@@ -20,8 +20,6 @@ public class SceneContentManager {
     private Scene scene;
     private Group root;
     private StackPane primaryNode;
-    private SimpleObjectProperty<WindowType> windowType;
-    private SimpleObjectProperty<DialogType> dialogType;
 
     public SceneContentManager(Stage stage) {
         primaryStage = stage;
@@ -30,24 +28,20 @@ public class SceneContentManager {
         primaryNode = new StackPane();
         root.getChildren().add(primaryNode);
 
-        ViewModelSceneManager viewModelSceneManager = ViewModelSceneManager.getInstance();
+        final ViewModelSceneManager viewModelSceneManager = ViewModelSceneManager.getInstance();
 
-        windowType.bind(viewModelSceneManager.getWindowTypeProperty());
-        viewModelSceneManager.getWindowTypeProperty().addListener(new ChangeListener<WindowType>() {
-            public void changed(ObservableValue<? extends WindowType> observableValue, WindowType windowType, WindowType t1) {
-                updateContent();
-            }
-        });
+        viewModelSceneManager.getWindowTypeProperty().addListener(
+                (observableValue, newValue, oldValue) -> updateContent(newValue));
 
-        dialogType.bind(viewModelSceneManager.getDialogTypeProperty());
-        viewModelSceneManager.getDialogTypeProperty().addListener(new ChangeListener<DialogType>() {
-            public void changed(ObservableValue<? extends DialogType> observableValue, DialogType dialogType, DialogType t1) {
-                updateContent();
-            }
-        });
+        viewModelSceneManager.getDialogTypeProperty().addListener(
+                (observableValue, newValue, oldValue) -> updateContent(newValue));
     }
 
-    public void updateContent() {
+    public void updateContent(WindowType windowType) {
+        //TODO
+    }
+
+    public void updateContent(DialogType dialogType) {
         //TODO
     }
 
