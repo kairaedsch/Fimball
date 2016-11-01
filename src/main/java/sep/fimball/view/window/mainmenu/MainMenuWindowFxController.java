@@ -4,11 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sep.fimball.view.window.Window;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MainMenuWindowFxController
+public class MainMenuWindowFxController extends Window
 {
     @FXML
     private VBox machineOverview;
@@ -19,7 +20,6 @@ public class MainMenuWindowFxController
     @FXML
     private Pane buttonEdit;
 
-    @FXML
     public void bindToViewModel()
     {
 
