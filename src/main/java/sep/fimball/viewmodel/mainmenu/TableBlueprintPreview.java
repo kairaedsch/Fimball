@@ -8,22 +8,25 @@ import javafx.scene.image.Image;
  */
 public class TableBlueprintPreview
 {
-    SimpleObjectProperty<Image> image;
     SimpleStringProperty name;
+    SimpleStringProperty imagePath;
 
-    public TableBlueprintPreview(SimpleObjectProperty<Image> image, SimpleStringProperty name)
+    public TableBlueprintPreview(SimpleStringProperty nameProperty, SimpleStringProperty imagePathProperty)
     {
-        this.image = image;
-        this.name = name;
+        name = new SimpleStringProperty();
+        imagePath = new SimpleStringProperty();
+
+        name.bind(nameProperty);
+        imagePath.bind(imagePathProperty);
     }
 
-    public ReadOnlyStringProperty getStringProperty()
+    public ReadOnlyStringProperty getNameProperty()
     {
         return name;
     }
 
-    public ReadOnlyObjectProperty<Image> getObjectProperty()
+    public SimpleStringProperty getImagePathProperty()
     {
-        return image;
+        return imagePath;
     }
 }
