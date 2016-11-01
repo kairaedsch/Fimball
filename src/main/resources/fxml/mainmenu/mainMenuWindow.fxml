@@ -46,14 +46,14 @@
                                 <HBox>
                                     <children>
                                         <Pane HBox.hgrow="ALWAYS"/>
-                                        <Pane fx:id="buttonPlaySinglePlayer" styleClass="button, buttonPlaySinglePlayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#playSingeplayer"></Pane>
+                                        <Pane fx:id="buttonPlaySinglePlayer" styleClass="button, buttonPlaySinglePlayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#play"></Pane>
                                         <Pane HBox.hgrow="ALWAYS"/>
                                     </children>
                                 </HBox>
                                 <HBox GridPane.columnIndex="1">
                                     <children>
                                         <Pane HBox.hgrow="ALWAYS"/>
-                                        <Pane fx:id="buttonPlayMultiplayer" styleClass="button, buttonPlayMultiplayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#playMultiplayer"></Pane>
+                                        <Pane fx:id="buttonPlayMultiplayer" styleClass="button, buttonPlayMultiplayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"></Pane>
                                         <Pane HBox.hgrow="ALWAYS"/>
                                     </children>
                                 </HBox>

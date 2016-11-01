@@ -5,6 +5,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.window.Window;
+import sep.fimball.viewmodel.MainMenuViewModel;
+import sep.fimball.viewmodel.ViewModelSceneManager;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -20,26 +22,22 @@ public class MainMenuWindowFxController extends Window
     @FXML
     private Pane buttonEdit;
 
-    public void bindToViewModel()
-    {
+    private MainMenuViewModel mainMenuViewModel;
 
+    @FXML
+    public void initialize() {
+        mainMenuViewModel = new MainMenuViewModel();
     }
 
     @FXML
     public void edit(MouseEvent mouseEvent)
     {
-
+        mainMenuViewModel.editClicked();
     }
 
     @FXML
-    public void playMultiplayer(MouseEvent mouseEvent)
+    public void play(MouseEvent mouseEvent)
     {
-
-    }
-
-    @FXML
-    public void playSingeplayer(MouseEvent mouseEvent)
-    {
-
+        mainMenuViewModel.playClicked();
     }
 }
