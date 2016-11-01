@@ -18,16 +18,16 @@ public class MainMenuViewModel
     public MainMenuViewModel()
     {
         tableBlueprintPreviewList = new SimpleListProperty(FXCollections.observableArrayList());
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 1"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 2"), new SimpleStringProperty("../../images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 3"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 4"), new SimpleStringProperty("../../images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 5"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 6"), new SimpleStringProperty("../../images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 7"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 8"), new SimpleStringProperty("../../images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 9"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 10"), new SimpleStringProperty("../../images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 1"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 2"), new SimpleStringProperty("/images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 3"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 4"), new SimpleStringProperty("/images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 5"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 6"), new SimpleStringProperty("/images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 7"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 8"), new SimpleStringProperty("/images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 9"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 10"), new SimpleStringProperty("/images/pic.jpg")));
     }
 
     public ReadOnlyListProperty<TableBlueprintPreview> getTableBlueprintPreviewListProperty()
@@ -42,11 +42,11 @@ public class MainMenuViewModel
 
     public void playClicked()
     {
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test play"), new SimpleStringProperty("../../images/pinball-machine-test-v6.png")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test play"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
     }
 
     public void editClicked()
     {
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test edit"), new SimpleStringProperty("../../images/pic.jpg")));
+        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test edit"), new SimpleStringProperty("/images/pic.jpg")));
     }
 }

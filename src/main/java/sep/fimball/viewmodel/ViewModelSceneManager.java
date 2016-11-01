@@ -21,7 +21,7 @@ public class ViewModelSceneManager
 
     private ViewModelSceneManager()
     {
-        windowType = new SimpleObjectProperty<WindowType>(WindowType.SPLASH_SCREEN);
+        windowType = new SimpleObjectProperty<WindowType>(WindowType.MAIN_MENU);
         dialogType = new SimpleObjectProperty<DialogType>(DialogType.NONE);
     }
 

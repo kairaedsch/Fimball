@@ -1,12 +1,13 @@
 package sep.fimball.view;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import sep.fimball.view.dialog.Dialog;
+import sep.fimball.view.window.Window;
+import sep.fimball.view.window.mainmenu.MainMenuWindowFxController;
 import sep.fimball.viewmodel.DialogType;
 import sep.fimball.viewmodel.ViewModelSceneManager;
 import sep.fimball.viewmodel.WindowType;
@@ -16,33 +17,85 @@ import sep.fimball.viewmodel.WindowType;
  */
 public class SceneContentManager {
 
-    private Stage primaryStage;
+    private Stage stage;
     private Scene scene;
-    private Group root;
-    private StackPane primaryNode;
+    private StackPane root;
 
     public SceneContentManager(Stage stage) {
-        primaryStage = stage;
-        root = new Group();
-        scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
-        primaryNode = new StackPane();
-        root.getChildren().add(primaryNode);
+        this.stage = stage;
 
-        final ViewModelSceneManager viewModelSceneManager = ViewModelSceneManager.getInstance();
+        // Create Stackpane and add two Placeholder
+        root = new StackPane();
+        root.getChildren().add(new Group());
+        root.getChildren().add(new Group());
 
-        viewModelSceneManager.getWindowTypeProperty().addListener(
-                (observableValue, newValue, oldValue) -> updateContent(newValue));
+        scene = new Scene(root, this.stage.getWidth(), this.stage.getHeight());
+        this.stage.setScene(scene);
+        this.stage.show();
 
-        viewModelSceneManager.getDialogTypeProperty().addListener(
-                (observableValue, newValue, oldValue) -> updateContent(newValue));
+        ViewModelSceneManager viewModelSceneManager = ViewModelSceneManager.getInstance();
+        viewModelSceneManager.getWindowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType));
+        viewModelSceneManager.getDialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType));
+        updateContent(viewModelSceneManager.getWindowTypeProperty().get());
+        updateContent(viewModelSceneManager.getDialogTypeProperty().get());
     }
 
-    public void updateContent(WindowType windowType) {
-        //TODO
+    public void updateContent(WindowType newWindowType) {
+        switch (newWindowType)
+        {
+            case SPLASH_SCREEN:
+                //TODO
+                break;
+            case MAIN_MENU:
+                setWindow(new FxmlLoader("mainmenu/mainMenuWindow.fxml"));
+                break;
+            case GAME:
+                //TODO
+                break;
+            case TABLE_EDITOR:
+                //TODO
+                break;
+            case TABLE_SETTINGS:
+                //TODO
+                break;
+        }
     }
 
-    public void updateContent(DialogType dialogType) {
-        //TODO
+    public void updateContent(DialogType newDialogType) {
+        switch (newDialogType)
+        {
+            case NONE:
+                //TODO
+                break;
+            case GAME_OVER:
+                //TODO
+                break;
+            case GAME_SETTINGS:
+                //TODO
+                break;
+            case PLAYER_NAMES:
+                //TODO
+                break;
+        }
     }
 
+    private void setWindow(FxmlLoader fxmlLoader)
+    {
+        Node windowNode = fxmlLoader.getRootNode();
+        if(windowNode != null)
+        {
+            root.getChildren().add(0, windowNode);
+            root.getChildren().remove(1);
+        }
+    }
+
+    private void setDialog(FxmlLoader fxmlLoader)
+    {
+        Node dialogNode = fxmlLoader.getRootNode();
+        if(dialogNode != null)
+        {
+            root.getChildren().add(0, dialogNode);
+            root.getChildren().remove(1);
+        }
+    }
 }
