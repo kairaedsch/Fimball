@@ -1,0 +1,161 @@
+/** CSS **/
+
+/* The main scrollbar CSS class of ListView */
+.machineOverview .scroll-bar:horizontal,
+.machineOverview .scroll-bar:vertical {
+    -fx-background-color: #708BAC;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.machineOverview .increment-button, .machineOverview .decrement-button {
+    -fx-background-color: #345883;
+    -fx-border-color: #345883;
+    -fx-opacity: 0;
+}
+
+/* The main scrollbar **track** CSS class  */
+.machineOverview .scroll-bar:horizontal .track,
+.machineOverview .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.machineOverview .scroll-bar:horizontal .thumb,
+.machineOverview .scroll-bar:vertical .thumb {
+    -fx-background-color: #345883;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+
+}
+
+/* ------------------------------------------------------------------------------------- */
+/** EVENT CSS **/
+/* ------------------------------------------------------------------------------------- */
+
+/* The main scrollbar **track** CSS class on event of "hover" and "pressed" */
+.machineOverview .scroll-bar:horizontal:hover .track,
+.machineOverview .scroll-bar:horizontal:pressed .track,
+.machineOverview .scroll-bar:vertical:hover .track,
+.machineOverview .scroll-bar:vertical:pressed .track {
+    -fx-background-color: #58779D;
+    -fx-opacity: 0.2;
+    -fx-background-radius: 0em;
+
+}
+
+/* The main scrollbar **thumb** CSS class on event of "hover" and "pressed" */
+.machineOverview .scroll-bar .thumb:hover,
+.machineOverview .scroll-bar .thumb:pressed {
+    -fx-background-color: #274E7D;
+}
+
+.machineOverview .increment-button:hover, .machineOverview .decrement-button:hover {
+    -fx-background-color: #274E7D;
+    -fx-border-color: #274E7D;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-background-color: #FF9E9E;
+}
+
+.splitPane {
+    -fx-box-border: transparent;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0;
+}
+
+.button {
+    -fx-background-position: 17px 14px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 30px;
+    -fx-background-radius: 100%;
+    -fx-background-color: #FFF;
+    -fx-cursor: hand;
+}
+
+.buttonPlaySinglePlayer {
+    -fx-background-image: url("../images/media-play.svg");
+}
+
+.buttonPlaySinglePlayer:hover {
+    -fx-background-color: #4AAF4A;
+    -fx-background-image: url("../images/media-play_white.svg");
+}
+
+.buttonPlayMultiplayer {
+    -fx-background-image: url("../images/media-play.svg");
+}
+
+.buttonPlayMultiplayer:hover {
+    -fx-background-color: #4AAF4A;
+    -fx-background-image: url("../images/media-play_white.svg");
+}
+
+.buttonEdit {
+    -fx-background-image: url("../images/pencil.svg");
+}
+
+.buttonEdit:hover {
+    -fx-background-color: #DBAA5D;
+    -fx-background-image: url("../images/pencil_white.svg");
+}
+
+.machineOverviewInner {
+    -fx-background-color: #345883;
+}
+
+.machineOverviewInner .machine {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+
+.machineOverviewInner:even .machine {
+    -fx-background-color: #44668F;
+}
+
+.machineOverviewInner .machine:hover, .machineOverviewInner .machine.selected {
+    -fx-background-color: #DB5D5D;
+}
+
+.machineOverviewInner .machinePic {
+    -fx-background-image: url("../images/pinball-machine-test-v6.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+.machineOverviewInner .machineName {
+    -fx-font-family: Roboto Medium;
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFF;
+    -fx-padding: 0 0 0 15px;
+}
+
+.machinePreview {
+    -fx-background-color: DB5D5D;
+}
+
+.machinePreview .machineName {
+    -fx-background-color: #C84444;
+    -fx-font-family: Roboto Medium;
+    -fx-font-size: 28px;
+    -fx-text-fill: #FFF;
+    -fx-padding: 25px 15px 25px 15px;
+}
+
+.machinePreview .machinePic {
+    -fx-background-image: url("../images/pinball-machine-test-v6.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+}
+
+.machinePreview .machineAktions {
+    -fx-background-color: #C84444;
+    -fx-padding: 25px 15px 25px 15px;
+}
