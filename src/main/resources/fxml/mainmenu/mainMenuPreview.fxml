@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<HBox styleClass="machine, selected" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuPreviewFxController">
+    <children>
+        <Pane minHeight="80.0" minWidth="80.0" styleClass="machinePic"/>
+        <Label maxHeight="9999" text="Marcs Automat" styleClass="machineName"></Label>
+    </children>
+    <stylesheets>
+        <String fx:value="styles/style.css"/>
+    </stylesheets>
+</HBox>
