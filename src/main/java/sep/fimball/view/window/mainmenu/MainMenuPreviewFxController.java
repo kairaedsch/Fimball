@@ -1,5 +1,6 @@
 package sep.fimball.view.window.mainmenu;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -18,7 +19,6 @@ public class MainMenuPreviewFxController
     public void bindToViewModel(TableBlueprintPreview preview)
     {
         previewName.textProperty().bind(preview.getNameProperty());
-        String css = "-fx-background-image: url(\"" + preview.getImagePathProperty().get() + "\");";
-        previewImage.setStyle(css);
+        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", preview.getImagePathProperty().get(), "\");"));
     }
 }

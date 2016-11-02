@@ -2,6 +2,7 @@ package sep.fimball.view.window.mainmenu;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,6 +11,9 @@ import sep.fimball.view.SimpleFxmlLoader;
 import sep.fimball.view.window.Window;
 import sep.fimball.viewmodel.MainMenuViewModel;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by kaira on 01.11.2016.

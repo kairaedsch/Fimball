@@ -46,7 +46,7 @@ public class ViewModelSceneManager
         dialogType.set(dialogtypeNew);
     }
 
-    void setWindow(WindowType WindowTypeNew, DialogType dialogtypeNew)
+    void setWindowAndDialog(WindowType WindowTypeNew, DialogType dialogtypeNew)
     {
         windowType.set(WindowTypeNew);
         dialogType.set(dialogtypeNew);

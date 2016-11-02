@@ -91,8 +91,8 @@ public class SceneContentManager {
         Node dialogNode = simpleFxmlLoader.getRootNode();
         if(dialogNode != null)
         {
-            root.getChildren().add(0, dialogNode);
-            root.getChildren().remove(1);
+            root.getChildren().add(1, dialogNode);
+            root.getChildren().remove(2);
         }
     }
 }
