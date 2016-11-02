@@ -33,15 +33,6 @@ public class Player
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * @param name
-     */
-    public void setName(int name)
-    {
-        // TODO - implement Player.setName
-        throw new UnsupportedOperationException();
-    }
-
     public void getBalls()
     {
         // TODO - implement Player.getBalls
@@ -55,5 +46,13 @@ public class Player
     {
         this.balls = balls;
     }
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

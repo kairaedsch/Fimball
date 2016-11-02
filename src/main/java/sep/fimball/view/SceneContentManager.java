@@ -12,13 +12,15 @@ import sep.fimball.viewmodel.WindowType;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class SceneContentManager {
+public class SceneContentManager
+{
 
     private Stage stage;
     private Scene scene;
     private StackPane root;
 
-    public SceneContentManager(Stage stage) {
+    public SceneContentManager(Stage stage)
+    {
         this.stage = stage;
 
         // Create Stackpane and add two Placeholder
@@ -37,7 +39,8 @@ public class SceneContentManager {
         updateContent(viewModelSceneManager.getDialogTypeProperty().get());
     }
 
-    public void updateContent(WindowType newWindowType) {
+    public void updateContent(WindowType newWindowType)
+    {
         switch (newWindowType)
         {
             case SPLASH_SCREEN:
@@ -58,7 +61,8 @@ public class SceneContentManager {
         }
     }
 
-    public void updateContent(DialogType newDialogType) {
+    public void updateContent(DialogType newDialogType)
+    {
         switch (newDialogType)
         {
             case NONE:
@@ -79,7 +83,7 @@ public class SceneContentManager {
     private void setWindow(SimpleFxmlLoader simpleFxmlLoader)
     {
         Node windowNode = simpleFxmlLoader.getRootNode();
-        if(windowNode != null)
+        if (windowNode != null)
         {
             root.getChildren().add(0, windowNode);
             root.getChildren().remove(1);
@@ -89,10 +93,28 @@ public class SceneContentManager {
     private void setDialog(SimpleFxmlLoader simpleFxmlLoader)
     {
         Node dialogNode = simpleFxmlLoader.getRootNode();
-        if(dialogNode != null)
+        if (dialogNode != null)
         {
             root.getChildren().add(1, dialogNode);
             root.getChildren().remove(2);
         }
+    }
+
+    /**
+     * @param fxmlLoader
+     */
+    private void setWindow(FxmlLoader fxmlLoader)
+    {
+        // TODO - implement SceneContentManager.setWindow
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @param fxmlLoader
+     */
+    private void setDialog(FxmlLoader fxmlLoader)
+    {
+        // TODO - implement SceneContentManager.setDialog
+        throw new UnsupportedOperationException();
     }
 }

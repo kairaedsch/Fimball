@@ -1,5 +1,9 @@
 package sep.fimball.model;
 
+import javafx.scene.input.KeyCode;
+
+import java.util.HashMap;
+
 public class Settings
 {
     private static Settings singletonInstance;
@@ -12,6 +16,13 @@ public class Settings
     private float masterVolume;
     private float musicVolume;
     private float sfxVolume;
+    private Language language;
+    private HashMap<KeyCode, KeyBinding> keyBindingsMap;
+
+    private Settings()
+    {
+
+    }
 
     public float getMasterVolume()
     {
@@ -41,5 +52,20 @@ public class Settings
     public void setSfxVolume(float sfxVolume)
     {
         this.sfxVolume = sfxVolume;
+    }
+
+    public Language getLanguage()
+    {
+        return this.language;
+    }
+
+    public void setLanguage(Language language)
+    {
+        this.language = language;
+    }
+
+    public HashMap<KeyCode, KeyBinding> getKeyBindingsMap()
+    {
+        return keyBindingsMap;
     }
 }

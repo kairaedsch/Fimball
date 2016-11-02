@@ -51,4 +51,14 @@ public class ViewModelSceneManager
         windowType.set(WindowTypeNew);
         dialogType.set(dialogtypeNew);
     }
+
+	/**
+	 *
+	 * @param WindowTypeNew
+	 * @param dialogtypeNew
+	 */
+	void setWindow(WindowType WindowTypeNew, DialogType dialogtypeNew) {
+		// TODO - implement ViewModelSceneManager.setWindow
+		throw new UnsupportedOperationException();
+	}
 }
