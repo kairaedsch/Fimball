@@ -1,16 +1,14 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.beans.property.ReadOnlyListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.FxmlLoader;
+import sep.fimball.view.FxControllerType;
+import sep.fimball.view.SimpleFxmlLoader;
 import sep.fimball.view.window.Window;
 import sep.fimball.viewmodel.MainMenuViewModel;
-import sep.fimball.viewmodel.ViewModelSceneManager;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 
 /**
@@ -49,9 +47,9 @@ public class MainMenuWindowFxController extends Window
 
         for(TableBlueprintPreview preview : mainMenuViewModel.getTableBlueprintPreviewListProperty())
         {
-            FxmlLoader fxmlLoader = new FxmlLoader("mainmenu/mainMenuPreview.fxml");
-            machineOverview.getChildren().add(fxmlLoader.getRootNode());
-            ((MainMenuPreviewFxController) fxmlLoader.getFxController()).bindToViewModel(preview);
+            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(FxControllerType.MAIN_MENU_PREVIEW);
+            machineOverview.getChildren().add(simpleFxmlLoader.getRootNode());
+            ((MainMenuPreviewFxController) simpleFxmlLoader.getFxController()).bindToViewModel(preview);
         }
     }
 

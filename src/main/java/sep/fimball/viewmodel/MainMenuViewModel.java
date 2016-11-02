@@ -18,6 +18,7 @@ public class MainMenuViewModel
     public MainMenuViewModel()
     {
         tableBlueprintPreviewList = new SimpleListProperty(FXCollections.observableArrayList());
+        // TODO remove test code
         tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 1"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
         tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 2"), new SimpleStringProperty("/images/pic.jpg")));
         tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 3"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
@@ -42,11 +43,13 @@ public class MainMenuViewModel
 
     public void playClicked()
     {
+        // TODO remove test code
         tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test play"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
     }
 
     public void editClicked()
     {
+        // TODO remove test code
         tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test edit"), new SimpleStringProperty("/images/pic.jpg")));
     }
 }

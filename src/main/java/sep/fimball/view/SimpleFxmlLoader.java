@@ -8,14 +8,14 @@ import java.io.IOException;
 /**
  * Created by kaira on 02.11.2016.
  */
-public class FxmlLoader
+public class SimpleFxmlLoader
 {
     private Node rootNode = null;
     private Object fxController = null;
 
-    public FxmlLoader(String fxmlPath)
+    public SimpleFxmlLoader(FxControllerType fxmlControllerType)
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlControllerType.getFxmlPath()));
 
         try
         {

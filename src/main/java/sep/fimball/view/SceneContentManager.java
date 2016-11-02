@@ -5,9 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sep.fimball.view.dialog.Dialog;
-import sep.fimball.view.window.Window;
-import sep.fimball.view.window.mainmenu.MainMenuWindowFxController;
 import sep.fimball.viewmodel.DialogType;
 import sep.fimball.viewmodel.ViewModelSceneManager;
 import sep.fimball.viewmodel.WindowType;
@@ -47,7 +44,7 @@ public class SceneContentManager {
                 //TODO
                 break;
             case MAIN_MENU:
-                setWindow(new FxmlLoader("mainmenu/mainMenuWindow.fxml"));
+                setWindow(new SimpleFxmlLoader(FxControllerType.MAIN_MENU_WINDOW));
                 break;
             case GAME:
                 //TODO
@@ -79,9 +76,9 @@ public class SceneContentManager {
         }
     }
 
-    private void setWindow(FxmlLoader fxmlLoader)
+    private void setWindow(SimpleFxmlLoader simpleFxmlLoader)
     {
-        Node windowNode = fxmlLoader.getRootNode();
+        Node windowNode = simpleFxmlLoader.getRootNode();
         if(windowNode != null)
         {
             root.getChildren().add(0, windowNode);
@@ -89,9 +86,9 @@ public class SceneContentManager {
         }
     }
 
-    private void setDialog(FxmlLoader fxmlLoader)
+    private void setDialog(SimpleFxmlLoader simpleFxmlLoader)
     {
-        Node dialogNode = fxmlLoader.getRootNode();
+        Node dialogNode = simpleFxmlLoader.getRootNode();
         if(dialogNode != null)
         {
             root.getChildren().add(0, dialogNode);
