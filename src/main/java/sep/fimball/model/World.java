@@ -31,4 +31,10 @@ public class World
     {
         return worldObjects; // TODO immutable?
     }
+
+    //Called by a timeline created in this class, update all gameobjects and draw them
+    private void updateWorld()
+    {
+        throw new UnsupportedOperationException();
+    }
 }
