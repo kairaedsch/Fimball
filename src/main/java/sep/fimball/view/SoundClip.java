@@ -2,9 +2,11 @@ package sep.fimball.view;
 
 public enum SoundClip
 {
-    TABLE_INTRO,
-    BUMPER,
-    FLIPPER,
-    WALL_COLLISION
+    PINBALL_TABLE_INTRO,
+    WALL_COLLISION,
+    BUMPER_OR_SLINGSHOT_HIT,
+    FLIPPER_MOVE,
+    PLUNGER_PULL
+
     //TODO more
 }

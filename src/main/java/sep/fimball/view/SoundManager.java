@@ -28,7 +28,7 @@ public class SoundManager
         musicClips = new HashMap<>();
         fxClips = new HashMap<>();
 
-        // load music and sound clips here
+        // TODO load music and sound clips here
     }
 
     public void playMusicClip(MusicClip clip)
@@ -37,7 +37,7 @@ public class SoundManager
             currentMusic.dispose();
 
         currentMusic = new MediaPlayer(musicClips.get(clip));
-        currentMusic.play();
+        currentMusic.play(); // TODO loop
     }
 
     public void playFxClip(SoundClip clip)
@@ -45,19 +45,11 @@ public class SoundManager
         fxClips.get(clip).play();
     }
 
-	/**
-	 *
-	 * @param clip
-	 */
 	public void PlayFxClip(SoundClip clip) {
 		// TODO - implement SoundManager.PlayFxClip
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 *
-	 * @param clip
-	 */
 	public void PlayMusicClip(MusicClip clip) {
 		// TODO - implement SoundManager.PlayMusicClip
 		throw new UnsupportedOperationException();
