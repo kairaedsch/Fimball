@@ -2,7 +2,7 @@ package sep.fimball.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Camera extends WorldObject
+public class Camera
 {
     public Camera(World targetWorld, Vector2 position)
     {

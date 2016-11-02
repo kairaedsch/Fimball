@@ -6,12 +6,20 @@ public class World
 {
     private List<WorldObject> worldObjects;
 
-    public World(List<WorldObject> worldObjects)
+    /**
+	 *
+	 * @param worldObjects
+	 */
+	public World(java.util.List<WorldObject> worldObjects)
     {
         this.worldObjects = worldObjects;
     }
 
-    public void addWorldObject(WorldObject obj)
+    /**
+	 *
+	 * @param obj
+	 */
+	public void addWorldObject(WorldObject obj)
     {
         if (worldObjects.contains(obj))
             throw new IllegalArgumentException("Added same object twice!");

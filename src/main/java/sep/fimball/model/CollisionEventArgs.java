@@ -4,7 +4,11 @@ public class CollisionEventArgs
 {
     private PhysicsObject otherObject;
 
-    public CollisionEventArgs(PhysicsObject otherObject)
+    /**
+	 *
+	 * @param otherObject
+	 */
+	public CollisionEventArgs(PhysicsObject otherObject)
     {
         this.otherObject = otherObject;
     }
