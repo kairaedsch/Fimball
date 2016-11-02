@@ -5,6 +5,6 @@ import sep.fimball.view.dialog.Dialog;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class gameSettingsDialogFxController extends Dialog
+public class GameSettingsDialogFxController extends Dialog
 {
 }
