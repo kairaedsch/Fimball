@@ -2,6 +2,7 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -19,10 +20,18 @@ public class ViewModelSceneManager
     private SimpleObjectProperty<WindowType> windowType;
     private SimpleObjectProperty<DialogType> dialogType;
 
+    private ViewModelInputManager inputManager;
+
     private ViewModelSceneManager()
     {
         windowType = new SimpleObjectProperty<WindowType>(WindowType.MAIN_MENU);
         dialogType = new SimpleObjectProperty<DialogType>(DialogType.NONE);
+        inputManager = new ViewModelInputManager();
+    }
+
+    public void onKeyEvent(KeyEvent event)
+    {
+        inputManager.onKeyEvent(event, windowType.get());
     }
 
     public ReadOnlyObjectProperty<WindowType> getWindowTypeProperty()

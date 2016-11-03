@@ -1,11 +1,14 @@
 package sep.fimball.view;
 
+import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import sep.fimball.viewmodel.DialogType;
+import sep.fimball.viewmodel.ViewModelInputManager;
 import sep.fimball.viewmodel.ViewModelSceneManager;
 import sep.fimball.viewmodel.WindowType;
 
@@ -36,6 +39,12 @@ public class SceneContentManager
         viewModelSceneManager.getDialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType));
         updateContent(viewModelSceneManager.getWindowTypeProperty().get());
         updateContent(viewModelSceneManager.getDialogTypeProperty().get());
+    }
+
+    @FXML //TODO write in fxml file
+    protected void onKeyEvent(KeyEvent event)
+    {
+        ViewModelSceneManager.getInstance().onKeyEvent(event);
     }
 
     public void updateContent(WindowType newWindowType)

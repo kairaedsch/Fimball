@@ -1,17 +1,28 @@
 package sep.fimball.model;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import javafx.event.EventType;
 import javafx.scene.input.KeyEvent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class InputManager
 {
+    private static InputManager singletonInstance;
+
+    public static InputManager getSingletonInstance()
+    {
+        if (singletonInstance == null)
+            singletonInstance = new InputManager();
+
+        return singletonInstance;
+    }
+
     private HashMap<KeyBinding, KeyObserver> keyObserversMap = new HashMap<>();
+
+    private InputManager()
+    {
+
+    }
 
     public void addKeyEvent(KeyEvent keyEvent)
     {
