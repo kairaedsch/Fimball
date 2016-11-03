@@ -4,32 +4,32 @@ import java.util.List;
 
 public class World
 {
-    private List<WorldObject> worldObjects;
+    private List<GameElement> worldElements;
 
     /**
 	 *
-	 * @param worldObjects
+	 * @param worldElements
 	 */
-	public World(java.util.List<WorldObject> worldObjects)
+	public World(List<GameElement> worldElements)
     {
-        this.worldObjects = worldObjects;
+        this.worldElements = worldElements;
     }
 
     /**
 	 *
 	 * @param obj
 	 */
-	public void addWorldObject(WorldObject obj)
+	public void addWorldElement(GameElement obj)
     {
-        if (worldObjects.contains(obj))
+        if (worldElements.contains(obj))
             throw new IllegalArgumentException("Added same object twice!");
 
-        worldObjects.add(obj);
+        worldElements.add(obj);
     }
 
-    public List<WorldObject> getWorldObjects()
+    public List<GameElement> getWorldElements()
     {
-        return worldObjects; // TODO immutable?
+        return worldElements; // TODO immutable?
     }
 
     //Called by a timeline created in this class, update all gameobjects and draw them

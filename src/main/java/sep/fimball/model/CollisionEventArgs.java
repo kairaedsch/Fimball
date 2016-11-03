@@ -2,20 +2,19 @@ package sep.fimball.model;
 
 public class CollisionEventArgs
 {
-    private PhysicsObject otherObject;
+    private GameElement otherElement;
 
     /**
 	 *
-	 * @param otherObject
+	 * @param otherElement
 	 */
-	public CollisionEventArgs(PhysicsObject otherObject)
+	public CollisionEventArgs(GameElement otherElement)
     {
-        this.otherObject = otherObject;
+        this.otherElement = otherElement;
     }
 
-    public PhysicsObject getOtherObject()
+    public GameElement getOtherElement()
     {
-        return otherObject;
+        return otherElement;
     }
-
 }
