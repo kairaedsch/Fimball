@@ -99,22 +99,4 @@ public class SceneContentManager
             root.getChildren().remove(2);
         }
     }
-
-    /**
-     * @param fxmlLoader
-     */
-    private void setWindow(FxmlLoader fxmlLoader)
-    {
-        // TODO - implement SceneContentManager.setWindow
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @param fxmlLoader
-     */
-    private void setDialog(FxmlLoader fxmlLoader)
-    {
-        // TODO - implement SceneContentManager.setDialog
-        throw new UnsupportedOperationException();
-    }
 }
