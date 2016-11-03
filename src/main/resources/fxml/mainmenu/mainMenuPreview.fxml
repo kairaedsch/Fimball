@@ -9,7 +9,7 @@
         <Pane minHeight="80.0" minWidth="80.0" styleClass="machinePic" fx:id="previewImage" />
         <Label maxHeight="9999" text="Marcs Automat" styleClass="machineName"  fx:id="previewName" ></Label>
     </children>
-   <!-- <stylesheets>
+    <stylesheets>
         <String fx:value="styles/style.css"/>
-    </stylesheets>-->
+    </stylesheets>
 </HBox>
