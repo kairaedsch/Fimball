@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class InputManager
 {
-    private List<KeyBinding> receivedKeys = new ArrayList<>();
     private HashMap<KeyBinding, KeyObserver> keyObserversMap = new HashMap<>();
 
     public void addKeyEvent(KeyEvent keyEvent)
