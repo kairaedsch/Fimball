@@ -5,4 +5,6 @@ package sep.fimball.model;
  */
 public enum ColliderType
 {
+    BOUNCE,
+    ACCELERATE
 }
