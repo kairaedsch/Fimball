@@ -2,6 +2,7 @@ package sep.fimball.model.tableblueprint;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import sep.fimball.general.Highscore;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -19,7 +20,7 @@ public class TableBlueprint
     {
         this.name = new SimpleStringProperty(name);
         this.blueprintId = new SimpleIntegerProperty(blueprintId);
-        this.highscoreList =  new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         // TODO real pic
@@ -46,6 +47,11 @@ public class TableBlueprint
         return elements;
     }
 
+    public ReadOnlyStringProperty imagePathProperty()
+    {
+        return imagePath;
+    }
+
     public void setName(String name)
     {
         this.name.set(name);
@@ -61,8 +67,8 @@ public class TableBlueprint
         return elements.removeIf((element) -> element.blueprintIdProperty().get() == blueprintId);
     }
 
-    public ReadOnlyStringProperty imagePathProperty()
+    public void addHighscore(Highscore highscore)
     {
-        return imagePath;
+        highscoreList.add(highscore);
     }
 }

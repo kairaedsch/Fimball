@@ -1,10 +1,8 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import sep.fimball.viewmodel.mainmenu.TableBlueprintDetailedPreviewHighscoreEntry;
+import sep.fimball.general.Highscore;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -16,9 +14,9 @@ public class MainMenuDetailedPreviewHighscoreEntryFxController
     @FXML
     public Label score;
 
-    public void bindToViewModel(TableBlueprintDetailedPreviewHighscoreEntry highscoreEntry)
+    public void bindToViewModel(Highscore highscore)
     {
-        playerName.textProperty().bind(highscoreEntry.playerNameProperty());
-        score.textProperty().bind(highscoreEntry.scoreProperty().asString());
+        playerName.textProperty().bind(highscore.playerNameProperty());
+        score.textProperty().bind(highscore.scoreProperty().asString());
     }
 }

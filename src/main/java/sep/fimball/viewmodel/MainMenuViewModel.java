@@ -3,10 +3,12 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.AutoListPropertyBinder;
+import sep.fimball.general.ListPropertyBinder;
 import sep.fimball.model.tableblueprint.TableBlueprintManager;
+import sep.fimball.viewmodel.mainmenu.TableBlueprintDetailedPreview;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 
 /**
@@ -15,12 +17,13 @@ import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 public class MainMenuViewModel
 {
     private SimpleListProperty<TableBlueprintPreview> tableBlueprintPreviewList;
+    private SimpleObjectProperty<TableBlueprintDetailedPreview> tableBlueprintDetailedPreview;
 
     public MainMenuViewModel()
     {
         tableBlueprintPreviewList = new SimpleListProperty<>(FXCollections.observableArrayList());
-
-        AutoListPropertyBinder.bind(tableBlueprintPreviewList, TableBlueprintManager.getInstance().tableBlueprintsProperty(), tableBlueprint -> new TableBlueprintPreview(tableBlueprint));
+        ListPropertyBinder.bind(tableBlueprintPreviewList, TableBlueprintManager.getInstance().tableBlueprintsProperty(), TableBlueprintPreview::new);
+        tableBlueprintDetailedPreview = new SimpleObjectProperty<>(new TableBlueprintDetailedPreview(TableBlueprintManager.getInstance().tableBlueprintsProperty().get(0)));
     }
 
     public ReadOnlyListProperty<TableBlueprintPreview> getTableBlueprintPreviewListProperty()

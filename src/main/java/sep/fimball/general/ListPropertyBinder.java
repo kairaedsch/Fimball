@@ -7,11 +7,11 @@ import javafx.collections.ObservableList;
 /**
  * Created by kaira on 03.11.2016.
  */
-public class AutoListPropertyBinder
+public class ListPropertyBinder
 {
     public static <A, B> void bind(ListProperty<A> listPropertyA, ObservableList<B> listPropertyB, Converter<A, B> converter)
     {
-        listPropertyB.addListener(new ListChangeListener<B>()
+        ListChangeListener listChangeListener = new ListChangeListener<B>()
         {
             @Override
             public void onChanged(Change<? extends B> change)
@@ -23,11 +23,14 @@ public class AutoListPropertyBinder
                     listPropertyA.add(converter.convert(b));
                 }
             }
-        });
+        };
+
+        listPropertyB.addListener(listChangeListener);
+        listChangeListener.onChanged(null);
     }
 
-    public abstract interface Converter<A, B>
+    public interface Converter<A, B>
     {
-        public abstract A convert(B b);
+        A convert(B b);
     }
 }

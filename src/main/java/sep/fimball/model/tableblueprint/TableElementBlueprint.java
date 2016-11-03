@@ -59,4 +59,9 @@ public class TableElementBlueprint
     {
         this.points.set(points);
     }
+
+    public void setColliderMultiplier(String collider, double multiplier)
+    {
+        colliderToMulitplier.put(collider, multiplier);
+    }
 }

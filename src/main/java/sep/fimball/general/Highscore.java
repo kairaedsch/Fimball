@@ -1,4 +1,4 @@
-package sep.fimball.model.tableblueprint;
+package sep.fimball.general;
 
 import javafx.beans.property.ReadOnlyLongProperty;
 import javafx.beans.property.ReadOnlyStringProperty;

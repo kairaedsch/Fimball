@@ -1,26 +1,32 @@
 package sep.fimball.viewmodel.mainmenu;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import sep.fimball.general.Highscore;
+import sep.fimball.model.tableblueprint.TableBlueprint;
 
 /**
  * Created by kaira on 01.11.2016.
  */
 public class TableBlueprintDetailedPreview
 {
-    SimpleIntegerProperty id;
+    SimpleIntegerProperty blueprintId;
     SimpleStringProperty name;
     SimpleStringProperty imagePath;
-    SimpleListProperty<TableBlueprintDetailedPreviewHighscoreEntry> highscore;
+    SimpleListProperty<Highscore> highscoreList;
 
-    public TableBlueprintDetailedPreview(SimpleIntegerProperty idProperty, SimpleStringProperty nameProperty, SimpleStringProperty imagePathProperty)
+    public TableBlueprintDetailedPreview(TableBlueprint tableBlueprint)
     {
-        id = new SimpleIntegerProperty();
+        blueprintId = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
+        highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
-        id.bind(idProperty);
-        name.bind(nameProperty);
-        imagePath.bind(imagePathProperty);
+        blueprintId.bind(tableBlueprint.blueprintIdProperty());
+        name.bind(tableBlueprint.nameProperty());
+        imagePath.bind(tableBlueprint.imagePathProperty());
+        highscoreList.bind(tableBlueprint.highscoreListProperty());
     }
 
     public ReadOnlyStringProperty nameProperty()
@@ -33,10 +39,18 @@ public class TableBlueprintDetailedPreview
         return imagePath;
     }
 
-    public ReadOnlyIntegerProperty idProperty()
+    public ReadOnlyIntegerProperty blueprintIdProperty()
     {
-        return id;
+        return blueprintId;
     }
 
+    public ObservableList<Highscore> getHighscoreList()
+    {
+        return highscoreList.get();
+    }
 
+    public ReadOnlyListProperty<Highscore> highscoreListProperty()
+    {
+        return highscoreList;
+    }
 }
