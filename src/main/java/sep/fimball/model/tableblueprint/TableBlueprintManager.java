@@ -5,4 +5,5 @@ package sep.fimball.model.tableblueprint;
  */
 public class TableBlueprintManager
 {
+
 }

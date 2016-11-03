@@ -14,7 +14,6 @@ import sep.fimball.viewmodel.WindowType;
  */
 public class SceneContentManager
 {
-
     private Stage stage;
     private Scene scene;
     private StackPane root;
@@ -44,19 +43,19 @@ public class SceneContentManager
         switch (newWindowType)
         {
             case SPLASH_SCREEN:
-                //TODO
+                setWindow(FxControllerType.SPLASH_SCREEN_WINDOW);
                 break;
             case MAIN_MENU:
-                setWindow(new SimpleFxmlLoader(FxControllerType.MAIN_MENU_WINDOW));
+                setWindow(FxControllerType.MAIN_MENU_WINDOW);
                 break;
             case GAME:
-                //TODO
+                setWindow(FxControllerType.GAME_WINDOW);
                 break;
             case TABLE_EDITOR:
-                //TODO
+                setWindow(FxControllerType.TABLE_EDITOR_WINDOW);
                 break;
             case TABLE_SETTINGS:
-                //TODO
+                setWindow(FxControllerType.TABLE_SETTINGS_WINDOW);
                 break;
         }
     }
@@ -66,22 +65,23 @@ public class SceneContentManager
         switch (newDialogType)
         {
             case NONE:
-                //TODO
+                removeDialog();
                 break;
             case GAME_OVER:
-                //TODO
+                setDialog(FxControllerType.GAME_OVER_DIALOG);
                 break;
             case GAME_SETTINGS:
-                //TODO
+                setDialog(FxControllerType.GAME_SETTINGS_DIALOG);
                 break;
             case PLAYER_NAMES:
-                //TODO
+                setDialog(FxControllerType.PLAYER_NAME_DIALOG);
                 break;
         }
     }
 
-    private void setWindow(SimpleFxmlLoader simpleFxmlLoader)
+    private void setWindow(FxControllerType fxControllerType)
     {
+        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(fxControllerType);
         Node windowNode = simpleFxmlLoader.getRootNode();
         if (windowNode != null)
         {
@@ -90,13 +90,20 @@ public class SceneContentManager
         }
     }
 
-    private void setDialog(SimpleFxmlLoader simpleFxmlLoader)
+    private void setDialog(FxControllerType fxControllerType)
     {
+        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(fxControllerType);
         Node dialogNode = simpleFxmlLoader.getRootNode();
         if (dialogNode != null)
         {
+            root.getChildren().remove(1);
             root.getChildren().add(1, dialogNode);
-            root.getChildren().remove(2);
         }
+    }
+
+    private void removeDialog()
+    {
+        root.getChildren().remove(1);
+        root.getChildren().add(1, new Group());
     }
 }

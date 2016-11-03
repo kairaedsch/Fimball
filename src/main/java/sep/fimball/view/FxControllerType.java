@@ -5,7 +5,17 @@ package sep.fimball.view;
  */
 public enum FxControllerType
 {
-    MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"), MAIN_MENU_PREVIEW("mainmenu/mainMenuPreview.fxml");
+    MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"),
+    MAIN_MENU_PREVIEW("mainmenu/mainMenuPreview.fxml"),
+    MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY("mainmenu/mainMenuDetailedPreviewHighscoreEntry.fxml"),
+    SPLASH_SCREEN_WINDOW("TODO"),
+    TABLE_EDITOR_WINDOW("TODO"),
+    TABLE_SETTINGS_WINDOW("TODO"),
+    GAME_WINDOW("TODO"),
+
+    GAME_OVER_DIALOG("TODO"),
+    GAME_SETTINGS_DIALOG("TODO"),
+    PLAYER_NAME_DIALOG("TODO");
 
     private String fxmlPath;
 

@@ -1,6 +1,7 @@
 package sep.fimball.model;
 
 import javafx.scene.image.Image;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Sprite implements Renderable
 {
@@ -11,8 +12,8 @@ public class Sprite implements Renderable
         this.image = image;
     }
 
-    public Image getFrame()
+    public Sprite getFrame()
     {
-        return image;
+        throw new NotImplementedException();
     }
 }

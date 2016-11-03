@@ -3,6 +3,7 @@ package sep.fimball.view.window.mainmenu;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 

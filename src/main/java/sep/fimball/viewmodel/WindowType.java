@@ -5,5 +5,5 @@ package sep.fimball.viewmodel;
  */
 public enum WindowType
 {
-     SPLASH_SCREEN, MAIN_MENU, GAME, TABLE_EDITOR, TABLE_SETTINGS
+     SPLASH_SCREEN, MAIN_MENU, GAME, TABLE_EDITOR, TABLE_SETTINGS;
 }
