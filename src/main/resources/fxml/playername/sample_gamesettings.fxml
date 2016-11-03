@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane collapsible="false" text="Game Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane collapsible="false" text="Game Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.playername.PlayerNameDialogFxController">
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -20,26 +20,11 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <GridPane hgap="10.0">
-                    <columnConstraints>
-                      <ColumnConstraints minWidth="10.0" prefWidth="150.0" />
-                      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <VBox fx:id="nameEntryList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
                      <children>
-                        <TextField text="Player 1" />
-                        <TextField text="Player 2" GridPane.rowIndex="1" />
-                        <TextField text="Player 3" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="X" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="X" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="Add Player" GridPane.rowIndex="3" />
                      </children>
-                  </GridPane>
+                  </VBox>
                </children>
             </VBox>
             <Button defaultButton="true" mnemonicParsing="false" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
