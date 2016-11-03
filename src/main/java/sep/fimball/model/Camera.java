@@ -2,8 +2,10 @@ package sep.fimball.model;
 
 public class Camera
 {
+    private Vector2 position;
+
     public Camera(Vector2 position)
     {
-        throw new UnsupportedOperationException();
+        this.position = position;
     }
 }

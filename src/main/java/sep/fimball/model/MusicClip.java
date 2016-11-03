@@ -1,4 +1,4 @@
-package sep.fimball.view;
+package sep.fimball.model;
 
 public enum MusicClip
 {

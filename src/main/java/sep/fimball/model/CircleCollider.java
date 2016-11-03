@@ -10,4 +10,14 @@ public class CircleCollider extends Collider
         this.position = position;
         this.radius = radius;
     }
+
+    public Vector2 getPosition()
+    {
+        return position;
+    }
+
+    public double getRadius()
+    {
+        return radius;
+    }
 }

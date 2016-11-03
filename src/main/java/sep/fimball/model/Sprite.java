@@ -1,9 +1,18 @@
 package sep.fimball.model;
 
+import javafx.scene.image.Image;
+
 public class Sprite implements Renderable
 {
-    public Sprite getFrame()
+    private Image image;
+
+    public Sprite(Image image)
     {
-        throw new UnsupportedOperationException();
+        this.image = image;
+    }
+
+    public Image getFrame()
+    {
+        return image;
     }
 }

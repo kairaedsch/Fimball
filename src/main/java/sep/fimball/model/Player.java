@@ -13,7 +13,7 @@ public class Player
         this.balls = 3;
     }
 
-    public void getPoints()
+    public int getPoints()
     {
         // TODO - implement Player.getPoints
         throw new UnsupportedOperationException();
@@ -27,13 +27,13 @@ public class Player
         this.points = points;
     }
 
-    public void getName()
+    public String getName()
     {
         // TODO - implement Player.getName
         throw new UnsupportedOperationException();
     }
 
-    public void getBalls()
+    public int getBalls()
     {
         // TODO - implement Player.getBalls
         throw new UnsupportedOperationException();
@@ -46,13 +46,4 @@ public class Player
     {
         this.balls = balls;
     }
-
-	/**
-	 *
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
 }

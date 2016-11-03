@@ -3,7 +3,6 @@ package sep.fimball.model;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import sep.fimball.view.MusicClip;
 
 import java.util.HashMap;
 import java.util.Map;
