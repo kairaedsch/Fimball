@@ -23,9 +23,7 @@ public class GameSession
         if (players == null || players.length == 0)
             throw new IllegalArgumentException("At least one player must be present!");
 
-        this.players = players;
         this.currentPlayer = players[0];
-        this.table = table;
         this.tiltCounter = 0;
     }
 

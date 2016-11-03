@@ -21,10 +21,9 @@ public class PinballTable
         return id;
     }
 
-    public void getName()
+    public String getName()
     {
-        // TODO - implement PinballTable.getName
-        throw new UnsupportedOperationException();
+        return name;
     }
 
     public void setName(String name)
@@ -34,7 +33,6 @@ public class PinballTable
 
     public void addHighscore(Highscore highscore)
     {
-        // TODO - implement PinballTable.addHighscore
-        throw new UnsupportedOperationException();
+        this.highscores.add(highscore);
     }
 }

@@ -15,7 +15,7 @@ public class Animation implements Renderable
 
     public Sprite getFrame()
     {
-        if (frames.length >= currentFrame || currentFrame < 0)
+        if (currentFrame >= frames.length || currentFrame < 0)
             throw new IllegalStateException();
 
         return frames[currentFrame];

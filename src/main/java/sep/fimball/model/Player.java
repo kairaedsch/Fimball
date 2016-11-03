@@ -15,8 +15,7 @@ public class Player
 
     public int getPoints()
     {
-        // TODO - implement Player.getPoints
-        throw new UnsupportedOperationException();
+        return points;
     }
 
     /**
@@ -29,14 +28,12 @@ public class Player
 
     public String getName()
     {
-        // TODO - implement Player.getName
-        throw new UnsupportedOperationException();
+        return name;
     }
 
     public int getBalls()
     {
-        // TODO - implement Player.getBalls
-        throw new UnsupportedOperationException();
+        return balls;
     }
 
     /**

@@ -7,6 +7,5 @@ public enum SoundClip
     BUMPER_OR_SLINGSHOT_HIT,
     FLIPPER_MOVE,
     PLUNGER_PULL
-
     //TODO more
 }
