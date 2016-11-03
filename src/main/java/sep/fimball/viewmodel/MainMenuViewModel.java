@@ -4,7 +4,6 @@ package sep.fimball.viewmodel;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
 import sep.fimball.model.tableblueprint.TableBlueprintManager;
@@ -33,18 +32,16 @@ public class MainMenuViewModel
 
     public void settingsClicked()
     {
-        ViewModelSceneManager.getInstance().setWindow(WindowType.TABLE_SETTINGS);
+        ViewModelSceneManager.getInstance().setDialog(DialogType.GAME_SETTINGS);
     }
 
     public void playClicked()
     {
-        // TODO remove test code
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test play"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
+        ViewModelSceneManager.getInstance().setDialog(DialogType.PLAYER_NAMES);
     }
 
     public void editClicked()
     {
-        // TODO remove test code
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test edit"), new SimpleStringProperty("/images/pic.jpg")));
+        ViewModelSceneManager.getInstance().setWindow(WindowType.TABLE_SETTINGS);
     }
 }

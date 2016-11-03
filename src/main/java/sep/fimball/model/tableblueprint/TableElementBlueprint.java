@@ -10,29 +10,29 @@ import java.awt.*;
  */
 public class TableElementBlueprint
 {
-    SimpleIntegerProperty blueprintId;
-    SimpleStringProperty greenprintId;
+    SimpleIntegerProperty blueprintElementId;
+    SimpleStringProperty greenprintElementId;
     SimpleObjectProperty<Point> position;
     SimpleMapProperty<String, Double> colliderToMulitplier;
     SimpleIntegerProperty points;
 
-    public TableElementBlueprint(int blueprintId, String greenprintId, Point position)
+    public TableElementBlueprint(int blueprintElementId, String greenprintElementId, Point position)
     {
-        this.blueprintId = new SimpleIntegerProperty(blueprintId);
-        this.greenprintId = new SimpleStringProperty(greenprintId);
+        this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
+        this.greenprintElementId = new SimpleStringProperty(greenprintElementId);
         this.position = new SimpleObjectProperty<>(position);
         this.colliderToMulitplier = new SimpleMapProperty<>(FXCollections.observableHashMap());
         this.points = new SimpleIntegerProperty();
     }
 
-    public ReadOnlyIntegerProperty blueprintIdProperty()
+    public ReadOnlyIntegerProperty blueprintElementIdProperty()
     {
-        return blueprintId;
+        return blueprintElementId;
     }
 
-    public ReadOnlyStringProperty greenprintIdProperty()
+    public ReadOnlyStringProperty greenprintElementIdProperty()
     {
-        return greenprintId;
+        return greenprintElementId;
     }
 
     public ReadOnlyObjectProperty<Point> positionProperty()

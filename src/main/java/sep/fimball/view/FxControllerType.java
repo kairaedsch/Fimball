@@ -15,7 +15,7 @@ public enum FxControllerType
 
     GAME_OVER_DIALOG("TODO"),
     GAME_SETTINGS_DIALOG("TODO"),
-    PLAYER_NAME_DIALOG("TODO");
+    PLAYER_NAME_DIALOG("playername/playerNameWindow.fxml");
 
     private String fxmlPath;
 

@@ -10,16 +10,16 @@ import sep.fimball.general.Highscore;
 public class TableBlueprint
 {
     private SimpleStringProperty name;
-    private SimpleIntegerProperty blueprintId;
+    private SimpleIntegerProperty blueprintTableId;
     private SimpleListProperty<Highscore> highscoreList;
     private SimpleListProperty<TableElementBlueprint> elements;
 
     private SimpleStringProperty imagePath;
 
-    public TableBlueprint(String name, int blueprintId)
+    public TableBlueprint(String name, int blueprintTableId)
     {
         this.name = new SimpleStringProperty(name);
-        this.blueprintId = new SimpleIntegerProperty(blueprintId);
+        this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
 
@@ -32,9 +32,9 @@ public class TableBlueprint
         return name;
     }
 
-    public ReadOnlyIntegerProperty blueprintIdProperty()
+    public ReadOnlyIntegerProperty blueprintTableIdProperty()
     {
-        return blueprintId;
+        return blueprintTableId;
     }
 
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
@@ -62,9 +62,9 @@ public class TableBlueprint
         elements.add(tableElementBlueprint);
     }
 
-    public boolean removeElement(int blueprintId)
+    public boolean removeElement(int blueprintElementId)
     {
-        return elements.removeIf((element) -> element.blueprintIdProperty().get() == blueprintId);
+        return elements.removeIf((element) -> element.blueprintElementIdProperty().get() == blueprintElementId);
     }
 
     public void addHighscore(Highscore highscore)

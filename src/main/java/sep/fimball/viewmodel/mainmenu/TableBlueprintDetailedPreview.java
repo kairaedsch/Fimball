@@ -23,7 +23,7 @@ public class TableBlueprintDetailedPreview
         imagePath = new SimpleStringProperty();
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
-        blueprintId.bind(tableBlueprint.blueprintIdProperty());
+        blueprintId.bind(tableBlueprint.blueprintTableIdProperty());
         name.bind(tableBlueprint.nameProperty());
         imagePath.bind(tableBlueprint.imagePathProperty());
         highscoreList.bind(tableBlueprint.highscoreListProperty());
