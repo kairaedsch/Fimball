@@ -1,6 +1,7 @@
 package sep.fimball.model;
 
 import javafx.collections.transformation.SortedList;
+import sep.fimball.model.tableblueprint.Highscore;
 
 public class PinballTable
 {

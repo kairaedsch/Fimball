@@ -3,7 +3,6 @@ package sep.fimball.view.window.mainmenu;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 
@@ -13,9 +12,9 @@ import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 public class MainMenuPreviewFxController
 {
     @FXML
-    public Pane previewImage;
+    private Pane previewImage;
     @FXML
-    public Label previewName;
+    private Label previewName;
 
     public void bindToViewModel(TableBlueprintPreview preview)
     {

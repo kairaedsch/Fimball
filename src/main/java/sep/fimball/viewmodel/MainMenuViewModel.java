@@ -5,7 +5,8 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.scene.image.Image;
+import sep.fimball.general.AutoListPropertyBinder;
+import sep.fimball.model.tableblueprint.TableBlueprintManager;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 
 /**
@@ -17,18 +18,9 @@ public class MainMenuViewModel
 
     public MainMenuViewModel()
     {
-        tableBlueprintPreviewList = new SimpleListProperty(FXCollections.observableArrayList());
-        // TODO remove test code
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 1"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 2"), new SimpleStringProperty("/images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 3"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 4"), new SimpleStringProperty("/images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 5"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 6"), new SimpleStringProperty("/images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 7"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 8"), new SimpleStringProperty("/images/pic.jpg")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 9"), new SimpleStringProperty("/images/pinball-machine-test-v6.png")));
-        tableBlueprintPreviewList.add(new TableBlueprintPreview(new SimpleStringProperty("Test 10"), new SimpleStringProperty("/images/pic.jpg")));
+        tableBlueprintPreviewList = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        AutoListPropertyBinder.bind(tableBlueprintPreviewList, TableBlueprintManager.getInstance().tableBlueprintsProperty(), tableBlueprint -> new TableBlueprintPreview(tableBlueprint));
     }
 
     public ReadOnlyListProperty<TableBlueprintPreview> getTableBlueprintPreviewListProperty()
