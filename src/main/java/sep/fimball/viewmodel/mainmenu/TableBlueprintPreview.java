@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.mainmenu;
 
 import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import sep.fimball.model.tableblueprint.TableBlueprint;
 
@@ -11,23 +12,17 @@ public class TableBlueprintPreview
 {
     SimpleStringProperty name;
     SimpleStringProperty imagePath;
-
-    public TableBlueprintPreview(SimpleStringProperty nameProperty, SimpleStringProperty imagePathProperty)
-    {
-        name = new SimpleStringProperty();
-        imagePath = new SimpleStringProperty();
-
-        name.bind(nameProperty);
-        imagePath.bind(imagePathProperty);
-    }
+    SimpleIntegerProperty blueprintTableId;
 
     public TableBlueprintPreview(TableBlueprint tableBlueprint)
     {
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
+        blueprintTableId = new SimpleIntegerProperty();
 
         name.bind(tableBlueprint.nameProperty());
         imagePath.bind(tableBlueprint.imagePathProperty());
+        blueprintTableId.bind(tableBlueprint.blueprintTableIdProperty());
     }
 
     public ReadOnlyStringProperty getNameProperty()
@@ -38,5 +33,10 @@ public class TableBlueprintPreview
     public SimpleStringProperty getImagePathProperty()
     {
         return imagePath;
+    }
+
+    public SimpleIntegerProperty blueprintTableIdProperty()
+    {
+        return blueprintTableId;
     }
 }

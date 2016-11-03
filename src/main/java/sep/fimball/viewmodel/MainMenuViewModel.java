@@ -3,9 +3,9 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
+import sep.fimball.model.tableblueprint.TableBlueprint;
 import sep.fimball.model.tableblueprint.TableBlueprintManager;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintDetailedPreview;
 import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
@@ -16,16 +16,16 @@ import sep.fimball.viewmodel.mainmenu.TableBlueprintPreview;
 public class MainMenuViewModel
 {
     private SimpleListProperty<TableBlueprintPreview> tableBlueprintPreviewList;
-    private SimpleObjectProperty<TableBlueprintDetailedPreview> tableBlueprintDetailedPreview;
+    private TableBlueprintDetailedPreview tableBlueprintDetailedPreview;
 
     public MainMenuViewModel()
     {
         tableBlueprintPreviewList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bind(tableBlueprintPreviewList, TableBlueprintManager.getInstance().tableBlueprintsProperty(), TableBlueprintPreview::new);
-        tableBlueprintDetailedPreview = new SimpleObjectProperty<>(new TableBlueprintDetailedPreview(TableBlueprintManager.getInstance().tableBlueprintsProperty().get(0)));
+        ListPropertyBinder.bindMap(tableBlueprintPreviewList, TableBlueprintManager.getInstance().tableBlueprintsProperty(), TableBlueprintPreview::new);
+        tableBlueprintDetailedPreview = new TableBlueprintDetailedPreview(TableBlueprintManager.getInstance().tableBlueprintsProperty().get(0));
     }
 
-    public ReadOnlyListProperty<TableBlueprintPreview> getTableBlueprintPreviewListProperty()
+    public ReadOnlyListProperty<TableBlueprintPreview> tableBlueprintPreviewListProperty()
     {
         return tableBlueprintPreviewList;
     }
@@ -43,5 +43,19 @@ public class MainMenuViewModel
     public void editClicked()
     {
         ViewModelSceneManager.getInstance().setWindow(WindowType.TABLE_SETTINGS);
+    }
+
+    public void blueprintPreviewClick(int blueprintTableId)
+    {
+        TableBlueprint tableBlueprint = TableBlueprintManager.getInstance().tableBlueprintsProperty().get(blueprintTableId);
+        if (tableBlueprint != null)
+        {
+            tableBlueprintDetailedPreview.update(tableBlueprint);
+        }
+    }
+
+    public TableBlueprintDetailedPreview getTableBlueprintDetailedPreview()
+    {
+        return tableBlueprintDetailedPreview;
     }
 }

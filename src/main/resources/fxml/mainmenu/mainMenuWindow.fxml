@@ -26,14 +26,14 @@
             <children>
                 <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label alignment="CENTER" maxWidth="Infinity" styleClass="machineName" text="Marcs Automat" VBox.vgrow="ALWAYS" />
+                        <Label alignment="CENTER" maxWidth="Infinity" styleClass="machineName" text="Marcs Automat" VBox.vgrow="ALWAYS" fx:id="detailedPreviewName"/>
                   <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="158.0" prefWidth="200.0">
                            <children>
-                                    <Pane layoutX="-71.0" layoutY="89.0" styleClass="machinePic" />
+                               <Pane layoutX="-71.0" layoutY="89.0" styleClass="machinePic" fx:id="detailedPreviewImage" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                            </children>
-                        </AnchorPane>
+                      </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="90.0" prefHeight="158.0" prefWidth="90.0">
                            <children>
                               <VBox layoutX="77.0" prefHeight="158.0" prefWidth="128.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -1,7 +1,7 @@
 package sep.fimball.model.tableblueprint;
 
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.ReadOnlyMapProperty;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
 /**
@@ -17,19 +17,19 @@ public class TableBlueprintManager
         return singletonInstance;
     }
 
-    private SimpleListProperty<TableBlueprint> tableBlueprints;
+    private SimpleMapProperty<Integer, TableBlueprint> tableBlueprints;
 
     private TableBlueprintManager()
     {
-        tableBlueprints = new SimpleListProperty<>(FXCollections.observableArrayList());
+        tableBlueprints = new SimpleMapProperty<>(FXCollections.observableHashMap());
 
         //TODO load real Blueprints
-        tableBlueprints.add(new TableBlueprint("Testautomat 1", 0));
-        tableBlueprints.add(new TableBlueprint("Testautomat 2", 1));
-        tableBlueprints.add(new TableBlueprint("Testautomat 3", 2));
+        tableBlueprints.put(0, new TableBlueprint("Testautomat 1", 0));
+        tableBlueprints.put(1, new TableBlueprint("Testautomat 2", 1));
+        tableBlueprints.put(2, new TableBlueprint("Testautomat 3", 2));
     }
 
-    public ReadOnlyListProperty<TableBlueprint> tableBlueprintsProperty()
+    public ReadOnlyMapProperty<Integer, TableBlueprint> tableBlueprintsProperty()
     {
         return tableBlueprints;
     }

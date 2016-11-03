@@ -12,7 +12,7 @@ public class TableBlueprint
     private SimpleStringProperty name;
     private SimpleIntegerProperty blueprintTableId;
     private SimpleListProperty<Highscore> highscoreList;
-    private SimpleListProperty<TableElementBlueprint> elements;
+    private TableBlueprintElementList tableElementList;
 
     private SimpleStringProperty imagePath;
 
@@ -21,10 +21,11 @@ public class TableBlueprint
         this.name = new SimpleStringProperty(name);
         this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.tableElementList = new TableBlueprintElementList();
 
         // TODO real pic
-        this.imagePath = new SimpleStringProperty("/images/pinball-machine-test-v6.png");
+        if(blueprintTableId % 2 == 0) this.imagePath = new SimpleStringProperty("/images/pinball-machine-test-v6.png");
+        else this.imagePath = new SimpleStringProperty("/images/pic.jpg");
     }
 
     public ReadOnlyStringProperty nameProperty()
@@ -42,9 +43,9 @@ public class TableBlueprint
         return highscoreList;
     }
 
-    public ReadOnlyListProperty<TableElementBlueprint> elementsProperty()
+    public TableBlueprintElementList getTableElementList()
     {
-        return elements;
+        return tableElementList;
     }
 
     public ReadOnlyStringProperty imagePathProperty()
@@ -55,16 +56,6 @@ public class TableBlueprint
     public void setName(String name)
     {
         this.name.set(name);
-    }
-
-    public void addElement(TableElementBlueprint tableElementBlueprint)
-    {
-        elements.add(tableElementBlueprint);
-    }
-
-    public boolean removeElement(int blueprintElementId)
-    {
-        return elements.removeIf((element) -> element.blueprintElementIdProperty().get() == blueprintElementId);
     }
 
     public void addHighscore(Highscore highscore)

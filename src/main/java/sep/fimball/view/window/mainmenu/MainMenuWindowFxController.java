@@ -1,7 +1,9 @@
 package sep.fimball.view.window.mainmenu;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,13 +26,20 @@ public class MainMenuWindowFxController extends Window
     private Pane buttonPlayMultiplayer;
     @FXML
     private Pane buttonEdit;
+    @FXML
+    private Pane detailedPreviewImage;
+    @FXML
+    private Label detailedPreviewName;
 
     private MainMenuViewModel mainMenuViewModel;
 
     @FXML
     public void initialize() {
         mainMenuViewModel = new MainMenuViewModel();
-        mainMenuViewModel.getTableBlueprintPreviewListProperty().addListener(new ListChangeListener<TableBlueprintPreview>()
+
+        detailedPreviewName.textProperty().bind(mainMenuViewModel.getTableBlueprintDetailedPreview().nameProperty());
+        detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getTableBlueprintDetailedPreview().imagePathProperty(), "\");"));
+        mainMenuViewModel.tableBlueprintPreviewListProperty().addListener(new ListChangeListener<TableBlueprintPreview>()
         {
             @Override
             public void onChanged(Change<? extends TableBlueprintPreview> c)
@@ -45,11 +54,11 @@ public class MainMenuWindowFxController extends Window
     {
         machineOverview.getChildren().clear();
 
-        for(TableBlueprintPreview preview : mainMenuViewModel.getTableBlueprintPreviewListProperty())
+        for(TableBlueprintPreview preview : mainMenuViewModel.tableBlueprintPreviewListProperty())
         {
             SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(FxControllerType.MAIN_MENU_PREVIEW);
             machineOverview.getChildren().add(simpleFxmlLoader.getRootNode());
-            ((MainMenuPreviewFxController) simpleFxmlLoader.getFxController()).bindToViewModel(preview);
+            ((MainMenuPreviewFxController) simpleFxmlLoader.getFxController()).bindToViewModel(mainMenuViewModel, preview);
         }
     }
 

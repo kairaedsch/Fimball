@@ -11,22 +11,19 @@ import sep.fimball.model.tableblueprint.TableBlueprint;
  */
 public class TableBlueprintDetailedPreview
 {
-    SimpleIntegerProperty blueprintId;
+    SimpleIntegerProperty blueprintTableId;
     SimpleStringProperty name;
     SimpleStringProperty imagePath;
     SimpleListProperty<Highscore> highscoreList;
 
     public TableBlueprintDetailedPreview(TableBlueprint tableBlueprint)
     {
-        blueprintId = new SimpleIntegerProperty();
+        blueprintTableId = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
-        blueprintId.bind(tableBlueprint.blueprintTableIdProperty());
-        name.bind(tableBlueprint.nameProperty());
-        imagePath.bind(tableBlueprint.imagePathProperty());
-        highscoreList.bind(tableBlueprint.highscoreListProperty());
+        update(tableBlueprint);
     }
 
     public ReadOnlyStringProperty nameProperty()
@@ -39,9 +36,9 @@ public class TableBlueprintDetailedPreview
         return imagePath;
     }
 
-    public ReadOnlyIntegerProperty blueprintIdProperty()
+    public ReadOnlyIntegerProperty blueprintTableIdProperty()
     {
-        return blueprintId;
+        return blueprintTableId;
     }
 
     public ObservableList<Highscore> getHighscoreList()
@@ -52,5 +49,13 @@ public class TableBlueprintDetailedPreview
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
         return highscoreList;
+    }
+
+    public void update(TableBlueprint tableBlueprint)
+    {
+        blueprintTableId.bind(tableBlueprint.blueprintTableIdProperty());
+        name.bind(tableBlueprint.nameProperty());
+        imagePath.bind(tableBlueprint.imagePathProperty());
+        highscoreList.bind(tableBlueprint.highscoreListProperty());
     }
 }

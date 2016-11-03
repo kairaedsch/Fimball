@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class TableElementBlueprint
+public class TableBlueprintElement
 {
     SimpleIntegerProperty blueprintElementId;
     SimpleStringProperty greenprintElementId;
@@ -16,7 +16,7 @@ public class TableElementBlueprint
     SimpleMapProperty<String, Double> colliderToMulitplier;
     SimpleIntegerProperty points;
 
-    public TableElementBlueprint(int blueprintElementId, String greenprintElementId, Point position)
+    public TableBlueprintElement(int blueprintElementId, String greenprintElementId, Point position)
     {
         this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
         this.greenprintElementId = new SimpleStringProperty(greenprintElementId);
