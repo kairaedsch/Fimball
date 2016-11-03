@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="sep.fimball.view.window.mainmenu.MainMenuWindowFxController">
+<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuWindowFxController">
     <items>
         <AnchorPane minWidth="150.0">
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
-                            styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
                         <AnchorPane>
                             <children>
-                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
-                                      styleClass="machineOverviewInner" fx:id="machineOverview">
+                                <VBox fx:id="machineOverview" styleClass="machineOverviewInner" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                     </children>
                                 </VBox>
@@ -31,60 +32,70 @@
         </AnchorPane>
         <AnchorPane minWidth="300.0">
             <children>
-                <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label styleClass="machineName" alignment="CENTER" maxWidth="Infinity" text="Marcs Automat"
-                               VBox.vgrow="ALWAYS"></Label>
-                        <Pane styleClass="machinePic" VBox.vgrow="ALWAYS">
-                            <VBox.margin>
-                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
-                            </VBox.margin>
-                        </Pane>
-                        <GridPane styleClass="machineAktions" prefHeight="110.0">
+                        <Label alignment="CENTER" maxWidth="Infinity" styleClass="machineName" text="Marcs Automat" VBox.vgrow="ALWAYS" />
+                  <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                                    <Pane layoutX="-71.0" layoutY="89.0" styleClass="machinePic" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane maxWidth="90.0" minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="90.0">
+                           <children>
+                              <VBox layoutX="-6.0" prefHeight="158.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="80.0" text="Highscore 1" VBox.vgrow="ALWAYS" />
+                                    <Label prefHeight="21.0" prefWidth="79.0" text="Highscore 2" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                        <GridPane prefHeight="110.0" styleClass="machineAktions">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <HBox>
                                     <children>
-                                        <Pane HBox.hgrow="ALWAYS"/>
-                                        <Pane fx:id="buttonPlaySinglePlayer" styleClass="button, buttonPlaySinglePlayer"
-                                              maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
-                                              onMouseClicked="#play"></Pane>
-                                        <Pane HBox.hgrow="ALWAYS"/>
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Pane fx:id="buttonPlaySinglePlayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#play" styleClass="button, buttonPlaySinglePlayer" />
+                                        <Pane HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
                                 <HBox GridPane.columnIndex="1">
                                     <children>
-                                        <Pane HBox.hgrow="ALWAYS"/>
-                                        <Pane fx:id="buttonPlayMultiplayer" styleClass="button, buttonPlayMultiplayer"
-                                              maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"></Pane>
-                                        <Pane HBox.hgrow="ALWAYS"/>
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Pane fx:id="buttonPlayMultiplayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" styleClass="button, buttonPlayMultiplayer" />
+                                        <Pane HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
                                 <HBox GridPane.columnIndex="2">
                                     <children>
-                                        <Pane HBox.hgrow="ALWAYS"/>
-                                        <Pane fx:id="buttonEdit" styleClass="button, buttonEdit" maxHeight="60.0"
-                                              maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#edit"
-                                              prefHeight="60.0" prefWidth="60.0"></Pane>
-                                        <Pane HBox.hgrow="ALWAYS"/>
+                                        <Pane HBox.hgrow="ALWAYS" />
+                                        <Pane fx:id="buttonEdit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#edit" prefHeight="60.0" prefWidth="60.0" styleClass="button, buttonEdit" />
+                                        <Pane HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
                             </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
                         </GridPane>
                     </children>
                 </VBox>
             </children>
         </AnchorPane>
     </items>
-    <stylesheets>
+ <!--   <stylesheets>
         <String fx:value="styles/style.css"/>
-    </stylesheets>
+    </stylesheets> -->
 </SplitPane>
