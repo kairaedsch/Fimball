@@ -4,7 +4,6 @@ import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import sep.fimball.model.Vector2;
 import sep.fimball.viewmodel.SpriteViewModel;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
 
@@ -22,7 +21,7 @@ public class Sprite
 
         imagePathProperty = new SimpleStringProperty();
         imagePathProperty.addListener((observable, oldValue, newValue) -> loadImage());
-        imagePathProperty.bind(viewModel.getAnimationPath()); // TODO wird der listener instant aufgerufen?
+        imagePathProperty.bind(viewModel.getAnimation()); // TODO wird der listener instant aufgerufen?
 
         rotationProperty = new SimpleDoubleProperty();
         rotationProperty.bind(viewModel.getRotation());

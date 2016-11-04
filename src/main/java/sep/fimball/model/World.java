@@ -2,12 +2,8 @@ package sep.fimball.model;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableList;
 import javafx.util.Duration;
-
-import java.util.List;
 
 public class World
 {
