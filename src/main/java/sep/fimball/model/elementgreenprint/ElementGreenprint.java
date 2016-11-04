@@ -9,19 +9,6 @@ public class ElementGreenprint
 {
     public class GreenprintCollider
     {
-        public class AnimationObject
-        {
-            public int frameCount;
-            public double duration;
-            public String frameName;
-        }
-
-        public class ForceObject
-        {
-            public String forceType;
-            public double strength;
-        }
-
         public class PhysicsObjectPolygon
         {
             public String type;
@@ -42,8 +29,23 @@ public class ElementGreenprint
         public PhysicsObjectCircle[] physicsCircles;
     }
 
+    public class AnimationObject
+    {
+        public int frameCount;
+        public double duration;
+        public String frameName;
+    }
+
+    public class ForceObject
+    {
+        public String forceType;
+        public double strength;
+    }
+
     public String editorName;
     public String editorDescription;
     public double rotationAccuracy;
     public GreenprintCollider[] colliders;
+    public AnimationObject[] animations;
+    public ForceObject[] forces;
 }

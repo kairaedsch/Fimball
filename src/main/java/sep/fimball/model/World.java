@@ -51,7 +51,8 @@ public class World
         return worldElements; // TODO immutable?
     }
 
-    //Called by a timeline created in this class, update all gameobjects and draw them
+    //Called by a timeline created in this class, update all gameobjects
+    //is NOT the physics loop
     private void updateWorld()
     {
         throw new UnsupportedOperationException();

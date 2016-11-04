@@ -4,7 +4,7 @@ public class GameElement
 {
     private Vector2 position;
     private double rotation;
-    private Sprite currentFrame;
+    private String[] frames;
 
     public void update()
     {
@@ -29,10 +29,5 @@ public class GameElement
     public void setRotation(double rotation)
     {
         this.rotation = rotation;
-    }
-
-    public Sprite getCurrentFrame()
-    {
-        return currentFrame;
     }
 }

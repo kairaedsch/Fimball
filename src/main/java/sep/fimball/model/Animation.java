@@ -1,23 +1,22 @@
 package sep.fimball.model;
 
-public class Animation implements Renderable
+import javafx.beans.property.SimpleListProperty;
+import sep.fimball.model.elementgreenprint.ElementGreenprint;
+
+public class Animation
 {
-    private Sprite[] frames;
-    private int currentFrame;
-
-    public Animation(Sprite[] frames)
+    class SubAnimation
     {
-        if (frames == null || frames.length == 0)
-            throw new IllegalArgumentException("Animation can't be null and must have at least one frame!");
-
-        this.frames = frames;
+        private String[] framePaths;
+        private double frameDuration;
+        // TODO collider group wie???
     }
 
-    public Sprite getFrame()
-    {
-        if (currentFrame >= frames.length || currentFrame < 0)
-            throw new IllegalStateException();
+    // Maps name of animation to the paths of the animation frames
+    private SimpleListProperty<SubAnimation> subAnimations;
 
-        return frames[currentFrame];
+    public Animation(ElementGreenprint.AnimationObject[] animObjects)
+    {
+
     }
 }

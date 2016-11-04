@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel;
 
+import javafx.beans.property.SimpleStringProperty;
 import sep.fimball.model.Sprite;
 import sep.fimball.model.Vector2;
 
@@ -9,12 +10,14 @@ import sep.fimball.model.Vector2;
 public class Drawable
 {
     private Vector2 position;
-    private Sprite sprite;
+    private double rotation;
+    private SimpleStringProperty animationPath;
 
-    public Drawable(Vector2 position, Sprite sprite)
+    public Drawable(Vector2 position, double rotation, String animationPath)
     {
         this.position = position;
-        this.sprite = sprite;
+        this.rotation = rotation;
+        this.animationPath = new SimpleStringProperty(animationPath);
     }
 
     public Vector2 getPosition()
@@ -22,8 +25,13 @@ public class Drawable
         return position;
     }
 
-    public Sprite getSprite()
+    public double getRotation()
     {
-        return sprite;
+        return rotation;
+    }
+
+    public SimpleStringProperty getAnimationPath()
+    {
+        return animationPath;
     }
 }
