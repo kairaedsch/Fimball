@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -33,15 +34,19 @@ public class MainMenuWindowFxController extends Window
     @FXML
     private Label detailedPreviewName;
     @FXML
-    private TableView<Highscore> highscores;
+    private TableView<Highscore> highscoreTable;
+    @FXML
+    private TableColumn<Highscore, String> highscores;
 
     private MainMenuViewModel mainMenuViewModel;
 
     @FXML
     public void initialize() {
         mainMenuViewModel = new MainMenuViewModel();
+        highscoreTable.setItems(mainMenuViewModel.getTableBlueprintDetailedPreview().getHighscoreList());
+        highscores.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().playerNameProperty() ," ", cellData.getValue().scoreProperty().asString()));
 
-        highscores.setItems(mainMenuViewModel.getTableBlueprintDetailedPreview().getHighscoreList());
+
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getTableBlueprintDetailedPreview().nameProperty());
         detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getTableBlueprintDetailedPreview().imagePathProperty(), "\");"));
         mainMenuViewModel.tableBlueprintPreviewListProperty().addListener(new ListChangeListener<TableBlueprintPreview>()

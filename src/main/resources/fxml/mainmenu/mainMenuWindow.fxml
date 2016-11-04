@@ -36,9 +36,9 @@
                       </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="90.0" prefHeight="158.0" prefWidth="90.0">
                            <children>
-                              <TableView fx:id ="highscores" prefHeight="160.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id ="highscoreTable" prefHeight="160.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Highscores" />
+                                  <TableColumn fx:id = "highscores" prefWidth="75.0" text="Highscores" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
