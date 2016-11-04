@@ -18,7 +18,7 @@ public class Camera
         double width = viewArea.getX();
         double height = viewArea.getY();
         double originX = position.getX() - (width / 2);
-        double originY = position.getY() + (height / 2);
+        double originY = position.getY() - (height / 2);
         Vector2 origin = new Vector2(originX, originY);
         return new RectangleDouble(origin, width, height);
     }
