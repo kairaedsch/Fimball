@@ -53,7 +53,7 @@ public class MainMenuWindowFxController extends Window
         });
         previewListChanged();
 
-        updateHighsores();
+       // updateHighsores();
     }
 
     private void updateHighsores()

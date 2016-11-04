@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import sep.fimball.view.FxControllerType;
 import sep.fimball.view.SimpleFxmlLoader;
 import sep.fimball.view.dialog.Dialog;
+import sep.fimball.viewmodel.MainMenuViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -18,6 +19,8 @@ public class PlayerNameDialogFxController extends Dialog
     private Button abortButton;
     @FXML
     private VBox nameEntryList;
+
+    private MainMenuViewModel mainMenuViewModel;
 
     @FXML
     public void initialize()
@@ -41,6 +44,8 @@ public class PlayerNameDialogFxController extends Dialog
     @FXML
     public void addPlayer()
     {
+        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(FxControllerType.PLAYERNAME_ENTRY);
+        nameEntryList.getChildren().add(simpleFxmlLoader.getRootNode());
 
     }
 }
