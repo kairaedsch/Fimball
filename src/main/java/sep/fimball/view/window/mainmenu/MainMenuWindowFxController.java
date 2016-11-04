@@ -4,9 +4,11 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.Highscore;
 import sep.fimball.view.FxControllerType;
 import sep.fimball.view.SimpleFxmlLoader;
 import sep.fimball.view.window.Window;
@@ -30,6 +32,8 @@ public class MainMenuWindowFxController extends Window
     private Pane detailedPreviewImage;
     @FXML
     private Label detailedPreviewName;
+    @FXML
+    private TableView<Highscore> highscores;
 
     private MainMenuViewModel mainMenuViewModel;
 
@@ -37,6 +41,7 @@ public class MainMenuWindowFxController extends Window
     public void initialize() {
         mainMenuViewModel = new MainMenuViewModel();
 
+        highscores.setItems(mainMenuViewModel.getTableBlueprintDetailedPreview().getHighscoreList());
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getTableBlueprintDetailedPreview().nameProperty());
         detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getTableBlueprintDetailedPreview().imagePathProperty(), "\");"));
         mainMenuViewModel.tableBlueprintPreviewListProperty().addListener(new ListChangeListener<TableBlueprintPreview>()
