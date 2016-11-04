@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class PolygonCollider extends Collider
 {
-    private List<Vector2> vertecies = new ArrayList<>();
+    private List<Vector2> vertecies;
 
     public PolygonCollider(List<Vector2> vertecies, WorldLayer layer, ColliderType colliderType)
     {
