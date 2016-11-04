@@ -16,13 +16,9 @@ public class World
     private Timeline gameLoop;
     private KeyFrame keyFrame;
 
-    /**
-	 *
-	 * @param worldElements
-	 */
-	public World(ObservableList<GameElement> worldElements)
+	public World()
     {
-        this.worldElements = new SimpleListProperty<>(worldElements);
+        this.worldElements = new SimpleListProperty<>();
     }
 
     public void startTimeline()
