@@ -18,7 +18,7 @@ public class GameViewModel
     {
         spriteViewModels = new SimpleListProperty<>();
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteViewModels, elements, (GameElement) -> new SpriteViewModel());
+        ListPropertyBinder.bindList(spriteViewModels, elements, SpriteViewModel::new);
         elements.bind(GameSession.getSingletonInstance().getTable().getWorld().getWorldElements());
 
         // GameSession has been created and filled in the PlayerNameDialog TODO move this to controller?

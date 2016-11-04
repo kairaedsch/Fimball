@@ -24,7 +24,7 @@ public class GameWindowFxController extends Window
 
         sprites = new SimpleListProperty<>();
         spriteViewModels = new SimpleListProperty<>();
-        ListPropertyBinder.bindList(sprites, spriteViewModels, (SpriteViewModel) -> new Sprite(SpriteViewModel));
+        ListPropertyBinder.bindList(sprites, spriteViewModels, Sprite::new);
         spriteViewModels.bind(viewModel.getSpriteViewModels());
     }
 }

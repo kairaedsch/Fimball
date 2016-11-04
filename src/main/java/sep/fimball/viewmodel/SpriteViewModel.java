@@ -3,6 +3,7 @@ package sep.fimball.viewmodel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import sep.fimball.model.GameElement;
 import sep.fimball.model.Vector2;
 
 /**
@@ -14,10 +15,11 @@ public class SpriteViewModel
     private SimpleDoubleProperty rotation;
     private SimpleStringProperty animationPath;
 
-    public SpriteViewModel()
+    public SpriteViewModel(GameElement baseElement)
     {
-        position = new SimpleObjectProperty<>();
-        rotation = new SimpleDoubleProperty();
+        position = new SimpleObjectProperty<>(baseElement.getPosition());
+        rotation = new SimpleDoubleProperty(baseElement.getRotation());
+        // TODO animatino stuff (put that into controller maybe?)
         animationPath = new SimpleStringProperty();
     }
 
