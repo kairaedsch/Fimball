@@ -1,5 +1,8 @@
 package sep.fimball.view.dialog.pause;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import sep.fimball.view.dialog.Dialog;
 
 /**
@@ -7,4 +10,22 @@ import sep.fimball.view.dialog.Dialog;
  */
 public class PauseDialogFxController extends Dialog
 {
+    @FXML
+    private Button continueButton;
+    @FXML
+    private Button abortButton;
+    @FXML
+    private GridPane playerScores;
+
+    @FXML
+    public void exitGame()
+    {
+
+    }
+
+    @FXML
+    public void continueGame()
+    {
+
+    }
 }
