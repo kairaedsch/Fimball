@@ -53,4 +53,9 @@ public class GameElement
     {
         this.animation.set(animation);
     }
+
+    public void update()
+    {
+
+    }
 }
