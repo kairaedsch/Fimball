@@ -1,19 +1,28 @@
 package sep.fimball.model;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Sprite implements Renderable
+import java.io.File;
+
+public class Sprite
 {
     private Image image;
+    private StringProperty imagePathProperty;
 
-    public Sprite(Image image)
+    public Sprite()
     {
-        this.image = image;
+        imagePathProperty.addListener((observable, oldValue, newValue) ->
+        {
+            loadImage();
+        });
     }
 
-    public Sprite getFrame()
+    private void loadImage()
     {
-        throw new NotImplementedException();
+        File file = new File(imagePathProperty.get());
+        image = new Image(file.toURI().toString());
     }
 }
