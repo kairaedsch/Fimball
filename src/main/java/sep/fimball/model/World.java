@@ -2,6 +2,9 @@ package sep.fimball.model;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.List;
 public class World
 {
     private final double TIMELINE_TICK = 1 / 60;
-    private List<GameElement> worldElements;
+    private SimpleListProperty<GameElement> worldElements;
     private Timeline gameLoop;
     private KeyFrame keyFrame;
 
@@ -17,9 +20,9 @@ public class World
 	 *
 	 * @param worldElements
 	 */
-	public World(List<GameElement> worldElements)
+	public World(ObservableList<GameElement> worldElements)
     {
-        this.worldElements = worldElements;
+        this.worldElements = new SimpleListProperty<>(worldElements);
     }
 
     public void startTimeline()
@@ -51,9 +54,9 @@ public class World
         worldElements.add(obj);
     }
 
-    public List<GameElement> getWorldElements()
+    public SimpleListProperty<GameElement> getWorldElements()
     {
-        return worldElements; // TODO immutable?
+        return worldElements;
     }
 
     //Called by a timeline created in this class, update all gameobjects

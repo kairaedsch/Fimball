@@ -16,9 +16,9 @@ public class Sprite
     private ObjectProperty<Vector2> positionProperty;
     private SpriteViewModel viewModel;
 
-    public Sprite()
+    public Sprite(SpriteViewModel viewModel)
     {
-        viewModel = new SpriteViewModel();
+        this.viewModel = viewModel;
 
         imagePathProperty = new SimpleStringProperty();
         imagePathProperty.addListener((observable, oldValue, newValue) -> loadImage());
