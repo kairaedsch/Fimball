@@ -27,6 +27,7 @@
                             <children>
                             </children>
                         </VBox>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPlayer" text="Add Player" />
                     </children>
                 </VBox>
                 <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#start" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />

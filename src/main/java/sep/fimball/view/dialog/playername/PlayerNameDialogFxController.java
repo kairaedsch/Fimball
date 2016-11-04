@@ -37,4 +37,10 @@ public class PlayerNameDialogFxController extends Dialog
     {
 
     }
+
+    @FXML
+    public void addPlayer()
+    {
+
+    }
 }
