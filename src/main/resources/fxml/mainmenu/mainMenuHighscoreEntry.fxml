@@ -1,2 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Label?>
-<Label xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:id="highscoreEntry" prefHeight="21.0" prefWidth="79.0"  />
+<?import javafx.scene.layout.Pane?>
+        <Label fx:id="highscoreEntry" prefHeight="21.0" prefWidth="79.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+               fx:controller="sep.fimball.view.window.mainmenu.MainMenuDetailedPreviewHighscoreEntryFxController">
+        </Label>

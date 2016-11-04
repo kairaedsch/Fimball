@@ -15,6 +15,6 @@ public class MainMenuDetailedPreviewHighscoreEntryFxController
 
     public void bindToViewModel(Highscore highscore)
     {
-        highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty(),highscore.scoreProperty().asString()));
+        highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty()," ", highscore.scoreProperty().asString()));
     }
 }

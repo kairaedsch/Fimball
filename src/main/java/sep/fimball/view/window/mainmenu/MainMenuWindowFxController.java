@@ -4,8 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,18 +32,14 @@ public class MainMenuWindowFxController extends Window
     @FXML
     private Label detailedPreviewName;
     @FXML
-    private TableView<Highscore> highscoreTable;
-    @FXML
-    private TableColumn<Highscore, String> highscores;
+    private VBox highscores;
 
     private MainMenuViewModel mainMenuViewModel;
 
     @FXML
-    public void initialize() {
+    public void initialize()
+    {
         mainMenuViewModel = new MainMenuViewModel();
-        highscoreTable.setItems(mainMenuViewModel.getTableBlueprintDetailedPreview().getHighscoreList());
-        highscores.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().playerNameProperty() ," ", cellData.getValue().scoreProperty().asString()));
-
 
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getTableBlueprintDetailedPreview().nameProperty());
         detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getTableBlueprintDetailedPreview().imagePathProperty(), "\");"));
@@ -58,13 +52,26 @@ public class MainMenuWindowFxController extends Window
             }
         });
         previewListChanged();
+
+        updateHighsores();
+    }
+
+    private void updateHighsores()
+    {
+        highscores.getChildren().clear();
+        for (Highscore score : mainMenuViewModel.getTableBlueprintDetailedPreview().getHighscoreList())
+        {
+            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(FxControllerType.MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY);
+            highscores.getChildren().add(simpleFxmlLoader.getRootNode());
+            ((MainMenuDetailedPreviewHighscoreEntryFxController) simpleFxmlLoader.getFxController()).bindToViewModel(score);
+        }
     }
 
     private void previewListChanged()
     {
         machineOverview.getChildren().clear();
 
-        for(TableBlueprintPreview preview : mainMenuViewModel.tableBlueprintPreviewListProperty())
+        for (TableBlueprintPreview preview : mainMenuViewModel.tableBlueprintPreviewListProperty())
         {
             SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(FxControllerType.MAIN_MENU_PREVIEW);
             machineOverview.getChildren().add(simpleFxmlLoader.getRootNode());
