@@ -39,8 +39,6 @@
                               <VBox layoutX="77.0" prefHeight="158.0" prefWidth="128.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label prefHeight="21.0" prefWidth="80.0" text="Highscores" VBox.vgrow="ALWAYS" />
-                                    <Label prefHeight="21.0" prefWidth="79.0" text="Highscore 1" VBox.vgrow="ALWAYS" />
-                                    <Label prefHeight="21.0" prefWidth="79.0" text="Highscore 2" />
                                  </children>
                               </VBox>
                            </children>

@@ -1,5 +1,6 @@
 package sep.fimball.view.window.mainmenu;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import sep.fimball.general.Highscore;
@@ -10,13 +11,10 @@ import sep.fimball.general.Highscore;
 public class MainMenuDetailedPreviewHighscoreEntryFxController
 {
     @FXML
-    public Label playerName;
-    @FXML
-    public Label score;
+    public Label highscoreEntry;
 
     public void bindToViewModel(Highscore highscore)
     {
-        playerName.textProperty().bind(highscore.playerNameProperty());
-        score.textProperty().bind(highscore.scoreProperty().asString());
+        highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty(),highscore.scoreProperty().asString()));
     }
 }

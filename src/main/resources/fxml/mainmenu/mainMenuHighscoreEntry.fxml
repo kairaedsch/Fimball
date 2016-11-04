@@ -1,2 +1,2 @@
 <?import javafx.scene.control.Label?>
-<Label xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:id="highscore" prefHeight="21.0" prefWidth="79.0"  />
+<Label xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:id="highscoreEntry" prefHeight="21.0" prefWidth="79.0"  />
