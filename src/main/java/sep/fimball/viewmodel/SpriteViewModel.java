@@ -3,7 +3,6 @@ package sep.fimball.viewmodel;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import sep.fimball.model.Sprite;
 import sep.fimball.model.Vector2;
 
 /**

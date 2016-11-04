@@ -1,10 +1,9 @@
 package sep.fimball.view;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import sep.fimball.model.Vector2;
+import sep.fimball.viewmodel.SpriteViewModel;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
@@ -15,13 +14,21 @@ public class Sprite
     private StringProperty imagePathProperty;
     private DoubleProperty rotationProperty;
     private ObjectProperty<Vector2> positionProperty;
+    private SpriteViewModel viewModel;
 
     public Sprite()
     {
-        imagePathProperty.addListener((observable, oldValue, newValue) ->
-        {
-            loadImage();
-        });
+        viewModel = new SpriteViewModel();
+
+        imagePathProperty = new SimpleStringProperty();
+        imagePathProperty.addListener((observable, oldValue, newValue) -> loadImage());
+        imagePathProperty.bind(viewModel.getAnimationPath()); // TODO wird der listener instant aufgerufen?
+
+        rotationProperty = new SimpleDoubleProperty();
+        rotationProperty.bind(viewModel.getRotation());
+
+        positionProperty = new SimpleObjectProperty<>();
+        positionProperty.bind(viewModel.getPosition());
     }
 
     private void loadImage()
