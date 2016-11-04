@@ -20,11 +20,15 @@ public class GameSession
 
     private GameSession()
     {
-        if (players == null || players.length == 0)
-            throw new IllegalArgumentException("At least one player must be present!");
 
-        this.currentPlayer = players[0];
-        this.tiltCounter = 0;
+    }
+
+    public void startNewGame()
+    {
+        if (table.getWorld() == null)
+            table.loadWorld();
+
+        table.getWorld().startTimeline();
     }
 
     public Player getCurrentPlayer()
@@ -35,6 +39,11 @@ public class GameSession
     public Player[] getPlayers()
     {
         return players;
+    }
+
+    public void setPlayers(Player[] players)
+    {
+        this.players = players;
     }
 
     public PinballTable getTable()

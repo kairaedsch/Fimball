@@ -20,6 +20,10 @@ public class World
 	public World(List<GameElement> worldElements)
     {
         this.worldElements = worldElements;
+    }
+
+    public void startTimeline()
+    {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event -> {
