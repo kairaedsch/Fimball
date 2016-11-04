@@ -21,7 +21,7 @@ public class Sprite
 
         imagePathProperty = new SimpleStringProperty();
         imagePathProperty.addListener((observable, oldValue, newValue) -> loadImage());
-        imagePathProperty.bind(viewModel.getAnimation()); // TODO wird der listener instant aufgerufen?
+        imagePathProperty.bind(viewModel.getFramePath()); // TODO wird der listener instant aufgerufen?
 
         rotationProperty = new SimpleDoubleProperty();
         rotationProperty.bind(viewModel.getRotation());
