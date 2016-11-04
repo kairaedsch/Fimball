@@ -33,6 +33,7 @@ public class World
         gameLoop.play();
     }
 
+
     public void stopTimeline()
     {
         gameLoop.stop();

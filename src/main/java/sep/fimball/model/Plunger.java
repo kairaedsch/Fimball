@@ -1,5 +1,7 @@
 package sep.fimball.model;
 
+import sep.fimball.view.Sprite;
+
 public class Plunger extends GameElement
 {
     private double chargePercent;
