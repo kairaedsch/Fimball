@@ -1,10 +1,17 @@
 package sep.fimball.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 import java.util.List;
 
 public class World
 {
+    private final double TIMELINE_TICK = 1 / 60;
     private List<GameElement> worldElements;
+    private Timeline gameLoop;
+    private KeyFrame keyFrame;
 
     /**
 	 *
@@ -13,6 +20,18 @@ public class World
 	public World(List<GameElement> worldElements)
     {
         this.worldElements = worldElements;
+        gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event -> {
+
+        }));
+        gameLoop.getKeyFrames().add(keyFrame);
+        gameLoop.play();
+    }
+
+    public void stopTimeline()
+    {
+        gameLoop.stop();
     }
 
     /**
