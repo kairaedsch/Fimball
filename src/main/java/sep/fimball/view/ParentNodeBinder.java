@@ -14,63 +14,70 @@ import java.util.Map;
  */
 public class ParentNodeBinder
 {
-    public static <B> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType)
+    public static <ViewModel> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewType viewType)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyB, viewType, (view, b) ->
+        ParentNodeBinder.bindList(parentNode, listPropertyViewModel, viewType, (view, viewModel) ->
         {
-            ((SimpleBindedToViewModel<B>) view).bindToViewModel(b);
+            if(view instanceof SimpleBoundToViewModel)
+            {
+                ((SimpleBoundToViewModel<ViewModel>) view).bindToViewModel(viewModel);
+            }
+            else
+            {
+                throw new RuntimeException("View needs to be implement the SimpleBoundToViewModel Interface");
+            }
         });
     }
 
-    public static <B> void bindList(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType, Caller<B> converter)
+    public static <ViewModel> void bindList(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModel> converter)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyB, (b) ->
+        ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
         {
             SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
-            converter.call(simpleFxmlLoader.getFxController(), b);
+            converter.call(simpleFxmlLoader.getFxController(), viewModel);
             return simpleFxmlLoader.getRootNode();
         });
     }
 
-    public static <B> void bindList(Pane parentNode, ObservableList<B> listPropertyB, Converter<B> converter)
+    public static <ViewModel> void bindList(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewModelToNodeConverter<ViewModel> viewModelToNodeConverter)
     {
-        ListChangeListener<B> listChangeListener = (change) ->
+        ListChangeListener<ViewModel> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for(B b : listPropertyB)
+            for(ViewModel b : listPropertyViewModel)
             {
-                parentNode.getChildren().add(converter.convert(b));
+                parentNode.getChildren().add(viewModelToNodeConverter.convert(b));
             }
         };
 
-        listPropertyB.addListener(listChangeListener);
+        listPropertyViewModel.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 
-    public static <K, B> void bindMap(Pane parentNode, ObservableMap<K, B> MapPropertyB, Converter<B> converter)
+    public static <ViewModelKey, ViewModel> void bindMap(Pane parentNode, ObservableMap<ViewModelKey, ViewModel> MapPropertyViewModel, ViewModelToNodeConverter<ViewModel> viewModelToNodeConverter)
     {
-        MapChangeListener<K, B> listChangeListener = (change) ->
+        MapChangeListener<ViewModelKey, ViewModel> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for(Map.Entry<K, B> b : MapPropertyB.entrySet())
+            for(Map.Entry<ViewModelKey, ViewModel> b : MapPropertyViewModel.entrySet())
             {
-                parentNode.getChildren().add(converter.convert(b.getValue()));
+                parentNode.getChildren().add(viewModelToNodeConverter.convert(b.getValue()));
             }
         };
 
-        MapPropertyB.addListener(listChangeListener);
+        MapPropertyViewModel.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 
-    public interface Converter<B>
+    public interface ViewModelToNodeConverter<ViewModel>
     {
-        Node convert(B b);
+        Node convert(ViewModel viewModel);
     }
 
-    public interface Caller<B>
+    public interface ViewAndViewModelCaller<ViewModel>
     {
-        void call(Object view, B b);
+        void call(Object view, ViewModel viewModel);
     }
 }
