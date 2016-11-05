@@ -16,11 +16,9 @@ public class ParentNodeBinder
 {
     public static <B> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyB, (b) ->
+        ParentNodeBinder.bindList(parentNode, listPropertyB, viewType, (viewMode, b) ->
         {
-            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
-            ((SimpleBindedToViewModel<B>) simpleFxmlLoader.getFxController()).bindToViewModel(b);
-            return simpleFxmlLoader.getRootNode();
+            ((SimpleBindedToViewModel<B>) viewMode).bindToViewModel(b);
         });
     }
 
@@ -73,6 +71,6 @@ public class ParentNodeBinder
 
     public interface Caller<B>
     {
-        void call(Object view, B b);
+        void call(Object viewModel, B b);
     }
 }
