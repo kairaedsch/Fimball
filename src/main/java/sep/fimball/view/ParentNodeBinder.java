@@ -14,19 +14,35 @@ import java.util.Map;
  */
 public class ParentNodeBinder
 {
+    public static <B> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType)
+    {
+        ParentNodeBinder.bindList(parentNode, listPropertyB, (b) ->
+        {
+            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
+            ((SimpleBindedToViewModel<B>) simpleFxmlLoader.getFxController()).bindToViewModel(b);
+            return simpleFxmlLoader.getRootNode();
+        });
+    }
+
+    public static <B> void bindList(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType, Caller<B> converter)
+    {
+        ParentNodeBinder.bindList(parentNode, listPropertyB, (b) ->
+        {
+            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
+            converter.call(simpleFxmlLoader.getFxController(), b);
+            return simpleFxmlLoader.getRootNode();
+        });
+    }
+
     public static <B> void bindList(Pane parentNode, ObservableList<B> listPropertyB, Converter<B> converter)
     {
-        ListChangeListener<B> listChangeListener = new ListChangeListener<B>()
+        ListChangeListener<B> listChangeListener = (change) ->
         {
-            @Override
-            public void onChanged(Change<? extends B> change)
-            {
-                parentNode.getChildren().clear();
+            parentNode.getChildren().clear();
 
-                for(B b : listPropertyB)
-                {
-                    parentNode.getChildren().add(converter.convert(b));
-                }
+            for(B b : listPropertyB)
+            {
+                parentNode.getChildren().add(converter.convert(b));
             }
         };
 
@@ -36,17 +52,13 @@ public class ParentNodeBinder
 
     public static <K, B> void bindMap(Pane parentNode, ObservableMap<K, B> MapPropertyB, Converter<B> converter)
     {
-        MapChangeListener<K, B> listChangeListener = new MapChangeListener<K, B>()
+        MapChangeListener<K, B> listChangeListener = (change) ->
         {
-            @Override
-            public void onChanged(Change<? extends K, ? extends B> change)
-            {
-                parentNode.getChildren().clear();
+            parentNode.getChildren().clear();
 
-                for(Map.Entry<K, B> b : MapPropertyB.entrySet())
-                {
-                    parentNode.getChildren().add(converter.convert(b.getValue()));
-                }
+            for(Map.Entry<K, B> b : MapPropertyB.entrySet())
+            {
+                parentNode.getChildren().add(converter.convert(b.getValue()));
             }
         };
 
@@ -57,5 +69,10 @@ public class ParentNodeBinder
     public interface Converter<B>
     {
         Node convert(B b);
+    }
+
+    public interface Caller<B>
+    {
+        void call(Object view, B b);
     }
 }

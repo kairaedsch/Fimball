@@ -1,9 +1,11 @@
 package sep.fimball.view.window;
 
+import sep.fimball.view.ViewType;
+
 /**
  * Created by kaira on 02.11.2016.
  */
-public enum WindowType
+public enum WindowType implements ViewType
 {
     MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"),
     MAIN_MENU_PREVIEW("mainmenu/mainMenuPreview.fxml"),
@@ -21,6 +23,7 @@ public enum WindowType
         this.fxmlPath = fxmlPath;
     }
 
+    @Override
     public String getFxmlPath()
     {
         return fxmlPath;

@@ -2,8 +2,6 @@ package sep.fimball.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import sep.fimball.view.dialog.DialogType;
-import sep.fimball.view.window.WindowType;
 
 import java.io.IOException;
 
@@ -15,14 +13,9 @@ public class SimpleFxmlLoader
     private Node rootNode = null;
     private Object fxController = null;
 
-    public SimpleFxmlLoader(WindowType windowType)
+    public SimpleFxmlLoader(ViewType viewType)
     {
-        load(windowType.getFxmlPath());
-    }
-
-    public SimpleFxmlLoader(DialogType dialogType)
-    {
-        load(dialogType.getFxmlPath());
+        load(viewType.getFxmlPath());
     }
 
     private void load(String fxmlPath)
