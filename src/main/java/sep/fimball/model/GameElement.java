@@ -3,11 +3,27 @@ package sep.fimball.model;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.util.List;
+
 public class GameElement
 {
     private SimpleObjectProperty<Vector2> position;
     private SimpleDoubleProperty rotation;
     private SimpleObjectProperty<Animation> animation;
+    private List<Collider> colliders;
+
+    public GameElement(Vector2 position, double rotation, Animation animation, List<Collider> colliders)
+    {
+        this.position = new SimpleObjectProperty<>(position);
+        this.rotation = new SimpleDoubleProperty(rotation);
+        this.animation = new SimpleObjectProperty<>(animation);
+        this.colliders = colliders;
+    }
+
+    public void update()
+    {
+
+    }
 
     public Vector2 getPosition()
     {
@@ -54,8 +70,8 @@ public class GameElement
         this.animation.set(animation);
     }
 
-    public void update()
+    public List<Collider> getColliders()
     {
-
+        return colliders;
     }
 }

@@ -1,7 +1,5 @@
 package sep.fimball.model;
 
-import com.sun.javafx.geom.Rectangle;
-
 public class Camera
 {
     private Vector2 position;
