@@ -1,15 +1,14 @@
 package sep.fimball.model;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 import java.util.List;
 
 public class GameElement
 {
-    private SimpleObjectProperty<Vector2> position;
-    private SimpleDoubleProperty rotation;
-    private SimpleObjectProperty<Animation> animation;
+    private ObjectProperty<Vector2> position;
+    private DoubleProperty rotation;
+    private ObjectProperty<Animation> animation;
     private List<Collider> colliders;
 
     public GameElement(Vector2 position, double rotation, Animation animation, List<Collider> colliders)
@@ -30,7 +29,7 @@ public class GameElement
         return position.get();
     }
 
-    public SimpleObjectProperty<Vector2> positionProperty()
+    public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
         return position;
     }
@@ -45,7 +44,7 @@ public class GameElement
         return rotation.get();
     }
 
-    public SimpleDoubleProperty rotationProperty()
+    public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
     }
@@ -60,7 +59,7 @@ public class GameElement
         return animation.get();
     }
 
-    public SimpleObjectProperty<Animation> animationProperty()
+    public ReadOnlyObjectProperty<Animation> animationProperty()
     {
         return animation;
     }

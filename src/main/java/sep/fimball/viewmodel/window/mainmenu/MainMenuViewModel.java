@@ -1,12 +1,13 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
-import sep.fimball.model.elements.PinballMachineManager;
 import sep.fimball.model.elements.PinballMachine;
+import sep.fimball.model.elements.PinballMachineManager;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 
@@ -15,13 +16,13 @@ import sep.fimball.viewmodel.dialog.DialogType;
  */
 public class MainMenuViewModel
 {
-    private SimpleListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelList;
+    private ListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelList;
     private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
 
     public MainMenuViewModel()
     {
         pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), PinballMachineSelectorSubViewModel::new);
+        ListPropertyBinder.bindMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(pinballMachine));
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
     }
 

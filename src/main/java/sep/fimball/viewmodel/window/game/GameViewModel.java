@@ -1,5 +1,7 @@
 package sep.fimball.viewmodel.window.game;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
@@ -12,8 +14,8 @@ import sep.fimball.viewmodel.pinball.SpriteViewModel;
  */
 public class GameViewModel
 {
-    private SimpleListProperty<SpriteViewModel> spriteViewModels;
-    private SimpleListProperty<GameElement> elements;
+    private ListProperty<SpriteViewModel> spriteViewModels;
+    private ListProperty<GameElement> elements;
 
     public GameViewModel()
     {
@@ -27,7 +29,7 @@ public class GameViewModel
         GameSession.getSingletonInstance().startNewGame();
     }
 
-    public SimpleListProperty<SpriteViewModel> getSpriteViewModels()
+    public ReadOnlyListProperty<SpriteViewModel> getSpriteViewModels()
     {
         return spriteViewModels;
     }

@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.input.KeyEvent;
@@ -19,8 +20,8 @@ public class SceneManagerViewModel
         return singletonInstance;
     }
 
-    private SimpleObjectProperty<WindowType> windowType;
-    private SimpleObjectProperty<DialogType> dialogType;
+    private ObjectProperty<WindowType> windowType;
+    private ObjectProperty<DialogType> dialogType;
 
     private InputManagerViewModel inputManager;
 

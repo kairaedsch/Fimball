@@ -1,6 +1,7 @@
 package sep.fimball.view.window.mainmenu;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,7 +20,7 @@ public class PinballMachineSelectorSubView
     @FXML
     private Label previewName;
 
-    private SimpleIntegerProperty blueprintElementId;
+    private IntegerProperty blueprintElementId;
 
     private MainMenuViewModel mainMenuViewModel;
 

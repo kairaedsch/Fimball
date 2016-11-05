@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class ListPropertyBinder
 {
-    public static <SlaveT, MasterT> void bindList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, Converter<SlaveT, MasterT> converter)
+    public static <SlaveT, MasterT> void bindList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, ConverterList<SlaveT, MasterT> converter)
     {
         ListChangeListener<MasterT> listChangeListener = (change) ->
         {
@@ -29,7 +29,7 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public static <SlaveT, MasterKeyT, MasterValueT> void bindMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, Converter<SlaveT, MasterValueT> converter)
+    public static <SlaveT, MasterKeyT, MasterValueT> void bindMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, ConverterMap<SlaveT, MasterKeyT, MasterValueT> converter)
     {
         MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
         {
@@ -37,7 +37,7 @@ public class ListPropertyBinder
 
             for(Map.Entry<MasterKeyT, MasterValueT> masterEntry : MapPropertyMaster.entrySet())
             {
-                listPropertySlave.add(converter.convert(masterEntry.getValue()));
+                listPropertySlave.add(converter.convert(masterEntry.getKey(), masterEntry.getValue()));
             }
         };
 
@@ -45,8 +45,13 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public interface Converter<A, B>
+    public interface ConverterList<SlaveT, MasterT>
     {
-        A convert(B b);
+        SlaveT convert(MasterT master);
+    }
+
+    public interface ConverterMap<SlaveT, MasterKeyT, MasterValueT>
+    {
+        SlaveT convert(MasterKeyT masterKey, MasterValueT masterValueT);
     }
 }

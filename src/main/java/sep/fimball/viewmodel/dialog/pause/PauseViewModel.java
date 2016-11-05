@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.dialog.pause;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.Highscore;
 
 /**
@@ -9,7 +9,7 @@ import sep.fimball.general.Highscore;
  */
 public class PauseViewModel
 {
-    private SimpleListProperty<Highscore> playerHighscores;
+    private ListProperty<Highscore> playerHighscores;
 
     public void abortClicked()
     {

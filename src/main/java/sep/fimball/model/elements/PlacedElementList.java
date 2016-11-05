@@ -1,5 +1,6 @@
 package sep.fimball.model.elements;
 
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
@@ -8,7 +9,7 @@ import javafx.collections.FXCollections;
  */
 public class PlacedElementList
 {
-    private SimpleMapProperty<Integer, PlacedElement> elements;
+    private MapProperty<Integer, PlacedElement> elements;
 
     public PlacedElementList()
     {

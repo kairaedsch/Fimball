@@ -1,6 +1,6 @@
 package sep.fimball.model;
 
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.ListProperty;
 import sep.fimball.model.elements.Element;
 
 public class Animation
@@ -13,7 +13,7 @@ public class Animation
     }
 
     // Maps name of animation to the paths of the animation frames
-    private SimpleListProperty<SubAnimation> subAnimations;
+    private ListProperty<SubAnimation> subAnimations;
 
     public Animation(Element.AnimationObject[] animObjects)
     {

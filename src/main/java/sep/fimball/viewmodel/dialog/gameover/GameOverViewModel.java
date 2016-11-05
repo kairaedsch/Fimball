@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.dialog.gameover;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.Highscore;
 
 /**
@@ -9,8 +9,8 @@ import sep.fimball.general.Highscore;
  */
 public class GameOverViewModel
 {
-    private SimpleListProperty<Highscore> machineHighscores;
-    private SimpleListProperty<Highscore> playerHighscores;
+    private ListProperty<Highscore> machineHighscores;
+    private ListProperty<Highscore> playerHighscores;
 
     public void playAgainClicked()
     {
@@ -27,7 +27,7 @@ public class GameOverViewModel
         return machineHighscores;
     }
 
-    public SimpleListProperty<Highscore> playerHighscoresProperty()
+    public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;
     }

@@ -2,13 +2,15 @@ package sep.fimball.model;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.util.Duration;
 
 public class World
 {
     private final double TIMELINE_TICK = 1 / 60;
-    private SimpleListProperty<GameElement> worldElements;
+    private ListProperty<GameElement> worldElements;
     private Timeline gameLoop;
     private KeyFrame keyFrame;
 
@@ -46,7 +48,7 @@ public class World
         worldElements.add(obj);
     }
 
-    public SimpleListProperty<GameElement> getWorldElements()
+    public ReadOnlyListProperty<GameElement> getWorldElements()
     {
         return worldElements;
     }

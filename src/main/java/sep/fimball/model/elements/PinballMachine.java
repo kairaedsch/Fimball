@@ -9,12 +9,12 @@ import sep.fimball.general.Highscore;
  */
 public class PinballMachine
 {
-    private SimpleStringProperty name;
-    private SimpleIntegerProperty blueprintTableId;
-    private SimpleListProperty<Highscore> highscoreList;
+    private StringProperty name;
+    private IntegerProperty blueprintTableId;
+    private ListProperty<Highscore> highscoreList;
     private PlacedElementList tableElementList;
 
-    private SimpleStringProperty imagePath;
+    private StringProperty imagePath;
 
     public PinballMachine(String name, int blueprintTableId)
     {

@@ -1,5 +1,6 @@
 package sep.fimball.model.elements;
 
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
@@ -17,7 +18,7 @@ public class PinballMachineManager
         return singletonInstance;
     }
 
-    private SimpleMapProperty<Integer, PinballMachine> tableBlueprints;
+    private MapProperty<Integer, PinballMachine> tableBlueprints;
 
     private PinballMachineManager()
     {

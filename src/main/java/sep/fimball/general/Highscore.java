@@ -1,14 +1,11 @@
 package sep.fimball.general;
 
-import javafx.beans.property.ReadOnlyLongProperty;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 public class Highscore
 {
-    private SimpleLongProperty score;
-    private SimpleStringProperty playerName;
+    private LongProperty score;
+    private StringProperty playerName;
 
     public Highscore(long score, String playerName)
     {

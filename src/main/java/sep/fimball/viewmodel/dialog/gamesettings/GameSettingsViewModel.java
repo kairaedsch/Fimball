@@ -1,8 +1,6 @@
 package sep.fimball.viewmodel.dialog.gamesettings;
 
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import sep.fimball.general.Language;
 
 /**
@@ -10,7 +8,10 @@ import sep.fimball.general.Language;
  */
 public class GameSettingsViewModel
 {
+    SimpleObjectProperty<Language> language;
     SimpleListProperty<KeybindSubViewModel> keybinds;
+    SimpleBooleanProperty fullscreen;
+
     SimpleIntegerProperty volumeMaster;
     SimpleIntegerProperty volumeMusic;
     SimpleIntegerProperty volumeSFX;
@@ -45,9 +46,19 @@ public class GameSettingsViewModel
 
     }
 
+    public SimpleObjectProperty<Language> languageProperty()
+    {
+        return language;
+    }
+
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()
     {
         return keybinds;
+    }
+
+    public SimpleBooleanProperty fullscreenProperty()
+    {
+        return fullscreen;
     }
 
     // TODO bind bidirectional

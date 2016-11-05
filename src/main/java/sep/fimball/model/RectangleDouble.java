@@ -1,7 +1,5 @@
 package sep.fimball.model;
 
-import com.sun.javafx.geom.Rectangle;
-
 /**
  * Created by alexcekay on 04.11.16.
  */
