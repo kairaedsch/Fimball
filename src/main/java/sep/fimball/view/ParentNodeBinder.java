@@ -16,9 +16,9 @@ public class ParentNodeBinder
 {
     public static <B> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<B> listPropertyB, ViewType viewType)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyB, viewType, (viewMode, b) ->
+        ParentNodeBinder.bindList(parentNode, listPropertyB, viewType, (view, b) ->
         {
-            ((SimpleBindedToViewModel<B>) viewMode).bindToViewModel(b);
+            ((SimpleBindedToViewModel<B>) view).bindToViewModel(b);
         });
     }
 
@@ -71,6 +71,6 @@ public class ParentNodeBinder
 
     public interface Caller<B>
     {
-        void call(Object viewModel, B b);
+        void call(Object view, B b);
     }
 }
