@@ -1,11 +1,11 @@
-package sep.fimball.model.elementgreenprint;
+package sep.fimball.model.elements;
 
 import sep.fimball.model.Vector2;
 
 /**
  * Created by kaira on 03.11.2016.
  */
-public class ElementGreenprint
+public class Element
 {
     public class GreenprintCollider
     {

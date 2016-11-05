@@ -1,4 +1,4 @@
-package sep.fimball.model.tableblueprint;
+package sep.fimball.model.elements;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -12,7 +12,7 @@ public class PinballMachine
     private SimpleStringProperty name;
     private SimpleIntegerProperty blueprintTableId;
     private SimpleListProperty<Highscore> highscoreList;
-    private MachineElementList tableElementList;
+    private PlacedElementList tableElementList;
 
     private SimpleStringProperty imagePath;
 
@@ -21,7 +21,7 @@ public class PinballMachine
         this.name = new SimpleStringProperty(name);
         this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        this.tableElementList = new MachineElementList();
+        this.tableElementList = new PlacedElementList();
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));
 
@@ -45,7 +45,7 @@ public class PinballMachine
         return highscoreList;
     }
 
-    public MachineElementList getTableElementList()
+    public PlacedElementList getTableElementList()
     {
         return tableElementList;
     }

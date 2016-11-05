@@ -1,4 +1,4 @@
-package sep.fimball.model.tableblueprint;
+package sep.fimball.model.elements;
 
 import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
@@ -7,19 +7,19 @@ import javafx.collections.FXCollections;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class Manager
+public class PinballMachineManager
 {
-    private static Manager singletonInstance;
+    private static PinballMachineManager singletonInstance;
 
-    public static Manager getInstance()
+    public static PinballMachineManager getInstance()
     {
-        if(singletonInstance == null) singletonInstance = new Manager();
+        if(singletonInstance == null) singletonInstance = new PinballMachineManager();
         return singletonInstance;
     }
 
     private SimpleMapProperty<Integer, PinballMachine> tableBlueprints;
 
-    private Manager()
+    private PinballMachineManager()
     {
         tableBlueprints = new SimpleMapProperty<>(FXCollections.observableHashMap());
 

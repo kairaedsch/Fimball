@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.window.mainmenu;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import sep.fimball.model.tableblueprint.PinballMachine;
+import sep.fimball.model.elements.PinballMachine;
 
 /**
  * Created by kaira on 01.11.2016.

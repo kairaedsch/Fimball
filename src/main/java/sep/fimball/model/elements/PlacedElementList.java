@@ -1,4 +1,4 @@
-package sep.fimball.model.tableblueprint;
+package sep.fimball.model.elements;
 
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
@@ -6,23 +6,23 @@ import javafx.collections.FXCollections;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MachineElementList
+public class PlacedElementList
 {
-    private SimpleMapProperty<Integer, MachineElement> elements;
+    private SimpleMapProperty<Integer, PlacedElement> elements;
 
-    public MachineElementList()
+    public PlacedElementList()
     {
         this.elements = new SimpleMapProperty<>(FXCollections.observableHashMap());
     }
 
-    public MachineElement getElementByBlueprintElementId(int blueprintElemnentId)
+    public PlacedElement getElementByBlueprintElementId(int blueprintElemnentId)
     {
         return elements.get(blueprintElemnentId);
     }
 
-    public void addElement(MachineElement machineElement)
+    public void addElement(PlacedElement placedElement)
     {
-        elements.put(machineElement.blueprintElementId.get(), machineElement);
+        elements.put(placedElement.blueprintElementId.get(), placedElement);
     }
 
     public boolean removeElement(int blueprintElementId)

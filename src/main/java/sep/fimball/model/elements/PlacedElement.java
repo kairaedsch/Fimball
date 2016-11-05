@@ -1,4 +1,4 @@
-package sep.fimball.model.tableblueprint;
+package sep.fimball.model.elements;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MachineElement
+public class PlacedElement
 {
     SimpleIntegerProperty blueprintElementId;
     SimpleStringProperty greenprintElementId;
@@ -16,7 +16,7 @@ public class MachineElement
     SimpleMapProperty<String, Double> colliderToMulitplier;
     SimpleIntegerProperty points;
 
-    public MachineElement(int blueprintElementId, String greenprintElementId, Point position)
+    public PlacedElement(int blueprintElementId, String greenprintElementId, Point position)
     {
         this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
         this.greenprintElementId = new SimpleStringProperty(greenprintElementId);

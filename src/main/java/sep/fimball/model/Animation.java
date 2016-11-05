@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 import javafx.beans.property.SimpleListProperty;
-import sep.fimball.model.elementgreenprint.ElementGreenprint;
+import sep.fimball.model.elements.Element;
 
 public class Animation
 {
@@ -15,7 +15,7 @@ public class Animation
     // Maps name of animation to the paths of the animation frames
     private SimpleListProperty<SubAnimation> subAnimations;
 
-    public Animation(ElementGreenprint.AnimationObject[] animObjects)
+    public Animation(Element.AnimationObject[] animObjects)
     {
 
     }
