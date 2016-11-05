@@ -13,10 +13,10 @@ import sep.fimball.viewmodel.window.WindowType;
  */
 public class PinballMachineInfoSubViewModel
 {
-    SimpleIntegerProperty blueprintTableId;
-    SimpleStringProperty name;
-    SimpleStringProperty imagePath;
-    SimpleListProperty<Highscore> highscoreList;
+    IntegerProperty blueprintTableId;
+    StringProperty name;
+    StringProperty imagePath;
+    ListProperty<Highscore> highscoreList;
 
     public PinballMachineInfoSubViewModel(PinballMachine pinballMachine)
     {

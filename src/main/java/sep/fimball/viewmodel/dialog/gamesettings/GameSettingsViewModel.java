@@ -8,13 +8,13 @@ import sep.fimball.general.Language;
  */
 public class GameSettingsViewModel
 {
-    SimpleObjectProperty<Language> language;
-    SimpleListProperty<KeybindSubViewModel> keybinds;
-    SimpleBooleanProperty fullscreen;
+    ObjectProperty<Language> language;
+    ListProperty<KeybindSubViewModel> keybinds;
+    BooleanProperty fullscreen;
 
-    SimpleIntegerProperty volumeMaster;
-    SimpleIntegerProperty volumeMusic;
-    SimpleIntegerProperty volumeSFX;
+    IntegerProperty volumeMaster;
+    IntegerProperty volumeMusic;
+    IntegerProperty volumeSFX;
 
     public void LanguageSelected(Language language)
     {
@@ -46,7 +46,7 @@ public class GameSettingsViewModel
 
     }
 
-    public SimpleObjectProperty<Language> languageProperty()
+    public ReadOnlyObjectProperty<Language> languageProperty()
     {
         return language;
     }
@@ -56,25 +56,25 @@ public class GameSettingsViewModel
         return keybinds;
     }
 
-    public SimpleBooleanProperty fullscreenProperty()
+    public ReadOnlyBooleanProperty fullscreenProperty()
     {
         return fullscreen;
     }
 
     // TODO bind bidirectional
-    public SimpleIntegerProperty volumeMasterProperty()
+    public IntegerProperty volumeMasterProperty()
     {
         return volumeMaster;
     }
 
     // TODO bind bidirectional
-    public SimpleIntegerProperty volumeMusicProperty()
+    public IntegerProperty volumeMusicProperty()
     {
         return volumeMusic;
     }
 
     // TODO bind bidirectional
-    public SimpleIntegerProperty volumeSFXProperty()
+    public IntegerProperty volumeSFXProperty()
     {
         return volumeSFX;
     }

@@ -1,8 +1,6 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 import sep.fimball.model.elements.PinballMachine;
 
 /**
@@ -10,9 +8,9 @@ import sep.fimball.model.elements.PinballMachine;
  */
 public class PinballMachineSelectorSubViewModel
 {
-    SimpleStringProperty name;
-    SimpleStringProperty imagePath;
-    SimpleIntegerProperty blueprintTableId;
+    StringProperty name;
+    StringProperty imagePath;
+    IntegerProperty blueprintTableId;
 
     public PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
     {
@@ -30,12 +28,12 @@ public class PinballMachineSelectorSubViewModel
         return name;
     }
 
-    public SimpleStringProperty getImagePathProperty()
+    public ReadOnlyStringProperty getImagePathProperty()
     {
         return imagePath;
     }
 
-    public SimpleIntegerProperty blueprintTableIdProperty()
+    public ReadOnlyIntegerProperty blueprintTableIdProperty()
     {
         return blueprintTableId;
     }

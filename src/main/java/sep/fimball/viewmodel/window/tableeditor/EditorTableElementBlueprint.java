@@ -1,8 +1,8 @@
 package sep.fimball.viewmodel.window.tableeditor;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 
 import java.awt.*;
 import java.util.Map;
@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public class EditorTableElementBlueprint
 {
-    SimpleIntegerProperty blueprintId;
-    SimpleStringProperty greenprintId;
-    SimpleObjectProperty<Point> position;
-    SimpleObjectProperty<Map<String, Double>> colliderToMulitplier;
-    SimpleIntegerProperty points;
+    IntegerProperty blueprintId;
+    StringProperty greenprintId;
+    ObjectProperty<Point> position;
+    ObjectProperty<Map<String, Double>> colliderToMulitplier;
+    IntegerProperty points;
 }

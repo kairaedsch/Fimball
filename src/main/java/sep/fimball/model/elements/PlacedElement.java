@@ -10,11 +10,11 @@ import java.awt.*;
  */
 public class PlacedElement
 {
-    SimpleIntegerProperty blueprintElementId;
-    SimpleStringProperty greenprintElementId;
-    SimpleObjectProperty<Point> position;
-    SimpleMapProperty<String, Double> colliderToMulitplier;
-    SimpleIntegerProperty points;
+    IntegerProperty blueprintElementId;
+    StringProperty greenprintElementId;
+    ObjectProperty<Point> position;
+    MapProperty<String, Double> colliderToMulitplier;
+    IntegerProperty points;
 
     public PlacedElement(int blueprintElementId, String greenprintElementId, Point position)
     {
