@@ -2,9 +2,11 @@ package sep.fimball.viewmodel.window.mainmenu;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import sep.fimball.general.Highscore;
 import sep.fimball.model.tableblueprint.PinballMachine;
+import sep.fimball.viewmodel.SceneManagerViewModel;
+import sep.fimball.viewmodel.dialog.DialogType;
+import sep.fimball.viewmodel.window.WindowType;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -41,11 +43,6 @@ public class PinballMachineInfoSubViewModel
         return blueprintTableId;
     }
 
-    public ObservableList<Highscore> getHighscoreList()
-    {
-        return highscoreList.get();
-    }
-
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
         return highscoreList;
@@ -57,5 +54,15 @@ public class PinballMachineInfoSubViewModel
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.imagePathProperty());
         highscoreList.bind(pinballMachine.highscoreListProperty());
+    }
+
+    public void playClicked()
+    {
+        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES);
+    }
+
+    public void editClicked()
+    {
+        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS);
     }
 }

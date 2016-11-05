@@ -1,30 +1,31 @@
-package sep.fimball.general;
+package sep.fimball.view;
 
-import javafx.beans.property.ListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 import java.util.Map;
 
 /**
- * Created by kaira on 03.11.2016.
+ * Created by kaira on 05.11.2016.
  */
-public class ListPropertyBinder
+public class ParentNodeBinder
 {
-    public static <A, B> void bindList(ListProperty<A> listPropertyA, ObservableList<B> listPropertyB, Converter<A, B> converter)
+    public static <B> void bindList(Pane parentNode, ObservableList<B> listPropertyB, Converter<B> converter)
     {
         ListChangeListener<B> listChangeListener = new ListChangeListener<B>()
         {
             @Override
             public void onChanged(Change<? extends B> change)
             {
-                listPropertyA.clear();
+                parentNode.getChildren().clear();
 
                 for(B b : listPropertyB)
                 {
-                    listPropertyA.add(converter.convert(b));
+                    parentNode.getChildren().add(converter.convert(b));
                 }
             }
         };
@@ -33,18 +34,18 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public static <A, K, B> void bindMap(ListProperty<A> listPropertyA, ObservableMap<K, B> MapPropertyB, Converter<A, B> converter)
+    public static <K, B> void bindMap(Pane parentNode, ObservableMap<K, B> MapPropertyB, Converter<B> converter)
     {
         MapChangeListener<K, B> listChangeListener = new MapChangeListener<K, B>()
         {
             @Override
             public void onChanged(Change<? extends K, ? extends B> change)
             {
-                listPropertyA.clear();
+                parentNode.getChildren().clear();
 
                 for(Map.Entry<K, B> b : MapPropertyB.entrySet())
                 {
-                    listPropertyA.add(converter.convert(b.getValue()));
+                    parentNode.getChildren().add(converter.convert(b.getValue()));
                 }
             }
         };
@@ -53,8 +54,8 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public interface Converter<A, B>
+    public interface Converter<B>
     {
-        A convert(B b);
+        Node convert(B b);
     }
 }

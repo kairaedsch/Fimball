@@ -1,9 +1,9 @@
-package sep.fimball.view.window.pinball;
+package sep.fimball.view.pinball;
 
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import sep.fimball.model.Vector2;
-import sep.fimball.viewmodel.window.pinball.SpriteViewModel;
+import sep.fimball.viewmodel.pinball.SpriteViewModel;
 
 import java.io.File;
 

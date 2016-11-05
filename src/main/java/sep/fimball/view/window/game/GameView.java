@@ -3,10 +3,10 @@ package sep.fimball.view.window.game;
 import javafx.beans.property.SimpleListProperty;
 import javafx.fxml.FXML;
 import sep.fimball.general.ListPropertyBinder;
-import sep.fimball.view.window.pinball.SpriteSubView;
+import sep.fimball.view.pinball.SpriteSubView;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.game.GameViewModel;
-import sep.fimball.viewmodel.window.pinball.SpriteViewModel;
+import sep.fimball.viewmodel.pinball.SpriteViewModel;
 
 /**
  * Created by kaira on 01.11.2016.

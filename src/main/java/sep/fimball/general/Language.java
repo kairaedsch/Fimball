@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.general;
 
 public enum Language
 {

@@ -13,7 +13,7 @@ public class HighscoreSubView
     @FXML
     public Label highscoreEntry;
 
-    public void bindToViewModel(sep.fimball.general.Highscore highscore)
+    public void bindToViewModel(Highscore highscore)
     {
         highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty()," ", highscore.scoreProperty().asString()));
     }

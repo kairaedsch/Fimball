@@ -1,6 +1,6 @@
 package sep.fimball.model;
 
-import sep.fimball.view.window.pinball.SpriteSubView;
+import sep.fimball.view.pinball.SpriteSubView;
 
 public class Plunger extends GameElement
 {

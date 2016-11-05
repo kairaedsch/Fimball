@@ -5,11 +5,10 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
-import sep.fimball.model.tableblueprint.PinballMachine;
 import sep.fimball.model.tableblueprint.Manager;
-import sep.fimball.viewmodel.dialog.DialogType;
+import sep.fimball.model.tableblueprint.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.window.WindowType;
+import sep.fimball.viewmodel.dialog.DialogType;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -34,16 +33,6 @@ public class MainMenuViewModel
     public void settingsClicked()
     {
         SceneManagerViewModel.getInstance().setDialog(DialogType.GAME_SETTINGS);
-    }
-
-    public void playClicked()
-    {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES);
-    }
-
-    public void editClicked()
-    {
-        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS);
     }
 
     public void blueprintPreviewClick(int blueprintTableId)

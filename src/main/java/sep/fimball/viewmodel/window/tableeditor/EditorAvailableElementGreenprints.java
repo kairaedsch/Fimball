@@ -5,4 +5,5 @@ package sep.fimball.viewmodel.window.tableeditor;
  */
 public class EditorAvailableElementGreenprints
 {
+
 }

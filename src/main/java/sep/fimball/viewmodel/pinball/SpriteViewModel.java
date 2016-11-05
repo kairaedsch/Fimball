@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.window.pinball;
+package sep.fimball.viewmodel.pinball;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;

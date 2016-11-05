@@ -22,8 +22,8 @@ public class PinballMachine
         this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.tableElementList = new MachineElementList();
-        highscoreList.add(new Highscore(1000, "Jenny" + name));
-        highscoreList.add(new Highscore(2000, "Felix" + name));
+        highscoreList.add(new Highscore(1000, "Jenny " + name));
+        highscoreList.add(new Highscore(2000, "Felix " + name));
 
         // TODO real pic
         if(blueprintTableId % 2 == 0) this.imagePath = new SimpleStringProperty("/images/pinball-machine-test-v6.png");

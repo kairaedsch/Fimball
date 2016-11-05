@@ -7,7 +7,7 @@ public enum WindowType
 {
     MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"),
     MAIN_MENU_PREVIEW("mainmenu/mainMenuPreview.fxml"),
-    MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY("mainmenu/mainMenuDetailedPreviewHighscoreEntry.fxml"),
+    MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY("mainmenu/mainMenuHighscoreEntry.fxml"),
     PLAYERNAME_ENTRY("playername/nameEntry.fxml"),
     SPLASH_SCREEN_WINDOW("TODO"),
     TABLE_EDITOR_WINDOW("TODO"),

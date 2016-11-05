@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
 import sep.fimball.model.GameElement;
 import sep.fimball.model.GameSession;
-import sep.fimball.viewmodel.window.pinball.SpriteViewModel;
+import sep.fimball.viewmodel.pinball.SpriteViewModel;
 
 /**
  * Created by TheAsuro on 04.11.2016.

@@ -11,21 +11,7 @@ import sep.fimball.view.dialog.DialogView;
 public class GameSettingsView extends DialogView
 {
     @FXML
-    private Button okButton;
-    @FXML
     private ComboBox language;
-    @FXML
-    private TextField leftFlipper;
-    @FXML
-    private TextField rightFlipper;
-    @FXML
-    private TextField plunger;
-    @FXML
-    private TextField pause;
-    @FXML
-    private TextField nudgeLeft;
-    @FXML
-    private TextField nudgeRight;
     @FXML
     private CheckBox fullscreen;
     @FXML
@@ -34,12 +20,6 @@ public class GameSettingsView extends DialogView
     private Slider musicVolumeSlider;
     @FXML
     private Slider sfxVolumeSlider;
-    @FXML
-    private Label masterVolumePercent;
-    @FXML
-    private Label musicVolumePercent;
-    @FXML
-    private Label sfxVolumePercent;
 
     @FXML
     public void exitSettings()
