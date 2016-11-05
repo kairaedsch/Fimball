@@ -13,43 +13,35 @@ import java.util.Map;
  */
 public class ListPropertyBinder
 {
-    public static <A, B> void bindList(ListProperty<A> listPropertyA, ObservableList<B> listPropertyB, Converter<A, B> converter)
+    public static <SlaveT, MasterT> void bindList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, Converter<SlaveT, MasterT> converter)
     {
-        ListChangeListener<B> listChangeListener = new ListChangeListener<B>()
+        ListChangeListener<MasterT> listChangeListener = (change) ->
         {
-            @Override
-            public void onChanged(Change<? extends B> change)
-            {
-                listPropertyA.clear();
+            listPropertySlave.clear();
 
-                for(B b : listPropertyB)
-                {
-                    listPropertyA.add(converter.convert(b));
-                }
+            for(MasterT master : listPropertyMaster)
+            {
+                listPropertySlave.add(converter.convert(master));
             }
         };
 
-        listPropertyB.addListener(listChangeListener);
+        listPropertyMaster.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 
-    public static <A, K, B> void bindMap(ListProperty<A> listPropertyA, ObservableMap<K, B> MapPropertyB, Converter<A, B> converter)
+    public static <SlaveT, MasterKeyT, MasterValueT> void bindMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, Converter<SlaveT, MasterValueT> converter)
     {
-        MapChangeListener<K, B> listChangeListener = new MapChangeListener<K, B>()
+        MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
         {
-            @Override
-            public void onChanged(Change<? extends K, ? extends B> change)
-            {
-                listPropertyA.clear();
+            listPropertySlave.clear();
 
-                for(Map.Entry<K, B> b : MapPropertyB.entrySet())
-                {
-                    listPropertyA.add(converter.convert(b.getValue()));
-                }
+            for(Map.Entry<MasterKeyT, MasterValueT> masterEntry : MapPropertyMaster.entrySet())
+            {
+                listPropertySlave.add(converter.convert(masterEntry.getValue()));
             }
         };
 
-        MapPropertyB.addListener(listChangeListener);
+        MapPropertyMaster.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 

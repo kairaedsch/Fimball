@@ -14,22 +14,22 @@ import java.util.Map;
  */
 public class ParentNodeBinder
 {
-    public static <ViewModel> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewType viewType)
+    public static <ViewModelT> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType)
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, viewType, (view, viewModel) ->
         {
             if(view instanceof SimpleBoundToViewModel)
             {
-                ((SimpleBoundToViewModel<ViewModel>) view).bindToViewModel(viewModel);
+                ((SimpleBoundToViewModel<ViewModelT>) view).bindToViewModel(viewModel);
             }
             else
             {
-                throw new RuntimeException("View needs to be implement the SimpleBoundToViewModel Interface");
+                throw new RuntimeException("View needs to implement the SimpleBoundToViewModel Interface");
             }
         });
     }
 
-    public static <ViewModel> void bindList(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModel> converter)
+    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModelT> converter)
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
         {
@@ -39,13 +39,13 @@ public class ParentNodeBinder
         });
     }
 
-    public static <ViewModel> void bindList(Pane parentNode, ObservableList<ViewModel> listPropertyViewModel, ViewModelToNodeConverter<ViewModel> viewModelToNodeConverter)
+    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
-        ListChangeListener<ViewModel> listChangeListener = (change) ->
+        ListChangeListener<ViewModelT> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for(ViewModel b : listPropertyViewModel)
+            for(ViewModelT b : listPropertyViewModel)
             {
                 parentNode.getChildren().add(viewModelToNodeConverter.convert(b));
             }
@@ -55,13 +55,13 @@ public class ParentNodeBinder
         listChangeListener.onChanged(null);
     }
 
-    public static <ViewModelKey, ViewModel> void bindMap(Pane parentNode, ObservableMap<ViewModelKey, ViewModel> MapPropertyViewModel, ViewModelToNodeConverter<ViewModel> viewModelToNodeConverter)
+    public static <ViewModelKeyT, ViewModelT> void bindMap(Pane parentNode, ObservableMap<ViewModelKeyT, ViewModelT> MapPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
-        MapChangeListener<ViewModelKey, ViewModel> listChangeListener = (change) ->
+        MapChangeListener<ViewModelKeyT, ViewModelT> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for(Map.Entry<ViewModelKey, ViewModel> b : MapPropertyViewModel.entrySet())
+            for(Map.Entry<ViewModelKeyT, ViewModelT> b : MapPropertyViewModel.entrySet())
             {
                 parentNode.getChildren().add(viewModelToNodeConverter.convert(b.getValue()));
             }
@@ -71,13 +71,13 @@ public class ParentNodeBinder
         listChangeListener.onChanged(null);
     }
 
-    public interface ViewModelToNodeConverter<ViewModel>
+    public interface ViewModelToNodeConverter<ViewModelT>
     {
-        Node convert(ViewModel viewModel);
+        Node convert(ViewModelT viewModel);
     }
 
-    public interface ViewAndViewModelCaller<ViewModel>
+    public interface ViewAndViewModelCaller<ViewModelT>
     {
-        void call(Object view, ViewModel viewModel);
+        void call(Object view, ViewModelT viewModel);
     }
 }

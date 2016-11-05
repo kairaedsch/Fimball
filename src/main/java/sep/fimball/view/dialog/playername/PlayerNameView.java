@@ -3,15 +3,14 @@ package sep.fimball.view.dialog.playername;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.window.WindowType;
 import sep.fimball.view.SimpleFxmlLoader;
-import sep.fimball.view.dialog.DialogView;
+import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class PlayerNameView extends DialogView
+public class PlayerNameView
 {
     @FXML
     private Button okButton;
