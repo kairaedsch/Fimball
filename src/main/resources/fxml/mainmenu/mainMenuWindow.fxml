@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
-<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuWindowFxController">
+<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuView">
     <items>
         <AnchorPane minWidth="150.0">
             <children>

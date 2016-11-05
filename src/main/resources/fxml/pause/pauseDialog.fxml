@@ -14,7 +14,7 @@
 <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" text="Pause"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sep.fimball.view.dialog.pause.PauseDialogFxController">
+            fx:controller="sep.fimball.view.dialog.pause.PauseView">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
