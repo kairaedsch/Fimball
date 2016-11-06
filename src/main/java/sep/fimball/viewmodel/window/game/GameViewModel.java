@@ -4,11 +4,13 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
+import sep.fimball.viewmodel.window.WindowType;
+import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
  * Created by TheAsuro on 04.11.2016.
  */
-public class GameViewModel
+public class GameViewModel extends WindowViewModel
 {
     private IntegerProperty playerPoints;
     private StringProperty playerName;
@@ -20,6 +22,7 @@ public class GameViewModel
 
     public GameViewModel(GameSession gameSession)
     {
+        super(WindowType.GAME);
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();

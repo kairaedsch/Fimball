@@ -5,9 +5,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
-import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
@@ -16,6 +14,7 @@ import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettin
 public class PinballMachineInfoSubViewModel
 {
     private PinballMachine pinballMachine;
+
     private StringProperty name;
     private StringProperty imagePath;
     private ListProperty<Highscore> highscoreList;
@@ -40,12 +39,12 @@ public class PinballMachineInfoSubViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel(pinballMachine));
+        SceneManagerViewModel.getInstance().setDialog(new PlayerNameViewModel(pinballMachine));
     }
 
     public void editClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS, new PinballMachineSettingsViewModel());
+        SceneManagerViewModel.getInstance().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
     public ReadOnlyStringProperty nameProperty()

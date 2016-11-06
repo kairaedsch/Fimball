@@ -1,7 +1,6 @@
 package sep.fimball.view.dialog.pause;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
@@ -12,27 +11,26 @@ import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 public class PauseView  extends DialogView<PauseViewModel>
 {
     @FXML
-    private Button continueButton;
-    @FXML
-    private Button abortButton;
-    @FXML
     private GridPane playerScores;
 
-    @FXML
-    private void abortClicked()
-    {
-
-    }
-
-    @FXML
-    private void okClicked()
-    {
-
-    }
+    private PauseViewModel pauseViewModel;
 
     @Override
     public void setViewModel(PauseViewModel pauseViewModel)
     {
 
+        this.pauseViewModel = pauseViewModel;
+    }
+
+    @FXML
+    private void abortClicked()
+    {
+        pauseViewModel.abortClicked();
+    }
+
+    @FXML
+    private void okClicked()
+    {
+        pauseViewModel.okClicked();
     }
 }

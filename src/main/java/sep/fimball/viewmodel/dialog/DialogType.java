@@ -5,5 +5,5 @@ package sep.fimball.viewmodel.dialog;
  */
 public enum DialogType
 {
-    NONE, GAME_OVER, GAME_SETTINGS, PLAYER_NAMES
+    NONE, GAME_OVER, GAME_SETTINGS, PLAYER_NAMES, PAUSE
 }

@@ -14,7 +14,8 @@ import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.ViewModel;
-import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
+import sep.fimball.viewmodel.dialog.DialogViewModel;
+import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -50,10 +51,10 @@ public class SceneManagerView
         this.stage.show();
 
         SceneManagerViewModel sceneManagerViewModel = SceneManagerViewModel.getInstance();
-        sceneManagerViewModel.windowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType, sceneManagerViewModel.getWindowViewModel()));
-        sceneManagerViewModel.dialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType, sceneManagerViewModel.getDialogViewModel()));
-        updateContent(sceneManagerViewModel.windowTypeProperty().get(), new MainMenuViewModel());
-        updateContent(sceneManagerViewModel.dialogTypeProperty().get(), null);
+        sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
+        sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
+        updateContent(sceneManagerViewModel.windowViewModelProperty().get());
+        updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
 
         blurEffect = new GaussianBlur(13);
     }
@@ -64,43 +65,43 @@ public class SceneManagerView
         SceneManagerViewModel.getInstance().onKeyEvent(event);
     }
 
-    private void updateContent(sep.fimball.viewmodel.window.WindowType newWindowType, ViewModel viewModel)
+    private void updateContent(WindowViewModel windowViewModel)
     {
-        switch (newWindowType)
+        switch (windowViewModel.getWindowType())
         {
             case SPLASH_SCREEN:
-                setWindow(WindowType.SPLASH_SCREEN_WINDOW, viewModel);
+                setWindow(WindowType.SPLASH_SCREEN_WINDOW, windowViewModel);
                 break;
             case MAIN_MENU:
-                setWindow(WindowType.MAIN_MENU_WINDOW, viewModel);
+                setWindow(WindowType.MAIN_MENU_WINDOW, windowViewModel);
                 break;
             case GAME:
-                setWindow(WindowType.GAME_WINDOW, viewModel);
+                setWindow(WindowType.GAME_WINDOW, windowViewModel);
                 break;
             case TABLE_EDITOR:
-                setWindow(WindowType.TABLE_EDITOR_WINDOW, viewModel);
+                setWindow(WindowType.TABLE_EDITOR_WINDOW, windowViewModel);
                 break;
             case TABLE_SETTINGS:
-                setWindow(WindowType.TABLE_SETTINGS_WINDOW, viewModel);
+                setWindow(WindowType.TABLE_SETTINGS_WINDOW, windowViewModel);
                 break;
         }
     }
 
-    private void updateContent(sep.fimball.viewmodel.dialog.DialogType newDialogType, ViewModel viewModel)
+    private void updateContent(DialogViewModel dialogViewModel)
     {
-        switch (newDialogType)
+        switch (dialogViewModel.getDialogType())
         {
             case NONE:
                 removeDialog();
                 break;
             case GAME_OVER:
-                setDialog(DialogType.GAME_OVER_DIALOG, viewModel);
+                setDialog(DialogType.GAME_OVER_DIALOG, dialogViewModel);
                 break;
             case GAME_SETTINGS:
-                setDialog(DialogType.GAME_SETTINGS_DIALOG, viewModel);
+                setDialog(DialogType.GAME_SETTINGS_DIALOG, dialogViewModel);
                 break;
             case PLAYER_NAMES:
-                setDialog(DialogType.PLAYER_NAME_DIALOG, viewModel);
+                setDialog(DialogType.PLAYER_NAME_DIALOG, dialogViewModel);
                 break;
         }
     }

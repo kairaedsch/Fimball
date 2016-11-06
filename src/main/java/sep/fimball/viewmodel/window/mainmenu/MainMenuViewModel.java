@@ -9,20 +9,21 @@ import sep.fimball.general.tool.ListPropertyBinder;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.model.blueprint.PinballMachineManager;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.ViewModel;
-import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
+import sep.fimball.viewmodel.window.WindowType;
+import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MainMenuViewModel extends ViewModel
+public class MainMenuViewModel extends WindowViewModel
 {
     private ListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelList;
     private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
 
     public MainMenuViewModel()
     {
+        super(WindowType.MAIN_MENU);
         pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyBinder.bindMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(pinballMachine));
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
@@ -30,7 +31,7 @@ public class MainMenuViewModel extends ViewModel
 
     public void settingsClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.GAME_SETTINGS, new GameSettingsViewModel());
+        SceneManagerViewModel.getInstance().setDialog(new GameSettingsViewModel());
     }
 
     public void blueprintPreviewClick(int blueprintTableId)

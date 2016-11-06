@@ -12,9 +12,9 @@ public enum WindowType implements ViewType
     MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY("mainmenu/mainMenuHighscoreEntry.fxml"),
     PLAYERNAME_ENTRY("playername/nameEntry.fxml"),
     SPLASH_SCREEN_WINDOW("TODO"),
-    TABLE_EDITOR_WINDOW("TODO"),
-    TABLE_SETTINGS_WINDOW("TODO"),
-    GAME_WINDOW("TODO");
+    TABLE_EDITOR_WINDOW("tableeditor/TableEditor.fxml"),
+    TABLE_SETTINGS_WINDOW("tablesettings/tableSettings.fxml"),
+    GAME_WINDOW("game/gameWindow.fxml");
 
     private String fxmlPath;
 

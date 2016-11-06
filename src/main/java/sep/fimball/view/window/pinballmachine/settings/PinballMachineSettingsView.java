@@ -1,7 +1,6 @@
 package sep.fimball.view.window.pinballmachine.settings;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
@@ -12,40 +11,37 @@ import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettin
 public class PinballMachineSettingsView extends WindowView<PinballMachineSettingsViewModel>
 {
     @FXML
-    private Button editButton;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button saveButton;
-    @FXML
     private TextField tableName;
 
+    private PinballMachineSettingsViewModel pinballMachineSettingsViewModel;
 
     @Override
     public void setViewModel(PinballMachineSettingsViewModel pinballMachineSettingsViewModel)
     {
-
+        this.pinballMachineSettingsViewModel = pinballMachineSettingsViewModel;
     }
 
     @FXML
-    private void editClicked(){
-
+    private void editClicked()
+    {
+        pinballMachineSettingsViewModel.editClicked();
     }
 
     @FXML
-    private void menuClicked() {
-
+    private void menuClicked()
+    {
+        pinballMachineSettingsViewModel.menuClicked();
     }
 
     @FXML
-    private void saveClicked(){
-
+    private void saveClicked()
+    {
+        pinballMachineSettingsViewModel.saveClicked();
     }
 
     @FXML
-    private void deleteClicked(){
-
+    private void deleteClicked()
+    {
+        pinballMachineSettingsViewModel.deleteClicked();
     }
 }

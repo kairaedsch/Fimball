@@ -7,8 +7,8 @@ import sep.fimball.view.ViewType;
  */
 public enum DialogType implements ViewType
 {
-    GAME_OVER_DIALOG("TODO"),
-    GAME_SETTINGS_DIALOG("TODO"),
+    GAME_OVER_DIALOG("gameover/gameOverDialog.fxml"),
+    GAME_SETTINGS_DIALOG("gamesettings/gameSettingsWindow.fxl"),
     PLAYER_NAME_DIALOG("playername/playerNameWindow.fxml");
 
     private String fxmlPath;
