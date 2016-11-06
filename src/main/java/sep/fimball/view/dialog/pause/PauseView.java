@@ -19,13 +19,13 @@ public class PauseView  extends DialogView<PauseViewModel>
     private GridPane playerScores;
 
     @FXML
-    public void exitGame()
+    private void abortClicked()
     {
 
     }
 
     @FXML
-    public void continueGame()
+    private void okClicked()
     {
 
     }

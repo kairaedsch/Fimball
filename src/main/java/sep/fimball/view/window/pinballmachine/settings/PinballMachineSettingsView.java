@@ -30,12 +30,22 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     @FXML
-    public void edit(){
+    private void editClicked(){
 
     }
 
     @FXML
-    public void exitSettings() {
+    private void menuClicked() {
+
+    }
+
+    @FXML
+    private void saveClicked(){
+
+    }
+
+    @FXML
+    private void deleteClicked(){
 
     }
 }

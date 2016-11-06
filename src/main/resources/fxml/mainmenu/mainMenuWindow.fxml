@@ -60,7 +60,7 @@
                                 <HBox>
                                     <children>
                                         <Pane HBox.hgrow="ALWAYS" />
-                                        <Pane fx:id="buttonPlaySinglePlayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#play" styleClass="button, buttonPlaySinglePlayer" />
+                                        <Pane fx:id="buttonPlaySinglePlayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#playClicked" styleClass="button, buttonPlaySinglePlayer" />
                                         <Pane HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
@@ -74,7 +74,7 @@
                                 <HBox GridPane.columnIndex="2">
                                     <children>
                                         <Pane HBox.hgrow="ALWAYS" />
-                                        <Pane fx:id="buttonEdit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#edit" prefHeight="60.0" prefWidth="60.0" styleClass="button, buttonEdit" />
+                                        <Pane fx:id="buttonEdit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0" styleClass="button, buttonEdit" />
                                         <Pane HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>

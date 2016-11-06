@@ -220,7 +220,7 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#exitSettings" text="OK"
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="OK"
                         AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0"/>
             </children>
         </AnchorPane>

@@ -14,10 +14,6 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 public class PlayerNameView extends DialogView<PlayerNameViewModel>
 {
     @FXML
-    private Button okButton;
-    @FXML
-    private Button abortButton;
-    @FXML
     private VBox nameEntryList;
 
     @Override
@@ -28,19 +24,19 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     }
 
     @FXML
-    public void start()
+    private void startClicked()
     {
 
     }
 
     @FXML
-    public void abort()
+    private void abortClicked()
     {
 
     }
 
     @FXML
-    public void addPlayer()
+    private void addPlayerClicked()
     {
         ViewLoader viewLoader = new ViewLoader(WindowType.PLAYERNAME_ENTRY);
         nameEntryList.getChildren().add(viewLoader.getRootNode());

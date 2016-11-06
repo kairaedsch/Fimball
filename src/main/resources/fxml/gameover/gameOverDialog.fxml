@@ -95,8 +95,8 @@
                         </GridPane>
                     </children>
                 </VBox>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#endGame" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restart" text="Play Again" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked" text="Play Again" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
             </children>
         </AnchorPane>
     </content>

@@ -15,7 +15,7 @@ public class PlayerNameEntrySubView
     private Button deleteButton;
 
     @FXML
-    public void deletePlayer() {
+    private void deletePlayerClicked() {
 
     }
 

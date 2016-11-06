@@ -7,7 +7,7 @@
 <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Editor Settings - Tills Automat"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sep.fimball.view.window.machine:settings.TableSettingsView">
+            fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
@@ -51,16 +51,16 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save"/>
-                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Delete"
+                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="Save"/>
+                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="Delete"
                                         GridPane.rowIndex="1"/>
                             </children>
                         </GridPane>
                     </children>
                 </VBox>
                 <Button fx:id="menuButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                        onAction="#exitSettings" text="Menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
-                <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#edit" text="Edit"
+                        onAction="#menuClicked" text="Menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
+                <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editClicked" text="Edit"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
             </children>
         </AnchorPane>

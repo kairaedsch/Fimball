@@ -27,13 +27,13 @@ public class GameOverView extends DialogView<GameOverViewModel>
     }
 
     @FXML
-    public void endGame()
+    private void okClicked()
     {
 
     }
 
     @FXML
-    public void restart()
+    private void restartClicked()
     {
 
     }

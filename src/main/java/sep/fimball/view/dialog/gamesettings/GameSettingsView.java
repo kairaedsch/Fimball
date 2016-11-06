@@ -25,7 +25,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Slider sfxVolumeSlider;
 
     @FXML
-    public void exitSettings()
+    private void okClicked()
     {
 
     }
