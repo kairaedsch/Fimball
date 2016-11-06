@@ -23,12 +23,12 @@ public class PinballMachineSelectorSubViewModel
         blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
     }
 
-    public ReadOnlyStringProperty getNameProperty()
+    public ReadOnlyStringProperty nameProperty()
     {
         return name;
     }
 
-    public ReadOnlyStringProperty getImagePathProperty()
+    public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
     }

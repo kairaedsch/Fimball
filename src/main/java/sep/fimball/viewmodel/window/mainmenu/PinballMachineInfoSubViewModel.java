@@ -28,6 +28,24 @@ public class PinballMachineInfoSubViewModel
         update(pinballMachine);
     }
 
+    public void update(PinballMachine pinballMachine)
+    {
+        blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
+        name.bind(pinballMachine.nameProperty());
+        imagePath.bind(pinballMachine.imagePathProperty());
+        highscoreList.bind(pinballMachine.highscoreListProperty());
+    }
+
+    public void playClicked()
+    {
+        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES);
+    }
+
+    public void editClicked()
+    {
+        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS);
+    }
+
     public ReadOnlyStringProperty nameProperty()
     {
         return name;
@@ -46,23 +64,5 @@ public class PinballMachineInfoSubViewModel
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
         return highscoreList;
-    }
-
-    public void update(PinballMachine pinballMachine)
-    {
-        blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
-        name.bind(pinballMachine.nameProperty());
-        imagePath.bind(pinballMachine.imagePathProperty());
-        highscoreList.bind(pinballMachine.highscoreListProperty());
-    }
-
-    public void playClicked()
-    {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES);
-    }
-
-    public void editClicked()
-    {
-        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS);
     }
 }

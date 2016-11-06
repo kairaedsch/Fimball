@@ -1,23 +1,21 @@
-package sep.fimball.viewmodel.window.game;
+package sep.fimball.viewmodel.pinball;
 
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.ListPropertyBinder;
 import sep.fimball.model.GameElement;
 import sep.fimball.model.GameSession;
-import sep.fimball.viewmodel.pinball.SpriteSubViewModel;
 
 /**
- * Created by TheAsuro on 04.11.2016.
+ * Created by kaira on 06.11.2016.
  */
-public class GameViewModel
+public class PinballCanvasViewModel
 {
     private ListProperty<SpriteSubViewModel> spriteSubViewModels;
     private ListProperty<GameElement> elements;
 
-    public GameViewModel()
+    public PinballCanvasViewModel()
     {
         spriteSubViewModels = new SimpleListProperty<>();
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -29,7 +27,7 @@ public class GameViewModel
         GameSession.getSingletonInstance().startNewGame();
     }
 
-    public ReadOnlyListProperty<SpriteSubViewModel> SpriteSubViewModels()
+    public ListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()
     {
         return spriteSubViewModels;
     }

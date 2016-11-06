@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import sep.fimball.general.ListPropertyBinder;
 import sep.fimball.view.pinball.SpriteSubView;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.pinball.SpriteViewModel;
+import sep.fimball.viewmodel.pinball.SpriteSubViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
@@ -16,7 +16,7 @@ public class GameView extends WindowView
 {
     private GameViewModel viewModel;
     private ListProperty<SpriteSubView> spriteSubViews;
-    private ListProperty<SpriteViewModel> spriteViewModels;
+    private ListProperty<SpriteSubViewModel> spriteSubViewModels;
 
     @FXML
     protected void initialize()
@@ -24,8 +24,8 @@ public class GameView extends WindowView
         viewModel = new GameViewModel();
 
         spriteSubViews = new SimpleListProperty<>();
-        spriteViewModels = new SimpleListProperty<>();
-        ListPropertyBinder.bindList(spriteSubViews, spriteViewModels, SpriteSubView::new);
-        spriteViewModels.bind(viewModel.getSpriteViewModels());
+        spriteSubViewModels = new SimpleListProperty<>();
+        ListPropertyBinder.bindList(spriteSubViews, spriteSubViewModels, SpriteSubView::new);
+        spriteSubViewModels.bind(viewModel.SpriteSubViewModels());
     }
 }

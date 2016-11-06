@@ -37,12 +37,12 @@ public class SceneManagerViewModel
         inputManager.onKeyEvent(event, windowType.get());
     }
 
-    public ReadOnlyObjectProperty<WindowType> getWindowTypeProperty()
+    public ReadOnlyObjectProperty<WindowType> windowTypeProperty()
     {
         return windowType;
     }
 
-    public ReadOnlyObjectProperty<DialogType> getDialogTypeProperty()
+    public ReadOnlyObjectProperty<DialogType> dialogTypeProperty()
     {
         return dialogType;
     }

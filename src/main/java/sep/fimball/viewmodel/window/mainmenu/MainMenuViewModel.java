@@ -26,11 +26,6 @@ public class MainMenuViewModel
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
     }
 
-    public ReadOnlyListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelListProperty()
-    {
-        return pinballMachineSelectorSubViewModelList;
-    }
-
     public void settingsClicked()
     {
         SceneManagerViewModel.getInstance().setDialog(DialogType.GAME_SETTINGS);
@@ -43,6 +38,11 @@ public class MainMenuViewModel
         {
             pinballMachineInfoSubViewModel.update(pinballMachine);
         }
+    }
+
+    public ReadOnlyListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelListProperty()
+    {
+        return pinballMachineSelectorSubViewModelList;
     }
 
     public PinballMachineInfoSubViewModel getPinballMachineInfoSubViewModel()

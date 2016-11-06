@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
@@ -19,14 +22,22 @@ public class SceneManagerView
     private Stage stage;
     private Scene scene;
     private StackPane root;
+    private GaussianBlur blurEffect;
 
     public SceneManagerView(Stage stage)
     {
         this.stage = stage;
 
-        // Create Stackpane and add two Placeholder
         root = new StackPane();
+
+        Rectangle box = new Rectangle();
+        box.widthProperty().bind(root.widthProperty());
+        box.heightProperty().bind(root.heightProperty());
+        box.setFill(new Color(219/255., 93/255., 93/255., 1));
+        box.setOpacity(0.60);
+
         root.getChildren().add(new Group());
+        root.getChildren().add(box);
         root.getChildren().add(new Group());
 
         scene = new Scene(root, this.stage.getWidth(), this.stage.getHeight());
@@ -34,10 +45,12 @@ public class SceneManagerView
         this.stage.show();
 
         SceneManagerViewModel sceneManagerViewModel = SceneManagerViewModel.getInstance();
-        sceneManagerViewModel.getWindowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType));
-        sceneManagerViewModel.getDialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType));
-        updateContent(sceneManagerViewModel.getWindowTypeProperty().get());
-        updateContent(sceneManagerViewModel.getDialogTypeProperty().get());
+        sceneManagerViewModel.windowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType));
+        sceneManagerViewModel.dialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType));
+        updateContent(sceneManagerViewModel.windowTypeProperty().get());
+        updateContent(sceneManagerViewModel.dialogTypeProperty().get());
+
+        blurEffect = new GaussianBlur(15);
     }
 
     @FXML //TODO write in fxml file
@@ -91,27 +104,50 @@ public class SceneManagerView
     {
         SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(windowType);
         Node windowNode = simpleFxmlLoader.getRootNode();
-        if (windowNode != null)
-        {
-            root.getChildren().add(0, windowNode);
-            root.getChildren().remove(1);
-        }
+        replaceWindow(windowNode);
     }
 
     private void setDialog(DialogType dialogType)
     {
         SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(dialogType);
         Node dialogNode = simpleFxmlLoader.getRootNode();
-        if (dialogNode != null)
-        {
-            root.getChildren().remove(1);
-            root.getChildren().add(1, dialogNode);
-        }
+
+        replaceDialog(dialogNode);
+
+        getWindow().setEffect(blurEffect);
+        getWindow().setDisable(true);
+        getGlass().setVisible(true);
     }
 
     private void removeDialog()
     {
-        root.getChildren().remove(1);
-        root.getChildren().add(1, new Group());
+        replaceDialog(null);
+
+        getWindow().setEffect(null);
+        getWindow().setDisable(false);
+        getGlass().setVisible(false);
+    }
+
+    private Node getWindow()
+    {
+        return root.getChildren().get(0);
+    }
+
+    private Node getGlass()
+    {
+        return root.getChildren().get(1);
+    }
+
+    private void replaceWindow(Node node)
+    {
+        root.getChildren().remove(0);
+        root.getChildren().add(0, node);
+    }
+
+    private void replaceDialog(Node node)
+    {
+        root.getChildren().remove(2);
+        if(node != null) root.getChildren().add(node);
+        else root.getChildren().add(new Group());
     }
 }

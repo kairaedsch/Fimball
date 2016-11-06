@@ -27,8 +27,8 @@ public class PinballMachineSelectorSubView
     public void bindToViewModel(MainMenuViewModel mainMenuViewModel, PinballMachineSelectorSubViewModel preview)
     {
         this.mainMenuViewModel = mainMenuViewModel;
-        previewName.textProperty().bind(preview.getNameProperty());
-        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", preview.getImagePathProperty().get(), "\");"));
+        previewName.textProperty().bind(preview.nameProperty());
+        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", preview.imagePathProperty().get(), "\");"));
         blueprintElementId = new SimpleIntegerProperty();
         blueprintElementId.bind(preview.blueprintTableIdProperty());
     }

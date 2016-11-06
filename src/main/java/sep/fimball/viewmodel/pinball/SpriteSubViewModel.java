@@ -8,14 +8,14 @@ import sep.fimball.model.Vector2;
 /**
  * Created by alexcekay on 02.11.16.
  */
-public class SpriteViewModel
+public class SpriteSubViewModel
 {
     private ObjectProperty<Vector2> position;
     private DoubleProperty rotation;
     private ObjectProperty<Animation> animation;
     private StringProperty framePath;
 
-    public SpriteViewModel(GameElement baseElement)
+    public SpriteSubViewModel(GameElement baseElement)
     {
         position = new SimpleObjectProperty<>();
         position.bind(baseElement.positionProperty());
@@ -28,22 +28,17 @@ public class SpriteViewModel
         framePath = new SimpleStringProperty();
     }
 
-    public ReadOnlyObjectProperty<Vector2> getPosition()
+    public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
         return position;
     }
 
-    public ReadOnlyDoubleProperty getRotation()
+    public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
     }
 
-    public ReadOnlyObjectProperty<Animation> getAnimation()
-    {
-        return animation;
-    }
-
-    public ReadOnlyStringProperty getFramePath()
+    public ReadOnlyStringProperty framePathProperty()
     {
         return framePath;
     }
