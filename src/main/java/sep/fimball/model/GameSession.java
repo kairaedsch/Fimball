@@ -67,6 +67,8 @@ public class GameSession
     public void onBallLost()
     {
         // TODO - implement GameSession.onBallLost
+        // TODO - switch currentPlayer to next player in list
+        // TODO - if no player has balls left, switch to game over
         throw new UnsupportedOperationException();
     }
 

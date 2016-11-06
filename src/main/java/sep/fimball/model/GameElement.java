@@ -13,6 +13,7 @@ public class GameElement
     private ObjectProperty<Animation> animation;
     private List<Collider> colliders;
     private IntegerProperty hitCounter;
+    private IntegerProperty pointReward;
 
     public GameElement(Vector2 position, double rotation, Animation animation, List<Collider> colliders)
     {
@@ -20,6 +21,7 @@ public class GameElement
         this.rotation = new SimpleDoubleProperty(rotation);
         this.animation = new SimpleObjectProperty<>(animation);
         this.hitCounter = new SimpleIntegerProperty();
+        this.pointReward = new SimpleIntegerProperty();
         this.colliders = colliders;
     }
 
