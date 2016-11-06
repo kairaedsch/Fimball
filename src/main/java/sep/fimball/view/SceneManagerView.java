@@ -30,6 +30,9 @@ public class SceneManagerView
     {
         this.stage = stage;
 
+        stage.setWidth(1280);
+        stage.setHeight(720);
+
         root = new StackPane();
 
         Rectangle box = new Rectangle();
@@ -163,7 +166,10 @@ public class SceneManagerView
     private void replaceDialog(Node node)
     {
         root.getChildren().remove(2);
-        if (node != null) root.getChildren().add(node);
+        if (node != null)
+        {
+            root.getChildren().add(node);
+        }
         else root.getChildren().add(new Group());
     }
 }
