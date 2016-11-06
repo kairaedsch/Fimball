@@ -7,18 +7,22 @@ import javafx.beans.property.*;
  */
 public class PlayerNameEntrySubViewModel
 {
+    private PlayerNameViewModel playerNameViewModel;
+
     private StringProperty playerName;
     private BooleanProperty isDeleteAble;
 
-    public PlayerNameEntrySubViewModel(String name, boolean isDeleteAble)
+    public PlayerNameEntrySubViewModel(PlayerNameViewModel playerNameViewModel, String name, boolean isDeleteAble)
     {
-        this.playerName = new SimpleStringProperty();
+        this.playerNameViewModel = playerNameViewModel;
+
+        this.playerName = new SimpleStringProperty(name);
         this.isDeleteAble = new SimpleBooleanProperty(isDeleteAble);
     }
 
     public void deleteClicked()
     {
-
+        if(isDeleteAble.get()) playerNameViewModel.removePlayerNameEntry(this);
     }
 
     // TODO bind bidirekt
