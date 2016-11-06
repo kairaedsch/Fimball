@@ -6,7 +6,7 @@ import sep.fimball.general.data.Language;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.NoneViewModel;
 
 /**
  * Created by kaira on 05.11.2016.

@@ -6,7 +6,7 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.NoneViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**

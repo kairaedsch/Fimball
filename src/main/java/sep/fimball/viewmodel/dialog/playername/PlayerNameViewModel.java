@@ -7,7 +7,7 @@ import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.NoneViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
