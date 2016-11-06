@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 import javafx.scene.input.KeyCode;
-import sep.fimball.general.Language;
+import sep.fimball.general.data.Language;
 
 import java.util.HashMap;
 

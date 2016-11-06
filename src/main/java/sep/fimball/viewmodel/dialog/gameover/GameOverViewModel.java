@@ -2,7 +2,7 @@ package sep.fimball.viewmodel.dialog.gameover;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
-import sep.fimball.general.Highscore;
+import sep.fimball.general.data.Highscore;
 
 /**
  * Created by kaira on 05.11.2016.

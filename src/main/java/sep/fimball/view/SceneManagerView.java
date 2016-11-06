@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.SceneManagerViewModel;
+import sep.fimball.viewmodel.ViewModel;
+import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -33,7 +35,7 @@ public class SceneManagerView
         Rectangle box = new Rectangle();
         box.widthProperty().bind(root.widthProperty());
         box.heightProperty().bind(root.heightProperty());
-        box.setFill(new Color(219/255., 93/255., 93/255., 1));
+        box.setFill(new Color(219 / 255., 93 / 255., 93 / 255., 1));
         box.setOpacity(0.60);
 
         root.getChildren().add(new Group());
@@ -45,12 +47,12 @@ public class SceneManagerView
         this.stage.show();
 
         SceneManagerViewModel sceneManagerViewModel = SceneManagerViewModel.getInstance();
-        sceneManagerViewModel.windowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType));
-        sceneManagerViewModel.dialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType));
-        updateContent(sceneManagerViewModel.windowTypeProperty().get());
-        updateContent(sceneManagerViewModel.dialogTypeProperty().get());
+        sceneManagerViewModel.windowTypeProperty().addListener((observableValue, oldWindowType, newWindowType) -> updateContent(newWindowType, sceneManagerViewModel.getWindowViewModel()));
+        sceneManagerViewModel.dialogTypeProperty().addListener((observableValue, oldDialogType, newDialogType) -> updateContent(newDialogType, sceneManagerViewModel.getDialogViewModel()));
+        updateContent(sceneManagerViewModel.windowTypeProperty().get(), new MainMenuViewModel());
+        updateContent(sceneManagerViewModel.dialogTypeProperty().get(), null);
 
-        blurEffect = new GaussianBlur(15);
+        blurEffect = new GaussianBlur(13);
     }
 
     @FXML //TODO write in fxml file
@@ -59,29 +61,29 @@ public class SceneManagerView
         SceneManagerViewModel.getInstance().onKeyEvent(event);
     }
 
-    public void updateContent(sep.fimball.viewmodel.window.WindowType newWindowType)
+    public void updateContent(sep.fimball.viewmodel.window.WindowType newWindowType, ViewModel viewModel)
     {
         switch (newWindowType)
         {
             case SPLASH_SCREEN:
-                setWindow(WindowType.SPLASH_SCREEN_WINDOW);
+                setWindow(WindowType.SPLASH_SCREEN_WINDOW, viewModel);
                 break;
             case MAIN_MENU:
-                setWindow(WindowType.MAIN_MENU_WINDOW);
+                setWindow(WindowType.MAIN_MENU_WINDOW, viewModel);
                 break;
             case GAME:
-                setWindow(WindowType.GAME_WINDOW);
+                setWindow(WindowType.GAME_WINDOW, viewModel);
                 break;
             case TABLE_EDITOR:
-                setWindow(WindowType.TABLE_EDITOR_WINDOW);
+                setWindow(WindowType.TABLE_EDITOR_WINDOW, viewModel);
                 break;
             case TABLE_SETTINGS:
-                setWindow(WindowType.TABLE_SETTINGS_WINDOW);
+                setWindow(WindowType.TABLE_SETTINGS_WINDOW, viewModel);
                 break;
         }
     }
 
-    public void updateContent(sep.fimball.viewmodel.dialog.DialogType newDialogType)
+    public void updateContent(sep.fimball.viewmodel.dialog.DialogType newDialogType, ViewModel viewModel)
     {
         switch (newDialogType)
         {
@@ -89,34 +91,48 @@ public class SceneManagerView
                 removeDialog();
                 break;
             case GAME_OVER:
-                setDialog(DialogType.GAME_OVER_DIALOG);
+                setDialog(DialogType.GAME_OVER_DIALOG, viewModel);
                 break;
             case GAME_SETTINGS:
-                setDialog(DialogType.GAME_SETTINGS_DIALOG);
+                setDialog(DialogType.GAME_SETTINGS_DIALOG, viewModel);
                 break;
             case PLAYER_NAMES:
-                setDialog(DialogType.PLAYER_NAME_DIALOG);
+                setDialog(DialogType.PLAYER_NAME_DIALOG, viewModel);
                 break;
         }
     }
 
-    private void setWindow(WindowType windowType)
+    private void setWindow(WindowType windowType, ViewModel viewModel)
     {
-        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(windowType);
-        Node windowNode = simpleFxmlLoader.getRootNode();
+        Node windowNode = loadView(windowType, viewModel);
         replaceWindow(windowNode);
     }
 
-    private void setDialog(DialogType dialogType)
+    private void setDialog(DialogType dialogType, ViewModel viewModel)
     {
-        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(dialogType);
-        Node dialogNode = simpleFxmlLoader.getRootNode();
-
+        Node dialogNode = loadView(dialogType, viewModel);
         replaceDialog(dialogNode);
 
         getWindow().setEffect(blurEffect);
         getWindow().setDisable(true);
         getGlass().setVisible(true);
+    }
+
+    private Node loadView(ViewType viewType, ViewModel viewModel)
+    {
+        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
+        try
+        {
+            BoundToViewModel<ViewModel> view = (BoundToViewModel<ViewModel>) simpleFxmlLoader.getFxController();
+            view.bindToViewModel(viewModel);
+        }
+        catch (ClassCastException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Could inject viemodel into view");
+        }
+
+        return simpleFxmlLoader.getRootNode();
     }
 
     private void removeDialog()
@@ -147,7 +163,7 @@ public class SceneManagerView
     private void replaceDialog(Node node)
     {
         root.getChildren().remove(2);
-        if(node != null) root.getChildren().add(node);
+        if (node != null) root.getChildren().add(node);
         else root.getChildren().add(new Group());
     }
 }

@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 public class World
 {
-    private final double TIMELINE_TICK = 1 / 60;
+    private final double TIMELINE_TICK = 1 / 60D;
     private ListProperty<GameElement> worldElements;
     private Timeline gameLoop;
     private KeyFrame keyFrame;

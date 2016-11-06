@@ -1,46 +1,50 @@
 package sep.fimball.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Player
 {
-    private int points;
-    private String name;
-    private int balls;
+    private IntegerProperty points;
+    private StringProperty name;
+    private IntegerProperty balls;
 
     public Player(String name)
     {
-        this.points = 0;
-        this.name = name;
-        this.balls = 3;
+        this.points = new SimpleIntegerProperty();
+        this.name = new SimpleStringProperty();
+        this.balls = new SimpleIntegerProperty(3);
     }
 
     public int getPoints()
     {
+        return points.get();
+    }
+
+    public IntegerProperty pointsProperty()
+    {
         return points;
     }
 
-    /**
-     * @param points
-     */
-    public void setPoints(int points)
+    public String getName()
     {
-        this.points = points;
+        return name.get();
     }
 
-    public String getName()
+    public StringProperty nameProperty()
     {
         return name;
     }
 
     public int getBalls()
     {
-        return balls;
+        return balls.get();
     }
 
-    /**
-     * @param balls
-     */
-    public void setBalls(int balls)
+    public IntegerProperty ballsProperty()
     {
-        this.balls = balls;
+        return balls;
     }
 }

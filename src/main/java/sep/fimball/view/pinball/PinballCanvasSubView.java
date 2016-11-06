@@ -5,23 +5,23 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import sep.fimball.general.ListPropertyBinder;
+import sep.fimball.general.tool.ListPropertyBinder;
+import sep.fimball.view.BoundToViewModel;
 import sep.fimball.viewmodel.pinball.PinballCanvasViewModel;
 
 /**
  * Created by kaira on 05.11.2016.
  */
-public class PinballCanvasSubView
+public class PinballCanvasSubView implements BoundToViewModel<PinballCanvasViewModel>
 {
     @FXML
     private Canvas canvas;
 
     private ListProperty<SpriteSubView> sprites;
 
-    public PinballCanvasSubView()
+    @Override
+    public void bindToViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
-        PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel();
-
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyBinder.bindList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
     }
@@ -33,4 +33,5 @@ public class PinballCanvasSubView
             sprite.draw(canvas.getGraphicsContext2D());
         }
     }
+
 }

@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.transform.Rotate;
-import sep.fimball.model.Vector2;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.pinball.SpriteSubViewModel;
 
 import java.io.File;

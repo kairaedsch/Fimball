@@ -1,4 +1,4 @@
-package sep.fimball.general;
+package sep.fimball.general.data;
 
 import javafx.beans.property.*;
 

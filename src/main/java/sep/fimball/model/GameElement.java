@@ -1,6 +1,7 @@
 package sep.fimball.model;
 
 import javafx.beans.property.*;
+import sep.fimball.general.data.Vector2;
 
 import java.util.List;
 

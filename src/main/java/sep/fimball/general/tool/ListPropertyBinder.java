@@ -1,4 +1,4 @@
-package sep.fimball.general;
+package sep.fimball.general.tool;
 
 import javafx.beans.property.ListProperty;
 import javafx.collections.ListChangeListener;

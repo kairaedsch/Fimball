@@ -1,11 +1,11 @@
 package sep.fimball.viewmodel.pinball;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import sep.fimball.general.ListPropertyBinder;
-import sep.fimball.model.GameElement;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.general.tool.ListPropertyBinder;
 import sep.fimball.model.GameSession;
+import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
  * Created by kaira on 06.11.2016.
@@ -13,22 +13,38 @@ import sep.fimball.model.GameSession;
 public class PinballCanvasViewModel
 {
     private ListProperty<SpriteSubViewModel> spriteSubViewModels;
-    private ListProperty<GameElement> elements;
+    private ObjectProperty<Vector2> cameraPosition;
+    private DoubleProperty cameraZoom;
 
-    public PinballCanvasViewModel()
+    public PinballCanvasViewModel(GameSession gameSession, GameViewModel gameViewModel)
     {
-        spriteSubViewModels = new SimpleListProperty<>();
-        elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteSubViewModels, elements, SpriteSubViewModel::new);
-        elements.bind(GameSession.getSingletonInstance().getTable().getWorld().getWorldElements());
+        initWithGameSession(gameSession);
 
-        // GameSession has been created and filled in the PlayerNameView TODO move this to controller?
-        // As the view has finished loading (TODO has it?), we can now start the game
-        GameSession.getSingletonInstance().startNewGame();
+        cameraPosition.bind(gameViewModel.cameraPositionProperty());
+        cameraZoom.bind(gameViewModel.cameraZoomProperty());
     }
 
-    public ListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()
+    private void initWithGameSession(GameSession gameSession)
+    {
+        cameraPosition = new SimpleObjectProperty<>();
+        cameraZoom = new SimpleDoubleProperty();
+
+        spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyBinder.bindList(spriteSubViewModels, gameSession.getTable().getWorld().getWorldElements(), SpriteSubViewModel::new);
+    }
+
+    public ReadOnlyListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()
     {
         return spriteSubViewModels;
+    }
+
+    public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
+    {
+        return cameraPosition;
+    }
+
+    public ReadOnlyDoubleProperty cameraZoomProperty()
+    {
+        return cameraZoom;
     }
 }

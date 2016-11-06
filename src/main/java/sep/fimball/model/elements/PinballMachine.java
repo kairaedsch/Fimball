@@ -2,7 +2,7 @@ package sep.fimball.model.elements;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import sep.fimball.general.Highscore;
+import sep.fimball.general.data.Highscore;
 
 /**
  * Created by kaira on 01.11.2016.

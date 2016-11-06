@@ -23,6 +23,9 @@ public class SceneManagerViewModel
     private ObjectProperty<WindowType> windowType;
     private ObjectProperty<DialogType> dialogType;
 
+    private ViewModel windowViewModel;
+    private ViewModel dialogViewModel;
+
     private InputManagerViewModel inputManager;
 
     private SceneManagerViewModel()
@@ -37,6 +40,21 @@ public class SceneManagerViewModel
         inputManager.onKeyEvent(event, windowType.get());
     }
 
+    public void setWindow(WindowType WindowTypeNew, ViewModel viewModel)
+    {
+        windowViewModel = viewModel;
+        windowType.set(WindowTypeNew);
+
+        dialogViewModel = null;
+        dialogType.set(DialogType.NONE);
+    }
+
+    public void setDialog(DialogType dialogtypeNew, ViewModel viewModel)
+    {
+        dialogViewModel = viewModel;
+        dialogType.set(dialogtypeNew);
+    }
+
     public ReadOnlyObjectProperty<WindowType> windowTypeProperty()
     {
         return windowType;
@@ -47,20 +65,13 @@ public class SceneManagerViewModel
         return dialogType;
     }
 
-    public void setWindow(WindowType WindowTypeNew)
+    public ViewModel getWindowViewModel()
     {
-        dialogType.set(DialogType.NONE);
-        windowType.set(WindowTypeNew);
+        return windowViewModel;
     }
 
-    public void setDialog(DialogType dialogtypeNew)
+    public ViewModel getDialogViewModel()
     {
-        dialogType.set(dialogtypeNew);
-    }
-
-    public void setWindowAndDialog(WindowType WindowTypeNew, DialogType dialogtypeNew)
-    {
-        windowType.set(WindowTypeNew);
-        dialogType.set(dialogtypeNew);
+        return dialogViewModel;
     }
 }

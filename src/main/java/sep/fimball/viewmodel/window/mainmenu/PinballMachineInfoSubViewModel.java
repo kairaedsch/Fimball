@@ -2,11 +2,13 @@ package sep.fimball.viewmodel.window.mainmenu;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import sep.fimball.general.Highscore;
+import sep.fimball.general.data.Highscore;
 import sep.fimball.model.elements.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
+import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
+import sep.fimball.viewmodel.window.tablesettings.TableSettingsViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -38,12 +40,12 @@ public class PinballMachineInfoSubViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES);
+        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel());
     }
 
     public void editClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS);
+        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS, new TableSettingsViewModel());
     }
 
     public ReadOnlyStringProperty nameProperty()

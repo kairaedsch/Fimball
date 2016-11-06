@@ -14,27 +14,27 @@ import java.util.Map;
  */
 public class ParentNodeBinder
 {
-    public static <ViewModelT> void bindListToSimpleBindedParent(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType)
+    public static <ViewModelT> void bindListToSimpleBoundParent(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType)
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, viewType, (view, viewModel) ->
         {
-            if(view instanceof SimpleBoundToViewModel)
+            if(view instanceof BoundToViewModel)
             {
-                ((SimpleBoundToViewModel<ViewModelT>) view).bindToViewModel(viewModel);
+                ((BoundToViewModel<ViewModelT>) view).bindToViewModel(viewModel);
             }
             else
             {
-                throw new RuntimeException("View needs to implement the SimpleBoundToViewModel Interface");
+                throw new RuntimeException("View needs to implement the BoundToViewModel Interface");
             }
         });
     }
 
-    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModelT> converter)
+    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModelT> caller)
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
         {
             SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
-            converter.call(simpleFxmlLoader.getFxController(), viewModel);
+            caller.call(simpleFxmlLoader.getFxController(), viewModel);
             return simpleFxmlLoader.getRootNode();
         });
     }

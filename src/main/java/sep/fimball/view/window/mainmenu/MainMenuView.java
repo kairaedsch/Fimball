@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ParentNodeBinder;
+import sep.fimball.view.BoundToViewModel;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -14,7 +15,7 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MainMenuView extends WindowView
+public class MainMenuView extends WindowView implements BoundToViewModel<MainMenuViewModel>
 {
     @FXML
     private VBox machineOverview;
@@ -27,21 +28,21 @@ public class MainMenuView extends WindowView
 
     private MainMenuViewModel mainMenuViewModel;
 
-    @FXML
-    public void initialize()
+    @Override
+    public void bindToViewModel(MainMenuViewModel mainMenuViewModel)
     {
-        mainMenuViewModel = new MainMenuViewModel();
+        this.mainMenuViewModel = mainMenuViewModel;
 
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getPinballMachineInfoSubViewModel().nameProperty());
         detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty(), "\");"));
 
         ParentNodeBinder.bindList(machineOverview, mainMenuViewModel.pinballMachineSelectorSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW,
                 (view, pinballMachineSelectorSubViewModel) ->
-        {
-            ((PinballMachineSelectorSubView) view).bindToViewModel(mainMenuViewModel, pinballMachineSelectorSubViewModel);
-        });
+                {
+                    ((PinballMachineSelectorSubView) view).bindToViewModel(mainMenuViewModel, pinballMachineSelectorSubViewModel);
+                });
 
-        ParentNodeBinder.bindListToSimpleBindedParent(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY);
+        ParentNodeBinder.bindListToSimpleBoundParent(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY);
     }
 
     @FXML

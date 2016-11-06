@@ -1,12 +1,13 @@
 package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.beans.property.*;
-import sep.fimball.general.Language;
+import sep.fimball.general.data.Language;
+import sep.fimball.viewmodel.ViewModel;
 
 /**
  * Created by kaira on 05.11.2016.
  */
-public class GameSettingsViewModel
+public class GameSettingsViewModel extends ViewModel
 {
     ObjectProperty<Language> language;
     ListProperty<KeybindSubViewModel> keybinds;

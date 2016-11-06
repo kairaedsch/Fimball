@@ -1,5 +1,7 @@
 package sep.fimball.model;
 
+import sep.fimball.general.data.Vector2;
+
 /**
  * Created by alexcekay on 04.11.16.
  */

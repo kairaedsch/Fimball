@@ -1,5 +1,7 @@
 package sep.fimball.model;
 
+import sep.fimball.general.data.Vector2;
+
 public class CircleCollider extends Collider
 {
     private Vector2 position;

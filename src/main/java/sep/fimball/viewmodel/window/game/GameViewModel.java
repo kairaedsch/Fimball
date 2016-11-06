@@ -1,36 +1,70 @@
 package sep.fimball.viewmodel.window.game;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
-import sep.fimball.general.ListPropertyBinder;
-import sep.fimball.model.GameElement;
+import javafx.beans.property.*;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
-import sep.fimball.viewmodel.pinball.SpriteSubViewModel;
+import sep.fimball.viewmodel.pinball.PinballCanvasViewModel;
 
 /**
  * Created by TheAsuro on 04.11.2016.
  */
 public class GameViewModel
 {
-    private ListProperty<SpriteSubViewModel> spriteSubViewModels;
-    private ListProperty<GameElement> elements;
+    private IntegerProperty playerPoints;
+    private StringProperty playerName;
+    private IntegerProperty playerReserveBalls;
+    private ObjectProperty<Vector2> cameraPosition;
+    private DoubleProperty cameraZoom;
+
+    private PinballCanvasViewModel pinballCanvasViewModel;
 
     public GameViewModel()
     {
-        spriteSubViewModels = new SimpleListProperty<>();
-        elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteSubViewModels, elements, SpriteSubViewModel::new);
-        elements.bind(GameSession.getSingletonInstance().getTable().getWorld().getWorldElements());
+        playerPoints = new SimpleIntegerProperty();
+        playerName = new SimpleStringProperty();
+        playerReserveBalls = new SimpleIntegerProperty();
+        cameraPosition = new SimpleObjectProperty<>();
+        cameraZoom = new SimpleDoubleProperty();
+
+        GameSession gameSession = GameSession.getSingletonInstance();
+        playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
+        playerName.bind(gameSession.getCurrentPlayer().nameProperty());
+        playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
+
+        pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
         // GameSession has been created and filled in the PlayerNameView TODO move this to controller?
         // As the view has finished loading (TODO has it?), we can now start the game
         GameSession.getSingletonInstance().startNewGame();
     }
 
-    public ReadOnlyListProperty<SpriteSubViewModel> SpriteSubViewModels()
+    public IntegerProperty playerPointsProperty()
     {
-        return spriteSubViewModels;
+        return playerPoints;
+    }
+
+    public StringProperty playerNameProperty()
+    {
+        return playerName;
+    }
+
+    public IntegerProperty playerReserveBallsProperty()
+    {
+        return playerReserveBalls;
+    }
+
+    public PinballCanvasViewModel getPinballCanvasViewModel()
+    {
+        return pinballCanvasViewModel;
+    }
+
+    public ReadOnlyProperty<Vector2> cameraPositionProperty()
+    {
+        return cameraPosition;
+    }
+
+    public ReadOnlyDoubleProperty cameraZoomProperty()
+    {
+        return cameraZoom;
     }
 }

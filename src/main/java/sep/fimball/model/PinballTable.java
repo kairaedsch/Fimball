@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 import javafx.collections.transformation.SortedList;
-import sep.fimball.general.Highscore;
+import sep.fimball.general.data.Highscore;
 
 public class PinballTable
 {
