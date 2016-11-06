@@ -1,6 +1,7 @@
-package sep.fimball.model.elements;
+package sep.fimball.model.blueprint;
 
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
@@ -29,5 +30,10 @@ public class PlacedElementList
     public boolean removeElement(int blueprintElementId)
     {
         return elements.remove(blueprintElementId) != null;
+    }
+
+    public ReadOnlyMapProperty<Integer, PlacedElement> elementsProperty()
+    {
+        return elements;
     }
 }

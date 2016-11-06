@@ -22,12 +22,13 @@ public class PinballTable
      */
     public void loadWorld()
     {
+        // TODO load world here
 
     }
 
     public void deleteWorld()
     {
-
+        world = null;
     }
 
     public World getWorld()

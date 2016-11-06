@@ -1,8 +1,11 @@
 package sep.fimball.model;
 
+import javafx.beans.property.*;
+import javafx.collections.ObservableMap;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 public class Settings
@@ -11,61 +14,74 @@ public class Settings
 
     public static Settings getSingletonInstance()
     {
+        if (singletonInstance != null)
+            singletonInstance = new Settings();
+
         return singletonInstance;
     }
 
-    private float masterVolume;
-    private float musicVolume;
-    private float sfxVolume;
-    private Language language;
-    private HashMap<KeyCode, KeyBinding> keyBindingsMap;
+    private DoubleProperty masterVolume;
+    private DoubleProperty musicVolume;
+    private DoubleProperty sfxVolume;
+    private ObjectProperty<Language> language;
+    private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
 
     private Settings()
+    {
+        // TODO load settings file here
+    }
+
+    public void Serialize()
     {
 
     }
 
-    public float getMasterVolume()
+    public double getMasterVolume()
+    {
+        return masterVolume.get();
+    }
+
+    public ReadOnlyDoubleProperty masterVolumeProperty()
     {
         return masterVolume;
     }
 
-    public void setMasterVolume(float masterVolume)
+    public double getMusicVolume()
     {
-        this.masterVolume = masterVolume;
+        return musicVolume.get();
     }
 
-    public float getMusicVolume()
+    public ReadOnlyDoubleProperty musicVolumeProperty()
     {
         return musicVolume;
     }
 
-    public void setMusicVolume(float musicVolume)
+    public double getSfxVolume()
     {
-        this.musicVolume = musicVolume;
+        return sfxVolume.get();
     }
 
-    public float getSfxVolume()
+    public ReadOnlyDoubleProperty sfxVolumeProperty()
     {
         return sfxVolume;
     }
 
-    public void setSfxVolume(float sfxVolume)
-    {
-        this.sfxVolume = sfxVolume;
-    }
-
     public Language getLanguage()
     {
-        return this.language;
+        return language.get();
     }
 
-    public void setLanguage(Language language)
+    public ReadOnlyObjectProperty<Language> languageProperty()
     {
-        this.language = language;
+        return language;
     }
 
-    public HashMap<KeyCode, KeyBinding> getKeyBindingsMap()
+    public ObservableMap<KeyCode, KeyBinding> getKeyBindingsMap()
+    {
+        return keyBindingsMap.get();
+    }
+
+    public ReadOnlyMapProperty<KeyCode, KeyBinding> keyBindingsMapProperty()
     {
         return keyBindingsMap;
     }

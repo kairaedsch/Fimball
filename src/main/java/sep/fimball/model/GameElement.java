@@ -2,6 +2,7 @@ package sep.fimball.model;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.PlacedElement;
 
 import java.util.List;
 
@@ -18,6 +19,11 @@ public class GameElement
         this.rotation = new SimpleDoubleProperty(rotation);
         this.animation = new SimpleObjectProperty<>(animation);
         this.colliders = colliders;
+    }
+
+    public GameElement(PlacedElement element)
+    {
+        // TODO convert
     }
 
     public void update()

@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.window.mainmenu;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.elements.PinballMachine;
+import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;

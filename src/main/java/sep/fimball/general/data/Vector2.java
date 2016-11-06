@@ -1,5 +1,7 @@
 package sep.fimball.general.data;
 
+import java.awt.*;
+
 public class Vector2
 {
     private double x;
@@ -15,6 +17,12 @@ public class Vector2
     {
         this.x = x;
         this.y = y;
+    }
+
+    public Vector2(Point p)
+    {
+        this.x = p.x;
+        this.y = p.y;
     }
 
     public double getX()

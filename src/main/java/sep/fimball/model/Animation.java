@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 import javafx.beans.property.ListProperty;
-import sep.fimball.model.elements.Element;
+import sep.fimball.model.blueprint.Element;
 
 public class Animation
 {

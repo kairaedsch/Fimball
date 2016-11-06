@@ -1,4 +1,4 @@
-package sep.fimball.model.elements;
+package sep.fimball.model.blueprint;
 
 import sep.fimball.general.data.Vector2;
 

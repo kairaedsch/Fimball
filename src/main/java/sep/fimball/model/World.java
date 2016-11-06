@@ -5,7 +5,10 @@ import javafx.animation.Timeline;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.util.Duration;
+import sep.fimball.model.blueprint.PlacedElement;
+import sep.fimball.model.blueprint.PlacedElementList;
 
 public class World
 {
@@ -14,9 +17,11 @@ public class World
     private Timeline gameLoop;
     private KeyFrame keyFrame;
 
-	public World()
+	public World(PlacedElementList elementList)
     {
-        this.worldElements = new SimpleListProperty<>();
+        worldElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        for (PlacedElement pe : elementList.elementsProperty().get().values())
+            worldElements.add(new GameElement(pe));
     }
 
     public void startTimeline()
@@ -29,7 +34,6 @@ public class World
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
     }
-
 
     public void stopTimeline()
     {
