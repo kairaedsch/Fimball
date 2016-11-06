@@ -33,9 +33,9 @@ public class ParentNodeBinder
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
         {
-            SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
-            caller.call(simpleFxmlLoader.getFxController(), viewModel);
-            return simpleFxmlLoader.getRootNode();
+            ViewLoader viewLoader = new ViewLoader(viewType);
+            caller.call(viewLoader.getView(), viewModel);
+            return viewLoader.getRootNode();
         });
     }
 

@@ -61,7 +61,7 @@ public class SceneManagerView
         SceneManagerViewModel.getInstance().onKeyEvent(event);
     }
 
-    public void updateContent(sep.fimball.viewmodel.window.WindowType newWindowType, ViewModel viewModel)
+    private void updateContent(sep.fimball.viewmodel.window.WindowType newWindowType, ViewModel viewModel)
     {
         switch (newWindowType)
         {
@@ -83,7 +83,7 @@ public class SceneManagerView
         }
     }
 
-    public void updateContent(sep.fimball.viewmodel.dialog.DialogType newDialogType, ViewModel viewModel)
+    private void updateContent(sep.fimball.viewmodel.dialog.DialogType newDialogType, ViewModel viewModel)
     {
         switch (newDialogType)
         {
@@ -120,19 +120,19 @@ public class SceneManagerView
 
     private Node loadView(ViewType viewType, ViewModel viewModel)
     {
-        SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
+        ViewLoader<ViewBoundToViewModel<ViewModel>> viewLoader = new ViewLoader<>(viewType);
         try
         {
-            ViewBoundToViewModel<ViewModel> view = (ViewBoundToViewModel<ViewModel>) simpleFxmlLoader.getFxController();
+            ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
             view.setViewModel(viewModel);
         }
         catch (ClassCastException e)
         {
-            e.printStackTrace();
-            throw new RuntimeException("Could inject viemodel into view");
+            System.err.println("Could not inject viemodel into view");
+            throw e;
         }
 
-        return simpleFxmlLoader.getRootNode();
+        return viewLoader.getRootNode();
     }
 
     private void removeDialog()

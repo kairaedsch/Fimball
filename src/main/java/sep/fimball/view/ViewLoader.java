@@ -8,12 +8,12 @@ import java.io.IOException;
 /**
  * Created by kaira on 02.11.2016.
  */
-public class SimpleFxmlLoader
+public class ViewLoader<ViewT>
 {
     private Node rootNode = null;
-    private Object fxController = null;
+    private ViewT view = null;
 
-    public SimpleFxmlLoader(ViewType viewType)
+    public ViewLoader(ViewType viewType)
     {
         load(viewType.getFxmlPath());
     }
@@ -25,7 +25,7 @@ public class SimpleFxmlLoader
         try
         {
             rootNode = (Node) loader.load();
-            fxController = loader.getController();
+            view = loader.getController();
         }
         catch (IOException e)
         {
@@ -38,8 +38,8 @@ public class SimpleFxmlLoader
         return rootNode;
     }
 
-    public Object getFxController()
+    public ViewT getView()
     {
-        return fxController;
+        return view;
     }
 }

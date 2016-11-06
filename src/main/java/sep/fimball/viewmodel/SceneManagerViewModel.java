@@ -30,8 +30,8 @@ public class SceneManagerViewModel
 
     private SceneManagerViewModel()
     {
-        windowType = new SimpleObjectProperty<WindowType>(WindowType.MAIN_MENU);
-        dialogType = new SimpleObjectProperty<DialogType>(DialogType.NONE);
+        windowType = new SimpleObjectProperty<>(WindowType.MAIN_MENU);
+        dialogType = new SimpleObjectProperty<>(DialogType.NONE);
         inputManager = new InputManagerViewModel();
     }
 
