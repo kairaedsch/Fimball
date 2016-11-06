@@ -8,9 +8,9 @@ import sep.fimball.model.blueprint.PinballMachine;
  */
 public class PinballMachineSelectorSubViewModel
 {
-    StringProperty name;
-    StringProperty imagePath;
-    IntegerProperty blueprintTableId;
+    private StringProperty name;
+    private StringProperty imagePath;
+    private IntegerProperty blueprintTableId;
 
     public PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
     {

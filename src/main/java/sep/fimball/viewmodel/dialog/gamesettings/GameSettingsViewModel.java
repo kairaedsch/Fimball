@@ -9,13 +9,13 @@ import sep.fimball.viewmodel.ViewModel;
  */
 public class GameSettingsViewModel extends ViewModel
 {
-    ObjectProperty<Language> language;
-    ListProperty<KeybindSubViewModel> keybinds;
-    BooleanProperty fullscreen;
+    private ObjectProperty<Language> language;
+    private ListProperty<KeybindSubViewModel> keybinds;
+    private BooleanProperty fullscreen;
 
-    IntegerProperty volumeMaster;
-    IntegerProperty volumeMusic;
-    IntegerProperty volumeSFX;
+    private IntegerProperty volumeMaster;
+    private IntegerProperty volumeMusic;
+    private IntegerProperty volumeSFX;
 
     public void LanguageSelected(Language language)
     {

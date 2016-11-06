@@ -9,8 +9,8 @@ import sep.fimball.viewmodel.ViewModel;
  */
 public class PinballMachineSettingsViewModel extends ViewModel
 {
-    StringProperty machineName;
-    IntegerProperty machineId;
+    private StringProperty machineName;
+    private IntegerProperty machineId;
 
     public PinballMachineSettingsViewModel()
     {
