@@ -16,7 +16,7 @@ import java.util.Observer;
 public class World
 {
     private final double TIMELINE_TICK = 1 / 60D;
-    private ListProperty<GameElement> worldElements;
+    private ListProperty<GameElement> gameElements;
     private Timeline gameLoop;
     private KeyFrame keyFrame;
     private Observable observable;
@@ -24,9 +24,9 @@ public class World
 	public World(PlacedElementList elementList)
     {
         observable = new Observable();
-        worldElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        gameElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement pe : elementList.elementsProperty().get().values())
-            worldElements.add(new GameElement(pe));
+            addPlacedElement(pe);
     }
 
     public void notifyToRedraw(Observer observer)
@@ -51,21 +51,14 @@ public class World
         gameLoop.stop();
     }
 
-    /**
-	 *
-	 * @param obj
-	 */
-	public void addWorldElement(GameElement obj)
+    public void addPlacedElement(PlacedElement element)
     {
-        if (worldElements.contains(obj))
-            throw new IllegalArgumentException("Added same object twice!");
-
-        worldElements.add(obj);
+        gameElements.add(new GameElement(element));
     }
 
-    public ReadOnlyListProperty<GameElement> getWorldElements()
+    public ReadOnlyListProperty<GameElement> getGameElements()
     {
-        return worldElements;
+        return gameElements;
     }
 
     //Called by a timeline created in this class, update all gameobjects
