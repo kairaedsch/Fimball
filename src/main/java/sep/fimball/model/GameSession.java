@@ -2,16 +2,6 @@ package sep.fimball.model;
 
 public class GameSession
 {
-    protected static GameSession singletonInstance;
-
-    public static GameSession getSingletonInstance()
-    {
-        if (singletonInstance == null)
-            singletonInstance = new GameSession();
-
-        return singletonInstance;
-    }
-
     private Player[] players;
     private Player currentPlayer;
     private PinballTable table;

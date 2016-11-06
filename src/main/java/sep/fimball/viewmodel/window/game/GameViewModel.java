@@ -18,7 +18,7 @@ public class GameViewModel
 
     private PinballCanvasViewModel pinballCanvasViewModel;
 
-    public GameViewModel()
+    public GameViewModel(GameSession gameSession)
     {
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
@@ -26,7 +26,6 @@ public class GameViewModel
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
 
-        GameSession gameSession = GameSession.getSingletonInstance();
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
         playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
