@@ -123,8 +123,8 @@ public class SceneManagerView
         SimpleFxmlLoader simpleFxmlLoader = new SimpleFxmlLoader(viewType);
         try
         {
-            BoundToViewModel<ViewModel> view = (BoundToViewModel<ViewModel>) simpleFxmlLoader.getFxController();
-            view.bindToViewModel(viewModel);
+            ViewBoundToViewModel<ViewModel> view = (ViewBoundToViewModel<ViewModel>) simpleFxmlLoader.getFxController();
+            view.setViewModel(viewModel);
         }
         catch (ClassCastException e)
         {

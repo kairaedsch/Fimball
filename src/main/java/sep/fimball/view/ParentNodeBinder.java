@@ -18,13 +18,13 @@ public class ParentNodeBinder
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, viewType, (view, viewModel) ->
         {
-            if(view instanceof BoundToViewModel)
+            if(view instanceof ViewBoundToViewModel)
             {
-                ((BoundToViewModel<ViewModelT>) view).bindToViewModel(viewModel);
+                ((ViewBoundToViewModel<ViewModelT>) view).setViewModel(viewModel);
             }
             else
             {
-                throw new RuntimeException("View needs to implement the BoundToViewModel Interface");
+                throw new RuntimeException("View needs to implement the ViewBoundToViewModel Interface");
             }
         });
     }

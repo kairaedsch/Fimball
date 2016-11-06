@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ParentNodeBinder;
-import sep.fimball.view.BoundToViewModel;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -15,7 +14,7 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 /**
  * Created by kaira on 01.11.2016.
  */
-public class MainMenuView extends WindowView implements BoundToViewModel<MainMenuViewModel>
+public class MainMenuView extends WindowView<MainMenuViewModel>
 {
     @FXML
     private VBox machineOverview;
@@ -29,7 +28,7 @@ public class MainMenuView extends WindowView implements BoundToViewModel<MainMen
     private MainMenuViewModel mainMenuViewModel;
 
     @Override
-    public void bindToViewModel(MainMenuViewModel mainMenuViewModel)
+    public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {
         this.mainMenuViewModel = mainMenuViewModel;
 
@@ -39,7 +38,7 @@ public class MainMenuView extends WindowView implements BoundToViewModel<MainMen
         ParentNodeBinder.bindList(machineOverview, mainMenuViewModel.pinballMachineSelectorSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW,
                 (view, pinballMachineSelectorSubViewModel) ->
                 {
-                    ((PinballMachineSelectorSubView) view).bindToViewModel(mainMenuViewModel, pinballMachineSelectorSubViewModel);
+                    ((PinballMachineSelectorSubView) view).setViewModel(mainMenuViewModel, pinballMachineSelectorSubViewModel);
                 });
 
         ParentNodeBinder.bindListToSimpleBoundParent(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_DETAILD_PREVIEW_HIGHSCORE_ENTRY);

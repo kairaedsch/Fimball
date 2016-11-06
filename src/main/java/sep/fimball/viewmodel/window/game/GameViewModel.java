@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.window.game;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
-import sep.fimball.viewmodel.pinball.PinballCanvasViewModel;
+import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
 /**
  * Created by TheAsuro on 04.11.2016.

@@ -4,11 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.window.tablesettings.TableSettingsViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class TableSettingsView extends WindowView
+public class TableSettingsView extends WindowView<TableSettingsViewModel>
 {
     @FXML
     private Button editButton;
@@ -21,10 +22,18 @@ public class TableSettingsView extends WindowView
     @FXML
     private TextField tableName;
 
+
+    @Override
+    public void setViewModel(TableSettingsViewModel tableSettingsViewModel)
+    {
+
+    }
+
     @FXML
     public void edit(){
 
     }
+
     @FXML
     public void exitSettings() {
 

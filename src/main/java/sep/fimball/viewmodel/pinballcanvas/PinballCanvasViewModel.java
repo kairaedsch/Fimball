@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.pinball;
+package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

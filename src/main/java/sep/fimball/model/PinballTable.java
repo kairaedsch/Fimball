@@ -18,7 +18,7 @@ public class PinballTable
     }
 
     /**
-     * TODO: This exists because we load all PinballTables in the main menu and don't want to load all worlds of all pinball tables. is this unnecessary?
+     * TODO: This exists because we load all PinballTables in the main menu and don't want to load all worlds of all pinballcanvas tables. is this unnecessary?
      */
     public void loadWorld()
     {

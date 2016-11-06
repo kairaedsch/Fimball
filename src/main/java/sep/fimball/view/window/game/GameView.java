@@ -1,19 +1,18 @@
 package sep.fimball.view.window.game;
 
-import javafx.fxml.FXML;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class GameView extends WindowView
+public class GameView extends WindowView<GameViewModel>
 {
-    private GameViewModel viewModel;
+    private GameViewModel gameViewModel;
 
-    @FXML
-    protected void initialize()
+    @Override
+    public void setViewModel(GameViewModel gameViewModel)
     {
-        viewModel = new GameViewModel();
+        this.gameViewModel = gameViewModel;
     }
 }
