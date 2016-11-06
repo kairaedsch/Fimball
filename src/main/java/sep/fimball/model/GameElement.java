@@ -12,12 +12,14 @@ public class GameElement
     private DoubleProperty rotation;
     private ObjectProperty<Animation> animation;
     private List<Collider> colliders;
+    private IntegerProperty hitCounter;
 
     public GameElement(Vector2 position, double rotation, Animation animation, List<Collider> colliders)
     {
         this.position = new SimpleObjectProperty<>(position);
         this.rotation = new SimpleDoubleProperty(rotation);
         this.animation = new SimpleObjectProperty<>(animation);
+        this.hitCounter = new SimpleIntegerProperty();
         this.colliders = colliders;
     }
 
@@ -79,5 +81,11 @@ public class GameElement
     public List<Collider> getColliders()
     {
         return colliders;
+    }
+
+    public void OnCollision(CollisionEventArgs args)
+    {
+        //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
+        hitCounter.set(hitCounter.get() + 1);
     }
 }
