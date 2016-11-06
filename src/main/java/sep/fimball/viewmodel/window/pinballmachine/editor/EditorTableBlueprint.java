@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.window.tableeditor;
+package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

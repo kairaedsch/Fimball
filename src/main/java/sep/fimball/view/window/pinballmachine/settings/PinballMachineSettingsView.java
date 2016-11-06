@@ -1,15 +1,15 @@
-package sep.fimball.view.window.tablesettings;
+package sep.fimball.view.window.pinballmachine.settings;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.window.tablesettings.TableSettingsViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
-public class TableSettingsView extends WindowView<TableSettingsViewModel>
+public class PinballMachineSettingsView extends WindowView<PinballMachineSettingsViewModel>
 {
     @FXML
     private Button editButton;
@@ -24,7 +24,7 @@ public class TableSettingsView extends WindowView<TableSettingsViewModel>
 
 
     @Override
-    public void setViewModel(TableSettingsViewModel tableSettingsViewModel)
+    public void setViewModel(PinballMachineSettingsViewModel pinballMachineSettingsViewModel)
     {
 
     }

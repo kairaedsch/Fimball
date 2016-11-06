@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel.dialog.playername;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import sep.fimball.viewmodel.ViewModel;
@@ -10,6 +11,12 @@ import sep.fimball.viewmodel.ViewModel;
 public class PlayerNameViewModel extends ViewModel
 {
     private ListProperty<PlayerNameEntrySubViewModel> playerNameEntrys;
+    private IntegerProperty pinballMachineId;
+
+    public PlayerNameViewModel(IntegerProperty pinballMachineId)
+    {
+
+    }
 
     public void addPlayerClicked()
     {

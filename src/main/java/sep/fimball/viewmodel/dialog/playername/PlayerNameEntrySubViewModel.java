@@ -1,24 +1,28 @@
 package sep.fimball.viewmodel.dialog.playername;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.*;
 
 /**
  * Created by kaira on 01.11.2016.
  */
 public class PlayerNameEntrySubViewModel
 {
-    private IntegerProperty playerName;
+    private StringProperty playerName;
     private BooleanProperty isDeleteAble;
+
+    public PlayerNameEntrySubViewModel(String name, boolean isDeleteAble)
+    {
+        this.playerName = new SimpleStringProperty();
+        this.isDeleteAble = new SimpleBooleanProperty(isDeleteAble);
+    }
 
     public void deleteClicked()
     {
 
     }
 
-    public ReadOnlyIntegerProperty playerNameProperty()
+    // TODO bind bidirekt
+    public StringProperty playerNameProperty()
     {
         return playerName;
     }

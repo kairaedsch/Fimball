@@ -4,7 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.tool.ListPropertyBinder;
-import sep.fimball.model.GameSession;
+import sep.fimball.model.World;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 import java.util.Observable;
@@ -20,22 +20,22 @@ public class PinballCanvasViewModel
     private DoubleProperty cameraZoom;
     private Observable redrawObservable;
 
-    public PinballCanvasViewModel(GameSession gameSession, GameViewModel gameViewModel)
+    public PinballCanvasViewModel(World world, GameViewModel gameViewModel)
     {
-        initWithGameSession(gameSession);
+        init(world);
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
 
     }
 
-    private void initWithGameSession(GameSession gameSession)
+    private void init(World world)
     {
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
 
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteSubViewModels, gameSession.getTable().getWorld().getWorldElements(), SpriteSubViewModel::new);
+        ListPropertyBinder.bindList(spriteSubViewModels, world.getWorldElements(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
         Observer redrawObserver = (o, arg) -> redraw();

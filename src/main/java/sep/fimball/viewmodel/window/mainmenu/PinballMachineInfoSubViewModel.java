@@ -8,7 +8,7 @@ import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
-import sep.fimball.viewmodel.window.tablesettings.TableSettingsViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
@@ -40,12 +40,12 @@ public class PinballMachineInfoSubViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel());
+        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel(blueprintTableId));
     }
 
     public void editClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS, new TableSettingsViewModel());
+        SceneManagerViewModel.getInstance().setWindow(WindowType.TABLE_SETTINGS, new PinballMachineSettingsViewModel());
     }
 
     public ReadOnlyStringProperty nameProperty()

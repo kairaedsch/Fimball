@@ -31,7 +31,7 @@ public class GameViewModel
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
         playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
 
-        pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+        pinballCanvasViewModel = new PinballCanvasViewModel(gameSession.getTable().getWorld(), this);
 
         // GameSession has been created and filled in the PlayerNameView TODO move this to controller?
         // As the view has finished loading (TODO has it?), we can now start the game
