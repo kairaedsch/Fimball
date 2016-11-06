@@ -39,7 +39,7 @@ public class PinballCanvasViewModel
 
         redrawObservable = new Observable();
         Observer redrawObserver = (o, arg) -> redraw();
-        // TODO give model the observer
+        world.notifyToRedraw(redrawObserver);
     }
 
     public ReadOnlyListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()

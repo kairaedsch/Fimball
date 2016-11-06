@@ -10,18 +10,28 @@ import javafx.util.Duration;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class World
 {
     private final double TIMELINE_TICK = 1 / 60D;
     private ListProperty<GameElement> worldElements;
     private Timeline gameLoop;
     private KeyFrame keyFrame;
+    private Observable observable;
 
 	public World(PlacedElementList elementList)
     {
+        observable = new Observable();
         worldElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement pe : elementList.elementsProperty().get().values())
             worldElements.add(new GameElement(pe));
+    }
+
+    public void notifyToRedraw(Observer observer)
+    {
+        observable.addObserver(observer);
     }
 
     public void startTimeline()
@@ -29,7 +39,8 @@ public class World
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event -> {
-
+            observable.hasChanged();
+            observable.notifyObservers();
         }));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
