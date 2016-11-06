@@ -1,4 +1,4 @@
-package sep.fimball.view.pinball;
+package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
@@ -19,7 +19,7 @@ public class SpriteSubView
     private ObjectProperty<Vector2> positionProperty;
     private SpriteSubViewModel viewModel;
 
-    public SpriteSubView(SpriteSubViewModel viewModel)
+    SpriteSubView(SpriteSubViewModel viewModel)
     {
         this.viewModel = viewModel;
 
@@ -39,7 +39,7 @@ public class SpriteSubView
         image = new Image(file.toURI().toString());
     }
 
-    public void draw(GraphicsContext gc)
+    void draw(GraphicsContext gc)
     {
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();

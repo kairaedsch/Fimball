@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.view.pinball.SpriteSubView;
+import sep.fimball.view.pinballcanvas.SpriteSubView;
 
 import java.util.List;
 

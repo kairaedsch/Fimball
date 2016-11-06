@@ -35,7 +35,7 @@ public class GameViewModel
 
         // GameSession has been created and filled in the PlayerNameView TODO move this to controller?
         // As the view has finished loading (TODO has it?), we can now start the game
-        GameSession.getSingletonInstance().startNewGame();
+        gameSession.startNewGame();
     }
 
     public IntegerProperty playerPointsProperty()
