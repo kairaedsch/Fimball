@@ -1,7 +1,6 @@
 package sep.fimball.model.blueprint;
 
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
 
 import java.awt.*;
 
@@ -13,16 +12,16 @@ public class PlacedElement
     IntegerProperty blueprintElementId;
     StringProperty greenprintElementId;
     ObjectProperty<Point> position;
-    MapProperty<String, Double> colliderToMulitplier;
     IntegerProperty points;
+    DoubleProperty multiplier;
 
     public PlacedElement(int blueprintElementId, String greenprintElementId, Point position)
     {
         this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
         this.greenprintElementId = new SimpleStringProperty(greenprintElementId);
         this.position = new SimpleObjectProperty<>(position);
-        this.colliderToMulitplier = new SimpleMapProperty<>(FXCollections.observableHashMap());
         this.points = new SimpleIntegerProperty();
+        this.multiplier = new SimpleDoubleProperty();
     }
 
     public ReadOnlyIntegerProperty blueprintElementIdProperty()
@@ -40,14 +39,14 @@ public class PlacedElement
         return position;
     }
 
-    public ReadOnlyMapProperty<String, Double> colliderToMulitplierProperty()
-    {
-        return colliderToMulitplier;
-    }
-
     public ReadOnlyIntegerProperty pointsProperty()
     {
         return points;
+    }
+
+    public DoubleProperty multiplierProperty()
+    {
+        return multiplier;
     }
 
     public void setPosition(Point position)
@@ -60,8 +59,8 @@ public class PlacedElement
         this.points.set(points);
     }
 
-    public void setColliderMultiplier(String collider, double multiplier)
+    public void setMultiplier(double multiplier)
     {
-        colliderToMulitplier.put(collider, multiplier);
+        this.multiplier.set(multiplier);
     }
 }

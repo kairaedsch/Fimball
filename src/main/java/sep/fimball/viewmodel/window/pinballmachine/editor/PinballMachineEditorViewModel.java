@@ -11,7 +11,7 @@ import sep.fimball.model.blueprint.ElementManager;
  */
 public class PinballMachineEditorViewModel
 {
-    ListProperty<AvailableElementSubViewModel> availableElements;
+    private ListProperty<AvailableElementSubViewModel> availableElements;
 
     public PinballMachineEditorViewModel()
     {

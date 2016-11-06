@@ -15,14 +15,13 @@ import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettin
  */
 public class PinballMachineInfoSubViewModel
 {
-    IntegerProperty blueprintTableId;
-    StringProperty name;
-    StringProperty imagePath;
-    ListProperty<Highscore> highscoreList;
+    private PinballMachine pinballMachine;
+    private StringProperty name;
+    private StringProperty imagePath;
+    private ListProperty<Highscore> highscoreList;
 
     public PinballMachineInfoSubViewModel(PinballMachine pinballMachine)
     {
-        blueprintTableId = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -32,7 +31,8 @@ public class PinballMachineInfoSubViewModel
 
     public void update(PinballMachine pinballMachine)
     {
-        blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
+        this.pinballMachine = pinballMachine;
+
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.imagePathProperty());
         highscoreList.bind(pinballMachine.highscoreListProperty());
@@ -40,7 +40,7 @@ public class PinballMachineInfoSubViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel(blueprintTableId));
+        SceneManagerViewModel.getInstance().setDialog(DialogType.PLAYER_NAMES, new PlayerNameViewModel(pinballMachine));
     }
 
     public void editClicked()
@@ -56,11 +56,6 @@ public class PinballMachineInfoSubViewModel
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
-    }
-
-    public ReadOnlyIntegerProperty blueprintTableIdProperty()
-    {
-        return blueprintTableId;
     }
 
     public ReadOnlyListProperty<Highscore> highscoreListProperty()

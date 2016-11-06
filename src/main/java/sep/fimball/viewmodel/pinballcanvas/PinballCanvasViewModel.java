@@ -26,7 +26,6 @@ public class PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
-
     }
 
     private void init(World world)
