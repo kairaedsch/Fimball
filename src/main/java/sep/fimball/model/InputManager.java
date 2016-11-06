@@ -32,14 +32,16 @@ public class InputManager
         {
             if (mapEntry.getKey().equals(binding))
             {
+                KeyObserverEventArgs.KeyChangedToState state;
+
                 if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
-                {
-                    mapEntry.getValue().keyDown(binding);
-                }
+                    state = KeyObserverEventArgs.KeyChangedToState.DOWN;
                 else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
-                {
-                    mapEntry.getValue().keyUp(binding);
-                }
+                    state = KeyObserverEventArgs.KeyChangedToState.UP;
+                else
+                    throw new IllegalArgumentException("Invalid keyEvent!");
+
+                mapEntry.getValue().keyEvent(new KeyObserverEventArgs(binding, state));
             }
         }
     }
