@@ -51,9 +51,12 @@ public class GameSession
         this.tiltCounter = tiltCounter;
     }
 
-    public void resetBall()
+    /**
+     * gets called by physics when a ball is lost
+     */
+    public void onBallLost()
     {
-        // TODO - implement GameSession.resetBall
+        // TODO - implement GameSession.onBallLost
         throw new UnsupportedOperationException();
     }
 
