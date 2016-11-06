@@ -5,7 +5,5 @@ package sep.fimball.model;
  */
 public interface KeyObserver
 {
-    void keyDown(KeyBinding binding);
-
-    void keyUp(KeyBinding binding);
+    void keyEvent(KeyObserverEventArgs args);
 }

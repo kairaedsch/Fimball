@@ -8,9 +8,18 @@ public class GameSession
     private int tiltCounter;
     private boolean paused;
 
-    private GameSession()
+    public GameSession()
     {
-
+        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
+        {
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                addTiltCounter();
+        });
+        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_RIGHT, args ->
+        {
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                addTiltCounter();
+        });
     }
 
     public void startNewGame()
@@ -41,14 +50,15 @@ public class GameSession
         return table;
     }
 
+    private void addTiltCounter()
+    {
+        tiltCounter++;
+        // tilt logic etc.
+    }
+
     public int getTiltCounter()
     {
         return tiltCounter;
-    }
-
-    public void setTiltCounter(int tiltCounter)
-    {
-        this.tiltCounter = tiltCounter;
     }
 
     /**
