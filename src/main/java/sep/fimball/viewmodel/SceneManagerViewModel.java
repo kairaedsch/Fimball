@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
@@ -29,7 +29,7 @@ public class SceneManagerViewModel
     private SceneManagerViewModel()
     {
         windowViewModel = new SimpleObjectProperty<>(new MainMenuViewModel());
-        dialogViewModel = new SimpleObjectProperty<>(new NoneViewModel());
+        dialogViewModel = new SimpleObjectProperty<>(new EmptyViewModel());
         inputManager = new InputManagerViewModel();
     }
 

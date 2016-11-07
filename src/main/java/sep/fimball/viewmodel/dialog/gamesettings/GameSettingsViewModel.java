@@ -6,7 +6,7 @@ import sep.fimball.general.data.Language;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 
 /**
  * Created by kaira on 05.11.2016.
@@ -60,7 +60,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     public void okClicked(int value)
     {
-        SceneManagerViewModel.getInstance().setDialog(new NoneViewModel());
+        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyObjectProperty<Language> languageProperty()

@@ -6,9 +6,9 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 /**
  * Created by kaira on 05.11.2016.
  */
-public class NoneViewModel extends DialogViewModel
+public class EmptyViewModel extends DialogViewModel
 {
-    public NoneViewModel()
+    public EmptyViewModel()
     {
         super(DialogType.NONE);
     }

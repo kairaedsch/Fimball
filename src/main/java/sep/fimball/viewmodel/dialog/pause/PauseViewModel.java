@@ -6,7 +6,7 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
@@ -28,7 +28,7 @@ public class PauseViewModel extends DialogViewModel
 
     public void okClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(new NoneViewModel());
+        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()

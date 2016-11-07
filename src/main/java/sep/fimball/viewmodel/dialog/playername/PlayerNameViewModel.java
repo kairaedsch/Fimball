@@ -9,7 +9,7 @@ import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.NoneViewModel;
+import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
@@ -47,7 +47,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
     public void abortClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(new NoneViewModel());
+        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntrysProperty()

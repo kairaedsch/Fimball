@@ -2,6 +2,8 @@ package sep.fimball.model;
 
 import javafx.collections.transformation.SortedList;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.PlacedElement;
 
 public class PinballTable
 {
@@ -22,8 +24,8 @@ public class PinballTable
      */
     public void loadWorld()
     {
-        // TODO load world here
-
+        PinballMachine blueprint = new PinballMachine(name, id);
+        world = new World(blueprint.getTableElementList());
     }
 
     public void deleteWorld()
