@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.tool.ListPropertyBinder;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
@@ -21,11 +22,20 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private ListProperty<SpriteSubView> sprites;
 
+    private SimpleObjectProperty<Vector2> cameraPosition;
+    private SimpleDoubleProperty cameraZoom;
+
     @Override
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyBinder.bindList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
+
+        cameraPosition = new SimpleObjectProperty<>();
+        cameraPosition.bind(pinballCanvasViewModel.cameraPositionProperty());
+
+        cameraZoom = new SimpleDoubleProperty();
+        cameraZoom.bind(pinballCanvasViewModel.cameraZoomProperty());
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.notifyToRedraw(redrawObserver);
