@@ -5,13 +5,28 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.model.blueprint.PlacedElement;
 
+/**
+ * PinballTable repräsentiert einen Flipperautomaten
+ */
 public class PinballTable
 {
     private int id;
+    /*
+     * Der Name des Flipperautomaten welcher vom Nutzer im Editor eingestellt wurde
+     */
     private String name;
+    /*
+     * Die absteigend sortierte Highscore Liste des Flipperautomaten
+     */
     private SortedList<Highscore> highscores;
+    /*
+     * Die Spielwelt des Flipperautomaten
+     */
     private World world;
 
+    /**
+     * Erzeugt einen PinballTable
+     */
     public PinballTable(int id, String name, SortedList<Highscore> highscores)
     {
         this.id = id;
@@ -20,6 +35,7 @@ public class PinballTable
     }
 
     /**
+     * Lädt die Spielwelt des Flipperautomaten [TODO: Genauer beschreiben dass JSON serialized Daten genutzt werden]
      * TODO: This exists because we load all PinballTables in the main menu and don't want to load all worlds of all pinballcanvas tables. is this unnecessary?
      */
     public void loadWorld()
@@ -28,6 +44,9 @@ public class PinballTable
         world = new World(blueprint.getTableElementList());
     }
 
+    /**
+     * Löscht die Spielwelt des Flipperautomaten
+     */
     public void deleteWorld()
     {
         world = null;
@@ -58,6 +77,9 @@ public class PinballTable
         this.name = name;
     }
 
+    /**
+     * Fügt einen neuen Highscore zum Flipperautomaten hinzu
+     */
     public void addHighscore(Highscore highscore)
     {
         this.highscores.add(highscore);

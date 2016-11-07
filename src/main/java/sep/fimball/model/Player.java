@@ -5,12 +5,27 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Stellt einen Spieler welcher an einer Partie teilnimmt dar
+ */
 public class Player
 {
+    /*
+     * Die Anzahl an Punkten welcher der Spieler in der aktuellen Partie hat
+     */
     private IntegerProperty points;
+    /*
+     * Der Name des Spielers
+     */
     private StringProperty name;
+    /*
+     * Die Anzahl an Reservekugeln die dem Spieler verbleiben
+     */
     private IntegerProperty balls;
 
+    /**
+     * Erzeugt einen neuen Spieler
+     */
     public Player(String name)
     {
         this.points = new SimpleIntegerProperty();
