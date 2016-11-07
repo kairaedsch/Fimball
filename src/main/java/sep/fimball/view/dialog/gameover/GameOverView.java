@@ -12,10 +12,6 @@ import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 public class GameOverView extends DialogView<GameOverViewModel>
 {
     @FXML
-    private Button okButton;
-    @FXML
-    private Button abortButton;
-    @FXML
     private GridPane highscores;
     @FXML
     private GridPane playerScores;
