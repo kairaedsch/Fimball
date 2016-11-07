@@ -60,7 +60,7 @@ public class GameElement
         return colliders;
     }
 
-    public StringPropery currentAnimationFrameProperty()
+    public StringProperty currentAnimationFrameProperty()
     {
         return currentAnimationFrame;
     }

@@ -21,7 +21,7 @@ public class SpriteSubViewModel
         rotation = new SimpleDoubleProperty();
         rotation.bind(baseElement.rotationProperty());
         animationFramePath = new SimpleStringProperty();
-        animationFramePath.bind(baseElement.animationProperty());
+        animationFramePath.bind(baseElement.currentAnimationFrameProperty());
 
         isSelected = new SimpleBooleanProperty(false);
     }
