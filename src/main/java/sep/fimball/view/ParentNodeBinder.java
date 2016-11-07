@@ -16,24 +16,14 @@ public class ParentNodeBinder
 {
     public static <ViewModelT> void bindListToSimpleBoundParent(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyViewModel, viewType, (view, viewModel) ->
-        {
-            if(view instanceof ViewBoundToViewModel)
-            {
-                ((ViewBoundToViewModel<ViewModelT>) view).setViewModel(viewModel);
-            }
-            else
-            {
-                throw new RuntimeException("View needs to implement the ViewBoundToViewModel Interface");
-            }
-        });
+        ParentNodeBinder.<ViewBoundToViewModel<ViewModelT>, ViewModelT>bindList(parentNode, listPropertyViewModel, viewType, ViewBoundToViewModel::setViewModel);
     }
 
-    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewModelT> caller)
+    public static <ViewT, ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
     {
         ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
         {
-            ViewLoader viewLoader = new ViewLoader(viewType);
+            ViewLoader<ViewT> viewLoader = new ViewLoader<>(viewType);
             caller.call(viewLoader.getView(), viewModel);
             return viewLoader.getRootNode();
         });
@@ -45,9 +35,9 @@ public class ParentNodeBinder
         {
             parentNode.getChildren().clear();
 
-            for(ViewModelT b : listPropertyViewModel)
+            for(ViewModelT viewModel : listPropertyViewModel)
             {
-                parentNode.getChildren().add(viewModelToNodeConverter.convert(b));
+                parentNode.getChildren().add(viewModelToNodeConverter.convert(viewModel));
             }
         };
 
@@ -76,8 +66,8 @@ public class ParentNodeBinder
         Node convert(ViewModelT viewModel);
     }
 
-    public interface ViewAndViewModelCaller<ViewModelT>
+    public interface ViewAndViewModelCaller<ViewT, ViewModelT>
     {
-        void call(Object view, ViewModelT viewModel);
+        void call(ViewT view, ViewModelT viewModel);
     }
 }
