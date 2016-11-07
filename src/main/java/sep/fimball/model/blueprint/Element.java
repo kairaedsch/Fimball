@@ -10,6 +10,7 @@ public class Element
     public String editorName;
     public String editorDescription;
     public double rotationAccuracy;
+    public String elementType;
     public Collider[] colliders;
 
     public class Collider
