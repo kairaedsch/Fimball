@@ -11,14 +11,30 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Created by kaira on 05.11.2016.
+ * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zu verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach dem Spielende an.
  */
 public class GameOverViewModel extends DialogViewModel
 {
+    /**
+     * Der zuletzt gespielte Flipperautomat.
+     */
     private PinballMachine pinballMachine;
+
+    /**
+     * Die Highscoreliste des zuletzt gespielten Flipperautomaten.
+     */
     private ListProperty<Highscore> machineHighscores;
+
+    /**
+     * Eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält.
+     */
     private ListProperty<Highscore> playerHighscores;
 
+    /**
+     * Erstellt ein neues GameOverViewModel.
+     *
+     * @param pinballMachine
+     */
     public GameOverViewModel(PinballMachine pinballMachine)
     {
         super(DialogType.GAME_OVER);
@@ -28,25 +44,38 @@ public class GameOverViewModel extends DialogViewModel
         playerHighscores = new SimpleListProperty<>();
 
         machineHighscores.bind(pinballMachine.highscoreListProperty());
-        //TODO bind playerHighscores
     }
 
+    /**
+     * Startet eine weitere Partie mit dem selben Flipperautomaten und den selben Spielern.
+     */
     public void playAgainClicked()
     {
         sceneManager.setWindow(new MainMenuViewModel());
         sceneManager.setDialog(new PlayerNameViewModel(pinballMachine));
     }
 
-    public void okClicked()
+    /**
+     * Führt den Benutzer zurück ins Hauptmenu.
+     */
+    public void backClicked()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
+    /**
+     * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyListProperty<Highscore> machineHighscoresProperty()
     {
         return machineHighscores;
     }
 
+    /**
+     * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, zu Verfügung.
+     * @return
+     */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;

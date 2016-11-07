@@ -8,7 +8,7 @@ import sep.fimball.model.blueprint.PlacedElement;
  */
 public class SelectedElementSubViewModel
 {
-    PlacedElement placedElement;
+    private PlacedElement placedElement;
 
     private StringProperty name;
     private StringProperty description;

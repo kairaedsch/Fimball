@@ -7,7 +7,7 @@ import sep.fimball.viewmodel.ViewModel;
  */
 public abstract class WindowViewModel extends ViewModel
 {
-    WindowType windowType;
+    private WindowType windowType;
 
     public WindowViewModel(WindowType windowType)
     {

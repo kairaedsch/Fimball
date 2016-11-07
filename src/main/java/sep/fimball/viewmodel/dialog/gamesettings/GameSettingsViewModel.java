@@ -8,18 +8,43 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 
 /**
- * Created by kaira on 05.11.2016.
+ * Das GameOverViewModel stellt der View Daten über die Einstellungen von Fimball zu Verfügung und ermöglicht deren Änderung.
  */
 public class GameSettingsViewModel extends DialogViewModel
 {
-    private ObjectProperty<Language> language;
+    /**
+     * Die aktuell eingestellten Tasten um diverse Flipperautomat-Element zu bedienen z.b. den rechten Flipperarm.
+     */
     private ListProperty<KeybindSubViewModel> keybinds;
+
+    /**
+     * Die aktuell eingestellte Sprache.
+     */
+    private ObjectProperty<Language> language;
+
+    /**
+     * Einstellung, um Fimball im Vollbild oder im Fenstermodus laufen zu lassen.
+     */
     private BooleanProperty fullscreen;
 
+    /**
+     * Die aktuell eingestellte Hauptlautstärke von FimBall.
+     */
     private IntegerProperty volumeMaster;
+
+    /**
+     * Die aktuell eingestellte Lautstärke der Musik von FimBall.
+     */
     private IntegerProperty volumeMusic;
+
+    /**
+     * Die aktuell eingestellte Lautstärke der Soundeffekte von FimBall.
+     */
     private IntegerProperty volumeSFX;
 
+    /**
+     * Erstellt ein eineu GameSettingsViewModel.
+     */
     public GameSettingsViewModel()
     {
         super(DialogType.GAME_SETTINGS);
@@ -32,63 +57,66 @@ public class GameSettingsViewModel extends DialogViewModel
         volumeSFX = new SimpleIntegerProperty();
     }
 
-    public void LanguageSelected(Language language)
-    {
-
-    }
-
-    public void fullscreenClicked(boolean active)
-    {
-
-    }
-
-    public void volumeMasterSlided(int value)
-    {
-
-    }
-
-    public void volumeMusicSlided(int value)
-    {
-
-    }
-
-    public void volumeSFXSlided(int value)
-    {
-
-    }
-
-    public void okClicked(int value)
+    /**
+     * Führt den Benutzer zurück ins Hauptmenu.
+     */
+    public void okClicked()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }
 
-    public ReadOnlyObjectProperty<Language> languageProperty()
-    {
-        return language;
-    }
-
+    /**
+     * Stellt die aktuell eingestellten Tasten um diverse Flipperautomat-Element zu bedienen für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()
     {
         return keybinds;
     }
 
-    public ReadOnlyBooleanProperty fullscreenProperty()
+    /**
+     * Stellt die aktuell eingestellte Sprache für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * @return
+     */
+    public ObjectProperty<Language> languageProperty()
+    {
+        return language;
+    }
+
+    /**
+     * Stellt den aktuellen eingestellten Fenster- oder Vollbildmodus für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * @return
+     */
+    // TODO bind bidirectional
+    public BooleanProperty fullscreenProperty()
     {
         return fullscreen;
     }
 
+    /**
+     * Stellt die aktuell eingestellte Hauptlautstärke zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * @return
+     */
     // TODO bind bidirectional
     public IntegerProperty volumeMasterProperty()
     {
         return volumeMaster;
     }
 
+    /**
+     * Stellt die aktuell eingestellte Lautstärke der Musik für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * @return
+     */
     // TODO bind bidirectional
     public IntegerProperty volumeMusicProperty()
     {
         return volumeMusic;
     }
 
+    /**
+     * Stellt die aktuell eingestellte Lautstärke der Soundeffekte für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * @return
+     */
     // TODO bind bidirectional
     public IntegerProperty volumeSFXProperty()
     {
