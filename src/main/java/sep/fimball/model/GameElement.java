@@ -10,10 +10,10 @@ public class GameElement
 {
     private ObjectProperty<Vector2> position;
     private DoubleProperty rotation;
-    private ObjectProperty<Animation> animation;
     private List<Collider> colliders;
     private IntegerProperty hitCounter;
     private IntegerProperty pointReward;
+    private StringProperty currentAnimationFrame;
 
     public GameElement(PlacedElement element)
     {
@@ -55,29 +55,21 @@ public class GameElement
         this.rotation.set(rotation);
     }
 
-    public Animation getAnimation()
-    {
-        return animation.get();
-    }
-
-    public ReadOnlyObjectProperty<Animation> animationProperty()
-    {
-        return animation;
-    }
-
-    public void setAnimation(Animation animation)
-    {
-        this.animation.set(animation);
-    }
-
     public List<Collider> getColliders()
     {
         return colliders;
+    }
+
+    public StringPropery currentAnimationFrameProperty()
+    {
+        return currentAnimationFrame;
     }
 
     public void OnCollision(CollisionEventArgs args)
     {
         //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
         hitCounter.set(hitCounter.get() + 1);
+
+        //Todo: trigger animation
     }
 }

@@ -7,45 +7,42 @@ import sep.fimball.general.data.Vector2;
  */
 public class Element
 {
-    public class GreenprintCollider
+    public String editorName;
+    public String editorDescription;
+    public double rotationAccuracy;
+    public Collider[] colliders;
+
+    public class Collider
     {
-        public class PhysicsObjectPolygon
+        public Polygon[] polygons;
+        public Circle[] circles;
+        public AnimationObject[] animations;
+        public ForceObject[] forces;
+
+        public class Polygon
         {
-            public String type;
             public boolean onGround;
             public Vector2[] points;
         }
 
-        public class PhysicsObjectCircle
+        public class Circle
         {
-            public String type;
             public boolean onGround;
             public double x, y;
             public double radius;
         }
 
-        public String name;
-        public PhysicsObjectPolygon[] physicsPolygons;
-        public PhysicsObjectCircle[] physicsCircles;
-    }
+        public class AnimationObject
+        {
+            public int frameCount;
+            public double duration;
+            public String frameName;
+        }
 
-    public class AnimationObject
-    {
-        public int frameCount;
-        public double duration;
-        public String frameName;
+        public class ForceObject
+        {
+            public String forceType;
+            public double strength;
+        }
     }
-
-    public class ForceObject
-    {
-        public String forceType;
-        public double strength;
-    }
-
-    public String editorName;
-    public String editorDescription;
-    public double rotationAccuracy;
-    public GreenprintCollider[] colliders;
-    public AnimationObject[] animations;
-    public ForceObject[] forces;
 }

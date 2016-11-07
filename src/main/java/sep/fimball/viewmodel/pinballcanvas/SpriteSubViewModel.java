@@ -1,7 +1,6 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
-import sep.fimball.model.Animation;
 import sep.fimball.model.GameElement;
 import sep.fimball.general.data.Vector2;
 
@@ -12,8 +11,7 @@ public class SpriteSubViewModel
 {
     private ObjectProperty<Vector2> position;
     private DoubleProperty rotation;
-    private ObjectProperty<Animation> animation;
-    private StringProperty framePath;
+    private StringProperty animationFramePath;
     private BooleanProperty isSelected;
 
     public SpriteSubViewModel(GameElement baseElement)
@@ -22,12 +20,10 @@ public class SpriteSubViewModel
         position.bind(baseElement.positionProperty());
         rotation = new SimpleDoubleProperty();
         rotation.bind(baseElement.rotationProperty());
-        animation = new SimpleObjectProperty<>();
-        animation.bind(baseElement.animationProperty());
-        isSelected = new SimpleBooleanProperty(false);
+        animationFramePath = new SimpleStringProperty();
+        animationFramePath.bind(baseElement.animationProperty());
 
-        // TODO animatino stuff (put that into controller maybe?)
-        framePath = new SimpleStringProperty();
+        isSelected = new SimpleBooleanProperty(false);
     }
 
     public ReadOnlyObjectProperty<Vector2> positionProperty()
@@ -40,9 +36,9 @@ public class SpriteSubViewModel
         return rotation;
     }
 
-    public ReadOnlyStringProperty framePathProperty()
+    public ReadOnlyStringProperty animationFramePathProperty()
     {
-        return framePath;
+        return animationFramePath;
     }
 
     public ReadOnlyBooleanProperty isSelectedProperty()

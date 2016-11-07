@@ -23,8 +23,8 @@ public class SpriteSubView
     {
         this.viewModel = viewModel;
 
-        viewModel.framePathProperty().addListener((observable, oldValue, newValue) -> loadImage(newValue));
-        loadImage(viewModel.framePathProperty().getValue());
+        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> loadImage(newValue));
+        loadImage(viewModel.animationFramePathProperty().getValue());
 
         rotationProperty = new SimpleDoubleProperty();
         rotationProperty.bind(viewModel.rotationProperty());
