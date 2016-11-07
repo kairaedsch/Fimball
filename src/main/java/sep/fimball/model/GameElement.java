@@ -13,7 +13,7 @@ public class GameElement
     private List<Collider> colliders;
     private IntegerProperty hitCounter;
     private IntegerProperty pointReward;
-    private StringProperty currentAnimationFrame;
+    private Animation currentAnimation;
 
     public GameElement(PlacedElement element)
     {
@@ -22,7 +22,15 @@ public class GameElement
 
     public void update()
     {
+        colliders.forEach(Collider::updateAnimation);
+    }
 
+    public void onCollision(CollisionEventArgs args)
+    {
+        //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
+        hitCounter.set(hitCounter.get() + 1);
+
+        //Todo: trigger animation, set currentAnimation
     }
 
     public Vector2 getPosition()
@@ -62,14 +70,6 @@ public class GameElement
 
     public StringProperty currentAnimationFrameProperty()
     {
-        return currentAnimationFrame;
-    }
-
-    public void OnCollision(CollisionEventArgs args)
-    {
-        //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
-        hitCounter.set(hitCounter.get() + 1);
-
-        //Todo: trigger animation
+        return currentAnimation.currentFrameProperty();
     }
 }

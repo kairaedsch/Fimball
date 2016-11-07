@@ -4,11 +4,18 @@ public abstract class Collider
 {
     private WorldLayer layer;
     private PhysicsForce force;
+    private Animation animation;
 
-    public Collider(WorldLayer layer, PhysicsForce force)
+    public Collider(WorldLayer layer, PhysicsForce force, Animation animation)
     {
         this.layer = layer;
         this.force = force;
+        this.animation = animation;
+    }
+
+    public void updateAnimation()
+    {
+        animation.update();
     }
 
     public WorldLayer getLayer()
@@ -16,8 +23,13 @@ public abstract class Collider
         return layer;
     }
 
-    public PhysicsForce getColliderType()
+    public PhysicsForce getForce()
     {
         return force;
+    }
+
+    public Animation getAnimation()
+    {
+        return animation;
     }
 }

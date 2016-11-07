@@ -9,16 +9,16 @@ import java.util.List;
  */
 public class PolygonCollider extends Collider
 {
-    private List<Vector2> vertecies;
+    private List<Vector2> vertices;
 
-    public PolygonCollider(List<Vector2> vertecies, WorldLayer layer, PhysicsForce colliderType)
+    public PolygonCollider(List<Vector2> vertices, WorldLayer layer, PhysicsForce force, Animation animation)
     {
-        super(layer, colliderType);
-        this.vertecies = vertecies;
+        super(layer, force, animation);
+        this.vertices = vertices;
     }
 
-    public List<Vector2> getVertecies()
+    public List<Vector2> getVertices()
     {
-        return vertecies;
+        return vertices;
     }
 }

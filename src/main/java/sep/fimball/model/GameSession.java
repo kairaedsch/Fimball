@@ -7,6 +7,7 @@ public class GameSession
     private PinballTable table;
     private int tiltCounter;
     private boolean paused;
+    private PhysicsHandler physicsHandler;
 
     public GameSession()
     {
@@ -28,6 +29,20 @@ public class GameSession
             table.loadWorld();
 
         table.getWorld().startTimeline();
+
+        physicsHandler = new PhysicsHandler(table.getWorld());
+    }
+
+    public void pauseAll()
+    {
+        table.getWorld().stopTimeline();
+        physicsHandler.stopTicking();
+    }
+
+    public void continueAll()
+    {
+        table.getWorld().startTimeline();
+        physicsHandler.startTicking();
     }
 
     public Player getCurrentPlayer()
