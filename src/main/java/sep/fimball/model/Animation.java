@@ -1,5 +1,6 @@
 package sep.fimball.model;
 
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -21,7 +22,7 @@ public class Animation
         // move to next frame logic etc.
     }
 
-    public StringProperty currentFrameProperty()
+    public ReadOnlyStringProperty currentFrameProperty()
     {
         return currentFrame;
     }
