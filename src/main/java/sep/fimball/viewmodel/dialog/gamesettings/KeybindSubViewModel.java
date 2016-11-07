@@ -15,12 +15,12 @@ public class KeybindSubViewModel
     /**
      * Der Name des Flipperautomat-Elements, welches bedient werden will.
      */
-    private StringProperty keybindName;
+    private StringProperty elementName;
 
     /**
      * Der Name der Taste, welche das Flipperautomaten-Element bedienen will.
      */
-    private StringProperty keybindValue;
+    private StringProperty key;
 
     /**
      * Erstellt ein neues KeybindSubViewModel.
@@ -30,9 +30,9 @@ public class KeybindSubViewModel
     // TODO Button is given over
     public KeybindSubViewModel(KeyBinding keyBinding, KeyCode keyCode)
     {
-        keybindName = new SimpleStringProperty();
-        keybindValue = new SimpleStringProperty();
-        keybindName.bind(Bindings.concat(keyBinding.toString()));
+        elementName = new SimpleStringProperty();
+        key = new SimpleStringProperty();
+        elementName.bind(Bindings.concat(keyBinding.toString()));
     }
 
     /**
@@ -48,17 +48,17 @@ public class KeybindSubViewModel
      * Stellt den Name des Flipperautomat-Elements, welches bedient werden will, für die View zu Verfügung.
      * @return
      */
-    public ReadOnlyStringProperty keybindNameProperty()
+    public ReadOnlyStringProperty elementNameProperty()
     {
-        return keybindName;
+        return elementName;
     }
 
     /**
      * Stellt den Name der Taste, welche das Flipperautomaten-Element bedienen will, für die View zu Verfügung.
      * @return
      */
-    public ReadOnlyStringProperty keybindValueProperty()
+    public ReadOnlyStringProperty keyProperty()
     {
-        return keybindValue;
+        return key;
     }
 }

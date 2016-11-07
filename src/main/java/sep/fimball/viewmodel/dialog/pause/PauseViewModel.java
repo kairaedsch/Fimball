@@ -9,27 +9,43 @@ import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Created by kaira on 05.11.2016.
+ * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinnball zu Verfügung und ermöglicht deren Fortsetzung oder Abbrechung.
  */
 public class PauseViewModel extends DialogViewModel
 {
+    /**
+     * Eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält.
+     */
     private ListProperty<Highscore> playerHighscores;
 
+    /**
+     * Erstellt ein neues PauseViewModel.
+     */
     public PauseViewModel()
     {
         super(DialogType.PAUSE);
     }
 
+    /**
+     * Führt den Benutzer zurück ins Hauptmenu.
+     */
     public void abortClicked()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
+    /**
+     * Führt den Benutzer zurück ins Spiel.
+     */
     public void okClicked()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }
 
+    /**
+     * Stellt eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält, zu Verfügung.
+     * @return
+     */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;

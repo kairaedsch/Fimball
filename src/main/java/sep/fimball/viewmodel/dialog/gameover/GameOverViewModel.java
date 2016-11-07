@@ -73,7 +73,7 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, zu Verfügung.
+     * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, für die View zu Verfügung.
      * @return
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
