@@ -2,11 +2,29 @@ package sep.fimball.model;
 
 import sep.fimball.general.data.Vector2;
 
+/**
+ * Implementierung eines Colliders, die die Form eines Kreises hat.
+ */
 public class CircleCollider extends Collider
 {
+    /**
+     * Mittelpunkt des Kreises, der den Collider formt.
+     */
     private Vector2 position;
+
+    /**
+     * Radius des Kreises, der den Collider formt.
+     */
     private double radius;
 
+    /**
+     * Erstellt einen neuen Collider in Kreisform.
+     * @param position
+     * @param radius
+     * @param layer
+     * @param force
+     * @param animation
+     */
     public CircleCollider(Vector2 position, double radius, WorldLayer layer, PhysicsForce force, Animation animation)
     {
         super(layer, force, animation);
