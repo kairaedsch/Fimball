@@ -5,10 +5,10 @@ public abstract class Collider
     private WorldLayer layer;
     private PhysicsForce force;
 
-    public Collider(WorldLayer layer, ForceType colliderType)
+    public Collider(WorldLayer layer, PhysicsForce force)
     {
         this.layer = layer;
-        this.colliderType = colliderType;
+        this.force = force;
     }
 
     public WorldLayer getLayer()
@@ -16,8 +16,8 @@ public abstract class Collider
         return layer;
     }
 
-    public ForceType getColliderType()
+    public PhysicsForce getColliderType()
     {
-        return colliderType;
+        return force;
     }
 }
