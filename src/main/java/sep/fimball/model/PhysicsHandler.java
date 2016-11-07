@@ -32,6 +32,11 @@ public class PhysicsHandler
             public void run()
             {
                 // TODO check bufferedKeyEvents
+                // TODO check Collisions
+                // TODO Notify GameElements about collisions
+                // TODO Solve collisions
+                // TODO Check if ball is lost
+                // TODO Simulate ball movement
             }
         };
     }

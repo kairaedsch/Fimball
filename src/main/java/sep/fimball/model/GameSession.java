@@ -84,6 +84,7 @@ public class GameSession
         // TODO - implement GameSession.onBallLost
         // TODO - switch currentPlayer to next player in list
         // TODO - if no player has balls left, switch to game over
+        // TODO - remove one ball from currently active player if he has balls left
         throw new UnsupportedOperationException();
     }
 
