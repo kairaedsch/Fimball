@@ -11,7 +11,7 @@ public class PolygonCollider extends Collider
 {
     private List<Vector2> vertecies;
 
-    public PolygonCollider(List<Vector2> vertecies, WorldLayer layer, ColliderType colliderType)
+    public PolygonCollider(List<Vector2> vertecies, WorldLayer layer, ForceType colliderType)
     {
         super(layer, colliderType);
         this.vertecies = vertecies;

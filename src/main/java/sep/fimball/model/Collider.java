@@ -3,9 +3,9 @@ package sep.fimball.model;
 public abstract class Collider
 {
     private WorldLayer layer;
-    private ColliderType colliderType;
+    private PhysicsForce force;
 
-    public Collider(WorldLayer layer, ColliderType colliderType)
+    public Collider(WorldLayer layer, ForceType colliderType)
     {
         this.layer = layer;
         this.colliderType = colliderType;
@@ -16,7 +16,7 @@ public abstract class Collider
         return layer;
     }
 
-    public ColliderType getColliderType()
+    public ForceType getColliderType()
     {
         return colliderType;
     }

@@ -7,7 +7,7 @@ public class CircleCollider extends Collider
     private Vector2 position;
     private double radius;
 
-    public CircleCollider(Vector2 position, double radius, WorldLayer layer, ColliderType colliderType)
+    public CircleCollider(Vector2 position, double radius, WorldLayer layer, ForceType colliderType)
     {
         super(layer, colliderType);
         this.position = position;
