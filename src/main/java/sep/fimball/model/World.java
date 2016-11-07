@@ -34,6 +34,8 @@ public class World
             //TODO check if PlacedElement is Flipper/Plunger or ball and assign
             //TODO if a ball is already set and another one gets added -> unknown behaviour
             addPlacedElement(pe);
+
+        // TODO generate walls around playfield
     }
 
     public void notifyToRedraw(Observer observer)
