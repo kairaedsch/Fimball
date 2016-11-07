@@ -34,7 +34,7 @@ public class Animation
     }
 
     /**
-     * Wird kurz vor dem Zeichen des Bildes aufgerufen, um das aktuell ausgewählte Bild zu aktualisieren.
+     * Wird kurz vor dem Zeichen des Automaten im Canvas aufgerufen, um den Pfad zum aktuell ausgewählte Bild zu aktualisieren.
      */
     public void update()
     {
