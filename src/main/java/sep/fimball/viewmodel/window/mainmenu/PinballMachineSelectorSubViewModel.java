@@ -12,7 +12,7 @@ public class PinballMachineSelectorSubViewModel
     private StringProperty imagePath;
     private IntegerProperty blueprintTableId;
 
-    public PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
+    PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
     {
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();

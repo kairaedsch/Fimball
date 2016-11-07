@@ -22,6 +22,8 @@ import sep.fimball.viewmodel.window.WindowViewModel;
  */
 public class SceneManagerView
 {
+    private SceneManagerViewModel sceneManagerViewModel;
+
     private Stage stage;
     private Scene scene;
     private StackPane root;
@@ -50,7 +52,7 @@ public class SceneManagerView
         this.stage.setScene(scene);
         this.stage.show();
 
-        SceneManagerViewModel sceneManagerViewModel = SceneManagerViewModel.getInstance();
+        sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
         updateContent(sceneManagerViewModel.windowViewModelProperty().get());
@@ -62,7 +64,7 @@ public class SceneManagerView
     @FXML //TODO write in fxml file
     protected void onKeyEvent(KeyEvent event)
     {
-        SceneManagerViewModel.getInstance().onKeyEvent(event);
+        sceneManagerViewModel.onKeyEvent(event);
     }
 
     private void updateContent(WindowViewModel windowViewModel)

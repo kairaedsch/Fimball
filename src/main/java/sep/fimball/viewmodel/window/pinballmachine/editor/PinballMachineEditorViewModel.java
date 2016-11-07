@@ -8,7 +8,6 @@ import sep.fimball.general.tool.ListPropertyBinder;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.ElementManager;
 import sep.fimball.model.blueprint.PinballMachine;
-import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -49,11 +48,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new GameViewModel(new GameSession()));
+        sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
 
     public void settingsClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+        sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 }

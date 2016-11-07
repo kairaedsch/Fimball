@@ -5,5 +5,10 @@ package sep.fimball.viewmodel;
  */
 public abstract class ViewModel
 {
+    protected SceneManagerViewModel sceneManager;
 
+    public void setSceneManager(SceneManagerViewModel sceneManager)
+    {
+        this.sceneManager = sceneManager;
+    }
 }

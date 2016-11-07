@@ -3,7 +3,6 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Language;
-import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -60,7 +59,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     public void okClicked(int value)
     {
-        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
+        sceneManager.setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyObjectProperty<Language> languageProperty()

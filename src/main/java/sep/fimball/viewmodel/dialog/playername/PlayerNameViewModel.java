@@ -42,12 +42,12 @@ public class PlayerNameViewModel extends DialogViewModel
 
     public void startClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new GameViewModel(new GameSession()));
+        sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
 
     public void abortClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
+        sceneManager.setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntrysProperty()

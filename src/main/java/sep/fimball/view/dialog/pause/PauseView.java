@@ -18,7 +18,6 @@ public class PauseView  extends DialogView<PauseViewModel>
     @Override
     public void setViewModel(PauseViewModel pauseViewModel)
     {
-
         this.pauseViewModel = pauseViewModel;
     }
 

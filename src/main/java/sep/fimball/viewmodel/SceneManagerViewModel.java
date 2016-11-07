@@ -13,39 +13,35 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
  */
 public class SceneManagerViewModel
 {
-    private static SceneManagerViewModel singletonInstance;
-
-    public static SceneManagerViewModel getInstance()
-    {
-        if(singletonInstance == null) singletonInstance = new SceneManagerViewModel();
-        return singletonInstance;
-    }
-
     private ObjectProperty<WindowViewModel> windowViewModel;
     private ObjectProperty<DialogViewModel> dialogViewModel;
 
     private InputManagerViewModel inputManager;
 
-    private SceneManagerViewModel()
+    public SceneManagerViewModel()
     {
-        windowViewModel = new SimpleObjectProperty<>(new MainMenuViewModel());
-        dialogViewModel = new SimpleObjectProperty<>(new EmptyViewModel());
+        windowViewModel = new SimpleObjectProperty<>();
+        dialogViewModel = new SimpleObjectProperty<>();
+        setWindow(new MainMenuViewModel());
+        setDialog(new EmptyViewModel());
         inputManager = new InputManagerViewModel();
     }
 
     public void onKeyEvent(KeyEvent event)
     {
-        //inputManager.onKeyEvent(event, windowType.get());
+        inputManager.onKeyEvent(event, windowViewModel.get().getWindowType());
     }
 
     public void setWindow(WindowViewModel windowViewModel)
     {
+        windowViewModel.setSceneManager(this);
         this.windowViewModel.set(windowViewModel);
         this.dialogViewModel.set(null);
     }
 
     public void setDialog(DialogViewModel dialogViewModel)
     {
+        dialogViewModel.setSceneManager(this);
         this.dialogViewModel.set(dialogViewModel);
     }
 

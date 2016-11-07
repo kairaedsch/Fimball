@@ -4,23 +4,24 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
-import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
  * Created by kaira on 01.11.2016.
  */
 public class PinballMachineInfoSubViewModel
 {
+    private MainMenuViewModel mainMenu;
+
     private PinballMachine pinballMachine;
 
     private StringProperty name;
     private StringProperty imagePath;
     private ListProperty<Highscore> highscoreList;
 
-    public PinballMachineInfoSubViewModel(PinballMachine pinballMachine)
+    PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
+        this.mainMenu = mainMenu;
+
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -28,7 +29,7 @@ public class PinballMachineInfoSubViewModel
         update(pinballMachine);
     }
 
-    public void update(PinballMachine pinballMachine)
+    void update(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
 
@@ -39,12 +40,12 @@ public class PinballMachineInfoSubViewModel
 
     public void playClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(new PlayerNameViewModel(pinballMachine));
+        mainMenu.playClicked(pinballMachine);
     }
 
     public void editClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+        mainMenu.editClicked(pinballMachine);
     }
 
     public ReadOnlyStringProperty nameProperty()

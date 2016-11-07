@@ -3,7 +3,6 @@ package sep.fimball.viewmodel.dialog.pause;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -23,12 +22,12 @@ public class PauseViewModel extends DialogViewModel
 
     public void abortClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new MainMenuViewModel());
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     public void okClicked()
     {
-        SceneManagerViewModel.getInstance().setDialog(new EmptyViewModel());
+        sceneManager.setDialog(new EmptyViewModel());
     }
 
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()

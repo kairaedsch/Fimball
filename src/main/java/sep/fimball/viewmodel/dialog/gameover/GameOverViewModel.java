@@ -5,7 +5,6 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
-import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
@@ -34,13 +33,13 @@ public class GameOverViewModel extends DialogViewModel
 
     public void playAgainClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new MainMenuViewModel());
-        SceneManagerViewModel.getInstance().setDialog(new PlayerNameViewModel(pinballMachine));
+        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.setDialog(new PlayerNameViewModel(pinballMachine));
     }
 
     public void okClicked()
     {
-        SceneManagerViewModel.getInstance().setWindow(new MainMenuViewModel());
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     public ReadOnlyListProperty<Highscore> machineHighscoresProperty()
