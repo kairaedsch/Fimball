@@ -15,29 +15,37 @@ import java.util.TimerTask;
  */
 public class PhysicsHandler
 {
-    /*
+    /**
      * Der PhysikTimer beginnt ohne Verzögerung wenn er gestartet wird
      */
     private final int TIMER_DELAY = 0;
-    /*
+
+    /**
      * Gibt an nach wie vielen Millisekunden Wartezeit die run Methode erneut ausgeführt wrid
      */
     private final int TICK_RATE = 1000 / 60;
-    /*
+
+    /**
      * Eine Referenz auf die Welt auf welcher die physikalischen Berechnungen ausgeführt werden
      */
     private World world;
-    /*
+
+    /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt
      */
     private Timer physicTimer;
     private TimerTask timerTask;
-    /*
+    /**
      * Hier werden alle Tastendrücke die vom InputManager an den PhysikHandler mithilfe des Observer Pattern gesendet
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Threadübergreifenden Kommunikation gedacht ist.
      */
     private List<KeyObserverEventArgs> bufferedKeyEvents;
+
+    /**
+     * Eine Liste aller GameElements
+     */
+    private List<PhysicsElement> physicsElements;
 
     /**
      * Erzeugt einen PhysicsHandler
@@ -54,6 +62,14 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
+
+        physicsElements = new ArrayList<>();
+        world.gameElementsProperty().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
+        world.gameElementsProperty().addListener((observableValue, gameElements, t1) ->
+        {
+            physicsElements.clear();
+            gameElements.forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
+        });
 
         timerTask = new TimerTask()
         {

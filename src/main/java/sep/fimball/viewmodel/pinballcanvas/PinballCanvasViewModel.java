@@ -54,7 +54,7 @@ public class PinballCanvasViewModel
         cameraZoom = new SimpleDoubleProperty();
 
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteSubViewModels, world.getGameElements(), SpriteSubViewModel::new);
+        ListPropertyBinder.bindList(spriteSubViewModels, world.gameElementsProperty(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
         Observer redrawObserver = (o, arg) -> redraw();

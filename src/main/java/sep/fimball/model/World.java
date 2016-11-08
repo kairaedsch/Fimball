@@ -8,9 +8,7 @@ import javafx.util.Duration;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
 import sep.fimball.model.element.Ball;
-import sep.fimball.model.element.Flipper;
 import sep.fimball.model.element.GameElement;
-import sep.fimball.model.element.Plunger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -19,8 +17,6 @@ public class World
 {
     private final double TIMELINE_TICK = 1 / 60D;
     private ListProperty<GameElement> gameElements;
-    private ListProperty<Flipper> flipperListProperty;
-    private ListProperty<Plunger> plungerListProperty;
     private ObjectProperty<Ball> ballProperty;
     private Timeline gameLoop;
     private KeyFrame keyFrame;
@@ -30,8 +26,6 @@ public class World
     {
         observable = new Observable();
         gameElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        flipperListProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
-        plungerListProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
         ballProperty = new SimpleObjectProperty<>();
 
         for (PlacedElement pe : elementList.elementsProperty().get().values())
@@ -71,22 +65,12 @@ public class World
         //TODO if a ball is already set and another one gets added -> unknown behaviour
     }
 
-    public ReadOnlyListProperty<GameElement> getGameElements()
+    public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
     }
 
-    public ReadOnlyListProperty<Flipper> getFlipperListProperty()
-    {
-        return flipperListProperty;
-    }
-
-    public ReadOnlyListProperty<Plunger> getPlungerListProperty()
-    {
-        return plungerListProperty;
-    }
-
-    public ReadOnlyObjectProperty<Ball> getBallProperty()
+    public ReadOnlyObjectProperty<Ball> ballProperty()
     {
         return ballProperty;
     }
