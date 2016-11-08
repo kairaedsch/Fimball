@@ -1,5 +1,8 @@
 package sep.fimball.model;
 
+import sep.fimball.general.data.Highscore;
+import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.PinballMachineManager;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -21,11 +24,6 @@ public class GameSession
     private Player currentPlayer;
 
     /**
-     * Der Flipperautomat auf dem aktuell gespielt wird.
-     */
-    private PinballTable table;
-
-    /**
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
      */
     private int tiltCounter;
@@ -39,6 +37,16 @@ public class GameSession
      * Referenz zum PhysicsHandler, der die Bewegung des Balls auf dem Spielfeld und andere physikalische Eigenschaften berechnet.
      */
     private PhysicsHandler physicsHandler;
+
+    /**
+     * Die Spielwelt des Flipperautomaten.
+     */
+    private World world;
+
+    /**
+     * TODO
+     */
+    private PinballMachine machineBlueprint;
 
     /**
      * Erstellt eine neue GameSession.
@@ -62,12 +70,11 @@ public class GameSession
      */
     public void startNewGame()
     {
-        if (table.getWorld() == null)
-            table.loadWorld();
+        if (world == null)
+            world = new World(machineBlueprint.getTableElementList());
 
-        table.getWorld().startTimeline();
-
-        physicsHandler = new PhysicsHandler(table.getWorld());
+        physicsHandler = new PhysicsHandler(world);
+        startAll();
     }
 
     /**
@@ -76,16 +83,16 @@ public class GameSession
     public void pauseAll()
     {
         paused = true;
-        table.getWorld().stopTimeline();
+        world.stopTimeline();
         physicsHandler.stopTicking();
     }
 
     /**
-     * Setzt das Spiel fort, nachdem dieses Pausiert wurde.
+     * Startet das Spiel oder setzt es fort, nachdem dieses Pausiert wurde.
      */
-    public void continueAll()
+    public void startAll()
     {
-        table.getWorld().startTimeline();
+        world.startTimeline();
         physicsHandler.startTicking();
         paused = false;
     }
@@ -99,6 +106,17 @@ public class GameSession
         // TODO - switch currentPlayer to next player in list
         // TODO - if no player has balls left, switch to game over
         throw new UnsupportedOperationException();
+    }
+
+    public void saveHighscore(Highscore score)
+    {
+        machineBlueprint.addHighscore(score);
+    }
+
+    private void addTiltCounter()
+    {
+        tiltCounter++;
+        // tilt logic etc.
     }
 
     public Player getCurrentPlayer()
@@ -116,17 +134,6 @@ public class GameSession
         this.players = players;
     }
 
-    public PinballTable getTable()
-    {
-        return table;
-    }
-
-    private void addTiltCounter()
-    {
-        tiltCounter++;
-        // tilt logic etc.
-    }
-
     public int getTiltCounter()
     {
         return tiltCounter;
@@ -141,4 +148,11 @@ public class GameSession
     {
         this.paused = paused;
     }
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public void setMachineBlueprint(int machineId) { machineBlueprint = PinballMachineManager.getInstance().tableBlueprintsProperty().get(machineId); }
 }
