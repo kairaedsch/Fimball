@@ -1,6 +1,7 @@
 package sep.fimball.view.dialog.playername;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameEntrySubViewModel;
@@ -12,18 +13,22 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
 {
     @FXML
     private TextField nameTextField;
+    @FXML
+    private Button deleteButton;
 
     private PlayerNameEntrySubViewModel playerNameEntrySubViewModel;
 
     @Override
     public void setViewModel(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {
+        this.playerNameEntrySubViewModel = playerNameEntrySubViewModel;
         nameTextField.textProperty().bindBidirectional(playerNameEntrySubViewModel.playerNameProperty());
+        deleteButton.visibleProperty().bind(playerNameEntrySubViewModel.isDeleteAbleProperty());
     }
 
     @FXML
     private void deletePlayerClicked()
     {
-
+        playerNameEntrySubViewModel.deleteClicked();
     }
 }

@@ -25,7 +25,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     private StringProperty machineName;
 
     /**
-     * Erstllt ein neues PinballMachineSettingsViewModel.
+     * Erstellt ein neues PinballMachineSettingsViewModel.
      * @param pinballMachine
      */
     public PinballMachineSettingsViewModel(PinballMachine pinballMachine)

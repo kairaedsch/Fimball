@@ -36,7 +36,7 @@ public class PlayerNameViewModel extends DialogViewModel
         this.pinballMachine = pinballMachine;
 
         playerNameEntrys = new SimpleListProperty<>(FXCollections.observableArrayList());
-        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player 1", true));
+        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player 1"));
     }
 
     /**
@@ -53,7 +53,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void addPlayerClicked()
     {
-        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntrys.size() + 1), false));
+        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntrys.size() + 1)));
     }
 
     /**

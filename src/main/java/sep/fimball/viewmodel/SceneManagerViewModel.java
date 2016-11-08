@@ -51,7 +51,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * 
+     * Ändert das aktuelle WindowViewModel auf ein neue, welches übergeben wird.
      * @param windowViewModel
      */
     public void setWindow(WindowViewModel windowViewModel)
@@ -61,17 +61,29 @@ public class SceneManagerViewModel
         this.dialogViewModel.set(null);
     }
 
+    /**
+     * Ändert das aktuelle DialogViewModel auf ein neue, welches übergeben wird.
+     * @param dialogViewModel
+     */
     public void setDialog(DialogViewModel dialogViewModel)
     {
         dialogViewModel.setSceneManager(this);
         this.dialogViewModel.set(dialogViewModel);
     }
 
+    /**
+     * Stellt das aktuelle WindowViewModel für die View zu Verfügung.
+     * @return
+     */
     public ObjectProperty<WindowViewModel> windowViewModelProperty()
     {
         return windowViewModel;
     }
 
+    /**
+     * Stellt das aktuelle DialogViewModel für die View zu Verfügung.
+     * @return
+     */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
         return dialogViewModel;
