@@ -6,31 +6,57 @@ import sep.fimball.model.blueprint.PlacedElement;
 
 import java.util.List;
 
+/**
+ * Stellt ein Spielelement auf einem Flipperautomaten dar.
+ */
 public class GameElement
 {
+    /**
+     * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
+     */
     private ObjectProperty<Vector2> position;
+
+    /**
+     * Die Rotation in Grad, um die das Element gedreht ist.
+     */
     private DoubleProperty rotation;
+
+    /**
+     * Die Liste aller Collider, die dieses Objekt enthält. Diese bestimmen die Flächen an denen der Ball abprallt, sowie weitere Eigenschaften wie Beschleunigung des Balls o.ä.
+     */
     private List<Collider> colliders;
+
+    /**
+     * Diese Zahl zählt wie oft das Element in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
+     */
     private IntegerProperty hitCounter;
     private IntegerProperty pointReward;
     private Animation currentAnimation;
 
+    /**
+     * Erstellt ein neues GameElement.
+     * @param element
+     */
     public GameElement(PlacedElement element)
     {
         // TODO convert
     }
 
+    /**
+     * Wird kurz vor dem Zeichen des Automaten aufgerufen, um die Animation in den Collidern zu aktualisieren. Außerdem werden Informationen die der Physik-Thread diesem Objekt übergeben hat abgearbeitet, wie z.B. Kollisionen.
+     */
     public void update()
     {
         colliders.forEach(Collider::updateAnimation);
+        // TODO: read collision events from physics thread
     }
 
-    public void onCollision(CollisionEventArgs args)
+    private void onCollision(CollisionEventArgs args)
     {
         //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
         hitCounter.set(hitCounter.get() + 1);
 
-        //Todo: trigger animation, set currentAnimation
+        //Todo: trigger animation, set currentAnimation, start that animation
     }
 
     public Vector2 getPosition()

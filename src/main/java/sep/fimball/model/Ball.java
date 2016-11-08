@@ -4,7 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.PlacedElement;
 
 /**
- * Repräsentiert einen Spielball auf dem Spielfeld eines Flipperautomaten.
+ * Repräsentiert einen Spielball auf dem Spielfeld eines Flipperautomaten. Der Ball kann sich bewegen und rotieren.
  */
 public class Ball extends GameElement
 {
