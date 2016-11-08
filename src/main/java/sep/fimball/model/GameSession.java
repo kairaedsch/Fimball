@@ -1,14 +1,43 @@
 package sep.fimball.model;
 
+/**
+ * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
+ */
 public class GameSession
 {
+    /**
+     * Array der Spieler, die am aktuellen Spiel teilnehmen.
+     */
     private Player[] players;
+
+    /**
+     * Der Spieler, der aktuell den Flipperautomaten bedient.
+     */
     private Player currentPlayer;
+
+    /**
+     * Der Flipperautomat auf dem aktuell gespielt wird.
+     */
     private PinballTable table;
+
+    /**
+     * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
+     */
     private int tiltCounter;
+
+    /**
+     * Beschreibt, ob das Spiel pausiert ist.
+     */
     private boolean paused;
+
+    /**
+     * Referenz zum PhysicsHandler, der die Bewegung des Balls auf dem Spielfeld und andere physikalische Eigenschaften berechnet.
+     */
     private PhysicsHandler physicsHandler;
 
+    /**
+     * Erstellt eine neue GameSession.
+     */
     public GameSession()
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
@@ -23,6 +52,9 @@ public class GameSession
         });
     }
 
+    /**
+     * Startet ein neues Spiel auf dem Flipperautomaten, indem der erste Spieler geladen und die Physikberechnung gestartet wird.
+     */
     public void startNewGame()
     {
         if (table.getWorld() == null)
@@ -33,16 +65,35 @@ public class GameSession
         physicsHandler = new PhysicsHandler(table.getWorld());
     }
 
+    /**
+     * Pausiert das Spiel, in dem die Physikberechnung und das Zeichnen des Canvas gestoppt wird.
+     */
     public void pauseAll()
     {
+        paused = true;
         table.getWorld().stopTimeline();
         physicsHandler.stopTicking();
     }
 
+    /**
+     * Setzt das Spiel fort, nachdem dieses Pausiert wurde.
+     */
     public void continueAll()
     {
         table.getWorld().startTimeline();
         physicsHandler.startTicking();
+        paused = false;
+    }
+
+    /**
+     * Wird aufgerufen, nachdem der Spieler einen Ball verloren hat. Falls möglich wird zum nächsten Spieler gewechselt und ein neuer Ball gesetzt. Falls keine Spieler mehr Bälle haben, wird zum Game-Over-Bildschirm gewechselt.
+     */
+    public void onBallLost()
+    {
+        // TODO - implement GameSession.onBallLost
+        // TODO - switch currentPlayer to next player in list
+        // TODO - if no player has balls left, switch to game over
+        throw new UnsupportedOperationException();
     }
 
     public Player getCurrentPlayer()
@@ -74,18 +125,6 @@ public class GameSession
     public int getTiltCounter()
     {
         return tiltCounter;
-    }
-
-    /**
-     * gets called by physics when a ball is lost
-     */
-    public void onBallLost()
-    {
-        // TODO - implement GameSession.onBallLost
-        // TODO - switch currentPlayer to next player in list
-        // TODO - if no player has balls left, switch to game over
-        // TODO - remove one ball from currently active player if he has balls left
-        throw new UnsupportedOperationException();
     }
 
     public boolean getPaused()
