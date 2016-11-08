@@ -10,6 +10,7 @@ public class Element
     public String editorName;
     public String editorDescription;
     public double rotationAccuracy;
+    // TODO make enum
     public String elementType;
     public Collider[] colliders;
 
@@ -17,8 +18,9 @@ public class Element
     {
         public Polygon[] polygons;
         public Circle[] circles;
-        public AnimationObject[] animations;
-        public ForceObject[] forces;
+        public AnimationObject animations;
+        public ForceObject forces;
+        public boolean givesPoints;
 
         public class Polygon
         {
