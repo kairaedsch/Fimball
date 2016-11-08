@@ -12,16 +12,16 @@ import java.util.Map;
 /**
  * Created by kaira on 05.11.2016.
  */
-public class ParentNodeBinder
+public class ViewModelListToPaneBinder
 {
-    public static <ViewModelT> void bindListToSimpleBoundParent(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType)
+    public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType)
     {
-        ParentNodeBinder.<ViewBoundToViewModel<ViewModelT>, ViewModelT>bindList(parentNode, listPropertyViewModel, viewType, ViewBoundToViewModel::setViewModel);
+        ViewModelListToPaneBinder.<ViewBoundToViewModel<ViewModelT>, ViewModelT>bindViewModelsToViews(parentNode, viewModelList, viewType, ViewBoundToViewModel::setViewModel);
     }
 
-    public static <ViewT, ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
+    public static <ViewT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
     {
-        ParentNodeBinder.bindList(parentNode, listPropertyViewModel, (viewModel) ->
+        ViewModelListToPaneBinder.bindViewModelsToViews(parentNode, viewModelList, (viewModel) ->
         {
             ViewLoader<ViewT> viewLoader = new ViewLoader<>(viewType);
             caller.call(viewLoader.getView(), viewModel);
@@ -29,19 +29,19 @@ public class ParentNodeBinder
         });
     }
 
-    public static <ViewModelT> void bindList(Pane parentNode, ObservableList<ViewModelT> listPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
+    public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
         ListChangeListener<ViewModelT> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for(ViewModelT viewModel : listPropertyViewModel)
+            for(ViewModelT viewModel : viewModelList)
             {
                 parentNode.getChildren().add(viewModelToNodeConverter.convert(viewModel));
             }
         };
 
-        listPropertyViewModel.addListener(listChangeListener);
+        viewModelList.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 

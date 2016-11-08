@@ -13,7 +13,7 @@ import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 public class GameSettingsViewModel extends DialogViewModel
 {
     /**
-     * Die aktuell eingestellten Tasten um diverse Flipperautomat-Element zu bedienen z.b. den rechten Flipperarm.
+     * Die aktuell eingestellten Tasten um diverse Flipperautomat-ElementType zu bedienen z.b. den rechten Flipperarm.
      */
     private ListProperty<KeybindSubViewModel> keybinds;
 
@@ -66,7 +66,7 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellten Tasten um diverse Flipperautomat-Element zu bedienen für die View zu Verfügung.
+     * Stellt die aktuell eingestellten Tasten um diverse Flipperautomat-ElementType zu bedienen für die View zu Verfügung.
      * @return
      */
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()

@@ -1,4 +1,4 @@
-package sep.fimball.general.tool;
+package sep.fimball.general.util;
 
 import javafx.beans.property.ListProperty;
 import javafx.collections.ListChangeListener;
@@ -11,9 +11,9 @@ import java.util.Map;
 /**
  * Created by kaira on 03.11.2016.
  */
-public class ListPropertyBinder
+public class ListPropertyConverter
 {
-    public static <SlaveT, MasterT> void bindList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, ConverterList<SlaveT, MasterT> converter)
+    public static <SlaveT, MasterT> void bindAndConvertList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, ListConverter<SlaveT, MasterT> converter)
     {
         ListChangeListener<MasterT> listChangeListener = (change) ->
         {
@@ -29,7 +29,7 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public static <SlaveT, MasterKeyT, MasterValueT> void bindMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, ConverterMap<SlaveT, MasterKeyT, MasterValueT> converter)
+    public static <SlaveT, MasterKeyT, MasterValueT> void bindAndConvertMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, MapConverter<SlaveT, MasterKeyT, MasterValueT> converter)
     {
         MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
         {
@@ -45,12 +45,12 @@ public class ListPropertyBinder
         listChangeListener.onChanged(null);
     }
 
-    public interface ConverterList<SlaveT, MasterT>
+    public interface ListConverter<SlaveT, MasterT>
     {
         SlaveT convert(MasterT master);
     }
 
-    public interface ConverterMap<SlaveT, MasterKeyT, MasterValueT>
+    public interface MapConverter<SlaveT, MasterKeyT, MasterValueT>
     {
         SlaveT convert(MasterKeyT masterKey, MasterValueT masterValueT);
     }

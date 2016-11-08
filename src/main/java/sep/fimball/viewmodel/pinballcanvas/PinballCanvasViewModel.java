@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.pinballcanvas;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.tool.ListPropertyBinder;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.World;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
@@ -21,12 +21,12 @@ public class PinballCanvasViewModel
     private ListProperty<SpriteSubViewModel> spriteSubViewModels;
 
     /**
-     * Position der Kamera, welche festlegt von welchen Standpunkt aus die Element gezeichnet werden sollen.
+     * Position der Kamera, welche festlegt von welchen Standpunkt aus die ElementType gezeichnet werden sollen.
      */
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Legt fest, wie groß Elemente zu zeichnen sind und legt somit auch fest, wie viele Element der Nutzer sehen kann.
+     * Legt fest, wie groß Elemente zu zeichnen sind und legt somit auch fest, wie viele ElementType der Nutzer sehen kann.
      */
     private DoubleProperty cameraZoom;
 
@@ -54,7 +54,7 @@ public class PinballCanvasViewModel
         cameraZoom = new SimpleDoubleProperty();
 
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(spriteSubViewModels, world.gameElementsProperty(), SpriteSubViewModel::new);
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, world.gameElementsProperty(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
         Observer redrawObserver = (o, arg) -> redraw();

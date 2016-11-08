@@ -21,7 +21,7 @@ public class GameElement
     private ObjectProperty<Vector2> position;
 
     /**
-     * Die Rotation in Grad, um die das Element gedreht ist.
+     * Die Rotation in Grad, um die das ElementType gedreht ist.
      */
     private DoubleProperty rotation;
 
@@ -31,7 +31,7 @@ public class GameElement
     private List<Collider> colliders;
 
     /**
-     * Diese Zahl zählt wie oft das Element in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
+     * Diese Zahl zählt wie oft das ElementType in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
     private IntegerProperty hitCounter;
     private IntegerProperty pointReward;

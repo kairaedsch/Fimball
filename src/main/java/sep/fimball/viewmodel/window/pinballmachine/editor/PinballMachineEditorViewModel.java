@@ -4,9 +4,9 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.tool.ListPropertyBinder;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.GameSession;
-import sep.fimball.model.blueprint.ElementManager;
+import sep.fimball.model.blueprint.ElementTypeManager;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -28,7 +28,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.pinballMachine = pinballMachine;
 
         availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindMap(availableElements, ElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(element));
+        ListPropertyConverter.bindAndConvertMap(availableElements, ElementTypeManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(element));
     }
 
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableElementsProperty()

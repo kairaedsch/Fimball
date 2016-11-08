@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 /**
  * Created by kaira on 03.11.2016.
  */
-public class Element
+public class ElementType
 {
     public String editorName;
     public String editorDescription;

@@ -20,7 +20,7 @@ public abstract class Collider
     private PhysicsForce force;
 
     /**
-     * Animation, die bei Berührung des Balles an diesem Element abgespielt wird. null, falls keine Animation vorhanden.
+     * Animation, die bei Berührung des Balles an diesem ElementType abgespielt wird. null, falls keine Animation vorhanden.
      */
     private Animation animation;
 

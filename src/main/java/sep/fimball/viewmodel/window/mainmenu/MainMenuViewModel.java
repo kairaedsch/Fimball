@@ -5,7 +5,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.tool.ListPropertyBinder;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.model.blueprint.PinballMachineManager;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
@@ -37,7 +37,7 @@ public class MainMenuViewModel extends WindowViewModel
         super(WindowType.MAIN_MENU);
 
         pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(pinballMachine));
+        ListPropertyConverter.bindAndConvertMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(pinballMachine));
 
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
     }

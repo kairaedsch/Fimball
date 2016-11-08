@@ -26,11 +26,11 @@ public enum KeyBinding
      */
     NUDGE_RIGHT,
     /**
-     * Rotiert das ausgewählte Element im Editor um den im Element vorgegebenen Winkel nach rechts.
+     * Rotiert das ausgewählte ElementType im Editor um den im ElementType vorgegebenen Winkel nach rechts.
      */
     EDITOR_ROTATE,
     /**
-     * Löscht das im Editor ausgewählte Element.
+     * Löscht das im Editor ausgewählte ElementType.
      */
     EDITOR_DELETE
 }

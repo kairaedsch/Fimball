@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.tool.ListPropertyBinder;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
@@ -32,7 +32,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyBinder.bindList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
+        ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
 
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(pinballCanvasViewModel.cameraPositionProperty());

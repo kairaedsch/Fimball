@@ -8,7 +8,7 @@ import javafx.scene.input.KeyCode;
 import sep.fimball.model.input.KeyBinding;
 
 /**
- * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende Flipperautomaten-Element zu Verfügung und ermöglicht die Änderung der zugeteilten Taste.
+ * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende Flipperautomaten-ElementType zu Verfügung und ermöglicht die Änderung der zugeteilten Taste.
  */
 public class KeybindSubViewModel
 {
@@ -18,7 +18,7 @@ public class KeybindSubViewModel
     private StringProperty elementName;
 
     /**
-     * Der Name der Taste, welche das Flipperautomaten-Element bedienen will.
+     * Der Name der Taste, welche das Flipperautomaten-ElementType bedienen will.
      */
     private StringProperty key;
 
@@ -36,7 +36,7 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, die Taste welche das Flipperautomat-Element bedient, auf das gegebene zu ändern.
+     * Erteilt dem Model den Befehl, die Taste welche das Flipperautomat-ElementType bedient, auf das gegebene zu ändern.
      */
     // TODO Button is given over
     public void keybindValueClicked(KeyCode keyCode)
@@ -54,7 +54,7 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Stellt den Name der Taste, welche das Flipperautomaten-Element bedienen will, für die View zu Verfügung.
+     * Stellt den Name der Taste, welche das Flipperautomaten-ElementType bedienen will, für die View zu Verfügung.
      * @return
      */
     public ReadOnlyStringProperty keyProperty()

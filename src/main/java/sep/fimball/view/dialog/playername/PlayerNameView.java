@@ -2,7 +2,7 @@ package sep.fimball.view.dialog.playername;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.ParentNodeBinder;
+import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
@@ -22,7 +22,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     {
         this.playerNameViewModel = playerNameViewModel;
 
-        ParentNodeBinder.bindListToSimpleBoundParent(nameEntryList, playerNameViewModel.playerNameEntrysProperty(), DialogType.PLAYER_NAME_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntrysProperty(), DialogType.PLAYER_NAME_ENTRY);
     }
 
     @FXML

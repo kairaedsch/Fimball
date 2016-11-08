@@ -2,22 +2,22 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.Element;
+import sep.fimball.model.blueprint.ElementType;
 
 /**
  * Created by kaira on 03.11.2016.
  */
 public class AvailableElementSubViewModel
 {
-    private Element element;
+    private ElementType elementType;
 
     private IntegerProperty elementId;
     private StringProperty imagePath;
     private StringProperty name;
 
-    public AvailableElementSubViewModel(Element element)
+    public AvailableElementSubViewModel(ElementType elementType)
     {
-        this.element = element;
+        this.elementType = elementType;
         elementId = new SimpleIntegerProperty();
         imagePath = new SimpleStringProperty();
         name = new SimpleStringProperty();

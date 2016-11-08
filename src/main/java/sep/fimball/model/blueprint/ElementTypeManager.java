@@ -8,24 +8,24 @@ import javafx.collections.FXCollections;
 /**
  * Created by kaira on 03.11.2016.
  */
-public class ElementManager
+public class ElementTypeManager
 {
-    private static ElementManager singletonInstance;
+    private static ElementTypeManager singletonInstance;
 
-    public static ElementManager getInstance()
+    public static ElementTypeManager getInstance()
     {
-        if(singletonInstance == null) singletonInstance = new ElementManager();
+        if(singletonInstance == null) singletonInstance = new ElementTypeManager();
         return singletonInstance;
     }
 
-    private MapProperty<String, Element> elements;
+    private MapProperty<String, ElementType> elements;
 
-    private ElementManager()
+    private ElementTypeManager()
     {
         elements = new SimpleMapProperty<>(FXCollections.observableHashMap());
     }
 
-    public ReadOnlyMapProperty<String, Element> elementsProperty()
+    public ReadOnlyMapProperty<String, ElementType> elementsProperty()
     {
         return elements;
     }
