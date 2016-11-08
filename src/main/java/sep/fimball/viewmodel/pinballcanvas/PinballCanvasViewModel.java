@@ -31,7 +31,7 @@ public class PinballCanvasViewModel
     private DoubleProperty cameraZoom;
 
     /**
-     * Observable, um die View bei Änderungen zum eneuten zeichnen auffordern zu können.
+     * Observable, um die View bei Änderungen zum erneuten zeichnen auffordern zu können.
      */
     private Observable redrawObservable;
 
