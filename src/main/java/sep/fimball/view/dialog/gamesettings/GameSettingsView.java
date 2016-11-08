@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 
@@ -23,6 +24,8 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Slider musicVolumeSlider;
     @FXML
     private Slider sfxVolumeSlider;
+    @FXML
+    private GridPane keyBindings;
 
     private GameSettingsViewModel gameSettingsViewModel;
 
