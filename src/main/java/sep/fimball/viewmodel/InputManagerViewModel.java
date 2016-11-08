@@ -5,12 +5,12 @@ import sep.fimball.model.input.InputManager;
 import sep.fimball.viewmodel.window.WindowType;
 
 /**
- * Created by TheAsuro on 03.11.2016.
+ * Der InputManagerViewModel nimmt Key-Events entgegen und leitet diese ans Model weiter.
  */
 public class InputManagerViewModel
 {
     /**
-     * Gets called when a javafx key event was fired
+     * Leitet ein Key-Event ans Model weiter.
      * @param event
      */
     public void onKeyEvent(KeyEvent event, WindowType currentWindowType)
