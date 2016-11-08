@@ -13,6 +13,8 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
     @FXML
     private TextField nameTextField;
 
+    private PlayerNameEntrySubViewModel playerNameEntrySubViewModel;
+
     @Override
     public void setViewModel(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {

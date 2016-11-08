@@ -26,6 +26,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private SimpleObjectProperty<Vector2> cameraPosition;
     private SimpleDoubleProperty cameraZoom;
+    private PinballCanvasViewModel pinballCanvasViewModel;
 
     @Override
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)

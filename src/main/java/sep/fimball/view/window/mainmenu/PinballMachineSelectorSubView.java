@@ -24,6 +24,8 @@ public class PinballMachineSelectorSubView
 
     private MainMenuViewModel mainMenuViewModel;
 
+    private PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel;
+
     public void setViewModel(MainMenuViewModel mainMenuViewModel, PinballMachineSelectorSubViewModel preview)
     {
         this.mainMenuViewModel = mainMenuViewModel;

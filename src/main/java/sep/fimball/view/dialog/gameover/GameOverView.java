@@ -16,10 +16,12 @@ public class GameOverView extends DialogView<GameOverViewModel>
     @FXML
     private GridPane playerScores;
 
+    private GameOverViewModel gameOverViewModel;
+
     @Override
     public void setViewModel(GameOverViewModel gameOverViewModel)
     {
-
+        this.gameOverViewModel = gameOverViewModel;
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
@@ -8,9 +10,23 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
-    @Override
+
+    private PinballMachineEditorViewModel pinballMachineEditorViewModel;
+
+      @Override
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
+        this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
+    }
+
+    @FXML
+    private void playClicked() {
 
     }
+
+    @FXML
+    private void settingsClicked() {
+
+    }
+
 }

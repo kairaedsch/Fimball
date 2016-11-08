@@ -24,6 +24,8 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     private Slider sfxVolumeSlider;
 
+    private GameSettingsViewModel gameSettingsViewModel;
+
     @FXML
     private void okClicked()
     {
@@ -33,6 +35,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @Override
     public void setViewModel(GameSettingsViewModel gameSettingsViewModel)
     {
-
+        this.gameSettingsViewModel = gameSettingsViewModel;
     }
 }
