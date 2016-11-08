@@ -82,7 +82,7 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden, für die View zu Verfügung.
+     * Stellt die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
      * @return
      */
     // TODO bind bidirect
@@ -92,7 +92,7 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt den Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert, für die View zu Verfügung.
+     * Stellt den Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
      * @return
      */
     // TODO bind bidirect
