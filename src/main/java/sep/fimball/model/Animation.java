@@ -2,9 +2,10 @@ package sep.fimball.model;
 
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.StringProperty;
+import sep.fimball.model.blueprint.Element;
 
 /**
- * Enthält die Pfade zu den Bild-Dateien einer Animation, und stellt das aktuell angezeigte Bild der Animation bereit.
+ * Enthält die Pfade zu den Bild-Dateien einer Animation, und stellt das aktuell angezeigte Bild bereit.
  */
 public class Animation
 {
@@ -19,16 +20,16 @@ public class Animation
     private double duration;
 
     /**
-     * Property, an die vom SpriteViewModel gebunden wird. Diese enthält den Pfad zum aktuellen Bild.
+     * Der Pfad zum aktuellen Bild der Animation.
      */
     private StringProperty currentFrame;
 
     /**
-     * Erstellt eine neue Animation.
-     *
-     * @param directoryPath
+     * Erstellt eine neue Animation aus der Vorlage eines Elements.
+     * @param blueprintName
+     * @param animationBlueprint
      */
-    public Animation(String directoryPath)
+    public Animation(String blueprintName, Element.Collider.AnimationObject animationBlueprint)
     {
         // load frames and stuff
     }
@@ -42,7 +43,7 @@ public class Animation
     }
 
     /**
-     * Setzt die Animation auf das erste Bild zurück.
+     * Startet die Animation und setzt diese auf das erste Bild zurück.
      */
     public void startAnimation()
     {

@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 /**
- * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
+ * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
  */
 public abstract class Collider
 {

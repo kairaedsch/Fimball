@@ -19,11 +19,31 @@ public class Ball extends GameElement
     private double angularVelocity;
 
     /**
-     * Erstellt einen neuen Ball.
+     * Erstellt einen neuen Ball aus einer Vorlage.
      * @param element
      */
     public Ball(PlacedElement element)
     {
         super(element);
+    }
+
+    public Vector2 getVelocity()
+    {
+        return velocity;
+    }
+
+    public void setVelocity(Vector2 velocity)
+    {
+        this.velocity = velocity;
+    }
+
+    public double getAngularVelocity()
+    {
+        return angularVelocity;
+    }
+
+    public void setAngularVelocity(double angularVelocity)
+    {
+        this.angularVelocity = angularVelocity;
     }
 }
