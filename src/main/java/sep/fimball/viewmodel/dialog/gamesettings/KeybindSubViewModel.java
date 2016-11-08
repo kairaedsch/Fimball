@@ -5,7 +5,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
-import sep.fimball.model.KeyBinding;
+import sep.fimball.model.input.KeyBinding;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende Flipperautomaten-Element zu Verfügung und ermöglicht die Änderung der zugeteilten Taste.

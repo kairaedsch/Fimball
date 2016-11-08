@@ -1,4 +1,9 @@
-package sep.fimball.model;
+package sep.fimball.model.physics;
+
+import sep.fimball.model.input.InputManager;
+import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.KeyObserverEventArgs;
+import sep.fimball.model.World;
 
 import java.util.ArrayList;
 import java.util.List;

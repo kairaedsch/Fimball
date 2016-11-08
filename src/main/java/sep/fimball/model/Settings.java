@@ -4,9 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableMap;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
-
-import java.io.Serializable;
-import java.util.HashMap;
+import sep.fimball.model.input.KeyBinding;
 
 public class Settings
 {

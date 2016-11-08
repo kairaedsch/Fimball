@@ -7,6 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.util.Duration;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
+import sep.fimball.model.element.Ball;
+import sep.fimball.model.element.Flipper;
+import sep.fimball.model.element.GameElement;
+import sep.fimball.model.element.Plunger;
 
 import java.util.Observable;
 import java.util.Observer;

@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.input;
 
 /**
  * Dieses Interface wird benutzt, um beim InputManager auf einen bestimmten Tastendruck zu reagieren.

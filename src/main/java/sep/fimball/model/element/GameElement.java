@@ -1,8 +1,12 @@
-package sep.fimball.model;
+package sep.fimball.model.element;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.Animation;
 import sep.fimball.model.blueprint.PlacedElement;
+import sep.fimball.model.physics.Collider;
+import sep.fimball.model.physics.CollisionEventArgs;
+import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
 import java.util.List;
 
@@ -33,6 +37,9 @@ public class GameElement
     private IntegerProperty pointReward;
     private Animation currentAnimation;
 
+    private List<PhysicsUpdateEventArgs> physicsUpdates;
+    private List<CollisionEventArgs> physicsCollisions;
+
     /**
      * Erstellt ein neues GameElement.
      * @param element
@@ -48,7 +55,10 @@ public class GameElement
     public void update()
     {
         colliders.forEach(Collider::updateAnimation);
-        // TODO: read collision events from physics thread
+        // TODO: read collisions
+        physicsCollisions.clear();
+        // TODO: read updates
+        physicsUpdates.clear();
     }
 
     private void onCollision(CollisionEventArgs args)
@@ -57,6 +67,16 @@ public class GameElement
         hitCounter.set(hitCounter.get() + 1);
 
         //Todo: trigger animation, set currentAnimation, start that animation
+    }
+
+    public void addPhysicsUpdate(PhysicsUpdateEventArgs update)
+    {
+        physicsUpdates.add(update);
+    }
+
+    public void addCollisionUpdate(CollisionEventArgs update)
+    {
+        physicsCollisions.add(update);
     }
 
     public Vector2 getPosition()

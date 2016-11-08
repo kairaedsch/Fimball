@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.physics;
 
 /**
  * PhysicForce gibt die Stärke und die Art der Kraft an die auf den Ball einwirken sobald dieser mit einem

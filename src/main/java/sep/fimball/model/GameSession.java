@@ -1,5 +1,10 @@
 package sep.fimball.model;
 
+import sep.fimball.model.input.InputManager;
+import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.KeyObserverEventArgs;
+import sep.fimball.model.physics.PhysicsHandler;
+
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */

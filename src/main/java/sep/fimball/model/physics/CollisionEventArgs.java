@@ -1,4 +1,6 @@
-package sep.fimball.model;
+package sep.fimball.model.physics;
+
+import sep.fimball.model.element.GameElement;
 
 /**
  * Argumente, die an das "Ziel-GameElement" bei einer Kollision mit einem anderen GameElement übergeben werden.

@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel;
 
 import javafx.scene.input.KeyEvent;
-import sep.fimball.model.InputManager;
+import sep.fimball.model.input.InputManager;
 import sep.fimball.viewmodel.window.WindowType;
 
 /**

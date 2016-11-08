@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.input;
 
 /**
  * Die Argumente, die beim Auslösen eines Tastendruck-Events im InputManager übergeben werden.
