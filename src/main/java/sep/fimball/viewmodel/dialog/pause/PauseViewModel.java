@@ -43,7 +43,7 @@ public class PauseViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält, zu Verfügung.
+     * Stellt eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält, für die View zu Verfügung.
      * @return
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()

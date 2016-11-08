@@ -1,9 +1,17 @@
 package sep.fimball.viewmodel.dialog;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Der DialogType im ViewModel enthält alle möglichen Dialog-Fenster-Typen, welche es in Fimball gibt.
  */
 public enum DialogType
 {
-    NONE, GAME_OVER, GAME_SETTINGS, PLAYER_NAMES, PAUSE
+    /**
+     * Wird verwendet um auch das Anzeigen von keinen Dialog-Fenster in der View zu ermöglichen.
+     */
+    NONE,
+
+    /**
+     * Alle Dialog-Fenster-Typen.
+     */
+    GAME_OVER, GAME_SETTINGS, PLAYER_NAMES, PAUSE
 }
