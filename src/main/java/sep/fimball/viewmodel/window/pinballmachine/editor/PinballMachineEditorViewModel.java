@@ -14,14 +14,24 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
- * Created by kaira on 03.11.2016.
+ * Das PinballMachineEditorViewModel stellt der View Daten über einen FlipperAutomaten zu Verfügung und ermöglicht es, diesen zu editieren.
  */
 public class PinballMachineEditorViewModel extends WindowViewModel
 {
+    /**
+     * Der FlipperAutomat, welcher editiert wird.
+     */
     private PinballMachine pinballMachine;
 
+    /**
+     * Eine Liste, welche alle FlipperAutomat-Elemente enthält, die von dem Nutzer platziert werden können.
+     */
     private ListProperty<AvailableElementSubViewModel> availableElements;
 
+    /**
+     * Erstellt ein neues PinballMachineEditorViewModel.
+     * @param pinballMachine
+     */
     public PinballMachineEditorViewModel(PinballMachine pinballMachine)
     {
         super(WindowType.TABLE_EDITOR);
@@ -31,26 +41,42 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         ListPropertyConverter.bindAndConvertMap(availableElements, ElementTypeManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(element));
     }
 
+    /**
+     * Stellt die Liste, welche alle FlipperAutomat-Elemente enthält, die von dem Nutzer platziert werden können, für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableElementsProperty()
     {
         return availableElements;
     }
 
+    /**
+     * Vergrößert die Ansicht des FlipperAutomaten für den Nutzer.
+     */
     public void zoomPlusClicked()
     {
 
     }
 
+    /**
+     * Verkleinert die Ansicht des FlipperAutomaten für den Nutzer.
+     */
     public void zoomMinusClicked()
     {
 
     }
 
+    /**
+     * Führt den Benutzer zu dem Spiel-Window, wo der gerade von dem Nutzer editierte FlipperAutomat getestet werden kann.
+     */
     public void playClicked()
     {
         sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
 
+    /**
+     * Führt den Benutzer zu dem Automat-Einstellungs-Window, wo der gerade von dem Nutzer editierte FlipperAutomat u.a. gespeichert werden kann.
+     */
     public void settingsClicked()
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));

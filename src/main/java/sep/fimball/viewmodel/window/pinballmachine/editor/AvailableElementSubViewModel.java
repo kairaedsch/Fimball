@@ -15,14 +15,14 @@ public class AvailableElementSubViewModel
     private ElementType elementType;
 
     /**
-     * Der Pfad zum Vorschau Bild des Flipperautomaten-Elements.
-     */
-    private StringProperty imagePath;
-
-    /**
      * Der Name des Flipperautomaten-Elements.
      */
     private StringProperty name;
+
+    /**
+     * Der Pfad zum Vorschau Bild des Flipperautomaten-Elements.
+     */
+    private StringProperty imagePath;
 
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
@@ -44,13 +44,21 @@ public class AvailableElementSubViewModel
 
     }
 
-    public ReadOnlyStringProperty imagePathProperty()
-    {
-        return imagePath;
-    }
-
+    /**
+     * Stellt den Pfad zum Vorschaubild des Flipperautomaten-Elements für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyStringProperty nameProperty()
     {
         return name;
+    }
+
+    /**
+     * Stellt den Name des Flipperautomaten-Elements für die View zu Verfügung.
+     * @return
+     */
+    public ReadOnlyStringProperty imagePathProperty()
+    {
+        return imagePath;
     }
 }
