@@ -1,5 +1,8 @@
 package sep.fimball.view.window.game;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
@@ -9,6 +12,16 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
 public class GameView extends WindowView<GameViewModel>
 {
     private GameViewModel gameViewModel;
+
+    @FXML
+    private Label playername;
+
+    @FXML
+    private Label score;
+
+    @FXML
+    private HBox reserveBalls;
+
 
     @Override
     public void setViewModel(GameViewModel gameViewModel)
