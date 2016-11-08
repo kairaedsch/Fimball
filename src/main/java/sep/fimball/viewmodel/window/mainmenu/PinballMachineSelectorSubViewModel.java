@@ -4,14 +4,37 @@ import javafx.beans.property.*;
 import sep.fimball.model.blueprint.PinballMachine;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Das PinballMachineSelectorSubViewModel stellt der View Daten über einen Flipperautomat bereit und ermöglicht dessen Auswahl, sodass eine detailreichere Darstellung durch das PinballMachineInfoSubViewModel erfolgen kann.
  */
 public class PinballMachineSelectorSubViewModel
 {
+    /**
+     * Das zu diesem PinballMachineSelectorSubViewModel zugehörige MainMenuViewModel.
+     */
+    private MainMenuViewModel mainMenu;
+
+    /**
+     * Der Flipperautomat, dessen Informationen zu Verfügung gestellt werden.
+     */
+    private PinballMachine pinballMachine;
+
+    /**
+     * Der Name des Flipperautomaten.
+     */
     private StringProperty name;
+
+    /**
+     * Der Pfad zum Vorschaubild des Flipperautomaten.
+     */
     private StringProperty imagePath;
+
+    //TODO remove blueprintTableId
     private IntegerProperty blueprintTableId;
 
+    /**
+     * Erstellt ein PinballMachineSelectorSubViewModel.
+     * @param pinballMachine
+     */
     PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
     {
         name = new SimpleStringProperty();
@@ -23,16 +46,33 @@ public class PinballMachineSelectorSubViewModel
         blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
     }
 
+    /**
+     * Leitet den Befehl, den Flipperautomaten dieses ViewModels auszuwählen, an das zu diesem gehörige MainMenuViewModel weiter.
+     */
+    public void clicked()
+    {
+        mainMenu.blueprintPreviewClick(blueprintTableId.get());
+    }
+
+    /**
+     * Stellt den Name des Flipperautomaten für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyStringProperty nameProperty()
     {
         return name;
     }
 
+    /**
+     * Stellt den Pfad zum Vorschaubild des Flipperautomaten für die View zu Verfügung.
+     * @return
+     */
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
     }
 
+    //TODO remove
     public ReadOnlyIntegerProperty blueprintTableIdProperty()
     {
         return blueprintTableId;
