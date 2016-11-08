@@ -5,32 +5,43 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.ElementType;
 
 /**
- * Created by kaira on 03.11.2016.
+ * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomate-Element bereit und ermöglicht es dem Nutzer, dieses in seinem Flipperautomaten zu platzieren.
  */
 public class AvailableElementSubViewModel
 {
+    /**
+     * Das Flipperautomate-Element, dessen Informationen angezeigt werden.
+     */
     private ElementType elementType;
 
-    private IntegerProperty elementId;
+    /**
+     * Der Pfad zum Vorschau Bild des Flipperautomaten-Elements.
+     */
     private StringProperty imagePath;
+
+    /**
+     * Der Name des Flipperautomaten-Elements.
+     */
     private StringProperty name;
 
+    /**
+     * Erstellt ein neues AvailableElementSubViewModel.
+     * @param elementType
+     */
     public AvailableElementSubViewModel(ElementType elementType)
     {
         this.elementType = elementType;
-        elementId = new SimpleIntegerProperty();
         imagePath = new SimpleStringProperty();
         name = new SimpleStringProperty();
     }
 
+    /**
+     * Erteilt dem Model den Befehl, dieses Flipperautomat-Element in den Flipperautomaten zu platzieren.
+     * @param position
+     */
     public void dropOverPinballCanvas(Vector2 position)
     {
 
-    }
-
-    public ReadOnlyIntegerProperty elementIdProperty()
-    {
-        return elementId;
     }
 
     public ReadOnlyStringProperty imagePathProperty()
