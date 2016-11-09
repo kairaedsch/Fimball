@@ -18,21 +18,31 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Der SceneManagerView verwaltet die aktuelle WindowView und DialogView, und reagiert bei ViewModel Änderungen im ViewModel damit, dass sie das richtige WindowView und Dialogview erstellt und in die Stage einbindet.
  */
 public class SceneManagerView
 {
+    /**
+     * Das zum SceneManagerView gehörende ViewModel.
+     */
     private SceneManagerViewModel sceneManagerViewModel;
 
-    private Stage stage;
-    private Scene scene;
+    /**
+     * Der oberste Container, in den die gesamte View geladen wird.
+     */
     private StackPane root;
+
+    /**
+     * Ein Blur-Effekt, welcher bei einem aktiven DialogView das darunter liegende WindowView ausblendet.
+     */
     private GaussianBlur blurEffect;
 
+    /**
+     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welche der oberste Container gelegt wird. Auch legt es die Startgröße des Fenster fest und initialisiert das SceneManagerViewModel an welches es sich dann auch gleich bindet, um bei ViewModel Änderungen reagieren zu können.
+     * @param stage
+     */
     public SceneManagerView(Stage stage)
     {
-        this.stage = stage;
-
         stage.setWidth(1280);
         stage.setHeight(720);
 
@@ -48,9 +58,9 @@ public class SceneManagerView
         root.getChildren().add(box);
         root.getChildren().add(new Group());
 
-        scene = new Scene(root, this.stage.getWidth(), this.stage.getHeight());
-        this.stage.setScene(scene);
-        this.stage.show();
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        stage.setScene(scene);
+        stage.show();
 
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
@@ -62,7 +72,7 @@ public class SceneManagerView
     }
 
     @FXML //TODO write in fxml file
-    protected void onKeyEvent(KeyEvent event)
+    private void onKeyEvent(KeyEvent event)
     {
         sceneManagerViewModel.onKeyEvent(event);
     }
