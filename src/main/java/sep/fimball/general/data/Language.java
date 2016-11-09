@@ -1,5 +1,8 @@
 package sep.fimball.general.data;
 
+/**
+ * Language ist eine Aufzählung von Sprachen, in denen Text im Spiel dargestellt wird.
+ */
 public enum Language
 {
     GERMAN("Deutsch"),

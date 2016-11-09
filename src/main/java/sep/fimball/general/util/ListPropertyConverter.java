@@ -10,9 +10,18 @@ import java.util.Map;
 
 /**
  * Created by kaira on 03.11.2016.
+ * Stellt Funktionen zum konvertieren einer Liste in eine andere bereit.
  */
 public class ListPropertyConverter
 {
+    /**
+     * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der listPropertyMaster, wenn sich letztere ändert.
+     * @param listPropertySlave
+     * @param listPropertyMaster
+     * @param converter
+     * @param <SlaveT>
+     * @param <MasterT>
+     */
     public static <SlaveT, MasterT> void bindAndConvertList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, ListConverter<SlaveT, MasterT> converter)
     {
         ListChangeListener<MasterT> listChangeListener = (change) ->
@@ -29,6 +38,15 @@ public class ListPropertyConverter
         listChangeListener.onChanged(null);
     }
 
+    /**
+     * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der MapPropertyMaster, wenn sich letztere ändert.
+     * @param listPropertySlave
+     * @param MapPropertyMaster
+     * @param converter
+     * @param <SlaveT>
+     * @param <MasterKeyT>
+     * @param <MasterValueT>
+     */
     public static <SlaveT, MasterKeyT, MasterValueT> void bindAndConvertMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, MapConverter<SlaveT, MasterKeyT, MasterValueT> converter)
     {
         MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
