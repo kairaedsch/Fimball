@@ -6,10 +6,20 @@ import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.input.KeyBinding;
 
+/**
+ * Settings speichert die aktuellen Spieleinstellungen, welche vom Spieler in den Einstellungen geändert werden können.
+ */
 public class Settings
 {
+    /**
+     * Stellt sicher, dass es nur eine Instanz von Settings gibt.
+     */
     private static Settings singletonInstance;
 
+    /**
+     * Gibt die bereits existierenden Settings oder neu angelegte zurück, falls noch keine existieren.
+     * @return
+     */
     public static Settings getSingletonInstance()
     {
         if (singletonInstance != null)
@@ -18,12 +28,34 @@ public class Settings
         return singletonInstance;
     }
 
+    /**
+     * Allgemeine Lautstärke von 0-100\%, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
+     */
     private DoubleProperty masterVolume;
+
+    /**
+     * Lautstärke der Musik von 0-100%.
+     */
     private DoubleProperty musicVolume;
+
+    /**
+     * Lautstärke der Soundeffekte von 0-100%.
+     */
     private DoubleProperty sfxVolume;
+
+    /**
+     * Aktuell ausgewählte Sprache, ein Teil der Aufzählung <enum> Language.
+     */
     private ObjectProperty<Language> language;
+
+    /**
+     * Speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
+     */
     private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
 
+    /**
+     * Erzeugt eine neue Instanz von Settings.
+     */
     private Settings()
     {
         // TODO load settings file here

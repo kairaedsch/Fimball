@@ -13,15 +13,39 @@ import sep.fimball.model.element.GameElement;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Eine World stellt die Spielwelt eines Automaten dar.
+ */
 public class World
 {
+    /**
+     * Die Wiederholungsrate, mit der sich die Game Loop aktualisiert.
+     */
     private final double TIMELINE_TICK = 1 / 60D;
+
+    /**
+     * Liste der Elemente in der Spielwelt.
+     */
     private ListProperty<GameElement> gameElements;
+
+    /**
+     *
+     */
     private ObjectProperty<Ball> ballProperty;
+
+    /**
+     * Die Schleife, die die Spielwelt aktualisiert.
+     */
     private Timeline gameLoop;
+
     private KeyFrame keyFrame;
+
     private Observable observable;
 
+    /**
+     * Erzeugt eine World mit den übergebenen GameElemente.
+     * @param elementList
+     */
 	public World(PlacedElementList elementList)
     {
         observable = new Observable();
@@ -41,6 +65,9 @@ public class World
         observable.addObserver(observer);
     }
 
+    /**
+     * Startet die Gameloop.
+     */
     public void startTimeline()
     {
         gameLoop = new Timeline();
@@ -53,11 +80,18 @@ public class World
         gameLoop.play();
     }
 
+    /**
+     * Stoppt die Gameloop.
+     */
     public void stopTimeline()
     {
         gameLoop.stop();
     }
 
+    /**
+     * Fügt das gegebene Element in die Spielwelt ein.
+     * @param element
+     */
     public void addPlacedElement(PlacedElement element)
     {
         gameElements.add(new GameElement(element));

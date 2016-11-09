@@ -7,10 +7,20 @@ import javafx.scene.media.MediaPlayer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Der Soundmanager kümmert sich um die Verwaltung von MusicClips und AudioClips. Dabei ist zu beachten dass AudioClips komplett in den Arbeitsspeicher geladen werden wohingegen MusicClips gestreamt werden. Mithilfe des SoundManager können sowohl Hintergrundmusik als auch Soundeffekte abgespielt werden. Der Soundmanager hat eine Liste welche speichert zu welcher Datei ein SoundClip/MusicClip gehört.
+ */
 public class SoundManager
 {
+    /**
+     * Stellt sicher, dass es nur eine Instanz von Settings gibt.
+     */
     private static SoundManager singletonInstance;
 
+    /**
+     * Gibt den bereits existierenden Soundmanager oder einen neu angelegten zurück, falls noch keiner existiert.
+     * @return
+     */
     public static SoundManager getSingletonInstance()
     {
         if (singletonInstance == null)
@@ -19,10 +29,24 @@ public class SoundManager
         return singletonInstance;
     }
 
+    /**
+     * Hält eine Refernz auf die aktuell abgespielte Musik.
+     */
     private MediaPlayer currentMusic;
+
+    /**
+     * Eine Menge von Hintergrundmusik.
+     */
     private Map<MusicClip, Media> musicClips;
+
+    /**
+     * Eine Menge von Sounds.
+     */
     private Map<SoundClip, AudioClip> fxClips;
 
+    /**
+     * Erzeugt eine neue Instanz von Soundmanager.
+     */
     private SoundManager()
     {
         musicClips = new HashMap<>();
@@ -40,6 +64,10 @@ public class SoundManager
         currentMusic.play(); // TODO loop
     }
 
+    /**
+     * Spielt den angegebenen SoundClip ab.
+     * @param clip
+     */
     public void playFxClip(SoundClip clip)
     {
         fxClips.get(clip).play();
@@ -50,6 +78,10 @@ public class SoundManager
 		throw new UnsupportedOperationException();
 	}
 
+    /**
+     * Spielt die angegebene Musik in einer Dauerschleife ab.
+     * @param clip
+     */
 	public void PlayMusicClip(MusicClip clip) {
 		// TODO - implement SoundManager.PlayMusicClip
 		throw new UnsupportedOperationException();

@@ -7,12 +7,22 @@ import sep.fimball.model.WorldLayer;
 import java.util.List;
 
 /**
- * Created by alexcekay on 03.11.16.
+ * Implementierung eines Colliders, welcher die Form eines Polygons hat.
  */
 public class PolygonCollider extends Collider
 {
+    /**
+     * Die Kanten des Polygons, die den Collider formen.
+     */
     private List<Vector2> vertices;
 
+    /**
+     * Erstellt einen neuen Collider in Polygonform.
+     * @param vertices
+     * @param layer
+     * @param force
+     * @param animation
+     */
     public PolygonCollider(List<Vector2> vertices, WorldLayer layer, PhysicsForce force, Animation animation)
     {
         super(layer, force, animation);
