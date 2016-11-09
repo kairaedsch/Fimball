@@ -3,7 +3,7 @@ package sep.fimball.view.window;
 import sep.fimball.view.ViewBoundToViewModel;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Die WindowView ist die Oberklasse aller Haupt-WindowViews und stellt sicher, dass diese das ViewBoundToViewModel-Interface implementieren.
  */
 public abstract class WindowView<ViewModelT> implements ViewBoundToViewModel<ViewModelT>
 {

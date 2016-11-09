@@ -3,7 +3,7 @@ package sep.fimball.view.dialog;
 import sep.fimball.view.ViewType;
 
 /**
- * DialogType ist eine Auflistung der Dialogtypen.
+ * Der DialogType enhält alle Dialogtypen, sowohl die Haupt-Views als auch die SubViews. Jeder DialogType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
  */
 public enum DialogType implements ViewType
 {
@@ -25,7 +25,7 @@ public enum DialogType implements ViewType
     PLAYER_NAME_ENTRY("playername/nameEntry.fxml");
 
     /**
-     * Der Pfad zu dem zum Fenstertyp gehörenden FXML-Datei.
+     * Der Pfad zu dem zum Fenstertyp gehörende FXML-Datei.
      */
     private String fxmlPath;
 

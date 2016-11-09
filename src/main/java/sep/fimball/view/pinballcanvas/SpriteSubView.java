@@ -12,13 +12,35 @@ import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 import java.io.File;
 
+/**
+ * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements zuständig.
+ */
 public class SpriteSubView
 {
+    /**
+     * Das Bild des Sprites.
+     */
     private Image image;
+
+    /**
+     * Die Drehung des Sprites.
+     */
     private DoubleProperty rotationProperty;
+
+    /**
+     * Die Position des Sprites.
+     */
     private ObjectProperty<Vector2> positionProperty;
+
+    /**
+     * Das zur SpriteSubView gehörende SpriteSubViewModel.
+     */
     private SpriteSubViewModel viewModel;
 
+    /**
+     * Erzeugt eine neue SpriteSubView mit zugehörigen SpriteSubViewModel und bindet sich daran.
+     * @param viewModel
+     */
     SpriteSubView(SpriteSubViewModel viewModel)
     {
         this.viewModel = viewModel;
@@ -39,20 +61,23 @@ public class SpriteSubView
         image = new Image(file.toURI().toString());
     }
 
-    void draw(GraphicsContext gc)
+    /**
+     * Zeichnet sich auf das übergebene graphicsContext-Objekt.
+     * @param graphicsContext
+     */
+    void draw(GraphicsContext graphicsContext)
     {
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();
 
-        gc.save(); // saves the current state on stack, including the current transform
-        rotate(gc, rotationProperty.doubleValue(), x + image.getWidth() / 2, y + image.getHeight() / 2);
-        gc.drawImage(image, x, y);
-        gc.restore(); // back to original state (before rotation)
+        graphicsContext.save(); // saves the current state on stack, including the current transform
+        rotate(graphicsContext, rotationProperty.doubleValue(), x + image.getWidth() / 2, y + image.getHeight() / 2);
+        graphicsContext.drawImage(image, x, y);
+        graphicsContext.restore(); // back to original state (before rotation)
     }
 
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
-
 }

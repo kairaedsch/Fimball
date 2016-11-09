@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Stellt einen Spieler welcher an einer Partie teilnimmt dar.
+ * Stellt einen Spieler welcher an einer Partie teilnimmt.
  */
 public class Player
 {

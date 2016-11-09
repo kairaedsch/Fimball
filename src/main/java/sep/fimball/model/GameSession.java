@@ -2,7 +2,6 @@ package sep.fimball.model;
 
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
-import sep.fimball.model.blueprint.PinballMachineManager;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -51,7 +50,7 @@ public class GameSession
     /**
      * Erstellt eine neue GameSession.
      */
-    public GameSession(PinballMachine machineBlueprint, Player[] players)
+    public GameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         this.machineBlueprint = machineBlueprint;
 

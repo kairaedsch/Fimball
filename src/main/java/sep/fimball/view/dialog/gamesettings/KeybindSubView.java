@@ -13,19 +13,19 @@ import sep.fimball.viewmodel.dialog.gamesettings.KeybindSubViewModel;
 public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
 {
     /**
-     * Die aktuell gebundene Taste.
+     * Zeigt die aktuell gebundene Taste und ermöglicht dessen Änderung.
      */
     @FXML
     private TextField keybindKey;
 
     /**
-     * Der Name der belegten Funktion.
+     * Zeigt den Name der belegten Funktion.
      */
     @FXML
     private Label keybindName;
 
     /**
-     *  Das zur KeyBindView gehörende KeybindSubViewModel.
+     * Das zur KeyBindView gehörende KeybindSubViewModel.
      */
     private KeybindSubViewModel keybindSubViewModel;
 
