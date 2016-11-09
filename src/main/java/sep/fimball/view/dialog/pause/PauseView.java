@@ -6,7 +6,7 @@ import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Die PauseView ist für die Darstellung des aktuellen Standes der Partie während sie pausiert ist zuständig und ermöglicht es dem Nutzer, weiter zu spielen oder die Partie abzubrechen.
  */
 public class PauseView extends DialogView<PauseViewModel>
 {

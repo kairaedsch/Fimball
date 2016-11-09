@@ -13,6 +13,6 @@
     </rowConstraints>
     <children>
         <TextField fx:id="nameTextField" text="Player" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deletePlayerClicked" text="X" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="X" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     </children>
 </GridPane>
