@@ -9,7 +9,7 @@ import javafx.beans.property.*;
 public class PlayerNameEntrySubViewModel
 {
     /**
-     * Das zum PlayerNameEntrySubViewModel gehörige HauptViewModel, welches eine Liste aller PlayerNameEntrySubViewModel enthält.
+     * Das zum PlayerNameEntrySubViewModel zugehörige HauptViewModel, welches eine Liste aller PlayerNameEntrySubViewModel enthält.
      */
     private PlayerNameViewModel playerNameViewModel;
 

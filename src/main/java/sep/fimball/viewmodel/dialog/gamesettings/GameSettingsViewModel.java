@@ -43,7 +43,7 @@ public class GameSettingsViewModel extends DialogViewModel
     private IntegerProperty volumeSFX;
 
     /**
-     * Erstellt ein eineu GameSettingsViewModel.
+     * Erstellt ein GameSettingsViewModel.
      */
     public GameSettingsViewModel()
     {
