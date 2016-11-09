@@ -51,8 +51,10 @@ public class GameSession
     /**
      * Erstellt eine neue GameSession.
      */
-    public GameSession()
+    public GameSession(PinballMachine machineBlueprint, Player[] players)
     {
+        this.machineBlueprint = machineBlueprint;
+
         InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
@@ -63,17 +65,10 @@ public class GameSession
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
                 addTiltCounter();
         });
-    }
 
-    /**
-     * Startet ein neues Spiel auf dem Flipperautomaten, indem der erste Spieler geladen und die Physikberechnung gestartet wird.
-     */
-    public void startNewGame()
-    {
-        if (world == null)
-            world = new World(machineBlueprint.getTableElementList());
-
+        world = new World(machineBlueprint.getTableElementList());
         physicsHandler = new PhysicsHandler(world);
+
         startAll();
     }
 
@@ -144,15 +139,8 @@ public class GameSession
         return this.paused;
     }
 
-    public void setPaused(boolean paused)
-    {
-        this.paused = paused;
-    }
-
     public World getWorld()
     {
         return world;
     }
-
-    public void setMachineBlueprint(int machineId) { machineBlueprint = PinballMachineManager.getInstance().tableBlueprintsProperty().get(machineId); }
 }
