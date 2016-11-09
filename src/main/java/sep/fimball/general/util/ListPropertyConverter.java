@@ -9,7 +9,6 @@ import javafx.collections.ObservableMap;
 import java.util.Map;
 
 /**
- * Created by kaira on 03.11.2016.
  * Stellt Funktionen zum konvertieren einer Liste in eine andere bereit.
  */
 public class ListPropertyConverter

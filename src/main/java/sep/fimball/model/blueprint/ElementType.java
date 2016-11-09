@@ -3,23 +3,51 @@ package sep.fimball.model.blueprint;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by kaira on 03.11.2016.
+ * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
  */
 public class ElementType
 {
+    /**
+     * Bezeichnung des Elementtyps im Editor.
+     */
     public String editorName;
+
+    /**
+     * Text, der den Elementtyp im Editor beschreibt.
+     */
     public String editorDescription;
+
+    /**
+     * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel man Elemente von diesem Typ drehen kann.
+     */
     public double rotationAccuracy;
     // TODO make enum
+
+    /**
+     *
+     */
     public String elementType;
+
+    /**
+     * Die Collider, die dieser Elementtyp hat.
+     */
     public Collider[] colliders;
 
     public class Collider
     {
         public Polygon[] polygons;
         public Circle[] circles;
+
+        /**
+         * Die Animationen, die dieser Elementtyp abspielt.
+         */
         public AnimationObject animations;
+
+        /**
+         * Die Kräfte, die bei Interaktion mit diesem Elementtyp auftreten.
+         */
         public ForceObject forces;
+
         public boolean givesPoints;
 
         public class Polygon

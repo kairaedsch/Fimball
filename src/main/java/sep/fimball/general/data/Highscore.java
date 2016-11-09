@@ -8,17 +8,17 @@ import javafx.beans.property.*;
 public class Highscore
 {
     /**
-     * Die erreichten Punkte
+     * Die erreichten Punkte.
      */
     private LongProperty score;
 
     /**
-     * Der Name des Spielers
+     * Der Name des Spielers.
      */
     private StringProperty playerName;
 
     /**
-     * Erzeugt einen neuen Highscore mit gegebenen Punkten und Namen
+     * Erzeugt einen neuen Highscore mit gegebenen Punkten und Namen.
      * @param score
      * @param playerName
      */

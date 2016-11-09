@@ -5,16 +5,38 @@ import javafx.beans.property.*;
 import java.awt.*;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar.
  */
 public class PlacedElement
 {
+    /**
+     * ID zur Identifizierung des Elements.
+     */
     IntegerProperty blueprintElementId;
+
+    /**
+     * Verweis auf den Typ des Elements.
+     */
     StringProperty greenprintElementId;
+
+    /**
+     * Position des Elementes auf dem Automaten.
+     */
     ObjectProperty<Point> position;
+
+    /**
+     * Punkte, die das Element vergibt.
+     */
     IntegerProperty points;
+
     DoubleProperty multiplier;
 
+    /**
+     * Legt ein neues Element  mit gegebener ID, Typ und Position an.
+     * @param blueprintElementId
+     * @param greenprintElementId
+     * @param position
+     */
     public PlacedElement(int blueprintElementId, String greenprintElementId, Point position)
     {
         this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);

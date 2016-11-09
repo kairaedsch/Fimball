@@ -5,17 +5,40 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Eine PinBallMachine stellt einen Flipperautomaten zur Serialisierung dar.
  */
 public class PinballMachine
 {
+    /**
+     * Der Name des Automaten.
+     */
     private StringProperty name;
+
+    /**
+     * ID zur Identifizierung des Automaten.
+     */
     private IntegerProperty blueprintTableId;
+
+    /**
+     * Liste mit den auf dem Automaten erreichten Highscores.
+     */
     private ListProperty<Highscore> highscoreList;
+
+    /**
+     * Liste der auf dem Automaten gesetzten Elemente.
+     */
     private PlacedElementList tableElementList;
 
+    /**
+     * Speicherpfad des Hintergrundbildes des Automaten.
+     */
     private StringProperty imagePath;
 
+    /**
+     * Legt einen leeren Automaten mit gegebenen Namen und ID an.
+     * @param name
+     * @param blueprintTableId
+     */
     public PinballMachine(String name, int blueprintTableId)
     {
         this.name = new SimpleStringProperty(name);
