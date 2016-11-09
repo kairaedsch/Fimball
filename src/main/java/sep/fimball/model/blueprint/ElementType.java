@@ -72,7 +72,7 @@ public class ElementType
             public double x, y;
             public double radius;
         }
-1
+
         public class AnimationObject
         {
             public int frameCount;
