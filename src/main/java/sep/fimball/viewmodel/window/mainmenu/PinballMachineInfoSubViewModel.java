@@ -67,7 +67,7 @@ public class PinballMachineInfoSubViewModel
     /**
      * Leitet den Befehl, den aktuellen Flipperautomat spielen zu wollen, an das zu diesem gehörige MainMenuViewModel weiter.
      */
-    public void playClicked()
+    public void showPlayerNameDialog()
     {
         mainMenu.showPlayerNameDialog(pinballMachine);
     }
@@ -75,7 +75,7 @@ public class PinballMachineInfoSubViewModel
     /**
      * Leitet den Befehl, den aktuellen Flipperautomat editieren zu wollen, an das zu diesem gehörige MainMenuViewModel weiter.
      */
-    public void editClicked()
+    public void startEditor()
     {
         mainMenu.startEditor(pinballMachine);
     }

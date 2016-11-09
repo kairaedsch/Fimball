@@ -29,6 +29,6 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
 
     public void mouseClicked(MouseEvent mouseEvent)
     {
-        pinballMachineSelectorSubViewModel.selectMachine();
+        pinballMachineSelectorSubViewModel.selectPinballMachine();
     }
 }

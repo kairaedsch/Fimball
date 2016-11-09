@@ -69,7 +69,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zu dem Spiel-Window, wo der gerade von dem Nutzer editierte FlipperAutomat getestet werden kann.
      */
-    public void startMachine()
+    public void startPinballMachine()
     {
         sceneManager.setWindow(new GameViewModel(new GameSession()));
     }

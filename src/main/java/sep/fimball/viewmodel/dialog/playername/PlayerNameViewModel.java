@@ -59,7 +59,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Startet ein Spiel von dem ausgewählte Flipperautomat, wobei die Spieler aus der Liste der möglichen Spielern genommen wird .
      */
-    public void startGame()
+    public void startPinballMachine()
     {
         sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
@@ -67,7 +67,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void exitDialog()
+    public void exitDialogToMainMenu()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }

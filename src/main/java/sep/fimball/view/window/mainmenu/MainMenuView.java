@@ -43,12 +43,12 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void editClicked(MouseEvent mouseEvent)
     {
-        mainMenuViewModel.getPinballMachineInfoSubViewModel().editClicked();
+        mainMenuViewModel.getPinballMachineInfoSubViewModel().startEditor();
     }
 
     @FXML
     private void playClicked(MouseEvent mouseEvent)
     {
-        mainMenuViewModel.getPinballMachineInfoSubViewModel().playClicked();
+        mainMenuViewModel.getPinballMachineInfoSubViewModel().showPlayerNameDialog();
     }
 }

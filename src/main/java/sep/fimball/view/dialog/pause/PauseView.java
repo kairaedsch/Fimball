@@ -24,7 +24,7 @@ public class PauseView  extends DialogView<PauseViewModel>
     @FXML
     private void abortClicked()
     {
-        pauseViewModel.exitDialog();
+        pauseViewModel.exitDialogToMainMenu();
     }
 
     @FXML

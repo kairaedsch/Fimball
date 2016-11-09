@@ -29,7 +29,7 @@ public class PauseViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void exitDialog()
+    public void exitDialogToMainMenu()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }

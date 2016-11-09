@@ -54,7 +54,7 @@ public class MainMenuViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zu den Fimball Einstellungen.
      */
-    public void settingsClicked()
+    public void showSettingsDialog()
     {
         sceneManager.setDialog(new GameSettingsViewModel());
     }

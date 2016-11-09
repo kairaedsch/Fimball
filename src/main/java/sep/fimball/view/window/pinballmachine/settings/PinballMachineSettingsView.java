@@ -36,12 +36,12 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     @FXML
     private void saveClicked()
     {
-        pinballMachineSettingsViewModel.saveMachine();
+        pinballMachineSettingsViewModel.savePinballMachine();
     }
 
     @FXML
     private void deleteClicked()
     {
-        pinballMachineSettingsViewModel.deleteMachine();
+        pinballMachineSettingsViewModel.deletePinballMachine();
     }
 }

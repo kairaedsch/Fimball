@@ -28,13 +28,13 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     @FXML
     private void startClicked()
     {
-        playerNameViewModel.startGame();
+        playerNameViewModel.startPinballMachine();
     }
 
     @FXML
     private void abortClicked()
     {
-        playerNameViewModel.exitDialog();
+        playerNameViewModel.exitDialogToMainMenu();
     }
 
     @FXML
