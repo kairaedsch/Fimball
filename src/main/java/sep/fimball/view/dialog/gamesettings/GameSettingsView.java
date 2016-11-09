@@ -56,15 +56,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private GameSettingsViewModel gameSettingsViewModel;
 
     /**
-     * Erteilt dem GameSettingsViewModel den Befehl, sich zu schließen.
-     */
-    @FXML
-    private void okClicked()
-    {
-
-    }
-
-    /**
      * Setzt das zum GameSettignsView gehörende GameSettingsViewModel.
      * @param gameSettingsViewModel
      */
@@ -72,5 +63,14 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     public void setViewModel(GameSettingsViewModel gameSettingsViewModel)
     {
         this.gameSettingsViewModel = gameSettingsViewModel;
+    }
+
+    /**
+     * Benachrichtigt das GameSettingsViewModel, dass der Nutzer die Einstellungen schließen möchte.
+     */
+    @FXML
+    private void okClicked()
+    {
+
     }
 }

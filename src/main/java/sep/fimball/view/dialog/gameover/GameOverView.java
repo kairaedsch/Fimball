@@ -38,7 +38,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     }
 
     /**
-     * Erteilt dem GameOverViewModel den Befehl, dass der Nutzer das GameOverView schließen möchte.
+     * Benachrichtigt das GameOverViewModel, dass der Nutzer das GameOverView schließen möchte.
      */
     @FXML
     private void okClicked()
@@ -47,7 +47,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     }
 
     /**
-     * Erteilt dem GameOverViewModel den Befehl, dass der Nutzer noch eine Partie mit dem selben Flipperautomat und dem selben Spielern spielen möchte.
+     * Benachrichtigt das GameOverViewModel, dass der Nutzer noch eine Partie mit dem selben Flipperautomat und dem selben Spielern spielen möchte.
      */
     @FXML
     private void restartClicked()
