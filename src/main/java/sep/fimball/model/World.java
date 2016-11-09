@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.util.Duration;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
 import sep.fimball.model.element.Ball;
@@ -72,7 +73,8 @@ public class World
     {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event -> {
+        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
+        {
             observable.hasChanged();
             observable.notifyObservers();
         }));
@@ -97,6 +99,12 @@ public class World
         gameElements.add(new GameElement(element));
         //TODO check if PlacedElement is Flipper/Plunger or ball and assign
         //TODO if a ball is already set and another one gets added -> unknown behaviour
+    }
+
+    public void bindWorldToPlacedElementList(PlacedElementList placedElementList)
+    {
+        ListPropertyConverter.bindAndConvertMap(gameElements, placedElementList.elementsProperty(), ((placedElementKey, placedElementValue) ->
+                new GameElement(placedElementValue)));
     }
 
     public ReadOnlyListProperty<GameElement> gameElementsProperty()
