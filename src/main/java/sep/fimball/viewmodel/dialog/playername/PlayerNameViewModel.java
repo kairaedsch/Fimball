@@ -51,7 +51,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Fügt einen neuen Spieler zu der Liste der möglichen Spieler hinzu.
      */
-    public void addPlayerClicked()
+    public void addPlayer()
     {
         playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntrys.size() + 1)));
     }
@@ -59,7 +59,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Startet ein Spiel von dem ausgewählte Flipperautomat, wobei die Spieler aus der Liste der möglichen Spielern genommen wird .
      */
-    public void startClicked()
+    public void startGame()
     {
         sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
@@ -67,7 +67,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void abortClicked()
+    public void exitDialog()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }

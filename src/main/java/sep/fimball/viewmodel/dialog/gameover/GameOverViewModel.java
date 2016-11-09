@@ -49,7 +49,7 @@ public class GameOverViewModel extends DialogViewModel
     /**
      * Startet eine weitere Partie mit dem selben Flipperautomaten und den selben Spielern.
      */
-    public void playAgainClicked()
+    public void restartGame()
     {
         sceneManager.setWindow(new MainMenuViewModel());
         sceneManager.setDialog(new PlayerNameViewModel(pinballMachine));
@@ -58,7 +58,7 @@ public class GameOverViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void backClicked()
+    public void exitDialog()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }

@@ -39,7 +39,7 @@ public class KeybindSubViewModel
      * Erteilt dem Model den Befehl, die Taste welche das Flipperautomat-ElementType bedient, auf das gegebene zu ändern.
      */
     // TODO Button is given over
-    public void keybindValueClicked(KeyCode keyCode)
+    public void changeKeyBinding(KeyCode keyCode)
     {
 
     }

@@ -60,7 +60,7 @@ public class GameSettingsViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void okClicked()
+    public void exitDialog()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }

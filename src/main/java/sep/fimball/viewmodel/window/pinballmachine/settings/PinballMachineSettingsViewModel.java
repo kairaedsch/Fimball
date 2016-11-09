@@ -40,7 +40,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     /**
      * Erteilt dem Model den Befehl, die Änderungen an dem Flipperautomat zu speichern.
      */
-    public void saveClicked()
+    public void saveMachine()
     {
         //TODO save
     }
@@ -48,7 +48,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     /**
      * Erteilt dem Model den Befehl, den Flipperautomat zu löschen.
      */
-    public void deleteClicked()
+    public void deleteMachine()
     {
         sceneManager.setWindow(new MainMenuViewModel());
         // TODO delete
@@ -57,7 +57,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void menuClicked()
+    public void exitWindowToMainMenu()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }
@@ -65,7 +65,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     /**
      * Führt den Benutzer ins Automat-Editor-Fenster, wo er den Flipperautomat und seine Flipperautomat-Elemente editieren kann.
      */
-    public void editClicked()
+    public void exitWindowToEditor()
     {
         sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
     }

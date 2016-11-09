@@ -47,7 +47,7 @@ public class PinballMachineSelectorSubViewModel
     /**
      * Leitet den Befehl, den Flipperautomaten dieses ViewModels auszuwählen, an das zu diesem gehörige MainMenuViewModel weiter.
      */
-    public void clicked()
+    public void selectMachine()
     {
         mainMenu.switchPinballMachineInfo(pinballMachine);
     }

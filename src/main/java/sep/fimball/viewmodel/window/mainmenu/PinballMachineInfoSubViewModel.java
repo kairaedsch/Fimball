@@ -69,7 +69,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void playClicked()
     {
-        mainMenu.playClicked(pinballMachine);
+        mainMenu.showPlayerNameDialog(pinballMachine);
     }
 
     /**
@@ -77,7 +77,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void editClicked()
     {
-        mainMenu.editClicked(pinballMachine);
+        mainMenu.startEditor(pinballMachine);
     }
 
     /**

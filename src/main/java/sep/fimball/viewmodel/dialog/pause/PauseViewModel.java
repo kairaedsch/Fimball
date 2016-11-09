@@ -29,7 +29,7 @@ public class PauseViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Hauptmenu.
      */
-    public void abortClicked()
+    public void exitDialog()
     {
         sceneManager.setWindow(new MainMenuViewModel());
     }
@@ -37,7 +37,7 @@ public class PauseViewModel extends DialogViewModel
     /**
      * Führt den Benutzer zurück ins Spiel.
      */
-    public void okClicked()
+    public void resumeGame()
     {
         sceneManager.setDialog(new EmptyViewModel());
     }

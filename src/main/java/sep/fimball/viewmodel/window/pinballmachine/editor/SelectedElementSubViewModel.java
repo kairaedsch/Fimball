@@ -50,7 +50,7 @@ public class SelectedElementSubViewModel
     /**
      * Erteilt dem Model den Befehl, das Flipperautomat-Element nach rechts zu drehen.
      */
-    public void rotateRightClicked()
+    public void rotateClockwise()
     {
 
     }
@@ -58,7 +58,7 @@ public class SelectedElementSubViewModel
     /**
      * Erteilt dem Model den Befehl, das Flipperautomat-Element nach links zu drehen.
      */
-    public void rotateLeftClicked()
+    public void rotateCounterclockwise()
     {
 
     }

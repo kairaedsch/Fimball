@@ -39,7 +39,7 @@ public class AvailableElementSubViewModel
      * Erteilt dem Model den Befehl, dieses Flipperautomat-Element in den Flipperautomaten zu platzieren.
      * @param position
      */
-    public void dropOverPinballCanvas(Vector2 position)
+    public void placeElement(Vector2 position)
     {
 
     }

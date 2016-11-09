@@ -41,7 +41,7 @@ public class PlayerNameEntrySubViewModel
     /**
      * Löscht den möglichen Spieler (Falls erlaubt).
      */
-    public void deleteClicked()
+    public void deletePlayerName()
     {
         if(isDeleteAble.get()) playerNameViewModel.removePlayerNameEntry(this);
     }

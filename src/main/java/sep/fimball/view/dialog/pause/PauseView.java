@@ -24,12 +24,12 @@ public class PauseView  extends DialogView<PauseViewModel>
     @FXML
     private void abortClicked()
     {
-        pauseViewModel.abortClicked();
+        pauseViewModel.exitDialog();
     }
 
     @FXML
     private void okClicked()
     {
-        pauseViewModel.okClicked();
+        pauseViewModel.resumeGame();
     }
 }

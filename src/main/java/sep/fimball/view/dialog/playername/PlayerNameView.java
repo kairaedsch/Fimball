@@ -28,18 +28,18 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     @FXML
     private void startClicked()
     {
-        playerNameViewModel.startClicked();
+        playerNameViewModel.startGame();
     }
 
     @FXML
     private void abortClicked()
     {
-        playerNameViewModel.abortClicked();
+        playerNameViewModel.exitDialog();
     }
 
     @FXML
     private void addPlayerClicked()
     {
-        playerNameViewModel.addPlayerClicked();
+        playerNameViewModel.addPlayer();
     }
 }

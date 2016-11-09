@@ -53,7 +53,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Vergrößert die Ansicht des FlipperAutomaten für den Nutzer.
      */
-    public void zoomPlusClicked()
+    public void zoomIn()
     {
 
     }
@@ -61,7 +61,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Verkleinert die Ansicht des FlipperAutomaten für den Nutzer.
      */
-    public void zoomMinusClicked()
+    public void zoomOut()
     {
 
     }
@@ -69,7 +69,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zu dem Spiel-Window, wo der gerade von dem Nutzer editierte FlipperAutomat getestet werden kann.
      */
-    public void playClicked()
+    public void startMachine()
     {
         sceneManager.setWindow(new GameViewModel(new GameSession()));
     }
@@ -77,7 +77,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zu dem Automat-Einstellungs-Window, wo der gerade von dem Nutzer editierte FlipperAutomat u.a. gespeichert werden kann.
      */
-    public void settingsClicked()
+    public void showSettingsDialog()
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }

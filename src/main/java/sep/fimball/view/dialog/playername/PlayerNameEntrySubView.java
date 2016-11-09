@@ -29,6 +29,6 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
     @FXML
     private void deletePlayerClicked()
     {
-        playerNameEntrySubViewModel.deleteClicked();
+        playerNameEntrySubViewModel.deletePlayerName();
     }
 }
