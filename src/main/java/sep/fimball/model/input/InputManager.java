@@ -17,6 +17,10 @@ public class InputManager
      */
     private static InputManager singletonInstance;
 
+    /**
+     * Gibt den bereits existierenden Inputmanager oder einen neu angelegten zurück, falls noch keiner existiert
+     * @return
+     */
     public static InputManager getSingletonInstance()
     {
         if (singletonInstance == null)

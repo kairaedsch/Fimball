@@ -61,6 +61,9 @@ public class Settings
         // TODO load settings file here
     }
 
+    /**
+     * Serialisiert und speichert die Einstelunngen.
+     */
     public void Serialize()
     {
 

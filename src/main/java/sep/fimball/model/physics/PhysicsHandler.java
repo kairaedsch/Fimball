@@ -34,6 +34,10 @@ public class PhysicsHandler
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt
      */
     private Timer physicTimer;
+
+    /**
+     * Die Aufgabe, die der Timer ausführen soll.
+     */
     private TimerTask timerTask;
     /**
      * Hier werden alle Tastendrücke die vom InputManager an den PhysikHandler mithilfe des Observer Pattern gesendet

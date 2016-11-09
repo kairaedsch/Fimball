@@ -24,7 +24,7 @@ public class ElementType
     // TODO make enum
 
     /**
-     *
+     * TODO
      */
     public String elementType;
 
@@ -35,7 +35,14 @@ public class ElementType
 
     public class Collider
     {
+        /**
+         * Speichert die Polygon-Collider des Elementtyps.
+         */
         public Polygon[] polygons;
+
+        /**
+         * Speichert die Kreis-Collider des Elementtyps.
+         */
         public Circle[] circles;
 
         /**
@@ -48,6 +55,9 @@ public class ElementType
          */
         public ForceObject forces;
 
+        /**
+         * Speichert die Punkte, die ein Treffer durch die Kugel bringt.
+         */
         public boolean givesPoints;
 
         public class Polygon

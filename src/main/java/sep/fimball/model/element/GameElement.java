@@ -34,10 +34,25 @@ public class GameElement
      * Diese Zahl zählt wie oft das ElementType in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
     private IntegerProperty hitCounter;
+
+    /**
+     * Die Punkte, die das Treffen des Elements durch die Kugel bringt.
+     */
     private IntegerProperty pointReward;
+
+    /**
+     * TODO
+     */
     private Animation currentAnimation;
 
+    /**
+     * ZODO
+     */
     private List<PhysicsUpdateEventArgs> physicsUpdates;
+
+    /**
+     * TODO
+     */
     private List<CollisionEventArgs> physicsCollisions;
 
     /**
@@ -69,11 +84,19 @@ public class GameElement
         //Todo: trigger animation, set currentAnimation, start that animation
     }
 
+    /**
+     * TODO
+     * @param update
+     */
     public void addPhysicsUpdate(PhysicsUpdateEventArgs update)
     {
         physicsUpdates.add(update);
     }
 
+    /**
+     * TODO
+     * @param update
+     */
     public void addCollisionUpdate(CollisionEventArgs update)
     {
         physicsCollisions.add(update);

@@ -6,12 +6,19 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Verwaltet die mitgelieferten und neu erstellten Flipperautomaten.
  */
 public class PinballMachineManager
 {
+    /**
+     * Die einzige Instanz des Managers.
+     */
     private static PinballMachineManager singletonInstance;
 
+    /**
+     * Gibt den bereits existierenden ElementManager oder  einen neu angelegten zurück, falls noch keiner existiert.
+     * @return
+     */
     public static PinballMachineManager getInstance()
     {
         if(singletonInstance == null) singletonInstance = new PinballMachineManager();
@@ -20,6 +27,9 @@ public class PinballMachineManager
 
     private MapProperty<Integer, PinballMachine> tableBlueprints;
 
+    /**
+     * Erzeugt eine neue Instanz von PinballMachineManager.
+     */
     private PinballMachineManager()
     {
         tableBlueprints = new SimpleMapProperty<>(FXCollections.observableHashMap());
@@ -35,6 +45,10 @@ public class PinballMachineManager
         return tableBlueprints;
     }
 
+    /**
+     * Serialisiert und speichert den Flipperautomaten mit der gegebenen Id.
+     * @param blueprintId
+     */
     public void save(int blueprintId)
     {
 

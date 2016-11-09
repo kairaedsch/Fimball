@@ -8,10 +8,25 @@ import sep.fimball.model.element.GameElement;
  */
 public class PhysicsElement
 {
+    /**
+     * Das zugehörige GameElement.
+     */
     GameElement element;
+
+    /**
+     * Die aktuelle Position des PhysikElements.
+     */
     Vector2 position;
+
+    /**
+     * Die aktuelle Rotation.
+     */
     double rotation;
 
+    /**
+     * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
+     * @param element
+     */
     public PhysicsElement(GameElement element)
     {
         this.element = element;
@@ -19,6 +34,9 @@ public class PhysicsElement
         this.rotation = element.getRotation();
     }
 
+    /**
+     * Aktualisiert Position und Rotation des zugehörigen GameElements.
+     */
     public void writeToGameElement()
     {
         element.addPhysicsUpdate(new PhysicsUpdateEventArgs(position, rotation));

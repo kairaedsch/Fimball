@@ -6,12 +6,12 @@ package sep.fimball.model.physics;
  */
 public class PhysicsForce
 {
-    /*
+    /**
      * Multiplikator welcher vom Nutzer im Editor eingestellt wird.
      * Dieser Multiplikator wird mit dem im Bahnelement eingestellten Standardwert der Kraft multipliziert
      */
     private double force;
-    /*
+    /**
      * Typ der Kraft, wobei die Unterschiedlichen Arten in der ForceType Aufzählung erklärt werden
      */
     private ForceType type;
