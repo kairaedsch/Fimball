@@ -28,22 +28,20 @@ public class PinballMachineSelectorSubViewModel
      */
     private StringProperty imagePath;
 
-    //TODO remove blueprintTableId
-    private IntegerProperty blueprintTableId;
-
     /**
      * Erstellt ein PinballMachineSelectorSubViewModel.
      * @param pinballMachine
      */
-    PinballMachineSelectorSubViewModel(PinballMachine pinballMachine)
+    PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
+        this.mainMenu = mainMenu;
+        this.pinballMachine = pinballMachine;
+        
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
-        blueprintTableId = new SimpleIntegerProperty();
 
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.imagePathProperty());
-        blueprintTableId.bind(pinballMachine.blueprintTableIdProperty());
     }
 
     /**
@@ -51,7 +49,7 @@ public class PinballMachineSelectorSubViewModel
      */
     public void clicked()
     {
-        mainMenu.blueprintPreviewClick(blueprintTableId.get());
+        mainMenu.switchPinballMachineInfo(pinballMachine);
     }
 
     /**
@@ -70,11 +68,5 @@ public class PinballMachineSelectorSubViewModel
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
-    }
-
-    //TODO remove
-    public ReadOnlyIntegerProperty blueprintTableIdProperty()
-    {
-        return blueprintTableId;
     }
 }

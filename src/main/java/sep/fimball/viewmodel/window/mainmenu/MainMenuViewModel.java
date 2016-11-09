@@ -37,9 +37,18 @@ public class MainMenuViewModel extends WindowViewModel
         super(WindowType.MAIN_MENU);
 
         pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(pinballMachine));
+        ListPropertyConverter.bindAndConvertMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine));
 
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
+    }
+
+    /**
+     * Wechselt den FlipperAutomaten, der detailreich dargestellt wird, auf den übergebenen.
+     * @param pinballMachine
+     */
+    public void switchPinballMachineInfo(PinballMachine pinballMachine)
+    {
+        pinballMachineInfoSubViewModel.update(pinballMachine);
     }
 
     /**
@@ -48,15 +57,6 @@ public class MainMenuViewModel extends WindowViewModel
     public void settingsClicked()
     {
         sceneManager.setDialog(new GameSettingsViewModel());
-    }
-
-    public void blueprintPreviewClick(int blueprintTableId)
-    {
-        PinballMachine pinballMachine = PinballMachineManager.getInstance().tableBlueprintsProperty().get(blueprintTableId);
-        if (pinballMachine != null)
-        {
-            pinballMachineInfoSubViewModel.update(pinballMachine);
-        }
     }
 
     /**
