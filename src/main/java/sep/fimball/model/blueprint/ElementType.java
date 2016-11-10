@@ -77,7 +77,7 @@ public class ElementType
         {
             public int frameCount;
             public double duration;
-            public String frameName;
+            public String animationName;
         }
 
         public class ForceObject

@@ -44,15 +44,12 @@ public class World
      */
     private KeyFrame keyFrame;
 
-    private Observable observable;
-
     /**
      * Erzeugt eine World mit der übergebenen Liste von PlacedElements.
      * @param elementList
      */
 	public World(PlacedElementList elementList)
     {
-        observable = new Observable();
         gameElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ballProperty = new SimpleObjectProperty<>();
 
@@ -64,11 +61,6 @@ public class World
         // TODO generate walls around playfield
     }
 
-    public void notifyToRedraw(Observer observer)
-    {
-        observable.addObserver(observer);
-    }
-
     /**
      * Startet die Gameloop.
      */
@@ -78,8 +70,7 @@ public class World
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
-            observable.hasChanged();
-            observable.notifyObservers();
+            // TODO update GameElements
         }));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();

@@ -28,7 +28,7 @@ public class CircleCollider extends Collider
      */
     public CircleCollider(Vector2 position, double radius, WorldLayer layer, PhysicsForce force, Animation animation)
     {
-        super(layer, force, animation);
+        super(layer, force);
         this.position = position;
         this.radius = radius;
     }

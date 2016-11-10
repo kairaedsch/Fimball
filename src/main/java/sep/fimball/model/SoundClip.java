@@ -1,7 +1,7 @@
 package sep.fimball.model;
 
 /**
- * SoundClip ist eine Aufzählung von Ereignissen an denen Soundeffekte abgespielt werden.
+ * SoundClip ist eine Aufzählung von Ereignissen bei denen Soundeffekte abgespielt werden.
  */
 public enum SoundClip
 {

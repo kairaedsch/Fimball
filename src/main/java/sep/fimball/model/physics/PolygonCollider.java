@@ -24,7 +24,7 @@ public class PolygonCollider extends Collider
      */
     public PolygonCollider(List<Vector2> vertices, WorldLayer layer, PhysicsForce force, Animation animation)
     {
-        super(layer, force, animation);
+        super(layer, force);
         this.vertices = vertices;
     }
 

@@ -57,8 +57,6 @@ public class PinballCanvasViewModel
         ListPropertyConverter.bindAndConvertList(spriteSubViewModels, world.gameElementsProperty(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
-        Observer redrawObserver = (o, arg) -> redraw();
-        world.notifyToRedraw(redrawObserver);
     }
 
     /**

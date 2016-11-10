@@ -72,7 +72,7 @@ public class GameSession
     }
 
     /**
-     * Pausiert das Spiel, in dem die Physikberechnung und das Zeichnen des Canvas gestoppt wird.
+     * Pausiert das Spiel, in dem die Physikberechnung sowie die Spielschleife gestoppt wird.
      */
     public void pauseAll()
     {
