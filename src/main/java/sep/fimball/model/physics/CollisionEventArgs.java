@@ -3,7 +3,7 @@ package sep.fimball.model.physics;
 import sep.fimball.model.element.GameElement;
 
 /**
- * Argumente, die an das "Ziel-GameElement" bei einer Kollision mit einem anderen GameElement übergeben werden.
+ * Argumente, die an das "Ziel-GameElement" (das GameElement welche diese CollisionEventArgs beim OnCollision Event übergeben bekommt) bei einer Kollision mit einem anderen GameElement übergeben werden.
  */
 public class CollisionEventArgs
 {

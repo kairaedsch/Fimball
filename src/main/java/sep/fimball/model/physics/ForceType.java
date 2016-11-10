@@ -1,7 +1,7 @@
 package sep.fimball.model.physics;
 
 /**
- * Enthält verschiedene Arten von Physik-Kräften, die beim aufprallen eines Balls an einem Collider auf den Ball gewirkt werden können.
+ * Enthält verschiedene Arten von Physik-Kräften, die beim Aufprallen eines Balls an einem Collider auf den Ball gewirkt werden können.
  */
 public enum ForceType
 {

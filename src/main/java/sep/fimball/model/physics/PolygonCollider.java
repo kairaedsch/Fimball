@@ -6,7 +6,7 @@ import sep.fimball.model.Animation;
 import java.util.List;
 
 /**
- * Implementierung eines Colliders, welcher die Form eines Polygons hat.
+ * Implementierung eines Colliders, welcher die Form eines Polygons hat. Um Kollisionen korrekt erkennen zu können muss das Polygon konvex sein.
  */
 public class PolygonCollider extends Collider
 {

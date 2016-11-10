@@ -46,12 +46,12 @@ public class GameElement
     private Animation currentAnimation;
 
     /**
-     * Liste von Änderungen an Position/Rotation die der PhysicsHandler am PhysicsElement vorgenommen hat und die im nächsten update des GameElement übernommen werden sollen
+     * Liste von Änderungen an Position/Rotation die der PhysicsHandler an dem zu diesem GameElement zugehörigen PhysicsElement vorgenommen hat und die im nächsten Schritt der Spielschleife vom GameElement übernommen werden sollen.
      */
     private List<PhysicsUpdateEventArgs> physicsUpdates;
 
     /**
-     * Liste von Kollisionen die der PhysicsHandler mit dem GameElement erkannt hat welche im nächsten update des GameElement abgearbeitet werden sollen
+     * Liste von Kollisionen die der PhysicsHandler mit dem GameElement erkannt hat welche im nächsten Schritt der Spielschleife vom GameElement abgearbeitet werden sollen.
      */
     private List<CollisionEventArgs> physicsCollisions;
 
