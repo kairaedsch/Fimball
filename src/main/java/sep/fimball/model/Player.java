@@ -6,19 +6,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Stellt einen Spieler welcher an einer Partie teilnimmt.
+ * Stellt einen Spieler dar welcher an einer Partie teilnimmt.
  */
 public class Player
 {
-    /*
+    /**
      * Die Anzahl an Punkten welcher der Spieler in der aktuellen Partie hat.
      */
     private IntegerProperty points;
-    /*
+    /**
      * Der Name des Spielers.
      */
     private StringProperty name;
-    /*
+    /**
      * Die Anzahl an Reservekugeln die dem Spieler verbleiben.
      */
     private IntegerProperty balls;

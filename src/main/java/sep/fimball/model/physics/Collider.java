@@ -1,8 +1,6 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.model.Animation;
-import sep.fimball.model.WorldLayer;
-import sep.fimball.model.physics.PhysicsForce;
 
 /**
  * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.

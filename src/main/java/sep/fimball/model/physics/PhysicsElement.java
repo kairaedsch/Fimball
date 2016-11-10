@@ -4,7 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.element.GameElement;
 
 /**
- * Repräsentiert ein GameElement in der Physikberechnung.
+ * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden
  */
 public class PhysicsElement
 {

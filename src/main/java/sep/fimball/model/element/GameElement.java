@@ -11,7 +11,7 @@ import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 import java.util.List;
 
 /**
- * Stellt ein Spielelement auf einem Flipperautomaten dar.
+ * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementType/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
  */
 public class GameElement
 {
@@ -46,12 +46,12 @@ public class GameElement
     private Animation currentAnimation;
 
     /**
-     * ZODO
+     * Liste von Änderungen an Position/Rotation die der PhysicsHandler am PhysicsElement vorgenommen hat und die im nächsten update des GameElement übernommen werden sollen
      */
     private List<PhysicsUpdateEventArgs> physicsUpdates;
 
     /**
-     * TODO
+     * Liste von Kollisionen die der PhysicsHandler mit dem GameElement erkannt hat welche im nächsten update des GameElement abgearbeitet werden sollen
      */
     private List<CollisionEventArgs> physicsCollisions;
 

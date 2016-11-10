@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 
 /**
- * Eine PinBallMachine stellt einen Flipperautomaten zur Serialisierung dar.
+ * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.
  */
 public class PinballMachine
 {
@@ -83,6 +83,9 @@ public class PinballMachine
         this.name.set(name);
     }
 
+    /**
+     * Fügt einen Highscore zum Flipperautomaten hinzu
+     */
     public void addHighscore(Highscore highscore)
     {
         highscoreList.add(highscore);

@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import java.awt.*;
 
 /**
- * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar.
+ * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementType wird diese Klasse zur Serialisierung genutzt.
  */
 public class PlacedElement
 {
@@ -29,6 +29,9 @@ public class PlacedElement
      */
     IntegerProperty points;
 
+    /**
+     * TODO
+     */
     DoubleProperty multiplier;
 
     /**

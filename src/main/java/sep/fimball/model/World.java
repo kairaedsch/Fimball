@@ -20,7 +20,7 @@ import java.util.Observer;
 public class World
 {
     /**
-     * Die Wiederholungsrate, mit der sich die Game Loop aktualisiert.
+     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
     private final double TIMELINE_TICK = 1 / 60D;
 
@@ -30,7 +30,7 @@ public class World
     private ListProperty<GameElement> gameElements;
 
     /**
-     *
+     * Die Kugel welche gesondert gespeichert wird da häufig auf sie zugegriffen wird
      */
     private ObjectProperty<Ball> ballProperty;
 
@@ -39,12 +39,15 @@ public class World
      */
     private Timeline gameLoop;
 
+    /**
+     * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
+     */
     private KeyFrame keyFrame;
 
     private Observable observable;
 
     /**
-     * Erzeugt eine World mit den übergebenen GameElemente.
+     * Erzeugt eine World mit der übergebenen Liste von PlacedElements.
      * @param elementList
      */
 	public World(PlacedElementList elementList)

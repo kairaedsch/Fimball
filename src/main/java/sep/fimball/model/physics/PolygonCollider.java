@@ -2,7 +2,6 @@ package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
-import sep.fimball.model.WorldLayer;
 
 import java.util.List;
 

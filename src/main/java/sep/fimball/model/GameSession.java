@@ -38,7 +38,7 @@ public class GameSession
     private PhysicsHandler physicsHandler;
 
     /**
-     * Die Spielwelt des Flipperautomaten.
+     * Die Spielwelt des Flipperautomaten auf dem in der aktuellen Spielpartie gespielt wird.
      */
     private World world;
 

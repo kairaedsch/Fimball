@@ -55,6 +55,10 @@ public class SoundManager
         // TODO load music and sound clips here
     }
 
+    /**
+     * Spielt die angegebene Musik in einer Dauerschleife ab.
+     * @param clip
+     */
     public void playMusicClip(MusicClip clip)
     {
         if (currentMusic != null)
@@ -72,18 +76,4 @@ public class SoundManager
     {
         fxClips.get(clip).play();
     }
-
-	public void PlayFxClip(SoundClip clip) {
-		// TODO - implement SoundManager.PlayFxClip
-		throw new UnsupportedOperationException();
-	}
-
-    /**
-     * Spielt die angegebene Musik in einer Dauerschleife ab.
-     * @param clip
-     */
-	public void PlayMusicClip(MusicClip clip) {
-		// TODO - implement SoundManager.PlayMusicClip
-		throw new UnsupportedOperationException();
-	}
 }

@@ -1,12 +1,13 @@
-package sep.fimball.model;
+package sep.fimball.model.physics;
 
 /**
  * WorldLayer ist eine Aufzählung von Ebenen, die es in einer Spielwelt gibt und auf der sich die Kugel befinden kann.
+ * TODO: Nur Kugel? Wird in Collidern gespeichert
  */
 public enum WorldLayer
 {
     /**
-     * Die allgemeine Spielebene.
+     * Die allgemeine, untere Spielfeldebene.
      */
     GROUND,
 

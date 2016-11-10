@@ -18,7 +18,7 @@ public class ElementType
     public String editorDescription;
 
     /**
-     * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel man Elemente von diesem Typ drehen kann.
+     * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
      */
     public double rotationAccuracy;
     // TODO make enum
@@ -46,7 +46,7 @@ public class ElementType
         public Circle[] circles;
 
         /**
-         * Die Animationen, die dieser Elementtyp abspielt.
+         * Die Animationen, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
          */
         public AnimationObject animations;
 

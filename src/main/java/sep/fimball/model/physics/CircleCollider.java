@@ -2,10 +2,9 @@ package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
-import sep.fimball.model.WorldLayer;
 
 /**
- * Implementierung eines Colliders, die die Form eines Kreises hat.
+ * Implementierung eines Colliders, der die Form eines Kreises hat.
  */
 public class CircleCollider extends Collider
 {

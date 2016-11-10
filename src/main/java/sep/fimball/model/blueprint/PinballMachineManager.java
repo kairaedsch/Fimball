@@ -25,6 +25,9 @@ public class PinballMachineManager
         return singletonInstance;
     }
 
+    /**
+     * TODO
+     */
     private MapProperty<Integer, PinballMachine> tableBlueprints;
 
     /**

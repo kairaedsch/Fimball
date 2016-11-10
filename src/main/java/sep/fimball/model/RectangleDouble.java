@@ -3,7 +3,7 @@ package sep.fimball.model;
 import sep.fimball.general.data.Vector2;
 
 /**
- * RectangleDouble stellt ein Rechteck dar, wobei seine Eigenschaften mit Double-Werten gespeichert werden.
+ * RectangleDouble stellt ein Rechteck dar, wobei seine Daten mit Double-Werten gespeichert werden.
  */
 public class RectangleDouble
 {
