@@ -8,7 +8,7 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer einen Flipperautomaten zu bearbeiten.
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
@@ -18,20 +18,27 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private Canvas canvas;
 
     /**
-     *
+     * Das zurzeit auf dem Spielfeld vom Nutzer ausgewählte Element.
      */
     @FXML
     private Node selectedElement;
 
     /**
-     *
+     * Die zum Platzieren auf dem Spielfeld verfügbaren Elemente.
      */
     @FXML
-    private VBox AvailableElements;
+    private VBox availableElements;
 
+    /**
+     * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
+     */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
-      @Override
+    /**
+     * Setzt das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
+     * @param pinballMachineEditorViewModel
+     */
+    @Override
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
