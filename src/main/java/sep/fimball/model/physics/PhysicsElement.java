@@ -41,4 +41,19 @@ public class PhysicsElement
     {
         element.addPhysicsUpdate(new PhysicsUpdateEventArgs(position, rotation));
     }
+
+    public GameElement getElement()
+    {
+        return element;
+    }
+
+    public void setPosition(Vector2 position)
+    {
+        this.position = position;
+    }
+
+    public void setRotation(double rotation)
+    {
+        this.rotation = rotation;
+    }
 }
