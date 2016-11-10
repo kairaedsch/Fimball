@@ -16,27 +16,27 @@ import java.util.TimerTask;
 public class PhysicsHandler
 {
     /**
-     * Der PhysikTimer beginnt ohne Verzögerung wenn er gestartet wird
+     * Die Physikschleife beginnt ohne Verzögerung wenn sie gestartet wird
      */
     private final int TIMER_DELAY = 0;
 
     /**
-     * Gibt an nach wie vielen Millisekunden Wartezeit die run Methode erneut ausgeführt wrid
+     * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
     private final int TICK_RATE = 1000 / 60;
 
     /**
-     * Eine Referenz auf die Welt auf welcher die physikalischen Berechnungen ausgeführt werden
+     * Eine Referenz auf die Welt auf welcher die physikalischen Berechnungen ausgeführt werden.
      */
     private World world;
 
     /**
-     * Der Timer wird zur Erzeugung der Physik Schleife genutzt
+     * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
      */
     private Timer physicTimer;
 
     /**
-     * Die Aufgabe, die der Timer ausführen soll.
+     * Die Aufgabe, die in jedem Schritt der Physikschleife ausgeführt werden soll.
      */
     private TimerTask timerTask;
     /**
@@ -78,7 +78,7 @@ public class PhysicsHandler
         timerTask = new TimerTask()
         {
             /**
-             * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig
+             * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig.
              */
             @Override
             public void run()
