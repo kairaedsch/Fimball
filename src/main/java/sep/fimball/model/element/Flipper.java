@@ -7,12 +7,19 @@ import sep.fimball.model.blueprint.PlacedElement;
  */
 public class Flipper extends GameElement
 {
+    private boolean isLeft;
     /**
      * Erstellt einen neuen Flipperarm.
      * @param element
      */
-    public Flipper(PlacedElement element)
+    public Flipper(PlacedElement element, boolean isLeft)
     {
         super(element);
+        this.isLeft = isLeft;
+    }
+
+    public boolean isLeft()
+    {
+        return isLeft;
     }
 }
