@@ -76,7 +76,7 @@ public class GameElement
         physicsUpdates.clear();
     }
 
-    private void onCollision(CollisionEventArgs args)
+    public void onCollision(CollisionEventArgs args)
     {
         //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
         hitCounter.set(hitCounter.get() + 1);
