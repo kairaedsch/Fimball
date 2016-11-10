@@ -1,6 +1,7 @@
 package sep.fimball.view.window.game;
 
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import sep.fimball.view.window.WindowView;
@@ -28,6 +29,11 @@ public class GameView extends WindowView<GameViewModel>
      */
     @FXML
     private HBox reserveBalls;
+
+    /**
+     * Das Canvas, in welchen der Flipperautomat gezeichnet wird.
+     */
+    private Canvas canvas;
 
     /**
      * Das zur GameView gehörende GameViewModel.
