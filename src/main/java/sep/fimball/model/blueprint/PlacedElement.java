@@ -17,7 +17,7 @@ public class PlacedElement
     /**
      * Verweis auf den Typ des Elements.
      */
-    StringProperty greenprintElementId;
+    StringProperty elementTypeId;
 
     /**
      * Position des Elementes auf dem Automaten.
@@ -37,13 +37,13 @@ public class PlacedElement
     /**
      * Legt ein neues Element  mit gegebener ID, Typ und Position an.
      * @param blueprintElementId
-     * @param greenprintElementId
+     * @param elementTypeId
      * @param position
      */
-    public PlacedElement(int blueprintElementId, String greenprintElementId, Point position)
+    public PlacedElement(int blueprintElementId, String elementTypeId, Point position)
     {
         this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
-        this.greenprintElementId = new SimpleStringProperty(greenprintElementId);
+        this.elementTypeId = new SimpleStringProperty(elementTypeId);
         this.position = new SimpleObjectProperty<>(position);
         this.points = new SimpleIntegerProperty();
         this.multiplier = new SimpleDoubleProperty();
@@ -54,9 +54,9 @@ public class PlacedElement
         return blueprintElementId;
     }
 
-    public ReadOnlyStringProperty greenprintElementIdProperty()
+    public ReadOnlyStringProperty elementTypeIdProperty()
     {
-        return greenprintElementId;
+        return elementTypeId;
     }
 
     public ReadOnlyObjectProperty<Point> positionProperty()
