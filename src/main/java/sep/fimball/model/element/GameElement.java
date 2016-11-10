@@ -9,6 +9,7 @@ import sep.fimball.model.physics.CollisionEventArgs;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementType/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
@@ -41,6 +42,11 @@ public class GameElement
     private IntegerProperty pointReward;
 
     /**
+     * Enthält alle Animationen, die durch einen Zusammenprall mit einem Collider ausgelöst werden.
+     */
+    private Map<Collider, Animation> allAnimations;
+
+    /**
      * TODO
      */
     private Animation currentAnimation;
@@ -69,7 +75,7 @@ public class GameElement
      */
     public void update()
     {
-        colliders.forEach(Collider::updateAnimation);
+        // TODO: update animation
         // TODO: read collisions
         physicsCollisions.clear();
         // TODO: read updates
@@ -130,11 +136,6 @@ public class GameElement
     public void setRotation(double rotation)
     {
         this.rotation.set(rotation);
-    }
-
-    public List<Collider> getColliders()
-    {
-        return colliders;
     }
 
     public ReadOnlyStringProperty currentAnimationFrameProperty()

@@ -1,7 +1,5 @@
 package sep.fimball.model.physics;
 
-import sep.fimball.model.Animation;
-
 /**
  * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
  */
@@ -18,29 +16,14 @@ public abstract class Collider
     private PhysicsForce force;
 
     /**
-     * Animation, die bei Berührung des Balles an diesem ElementType abgespielt wird. null, falls keine Animation vorhanden.
-     */
-    private Animation animation;
-
-    /**
      * Erstellt einen neuen Collider.
      * @param layer
      * @param force
-     * @param animation
      */
-    public Collider(WorldLayer layer, PhysicsForce force, Animation animation)
+    public Collider(WorldLayer layer, PhysicsForce force)
     {
         this.layer = layer;
         this.force = force;
-        this.animation = animation;
-    }
-
-    /**
-     * Wird kurz vor dem Zeichen des Automaten im Canvas aufgerufen, um den Pfad zum aktuell ausgewählte Bild zu aktualisieren.
-     */
-    public void updateAnimation()
-    {
-        animation.update();
     }
 
     public WorldLayer getLayer()
@@ -51,10 +34,5 @@ public abstract class Collider
     public PhysicsForce getForce()
     {
         return force;
-    }
-
-    public Animation getAnimation()
-    {
-        return animation;
     }
 }
