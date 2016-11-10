@@ -1,4 +1,4 @@
-package sep.fimball.view.window.mainmenu;
+package sep.fimball.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
