@@ -3,6 +3,7 @@ package sep.fimball;
 import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import sep.fimball.model.blueprint.ElementTypeManager;
 import sep.fimball.view.SceneManagerView;
 
 /**
@@ -12,6 +13,7 @@ public class Main extends Application
 {
     public static void main(String args[])
     {
+        ElementTypeManager.getInstance();
         SvgImageLoaderFactory.install();
         launch();
     }

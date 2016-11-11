@@ -21,11 +21,11 @@ public class ElementType
      * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
      */
     public double rotationAccuracy;
-    // TODO make enum
 
     /**
      * TODO
      */
+    // TODO make enum
     public String elementType;
 
     /**
@@ -33,7 +33,7 @@ public class ElementType
      */
     public Collider[] colliders;
 
-    public class Collider
+    public static class Collider
     {
         /**
          * Speichert die Polygon-Collider des Elementtyps.
@@ -60,27 +60,32 @@ public class ElementType
          */
         public boolean givesPoints;
 
-        public class Polygon
+        /**
+         * Die Kräfte, die bei Interaktion mit diesem Elementtyp auftreten.
+         */
+        public String soundName;
+
+        public static class Polygon
         {
             public boolean onGround;
             public Vector2[] points;
         }
 
-        public class Circle
+        public static class Circle
         {
             public boolean onGround;
             public double x, y;
             public double radius;
         }
 
-        public class AnimationObject
+        public static class AnimationObject
         {
             public int frameCount;
             public double duration;
             public String animationName;
         }
 
-        public class ForceObject
+        public static class ForceObject
         {
             public String forceType;
             public double strength;
