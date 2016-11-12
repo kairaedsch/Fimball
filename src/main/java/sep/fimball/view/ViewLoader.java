@@ -29,6 +29,10 @@ public class ViewLoader<ViewT>
         load(viewType.getFxmlPath());
     }
 
+    /**
+     * Lädt aus der gegebenen FXML-Datei, setzt deren RootNode als {@code rootNode} und lädt und setzt die zur {@code rootNode} gehörende View.
+     * @param fxmlPath Der Pfad zur FXML-Datei aus der geladen werden soll.
+     */
     private void load(String fxmlPath)
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
@@ -45,8 +49,8 @@ public class ViewLoader<ViewT>
     }
 
     /**
-     * Gibt das RootNode der geladenen FXML-Datei zurück.
-     * @return
+     * Gibt die RootNode der geladenen FXML-Datei zurück.
+     * @return Die RootNode.
      */
     public Node getRootNode()
     {
@@ -55,7 +59,7 @@ public class ViewLoader<ViewT>
 
     /**
      * Gibt die View (FxController) der geladenen FXML-Datei zurück.
-     * @return
+     * @return Die View.
      */
     public ViewT getView()
     {

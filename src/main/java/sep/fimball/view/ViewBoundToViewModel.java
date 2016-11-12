@@ -7,7 +7,7 @@ public interface ViewBoundToViewModel<ViewModelT>
 {
     /**
      * Injeziert das ViewModel.
-     * @param viewModelT
+     * @param viewModelT Das ViewModelT, das gesetzt werden soll.
      */
     public void setViewModel(ViewModelT viewModelT);
 }

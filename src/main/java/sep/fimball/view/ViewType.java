@@ -7,7 +7,7 @@ public interface ViewType
 {
     /**
      * Gibt einen FXML-Datei-Pfad zurück.
-     * @return
+     * @return Der Pfad einer FXML-Datei.
      */
     public String getFxmlPath();
 }

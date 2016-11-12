@@ -22,6 +22,10 @@ public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
     @FXML
     public Label score;
 
+    /**
+     * Bindet die HighscoreSubView an den zugehörigen Highscore.
+     * @param highscore Der Highscore, der gesetzt werden soll.
+     */
     public void setViewModel(Highscore highscore)
     {
         //highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty(), " ", highscore.scoreProperty().asString()));

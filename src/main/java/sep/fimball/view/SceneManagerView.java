@@ -39,7 +39,7 @@ public class SceneManagerView
 
     /**
      * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welche der oberste Container gelegt wird. Auch legt es die Startgröße des Fenster fest und initialisiert das SceneManagerViewModel an welches es sich dann auch gleich bindet, um bei ViewModel Änderungen reagieren zu können.
-     * @param stage
+     * @param stage Die Stage, die gesetzt werden soll.
      */
     public SceneManagerView(Stage stage)
     {
@@ -71,12 +71,20 @@ public class SceneManagerView
         blurEffect = new GaussianBlur(13);
     }
 
+    /**
+     * TODO
+     * @param event
+     */
     @FXML //TODO write in fxml file
     private void onKeyEvent(KeyEvent event)
     {
         sceneManagerViewModel.onKeyEvent(event);
     }
 
+    /**
+     * Ersetzt das aktuelle Fenster durch das zum gegebenen WindowViewModel gehörende Fenster.
+     * @param windowViewModel Das übergenene WindowVIewModel.
+     */
     private void updateContent(WindowViewModel windowViewModel)
     {
         switch (windowViewModel.getWindowType())
@@ -99,6 +107,10 @@ public class SceneManagerView
         }
     }
 
+    /**
+     * Ersetzt den aktuellen Dialog durch den zum gegebenen DialogVIewModel gehörenden Dialog.
+     * @param dialogViewModel Das übergebene DialogViewModel.
+     */
     private void updateContent(DialogViewModel dialogViewModel)
     {
         switch (dialogViewModel.getDialogType())
@@ -118,12 +130,22 @@ public class SceneManagerView
         }
     }
 
+    /**
+     * Setzt das aktuelle Fenster auf den gegebenen WindowType und verbindet dieses mit dem gegebenen ViewModel.
+     * @param windowType Der WindowType des zu setzenden Fensters.
+     * @param viewModel Das zum windowType gehörende ViewModel.
+     */
     private void setWindow(WindowType windowType, ViewModel viewModel)
     {
         Node windowNode = loadView(windowType, viewModel);
         replaceWindow(windowNode);
     }
 
+    /**
+     * Setzt den aktuellen Dialog auf den gegebenen DialogTyp und verbindet diesen mit dem gegebenen ViewModel.
+     * @param dialogType Der DialogType des zu setzenden Dialogs.
+     * @param viewModel Das zum dialogType gehörende ViewModel.
+     */
     private void setDialog(DialogType dialogType, ViewModel viewModel)
     {
         Node dialogNode = loadView(dialogType, viewModel);
@@ -134,6 +156,12 @@ public class SceneManagerView
         getGlass().setVisible(true);
     }
 
+    /**
+     * Lädt eine View aus dem gegebenen ViewType und verbindet diese mit dem gegebenen ViewModel.
+     * @param viewType Der gegebene ViewType der zu ladenden View.
+     * @param viewModel Das zur geladenen View gehörende ViewModel.
+     * @return Eine Node, die die geladene View verbunden mit dem (@code viewmodel} enthält.
+     */
     private Node loadView(ViewType viewType, ViewModel viewModel)
     {
         ViewLoader<ViewBoundToViewModel<ViewModel>> viewLoader = new ViewLoader<>(viewType);
@@ -151,6 +179,9 @@ public class SceneManagerView
         return viewLoader.getRootNode();
     }
 
+    /**
+     * Blendet den angezigten Dialog aus und entfernt diesen.
+     */
     private void removeDialog()
     {
         replaceDialog(null);
@@ -160,22 +191,38 @@ public class SceneManagerView
         getGlass().setVisible(false);
     }
 
+    /**
+     * Gibt das aktuell angzeigte Fenster zurück.
+     * @return Das aktuell angezeigte Fenster.
+     */
     private Node getWindow()
     {
         return root.getChildren().get(0);
     }
 
+    /**
+     * TODO
+     * @return
+     */
     private Node getGlass()
     {
         return root.getChildren().get(1);
     }
 
+    /**
+     * Ersetzt das aktuell angzeigte Fenster mit dem in {@code node} gespeicherten Fenster.
+     * @param node Eine Node, die eine Fenster-View enthält.
+     */
     private void replaceWindow(Node node)
     {
         root.getChildren().remove(0);
         root.getChildren().add(0, node);
     }
 
+    /**
+     * Ersetzt den aktuell angzeigten Dialog mit dem in {@code node} gespeicherten Dialog.
+     * @param node Ene Node, die eine Dialog-View enthält.
+     */
     private void replaceDialog(Node node)
     {
         root.getChildren().remove(2);

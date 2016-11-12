@@ -15,11 +15,11 @@ import java.util.Map;
 public class ViewModelListToPaneBinder
 {
     /**
-     * Bindet die Einträge aus dem listPropertViewModel an die parent Node unter Nutzung der in dem viewType beschriebene fxml-Datei, welche die View als fx::Controller eingetragen hat. Hierbei muss die View zwingend das ViewBoundToViewModel-Interface implementieren.
-     * @param parentNode
-     * @param viewModelList
-     * @param viewType
-     * @param <ViewModelT>
+     * Bindet die Einträge aus der {@code viewModelList} an die {@code parentNode} unter Nutzung der in dem {@code viewType} beschriebenen fxml-Datei, welche die View als fx::Controller eingetragen hat. Hierbei muss die View zwingend das ViewBoundToViewModel-Interface implementieren.
+     * @param parentNode Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
+     * @param viewModelList Die Liste, deren Einträge an die {@code parentNode} gehängt werden sollen.
+     * @param viewType Der Typ der View der zu anhängenden Einträge.
+     * @param <ViewModelT> Das ViewModel der Einträge in {@code viewModelList}.
      */
     public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType)
     {
@@ -27,13 +27,13 @@ public class ViewModelListToPaneBinder
     }
 
     /**
-     * Bindet die Einträge aus dem listPropertyViewModel an die parent Node unter Nutzung der in dem viewType beschriebene fxml-Datei, welche die View als fx::Controller eingetragen hat. Mithilfe des callers kann dann bei der Node- und ViewGenerierung beliebige Logik mit der View und dem ViewModel ausgeführt werden.
-     * @param parentNode
-     * @param viewModelList
-     * @param viewType
-     * @param caller
-     * @param <ViewT>
-     * @param <ViewModelT>
+     * Bindet die Einträge aus der {@code viewModelList} an die {@code parentNode} unter Nutzung der in dem {@code viewType} beschriebene fxml-Datei, welche die View als fx::Controller eingetragen hat. Mithilfe des {@code caller} kann dann bei der Node- und ViewGenerierung beliebige Logik mit der View und dem ViewModel ausgeführt werden.
+     * @param parentNode Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
+     * @param viewModelList Die Liste, deren Einträge an die {@code parentNode} gehängt werden sollen.
+     * @param viewType Der Typ der View der zu anhängenden Einträge.
+     * @param caller Caller, der beliebige Logik mit der View und dem ViewModel ausgeführt.
+     * @param <ViewT> Die View  der Listeneinträge, die vom Typ {@code viewType} ist.
+     * @param <ViewModelT> Das ViewModel der Einträge in {@code viewModelList}.
      */
     public static <ViewT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
     {
@@ -46,11 +46,11 @@ public class ViewModelListToPaneBinder
     }
 
     /**
-     * Bindet die Einträge aus dem listPropertyViewModel an die parentNode, indem einzelne Nodes mithilfe des viewModelToNodeConverter erzeugt werden.
-     * @param parentNode
-     * @param viewModelList
-     * @param viewModelToNodeConverter
-     * @param <ViewModelT>
+     * Bindet die Einträge aus der @code viewModelList} an die {@code parentNode}, indem einzelne Nodes mithilfe des {@code viewModelToNodeConverter} erzeugt werden.
+     * @param parentNode Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
+     * @param viewModelList Die Liste, deren Einträge an die {@code parentNode} gehängt werden sollen.
+     * @param viewModelToNodeConverter Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
+     * @param <ViewModelT> Das ViewModel der Einträge in {@code viewModelList}.
      */
     public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
@@ -70,11 +70,11 @@ public class ViewModelListToPaneBinder
 
     /**
      * Bindet die Einträge aus dem MapPropertyViewModel an die parentNode, indem einzelne Nodes mithilfe des viewModelToNodeConverter erzeugt werden.
-     * @param parentNode
-     * @param MapPropertyViewModel
-     * @param viewModelToNodeConverter
-     * @param <ViewModelKeyT>
-     * @param <ViewModelT>
+     * @param parentNode Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
+     * @param MapPropertyViewModel Die Map, deren Einträge an die {@code parentNode} gehängt werden sollen.
+     * @param viewModelToNodeConverter  Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
+     * @param <ViewModelKeyT> TODO
+     * @param <ViewModelT> Das ViewModel der Einträge in {@code MapPropertyViewModel}.
      */
     public static <ViewModelKeyT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableMap<ViewModelKeyT, ViewModelT> MapPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
@@ -94,29 +94,29 @@ public class ViewModelListToPaneBinder
 
     /**
      * Das ViewModelToNodeConverter-Interface ermöglicht es, ein Node aus einem ViewModel-Object zu erstellen.
-     * @param <ViewModelT>
+     * @param <ViewModelT>  Das ViewModel, aus dem die Node erstellt werden soll.
      */
     public interface ViewModelToNodeConverter<ViewModelT>
     {
         /**
          * Erzeugt ein Node aus einem ViewModel und gibt das Node-Objekt zurück.
-         * @param viewModel
-         * @return
+         * @param viewModel Das ViewModel, aus dem die Node erstellt werden soll.
+         * @return Die erzeugte Node.
          */
         Node convert(ViewModelT viewModel);
     }
 
     /**
      * Das ViewAndViewModelCaller-Interface stellt eine Methode zu Verfügung, in der sowohl das View-Objekt als auch das ViewModel-Objekt als Parameter übergeben werden. In dem Aufruf kann man dann beliebiges mit den Objekten mache, wie zum Beispiel das ViewModel in die View injezieren.
-     * @param <ViewT>
-     * @param <ViewModelT>
+     * @param <ViewT> Die zu manipulierende View.
+     * @param <ViewModelT> Das zu manipulierende ViewModel.
      */
     public interface ViewAndViewModelCaller<ViewT, ViewModelT>
     {
         /**
          * Erlaubt das manipulieren der View und des ViewModels, wie zum Beispiel das Injezieren des ViewModel in die View.
-         * @param view
-         * @param viewModel
+         * @param view Die zu manipulierende View.
+         * @param viewModel Das zu manipulierende ViewModel.
          */
         void call(ViewT view, ViewModelT viewModel);
     }
