@@ -42,8 +42,8 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Leitet ein Key-Event an den inputManager weiter.
-     * @param event
+     * Leitet das Key-Event an den inputManager weiter.
+     * @param event Das Key-Event, das weitergeleitet werden soll.
      */
     public void onKeyEvent(KeyEvent event)
     {
@@ -51,8 +51,8 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Ändert das aktuelle WindowViewModel auf ein neue, welches übergeben wird.
-     * @param windowViewModel
+     * Ändert das aktuelle WindowViewModel auf ein neuea, welches übergeben wird.
+     * @param windowViewModel Das neue WindowViewModel.
      */
     public void setWindow(WindowViewModel windowViewModel)
     {
@@ -62,8 +62,8 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Ändert das aktuelle DialogViewModel auf ein neue, welches übergeben wird.
-     * @param dialogViewModel
+     * Ändert das aktuelle DialogViewModel auf ein neues, welches übergeben wird.
+     * @param dialogViewModel Das neue DialogViewModel.
      */
     public void setDialog(DialogViewModel dialogViewModel)
     {
@@ -73,7 +73,7 @@ public class SceneManagerViewModel
 
     /**
      * Stellt das aktuelle WindowViewModel für die View zu Verfügung.
-     * @return
+     * @return Das aktuelle WindowViewModel.
      */
     public ObjectProperty<WindowViewModel> windowViewModelProperty()
     {
@@ -82,7 +82,7 @@ public class SceneManagerViewModel
 
     /**
      * Stellt das aktuelle DialogViewModel für die View zu Verfügung.
-     * @return
+     * @return Das aktuelle DialogViewModel.
      */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {

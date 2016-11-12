@@ -12,7 +12,7 @@ public abstract class ViewModel
 
     /**
      * Setzt den SceneManager. Der SceneManager wird dabei nicht im Konstruktor gesetzt, da dieser immer erst beim ViewModel-Wechsel im SceneManager gesetzt wird.
-     * @param sceneManager
+     * @param sceneManager Der zu setzende SceneManager.
      */
     public void setSceneManager(SceneManagerViewModel sceneManager)
     {
