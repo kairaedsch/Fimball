@@ -29,7 +29,7 @@ public class Animation
      * @param blueprintName
      * @param animationBlueprint
      */
-    public Animation(String blueprintName, ElementType.MediaElementType.MediaTrigger.Trigger animationBlueprint)
+    public Animation(String blueprintName, ElementType.MediaElementType.MediaTrigger.Animation animationBlueprint)
     {
         // load frames and stuff
     }

@@ -12,11 +12,7 @@ public class ElementType
      */
     public double rotationAccuracy;
 
-    /**
-     * TODO
-     */
-    // TODO make enum
-    public String elementType;
+    public ElementTypeType elementType;
 
     public PhysicElementType physicElement;
     public MediaElementType mediaElement;
@@ -24,11 +20,11 @@ public class ElementType
 
     public static class PhysicElementType
     {
-        public PhysicCollider[] collider;
+        public PhysicCollider[] colliders;
 
         public static class PhysicCollider
         {
-            public String medieTriggerId;
+            public String mediaTriggerId;
 
             /**
              * Speichert die Polygon-Collider des Elementtyps.
@@ -78,6 +74,8 @@ public class ElementType
          */
         public String editorDescription;
 
+        public MediaTrigger[] triggers;
+
 
         public static class MediaTrigger {
 
@@ -87,9 +85,9 @@ public class ElementType
             /**
              * Die Animationen, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
              */
-            public Trigger triggers;
+            public Animation animation;
 
-            public static class Trigger {
+            public static class Animation {
                 public int frameCount;
                 public double duration;
                 public String animationName;
