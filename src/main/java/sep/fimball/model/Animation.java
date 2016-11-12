@@ -29,7 +29,7 @@ public class Animation
      * @param blueprintName
      * @param animationBlueprint
      */
-    public Animation(String blueprintName, ElementType.Collider.AnimationObject animationBlueprint)
+    public Animation(String blueprintName, ElementType.MediaElementType.MediaTrigger.Trigger animationBlueprint)
     {
         // load frames and stuff
     }
