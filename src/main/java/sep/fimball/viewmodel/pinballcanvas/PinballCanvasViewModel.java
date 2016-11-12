@@ -37,8 +37,8 @@ public class PinballCanvasViewModel
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
-     * @param world
-     * @param gameViewModel
+     * @param world Die Spielwelt des anzuzeigenden Flipperautomatens.
+     * @param gameViewModel Das korrespondierende GameViewModel.
      */
     public PinballCanvasViewModel(World world, GameViewModel gameViewModel)
     {
@@ -48,6 +48,10 @@ public class PinballCanvasViewModel
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
     }
 
+    /**
+     * Initzialisiert die Zeichnung des Canvas.
+     * @param world Die Spielwelt des anzuzeigenden Flipperautomatens.
+     */
     private void init(World world)
     {
         cameraPosition = new SimpleObjectProperty<>();
@@ -61,7 +65,7 @@ public class PinballCanvasViewModel
 
     /**
      * Stellt die Liste aller spriteSubViewModels für die View zu Verfügung.
-     * @return
+     * @return Eine Liste aller spriteSubViewModels.
      */
     public ReadOnlyListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()
     {
@@ -70,7 +74,7 @@ public class PinballCanvasViewModel
 
     /**
      * Stellt die Position der Kamera für die View zu Verfügung.
-     * @return
+     * @return Die Position der Kamera.
      */
     public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
     {
@@ -78,8 +82,8 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Stellt die Stärke des kamera Zooms für die View zu Verfügung.
-     * @return
+     * Stellt die Stärke des Kamera-Zooms für die View zu Verfügung.
+     * @return Die Stärke des Kamera-Zooms.
      */
     public ReadOnlyDoubleProperty cameraZoomProperty()
     {
@@ -88,13 +92,15 @@ public class PinballCanvasViewModel
 
     /**
      * Ermöglicht es der View, sich als Observer zu registrieren, um dann bei Änderungen zum neu zeichnen benachrichtigt zu werden.
-     * @return
      */
     public void notifyToRedraw(Observer observer)
     {
         redrawObservable.addObserver(observer);
     }
 
+    /**
+     * TODO
+     */
     private void redraw()
     {
         redrawObservable.hasChanged();

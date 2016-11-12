@@ -31,7 +31,7 @@ public class SpriteSubViewModel
 
     /**
      * Erstellt ein neues SpriteSubViewModel.
-     * @param baseElement
+     * @param baseElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
      */
     SpriteSubViewModel(GameElement baseElement)
     {
@@ -46,8 +46,8 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Stellt die Position der Sprite für die View zu Verfügung.
-     * @return
+     * Stellt die Position des Sprites für die View zu Verfügung.
+     * @return Die Position des Sprites.
      */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
@@ -56,7 +56,7 @@ public class SpriteSubViewModel
 
     /**
      * Stellt die Drehung des Sprites für die View zu Verfügung.
-     * @return
+     * @return Die Drehung des Sprites.
      */
     public ReadOnlyDoubleProperty rotationProperty()
     {
@@ -65,7 +65,7 @@ public class SpriteSubViewModel
 
     /**
      * Stellt den Pfad zu dem Bild des Sprites für die View zu Verfügung.
-     * @return
+     * @return Der Pfad zum Bild des Sprites.
      */
     public ReadOnlyStringProperty animationFramePathProperty()
     {
@@ -74,7 +74,7 @@ public class SpriteSubViewModel
 
     /**
      * Stellt die Information, ob das Sprite aktuell ausgewählt ist, für die View zu Verfügung.
-     * @return
+     * @return {@code true}, wemm das Sprite ausgewählt ist, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isSelectedProperty()
     {
