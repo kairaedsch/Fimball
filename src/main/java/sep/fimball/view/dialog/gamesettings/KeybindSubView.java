@@ -31,7 +31,7 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
 
     /**
      * Setzt das zur KeyBindView gehörende keybindSubViewModel.
-     * @param keybindSubViewModel
+     * @param keybindSubViewModel Das zu setzende keybindSubViewModel.
      */
     @Override
     public void setViewModel(KeybindSubViewModel keybindSubViewModel) {

@@ -25,7 +25,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
 
     /**
      * Setzt das zur PlayerNameView gehörende PlayerNameViewModel.
-     * @param playerNameViewModel
+     * @param playerNameViewModel Das zu setzende PalyerNameViewModel.
      */
     @Override
     public void setViewModel(PlayerNameViewModel playerNameViewModel)

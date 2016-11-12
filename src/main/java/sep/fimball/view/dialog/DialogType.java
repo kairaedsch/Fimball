@@ -36,7 +36,7 @@ public enum DialogType implements ViewType
 
     /**
      * Liefert den Pfad zur FXML-Datei.
-     * @return
+     * @return Der Pfad zur FXML-Datei.
      */
     @Override
     public String getFxmlPath()

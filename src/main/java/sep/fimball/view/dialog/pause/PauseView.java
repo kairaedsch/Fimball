@@ -23,7 +23,7 @@ public class PauseView extends DialogView<PauseViewModel>
 
     /**
      * Setzt das zum PauseView gehörende PauseViewModel.
-     * @param pauseViewModel
+     * @param pauseViewModel Das zu setzende PauseViewModel.
      */
     @Override
     public void setViewModel(PauseViewModel pauseViewModel)
