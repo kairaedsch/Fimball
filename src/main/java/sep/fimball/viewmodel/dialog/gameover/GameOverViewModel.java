@@ -65,7 +65,7 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zu Verfügung.
-     * @return Eine read-only-Propterty-Liste von Highscores der zuletzt gespielten Flipperautomaten.
+     * @return Eine Liste von Highscores der zuletzt gespielten Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> machineHighscoresProperty()
     {
@@ -74,7 +74,7 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, für die View zu Verfügung.
-     * @return Eine read-only-Propterty-Liste von Highscores der zuletzt gespielten Partie.
+     * @return Eine Liste von Highscores der zuletzt gespielten Partie.
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
