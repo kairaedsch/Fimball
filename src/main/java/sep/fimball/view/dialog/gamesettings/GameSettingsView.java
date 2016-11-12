@@ -10,24 +10,24 @@ import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 
 
 /**
- * Die GameSettingsView ist für die Darstellung der Spiel Einstellungen zuständig und ermöglicht es dem Nutzer, diese zu ändern.
+ * Die GameSettingsView ist für die Darstellung der Spieleinstellungen zuständig und ermöglicht es dem Nutzer, diese zu ändern.
  */
 public class GameSettingsView extends DialogView<GameSettingsViewModel>
 {
     /**
-     * Auswahlmöglichkeit zum Einstellen der Sprache.
+     * Auswahlmöglichkeit zur Einstellung der Sprache.
      */
     @FXML
     private ComboBox language;
 
     /**
-     * Einstellen des Fullscreens.
+     * Einstellung des Fullscreens.
      */
     @FXML
     private CheckBox fullscreen;
 
     /**
-     * Regler für die Master-Lautstärke.
+     * Regler für die Gesamtlautstärke.
      */
     @FXML
     private Slider masterVolumeSlider;
@@ -45,7 +45,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Slider sfxVolumeSlider;
 
     /**
-     * Das Pane zum Einstellen der Tastenbelegungen.
+     * Das Pane zur Einstellung der Tastenbelegungen.
      */
     @FXML
     private GridPane keyBindings;
@@ -56,8 +56,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private GameSettingsViewModel gameSettingsViewModel;
 
     /**
-     * Setzt das zum GameSettignsView gehörende GameSettingsViewModel.
-     * @param gameSettingsViewModel Das zu setzenden GameSettingsViewModel.
+     * Setzt das zum GameSettingsView gehörende GameSettingsViewModel.
+     *
+     * @param gameSettingsViewModel Das zu setzende GameSettingsViewModel.
      */
     @Override
     public void setViewModel(GameSettingsViewModel gameSettingsViewModel)

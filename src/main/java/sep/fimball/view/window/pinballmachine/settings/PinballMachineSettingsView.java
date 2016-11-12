@@ -23,6 +23,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
 
     /**
      * Setzt das zur PinballMachineSettingsView gehörende PinballMachineSettingsViewModel.
+     *
      * @param pinballMachineSettingsViewModel Das zu setzende PinballMachineSettingsViewModel.
      */
     @Override
@@ -41,7 +42,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer zurück zum Hauptmenü möchte.
+     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer zurück zum Hauptmenü wechseln möchte.
      */
     @FXML
     private void menuClicked()
@@ -50,7 +51,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer die PinballMachine speichern möchte.
+     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer den aktuellen Stand der PinballMachine speichern möchte.
      */
     @FXML
     private void saveClicked()

@@ -8,23 +8,23 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
- * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer einen Flipperautomaten zu bearbeiten.
+ * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer, einen Flipperautomaten zu bearbeiten.
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     /**
-     * Das Canvas, in welchen der Flipperautomat gezeichnet wird.
+     * Das Canvas, in dem der Flipperautomat gezeichnet wird.
      */
     private Canvas canvas;
 
     /**
-     * Das zurzeit auf dem Spielfeld vom Nutzer ausgewählte Element.
+     * Das zur Zeit auf dem Spielfeld vom Nutzer ausgewählte Element.
      */
     @FXML
     private Node selectedElement;
 
     /**
-     * Die zum Platzieren auf dem Spielfeld verfügbaren Elemente.
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Elemente.
      */
     @FXML
     private VBox availableElements;
@@ -36,6 +36,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Setzt das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
+     *
      * @param pinballMachineEditorViewModel Das zu setzende PinballMachineEditorViewModel.
      */
     @Override
@@ -45,7 +46,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den editierten Automaten spielen möchte.
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den bearbeiteten Automaten spielen möchte.
      */
     @FXML
     private void playClicked() {
@@ -53,7 +54,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechsseln möchte.
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
      */
     @FXML
     private void settingsClicked() {
@@ -61,7 +62,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in den editierten Automaten reinzoomen möchte.
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten heranzoomen möchte.
      */
     @FXML
     private void zoomInClicked() {
@@ -69,7 +70,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem editierten Automaten herauszoomen möchte.
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem geöffneten Automaten herauszoomen möchte.
      */
     @FXML
     private void zoomOutClicked() {

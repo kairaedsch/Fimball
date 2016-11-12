@@ -38,7 +38,8 @@ public class SpriteSubView
     private SpriteSubViewModel viewModel;
 
     /**
-     * Erzeugt eine neue SpriteSubView mit zugehörigen SpriteSubViewModel und bindet sich daran.
+     * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und bindet sich an dieses.
+     *
      * @param viewModel Das zu setzende SpriteSubViewModel.
      */
     SpriteSubView(SpriteSubViewModel viewModel)
@@ -57,6 +58,7 @@ public class SpriteSubView
 
     /**
      * Lädt das im {@imagePath} gespeicherte Bild.
+     *
      * @param imagePath Der Pfad zum Bild.
      */
     private void loadImage(String imagePath)
@@ -67,6 +69,7 @@ public class SpriteSubView
 
     /**
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
+     *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
      */
     void draw(GraphicsContext graphicsContext)
@@ -82,6 +85,7 @@ public class SpriteSubView
 
     /**
      * TODO
+     *
      * @param gc Der GraphicsContext, auf dem rotiert wird.
      * @param angle Die Gradanzahl, um die rotiert wird.
      * @param px TODO

@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import java.io.IOException;
 
 /**
- * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, welche als FxController im FXML eigetragen ist.
+ * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eigetragen ist.
  */
 public class ViewLoader<ViewT>
 {
@@ -21,7 +21,8 @@ public class ViewLoader<ViewT>
     private ViewT view = null;
 
     /**
-     * Erzeugt einen ViewLoader und lädt die zur viewType gehörende FXML-Datei mit deren zugehöriger View (FxController).
+     * Erzeugt einen ViewLoader und lädt die zur viewType gehörende FXML-Datei mit zugehöriger View (FxController).
+     *
      * @param viewType
      */
     public ViewLoader(ViewType viewType)
@@ -30,8 +31,9 @@ public class ViewLoader<ViewT>
     }
 
     /**
-     * Lädt aus der gegebenen FXML-Datei, setzt deren RootNode als {@code rootNode} und lädt und setzt die zur {@code rootNode} gehörende View.
-     * @param fxmlPath Der Pfad zur FXML-Datei aus der geladen werden soll.
+     * Lädt aus der gegebenen FXML-Datei, setzt die RootNode als {@code rootNode} und lädt und setzt die zur {@code rootNode} gehörende View.
+     *
+     * @param fxmlPath Der Pfad zur FXML-Datei, aus der geladen werden soll.
      */
     private void load(String fxmlPath)
     {
@@ -50,6 +52,7 @@ public class ViewLoader<ViewT>
 
     /**
      * Gibt die RootNode der geladenen FXML-Datei zurück.
+     *
      * @return Die RootNode.
      */
     public Node getRootNode()
@@ -59,6 +62,7 @@ public class ViewLoader<ViewT>
 
     /**
      * Gibt die View (FxController) der geladenen FXML-Datei zurück.
+     *
      * @return Die View.
      */
     public ViewT getView()

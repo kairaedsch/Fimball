@@ -8,7 +8,7 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 
 /**
- * Die AvailableELementSubView ist für die Darstellung eines zum Platzieren auf dem Spielfeld verfügbares Element im Editor zuständig und ermöglicht dem Nutzer, diesens zu platzieren.
+ * Die AvailableELementSubView ist für die Darstellung eines zur Platzierung auf dem Spielfeld verfügbaren Elements im Editor zuständig und ermöglicht dem Nutzer, dieses zu platzieren.
  */
 public class AvailableElementSubView implements ViewBoundToViewModel<AvailableElementSubViewModel>
 {
@@ -31,6 +31,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     /**
      * Setzt das zur AvailableElementSubView gehörende AvailableElementSubViewModel.
+     *
      * @param playerNameEntrySubViewModel Das zu setzende AvailableElementSubViewModel.
      */
     @Override
@@ -40,8 +41,9 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     }
 
     /**
-     * Benachrichtigt das {@code availabeElementSubViewModel}, dass der Nutzer das Element platzieren möchte.
-     * @param mouseEvent TODO
+     * Benachrichtigt das {@code availableElementSubViewModel}, dass der Nutzer das Element platzieren möchte.
+     *
+     * @param mouseEvent Der Mausklick, der den Aufruf dieser Methode bewirkt hat.
      */
     @FXML
     private void placeElement(MouseEvent mouseEvent) {

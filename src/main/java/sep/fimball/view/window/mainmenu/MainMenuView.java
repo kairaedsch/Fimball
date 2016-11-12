@@ -11,12 +11,12 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Die MainMenuView ist für die Darstellung des Hauptmenüs zuständig und ermöglicht dem Nutzer, sich einen Automatena auszusuchen und diesen dann zu editieren oder zu spielen.
+ * Die MainMenuView ist für die Darstellung des Hauptmenüs zuständig und ermöglicht dem Nutzer, sich einen Automaten auszusuchen und diesen dann zu bearbeiten oder zu spielen.
  */
 public class MainMenuView extends WindowView<MainMenuViewModel>
 {
     /**
-     * Das Pane zur Anzeige aller verfügbaren Flipperautomaten welche auch auswählber sind, wodurch eine größere Vorschau erscheint.
+     * Das Pane zur Anzeige aller verfügbaren Flipperautomaten, die auch auswählbar sind, wodurch eine größere Vorschau erscheint.
      */
     @FXML
     private VBox machineOverview;
@@ -28,13 +28,13 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private Pane detailedPreviewImage;
 
     /**
-     * Zeigt den name des ausgewählten Automaten an.
+     * Zeigt den Namen des ausgewählten Automaten an.
      */
     @FXML
     private Label detailedPreviewName;
 
     /**
-     * Das Pane zur Anzeige der Highscores, welche an dem Flipperautomaten erreicht wurden.
+     * Das Pane zur Anzeige der Highscores, die an dem Flipperautomaten erreicht wurden.
      */
     @FXML
     private VBox highscoreTable;
@@ -46,6 +46,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
 
     /**
      * Setzt das zur MainMenuView gehörende MainMenuViewModel.
+     *
      * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
      */
     @Override
@@ -62,7 +63,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer den aktuell ausgewählten Automaten editieren möchte.
+     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer den aktuell ausgewählten Automaten bearbeiten möchte.
      */
     @FXML
     private void editClicked()
@@ -80,20 +81,20 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     }
 
     /**
-     * TODO
+     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer die Einstellungen des Spiels einsehen und unter Umständen ändern möchte.
      */
     @FXML
     private void settingsClicked()
     {
-
+       // TODO
     }
 
     /**
-     * TODO
+     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer einen neuen Automaten erstellen und der Liste der verfügaberen Automaten hinzufügen möchte.
      */
     @FXML
     private void addClicked()
     {
-
+        // TODO
     }
 }

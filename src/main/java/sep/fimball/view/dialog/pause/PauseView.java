@@ -6,12 +6,12 @@ import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 
 /**
- * Die PauseView ist für die Darstellung des aktuellen Standes der Partie während sie pausiert ist zuständig und ermöglicht es dem Nutzer, weiter zu spielen oder die Partie abzubrechen.
+ * Die PauseView ist für die Darstellung des aktuellen Standes der Partie, während sie pausiert ist, zuständig und ermöglicht es dem Nutzer, weiterzuspielen oder die Partie abzubrechen.
  */
 public class PauseView extends DialogView<PauseViewModel>
 {
     /**
-     * Das Pane zum darstellen der Highscore Einträge der einzelnen Spieler dieser Partie.
+     * Das Pane zur Darstellung der Highscore-Einträge der einzelnen Spieler dieser Partie.
      */
     @FXML
     private GridPane playerScores;
@@ -23,6 +23,7 @@ public class PauseView extends DialogView<PauseViewModel>
 
     /**
      * Setzt das zum PauseView gehörende PauseViewModel.
+     *
      * @param pauseViewModel Das zu setzende PauseViewModel.
      */
     @Override
@@ -41,7 +42,7 @@ public class PauseView extends DialogView<PauseViewModel>
     }
 
     /**
-     * Benachrichtigt das PauseViewModel, dass der Nutzer weiter spielen möchte.
+     * Benachrichtigt das PauseViewModel, dass der Nutzer weiterspielen möchte.
      */
     @FXML
     private void okClicked()

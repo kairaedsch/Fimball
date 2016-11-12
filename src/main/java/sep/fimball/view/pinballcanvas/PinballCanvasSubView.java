@@ -15,28 +15,28 @@ import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import java.util.Observer;
 
 /**
- * Die PinBallCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
+ * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
  */
 public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasViewModel>
 {
     /**
-     * Das Canvas, in welches die Sprites gezeichnet werden.
+     * Das Canvas, in dem die Sprites gezeichnet werden.
      */
     @FXML
     private Canvas canvas;
 
     /**
-     * Alle Sprites der zu zeichnenenden Flipperautomaten-Elemente.
+     * Alle Sprites der zu zeichnenden Flipperautomaten-Elemente.
      */
     private ListProperty<SpriteSubView> sprites;
 
     /**
-     * Die Position der Kamera, welcher den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
+     * Die Position der Kamera, die den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
      */
     private SimpleObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die Stärke des Zooms der Kamera, welche die Größe der Flipperautomaten-Elemente bestimme.
+     * Die Stärke des Zooms der Kamera, die die Größe der Flipperautomaten-Elemente bestimmt.
      */
     private SimpleDoubleProperty cameraZoom;
 
@@ -47,6 +47,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Setzt das zur PinballCanvasSubView gehörende PinballCanvasViewModel.
+     *
      * @param pinballCanvasViewModel Das zu setzende PinballCanvasViewModel.
      */
     @Override
@@ -66,7 +67,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
-     * Leert das canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum bezeichnen übergeben wird.
+     * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      */
     private void redraw()
     {
