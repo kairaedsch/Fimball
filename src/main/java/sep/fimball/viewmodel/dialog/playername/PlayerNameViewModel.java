@@ -28,7 +28,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
     /**
      * Erstellt ein neues PlayerNameViewModel.
-     * @param pinballMachine
+     * @param pinballMachine Der zum Spielen ausgewählte Flipperautomat.
      */
     public PlayerNameViewModel(PinballMachine pinballMachine)
     {
@@ -41,7 +41,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
     /**
      * Entfernt einen Spieler aus der Liste der möglichen Spieler.
-     * @param playerNameEntrySubViewModel
+     * @param playerNameEntrySubViewModel Das Model des zu entfernenden Spielers.
      */
     void removePlayerNameEntry(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {
@@ -80,7 +80,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
     /**
      * Stellt die Liste der möglichen Spieler für die nächste Partie für die View zu Verfügung.
-     * @return
+     * @return Eine Liste der möglichen Spieler.
      */
     public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntrysProperty()
     {

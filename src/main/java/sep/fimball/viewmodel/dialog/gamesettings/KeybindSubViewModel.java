@@ -24,8 +24,8 @@ public class KeybindSubViewModel
 
     /**
      * Erstellt ein neues KeybindSubViewModel.
-     * @param keyBinding
-     * @param keyCode
+     * @param keyBinding TODO
+     * @param keyCode TODO
      */
     // TODO Button is given over
     public KeybindSubViewModel(KeyBinding keyBinding, KeyCode keyCode)
@@ -46,7 +46,7 @@ public class KeybindSubViewModel
 
     /**
      * Stellt den Name des Flipperautomat-Elements, welches bedient werden will, für die View zu Verfügung.
-     * @return
+     * @return Der Name des bedienbaren Flipperautoment-Elements-
      */
     public ReadOnlyStringProperty elementNameProperty()
     {
@@ -54,8 +54,8 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Stellt den Name der Taste, welche das Flipperautomaten-ElementType bedienen will, für die View zu Verfügung.
-     * @return
+     * Stellt den Name der Taste, welche das Flipperautomaten-Element bedienen will, für die View zu Verfügung.
+     * @return Der Name der Taste, die das Flipperautomaten-Element bedienen will.
      */
     public ReadOnlyStringProperty keyProperty()
     {

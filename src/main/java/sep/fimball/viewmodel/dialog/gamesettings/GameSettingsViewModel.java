@@ -67,7 +67,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt die aktuell eingestellten Tasten um diverse Flipperautomat-ElementType zu bedienen für die View zu Verfügung.
-     * @return
+     * @return Eine Liste der  aktuell eingestellten Tasten.
      */
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()
     {
@@ -76,7 +76,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt die aktuell eingestellte Sprache für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Die aktuell eingestellte Spache.
      */
     public ObjectProperty<Language> languageProperty()
     {
@@ -85,7 +85,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt den aktuellen eingestellten Fenster- oder Vollbildmodus für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return {@code true}, wenn der Vollbildmodus aktiviert ist, {@code false} sonst.
      */
     // TODO bind bidirectional
     public BooleanProperty fullscreenProperty()
@@ -95,7 +95,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt die aktuell eingestellte Hauptlautstärke zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Die aktuell eingestellte Hauptlautstärke.
      */
     // TODO bind bidirectional
     public IntegerProperty volumeMasterProperty()
@@ -105,7 +105,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt die aktuell eingestellte Lautstärke der Musik für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Die aktuell eingestellte Musik-Lautstärke.
      */
     // TODO bind bidirectional
     public IntegerProperty volumeMusicProperty()
@@ -115,7 +115,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Stellt die aktuell eingestellte Lautstärke der Soundeffekte für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Die aktuell eingestellte Soundeffekt-Lautstärke.
      */
     // TODO bind bidirectional
     public IntegerProperty volumeSFXProperty()

@@ -14,7 +14,7 @@ public abstract class DialogViewModel extends ViewModel
 
     /**
      * Erstellt ein neues DialogViewModel.
-     * @param dialogType
+     * @param dialogType Der Typ des DialogViewModels.
      */
     public DialogViewModel(DialogType dialogType)
     {
@@ -23,7 +23,7 @@ public abstract class DialogViewModel extends ViewModel
 
     /**
      * Gibt den Dialog-Typ das DialogViewModels zurück.
-     * @return
+     * @return Der Typ des DialogViewModels.
      */
     public DialogType getDialogType()
     {

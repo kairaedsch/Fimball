@@ -25,9 +25,8 @@ public class PlayerNameEntrySubViewModel
 
     /**
      * Erstellt ein neues PlayerNameEntrySubViewModel
-     * @param playerNameViewModel
-     * @param name
-     * @param isDeleteAble
+     * @param playerNameViewModel Das korrespondierende PlayerNameViewModel.
+     * @param name Der Name des Spielers.
      */
     public PlayerNameEntrySubViewModel(PlayerNameViewModel playerNameViewModel, String name)
     {
@@ -48,7 +47,7 @@ public class PlayerNameEntrySubViewModel
 
     /**
      * Stellt den möglichen Spieler Namen für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Der mögliche Spielername.
      */
     // TODO bind bidirekt
     public StringProperty playerNameProperty()
@@ -58,7 +57,7 @@ public class PlayerNameEntrySubViewModel
 
     /**
      * Stellt die Information für die View zu Verfügung, ob der mögliche Spieler gelöscht werden darf.
-     * @return
+     * @return {@code true}, falls der Spielernameneintrag gelöscht werden darf, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isDeleteAbleProperty()
     {
