@@ -39,7 +39,7 @@ public class SpriteSubView
 
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigen SpriteSubViewModel und bindet sich daran.
-     * @param viewModel
+     * @param viewModel Das zu setzende SpriteSubViewModel.
      */
     SpriteSubView(SpriteSubViewModel viewModel)
     {
@@ -55,6 +55,10 @@ public class SpriteSubView
         positionProperty.bind(viewModel.positionProperty());
     }
 
+    /**
+     * Lädt das im {@imagePath} gespeicherte Bild.
+     * @param imagePath Der Pfad zum Bild.
+     */
     private void loadImage(String imagePath)
     {
         File file = new File(imagePath);
@@ -62,8 +66,8 @@ public class SpriteSubView
     }
 
     /**
-     * Zeichnet sich auf das übergebene graphicsContext-Objekt.
-     * @param graphicsContext
+     * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
+     * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
      */
     void draw(GraphicsContext graphicsContext)
     {
@@ -76,6 +80,13 @@ public class SpriteSubView
         graphicsContext.restore(); // back to original state (before rotation)
     }
 
+    /**
+     * TODO
+     * @param gc Der GraphicsContext, auf dem rotiert wird.
+     * @param angle Die Gradanzahl, um die rotiert wird.
+     * @param px TODO
+     * @param py TODO
+     */
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());

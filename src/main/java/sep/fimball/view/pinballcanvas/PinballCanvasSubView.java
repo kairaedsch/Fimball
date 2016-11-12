@@ -47,7 +47,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Setzt das zur PinballCanvasSubView gehörende PinballCanvasViewModel.
-     * @param pinballCanvasViewModel
+     * @param pinballCanvasViewModel Das zu setzende PinballCanvasViewModel.
      */
     @Override
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)

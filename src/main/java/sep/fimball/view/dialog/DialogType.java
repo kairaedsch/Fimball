@@ -29,6 +29,10 @@ public enum DialogType implements ViewType
      */
     private String fxmlPath;
 
+    /**
+     * TODO
+     * @param fxmlPath
+     */
     DialogType(String fxmlPath)
     {
         this.fxmlPath = fxmlPath;
