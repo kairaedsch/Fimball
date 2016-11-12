@@ -36,7 +36,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Setzt das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
-     * @param pinballMachineEditorViewModel
+     * @param pinballMachineEditorViewModel Das zu setzende PinballMachineEditorViewModel.
      */
     @Override
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
@@ -44,21 +44,33 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den editierten Automaten spielen möchte.
+     */
     @FXML
     private void playClicked() {
 
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechsseln möchte.
+     */
     @FXML
     private void settingsClicked() {
 
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in den editierten Automaten reinzoomen möchte.
+     */
     @FXML
     private void zoomInClicked() {
 
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem editierten Automaten herauszoomen möchte.
+     */
     @FXML
     private void zoomOutClicked() {
 

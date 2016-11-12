@@ -46,7 +46,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
 
     /**
      * Setzt das zur MainMenuView gehörende MainMenuViewModel.
-     * @param mainMenuViewModel
+     * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
      */
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
@@ -77,5 +77,23 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private void playClicked()
     {
         mainMenuViewModel.getPinballMachineInfoSubViewModel().showPlayerNameDialog();
+    }
+
+    /**
+     * TODO
+     */
+    @FXML
+    private void settingsClicked()
+    {
+
+    }
+
+    /**
+     * TODO
+     */
+    @FXML
+    private void addClicked()
+    {
+
     }
 }

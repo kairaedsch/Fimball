@@ -46,6 +46,10 @@ public enum WindowType implements ViewType
      */
     private String fxmlPath;
 
+    /**
+     * TODO
+     * @param fxmlPath
+     */
     WindowType(String fxmlPath)
     {
         this.fxmlPath = fxmlPath;

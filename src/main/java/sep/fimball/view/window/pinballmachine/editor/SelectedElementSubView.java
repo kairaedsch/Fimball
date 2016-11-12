@@ -42,7 +42,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
 
     /**
      * Setzt das zur SelectedElementSubView gehörende SelectedElementSubViewModel.
-     * @param selectedElementSubViewModel
+     * @param selectedElementSubViewModel Das zu setzende SelectedElementSubViewModel-
      */
     @Override
     public void setViewModel(SelectedElementSubViewModel selectedElementSubViewModel)
@@ -50,11 +50,17 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
 
     }
 
+    /**
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das augewählte Element nach rechts drehen möchte.
+     */
     @FXML
     private void rotateClockwiseClicked() {
 
     }
 
+    /**
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das augewählte Element nach links drehen möchte.
+     */
     @FXML
     private void rotateCounterclockwiseClicked() {
 

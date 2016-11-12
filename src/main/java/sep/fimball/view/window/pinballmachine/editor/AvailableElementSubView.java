@@ -31,7 +31,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     /**
      * Setzt das zur AvailableElementSubView gehörende AvailableElementSubViewModel.
-     * @param playerNameEntrySubViewModel
+     * @param playerNameEntrySubViewModel Das zu setzende AvailableElementSubViewModel.
      */
     @Override
     public void setViewModel(AvailableElementSubViewModel playerNameEntrySubViewModel)
@@ -39,6 +39,10 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     }
 
+    /**
+     * Benachrichtigt das {@code availabeElementSubViewModel}, dass der Nutzer das Element platzieren möchte.
+     * @param mouseEvent TODO
+     */
     @FXML
     private void placeElement(MouseEvent mouseEvent) {
 
