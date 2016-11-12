@@ -37,8 +37,8 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Erstellt ein neues PinballMachineInfoSubViewModel.
-     * @param mainMenu
-     * @param pinballMachine
+     * @param mainMenu Das korrespondierende MainMenuViewModel.
+     * @param pinballMachine Der Flipperautomat, dessen Informationen dargstellt werden sollen.
      */
     PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
@@ -53,7 +53,7 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Ersetzt den aktuellen Flipperautomaten mit einem neuen, der Übergeben wird, sodass die Daten des neue Flipperautomat zu verfügung stehen.
-     * @param pinballMachine
+     * @param pinballMachine Der neue Flipperautomat.
      */
     void update(PinballMachine pinballMachine)
     {
@@ -82,7 +82,7 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Stellt den Name des Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Der Name des Flipperautomaten.
      */
     public ReadOnlyStringProperty nameProperty()
     {
@@ -91,7 +91,7 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Stellt den Pfad zum Vorschaubild des Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Der Pfad zum Vorschaubild des Flipperautomatens.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {
@@ -100,7 +100,7 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Stellt die Highscoreliste des Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Eine Liste der Highscores des Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {

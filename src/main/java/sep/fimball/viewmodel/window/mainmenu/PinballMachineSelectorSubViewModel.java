@@ -30,7 +30,7 @@ public class PinballMachineSelectorSubViewModel
 
     /**
      * Erstellt ein PinballMachineSelectorSubViewModel.
-     * @param pinballMachine
+     * @param pinballMachine Der Flipperautomat, dessen Informationen zu Verfügung gestellt werden sollen.
      */
     PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
@@ -54,7 +54,7 @@ public class PinballMachineSelectorSubViewModel
 
     /**
      * Stellt den Name des Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Der Name des Flipperautomaten
      */
     public ReadOnlyStringProperty nameProperty()
     {
@@ -63,7 +63,7 @@ public class PinballMachineSelectorSubViewModel
 
     /**
      * Stellt den Pfad zum Vorschaubild des Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Der Pfad zum Vorschaubild des Flupperautomaten.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {

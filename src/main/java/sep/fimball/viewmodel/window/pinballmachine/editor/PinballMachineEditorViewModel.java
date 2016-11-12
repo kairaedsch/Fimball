@@ -30,7 +30,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
-     * @param pinballMachine
+     * @param pinballMachine Der Flipperautomat, der editiert werden soll.
      */
     public PinballMachineEditorViewModel(PinballMachine pinballMachine)
     {
@@ -42,8 +42,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die Liste, welche alle FlipperAutomat-Elemente enthält, die von dem Nutzer platziert werden können, für die View zu Verfügung.
-     * @return
+     * Stellt die Liste, welche alle Flipperautomat-Elemente enthält, die von dem Nutzer platziert werden können, für die View zu Verfügung.
+     * @return Eine Liste aller platzierbaren Flipperautomat-Elemente.
      */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableElementsProperty()
     {

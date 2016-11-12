@@ -35,7 +35,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Erstelt ein neuse SelectedElementSubViewModel.
-     * @param placedElement
+     * @param placedElement Das Flipperautomat-Element, das ausgewählt ist.
      */
     public SelectedElementSubViewModel(PlacedElement placedElement)
     {
@@ -65,7 +65,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Stellt der Name des Flipperautomat-Elements für die View zu Verfügung.
-     * @return
+     * @return Der Name des Flipperautomat-Elements.
      */
     public ReadOnlyStringProperty nameProperty()
     {
@@ -74,7 +74,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Stellt die Beschreibung des Flipperautomat-Elements für die View zu Verfügung.
-     * @return
+     * @return Die Beschreibung des Flipperautomat-Elements.
      */
     public ReadOnlyStringProperty descriptionProperty()
     {
@@ -83,7 +83,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Stellt die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden.
      */
     // TODO bind bidirect
     public IntegerProperty pointsProperty()
@@ -93,7 +93,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Stellt den Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return
+     * @return Der Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert,
      */
     // TODO bind bidirect
     public DoubleProperty multiplierProperty()

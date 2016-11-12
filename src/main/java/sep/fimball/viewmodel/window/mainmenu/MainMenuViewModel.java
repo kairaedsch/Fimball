@@ -44,7 +44,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Wechselt den FlipperAutomaten, der detailreich dargestellt wird, auf den übergebenen.
-     * @param pinballMachine
+     * @param pinballMachine Der neue Flipperautomat, der dargstellt werden soll.
      */
     public void switchPinballMachineInfo(PinballMachine pinballMachine)
     {
@@ -76,8 +76,8 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt den aktuell ausgewählte FlipperAutomaten, welcher detailreicher dargestellt wird, für die View zu Verfügung.
-     * @return
+     * Stellt den aktuell ausgewählte Flipperautomaten, welcher detailreicher dargestellt wird, für die View zu Verfügung.
+     * @return Der ausgwewählte Flupperautomat.
      */
     public ReadOnlyListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelListProperty()
     {
@@ -86,7 +86,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Stellt die Liste aller FlipperAutomaten, welche ausgewählt werden können, für die View zu Verfügung.
-     * @return
+     * @return Eine Liste aller FlipperAutomaten.
      */
     public PinballMachineInfoSubViewModel getPinballMachineInfoSubViewModel()
     {

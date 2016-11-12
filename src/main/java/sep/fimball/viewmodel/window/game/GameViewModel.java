@@ -44,7 +44,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues GameViewModel.
-     * @param gameSession
+     * @param gameSession Die GameSession, die zu diesem GameViewModel gehört.
      */
     public GameViewModel(GameSession gameSession)
     {
@@ -68,7 +68,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Stellt die aktuelle Punktzahl(Score) für die View zu Verfügung.
-     * @return
+     * @return Die Punktezahl des aktiven Spielers.
      */
     public IntegerProperty playerPointsProperty()
     {
@@ -77,7 +77,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Stellt den Name des aktiven Spielers für die View zu Verfügung.
-     * @return
+     * @return Der Name des aktiven Spielers.
      */
     public StringProperty playerNameProperty()
     {
@@ -86,7 +86,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Stellt die Anzahl der Reservebälle des aktiven Spielers für die View zu Verfügung.
-     * @return
+     * @return Die Anzahl der Reservebälle des aktiven Spielers.
      */
     public IntegerProperty playerReserveBallsProperty()
     {
@@ -95,7 +95,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Stellt die aktuelle Position der Kamera für die View zu Verfügung.
-     * @return
+     * @return Die aktuelle Position der Kamera.
      */
     public ReadOnlyProperty<Vector2> cameraPositionProperty()
     {
@@ -103,8 +103,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die aktuelle Zoom Stärke der Kamera für die View zu Verfügung.
-     * @return
+     * Stellt die aktuelle Zoom-Stärke der Kamera für die View zu Verfügung.
+     * @return Die aktuelle Zoom-Stärke der Kamera.
      */
     public ReadOnlyDoubleProperty cameraZoomProperty()
     {
@@ -113,7 +113,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Stellt das PinballCanvasViewModel für die View zu Verfügung, damit die View den Automaten mit all seinen Sprites zeichnen kann.
-     * @return
+     * @return Das PinballCanvasViewModel.
      */
     public PinballCanvasViewModel getPinballCanvasViewModel()
     {

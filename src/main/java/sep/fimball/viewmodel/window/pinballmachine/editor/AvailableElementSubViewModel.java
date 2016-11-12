@@ -26,7 +26,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
-     * @param elementType
+     * @param elementType Der Elementtyp, dessen Informationen angezeigt werden sollen.
      */
     public AvailableElementSubViewModel(ElementType elementType)
     {
@@ -37,7 +37,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Erteilt dem Model den Befehl, dieses Flipperautomat-Element in den Flipperautomaten zu platzieren.
-     * @param position
+     * @param position Die neue Position, die das Flipperautomaten-Element haben soll.
      */
     public void placeElement(Vector2 position)
     {
@@ -46,7 +46,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Stellt den Pfad zum Vorschaubild des Flipperautomaten-Elements für die View zu Verfügung.
-     * @return
+     * @return Der Pfad des Vorschaubildes des Flipperautomaten-Elements.
      */
     public ReadOnlyStringProperty nameProperty()
     {
@@ -55,7 +55,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Stellt den Name des Flipperautomaten-Elements für die View zu Verfügung.
-     * @return
+     * @return Der Name des Flupperautomaten-Elements.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {

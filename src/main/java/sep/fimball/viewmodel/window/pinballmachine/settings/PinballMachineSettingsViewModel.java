@@ -14,7 +14,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 public class PinballMachineSettingsViewModel extends WindowViewModel
 {
     /**
-     * Der FlipperAutomat, welcher editiert wird.
+     * Der Flipperautomat, welcher editiert wird.
      */
     private PinballMachine pinballMachine;
 
@@ -26,7 +26,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues PinballMachineSettingsViewModel.
-     * @param pinballMachine
+     * @param pinballMachine Der Flupperautomat, der editiert wird.
      */
     public PinballMachineSettingsViewModel(PinballMachine pinballMachine)
     {

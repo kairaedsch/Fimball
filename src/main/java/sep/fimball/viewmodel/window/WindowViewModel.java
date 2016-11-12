@@ -14,7 +14,7 @@ public abstract class WindowViewModel extends ViewModel
 
     /**
      * Erstellt ein neues WindowViewModel.
-     * @param windowType
+     * @param windowType Der Typ des WindowViewModels.
      */
     public WindowViewModel(WindowType windowType)
     {
@@ -23,7 +23,7 @@ public abstract class WindowViewModel extends ViewModel
 
     /**
      * Gibt den Window-Typ das DialogViewModels zurück.
-     * @return
+     * @return Der Typ des WindowViewModels.
      */
     public WindowType getWindowType()
     {
