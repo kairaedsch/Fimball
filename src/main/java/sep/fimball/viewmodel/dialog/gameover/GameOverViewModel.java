@@ -33,7 +33,7 @@ public class GameOverViewModel extends DialogViewModel
     /**
      * Erstellt ein neues GameOverViewModel.
      *
-     * @param pinballMachine
+     * @param pinballMachine Der Flipperautomat, der zu dem GameOverViewModel gehört.
      */
     public GameOverViewModel(PinballMachine pinballMachine)
     {
@@ -65,7 +65,7 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zu Verfügung.
-     * @return
+     * @return Eine read-only-Propterty-Liste von Highscores der zuletzt gespielten Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> machineHighscoresProperty()
     {
@@ -74,7 +74,7 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, für die View zu Verfügung.
-     * @return
+     * @return Eine read-only-Propterty-Liste von Highscores der zuletzt gespielten Partie.
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
