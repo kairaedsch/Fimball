@@ -77,8 +77,8 @@ public class ElementType
         public MediaTrigger[] triggers;
 
 
-        public static class MediaTrigger {
-
+        public static class MediaTrigger
+        {
             public String id;
 
             public String soundName;
@@ -87,7 +87,8 @@ public class ElementType
              */
             public Animation animation;
 
-            public static class Animation {
+            public static class Animation
+            {
                 public int frameCount;
                 public double duration;
                 public String animationName;

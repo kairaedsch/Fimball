@@ -10,6 +10,7 @@ import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
 import sep.fimball.model.element.Ball;
 import sep.fimball.model.element.GameElement;
+import sep.fimball.model.element.GameElementList;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -104,6 +105,11 @@ public class World
     public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
+    }
+
+    public GameElementList getGameElements()
+    {
+        return new GameElementList(gameElements.get().filtered((elem) -> elem != ballProperty.get()), ballProperty.get());
     }
 
     public ReadOnlyObjectProperty<Ball> ballProperty()

@@ -1,5 +1,8 @@
 package sep.fimball.model.physics;
 
+import javafx.collections.ObservableList;
+import sep.fimball.model.element.GameElement;
+import sep.fimball.model.element.GameElementList;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -30,6 +33,8 @@ public class PhysicsHandler
      */
     private World world;
 
+    private PhysicsElement ballElement;
+
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
      */
@@ -53,6 +58,7 @@ public class PhysicsHandler
 
     /**
      * Erzeugt einen PhysicsHandler
+     *
      * @param world
      */
     public PhysicsHandler(World world)
@@ -68,12 +74,8 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
 
         physicsElements = new ArrayList<>();
-        world.gameElementsProperty().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
-        world.gameElementsProperty().addListener((observableValue, gameElements, t1) ->
-        {
-            physicsElements.clear();
-            gameElements.forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
-        });
+        LoadPhysicsElementList(world);
+        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> LoadPhysicsElementList(world));
 
         timerTask = new TimerTask()
         {
@@ -84,13 +86,26 @@ public class PhysicsHandler
             public void run()
             {
                 // TODO check bufferedKeyEvents
-                // TODO check Collisions
+
                 // TODO Notify GameElements about collisions
                 // TODO Solve collisions
                 // TODO Check if ball is lost
                 // TODO Simulate ball movement
             }
         };
+    }
+
+    /**
+     * Lädt die Liste von GameElements aus der World, löscht alle vorhandenen PhysicsElements und ersetzt diese durch
+     * neu geneierte.
+     * @param world Die Welt aus der die GameElements gelesen werden.
+     */
+    private void LoadPhysicsElementList(World world)
+    {
+        physicsElements.clear();
+        GameElementList elements = world.getGameElements();
+        elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
+        ballElement = new PhysicsElement(elements.getBall());
     }
 
     /**
