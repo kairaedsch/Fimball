@@ -31,6 +31,7 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
 
     /**
      * Setzt das zur PinballMachineSelectorSubView gehörende PinballMachineSelectorSubViewModel.
+     *
      * @param pinballMachineSelectorSubViewModel Das zu setzende PinballMachineSelectorSubViewModel.
      */
     public void setViewModel(PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel)
@@ -41,7 +42,7 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer den Flipperautomaten auswählen will, da er ihn im Detail sehen will, sodass er diesen auch starten oder editieren kann.
+     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer den Flipperautomaten auswählen will, da er ihn im Detail sehen will, sodass er diesen auch starten oder bearbeiten kann.
      */
     public void mouseClicked()
     {

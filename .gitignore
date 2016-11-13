@@ -23,6 +23,7 @@ hs_err_pid*
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 Fimball.iml
+/.idea/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -46,6 +47,7 @@ Fimball.iml
 
 # IntelliJ
 /out/
+/target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -61,3 +63,4 @@ fabric.properties
 
 # Random VP shit
 vpproject/*.vpp~*
+/vpproject/

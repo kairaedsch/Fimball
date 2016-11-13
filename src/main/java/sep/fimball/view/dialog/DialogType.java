@@ -11,27 +11,31 @@ public enum DialogType implements ViewType
      * Der Dialog, der nach Ende eines Spiels angezeigt wird.
      */
     GAME_OVER_DIALOG("gameover/gameOverDialog.fxml"),
+
     /**
      * Der Spieleinstellungsdialog.
      */
-    GAME_SETTINGS_DIALOG("gamesettings/gameSettingsWindow.fxl"),
+    GAME_SETTINGS_DIALOG("gamesettings/gameSettingsWindow.fxml"),
+
     /**
-     * Der Spielernamnendialog.
+     * Der Spielernamendialog.
      */
     PLAYER_NAME_DIALOG("playername/playerNameWindow.fxml"),
+
     /**
      * Ein Spielernameneintrag im Spielernamendialog.
      */
     PLAYER_NAME_ENTRY("playername/nameEntry.fxml");
 
     /**
-     * Der Pfad zu dem zum Fenstertyp gehörende FXML-Datei.
+     * Der Pfad zu der zum Fenstertyp gehörende FXML-Datei.
      */
     private String fxmlPath;
 
     /**
-     * TODO
-     * @param fxmlPath
+     * Setzt den Pfad zur den Aufbau des Dialogs beschreibenden FXML-Datei, sodass diese abgefragt und geladen werden kann.
+     *
+     * @param fxmlPath Der relative Pfad zur FXML-Datei.
      */
     DialogType(String fxmlPath)
     {
@@ -40,6 +44,7 @@ public enum DialogType implements ViewType
 
     /**
      * Liefert den Pfad zur FXML-Datei.
+     *
      * @return Der Pfad zur FXML-Datei.
      */
     @Override

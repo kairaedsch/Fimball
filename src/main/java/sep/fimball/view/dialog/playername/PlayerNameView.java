@@ -8,12 +8,12 @@ import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 
 /**
- * Die PlayerNameView ist für die Darstellung der aktuellen Partie Einstellungen zuständig und ermöglicht es dem Nutzer, diese einzustellen sowie eine Partie zu starten.
+ * Die PlayerNameView ist für die Darstellung der Einstellungen der aktuellen Partie zuständig und ermöglicht es dem Nutzer, diese zu ändern und eine Partie zu starten.
  */
 public class PlayerNameView extends DialogView<PlayerNameViewModel>
 {
     /**
-     * Das Pane zum Einstellen der Spielernamen.
+     * Das Pane zur Einstellung der Spielernamen.
      */
     @FXML
     private VBox nameEntryList;
@@ -25,7 +25,8 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
 
     /**
      * Setzt das zur PlayerNameView gehörende PlayerNameViewModel.
-     * @param playerNameViewModel Das zu setzende PalyerNameViewModel.
+     *
+     * @param playerNameViewModel Das zu setzende PlayerNameViewModel.
      */
     @Override
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
@@ -54,7 +55,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     }
 
     /**
-     * Benachrichtigt das PlayerNameViewModel, dass der Nutzer einen Spieler zu den Partie-Einstellungen hinzufügen möchte.
+     * Benachrichtigt das PlayerNameViewModel, dass der Nutzer einen Spieler zu den Partie-Teilnehmern hinzufügen möchte.
      */
     @FXML
     private void addPlayerClicked()

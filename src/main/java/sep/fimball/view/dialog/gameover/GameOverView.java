@@ -11,13 +11,13 @@ import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 public class GameOverView extends DialogView<GameOverViewModel>
 {
     /**
-     * Das Pane zur Anzeige der Highscores, welche an dem Flipperautomaten erreicht wurden.
+     * Das Pane zur Anzeige der Highscores, die am Flipperautomaten erreicht wurden.
      */
     @FXML
     private GridPane highscores;
 
     /**
-     * Das Pane zur Anzeige der im gerade gespielten Partie erreichten Punktestände.
+     * Das Pane zur Anzeige der in der gerade gespielten Partie erreichten Punktestände.
      */
     @FXML
     private GridPane playerScores;
@@ -29,6 +29,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
 
     /**
      * Setzt das zur GameOverView gehörende GameOverViewModel.
+     *
      * @param gameOverViewModel Das zu setzende GameOverViewModel.
      */
     @Override
@@ -47,7 +48,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     }
 
     /**
-     * Benachrichtigt das GameOverViewModel, dass der Nutzer noch eine Partie mit dem selben Flipperautomat und dem selben Spielern spielen möchte.
+     * Benachrichtigt das GameOverViewModel, dass der Nutzer noch eine Partie mit dem selben Flipperautomaten und den selben Spielern spielen möchte.
      */
     @FXML
     private void restartClicked()

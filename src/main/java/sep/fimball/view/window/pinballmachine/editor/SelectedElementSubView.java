@@ -7,7 +7,7 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
 /**
- *  Die SelectedElementSubView ist für die Darstellung des ausgewählten Elements auf dem Spielfeld im Editor zuständig und ermöglicht dem Nutzer dieses zu bearbeiten.
+ *  Die SelectedElementSubView ist für die Darstellung des ausgewählten Elements auf dem Spielfeld im Editor zuständig und ermöglicht dem Nutzer, dieses zu bearbeiten.
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
@@ -24,13 +24,13 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     private Label description;
 
     /**
-     * Regler für die Punkte, die ein Treffen des Elements durch die Kugel bringt.
+     * Regler für die Punkte, die ein Treffer des Elements durch die Kugel bringt.
      */
     @FXML
     private Slider points;
 
     /**
-     * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element auf die auswirkt.
+     * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
      */
     @FXML
     private Slider multiplier;
@@ -42,6 +42,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
 
     /**
      * Setzt das zur SelectedElementSubView gehörende SelectedElementSubViewModel.
+     *
      * @param selectedElementSubViewModel Das zu setzende SelectedElementSubViewModel-
      */
     @Override
@@ -51,7 +52,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das augewählte Element nach rechts drehen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element nach rechts drehen möchte.
      */
     @FXML
     private void rotateClockwiseClicked() {
@@ -59,7 +60,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das augewählte Element nach links drehen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element nach links drehen möchte.
      */
     @FXML
     private void rotateCounterclockwiseClicked() {

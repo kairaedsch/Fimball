@@ -18,7 +18,7 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
- * Der SceneManagerView verwaltet die aktuelle WindowView und DialogView, und reagiert bei ViewModel Änderungen im ViewModel damit, dass sie das richtige WindowView und Dialogview erstellt und in die Stage einbindet.
+ * Die SceneManagerView verwaltet die aktuelle WindowView und DialogView und reagiert bei Änderungen im ViewModel damit, dass sie die richtige WindowView und DialogView erstellt und in die Stage einbindet.
  */
 public class SceneManagerView
 {
@@ -33,12 +33,13 @@ public class SceneManagerView
     private StackPane root;
 
     /**
-     * Ein Blur-Effekt, welcher bei einem aktiven DialogView das darunter liegende WindowView ausblendet.
+     * Ein Blur-Effekt, der bei einem aktiven DialogView das darunter liegende WindowView ausblendet.
      */
     private GaussianBlur blurEffect;
 
     /**
-     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welche der oberste Container gelegt wird. Auch legt es die Startgröße des Fenster fest und initialisiert das SceneManagerViewModel an welches es sich dann auch gleich bindet, um bei ViewModel Änderungen reagieren zu können.
+     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in die der oberste Container gelegt wird. Auch die initiale Größe des Fensters wird festgelegt und das SceneManagerViewModel initialisiert, an das sich dann auch gleich gebunden wird, um bei Änderungen des ViewModels reagieren zu können.
+     *
      * @param stage Die Stage, die gesetzt werden soll.
      */
     public SceneManagerView(Stage stage)
@@ -72,8 +73,9 @@ public class SceneManagerView
     }
 
     /**
-     * TODO
-     * @param event
+     * Benachrichtigt {@code sceneManagerViewModel} über einen aufgetretenen Tastendruck und gibt diesen weiter.
+     *
+     * @param event Der Tastendruck in Form eines KeyEvents.
      */
     @FXML //TODO write in fxml file
     private void onKeyEvent(KeyEvent event)
@@ -82,8 +84,9 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt das aktuelle Fenster durch das zum gegebenen WindowViewModel gehörende Fenster.
-     * @param windowViewModel Das übergenene WindowVIewModel.
+     * Ersetzt das aktuelle Fenster durch das zum übergebenen WindowViewModel gehörende Fenster.
+     *
+     * @param windowViewModel Das übergebene WindowViewModel.
      */
     private void updateContent(WindowViewModel windowViewModel)
     {
@@ -108,7 +111,8 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt den aktuellen Dialog durch den zum gegebenen DialogVIewModel gehörenden Dialog.
+     * Ersetzt den aktuellen Dialog durch den zum übergebenen DialogViewModel gehörenden Dialog.
+     *
      * @param dialogViewModel Das übergebene DialogViewModel.
      */
     private void updateContent(DialogViewModel dialogViewModel)
@@ -131,7 +135,8 @@ public class SceneManagerView
     }
 
     /**
-     * Setzt das aktuelle Fenster auf den gegebenen WindowType und verbindet dieses mit dem gegebenen ViewModel.
+     * Erzeugt ein Fenster des übergebenden WindowType, setzt dieses als aktuelles Fenster und verbindet es mit dem gegebenen ViewModel.
+     *
      * @param windowType Der WindowType des zu setzenden Fensters.
      * @param viewModel Das zum windowType gehörende ViewModel.
      */
@@ -142,7 +147,8 @@ public class SceneManagerView
     }
 
     /**
-     * Setzt den aktuellen Dialog auf den gegebenen DialogTyp und verbindet diesen mit dem gegebenen ViewModel.
+     * Erzeugt einen Dialog des übergebenden DialogType, setzt diesen als aktuelles Fenster und verbindet ihn mit dem gegebenen ViewModel.
+     *
      * @param dialogType Der DialogType des zu setzenden Dialogs.
      * @param viewModel Das zum dialogType gehörende ViewModel.
      */
@@ -158,6 +164,7 @@ public class SceneManagerView
 
     /**
      * Lädt eine View aus dem gegebenen ViewType und verbindet diese mit dem gegebenen ViewModel.
+     *
      * @param viewType Der gegebene ViewType der zu ladenden View.
      * @param viewModel Das zur geladenen View gehörende ViewModel.
      * @return Eine Node, die die geladene View verbunden mit dem (@code viewmodel} enthält.
@@ -180,7 +187,7 @@ public class SceneManagerView
     }
 
     /**
-     * Blendet den angezigten Dialog aus und entfernt diesen.
+     * Blendet den angezeigten Dialog aus und entfernt diesen.
      */
     private void removeDialog()
     {
@@ -192,7 +199,8 @@ public class SceneManagerView
     }
 
     /**
-     * Gibt das aktuell angzeigte Fenster zurück.
+     * Gibt das aktuell angezeigte Fenster zurück.
+     *
      * @return Das aktuell angezeigte Fenster.
      */
     private Node getWindow()
@@ -201,8 +209,9 @@ public class SceneManagerView
     }
 
     /**
-     * TODO
-     * @return
+     * Gibt die transparente Zwischenebene zwischen dem Fenster und eventuell darüber liegenden Dialogen zurück.
+     *
+     * @return Die Zwischenebene zwischen Fenstern und Dialogen.
      */
     private Node getGlass()
     {
@@ -210,7 +219,8 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt das aktuell angzeigte Fenster mit dem in {@code node} gespeicherten Fenster.
+     * Ersetzt das aktuell angezeigte Fenster mit dem in {@code node} gespeicherten Fenster.
+     *
      * @param node Eine Node, die eine Fenster-View enthält.
      */
     private void replaceWindow(Node node)
@@ -220,8 +230,9 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt den aktuell angzeigten Dialog mit dem in {@code node} gespeicherten Dialog.
-     * @param node Ene Node, die eine Dialog-View enthält.
+     * Ersetzt den aktuell angezeigten Dialog mit dem in {@code node} gespeicherten Dialog.
+     *
+     * @param node Eine Node, die eine Dialog-View enthält.
      */
     private void replaceDialog(Node node)
     {

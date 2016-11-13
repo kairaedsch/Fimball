@@ -3,7 +3,7 @@ package sep.fimball.view.window;
 import sep.fimball.view.ViewType;
 
 /**
- * Der WindowType enhält alle WindowTypen, sowohl die Haupt-Views als auch die SubViews. Jeder WindowType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
+ * Der WindowType enthält alle Arten von Fenstern, sowohl die Haupt-Views als auch die SubViews. Jeder WindowType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
  */
 public enum WindowType implements ViewType
 {
@@ -36,19 +36,21 @@ public enum WindowType implements ViewType
      * Das Editoreinstellungsfenster.
      */
     TABLE_SETTINGS_WINDOW("tablesettings/tableSettings.fxml"),
+
     /**
      * Das Spielfenster.
      */
     GAME_WINDOW("game/gameWindow.fxml");
 
     /**
-     * Der Pfad zum Fenstertyp gehörende FXML-Datei.
+     * Der Pfad der zum Fenstertyp gehörenden FXML-Datei.
      */
     private String fxmlPath;
 
     /**
-     * TODO
-     * @param fxmlPath
+     * Setzt den Pfad zur den Aufbau des Fensters beschreibenden FXML-Datei, sodass diese abgefragt und geladen werden kann.
+     *
+     * @param fxmlPath Der relative Pfad zur FXML-Datei.
      */
     WindowType(String fxmlPath)
     {
@@ -57,7 +59,8 @@ public enum WindowType implements ViewType
 
     /**
      * Liefert den Pfad zur FXML-Datei.
-     * @return
+     *
+     * @return Der Pfad zur FXML-Datei.
      */
     @Override
     public String getFxmlPath()

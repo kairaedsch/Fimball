@@ -19,7 +19,7 @@ public class GameView extends WindowView<GameViewModel>
     private Label playername;
 
     /**
-     * Zeigt den aktuellen Punktestand des aktuellen Spielers an.
+     * Zeigt den aktuellen Punktestand des aktiven Spielers an.
      */
     @FXML
     private Label score;
@@ -31,7 +31,7 @@ public class GameView extends WindowView<GameViewModel>
     private HBox reserveBalls;
 
     /**
-     * Das Canvas, in welchen der Flipperautomat gezeichnet wird.
+     * Das Canvas, in dem der Flipperautomat gezeichnet wird.
      */
     private Canvas canvas;
 
@@ -42,6 +42,7 @@ public class GameView extends WindowView<GameViewModel>
 
     /**
      * Setzt das zur GameView gehörende GameViewModel.
+     *
      * @param gameViewModel Das zu setzende GameViewModel.
      */
     @Override

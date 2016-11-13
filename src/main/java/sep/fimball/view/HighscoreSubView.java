@@ -11,20 +11,21 @@ import sep.fimball.view.ViewBoundToViewModel;
 public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
 {
     /**
-     * Zeigt den Namen des Spielers, welcher den Highscore erreicht hat.
+     * Zeigt den Namen des Spielers, der den Highscore erreicht hat.
      */
     @FXML
     public Label playerName;
 
     /**
-     * Zeigt die Höhe des Highscore.
+     * Zeigt die Höhe des Highscores.
      */
     @FXML
     public Label score;
 
     /**
      * Bindet die HighscoreSubView an den zugehörigen Highscore.
-     * @param highscore Der Highscore, der gesetzt werden soll.
+     *
+     * @param highscore Der Highscore, an den diese HighscoreSubView gebunden werden soll.
      */
     public void setViewModel(Highscore highscore)
     {
