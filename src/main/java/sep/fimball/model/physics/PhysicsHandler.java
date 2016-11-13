@@ -85,7 +85,18 @@ public class PhysicsHandler
 
                 for (PhysicsElement element : physicsElements)
                 {
-                    solveBallCollision(ballElement, element);
+                    for (CircleCollider circle : element.getCircleColliders())
+                    {
+                        for (CircleCollider ballCircle : ballElement.getCircleColliders())
+                        {
+                            Vector2 distance = Vector2.sub(ballCircle.getPosition(), circle.getPosition());
+                            if (distance.magnitude() < ballCircle.getRadius() + circle.getRadius())
+                            {
+                                double overlapDistance = (ballCircle.getRadius() + circle.getRadius()) - distance.magnitude();
+                                Vector2 pushVector = Vector2.scale(distance.normalized(), overlapDistance);
+                            }
+                        }
+                    }
                 }
 
                 // TODO Notify GameElements about collisions
@@ -108,14 +119,6 @@ public class PhysicsHandler
         elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
         ballElement = new PhysicsElement(elements.getBall());
         physicsElements.add(ballElement);
-    }
-
-    private void solveBallCollision(PhysicsElement ball, PhysicsElement element)
-    {
-        for (Collider collider : element.getElement().getColliders())
-        {
-            // TODO: warum genau erben wir nochmal von collider, wenn circle und polygon collider nichts gemeinsam haben?
-        }
     }
 
     /**

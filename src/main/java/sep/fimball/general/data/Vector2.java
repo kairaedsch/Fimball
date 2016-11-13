@@ -78,6 +78,12 @@ public class Vector2
         this.y /= norm;
     }
 
+    public Vector2 normalized()
+    {
+        double norm = magnitude(this);
+        return new Vector2(getX() / norm, getY() / norm);
+    }
+
     public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
     {
         return new Vector2(vecOne.getX() + vecTwo.getX(), vecOne.getY() + vecTwo.getY());
@@ -116,6 +122,12 @@ public class Vector2
         vecOne.setX(vecOne.getX() / norm);
         vecOne.setY(vecOne.getY() / norm);
         return vecOne;
+    }
+
+    public static Vector2 normalized(Vector2 input)
+    {
+        double norm = magnitude(input);
+        return new Vector2(input.getX() / norm, input.getY() / norm);
     }
 
     public double getX()
