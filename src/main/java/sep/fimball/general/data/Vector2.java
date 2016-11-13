@@ -78,6 +78,12 @@ public class Vector2
         this.y /= norm;
     }
 
+    public void rotate(double radianAngle)
+    {
+        this.x = (Math.cos(radianAngle) * this.x) - (Math.sin(radianAngle) * this.y);
+        this.y = (Math.sin(radianAngle) * this.x) - (Math.cos(radianAngle) * this.y);
+    }
+
     public Vector2 normalized()
     {
         double norm = magnitude(this);
