@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.util.Duration;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
@@ -122,5 +123,41 @@ public class World
     private void updateWorld()
     {
         throw new UnsupportedOperationException();
+    }
+
+    private RectangleDouble generateWalls()
+    {
+        //TODO If GameElements contain the ball this method won't work anymore
+        double minX = gameElements.get(0).getPosition().getX();
+        double maxX = gameElements.get(0).getPosition().getX();
+        double minY = gameElements.get(0).getPosition().getY();
+        double maxY = gameElements.get(0).getPosition().getY();
+
+        for (GameElement gameElement : gameElements)
+        {
+            double currentX = gameElement.getPosition().getX();
+            double currentY = gameElement.getPosition().getY();
+
+            if (currentX < minX)
+            {
+                minX = currentX;
+            }
+            if (currentX > maxX)
+            {
+                maxX = currentX;
+            }
+            if (currentY < minY)
+            {
+                minY = currentY;
+            }
+            if (currentY > maxY)
+            {
+                maxY = currentY;
+            }
+        }
+        Vector2 rectOrigin = new Vector2(minX, minY);
+        double width = Math.abs(maxX - minX);
+        double height = Math.abs(maxY - minY);
+        return new RectangleDouble(rectOrigin, width, height);
     }
 }
