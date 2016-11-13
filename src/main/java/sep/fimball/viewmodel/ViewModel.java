@@ -1,17 +1,18 @@
 package sep.fimball.viewmodel;
 
 /**
- * Das ViewModel ist eine abstrakte Klasse, von der alle WindowViewModel und DialogViewModel erben. Sie stellt sicher, das ein aktives ViewModel immer sein SceneManagerViewModel kennt, sodass der Wechsel zwischen verschiedenen ViewModel möglich ist.
+ * Das ViewModel ist eine abstrakte Klasse, von der alle WindowViewModel und DialogViewModel erben. Sie stellt sicher, dass ein aktives ViewModel immer sein SceneManagerViewModel kennt, sodass der Wechsel zwischen verschiedenen ViewModel möglich ist.
  */
 public abstract class ViewModel
 {
     /**
-     * Der SceneManagerViewModel des ViewModels.
+     * Das SceneManagerViewModel des ViewModels.
      */
     protected SceneManagerViewModel sceneManager;
 
     /**
-     * Setzt den SceneManager. Der SceneManager wird dabei nicht im Konstruktor gesetzt, da dieser immer erst beim ViewModel-Wechsel im SceneManager gesetzt wird.
+     * Setzt das SceneManagerViewModel. Dieses wird nicht im Konstruktor gesetzt, da es immer erst beim ViewModel-Wechsel im SceneManagerViewModel gesetzt wird.
+     *
      * @param sceneManager Der zu setzende SceneManager.
      */
     public void setSceneManager(SceneManagerViewModel sceneManager)

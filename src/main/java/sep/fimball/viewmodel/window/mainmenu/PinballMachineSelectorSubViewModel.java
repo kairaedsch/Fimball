@@ -9,12 +9,12 @@ import sep.fimball.model.blueprint.PinballMachine;
 public class PinballMachineSelectorSubViewModel
 {
     /**
-     * Das zu diesem PinballMachineSelectorSubViewModel zugehörige MainMenuViewModel.
+     * Das zu diesem PinballMachineSelectorSubViewModel gehörige MainMenuViewModel.
      */
     private MainMenuViewModel mainMenu;
 
     /**
-     * Der Flipperautomat, dessen Informationen zu Verfügung gestellt werden.
+     * Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden.
      */
     private PinballMachine pinballMachine;
 
@@ -30,7 +30,8 @@ public class PinballMachineSelectorSubViewModel
 
     /**
      * Erstellt ein PinballMachineSelectorSubViewModel.
-     * @param pinballMachine Der Flipperautomat, dessen Informationen zu Verfügung gestellt werden sollen.
+     *
+     * @param pinballMachine Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
      */
     PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
@@ -45,7 +46,7 @@ public class PinballMachineSelectorSubViewModel
     }
 
     /**
-     * Leitet den Befehl, den Flipperautomaten dieses ViewModels auszuwählen, an das zu diesem gehörige MainMenuViewModel weiter.
+     * Leitet den Befehl, den Flipperautomaten dieses ViewModels auszuwählen, an das zu diesem gehörende MainMenuViewModel weiter.
      */
     public void selectPinballMachine()
     {
@@ -53,7 +54,8 @@ public class PinballMachineSelectorSubViewModel
     }
 
     /**
-     * Stellt den Name des Flipperautomaten für die View zu Verfügung.
+     * Stellt der View den Namen des Flipperautomaten zur Verfügung.
+     *
      * @return Der Name des Flipperautomaten
      */
     public ReadOnlyStringProperty nameProperty()
@@ -62,8 +64,9 @@ public class PinballMachineSelectorSubViewModel
     }
 
     /**
-     * Stellt den Pfad zum Vorschaubild des Flipperautomaten für die View zu Verfügung.
-     * @return Der Pfad zum Vorschaubild des Flupperautomaten.
+     * Stellt der View den Pfad zum Vorschaubild des Flipperautomaten zur Verfügung.
+     *
+     * @return Der Pfad zum Vorschaubild des Flipperautomaten.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {

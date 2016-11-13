@@ -5,7 +5,7 @@ import sep.fimball.model.element.GameElement;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Das SpriteSubViewModel stellt der View Daten über ein Sprite zu Verfügung, sodass es in der Lage ist, dieses, mit Hilfe eines Bildpfades, auf einem Canvas in der richtigen Position zu zeichnen.
+ * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
  */
 public class SpriteSubViewModel
 {
@@ -20,17 +20,18 @@ public class SpriteSubViewModel
     private DoubleProperty rotation;
 
     /**
-     * Der Pfad zu dem Bild, welches von der View gezeichnet werden soll.
+     * Der Pfad zu dem Bild, das von der View gezeichnet werden soll.
      */
     private StringProperty animationFramePath;
 
     /**
-     * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichent werden muss.
+     * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
      */
     private BooleanProperty isSelected;
 
     /**
      * Erstellt ein neues SpriteSubViewModel.
+     *
      * @param baseElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
      */
     SpriteSubViewModel(GameElement baseElement)
@@ -46,7 +47,8 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Stellt die Position des Sprites für die View zu Verfügung.
+     * Stellt der View die Position des Sprites zur Verfügung.
+     *
      * @return Die Position des Sprites.
      */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
@@ -55,7 +57,8 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Stellt die Drehung des Sprites für die View zu Verfügung.
+     * Stellt der View die Drehung des Sprites zur Verfügung.
+     *
      * @return Die Drehung des Sprites.
      */
     public ReadOnlyDoubleProperty rotationProperty()
@@ -64,7 +67,8 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Stellt den Pfad zu dem Bild des Sprites für die View zu Verfügung.
+     * Stellt der View den Pfad zum Bild des Sprites zur Verfügung.
+     *
      * @return Der Pfad zum Bild des Sprites.
      */
     public ReadOnlyStringProperty animationFramePathProperty()
@@ -73,8 +77,9 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Stellt die Information, ob das Sprite aktuell ausgewählt ist, für die View zu Verfügung.
-     * @return {@code true}, wemm das Sprite ausgewählt ist, {@code false} sonst.
+     * Stellt der View die Information, ob das Sprite aktuell ausgewählt ist, zur Verfügung.
+     *
+     * @return {@code true}, wenn das Sprite ausgewählt ist, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isSelectedProperty()
     {

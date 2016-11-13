@@ -12,7 +12,7 @@ import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
- * Das PlayerNameViewModel stellt der View Daten über die möglichen Spieler für die nächste Partie zu Verfügung und ermöglicht deren Anpassung.
+ * Das PlayerNameViewModel stellt der View Daten über die möglichen Spieler für die nächste Partie zur Verfügung und ermöglicht deren Anpassung.
  */
 public class PlayerNameViewModel extends DialogViewModel
 {
@@ -28,6 +28,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
     /**
      * Erstellt ein neues PlayerNameViewModel.
+     *
      * @param pinballMachine Der zum Spielen ausgewählte Flipperautomat.
      */
     public PlayerNameViewModel(PinballMachine pinballMachine)
@@ -40,8 +41,9 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     /**
-     * Entfernt einen Spieler aus der Liste der möglichen Spieler.
-     * @param playerNameEntrySubViewModel Das Model des zu entfernenden Spielers.
+     * Entfernt einen Spieler aus der Liste der Spieler, falls möglich.
+     *
+     * @param playerNameEntrySubViewModel Das SubViewModel, das die Daten des zu entfernenden Spielers enthält.
      */
     void removePlayerNameEntry(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {
@@ -49,7 +51,7 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     /**
-     * Fügt einen neuen Spieler zu der Liste der möglichen Spieler hinzu.
+     * Fügt einen neuen Spieler zur Liste der möglichen Spieler hinzu.
      */
     public void addPlayer()
     {
@@ -57,7 +59,7 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     /**
-     * Startet ein Spiel von dem ausgewählte Flipperautomat, wobei die Spieler aus der Liste der möglichen Spielern genommen wird .
+     * Startet ein Spiel mit dem ausgewählten Flipperautomaten, wobei die Spieler der Liste der möglichen Spielern entnommen werden.
      */
     public void startPinballMachine()
     {
@@ -71,7 +73,7 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Hauptmenu.
+     * Führt den Benutzer zurück in's Hauptmenü.
      */
     public void exitDialogToMainMenu()
     {
@@ -79,7 +81,8 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die Liste der möglichen Spieler für die nächste Partie für die View zu Verfügung.
+     * Stellt der View die Liste der möglichen Spieler für die nächste Partie zur Verfügung.
+     *
      * @return Eine Liste der möglichen Spieler.
      */
     public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntrysProperty()

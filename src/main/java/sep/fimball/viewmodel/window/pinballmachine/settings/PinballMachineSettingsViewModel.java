@@ -9,24 +9,25 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
- * Das PinballMachineEditorViewModel stellt der View Daten über einen FlipperAutomaten zu Verfügung und ermöglicht es u.a. Änderungen an diesen zu speichern oder zu löschen.
+ * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipperautomaten zu Verfügung und ermöglicht es u.a. Änderungen an diesem zu speichern oder zu löschen.
  */
 public class PinballMachineSettingsViewModel extends WindowViewModel
 {
     /**
-     * Der Flipperautomat, welcher editiert wird.
+     * Der Flipperautomat, der bearbeitet wird.
      */
     private PinballMachine pinballMachine;
 
 
     /**
-     * Der Name das FlipperAutomaten.
+     * Der Name des Flipperautomaten.
      */
     private StringProperty machineName;
 
     /**
      * Erstellt ein neues PinballMachineSettingsViewModel.
-     * @param pinballMachine Der Flupperautomat, der editiert wird.
+     *
+     * @param pinballMachine Der Flipperautomat, der bearbeitet wird.
      */
     public PinballMachineSettingsViewModel(PinballMachine pinballMachine)
     {
@@ -38,7 +39,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, die Änderungen an dem Flipperautomat zu speichern.
+     * Erteilt dem Model den Befehl, die Änderungen am Flipperautomaten zu speichern.
      */
     public void savePinballMachine()
     {
@@ -55,7 +56,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Hauptmenu.
+     * Führt den Benutzer zurück ins Hauptmenü.
      */
     public void exitWindowToMainMenu()
     {
@@ -63,7 +64,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer ins Automat-Editor-Fenster, wo er den Flipperautomat und seine Flipperautomat-Elemente editieren kann.
+     * Führt den Benutzer ins Automat-Editor-Fenster, wo er den Flipperautomat und seine Flipperautomat-Elemente bearbeiten kann.
      */
     public void exitWindowToEditor()
     {

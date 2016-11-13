@@ -8,12 +8,12 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 
 /**
- * Das GameOverViewModel stellt der View Daten über die Einstellungen von Fimball zu Verfügung und ermöglicht deren Änderung.
+ * Das GameSettingsViewModel stellt der View Daten über die Einstellungen von Fimball zur Verfügung und ermöglicht deren Änderung.
  */
 public class GameSettingsViewModel extends DialogViewModel
 {
     /**
-     * Die aktuell eingestellten Tasten um diverse Flipperautomat-ElementType zu bedienen z.b. den rechten Flipperarm.
+     * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.element.GameElement} zu bedienen, z.B. den rechten Flipperarm.
      */
     private ListProperty<KeybindSubViewModel> keybinds;
 
@@ -23,22 +23,22 @@ public class GameSettingsViewModel extends DialogViewModel
     private ObjectProperty<Language> language;
 
     /**
-     * Einstellung, um Fimball im Vollbild oder im Fenstermodus laufen zu lassen.
+     * Einstellung, um Fimball im Vollbild- oder im Fenstermodus laufen zu lassen.
      */
     private BooleanProperty fullscreen;
 
     /**
-     * Die aktuell eingestellte Hauptlautstärke von FimBall.
+     * Die aktuell eingestellte Hauptlautstärke von Fimball.
      */
     private IntegerProperty volumeMaster;
 
     /**
-     * Die aktuell eingestellte Lautstärke der Musik von FimBall.
+     * Die aktuell eingestellte Lautstärke der Musik von Fimball.
      */
     private IntegerProperty volumeMusic;
 
     /**
-     * Die aktuell eingestellte Lautstärke der Soundeffekte von FimBall.
+     * Die aktuell eingestellte Lautstärke der Soundeffekte von Fimball.
      */
     private IntegerProperty volumeSFX;
 
@@ -58,7 +58,7 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Hauptmenu.
+     * Führt den Benutzer zurück in das Hauptmenü.
      */
     public void exitDialogToMainMenu()
     {
@@ -66,8 +66,9 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellten Tasten um diverse Flipperautomat-ElementType zu bedienen für die View zu Verfügung.
-     * @return Eine Liste der  aktuell eingestellten Tasten.
+     * Stellt der View die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.element.GameElement GameElements} zu bedienen, zur Verfügung.
+     *
+     * @return Eine Liste der aktuell eingestellten Tasten.
      */
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()
     {
@@ -75,7 +76,8 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellte Sprache für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * Stellt die aktuell eingestellte Sprache zur Verfügung und diese kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     *
      * @return Die aktuell eingestellte Spache.
      */
     public ObjectProperty<Language> languageProperty()
@@ -84,7 +86,8 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt den aktuellen eingestellten Fenster- oder Vollbildmodus für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * Gibt zurück, ob der Vollbildmodus aktiv oder deaktiviert ist, was durch die bidirektionale Bindung zwischen ViewModel und View von der View geändert werden kann.
+     *
      * @return {@code true}, wenn der Vollbildmodus aktiviert ist, {@code false} sonst.
      */
     // TODO bind bidirectional
@@ -94,7 +97,8 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellte Hauptlautstärke zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * Stellt die aktuell eingestellte Hauptlautstärke zur Verfügung, die durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden kann.
+     *
      * @return Die aktuell eingestellte Hauptlautstärke.
      */
     // TODO bind bidirectional
@@ -104,7 +108,8 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellte Lautstärke der Musik für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * Stellt die aktuell eingestellte Lautstärke der Musik zur Verfügung, die durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden kann.
+     *
      * @return Die aktuell eingestellte Musik-Lautstärke.
      */
     // TODO bind bidirectional
@@ -114,7 +119,8 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die aktuell eingestellte Lautstärke der Soundeffekte für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     * Stellt die aktuell eingestellte Lautstärke der Soundeffekte zur Verfügung, die durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden kann.
+     *
      * @return Die aktuell eingestellte Soundeffekt-Lautstärke.
      */
     // TODO bind bidirectional

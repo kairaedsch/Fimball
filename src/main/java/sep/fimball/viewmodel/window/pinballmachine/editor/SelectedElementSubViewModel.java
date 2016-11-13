@@ -4,12 +4,12 @@ import javafx.beans.property.*;
 import sep.fimball.model.blueprint.PlacedElement;
 
 /**
- * Das SelectedElementSubViewModel stellt der View Daten über das akuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht es dem Nutzer, die Eigenschaften dieses Elements anzupassen.
+ * Das SelectedElementSubViewModel stellt der View Daten über das akuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
  */
 public class SelectedElementSubViewModel
 {
     /**
-     * Das Flipperautomat-Element, welches aktuell ausgewählt ist.
+     * Das Flipperautomat-Element, das aktuell ausgewählt ist.
      */
     private PlacedElement placedElement;
 
@@ -24,17 +24,18 @@ public class SelectedElementSubViewModel
     private StringProperty description;
 
     /**
-     * Die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden.
+     * Die Anzahl der Punkte, die dem Spieler bei einer Kollision mit diesem Element hinzugefügt werden.
      */
     private IntegerProperty points;
 
     /**
-     * Ein Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert.
+     * Ein Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
      */
     private DoubleProperty multiplier;
 
     /**
-     * Erstelt ein neuse SelectedElementSubViewModel.
+     * Erstellt ein neues SelectedElementSubViewModel.
+     *
      * @param placedElement Das Flipperautomat-Element, das ausgewählt ist.
      */
     public SelectedElementSubViewModel(PlacedElement placedElement)
@@ -48,7 +49,7 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, das Flipperautomat-Element nach rechts zu drehen.
+     * Erteilt dem Model den Befehl, das Flipperautomat-Element rechtsherum zu drehen.
      */
     public void rotateClockwise()
     {
@@ -56,7 +57,7 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, das Flipperautomat-Element nach links zu drehen.
+     * Erteilt dem Model den Befehl, das Flipperautomat-Element linksherum zu drehen.
      */
     public void rotateCounterclockwise()
     {
@@ -64,7 +65,8 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt der Name des Flipperautomat-Elements für die View zu Verfügung.
+     * Stellt der View den Namen des Flipperautomat-Elements zur Verfügung.
+     *
      * @return Der Name des Flipperautomat-Elements.
      */
     public ReadOnlyStringProperty nameProperty()
@@ -73,7 +75,8 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt die Beschreibung des Flipperautomat-Elements für die View zu Verfügung.
+     * Stellt der View die Beschreibung des Flipperautomat-Elements zur Verfügung.
+     *
      * @return Die Beschreibung des Flipperautomat-Elements.
      */
     public ReadOnlyStringProperty descriptionProperty()
@@ -82,8 +85,9 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return Die Anzahl der Punkte des Flipperautomat-Elements, welche dem Spieler bei einer Kollision mit diesem zugeschreiben werden.
+     * Stellt der View die Anzahl der Punkte des Flipperautomat-Elements, die dem Spieler bei einer Kollision mit diesem hinzugefügt werden, zur Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     *
+     * @return Die Anzahl der Punkte des Flipperautomat-Elements, die dem Spieler bei einer Kollision mit diesem hinzugefügt werden.
      */
     // TODO bind bidirect
     public IntegerProperty pointsProperty()
@@ -92,8 +96,9 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Stellt den Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert, für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return Der Multiplier, welcher die Stärke der Physikalischen Eigenschaften des Flipperautomat-Elements verstärkt oder reduziert,
+     * Stellt der View den Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert, zur Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     *
+     * @return Der Multiplier, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert,
      */
     // TODO bind bidirect
     public DoubleProperty multiplierProperty()

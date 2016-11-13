@@ -11,7 +11,7 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zu verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach dem Spielende an.
+ * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zur Verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach Spielende an.
  */
 public class GameOverViewModel extends DialogViewModel
 {
@@ -26,7 +26,7 @@ public class GameOverViewModel extends DialogViewModel
     private ListProperty<Highscore> machineHighscores;
 
     /**
-     * Eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält.
+     * Eine Highscoreliste, die alle Highscores der zuletzt gespielten Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
 
@@ -56,7 +56,7 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Hauptmenu.
+     * Führt den Benutzer zurück ins Hauptmenü.
      */
     public void exitDialogToMainMenu()
     {
@@ -64,7 +64,8 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zu Verfügung.
+     * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zur Verfügung.
+     *
      * @return Eine Liste von Highscores der zuletzt gespielten Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> machineHighscoresProperty()
@@ -73,7 +74,8 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt eine Highscoreliste, welche alle Highscores der zuletzt gespielten Partie enthält, für die View zu Verfügung.
+     * Stellt der View eine Highscoreliste, die alle Highscores der zuletzt gespielten Partie enthält, zur Verfügung.
+     *
      * @return Eine Liste von Highscores der zuletzt gespielten Partie.
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()

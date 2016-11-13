@@ -6,7 +6,7 @@ package sep.fimball.viewmodel.dialog;
 public enum DialogType
 {
     /**
-     * Wird verwendet um auch das Anzeigen von keinen Dialog-Fenster in der View zu ermöglichen.
+     * Wird verwendet, um auch die Anzeige keines Dialog-Fensters in der View zu ermöglichen.
      */
     NONE,
 

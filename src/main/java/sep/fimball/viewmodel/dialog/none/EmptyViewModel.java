@@ -4,7 +4,7 @@ import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
 /**
- * Das EmptyViewModel ist ein leeres DialogViewModel. Es wird genuzt, um in der View auch mal keinen Dialog anzeigen zu können.
+ * Das EmptyViewModel ist ein leeres DialogViewModel. Es wird genutzt, um in der View ein Fenster ohne darüber liegenden Dialog darzustellen.
  */
 public class EmptyViewModel extends DialogViewModel
 {

@@ -5,12 +5,13 @@ import sep.fimball.model.input.InputManager;
 import sep.fimball.viewmodel.window.WindowType;
 
 /**
- * Der InputManagerViewModel nimmt Key-Events entgegen und leitet diese ans Model weiter.
+ * Das InputManagerViewModel nimmt Key-Events entgegen und leitet diese an das Model weiter.
  */
 public class InputManagerViewModel
 {
     /**
-     * Leitet ein Key-Event ans Model weiter.
+     * Leitet ein Key-Event an das Model weiter.
+     *
      * @param event Das Key-Event, dass weitergeleitet wird.
      */
     public void onKeyEvent(KeyEvent event, WindowType currentWindowType)

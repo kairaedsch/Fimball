@@ -1,12 +1,32 @@
 package sep.fimball.viewmodel.window;
 
 /**
- * Der WindowType im ViewModel enthält alle möglichen Window-Fenster-Typen, welche es in Fimball gibt.
+ * Der WindowType im ViewModel enthält alle möglichen Fenster-Typen, die es in Fimball gibt.
  */
 public enum WindowType
 {
-     /**
-      * Alle Window-Fenster-Typen.
-      */
-     SPLASH_SCREEN, MAIN_MENU, GAME, TABLE_EDITOR, TABLE_SETTINGS;
+    /**
+     * Das Fenster, das beim Start von Fimball angezeigt wird.
+     */
+    SPLASH_SCREEN,
+
+    /**
+     * Das Fenster, das das Hauptmenü darstellt.
+     */
+    MAIN_MENU,
+
+    /**
+     * Das Fenster, das angezeigt wird, während ein Spiel gespielt wird.
+     */
+    GAME,
+
+    /**
+     * Das Fenster, das den Editor darstellt.
+     */
+    TABLE_EDITOR,
+
+    /**
+     * Das Fenster, in dem die Einstellungen von Fimball verwaltet werden.
+     */
+    TABLE_SETTINGS;
 }

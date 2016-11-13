@@ -3,17 +3,18 @@ package sep.fimball.viewmodel.window;
 import sep.fimball.viewmodel.ViewModel;
 
 /**
- * Das WindowViewModel ist die Oberklasse aller Window-ViewModel und speichert den Window-Typ.
+ * Das WindowViewModel ist die Oberklasse aller ViewModel, die Fenster repräsentieren, und speichert den Window-Typ.
  */
 public abstract class WindowViewModel extends ViewModel
 {
     /**
-     * Der Window-Typ des WindowViewModel.
+     * Der Typ des WindowViewModel.
      */
     private WindowType windowType;
 
     /**
      * Erstellt ein neues WindowViewModel.
+     *
      * @param windowType Der Typ des WindowViewModels.
      */
     public WindowViewModel(WindowType windowType)
@@ -22,8 +23,9 @@ public abstract class WindowViewModel extends ViewModel
     }
 
     /**
-     * Gibt den Window-Typ das DialogViewModels zurück.
-     * @return Der Typ des WindowViewModels.
+     * Gibt den Typ dieses Objekts zurück.
+     *
+     * @return Der Typ dieses WindowViewModels.
      */
     public WindowType getWindowType()
     {

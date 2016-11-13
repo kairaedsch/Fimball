@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.dialog;
 import sep.fimball.viewmodel.ViewModel;
 
 /**
- * Das DialogViewModel ist die Oberklasse aller Dialog-ViewModel und speichert den Dialog-Typ.
+ * Das DialogViewModel ist die Oberklasse der ViewModel aller Dialoge und speichert den Dialog-Typ.
  */
 public abstract class DialogViewModel extends ViewModel
 {
@@ -14,6 +14,7 @@ public abstract class DialogViewModel extends ViewModel
 
     /**
      * Erstellt ein neues DialogViewModel.
+     *
      * @param dialogType Der Typ des DialogViewModels.
      */
     public DialogViewModel(DialogType dialogType)
@@ -22,7 +23,8 @@ public abstract class DialogViewModel extends ViewModel
     }
 
     /**
-     * Gibt den Dialog-Typ das DialogViewModels zurück.
+     * Gibt den Dialog-Typ des DialogViewModels zurück.
+     *
      * @return Der Typ des DialogViewModels.
      */
     public DialogType getDialogType()

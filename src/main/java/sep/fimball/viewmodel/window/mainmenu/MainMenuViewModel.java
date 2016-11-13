@@ -15,17 +15,17 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
- * Das MainMenuViewModel stellt der View Daten über alle FlipperAutomaten zu Verfügung und ermöglicht den Start eines Automaten, wobei dann noch die Spieler festgelegt werden müssen.
+ * Das MainMenuViewModel stellt der View Daten über alle Flipper-Automaten zur Verfügung und ermöglicht den Start eines Automaten, wobei zuvor noch die Spieler festgelegt werden müssen.
  */
 public class MainMenuViewModel extends WindowViewModel
 {
     /**
-     * Liste aller FlipperAutomaten, welche ausgewählt werden können, um eine Detailreiche Darstellung zu bekommen.
+     * Liste aller Flipper-Automaten, die ausgewählt werden können, um eine detailreiche Darstellung zu bekommen.
      */
     private ListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelList;
 
     /**
-     * Der aktuell ausgewählte FlipperAutomaten, welcher detailreicher dargestellt wird.
+     * Der aktuell ausgewählte Flipper-Automat, der detailreicher dargestellt wird.
      */
     private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
 
@@ -43,7 +43,8 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Wechselt den FlipperAutomaten, der detailreich dargestellt wird, auf den übergebenen.
+     * Wechselt den Flipper-Automaten, der detailreich dargestellt wird, auf den Übergebenen.
+     *
      * @param pinballMachine Der neue Flipperautomat, der dargstellt werden soll.
      */
     public void switchPinballMachineInfo(PinballMachine pinballMachine)
@@ -52,7 +53,7 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu den Fimball Einstellungen.
+     * Führt den Benutzer zu den Fimball-Einstellungen.
      */
     public void showSettingsDialog()
     {
@@ -60,7 +61,7 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu der Spielerauswahl, wobei der detailreich dargestellte FlipperAutomat nach der Spieler Auswahl gespielt werden kann.
+     * Führt den Benutzer zu der Spielerauswahl, wobei der detailreich dargestellte Flipper-Automat nach der Spielerauswahl gespielt werden kann.
      */
     void showPlayerNameDialog(PinballMachine pinballMachine)
     {
@@ -68,7 +69,7 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu den Fimball Einstellungen.
+     * Führt den Benutzer zu den Fimball-Einstellungen.
      */
     void startEditor(PinballMachine pinballMachine)
     {
@@ -76,8 +77,9 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt den aktuell ausgewählte Flipperautomaten, welcher detailreicher dargestellt wird, für die View zu Verfügung.
-     * @return Der ausgwewählte Flupperautomat.
+     * Stellt der View den aktuell ausgewählten Flipperautomaten, der detailreicher dargestellt wird, zur Verfügung.
+     *
+     * @return Der ausgewählte Flipperautomat.
      */
     public ReadOnlyListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelListProperty()
     {
@@ -85,8 +87,9 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die Liste aller FlipperAutomaten, welche ausgewählt werden können, für die View zu Verfügung.
-     * @return Eine Liste aller FlipperAutomaten.
+     * Stellt der View die Liste aller Flipper-Automaten, die ausgewählt werden können, zur Verfügung.
+     *
+     * @return Eine Liste aller Flipper-Automaten.
      */
     public PinballMachineInfoSubViewModel getPinballMachineInfoSubViewModel()
     {

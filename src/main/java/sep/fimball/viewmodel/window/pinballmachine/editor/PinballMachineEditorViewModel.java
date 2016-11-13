@@ -14,22 +14,23 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 /**
- * Das PinballMachineEditorViewModel stellt der View Daten über einen FlipperAutomaten zu Verfügung und ermöglicht es, diesen zu editieren.
+ * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es, diesen zu bearbeiten.
  */
 public class PinballMachineEditorViewModel extends WindowViewModel
 {
     /**
-     * Der FlipperAutomat, welcher editiert wird.
+     * Der Flipperautomat, welcher editiert wird.
      */
     private PinballMachine pinballMachine;
 
     /**
-     * Eine Liste, welche alle FlipperAutomat-Elemente enthält, die von dem Nutzer platziert werden können.
+     * Eine Liste, die alle Flipperautomat-Elemente enthält, die vom Nutzer platziert werden können.
      */
     private ListProperty<AvailableElementSubViewModel> availableElements;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
+     *
      * @param pinballMachine Der Flipperautomat, der editiert werden soll.
      */
     public PinballMachineEditorViewModel(PinballMachine pinballMachine)
@@ -42,7 +43,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die Liste, welche alle Flipperautomat-Elemente enthält, die von dem Nutzer platziert werden können, für die View zu Verfügung.
+     * Stellt der View die Liste, die alle Flipperautomat-Elemente enthält, die vom Nutzer platziert werden können, zur Verfügung.
+     *
      * @return Eine Liste aller platzierbaren Flipperautomat-Elemente.
      */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableElementsProperty()
@@ -51,7 +53,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Vergrößert die Ansicht des FlipperAutomaten für den Nutzer.
+     * Vergrößert die Ansicht des Flipper-Automaten für den Nutzer.
      */
     public void zoomIn()
     {
@@ -59,7 +61,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Verkleinert die Ansicht des FlipperAutomaten für den Nutzer.
+     * Verkleinert die Ansicht des Flipper-Automaten für den Nutzer.
      */
     public void zoomOut()
     {
@@ -67,7 +69,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu dem Spiel-Window, wo der gerade von dem Nutzer editierte FlipperAutomat getestet werden kann.
+     * Führt den Benutzer zu dem Spielfenster, wo der gerade vom Nutzer bearbeitete Flipper-Automat getestet werden kann.
      */
     public void startPinballMachine()
     {
@@ -75,7 +77,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu dem Automat-Einstellungs-Window, wo der gerade von dem Nutzer editierte FlipperAutomat u.a. gespeichert werden kann.
+     * Führt den Benutzer zu dem Automateneinstellungsfenster, wo der gerade vom Nutzer bearbeitete Flipperautomat u.a. gespeichert werden kann.
      */
     public void showSettingsDialog()
     {

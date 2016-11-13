@@ -9,22 +9,23 @@ import javafx.beans.property.*;
 public class PlayerNameEntrySubViewModel
 {
     /**
-     * Das zum PlayerNameEntrySubViewModel zugehörige HauptViewModel, welches eine Liste aller PlayerNameEntrySubViewModel enthält.
+     * Das zum PlayerNameEntrySubViewModel gehörende PlayerNameViewModel, das eine Liste aller PlayerNameEntrySubViewModel enthält.
      */
     private PlayerNameViewModel playerNameViewModel;
 
     /**
-     * Der Name des möglichen Spielers.
+     * Der Name des Spielers.
      */
     private StringProperty playerName;
 
     /**
-     * Legt fest, ob der mögliche Spieler gelöscht werden darf.
+     * Legt fest, ob der Spieler gelöscht werden darf.
      */
     private BooleanProperty isDeleteAble;
 
     /**
      * Erstellt ein neues PlayerNameEntrySubViewModel
+     *
      * @param playerNameViewModel Das korrespondierende PlayerNameViewModel.
      * @param name Der Name des Spielers.
      */
@@ -38,7 +39,7 @@ public class PlayerNameEntrySubViewModel
     }
 
     /**
-     * Löscht den möglichen Spieler (Falls erlaubt).
+     * Löscht den Spieler, falls erlaubt.
      */
     public void deletePlayerName()
     {
@@ -46,8 +47,9 @@ public class PlayerNameEntrySubViewModel
     }
 
     /**
-     * Stellt den möglichen Spieler Namen für die View zu Verfügung und kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
-     * @return Der mögliche Spielername.
+     * Stellt der View den Spielernamen zur Verfügung und dieser kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
+     *
+     * @return Der Spielername.
      */
     // TODO bind bidirekt
     public StringProperty playerNameProperty()
@@ -56,8 +58,9 @@ public class PlayerNameEntrySubViewModel
     }
 
     /**
-     * Stellt die Information für die View zu Verfügung, ob der mögliche Spieler gelöscht werden darf.
-     * @return {@code true}, falls der Spielernameneintrag gelöscht werden darf, {@code false} sonst.
+     * Stellt der View die Information zur Verfügung, ob der Spieler gelöscht werden darf.
+     *
+     * @return {@code true}, falls der Spieler gelöscht werden darf, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isDeleteAbleProperty()
     {

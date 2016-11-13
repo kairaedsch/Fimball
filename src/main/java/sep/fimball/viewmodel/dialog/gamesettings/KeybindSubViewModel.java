@@ -8,24 +8,25 @@ import javafx.scene.input.KeyCode;
 import sep.fimball.model.input.KeyBinding;
 
 /**
- * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende Flipperautomaten-ElementType zu Verfügung und ermöglicht die Änderung der zugeteilten Taste.
+ * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.element.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
  */
 public class KeybindSubViewModel
 {
     /**
-     * Der Name des Flipperautomat-Elements, welches bedient werden will.
+     * Der Name des {@link sep.fimball.model.element.GameElement}, das durch die Taste bedient wird.
      */
     private StringProperty elementName;
 
     /**
-     * Der Name der Taste, welche das Flipperautomaten-ElementType bedienen will.
+     * Der Name der Taste, die das {@link sep.fimball.model.element.GameElement} bedient.
      */
     private StringProperty key;
 
     /**
      * Erstellt ein neues KeybindSubViewModel.
-     * @param keyBinding TODO
-     * @param keyCode TODO
+     *
+     * @param keyBinding Die Funktion des Automaten, an die die Taste gebunden wird.
+     * @param keyCode Die Taste, an die die Funktion gebunden wird.
      */
     // TODO Button is given over
     public KeybindSubViewModel(KeyBinding keyBinding, KeyCode keyCode)
@@ -36,7 +37,7 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, die Taste welche das Flipperautomat-ElementType bedient, auf das gegebene zu ändern.
+     * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.element.GameElement} bedient, auf die Übergebene zu ändern.
      */
     // TODO Button is given over
     public void changeKeyBinding(KeyCode keyCode)
@@ -45,8 +46,9 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Stellt den Name des Flipperautomat-Elements, welches bedient werden will, für die View zu Verfügung.
-     * @return Der Name des bedienbaren Flipperautoment-Elements-
+     * Stellt der View den Namen des Flipperautomat-Elements, das bedient werden soll, zur Verfügung.
+     *
+     * @return Der Name des bedienbaren Flipperautomaten-Elements.
      */
     public ReadOnlyStringProperty elementNameProperty()
     {
@@ -54,8 +56,9 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Stellt den Name der Taste, welche das Flipperautomaten-Element bedienen will, für die View zu Verfügung.
-     * @return Der Name der Taste, die das Flipperautomaten-Element bedienen will.
+     * Stellt der View die Taste, die das Flipperautomaten-Element bedienen soll, zur Verfügung.
+     *
+     * @return Die Taste, die das Flipperautomaten-Element bedienen soll.
      */
     public ReadOnlyStringProperty keyProperty()
     {

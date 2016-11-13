@@ -8,12 +8,12 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
- * Das GameViewModel stellt der View Daten über eine aktuelle Partie Pinball zu Verfügung (Besonders über den aktiven Spieler).
+ * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven Spieler.
  */
 public class GameViewModel extends WindowViewModel
 {
     /**
-     * Die aktuelle Punktzahl(Score) des aktiven Spielers.
+     * Die aktuelle Punktzahl des aktiven Spielers.
      */
     private IntegerProperty playerPoints;
 
@@ -28,22 +28,23 @@ public class GameViewModel extends WindowViewModel
     private IntegerProperty playerReserveBalls;
 
     /**
-     * Die aktuelle Position der Kamera, welche seinen Wert immer an die Kamera Position in PinballCanvasViewModel sendet. Dies geschieht durch Propertie Binding.
+     * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die aktuelle Zoom Stärke der Kamera, welche seinen Wert immer an die Kamera Zoom Stärke in PinballCanvasViewModel sendet. Dies geschieht durch Propertie Binding.
+     * Die aktuelle Zoomstärke der Kamera, die ihren Wert immer an die Kamera Zoomstärke in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private DoubleProperty cameraZoom;
 
     /**
-     * Das PinballCanvasViewModel welches vom GameViewModel initialisiert/gesteuert wird.
+     * Das PinballCanvasViewModel, das vom GameViewModel initialisiert und gesteuert wird.
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
     /**
      * Erstellt ein neues GameViewModel.
+     *
      * @param gameSession Die GameSession, die zu diesem GameViewModel gehört.
      */
     public GameViewModel(GameSession gameSession)
@@ -67,8 +68,9 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die aktuelle Punktzahl(Score) für die View zu Verfügung.
-     * @return Die Punktezahl des aktiven Spielers.
+     * Stellt der View die aktuelle Punktzahl zur Verfügung.
+     *
+     * @return Die Punktzahl des aktiven Spielers.
      */
     public IntegerProperty playerPointsProperty()
     {
@@ -76,7 +78,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt den Name des aktiven Spielers für die View zu Verfügung.
+     * Stellt der View den Namen des aktiven Spielers zur Verfügung.
+     *
      * @return Der Name des aktiven Spielers.
      */
     public StringProperty playerNameProperty()
@@ -85,7 +88,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die Anzahl der Reservebälle des aktiven Spielers für die View zu Verfügung.
+     * Stellt der View die Anzahl der Reservebälle des aktiven Spielers zur Verfügung.
+     *
      * @return Die Anzahl der Reservebälle des aktiven Spielers.
      */
     public IntegerProperty playerReserveBallsProperty()
@@ -94,7 +98,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die aktuelle Position der Kamera für die View zu Verfügung.
+     * Stellt der View die aktuelle Position der Kamera zur Verfügung.
+     *
      * @return Die aktuelle Position der Kamera.
      */
     public ReadOnlyProperty<Vector2> cameraPositionProperty()
@@ -103,7 +108,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt die aktuelle Zoom-Stärke der Kamera für die View zu Verfügung.
+     * Stellt der View die aktuelle Zoom-Stärke der Kamera zur Verfügung.
+     *
      * @return Die aktuelle Zoom-Stärke der Kamera.
      */
     public ReadOnlyDoubleProperty cameraZoomProperty()
@@ -112,7 +118,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt das PinballCanvasViewModel für die View zu Verfügung, damit die View den Automaten mit all seinen Sprites zeichnen kann.
+     * Stellt der View das PinballCanvasViewModel zur Verfügung, damit die View den Automaten mit all seinen Sprites zeichnen kann.
+     *
      * @return Das PinballCanvasViewModel.
      */
     public PinballCanvasViewModel getPinballCanvasViewModel()

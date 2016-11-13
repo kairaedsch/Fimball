@@ -9,12 +9,12 @@ import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinnball zu Verfügung und ermöglicht deren Fortsetzung oder Abbrechung.
+ * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinball zur Verfügung und ermöglicht deren Fortsetzung oder Abbrechung.
  */
 public class PauseViewModel extends DialogViewModel
 {
     /**
-     * Eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält.
+     * Eine Highscoreliste, die alle Highscores der aktuellen Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
 
@@ -27,7 +27,7 @@ public class PauseViewModel extends DialogViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Hauptmenu.
+     * Führt den Benutzer in's Hauptmenü zurück.
      */
     public void exitDialogToMainMenu()
     {
@@ -35,7 +35,7 @@ public class PauseViewModel extends DialogViewModel
     }
 
     /**
-     * Führt den Benutzer zurück ins Spiel.
+     * Führt den Benutzer in's Spiel zurück.
      */
     public void resumeGame()
     {
@@ -43,8 +43,9 @@ public class PauseViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt eine Highscoreliste, welche alle Highscores der aktuellen Partie enthält, für die View zu Verfügung.
-     * @return Eine Liste, der Highscores der aktuellen Partie.
+     * Stellt der View eine Liste, die alle Highscores der aktuellen Partie enthält, zur Verfügung.
+     *
+     * @return Eine Liste der Highscores der aktuellen Partie.
      */
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {

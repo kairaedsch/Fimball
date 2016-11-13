@@ -11,17 +11,17 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zu Verfügung und dient als Observable, um die View bei Änderungen zum eneuten zeichnen auffordern zu können.
+ * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zur Verfügung und dient als Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
  */
 public class PinballCanvasViewModel
 {
     /**
-     * Liste aller spriteSubViewModels die Informationen zum Zeichnen enthalten.
+     * Liste aller SpriteSubViewModels, die Informationen zum Zeichnen enthalten.
      */
     private ListProperty<SpriteSubViewModel> spriteSubViewModels;
 
     /**
-     * Position der Kamera, welche festlegt von welchen Standpunkt aus die ElementType gezeichnet werden sollen.
+     * Position der Kamera, die festlegt, von welchem Standpunkt aus die Automatenelemente gezeichnet werden sollen.
      */
     private ObjectProperty<Vector2> cameraPosition;
 
@@ -31,13 +31,14 @@ public class PinballCanvasViewModel
     private DoubleProperty cameraZoom;
 
     /**
-     * Observable, um die View bei Änderungen zum erneuten zeichnen auffordern zu können.
+     * Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
      */
     private Observable redrawObservable;
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
-     * @param world Die Spielwelt des anzuzeigenden Flipperautomatens.
+     *
+     * @param world Die Spielwelt des anzuzeigenden Flipperautomaten.
      * @param gameViewModel Das korrespondierende GameViewModel.
      */
     public PinballCanvasViewModel(World world, GameViewModel gameViewModel)
@@ -49,8 +50,8 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Initzialisiert die Zeichnung des Canvas.
-     * @param world Die Spielwelt des anzuzeigenden Flipperautomatens.
+     * Initialisiert die Zeichnung des Canvas.
+     * @param world Die Spielwelt des anzuzeigenden Flipperautomaten.
      */
     private void init(World world)
     {
@@ -64,8 +65,9 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Stellt die Liste aller spriteSubViewModels für die View zu Verfügung.
-     * @return Eine Liste aller spriteSubViewModels.
+     * Stellt der View die Liste aller SpriteSubViewModels zur Verfügung.
+     *
+     * @return Eine Liste aller SpriteSubViewModels.
      */
     public ReadOnlyListProperty<SpriteSubViewModel> spriteSubViewModelsProperty()
     {
@@ -73,7 +75,8 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Stellt die Position der Kamera für die View zu Verfügung.
+     * Stellt der View die Position der Kamera zur Verfügung.
+     *
      * @return Die Position der Kamera.
      */
     public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
@@ -82,7 +85,8 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Stellt die Stärke des Kamera-Zooms für die View zu Verfügung.
+     * Stellt der View die Stärke des Kamera-Zooms zur Verfügung.
+     *
      * @return Die Stärke des Kamera-Zooms.
      */
     public ReadOnlyDoubleProperty cameraZoomProperty()
@@ -91,7 +95,7 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * Ermöglicht es der View, sich als Observer zu registrieren, um dann bei Änderungen zum neu zeichnen benachrichtigt zu werden.
+     * Ermöglicht es der View, sich als Observer zu registrieren, um bei Änderungen benachrichtigt zu werden.
      */
     public void notifyToRedraw(Observer observer)
     {
@@ -99,7 +103,7 @@ public class PinballCanvasViewModel
     }
 
     /**
-     * TODO
+     * Benachrichtigt die Observer, dass sich etwas an den zu zeichnenden Objekten verändert hat.
      */
     private void redraw()
     {

@@ -6,7 +6,7 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
 
 /**
- * Das PinballMachineInfoSubViewModel stellt der View detailierte Daten über einen Flipperautomat bereit und ermöglicht das starten oder editieren dieses Automaten.
+ * Das PinballMachineInfoSubViewModel stellt der View detaillierte Daten über einen Flipperautomaten bereit und ermöglicht das Starten und Editieren dieses Automaten.
  */
 public class PinballMachineInfoSubViewModel
 {
@@ -16,7 +16,7 @@ public class PinballMachineInfoSubViewModel
     private MainMenuViewModel mainMenu;
 
     /**
-     * Der Flipperautomat, dessen Informationen zu Verfügung gestellt werden.
+     * Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden.
      */
     private PinballMachine pinballMachine;
 
@@ -37,8 +37,9 @@ public class PinballMachineInfoSubViewModel
 
     /**
      * Erstellt ein neues PinballMachineInfoSubViewModel.
+     *
      * @param mainMenu Das korrespondierende MainMenuViewModel.
-     * @param pinballMachine Der Flipperautomat, dessen Informationen dargstellt werden sollen.
+     * @param pinballMachine Der Flipperautomat, dessen Informationen dargestellt werden sollen.
      */
     PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
@@ -52,7 +53,8 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Ersetzt den aktuellen Flipperautomaten mit einem neuen, der Übergeben wird, sodass die Daten des neue Flipperautomat zu verfügung stehen.
+     * Ersetzt den aktuellen Flipperautomaten durch einen Anderen, der übergeben wird, sodass die Daten des neuen Flipperautomaten zur Verfügung stehen.
+     *
      * @param pinballMachine Der neue Flipperautomat.
      */
     void update(PinballMachine pinballMachine)
@@ -65,7 +67,7 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Leitet den Befehl, den aktuellen Flipperautomat spielen zu wollen, an das zu diesem gehörige MainMenuViewModel weiter.
+     * Leitet den Befehl, den aktuellen Flipperautomaten spielen zu wollen, an das zu diesem Objekt gehörenden MainMenuViewModel weiter.
      */
     public void showPlayerNameDialog()
     {
@@ -73,7 +75,7 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Leitet den Befehl, den aktuellen Flipperautomat editieren zu wollen, an das zu diesem gehörige MainMenuViewModel weiter.
+     * Leitet den Befehl, den aktuellen Flipperautomat bearbeiten zu wollen, an das zu diesem Objekt gehörenden MainMenuViewModel weiter.
      */
     public void startEditor()
     {
@@ -81,7 +83,8 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Stellt den Name des Flipperautomaten für die View zu Verfügung.
+     * Stellt der View den Namen des Flipperautomaten zur Verfügung.
+     *
      * @return Der Name des Flipperautomaten.
      */
     public ReadOnlyStringProperty nameProperty()
@@ -90,7 +93,8 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Stellt den Pfad zum Vorschaubild des Flipperautomaten für die View zu Verfügung.
+     * Stellt der View den Pfad zum Vorschaubild des Flipperautomaten zur Verfügung.
+     *
      * @return Der Pfad zum Vorschaubild des Flipperautomatens.
      */
     public ReadOnlyStringProperty imagePathProperty()
@@ -99,7 +103,8 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Stellt die Highscoreliste des Flipperautomaten für die View zu Verfügung.
+     * Stellt der View die Highscoreliste des Flipperautomaten zur Verfügung.
+     *
      * @return Eine Liste der Highscores des Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()

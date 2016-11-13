@@ -5,12 +5,12 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.ElementType;
 
 /**
- * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomate-Element bereit und ermöglicht es dem Nutzer, dieses in seinem Flipperautomaten zu platzieren.
+ * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomaten-Element bereit und ermöglicht dem Nutzer, dieses in seinem Flipperautomat zu platzieren.
  */
 public class AvailableElementSubViewModel
 {
     /**
-     * Das Flipperautomate-Element, dessen Informationen angezeigt werden.
+     * Das Flipperautomaten-Element, dessen Informationen angezeigt werden.
      */
     private ElementType elementType;
 
@@ -20,12 +20,13 @@ public class AvailableElementSubViewModel
     private StringProperty name;
 
     /**
-     * Der Pfad zum Vorschau Bild des Flipperautomaten-Elements.
+     * Der Pfad zum Vorschau-Bild des Flipperautomaten-Elements.
      */
     private StringProperty imagePath;
 
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
+     *
      * @param elementType Der Elementtyp, dessen Informationen angezeigt werden sollen.
      */
     public AvailableElementSubViewModel(ElementType elementType)
@@ -36,8 +37,9 @@ public class AvailableElementSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, dieses Flipperautomat-Element in den Flipperautomaten zu platzieren.
-     * @param position Die neue Position, die das Flipperautomaten-Element haben soll.
+     * Erteilt dem Model den Befehl, dieses Flipperautomat-Element im Flipperautomaten zu platzieren.
+     *
+     * @param position Die Position, die das Flipperautomaten-Element haben soll.
      */
     public void placeElement(Vector2 position)
     {
@@ -45,7 +47,8 @@ public class AvailableElementSubViewModel
     }
 
     /**
-     * Stellt den Pfad zum Vorschaubild des Flipperautomaten-Elements für die View zu Verfügung.
+     * Stellt dr View den Pfad zum Vorschaubild des Flipperautomaten-Elements zur Verfügung.
+     *
      * @return Der Pfad des Vorschaubildes des Flipperautomaten-Elements.
      */
     public ReadOnlyStringProperty nameProperty()
@@ -54,8 +57,9 @@ public class AvailableElementSubViewModel
     }
 
     /**
-     * Stellt den Name des Flipperautomaten-Elements für die View zu Verfügung.
-     * @return Der Name des Flupperautomaten-Elements.
+     * Stellt der View den Namen des Flipperautomaten-Elements zur Verfügung.
+     *
+     * @return Der Name des Flipperautomaten-Elements.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {
