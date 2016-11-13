@@ -1,17 +1,13 @@
 package sep.fimball.model.physics;
 
-import javafx.collections.ObservableList;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.element.GameElementList;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige ElementType ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Das Objekt mit dem die Kugel kollidiert ist wird über die Kollision informiert. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus welche 60 mal pro Sekunde ausgeführt wird. Auch wird überprüft ob die Kugel verloren gegangen ist.
@@ -87,6 +83,11 @@ public class PhysicsHandler
             {
                 // TODO check bufferedKeyEvents
 
+                for (PhysicsElement element : physicsElements)
+                {
+                    solveBallCollision(ballElement, element);
+                }
+
                 // TODO Notify GameElements about collisions
                 // TODO Solve collisions
                 // TODO Check if ball is lost
@@ -106,6 +107,15 @@ public class PhysicsHandler
         GameElementList elements = world.getGameElements();
         elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
         ballElement = new PhysicsElement(elements.getBall());
+        physicsElements.add(ballElement);
+    }
+
+    private void solveBallCollision(PhysicsElement ball, PhysicsElement element)
+    {
+        for (Collider collider : element.getElement().getColliders())
+        {
+            // TODO: warum genau erben wir nochmal von collider, wenn circle und polygon collider nichts gemeinsam haben?
+        }
     }
 
     /**

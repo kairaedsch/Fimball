@@ -142,4 +142,9 @@ public class GameElement
     {
         return currentAnimation.currentFrameProperty();
     }
+
+    public List<Collider> getColliders()
+    {
+        return colliders;
+    }
 }
