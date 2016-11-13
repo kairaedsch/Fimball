@@ -93,9 +93,29 @@ public class Vector2
         return new Vector2(vecOne.getX() * scalar, vecOne.getY() * scalar);
     }
 
+    public static Vector2 project(Vector2 source, Vector2 target)
+    {
+        Vector2 targetNorm = normalize(target);
+        double targetLength = dot(source, targetNorm);
+        return scale(target, targetLength);
+    }
+
+    public static double magnitude(Vector2 vecOne)
+    {
+        return Math.sqrt(vecOne.getX() * vecOne.getX() + vecOne.getY() * vecOne.getY());
+    }
+
     public static double dot(Vector2 vecOne, Vector2 vecTwo)
     {
         return (vecOne.getX() * vecTwo.getX()) + (vecOne.getY() * vecTwo.getY());
+    }
+
+    public static Vector2 normalize(Vector2 vecOne)
+    {
+        double norm = magnitude(vecOne);
+        vecOne.setX(vecOne.getX() / norm);
+        vecOne.setY(vecOne.getY() / norm);
+        return vecOne;
     }
 
     public double getX()
