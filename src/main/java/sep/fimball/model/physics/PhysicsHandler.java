@@ -70,8 +70,8 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
 
         physicsElements = new ArrayList<>();
-        LoadPhysicsElementList(world);
-        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> LoadPhysicsElementList(world));
+        loadPhysicsElementList(world);
+        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> loadPhysicsElementList(world));
 
         timerTask = new TimerTask()
         {
@@ -83,17 +83,55 @@ public class PhysicsHandler
             {
                 // TODO check bufferedKeyEvents
 
+                // Check all PhysicsElements for collisions with the ball
                 for (PhysicsElement element : physicsElements)
                 {
+                    // Found a random element, check if it's circles collide with the ball
                     for (CircleCollider circle : element.getCircleColliders())
                     {
+                        // Check all colliders of the ball [possibly unnecessary]
                         for (CircleCollider ballCircle : ballElement.getCircleColliders())
                         {
+                            // Collision check between two circles
                             Vector2 distance = Vector2.sub(ballCircle.getPosition(), circle.getPosition());
                             if (distance.magnitude() < ballCircle.getRadius() + circle.getRadius())
                             {
                                 double overlapDistance = (ballCircle.getRadius() + circle.getRadius()) - distance.magnitude();
                                 Vector2 pushVector = Vector2.scale(distance.normalized(), overlapDistance);
+                            }
+                        }
+                    }
+                    // Check if it's polygons collide with the ball
+                    for (PolygonCollider poly : element.getPolygonColliders())
+                    {
+                        // Check all colliders of the ball [possibly unnecessary]
+                        for (CircleCollider ballCircle : ballElement.getCircleColliders())
+                        {
+                            // check axis with the ball from all vertices [possibly unnecessary]
+                            for (Vector2 axisVertex : poly.getVertices())
+                            {
+                                Vector2 axis = Vector2.sub(ballCircle.getPosition(), axisVertex).normalized();
+                                List<Double> points = new ArrayList<>();
+
+                                for (Vector2 vertex : poly.getVertices())
+                                {
+                                    points.add(Vector2.dot(vertex, axis));
+                                }
+
+                                points.sort(Comparator.naturalOrder());
+
+                                double ballCenter = Vector2.dot(ballCircle.getPosition(), axis);
+                                double ballMin = ballCenter - ballCircle.getRadius();
+                                double ballMax = ballCenter + ballCircle.getRadius();
+
+                                double polyMin = points.get(0);
+                                double polyMax = points.get(points.size() - 1);
+
+                                // Do the projected areas intersect?
+                                if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
+                                {
+                                    
+                                }
                             }
                         }
                     }
@@ -110,9 +148,10 @@ public class PhysicsHandler
     /**
      * Lädt die Liste von GameElements aus der World, löscht alle vorhandenen PhysicsElements und ersetzt diese durch
      * neu geneierte.
+     *
      * @param world Die Welt aus der die GameElements gelesen werden.
      */
-    private void LoadPhysicsElementList(World world)
+    private void loadPhysicsElementList(World world)
     {
         physicsElements.clear();
         GameElementList elements = world.getGameElements();
