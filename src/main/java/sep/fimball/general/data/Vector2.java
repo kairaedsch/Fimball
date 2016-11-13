@@ -84,6 +84,11 @@ public class Vector2
         return new Vector2(getX() / norm, getY() / norm);
     }
 
+    public double angleBetween(Vector2 otherVec)
+    {
+        return Vector2.angleBetween(this, otherVec);
+    }
+
     public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
     {
         return new Vector2(vecOne.getX() + vecTwo.getX(), vecOne.getY() + vecTwo.getY());
@@ -128,6 +133,11 @@ public class Vector2
     {
         double norm = magnitude(input);
         return new Vector2(input.getX() / norm, input.getY() / norm);
+    }
+
+    public static double angleBetween(Vector2 vecOne, Vector2 vecTwo)
+    {
+        return Math.acos(Vector2.dot(vecOne.normalized(), vecTwo.normalized()));
     }
 
     public double getX()
