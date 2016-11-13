@@ -43,6 +43,61 @@ public class Vector2
         this.y = p.y;
     }
 
+    public void add(Vector2 otherVec)
+    {
+        this.x += otherVec.getX();
+        this.y += otherVec.getY();
+    }
+
+    public void sub(Vector2 otherVec)
+    {
+        this.x -= otherVec.getX();
+        this.y -= otherVec.getY();
+    }
+
+    public void scale(double scalar)
+    {
+        this.x *= scalar;
+        this.y *= scalar;
+    }
+
+    public double magnitude()
+    {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    public double dot(Vector2 other)
+    {
+        return (this.x * other.getX()) + (this.y * other.getY());
+    }
+
+    public void normalize()
+    {
+        double norm = magnitude();
+        this.x /= norm;
+        this.y /= norm;
+    }
+
+    public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
+    {
+        return new Vector2(vecOne.getX() + vecTwo.getX(), vecOne.getY() + vecTwo.getY());
+    }
+
+    public static Vector2 sub(Vector2 vecOne, Vector2 vecTwo)
+    {
+        return new Vector2(vecOne.getX() - vecTwo.getX(), vecOne.getY() - vecTwo.getY());
+    }
+
+    public static Vector2 scale(Vector2 vecOne, double scalar)
+    {
+        return new Vector2(vecOne.getX() * scalar, vecOne.getY() * scalar);
+    }
+
+    public static double dot(Vector2 vecOne, Vector2 vecTwo)
+    {
+        return (vecOne.getX() * vecTwo.getX()) + (vecOne.getY() * vecTwo.getY());
+    }
+
     public double getX()
     {
         return x;
