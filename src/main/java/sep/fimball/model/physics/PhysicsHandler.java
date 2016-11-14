@@ -130,7 +130,8 @@ public class PhysicsHandler
                                 // Do the projected areas intersect?
                                 if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
                                 {
-                                    
+                                    double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
+                                    Vector2 pushVector = Vector2.scale(axis, overlapDistance);
                                 }
                             }
                         }
