@@ -62,7 +62,6 @@
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -76,13 +75,6 @@
                                     </children>
                                 </HBox>
                                 <HBox GridPane.columnIndex="1">
-                                    <children>
-                                        <Pane HBox.hgrow="ALWAYS" />
-                                        <Pane fx:id="buttonPlayMultiplayer" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" styleClass="button, buttonPlayMultiplayer" />
-                                        <Pane HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </HBox>
-                                <HBox GridPane.columnIndex="2">
                                     <children>
                                         <Pane HBox.hgrow="ALWAYS" />
                                         <Pane fx:id="buttonEdit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0" styleClass="button, buttonEdit" />
