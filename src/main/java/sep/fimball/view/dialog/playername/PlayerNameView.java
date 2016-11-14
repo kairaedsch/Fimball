@@ -40,7 +40,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
      * Benachrichtigt das PlayerNameViewModel, dass der Nutzer eine Partie mit den gerade getätigten Einstellungen spielen möchte.
      */
     @FXML
-    private void startClicked()
+    private void okClicked()
     {
         playerNameViewModel.startPinballMachine();
     }
