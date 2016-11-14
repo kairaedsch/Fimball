@@ -84,8 +84,12 @@ public class PhysicsHandler
                 // TODO check bufferedKeyEvents
 
                 // Check all PhysicsElements for collisions with the ball
+
                 for (PhysicsElement element : physicsElements)
                 {
+                    boolean collision = false;
+                    Vector2 pushVector;
+
                     // Found a random element, check if it's circles collide with the ball
                     for (CircleCollider circle : element.getCircleColliders())
                     {
@@ -96,8 +100,9 @@ public class PhysicsHandler
                             Vector2 distance = Vector2.sub(ballCircle.getPosition(), circle.getPosition());
                             if (distance.magnitude() < ballCircle.getRadius() + circle.getRadius())
                             {
+                                collision = true;
                                 double overlapDistance = (ballCircle.getRadius() + circle.getRadius()) - distance.magnitude();
-                                Vector2 pushVector = Vector2.scale(distance.normalized(), overlapDistance);
+                                pushVector = Vector2.scale(distance.normalized(), overlapDistance);
                             }
                         }
                     }
@@ -131,7 +136,7 @@ public class PhysicsHandler
                                 if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
                                 {
                                     double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-                                    Vector2 pushVector = Vector2.scale(axis, overlapDistance);
+                                    pushVector = Vector2.scale(axis, overlapDistance);
                                 }
                             }
                         }
