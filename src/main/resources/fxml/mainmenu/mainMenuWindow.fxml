@@ -1,52 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
-<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuView">
+
+<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuView">
     <items>
-        <AnchorPane minWidth="150.0">
+        <VBox>
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <content>
-                        <AnchorPane>
-                            <children>
-                                <VBox fx:id="machineOverview" styleClass="machineOverviewInner" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings" />
+
+                <AnchorPane minWidth="150.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane>
                                     <children>
+                                        <VBox fx:id="machineOverview" styleClass="machineOverviewInner" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                            </children>
+                                        </VBox>
                                     </children>
-                                </VBox>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#addClicked" text="+" />
             </children>
-        </AnchorPane>
+        </VBox>
         <AnchorPane minWidth="300.0">
             <children>
                 <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" styleClass="machineName" text="Marcs Automat" VBox.vgrow="ALWAYS" />
-                  <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="158.0" prefWidth="200.0">
-                           <children>
-                               <Pane fx:id="detailedPreviewImage" layoutX="-71.0" layoutY="89.0" styleClass="machinePic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                      </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="90.0" prefHeight="158.0" prefWidth="90.0">
-                           <children>
-                              <VBox fx:id ="highscoreTable" prefHeight="160.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <children>
+                        <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="158.0" prefWidth="200.0">
+                                    <children>
+                                        <Pane fx:id="detailedPreviewImage" layoutX="-71.0" layoutY="89.0" styleClass="machinePic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="90.0" prefHeight="158.0" prefWidth="90.0">
+                                    <children>
+                                        <VBox fx:id="highscoreTable" prefHeight="160.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
 
-                                </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
                         <GridPane prefHeight="110.0" styleClass="machineAktions">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -79,9 +90,9 @@
                                     </children>
                                 </HBox>
                             </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
                         </GridPane>
                     </children>
                 </VBox>
@@ -89,6 +100,6 @@
         </AnchorPane>
     </items>
     <stylesheets>
-        <String fx:value="styles/style.css"/>
-    </stylesheets>
+           <String fx:value="styles/style.css" />
+       </stylesheets>
 </SplitPane>
