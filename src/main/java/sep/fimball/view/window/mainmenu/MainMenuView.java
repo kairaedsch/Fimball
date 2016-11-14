@@ -86,7 +86,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void settingsClicked()
     {
-       // TODO
+       mainMenuViewModel.showSettingsDialog();
     }
 
     /**
@@ -95,6 +95,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void addClicked()
     {
-        // TODO
+        //TODO
     }
 }

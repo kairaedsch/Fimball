@@ -72,6 +72,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     private void okClicked()
     {
-
+        gameSettingsViewModel.exitDialogToMainMenu();
     }
 }
