@@ -55,8 +55,7 @@ public class World
 
     public void bindWorldToPlacedElementList(PlacedElementList placedElementList)
     {
-        ListPropertyConverter.bindAndConvertMap(gameElements, placedElementList.elementsProperty(), ((placedElementKey, placedElementValue) ->
-                new GameElement(placedElementValue)));
+        ListPropertyConverter.bindAndConvertList(gameElements, placedElementList.elementsProperty(), GameElement::new);
     }
 
     public ReadOnlyListProperty<GameElement> gameElementsProperty()

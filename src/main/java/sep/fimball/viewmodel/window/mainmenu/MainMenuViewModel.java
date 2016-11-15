@@ -37,7 +37,7 @@ public class MainMenuViewModel extends WindowViewModel
         super(WindowType.MAIN_MENU);
 
         pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertMap(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachineId, pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine));
+        ListPropertyConverter.bindAndConvertList(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().tableBlueprintsProperty(), (pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine));
 
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().tableBlueprintsProperty().get(0));
     }
