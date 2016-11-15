@@ -54,15 +54,16 @@ public class Settings
      */
     private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
 
-    private MapProperty<KeyBinding, KeyCode> keyCodesMap;
-
     /**
      * Erzeugt eine neue Instanz von Settings.
      */
     private Settings()
     {
-        keyBindingsMap = new SimpleMapProperty<>(FXCollections.emptyObservableMap());
-        keyCodesMap = new SimpleMapProperty<>(FXCollections.emptyObservableMap());
+        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
+
+        keyBindingsMap.put(KeyCode.Y, KeyBinding.LEFT_FLIPPER);
+        keyBindingsMap.put(KeyCode.M, KeyBinding.RIGHT_FLIPPER);
+
 
         // TODO load settings file here
     }
@@ -118,11 +119,6 @@ public class Settings
     public ObservableMap<KeyCode, KeyBinding> getKeyBindingsMap()
     {
         return keyBindingsMap.get();
-    }
-
-    public ReadOnlyMapProperty<KeyBinding, KeyCode> keyCodesMapProperty()
-    {
-        return keyCodesMap;
     }
 
     public ReadOnlyMapProperty<KeyCode, KeyBinding> keyBindingsMapProperty()

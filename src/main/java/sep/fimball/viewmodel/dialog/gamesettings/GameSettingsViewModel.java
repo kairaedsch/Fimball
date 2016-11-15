@@ -71,11 +71,7 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     private void addKeyBindings() {
-        keybinds.clear();
-        for (KeyBinding binding: KeyBinding.values()) {
-            KeybindSubViewModel test = new KeybindSubViewModel(binding, Settings.getSingletonInstance().keyCodesMapProperty().get(binding));
-            keybinds.add(test);
-        }
+        ListPropertyConverter.bindAndConvertMap(keybinds, Settings.getSingletonInstance().getKeyBindingsMap(), (code, binding) -> new KeybindSubViewModel(binding,code));
     }
 
     /**

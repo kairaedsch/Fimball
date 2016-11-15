@@ -1,12 +1,12 @@
 package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableMap;
 import javafx.scene.input.KeyCode;
 import sep.fimball.model.Settings;
 import sep.fimball.model.input.KeyBinding;
+import sep.fimball.view.dialog.gamesettings.KeybindSubView;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.element.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
@@ -49,7 +49,11 @@ public class KeybindSubViewModel
     // TODO Button is given over
     public void changeKeyBinding(KeyCode keyCode)
     {
-        this.keyCode = keyCode;
+        ObservableMap<KeyCode, KeyBinding> bindings = Settings.getSingletonInstance().getKeyBindingsMap();
+        KeyBinding binding = bindings.get(this.keyCode);
+        bindings.remove(this.keyCode, binding);
+        bindings.put(keyCode,binding);
+
         keyName.setValue(keyCode.getName());
     }
 
