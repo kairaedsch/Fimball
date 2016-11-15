@@ -1,22 +1,13 @@
 package sep.fimball.model.element;
 
-import sep.fimball.model.GameSession;
-
 /**
  * Created by TheAsuro on 15.11.2016.
  */
-public class AnimationTrigger implements Trigger
+public class AnimationTrigger implements ElementTrigger
 {
-    private GameSession session;
-
-    public AnimationTrigger(GameSession session)
-    {
-        this.session = session;
-    }
-
     @Override
-    public void activateTrigger(GameElement element, int colliderID)
+    public void activateTrigger(GameElement element, int colliderId)
     {
-        // TODO
+
     }
 }

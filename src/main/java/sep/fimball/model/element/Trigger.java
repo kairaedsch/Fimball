@@ -3,7 +3,24 @@ package sep.fimball.model.element;
 /**
  * Created by TheAsuro on 15.11.2016.
  */
-public interface Trigger
+public class Trigger
 {
-    void activateTrigger(GameElement element, int colliderID);
+    private ElementTrigger elementTrigger;
+    private GameTrigger gameTrigger;
+    private UserTrigger userTrigger;
+
+    public void setElementTrigger(ElementTrigger elementTrigger)
+    {
+        this.elementTrigger = elementTrigger;
+    }
+
+    public void setGameTrigger(GameTrigger gameTrigger)
+    {
+        this.gameTrigger = gameTrigger;
+    }
+
+    public void setUserTrigger(UserTrigger userTrigger)
+    {
+        this.userTrigger = userTrigger;
+    }
 }

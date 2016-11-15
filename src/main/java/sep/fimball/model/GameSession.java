@@ -5,10 +5,13 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.json.PinballMachine;
+import sep.fimball.model.element.Trigger;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
+
+import java.util.List;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -64,6 +67,8 @@ public class GameSession
      * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
      */
     private KeyFrame keyFrame;
+
+    private List<Trigger> triggers;
 
     /**
      * Erstellt eine neue GameSession.

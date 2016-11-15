@@ -10,6 +10,6 @@ public class FlipperCollision implements CollisionType
     @Override
     public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
-        
+
     }
 }
