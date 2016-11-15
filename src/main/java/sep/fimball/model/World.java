@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.util.Duration;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.blueprint.PlacedElementList;
@@ -21,11 +22,6 @@ import java.util.Observer;
 public class World
 {
     /**
-     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
-     */
-    private final double TIMELINE_TICK = 1 / 60D;
-
-    /**
      * Liste der Elemente in der Spielwelt.
      */
     private ListProperty<GameElement> gameElements;
@@ -34,17 +30,7 @@ public class World
      * Die Kugel welche gesondert gespeichert wird da häufig auf sie zugegriffen wird
      */
     private ObjectProperty<Ball> ballProperty;
-
-    /**
-     * Die Schleife, die die Spielwelt aktualisiert.
-     */
-    private Timeline gameLoop;
-
-    /**
-     * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
-     */
-    private KeyFrame keyFrame;
-
+    
     /**
      * Erzeugt eine World mit der übergebenen Liste von PlacedElements.
      * @param elementList
@@ -60,29 +46,6 @@ public class World
             addPlacedElement(pe);
 
         // TODO generate walls around playfield
-    }
-
-    /**
-     * Startet die Gameloop.
-     */
-    public void startTimeline()
-    {
-        gameLoop = new Timeline();
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
-        {
-            // TODO update GameElements
-        }));
-        gameLoop.getKeyFrames().add(keyFrame);
-        gameLoop.play();
-    }
-
-    /**
-     * Stoppt die Gameloop.
-     */
-    public void stopTimeline()
-    {
-        gameLoop.stop();
     }
 
     /**
@@ -122,5 +85,41 @@ public class World
     private void updateWorld()
     {
         throw new UnsupportedOperationException();
+    }
+
+    private RectangleDouble generateWalls()
+    {
+        //TODO If GameElements contain the ball this method won't work anymore
+        double minX = gameElements.get(0).getPosition().getX();
+        double maxX = gameElements.get(0).getPosition().getX();
+        double minY = gameElements.get(0).getPosition().getY();
+        double maxY = gameElements.get(0).getPosition().getY();
+
+        for (GameElement gameElement : gameElements)
+        {
+            double currentX = gameElement.getPosition().getX();
+            double currentY = gameElement.getPosition().getY();
+
+            if (currentX < minX)
+            {
+                minX = currentX;
+            }
+            if (currentX > maxX)
+            {
+                maxX = currentX;
+            }
+            if (currentY < minY)
+            {
+                minY = currentY;
+            }
+            if (currentY > maxY)
+            {
+                maxY = currentY;
+            }
+        }
+        Vector2 rectOrigin = new Vector2(minX, minY);
+        double width = Math.abs(maxX - minX);
+        double height = Math.abs(maxY - minY);
+        return new RectangleDouble(rectOrigin, width, height);
     }
 }

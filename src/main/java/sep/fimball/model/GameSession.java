@@ -1,5 +1,8 @@
 package sep.fimball.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.model.input.InputManager;
@@ -12,6 +15,11 @@ import sep.fimball.model.physics.PhysicsHandler;
  */
 public class GameSession
 {
+    /**
+     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
+     */
+    private final double TIMELINE_TICK = 1 / 60D;
+
     /**
      * Array der Spieler, die am aktuellen Spiel teilnehmen.
      */
@@ -48,6 +56,16 @@ public class GameSession
     private PinballMachine machineBlueprint;
 
     /**
+     * Die Schleife, die die Spielwelt aktualisiert.
+     */
+    private Timeline gameLoop;
+
+    /**
+     * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
+     */
+    private KeyFrame keyFrame;
+
+    /**
      * Erstellt eine neue GameSession.
      */
     public GameSession(PinballMachine machineBlueprint, String[] playerNames)
@@ -72,12 +90,35 @@ public class GameSession
     }
 
     /**
+     * Startet die Gameloop.
+     */
+    public void startTimeline()
+    {
+        gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
+        {
+            // TODO update GameElements
+        }));
+        gameLoop.getKeyFrames().add(keyFrame);
+        gameLoop.play();
+    }
+
+    /**
+     * Stoppt die Gameloop.
+     */
+    public void stopTimeline()
+    {
+        gameLoop.stop();
+    }
+
+    /**
      * Pausiert das Spiel, in dem die Physikberechnung sowie die Spielschleife gestoppt wird.
      */
     public void pauseAll()
     {
         paused = true;
-        world.stopTimeline();
+        stopTimeline();
         physicsHandler.stopTicking();
     }
 
@@ -86,7 +127,7 @@ public class GameSession
      */
     public void startAll()
     {
-        world.startTimeline();
+        startTimeline();
         physicsHandler.startTicking();
         paused = false;
     }

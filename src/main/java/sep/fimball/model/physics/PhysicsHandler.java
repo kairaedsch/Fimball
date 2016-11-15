@@ -70,8 +70,8 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
 
         physicsElements = new ArrayList<>();
-        LoadPhysicsElementList(world);
-        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> LoadPhysicsElementList(world));
+        loadPhysicsElementList(world);
+        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> loadPhysicsElementList(world));
 
         timerTask = new TimerTask()
         {
@@ -83,9 +83,14 @@ public class PhysicsHandler
             {
                 // TODO check bufferedKeyEvents
 
+                // Check all PhysicsElements for collisions with the ball
+
                 for (PhysicsElement element : physicsElements)
                 {
-                    solveBallCollision(ballElement, element);
+                    for (Collider collider : element.getColliders())
+                    {
+                        collider.checkCollision(ballElement);
+                    }
                 }
 
                 // TODO Notify GameElements about collisions
@@ -99,23 +104,16 @@ public class PhysicsHandler
     /**
      * Lädt die Liste von GameElements aus der World, löscht alle vorhandenen PhysicsElements und ersetzt diese durch
      * neu geneierte.
+     *
      * @param world Die Welt aus der die GameElements gelesen werden.
      */
-    private void LoadPhysicsElementList(World world)
+    private void loadPhysicsElementList(World world)
     {
         physicsElements.clear();
         GameElementList elements = world.getGameElements();
         elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
         ballElement = new PhysicsElement(elements.getBall());
         physicsElements.add(ballElement);
-    }
-
-    private void solveBallCollision(PhysicsElement ball, PhysicsElement element)
-    {
-        for (Collider collider : element.getElement().getColliders())
-        {
-            // TODO: warum genau erben wir nochmal von collider, wenn circle und polygon collider nichts gemeinsam haben?
-        }
     }
 
     /**

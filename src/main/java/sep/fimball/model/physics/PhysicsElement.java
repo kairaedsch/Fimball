@@ -3,6 +3,8 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.element.GameElement;
 
+import java.util.List;
+
 /**
  * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden
  */
@@ -11,17 +13,19 @@ public class PhysicsElement
     /**
      * Das zugehörige GameElement.
      */
-    GameElement element;
+    private GameElement element;
 
     /**
      * Die aktuelle Position des PhysikElements.
      */
-    Vector2 position;
+    private Vector2 position;
 
     /**
      * Die aktuelle Rotation.
      */
-    double rotation;
+    private double rotation;
+
+    private List<Collider> colliders;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
@@ -47,6 +51,11 @@ public class PhysicsElement
         return element;
     }
 
+    public Vector2 getPosition()
+    {
+        return position;
+    }
+
     public void setPosition(Vector2 position)
     {
         this.position = position;
@@ -55,5 +64,10 @@ public class PhysicsElement
     public void setRotation(double rotation)
     {
         this.rotation = rotation;
+    }
+
+    public List<Collider> getColliders()
+    {
+        return colliders;
     }
 }
