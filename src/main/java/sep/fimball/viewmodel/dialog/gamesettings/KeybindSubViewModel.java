@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
+import sep.fimball.model.Settings;
 import sep.fimball.model.input.KeyBinding;
 
 /**
@@ -20,7 +21,9 @@ public class KeybindSubViewModel
     /**
      * Der Name der Taste, die das {@link sep.fimball.model.element.GameElement} bedient.
      */
-    private StringProperty key;
+    private StringProperty keyName;
+
+    private KeyCode keyCode;
 
     /**
      * Erstellt ein neues KeybindSubViewModel.
@@ -31,8 +34,12 @@ public class KeybindSubViewModel
     // TODO Button is given over
     public KeybindSubViewModel(KeyBinding keyBinding, KeyCode keyCode)
     {
+        this.keyCode = keyCode;
         elementName = new SimpleStringProperty();
-        key = new SimpleStringProperty();
+        keyName = new SimpleStringProperty();
+        if (keyCode != null) {
+            keyName.setValue(keyCode.getName());
+        }
         elementName.bind(Bindings.concat(keyBinding.toString()));
     }
 
@@ -42,7 +49,8 @@ public class KeybindSubViewModel
     // TODO Button is given over
     public void changeKeyBinding(KeyCode keyCode)
     {
-
+        this.keyCode = keyCode;
+        keyName.setValue(keyCode.getName());
     }
 
     /**
@@ -60,8 +68,8 @@ public class KeybindSubViewModel
      *
      * @return Die Taste, die das Flipperautomaten-Element bedienen soll.
      */
-    public ReadOnlyStringProperty keyProperty()
+    public ReadOnlyStringProperty keyNameProperty()
     {
-        return key;
+        return keyName;
     }
 }

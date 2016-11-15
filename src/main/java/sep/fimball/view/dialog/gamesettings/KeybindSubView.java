@@ -39,10 +39,11 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     public void setViewModel(KeybindSubViewModel keybindSubViewModel) {
         this.keybindSubViewModel = keybindSubViewModel;
         keybindName.textProperty().bind(keybindSubViewModel.elementNameProperty());
-        keybindKey.textProperty().bind(keybindSubViewModel.keyProperty());
+        keybindKey.textProperty().bind(keybindSubViewModel.keyNameProperty());
     }
 
     @FXML
-    public void changeKey(KeyEvent keyEvent) {
+    private void changeKey(KeyEvent keyEvent) {
+        keybindSubViewModel.changeKeyBinding(keyEvent.getCode());
     }
 }
