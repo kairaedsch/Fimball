@@ -1,6 +1,7 @@
 package sep.fimball.model;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
@@ -22,7 +23,7 @@ public class Settings
      */
     public static Settings getSingletonInstance()
     {
-        if (singletonInstance != null)
+        if (singletonInstance == null)
             singletonInstance = new Settings();
 
         return singletonInstance;
@@ -53,11 +54,16 @@ public class Settings
      */
     private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
 
+    private MapProperty<KeyBinding, KeyCode> keyCodesMap;
+
     /**
      * Erzeugt eine neue Instanz von Settings.
      */
     private Settings()
     {
+        keyBindingsMap = new SimpleMapProperty<>(FXCollections.emptyObservableMap());
+        keyCodesMap = new SimpleMapProperty<>(FXCollections.emptyObservableMap());
+
         // TODO load settings file here
     }
 
@@ -112,6 +118,11 @@ public class Settings
     public ObservableMap<KeyCode, KeyBinding> getKeyBindingsMap()
     {
         return keyBindingsMap.get();
+    }
+
+    public ReadOnlyMapProperty<KeyBinding, KeyCode> keyCodesMapProperty()
+    {
+        return keyCodesMap;
     }
 
     public ReadOnlyMapProperty<KeyCode, KeyBinding> keyBindingsMapProperty()

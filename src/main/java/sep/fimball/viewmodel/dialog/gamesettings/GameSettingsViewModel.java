@@ -2,10 +2,22 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
+import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.model.Settings;
+import sep.fimball.model.blueprint.PinballMachineManager;
+import sep.fimball.model.input.InputManager;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
+import sep.fimball.viewmodel.window.mainmenu.PinballMachineSelectorSubViewModel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Das GameSettingsViewModel stellt der View Daten über die Einstellungen von Fimball zur Verfügung und ermöglicht deren Änderung.
@@ -50,11 +62,20 @@ public class GameSettingsViewModel extends DialogViewModel
         super(DialogType.GAME_SETTINGS);
         language = new SimpleObjectProperty<>();
         keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
+        addKeyBindings();
         fullscreen = new SimpleBooleanProperty();
 
         volumeMaster = new SimpleIntegerProperty();
         volumeMusic = new SimpleIntegerProperty();
         volumeSFX = new SimpleIntegerProperty();
+    }
+
+    private void addKeyBindings() {
+        keybinds.clear();
+        for (KeyBinding binding: KeyBinding.values()) {
+            KeybindSubViewModel test = new KeybindSubViewModel(binding, Settings.getSingletonInstance().keyCodesMapProperty().get(binding));
+            keybinds.add(test);
+        }
     }
 
     /**

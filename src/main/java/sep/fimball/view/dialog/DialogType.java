@@ -18,6 +18,11 @@ public enum DialogType implements ViewType
     GAME_SETTINGS_DIALOG("gamesettings/gameSettingsWindow.fxml"),
 
     /**
+     * Ein Feld eines Key Bindings TODO.
+     */
+    KEY_BINDING_ENTRY("gamesettings/keybind.fxml"),
+
+    /**
      * Der Spielernamendialog.
      */
     PLAYER_NAME_DIALOG("playername/playerNameWindow.fxml"),

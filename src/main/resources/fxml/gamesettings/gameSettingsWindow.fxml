@@ -50,34 +50,10 @@
                                                                         <Insets top="10.0" />
                                                                     </VBox.margin>
                                                                 </Label>
-                                                                <GridPane fx:id="keyBindings">
-                                                                    <columnConstraints>
-                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                                                                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                    </columnConstraints>
-                                                                    <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                    </rowConstraints>
+                                                                <VBox fx:id="keyBindings">
                                                                     <children>
-                                                                        <Label text="Left Flipper" />
-                                                                        <TextField fx:id="leftFlipper" prefWidth="150.0" text="Left Shift" GridPane.columnIndex="1" />
-                                                                        <TextField fx:id="rightFlipper" prefWidth="150.0" text="Right Shift" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                        <Label text="Right Flipper" GridPane.rowIndex="1" />
-                                                                        <TextField fx:id="plunger" prefWidth="150.0" text="Space" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                        <Label text="Pull Plunger" GridPane.rowIndex="2" />
-                                                                        <Label text="Pause Game" GridPane.rowIndex="3" />
-                                                                        <TextField fx:id="pause" prefWidth="150.0" text="Escape" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                        <TextField fx:id="nudgeLeft" prefWidth="150.0" text="Left Ctrl" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                                        <Label text="Nudge Left" GridPane.rowIndex="4" />
-                                                                        <Label text="Nudge Right" GridPane.rowIndex="5" />
-                                                                        <TextField fx:id="nudgeRight" prefWidth="150.0" text="Right Ctrl" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                                     </children>
-                                                                </GridPane>
+                                                                </VBox>
                                                                 <Label text="Display">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0" />
