@@ -34,7 +34,7 @@ public class World
         gameElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ballProperty = new SimpleObjectProperty<>();
 
-        for (PlacedElement pe : elementList.elementsProperty().get().values())
+        for (PlacedElement pe : elementList.elementsProperty().get())
             //TODO check if PlacedElement is Flipper/Plunger or ball and assign
             //TODO if a ball is already set and another one gets added -> unknown behaviour
             addPlacedElement(pe);
