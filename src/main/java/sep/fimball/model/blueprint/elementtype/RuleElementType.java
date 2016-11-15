@@ -9,5 +9,21 @@ public class RuleElementType
 {
     private boolean givesPoints;
 
-    private Map<Integer, RuleElementEvent> ruleElementEventMap;
+    private Map<Integer, RuleElementEvent> eventMap;
+
+    public RuleElementType(boolean givesPoints, Map<Integer, RuleElementEvent> eventMap)
+    {
+        this.givesPoints = givesPoints;
+        this.eventMap = eventMap;
+    }
+
+    public boolean isGivesPoints()
+    {
+        return givesPoints;
+    }
+
+    public Map<Integer, RuleElementEvent> getEventMap()
+    {
+        return eventMap;
+    }
 }

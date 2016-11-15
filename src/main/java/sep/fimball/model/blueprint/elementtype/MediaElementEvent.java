@@ -10,4 +10,20 @@ public class MediaElementEvent
 {
     Animation animation;
     SoundClip soundClip;
+
+    public MediaElementEvent(Animation animation, SoundClip soundClip)
+    {
+        this.animation = animation;
+        this.soundClip = soundClip;
+    }
+
+    public Animation getAnimation()
+    {
+        return animation;
+    }
+
+    public SoundClip getSoundClip()
+    {
+        return soundClip;
+    }
 }

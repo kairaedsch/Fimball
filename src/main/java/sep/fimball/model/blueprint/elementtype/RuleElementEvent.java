@@ -5,4 +5,5 @@ package sep.fimball.model.blueprint.elementtype;
  */
 public class RuleElementEvent
 {
+
 }

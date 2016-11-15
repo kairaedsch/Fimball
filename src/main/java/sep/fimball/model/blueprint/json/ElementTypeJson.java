@@ -108,7 +108,6 @@ public class ElementTypeJson
 
     public static class GameElementType
     {
-
         public GameElementTypeGeneral general;
 
         public GameElementEvent[] events;

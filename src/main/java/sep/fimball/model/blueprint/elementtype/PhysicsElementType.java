@@ -10,4 +10,14 @@ import java.util.List;
 public class PhysicsElementType
 {
     private List<Collider> colliders;
+
+    public PhysicsElementType(List<Collider> colliders)
+    {
+        this.colliders = colliders;
+    }
+
+    public List<Collider> getColliders()
+    {
+        return colliders;
+    }
 }

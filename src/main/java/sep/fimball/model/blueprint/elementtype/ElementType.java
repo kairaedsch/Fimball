@@ -5,31 +5,39 @@ package sep.fimball.model.blueprint.elementtype;
  */
 public class ElementType
 {
-    private ElementTypeType elementTypeType;
+    private ElementTypeType type;
 
-    private PhysicsElementType physicsElementType;
+    private PhysicsElementType physics;
 
-    private MediaElementType mediaElementType;
+    private MediaElementType media;
 
-    private RuleElementType ruleElementType;
+    private RuleElementType rule;
 
-    public ElementTypeType getElementTypeType()
+    public ElementType(ElementTypeType type, PhysicsElementType physics, MediaElementType media, RuleElementType rule)
     {
-        return elementTypeType;
+        this.type = type;
+        this.physics = physics;
+        this.media = media;
+        this.rule = rule;
     }
 
-    public PhysicsElementType getPhysicsElementType()
+    public ElementTypeType getType()
     {
-        return physicsElementType;
+        return type;
     }
 
-    public MediaElementType getMediaElementType()
+    public PhysicsElementType getPhysics()
     {
-        return mediaElementType;
+        return physics;
     }
 
-    public RuleElementType getRuleElementType()
+    public MediaElementType getMedia()
     {
-        return ruleElementType;
+        return media;
+    }
+
+    public RuleElementType getRule()
+    {
+        return rule;
     }
 }
