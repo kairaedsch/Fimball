@@ -6,7 +6,7 @@ import sep.fimball.model.Animation;
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
  */
-public class CircleCollider extends Collider
+public class CircleCollider implements CollisionShape
 {
     /**
      * Mittelpunkt des Kreises, der den Collider formt.
@@ -22,13 +22,9 @@ public class CircleCollider extends Collider
      * Erstellt einen neuen Collider in Kreisform.
      * @param position
      * @param radius
-     * @param layer
-     * @param force
-     * @param animation
      */
-    public CircleCollider(Vector2 position, double radius, WorldLayer layer, PhysicsForce force, Animation animation)
+    public CircleCollider(Vector2 position, double radius)
     {
-        super(layer, force);
         this.position = position;
         this.radius = radius;
     }
@@ -41,5 +37,19 @@ public class CircleCollider extends Collider
     public double getRadius()
     {
         return radius;
+    }
+
+    @Override
+    public HitInfo calculateHitInfo(CircleCollider ball)
+    {
+        // Collision check between two circles
+        Vector2 distance = Vector2.sub(ball.getPosition(), position);
+        if (distance.magnitude() < ball.getRadius() + radius)
+        {
+            double overlapDistance = (ball.getRadius() + ball.getRadius()) - distance.magnitude();
+            return new HitInfo(true, Vector2.scale(distance.normalized(), overlapDistance));
+        }
+
+        return new HitInfo(false, null);
     }
 }

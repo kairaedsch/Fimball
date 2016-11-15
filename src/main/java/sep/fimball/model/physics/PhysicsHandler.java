@@ -87,59 +87,9 @@ public class PhysicsHandler
 
                 for (PhysicsElement element : physicsElements)
                 {
-                    boolean collision = false;
-                    Vector2 pushVector;
-
-                    // Found a random element, check if it's circles collide with the ball
-                    for (CircleCollider circle : element.getCircleColliders())
+                    for (Collider collider : element.getColliders())
                     {
-                        // Check all colliders of the ball [possibly unnecessary]
-                        for (CircleCollider ballCircle : ballElement.getCircleColliders())
-                        {
-                            // Collision check between two circles
-                            Vector2 distance = Vector2.sub(ballCircle.getPosition(), circle.getPosition());
-                            if (distance.magnitude() < ballCircle.getRadius() + circle.getRadius())
-                            {
-                                collision = true;
-                                double overlapDistance = (ballCircle.getRadius() + circle.getRadius()) - distance.magnitude();
-                                pushVector = Vector2.scale(distance.normalized(), overlapDistance);
-                            }
-                        }
-                    }
-                    // Check if it's polygons collide with the ball
-                    for (PolygonCollider poly : element.getPolygonColliders())
-                    {
-                        // Check all colliders of the ball [possibly unnecessary]
-                        for (CircleCollider ballCircle : ballElement.getCircleColliders())
-                        {
-                            // check axis with the ball from all vertices [possibly unnecessary]
-                            for (Vector2 axisVertex : poly.getVertices())
-                            {
-                                Vector2 axis = Vector2.sub(ballCircle.getPosition(), axisVertex).normalized();
-                                List<Double> points = new ArrayList<>();
-
-                                for (Vector2 vertex : poly.getVertices())
-                                {
-                                    points.add(Vector2.dot(vertex, axis));
-                                }
-
-                                points.sort(Comparator.naturalOrder());
-
-                                double ballCenter = Vector2.dot(ballCircle.getPosition(), axis);
-                                double ballMin = ballCenter - ballCircle.getRadius();
-                                double ballMax = ballCenter + ballCircle.getRadius();
-
-                                double polyMin = points.get(0);
-                                double polyMax = points.get(points.size() - 1);
-
-                                // Do the projected areas intersect?
-                                if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
-                                {
-                                    double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-                                    pushVector = Vector2.scale(axis, overlapDistance);
-                                }
-                            }
-                        }
+                        collider.checkCollision(ballElement);
                     }
                 }
 

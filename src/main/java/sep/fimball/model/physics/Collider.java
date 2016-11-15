@@ -3,36 +3,28 @@ package sep.fimball.model.physics;
 /**
  * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
  */
-public abstract class Collider
+public class Collider
 {
     /**
      * Ebene, auf der die Barriere sich befindet. Diese kann sich entweder auf Bodenhöhe des Flipperautomaten befinden, oder auf der Höhe einer Rampe.
      */
     private WorldLayer layer;
 
-    /**
-     * Kraft, die bei Berührung auf den Ball gewirkt wird. null, falls keine besondere Kraft vorhanden.
-     */
-    private PhysicsForce force;
+    private CollisionShape shape;
 
-    /**
-     * Erstellt einen neuen Collider.
-     * @param layer
-     * @param force
-     */
-    public Collider(WorldLayer layer, PhysicsForce force)
+    private CollisionType type;
+
+    public Collider(WorldLayer layer, CollisionShape shape, CollisionType type)
     {
         this.layer = layer;
-        this.force = force;
+        this.shape = shape;
+        this.type = type;
     }
 
-    public WorldLayer getLayer()
+    public void checkCollision(PhysicsElement ball)
     {
-        return layer;
-    }
-
-    public PhysicsForce getForce()
-    {
-        return force;
+        HitInfo info = shape.calculateHitInfo(ball.getCollider()); // TODO idk ball is weird
+        if (info.isHit())
+            type.applyCollision(ball, info.getShortestIntersect());
     }
 }

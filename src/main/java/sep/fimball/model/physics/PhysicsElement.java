@@ -25,9 +25,7 @@ public class PhysicsElement
      */
     private double rotation;
 
-    private List<PolygonCollider> polygonColliders;
-
-    private List<CircleCollider> circleColliders;
+    private List<Collider> colliders;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
@@ -63,13 +61,8 @@ public class PhysicsElement
         this.rotation = rotation;
     }
 
-    public List<PolygonCollider> getPolygonColliders()
+    public List<Collider> getColliders()
     {
-        return polygonColliders;
-    }
-
-    public List<CircleCollider> getCircleColliders()
-    {
-        return circleColliders;
+        return colliders;
     }
 }
