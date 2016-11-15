@@ -12,4 +12,24 @@ public class ElementType
     private MediaElementType mediaElementType;
 
     private RuleElementType ruleElementType;
+
+    public ElementTypeType getElementTypeType()
+    {
+        return elementTypeType;
+    }
+
+    public PhysicsElementType getPhysicsElementType()
+    {
+        return physicsElementType;
+    }
+
+    public MediaElementType getMediaElementType()
+    {
+        return mediaElementType;
+    }
+
+    public RuleElementType getRuleElementType()
+    {
+        return ruleElementType;
+    }
 }

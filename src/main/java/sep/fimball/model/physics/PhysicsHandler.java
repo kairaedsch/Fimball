@@ -50,10 +50,9 @@ public class PhysicsHandler
     /**
      * Erzeugt einen PhysicsHandler
      */
-    public PhysicsHandler(List<PhysicsElement> elements, BallElement ball)
+    public PhysicsHandler(List<PhysicsElement> elements)
     {
         this.physicsElements = elements;
-        this.ballElement = ball;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -90,6 +89,16 @@ public class PhysicsHandler
                 // TODO Simulate ball movement
             }
         };
+    }
+
+    public void addBall(BallElement ball)
+    {
+        ballElement = ball;
+    }
+
+    public void removeBall()
+    {
+        ballElement = null;
     }
 
     /**

@@ -64,4 +64,9 @@ public class PlacedElement
     {
         this.multiplier.set(multiplier);
     }
+
+    public ElementType getElementType()
+    {
+        return elementType;
+    }
 }

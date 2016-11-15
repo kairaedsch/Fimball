@@ -98,18 +98,22 @@ public class GameSession
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
-        BallElement ball = null; // TODO
         for (PlacedElement element : machineBlueprint.getTableElementList())
         {
             GameElement gameElem = new GameElement(element);
-            PhysicsElement physElem = new PhysicsElement(gameElem);
-
             elements.add(gameElem);
+
+            PhysicsElement physElem = new PhysicsElement(gameElem);
             physicsElements.add(physElem);
+
+            element.getElementType().getElementTypeType();
         }
 
         world = new World(elements);
-        physicsHandler = new PhysicsHandler(physicsElements, ball);
+        physicsHandler = new PhysicsHandler(physicsElements);
+
+        BallElement ball = null; // TODO
+        physicsHandler.addBall(ball);
 
         startAll();
     }
