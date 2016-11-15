@@ -1,13 +1,11 @@
 package sep.fimball.view.dialog.gamesettings;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import sep.fimball.general.data.Language;
 import sep.fimball.view.ViewModelListToPaneBinder;
@@ -57,6 +55,16 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     private VBox keyBindings;
 
+    @FXML
+    public Label masterVolumePercent;
+
+    @FXML
+    public Label musicVolumePercent;
+
+    @FXML
+    public Label sfxVolumePercent;
+
+
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
      */
@@ -73,14 +81,20 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         this.gameSettingsViewModel = gameSettingsViewModel;
 
         ViewModelListToPaneBinder.bindViewModelsToViews(keyBindings, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
-        initializeLanguage();
-    }
 
-    private void initializeLanguage()
-    {
         language.setItems(gameSettingsViewModel.getLanguages());
-        language.setValue(gameSettingsViewModel.languageProperty().getValue());
-        language.valueProperty().addListener((ov, t, t1) -> gameSettingsViewModel.changeLanguage(language.getValue()));
+        language.valueProperty().bindBidirectional(gameSettingsViewModel.languageProperty());
+
+        fullscreen.selectedProperty().bindBidirectional(gameSettingsViewModel.fullscreenProperty());
+
+        masterVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMasterProperty());
+        masterVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMasterProperty().asString(), "%"));
+
+        musicVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMusicProperty());
+        musicVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMusicProperty().asString(), "%"));
+
+        sfxVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeSFXProperty());
+        sfxVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeSFXProperty().asString(), "%"));
     }
 
     /**
@@ -90,11 +104,5 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private void okClicked()
     {
         gameSettingsViewModel.exitDialogToMainMenu();
-    }
-
-
-    @FXML
-    private void switchFullScreen(MouseEvent mouseEvent)
-    {
     }
 }

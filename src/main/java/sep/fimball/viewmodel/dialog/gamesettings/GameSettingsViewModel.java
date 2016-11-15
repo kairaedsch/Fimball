@@ -2,22 +2,15 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.Settings;
-import sep.fimball.model.blueprint.PinballMachineManager;
-import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
-import sep.fimball.viewmodel.window.mainmenu.PinballMachineSelectorSubViewModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Das GameSettingsViewModel stellt der View Daten über die Einstellungen von Fimball zur Verfügung und ermöglicht deren Änderung.
@@ -60,19 +53,26 @@ public class GameSettingsViewModel extends DialogViewModel
     public GameSettingsViewModel()
     {
         super(DialogType.GAME_SETTINGS);
+
+        Settings settings = Settings.getSingletonInstance();
+
         language = new SimpleObjectProperty<>();
-        language.bindBidirectional(Settings.getSingletonInstance().languageProperty());
+        language.bindBidirectional(settings.languageProperty());
+
         keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
-        addKeyBindings();
+        ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyBinding, keyCode) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
+
         fullscreen = new SimpleBooleanProperty();
+        fullscreen.bindBidirectional(settings.fullscreenProperty());
 
         volumeMaster = new SimpleIntegerProperty();
-        volumeMusic = new SimpleIntegerProperty();
-        volumeSFX = new SimpleIntegerProperty();
-    }
+        volumeMaster.bindBidirectional(settings.masterVolumeProperty());
 
-    private void addKeyBindings() {
-        ListPropertyConverter.bindAndConvertMap(keybinds, Settings.getSingletonInstance().getKeyBindingsMap(), (code, binding) -> new KeybindSubViewModel(binding,code));
+        volumeMusic = new SimpleIntegerProperty();
+        volumeMusic.bindBidirectional(settings.musicVolumeProperty());
+
+        volumeSFX = new SimpleIntegerProperty();
+        volumeSFX.bindBidirectional(settings.sfxVolumeProperty());
     }
 
     /**
@@ -108,7 +108,6 @@ public class GameSettingsViewModel extends DialogViewModel
      *
      * @return {@code true}, wenn der Vollbildmodus aktiviert ist, {@code false} sonst.
      */
-    // TODO bind bidirectional
     public BooleanProperty fullscreenProperty()
     {
         return fullscreen;
@@ -119,7 +118,6 @@ public class GameSettingsViewModel extends DialogViewModel
      *
      * @return Die aktuell eingestellte Hauptlautstärke.
      */
-    // TODO bind bidirectional
     public IntegerProperty volumeMasterProperty()
     {
         return volumeMaster;
@@ -130,7 +128,6 @@ public class GameSettingsViewModel extends DialogViewModel
      *
      * @return Die aktuell eingestellte Musik-Lautstärke.
      */
-    // TODO bind bidirectional
     public IntegerProperty volumeMusicProperty()
     {
         return volumeMusic;
@@ -141,21 +138,14 @@ public class GameSettingsViewModel extends DialogViewModel
      *
      * @return Die aktuell eingestellte Soundeffekt-Lautstärke.
      */
-    // TODO bind bidirectional
     public IntegerProperty volumeSFXProperty()
     {
         return volumeSFX;
     }
 
-    public void changeLanguage(Language value) {
-        language.set(value);
-    }
-
     public ObservableList<Language> getLanguages() {
         ObservableList<Language> languages = FXCollections.observableArrayList();
-        for (Language language : Language.values()) {
-            languages.add(language);
-        }
+        Collections.addAll(languages, Language.values());
         return languages;
     }
 }

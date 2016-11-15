@@ -38,6 +38,7 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     @Override
     public void setViewModel(KeybindSubViewModel keybindSubViewModel) {
         this.keybindSubViewModel = keybindSubViewModel;
+
         keybindName.textProperty().bind(keybindSubViewModel.elementNameProperty());
         keybindKey.textProperty().bind(keybindSubViewModel.keyNameProperty());
     }

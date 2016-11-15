@@ -1,12 +1,12 @@
 package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
-import javafx.collections.ObservableMap;
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
 import sep.fimball.model.Settings;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.view.dialog.gamesettings.KeybindSubView;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.element.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
@@ -23,7 +23,8 @@ public class KeybindSubViewModel
      */
     private StringProperty keyName;
 
-    private KeyCode keyCode;
+    private KeyBinding keyBinding;
+    private Settings settings;
 
     /**
      * Erstellt ein neues KeybindSubViewModel.
@@ -31,35 +32,24 @@ public class KeybindSubViewModel
      * @param keyBinding Die Funktion des Automaten, an die die Taste gebunden wird.
      * @param keyCode Die Taste, an die die Funktion gebunden wird.
      */
-    // TODO Button is given over
-    public KeybindSubViewModel(KeyBinding keyBinding, KeyCode keyCode)
+    public KeybindSubViewModel(Settings settings, KeyBinding keyBinding, KeyCode keyCode)
     {
-        this.keyCode = keyCode;
-        elementName = new SimpleStringProperty();
+        this.keyBinding = keyBinding;
+        this.settings = settings;
+
         keyName = new SimpleStringProperty();
-        if (keyCode != null) {
-            keyName.setValue(keyCode.getName());
-        }
+        keyName.setValue(keyCode != null ? keyCode.getName() : "No Key set");
+
+        elementName = new SimpleStringProperty();
         elementName.bind(Bindings.concat(keyBinding.toString()));
     }
 
     /**
      * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.element.GameElement} bedient, auf die Übergebene zu ändern.
      */
-    // TODO Button is given over
     public void changeKeyBinding(KeyCode keyCode)
     {
-
-        ObservableMap<KeyCode, KeyBinding> bindings = Settings.getSingletonInstance().getKeyBindingsMap();
-
-        if (bindings.containsKey(keyCode)) {
-            return;
-        }
-        KeyBinding binding = bindings.get(this.keyCode);
-        bindings.remove(this.keyCode, binding);
-        bindings.put(keyCode,binding);
-
-        keyName.setValue(keyCode.getName());
+        settings.setKeyBinding(keyBinding, keyCode);
     }
 
     /**

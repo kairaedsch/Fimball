@@ -2,7 +2,6 @@ package sep.fimball.model;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.input.KeyBinding;
@@ -30,6 +29,11 @@ public class Settings
     }
 
     /**
+     * Vollbild- oder Fenstermodus.
+     */
+    private BooleanProperty fullscreen;
+
+    /**
      * Allgemeine Lautstärke von 0-100\%, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
      */
     private DoubleProperty masterVolume;
@@ -52,7 +56,7 @@ public class Settings
     /**
      * Speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
      */
-    private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
+    private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
 
     /**
      * Erzeugt eine neue Instanz von Settings.
@@ -61,12 +65,17 @@ public class Settings
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
 
-        keyBindingsMap.put(KeyCode.Y, KeyBinding.LEFT_FLIPPER);
-        keyBindingsMap.put(KeyCode.M, KeyBinding.RIGHT_FLIPPER);
+        keyBindingsMap.put(KeyBinding.LEFT_FLIPPER, KeyCode.Y);
+        keyBindingsMap.put(KeyBinding.RIGHT_FLIPPER, KeyCode.M);
 
         language = new SimpleObjectProperty<>();
         language.setValue(Language.ENGLISH);
 
+        fullscreen = new SimpleBooleanProperty(false);
+
+        masterVolume = new SimpleDoubleProperty(100);
+        musicVolume = new SimpleDoubleProperty(50);
+        sfxVolume = new SimpleDoubleProperty(75);
 
         // TODO load settings file here
     }
@@ -79,39 +88,19 @@ public class Settings
 
     }
 
-    public double getMasterVolume()
-    {
-        return masterVolume.get();
-    }
-
-    public ReadOnlyDoubleProperty masterVolumeProperty()
+    public DoubleProperty masterVolumeProperty()
     {
         return masterVolume;
     }
 
-    public double getMusicVolume()
-    {
-        return musicVolume.get();
-    }
-
-    public ReadOnlyDoubleProperty musicVolumeProperty()
+    public DoubleProperty musicVolumeProperty()
     {
         return musicVolume;
     }
 
-    public double getSfxVolume()
-    {
-        return sfxVolume.get();
-    }
-
-    public ReadOnlyDoubleProperty sfxVolumeProperty()
+    public DoubleProperty sfxVolumeProperty()
     {
         return sfxVolume;
-    }
-
-    public Language getLanguage()
-    {
-        return language.get();
     }
 
     public ObjectProperty<Language> languageProperty()
@@ -119,13 +108,18 @@ public class Settings
         return language;
     }
 
-    public ObservableMap<KeyCode, KeyBinding> getKeyBindingsMap()
-    {
-        return keyBindingsMap.get();
-    }
-
-    public ReadOnlyMapProperty<KeyCode, KeyBinding> keyBindingsMapProperty()
+    public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
     {
         return keyBindingsMap;
+    }
+
+    public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
+    {
+        keyBindingsMap.put(keyBinding, keyCode);
+    }
+
+    public BooleanProperty fullscreenProperty()
+    {
+        return fullscreen;
     }
 }

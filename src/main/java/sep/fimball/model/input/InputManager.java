@@ -1,8 +1,6 @@
 package sep.fimball.model.input;
 
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import sep.fimball.model.Settings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +44,7 @@ public class InputManager
      */
     public void addKeyEvent(KeyEvent keyEvent)
     {
-        KeyBinding binding = Settings.getSingletonInstance().getKeyBindingsMap().get(keyEvent.getCode());
+        KeyBinding binding =  null;//Settings.getSingletonInstance().getKeyBindingsMap().get(keyEvent.getCode());
 
         for (Map.Entry<KeyBinding, List<KeyObserver>> mapEntry : keyObserversMap.entrySet())
         {
