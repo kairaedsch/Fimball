@@ -7,5 +7,5 @@ import sep.fimball.general.data.Vector2;
  */
 public interface CollisionType
 {
-    void applyCollision(PhysicsElement ball, Vector2 shortestIntersect);
+    void applyCollision(BallElement ball, Vector2 shortestIntersect);
 }

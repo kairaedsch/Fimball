@@ -5,7 +5,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
 import sep.fimball.model.blueprint.PlacedElement;
 import sep.fimball.model.physics.Collider;
-import sep.fimball.model.physics.CollisionEventArgs;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
 import java.util.List;

@@ -29,7 +29,7 @@ public class PhysicsHandler
      */
     private World world;
 
-    private PhysicsElement ballElement;
+    private BallElement ballElement;
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -112,8 +112,7 @@ public class PhysicsHandler
         physicsElements.clear();
         GameElementList elements = world.getGameElements();
         elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
-        ballElement = new PhysicsElement(elements.getBall());
-        physicsElements.add(ballElement);
+        // TODO ballElement = new PhysicsElement(elements.getBall());
     }
 
     /**

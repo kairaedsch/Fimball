@@ -21,7 +21,7 @@ public class Collider
         this.type = type;
     }
 
-    public void checkCollision(PhysicsElement ball)
+    public void checkCollision(BallElement ball)
     {
         HitInfo info = shape.calculateHitInfo(ball.getCollider()); // TODO idk ball is weird
         if (info.isHit())
