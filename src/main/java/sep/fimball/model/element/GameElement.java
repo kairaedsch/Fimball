@@ -147,4 +147,9 @@ public class GameElement
     {
         return colliders;
     }
+
+    public int getPointReward()
+    {
+        return pointReward.get();
+    }
 }
