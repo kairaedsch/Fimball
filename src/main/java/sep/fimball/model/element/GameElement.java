@@ -27,14 +27,9 @@ public class GameElement
     private DoubleProperty rotation;
 
     /**
-     * Die Liste aller Collider, die dieses Objekt enthält. Diese bestimmen die Flächen an denen der Ball abprallt, sowie weitere Eigenschaften wie Beschleunigung des Balls o.ä.
-     */
-    private List<Collider> colliders;
-
-    /**
      * Diese Zahl zählt wie oft das ElementType in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
-    private IntegerProperty hitCounter;
+    private IntegerProperty hitCount;
 
     /**
      * Die Punkte, die das Treffen des Elements durch die Kugel bringt.
@@ -57,11 +52,6 @@ public class GameElement
     private List<PhysicsUpdateEventArgs> physicsUpdates;
 
     /**
-     * Liste von Kollisionen die der PhysicsHandler mit dem GameElement erkannt hat welche im nächsten Schritt der Spielschleife vom GameElement abgearbeitet werden sollen.
-     */
-    private List<CollisionEventArgs> physicsCollisions;
-
-    /**
      * Erstellt ein neues GameElement.
      * @param element
      */
@@ -75,19 +65,8 @@ public class GameElement
      */
     public void update()
     {
-        // TODO: update animation
-        // TODO: read collisions
-        physicsCollisions.clear();
         // TODO: read updates
         physicsUpdates.clear();
-    }
-
-    public void onCollision(CollisionEventArgs args)
-    {
-        //Todo: Add Points to active player, how to get reference to gamesession/currentplayer?
-        hitCounter.set(hitCounter.get() + 1);
-
-        //Todo: trigger animation, set currentAnimation, start that animation
     }
 
     /**
@@ -97,15 +76,6 @@ public class GameElement
     public void addPhysicsUpdate(PhysicsUpdateEventArgs update)
     {
         physicsUpdates.add(update);
-    }
-
-    /**
-     * TODO
-     * @param update
-     */
-    public void addCollisionUpdate(CollisionEventArgs update)
-    {
-        physicsCollisions.add(update);
     }
 
     public Vector2 getPosition()
@@ -143,13 +113,18 @@ public class GameElement
         return currentAnimation.currentFrameProperty();
     }
 
-    public List<Collider> getColliders()
-    {
-        return colliders;
-    }
-
     public int getPointReward()
     {
         return pointReward.get();
+    }
+
+    public int getHitCount()
+    {
+        return hitCount.get();
+    }
+
+    public void setHitCount(int hitCount)
+    {
+        this.hitCount.set(hitCount);
     }
 }
