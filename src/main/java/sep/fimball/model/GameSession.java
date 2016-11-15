@@ -9,8 +9,7 @@ import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinnballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinnballmachine.PlacedElement;
-import sep.fimball.model.element.GameElement;
-import sep.fimball.model.element.Trigger;
+import sep.fimball.model.element.*;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -105,9 +104,19 @@ public class GameSession
 
             PhysicsElement physElem = new PhysicsElement(gameElem);
             physicsElements.add(physElem);
-
-            element.getElementType().getElementTypeType();
         }
+
+        Trigger hitTrigger = new Trigger();
+        hitTrigger.setElementTrigger(new HitTrigger());
+        triggers.add(hitTrigger);
+
+        Trigger scoreTrigger = new Trigger();
+        scoreTrigger.setElementTrigger(new ScoreTrigger(this));
+        triggers.add(scoreTrigger);
+
+        Trigger soundTrigger = new Trigger();
+        soundTrigger.setElementTrigger(new SoundTrigger());
+        triggers.add(soundTrigger);
 
         world = new World(elements);
         physicsHandler = new PhysicsHandler(physicsElements);

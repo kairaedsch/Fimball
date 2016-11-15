@@ -1,9 +1,9 @@
 package sep.fimball.model.blueprint.pinnballmachine;
 
 import javafx.beans.property.*;
+import sep.fimball.model.blueprint.elementtype.ElementType;
 
 import java.awt.*;
-import java.lang.annotation.ElementType;
 
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementTypeJson wird diese Klasse zur Serialisierung genutzt.

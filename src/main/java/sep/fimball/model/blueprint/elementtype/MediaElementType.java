@@ -12,5 +12,5 @@ public class MediaElementType
     private StringProperty name;
     private StringProperty description;
 
-    private Map<Integer, MediaElementEvent> mediaElementEventMap;
+    private Map<Integer, MediaElementEvent> eventMap;
 }
