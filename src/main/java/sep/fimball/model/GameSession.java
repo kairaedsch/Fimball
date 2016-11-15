@@ -2,15 +2,23 @@ package sep.fimball.model;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinnballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinnballmachine.PlacedElement;
+import sep.fimball.model.element.GameElement;
 import sep.fimball.model.element.Trigger;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
+import sep.fimball.model.physics.BallElement;
+import sep.fimball.model.physics.PhysicsElement;
 import sep.fimball.model.physics.PhysicsHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,8 +96,20 @@ public class GameSession
                 addTiltCounter();
         });
 
-        world = new World(machineBlueprint.getTableElementList());
-        physicsHandler = new PhysicsHandler(world);
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        List<PhysicsElement> physicsElements = new ArrayList<>();
+        BallElement ball = null; // TODO
+        for (PlacedElement element : machineBlueprint.getTableElementList())
+        {
+            GameElement gameElem = new GameElement(element);
+            PhysicsElement physElem = new PhysicsElement(gameElem);
+
+            elements.add(gameElem);
+            physicsElements.add(physElem);
+        }
+
+        world = new World(elements);
+        physicsHandler = new PhysicsHandler(physicsElements, ball);
 
         startAll();
     }

@@ -1,13 +1,13 @@
 package sep.fimball.model.physics;
 
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.element.GameElementList;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
-import sep.fimball.model.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige ElementType ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Das Objekt mit dem die Kugel kollidiert ist wird über die Kollision informiert. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus welche 60 mal pro Sekunde ausgeführt wird. Auch wird überprüft ob die Kugel verloren gegangen ist.
@@ -23,11 +23,6 @@ public class PhysicsHandler
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
     private final int TICK_RATE = 1000 / 60;
-
-    /**
-     * Eine Referenz auf die Welt auf welcher die physikalischen Berechnungen ausgeführt werden.
-     */
-    private World world;
 
     private BallElement ballElement;
 
@@ -54,12 +49,12 @@ public class PhysicsHandler
 
     /**
      * Erzeugt einen PhysicsHandler
-     *
-     * @param world
      */
-    public PhysicsHandler(World world)
+    public PhysicsHandler(List<PhysicsElement> elements, BallElement ball)
     {
-        this.world = world;
+        this.physicsElements = elements;
+        this.ballElement = ball;
+
         bufferedKeyEvents = new ArrayList<>();
 
         InputManager inputManager = InputManager.getSingletonInstance();
@@ -68,10 +63,6 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
-
-        physicsElements = new ArrayList<>();
-        loadPhysicsElementList(world);
-        world.gameElementsProperty().addListener((observableValue, gameElements, t1) -> loadPhysicsElementList(world));
 
         timerTask = new TimerTask()
         {
@@ -99,20 +90,6 @@ public class PhysicsHandler
                 // TODO Simulate ball movement
             }
         };
-    }
-
-    /**
-     * Lädt die Liste von GameElements aus der World, löscht alle vorhandenen PhysicsElements und ersetzt diese durch
-     * neu geneierte.
-     *
-     * @param world Die Welt aus der die GameElements gelesen werden.
-     */
-    private void loadPhysicsElementList(World world)
-    {
-        physicsElements.clear();
-        GameElementList elements = world.getGameElements();
-        elements.getElementsWithoutBall().forEach(gameElement -> physicsElements.add(new PhysicsElement(gameElement)));
-        // TODO ballElement = new PhysicsElement(elements.getBall());
     }
 
     /**

@@ -4,6 +4,9 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.
  */
@@ -27,7 +30,7 @@ public class PinballMachine
     /**
      * Liste der auf dem Automaten gesetzten Elemente.
      */
-    private PlacedElementList tableElementList;
+    private List<PlacedElement> tableElementList;
 
     /**
      * Speicherpfad des Hintergrundbildes des Automaten.
@@ -44,7 +47,7 @@ public class PinballMachine
         this.name = new SimpleStringProperty(name);
         this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        this.tableElementList = new PlacedElementList();
+        this.tableElementList = new ArrayList<>();
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));
 
@@ -63,7 +66,7 @@ public class PinballMachine
         return highscoreList;
     }
 
-    public PlacedElementList getTableElementList()
+    public List<PlacedElement> getTableElementList()
     {
         return tableElementList;
     }
