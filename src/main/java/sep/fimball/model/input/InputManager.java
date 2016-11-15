@@ -1,5 +1,6 @@
 package sep.fimball.model.input;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.model.Settings;
 

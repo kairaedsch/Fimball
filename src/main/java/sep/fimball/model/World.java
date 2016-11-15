@@ -22,11 +22,6 @@ import java.util.Observer;
 public class World
 {
     /**
-     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
-     */
-    private final double TIMELINE_TICK = 1 / 60D;
-
-    /**
      * Liste der Elemente in der Spielwelt.
      */
     private ListProperty<GameElement> gameElements;
@@ -35,17 +30,7 @@ public class World
      * Die Kugel welche gesondert gespeichert wird da häufig auf sie zugegriffen wird
      */
     private ObjectProperty<Ball> ballProperty;
-
-    /**
-     * Die Schleife, die die Spielwelt aktualisiert.
-     */
-    private Timeline gameLoop;
-
-    /**
-     * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
-     */
-    private KeyFrame keyFrame;
-
+    
     /**
      * Erzeugt eine World mit der übergebenen Liste von PlacedElements.
      * @param elementList
@@ -61,29 +46,6 @@ public class World
             addPlacedElement(pe);
 
         // TODO generate walls around playfield
-    }
-
-    /**
-     * Startet die Gameloop.
-     */
-    public void startTimeline()
-    {
-        gameLoop = new Timeline();
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
-        {
-            // TODO update GameElements
-        }));
-        gameLoop.getKeyFrames().add(keyFrame);
-        gameLoop.play();
-    }
-
-    /**
-     * Stoppt die Gameloop.
-     */
-    public void stopTimeline()
-    {
-        gameLoop.stop();
     }
 
     /**
