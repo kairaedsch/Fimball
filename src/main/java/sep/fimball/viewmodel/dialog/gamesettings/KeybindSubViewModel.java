@@ -49,7 +49,12 @@ public class KeybindSubViewModel
     // TODO Button is given over
     public void changeKeyBinding(KeyCode keyCode)
     {
+
         ObservableMap<KeyCode, KeyBinding> bindings = Settings.getSingletonInstance().getKeyBindingsMap();
+
+        if (bindings.containsKey(keyCode)) {
+            return;
+        }
         KeyBinding binding = bindings.get(this.keyCode);
         bindings.remove(this.keyCode, binding);
         bindings.put(keyCode,binding);
