@@ -1,10 +1,15 @@
 package sep.fimball.view.dialog.gamesettings;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.data.Language;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
@@ -20,7 +25,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      * Auswahlmöglichkeit zur Einstellung der Sprache.
      */
     @FXML
-    private ComboBox language;
+    private ComboBox<Language> language;
 
     /**
      * Einstellung des Fullscreens.
@@ -68,6 +73,14 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         this.gameSettingsViewModel = gameSettingsViewModel;
 
         ViewModelListToPaneBinder.bindViewModelsToViews(keyBindings, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
+        initializeLanguage();
+    }
+
+    private void initializeLanguage()
+    {
+        language.setItems(gameSettingsViewModel.getLanguages());
+        language.setValue(gameSettingsViewModel.languageProperty().getValue());
+        language.valueProperty().addListener((ov, t, t1) -> gameSettingsViewModel.changeLanguage(language.getValue()));
     }
 
     /**
@@ -80,4 +93,8 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     }
 
 
+    @FXML
+    private void switchFullScreen(MouseEvent mouseEvent)
+    {
+    }
 }

@@ -61,6 +61,7 @@ public class GameSettingsViewModel extends DialogViewModel
     {
         super(DialogType.GAME_SETTINGS);
         language = new SimpleObjectProperty<>();
+        language.bindBidirectional(Settings.getSingletonInstance().languageProperty());
         keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
         addKeyBindings();
         fullscreen = new SimpleBooleanProperty();
@@ -144,5 +145,17 @@ public class GameSettingsViewModel extends DialogViewModel
     public IntegerProperty volumeSFXProperty()
     {
         return volumeSFX;
+    }
+
+    public void changeLanguage(Language value) {
+        language.set(value);
+    }
+
+    public ObservableList<Language> getLanguages() {
+        ObservableList<Language> languages = FXCollections.observableArrayList();
+        for (Language language : Language.values()) {
+            languages.add(language);
+        }
+        return languages;
     }
 }

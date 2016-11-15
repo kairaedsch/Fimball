@@ -39,7 +39,7 @@
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <Label text="Select" />
-                                                                        <ComboBox fx:id="language" prefWidth="150.0" promptText="English" GridPane.columnIndex="1" />
+                                                                        <ComboBox fx:id="language"  prefWidth="150.0" GridPane.columnIndex="1" />
                                                                     </children>
                                                                 </GridPane>
                                                                 <Label text="Keybinds">
@@ -72,7 +72,7 @@
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <Label text="Fullscreen" />
-                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1" />
+                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" onMouseClicked="#switchFullScreen" GridPane.columnIndex="1" />
                                                                     </children>
                                                                 </GridPane>
                                                             </children>

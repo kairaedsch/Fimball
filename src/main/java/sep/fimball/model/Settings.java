@@ -64,6 +64,9 @@ public class Settings
         keyBindingsMap.put(KeyCode.Y, KeyBinding.LEFT_FLIPPER);
         keyBindingsMap.put(KeyCode.M, KeyBinding.RIGHT_FLIPPER);
 
+        language = new SimpleObjectProperty<>();
+        language.setValue(Language.ENGLISH);
+
 
         // TODO load settings file here
     }
@@ -111,7 +114,7 @@ public class Settings
         return language.get();
     }
 
-    public ReadOnlyObjectProperty<Language> languageProperty()
+    public ObjectProperty<Language> languageProperty()
     {
         return language;
     }
