@@ -5,7 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.model.GameSession;
-import sep.fimball.model.blueprint.json.PinballMachine;
+import sep.fimball.model.blueprint.PinballMachine;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;

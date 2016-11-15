@@ -1,7 +1,7 @@
 package sep.fimball.model.element;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.json.PlacedElement;
+import sep.fimball.model.blueprint.PlacedElement;
 
 /**
  * Repräsentiert einen Spielball auf dem Spielfeld eines Flipperautomaten. Der Ball kann sich bewegen und rotieren.

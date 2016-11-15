@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
-import sep.fimball.model.blueprint.json.PlacedElement;
+import sep.fimball.model.blueprint.PlacedElement;
 
 /**
  * Das SelectedElementSubViewModel stellt der View Daten über das akuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
