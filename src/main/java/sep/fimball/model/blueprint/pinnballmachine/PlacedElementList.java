@@ -1,6 +1,7 @@
 package sep.fimball.model.blueprint.pinnballmachine;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
@@ -23,16 +24,6 @@ public class PlacedElementList
     }
 
     /**
-     * Gibt das Element mit der gegebenen ID zurück.
-     * @param blueprintElemnentId
-     * @return
-     */
-    public PlacedElement getElementByBlueprintElementId(int blueprintElemnentId)
-    {
-        return elements.get(blueprintElemnentId);
-    }
-
-    /**
      * Fügt ein Element der Liste hinzu.
      * @param placedElement
      */
@@ -41,17 +32,12 @@ public class PlacedElementList
         elements.add(placedElement);
     }
 
-    /**
-     * Entfernt das Element mit der gegebenen ID aus der Liste.
-     * @param blueprintElementId
-     * @return
-     */
-    public boolean removeElement(int blueprintElementId)
+    public void rempoveElement(PlacedElement placedElement)
     {
-        return elements.remove(blueprintElementId) != null;
+        elements.remove(placedElement);
     }
 
-    public ListProperty<PlacedElement> elementsProperty()
+    public ReadOnlyListProperty<PlacedElement> elementsProperty()
     {
         return elements;
     }
