@@ -7,7 +7,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.ElementTypeManager;
-import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.json.PinballMachine;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;

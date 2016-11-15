@@ -4,6 +4,7 @@ import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
+import sep.fimball.model.blueprint.json.PinballMachine;
 
 /**
  * Verwaltet die mitgelieferten und neu erstellten Flipperautomaten.

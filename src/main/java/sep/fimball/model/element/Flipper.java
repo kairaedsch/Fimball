@@ -1,6 +1,6 @@
 package sep.fimball.model.element;
 
-import sep.fimball.model.blueprint.PlacedElement;
+import sep.fimball.model.blueprint.json.PlacedElement;
 
 /**
  * Repräsentiert einen Flipperarm auf dem Spielfeld eines Flipperautomaten. Dieser kann durch Tastendruck nach oben bewegt werden, und so mögliche Bälle die in der Bahn liegen wegschleudern.

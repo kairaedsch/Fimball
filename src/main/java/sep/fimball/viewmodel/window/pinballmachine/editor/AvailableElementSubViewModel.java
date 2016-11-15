@@ -2,7 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.ElementType;
+import sep.fimball.model.blueprint.json.ElementTypeJson;
 
 /**
  * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomaten-Element bereit und ermöglicht dem Nutzer, dieses in seinem Flipperautomat zu platzieren.
@@ -12,7 +12,7 @@ public class AvailableElementSubViewModel
     /**
      * Das Flipperautomaten-Element, dessen Informationen angezeigt werden.
      */
-    private ElementType elementType;
+    private ElementTypeJson elementType;
 
     /**
      * Der Name des Flipperautomaten-Elements.
@@ -29,7 +29,7 @@ public class AvailableElementSubViewModel
      *
      * @param elementType Der Elementtyp, dessen Informationen angezeigt werden sollen.
      */
-    public AvailableElementSubViewModel(ElementType elementType)
+    public AvailableElementSubViewModel(ElementTypeJson elementType)
     {
         this.elementType = elementType;
         imagePath = new SimpleStringProperty();

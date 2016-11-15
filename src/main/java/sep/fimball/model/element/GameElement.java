@@ -3,7 +3,7 @@ package sep.fimball.model.element;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
-import sep.fimball.model.blueprint.PlacedElement;
+import sep.fimball.model.blueprint.json.PlacedElement;
 import sep.fimball.model.physics.Collider;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementType/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
+ * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
  */
 public class GameElement
 {
@@ -21,12 +21,12 @@ public class GameElement
     private ObjectProperty<Vector2> position;
 
     /**
-     * Die Rotation in Grad, um die das ElementType gedreht ist.
+     * Die Rotation in Grad, um die das ElementTypeJson gedreht ist.
      */
     private DoubleProperty rotation;
 
     /**
-     * Diese Zahl zählt wie oft das ElementType in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
+     * Diese Zahl zählt wie oft das ElementTypeJson in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
     private IntegerProperty hitCount;
 

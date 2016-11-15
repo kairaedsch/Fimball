@@ -4,7 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.json.PinballMachine;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;

@@ -5,6 +5,8 @@ import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
+import sep.fimball.model.blueprint.json.ElementTypeJson;
+import sep.fimball.model.blueprint.json.JsonLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,7 +38,7 @@ public class ElementTypeManager
     /**
      * Liste von Elementtypen.
      */
-    private MapProperty<String, ElementType> elements;
+    private MapProperty<String, ElementTypeJson> elements;
 
     /**
      * Gibt die vom ElementManager verwalteten Elemente zurück.
@@ -58,7 +60,7 @@ public class ElementTypeManager
     {
         Path jsonPath = Paths.get(path.toString() + Config.pathElementsToDataJson);
 
-        Optional<ElementType> elementTypeOptional = JsonLoader.loadFromJson(jsonPath, ElementType.class);
+        Optional<ElementTypeJson> elementTypeOptional = JsonLoader.loadFromJson(jsonPath, ElementTypeJson.class);
 
         if(elementTypeOptional.isPresent())
         {
@@ -71,7 +73,7 @@ public class ElementTypeManager
         }
     }
 
-    public ReadOnlyMapProperty<String, ElementType> elementsProperty()
+    public ReadOnlyMapProperty<String, ElementTypeJson> elementsProperty()
     {
         return elements;
     }

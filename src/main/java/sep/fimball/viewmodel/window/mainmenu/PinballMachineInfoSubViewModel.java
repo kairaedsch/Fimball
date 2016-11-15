@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.window.mainmenu;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.json.PinballMachine;
 
 /**
  * Das PinballMachineInfoSubViewModel stellt der View detaillierte Daten über einen Flipperautomaten bereit und ermöglicht das Starten und Editieren dieses Automaten.

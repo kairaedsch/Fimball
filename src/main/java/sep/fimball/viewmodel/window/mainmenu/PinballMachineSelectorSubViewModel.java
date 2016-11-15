@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
 import javafx.beans.property.*;
-import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.json.PinballMachine;
 
 /**
  * Das PinballMachineSelectorSubViewModel stellt der View Daten über einen Flipperautomat bereit und ermöglicht dessen Auswahl, sodass eine detailreichere Darstellung durch das PinballMachineInfoSubViewModel erfolgen kann.

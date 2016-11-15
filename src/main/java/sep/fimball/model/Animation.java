@@ -2,7 +2,7 @@ package sep.fimball.model;
 
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.StringProperty;
-import sep.fimball.model.blueprint.ElementType;
+import sep.fimball.model.blueprint.json.ElementTypeJson;
 
 /**
  * Enthält die Pfade zu den Bild-Dateien einer Animation, und stellt das aktuell angezeigte Bild bereit.
@@ -29,7 +29,7 @@ public class Animation
      * @param blueprintName
      * @param animationBlueprint
      */
-    public Animation(String blueprintName, ElementType.MediaElementType.MediaTrigger.Animation animationBlueprint)
+    public Animation(String blueprintName, ElementTypeJson.MediaElementType.MediaTrigger.Animation animationBlueprint)
     {
         // load frames and stuff
     }

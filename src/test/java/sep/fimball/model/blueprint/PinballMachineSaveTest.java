@@ -1,19 +1,12 @@
 package sep.fimball.model.blueprint;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ReadOnlyMapProperty;
-import javafx.beans.property.StringProperty;
-import org.apache.xpath.operations.String;
-import org.junit.Test;
-import sep.fimball.general.data.Vector2;
-
 /**
  *
  */
 public class PinballMachineSaveTest
 {
     private static final int MAX_ELEMENT_SIZE = 20;
-
+/*
     @Test
     public void pinballMachineShouldSave()
     {
@@ -52,4 +45,5 @@ public class PinballMachineSaveTest
         }
 
     }
+*/
 }

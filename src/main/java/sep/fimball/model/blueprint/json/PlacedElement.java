@@ -1,11 +1,11 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.json;
 
 import javafx.beans.property.*;
 
 import java.awt.*;
 
 /**
- * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementType wird diese Klasse zur Serialisierung genutzt.
+ * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementTypeJson wird diese Klasse zur Serialisierung genutzt.
  */
 public class PlacedElement
 {

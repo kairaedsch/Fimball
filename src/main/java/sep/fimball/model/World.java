@@ -1,20 +1,14 @@
 package sep.fimball.model;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.util.Duration;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.blueprint.PlacedElement;
-import sep.fimball.model.blueprint.PlacedElementList;
+import sep.fimball.model.blueprint.json.PlacedElement;
+import sep.fimball.model.blueprint.json.PlacedElementList;
 import sep.fimball.model.element.Ball;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.model.element.GameElementList;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Eine World stellt die Spielwelt eines Automaten dar.

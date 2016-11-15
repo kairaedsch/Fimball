@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.json;
 
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;
@@ -39,7 +39,7 @@ public class PlacedElementList
      */
     public void addElement(PlacedElement placedElement)
     {
-        elements.put(placedElement.blueprintElementId.get(), placedElement);
+        elements.put(0, placedElement);
     }
 
     /**

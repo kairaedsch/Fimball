@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -11,9 +11,9 @@ import java.util.Optional;
 /**
  * Created by kaira on 11.11.2016.
  */
-class JsonLoader
+public class JsonLoader
 {
-    static <T> Optional<T> loadFromJson(Path path, Class<T> tClass)
+    public static <T> Optional<T> loadFromJson(Path path, Class<T> tClass)
     {
         if (!path.toFile().exists())
         {
