@@ -8,7 +8,7 @@ import sep.fimball.general.data.Vector2;
 public class NormalCollision implements CollisionType
 {
     @Override
-    public void applyCollision(PhysicsElement ball, Vector2 shortestIntersect)
+    public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();

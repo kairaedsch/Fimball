@@ -15,7 +15,7 @@ public class AccelerationCollision implements CollisionType
     }
 
     @Override
-    public void applyCollision(PhysicsElement ball, Vector2 shortestIntersect)
+    public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
         Vector2 ballDirection = ball.getVelocity().normalized();
         ball.setVelocity(Vector2.add(ball.getVelocity(), Vector2.scale(ballDirection, accelerationSpeed)));
