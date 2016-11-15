@@ -3,6 +3,7 @@ package sep.fimball.model.blueprint.pinnballmachine;
 import javafx.beans.property.*;
 
 import java.awt.*;
+import java.lang.annotation.ElementType;
 
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementTypeJson wird diese Klasse zur Serialisierung genutzt.
@@ -12,7 +13,7 @@ public class PlacedElement
     /**
      * Verweis auf den Typ des Elements.
      */
-    StringProperty elementTypeId;
+    ElementType elementType;
 
     /**
      * Position des Elementes auf dem Automaten.
@@ -24,28 +25,14 @@ public class PlacedElement
      */
     IntegerProperty points;
 
-    /**
-     * TODO
-     */
     DoubleProperty multiplier;
 
-    /**
-     * Legt ein neues Element  mit gegebener ID, Typ und Position an.
-     * @param blueprintElementId
-     * @param elementTypeId
-     * @param position
-     */
-    public PlacedElement(int blueprintElementId, String elementTypeId, Point position)
+    public PlacedElement(ElementType elementType, Point position)
     {
-        this.elementTypeId = new SimpleStringProperty(elementTypeId);
+        this.elementType = elementType;
         this.position = new SimpleObjectProperty<>(position);
         this.points = new SimpleIntegerProperty();
         this.multiplier = new SimpleDoubleProperty();
-    }
-
-    public ReadOnlyStringProperty elementTypeIdProperty()
-    {
-        return elementTypeId;
     }
 
     public ReadOnlyObjectProperty<Point> positionProperty()
@@ -58,7 +45,7 @@ public class PlacedElement
         return points;
     }
 
-    public DoubleProperty multiplierProperty()
+    public ReadOnlyDoubleProperty multiplierProperty()
     {
         return multiplier;
     }

@@ -1,8 +1,7 @@
 package sep.fimball.model.blueprint.pinnballmachine;
 
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.ReadOnlyMapProperty;
-import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
 /**
@@ -28,22 +27,22 @@ public class PinballMachineManager
     /**
      * TODO
      */
-    private MapProperty<Integer, PinballMachine> tableBlueprints;
+    private ListProperty<PinballMachine> tableBlueprints;
 
     /**
      * Erzeugt eine neue Instanz von PinballMachineManager.
      */
     private PinballMachineManager()
     {
-        tableBlueprints = new SimpleMapProperty<>(FXCollections.observableHashMap());
+        tableBlueprints = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         //TODO load real Blueprints
-        tableBlueprints.put(0, new PinballMachine("Testautomat 1", 0));
-        tableBlueprints.put(1, new PinballMachine("Testautomat 2", 1));
-        tableBlueprints.put(2, new PinballMachine("Testautomat 3", 2));
+        tableBlueprints.add(new PinballMachine("Testautomat 1", 0));
+        tableBlueprints.add(new PinballMachine("Testautomat 2", 1));
+        tableBlueprints.add(new PinballMachine("Testautomat 3", 2));
     }
 
-    public ReadOnlyMapProperty<Integer, PinballMachine> tableBlueprintsProperty()
+    public ListProperty<PinballMachine> tableBlueprintsProperty()
     {
         return tableBlueprints;
     }

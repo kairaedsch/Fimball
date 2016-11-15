@@ -1,8 +1,7 @@
 package sep.fimball.model.blueprint.pinnballmachine;
 
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.ReadOnlyMapProperty;
-import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
 /**
@@ -13,14 +12,14 @@ public class PlacedElementList
     /**
      * Liste von platzierten Elementen.
      */
-    private MapProperty<Integer, PlacedElement> elements;
+    private ListProperty<PlacedElement> elements;
 
     /**
      * Erzeugt einen neue Instanz von PlacedElementList.
      */
     public PlacedElementList()
     {
-        this.elements = new SimpleMapProperty<>(FXCollections.observableHashMap());
+        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
     }
 
     /**
@@ -39,7 +38,7 @@ public class PlacedElementList
      */
     public void addElement(PlacedElement placedElement)
     {
-        elements.put(0, placedElement);
+        elements.add(placedElement);
     }
 
     /**
@@ -52,7 +51,7 @@ public class PlacedElementList
         return elements.remove(blueprintElementId) != null;
     }
 
-    public ReadOnlyMapProperty<Integer, PlacedElement> elementsProperty()
+    public ListProperty<PlacedElement> elementsProperty()
     {
         return elements;
     }

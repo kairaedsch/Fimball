@@ -58,11 +58,6 @@ public class PinballMachine
         return name;
     }
 
-    public ReadOnlyIntegerProperty blueprintTableIdProperty()
-    {
-        return blueprintTableId;
-    }
-
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
         return highscoreList;
