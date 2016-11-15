@@ -1,9 +1,8 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.pinnballmachine;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.PlacedElementList;
 
 /**
  * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.

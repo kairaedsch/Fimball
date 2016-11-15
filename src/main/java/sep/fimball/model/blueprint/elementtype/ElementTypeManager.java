@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.elementType;
+package sep.fimball.model.blueprint.elementtype;
 
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;

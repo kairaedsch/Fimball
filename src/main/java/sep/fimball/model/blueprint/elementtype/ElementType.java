@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.elementType;
+package sep.fimball.model.blueprint.elementtype;
 
 import sep.fimball.model.physics.Collider;
 

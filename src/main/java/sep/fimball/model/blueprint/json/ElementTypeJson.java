@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.json;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.elementType.ElementTypeType;
+import sep.fimball.model.blueprint.elementtype.ElementTypeType;
 
 /**
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).

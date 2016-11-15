@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.pinnballmachine;
 
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;

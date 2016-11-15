@@ -3,7 +3,7 @@ package sep.fimball.model.element;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
-import sep.fimball.model.blueprint.PlacedElement;
+import sep.fimball.model.blueprint.pinnballmachine.PlacedElement;
 import sep.fimball.model.physics.Collider;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 

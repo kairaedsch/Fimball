@@ -2,7 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.settings;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import sep.fimball.model.blueprint.PinballMachine;
+import sep.fimball.model.blueprint.pinnballmachine.PinballMachine;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
