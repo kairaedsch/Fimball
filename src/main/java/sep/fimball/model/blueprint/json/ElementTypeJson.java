@@ -2,6 +2,7 @@ package sep.fimball.model.blueprint.json;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.elementtype.ElementTypeType;
+import sep.fimball.model.physics.WorldLayer;
 
 /**
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
@@ -25,7 +26,8 @@ public class ElementTypeJson
 
         public static class PhysicCollider
         {
-            public String mediaTriggerId;
+            public String colliderId;
+            public WorldLayer layer;
 
             /**
              * Speichert die Polygon-Collider des Elementtyps.
@@ -40,7 +42,7 @@ public class ElementTypeJson
             /**
              * Die Kräfte, die bei Interaktion mit diesem Elementtyp auftreten.
              */
-            public ForceObject forces;
+            public ColliderType collisionType;
 
             public static class Polygon
             {
@@ -55,34 +57,41 @@ public class ElementTypeJson
                 public double radius;
             }
 
-            public static class ForceObject
+            public static class ColliderType
             {
                 public String forceType;
                 public double strength;
+                public double accelX;
+                public double accelY;
             }
         }
     }
 
     public static class MediaElementType
     {
-        /**
-         * Bezeichnung des Elementtyps im Editor.
-         */
-        public String editorName;
+        public MediaElementTypeGeneral general;
 
-        /**
-         * Text, der den Elementtyp im Editor beschreibt.
-         */
-        public String editorDescription;
+        public MediaElementEvent[] events;
 
-        public MediaTrigger[] triggers;
-
-
-        public static class MediaTrigger
+        public static class MediaElementTypeGeneral
         {
-            public String id;
+            /**
+             * Bezeichnung des Elementtyps im Editor.
+             */
+            public String editorName;
+
+            /**
+             * Text, der den Elementtyp im Editor beschreibt.
+             */
+            public String editorDescription;
+        }
+
+        public static class MediaElementEvent
+        {
+            public String colliderId;
 
             public String soundName;
+
             /**
              * Die Animationen, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
              */
@@ -99,9 +108,22 @@ public class ElementTypeJson
 
     public static class GameElementType
     {
-        /**
-         * Speichert die Punkte, die ein Treffer durch die Kugel bringt.
-         */
-        public boolean givesPoints;
+
+        public GameElementTypeGeneral general;
+
+        public GameElementEvent[] events;
+
+        public static class GameElementTypeGeneral
+        {
+            /**
+             * Speichert die Punkte, die ein Treffer durch die Kugel bringt.
+             */
+            public boolean givesPoints;
+        }
+
+        public static class GameElementEvent
+        {
+            public String colliderId;
+        }
     }
 }
