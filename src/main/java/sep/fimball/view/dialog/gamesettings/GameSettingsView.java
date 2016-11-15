@@ -4,15 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import sep.fimball.model.input.KeyBinding;
-import sep.fimball.view.ViewLoader;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
-import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 
 

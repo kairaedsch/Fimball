@@ -10,11 +10,6 @@ import java.awt.*;
 public class PlacedElement
 {
     /**
-     * ID zur Identifizierung des Elements.
-     */
-    IntegerProperty blueprintElementId;
-
-    /**
      * Verweis auf den Typ des Elements.
      */
     StringProperty elementTypeId;
@@ -42,16 +37,10 @@ public class PlacedElement
      */
     public PlacedElement(int blueprintElementId, String elementTypeId, Point position)
     {
-        this.blueprintElementId = new SimpleIntegerProperty(blueprintElementId);
         this.elementTypeId = new SimpleStringProperty(elementTypeId);
         this.position = new SimpleObjectProperty<>(position);
         this.points = new SimpleIntegerProperty();
         this.multiplier = new SimpleDoubleProperty();
-    }
-
-    public ReadOnlyIntegerProperty blueprintElementIdProperty()
-    {
-        return blueprintElementId;
     }
 
     public ReadOnlyStringProperty elementTypeIdProperty()
