@@ -47,7 +47,7 @@ public class ElementImage
 
     public String getImagePath(ImageLayer imageLayer, int rotation)
     {
-        return Config.pathToElementImage(elementTypeId, ImageLayer.TOP, canRotate, rotation - (rotation % rotationAccuracy), animation, animationName, animationId);
+        return Config.pathToElementImage(elementTypeId, imageLayer, canRotate, rotation - (rotation % rotationAccuracy), animation, animationName, animationId);
     }
 
     public int getRestRotation(int rotation)
