@@ -59,7 +59,7 @@ public class SceneManagerViewModel
     {
         windowViewModel.setSceneManager(this);
         this.windowViewModel.set(windowViewModel);
-        this.dialogViewModel.set(null);
+        this.dialogViewModel.set(new EmptyViewModel());
     }
 
     /**
