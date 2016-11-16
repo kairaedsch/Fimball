@@ -1,5 +1,6 @@
 package sep.fimball.view.window.game;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -50,6 +51,9 @@ public class GameView extends WindowView<GameViewModel>
     public void setViewModel(GameViewModel gameViewModel)
     {
         this.gameViewModel = gameViewModel;
+
+        playername.textProperty().bind(Bindings.concat("Score: ", gameViewModel.playerNameProperty()));
+        score.textProperty().bind(Bindings.concat("Player: ", gameViewModel.playerPointsProperty().asString()));
 
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
