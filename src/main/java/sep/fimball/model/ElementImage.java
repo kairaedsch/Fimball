@@ -1,6 +1,7 @@
 package sep.fimball.model;
 
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.ImageLayer;
 
 /**
  * Created by kaira on 16.11.2016.
@@ -32,8 +33,8 @@ public class ElementImage
 
     private ElementImage(String elementTypeId, boolean canRotate, double rotation, boolean animation, String animationName, int animationId)
     {
-        topImagePath = Config.pathToElementImage(elementTypeId, true, canRotate, rotation, animation, animationName, animationId);
-        bottomImagePath = Config.pathToElementImage(elementTypeId, false, canRotate, rotation, animation, animationName, animationId);
+        topImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.TOP, canRotate, rotation, animation, animationName, animationId);
+        bottomImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.BOTTOM, canRotate, rotation, animation, animationName, animationId);
     }
 
     public String getTopImagePath()
