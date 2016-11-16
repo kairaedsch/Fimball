@@ -17,4 +17,19 @@ public class AnimationState
     {
         this.animation = new SimpleObjectProperty<>(animation.get());
     }
+
+    public int getAnimationSize()
+    {
+        return animation.get().getFramePaths().length;
+    }
+
+    public String getCurrentFrame()
+    {
+        return animation.get().getFramePaths()[currentFrameIndex];
+    }
+
+    public void setCurrentFrameIndex(int index)
+    {
+        currentFrameIndex = index;
+    }
 }
