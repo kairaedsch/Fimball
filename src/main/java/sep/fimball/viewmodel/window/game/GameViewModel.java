@@ -62,10 +62,6 @@ public class GameViewModel extends WindowViewModel
         playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
 
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession.getWorld(), this);
-
-        // GameSession has been created and filled in the PlayerNameView TODO move this to controller?
-        // As the view has finished loading (TODO has it?), we can now start the game
-        gameSession.startAll();
     }
 
     /**

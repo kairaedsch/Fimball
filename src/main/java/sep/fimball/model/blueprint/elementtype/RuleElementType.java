@@ -17,14 +17,17 @@ public class RuleElementType
     public RuleElementType(ElementTypeJson.RuleElementTypeJson ruleElement)
     {
         eventMap = new HashMap<>();
-        for (ElementTypeJson.RuleElementTypeJson.RuleElementEventJson event : ruleElement.events)
+        if (ruleElement.events != null)
         {
-            // TODO hashCode musst not be unique
-            eventMap.put(event.colliderId.hashCode(), new RuleElementEvent(event));
+            for (ElementTypeJson.RuleElementTypeJson.RuleElementEventJson event : ruleElement.events)
+            {
+                // TODO hashCode musst not be unique
+                eventMap.put(event.colliderId.hashCode(), new RuleElementEvent(event));
+            }
         }
     }
 
-    public boolean isGivesPoints()
+    public boolean givesPoints()
     {
         return givesPoints;
     }

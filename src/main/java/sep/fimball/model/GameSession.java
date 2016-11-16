@@ -104,6 +104,13 @@ public class GameSession
                 addTiltCounter();
         });
 
+        players = new Player[playerNames.length];
+        for (int i = 0; i < playerNames.length; i++)
+        {
+            players[i] = new Player(playerNames[i]);
+        }
+        currentPlayer = players[0];
+
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
         for (PlacedElement element : machineBlueprint.getTableElementList())
@@ -114,6 +121,20 @@ public class GameSession
             PhysicsElement physElem = new PhysicsElement(gameElem);
             physicsElements.add(physElem);
         }
+
+        triggers = new ArrayList<>();
+
+        Trigger hitTrigger = new Trigger();
+        hitTrigger.setElementTrigger(new HitTrigger());
+        triggers.add(hitTrigger);
+
+        Trigger scoreTrigger = new Trigger();
+        scoreTrigger.setElementTrigger(new ScoreTrigger(this));
+        triggers.add(scoreTrigger);
+
+        Trigger soundTrigger = new Trigger();
+        soundTrigger.setElementTrigger(new SoundTrigger());
+        triggers.add(soundTrigger);
 
         world = new World(elements);
         physicsHandler = new PhysicsHandler(physicsElements);

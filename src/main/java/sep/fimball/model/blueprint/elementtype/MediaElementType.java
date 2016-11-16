@@ -21,10 +21,13 @@ public class MediaElementType
         description  = mediaElement.general.editorDescription;
 
         eventMap = new HashMap<>();
-        for (ElementTypeJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
+        if (mediaElement.events != null)
         {
-            // TODO hashCode musst not be unique
-            eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
+            for (ElementTypeJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
+            {
+                // TODO hashCode musst not be unique
+                eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
+            }
         }
     }
 
