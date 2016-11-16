@@ -52,8 +52,8 @@ public class GameView extends WindowView<GameViewModel>
     {
         this.gameViewModel = gameViewModel;
 
-        playername.textProperty().bind(Bindings.concat("Score: ", gameViewModel.playerNameProperty()));
-        score.textProperty().bind(Bindings.concat("Player: ", gameViewModel.playerPointsProperty().asString()));
+        playername.textProperty().bind(Bindings.concat("Player: ", gameViewModel.playerNameProperty()));
+        score.textProperty().bind(Bindings.concat("Score: ", gameViewModel.playerPointsProperty().asString()));
 
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
