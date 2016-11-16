@@ -49,7 +49,7 @@ public class ElementTypeManager
 
         try
         {
-            Files.list(Paths.get(Config.pathToData + Config.pathDataToElements)).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
+            Files.list(Paths.get(Config.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
         }
         catch (IOException e)
         {
@@ -59,8 +59,8 @@ public class ElementTypeManager
 
     private void loadElement(Path path)
     {
-        Path jsonPath = Paths.get(path.toString() + Config.pathElementsToDataJson);
         String elementTypeId = path.getFileName().toString();
+        Path jsonPath = Paths.get(Config.pathToElementDataJson(elementTypeId));
 
         Optional<ElementTypeJson> elementTypeOptional = JsonFileManager.loadFromJson(jsonPath, ElementTypeJson.class);
 

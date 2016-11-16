@@ -80,12 +80,11 @@ public class Settings
         musicVolume = new SimpleDoubleProperty(50);
         sfxVolume = new SimpleDoubleProperty(75);
 
-        loadSettings(Paths.get(Config.pathToData));
+        loadSettings(Paths.get(Config.pathToSettings()));
     }
 
-    private void loadSettings(Path path)
+    private void loadSettings(Path jsonPath)
     {
-        Path jsonPath = Paths.get(path.toString() + Config.pathDataToSettings);
 
         Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(jsonPath, SettingsJson.class);
 
@@ -131,7 +130,7 @@ public class Settings
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToData + Config.pathDataToSettings, settingsJson);
+        JsonFileManager.saveToJson(Config.pathToSettings(), settingsJson);
     }
 
     public DoubleProperty masterVolumeProperty()

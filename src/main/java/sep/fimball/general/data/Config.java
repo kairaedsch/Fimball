@@ -21,10 +21,10 @@ public class Config
         }
     }
 
-    public static String pathToData;
-    public static String pathDataToElements = "//elements";
-    public final static String pathElementsToDataJson = "//data.json";
-    public static String pathDataToSettings ="//settings.json";
+    private static String pathToData;
+    private static String pathDataToElements = "//elements";
+    private static String pathElementsToDataJson = "//data.json";
+    private static String pathDataToSettings ="//settings.json";
 
     public final static int maxHighscores = 10;
     public final static double maxVolume = 10;
