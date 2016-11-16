@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
@@ -73,11 +74,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         for (SpriteSubView sprite : sprites)
         {
-            sprite.draw(canvas.getGraphicsContext2D(), true);
+            sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
         }
         for (SpriteSubView spriteTop : sprites)
         {
-            spriteTop.draw(canvas.getGraphicsContext2D(), false);
+            spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
         }
     }
 }
