@@ -209,11 +209,6 @@ public class GameSession
         return players;
     }
 
-    public void setPlayers(Player[] players)
-    {
-        this.players = players;
-    }
-
     public int getTiltCounter()
     {
         return tiltCounter;

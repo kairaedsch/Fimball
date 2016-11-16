@@ -53,11 +53,6 @@ public class Player
         return name;
     }
 
-    public int getBalls()
-    {
-        return balls.get();
-    }
-
     public IntegerProperty ballsProperty()
     {
         return balls;
