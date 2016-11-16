@@ -9,12 +9,6 @@ import sep.fimball.model.physics.WorldLayer;
  */
 public class BaseElementJson
 {
-    public boolean canRotate;
-    /**
-     * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
-     */
-    public double rotationAccuracy;
-
     public BaseElementType elementType;
 
     public PhysicElementTypeJson physicElement;
@@ -83,6 +77,12 @@ public class BaseElementJson
              * Text, der den Elementtyp im Editor beschreibt.
              */
             public String editorDescription;
+
+            public boolean canRotate;
+            /**
+             * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
+             */
+            public double rotationAccuracy;
         }
 
         public static class MediaElementEventJson

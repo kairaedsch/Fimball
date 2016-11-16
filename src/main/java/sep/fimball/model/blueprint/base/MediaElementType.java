@@ -16,6 +16,8 @@ public class MediaElementType
 {
     private String name;
     private String description;
+    private boolean canRotate;
+    private double rotationAccuracy;
 
     private ObjectProperty<ElementImage> elementImage;
 
@@ -25,6 +27,8 @@ public class MediaElementType
     {
         name = mediaElement.general.editorName;
         description  = mediaElement.general.editorDescription;
+        canRotate = mediaElement.general.canRotate;
+        rotationAccuracy = mediaElement.general.rotationAccuracy;
 
         eventMap = new HashMap<>();
         if (mediaElement.events != null)
@@ -46,6 +50,16 @@ public class MediaElementType
     public String getDescription()
     {
         return description;
+    }
+
+    public boolean canRotate()
+    {
+        return canRotate;
+    }
+
+    public double getRotationAccuracy()
+    {
+        return rotationAccuracy;
     }
 
     public Map<Integer, MediaElementEvent> getEventMap()
