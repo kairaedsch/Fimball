@@ -55,7 +55,7 @@ public class GameViewModel extends WindowViewModel
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();
         cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
-        cameraZoom = new SimpleDoubleProperty(0.5);
+        cameraZoom = new SimpleDoubleProperty(0.75);
 
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());

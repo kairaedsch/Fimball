@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Region;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
@@ -67,6 +68,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.notifyToRedraw(redrawObserver);
+
+        Region parent = (Region) canvas.getParent();
+        canvas.widthProperty().bind(parent.widthProperty());
+        canvas.heightProperty().bind(parent.heightProperty());
     }
 
     /**
