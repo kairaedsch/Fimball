@@ -5,7 +5,24 @@ package sep.fimball.general.data;
  */
 public class Config
 {
-    public final static String pathToData = "A://data";
-    public final static String pathDataToElements = "//elements";
+    public static void config()
+    {
+        String mode = System.getProperty("mode");
+        if (true || (mode != null && mode.equalsIgnoreCase("development")))
+        {
+            if (System.getProperty("os.name").startsWith("Windows"))
+            {
+                pathToData = "A://data";
+            } else
+            {
+                pathToData = "~/FleetDJ/user/image/";
+            }
+        }
+    }
+
+    public static String pathToData;
+    public static String pathDataToElements = "//elements";
     public final static String pathElementsToDataJson = "//data.json";
+
+    public final static int maxHighscores = 10;
 }

@@ -2,9 +2,11 @@ package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,7 +70,7 @@ public class PinballMachine
 
     public List<PlacedElement> getTableElementList()
     {
-        return tableElementList;
+        return Collections.unmodifiableList(tableElementList);
     }
 
     public ReadOnlyStringProperty imagePathProperty()
@@ -87,5 +89,6 @@ public class PinballMachine
     public void addHighscore(Highscore highscore)
     {
         highscoreList.add(highscore);
+        if(highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
     }
 }
