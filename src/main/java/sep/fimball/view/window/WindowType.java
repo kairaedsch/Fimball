@@ -40,7 +40,9 @@ public enum WindowType implements ViewType
     /**
      * Das Spielfenster.
      */
-    GAME_WINDOW("game/gameWindow.fxml");
+    GAME_WINDOW("game/gameWindow.fxml"),
+
+    PINBALL_CANVAS("pinballcanvas/pinballCanvas.fxml");
 
     /**
      * Der Pfad der zum Fenstertyp gehörenden FXML-Datei.

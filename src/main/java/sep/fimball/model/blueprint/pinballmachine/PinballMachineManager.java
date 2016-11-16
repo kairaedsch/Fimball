@@ -43,13 +43,4 @@ public class PinballMachineManager
     {
         return tableBlueprints;
     }
-
-    /**
-     * Serialisiert und speichert den Flipperautomaten mit der gegebenen Id.
-     * @param blueprintId
-     */
-    public void save(int blueprintId)
-    {
-
-    }
 }

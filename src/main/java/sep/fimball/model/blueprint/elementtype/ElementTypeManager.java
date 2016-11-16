@@ -50,7 +50,8 @@ public class ElementTypeManager
         try
         {
             Files.list(Paths.get(Config.pathToData + Config.pathDataToElements)).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -71,13 +72,15 @@ public class ElementTypeManager
                 ElementType elementType = new ElementType(elementTypeJson);
                 elements.put(path.getFileName().toString(), elementType);
                 System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
-            } catch (NullPointerException e)
+            }
+            catch (NullPointerException e)
             {
                 System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
                 e.printStackTrace();
             }
 
-        } else
+        }
+        else
         {
             System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
         }
