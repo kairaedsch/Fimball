@@ -9,6 +9,7 @@ import sep.fimball.model.physics.WorldLayer;
  */
 public class ElementTypeJson
 {
+    public boolean canRotate;
     /**
      * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
      */
@@ -46,20 +47,18 @@ public class ElementTypeJson
 
             public static class PolygonJson
             {
-                public boolean onGround;
-                public Vector2[] points;
+                public Vector2[] vertices;
             }
 
             public static class CircleJson
             {
-                public boolean onGround;
                 public double x, y;
                 public double radius;
             }
 
             public static class ColliderTypeJson
             {
-                public String forceType;
+                public String type;
                 public double strength;
                 public double accelX;
                 public double accelY;

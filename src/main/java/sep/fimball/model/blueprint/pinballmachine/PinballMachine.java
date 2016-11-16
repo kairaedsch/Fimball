@@ -54,8 +54,7 @@ public class PinballMachine
         highscoreList.add(new Highscore(2000, "Felix " + name));
 
         // TODO real pic
-        if(blueprintTableId % 2 == 0) this.imagePath = new SimpleStringProperty("/images/pinball-machine-test-v6.png");
-        else this.imagePath = new SimpleStringProperty("/images/pic.jpg");
+        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImage());
     }
 
     public ReadOnlyStringProperty nameProperty()

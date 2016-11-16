@@ -22,8 +22,15 @@ public class Config
     }
 
     private static String pathToData;
+
     private static String pathDataToElements = "//elements";
-    private static String pathElementsToDataJson = "//data.json";
+    private static String pathElementToDataJson = "//data.json";
+
+    private static String pathDataToMachines = "//machines";
+    private static String pathMachineToImage = "//image.png";
+    private static String pathMachineToGeneralJson = "//general.json";
+    private static String pathMachineToPlacedElementsJson = "//elements.json";
+
     private static String pathDataToSettings ="//settings.json";
 
     public final static int maxHighscores = 10;
@@ -36,7 +43,61 @@ public class Config
 
     public static String pathToElementDataJson(String elementTypeId)
     {
-        return pathToElements() + elementTypeId + pathElementsToDataJson;
+        return pathToElements() + "//" + elementTypeId + pathElementToDataJson;
+    }
+
+    public static String pathToElementImage(String elementTypeId, boolean top)
+    {
+        return pathToElementImage(elementTypeId, top, false, -1, false, null, -1);
+    }
+
+    public static String pathToElementImage(String elementTypeId, boolean top, double rotationAccuracy)
+    {
+        return pathToElementImage(elementTypeId, top, true, rotationAccuracy, false, null, -1);
+    }
+
+    public static String pathToElementImage(String elementTypeId, boolean top, String animationName, int animationId)
+    {
+        return pathToElementImage(elementTypeId, top, false, -1, true, animationName, animationId);
+    }
+
+    public static String pathToElementImage(String elementTypeId, boolean top, double rotationAccuracy, String animationName, int animationId)
+    {
+        return pathToElementImage(elementTypeId, top, true, rotationAccuracy, true, animationName, animationId);
+    }
+
+    private static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
+    {
+        String path = pathToElements() + "//" + elementTypeId + "//";
+
+        if(top) path += "top";
+        else path += "bottom";
+
+        if(canRotate) path += "-" + rotationAccuracy;
+
+        if(animation) path += "+" + animationName + "_" + animationId;
+
+        return path + ".png";
+    }
+
+    public static String pathToMachines()
+    {
+        return pathToData + pathDataToMachines;
+    }
+
+    public static String pathToPinballMachineImage(String pinballMachineId)
+    {
+        return pathToMachines() + "//" + pinballMachineId + pathMachineToImage;
+    }
+
+    public static String pathToPinballMachineGeneralJson(String pinballMachineId)
+    {
+        return pathToMachines() + "//" + pinballMachineId + pathMachineToGeneralJson;
+    }
+
+    public static String pathToPinballMachinePlacedElementsJson(String pinballMachineId)
+    {
+        return pathToMachines() + "//" + pinballMachineId + pathMachineToPlacedElementsJson;
     }
 
     public static String pathToSettings()

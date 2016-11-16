@@ -22,20 +22,20 @@ public class PhysicsElementType
         {
             List<CollisionShape> shapes = new ArrayList<>();
 
-            for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
+            if(collider.polygonShapes != null) for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
             {
-                PolygonCollider polygonCollider = new PolygonCollider(Arrays.asList(polygonShape.points));
+                PolygonCollider polygonCollider = new PolygonCollider(Arrays.asList(polygonShape.vertices));
                 shapes.add(polygonCollider);
             }
 
-            for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
+            if(collider.circleShapes != null) for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
             {
                 CircleCollider circleCollider = new CircleCollider(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
                 shapes.add(circleCollider);
             }
 
             CollisionType collisionType;
-            switch (collider.collisionType.forceType)
+            switch (collider.collisionType.type)
             {
                 case "normal":
                     collisionType = new NormalCollision();
