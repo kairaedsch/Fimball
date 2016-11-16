@@ -51,7 +51,7 @@ public class GameSession
     /**
      * Der Spieler, der aktuell den Flipperautomaten bedient.
      */
-    private Player currentPlayer;
+    private int playerIndex;
 
     /**
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
@@ -115,7 +115,7 @@ public class GameSession
         {
             players[i] = new Player(playerNames[i]);
         }
-        currentPlayer = players[0];
+        playerIndex = 0;
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
@@ -201,10 +201,11 @@ public class GameSession
      */
     public void onBallLost()
     {
-        // TODO - implement GameSession.onBallLost
-        // TODO - switch currentPlayer to next player in list
-        // TODO - if no player has balls left, switch to game over
-        throw new UnsupportedOperationException();
+        playerIndex++;
+        if (playerIndex >= players.length)
+            playerIndex = 0;
+
+        spawnNewBall();
     }
 
     private void spawnNewBall()
@@ -232,7 +233,7 @@ public class GameSession
 
     public Player getCurrentPlayer()
     {
-        return currentPlayer;
+        return players[playerIndex];
     }
 
     public Player[] getPlayers()
