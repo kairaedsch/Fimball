@@ -115,6 +115,7 @@ public class PhysicsHandler
     public void addBall(BallElement ball)
     {
         ballElement = ball;
+        physicsElements.add(ball.getSubElement());
     }
 
     public void removeBall()
