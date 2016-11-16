@@ -7,10 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.blueprint.base.PhysicsElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
@@ -23,7 +21,6 @@ import sep.fimball.model.physics.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Observer;
 
 /**
@@ -161,7 +158,7 @@ public class GameSession
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
             // TODO update GameElements
-            gameLoopObservable.hasChanged();
+            gameLoopObservable.setChanged();
             gameLoopObservable.notifyObservers();
         }));
         gameLoop.getKeyFrames().add(keyFrame);

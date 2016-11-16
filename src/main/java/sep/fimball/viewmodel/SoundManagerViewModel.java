@@ -1,10 +1,10 @@
 package sep.fimball.viewmodel;
 
 import javafx.beans.property.DoubleProperty;
+import sep.fimball.general.util.Observable;
 import sep.fimball.model.Settings;
 import sep.fimball.model.SoundManager;
 
-import java.util.Observable;
 import java.util.Observer;
 
 /**
@@ -43,7 +43,7 @@ public class SoundManagerViewModel {
      */
     private void playClip(String clipPath)
     {
-        clipObservable.hasChanged();
+        clipObservable.setChanged();
         clipObservable.notifyObservers(clipPath);
     }
 
@@ -53,7 +53,7 @@ public class SoundManagerViewModel {
      * @param mediaPath Der Pfad zur Datei der neuen Hintergrundmusik.
      */
     private void playMedia(String mediaPath) {
-        mediaObservable.hasChanged();
+        mediaObservable.setChanged();
         mediaObservable.notifyObservers(mediaPath);
     }
 

@@ -1,6 +1,6 @@
 package sep.fimball.model;
 
-import java.util.Observable;
+import sep.fimball.general.util.Observable;
 import java.util.Observer;
 
 /**
@@ -39,13 +39,13 @@ public class SoundManager
 
     public void addClipToPlay(String clipPath)
     {
-        clipObservable.hasChanged();
+        clipObservable.setChanged();
         clipObservable.notifyObservers(clipPath);
     }
 
     public void addMediaToPlay(String musicPath)
     {
-        mediaObservable.hasChanged();
+        mediaObservable.setChanged();
         mediaObservable.notifyObservers(musicPath);
     }
 }

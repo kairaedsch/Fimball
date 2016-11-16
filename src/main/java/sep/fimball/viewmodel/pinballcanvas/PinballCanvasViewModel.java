@@ -4,11 +4,11 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.general.util.Observable;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.World;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
-import java.util.Observable;
 import java.util.Observer;
 
 /**
@@ -111,7 +111,7 @@ public class PinballCanvasViewModel
      */
     private void redraw()
     {
-        redrawObservable.hasChanged();
+        redrawObservable.setChanged();
         redrawObservable.notifyObservers();
     }
 }
