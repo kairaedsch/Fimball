@@ -26,7 +26,7 @@ public class PlacedElement
 
     private DoubleProperty multiplier;
 
-    public PlacedElement(ElementType elementType, Vector2 position, double rotation)
+    public PlacedElement(ElementType elementType, Vector2 position)
     {
         this.elementType = elementType;
         this.position = new SimpleObjectProperty<>(position);
