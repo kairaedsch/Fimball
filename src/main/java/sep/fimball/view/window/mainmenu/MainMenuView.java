@@ -1,10 +1,13 @@
 package sep.fimball.view.window.mainmenu;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
@@ -86,7 +89,49 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void settingsClicked()
     {
-       mainMenuViewModel.showSettingsDialog();
+        mainMenuViewModel.showSettingsDialog();
+
+        final long[] lv = {System.currentTimeMillis()};
+        final long[] lm = {System.currentTimeMillis()};
+
+        {
+            Timeline timeline  = new Timeline();
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.getKeyFrames().add(new KeyFrame(new Duration(16.66), "", event -> {
+                long s = System.currentTimeMillis();
+                System.out.println("View Timeline fängt an:  Last run was " + (s - lv[0]) + "ms ago.");
+                try
+                {
+                    Thread.sleep(5);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                System.out.println("View Timeline hört auf:  dauer                 " + (System.currentTimeMillis() - s) + "ms     ");
+                lv[0] = s;
+            }));
+            timeline.play();
+        }
+        {
+            Timeline timeline  = new Timeline();
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.getKeyFrames().add(new KeyFrame(new Duration(16.66), "", event -> {
+                long s = System.currentTimeMillis();
+                System.out.println("Model Timeline fängt an. Last run was " + (s - lm[0]) + "ms ago.");
+                try
+                {
+                    Thread.sleep(33);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                System.out.println("Model Timeline hört auf: dauer                 " + (System.currentTimeMillis() - s) + "ms     ");
+                lm[0] = s;
+            }));
+            timeline.play();
+        }
     }
 
     /**

@@ -10,7 +10,7 @@ public class Animation
     /**
      * Array mit den Pfaden der einzelnen Bilder der Animation.
      */
-    private String[] framePaths;
+    private ElementImage[] elementImages;
 
     /**
      * Wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
@@ -19,12 +19,18 @@ public class Animation
 
     public Animation(BaseElementJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
     {
-        // TODO load animation
+        duration = animation.duration;
+
+        elementImages = new ElementImage[animation.frameCount];
+        for(int f = 0; f < animation.frameCount; f++)
+        {
+            //elementImages[f] = new ElementImage();
+        }
     }
 
-    public String[] getFramePaths()
+    public ElementImage[] getElementImages()
     {
-        return framePaths;
+        return elementImages;
     }
 
     public double getDuration()
