@@ -34,8 +34,8 @@ public class PhysicsElement
     public PhysicsElement(GameElement element)
     {
         this.element = element;
-        this.position = element.getPosition();
-        this.rotation = element.getRotation();
+        this.position = element.positionProperty().get();
+        this.rotation = element.rotationProperty().get();
         this.colliders = element.getPlacedElement().getBaseElement().getPhysics().getColliders();
     }
 

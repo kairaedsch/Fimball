@@ -39,11 +39,6 @@ public class GameElement
      */
     private ObjectProperty<Animation> currentAnimation;
 
-    /**
-     * Liste von Änderungen an Position/Rotation die der PhysicsHandler an dem zu diesem GameElement zugehörigen PhysicsElement vorgenommen hat und die im nächsten Schritt der Spielschleife vom GameElement übernommen werden sollen.
-     */
-    private List<PhysicsUpdateEventArgs> physicsUpdates;
-
     private PlacedElement placedElement;
 
     /**
@@ -58,35 +53,6 @@ public class GameElement
         this.hitCount = new SimpleIntegerProperty();
         this.currentAnimation = new SimpleObjectProperty<>();
         this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
-        this.physicsUpdates = new ArrayList<>();
-    }
-
-    /**
-     * Wird kurz vor dem Zeichen des Automaten aufgerufen, um die Animation in den Collidern zu aktualisieren. Außerdem werden Informationen die der Physik-Thread diesem Objekt übergeben hat abgearbeitet, wie z.B. Kollisionen.
-     */
-    public void update()
-    {
-        //TODO List synchronization
-        for (PhysicsUpdateEventArgs args : physicsUpdates)
-        {
-            position = new SimpleObjectProperty<>(args.getPosition());
-            rotation = new SimpleDoubleProperty(args.getRotation());
-        }
-        physicsUpdates.clear();
-    }
-
-    /**
-     * TODO List synchronization
-     * @param update
-     */
-    public void addPhysicsUpdate(PhysicsUpdateEventArgs update)
-    {
-        physicsUpdates.add(update);
-    }
-
-    public Vector2 getPosition()
-    {
-        return position.get();
     }
 
     public ReadOnlyObjectProperty<Vector2> positionProperty()
@@ -100,11 +66,6 @@ public class GameElement
         {
             this.position.set(position);
         }
-    }
-
-    public double getRotation()
-    {
-        return rotation.get();
     }
 
     public ReadOnlyDoubleProperty rotationProperty()

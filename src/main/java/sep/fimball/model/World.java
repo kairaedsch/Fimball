@@ -48,15 +48,15 @@ public class World
     private RectangleDouble generateWalls()
     {
         //TODO If GameElements contain the ball this method won't work anymore
-        double minX = gameElements.get(0).getPosition().getX();
-        double maxX = gameElements.get(0).getPosition().getX();
-        double minY = gameElements.get(0).getPosition().getY();
-        double maxY = gameElements.get(0).getPosition().getY();
+        double minX = gameElements.get(0).positionProperty().get().getX();
+        double maxX = gameElements.get(0).positionProperty().get().getX();
+        double minY = gameElements.get(0).positionProperty().get().getY();
+        double maxY = gameElements.get(0).positionProperty().get().getY();
 
         for (GameElement gameElement : gameElements)
         {
-            double currentX = gameElement.getPosition().getX();
-            double currentY = gameElement.getPosition().getY();
+            double currentX = gameElement.positionProperty().get().getX();
+            double currentY = gameElement.positionProperty().get().getY();
 
             if (currentX < minX)
             {
