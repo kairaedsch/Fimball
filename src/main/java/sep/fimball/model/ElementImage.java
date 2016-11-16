@@ -7,17 +7,17 @@ import sep.fimball.general.data.Config;
  */
 public class ElementImage
 {
-    String topImagePath;
-    String bottomImagePath;
+    private String topImagePath;
+    private String bottomImagePath;
 
     public ElementImage(String elementTypeId)
     {
         this(elementTypeId, true, false, -1, false, null, -1);
     }
 
-    public ElementImage(String elementTypeId, double rotationAccuracy)
+    public ElementImage(String elementTypeId, double rotation)
     {
-        this(elementTypeId, true, true, rotationAccuracy, false, null, -1);
+        this(elementTypeId, true, true, rotation, false, null, -1);
     }
 
     public ElementImage(String elementTypeId, String animationName, int animationId)
@@ -30,10 +30,10 @@ public class ElementImage
        this(elementTypeId, true, true, rotationAccuracy, true, animationName, animationId);
     }
 
-    private ElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
+    private ElementImage(String elementTypeId, boolean top, boolean canRotate, double rotation, boolean animation, String animationName, int animationId)
     {
-        topImagePath = Config.pathToElementImage(elementTypeId, true, canRotate, rotationAccuracy, animation, animationName, animationId);
-        bottomImagePath = Config.pathToElementImage(elementTypeId, true, canRotate, rotationAccuracy, animation, animationName, animationId);
+        topImagePath = Config.pathToElementImage(elementTypeId, true, canRotate, rotation, animation, animationName, animationId);
+        bottomImagePath = Config.pathToElementImage(elementTypeId, true, canRotate, rotation, animation, animationName, animationId);
     }
 
     public String getTopImagePath()

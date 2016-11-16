@@ -46,14 +46,14 @@ public class Config
         return pathToElements() + "/" + elementTypeId + pathElementToDataJson;
     }
 
-    public static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
+    public static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotation, boolean animation, String animationName, int animationId)
     {
         String path = pathToElements() + "/" + elementTypeId + "/";
 
         if(top) path += "top";
         else path += "bottom";
 
-        if(canRotate) path += "-" + rotationAccuracy;
+        if(canRotate) path += "-" + rotation;
 
         if(animation) path += "+" + animationName + "_" + animationId;
 
