@@ -120,14 +120,18 @@ public class GameSession
 
         for (PlacedElement element : machineBlueprint.getTableElementList())
         {
-            GameElement gameElem = new GameElement(element);
-            elements.add(gameElem);
-
-            PhysicsElement physElem = new PhysicsElement(gameElem);
-            physicsElements.add(physElem);
-
             if (element.getBaseElement().getType() == BaseElementType.BALL)
+            {
                 ballTemplate = element;
+            }
+            else
+            {
+                GameElement gameElem = new GameElement(element);
+                elements.add(gameElem);
+
+                PhysicsElement physElem = new PhysicsElement(gameElem);
+                physicsElements.add(physElem);
+            }
         }
 
         if (ballTemplate == null)
@@ -208,6 +212,8 @@ public class GameSession
     private void spawnNewBall()
     {
         GameElement gameBall = new GameElement(world.getBallTemplate());
+        world.addGameElement(gameBall);
+
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
         physicsHandler.addBall(new BallElement(gameBall, ballCollider, WorldLayer.GROUND));
     }

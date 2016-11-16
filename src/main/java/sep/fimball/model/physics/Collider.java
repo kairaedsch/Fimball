@@ -30,7 +30,7 @@ public class Collider
     {
         for (ColliderShape shape : shapes)
         {
-            HitInfo info = shape.calculateHitInfo(ball.getCollider()); // TODO idk ball is weird
+            HitInfo info = shape.calculateHitInfo(ball.getCollider());
             if (info.isHit())
                 type.applyCollision(ball, info.getShortestIntersect());
         }

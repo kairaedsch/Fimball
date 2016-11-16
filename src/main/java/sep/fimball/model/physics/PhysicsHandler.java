@@ -83,7 +83,7 @@ public class PhysicsHandler
 
                 if (ballElement != null)
                 {
-                    double delta = TICK_RATE / 1000;
+                    double delta = TICK_RATE / 1000.0;
 
                     // Wende Schwerkraft auf den Ball an
                     ballElement.setVelocity(Vector2.add(ballElement.getVelocity(), new Vector2(0.0, GRAVITY * delta)));
@@ -94,9 +94,12 @@ public class PhysicsHandler
 
                 for (PhysicsElement element : physicsElements)
                 {
-                    for (Collider collider : element.getColliders())
+                    if (ballElement != null && element != ballElement.getSubElement())
                     {
-                        collider.checkCollision(ballElement);
+                        for (Collider collider : element.getColliders())
+                        {
+                            collider.checkCollision(ballElement);
+                        }
                     }
 
                     element.writeToGameElement();

@@ -21,6 +21,11 @@ public class BallElement
         this.layer = layer;
     }
 
+    public PhysicsElement getSubElement()
+    {
+        return subElement;
+    }
+
     public Vector2 getPosition()
     {
         return subElement.getPosition();
