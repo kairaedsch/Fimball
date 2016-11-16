@@ -7,13 +7,21 @@ public class Sound
 {
     private String soundName;
 
-    public Sound(String soundName)
+    private boolean repeating;
+
+    public Sound(String soundName, boolean repeating)
     {
         this.soundName = soundName;
+        this.repeating = repeating;
     }
 
     public String getSoundName()
     {
         return soundName;
+    }
+
+    public boolean isRepeating()
+    {
+        return repeating;
     }
 }

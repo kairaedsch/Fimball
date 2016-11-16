@@ -14,7 +14,7 @@ public class MediaElementEvent
     public MediaElementEvent(ElementTypeJson.MediaElementTypeJson.MediaElementEventJson event)
     {
         animation = new Animation(event.animation);
-        sound = new Sound(event.soundName);
+        sound = new Sound(event.soundName, false);
     }
 
     public Animation getAnimation()

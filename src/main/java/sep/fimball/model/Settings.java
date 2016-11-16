@@ -145,7 +145,10 @@ public class Settings
 
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
-        keyBindingsMap.put(keyBinding, keyCode);
+        if (!keyBindingsMap.containsValue(keyCode))
+        {
+            keyBindingsMap.put(keyBinding, keyCode);
+        }
     }
 
     public BooleanProperty fullscreenProperty()
