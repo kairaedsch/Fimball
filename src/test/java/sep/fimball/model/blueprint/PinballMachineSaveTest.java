@@ -1,9 +1,12 @@
 package sep.fimball.model.blueprint;
 
+import org.junit.Ignore;
+
 /**
  *
  */
-@Ignore public class PinballMachineSaveTest
+@Ignore
+public class PinballMachineSaveTest
 {
     private static final int MAX_ELEMENT_SIZE = 20;
 /*

@@ -62,9 +62,9 @@ public class GameElement
         this.placedElement = element;
         this.position = new SimpleObjectProperty<>(element.positionProperty().get());
         this.rotation = new SimpleDoubleProperty();
+        this.hitCount = new SimpleIntegerProperty();
         this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
         physicsUpdates = new ArrayList<>();
-        // TODO convert
     }
 
     /**

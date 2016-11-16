@@ -1,12 +1,14 @@
 package sep.fimball.model;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 /**
  * Created by marc on 16.11.16.
  */
-@Ignore public class ReserveBallsTest {
+@Ignore
+public class ReserveBallsTest {
     static String[] players = new String[] {"tester", "test"};
     static PinballMachine automaton;
     static GameSession game;

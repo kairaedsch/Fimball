@@ -16,11 +16,14 @@ public class Collider
 
     private CollisionType type;
 
-    public Collider(WorldLayer layer, List<CollisionShape> shapes, CollisionType type)
+    private int id;
+
+    public Collider(WorldLayer layer, List<CollisionShape> shapes, CollisionType type, int id)
     {
         this.layer = layer;
         this.shapes = shapes;
         this.type = type;
+        this.id = id;
     }
 
     public void checkCollision(BallElement ball)
