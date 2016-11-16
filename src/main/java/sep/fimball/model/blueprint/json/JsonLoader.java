@@ -3,7 +3,6 @@ package sep.fimball.model.blueprint.json;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,7 +48,7 @@ public class JsonLoader
         }
     }
 
-    public static <T> void saveToJason(String path, Object aclass)
+    public static void saveToJson(String path, Object aclass)
     {
         try (FileWriter writer = new FileWriter(path))
         {
