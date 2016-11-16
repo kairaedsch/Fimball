@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.model.ElementImage;
 import sep.fimball.model.blueprint.json.BaseElementJson;
 
 import java.util.HashMap;
@@ -12,6 +13,8 @@ public class MediaElementType
 {
     private String name;
     private String description;
+
+    private ElementImage elementImage;
 
     private Map<Integer, MediaElementEvent> eventMap;
 
@@ -29,6 +32,8 @@ public class MediaElementType
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
             }
         }
+
+        elementImage = new ElementImage("Alex mach mal");
     }
 
     public String getName()
@@ -44,5 +49,10 @@ public class MediaElementType
     public Map<Integer, MediaElementEvent> getEventMap()
     {
         return eventMap;
+    }
+
+    public ElementImage getElementImage()
+    {
+        return elementImage;
     }
 }
