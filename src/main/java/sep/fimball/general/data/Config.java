@@ -27,4 +27,5 @@ public class Config
     public static String pathDataToSettings ="//settings.json";
 
     public final static int maxHighscores = 10;
+    public final static double maxVolume = 10;
 }

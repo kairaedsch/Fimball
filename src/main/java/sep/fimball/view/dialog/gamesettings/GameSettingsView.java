@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
@@ -91,19 +92,23 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
 
         ViewModelListToPaneBinder.bindViewModelsToViews(keyBindings, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
 
+        masterVolumeSlider.setMax(Config.maxVolume);
+        musicVolumeSlider.setMax(Config.maxVolume);
+        sfxVolumeSlider.setMax(Config.maxVolume);
+
         language.setItems(gameSettingsViewModel.getLanguages());
         language.valueProperty().bindBidirectional(gameSettingsViewModel.languageProperty());
 
         fullscreen.selectedProperty().bindBidirectional(gameSettingsViewModel.fullscreenProperty());
 
         masterVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMasterProperty());
-        masterVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMasterProperty().asString(), "%"));
+        masterVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeMasterProperty(), Config.maxVolume * 0.01).asString(), "%"));
 
         musicVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMusicProperty());
-        musicVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMusicProperty().asString(), "%"));
+        musicVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeMusicProperty(), Config.maxVolume * 0.01), "%"));
 
         sfxVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeSFXProperty());
-        sfxVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeSFXProperty().asString(), "%"));
+        sfxVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeSFXProperty(), Config.maxVolume * 0.01), "%"));
     }
 
     /**
