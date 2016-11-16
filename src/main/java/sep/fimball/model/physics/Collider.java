@@ -12,13 +12,13 @@ public class Collider
      */
     private WorldLayer layer;
 
-    private List<CollisionShape> shapes;
+    private List<ColliderShape> shapes;
 
     private CollisionType type;
 
     private int id;
 
-    public Collider(WorldLayer layer, List<CollisionShape> shapes, CollisionType type, int id)
+    public Collider(WorldLayer layer, List<ColliderShape> shapes, CollisionType type, int id)
     {
         this.layer = layer;
         this.shapes = shapes;
@@ -28,7 +28,7 @@ public class Collider
 
     public void checkCollision(BallElement ball)
     {
-        for (CollisionShape shape : shapes)
+        for (ColliderShape shape : shapes)
         {
             HitInfo info = shape.calculateHitInfo(ball.getCollider()); // TODO idk ball is weird
             if (info.isHit())

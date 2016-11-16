@@ -1,12 +1,11 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.Animation;
 
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
  */
-public class CircleCollider implements CollisionShape
+public class CircleColliderShape implements ColliderShape
 {
     /**
      * Mittelpunkt des Kreises, der den Collider formt.
@@ -23,7 +22,7 @@ public class CircleCollider implements CollisionShape
      * @param position
      * @param radius
      */
-    public CircleCollider(Vector2 position, double radius)
+    public CircleColliderShape(Vector2 position, double radius)
     {
         this.position = position;
         this.radius = radius;
@@ -40,7 +39,7 @@ public class CircleCollider implements CollisionShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleCollider ball)
+    public HitInfo calculateHitInfo(CircleColliderShape ball)
     {
         // Collision check between two circles
         Vector2 distance = Vector2.sub(ball.getPosition(), position);

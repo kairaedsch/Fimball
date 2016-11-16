@@ -1,7 +1,6 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.Animation;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Implementierung eines Colliders, welcher die Form eines Polygons hat. Um Kollisionen korrekt erkennen zu können muss das Polygon konvex sein.
  */
-public class PolygonCollider implements CollisionShape
+public class PolygonColliderShape implements ColliderShape
 {
     /**
      * Die Kanten des Polygons, die den Collider formen.
@@ -21,7 +20,7 @@ public class PolygonCollider implements CollisionShape
      * Erstellt einen neuen Collider in Polygonform.
      * @param vertices
      */
-    public PolygonCollider(List<Vector2> vertices)
+    public PolygonColliderShape(List<Vector2> vertices)
     {
         this.vertices = vertices;
     }
@@ -32,7 +31,7 @@ public class PolygonCollider implements CollisionShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleCollider ball)
+    public HitInfo calculateHitInfo(CircleColliderShape ball)
     {
         for (Vector2 axisVertex : vertices)
         {

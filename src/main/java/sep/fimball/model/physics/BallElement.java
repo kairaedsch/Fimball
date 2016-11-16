@@ -1,42 +1,39 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.element.GameElement;
 
 public class BallElement
 {
-    private Vector2 position;
-    private double rotation;
+    private PhysicsElement subElement;
     private Vector2 velocity;
     private double angularVelocity;
-    private CircleCollider collider;
+    private CircleColliderShape collider;
     private WorldLayer layer;
 
-    public BallElement(Vector2 velocity, double angularVelocity, CircleCollider collider, WorldLayer layer)
+    public BallElement(GameElement gameElement, Vector2 velocity, double angularVelocity, CircleColliderShape collider, WorldLayer layer)
     {
+        subElement = new PhysicsElement(gameElement);
+
+        this.collider = collider;
         this.velocity = velocity;
         this.angularVelocity = angularVelocity;
-        this.collider = collider;
         this.layer = layer;
     }
 
     public Vector2 getPosition()
     {
-        return position;
+        return subElement.getPosition();
     }
 
     public void setPosition(Vector2 position)
     {
-        this.position = position;
-    }
-
-    public double getRotation()
-    {
-        return rotation;
+        subElement.setPosition(position);
     }
 
     public void setRotation(double rotation)
     {
-        this.rotation = rotation;
+        subElement.setRotation(rotation);
     }
 
     public Vector2 getVelocity()
@@ -59,7 +56,7 @@ public class BallElement
         this.angularVelocity = angularVelocity;
     }
 
-    public CircleCollider getCollider()
+    public CircleColliderShape getCollider()
     {
         return collider;
     }
