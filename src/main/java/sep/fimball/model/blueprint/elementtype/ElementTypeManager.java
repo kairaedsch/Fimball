@@ -67,6 +67,7 @@ public class ElementTypeManager
         {
             ElementTypeJson elementTypeJson = elementTypeOptional.get();
 
+            // TODO NullPointerException not very good
             try
             {
                 ElementType elementType = new ElementType(elementTypeJson);
