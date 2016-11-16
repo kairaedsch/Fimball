@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
@@ -73,8 +74,13 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private void redraw()
     {
-        canvas.getGraphicsContext2D().setFill(Config.baseColor);
-        canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+
+        graphicsContext.setFill(Config.baseColor);
+        graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        graphicsContext.save();
+        graphicsContext.translate(canvas.getWidth() / 2 + cameraPosition.get().getX() * Config.pixelsPerGridUnit, canvas.getHeight() / 2 + cameraPosition.get().getY() * Config.pixelsPerGridUnit);
 
         for (SpriteSubView sprite : sprites)
         {
@@ -84,5 +90,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM, cameraZoom.get());
         }
+        graphicsContext.restore();
     }
 }
