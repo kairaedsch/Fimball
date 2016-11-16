@@ -1,9 +1,8 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.*;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.elementtype.ElementType;
-
-import java.awt.*;
 
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch ElementTypeJson wird diese Klasse zur Serialisierung genutzt.
@@ -13,21 +12,21 @@ public class PlacedElement
     /**
      * Verweis auf den Typ des Elements.
      */
-    ElementType elementType;
+    private ElementType elementType;
 
     /**
      * Position des Elementes auf dem Automaten.
      */
-    ObjectProperty<Point> position;
+    private ObjectProperty<Vector2> position;
 
     /**
      * Punkte, die das Element vergibt.
      */
-    IntegerProperty points;
+    private IntegerProperty points;
 
-    DoubleProperty multiplier;
+    private DoubleProperty multiplier;
 
-    public PlacedElement(ElementType elementType, Point position)
+    public PlacedElement(ElementType elementType, Vector2 position, double rotation)
     {
         this.elementType = elementType;
         this.position = new SimpleObjectProperty<>(position);
@@ -35,7 +34,7 @@ public class PlacedElement
         this.multiplier = new SimpleDoubleProperty();
     }
 
-    public ReadOnlyObjectProperty<Point> positionProperty()
+    public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
         return position;
     }
@@ -50,7 +49,7 @@ public class PlacedElement
         return multiplier;
     }
 
-    public void setPosition(Point position)
+    public void setPosition(Vector2 position)
     {
         this.position.set(position);
     }

@@ -7,6 +7,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.physics.Collider;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,12 +51,19 @@ public class GameElement
      */
     private List<PhysicsUpdateEventArgs> physicsUpdates;
 
+    private PlacedElement placedElement;
+
     /**
      * Erstellt ein neues GameElement.
      * @param element
      */
     public GameElement(PlacedElement element)
     {
+        this.placedElement = element;
+        this.position = new SimpleObjectProperty<>(element.positionProperty().get());
+        this.rotation = new SimpleDoubleProperty();
+        this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
+        physicsUpdates = new ArrayList<>();
         // TODO convert
     }
 
@@ -64,12 +72,17 @@ public class GameElement
      */
     public void update()
     {
-        // TODO: read updates
+        //TODO List synchronization
+        for (PhysicsUpdateEventArgs args : physicsUpdates)
+        {
+            position = new SimpleObjectProperty<>(args.getPosition());
+            rotation = new SimpleDoubleProperty(args.getRotation());
+        }
         physicsUpdates.clear();
     }
 
     /**
-     * TODO
+     * TODO List synchronization
      * @param update
      */
     public void addPhysicsUpdate(PhysicsUpdateEventArgs update)
@@ -125,5 +138,10 @@ public class GameElement
     public void setHitCount(int hitCount)
     {
         this.hitCount.set(hitCount);
+    }
+
+    public PlacedElement getPlacedElement()
+    {
+        return placedElement;
     }
 }

@@ -36,6 +36,7 @@ public class PhysicsElement
         this.element = element;
         this.position = element.getPosition();
         this.rotation = element.getRotation();
+        this.colliders = element.getPlacedElement().getElementType().getPhysics().getColliders();
     }
 
     /**
