@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.ElementImage;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 import java.io.File;
@@ -20,7 +21,9 @@ public class SpriteSubView
     /**
      * Das Bild des Sprites.
      */
-    private Image image;
+    private Image topImage;
+
+    private Image bottomImage;
 
     /**
      * Die Drehung des Sprites.
@@ -59,12 +62,14 @@ public class SpriteSubView
     /**
      * Lädt das im {@imagePath} gespeicherte Bild.
      *
-     * @param imagePath Der Pfad zum Bild.
+     * @param elementImage Der Pfad zum Bild.
      */
-    private void loadImage(String imagePath)
+    private void loadImage(ElementImage elementImage)
     {
-        File file = new File(imagePath);
-        image = new Image(file.toURI().toString());
+        File topFile = new File(elementImage.getTopImagePath());
+        topImage = new Image(topFile.toURI().toString());
+        File bottomFile = new File(elementImage.getBottomImagePath());
+        bottomImage = new Image(bottomFile.toURI().toString());
     }
 
     /**
@@ -72,14 +77,22 @@ public class SpriteSubView
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext)
+    void draw(GraphicsContext graphicsContext, boolean drawBottom)
     {
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
-        rotate(graphicsContext, rotationProperty.doubleValue(), x + image.getWidth() / 2, y + image.getHeight() / 2);
-        graphicsContext.drawImage(image, x, y);
+        rotate(graphicsContext, rotationProperty.doubleValue(), x + bottomImage.getWidth() / 2, y + bottomImage.getHeight() / 2);
+
+        if (drawBottom)
+        {
+            graphicsContext.drawImage(bottomImage, x, y);
+        }
+        else
+        {
+            graphicsContext.drawImage(topImage, x, y);
+        }
         graphicsContext.restore(); // back to original state (before rotation)
     }
 
