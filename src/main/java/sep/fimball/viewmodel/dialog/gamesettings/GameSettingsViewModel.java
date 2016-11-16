@@ -80,7 +80,13 @@ public class GameSettingsViewModel extends DialogViewModel
      */
     public void exitDialogToMainMenu()
     {
+        saveSettings();
         sceneManager.setDialog(new EmptyViewModel());
+    }
+
+    private void saveSettings()
+    {
+        Settings.getSingletonInstance().Serialize();
     }
 
     /**

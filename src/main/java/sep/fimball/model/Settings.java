@@ -115,7 +115,23 @@ public class Settings
      */
     public void Serialize()
     {
+        SettingsJson settingsJson = new SettingsJson();
+        settingsJson.language = language.get().toString();
+        settingsJson.fullscreen = fullscreen.get();
+        settingsJson.masterVolume = masterVolume.get();
+        settingsJson.musicVolume = musicVolume.get();
+        settingsJson.sfxVolume = sfxVolume.get();
+        settingsJson.keyLayouts = new SettingsJson.KeyLayout[keyBindingsMap.size()];
 
+        int counter = 0;
+        for (KeyBinding binding: keyBindingsMap.keySet()) {
+            settingsJson.keyLayouts[counter] = new SettingsJson.KeyLayout();
+            settingsJson.keyLayouts[counter].bindingName = binding.name();
+            settingsJson.keyLayouts[counter].keyCode = keyBindingsMap.get(binding).name();
+            counter++;
+        }
+
+        JsonLoader.saveToJason("D:\\test.json", settingsJson);
     }
 
     public DoubleProperty masterVolumeProperty()
