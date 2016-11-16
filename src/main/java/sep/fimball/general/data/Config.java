@@ -15,7 +15,7 @@ public class Config
                 pathToData = "A://data";
             } else
             {
-                pathToData = "~/FleetDJ/user/image/";
+                pathToData = "~/link/SEP/data/";
             }
         }
     }
