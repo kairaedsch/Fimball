@@ -8,7 +8,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
  * Created by marc on 16.11.16.
  */
 @Ignore
-public class ReserveBallsTest {
+public class ReserveBallsAndPlayerChangeTest {
     static String[] players = new String[] {"tester", "test"};
     static PinballMachine automaton;
     static GameSession game;
