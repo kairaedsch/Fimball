@@ -46,7 +46,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         super(WindowType.TABLE_SETTINGS);
 
         //TODO
-        this.pinballMachine = new PinballMachine("",0);
+        this.pinballMachine = new PinballMachine("", "0");
 
         machineName = new SimpleStringProperty();
         machineName.bind(pinballMachine.nameProperty());

@@ -22,7 +22,7 @@ public class PinballMachine
     /**
      * ID zur Identifizierung des Automaten.
      */
-    private IntegerProperty blueprintTableId;
+    private StringProperty pinballMachineId;
 
     /**
      * Liste mit den auf dem Automaten erreichten Highscores.
@@ -42,19 +42,19 @@ public class PinballMachine
     /**
      * Legt einen leeren Automaten mit gegebenen Namen und ID an.
      * @param name
-     * @param blueprintTableId
+     * @param pinballMachineId
      */
-    public PinballMachine(String name, int blueprintTableId)
+    public PinballMachine(String name, String pinballMachineId)
     {
         this.name = new SimpleStringProperty(name);
-        this.blueprintTableId = new SimpleIntegerProperty(blueprintTableId);
+        this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.tableElementList = new ArrayList<>();
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));
 
         // TODO real pic
-        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImage(name));
+        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImage(pinballMachineId));
     }
 
     public ReadOnlyStringProperty nameProperty()
