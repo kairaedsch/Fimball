@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by marc on 16.11.16.
  */
-public class ReserveBallsTest {
+@Ignore public class ReserveBallsTest {
     static String[] players = new String[] {"tester", "test"};
     static PinballMachine automaton;
     static GameSession game;
@@ -19,7 +19,7 @@ public class ReserveBallsTest {
         // TODO GameSession mit richtigem Automaten und drei ReserveBalls erstellen
     }
 
-    @Test
+    @Ignore
     public static void testReserveBalls() {
         // TODO Mit Plunger einschießen
         // TODO Warten bis Kugel weg oder onBallLost() aufrufen
