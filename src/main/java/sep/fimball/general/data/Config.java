@@ -16,7 +16,7 @@ public class Config
             } else
             {
                 String home = System.getProperty("user.home");
-                pathToData = home + "/link/SEP/data/";
+                pathToData = home + "/link/SEP/data";
             }
         }
     }

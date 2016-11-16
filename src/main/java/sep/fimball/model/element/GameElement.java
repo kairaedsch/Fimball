@@ -144,4 +144,9 @@ public class GameElement
     {
         return placedElement;
     }
+
+    public void setCurrentAnimation(Animation animation)
+    {
+        currentAnimation = animation;
+    }
 }

@@ -8,6 +8,6 @@ public class AnimationTrigger implements ElementTrigger
     @Override
     public void activateTrigger(GameElement element, int colliderId)
     {
-
+        element.setCurrentAnimation(element.getPlacedElement().getElementType().getMedia().getEventMap().get(colliderId).getAnimation());
     }
 }
