@@ -19,9 +19,9 @@ public class ElementType
     {
         type = elementTypeJson.elementType;
 
-        physics = new PhysicsElementType(elementTypeJson.physicElement);
-        media = new MediaElementType(elementTypeJson.mediaElement);
-        rule = new RuleElementType(elementTypeJson.ruleElement);
+       // physics = new PhysicsElementType(elementTypeJson.physicElement);
+       // media = new MediaElementType(elementTypeJson.mediaElement);
+       // rule = new RuleElementType(elementTypeJson.ruleElement);
     }
 
     public ElementTypeType getType()

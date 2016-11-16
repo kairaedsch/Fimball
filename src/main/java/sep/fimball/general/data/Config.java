@@ -25,4 +25,5 @@ public class Config
     public final static String pathElementsToDataJson = "//data.json";
 
     public final static int maxHighscores = 10;
+    public static String pathDataToSettings ="//settings.json";
 }

@@ -3,8 +3,14 @@ package sep.fimball.model;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
+import sep.fimball.model.blueprint.json.JsonLoader;
 import sep.fimball.model.input.KeyBinding;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Settings speichert die aktuellen Spieleinstellungen, welche vom Spieler in den Einstellungen geändert werden können.
@@ -18,6 +24,7 @@ public class Settings
 
     /**
      * Gibt die bereits existierenden Settings oder neu angelegte zurück, falls noch keine existieren.
+     *
      * @return
      */
     public static Settings getSingletonInstance()
@@ -65,11 +72,7 @@ public class Settings
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
 
-        keyBindingsMap.put(KeyBinding.LEFT_FLIPPER, KeyCode.Y);
-        keyBindingsMap.put(KeyBinding.RIGHT_FLIPPER, KeyCode.M);
-
         language = new SimpleObjectProperty<>();
-        language.setValue(Language.ENGLISH);
 
         fullscreen = new SimpleBooleanProperty(false);
 
@@ -77,7 +80,34 @@ public class Settings
         musicVolume = new SimpleDoubleProperty(50);
         sfxVolume = new SimpleDoubleProperty(75);
 
-        // TODO load settings file here
+        loadSettings(Paths.get(Config.pathToData));
+    }
+
+    private void loadSettings(Path path)
+    {
+        Path jsonPath = Paths.get(path.toString() + Config.pathDataToSettings);
+
+        Optional<SettingsJson> settingsOptional = JsonLoader.loadFromJson(jsonPath, SettingsJson.class);
+
+        if (settingsOptional.isPresent())
+        {
+            System.out.println("Settings loaded");
+
+            SettingsJson settingsJson = settingsOptional.get();
+            language.setValue(Language.valueOf(settingsJson.language));
+            fullscreen.setValue(settingsJson.fullscreen);
+            masterVolume.set(settingsJson.masterVolume);
+            musicVolume.set(settingsJson.musicVolume);
+            sfxVolume.set(settingsJson.sfxVolume);
+
+            for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
+            {
+                keyBindingsMap.put(KeyBinding.valueOf(layout.bindingName), KeyCode.valueOf(layout.keyCode));
+            }
+        } else
+        {
+            System.err.println("Settings not loaded");
+        }
     }
 
     /**
