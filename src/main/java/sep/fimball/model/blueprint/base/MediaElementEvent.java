@@ -8,13 +8,13 @@ import sep.fimball.model.blueprint.json.BaseElementJson;
  */
 public class MediaElementEvent
 {
-    private Animation animation;
-    private Sound sound;
+    private Animation animation = null;
+    private Sound sound = null;
 
     public MediaElementEvent(BaseElementJson.MediaElementTypeJson.MediaElementEventJson event)
     {
-        animation = new Animation(event.animation);
-        sound = new Sound(event.soundName, false);
+        if (event.animation != null) animation = new Animation(event.animation);
+        if (event.soundName != null) sound = new Sound(event.soundName, false);
     }
 
     public Animation getAnimation()
