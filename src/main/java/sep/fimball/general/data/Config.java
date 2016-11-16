@@ -12,7 +12,7 @@ public class Config
         {
             if (System.getProperty("os.name").startsWith("Windows"))
             {
-                pathToData = "A://data";
+                pathToData = "A:/data";
             } else
             {
                 String home = System.getProperty("user.home");
@@ -23,15 +23,15 @@ public class Config
 
     private static String pathToData;
 
-    private static String pathDataToElements = "//elements";
-    private static String pathElementToDataJson = "//data.json";
+    private static String pathDataToElements = "/elements";
+    private static String pathElementToDataJson = "/data.json";
 
-    private static String pathDataToMachines = "//machines";
-    private static String pathMachineToImagePreview = "//preview.png";
-    private static String pathMachineToGeneralJson = "//general.json";
-    private static String pathMachineToPlacedElementsJson = "//elements.json";
+    private static String pathDataToMachines = "/machines";
+    private static String pathMachineToImagePreview = "/preview.png";
+    private static String pathMachineToGeneralJson = "/general.json";
+    private static String pathMachineToPlacedElementsJson = "/elements.json";
 
-    private static String pathDataToSettings ="//settings.json";
+    private static String pathDataToSettings ="/settings.json";
 
     public final static int maxHighscores = 10;
     public final static double maxVolume = 10;
@@ -43,7 +43,7 @@ public class Config
 
     public static String pathToElementDataJson(String elementTypeId)
     {
-        return pathToElements() + "//" + elementTypeId + pathElementToDataJson;
+        return pathToElements() + "/" + elementTypeId + pathElementToDataJson;
     }
 
     public static String pathToElementImage(String elementTypeId, boolean top)
@@ -68,7 +68,7 @@ public class Config
 
     private static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
     {
-        String path = pathToElements() + "//" + elementTypeId + "//";
+        String path = pathToElements() + "/" + elementTypeId + "/";
 
         if(top) path += "top";
         else path += "bottom";
@@ -87,17 +87,17 @@ public class Config
 
     public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
-        return pathToMachines() + "//" + pinballMachineId + pathMachineToImagePreview;
+        return pathToMachines() + "/" + pinballMachineId + pathMachineToImagePreview;
     }
 
     public static String pathToPinballMachineGeneralJson(String pinballMachineId)
     {
-        return pathToMachines() + "//" + pinballMachineId + pathMachineToGeneralJson;
+        return pathToMachines() + "/" + pinballMachineId + pathMachineToGeneralJson;
     }
 
     public static String pathToPinballMachinePlacedElementsJson(String pinballMachineId)
     {
-        return pathToMachines() + "//" + pinballMachineId + pathMachineToPlacedElementsJson;
+        return pathToMachines() + "/" + pinballMachineId + pathMachineToPlacedElementsJson;
     }
 
     public static String pathToSettings()
