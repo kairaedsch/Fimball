@@ -10,18 +10,45 @@ import sep.fimball.viewmodel.SoundManagerViewModel;
 import java.util.HashMap;
 import java.util.Observer;
 
+/**
+ * SoundManagerView ist für das Abspielen der Effektsounds sowie der Hintergrundmusik zuständig.
+ */
 public class SoundManagerView
 {
-    MediaPlayer mediaPlayer;
+    /**
+     * Spielt die Hintergrundmusik ab.
+     */
+    private MediaPlayer mediaPlayer;
 
-    HashMap<String, AudioClip> loadedAudioClips;
-    Media backgroundMusic;
+    /**
+     *  Hashed die bereits geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
+     */
+    private HashMap<String, AudioClip> loadedAudioClips;
 
-    DoubleProperty musicVolume;
-    DoubleProperty sfxVolume;
+    /**
+     * Die Hintergrundmusik, die abgespielt werden soll.
+     */
+    private Media backgroundMusic;
 
-    SoundManagerViewModel soundManagerViewModel;
+    /**
+     * Die Lautstärke, mit der die Hintergrundmusik abgespielt werden soll.
+     */
+    private DoubleProperty musicVolume;
 
+    /**
+     * Die Lautstärke, mit der die Soundeffekte abgespielt werden.
+     */
+    private DoubleProperty sfxVolume;
+
+    /**
+     * Das zum SoundManager gehörende SoundManagerViewModel.
+     */
+    private SoundManagerViewModel soundManagerViewModel;
+
+    /**
+     * Erzeugt einen neuen Soundmanager in der View mit dem gegebenen SoundManagerViewModel.
+     * @param soundManagerViewModel
+     */
     public SoundManagerView(SoundManagerViewModel soundManagerViewModel)
     {
         this.soundManagerViewModel = soundManagerViewModel;

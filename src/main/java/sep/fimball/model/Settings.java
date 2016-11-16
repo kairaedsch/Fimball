@@ -143,6 +143,11 @@ public class Settings
         return keyBindingsMap;
     }
 
+    /**
+     * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die durch {@code keycode} beschriebene Taste nicht schon von einem anderen KeyBinding belegt ist.
+     * @param keyBinding
+     * @param keyCode
+     */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
         if (!keyBindingsMap.containsValue(keyCode))
