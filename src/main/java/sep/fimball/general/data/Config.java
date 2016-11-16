@@ -46,27 +46,7 @@ public class Config
         return pathToElements() + "/" + elementTypeId + pathElementToDataJson;
     }
 
-    public static String pathToElementImage(String elementTypeId, boolean top)
-    {
-        return pathToElementImage(elementTypeId, top, false, -1, false, null, -1);
-    }
-
-    public static String pathToElementImage(String elementTypeId, boolean top, double rotationAccuracy)
-    {
-        return pathToElementImage(elementTypeId, top, true, rotationAccuracy, false, null, -1);
-    }
-
-    public static String pathToElementImage(String elementTypeId, boolean top, String animationName, int animationId)
-    {
-        return pathToElementImage(elementTypeId, top, false, -1, true, animationName, animationId);
-    }
-
-    public static String pathToElementImage(String elementTypeId, boolean top, double rotationAccuracy, String animationName, int animationId)
-    {
-        return pathToElementImage(elementTypeId, top, true, rotationAccuracy, true, animationName, animationId);
-    }
-
-    private static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
+    public static String pathToElementImage(String elementTypeId, boolean top, boolean canRotate, double rotationAccuracy, boolean animation, String animationName, int animationId)
     {
         String path = pathToElements() + "/" + elementTypeId + "/";
 
