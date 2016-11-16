@@ -68,9 +68,9 @@ public class SpriteSubView
      */
     private void loadImage(ElementImage elementImage)
     {
-        File topFile = new File(elementImage.getTopImagePath());
+        File topFile = new File(elementImage.getImagePath(ImageLayer.TOP, 0));
         topImage = new Image(topFile.toURI().toString());
-        File bottomFile = new File(elementImage.getBottomImagePath());
+        File bottomFile = new File(elementImage.getImagePath(ImageLayer.BOTTOM, 0));
         bottomImage = new Image(bottomFile.toURI().toString());
     }
 
