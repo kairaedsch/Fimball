@@ -81,18 +81,6 @@ public class PhysicsHandler
 
                 // Check all PhysicsElements for collisions with the ball
 
-                for (PhysicsElement element : physicsElements)
-                {
-                    for (Collider collider : element.getColliders())
-                    {
-                        collider.checkCollision(ballElement);
-                    }
-                }
-
-                // TODO Notify GameElements about collisions
-
-                // TODO Check if ball is lost
-
                 if (ballElement != null)
                 {
                     double delta = TICK_RATE / 1000;
@@ -103,6 +91,20 @@ public class PhysicsHandler
                     // Bewege den Ball
                     ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
                 }
+
+                for (PhysicsElement element : physicsElements)
+                {
+                    for (Collider collider : element.getColliders())
+                    {
+                        collider.checkCollision(ballElement);
+                    }
+
+                    element.writeToGameElement();
+                }
+
+                // TODO Notify GameElements about collisions
+
+                // TODO Check if ball is lost
             }
         };
     }

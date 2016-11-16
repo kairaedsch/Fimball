@@ -96,7 +96,10 @@ public class GameElement
 
     public void setPosition(Vector2 position)
     {
-        this.position.set(position);
+        synchronized (this)
+        {
+            this.position.set(position);
+        }
     }
 
     public double getRotation()
@@ -111,7 +114,10 @@ public class GameElement
 
     public void setRotation(double rotation)
     {
-        this.rotation.set(rotation);
+        synchronized (this)
+        {
+            this.rotation.set(rotation);
+        }
     }
 
     public int getPointReward()

@@ -44,7 +44,8 @@ public class PhysicsElement
      */
     public void writeToGameElement()
     {
-        element.addPhysicsUpdate(new PhysicsUpdateEventArgs(position, rotation));
+        element.setPosition(position);
+        element.setRotation(rotation);
     }
 
     public GameElement getElement()
