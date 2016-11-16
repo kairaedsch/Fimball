@@ -1,5 +1,6 @@
 package sep.fimball.model.physics;
 
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -23,6 +24,11 @@ public class PhysicsHandler
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
     private final int TICK_RATE = 1000 / 60;
+
+    /**
+     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit einberechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
+     */
+    private final double GRAVITY = 1.19554;
 
     private BallElement ballElement;
 
@@ -84,9 +90,19 @@ public class PhysicsHandler
                 }
 
                 // TODO Notify GameElements about collisions
-                // TODO Solve collisions
+
                 // TODO Check if ball is lost
-                // TODO Simulate ball movement
+
+                if (ballElement != null)
+                {
+                    double delta = TICK_RATE / 1000;
+
+                    // Wende Schwerkraft auf den Ball an
+                    ballElement.setVelocity(Vector2.add(ballElement.getVelocity(), new Vector2(0.0, GRAVITY * delta)));
+
+                    // Bewege den Ball
+                    ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
+                }
             }
         };
     }
