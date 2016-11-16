@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.model.GameSession;
 import sep.fimball.model.World;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
@@ -38,12 +39,14 @@ public class PinballCanvasViewModel
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
-     * @param world Die Spielwelt des anzuzeigenden Flipperautomaten.
+     * @param session Die Spielsitzung.
      * @param gameViewModel Das korrespondierende GameViewModel.
      */
-    public PinballCanvasViewModel(World world, GameViewModel gameViewModel)
+    public PinballCanvasViewModel(GameSession session, GameViewModel gameViewModel)
     {
-        init(world);
+        init(session.getWorld());
+        Observer gameObserver = (o, args) -> redraw();
+        session.addGameLoopObserver(gameObserver);
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());

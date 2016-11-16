@@ -9,7 +9,9 @@ import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.element.*;
+import sep.fimball.model.element.GameElement;
+import sep.fimball.model.element.Trigger;
+import sep.fimball.model.element.TriggerFactory;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -19,6 +21,8 @@ import sep.fimball.model.physics.PhysicsHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -84,6 +88,8 @@ public class GameSession
 
     private List<Trigger> triggers;
 
+    private Observable gameLoopObservable;
+
     /**
      * Erstellt eine neue GameSession.
      */
@@ -123,6 +129,8 @@ public class GameSession
         world = new World(elements);
         physicsHandler = new PhysicsHandler(physicsElements);
 
+        gameLoopObservable = new Observable();
+
         BallElement ball = null; // TODO
         physicsHandler.addBall(ball);
 
@@ -144,6 +152,8 @@ public class GameSession
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
             // TODO update GameElements
+            gameLoopObservable.hasChanged();
+            gameLoopObservable.notifyObservers();
         }));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
@@ -197,6 +207,11 @@ public class GameSession
     {
         tiltCounter++;
         // tilt logic etc.
+    }
+
+    public void addGameLoopObserver(Observer gameLoopObserver)
+    {
+        gameLoopObservable.addObserver(gameLoopObserver);
     }
 
     public Player getCurrentPlayer()
