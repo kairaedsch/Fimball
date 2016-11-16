@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.elementtype;
+package sep.fimball.model.blueprint.base;
 
 /**
  * Created by kaira on 16.11.2016.

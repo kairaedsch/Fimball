@@ -16,7 +16,7 @@ public class PinballMachineSaveTest
         Integer pinballMachineId = PinballMachineManager.getInstance().createNew();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().tableBlueprintsProperty().valueAt(pinballMachineId).get();
         String[] elementTypeIds;
-        ElementTypeManager.getInstance().elementsProperty().keySet().toArray(elementTypeIds);
+        BaseElementManager.getInstance().elementsProperty().keySet().toArray(elementTypeIds);
         PlacedElementList tableElementList = pinballMachine.getTableElementList();
 
         for (int i = 0; i < elementTypeIds.length; i++)

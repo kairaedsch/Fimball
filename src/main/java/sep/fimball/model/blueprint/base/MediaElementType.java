@@ -1,6 +1,6 @@
-package sep.fimball.model.blueprint.elementtype;
+package sep.fimball.model.blueprint.base;
 
-import sep.fimball.model.blueprint.json.ElementTypeJson;
+import sep.fimball.model.blueprint.json.BaseElementJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class MediaElementType
 
     private Map<Integer, MediaElementEvent> eventMap;
 
-    public MediaElementType(ElementTypeJson.MediaElementTypeJson mediaElement)
+    public MediaElementType(BaseElementJson.MediaElementTypeJson mediaElement)
     {
         name = mediaElement.general.editorName;
         description  = mediaElement.general.editorDescription;
@@ -23,7 +23,7 @@ public class MediaElementType
         eventMap = new HashMap<>();
         if (mediaElement.events != null)
         {
-            for (ElementTypeJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
+            for (BaseElementJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
             {
                 // TODO hashCode musst not be unique
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));

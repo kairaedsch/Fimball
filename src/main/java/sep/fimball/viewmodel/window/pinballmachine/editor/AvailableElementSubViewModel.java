@@ -4,7 +4,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.elementtype.ElementType;
+import sep.fimball.model.blueprint.base.BaseElement;
 
 /**
  * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomaten-Element bereit und ermöglicht dem Nutzer, dieses in seinem Flipperautomat zu platzieren.
@@ -14,7 +14,7 @@ public class AvailableElementSubViewModel
     /**
      * Das Flipperautomaten-Element, dessen Informationen angezeigt werden.
      */
-    private ElementType elementType;
+    private BaseElement baseElement;
 
     /**
      * Der Name des Flipperautomaten-Elements.
@@ -29,11 +29,11 @@ public class AvailableElementSubViewModel
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
      *
-     * @param elementType Der Elementtyp, dessen Informationen angezeigt werden sollen.
+     * @param baseElement Der Elementtyp, dessen Informationen angezeigt werden sollen.
      */
-    public AvailableElementSubViewModel(ElementType elementType)
+    public AvailableElementSubViewModel(BaseElement baseElement)
     {
-        this.elementType = elementType;
+        this.baseElement = baseElement;
         imagePath = new SimpleStringProperty();
         name = new SimpleStringProperty();
     }

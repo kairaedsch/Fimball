@@ -1,15 +1,15 @@
-package sep.fimball.model.blueprint.elementtype;
+package sep.fimball.model.blueprint.base;
 
-import sep.fimball.model.blueprint.json.ElementTypeJson;
+import sep.fimball.model.blueprint.json.BaseElementJson;
 
 /**
  * Created by kaira on 15.11.2016.
  */
-public class ElementType
+public class BaseElement
 {
     private String id;
 
-    private ElementTypeType type;
+    private BaseElementType type;
 
     private PhysicsElementType physics;
 
@@ -17,17 +17,17 @@ public class ElementType
 
     private RuleElementType rule;
 
-    public ElementType(String id, ElementTypeJson elementTypeJson)
+    public BaseElement(String id, BaseElementJson baseElementJson)
     {
         this.id = id;
-        type = elementTypeJson.elementType;
+        type = baseElementJson.elementType;
 
-        physics = new PhysicsElementType(elementTypeJson.physicElement);
-        media = new MediaElementType(elementTypeJson.mediaElement);
-        rule = new RuleElementType(elementTypeJson.ruleElement);
+        physics = new PhysicsElementType(baseElementJson.physicElement);
+        media = new MediaElementType(baseElementJson.mediaElement);
+        rule = new RuleElementType(baseElementJson.ruleElement);
     }
 
-    public ElementTypeType getType()
+    public BaseElementType getType()
     {
         return type;
     }

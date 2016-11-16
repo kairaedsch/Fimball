@@ -26,11 +26,11 @@ public enum KeyBinding
      */
     NUDGE_RIGHT,
     /**
-     * Rotiert das ausgewählte ElementTypeJson im Editor um den im ElementTypeJson vorgegebenen Winkel nach rechts.
+     * Rotiert das ausgewählte BaseElementJson im Editor um den im BaseElementJson vorgegebenen Winkel nach rechts.
      */
     EDITOR_ROTATE,
     /**
-     * Löscht das im Editor ausgewählte ElementType.
+     * Löscht das im Editor ausgewählte BaseElement.
      */
     EDITOR_DELETE
 }

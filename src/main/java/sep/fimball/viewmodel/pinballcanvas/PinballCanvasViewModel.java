@@ -26,7 +26,7 @@ public class PinballCanvasViewModel
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Legt fest, wie groß Elemente zu zeichnen sind und legt somit auch fest, wie viele ElementType der Nutzer sehen kann.
+     * Legt fest, wie groß Elemente zu zeichnen sind und legt somit auch fest, wie viele BaseElement der Nutzer sehen kann.
      */
     private DoubleProperty cameraZoom;
 

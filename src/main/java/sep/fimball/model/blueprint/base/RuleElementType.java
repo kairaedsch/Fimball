@@ -1,6 +1,6 @@
-package sep.fimball.model.blueprint.elementtype;
+package sep.fimball.model.blueprint.base;
 
-import sep.fimball.model.blueprint.json.ElementTypeJson;
+import sep.fimball.model.blueprint.json.BaseElementJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +14,12 @@ public class RuleElementType
 
     private Map<Integer, RuleElementEvent> eventMap;
 
-    public RuleElementType(ElementTypeJson.RuleElementTypeJson ruleElement)
+    public RuleElementType(BaseElementJson.RuleElementTypeJson ruleElement)
     {
         eventMap = new HashMap<>();
         if (ruleElement.events != null)
         {
-            for (ElementTypeJson.RuleElementTypeJson.RuleElementEventJson event : ruleElement.events)
+            for (BaseElementJson.RuleElementTypeJson.RuleElementEventJson event : ruleElement.events)
             {
                 // TODO hashCode musst not be unique
                 eventMap.put(event.colliderId.hashCode(), new RuleElementEvent(event));

@@ -1,13 +1,13 @@
 package sep.fimball.model.blueprint.json;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.elementtype.ElementTypeType;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.physics.WorldLayer;
 
 /**
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
  */
-public class ElementTypeJson
+public class BaseElementJson
 {
     public boolean canRotate;
     /**
@@ -15,7 +15,7 @@ public class ElementTypeJson
      */
     public double rotationAccuracy;
 
-    public ElementTypeType elementType;
+    public BaseElementType elementType;
 
     public PhysicElementTypeJson physicElement;
     public MediaElementTypeJson mediaElement;

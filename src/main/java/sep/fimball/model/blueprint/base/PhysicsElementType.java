@@ -1,7 +1,7 @@
-package sep.fimball.model.blueprint.elementtype;
+package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.json.ElementTypeJson;
+import sep.fimball.model.blueprint.json.BaseElementJson;
 import sep.fimball.model.physics.*;
 
 import java.util.ArrayList;
@@ -15,20 +15,20 @@ public class PhysicsElementType
 {
     private List<Collider> colliders;
 
-    public PhysicsElementType(ElementTypeJson.PhysicElementTypeJson physicElement)
+    public PhysicsElementType(BaseElementJson.PhysicElementTypeJson physicElement)
     {
         colliders = new ArrayList<>();
-        for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson collider : physicElement.colliders)
+        for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson collider : physicElement.colliders)
         {
             List<CollisionShape> shapes = new ArrayList<>();
 
-            if(collider.polygonShapes != null) for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
+            if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
             {
                 PolygonCollider polygonCollider = new PolygonCollider(Arrays.asList(polygonShape.vertices));
                 shapes.add(polygonCollider);
             }
 
-            if(collider.circleShapes != null) for (ElementTypeJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
+            if(collider.circleShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
             {
                 CircleCollider circleCollider = new CircleCollider(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
                 shapes.add(circleCollider);
