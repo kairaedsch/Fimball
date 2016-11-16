@@ -131,7 +131,7 @@ public class Settings
             counter++;
         }
 
-        JsonLoader.saveToJason("D:\\test.json", settingsJson);
+        JsonLoader.saveToJason(Config.pathToData + Config.pathDataToSettings, settingsJson);
     }
 
     public DoubleProperty masterVolumeProperty()
