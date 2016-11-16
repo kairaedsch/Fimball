@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Created by marc on 16.11.16.
  */
 public class ReserveBallsTest {
-    static String playerName = "tester";
+    static String[] players = new String[] {"tester", "test"};
     static PinballMachine automaton;
     static GameSession game;
 
@@ -23,8 +23,15 @@ public class ReserveBallsTest {
     public static void testReserveBalls() {
         // TODO Mit Plunger einschießen
         // TODO Warten bis Kugel weg oder onBallLost() aufrufen
+        // assertEquals(3, game.getCurrentPlayer().getBalls());
+        // assertEquals("test", game.getCurrentPlayer().getName());
         // TODO Kugel mit Plunger einschießen
         // TODO Warten bis Kugel weg oder onBallLost() aufrufen
-        // assertEquals(1, game.getCurrentPlayer().getBalls());
+        // assertEquals(2, game.getCurrentPlayer().getBalls());
+        // assertEquals("tester", game.getCurrentPlayer().getName());
+        // TODO Mit Plunger einschießen
+        // TODO Warten bis Kugel weg oder onBallLost() aufrufen
+        // assertEquals(2, game.getCurrentPlayer().getBalls());
+        // assertEquals("test", game.getCurrentPlayer().getName());
     }
 }
