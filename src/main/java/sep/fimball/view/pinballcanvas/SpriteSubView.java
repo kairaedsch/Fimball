@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.transform.Rotate;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.ElementImage;
@@ -78,7 +79,7 @@ public class SpriteSubView
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, double zoom)
     {
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();
@@ -88,11 +89,11 @@ public class SpriteSubView
 
         if (imageLayer == ImageLayer.TOP)
         {
-            graphicsContext.drawImage(topImage, x, y);
+            graphicsContext.drawImage(topImage, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
         }
         else
         {
-            graphicsContext.drawImage(bottomImage, x, y);
+            graphicsContext.drawImage(bottomImage, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
         }
         graphicsContext.restore(); // back to original state (before rotation)
     }
