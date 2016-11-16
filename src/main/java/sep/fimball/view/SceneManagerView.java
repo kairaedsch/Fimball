@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import sep.fimball.general.data.Config;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.SceneManagerViewModel;
@@ -52,7 +52,7 @@ public class SceneManagerView
         Rectangle box = new Rectangle();
         box.widthProperty().bind(root.widthProperty());
         box.heightProperty().bind(root.heightProperty());
-        box.setFill(new Color(219 / 255., 93 / 255., 93 / 255., 1));
+        box.setFill(Config.baseColor);
         box.setOpacity(0.60);
 
         root.getChildren().add(new Group());

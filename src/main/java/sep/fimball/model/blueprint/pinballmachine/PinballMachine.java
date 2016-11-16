@@ -54,6 +54,7 @@ public class PinballMachine
         this.tableElementList = new ArrayList<>();
 
         tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0)));
+        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(4, 4)));
 
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));

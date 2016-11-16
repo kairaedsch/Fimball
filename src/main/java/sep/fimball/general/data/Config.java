@@ -1,5 +1,7 @@
 package sep.fimball.general.data;
 
+import javafx.scene.paint.Color;
+
 /**
  * Created by kaira on 11.11.2016.
  */
@@ -35,6 +37,8 @@ public class Config
 
     public final static int maxHighscores = 10;
     public final static double maxVolume = 10;
+
+    public final static Color baseColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
 
     public static String pathToElements()
     {

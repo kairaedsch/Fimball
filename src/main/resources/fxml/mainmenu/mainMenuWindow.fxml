@@ -3,12 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
 
 <SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.MainMenuView">
     <items>
@@ -93,5 +88,5 @@
     </items>
     <stylesheets>
            <String fx:value="styles/style.css" />
-       </stylesheets>
+    </stylesheets>
 </SplitPane>
