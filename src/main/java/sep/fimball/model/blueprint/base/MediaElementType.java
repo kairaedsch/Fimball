@@ -39,7 +39,15 @@ public class MediaElementType
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
             }
         }
-        elementImage = new SimpleObjectProperty<>(new ElementImage(elementId));
+        if (canRotate)
+        {
+            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId, (int)rotationAccuracy));
+        }
+        else
+        {
+            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId));
+        }
+
     }
 
     public String getName()
