@@ -16,7 +16,7 @@ public class ElementImage
         this(elementTypeId, false, -1, false, null, -1);
     }
 
-    public ElementImage(String elementTypeId, double rotation)
+    public ElementImage(String elementTypeId, int rotation)
     {
         this(elementTypeId, true, rotation, false, null, -1);
     }
@@ -26,12 +26,12 @@ public class ElementImage
         this(elementTypeId, false, -1, true, animationName, animationId);
     }
 
-    public ElementImage(String elementTypeId, double rotationAccuracy, String animationName, int animationId)
+    public ElementImage(String elementTypeId, int rotation, String animationName, int animationId)
     {
-       this(elementTypeId, true, rotationAccuracy, true, animationName, animationId);
+       this(elementTypeId, true, rotation, true, animationName, animationId);
     }
 
-    private ElementImage(String elementTypeId, boolean canRotate, double rotation, boolean animation, String animationName, int animationId)
+    private ElementImage(String elementTypeId, boolean canRotate, int rotation, boolean animation, String animationName, int animationId)
     {
         topImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.TOP, canRotate, rotation, animation, animationName, animationId);
         bottomImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.BOTTOM, canRotate, rotation, animation, animationName, animationId);
