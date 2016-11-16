@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.elementtype;
 
+import sep.fimball.model.blueprint.json.ElementTypeJson;
 import sep.fimball.model.physics.Collider;
 
 import java.util.List;
@@ -11,9 +12,9 @@ public class PhysicsElementType
 {
     private List<Collider> colliders;
 
-    public PhysicsElementType(List<Collider> colliders)
+    public PhysicsElementType(ElementTypeJson.PhysicElementTypeJson physicElement)
     {
-        this.colliders = colliders;
+
     }
 
     public List<Collider> getColliders()

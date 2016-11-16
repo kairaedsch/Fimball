@@ -1,20 +1,20 @@
 package sep.fimball.model.blueprint.elementtype;
 
 import sep.fimball.model.Animation;
-import sep.fimball.model.SoundClip;
+import sep.fimball.model.blueprint.json.ElementTypeJson;
 
 /**
  * Created by kaira on 15.11.2016.
  */
 public class MediaElementEvent
 {
-    Animation animation;
-    SoundClip soundClip;
+    private Animation animation;
+    private Sound sound;
 
-    public MediaElementEvent(Animation animation, SoundClip soundClip)
+    public MediaElementEvent(ElementTypeJson.MediaElementTypeJson.MediaElementEventJson event)
     {
-        this.animation = animation;
-        this.soundClip = soundClip;
+        animation = new Animation(event.animation);
+        sound = new Sound(event.soundName);
     }
 
     public Animation getAnimation()
@@ -22,8 +22,8 @@ public class MediaElementEvent
         return animation;
     }
 
-    public SoundClip getSoundClip()
+    public Sound getSound()
     {
-        return soundClip;
+        return sound;
     }
 }

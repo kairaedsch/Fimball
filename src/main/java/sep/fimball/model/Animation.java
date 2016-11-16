@@ -24,14 +24,9 @@ public class Animation
      */
     private StringProperty currentFrame;
 
-    /**
-     * Erstellt eine neue Animation aus der Vorlage eines Elements.
-     * @param blueprintName
-     * @param animationBlueprint
-     */
-    public Animation(String blueprintName, ElementTypeJson.MediaElementType.MediaElementEvent.Animation animationBlueprint)
+    public Animation(ElementTypeJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
     {
-        // load frames and stuff
+        // TODO load animation
     }
 
     /**

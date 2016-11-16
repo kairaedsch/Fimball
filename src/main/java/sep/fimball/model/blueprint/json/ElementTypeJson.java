@@ -16,15 +16,15 @@ public class ElementTypeJson
 
     public ElementTypeType elementType;
 
-    public PhysicElementType physicElement;
-    public MediaElementType mediaElement;
-    public GameElementType gameElement;
+    public PhysicElementTypeJson physicElement;
+    public MediaElementTypeJson mediaElement;
+    public RuleElementTypeJson ruleElement;
 
-    public static class PhysicElementType
+    public static class PhysicElementTypeJson
     {
-        public PhysicCollider[] colliders;
+        public PhysicColliderJson[] colliders;
 
-        public static class PhysicCollider
+        public static class PhysicColliderJson
         {
             public String colliderId;
             public WorldLayer layer;
@@ -32,32 +32,32 @@ public class ElementTypeJson
             /**
              * Speichert die Polygon-Collider des Elementtyps.
              */
-            public Polygon[] polygonShapes;
+            public PolygonJson[] polygonShapes;
 
             /**
              * Speichert die Kreis-Collider des Elementtyps.
              */
-            public Circle[] circleShapes;
+            public CircleJson[] circleShapes;
 
             /**
              * Die Kräfte, die bei Interaktion mit diesem Elementtyp auftreten.
              */
-            public ColliderType collisionType;
+            public ColliderTypeJson collisionType;
 
-            public static class Polygon
+            public static class PolygonJson
             {
                 public boolean onGround;
                 public Vector2[] points;
             }
 
-            public static class Circle
+            public static class CircleJson
             {
                 public boolean onGround;
                 public double x, y;
                 public double radius;
             }
 
-            public static class ColliderType
+            public static class ColliderTypeJson
             {
                 public String forceType;
                 public double strength;
@@ -67,13 +67,13 @@ public class ElementTypeJson
         }
     }
 
-    public static class MediaElementType
+    public static class MediaElementTypeJson
     {
-        public MediaElementTypeGeneral general;
+        public MediaElementTypeGeneralJson general;
 
-        public MediaElementEvent[] events;
+        public MediaElementEventJson[] events;
 
-        public static class MediaElementTypeGeneral
+        public static class MediaElementTypeGeneralJson
         {
             /**
              * Bezeichnung des Elementtyps im Editor.
@@ -86,7 +86,7 @@ public class ElementTypeJson
             public String editorDescription;
         }
 
-        public static class MediaElementEvent
+        public static class MediaElementEventJson
         {
             public String colliderId;
 
@@ -95,9 +95,9 @@ public class ElementTypeJson
             /**
              * Die Animationen, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
              */
-            public Animation animation;
+            public AnimationJson animation;
 
-            public static class Animation
+            public static class AnimationJson
             {
                 public int frameCount;
                 public double duration;
@@ -106,13 +106,13 @@ public class ElementTypeJson
         }
     }
 
-    public static class GameElementType
+    public static class RuleElementTypeJson
     {
-        public GameElementTypeGeneral general;
+        public RuleElementTypeGeneralJson general;
 
-        public GameElementEvent[] events;
+        public RuleElementEventJson[] events;
 
-        public static class GameElementTypeGeneral
+        public static class RuleElementTypeGeneralJson
         {
             /**
              * Speichert die Punkte, die ein Treffer durch die Kugel bringt.
@@ -120,7 +120,7 @@ public class ElementTypeJson
             public boolean givesPoints;
         }
 
-        public static class GameElementEvent
+        public static class RuleElementEventJson
         {
             public String colliderId;
         }

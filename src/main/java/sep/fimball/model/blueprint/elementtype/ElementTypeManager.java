@@ -38,7 +38,7 @@ public class ElementTypeManager
     /**
      * Liste von Elementtypen.
      */
-    private MapProperty<String, ElementTypeJson> elements;
+    private MapProperty<String, ElementType> elements;
 
     /**
      * Gibt die vom ElementManager verwalteten Elemente zurück.
@@ -65,7 +65,9 @@ public class ElementTypeManager
         if(elementTypeOptional.isPresent())
         {
             System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
-            elements.put(path.getFileName().toString(), elementTypeOptional.get());
+
+            ElementTypeJson elementTypeJson = elementTypeOptional.get();
+            elements.put(path.getFileName().toString(), new ElementType(elementTypeJson));
         }
         else
         {
@@ -73,7 +75,7 @@ public class ElementTypeManager
         }
     }
 
-    public ReadOnlyMapProperty<String, ElementTypeJson> elementsProperty()
+    public ReadOnlyMapProperty<String, ElementType> elementsProperty()
     {
         return elements;
     }

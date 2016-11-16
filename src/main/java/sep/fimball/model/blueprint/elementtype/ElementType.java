@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.elementtype;
 
+import sep.fimball.model.blueprint.json.ElementTypeJson;
+
 /**
  * Created by kaira on 15.11.2016.
  */
@@ -13,12 +15,13 @@ public class ElementType
 
     private RuleElementType rule;
 
-    public ElementType(ElementTypeType type, PhysicsElementType physics, MediaElementType media, RuleElementType rule)
+    public ElementType(ElementTypeJson elementTypeJson)
     {
-        this.type = type;
-        this.physics = physics;
-        this.media = media;
-        this.rule = rule;
+        type = elementTypeJson.elementType;
+
+        physics = new PhysicsElementType(elementTypeJson.physicElement);
+        media = new MediaElementType(elementTypeJson.mediaElement);
+        rule = new RuleElementType(elementTypeJson.ruleElement);
     }
 
     public ElementTypeType getType()
