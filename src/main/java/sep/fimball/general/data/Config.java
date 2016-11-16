@@ -15,7 +15,7 @@ public class Config
                 pathToData = "A://data";
             } else
             {
-                String home = System.getProperty( "user.home" );
+                String home = System.getProperty("user.home");
                 pathToData = home + "/link/SEP/data/";
             }
         }
