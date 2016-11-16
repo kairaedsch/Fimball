@@ -27,7 +27,7 @@ public class Config
     private static String pathElementToDataJson = "//data.json";
 
     private static String pathDataToMachines = "//machines";
-    private static String pathMachineToImage = "//image.png";
+    private static String pathMachineToImagePreview = "//preview.png";
     private static String pathMachineToGeneralJson = "//general.json";
     private static String pathMachineToPlacedElementsJson = "//elements.json";
 
@@ -85,9 +85,9 @@ public class Config
         return pathToData + pathDataToMachines;
     }
 
-    public static String pathToPinballMachineImage(String pinballMachineId)
+    public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
-        return pathToMachines() + "//" + pinballMachineId + pathMachineToImage;
+        return pathToMachines() + "//" + pinballMachineId + pathMachineToImagePreview;
     }
 
     public static String pathToPinballMachineGeneralJson(String pinballMachineId)

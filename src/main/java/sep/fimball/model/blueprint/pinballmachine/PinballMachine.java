@@ -53,8 +53,7 @@ public class PinballMachine
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));
 
-        // TODO real pic
-        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImage(pinballMachineId));
+        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
 
     public ReadOnlyStringProperty nameProperty()
