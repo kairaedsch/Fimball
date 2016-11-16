@@ -1,5 +1,8 @@
 package sep.fimball.model.blueprint.base;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.model.ElementImage;
 import sep.fimball.model.blueprint.json.BaseElementJson;
 
@@ -14,11 +17,11 @@ public class MediaElementType
     private String name;
     private String description;
 
-    private ElementImage elementImage;
+    private ObjectProperty<ElementImage> elementImage;
 
     private Map<Integer, MediaElementEvent> eventMap;
 
-    public MediaElementType(BaseElementJson.MediaElementTypeJson mediaElement)
+    public MediaElementType(BaseElementJson.MediaElementTypeJson mediaElement, String elementId)
     {
         name = mediaElement.general.editorName;
         description  = mediaElement.general.editorDescription;
@@ -32,8 +35,7 @@ public class MediaElementType
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
             }
         }
-
-        elementImage = new ElementImage("Alex mach mal");
+        elementImage = new SimpleObjectProperty<>(new ElementImage(elementId));
     }
 
     public String getName()
@@ -51,7 +53,7 @@ public class MediaElementType
         return eventMap;
     }
 
-    public ElementImage getElementImage()
+    public ReadOnlyObjectProperty<ElementImage> elementImageProperty()
     {
         return elementImage;
     }

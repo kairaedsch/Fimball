@@ -23,7 +23,7 @@ public class BaseElement
         type = baseElementJson.elementType;
 
         physics = new PhysicsElementType(baseElementJson.physicElement);
-        media = new MediaElementType(baseElementJson.mediaElement);
+        media = new MediaElementType(baseElementJson.mediaElement, id);
         rule = new RuleElementType(baseElementJson.ruleElement);
     }
 

@@ -3,6 +3,7 @@ package sep.fimball.viewmodel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.model.Animation;
+import sep.fimball.model.ElementImage;
 
 /**
  * Created by alexcekay on 16.11.16.
@@ -20,12 +21,12 @@ public class AnimationState
 
     public int getAnimationSize()
     {
-        return animation.get().getFramePaths().length;
+        return animation.get().getElementImages().length;
     }
 
-    public String getCurrentFrame()
+    public ElementImage getCurrentFrame()
     {
-        return animation.get().getFramePaths()[currentFrameIndex];
+        return animation.get().getElementImages()[currentFrameIndex];
     }
 
     public void setCurrentFrameIndex(int index)

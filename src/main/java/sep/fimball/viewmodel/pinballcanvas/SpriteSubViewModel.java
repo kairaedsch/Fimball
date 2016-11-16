@@ -42,7 +42,7 @@ public class SpriteSubViewModel
         rotation = new SimpleDoubleProperty();
         rotation.bind(baseElement.rotationProperty());
         currentImagePath = new SimpleObjectProperty<>();
-        currentImagePath.bind(baseElement.getPlacedElement().getBaseElement().getMedia().);
+        currentImagePath.bind(baseElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty());
 
         isSelected = new SimpleBooleanProperty(false);
     }
