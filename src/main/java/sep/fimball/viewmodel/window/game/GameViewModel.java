@@ -69,7 +69,7 @@ public class GameViewModel extends WindowViewModel
      *
      * @return Die Punktzahl des aktiven Spielers.
      */
-    public IntegerProperty playerPointsProperty()
+    public ReadOnlyIntegerProperty playerPointsProperty()
     {
         return playerPoints;
     }
@@ -79,7 +79,7 @@ public class GameViewModel extends WindowViewModel
      *
      * @return Der Name des aktiven Spielers.
      */
-    public StringProperty playerNameProperty()
+    public ReadOnlyStringProperty playerNameProperty()
     {
         return playerName;
     }
@@ -89,7 +89,7 @@ public class GameViewModel extends WindowViewModel
      *
      * @return Die Anzahl der Reservebälle des aktiven Spielers.
      */
-    public IntegerProperty playerReserveBallsProperty()
+    public ReadOnlyIntegerProperty playerReserveBallsProperty()
     {
         return playerReserveBalls;
     }
