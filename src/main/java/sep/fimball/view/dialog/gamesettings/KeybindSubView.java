@@ -43,6 +43,10 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
         keybindKey.textProperty().bind(keybindSubViewModel.keyNameProperty());
     }
 
+    /**
+     *  Ändert die die Tastenbelegung für die von dieser KeybindSubView dargestellten Funktion.
+     * @param keyEvent
+     */
     @FXML
     private void changeKey(KeyEvent keyEvent) {
         keybindSubViewModel.changeKeyBinding(keyEvent.getCode());

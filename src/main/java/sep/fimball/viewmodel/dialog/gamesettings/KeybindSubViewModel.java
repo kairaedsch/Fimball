@@ -23,7 +23,14 @@ public class KeybindSubViewModel
      */
     private StringProperty keyName;
 
+    /**
+     *  Die Funktion, für die die Tastenbelegung festgelegt wird.
+     */
     private KeyBinding keyBinding;
+
+    /**
+     *  Die Einstellungen, die die Tastenbelegungen speichert.
+     */
     private Settings settings;
 
     /**

@@ -55,12 +55,21 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     private VBox keyBindings;
 
+    /**
+     * Zeigt die Prozentzahl der Master-Lautstärke.
+     */
     @FXML
     public Label masterVolumePercent;
 
+    /**
+     * Zeigt die Prozentzahl der Musik-Lautstärke.
+     */
     @FXML
     public Label musicVolumePercent;
 
+    /**
+     * Zeigt die Prozentzahl der Soundeffekt-Lautstärke.
+     */
     @FXML
     public Label sfxVolumePercent;
 

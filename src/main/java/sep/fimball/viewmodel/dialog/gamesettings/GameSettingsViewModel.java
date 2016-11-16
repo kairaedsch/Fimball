@@ -143,6 +143,10 @@ public class GameSettingsViewModel extends DialogViewModel
         return volumeSFX;
     }
 
+    /**
+     * Gibt eine Liste aller verfügbaren Sprachen zuürck.
+     * @return Eine Liste aller verfügbaren Sprachen.
+     */
     public ObservableList<Language> getLanguages() {
         ObservableList<Language> languages = FXCollections.observableArrayList();
         Collections.addAll(languages, Language.values());
