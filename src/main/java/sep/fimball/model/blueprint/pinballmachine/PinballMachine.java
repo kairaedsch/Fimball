@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +52,9 @@ public class PinballMachine
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         this.tableElementList = new ArrayList<>();
+
+        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0)));
+
         highscoreList.add(new Highscore(1000, "Jenny " + name));
         highscoreList.add(new Highscore(2000, "Felix " + name));
 

@@ -92,4 +92,9 @@ public class BaseElementManager
     {
         return elements;
     }
+
+    public BaseElement getElement(String baseElementId)
+    {
+        return elements.get(baseElementId);
+    }
 }
