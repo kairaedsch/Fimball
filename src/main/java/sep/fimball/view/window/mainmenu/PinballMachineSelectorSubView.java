@@ -38,7 +38,7 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
     {
         this.pinballMachineSelectorSubViewModel = pinballMachineSelectorSubViewModel;
         previewName.textProperty().bind(pinballMachineSelectorSubViewModel.nameProperty());
-        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", pinballMachineSelectorSubViewModel.imagePathProperty().get(), "\");"));
+        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", pinballMachineSelectorSubViewModel.imagePathProperty().get(), "\");"));
     }
 
     /**

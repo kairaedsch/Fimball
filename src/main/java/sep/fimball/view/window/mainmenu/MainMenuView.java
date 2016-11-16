@@ -55,7 +55,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         this.mainMenuViewModel = mainMenuViewModel;
 
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getPinballMachineInfoSubViewModel().nameProperty());
-        detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"", mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty(), "\");"));
+        detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty(), "\");"));
 
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachineSelectorSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
 
