@@ -28,4 +28,19 @@ public class Config
 
     public final static int maxHighscores = 10;
     public final static double maxVolume = 10;
+
+    public static String pathToElements()
+    {
+        return pathToData + pathDataToElements;
+    }
+
+    public static String pathToElementDataJson(String elementTypeId)
+    {
+        return pathToElements() + elementTypeId + pathElementsToDataJson;
+    }
+
+    public static String pathToSettings()
+    {
+        return pathToData + pathDataToSettings;
+    }
 }

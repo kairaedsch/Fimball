@@ -60,6 +60,7 @@ public class ElementTypeManager
     private void loadElement(Path path)
     {
         Path jsonPath = Paths.get(path.toString() + Config.pathElementsToDataJson);
+        String elementTypeId = path.getFileName().toString();
 
         Optional<ElementTypeJson> elementTypeOptional = JsonFileManager.loadFromJson(jsonPath, ElementTypeJson.class);
 
@@ -70,7 +71,7 @@ public class ElementTypeManager
             // TODO NullPointerException not very good
             try
             {
-                ElementType elementType = new ElementType(elementTypeJson);
+                ElementType elementType = new ElementType(elementTypeId, elementTypeJson);
                 elements.put(path.getFileName().toString(), elementType);
                 System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
             }

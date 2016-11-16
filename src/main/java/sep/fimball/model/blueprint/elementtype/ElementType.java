@@ -7,6 +7,8 @@ import sep.fimball.model.blueprint.json.ElementTypeJson;
  */
 public class ElementType
 {
+    private String id;
+
     private ElementTypeType type;
 
     private PhysicsElementType physics;
@@ -15,8 +17,9 @@ public class ElementType
 
     private RuleElementType rule;
 
-    public ElementType(ElementTypeJson elementTypeJson)
+    public ElementType(String id, ElementTypeJson elementTypeJson)
     {
+        this.id = id;
         type = elementTypeJson.elementType;
 
         physics = new PhysicsElementType(elementTypeJson.physicElement);
@@ -42,5 +45,10 @@ public class ElementType
     public RuleElementType getRule()
     {
         return rule;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 }
