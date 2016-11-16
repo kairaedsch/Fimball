@@ -4,7 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.pinnballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;

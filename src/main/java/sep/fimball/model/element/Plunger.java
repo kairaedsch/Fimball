@@ -1,6 +1,6 @@
 package sep.fimball.model.element;
 
-import sep.fimball.model.blueprint.pinnballmachine.PlacedElement;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 /**
  * Der Plunger stellt den Plunger des Automaten, der die Kugel anstößt, dar.

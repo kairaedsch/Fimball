@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.pinnballmachine;
+package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
