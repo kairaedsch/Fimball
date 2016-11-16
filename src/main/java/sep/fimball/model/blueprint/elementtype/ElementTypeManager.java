@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.model.blueprint.json.ElementTypeJson;
-import sep.fimball.model.blueprint.json.JsonLoader;
+import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -61,7 +61,7 @@ public class ElementTypeManager
     {
         Path jsonPath = Paths.get(path.toString() + Config.pathElementsToDataJson);
 
-        Optional<ElementTypeJson> elementTypeOptional = JsonLoader.loadFromJson(jsonPath, ElementTypeJson.class);
+        Optional<ElementTypeJson> elementTypeOptional = JsonFileManager.loadFromJson(jsonPath, ElementTypeJson.class);
 
         if (elementTypeOptional.isPresent())
         {

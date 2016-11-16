@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
-import sep.fimball.model.blueprint.json.JsonLoader;
+import sep.fimball.model.blueprint.json.JsonFileManager;
 import sep.fimball.model.input.KeyBinding;
 
 import java.nio.file.Path;
@@ -87,7 +87,7 @@ public class Settings
     {
         Path jsonPath = Paths.get(path.toString() + Config.pathDataToSettings);
 
-        Optional<SettingsJson> settingsOptional = JsonLoader.loadFromJson(jsonPath, SettingsJson.class);
+        Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(jsonPath, SettingsJson.class);
 
         if (settingsOptional.isPresent())
         {
@@ -131,7 +131,7 @@ public class Settings
             counter++;
         }
 
-        JsonLoader.saveToJson(Config.pathToData + Config.pathDataToSettings, settingsJson);
+        JsonFileManager.saveToJson(Config.pathToData + Config.pathDataToSettings, settingsJson);
     }
 
     public DoubleProperty masterVolumeProperty()

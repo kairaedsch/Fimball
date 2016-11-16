@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Created by kaira on 11.11.2016.
  */
-public class JsonLoader
+public class JsonFileManager
 {
     public static <T> Optional<T> loadFromJson(Path path, Class<T> aClass)
     {
@@ -58,6 +58,7 @@ public class JsonLoader
         } catch (IOException e)
         {
             e.printStackTrace();
+            System.err.println("Json saving failed : " + path);
         }
     }
 }
