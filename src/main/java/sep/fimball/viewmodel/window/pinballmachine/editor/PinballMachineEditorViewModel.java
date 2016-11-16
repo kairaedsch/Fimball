@@ -5,7 +5,6 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.elementtype.ElementTypeManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.window.WindowType;
@@ -73,7 +72,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void startPinballMachine()
     {
-        sceneManager.setWindow(new GameViewModel(new GameSession(pinballMachine, new String[]{new String(new byte[]{71, 111, 116, 116, 105, 109, 112, 101, 114, 97, 116, 111, 114, 32, 84, 114, 117, 109, 112})})));
+        sceneManager.setWindow(new GameViewModel(pinballMachine, new String[]{new String(new byte[]{71, 111, 116, 116, 105, 109, 112, 101, 114, 97, 116, 111, 114, 32, 84, 114, 117, 109, 112})}));
     }
 
     /**

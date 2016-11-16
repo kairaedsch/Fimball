@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.window.game;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -44,12 +45,12 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues GameViewModel.
-     *
-     * @param gameSession Die GameSession, die zu diesem GameViewModel gehört.
      */
-    public GameViewModel(GameSession gameSession)
+    public GameViewModel(PinballMachine machineBlueprint, String[] playerNames)
     {
         super(WindowType.GAME);
+        GameSession gameSession = GameSession.generateGameSession(machineBlueprint, playerNames);
+
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();

@@ -23,7 +23,7 @@ public class Config
     public static String pathToData;
     public static String pathDataToElements = "//elements";
     public final static String pathElementsToDataJson = "//data.json";
+    public static String pathDataToSettings ="//settings.json";
 
     public final static int maxHighscores = 10;
-    public static String pathDataToSettings ="//settings.json";
 }

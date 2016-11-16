@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public class JsonLoader
 {
-    public static <T> Optional<T> loadFromJson(Path path, Class<T> tClass)
+    public static <T> Optional<T> loadFromJson(Path path, Class<T> aClass)
     {
         if (!path.toFile().exists())
         {
@@ -36,7 +36,7 @@ public class JsonLoader
         Gson gson = new Gson();
         try
         {
-            T t = gson.fromJson(json, tClass);
+            T t = gson.fromJson(json, aClass);
             return Optional.of(t);
         }
         catch (JsonSyntaxException e)

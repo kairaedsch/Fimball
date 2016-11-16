@@ -62,14 +62,22 @@ public class ElementTypeManager
 
         Optional<ElementTypeJson> elementTypeOptional = JsonLoader.loadFromJson(jsonPath, ElementTypeJson.class);
 
-        if(elementTypeOptional.isPresent())
+        if (elementTypeOptional.isPresent())
         {
-            System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
-
             ElementTypeJson elementTypeJson = elementTypeOptional.get();
-            elements.put(path.getFileName().toString(), new ElementType(elementTypeJson));
-        }
-        else
+
+            try
+            {
+                ElementType elementType = new ElementType(elementTypeJson);
+                elements.put(path.getFileName().toString(), elementType);
+                System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
+            } catch (NullPointerException e)
+            {
+                System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
+                e.printStackTrace();
+            }
+
+        } else
         {
             System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
         }

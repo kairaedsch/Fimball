@@ -9,7 +9,9 @@ import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.element.*;
+import sep.fimball.model.element.GameElement;
+import sep.fimball.model.element.Trigger;
+import sep.fimball.model.element.TriggerFactory;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -25,6 +27,13 @@ import java.util.List;
  */
 public class GameSession
 {
+    public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
+    {
+        GameSession gameSession = new GameSession(machineBlueprint, playerNames);
+        gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
+        return gameSession;
+    }
+
     /**
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
@@ -106,18 +115,6 @@ public class GameSession
             physicsElements.add(physElem);
         }
 
-        Trigger hitTrigger = new Trigger();
-        hitTrigger.setElementTrigger(new HitTrigger());
-        triggers.add(hitTrigger);
-
-        Trigger scoreTrigger = new Trigger();
-        scoreTrigger.setElementTrigger(new ScoreTrigger(this));
-        triggers.add(scoreTrigger);
-
-        Trigger soundTrigger = new Trigger();
-        soundTrigger.setElementTrigger(new SoundTrigger());
-        triggers.add(soundTrigger);
-
         world = new World(elements);
         physicsHandler = new PhysicsHandler(physicsElements);
 
@@ -125,6 +122,11 @@ public class GameSession
         physicsHandler.addBall(ball);
 
         startAll();
+    }
+
+    public void setTriggers(List<Trigger> triggers)
+    {
+        this.triggers = triggers;
     }
 
     /**
