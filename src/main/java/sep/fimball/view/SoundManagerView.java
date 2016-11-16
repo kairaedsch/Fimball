@@ -47,7 +47,8 @@ public class SoundManagerView
 
     /**
      * Erzeugt einen neuen Soundmanager in der View mit dem gegebenen SoundManagerViewModel.
-     * @param soundManagerViewModel
+     *
+     * @param soundManagerViewModel Das zu dieser View gehörende ViewModel.
      */
     public SoundManagerView(SoundManagerViewModel soundManagerViewModel)
     {
@@ -60,6 +61,11 @@ public class SoundManagerView
         sfxVolume.bind(soundManagerViewModel.sfxVolumeProperty());
     }
 
+    /**
+     * Lädt die durch {@code mediaPath} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
+     *
+     * @param mediaPath Der Pfad zur Musikdatei.
+     */
     private void playMedia(String mediaPath) {
         backgroundMusic = new Media(mediaPath);
         if (mediaPlayer != null)
@@ -71,7 +77,11 @@ public class SoundManagerView
         mediaPlayer.play();
     }
 
-
+    /**
+     * Lädt den angegeben Soundclip und spielt ihn ab.
+     *
+     * @param clipPath Der Pfad zur Sound-Datei.
+     */
     private void playClip(String clipPath) {
         if (loadedAudioClips.containsKey(clipPath)) {
             loadedAudioClips.get(clipPath).play();
