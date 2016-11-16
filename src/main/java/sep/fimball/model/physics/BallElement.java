@@ -11,13 +11,13 @@ public class BallElement
     private CircleColliderShape collider;
     private WorldLayer layer;
 
-    public BallElement(GameElement gameElement, Vector2 velocity, double angularVelocity, CircleColliderShape collider, WorldLayer layer)
+    public BallElement(GameElement gameElement, CircleColliderShape collider, WorldLayer layer)
     {
         subElement = new PhysicsElement(gameElement);
 
         this.collider = collider;
-        this.velocity = velocity;
-        this.angularVelocity = angularVelocity;
+        this.velocity = new Vector2();
+        this.angularVelocity = 0.0;
         this.layer = layer;
     }
 
@@ -64,5 +64,10 @@ public class BallElement
     public WorldLayer getLayer()
     {
         return layer;
+    }
+
+    public void setLayer(WorldLayer layer)
+    {
+        this.layer = layer;
     }
 }

@@ -35,4 +35,9 @@ public class Collider
                 type.applyCollision(ball, info.getShortestIntersect());
         }
     }
+
+    public List<ColliderShape> getShapes()
+    {
+        return shapes;
+    }
 }

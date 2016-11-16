@@ -7,6 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.blueprint.base.PhysicsElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
@@ -15,9 +19,7 @@ import sep.fimball.model.element.TriggerFactory;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
-import sep.fimball.model.physics.BallElement;
-import sep.fimball.model.physics.PhysicsElement;
-import sep.fimball.model.physics.PhysicsHandler;
+import sep.fimball.model.physics.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +119,8 @@ public class GameSession
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
+        PlacedElement ballTemplate = null;
+
         for (PlacedElement element : machineBlueprint.getTableElementList())
         {
             GameElement gameElem = new GameElement(element);
@@ -124,15 +128,20 @@ public class GameSession
 
             PhysicsElement physElem = new PhysicsElement(gameElem);
             physicsElements.add(physElem);
+
+            if (element.getBaseElement().getType() == BaseElementType.BALL)
+                ballTemplate = element;
         }
 
-        world = new World(elements);
+        if (ballTemplate == null)
+            throw new IllegalArgumentException("No ball found in PlacedElements!");
+
+        world = new World(elements, ballTemplate);
         physicsHandler = new PhysicsHandler(physicsElements);
 
         gameLoopObservable = new Observable();
 
-        BallElement ball = null; // TODO
-        physicsHandler.addBall(ball);
+        spawnNewBall();
 
         startAll();
     }
@@ -196,6 +205,13 @@ public class GameSession
         // TODO - switch currentPlayer to next player in list
         // TODO - if no player has balls left, switch to game over
         throw new UnsupportedOperationException();
+    }
+
+    private void spawnNewBall()
+    {
+        GameElement gameBall = new GameElement(world.getBallTemplate());
+        CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
+        physicsHandler.addBall(new BallElement(gameBall, ballCollider, WorldLayer.GROUND));
     }
 
     public void saveHighscore(Highscore score)

@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
 
 /**
@@ -16,13 +17,16 @@ public class World
      */
     private ListProperty<GameElement> gameElements;
 
+    private PlacedElement ballTemplate;
+
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      * @param elements
      */
-	public World(ObservableList<GameElement> elements)
+	public World(ObservableList<GameElement> elements, PlacedElement ballTemplate)
     {
         this.gameElements = new SimpleListProperty<>(elements);
+        this.ballTemplate = ballTemplate;
     }
 
     /**
@@ -80,5 +84,15 @@ public class World
     public ListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
+    }
+
+    public PlacedElement getBallTemplate()
+    {
+        return ballTemplate;
+    }
+
+    public void setBallTemplate(PlacedElement ballTemplate)
+    {
+        this.ballTemplate = ballTemplate;
     }
 }
