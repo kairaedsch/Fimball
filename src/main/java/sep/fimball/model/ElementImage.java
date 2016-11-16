@@ -17,7 +17,7 @@ public class ElementImage
 
     public ElementImage(String elementTypeId)
     {
-        this(elementTypeId, false, -1, false, null, -1);
+        this(elementTypeId, false, 360, false, null, -1);
     }
 
     public ElementImage(String elementTypeId, int rotationAccuracy)
@@ -27,7 +27,7 @@ public class ElementImage
 
     public ElementImage(String elementTypeId, String animationName, int animationId)
     {
-        this(elementTypeId, false, -1, true, animationName, animationId);
+        this(elementTypeId, false, 360, true, animationName, animationId);
     }
 
     public ElementImage(String elementTypeId, int rotationAccuracy, String animationName, int animationId)
