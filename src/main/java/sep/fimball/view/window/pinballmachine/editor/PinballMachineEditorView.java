@@ -50,7 +50,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     @FXML
     private void playClicked() {
-
+        pinballMachineEditorViewModel.startPinballMachine();
     }
 
     /**
@@ -58,7 +58,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     @FXML
     private void settingsClicked() {
-
+        pinballMachineEditorViewModel.showSettingsDialog();
     }
 
     /**
@@ -66,7 +66,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     @FXML
     private void zoomInClicked() {
-
+        pinballMachineEditorViewModel.zoomIn();
     }
 
     /**
@@ -74,6 +74,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     @FXML
     private void zoomOutClicked() {
-
+        pinballMachineEditorViewModel.zoomOut();
     }
 }

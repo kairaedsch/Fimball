@@ -44,7 +44,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     @FXML
     private void okClicked()
     {
-
+        gameOverViewModel.exitDialogToMainMenu();
     }
 
     /**
@@ -53,6 +53,6 @@ public class GameOverView extends DialogView<GameOverViewModel>
     @FXML
     private void restartClicked()
     {
-
+        gameOverViewModel.restartGame();
     }
 }

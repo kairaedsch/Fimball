@@ -30,6 +30,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     public void setViewModel(PinballMachineSettingsViewModel pinballMachineSettingsViewModel)
     {
         this.pinballMachineSettingsViewModel = pinballMachineSettingsViewModel;
+        tableName.textProperty().bind(pinballMachineSettingsViewModel.machineNameProperty());
     }
 
     /**

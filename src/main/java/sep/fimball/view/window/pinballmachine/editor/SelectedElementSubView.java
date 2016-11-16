@@ -48,7 +48,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     @Override
     public void setViewModel(SelectedElementSubViewModel selectedElementSubViewModel)
     {
-
+        this.selectedElementSubViewModel = selectedElementSubViewModel;
     }
 
     /**
@@ -56,7 +56,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      */
     @FXML
     private void rotateClockwiseClicked() {
-
+        selectedElementSubViewModel.rotateClockwise();
     }
 
     /**
@@ -64,6 +64,6 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      */
     @FXML
     private void rotateCounterclockwiseClicked() {
-
+        selectedElementSubViewModel.rotateCounterclockwise();
     }
 }
