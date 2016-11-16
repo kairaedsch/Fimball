@@ -2,7 +2,7 @@ package sep.fimball.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import sep.fimball.model.blueprint.pinnballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 import static org.junit.Assert.assertEquals;
 
