@@ -7,9 +7,9 @@ import sep.fimball.general.data.Vector2;
  */
 public class AccelerationCollision implements CollisionType
 {
-    private float accelerationSpeed;
+    private double accelerationSpeed;
 
-    public AccelerationCollision(float accelerationSpeed)
+    public AccelerationCollision(double accelerationSpeed)
     {
         this.accelerationSpeed = accelerationSpeed;
     }

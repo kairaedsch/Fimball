@@ -5,13 +5,13 @@ import sep.fimball.general.data.Vector2;
 public class BallElement
 {
     private Vector2 position;
-    private float rotation;
+    private double rotation;
     private Vector2 velocity;
-    private float angularVelocity;
+    private double angularVelocity;
     private CircleCollider collider;
     private WorldLayer layer;
 
-    public BallElement(Vector2 velocity, float angularVelocity, CircleCollider collider, WorldLayer layer)
+    public BallElement(Vector2 velocity, double angularVelocity, CircleCollider collider, WorldLayer layer)
     {
         this.velocity = velocity;
         this.angularVelocity = angularVelocity;
@@ -29,12 +29,12 @@ public class BallElement
         this.position = position;
     }
 
-    public float getRotation()
+    public double getRotation()
     {
         return rotation;
     }
 
-    public void setRotation(float rotation)
+    public void setRotation(double rotation)
     {
         this.rotation = rotation;
     }
@@ -49,12 +49,12 @@ public class BallElement
         this.velocity = velocity;
     }
 
-    public float getAngularVelocity()
+    public double getAngularVelocity()
     {
         return angularVelocity;
     }
 
-    public void setAngularVelocity(float angularVelocity)
+    public void setAngularVelocity(double angularVelocity)
     {
         this.angularVelocity = angularVelocity;
     }
