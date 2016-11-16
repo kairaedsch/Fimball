@@ -62,7 +62,6 @@ public class ElementTypeJson
                 public double strength;
                 public double accelX;
                 public double accelY;
-                public double accelerationSpeed;
             }
         }
     }
