@@ -8,17 +8,21 @@ import sep.fimball.general.data.ImageLayer;
  */
 public class ElementImage
 {
-    private String topImagePath;
-    private String bottomImagePath;
+    private final int rotationAccuracy;
+    private String elementTypeId;
+    private boolean canRotate;
+    private boolean animation;
+    private String animationName;
+    private int animationId;
 
     public ElementImage(String elementTypeId)
     {
         this(elementTypeId, false, -1, false, null, -1);
     }
 
-    public ElementImage(String elementTypeId, int rotation)
+    public ElementImage(String elementTypeId, int rotationAccuracy)
     {
-        this(elementTypeId, true, rotation, false, null, -1);
+        this(elementTypeId, true, rotationAccuracy, false, null, -1);
     }
 
     public ElementImage(String elementTypeId, String animationName, int animationId)
@@ -26,24 +30,28 @@ public class ElementImage
         this(elementTypeId, false, -1, true, animationName, animationId);
     }
 
-    public ElementImage(String elementTypeId, int rotation, String animationName, int animationId)
+    public ElementImage(String elementTypeId, int rotationAccuracy, String animationName, int animationId)
     {
-       this(elementTypeId, true, rotation, true, animationName, animationId);
+       this(elementTypeId, true, rotationAccuracy, true, animationName, animationId);
     }
 
-    private ElementImage(String elementTypeId, boolean canRotate, int rotation, boolean animation, String animationName, int animationId)
+    private ElementImage(String elementTypeId, boolean canRotate, int rotationAccuracy, boolean animation, String animationName, int animationId)
     {
-        topImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.TOP, canRotate, rotation, animation, animationName, animationId);
-        bottomImagePath = Config.pathToElementImage(elementTypeId, ImageLayer.BOTTOM, canRotate, rotation, animation, animationName, animationId);
+        this.elementTypeId = elementTypeId;
+        this.canRotate = canRotate;
+        this.rotationAccuracy = rotationAccuracy;
+        this.animation = animation;
+        this.animationName = animationName;
+        this.animationId = animationId;
     }
 
-    public String getTopImagePath()
+    public String getImagePath(ImageLayer imageLayer, int rotation)
     {
-        return topImagePath;
+        return Config.pathToElementImage(elementTypeId, ImageLayer.TOP, canRotate, rotation - (rotation % rotationAccuracy), animation, animationName, animationId);
     }
 
-    public String getBottomImagePath()
+    public int getRestRotation(int rotation)
     {
-        return bottomImagePath;
+        return rotation % rotationAccuracy;
     }
 }
