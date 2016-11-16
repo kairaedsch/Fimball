@@ -33,16 +33,16 @@ public class SpriteSubViewModel
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
-     * @param baseElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
      */
-    SpriteSubViewModel(GameElement baseElement)
+    SpriteSubViewModel(GameElement gameElement)
     {
         position = new SimpleObjectProperty<>();
-        position.bind(baseElement.positionProperty());
+        position.bind(gameElement.positionProperty());
         rotation = new SimpleDoubleProperty();
-        rotation.bind(baseElement.rotationProperty());
+        rotation.bind(gameElement.rotationProperty());
         currentImagePath = new SimpleObjectProperty<>();
-        currentImagePath.bind(baseElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty());
+        currentImagePath.bind(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty());
 
         isSelected = new SimpleBooleanProperty(false);
     }
