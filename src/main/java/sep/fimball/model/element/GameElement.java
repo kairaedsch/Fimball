@@ -4,12 +4,10 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.Animation;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.physics.Collider;
 import sep.fimball.model.physics.PhysicsUpdateEventArgs;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
@@ -37,14 +35,9 @@ public class GameElement
     private IntegerProperty pointReward;
 
     /**
-     * Enthält alle Animationen, die durch einen Zusammenprall mit einem Collider ausgelöst werden.
-     */
-    private Map<Collider, Animation> allAnimations;
-
-    /**
      * TODO
      */
-    private Animation currentAnimation;
+    private ObjectProperty<Animation> currentAnimation;
 
     /**
      * Liste von Änderungen an Position/Rotation die der PhysicsHandler an dem zu diesem GameElement zugehörigen PhysicsElement vorgenommen hat und die im nächsten Schritt der Spielschleife vom GameElement übernommen werden sollen.
@@ -63,8 +56,9 @@ public class GameElement
         this.position = new SimpleObjectProperty<>(element.positionProperty().get());
         this.rotation = new SimpleDoubleProperty();
         this.hitCount = new SimpleIntegerProperty();
+        this.currentAnimation = new SimpleObjectProperty<>();
         this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
-        physicsUpdates = new ArrayList<>();
+        this.physicsUpdates = new ArrayList<>();
     }
 
     /**
@@ -120,11 +114,6 @@ public class GameElement
         this.rotation.set(rotation);
     }
 
-    public ReadOnlyStringProperty currentAnimationFrameProperty()
-    {
-        return currentAnimation.currentFrameProperty();
-    }
-
     public int getPointReward()
     {
         return pointReward.get();
@@ -145,8 +134,8 @@ public class GameElement
         return placedElement;
     }
 
-    public void setCurrentAnimation(Animation animation)
+    public ObjectProperty<Animation> currentAnimationProperty()
     {
-        currentAnimation = animation;
+        return currentAnimation;
     }
 }

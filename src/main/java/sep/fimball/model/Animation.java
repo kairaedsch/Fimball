@@ -1,7 +1,5 @@
 package sep.fimball.model;
 
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.StringProperty;
 import sep.fimball.model.blueprint.json.BaseElementJson;
 
 /**
@@ -19,34 +17,18 @@ public class Animation
      */
     private double duration;
 
-    /**
-     * Der Pfad zum aktuellen Bild der Animation.
-     */
-    private StringProperty currentFrame;
-
     public Animation(BaseElementJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
     {
         // TODO load animation
     }
 
-    /**
-     * Wird kurz vor dem Zeichen des Automaten im Canvas aufgerufen, um den Pfad zum aktuell ausgewählte Bild zu aktualisieren.
-     */
-    public void update()
+    public String[] getFramePaths()
     {
-        // move to next frame logic etc.
+        return framePaths;
     }
 
-    /**
-     * Startet die Animation und setzt diese auf das erste Bild zurück.
-     */
-    public void startAnimation()
+    public double getDuration()
     {
-
-    }
-
-    public ReadOnlyStringProperty currentFrameProperty()
-    {
-        return currentFrame;
+        return duration;
     }
 }
