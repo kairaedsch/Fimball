@@ -95,4 +95,9 @@ public class MainMenuViewModel extends WindowViewModel
     {
         return pinballMachineInfoSubViewModel;
     }
+
+    public void addNewAutomaton()
+    {
+        sceneManager.setWindow(new PinballMachineSettingsViewModel());
+    }
 }
