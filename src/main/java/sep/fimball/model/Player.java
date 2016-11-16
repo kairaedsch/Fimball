@@ -29,7 +29,7 @@ public class Player
     public Player(String name)
     {
         this.points = new SimpleIntegerProperty();
-        this.name = new SimpleStringProperty();
+        this.name = new SimpleStringProperty(name);
         this.balls = new SimpleIntegerProperty(3);
     }
 
