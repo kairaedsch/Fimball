@@ -13,10 +13,10 @@
                             <children>
                                 <GridPane>
                                     <children>
-                                        <Label text="Strength: 3" />
-                                        <Slider blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" />
-                                        <Slider max="1000.0" min="1.0" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Label text="Points: 500" GridPane.rowIndex="1" />
+                                        <Label text="Strength: 3" fx:id="strengthLabel"/>
+                                        <Slider blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" fx:id="strengthSlider"/>
+                                        <Slider max="1000.0" min="1.0" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="pointsSlider"/>
+                                        <Label text="Points: 500" GridPane.rowIndex="1" fx:id="pointsLabel"/>
                                     </children>
                                     <columnConstraints>
                                         <ColumnConstraints minWidth="10.0" prefWidth="100.0" />

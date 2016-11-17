@@ -1,5 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -11,6 +12,18 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubView
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
+    @FXML
+    private Slider strengthSlider;
+
+    @FXML
+    private Slider pointsSlider;
+
+    @FXML
+    private Label strengthLabel;
+
+    @FXML
+    private Label pointsLabel;
+
     /**
      * Zeigt den Namen des Elements an.
      */
@@ -49,6 +62,12 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     public void setViewModel(SelectedElementSubViewModel selectedElementSubViewModel)
     {
         this.selectedElementSubViewModel = selectedElementSubViewModel;
+
+        strengthSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.multiplierProperty());
+        pointsSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.pointsProperty());
+
+        strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString()));
+        pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString()));
     }
 
     /**

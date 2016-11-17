@@ -53,17 +53,17 @@ public class PlacedElement
         return position;
     }
 
-    public ReadOnlyIntegerProperty pointsProperty()
+    public IntegerProperty pointsProperty()
     {
         return points;
     }
 
-    public ReadOnlyDoubleProperty multiplierProperty()
+    public DoubleProperty multiplierProperty()
     {
         return multiplier;
     }
 
-    public DoubleProperty rotationProperty()
+    public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
     }
@@ -81,11 +81,6 @@ public class PlacedElement
     public void setPoints(int points)
     {
         this.points.set(points);
-    }
-
-    public void setMultiplier(double multiplier)
-    {
-        this.multiplier.set(multiplier);
     }
 
     public void rotateClockwise()

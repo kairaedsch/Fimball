@@ -8,6 +8,7 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -144,5 +145,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         cameraPosition.get().setX(cameraPosition.get().getX() + (x / Config.pixelsPerGridUnit));
         cameraPosition.get().setY(cameraPosition.get().getY() + (y / Config.pixelsPerGridUnit));
+    }
+
+    public void setSelectedElement(PlacedElement placedElement)
+    {
+        selectedElementSubViewModel.setPlacedElement(placedElement);
     }
 }
