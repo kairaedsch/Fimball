@@ -72,8 +72,8 @@ public class PinballMachine
                     Vector2 globalPosition = element.positionProperty().get();
                     double minX = boundingBox.getOrigin().getX() + globalPosition.getX();
                     double minY = boundingBox.getOrigin().getY() + globalPosition.getY();
-                    double maxX = minX + boundingBox.getWidth() + globalPosition.getX();
-                    double maxY = minY + boundingBox.getHeight() + globalPosition.getY();
+                    double maxX = minX + boundingBox.getWidth();
+                    double maxY = minY + boundingBox.getHeight();
 
                     if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
                     {
