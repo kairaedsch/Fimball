@@ -9,27 +9,29 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
  */
 @Ignore
 public class ReserveBallsAndPlayerChangeTest {
-    static String[] players = new String[] {"tester", "test"};
-    static PinballMachine automaton;
-    static GameSession game;
+    private static String[] players = new String[] {"tester", "test"};
+    private static PinballMachine automaton;
+    private static GameSession game;
+    private final long timeout = 30;
 
     @Before
     public static void initGame() {
-        // TODO GameSession mit richtigem Automaten und drei ReserveBalls erstellen
+        // TODO lade automaton
+        game = new GameSession(automaton, players);
     }
 
     @Ignore
     public static void testReserveBalls() {
         // TODO Mit Plunger einschießen
-        // TODO Warten bis Kugel weg oder onBallLost() aufrufen
+        // TODO Warten bis Kugel weg
         // assertEquals(3, game.getCurrentPlayer().getBalls());
         // assertEquals("test", game.getCurrentPlayer().getName());
         // TODO Kugel mit Plunger einschießen
-        // TODO Warten bis Kugel weg oder onBallLost() aufrufen
+        // TODO Warten bis Kugel weg
         // assertEquals(2, game.getCurrentPlayer().getBalls());
         // assertEquals("tester", game.getCurrentPlayer().getName());
         // TODO Mit Plunger einschießen
-        // TODO Warten bis Kugel weg oder onBallLost() aufrufen
+        // TODO Warten bis Kugel weg
         // assertEquals(2, game.getCurrentPlayer().getBalls());
         // assertEquals("test", game.getCurrentPlayer().getName());
     }
