@@ -25,7 +25,7 @@ public class Settings
     /**
      * Gibt die bereits existierenden Settings oder neu angelegte zurück, falls noch keine existieren.
      *
-     * @return
+     * @return Die Instanz von Settings.
      */
     public static Settings getSingletonInstance()
     {
@@ -66,7 +66,7 @@ public class Settings
     private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
 
     /**
-     * Erzeugt eine neue Instanz von Settings.
+     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der gespeicherten Settings-Datei geladen werden.
      */
     private Settings()
     {
@@ -83,6 +83,10 @@ public class Settings
         loadSettings(Paths.get(Config.pathToSettings()));
     }
 
+    /**
+     * Lädt die Einstellungen aus dem in {@code jsonPath} angegebenen Datei und setzt diese als die Attribute.
+     * @param jsonPath Der Pfad, wo die gespeicherte Settings-Datei liegt.
+     */
     private void loadSettings(Path jsonPath)
     {
 
@@ -110,7 +114,7 @@ public class Settings
     }
 
     /**
-     * Serialisiert und speichert die Einstelunngen.
+     * Serialisiert und speichert die Einstelunngen in der Settings-Datei.
      */
     public void Serialize()
     {
@@ -133,26 +137,46 @@ public class Settings
         JsonFileManager.saveToJson(Config.pathToSettings(), settingsJson);
     }
 
+    /**
+     * Gibt das Property der Master-Lautstärke zurück.
+     * @return Das Property der Master-Lautstärke.
+     */
     public DoubleProperty masterVolumeProperty()
     {
         return masterVolume;
     }
 
+    /**
+     * Gibt das Property der Musik-Lautstärke zurück.
+     * @return Das Property der Musik-Lautstärke.
+     */
     public DoubleProperty musicVolumeProperty()
     {
         return musicVolume;
     }
 
+    /**
+     * Gibt das Property der Soundeffekt-Lautstärke zurück.
+     * @return Das Property der Soundeffekt-Lautstärke.
+     */
     public DoubleProperty sfxVolumeProperty()
     {
         return sfxVolume;
     }
 
+    /**
+     * Gibt das Property der eingestellten Sprache zurück.
+     * @return Das Property der eingestellten Sprache.
+     */
     public ObjectProperty<Language> languageProperty()
     {
         return language;
     }
 
+    /**
+     * Gibt das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist, als ReadOnly zurück.
+     * @return Das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
+     */
     public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
     {
         return keyBindingsMap;
@@ -171,6 +195,10 @@ public class Settings
         }
     }
 
+    /**
+     * Gibt das Property zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * @return Das Property, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     */
     public BooleanProperty fullscreenProperty()
     {
         return fullscreen;

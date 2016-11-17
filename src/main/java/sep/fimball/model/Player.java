@@ -33,26 +33,46 @@ public class Player
         this.balls = new SimpleIntegerProperty(3);
     }
 
+    /**
+     * Gibt die vom Spieler erreichten Punkte zurück.
+     * @return Die vom Spieler erreichten Punkte.
+     */
     public int getPoints()
     {
         return points.get();
     }
 
+    /**
+     * Gibt das Property der Punkte, die ein Spieler erreicht hat, zurück.
+     * @return Das Property der Punkte, die ein Spieler erreicht hat,
+     */
     public IntegerProperty pointsProperty()
     {
         return points;
     }
 
+    /**
+     * Gibt den Namen des Spielers zurück.
+     * @return Der Name des Spielers.
+     */
     public String getName()
     {
         return name.get();
     }
 
+    /**
+     * Gibt das Property des Namens des Spielers zurück.
+     * @return Das Property des Namens des Spielers.
+     */
     public StringProperty nameProperty()
     {
         return name;
     }
 
+    /**
+     * Gibt das Property der Reservebälle des Spielers zurück.
+     * @return Das Property der Reservebälle des Spielers.
+     */
     public IntegerProperty ballsProperty()
     {
         return balls;

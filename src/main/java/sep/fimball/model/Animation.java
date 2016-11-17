@@ -28,11 +28,19 @@ public class Animation
         }
     }
 
+    /**
+     * Gibt das Array mit den Pfaden der einzelnen Bilder der Animation zurück.
+     * @return Ein Array  mit den Pfaden der einzelnen Bilder der Animation.
+     */
     public ElementImage[] getElementImages()
     {
         return elementImages;
     }
 
+    /**
+     *  Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     * @return Die Anzeigedauer eines einzelnen Bildes in Sekunden.
+     */
     public double getDuration()
     {
         return duration;

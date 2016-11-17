@@ -17,6 +17,9 @@ public class World
      */
     private ListProperty<GameElement> gameElements;
 
+    /**
+     * TODO
+     */
     private PlacedElement ballTemplate;
 
     /**
@@ -40,11 +43,19 @@ public class World
 
     //Called by a timeline created in this class, update all gameobjects
     //is NOT the physics loop
+
+    /**
+     * TODO
+     */
     private void updateWorld()
     {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Generiert das Rechteck, das das Spielfeld umschließt und den Spielfeldrand darstellt, und gibt dieses zurück.
+     * @return Ein Rechteck, das den Spielfeldrand darstellt.
+     */
     private RectangleDouble generateWalls()
     {
         //TODO If GameElements contain the ball this method won't work anymore
@@ -81,16 +92,28 @@ public class World
         return new RectangleDouble(rectOrigin, width, height);
     }
 
+    /**
+     * Gibt das Property der Liste der in der World enthaltenen GameElements zurück.
+     * @return Das Property der Liste der in der World enthaltenen GameElements
+     */
     public ListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public PlacedElement getBallTemplate()
     {
         return ballTemplate;
     }
 
+    /**
+     * TODO
+     * @param ballTemplate
+     */
     public void setBallTemplate(PlacedElement ballTemplate)
     {
         this.ballTemplate = ballTemplate;

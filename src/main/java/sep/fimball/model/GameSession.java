@@ -28,6 +28,12 @@ import java.util.Observer;
  */
 public class GameSession
 {
+    /**
+     * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Trigger für diese Game Session.
+     * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param playerNames Die Namen der Spieler.
+     * @return Die generierte Game Session.
+     */
     public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         GameSession gameSession = new GameSession(machineBlueprint, playerNames);
@@ -85,12 +91,20 @@ public class GameSession
      */
     private KeyFrame keyFrame;
 
+    /**
+     * Speichert die in dieser GameSession verwendeten Trigger.
+     */
     private List<Trigger> triggers;
 
+    /**
+     * TODO
+     */
     private Observable gameLoopObservable;
 
     /**
-     * Erstellt eine neue GameSession.
+     * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
+     * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param playerNames Die Namen der Spieler.
      */
     public GameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
@@ -147,6 +161,10 @@ public class GameSession
         startAll();
     }
 
+    /**
+     * Setzt die gegebenen Trigger als die Trigger, die in dieser Game Session verwendet werden.
+     * @param triggers Die Trigger, die gesetzt werden sollen.
+     */
     public void setTriggers(List<Trigger> triggers)
     {
         this.triggers = triggers;
@@ -209,6 +227,9 @@ public class GameSession
         spawnNewBall();
     }
 
+    /**
+     * Spwant einen neuen Ball auf dem Spielfeld.
+     */
     private void spawnNewBall()
     {
         GameElement gameBall = new GameElement(world.getBallTemplate());
@@ -218,6 +239,10 @@ public class GameSession
         physicsHandler.addBall(new BallElement(gameBall, ballCollider, WorldLayer.GROUND));
     }
 
+    /**
+     * Speichert den gegebenen Highscore in den Flipperautomaten dieser Game Session.
+     * @param score Der Highscore, der gespeichert werden soll.
+     */
     public void saveHighscore(Highscore score)
     {
         machineBlueprint.addHighscore(score);
@@ -229,31 +254,55 @@ public class GameSession
         // tilt logic etc.
     }
 
+    /**
+     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu.
+     * @param gameLoopObserver Der Observer, der hinzugefügt werden soll.
+     */
     public void addGameLoopObserver(Observer gameLoopObserver)
     {
         gameLoopObservable.addObserver(gameLoopObserver);
     }
 
+    /**
+     * Gibt den aktiven Spieler zurück.
+     * @return Der aktive Spieler.
+     */
     public Player getCurrentPlayer()
     {
         return players[playerIndex];
     }
 
+    /**
+     * Gibt die Spieler, die an dieser Game Session beteiligt sind, zurück.
+     * @return Die an dieser Game Session beteiligten Spieler.
+     */
     public Player[] getPlayers()
     {
         return players;
     }
 
+    /**
+     * Gibt die Anzahl zurück, wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
+     * @return Die Anzahl, wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
+     */
     public int getTiltCounter()
     {
         return tiltCounter;
     }
 
+    /**
+     * Gibt an, ob das Spiel pausiert ist.
+     * @return {@code true}, wenn das Spiel pausiert ist, {@code false} sonst.
+     */
     public boolean getPaused()
     {
         return this.paused;
     }
 
+    /**
+     * Gibt die zu dieser GameSession gehörende World zurück.
+     * @return Die zu dieser GameSession gehörende World.
+     */
     public World getWorld()
     {
         return world;

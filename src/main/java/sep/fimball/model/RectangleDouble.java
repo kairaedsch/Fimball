@@ -35,16 +35,28 @@ public class RectangleDouble
         this.height = height;
     }
 
+    /**
+     * Gibt die Position der linken oberen Ecke des Rechtecks zurück.
+     * @return Die Position der linken oberen Ecke des Rechtecks.
+     */
     public Vector2 getOrigin()
     {
         return origin;
     }
 
+    /**
+     * Gibt die Länge des Rechtecks zurück.
+     * @return Die Länge des Rechtecks.
+     */
     public double getWidth()
     {
         return width;
     }
 
+    /**
+     * Gibt die Höhe des Rechtecks zurück.
+     * @return Die Höhe des Rechtecks.
+     */
     public double getHeight()
     {
         return height;
