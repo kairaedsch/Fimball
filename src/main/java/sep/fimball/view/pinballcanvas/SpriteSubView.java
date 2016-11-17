@@ -11,9 +11,8 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.media.ElementImage;
+import sep.fimball.view.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
-
-import java.io.File;
 
 /**
  * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements zuständig.
@@ -69,11 +68,8 @@ public class SpriteSubView
         double rotation = viewModel.rotationProperty().get();
         ElementImage elementImage = viewModel.animationFramePathProperty().get();
 
-        File topFile = new File(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
-        topImage = new Image(topFile.toURI().toString());
-
-        File bottomFile = new File(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
-        bottomImage = new Image(bottomFile.toURI().toString());
+        topImage = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
+        bottomImage = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
 
         rotationProperty.setValue(elementImage.getRestRotation((int) rotation) + (rotation - (int) rotation));
     }
