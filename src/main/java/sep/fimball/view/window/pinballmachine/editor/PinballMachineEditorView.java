@@ -3,7 +3,12 @@ package sep.fimball.view.window.pinballmachine.editor;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import sep.fimball.view.ViewLoader;
+import sep.fimball.view.ViewModelListToPaneBinder;
+import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
+import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
@@ -12,6 +17,9 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
+    @FXML
+    private StackPane pinballCanvasContainer;
+
     /**
      * Das Canvas, in dem der Flipperautomat gezeichnet wird.
      */
@@ -43,6 +51,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
+
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.TABLE_EDITOR_AVAILABLE_ELEMENT);
+
+
+        ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
+        pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
+        viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
     }
 
     /**

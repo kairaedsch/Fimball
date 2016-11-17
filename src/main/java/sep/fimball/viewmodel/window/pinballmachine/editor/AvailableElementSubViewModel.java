@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
@@ -34,8 +35,8 @@ public class AvailableElementSubViewModel
     public AvailableElementSubViewModel(BaseElement baseElement)
     {
         this.baseElement = baseElement;
-        imagePath = new SimpleStringProperty();
-        name = new SimpleStringProperty();
+        imagePath = new SimpleStringProperty(baseElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0));
+        name = new SimpleStringProperty(baseElement.getMedia().getName());
     }
 
     /**

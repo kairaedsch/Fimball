@@ -6,8 +6,8 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.GameSession;
-import sep.fimball.model.World;
 import sep.fimball.viewmodel.window.game.GameViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Observer;
 
@@ -39,32 +39,40 @@ public class PinballCanvasViewModel
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
-     * @param session Die Spielsitzung.
+     * @param gameSession Die Spielsitzung.
      * @param gameViewModel Das korrespondierende GameViewModel.
      */
-    public PinballCanvasViewModel(GameSession session, GameViewModel gameViewModel)
+    public PinballCanvasViewModel(GameSession gameSession, GameViewModel gameViewModel)
     {
-        init(session.getWorld());
-        Observer gameObserver = (o, args) -> redraw();
-        session.addGameLoopObserver(gameObserver);
+        init(gameSession);
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
     }
 
+    public PinballCanvasViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
+    {
+        init(gameSession);
+
+        cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
+        cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
+    }
+
     /**
      * Initialisiert die Zeichnung des Canvas.
-     * @param world Die Spielwelt des anzuzeigenden Flipperautomaten.
      */
-    private void init(World world)
+    private void init(GameSession session)
     {
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
 
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, world.gameElementsProperty(), SpriteSubViewModel::new);
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, session.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
+
+        Observer gameObserver = (o, args) -> redraw();
+        session.addGameLoopObserver(gameObserver);
     }
 
     /**

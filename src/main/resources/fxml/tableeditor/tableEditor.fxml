@@ -5,12 +5,12 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<VBox prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
    <children>
       <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
          <items>
-            <AnchorPane minWidth="130.0">
+            <AnchorPane>
                <children>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -30,82 +30,11 @@
                           <panes>
                             <TitledPane animated="false" text="Basic Elements">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;" >
                                        <children>
-                                          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="availableElements">
                                              <children>
-                                                <HBox alignment="BOTTOM_LEFT" spacing="5.0" style="-fx-background-color: ;">
-                                                   <children>
-                                                      <Label alignment="TOP_LEFT" text="Plunger">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/plunger_main/top-90.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/plunger_stab/top-90.png" />
-                                                         </image>
-                                                         <HBox.margin>
-                                                            <Insets left="-5.0" />
-                                                         </HBox.margin>
-                                                      </ImageView>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                                                   </padding>
-                                                </HBox>
-                                                <HBox alignment="BOTTOM_LEFT" spacing="5.0">
-                                                   <children>
-                                                      <Label alignment="TOP_LEFT" text="Bumper">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/bumper_green/top.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                                                   </padding>
-                                                </HBox>
-                                                <HBox alignment="BOTTOM_LEFT" spacing="5.0">
-                                                   <children>
-                                                      <Label alignment="TOP_LEFT" text="Lamp">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/licht_green/bottom+glow_0.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                                                   </padding>
-                                                </HBox>
                                              </children>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
@@ -122,23 +51,20 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefWidth="350.0">
+            <AnchorPane>
                <children>
-                  <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="@../../../../../Grafiken/pinball-machine-test-v8-mit-grid.png" />
-                     </image>
-                  </ImageView>
+                  <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#8f8f8fa3" height="55.0" layoutX="144.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
                   <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-               </children></AnchorPane>
+               </children>
+            </AnchorPane>
             <AnchorPane minWidth="130.0">
                <children>
                   <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0" style="-fx-padding: 0;">
                            <children>
-                              <ScrollPane prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ScrollPane prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <content>
                                   <AnchorPane>
                                        <children>

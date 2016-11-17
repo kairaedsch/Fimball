@@ -53,7 +53,8 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
         return new Vector2(mouseEvent.getSceneX(),mouseEvent.getScreenY());
     }
 
-    public void mouseClicked(MouseEvent mouseEvent)
+    public void mouseClicked()
     {
+        int x = 0;
     }
 }
