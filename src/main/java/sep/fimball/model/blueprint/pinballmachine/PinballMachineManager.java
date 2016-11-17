@@ -148,7 +148,7 @@ public class PinballMachineManager
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachineJson.name + "general.json", pinballMachineJson);
+        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID() + "\\general.json", pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = new PlacedElementListJson();
         placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.getElements().size()];
@@ -165,7 +165,7 @@ public class PinballMachineManager
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachineJson.name + "elements.json", placedElementListJson);
+        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID()+ "\\elements.json", placedElementListJson);
     }
 
     public ListProperty<PinballMachine> pinballMachinesProperty()

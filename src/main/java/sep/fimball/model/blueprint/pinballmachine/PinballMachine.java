@@ -115,4 +115,8 @@ public class PinballMachine
     {
         elements.add(placedElement);
     }
+
+    public String getID() {
+        return pinballMachineId.getValue();
+    }
 }
