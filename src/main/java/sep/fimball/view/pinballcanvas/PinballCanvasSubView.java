@@ -86,14 +86,15 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         graphicsContext.save();
         graphicsContext.translate(canvas.getWidth() / 2 + cameraPosition.get().getX() * Config.pixelsPerGridUnit, canvas.getHeight() / 2 + cameraPosition.get().getY() * Config.pixelsPerGridUnit);
+        graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
 
         for (SpriteSubView sprite : sprites)
         {
-            sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP, cameraZoom.get());
+            sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
         }
         for (SpriteSubView spriteTop : sprites)
         {
-            spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM, cameraZoom.get());
+            spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
         }
         graphicsContext.restore();
     }

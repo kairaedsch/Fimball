@@ -80,7 +80,7 @@ public class SpriteSubView
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, double zoom)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();
@@ -92,7 +92,7 @@ public class SpriteSubView
         if (imageLayer == ImageLayer.TOP) image = topImage;
         else image = bottomImage;
 
-        graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit * zoom, y * Config.pixelsPerGridUnit * zoom, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
+        graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth(), topImage.getHeight());
         graphicsContext.restore(); // back to original state (before rotation)
     }
 
