@@ -8,10 +8,14 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.view.SceneManagerView;
 
 /**
- * Created by kaira on 01.11.2016.
+ * Stellt den Einstiegspunkt der Applikation dar
  */
 public class Main extends Application
 {
+    /**
+     * Der Einstiegspunkt der Applikation
+     * @param args Argumente welche an die Applikation gegeben werden
+     */
     public static void main(String args[])
     {
         Config.config();
@@ -20,6 +24,11 @@ public class Main extends Application
         launch();
     }
 
+    /**
+     * Startet das Userinterface der Applikation
+     * @param primaryStage Die von JavaFX erstellte Stage auf der gearbeitet wird
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception
     {

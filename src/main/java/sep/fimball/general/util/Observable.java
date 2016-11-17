@@ -1,7 +1,7 @@
 package sep.fimball.general.util;
 
 /**
- * Created by alexcekay on 16.11.16.
+ * Erweiterung von Observable um besser mit Lambda Expressions arbeiten zu können
  */
 public class Observable extends java.util.Observable
 {
