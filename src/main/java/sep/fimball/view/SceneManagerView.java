@@ -1,5 +1,7 @@
 package sep.fimball.view;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sep.fimball.general.data.Config;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
@@ -44,6 +47,14 @@ public class SceneManagerView
      */
     public SceneManagerView(Stage stage)
     {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
         stage.setWidth(1280);
         stage.setHeight(720);
 

@@ -79,7 +79,7 @@ public class PinballMachineManager
                     highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
                 }
 
-                PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineJson.tableId, highscores);
+                PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores);
                 pinballMachines.add(pinballMachine);
                 System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
 
