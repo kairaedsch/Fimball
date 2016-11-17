@@ -4,7 +4,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,8 +22,8 @@ public class PhysicsElementType
 
             if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
             {
-                PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
-                shapes.add(polygonColliderShape);
+                //TODO [important] uncomment this   PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
+                //shapes.add(polygonColliderShape);
             }
 
             if(collider.circleShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)

@@ -24,7 +24,7 @@ public class BaseElement
     public BaseElement(String id, BaseElementJson baseElementJson)
     {
         this.id = id;
-        type = baseElementJson.elementType;
+        //TODO [important] uncomment this    type = baseElementJson.elementType;
 
         physics = new PhysicsElementType(baseElementJson.physicElement);
         media = new MediaElementType(baseElementJson.mediaElement, id);
