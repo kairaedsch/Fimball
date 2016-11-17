@@ -27,9 +27,9 @@ public class Vector2
     }
 
     /**
-     * Konstruiert einen Vektor mit den übergebenen Parameter.
+     * Konstruiert einen Vektor mit den übergebenen Parametern.
      * @param x x-Komponente des Vektors
-     * @param y y-Komponente eines Vektors
+     * @param y y-Komponente des Vektors
      */
     public Vector2(double x, double y)
     {
@@ -58,7 +58,7 @@ public class Vector2
     }
 
     /**
-     * Subtrahiert einen anderen Vektor vom anderen
+     * Subtrahiert einen anderen Vektor von diesem Vektor
      * @param otherVec Der zu subtrahierende Vektor
      */
     public void sub(Vector2 otherVec)
@@ -86,7 +86,7 @@ public class Vector2
     }
 
     /**
-     * Das Skalarprodukt des Vektors mit einem anderen
+     * Berechnet das Skalarprodukt dieses Vektors mit einem gegebenen Vektor
      * @param other Der Vektor mit dem das Skalarprodukt berechnet werden soll
      * @return Das Skalarprodukt
      */
@@ -107,7 +107,7 @@ public class Vector2
 
     /**
      * Rotiert den Vektor um den gegebene Winkel
-     * @param radianAngle Zu rotierende Gradanzahl, gegeben in Radianten
+     * @param radianAngle Der Winkel um den rotiert werden soll, gegeben in Radianten
      */
     public void rotate(double radianAngle)
     {

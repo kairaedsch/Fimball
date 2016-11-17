@@ -24,7 +24,7 @@ public class BaseElementManager
     private static BaseElementManager singletonInstance;
 
     /**
-     * Gibt den bereits existierenden ElementManager oder  einen neu angelegten zurück, falls noch keiner existiert.
+     * Gibt den bereits existierenden ElementManager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
      * @return
      */

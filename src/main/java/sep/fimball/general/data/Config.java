@@ -44,7 +44,7 @@ public class Config
     private static String pathDataToMachines = "/machines";
 
     /**
-     * Die Datei in dem für einen Flipperautomaten das Vorschaubild gespeichert wird
+     * Die Datei in der für einen Flipperautomaten das Vorschaubild gespeichert wird
      */
     private static String pathMachineToImagePreview = "/preview.png";
 

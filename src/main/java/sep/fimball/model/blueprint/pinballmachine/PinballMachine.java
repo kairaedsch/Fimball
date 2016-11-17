@@ -42,7 +42,7 @@ public class PinballMachine
     private StringProperty imagePath;
 
     /**
-     * Legt einen leeren Automaten mit gegebenen Namen und ID an.
+     * Legt einen leeren Automaten mit gegebenen Namen und ID an. TODO
      * @param name Name des Automaten
      * @param pinballMachineId Id des Automaten
      */

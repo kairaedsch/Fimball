@@ -16,9 +16,9 @@ public class BaseElement
     private RuleElementType rule;
 
     /**
-     * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt und weist diesem eine ID zu.
+     * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt.
      *
-     * @param id Die ID, die dem erzeugten Bauplan zugewiesen werden soll.
+     * @param id TODO
      * @param baseElementJson Das Objekt, das die Informationen über das Spielelement enthält.
      */
     public BaseElement(String id, BaseElementJson baseElementJson)

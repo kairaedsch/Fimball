@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
 /**
- * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platziereten Elementen.
+ * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platzierten Elementen.
  */
 public class PlacedElementListJson {
 
