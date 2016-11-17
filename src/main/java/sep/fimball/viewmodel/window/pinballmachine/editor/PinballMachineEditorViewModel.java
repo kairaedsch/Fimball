@@ -72,16 +72,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
     }
 
-    public void mouseEvent(double xPos, double yPos)
-    {
-        Optional<PlacedElement> selectedElement = pinballMachine.getElementAt(new Vector2(xPos, yPos));
-        
-        if (selectedElement.isPresent())
-        {
-            selectedElementSubViewModel.setPlacedElement(selectedElement.get());
-        }
-    }
-
     /**
      * Stellt der View die Liste, die alle Flipperautomat-Elemente enthält, die vom Nutzer platziert werden können, zur Verfügung.
      *
@@ -181,8 +171,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if(mouseModus == MouseModus.SELECTING)
         {
-            PlacedElement placedElement = null;
-            selectedElementSubViewModel.setPlacedElement(placedElement);
+            Optional<PlacedElement> selectedElement = pinballMachine.getElementAt(gridPosition);
+
+            if (selectedElement.isPresent())
+            {
+                selectedElementSubViewModel.setPlacedElement(selectedElement.get());
+            }
+
         }
         else if(mouseModus == MouseModus.PLACING)
         {

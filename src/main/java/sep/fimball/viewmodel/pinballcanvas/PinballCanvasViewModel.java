@@ -82,11 +82,11 @@ public class PinballCanvasViewModel
         session.addGameLoopObserver(gameObserver);
     }
 
-    public void mouseEvent(double xPos, double yPos)
+    public void mouseClickedOnGame(Vector2 gridPos)
     {
         if (editorEnabled)
         {
-            editorViewModel.mouseEvent(xPos, yPos);
+            editorViewModel.mouseClickedOnGame(gridPos);
         }
     }
 
