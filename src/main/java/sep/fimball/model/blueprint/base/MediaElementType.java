@@ -35,7 +35,7 @@ public class MediaElementType
         {
             for (BaseElementJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
             {
-                // TODO hashCode musst not be unique
+                // TODO hashCode must not be unique
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
             }
         }
