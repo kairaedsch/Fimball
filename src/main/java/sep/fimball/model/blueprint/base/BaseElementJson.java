@@ -203,7 +203,7 @@ public class BaseElementJson
                 /**
                  * TODO
                  */
-                public double duration;
+                public int duration;
 
                 /**
                  * TODO

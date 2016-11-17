@@ -15,7 +15,7 @@ public class Animation
     /**
      * Wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
      */
-    private double duration;
+    private int duration;
 
     public Animation(BaseElementJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
     {
