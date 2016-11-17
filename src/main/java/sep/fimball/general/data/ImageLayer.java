@@ -1,7 +1,7 @@
 package sep.fimball.general.data;
 
 /**
- * Created by kaira on 16.11.2016.
+ * Wird zur Unterscheidung zwischen dem oberen Bild sowie des unteren Bild aus denen ein BaseElement besteht verwendet
  */
 public enum ImageLayer
 {
