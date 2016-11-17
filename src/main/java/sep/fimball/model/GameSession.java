@@ -7,17 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
-import sep.fimball.model.trigger.Trigger;
-import sep.fimball.model.trigger.TriggerFactory;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.physics.*;
+import sep.fimball.model.trigger.Trigger;
+import sep.fimball.model.trigger.TriggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class GameSession
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
         gameSession.stopPhysics();
+        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.getElements(), (GameElement::new));
         return gameSession;
     }
 

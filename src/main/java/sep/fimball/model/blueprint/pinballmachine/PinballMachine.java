@@ -5,8 +5,6 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,7 +30,7 @@ public class PinballMachine
     /**
      * Liste der auf dem Automaten gesetzten Elemente.
      */
-    private List<PlacedElement> elements;
+    private ListProperty<PlacedElement> elements;
 
     /**
      * Speicherpfad des Hintergrundbildes des Automaten.
@@ -48,7 +46,7 @@ public class PinballMachine
     {
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
-        this.elements = new ArrayList<>();
+        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         if(highscores != null) this.highscoreList.addAll(highscores);
@@ -78,9 +76,9 @@ public class PinballMachine
      * Gibt die Liste der Elemente des Flipperautomaten zurück.
      * @return  Die Liste der Elemente des Flipperautomaten zurück.
      */
-    public List<PlacedElement> getElements()
+    public ReadOnlyListProperty<PlacedElement> getElements()
     {
-        return Collections.unmodifiableList(elements);
+        return elements;
     }
 
     /**
