@@ -143,8 +143,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void dragged(double x, double y)
     {
-        cameraPosition.get().setX(cameraPosition.get().getX() + (x / Config.pixelsPerGridUnit));
-        cameraPosition.get().setY(cameraPosition.get().getY() + (y / Config.pixelsPerGridUnit));
+        cameraPosition.get().setX(cameraPosition.get().getX() + ((x / Config.pixelsPerGridUnit) / cameraZoom.get()));
+        cameraPosition.get().setY(cameraPosition.get().getY() + ((y / Config.pixelsPerGridUnit) / cameraZoom.get()));
     }
 
     public void setSelectedElement(PlacedElement placedElement)

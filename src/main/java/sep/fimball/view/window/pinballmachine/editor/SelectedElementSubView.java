@@ -12,6 +12,11 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubView
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label nameLabel;
     /**
      * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
      */
@@ -62,6 +67,9 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
 
         strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString()));
         pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString()));
+
+        nameLabel.textProperty().bind(selectedElementSubViewModel.nameProperty());
+        descriptionLabel.textProperty().bind(selectedElementSubViewModel.descriptionProperty());
     }
 
     /**
