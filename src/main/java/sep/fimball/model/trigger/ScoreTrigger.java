@@ -4,18 +4,18 @@ import sep.fimball.model.GameSession;
 import sep.fimball.model.element.GameElement;
 
 /**
- * TODO
+ * Trigger, der bei Kollision mit dem Ball ausgelöst wird, und die Punkte des aktuellen Spielers erhöht.
  */
 public class ScoreTrigger implements ElementTrigger
 {
     /**
-     * TODO
+     * Aktuelle GameSession.
      */
     private GameSession session;
 
     /**
-     * TODO
-     * @param session
+     * Erstellt einen neuen Trigger.
+     * @param session Aktuelle GameSession.
      */
     public ScoreTrigger(GameSession session)
     {

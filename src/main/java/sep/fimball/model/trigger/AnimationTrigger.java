@@ -3,7 +3,7 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.element.GameElement;
 
 /**
- * TODO
+ * Trigger, der bei einer Kollision die Animation des kollidierenden GameElements setzt.
  */
 public class AnimationTrigger implements ElementTrigger
 {

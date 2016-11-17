@@ -1,7 +1,7 @@
 package sep.fimball.model.trigger;
 
 /**
- * TODO
+ * Trigger, der bei User-Aktionen ausgelöst wird.
  */
 public interface UserTrigger
 {

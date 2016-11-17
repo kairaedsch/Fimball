@@ -1,12 +1,12 @@
 package sep.fimball.model.trigger;
 
 /**
- * TODO
+ * Wird bei verschiedenen Geschehnissen im Spiel informiert, und kann auf diese Reagieren.
  */
 public class Trigger
 {
     /**
-     * TODO
+     * Reagiert auf Kollisionen zwischen Ball und Spielelementen.
      */
     private ElementTrigger elementTrigger;
 
@@ -16,32 +16,20 @@ public class Trigger
     private GameTrigger gameTrigger;
 
     /**
-     * TODO
+     * Reagiert auf Aktionen des Spielers.
      */
     private UserTrigger userTrigger;
 
-    /**
-     * TODO
-     * @param elementTrigger
-     */
     public void setElementTrigger(ElementTrigger elementTrigger)
     {
         this.elementTrigger = elementTrigger;
     }
 
-    /**
-     * TODO
-     * @param gameTrigger
-     */
     public void setGameTrigger(GameTrigger gameTrigger)
     {
         this.gameTrigger = gameTrigger;
     }
 
-    /**
-     * TODO
-     * @param userTrigger
-     */
     public void setUserTrigger(UserTrigger userTrigger)
     {
         this.userTrigger = userTrigger;

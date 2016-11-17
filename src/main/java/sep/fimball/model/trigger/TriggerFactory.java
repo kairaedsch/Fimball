@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO
+ * Generiert eine Liste aller Trigger für die gegebene GameSession.
  */
 public class TriggerFactory
 {
     /**
-     * Generiert eine Liste aller Trigger für die gegebene GameSession und gibt diese zurück..
+     * Generiert eine Liste aller Trigger für die gegebene GameSession und gibt diese zurück.
      * @param gameSession Die GameSession, für die die Trigger generiert werden sollen.
      * @return Eine Liste aller Trigger.
      */

@@ -3,7 +3,7 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.element.GameElement;
 
 /**
- * TODO
+ * Trigger, der bei Kollision mit dem Ball ausgelöst wird, und den HitCount eines Elements erhöht.
  */
 public class HitTrigger implements ElementTrigger
 {

@@ -5,7 +5,7 @@ import sep.fimball.model.media.Sound;
 import sep.fimball.model.element.GameElement;
 
 /**
- * TODO
+ * Trigger, der bei Kollision mit dem Ball ausgelöst wird, und einen SoundClip abspielt.
  */
 public class SoundTrigger implements ElementTrigger
 {
