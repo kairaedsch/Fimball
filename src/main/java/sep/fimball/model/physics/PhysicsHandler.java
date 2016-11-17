@@ -1,5 +1,6 @@
 package sep.fimball.model.physics;
 
+import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
