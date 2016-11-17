@@ -46,6 +46,7 @@ public class PolygonColliderShape implements ColliderShape
             Vector2 axis = Vector2.sub(globalBallPosition, globalAxis).normalized();
 
             List<Double> points = new ArrayList<>();
+
             for (Vector2 vertex : vertices)
             {
                 Vector2 globalVertex = Vector2.add(vertex, colliderObjectPosition);
@@ -71,6 +72,49 @@ public class PolygonColliderShape implements ColliderShape
                 return new HitInfo(false, null);
             }
         }
+
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            Vector2 currentAxis;
+
+            if (i == vertices.size() - 1)
+            {
+                Vector2 vec = Vector2.sub(vertices.get(0), vertices.get(i));
+                currentAxis = Vector2.createNormal(vec).normalized();
+            }
+            else
+            {
+                Vector2 vec = Vector2.sub(vertices.get(i+1), vertices.get(i));
+                currentAxis = Vector2.createNormal(vec).normalized();
+            }
+            List<Double> newPoints = new ArrayList<>();
+
+            for (Vector2 vert : vertices)
+            {
+                Vector2 globalVert = Vector2.add(vert, colliderObjectPosition);
+                newPoints.add(Vector2.dot(globalVert, currentAxis));
+            }
+            newPoints.sort(Comparator.naturalOrder());
+
+            double ballCenter = Vector2.dot(globalBallPosition, currentAxis);
+            double ballMin = ballCenter - ball.getCollider().getRadius();
+            double ballMax = ballCenter + ball.getCollider().getRadius();
+
+            double polyMin = newPoints.get(0);
+            double polyMax = newPoints.get(newPoints.size() - 1);
+
+            // Do the projected areas intersect?
+            if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
+            {
+                double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
+                detectedOverlaps.add(Vector2.scale(currentAxis, overlapDistance));
+            }
+            else
+            {
+                return new HitInfo(false, null);
+            }
+        }
+
         detectedOverlaps.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
 
         return new HitInfo(true, detectedOverlaps.get(0));

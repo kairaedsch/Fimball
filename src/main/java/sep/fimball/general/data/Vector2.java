@@ -215,6 +215,11 @@ public class Vector2
         return vecOne;
     }
 
+    public static Vector2 createNormal(Vector2 vec)
+    {
+        return new Vector2(-vec.getY(), vec.getX());
+    }
+
     /**
      * Normiert den gegebenen Vektor wobei ein neuer erstellt wird und der Vektor der Klasse nicht geändert wird
      * @param input Der zu normierende Vektor
