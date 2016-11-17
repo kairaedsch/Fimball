@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.blueprint.settings;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

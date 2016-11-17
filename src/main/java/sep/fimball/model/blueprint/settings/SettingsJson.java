@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.blueprint.settings;
 
 /**
  * Diese Klasse repräsentiert die JSON-Beschreibung der Settings.

@@ -1,9 +1,9 @@
-package sep.fimball.model.element;
+package sep.fimball.model.trigger;
 
 /**
  * Created by alexcekay on 15.11.16.
  */
-public interface UserTrigger
+public interface GameTrigger
 {
     public void activateTrigger();
 }

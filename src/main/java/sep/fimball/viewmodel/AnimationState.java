@@ -2,8 +2,8 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import sep.fimball.model.Animation;
-import sep.fimball.model.ElementImage;
+import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.ElementImage;
 
 /**
  * Created by alexcekay on 16.11.16.

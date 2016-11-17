@@ -10,7 +10,7 @@ import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.ElementImage;
+import sep.fimball.model.media.ElementImage;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 import java.io.File;

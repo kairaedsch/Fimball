@@ -2,8 +2,8 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.DoubleProperty;
 import sep.fimball.general.util.Observable;
-import sep.fimball.model.Settings;
-import sep.fimball.model.SoundManager;
+import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.media.SoundManager;
 
 import java.util.Observer;
 
@@ -20,7 +20,7 @@ public class SoundManagerViewModel {
     Settings settings;
 
     /**
-     * Erzeugt ein neues SoundManagerViewModel, das sich an die Lautstärke-Properties in {@link sep.fimball.model.Settings} bindet.
+     * Erzeugt ein neues SoundManagerViewModel, das sich an die Lautstärke-Properties in {@link Settings} bindet.
      */
     public SoundManagerViewModel() {
         clipObservable = new Observable();

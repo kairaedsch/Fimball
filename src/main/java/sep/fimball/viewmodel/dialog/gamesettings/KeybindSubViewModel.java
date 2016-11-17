@@ -5,7 +5,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
-import sep.fimball.model.Settings;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.KeyBinding;
 
 /**

@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
-import sep.fimball.model.ElementImage;
+import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.general.data.Vector2;
 

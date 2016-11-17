@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.media;
 
 import sep.fimball.model.blueprint.json.BaseElementJson;
 

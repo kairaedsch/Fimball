@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.base;
+package sep.fimball.model.media;
 
 /**
  * Created by kaira on 16.11.2016.

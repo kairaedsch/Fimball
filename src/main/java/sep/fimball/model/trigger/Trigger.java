@@ -1,4 +1,4 @@
-package sep.fimball.model.element;
+package sep.fimball.model.trigger;
 
 /**
  * Created by TheAsuro on 15.11.2016.

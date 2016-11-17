@@ -2,12 +2,8 @@ package sep.fimball.model.element;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.Animation;
+import sep.fimball.model.media.Animation;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.physics.PhysicsUpdateEventArgs;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert

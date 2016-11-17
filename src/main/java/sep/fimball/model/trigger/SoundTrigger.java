@@ -1,7 +1,8 @@
-package sep.fimball.model.element;
+package sep.fimball.model.trigger;
 
-import sep.fimball.model.SoundManager;
-import sep.fimball.model.blueprint.base.Sound;
+import sep.fimball.model.media.SoundManager;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.element.GameElement;
 
 /**
  * Created by TheAsuro on 15.11.2016.

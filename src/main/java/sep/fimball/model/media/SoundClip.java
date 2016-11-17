@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.media;
 
 /**
  * SoundClip ist eine Aufzählung von Ereignissen bei denen Soundeffekte abgespielt werden.

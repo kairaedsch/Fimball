@@ -1,4 +1,6 @@
-package sep.fimball.model.element;
+package sep.fimball.model.trigger;
+
+import sep.fimball.model.element.GameElement;
 
 /**
  * Created by alexcekay on 11/14/16.

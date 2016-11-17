@@ -1,4 +1,4 @@
-package sep.fimball.model.element;
+package sep.fimball.model.trigger;
 
 import sep.fimball.model.GameSession;
 

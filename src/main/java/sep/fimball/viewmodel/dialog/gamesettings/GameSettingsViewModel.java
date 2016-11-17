@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.Settings;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
