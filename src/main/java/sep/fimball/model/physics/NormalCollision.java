@@ -7,7 +7,7 @@ import sep.fimball.general.data.Vector2;
  */
 public class NormalCollision implements CollisionType
 {
-    private final double bounce = 0.1;
+    private final double bounce = 0.5;
 
     @Override
     public void applyCollision(BallElement ball, Vector2 shortestIntersect)
