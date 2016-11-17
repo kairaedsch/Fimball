@@ -39,38 +39,42 @@ public class PolygonColliderShape implements ColliderShape
     {
         Vector2 globalBallPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
         List<Vector2> detectedOverlaps = new ArrayList<>();
+        List<Vector2> ballAxisList = new ArrayList<>();
+        Vector2 ballAxis;
 
-        for (Vector2 axisVertex : vertices)
+        for (Vector2 vertex : vertices)
         {
-            Vector2 globalAxis = Vector2.add(axisVertex, colliderObjectPosition);
-            Vector2 axis = Vector2.sub(globalBallPosition, globalAxis).normalized();
+            Vector2 axis = Vector2.add(vertex, colliderObjectPosition);
+            ballAxisList.add(Vector2.sub(globalBallPosition, axis));
+        }
+        ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
+        ballAxis = ballAxisList.get(0).normalized();
 
-            List<Double> points = new ArrayList<>();
+        List<Double> points = new ArrayList<>();
 
-            for (Vector2 vertex : vertices)
-            {
-                Vector2 globalVertex = Vector2.add(vertex, colliderObjectPosition);
-                points.add(Vector2.dot(globalVertex, axis));
-            }
-            points.sort(Comparator.naturalOrder());
+        for (Vector2 vertex : vertices)
+        {
+            Vector2 globalVertex = Vector2.add(vertex, colliderObjectPosition);
+            points.add(Vector2.dot(globalVertex, ballAxis));
+        }
+        points.sort(Comparator.naturalOrder());
 
-            double ballCenter = Vector2.dot(globalBallPosition, axis);
-            double ballMin = ballCenter - ball.getCollider().getRadius();
-            double ballMax = ballCenter + ball.getCollider().getRadius();
+        double ballCenter = Vector2.dot(globalBallPosition, ballAxis);
+        double ballMin = ballCenter - ball.getCollider().getRadius();
+        double ballMax = ballCenter + ball.getCollider().getRadius();
 
-            double polyMin = points.get(0);
-            double polyMax = points.get(points.size() - 1);
+        double polyMin = points.get(0);
+        double polyMax = points.get(points.size() - 1);
 
-            // Do the projected areas intersect?
-            if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
-            {
-                double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-                detectedOverlaps.add(Vector2.scale(axis, overlapDistance));
-            }
-            else
-            {
-                return new HitInfo(false, null);
-            }
+        // Do the projected areas intersect?
+        if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
+        {
+            double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
+            detectedOverlaps.add(Vector2.scale(ballAxis, overlapDistance));
+        }
+        else
+        {
+            return new HitInfo(false, null);
         }
 
         for (int i = 0; i < vertices.size(); i++)
@@ -96,17 +100,17 @@ public class PolygonColliderShape implements ColliderShape
             }
             newPoints.sort(Comparator.naturalOrder());
 
-            double ballCenter = Vector2.dot(globalBallPosition, currentAxis);
-            double ballMin = ballCenter - ball.getCollider().getRadius();
-            double ballMax = ballCenter + ball.getCollider().getRadius();
+            double circleCenter = Vector2.dot(globalBallPosition, currentAxis);
+            double ballMinimum = circleCenter - ball.getCollider().getRadius();
+            double ballMaximum = circleCenter + ball.getCollider().getRadius();
 
-            double polyMin = newPoints.get(0);
-            double polyMax = newPoints.get(newPoints.size() - 1);
+            double polygonMin = newPoints.get(0);
+            double polygonMax = newPoints.get(newPoints.size() - 1);
 
             // Do the projected areas intersect?
-            if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
+            if (ballMaximum > polygonMin && ballMinimum < polygonMax || polygonMax > ballMinimum && polygonMin < ballMaximum)
             {
-                double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
+                double overlapDistance = Math.min(ballMaximum, polygonMax) - Math.max(ballMinimum, polygonMin);
                 detectedOverlaps.add(Vector2.scale(currentAxis, overlapDistance));
             }
             else
