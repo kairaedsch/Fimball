@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
+import sep.fimball.general.data.Vector2;
+
 /**
  * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platzierten Elementen.
  */
@@ -21,14 +23,14 @@ public class PlacedElementListJson {
         public String BaseElementId;
 
         /**
-         * Speichert die x-Position des platzierten Elements.
+         * Speichert die Position des platzierten Elements.
          */
-        public double positionX;
+        public Vector2 position;
 
         /**
          * Speichert die y-Position des platzierten Elements.
          */
-        public double positionY;
+        public double rotation;
 
         /**
          * Speichert die Anzahl der Punkte, die das Treffen des Elements durch die Kugel bringt.
