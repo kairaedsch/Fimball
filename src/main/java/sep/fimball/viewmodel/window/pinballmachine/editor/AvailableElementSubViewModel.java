@@ -4,7 +4,6 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
 /**
@@ -12,6 +11,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
  */
 public class AvailableElementSubViewModel
 {
+
     /**
      * Das Flipperautomaten-Element, dessen Informationen angezeigt werden.
      */
@@ -27,26 +27,19 @@ public class AvailableElementSubViewModel
      */
     private StringProperty imagePath;
 
+    private PinballMachineEditorViewModel pinballMachineEditorViewModel;
+
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
      *
      * @param baseElement Der Elementtyp, dessen Informationen angezeigt werden sollen.
      */
-    public AvailableElementSubViewModel(BaseElement baseElement)
+    public AvailableElementSubViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel, BaseElement baseElement)
     {
+        this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
         this.baseElement = baseElement;
         imagePath = new SimpleStringProperty(baseElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0));
         name = new SimpleStringProperty(baseElement.getMedia().getName());
-    }
-
-    /**
-     * Erteilt dem Model den Befehl, dieses Flipperautomat-Element im Flipperautomaten zu platzieren.
-     *
-     * @param position Die Position, die das Flipperautomaten-Element haben soll.
-     */
-    public void placeElement(Vector2 position)
-    {
-
     }
 
     /**
@@ -67,5 +60,11 @@ public class AvailableElementSubViewModel
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
+    }
+
+    public void selected()
+    {
+        pinballMachineEditorViewModel.setMouseModus(MouseModus.PLACING);
+        pinballMachineEditorViewModel.setSelectedAvailableElement(baseElement);
     }
 }

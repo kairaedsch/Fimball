@@ -6,6 +6,7 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.RectangleDouble;
+import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.physics.Collider;
 import sep.fimball.model.physics.ColliderShape;
 
@@ -151,5 +152,11 @@ public class PinballMachine
 
     public String getID() {
         return pinballMachineId.getValue();
+    }
+
+    public void addElement(BaseElement baseElement, Vector2 position)
+    {
+        PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
+        addElement(placedElement);
     }
 }

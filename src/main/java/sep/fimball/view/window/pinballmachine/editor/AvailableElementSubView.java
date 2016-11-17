@@ -55,6 +55,6 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     public void mouseClicked()
     {
-        int x = 0;
+        availableElementSubViewModel.selected();
     }
 }
