@@ -24,6 +24,9 @@ public class PinballMachineManager
         return singletonInstance;
     }
 
+    /**
+     * Die Liste der gespeicherten Pinballautomaten.
+     */
     private ListProperty<PinballMachine> tableBlueprints;
 
     /**
@@ -38,6 +41,7 @@ public class PinballMachineManager
         tableBlueprints.add(new PinballMachine("Testautomat 2", "1"));
         tableBlueprints.add(new PinballMachine("Testautomat 3", "2"));
     }
+
 
     public ListProperty<PinballMachine> tableBlueprintsProperty()
     {

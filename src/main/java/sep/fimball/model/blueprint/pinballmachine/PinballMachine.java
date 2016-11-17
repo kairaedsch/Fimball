@@ -72,33 +72,54 @@ public class PinballMachine
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
 
+    /**
+     * Gibt das Property des Namens des Flipperautomaten als ReadOnly zurück.
+     * @return Das Property des Namens des Flipperautomaten.
+     */
     public ReadOnlyStringProperty nameProperty()
     {
         return name;
     }
 
+    /**
+     * Gibt das Property der Liste der Highscores des Flipperautomaten als ReadOnly zurück.
+     * @return Das Property der Liste der Highscores des Flipperautomaten.
+     */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
         return highscoreList;
     }
 
+    /**
+     * Gibt die Liste der Elemente des Flipperautomaten zurück.
+     * @return  Die Liste der Elemente des Flipperautomaten zurück.
+     */
     public List<PlacedElement> getTableElementList()
     {
         return Collections.unmodifiableList(tableElementList);
     }
 
+    /**
+     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
+     */
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
     }
 
+    /**
+     * Setzt den Namen des Flipperautomaten auf den übergebenen Wert.
+     * @param name Der neue Name des Flipperautomaten.
+     */
     public void setName(String name)
     {
         this.name.set(name);
     }
 
     /**
-     * Fügt einen Highscore zum Flipperautomaten hinzu
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu.
+     * @param highscore Der Highscore, der hinzugefügt werden soll.
      */
     public void addHighscore(Highscore highscore)
     {

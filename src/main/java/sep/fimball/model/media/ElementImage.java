@@ -39,7 +39,7 @@ public class ElementImage
     private int animationId;
 
     /**
-     * Erzeugt ein neues ElementImage mit der gegebenen {@code elementTypeId}.
+     * Erzeugt ein neues ElementImage mit der gegebenen {@code BaseElementId}.
      * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
      */
     public ElementImage(String elementTypeId)

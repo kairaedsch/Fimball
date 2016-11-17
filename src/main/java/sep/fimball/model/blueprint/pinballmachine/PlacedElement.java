@@ -24,8 +24,16 @@ public class PlacedElement
      */
     private IntegerProperty points;
 
+    /**
+     * TODO
+     */
     private DoubleProperty multiplier;
 
+    /**
+     * Erzeugt ein neues PlacedElement.
+     * @param baseElement Das korrespondierende BaseElement.
+     * @param position Die Position des PlacedElement.
+     */
     public PlacedElement(BaseElement baseElement, Vector2 position)
     {
         this.baseElement = baseElement;
