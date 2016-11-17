@@ -3,18 +3,19 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 
 /**
- * TODO
+ * Bei einem Collider mit dieser Art von Collision prallt der Ball nicht ab, sondern wird in eine vorher festgelegte
+ * Richtung beschleunigt.
  */
 public class AccelerationCollision implements CollisionType
 {
     /**
-     * TODO
+     * Wie stark, und in welche Richtung der Ball beschleunigt wird.
      */
     private Vector2 acceleration;
 
     /**
-     * TODO
-     * @param acceleration
+     * Erstellt eine neue Instanz von AccelerationCollision.
+     * @param acceleration Wie stark, und in welche Richtung der Ball beschleunigt wird.
      */
     public AccelerationCollision(Vector2 acceleration)
     {

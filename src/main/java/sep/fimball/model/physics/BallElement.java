@@ -9,7 +9,7 @@ import sep.fimball.model.element.GameElement;
 public class BallElement
 {
     /**
-     * TODO
+     * Darstellung des Balls als PhysicsElement.
      */
     private PhysicsElement subElement;
 

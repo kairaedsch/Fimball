@@ -19,8 +19,8 @@ public class CircleColliderShape implements ColliderShape
 
     /**
      * Erstellt einen neuen Collider in Kreisform.
-     * @param position
-     * @param radius
+     * @param position Mittelpunkt des Kreises, der den Collider formt.
+     * @param radius Radius des Kreises, der den Collider formt.
      */
     public CircleColliderShape(Vector2 position, double radius)
     {

@@ -30,6 +30,9 @@ public class PhysicsHandler
      */
     private final double GRAVITY = 1.19554;
 
+    /**
+     * Der aktuelle Spielball.
+     */
     private BallElement ballElement;
 
     /**
@@ -123,6 +126,9 @@ public class PhysicsHandler
         physicsElements.add(ball.getSubElement());
     }
 
+    /**
+     * Entfernt den aktuellen Ball aus dem Spiel.
+     */
     public void removeBall()
     {
         ballElement = null;
