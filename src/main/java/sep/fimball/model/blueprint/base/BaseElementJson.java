@@ -1,17 +1,28 @@
 package sep.fimball.model.blueprint.base;
 
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.WorldLayer;
-
 /**
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
  */
 public class BaseElementJson
 {
-    public BaseElementType elementType;
+    /**
+     * Speichert den Typ des BaseElements.
+     */
+    public String elementType;
 
+    /**
+     * Speichert den Typ des korrespondierenden PhysicElements.
+     */
     public PhysicElementTypeJson physicElement;
+
+    /**
+     * Speichert den Typ des korrespondierenden MediaElements.
+     */
     public MediaElementTypeJson mediaElement;
+
+    /**
+     * Speichert den Typ des korrespondierenden RuleElements.
+     */
     public RuleElementTypeJson ruleElement;
 
     /**
@@ -19,6 +30,9 @@ public class BaseElementJson
      */
     public static class PhysicElementTypeJson
     {
+        /**
+         * Speichert die Collider des PhysicElements.
+         */
         public PhysicColliderJson[] colliders;
 
         /**
@@ -26,8 +40,15 @@ public class BaseElementJson
          */
         public static class PhysicColliderJson
         {
+            /**
+             * Speichert die ID des Colliders.
+             */
             public String colliderId;
-            public WorldLayer layer;
+
+            /**
+             * Speichert die Ebene des Colliders
+             */
+            public String layer;
 
             /**
              * Speichert die Polygon-Collider des Elementtyps.
@@ -49,7 +70,24 @@ public class BaseElementJson
              */
             public static class PolygonJson
             {
-                public Vector2[] vertices;
+
+                public VerticeJson[] vertices;
+
+                /**
+                 * Diese Klasse repäsentiert eine Kante eines Polygons.
+                 */
+                public static class VerticeJson {
+
+                    /**
+                     * Speichert die x-Richtung der Kante.
+                     */
+                    public double xDirection;
+
+                    /**
+                     * Speichert die y-Richtung der Kante.
+                     */
+                    public double yDirection;
+                }
             }
 
             /**
@@ -57,7 +95,19 @@ public class BaseElementJson
              */
             public static class CircleJson
             {
-                public double x, y;
+                /**
+                 * Speichert die x-Position des Mittelpunktes des CircleColliders.
+                 */
+                public double x;
+
+                /**
+                 * Speichert die y-Position des Mittelpunktes des CircleColliders.
+                 */
+                public double y;
+
+                /**
+                 * Speichert den Radius des CircleColliders.
+                 */
                 public double radius;
             }
 
@@ -66,9 +116,24 @@ public class BaseElementJson
              */
             public static class ColliderTypeJson
             {
+                /**
+                 * Speichert den Named des Typs des Colliders.
+                 */
                 public String type;
+
+                /**
+                 * Speichert die Kraft, die der ColliderType auf die Kugel ausübt.
+                 */
                 public double strength;
+
+                /**
+                 * Speichert die Beschleunigung, die der ColliderType auf die Kugel ausübt, in x-Richtung.
+                 */
                 public double accelX;
+
+                /**
+                 * Speichert die Beschleunigung, die der ColliderType auf die Kugel ausübt, in x-Richtung.
+                 */
                 public double accelY;
             }
         }
@@ -79,8 +144,14 @@ public class BaseElementJson
      */
     public static class MediaElementTypeJson
     {
+        /**
+         * TODO
+         */
         public MediaElementTypeGeneralJson general;
 
+        /**
+         * TODO
+         */
         public MediaElementEventJson[] events;
 
         /**
@@ -110,8 +181,14 @@ public class BaseElementJson
          */
         public static class MediaElementEventJson
         {
+            /**
+             * TODO
+             */
             public String colliderId;
 
+            /**
+             * TODO
+             */
             public String soundName;
 
             /**
@@ -124,8 +201,19 @@ public class BaseElementJson
              */
             public static class AnimationJson
             {
+                /**
+                 * TODO
+                 */
                 public int frameCount;
+
+                /**
+                 * TODO
+                 */
                 public double duration;
+
+                /**
+                 * TODO
+                 */
                 public String animationName;
             }
         }
@@ -136,8 +224,14 @@ public class BaseElementJson
      */
     public static class RuleElementTypeJson
     {
+        /**
+         * TODO
+         */
         public RuleElementTypeGeneralJson general;
 
+        /**
+         * TODO
+         */
         public RuleElementEventJson[] events;
 
         /**
@@ -156,6 +250,9 @@ public class BaseElementJson
          */
         public static class RuleElementEventJson
         {
+            /**
+             * TODO
+             */
             public String colliderId;
         }
     }

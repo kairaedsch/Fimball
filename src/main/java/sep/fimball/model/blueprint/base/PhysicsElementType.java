@@ -49,7 +49,7 @@ public class PhysicsElementType
                     throw new NullPointerException();
             }
 
-            colliders.add(new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode()));
+            colliders.add(new Collider(WorldLayer.valueOf(collider.layer), shapes, collisionType, collider.colliderId.hashCode()));
         }
     }
 
