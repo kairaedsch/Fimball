@@ -56,7 +56,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(element));
 
-        GameSession gameSession = GameSession.generateGameSession(pinballMachine, new String[]{new String(new byte[]{71, 111, 116, 116, 105, 109, 112, 101, 114, 97, 116, 111, 114, 32, 84, 114, 117, 109, 112})});
+        GameSession gameSession = GameSession.generateGameSession(pinballMachine, new String[]{"Alex editor aufruf "});
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
     }
