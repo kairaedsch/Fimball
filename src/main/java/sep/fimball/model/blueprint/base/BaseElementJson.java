@@ -71,6 +71,9 @@ public class BaseElementJson
             public static class PolygonJson
             {
 
+                /**
+                 * Speichert die Kanten des Polygons.
+                 */
                 public VerticeJson[] vertices;
 
                 /**
@@ -169,7 +172,11 @@ public class BaseElementJson
              */
             public String editorDescription;
 
+            /**
+             * Speichert, ob das Element rotiert werden kann.
+             */
             public boolean canRotate;
+
             /**
              * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
              */
