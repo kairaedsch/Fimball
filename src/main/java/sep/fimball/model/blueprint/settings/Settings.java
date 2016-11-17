@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
-import sep.fimball.model.blueprint.json.JsonFileManager;
+import sep.fimball.model.blueprint.JsonFileManager;
 import sep.fimball.model.input.KeyBinding;
 
 import java.nio.file.Path;

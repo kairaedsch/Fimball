@@ -1,7 +1,5 @@
 package sep.fimball.model.blueprint.base;
 
-import sep.fimball.model.blueprint.json.BaseElementJson;
-
 /**
  * Diese Klasse enthält alle Informationen, die gemeinsam ein Spielfeldelement bestimmen. Sie stellt also einen Bauplan für die eigentlichen Spielelemente dar.
  */

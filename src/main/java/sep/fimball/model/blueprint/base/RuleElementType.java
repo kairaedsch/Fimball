@@ -1,7 +1,5 @@
 package sep.fimball.model.blueprint.base;
 
-import sep.fimball.model.blueprint.json.BaseElementJson;
-
 import java.util.HashMap;
 import java.util.Map;
 

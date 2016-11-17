@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint.json;
+package sep.fimball.model.blueprint.pinballmachine;
 
 import sep.fimball.general.data.Vector2;
 

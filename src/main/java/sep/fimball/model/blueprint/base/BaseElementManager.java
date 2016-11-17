@@ -5,8 +5,7 @@ import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
-import sep.fimball.model.blueprint.json.BaseElementJson;
-import sep.fimball.model.blueprint.json.JsonFileManager;
+import sep.fimball.model.blueprint.JsonFileManager;
 
 import java.io.IOException;
 import java.nio.file.Files;

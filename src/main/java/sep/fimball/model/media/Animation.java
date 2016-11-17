@@ -1,6 +1,6 @@
 package sep.fimball.model.media;
 
-import sep.fimball.model.blueprint.json.BaseElementJson;
+import sep.fimball.model.blueprint.base.BaseElementJson;
 
 /**
  * Enthält die Pfade zu den Bild-Dateien einer Animation, und stellt das aktuell angezeigte Bild bereit.

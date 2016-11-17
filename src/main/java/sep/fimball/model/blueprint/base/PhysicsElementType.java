@@ -1,7 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.json.BaseElementJson;
 import sep.fimball.model.physics.*;
 
 import java.util.ArrayList;

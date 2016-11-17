@@ -1,7 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
 import sep.fimball.model.media.Animation;
-import sep.fimball.model.blueprint.json.BaseElementJson;
 import sep.fimball.model.media.Sound;
 
 /**

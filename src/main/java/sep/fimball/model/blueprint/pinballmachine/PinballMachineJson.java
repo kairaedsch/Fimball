@@ -1,6 +1,4 @@
-package sep.fimball.model.blueprint.json;
-
-import sep.fimball.general.data.Highscore;
+package sep.fimball.model.blueprint.pinballmachine;
 
 /**
  * Created by marc on 16.11.16.

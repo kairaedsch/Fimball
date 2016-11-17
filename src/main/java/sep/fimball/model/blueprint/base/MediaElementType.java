@@ -4,7 +4,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.model.media.ElementImage;
-import sep.fimball.model.blueprint.json.BaseElementJson;
 
 import java.util.HashMap;
 import java.util.Map;

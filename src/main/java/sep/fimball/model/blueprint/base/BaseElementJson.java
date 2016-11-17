@@ -1,7 +1,6 @@
-package sep.fimball.model.blueprint.json;
+package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.physics.WorldLayer;
 
 /**
