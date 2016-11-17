@@ -73,7 +73,6 @@ public class BaseElementJson
              */
             public static class PolygonJson
             {
-
                 /**
                  * Speichert die Kanten des Polygons.
                  */
