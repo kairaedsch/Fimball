@@ -1,6 +1,7 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.RectangleDouble;
 
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
@@ -62,5 +63,12 @@ public class CircleColliderShape implements ColliderShape
         }
 
         return new HitInfo(false, null);
+    }
+
+    @Override
+    public RectangleDouble getBoundingBox()
+    {
+        Vector2 origin = new Vector2(position.getX() - radius, position.getY() - radius);
+        return new RectangleDouble(origin, 2 * radius, 2 * radius);
     }
 }

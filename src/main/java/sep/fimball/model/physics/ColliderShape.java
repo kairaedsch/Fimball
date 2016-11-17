@@ -1,6 +1,7 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.RectangleDouble;
 
 /**
  * Beschreibt die Form einer Fläche die mit dem Ball interagieren kann.
@@ -13,4 +14,6 @@ public interface ColliderShape
      * @return Informationen über eine mögliche Überschneidung der Fläche mit dem Ball.
      */
     HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition);
+
+    RectangleDouble getBoundingBox();
 }

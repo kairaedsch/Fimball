@@ -1,6 +1,7 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.RectangleDouble;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -122,5 +123,39 @@ public class PolygonColliderShape implements ColliderShape
         detectedOverlaps.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
 
         return new HitInfo(true, detectedOverlaps.get(0));
+    }
+
+    @Override
+    public RectangleDouble getBoundingBox()
+    {
+        double minX = vertices.get(0).getX();
+        double minY = vertices.get(0).getY();
+        double maxX = vertices.get(0).getX();
+        double maxY = vertices.get(0).getY();
+
+        for (Vector2 vertex : vertices)
+        {
+            double vertexX = vertex.getX();
+            double vertexY = vertex.getY();
+
+            if (vertexX < minX)
+            {
+                minX = vertexX;
+            }
+            if (vertexX > maxX)
+            {
+                maxX = vertexX;
+            }
+            if (vertexY < minY)
+            {
+                minY = vertexY;
+            }
+            if (vertexY > maxY)
+            {
+                maxY = vertexY;
+            }
+        }
+        Vector2 origin = new Vector2(minX, minY);
+        return new RectangleDouble(origin, maxX - minX, maxY - minY);
     }
 }

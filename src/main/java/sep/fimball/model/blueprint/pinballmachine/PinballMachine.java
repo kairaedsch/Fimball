@@ -4,8 +4,13 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.RectangleDouble;
+import sep.fimball.model.physics.Collider;
+import sep.fimball.model.physics.ColliderShape;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.
@@ -52,6 +57,30 @@ public class PinballMachine
         if(highscores != null) this.highscoreList.addAll(highscores);
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
+    }
+
+    public Optional<PlacedElement> getElementAt(Vector2 point)
+    {
+        for (PlacedElement element : elements)
+        {
+            for (Collider collider : element.getBaseElement().getPhysics().getColliders())
+            {
+                for (ColliderShape shape : collider.getShapes())
+                {
+                    RectangleDouble boundingBox = shape.getBoundingBox();
+                    double minX = boundingBox.getOrigin().getX();
+                    double minY = boundingBox.getOrigin().getY();
+                    double maxX = minX + boundingBox.getWidth();
+                    double maxY = minY + boundingBox.getHeight();
+
+                    if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
+                    {
+                        return Optional.of(element);
+                    }
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     /**
