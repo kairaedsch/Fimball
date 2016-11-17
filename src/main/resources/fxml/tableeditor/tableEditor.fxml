@@ -55,7 +55,7 @@
                <children>
                   <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#8f8f8fa3" height="55.0" layoutX="144.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
-                  <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                  <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" onMouseClicked="#playClicked" />
                </children>
             </AnchorPane>
             <AnchorPane minWidth="130.0">
