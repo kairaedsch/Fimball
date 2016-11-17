@@ -28,11 +28,20 @@ public class CircleColliderShape implements ColliderShape
         this.radius = radius;
     }
 
+    /**
+     * Gibt den Mittelpunkt des Kreises, der den Collider formt, zurück.
+     * @return Der Mittelpunkt des Kreises, der den Collider formt.
+     */
     public Vector2 getPosition()
     {
         return position;
     }
 
+
+    /**
+     * Gibt den Radius des Kreises, der den Collider formt, zurück.
+     * @return Der Radius des Kreises, der den Collider formt.
+     */
     public double getRadius()
     {
         return radius;

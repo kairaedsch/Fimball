@@ -33,16 +33,28 @@ public class CollisionEventArgs
         this.otherCollider = otherCollider;
     }
 
+    /**
+     * Gibt das GameElement, das mit dem Ziel-GameElement zusammengestoßen ist, zurück.
+     * @return Das GameElement, das mit dem Ziel-GameElement zusammengestoßen ist.
+     */
     public GameElement getOtherElement()
     {
         return otherElement;
     }
 
+    /**
+     * Gibt den Collider des Ziel-GameElements, der mit dem anderen GameElement zusammengestoßen ist, zurück.
+     * @return Der Collider des Ziel-GameElements, der mit dem anderen GameElement zusammengestoßen ist.
+     */
     public Collider getOwnCollider()
     {
         return ownCollider;
     }
 
+    /**
+     * Gibt den Collider des anderen GameElements, der mit dem Ziel-GameElement zusammengestoßen ist, zurück.
+     * @return Der Collider des anderen GameElements, der mit dem Ziel-GameElement zusammengestoßen ist.
+     */
     public Collider getOtherCollider()
     {
         return otherCollider;

@@ -3,12 +3,19 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * TODO
  */
 public class AccelerationCollision implements CollisionType
 {
+    /**
+     * TODO
+     */
     private Vector2 acceleration;
 
+    /**
+     * TODO
+     * @param acceleration
+     */
     public AccelerationCollision(Vector2 acceleration)
     {
         this.acceleration = acceleration;

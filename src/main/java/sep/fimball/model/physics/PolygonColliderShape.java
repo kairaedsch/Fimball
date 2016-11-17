@@ -25,6 +25,10 @@ public class PolygonColliderShape implements ColliderShape
         this.vertices = vertices;
     }
 
+    /**
+     * Gibt die Kanten des Polygons, die den Collider formen, zurück.
+     * @return Die Kanten des Polygons, die den Collider formen.
+     */
     public List<Vector2> getVertices()
     {
         return vertices;

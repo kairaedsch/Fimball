@@ -3,7 +3,7 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by alexcekay on 15.11.16.
+ * Diese Klasse repräsentiert die Kollision eines Flippers mti dem Ball.
  */
 public class FlipperCollision implements CollisionType
 {

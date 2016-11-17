@@ -3,7 +3,7 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * Diese Klasse repäsentiert die Kollision des Balls mit einem "normalen" Element (kein Flipper oder Plunger).
  */
 public class NormalCollision implements CollisionType
 {

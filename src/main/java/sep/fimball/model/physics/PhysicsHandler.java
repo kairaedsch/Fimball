@@ -54,7 +54,8 @@ public class PhysicsHandler
     private List<PhysicsElement> physicsElements;
 
     /**
-     * Erzeugt einen PhysicsHandler
+     * Zrzeugt einen neuen PhysicsHandler mit den gegebenen Element.
+     * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      */
     public PhysicsHandler(List<PhysicsElement> elements)
     {
@@ -112,6 +113,10 @@ public class PhysicsHandler
         };
     }
 
+    /**
+     * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
+     * @param ball Der Ball, der hinzugefügt werden soll.
+     */
     public void addBall(BallElement ball)
     {
         ballElement = ball;

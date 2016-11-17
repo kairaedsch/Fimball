@@ -1,9 +1,14 @@
 package sep.fimball.model.physics;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * TODO
  */
 public interface ColliderShape
 {
+    /**
+     * TODO
+     * @param ball
+     * @return
+     */
     HitInfo calculateHitInfo(CircleColliderShape ball);
 }

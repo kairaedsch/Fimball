@@ -48,26 +48,46 @@ public class PhysicsElement
         element.setRotation(rotation);
     }
 
+    /**
+     * Gibt das zu diesem PhysicElement gehörende GameElement zurück.
+     * @return Das zu diesem PhysicElement gehörende GameElement.
+     */
     public GameElement getElement()
     {
         return element;
     }
 
+    /**
+     * Gibt die Position des PhysicsElements zurück.
+     * @return Die Position des PhysiscsElements.
+     */
     public Vector2 getPosition()
     {
         return position;
     }
 
+    /**
+     * Setzt die Position des PhysicsElements auf den übergebenen Wert.
+     * @param position Die neue Position des PhysicsElement
+     */
     public void setPosition(Vector2 position)
     {
         this.position = position;
     }
 
+    /**
+     * Gibt die Rotation des PhysicsElements zurück.
+     * @param rotation Die Rotation des PhysicsElements zurück.
+     */
     public void setRotation(double rotation)
     {
         this.rotation = rotation;
     }
 
+    /**
+     * Gibt eine Liste der Collider des PhysicsElements zurück.
+     * @return Eine Liste der Collider des PhysicsElements.
+     */
     public List<Collider> getColliders()
     {
         return colliders;
