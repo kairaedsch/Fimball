@@ -38,6 +38,7 @@ public class PolygonColliderShape implements ColliderShape
     public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
     {
         Vector2 globalBallPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
+        List<Vector2> detectedOverlaps = new ArrayList<>();
 
         for (Vector2 axisVertex : vertices)
         {
@@ -63,10 +64,15 @@ public class PolygonColliderShape implements ColliderShape
             if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
             {
                 double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-                return new HitInfo(true, Vector2.scale(axis, overlapDistance));
+                detectedOverlaps.add(Vector2.scale(axis, overlapDistance));
+            }
+            else
+            {
+                return new HitInfo(false, null);
             }
         }
+        detectedOverlaps.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
 
-        return new HitInfo(false, null);
+        return new HitInfo(true, detectedOverlaps.get(0));
     }
 }
