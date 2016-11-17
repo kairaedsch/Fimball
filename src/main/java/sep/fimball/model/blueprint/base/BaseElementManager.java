@@ -61,29 +61,29 @@ public class BaseElementManager
         String elementTypeId = path.getFileName().toString();
         Path jsonPath = Paths.get(Config.pathToElementDataJson(elementTypeId));
 
-        Optional<BaseElementJson> elementTypeOptional = JsonFileManager.loadFromJson(jsonPath, BaseElementJson.class);
+        Optional<BaseElementJson> baseElementOptional = JsonFileManager.loadFromJson(jsonPath, BaseElementJson.class);
 
-        if (elementTypeOptional.isPresent())
+        if (baseElementOptional.isPresent())
         {
-            BaseElementJson baseElementJson = elementTypeOptional.get();
+            BaseElementJson baseElementJson = baseElementOptional.get();
 
             // TODO NullPointerException not very good
             try
             {
                 BaseElement baseElement = new BaseElement(elementTypeId, baseElementJson);
                 elements.put(path.getFileName().toString(), baseElement);
-                System.out.println("Element Type \"" + path.getFileName() + "\" loaded");
+                System.out.println("Element Type \"" + elementTypeId + "\" loaded");
             }
             catch (NullPointerException e)
             {
-                System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
+                System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
                 e.printStackTrace();
             }
 
         }
         else
         {
-            System.err.println("Element Type \"" + path.getFileName() + "\" not loaded");
+            System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
         }
     }
 

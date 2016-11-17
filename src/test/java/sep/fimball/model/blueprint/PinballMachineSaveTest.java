@@ -17,7 +17,7 @@ public class PinballMachineSaveTest
         PinballMachine pinballMachine = PinballMachineManager.getInstance().tableBlueprintsProperty().valueAt(pinballMachineId).get();
         String[] elementTypeIds;
         BaseElementManager.getInstance().elementsProperty().keySet().toArray(elementTypeIds);
-        PlacedElementList tableElementList = pinballMachine.getTableElementList();
+        PlacedElementList tableElementList = pinballMachine.getElements();
 
         for (int i = 0; i < elementTypeIds.length; i++)
         {
@@ -30,11 +30,11 @@ public class PinballMachineSaveTest
 
         PinballMachine loadedPinballMachine;
 
-        ReadOnlyMapProperty<Integer, PlacedElement> elementsPropertyOriginal = pinballMachine.getTableElementList().elementsProperty();
-        ReadOnlyMapProperty<Integer, PlacedElement> elementsPropertyLoaded = pinballMachine.getTableElementList().elementsProperty();
+        ReadOnlyMapProperty<Integer, PlacedElement> elementsPropertyOriginal = pinballMachine.getElements().elementsProperty();
+        ReadOnlyMapProperty<Integer, PlacedElement> elementsPropertyLoaded = pinballMachine.getElements().elementsProperty();
 
         boolean difference = false;
-        for (Integer key : pinballMachine.getTableElementList().elementsProperty().keySet())
+        for (Integer key : pinballMachine.getElements().elementsProperty().keySet())
         {
             PlacedElement original = elementsPropertyOriginal.valueAt(key).get();
             PlacedElement loaded = elementsPropertyLoaded.valueAt(key).get();

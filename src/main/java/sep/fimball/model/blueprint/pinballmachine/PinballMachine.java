@@ -4,8 +4,6 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElementManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +32,7 @@ public class PinballMachine
     /**
      * Liste der auf dem Automaten gesetzten Elemente.
      */
-    private List<PlacedElement> tableElementList;
+    private List<PlacedElement> elements;
 
     /**
      * Speicherpfad des Hintergrundbildes des Automaten.
@@ -46,28 +44,14 @@ public class PinballMachine
      * @param name Name des Automaten
      * @param pinballMachineId Id des Automaten
      */
-    public PinballMachine(String name, String pinballMachineId)
+    public PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
+        this.elements = new ArrayList<>();
+
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        this.tableElementList = new ArrayList<>();
-
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0)));
-
-        // Trumps Wall
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(12, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(8, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(4, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(0, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(-4, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(-8, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(-12, 4)));
-        tableElementList.add(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), new Vector2(-16, 4)));
-        // Can't Stump the Trump
-
-        highscoreList.add(new Highscore(1000, "Jenny " + name));
-        highscoreList.add(new Highscore(2000, "Felix " + name));
+        if(highscores != null) this.highscoreList.addAll(highscores);
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
@@ -94,9 +78,9 @@ public class PinballMachine
      * Gibt die Liste der Elemente des Flipperautomaten zurück.
      * @return  Die Liste der Elemente des Flipperautomaten zurück.
      */
-    public List<PlacedElement> getTableElementList()
+    public List<PlacedElement> getElements()
     {
-        return Collections.unmodifiableList(tableElementList);
+        return Collections.unmodifiableList(elements);
     }
 
     /**
@@ -125,5 +109,10 @@ public class PinballMachine
     {
         highscoreList.add(highscore);
         if(highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
+    }
+
+    public void addElement(PlacedElement placedElement)
+    {
+        elements.add(placedElement);
     }
 }

@@ -133,7 +133,7 @@ public class GameSession
         List<PhysicsElement> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
 
-        for (PlacedElement element : machineBlueprint.getTableElementList())
+        for (PlacedElement element : machineBlueprint.getElements())
         {
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {

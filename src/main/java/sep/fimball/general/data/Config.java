@@ -170,4 +170,10 @@ public class Config
     {
         return pathToData + pathDataToSettings;
     }
+
+    public static long uniqueId()
+    {
+        // TODO make unique
+        return System.currentTimeMillis();
+    }
 }

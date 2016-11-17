@@ -30,16 +30,22 @@ public class PlacedElement
     private DoubleProperty multiplier;
 
     /**
+     * TODO
+     */
+    private DoubleProperty rotation;
+
+    /**
      * Erzeugt ein neues PlacedElement.
      * @param baseElement Das korrespondierende BaseElement.
      * @param position Die Position des PlacedElement.
      */
-    public PlacedElement(BaseElement baseElement, Vector2 position)
+    public PlacedElement(BaseElement baseElement, Vector2 position, int points, double multiplier, double rotation)
     {
         this.baseElement = baseElement;
         this.position = new SimpleObjectProperty<>(position);
-        this.points = new SimpleIntegerProperty();
-        this.multiplier = new SimpleDoubleProperty();
+        this.points = new SimpleIntegerProperty(points);
+        this.multiplier = new SimpleDoubleProperty(multiplier);
+        this.rotation = new SimpleDoubleProperty(rotation);
     }
 
     public ReadOnlyObjectProperty<Vector2> positionProperty()
@@ -57,6 +63,16 @@ public class PlacedElement
         return multiplier;
     }
 
+    public DoubleProperty rotationProperty()
+    {
+        return rotation;
+    }
+
+    public BaseElement getBaseElement()
+    {
+        return baseElement;
+    }
+
     public void setPosition(Vector2 position)
     {
         this.position.set(position);
@@ -70,10 +86,5 @@ public class PlacedElement
     public void setMultiplier(double multiplier)
     {
         this.multiplier.set(multiplier);
-    }
-
-    public BaseElement getBaseElement()
-    {
-        return baseElement;
     }
 }

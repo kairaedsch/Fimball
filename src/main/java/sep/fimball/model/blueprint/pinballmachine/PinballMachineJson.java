@@ -8,7 +8,7 @@ public class PinballMachineJson {
     /**
      * Speichert die ID des Flipperautomaten.
      */
-    public int tableId;
+    public String tableId;
 
     /**
      * Speichert den Namen des Flipperautomaten.

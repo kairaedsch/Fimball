@@ -20,7 +20,7 @@ public class PlacedElementListJson {
         /**
          * Speichert die Id des BaseElements des platzierten Elements.
          */
-        public String BaseElementId;
+        public String baseElementId;
 
         /**
          * Speichert die Position des platzierten Elements.

@@ -39,20 +39,6 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     }
 
     /**
-     *  Erstellt ein neues PinballMachineSettingsViewModel mit leeren Flipperautomaten.
-     */
-    public PinballMachineSettingsViewModel()
-    {
-        super(WindowType.TABLE_SETTINGS);
-
-        //TODO
-        this.pinballMachine = new PinballMachine("", "0");
-
-        machineName = new SimpleStringProperty();
-        machineName.bind(pinballMachine.nameProperty());
-    }
-
-    /**
      * Erteilt dem Model den Befehl, die Änderungen am Flipperautomaten zu speichern.
      */
     public void savePinballMachine()
