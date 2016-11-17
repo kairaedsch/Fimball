@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 /**
@@ -8,6 +9,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
  */
 public class SelectedElementSubViewModel
 {
+    private PinballMachine pinballMachine;
     /**
      * Das Flipperautomat-Element, das aktuell ausgewählt ist.
      */
@@ -38,8 +40,9 @@ public class SelectedElementSubViewModel
      *
      * @param placedElement Das Flipperautomat-Element, das ausgewählt ist.
      */
-    public SelectedElementSubViewModel(PlacedElement placedElement)
+    public SelectedElementSubViewModel(PinballMachine pinballMachine, PlacedElement placedElement)
     {
+        this.pinballMachine = pinballMachine;
         this.placedElement = placedElement;
 
         name = new SimpleStringProperty();
@@ -53,7 +56,7 @@ public class SelectedElementSubViewModel
      */
     public void rotateClockwise()
     {
-
+        placedElement.rotateClockwise();
     }
 
     /**
@@ -61,7 +64,7 @@ public class SelectedElementSubViewModel
      */
     public void rotateCounterclockwise()
     {
-
+        placedElement.rotateCounterclockwise();
     }
 
     /**
@@ -104,5 +107,10 @@ public class SelectedElementSubViewModel
     public DoubleProperty multiplierProperty()
     {
         return multiplier;
+    }
+
+    public void remove()
+    {
+        pinballMachine.removeElement(placedElement);
     }
 }

@@ -38,6 +38,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private DoubleProperty cameraZoom;
 
+    private SelectedElementSubViewModel selectedElementSubViewModel;
+
     private PinballCanvasViewModel pinballCanvasViewModel;
 
     /**
@@ -52,13 +54,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
         cameraZoom = new SimpleDoubleProperty(0.75);
+        selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine, pinballMachine.getElements().get(0));
 
         availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(element));
 
-        GameSession gameSession = GameSession.generateGameSession(pinballMachine, new String[]{"Alex editor aufruf "});
+        GameSession gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
-
     }
 
     /**
@@ -76,7 +78,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void zoomIn()
     {
-
+        cameraZoom.subtract(0.25);
     }
 
     /**
@@ -84,7 +86,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void zoomOut()
     {
-
+        cameraZoom.add(0.25);
     }
 
     /**
@@ -116,5 +118,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public DoubleProperty cameraZoomProperty()
     {
         return cameraZoom;
+    }
+
+    public SelectedElementSubViewModel getSelectedElementSubViewModel()
+    {
+        return selectedElementSubViewModel;
     }
 }

@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import java.lang.String?>
-<HBox styleClass="machine, selected" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.mainmenu.PinballMachineSelectorSubView" onMouseClicked="#mouseClicked">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0" style="-fx-padding: 0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.SelectedElementSubView">
     <children>
-        <Pane minHeight="80.0" minWidth="80.0" styleClass="machinePic" fx:id="previewImage" />
-        <Label maxHeight="9999" text="Marcs Automat" styleClass="machineName"  fx:id="previewName" ></Label>
+        <ScrollPane prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" >
+            <content>
+                <AnchorPane>
+                    <children>
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                            <children>
+                                <GridPane>
+                                    <children>
+                                        <Label text="Strength: 3" />
+                                        <Slider blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" />
+                                        <Slider max="1000.0" min="1.0" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label text="Points: 500" GridPane.rowIndex="1" />
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                </GridPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <Button mnemonicParsing="false" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" onMouseClicked="#rotateClockwiseClicked"/>
+        <Button mnemonicParsing="false" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" onMouseClicked="#removeClicked" />
     </children>
-    <stylesheets>
-        <String fx:value="styles/style.css"/>
-    </stylesheets>
-</HBox>
+</AnchorPane>

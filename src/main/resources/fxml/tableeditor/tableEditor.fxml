@@ -60,43 +60,10 @@
             </AnchorPane>
             <AnchorPane minWidth="130.0">
                <children>
-                  <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="selectedElement">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0" style="-fx-padding: 0;">
-                           <children>
-                              <ScrollPane prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <content>
-                                  <AnchorPane>
-                                       <children>
-                                          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
-                                             <children>
-                                                <GridPane>
-                                                   <children>
-                                                      <Label text="Strength: 3" />
-                                                      <Slider blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" />
-                                                      <Slider max="1000.0" min="1.0" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                      <Label text="Points: 500" GridPane.rowIndex="1" />
-                                                   </children>
-                                                   <columnConstraints>
-                                                      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                </GridPane>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </ScrollPane>
-                              <Button mnemonicParsing="false" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-                              <Button mnemonicParsing="false" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
-                           </children>
-                        </AnchorPane>
-                     </content></TitledPane>
+                     </content>
+                  </TitledPane>
                </children>
             </AnchorPane>
          </items>

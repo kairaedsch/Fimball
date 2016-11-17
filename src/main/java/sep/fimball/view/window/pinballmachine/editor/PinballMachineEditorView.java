@@ -1,8 +1,8 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ViewLoader;
@@ -29,7 +29,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Das zur Zeit auf dem Spielfeld vom Nutzer ausgewählte Element.
      */
     @FXML
-    private Node selectedElement;
+    private TitledPane selectedElement;
 
     /**
      * Die zur Platzierung auf dem Spielfeld verfügbaren Elemente.
@@ -54,10 +54,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.TABLE_EDITOR_AVAILABLE_ELEMENT);
 
+        ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
+        pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
+        viewLoaderCanvas.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
 
-        ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
-        pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
-        viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
+        ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.TABLE_EDITOR_SELECTED_ELEMENT);
+        selectedElement.setContent(viewLoader.getRootNode());
+        viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
     }
 
     /**

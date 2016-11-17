@@ -114,6 +114,11 @@ public class PinballMachine
         elements.add(placedElement);
     }
 
+    public void removeElement(PlacedElement placedElement)
+    {
+        elements.remove(placedElement);
+    }
+
     public String getID() {
         return pinballMachineId.getValue();
     }

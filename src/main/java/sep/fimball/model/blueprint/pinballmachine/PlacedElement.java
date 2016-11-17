@@ -87,4 +87,14 @@ public class PlacedElement
     {
         this.multiplier.set(multiplier);
     }
+
+    public void rotateClockwise()
+    {
+        if(baseElement.getMedia().canRotate()) rotation.setValue(rotation.get() + baseElement.getMedia().getRotationAccuracy());
+    }
+
+    public void rotateCounterclockwise()
+    {
+        if(baseElement.getMedia().canRotate()) rotation.setValue(360 + rotation.get() - baseElement.getMedia().getRotationAccuracy());
+    }
 }

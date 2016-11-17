@@ -66,4 +66,9 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     private void rotateCounterclockwiseClicked() {
         selectedElementSubViewModel.rotateCounterclockwise();
     }
+
+    public void removeClicked()
+    {
+        selectedElementSubViewModel.remove();
+    }
 }

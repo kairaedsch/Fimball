@@ -44,7 +44,9 @@ public enum WindowType implements ViewType
 
     PINBALL_CANVAS("pinballcanvas/pinballCanvas.fxml"),
 
-    TABLE_EDITOR_AVAILABLE_ELEMENT("tableeditor/availableElement.fxml");
+    TABLE_EDITOR_AVAILABLE_ELEMENT("tableeditor/availableElement.fxml"),
+
+    TABLE_EDITOR_SELECTED_ELEMENT("tableeditor/selectedElement.fxml");
 
     /**
      * Der Pfad der zum Fenstertyp gehörenden FXML-Datei.
