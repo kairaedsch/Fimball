@@ -43,6 +43,14 @@ public class SelectedElementSubViewModel
     public SelectedElementSubViewModel(PinballMachine pinballMachine, PlacedElement placedElement)
     {
         this.pinballMachine = pinballMachine;
+
+        name = new SimpleStringProperty();
+        description = new SimpleStringProperty();
+
+        points = new SimpleIntegerProperty();
+
+        multiplier = new SimpleDoubleProperty();
+
         setPlacedElement(placedElement);
     }
 
@@ -50,13 +58,11 @@ public class SelectedElementSubViewModel
     {
         this.placedElement = placedElement;
 
-        name = new SimpleStringProperty(placedElement.getBaseElement().getMedia().getName());
-        description = new SimpleStringProperty(placedElement.getBaseElement().getMedia().getDescription());
-        
-        points = new SimpleIntegerProperty();
+        name.set(placedElement.getBaseElement().getMedia().getName());
+        description.set(placedElement.getBaseElement().getMedia().getDescription());
+
         points.bindBidirectional(placedElement.pointsProperty());
 
-        multiplier = new SimpleDoubleProperty();
         multiplier.bindBidirectional(placedElement.multiplierProperty());
     }
 

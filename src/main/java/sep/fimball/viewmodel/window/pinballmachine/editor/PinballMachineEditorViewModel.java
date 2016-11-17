@@ -177,7 +177,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             {
                 selectedElementSubViewModel.setPlacedElement(selectedElement.get());
             }
-
         }
         else if(mouseModus == MouseModus.PLACING)
         {
