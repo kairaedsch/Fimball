@@ -68,10 +68,11 @@ public class PinballMachine
                 for (ColliderShape shape : collider.getShapes())
                 {
                     RectangleDouble boundingBox = shape.getBoundingBox();
-                    double minX = boundingBox.getOrigin().getX();
-                    double minY = boundingBox.getOrigin().getY();
-                    double maxX = minX + boundingBox.getWidth();
-                    double maxY = minY + boundingBox.getHeight();
+                    Vector2 globalPosition = element.positionProperty().get();
+                    double minX = boundingBox.getOrigin().getX() + globalPosition.getX();
+                    double minY = boundingBox.getOrigin().getY() + globalPosition.getY();
+                    double maxX = minX + boundingBox.getWidth() + globalPosition.getX();
+                    double maxY = minY + boundingBox.getHeight() + globalPosition.getY();
 
                     if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
                     {
