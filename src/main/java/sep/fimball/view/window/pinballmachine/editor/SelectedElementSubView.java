@@ -12,9 +12,15 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubView
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
+    /**
+     * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
+     */
     @FXML
     private Slider strengthSlider;
 
+    /**
+     * Regler für die Punkte, die ein Treffer des Elements durch die Kugel bringt.
+     */
     @FXML
     private Slider pointsSlider;
 
@@ -35,18 +41,6 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      */
     @FXML
     private Label description;
-
-    /**
-     * Regler für die Punkte, die ein Treffer des Elements durch die Kugel bringt.
-     */
-    @FXML
-    private Slider points;
-
-    /**
-     * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
-     */
-    @FXML
-    private Slider multiplier;
 
     /**
      * Das zur SelectedElementSubView gehörende SelectedElementSubViewModel.

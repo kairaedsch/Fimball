@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
@@ -98,5 +99,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
         }
         graphicsContext.restore();
+    }
+
+    public void mouseCliked(MouseEvent mouseEvent)
+    {
+
     }
 }
