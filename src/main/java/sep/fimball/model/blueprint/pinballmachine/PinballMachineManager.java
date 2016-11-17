@@ -16,7 +16,7 @@ public class PinballMachineManager
 
     /**
      * Gibt den bereits existierenden ElementManager oder  einen neu angelegten zurück, falls noch keiner existiert.
-     * @return
+     * @return Instanz des PinballMachineManager
      */
     public static PinballMachineManager getInstance()
     {

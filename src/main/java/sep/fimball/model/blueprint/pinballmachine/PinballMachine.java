@@ -43,8 +43,8 @@ public class PinballMachine
 
     /**
      * Legt einen leeren Automaten mit gegebenen Namen und ID an.
-     * @param name
-     * @param pinballMachineId
+     * @param name Name des Automaten
+     * @param pinballMachineId Id des Automaten
      */
     public PinballMachine(String name, String pinballMachineId)
     {

@@ -97,7 +97,8 @@ public class GameSession
     private List<Trigger> triggers;
 
     /**
-     * TODO
+     * Das Observable welches genutzt wird um Observer darüber zu benachrichtigen dass der nächste Tick der Spielschleife
+     * ausgeführt wird
      */
     private Observable gameLoopObservable;
 

@@ -9,17 +9,17 @@ import java.util.Observer;
 public class SoundManager
 {
     /**
-     * TODO
+     * Die einzige existierende Instanz des SoundManager
      */
     private static SoundManager instance;
 
     /**
-     * TODO
+     * Das Observable, dass das Abspielen von Soundeffekten verwaltet
      */
     private Observable clipObservable;
 
     /**
-     * Das Observable, das das Abspielen von Media verwaltet.
+     * Das Observable, dass das Abspielen von Musik verwaltet.
      */
     private Observable mediaObservable;
 
