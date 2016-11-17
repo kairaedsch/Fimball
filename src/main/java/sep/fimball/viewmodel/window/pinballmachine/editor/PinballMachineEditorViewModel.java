@@ -16,6 +16,8 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
+import java.util.Optional;
+
 /**
  * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es, diesen zu bearbeiten.
  */
@@ -68,6 +70,16 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         GameSession gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+    }
+
+    public void mouseEvent(double xPos, double yPos)
+    {
+        Optional<PlacedElement> selectedElement = pinballMachine.getElementAt(new Vector2(xPos, yPos));
+        
+        if (selectedElement.isPresent())
+        {
+            selectedElementSubViewModel.setPlacedElement(selectedElement.get());
+        }
     }
 
     /**

@@ -36,6 +36,10 @@ public class PinballCanvasViewModel
      */
     private Observable redrawObservable;
 
+    private boolean editorEnabled;
+
+    private PinballMachineEditorViewModel editorViewModel;
+
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
@@ -48,14 +52,17 @@ public class PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
+        editorEnabled = false;
     }
 
     public PinballCanvasViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         init(gameSession);
 
+        this.editorViewModel = pinballMachineEditorViewModel;
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
+        editorEnabled = true;
     }
 
     /**
@@ -73,6 +80,14 @@ public class PinballCanvasViewModel
 
         Observer gameObserver = (o, args) -> redraw();
         session.addGameLoopObserver(gameObserver);
+    }
+
+    public void mouseEvent(double xPos, double yPos)
+    {
+        if (editorEnabled)
+        {
+            editorViewModel.mouseEvent(xPos, yPos);
+        }
     }
 
     /**

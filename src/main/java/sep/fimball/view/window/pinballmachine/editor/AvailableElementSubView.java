@@ -45,7 +45,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
      */
     @FXML
     private void placeElement(MouseEvent mouseEvent) {
-        availableElementSubViewModel.placeElement(getVector2(mouseEvent));
+        //availableElementSubViewModel.placeElement(getVector2(mouseEvent));
     }
 
     private Vector2 getVector2(MouseEvent mouseEvent)

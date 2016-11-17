@@ -58,6 +58,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     @Override
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
+        this.pinballCanvasViewModel = pinballCanvasViewModel;
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
 
@@ -103,6 +104,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     public void mouseCliked(MouseEvent mouseEvent)
     {
-
+        double translateX = -(canvas.getWidth() / 2d + cameraPosition.get().getX() * Config.pixelsPerGridUnit * cameraZoom.get());
+        double translateY = -(canvas.getHeight() / 2d + cameraPosition.get().getY() * Config.pixelsPerGridUnit * cameraZoom.get());
+        System.out.println((mouseEvent.getX() / cameraZoom.get()) + translateX);
+        System.out.println((mouseEvent.getY() / cameraZoom.get()) + translateY);
+        pinballCanvasViewModel.mouseEvent((mouseEvent.getX() / cameraZoom.get()) + translateX, (mouseEvent.getY() / cameraZoom.get()) + translateY);
     }
 }
