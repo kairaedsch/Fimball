@@ -105,6 +105,13 @@ public class Vector2
         this.y /= norm;
     }
 
+    public void rotate(double radianAngle, Vector2 pivot)
+    {
+        this.sub(pivot);
+        this.rotate(radianAngle);
+        this.add(pivot);
+    }
+
     /**
      * Rotiert den Vektor um den gegebene Winkel
      * @param radianAngle Der Winkel um den rotiert werden soll, gegeben in Radianten
