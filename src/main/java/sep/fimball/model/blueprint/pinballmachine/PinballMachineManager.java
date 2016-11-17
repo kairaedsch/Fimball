@@ -28,11 +28,12 @@ public class PinballMachineManager
 
     /**
      * Gibt den bereits existierenden ElementManager oder  einen neu angelegten zurück, falls noch keiner existiert.
+     *
      * @return Instanz des PinballMachineManager
      */
     public static PinballMachineManager getInstance()
     {
-        if(singletonInstance == null) singletonInstance = new PinballMachineManager();
+        if (singletonInstance == null) singletonInstance = new PinballMachineManager();
         return singletonInstance;
     }
 
@@ -51,8 +52,7 @@ public class PinballMachineManager
         try
         {
             Files.list(Paths.get(Config.pathToMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class PinballMachineManager
     private void loadMachine(Path path)
     {
         String pinballMachineId = path.getFileName().toString();
-        
+
         Path jsonPath = Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachineId));
 
         Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
@@ -84,15 +84,13 @@ public class PinballMachineManager
                 System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
 
                 loadMachineElements(pinballMachine, pinballMachineId);
-            }
-            catch (NullPointerException e)
+            } catch (NullPointerException e)
             {
                 System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
                 e.printStackTrace();
             }
 
-        }
-        else
+        } else
         {
             System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
         }
@@ -110,7 +108,7 @@ public class PinballMachineManager
 
             // TODO NullPointerException not very good
 
-            if(placedElementListJson.elements != null)
+            if (placedElementListJson.elements != null)
             {
                 int loaded = 0;
                 for (PlacedElementListJson.PlacedElementJson element : placedElementListJson.elements)
@@ -120,20 +118,54 @@ public class PinballMachineManager
                     {
                         pinballMachine.addElement(new PlacedElement(baseElement, element.position, element.points, element.multiplier, element.rotation));
                         loaded++;
-                    }
-                    else System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
+                    } else
+                        System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
                 }
                 System.out.println("Machine elem \"" + pinballMachineId + "\" loaded: (" + loaded + "/" + placedElementListJson.elements.length + ")");
-            }
-            else
+            } else
             {
                 System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: Element List null");
             }
-        }
-        else
+        } else
         {
             System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: All");
         }
+    }
+
+    public void savePinballMachine(PinballMachine pinballMachine)
+    {
+        PinballMachineJson pinballMachineJson = new PinballMachineJson();
+        pinballMachineJson.name = pinballMachine.nameProperty().getName();
+
+        pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[pinballMachine.highscoreListProperty().size()];
+        int counter = 0;
+        for (Highscore highscore : pinballMachine.highscoreListProperty())
+        {
+            PinballMachineJson.HighscoreJson highscoreJson = new PinballMachineJson.HighscoreJson();
+            highscoreJson.score = highscore.scoreProperty().getValue();
+            highscoreJson.playerName = highscore.playerNameProperty().getValue();
+            pinballMachineJson.highscores[counter] = highscoreJson;
+            counter++;
+        }
+
+        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachineJson.name + "general.json", pinballMachineJson);
+
+        PlacedElementListJson placedElementListJson = new PlacedElementListJson();
+        placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.getElements().size()];
+        counter = 0;
+        for (PlacedElement placedElement : pinballMachine.getElements())
+        {
+            PlacedElementListJson.PlacedElementJson placedElementJson = new PlacedElementListJson.PlacedElementJson();
+            placedElementJson.baseElementId = placedElement.getBaseElement().getId();
+            placedElementJson.position = placedElement.positionProperty().getValue();
+            placedElementJson.rotation = placedElement.rotationProperty().getValue();
+            placedElementJson.points = placedElement.pointsProperty().getValue();
+            placedElementJson.multiplier = placedElement.multiplierProperty().getValue();
+            placedElementListJson.elements[counter] = placedElementJson;
+            counter++;
+        }
+
+        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachineJson.name + "elements.json", placedElementListJson);
     }
 
     public ListProperty<PinballMachine> pinballMachinesProperty()
