@@ -7,12 +7,14 @@ import sep.fimball.general.data.Vector2;
  */
 public class NormalCollision implements CollisionType
 {
+    private final double bounce = 0.1;
+
     @Override
     public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();
-        Vector2 newVel = Vector2.sub(ball.getVelocity(), Vector2.scale(shortestIntersectNorm, 2 * Vector2.dot(ball.getVelocity(), shortestIntersectNorm)));
-        ball.setVelocity(newVel);
+        Vector2 newVel = Vector2.sub(ball.getVelocity(), Vector2.scale(shortestIntersectNorm, 2.0 * Vector2.dot(ball.getVelocity(), shortestIntersectNorm)));
+        ball.setVelocity(Vector2.scale(newVel, bounce));
     }
 }
