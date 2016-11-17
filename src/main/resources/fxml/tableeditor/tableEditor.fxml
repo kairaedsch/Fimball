@@ -7,66 +7,68 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
-   <children>
-      <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
-         <items>
-            <AnchorPane>
-               <children>
-                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Settings" />
-                              <Label text="Tills Automat" />
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </HBox>
-                        <Accordion VBox.vgrow="ALWAYS">
-                          <panes>
-                            <TitledPane animated="false" text="Basic Elements">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;" >
-                                       <children>
-                                          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="availableElements">
-                                             <children>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </TitledPane>
-                            <TitledPane animated="false" text="Advanced Elements">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </TitledPane>
-                          </panes>
-                        </Accordion>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-            <AnchorPane>
-               <children>
-                  <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#8f8f8fa3" height="55.0" layoutX="144.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
-                  <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" onMouseClicked="#playClicked" />
-               </children>
-            </AnchorPane>
-            <AnchorPane minWidth="130.0">
-               <children>
-                  <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="selectedElement">
-                     <content>
-                     </content>
-                  </TitledPane>
-               </children>
-            </AnchorPane>
-         </items>
-      </SplitPane>
-   </children>
+    <children>
+        <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane>
+                    <children>
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" text="Settings"/>
+                                        <Label text="Tills Automat"/>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets/>
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                </HBox>
+                                <Accordion VBox.vgrow="ALWAYS">
+                                    <panes>
+                                        <TitledPane animated="false" text="Basic Elements">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
+                                                    <children>
+                                                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="availableElements">
+                                                            <children>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Advanced Elements">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                            </content>
+                                        </TitledPane>
+                                    </panes>
+                                </Accordion>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane>
+                    <children>
+                        <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onScroll="#zoom" onMouseDragged="#dragged" onMousePressed="#down"/>
+                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#8f8f8fa3" height="55.0" layoutX="144.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="55.0"/>
+                        <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" onMouseClicked="#playClicked"/>
+                        <Button mnemonicParsing="false" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" onMouseClicked="#zoomInClicked"/>
+                        <Button mnemonicParsing="false" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" onMouseClicked="#zoomOutClicked"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minWidth="130.0">
+                    <children>
+                        <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="selectedElement">
+                            <content>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </VBox>

@@ -3,6 +3,9 @@ package sep.fimball.view.window.pinballmachine.editor;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ViewLoader;
@@ -41,6 +44,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
      */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
+
+    private MouseEvent mouseDown;
 
     /**
      * Setzt das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
@@ -93,5 +98,22 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void zoomOutClicked() {
         pinballMachineEditorViewModel.zoomOut();
+    }
+
+    public void zoom(ScrollEvent scrollEvent)
+    {
+        if(scrollEvent.getDeltaY() < 0) pinballMachineEditorViewModel.zoomOut();
+        else if(scrollEvent.getDeltaY() > 0) pinballMachineEditorViewModel.zoomIn();
+    }
+
+    public void dragged(MouseEvent mouseEvent)
+    {
+        pinballMachineEditorViewModel.dragged(mouseEvent.getX() - mouseDown.getX(), mouseEvent.getY() - mouseDown.getY());
+        mouseDown = mouseEvent;
+    }
+
+    public void down(MouseEvent mouseEvent)
+    {
+        mouseDown = mouseEvent;
     }
 }

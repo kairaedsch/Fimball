@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.GameSession;
@@ -76,17 +77,31 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Vergrößert die Ansicht des Flipper-Automaten für den Nutzer.
      */
-    public void zoomIn()
+    public void zoomOut()
     {
-        cameraZoom.subtract(0.25);
+        if(cameraZoom.get() >= 1)
+        {
+            cameraZoom.set(cameraZoom.get() - 0.5);
+        }
+        else
+        {
+            cameraZoom.set(cameraZoom.get() / 2);
+        }
     }
 
     /**
      * Verkleinert die Ansicht des Flipper-Automaten für den Nutzer.
      */
-    public void zoomOut()
+    public void zoomIn()
     {
-        cameraZoom.add(0.25);
+        if(cameraZoom.get() >= 1)
+        {
+            cameraZoom.set(cameraZoom.get() + 0.5);
+        }
+        else
+        {
+            cameraZoom.set(cameraZoom.get() * 2);
+        }
     }
 
     /**
@@ -123,5 +138,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public SelectedElementSubViewModel getSelectedElementSubViewModel()
     {
         return selectedElementSubViewModel;
+    }
+
+    public void dragged(double x, double y)
+    {
+        cameraPosition.get().setX(cameraPosition.get().getX() + (x / Config.pixelsPerGridUnit));
+        cameraPosition.get().setY(cameraPosition.get().getY() + (y / Config.pixelsPerGridUnit));
     }
 }
