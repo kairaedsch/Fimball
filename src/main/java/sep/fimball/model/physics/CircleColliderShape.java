@@ -54,9 +54,10 @@ public class CircleColliderShape implements ColliderShape
         Vector2 globalColliderPosition = Vector2.add(position, colliderObjectPosition);
         Vector2 ballGlobalColliderPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
         Vector2 distance = Vector2.sub(ballGlobalColliderPosition, globalColliderPosition);
+        
         if (distance.magnitude() < ball.getCollider().getRadius() + radius)
         {
-            double overlapDistance = (ball.getCollider().getRadius() + ball.getCollider().getRadius()) - distance.magnitude();
+            double overlapDistance = (ball.getCollider().getRadius() + radius) - distance.magnitude();
             return new HitInfo(true, Vector2.scale(distance.normalized(), overlapDistance));
         }
 
