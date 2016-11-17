@@ -1,5 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -13,17 +14,11 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubVie
  */
 public class AvailableElementSubView implements ViewBoundToViewModel<AvailableElementSubViewModel>
 {
-    /**
-     * Zeigt den Namen des verfügbaren Elements an.
-     */
     @FXML
-    private Label name;
+    public Pane previewImage;
 
-    /**
-     * Zeigt das Bild des Elements an.
-     */
     @FXML
-    private Pane image;
+    public Label previewName;
 
     /**
      * Das zur AvailableElementSubView gehörende AvailableElementSubViewModel.
@@ -39,6 +34,8 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     public void setViewModel(AvailableElementSubViewModel availableElementSubViewModel)
     {
         this.availableElementSubViewModel = availableElementSubViewModel;
+        previewName.textProperty().bind(availableElementSubViewModel.nameProperty());
+        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", availableElementSubViewModel.imagePathProperty().get(), "\");"));
     }
 
     /**
@@ -54,5 +51,9 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     private Vector2 getVector2(MouseEvent mouseEvent)
     {
         return new Vector2(mouseEvent.getSceneX(),mouseEvent.getScreenY());
+    }
+
+    public void mouseClicked(MouseEvent mouseEvent)
+    {
     }
 }

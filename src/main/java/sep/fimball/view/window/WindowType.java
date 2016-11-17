@@ -30,7 +30,7 @@ public enum WindowType implements ViewType
     /**
      * Das Editorfenster.
      */
-    TABLE_EDITOR_WINDOW("tableeditor/TableEditor.fxml"),
+    TABLE_EDITOR_WINDOW("tableeditor/tableEditor.fxml"),
 
     /**
      * Das Editoreinstellungsfenster.

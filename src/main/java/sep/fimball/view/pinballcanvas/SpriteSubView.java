@@ -51,28 +51,31 @@ public class SpriteSubView
     {
         this.viewModel = viewModel;
 
-        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> loadImage(newValue));
-        loadImage(viewModel.animationFramePathProperty().getValue());
-
         rotationProperty = new SimpleDoubleProperty();
-        rotationProperty.bind(viewModel.rotationProperty());
 
         positionProperty = new SimpleObjectProperty<>();
         positionProperty.bind(viewModel.positionProperty());
+
+        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> loadImage());
+        viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> loadImage());
+        loadImage();
     }
 
     /**
      * Lädt das im {@imagePath} gespeicherte Bild.
-     *
-     * @param elementImage Der Pfad zum Bild.
      */
-    private void loadImage(ElementImage elementImage)
+    private void loadImage()
     {
-        File topFile = new File(elementImage.getImagePath(ImageLayer.TOP, 0));
+        double rotation = viewModel.rotationProperty().get();
+        ElementImage elementImage = viewModel.animationFramePathProperty().get();
+
+        File topFile = new File(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
         topImage = new Image(topFile.toURI().toString());
 
-        File bottomFile = new File(elementImage.getImagePath(ImageLayer.BOTTOM, 0));
+        File bottomFile = new File(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
         bottomImage = new Image(bottomFile.toURI().toString());
+
+        rotationProperty.setValue(elementImage.getRestRotation((int) rotation) + (rotation - (int) rotation));
     }
 
     /**

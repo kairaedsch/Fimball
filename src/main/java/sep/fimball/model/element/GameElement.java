@@ -48,7 +48,7 @@ public class GameElement
     {
         this.placedElement = element;
         this.position = new SimpleObjectProperty<>(element.positionProperty().get());
-        this.rotation = new SimpleDoubleProperty();
+        this.rotation = new SimpleDoubleProperty(element.rotationProperty().get());
         this.hitCount = new SimpleIntegerProperty();
         this.currentAnimation = new SimpleObjectProperty<>();
         this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());

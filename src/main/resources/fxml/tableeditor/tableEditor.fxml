@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<VBox prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
    <children>
       <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
          <items>
@@ -46,12 +46,12 @@
                                                       </Label>
                                                       <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../../../../Grafiken/sprites/generated_sprites/plunger_main/top-90.png" />
+                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/plunger_main/top-90.png" />
                                                          </image>
                                                       </ImageView>
                                                       <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../../../../Grafiken/sprites/generated_sprites/plunger_stab/top-90.png" />
+                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/plunger_stab/top-90.png" />
                                                          </image>
                                                          <HBox.margin>
                                                             <Insets left="-5.0" />
@@ -74,7 +74,7 @@
                                                       </Label>
                                                       <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../../../../Grafiken/sprites/generated_sprites/bumper_green/top.png" />
+                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/bumper_green/top.png" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
@@ -94,7 +94,7 @@
                                                       </Label>
                                                       <ImageView fitHeight="18.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../../../../Grafiken/sprites/generated_sprites/licht_green/bottom+glow_0.png" />
+                                                            <Image url="@file:///A:/Grafiken/sprites/generated_sprites/licht_green/bottom+glow_0.png" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
