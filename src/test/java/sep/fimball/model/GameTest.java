@@ -10,7 +10,7 @@ import org.junit.Ignore;
 public class GameTest
 {
     /**
-     * The amount of the seconds the Test will run before it is failed.
+     * The maximum amount of seconds the Test will run before it is failed.
      */
     /*
     private static final int MAX_ITERATIONS = 30;
@@ -55,6 +55,7 @@ public class GameTest
             {
                 forcedStop = true;
             }
+            sleep(1000);
         }
         session.stopAll();
 
