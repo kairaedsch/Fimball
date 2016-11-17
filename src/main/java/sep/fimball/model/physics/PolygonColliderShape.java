@@ -35,22 +35,26 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleColliderShape ball)
+    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
     {
+        Vector2 globalBallPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
+
         for (Vector2 axisVertex : vertices)
         {
-            Vector2 axis = Vector2.sub(ball.getPosition(), axisVertex).normalized();
+            Vector2 globalAxis = Vector2.add(axisVertex, colliderObjectPosition);
+            Vector2 axis = Vector2.sub(globalBallPosition, globalAxis).normalized();
 
             List<Double> points = new ArrayList<>();
             for (Vector2 vertex : vertices)
             {
-                points.add(Vector2.dot(vertex, axis));
+                Vector2 globalVertex = Vector2.add(vertex, colliderObjectPosition);
+                points.add(Vector2.dot(globalVertex, axis));
             }
             points.sort(Comparator.naturalOrder());
 
-            double ballCenter = Vector2.dot(ball.getPosition(), axis);
-            double ballMin = ballCenter - ball.getRadius();
-            double ballMax = ballCenter + ball.getRadius();
+            double ballCenter = Vector2.dot(globalBallPosition, axis);
+            double ballMin = ballCenter - ball.getCollider().getRadius();
+            double ballMax = ballCenter + ball.getCollider().getRadius();
 
             double polyMin = points.get(0);
             double polyMax = points.get(points.size() - 1);

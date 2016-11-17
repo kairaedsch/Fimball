@@ -102,10 +102,9 @@ public class PhysicsHandler
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            collider.checkCollision(ballElement);
+                            collider.checkCollision(ballElement, element.getPosition());
                         }
                     }
-
                     element.writeToGameElement();
                 }
 

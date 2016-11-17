@@ -1,5 +1,7 @@
 package sep.fimball.model.physics;
 
+import sep.fimball.general.data.Vector2;
+
 /**
  * Beschreibt die Form einer Fläche die mit dem Ball interagieren kann.
  */
@@ -10,5 +12,5 @@ public interface ColliderShape
      * @param ball Der Ball, der auf Überschneidung mit der Fläche geprüft werden soll.
      * @return Informationen über eine mögliche Überschneidung der Fläche mit dem Ball.
      */
-    HitInfo calculateHitInfo(CircleColliderShape ball);
+    HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition);
 }

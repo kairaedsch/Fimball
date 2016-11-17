@@ -48,13 +48,15 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleColliderShape ball)
+    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
     {
         // Collision check between two circles
-        Vector2 distance = Vector2.sub(ball.getPosition(), position);
-        if (distance.magnitude() < ball.getRadius() + radius)
+        Vector2 globalColliderPosition = Vector2.add(position, colliderObjectPosition);
+        Vector2 ballGlobalColliderPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
+        Vector2 distance = Vector2.sub(ballGlobalColliderPosition, globalColliderPosition);
+        if (distance.magnitude() < ball.getCollider().getRadius() + radius)
         {
-            double overlapDistance = (ball.getRadius() + ball.getRadius()) - distance.magnitude();
+            double overlapDistance = (ball.getCollider().getRadius() + ball.getCollider().getRadius()) - distance.magnitude();
             return new HitInfo(true, Vector2.scale(distance.normalized(), overlapDistance));
         }
 

@@ -1,5 +1,7 @@
 package sep.fimball.model.physics;
 
+import sep.fimball.general.data.Vector2;
+
 import java.util.List;
 
 /**
@@ -46,11 +48,11 @@ public class Collider
      * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des  Colliders hat.
      * @param ball Der Ball, dessen Kollisionen überprüft werden sollen.
      */
-    public void checkCollision(BallElement ball)
+    public void checkCollision(BallElement ball, Vector2 colliderObjectPosition)
     {
         for (ColliderShape shape : shapes)
         {
-            HitInfo info = shape.calculateHitInfo(ball.getCollider());
+            HitInfo info = shape.calculateHitInfo(ball, colliderObjectPosition);
             if (info.isHit())
                 type.applyCollision(ball, info.getShortestIntersect());
         }
