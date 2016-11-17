@@ -1,13 +1,10 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
@@ -90,9 +87,10 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private void settingsClicked()
     {
         mainMenuViewModel.showSettingsDialog();
-
+        /*
         final long[] lv = {System.currentTimeMillis()};
         final long[] lm = {System.currentTimeMillis()};
+
 
         {
             Timeline timeline  = new Timeline();
@@ -132,6 +130,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
             }));
             timeline.play();
         }
+        */
     }
 
     /**

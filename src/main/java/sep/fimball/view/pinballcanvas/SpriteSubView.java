@@ -70,6 +70,7 @@ public class SpriteSubView
     {
         File topFile = new File(elementImage.getImagePath(ImageLayer.TOP, 0));
         topImage = new Image(topFile.toURI().toString());
+
         File bottomFile = new File(elementImage.getImagePath(ImageLayer.BOTTOM, 0));
         bottomImage = new Image(bottomFile.toURI().toString());
     }
@@ -87,14 +88,11 @@ public class SpriteSubView
         graphicsContext.save(); // saves the current state on stack, including the current transform
         rotate(graphicsContext, rotationProperty.doubleValue(), x + bottomImage.getWidth() / 2, y + bottomImage.getHeight() / 2);
 
-        if (imageLayer == ImageLayer.TOP)
-        {
-            graphicsContext.drawImage(topImage, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
-        }
-        else
-        {
-            graphicsContext.drawImage(bottomImage, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
-        }
+        Image image;
+        if (imageLayer == ImageLayer.TOP) image = topImage;
+        else image = bottomImage;
+
+        graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit * zoom, y * Config.pixelsPerGridUnit * zoom, topImage.getWidth() * zoom, topImage.getHeight() * zoom);
         graphicsContext.restore(); // back to original state (before rotation)
     }
 
