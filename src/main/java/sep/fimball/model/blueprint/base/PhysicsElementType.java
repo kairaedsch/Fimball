@@ -23,8 +23,8 @@ public class PhysicsElementType
 
             if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
             {
-                //TODO [important] uncomment this   PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
-                //shapes.add(polygonColliderShape);
+                PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
+                shapes.add(polygonColliderShape);
             }
 
             if(collider.circleShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
@@ -49,7 +49,7 @@ public class PhysicsElementType
                     throw new NullPointerException();
             }
 
-            colliders.add(new Collider(WorldLayer.valueOf(collider.layer), shapes, collisionType, collider.colliderId.hashCode()));
+            colliders.add(new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode()));
         }
     }
 

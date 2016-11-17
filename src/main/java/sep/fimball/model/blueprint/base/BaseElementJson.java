@@ -1,5 +1,8 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.WorldLayer;
+
 /**
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
  */
@@ -8,7 +11,7 @@ public class BaseElementJson
     /**
      * Speichert den Typ des BaseElements.
      */
-    public String elementType;
+    public BaseElementType elementType;
 
     /**
      * Speichert den Typ des korrespondierenden PhysicElements.
@@ -48,7 +51,7 @@ public class BaseElementJson
             /**
              * Speichert die Ebene des Colliders
              */
-            public String layer;
+            public WorldLayer layer;
 
             /**
              * Speichert die Polygon-Collider des Elementtyps.
@@ -74,23 +77,7 @@ public class BaseElementJson
                 /**
                  * Speichert die Kanten des Polygons.
                  */
-                public VerticeJson[] vertices;
-
-                /**
-                 * Diese Klasse repäsentiert eine Kante eines Polygons.
-                 */
-                public static class VerticeJson {
-
-                    /**
-                     * Speichert die x-Richtung der Kante.
-                     */
-                    public double xDirection;
-
-                    /**
-                     * Speichert die y-Richtung der Kante.
-                     */
-                    public double yDirection;
-                }
+                public Vector2[] vertices;
             }
 
             /**
