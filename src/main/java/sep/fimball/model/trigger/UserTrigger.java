@@ -1,9 +1,12 @@
 package sep.fimball.model.trigger;
 
 /**
- * Created by alexcekay on 15.11.16.
+ * TODO
  */
 public interface UserTrigger
 {
+    /**
+     * TODO
+     */
     public void activateTrigger();
 }

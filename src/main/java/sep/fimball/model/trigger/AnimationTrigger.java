@@ -3,7 +3,7 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.element.GameElement;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * TODO
  */
 public class AnimationTrigger implements ElementTrigger
 {

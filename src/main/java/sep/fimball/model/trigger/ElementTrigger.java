@@ -3,9 +3,14 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.element.GameElement;
 
 /**
- * Created by alexcekay on 15.11.16.
+ * TODO
  */
 public interface ElementTrigger
 {
+    /**
+     * TODO
+     * @param element
+     * @param colliderId
+     */
     public void activateTrigger(GameElement element, int colliderId);
 }

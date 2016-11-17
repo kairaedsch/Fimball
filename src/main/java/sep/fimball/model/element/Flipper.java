@@ -7,7 +7,11 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
  */
 public class Flipper extends GameElement
 {
+    /**
+     * Gibt an, ob der Flipper ein linksseitiger oder rechtsseitiger Flipper ist.
+     */
     private boolean isLeft;
+
     /**
      * Erstellt einen neuen Flipperarm.
      * @param element
@@ -18,6 +22,10 @@ public class Flipper extends GameElement
         this.isLeft = isLeft;
     }
 
+    /**
+     * Gibt an, ob der Flipper ein linksseitiger oder rechtsseitiger Flipper ist.
+     * @return {@code true}, wenn der Flipper linksseitig ist, {@code false} sonst.
+     */
     public boolean isLeft()
     {
         return isLeft;

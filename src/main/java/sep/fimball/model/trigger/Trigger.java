@@ -1,24 +1,47 @@
 package sep.fimball.model.trigger;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * TODO
  */
 public class Trigger
 {
+    /**
+     * TODO
+     */
     private ElementTrigger elementTrigger;
+
+    /**
+     * TODO
+     */
     private GameTrigger gameTrigger;
+
+    /**
+     * TODO
+     */
     private UserTrigger userTrigger;
 
+    /**
+     * TODO
+     * @param elementTrigger
+     */
     public void setElementTrigger(ElementTrigger elementTrigger)
     {
         this.elementTrigger = elementTrigger;
     }
 
+    /**
+     * TODO
+     * @param gameTrigger
+     */
     public void setGameTrigger(GameTrigger gameTrigger)
     {
         this.gameTrigger = gameTrigger;
     }
 
+    /**
+     * TODO
+     * @param userTrigger
+     */
     public void setUserTrigger(UserTrigger userTrigger)
     {
         this.userTrigger = userTrigger;

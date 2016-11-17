@@ -5,7 +5,7 @@ import sep.fimball.model.media.Sound;
 import sep.fimball.model.element.GameElement;
 
 /**
- * Created by TheAsuro on 15.11.2016.
+ * TODO
  */
 public class SoundTrigger implements ElementTrigger
 {

@@ -27,21 +27,37 @@ public class Ball extends GameElement
         super(element);
     }
 
+    /**
+     * Gibt den Geschwindigkeitsvektor des Balls zurück.
+     * @return Der Geschindigkeitsvektor des Balls.
+     */
     public Vector2 getVelocity()
     {
         return velocity;
     }
 
+    /**
+     * Setzt den Geschwindigkeitsvektor auf den übergebenen Vektor.
+     * @param velocity Der neue Geschwindigkeitsvektor des Balls.
+     */
     public void setVelocity(Vector2 velocity)
     {
         this.velocity = velocity;
     }
 
+    /**
+     * Gibt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", zurück.
+     * @return Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
+     */
     public double getAngularVelocity()
     {
         return angularVelocity;
     }
 
+    /**
+     * Setzt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", auf den gegebenen Wert.
+     * @param angularVelocity Die neue Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
+     */
     public void setAngularVelocity(double angularVelocity)
     {
         this.angularVelocity = angularVelocity;

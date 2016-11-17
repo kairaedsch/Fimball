@@ -35,11 +35,14 @@ public class GameElement
      */
     private ObjectProperty<Animation> currentAnimation;
 
+    /**
+     * Das zu diesem GameElement korrespondierende GameElement.
+     */
     private PlacedElement placedElement;
 
     /**
-     * Erstellt ein neues GameElement.
-     * @param element
+     * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
+     * @param element Das PlacedElement, das zu diesem GameElement gehört und  desssen Eigenschaften übernommen werden sollen.
      */
     public GameElement(PlacedElement element)
     {
@@ -51,11 +54,19 @@ public class GameElement
         this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
     }
 
+    /**
+     * Gibt das Property der Position des GameElements zurück.
+     * @return das Property der Position des GameElements.
+     */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
         return position;
     }
 
+    /**
+     * Setzt die Position des GameElements auf den gegebenen Vektor.
+     * @param position Die neue Position des GameElements.
+     */
     public void setPosition(Vector2 position)
     {
         synchronized (this)
@@ -64,11 +75,19 @@ public class GameElement
         }
     }
 
+    /**
+     * Gibt das Property der Rotation des GameElements als ReadOnly zurück.
+     * @return Das Property der Rotation des GameElements
+     */
     public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
     }
 
+    /**
+     * Setzt die Rotation des GameElements auf den gegebenen Wert.
+     * @param rotation Die neue Rotation des GameElements
+     */
     public void setRotation(double rotation)
     {
         synchronized (this)
@@ -77,26 +96,46 @@ public class GameElement
         }
     }
 
+    /**
+     * Gibt die Punkte, die ein Treffen dieses GameElements durch die Kugel bringt, zurück.
+     * @return Die Punkte, die ein Treffen dieses GameElements durch die Kugel bringt.
+     */
     public int getPointReward()
     {
         return pointReward.get();
     }
 
+    /**
+     * Gibt die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat, zurück.
+     * @return Die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat
+     */
     public int getHitCount()
     {
         return hitCount.get();
     }
 
+    /**
+     * Setzt die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
+     * @param hitCount Die neue Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
+     */
     public void setHitCount(int hitCount)
     {
         this.hitCount.set(hitCount);
     }
 
+    /**
+     * Gibt das zu diesem GameElement gehörende PlacedElement zurück.
+     * @return Das zu diesem GameElement gehörende PlacedElement.
+     */
     public PlacedElement getPlacedElement()
     {
         return placedElement;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public ObjectProperty<Animation> currentAnimationProperty()
     {
         return currentAnimation;
