@@ -46,7 +46,7 @@ public class PolygonColliderShape implements ColliderShape
         for (Vector2 vertex : vertices)
         {
             Vector2 axis = Vector2.add(vertex, colliderObjectPosition);
-            ballAxisList.add(Vector2.sub(globalBallPosition, axis));
+            ballAxisList.add(Vector2.sub(axis, globalBallPosition));
         }
         ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
         ballAxis = ballAxisList.get(0).normalized();
