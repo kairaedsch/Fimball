@@ -129,22 +129,22 @@ public class BaseElementJson
     }
 
     /**
-     * Diese Klasse enthält die Informationen über Bilder, Animationen, die Eigenschaften im Editor und Soundeffekte des Spielelements.
+     * Diese Klasse enthält die Informationen über Animationen, die Eigenschaften im Editor und Soundeffekte des Spielelements.
      */
     public static class MediaElementTypeJson
     {
         /**
-         * TODO
+         * Enthält die Eigenschaften des Elements im Editor.
          */
         public MediaElementTypeGeneralJson general;
 
         /**
-         * TODO
+         * Enthält die Animation und Soundtracks des Objekts, falls vorhanden.
          */
         public MediaElementEventJson[] events;
 
         /**
-         * TODO
+         * Repräsentiert die Eigenschaften des Objekts im Editor.
          */
         public static class MediaElementTypeGeneralJson
         {
@@ -170,17 +170,17 @@ public class BaseElementJson
         }
 
         /**
-         * TODO
+         * Enthält alle Informationen über Animation und Soundeffekt bei einem Zusammenstoß.
          */
         public static class MediaElementEventJson
         {
             /**
-             * TODO
+             * Die Identifikationsnummer des Colliders.
              */
             public String colliderId;
 
             /**
-             * TODO
+             * Der Soundeffekt, der beim Zusammenstoß abgespielt wird.
              */
             public String soundName;
 
@@ -190,22 +190,22 @@ public class BaseElementJson
             public AnimationJson animation;
 
             /**
-             * TODO
+             * Diese Klasse enthält alle nötigen Informationen zur Serialisierung einer Animation.
              */
             public static class AnimationJson
             {
                 /**
-                 * TODO
+                 * Gibt an, wie viele Bilder die Animation darstellt.
                  */
                 public int frameCount;
 
                 /**
-                 * TODO
+                 * Die Dauer der Animation.
                  */
                 public int duration;
 
                 /**
-                 * TODO
+                 * Der Name der Animation.
                  */
                 public String animationName;
             }
@@ -213,38 +213,38 @@ public class BaseElementJson
     }
 
     /**
-     * TODO
+     * Enthält die zur Serialisierung des Regelwerks nötigen Informationen.
      */
     public static class RuleElementTypeJson
     {
         /**
-         * TODO
+         * Gibt an, ob ein Zusammenstoß die Punkte des Spielers erhöht.
          */
         public RuleElementTypeGeneralJson general;
 
         /**
-         * TODO
+         * Speichert, zu welchem Collider dieses Regelwerk gehört.
          */
         public RuleElementEventJson[] events;
 
         /**
-         * TODO
+         * Enthält die Information, ob ein Zusammenstoß die Punktzahl des Spielers erhöht.
          */
         public static class RuleElementTypeGeneralJson
         {
             /**
-             * Speichert die Punkte, die ein Treffer durch die Kugel bringt.
+             * Speichert, ob ein Treffer durch die Kugel Punkte bringt.
              */
             public boolean givesPoints;
         }
 
         /**
-         * TODO
+         * Enthält die Information, zu welchem Collider dieses Regelwerk gehört.
          */
         public static class RuleElementEventJson
         {
             /**
-             * TODO
+             * Die Identifikationsnummer des Colliders, zu dem dieses Regelwerk gehört.
              */
             public String colliderId;
         }

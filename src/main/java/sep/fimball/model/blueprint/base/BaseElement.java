@@ -18,7 +18,7 @@ public class BaseElement
     /**
      * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt.
      *
-     * @param id TODO
+     * @param id Die Identifikationsnummer des Bauplans.
      * @param baseElementJson Das Objekt, das die Informationen über das Spielelement enthält.
      */
     public BaseElement(String id, BaseElementJson baseElementJson)
