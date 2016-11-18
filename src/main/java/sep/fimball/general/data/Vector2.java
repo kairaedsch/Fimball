@@ -224,7 +224,7 @@ public class Vector2
 
     public static Vector2 createNormal(Vector2 vec)
     {
-        return new Vector2(-vec.getY(), -vec.getX());
+        return new Vector2(vec.getY(), -vec.getX());
     }
 
     /**
