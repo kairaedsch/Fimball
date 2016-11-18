@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
-<Label fx:id="highscoreEntry" prefHeight="21.0" prefWidth="79.0" maxWidth="Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.HighscoreSubView">
-</Label>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="176.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.HighscoreSubView">
+   <children>
+      <Label fx:id="playerName" text="Till" HBox.hgrow="ALWAYS" />
+      <Label fx:id="score" text="10000" HBox.hgrow="ALWAYS" />
+   </children>
+</HBox>

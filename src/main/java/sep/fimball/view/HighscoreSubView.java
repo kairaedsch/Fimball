@@ -3,7 +3,6 @@ package sep.fimball.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.view.ViewBoundToViewModel;
 
 /**
  * Die HighscoreSubView ist für die Darstellung eines Highscores zuständig.
@@ -29,6 +28,11 @@ public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
      */
     public void setViewModel(Highscore highscore)
     {
-        //highscoreEntry.textProperty().bind(Bindings.concat(highscore.playerNameProperty(), " ", highscore.scoreProperty().asString()));
+        if (highscore == null) {
+            System.out.println("highscore fehler");
+            return;
+        }
+        playerName.textProperty().bind(highscore.playerNameProperty());
+        score.textProperty().bind(highscore.scoreProperty().asString());
     }
 }
