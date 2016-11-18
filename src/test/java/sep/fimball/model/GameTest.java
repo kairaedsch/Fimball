@@ -12,12 +12,11 @@ public class GameTest
     /**
      * The maximum amount of seconds the Test will run before it is failed.
      */
-    /*
     private static final int MAX_ITERATIONS = 30;
 
     //TODO correct id
-    private static final string WALL_ID = "Wall";
-    private static final string BUMPER_ID = "Bumper";
+    private static final String WALL_ID = "Wall";
+    private static final String BUMPER_ID = "Bumper";
 
     private Stack<GameElement> collidedGameElements;
     private boolean stop = false;
@@ -46,6 +45,7 @@ public class GameTest
         session.setTriggers(triggerList);
 
         session.startAll();
+        //TODO ball mit plunger wegschießen
 
         //Aufzeichnen der Kollisionen
         while (!stop && !forcedStop)
@@ -106,5 +106,4 @@ public class GameTest
             gameTest.ballLost();
         }
     }
-    */
 }
