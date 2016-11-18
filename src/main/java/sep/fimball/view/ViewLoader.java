@@ -2,8 +2,11 @@ package sep.fimball.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import sep.fimball.model.blueprint.settings.Settings;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eigetragen ist.
@@ -38,6 +41,18 @@ public class ViewLoader<ViewT>
     private void load(String fxmlPath)
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
+        Locale locale = null;
+        switch(Settings.getSingletonInstance().languageProperty().getValue().toString()) {
+            case "ENGLISH":
+                locale = Locale.ENGLISH;
+                break;
+            case "GERMAN":
+                locale = Locale.GERMAN;
+                break;
+            default:
+                locale = Locale.ENGLISH;
+        }
+        loader.setResources(ResourceBundle.getBundle("bundles.fimball",locale));
 
         try
         {
