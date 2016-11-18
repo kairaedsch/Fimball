@@ -9,7 +9,10 @@
     <items>
         <VBox>
             <children>
-            <Button fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="%mainmenu.settings.key" />
+            <Button fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="%mainmenu.settings.key">
+               <tooltip>
+                  <Tooltip fx:id="settingsTip" text="Show settings" />
+               </tooltip></Button>
 
                 <AnchorPane minWidth="150.0" VBox.vgrow="ALWAYS">
                     <children>

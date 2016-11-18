@@ -30,19 +30,29 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
      */
     private PlayerNameViewModel playerNameViewModel;
 
+    /**
+     * Der Titel des DialogFensters.
+     */
     @FXML
     private TitledPane title;
 
+    /**
+     * Das Label mit der Überschrift der Spielernamenliste.
+     */
     @FXML
     private Label playerNamesTitle;
 
+    /**
+     * Der Button, der einen neuen Spieler hinzufügt.
+     */
     @FXML
     private Button addPlayerButton;
 
+    /**
+     * Der Button, der den Dialog schließt und wieder zum Hauptmenü führt.
+     */
     @FXML
     private Button exitButton;
-
-    private ResourceBundle bundle;
 
     /**
      * Setzt das zur PlayerNameView gehörende PlayerNameViewModel.
@@ -87,7 +97,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        bundle = resources;
+        ResourceBundle bundle = resources;
         title.setText(bundle.getString("playername.title.key"));
         playerNamesTitle.setText(bundle.getString("playername.names.key"));
         addPlayerButton.setText(bundle.getString("playername.add.key"));

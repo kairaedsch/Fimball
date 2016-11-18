@@ -50,16 +50,30 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
      */
     private MainMenuViewModel mainMenuViewModel;
 
+    /**
+     * Der Button, der zu dein Einstellungen führt.
+     */
     @FXML
     private Button settingsButton;
 
-    private ResourceBundle bundle;
+    /**
+     * Der Button, der zur Erstelllung eines neuen Automaten führt.
+     */
+    @FXML
+    private Button addButton;
 
     /**
      * Setzt das zur MainMenuView gehörende MainMenuViewModel.
      *
      * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
      */
+
+    /**
+     * Der Tooltip zum settingsButton.
+     */
+    @FXML
+    private Tooltip settingsTip;
+
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {
@@ -72,7 +86,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
 
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
 
-        setToolTips();
     }
 
     /**
@@ -155,16 +168,11 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
         mainMenuViewModel.addNewAutomaton();
     }
 
-    private void setToolTips() {
-        Tooltip settingsToolTip = new Tooltip();
-        settingsToolTip.setText("Show settings");
-        settingsButton.setTooltip(settingsToolTip);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        bundle = resources;
+        ResourceBundle bundle = resources;
         settingsButton.setText(bundle.getString("mainmenu.settings.key"));
+        settingsTip.setText(bundle.getString("mainmenu.settingstip.key"));
     }
 }
