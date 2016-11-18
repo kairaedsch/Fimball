@@ -2,7 +2,9 @@ package sep.fimball.view.window.mainmenu;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ViewModelListToPaneBinder;
@@ -44,6 +46,9 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
      */
     private MainMenuViewModel mainMenuViewModel;
 
+    @FXML
+    private Button settingsButton;
+
     /**
      * Setzt das zur MainMenuView gehörende MainMenuViewModel.
      *
@@ -60,6 +65,8 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachineSelectorSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
 
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
+
+        setToolTips();
     }
 
     /**
@@ -140,5 +147,11 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private void addClicked()
     {
         mainMenuViewModel.addNewAutomaton();
+    }
+
+    private void setToolTips() {
+        Tooltip settingsToolTip = new Tooltip();
+        settingsToolTip.setText("Show settings");
+        settingsButton.setTooltip(settingsToolTip);
     }
 }
