@@ -60,7 +60,7 @@ public class PinballMachineSaveTest
         assertFalse(difference);
 
         //Loeschen des vorher gespeicherten Automaten
-        //TODO
+        PinballMachineManager.getInstance().deleteMachine(pinballMachine);
     }
 
     class TestPinballMachineManager extends PinballMachineManager

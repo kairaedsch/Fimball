@@ -63,6 +63,9 @@ public class GameTest
         assertTrue(stop);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
+
+        //Loeschen des vorher erstellten Automaten
+        PinballMachineManager.getInstance().deleteMachine(pinballMachine);
     }
 
     public synchronized void addCollidedGameElement(GameElement gameElement)
