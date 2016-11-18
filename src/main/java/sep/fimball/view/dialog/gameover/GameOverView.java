@@ -1,8 +1,10 @@
 package sep.fimball.view.dialog.gameover;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogView;
+import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 
 /**
@@ -14,13 +16,13 @@ public class GameOverView extends DialogView<GameOverViewModel>
      * Das Pane zur Anzeige der Highscores, die am Flipperautomaten erreicht wurden.
      */
     @FXML
-    private GridPane highscores;
+    private VBox highscores;
 
     /**
      * Das Pane zur Anzeige der in der gerade gespielten Partie erreichten Punktestände.
      */
     @FXML
-    private GridPane playerScores;
+    private VBox playerScores;
 
     /**
      * Das zur GameOverView gehörende GameOverViewModel.
@@ -36,6 +38,8 @@ public class GameOverView extends DialogView<GameOverViewModel>
     public void setViewModel(GameOverViewModel gameOverViewModel)
     {
         this.gameOverViewModel = gameOverViewModel;
+        ViewModelListToPaneBinder.bindViewModelsToViews(highscores,gameOverViewModel.machineHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(playerScores,gameOverViewModel.playerHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
 
     /**
