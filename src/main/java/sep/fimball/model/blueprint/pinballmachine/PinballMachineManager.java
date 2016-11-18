@@ -9,10 +9,9 @@ import sep.fimball.model.blueprint.JsonFileManager;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -165,7 +164,27 @@ public class PinballMachineManager
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID()+ "\\elements.json", placedElementListJson);
+        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID() + "\\elements.json", placedElementListJson);
+    }
+
+    public void deleteMachine(PinballMachine pinballMachine)
+    {
+        String pathToMachine = Config.pathToMachines() + "\\" + pinballMachine.getID();
+        File directory = new File(pathToMachine);
+        if (!directory.exists()) {
+            System.err.println("PinballMachine directory does not exists");
+        }
+
+        if (directory.isDirectory())
+        {
+            for (File file : directory.listFiles())
+            {
+                file.delete();
+            }
+        }
+        directory.delete();
+
+        pinballMachines.remove(pinballMachine);
     }
 
     public ListProperty<PinballMachine> pinballMachinesProperty()
