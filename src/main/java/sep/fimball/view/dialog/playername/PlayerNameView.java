@@ -1,16 +1,23 @@
 package sep.fimball.view.dialog.playername;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Die PlayerNameView ist für die Darstellung der Einstellungen der aktuellen Partie zuständig und ermöglicht es dem Nutzer, diese zu ändern und eine Partie zu starten.
  */
-public class PlayerNameView extends DialogView<PlayerNameViewModel>
+public class PlayerNameView extends DialogView<PlayerNameViewModel> implements Initializable
 {
     /**
      * Das Pane zur Einstellung der Spielernamen.
@@ -22,6 +29,20 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
      * Das zur PlayerNameView gehörende PlayerNameViewModel.
      */
     private PlayerNameViewModel playerNameViewModel;
+
+    @FXML
+    private TitledPane title;
+
+    @FXML
+    private Label playerNamesTitle;
+
+    @FXML
+    private Button addPlayerButton;
+
+    @FXML
+    private Button exitButton;
+
+    private ResourceBundle bundle;
 
     /**
      * Setzt das zur PlayerNameView gehörende PlayerNameViewModel.
@@ -61,5 +82,15 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     private void addPlayerClicked()
     {
         playerNameViewModel.addPlayer();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        bundle = resources;
+        title.setText(bundle.getString("playername.title.key"));
+        playerNamesTitle.setText(bundle.getString("playername.names.key"));
+        addPlayerButton.setText(bundle.getString("playername.add.key"));
+        exitButton.setText(bundle.getString("playername.exit.key"));
     }
 }
