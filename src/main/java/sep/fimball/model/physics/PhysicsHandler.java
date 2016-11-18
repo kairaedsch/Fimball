@@ -1,6 +1,5 @@
 package sep.fimball.model.physics;
 
-import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
@@ -57,6 +56,8 @@ public class PhysicsHandler
      */
     private List<PhysicsElement> physicsElements;
 
+    private final boolean debug = true;
+
     /**
      * Zrzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
@@ -73,16 +74,28 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
+        inputManager.addListener(KeyBinding.DEBUG_LEFT, args -> bufferedKeyEvents.add(args));
+        inputManager.addListener(KeyBinding.DEBUG_RIGHT, args -> bufferedKeyEvents.add(args));
 
         timerTask = new TimerTask()
         {
             /**
-             * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig.
+             * Diese Methode wird 60 mal pro Sekund e ausgeführt und ist für die physikalischen Berechnungen zuständig.
              */
             @Override
             public void run()
             {
+                boolean cont = !debug;
+
                 // TODO check bufferedKeyEvents
+                for (KeyObserverEventArgs args : bufferedKeyEvents)
+                {
+                    if (args.getBinding() == KeyBinding.DEBUG_RIGHT)
+                        cont = true;
+                }
+
+                if (!cont)
+                    return;
 
                 // Check all PhysicsElements for collisions with the ball
 

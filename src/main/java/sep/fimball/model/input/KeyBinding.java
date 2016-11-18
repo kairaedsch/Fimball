@@ -43,5 +43,7 @@ public enum KeyBinding
     /**
      * Löscht das im Editor ausgewählte BaseElement.
      */
-    EDITOR_DELETE
+    EDITOR_DELETE,
+
+    DEBUG_LEFT, DEBUG_RIGHT
 }

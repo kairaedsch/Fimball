@@ -1,17 +1,13 @@
 package sep.fimball.view;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import sep.fimball.general.data.Config;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.window.WindowType;
@@ -47,12 +43,10 @@ public class SceneManagerView
      */
     public SceneManagerView(Stage stage)
     {
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent t) {
-                Platform.exit();
-                System.exit(0);
-            }
+        stage.setOnCloseRequest(t ->
+        {
+            Platform.exit();
+            System.exit(0);
         });
 
         stage.setWidth(1280);
@@ -80,18 +74,10 @@ public class SceneManagerView
         updateContent(sceneManagerViewModel.windowViewModelProperty().get());
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
 
-        blurEffect = new GaussianBlur(13);
-    }
+        root.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
+        root.setOnKeyReleased(sceneManagerViewModel::onKeyEvent);
 
-    /**
-     * Benachrichtigt {@code sceneManagerViewModel} über einen aufgetretenen Tastendruck und gibt diesen weiter.
-     *
-     * @param event Der Tastendruck in Form eines KeyEvents.
-     */
-    @FXML //TODO write in fxml file
-    private void onKeyEvent(KeyEvent event)
-    {
-        sceneManagerViewModel.onKeyEvent(event);
+        blurEffect = new GaussianBlur(13);
     }
 
     /**
