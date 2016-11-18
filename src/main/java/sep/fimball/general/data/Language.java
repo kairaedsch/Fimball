@@ -27,6 +27,7 @@ public enum Language
     }
 
     /**
+     * TODO Durch toString ersetzen?
      * Gibt die Sprache, die dieses Objekt kennzeichnet, zurück.
      *
      * @return Die gekennzeichnete Sprache.
