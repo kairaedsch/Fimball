@@ -24,7 +24,7 @@ public class PinballMachineSaveTest
         }
 
         //Den gerade erstellten Automaten serialisieren und speichern
-        PinballMachineManager.getInstance().save(pinballMachineId);
+        PinballMachineManager.getInstance().savePinballMachine(pinballMachine);
 
         //Den vorher gespeicherten Automaten neu laden
         PinballMachine loadedPinballMachine;
