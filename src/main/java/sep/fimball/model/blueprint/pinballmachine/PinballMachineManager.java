@@ -171,19 +171,18 @@ public class PinballMachineManager
     {
         String pathToMachine = Config.pathToMachines() + "\\" + pinballMachine.getID();
         File directory = new File(pathToMachine);
-        if (!directory.exists()) {
-            System.err.println("PinballMachine directory does not exists");
-        }
-
-        if (directory.isDirectory())
+        if (directory.exists())
         {
-            for (File file : directory.listFiles())
+            if (directory.isDirectory())
             {
-                file.delete();
+                for (File file : directory.listFiles())
+                {
+                    file.delete();
+                }
+                directory.delete();
+                System.out.println("Pinball machine json-files deleted");
             }
         }
-        directory.delete();
-
         pinballMachines.remove(pinballMachine);
     }
 
