@@ -1,5 +1,7 @@
 package sep.fimball.model.physics;
 
+import javafx.scene.paint.Color;
+import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.RectangleDouble;
 
@@ -39,7 +41,7 @@ public class PolygonColliderShape implements ColliderShape
     public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
     {
         Vector2 globalBallPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
-        List<Vector2> detectedOverlaps = new ArrayList<>();
+        List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();
         Vector2 ballAxis;
 
@@ -71,7 +73,7 @@ public class PolygonColliderShape implements ColliderShape
         if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
         {
             double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-            detectedOverlaps.add(Vector2.scale(ballAxis, overlapDistance));
+            detectedOverlaps.add(new OverlapAxis(ballAxis, overlapDistance));
         }
         else
         {
@@ -92,6 +94,7 @@ public class PolygonColliderShape implements ColliderShape
                 Vector2 vec = Vector2.sub(vertices.get(i+1), vertices.get(i));
                 currentAxis = Vector2.createNormal(vec).normalized();
             }
+            Debug.addDrawEntry(vertices.get(i), currentAxis, Color.YELLOW);
             List<Double> newPoints = new ArrayList<>();
 
             for (Vector2 vert : vertices)
@@ -112,7 +115,7 @@ public class PolygonColliderShape implements ColliderShape
             if (ballMaximum > polygonMin && ballMinimum < polygonMax || polygonMax > ballMinimum && polygonMin < ballMaximum)
             {
                 double overlapDistance = Math.min(ballMaximum, polygonMax) - Math.max(ballMinimum, polygonMin);
-                detectedOverlaps.add(Vector2.scale(currentAxis, overlapDistance));
+                detectedOverlaps.add(new OverlapAxis(currentAxis, overlapDistance));
             }
             else
             {
@@ -120,9 +123,10 @@ public class PolygonColliderShape implements ColliderShape
             }
         }
 
-        detectedOverlaps.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
+        detectedOverlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));
+        Vector2 resultVector = Vector2.scale(detectedOverlaps.get(0).getAxis(), detectedOverlaps.get(0).getOverlap());
 
-        return new HitInfo(true, detectedOverlaps.get(0));
+        return new HitInfo(true, resultVector);
     }
 
     @Override
