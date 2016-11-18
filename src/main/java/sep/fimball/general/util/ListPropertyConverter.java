@@ -15,6 +15,7 @@ public class ListPropertyConverter
 {
     /**
      * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der listPropertyMaster, wenn sich letztere ändert.
+     * TODO
      * @param listPropertySlave
      * @param listPropertyMaster
      * @param converter
@@ -39,6 +40,7 @@ public class ListPropertyConverter
 
     /**
      * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der MapPropertyMaster, wenn sich letztere ändert.
+     * TODO
      * @param listPropertySlave
      * @param MapPropertyMaster
      * @param converter
@@ -62,11 +64,24 @@ public class ListPropertyConverter
         listChangeListener.onChanged(null);
     }
 
+    /**
+     * TODO
+     *
+     * @param <SlaveT>
+     * @param <MasterT>
+     */
     public interface ListConverter<SlaveT, MasterT>
     {
         SlaveT convert(MasterT master);
     }
 
+    /**
+     * TODO
+     *
+     * @param <SlaveT>
+     * @param <MasterKeyT>
+     * @param <MasterValueT>
+     */
     public interface MapConverter<SlaveT, MasterKeyT, MasterValueT>
     {
         SlaveT convert(MasterKeyT masterKey, MasterValueT masterValueT);

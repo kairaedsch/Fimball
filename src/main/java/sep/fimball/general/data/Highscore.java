@@ -19,8 +19,9 @@ public class Highscore
 
     /**
      * Erzeugt einen neuen Highscore mit gegebenen Punkten und Namen.
-     * @param score Die erreichte Punkteanzahl
-     * @param playerName Der Name des Spielers der den zu erzeugenden Highscore erreicht hat
+     *
+     * @param score Die erreichte Punkteanzahl.
+     * @param playerName Der Name des Spielers, der den zu erzeugenden Highscore erreicht hat.
      */
     public Highscore(long score, String playerName)
     {

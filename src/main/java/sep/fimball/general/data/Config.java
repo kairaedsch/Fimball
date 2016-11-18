@@ -24,67 +24,69 @@ public class Config
     }
 
     /**
-     * Der Pfad an dem sowohl die Automaten als auch die Einstellungen gespeichert werden
+     * Der Pfad, an dem sowohl die Automaten als auch die Einstellungen gespeichert werden.
      */
     private static String pathToData;
 
     /**
-     * Der Unterpfad an dem die serialisierten BaseElements gespeichert werden
+     * Der Unterpfad, an dem die serialisierten BaseElements gespeichert werden.
      */
     private static String pathDataToElements = "/elements";
 
     /**
-     * Die Datei in dem ein serialisiertes BaseElement gespeichert wird
+     * Die Datei, in der ein serialisiertes BaseElement gespeichert wird.
      */
     private static String pathElementToDataJson = "/data.json";
 
     /**
-     * Der Unterpfad an dem die serialisierten Flipperautomaten gespeichert werden
+     * Der Unterpfad, an dem die serialisierten Flipperautomaten gespeichert werden.
      */
     private static String pathDataToMachines = "/machines";
 
     /**
-     * Die Datei in der für einen Flipperautomaten das Vorschaubild gespeichert wird
+     * Die Datei, in der das Vorschaubild eines Flipperautomaten gespeichert wird.
      */
     private static String pathMachineToImagePreview = "/preview.png";
 
     /**
-     * Die Datei in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden
+     * Die Datei, in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden.
      */
     private static String pathMachineToGeneralJson = "/general.json";
 
     /**
-     * Die Datei in der die Liste von platzierten Elementen eines serialisierten Flipperautomat gespeichert werden
+     * Die Datei, in der die Liste von platzierten Elementen eines serialisierten Flipperautomaten gespeichert wird.
      */
     private static String pathMachineToPlacedElementsJson = "/elements.json";
 
     /**
-     * Die Datei in der die Spieleinstellungen gespeichert werden
+     * Die Datei, in der die Spieleinstellungen gespeichert werden.
      */
     private static String pathDataToSettings ="/settings.json";
 
     /**
-     * Die maximale Anzahl von Highscores die bei einem Flipperautomaten gespeichert werden
+     * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
      */
     public final static int maxHighscores = 10;
 
     /**
-     * Die maximal einstellbare Lautstärke
+     * Die maximal einstellbare Lautstärke.
      */
     public final static double maxVolume = 10;
 
     /**
-     * Die Hintergrundfarbe des Flipperautomaten
+     * Die Hintergrundfarbe des Flipperautomaten.
      */
     public final static Color baseColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
 
     /**
-     * Gibt an aus wie vielen Pixel eine Grid-Einheit besteht
+     * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
      */
     public final static int pixelsPerGridUnit = 15;
 
     /**
-     * @return Gibt den kombinierten Pfad zurück welcher angibt wo die BaseElements gespeichert werden
+     * Gibt den kombinierten Pfad zurück, der angibt, wo die BaseElements gespeichert werden.
+     *
+     * @return Der Pfad, an dem die BaseElements gespeichert werden.
      */
     public static String pathToElements()
     {
@@ -92,9 +94,10 @@ public class Config
     }
 
     /**
-     * Gibt den kombinierten Pfad zurück welcher den Namen der Datei eines gewissen BaseElements angibt
-     * @param elementTypeId Id des BaseElements
-     * @return Pfad des BaseElements
+     * Gibt den kombinierten Pfad zurück, der den Namen der Datei eines gewissen BaseElements angibt.
+     *
+     * @param elementTypeId Id des BaseElements.
+     * @return Pfad des BaseElements.
      */
     public static String pathToElementDataJson(String elementTypeId)
     {
@@ -102,15 +105,16 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zu einem der Bilder welche ein BaseElement darstellen zurück
-     * @param elementTypeId Id des BaseElements
-     * @param imageLayer Top oder Bottom Image
-     * @param canRotate Gibt an ob das Element rotieren kann
-     * @param rotation Gibt an um wie viel Grad das Element rotiert ist
-     * @param animation Gibt an ob das Element eine Rotation hat
-     * @param animationName Gibt den Namen der Animation an
-     * @param animationId Gibt die Id der Animation an
-     * @return Der Pfad des Bildes
+     * Gibt den Pfad zu einem der Bilder, die ein BaseElement darstellen, zurück.
+     *
+     * @param elementTypeId Id des BaseElements.
+     * @param imageLayer Top oder Bottom Image.
+     * @param canRotate Gibt an ob das Element rotieren kann.
+     * @param rotation Gibt an, um wie viel Grad das Element rotiert ist.
+     * @param animation Gibt an, ob das Element eine Animation hat.
+     * @param animationName Gibt den Namen der Animation an.
+     * @param animationId Gibt die Id der Animation an.
+     * @return Der Pfad des Bildes.
      */
     public static String pathToElementImage(String elementTypeId, ImageLayer imageLayer, boolean canRotate, int rotation, boolean animation, String animationName, int animationId)
     {
@@ -126,7 +130,9 @@ public class Config
     }
 
     /**
-     * @return Gibt den Pfad zum Speicherort der serialisierten Flipperautomaten zurück
+     * Gibt den Pfad zum Speicherort der serialisierten Flipperautomaten zurück.
+     *
+     * @return Der Pfad zum Speicherort der Flipperautomaten.
      */
     public static String pathToMachines()
     {
@@ -134,9 +140,10 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zum Speicherort des Vorschaubilds eines gewissen Flipperautomaten zurück
-     * @param pinballMachineId Id des Flipperautomaten
-     * @return Pfad zum Vorschaubild des Flipperautomaten
+     * Gibt den Pfad zum Speicherort des Vorschaubilds eines gewissen Flipperautomaten zurück.
+     *
+     * @param pinballMachineId Id des Flipperautomaten.
+     * @return Pfad zum Vorschaubild des Flipperautomaten.
      */
     public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
@@ -144,9 +151,10 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zur Datei in der allgemeine Infos über einen gewissen Flipperautomaten gespeichert werden zurück
-     * @param pinballMachineId Id des Flipperautomaten
-     * @return Pfad der allgemeinen Flipperbeschreibung
+     * Gibt den Pfad zur Datei, in der allgemeine Infos über einen gewissen Flipperautomaten gespeichert werden, zurück.
+     *
+     * @param pinballMachineId Id des Flipperautomaten.
+     * @return Pfad der allgemeinen Automatenbeschreibung.
      */
     public static String pathToPinballMachineGeneralJson(String pinballMachineId)
     {
@@ -154,9 +162,10 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad der Datei, welche die Liste von platzierten Elementen eines Flipperautomaten enthält, zurück
-     * @param pinballMachineId Id des Flipperautomaten
-     * @return Der Pfad der Liste von platzierten Elementen
+     * Gibt den Pfad der Datei, die die Liste von platzierten Elementen eines Flipperautomaten enthält, zurück.
+     *
+     * @param pinballMachineId Id des Flipperautomaten.
+     * @return Der Pfad der Liste von platzierten Elementen.
      */
     public static String pathToPinballMachinePlacedElementsJson(String pinballMachineId)
     {
@@ -164,13 +173,20 @@ public class Config
     }
 
     /**
-     * @return Pfad der Einstellungsdatei
+     * Gibt den Pfad zur Datei, in der die Einstellungen des Spiels gespeichert sind, zurück.
+     *
+     * @return Pfad der Einstellungsdatei.
      */
     public static String pathToSettings()
     {
         return pathToData + pathDataToSettings;
     }
 
+    /**
+     * Gibt eine eindeutige ID für Automaten zurück.
+     *
+     * @return Eine eindeutige ID für Automaten.
+     */
     public static long uniqueId()
     {
         // TODO make unique

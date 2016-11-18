@@ -8,17 +8,17 @@ import java.awt.*;
 public class Vector2
 {
     /**
-     * X Komponente des Vektors.
+     * Erste Komponente des Vektors.
      */
     private double x;
 
     /**
-     * Y Komponente des Vektors.
+     * Zweite Komponente des Vektors.
      */
     private double y;
 
     /**
-     * Konstruiert einen Vektor bei dem sowohl die X als auch Y Komponente 0 sind.
+     * Konstruiert einen Vektor, bei dem sowohl die erste als auch die zweite Komponente 0 sind.
      */
     public Vector2()
     {
@@ -28,8 +28,9 @@ public class Vector2
 
     /**
      * Konstruiert einen Vektor mit den übergebenen Parametern.
-     * @param x x-Komponente des Vektors
-     * @param y y-Komponente des Vektors
+     *
+     * @param x Erste Komponente des Vektors.
+     * @param y Zweite Komponente des Vektors.
      */
     public Vector2(double x, double y)
     {
@@ -38,8 +39,9 @@ public class Vector2
     }
 
     /**
-     * Erzeugt eine Vektor aus einem gegebenen Punkt
-     * @param p Der Punkt aus dem der Vektor erzeugt wird
+     * Erzeugt einen Vektor aus einem gegebenen Punkt.
+     *
+     * @param p Der Punkt, aus dem der Vektor erzeugt wird.
      */
     public Vector2(Point p)
     {
@@ -48,8 +50,9 @@ public class Vector2
     }
 
     /**
-     * Addiert einen anderen Vektor auf diesen Vektor
-     * @param otherVec Der zu addierende Vektor
+     * Addiert einen anderen Vektor auf diesen Vektor.
+     *
+     * @param otherVec Der zu addierende Vektor.
      */
     public void add(Vector2 otherVec)
     {
@@ -58,8 +61,9 @@ public class Vector2
     }
 
     /**
-     * Subtrahiert einen anderen Vektor von diesem Vektor
-     * @param otherVec Der zu subtrahierende Vektor
+     * Subtrahiert einen anderen Vektor von diesem Vektor.
+     *
+     * @param otherVec Der zu subtrahierende Vektor.
      */
     public void sub(Vector2 otherVec)
     {
@@ -68,8 +72,9 @@ public class Vector2
     }
 
     /**
-     * Skaliert einen Vektor mit dem gegebenen Skalar
-     * @param scalar Das Skalar mit dem der Vektor skaliert wird
+     * Skaliert einen Vektor mit dem gegebenen Skalar.
+     *
+     * @param scalar Der Skalar, mit dem der Vektor skaliert wird.
      */
     public void scale(double scalar)
     {
@@ -78,7 +83,9 @@ public class Vector2
     }
 
     /**
-     * @return Die L2-Norm des Vektors
+     * Gibt die Länge des Vektors in der euklidischen Norm zurück.
+     *
+     * @return Die L2-Norm des Vektors.
      */
     public double magnitude()
     {
@@ -86,9 +93,10 @@ public class Vector2
     }
 
     /**
-     * Berechnet das Skalarprodukt dieses Vektors mit einem gegebenen Vektor
-     * @param other Der Vektor mit dem das Skalarprodukt berechnet werden soll
-     * @return Das Skalarprodukt
+     * Berechnet das Skalarprodukt dieses Vektors mit einem gegebenen Vektor.
+     *
+     * @param other Der Vektor, mit dem das Skalarprodukt berechnet werden soll.
+     * @return Das Skalarprodukt der beiden Vektoren.
      */
     public double dot(Vector2 other)
     {
@@ -96,7 +104,7 @@ public class Vector2
     }
 
     /**
-     * Normiert den Vektor so dass er eine Norm von 1 hat
+     * Normiert den Vektor.
      */
     public void normalize()
     {
@@ -105,6 +113,12 @@ public class Vector2
         this.y /= norm;
     }
 
+    /**
+     * Dreht den Vektor gegen den Uhrzeigersinn um den durch {@code pivot} gegebenen Pivotpunkt im angegeben Winkel.
+     *
+     * @param radianAngle Der Winkel als Radiant.
+     * @param pivot Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
+     */
     public void rotate(double radianAngle, Vector2 pivot)
     {
         this.sub(pivot);
@@ -113,8 +127,9 @@ public class Vector2
     }
 
     /**
-     * Rotiert den Vektor um den gegebene Winkel
-     * @param radianAngle Der Winkel um den rotiert werden soll, gegeben in Radianten
+     * Dreht den Vektor gegen den Uhrzeigersinn um den gegebene Winkel.
+     *
+     * @param radianAngle Der Winkel, um den rotiert werden soll, gegeben in Radianten.
      */
     public void rotate(double radianAngle)
     {
@@ -123,8 +138,9 @@ public class Vector2
     }
 
     /**
-     * Gibt den normierten Vektor zurück ohne die Normierung an diesem Vektor zu übernehmen
-     * @return Der normierte Vektor
+     * Gibt den normierten Vektor zurück, ohne die Normierung an diesem Vektor zu übernehmen.
+     *
+     * @return Der normierte Vektor.
      */
     public Vector2 normalized()
     {
@@ -133,9 +149,10 @@ public class Vector2
     }
 
     /**
-     * Gibt den Winkel zwischen diesem Vektor und einem anderen zurück
-     * @param otherVec Der andere Vektor
-     * @return Winkel zwischen den beiden Vektoren in Radianten
+     * Gibt den Winkel zwischen diesem Vektor und einem anderen zurück.
+     *
+     * @param otherVec Der andere Vektor.
+     * @return Winkel zwischen den beiden Vektoren in Radianten.
      */
     public double angleBetween(Vector2 otherVec)
     {
@@ -143,10 +160,11 @@ public class Vector2
     }
 
     /**
-     * Addiert zwei Vektoren und gibt das Ergebnis zurück
-     * @param vecOne Der erste Vektor
-     * @param vecTwo Der zu addierende Vektor
-     * @return Das Ergebnis der Addition
+     * Addiert zwei Vektoren und gibt das Ergebnis zurück.
+     *
+     * @param vecOne Der erste Vektor.
+     * @param vecTwo Der zu addierende Vektor.
+     * @return Das Ergebnis der Addition.
      */
     public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
     {
@@ -154,10 +172,11 @@ public class Vector2
     }
 
     /**
-     * Subtrahiert zwei Vektoren und gibt das Ergebnis zurück
-     * @param vecOne Der erste Vektor
-     * @param vecTwo Der zu subtrahierende Vektor
-     * @return Das Ergebnis der Subtraktion
+     * Subtrahiert zwei Vektoren und gibt das Ergebnis zurück.
+     *
+     * @param vecOne Der erste Vektor.
+     * @param vecTwo Der zu subtrahierende Vektor.
+     * @return Das Ergebnis der Subtraktion.
      */
     public static Vector2 sub(Vector2 vecOne, Vector2 vecTwo)
     {
@@ -165,10 +184,11 @@ public class Vector2
     }
 
     /**
-     * Skaliert einen gegebenen Vektor mit einem Skalar und gibt das Ergebnis zurück
-     * @param vecOne Der Vektor
-     * @param scalar Das Skalar
-     * @return Das Ergebnis der Skalierung
+     * Skaliert einen gegebenen Vektor mit einem Skalar und gibt das Ergebnis zurück.
+     *
+     * @param vecOne Der Vektor.
+     * @param scalar Der Skalar.
+     * @return Das Ergebnis der Skalierung.
      */
     public static Vector2 scale(Vector2 vecOne, double scalar)
     {
@@ -176,10 +196,11 @@ public class Vector2
     }
 
     /**
-     * Projiziert einen Vektor auf einen anderen
-     * @param source Der Vektor der projiziert werden soll
-     * @param target Der Vektor auf den projiziert wird
-     * @return Der projizierte Vektor
+     * Projiziert einen Vektor auf einen Anderen.
+     *
+     * @param source Der Vektor, der projiziert werden soll.
+     * @param target Der Vektor, auf den projiziert wird.
+     * @return Der projizierte Vektor.
      */
     public static Vector2 project(Vector2 source, Vector2 target)
     {
@@ -189,9 +210,10 @@ public class Vector2
     }
 
     /**
-     * Gibt die L2-Norm eines gegebenen Vektors zurück
-     * @param vecOne Der Vektor dessen L2-Norm bestimmt werden soll
-     * @return Die L2-Norm des Vektors
+     * Gibt die euklidische Norm eines gegebenen Vektors zurück.
+     *
+     * @param vecOne Der Vektor, dessen L2-Norm bestimmt werden soll.
+     * @return Die L2-Norm des Vektors.
      */
     public static double magnitude(Vector2 vecOne)
     {
@@ -199,10 +221,11 @@ public class Vector2
     }
 
     /**
-     * Gibt das Skalarprodukt von zwei Vektoren zurück
-     * @param vecOne Der erste Vektor
-     * @param vecTwo Der zweite Vektor
-     * @return Das Skalarprodukt der beiden Vektoren
+     * Gibt das Skalarprodukt von zwei Vektoren zurück.
+     *
+     * @param vecOne Der erste Vektor.
+     * @param vecTwo Der zweite Vektor.
+     * @return Das Skalarprodukt der beiden Vektoren.
      */
     public static double dot(Vector2 vecOne, Vector2 vecTwo)
     {
@@ -211,8 +234,9 @@ public class Vector2
 
     /**
      * Normiert den gegebenen Vektor und gibt das Ergebnis zurück.
-     * @param vecOne Der zu normierende Vektor
-     * @return Der normierte Vektor
+     *
+     * @param vecOne Der zu normierende Vektor.
+     * @return Der normierte Vektor.
      */
     public static Vector2 normalize(Vector2 vecOne)
     {
@@ -228,9 +252,10 @@ public class Vector2
     }
 
     /**
-     * Normiert den gegebenen Vektor wobei ein neuer erstellt wird und der Vektor der Klasse nicht geändert wird
-     * @param input Der zu normierende Vektor
-     * @return Der normierte Vektor
+     * Normiert den gegebenen Vektor, wobei ein Neuer erstellt wird und der übergebene Vektor nicht verändert wird.
+     *
+     * @param input Der zu normierende Vektor.
+     * @return Der normierte Vektor.
      */
     public static Vector2 normalized(Vector2 input)
     {
@@ -239,10 +264,11 @@ public class Vector2
     }
 
     /**
-     * Gibt den Winkel zwischen zwei Vektoren in Radianten zurück
-     * @param vecOne Der erste Vektor
-     * @param vecTwo Der zweite Vektor
-     * @return Der Winkel zwischen den beiden Vektoren
+     * Gibt den Winkel zwischen zwei Vektoren als Radianten zurück.
+     *
+     * @param vecOne Der erste Vektor.
+     * @param vecTwo Der zweite Vektor.
+     * @return Der Winkel zwischen den beiden Vektoren.
      */
     public static double angleBetween(Vector2 vecOne, Vector2 vecTwo)
     {
@@ -269,6 +295,11 @@ public class Vector2
         this.y = y;
     }
 
+    /**
+     * Gibt einen Vektor als String in der Form {Erste Komponente|Zweite Komponente} zurück.
+     *
+     * @return Eine textuelle Repräsentation des Vektors.
+     */
     @Override
     public String toString()
     {

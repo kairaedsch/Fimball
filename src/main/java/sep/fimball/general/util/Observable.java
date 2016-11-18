@@ -1,10 +1,13 @@
 package sep.fimball.general.util;
 
 /**
- * Erweiterung von Observable um besser mit Lambda Expressions arbeiten zu können
+ * Ändert die Sichtbarkeit der Methode setChanged von protected auf public, um sie auch in Lambda-Ausdrücken nutzen zu können.
  */
 public class Observable extends java.util.Observable
 {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setChanged()
     {
