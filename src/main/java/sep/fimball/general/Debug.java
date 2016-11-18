@@ -42,7 +42,9 @@ public class Debug
             for (DrawEntry entry : drawEntries)
             {
                 context.setStroke(entry.color);
+                context.setFill(entry.color);
                 context.strokeLine(entry.position.getX(), entry.position.getY(), entry.position.getX() + entry.direction.getX(), entry.position.getY() + entry.direction.getY());
+                context.fillOval(entry.position.getX() - 1.5, entry.position.getY() - 1.5, 3.0, 3.0);
             }
         }
     }
