@@ -56,7 +56,7 @@ public class PhysicsHandler
      */
     private List<PhysicsElement> physicsElements;
 
-    private final boolean debug = true;
+    private final boolean debug = false;
 
     /**
      * Zrzeugt einen neuen PhysicsHandler mit den gegebenen Element.

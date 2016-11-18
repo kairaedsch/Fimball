@@ -115,7 +115,11 @@ public class PolygonColliderShape implements ColliderShape
             if (ballMaximum > polygonMin && ballMinimum < polygonMax || polygonMax > ballMinimum && polygonMin < ballMaximum)
             {
                 double overlapDistance = Math.min(ballMaximum, polygonMax) - Math.max(ballMinimum, polygonMin);
-                detectedOverlaps.add(new OverlapAxis(currentAxis, overlapDistance));
+
+                if (Vector2.dot(currentAxis, ballAxis) >= 0)
+                {
+                    detectedOverlaps.add(new OverlapAxis(currentAxis, overlapDistance));
+                }
             }
             else
             {
