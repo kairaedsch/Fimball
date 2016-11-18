@@ -1,9 +1,27 @@
 package sep.fimball.model.blueprint.base;
 
 /**
- * Created by Kai on 12.11.2016.
+ * Gibt an, welche Art von Element durch einen Bauplan beschrieben wird.
  */
 public enum BaseElementType
 {
-    NORMAL, BALL, PLUNGER, FLIPPER
+    /**
+     * Kennzeichnet alle Arten von Elementen, die der Spieler nicht steuern kann.
+     */
+    NORMAL,
+
+    /**
+     * Kennzeichnet einen Ball.
+     */
+    BALL,
+
+    /**
+     * Kennzeichnet einen Plunger.
+     */
+    PLUNGER,
+
+    /**
+     * Kennzeichnet einen Flipperarm.
+     */
+    FLIPPER
 }

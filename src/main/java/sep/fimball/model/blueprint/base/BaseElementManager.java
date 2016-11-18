@@ -14,19 +14,19 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
- * Der ElementManager verwaltet alle Elementtypen zum Serialisieren.
+ * Der ElementManager verwaltet die Serialisierung aller Elementtypen.
  */
 public class BaseElementManager
 {
     /**
-     * Stellt sicher, dass es nur einen ElementManager gibt, der alle Elemente verwalten soll um Duplikate zu vermeiden.
+     * Stellt sicher, dass es nur einen ElementManager gibt, der alle Elemente verwalten soll, um Duplikate zu vermeiden.
      */
     private static BaseElementManager singletonInstance;
 
     /**
      * Gibt den bereits existierenden ElementManager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
-     * @return
+     * @return Der BaseElementManager.
      */
     public static BaseElementManager getInstance()
     {
@@ -87,11 +87,22 @@ public class BaseElementManager
         }
     }
 
+    /**
+     * Gibt die Map, die IDs auf die durch sie identifizierten Elementbaupläne abbildet, zurück.
+     *
+     * @return Die Map, die Elementbaupläne und deren ID enthält.
+     */
     public ReadOnlyMapProperty<String, BaseElement> elementsProperty()
     {
         return elements;
     }
 
+    /**
+     * Gibt den Bauplan für ein Element zurück, der durch baseElementId identifiziert wird oder null, falls kein solcher Bauplan existiert.
+     *
+     * @param baseElementId Die ID des gesuchten Bauplans.
+     * @return Der Bauplan mit der gegebenen ID.
+     */
     public BaseElement getElement(String baseElementId)
     {
         return elements.get(baseElementId);
