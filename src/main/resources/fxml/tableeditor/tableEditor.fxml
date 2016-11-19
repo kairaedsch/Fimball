@@ -16,8 +16,8 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" text="Settings"/>
-                                        <Label text="Tills Automat"/>
+                                        <Button mnemonicParsing="false" text="Settings" onMouseClicked="#settingsClicked"/>
+                                        <Label text="Tills Automat" fx:id="nameLabel"/>
                                     </children>
                                     <VBox.margin>
                                         <Insets/>

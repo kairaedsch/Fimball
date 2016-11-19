@@ -43,7 +43,8 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void savePinballMachine()
     {
-        //TODO save
+        pinballMachine.saveToDisk();
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     /**
@@ -51,8 +52,8 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void deletePinballMachine()
     {
+        pinballMachine.deleteFromDisk();
         sceneManager.setWindow(new MainMenuViewModel());
-        // TODO delete
     }
 
     /**

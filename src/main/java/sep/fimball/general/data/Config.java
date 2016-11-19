@@ -93,6 +93,11 @@ public class Config
         return pathToData + pathDataToElements;
     }
 
+    public static String pathToElement(String elementTypeId)
+    {
+        return  pathToElements() + "/" + elementTypeId;
+    }
+
     /**
      * Gibt den kombinierten Pfad zurück, der den Namen der Datei eines gewissen BaseElements angibt.
      *
@@ -101,7 +106,7 @@ public class Config
      */
     public static String pathToElementDataJson(String elementTypeId)
     {
-        return pathToElements() + "/" + elementTypeId + pathElementToDataJson;
+        return pathToElement(elementTypeId) + pathElementToDataJson;
     }
 
     /**
@@ -118,7 +123,7 @@ public class Config
      */
     public static String pathToElementImage(String elementTypeId, ImageLayer imageLayer, boolean canRotate, int rotation, boolean animation, String animationName, int animationId)
     {
-        String path = pathToElements() + "/" + elementTypeId + "/";
+        String path = pathToElement(elementTypeId) + "/";
 
         path += imageLayer.getName();
 
@@ -134,9 +139,14 @@ public class Config
      *
      * @return Der Pfad zum Speicherort der Flipperautomaten.
      */
-    public static String pathToMachines()
+    public static String pathToPinballMachines()
     {
         return pathToData + pathDataToMachines;
+    }
+
+    public static String pathToPinballMachine(String pinballMachineId)
+    {
+        return pathToPinballMachines() + "/" + pinballMachineId;
     }
 
     /**
@@ -147,7 +157,7 @@ public class Config
      */
     public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
-        return pathToMachines() + "/" + pinballMachineId + pathMachineToImagePreview;
+        return pathToPinballMachine(pinballMachineId) + pathMachineToImagePreview;
     }
 
     /**
@@ -158,7 +168,7 @@ public class Config
      */
     public static String pathToPinballMachineGeneralJson(String pinballMachineId)
     {
-        return pathToMachines() + "/" + pinballMachineId + pathMachineToGeneralJson;
+        return pathToPinballMachine(pinballMachineId) + pathMachineToGeneralJson;
     }
 
     /**
@@ -169,7 +179,7 @@ public class Config
      */
     public static String pathToPinballMachinePlacedElementsJson(String pinballMachineId)
     {
-        return pathToMachines() + "/" + pinballMachineId + pathMachineToPlacedElementsJson;
+        return pathToPinballMachine(pinballMachineId) + pathMachineToPlacedElementsJson;
     }
 
     /**

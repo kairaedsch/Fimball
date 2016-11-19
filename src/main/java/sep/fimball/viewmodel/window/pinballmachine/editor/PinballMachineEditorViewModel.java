@@ -43,6 +43,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private DoubleProperty cameraZoom;
 
+    private StringProperty machineName;
+
     private SelectedElementSubViewModel selectedElementSubViewModel;
 
     private PinballCanvasViewModel pinballCanvasViewModel;
@@ -60,6 +62,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         super(WindowType.TABLE_EDITOR);
         this.pinballMachine = pinballMachine;
         mouseModus = MouseModus.SELECTING;
+
+        machineName = new SimpleStringProperty();
+        machineName.bind(pinballMachine.nameProperty());
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
         cameraZoom = new SimpleDoubleProperty(0.75);
@@ -128,26 +133,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
-    public PinballCanvasViewModel getPinballCanvasViewModel()
-    {
-        return pinballCanvasViewModel;
-    }
-
-    public ObjectProperty<Vector2> cameraPositionProperty()
-    {
-        return cameraPosition;
-    }
-
-    public DoubleProperty cameraZoomProperty()
-    {
-        return cameraZoom;
-    }
-
-    public SelectedElementSubViewModel getSelectedElementSubViewModel()
-    {
-        return selectedElementSubViewModel;
-    }
-
     public void dragged(double x, double y)
     {
         if(mouseModus == MouseModus.DRAGGING)
@@ -182,5 +167,29 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachine.addElement(selectedAvailableElement, gridPosition);
         }
+    }
+
+    public PinballCanvasViewModel getPinballCanvasViewModel()
+    {
+        return pinballCanvasViewModel;
+    }
+
+    public ObjectProperty<Vector2> cameraPositionProperty()
+    {
+        return cameraPosition;
+    }
+
+    public DoubleProperty cameraZoomProperty()
+    {
+        return cameraZoom;
+    }
+
+    public SelectedElementSubViewModel getSelectedElementSubViewModel()
+    {
+        return selectedElementSubViewModel;
+    }
+    public StringProperty machineNameProperty()
+    {
+        return machineName;
     }
 }

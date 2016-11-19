@@ -159,4 +159,16 @@ public class PinballMachine
         PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
         addElement(placedElement);
     }
+
+    public void saveToDisk()
+    {
+        PinballMachineManager.getInstance().savePinballMachine(this);
+        elements.clear();
+        elements = null;
+    }
+
+    public void deleteFromDisk()
+    {
+        PinballMachineManager.getInstance().deleteMachine(this);
+    }
 }

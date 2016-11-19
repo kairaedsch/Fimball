@@ -9,9 +9,10 @@ import sep.fimball.model.blueprint.JsonFileManager;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -50,11 +51,19 @@ public class PinballMachineManager
 
         try
         {
-            Files.list(Paths.get(Config.pathToMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);
-        } catch (IOException e)
+            Files.list(Paths.get(Config.pathToPinballMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
         }
+    }
+
+    public PinballMachine createNewMachine()
+    {
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
+        pinballMachines.add(pinballMachine);
+        return pinballMachine;
     }
 
     private void loadMachine(Path path)
@@ -83,13 +92,15 @@ public class PinballMachineManager
                 System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
 
                 loadMachineElements(pinballMachine, pinballMachineId);
-            } catch (NullPointerException e)
+            }
+            catch (NullPointerException e)
             {
                 System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
                 e.printStackTrace();
             }
 
-        } else
+        }
+        else
         {
             System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
         }
@@ -117,21 +128,26 @@ public class PinballMachineManager
                     {
                         pinballMachine.addElement(new PlacedElement(baseElement, element.position, element.points, element.multiplier, element.rotation));
                         loaded++;
-                    } else
+                    }
+                    else
+                    {
                         System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
+                    }
                 }
                 System.out.println("Machine elem \"" + pinballMachineId + "\" loaded: (" + loaded + "/" + placedElementListJson.elements.length + ")");
-            } else
+            }
+            else
             {
                 System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: Element List null");
             }
-        } else
+        }
+        else
         {
             System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: All");
         }
     }
 
-    public void savePinballMachine(PinballMachine pinballMachine)
+    void savePinballMachine(PinballMachine pinballMachine)
     {
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
         pinballMachineJson.name = pinballMachine.nameProperty().getName();
@@ -147,7 +163,7 @@ public class PinballMachineManager
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID() + "\\general.json", pinballMachineJson);
+        JsonFileManager.saveToJson(Config.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = new PlacedElementListJson();
         placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.getElements().size()];
@@ -164,37 +180,31 @@ public class PinballMachineManager
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToMachines() + "\\" + pinballMachine.getID() + "\\elements.json", placedElementListJson);
+        JsonFileManager.saveToJson(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+
+        // TODO save image of pinballmachine
     }
 
-    public void deleteMachine(PinballMachine pinballMachine)
+    boolean deleteMachine(PinballMachine pinballMachine)
     {
-        String pathToMachine = Config.pathToMachines() + "\\" + pinballMachine.getID();
-        File directory = new File(pathToMachine);
-        if (directory.exists())
+        try
         {
-            if (directory.isDirectory())
-            {
-                for (File file : directory.listFiles())
-                {
-                    file.delete();
-                }
-                directory.delete();
-                System.out.println("Pinball machine json-files deleted");
-            }
+            Files.deleteIfExists(Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(Config.pathToPinballMachine(pinballMachine.getID())));
+
+            return true;
         }
-        pinballMachines.remove(pinballMachine);
+        catch (IOException e)
+        {
+            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not saved");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public ListProperty<PinballMachine> pinballMachinesProperty()
     {
         return pinballMachines;
-    }
-
-    public PinballMachine createNewMachine()
-    {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
-        pinballMachines.add(pinballMachine);
-        return pinballMachine;
     }
 }

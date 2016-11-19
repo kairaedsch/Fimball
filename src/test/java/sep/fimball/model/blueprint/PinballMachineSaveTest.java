@@ -1,15 +1,10 @@
 package sep.fimball.model.blueprint;
 
-import javafx.beans.property.ReadOnlyMapProperty;
 import org.junit.Ignore;
 import org.junit.Test;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-
-import static org.junit.Assert.assertFalse;
 
 /**
  *
@@ -33,7 +28,7 @@ public class PinballMachineSaveTest
         }
 
         //Den gerade erstellten Automaten serialisieren und speichern
-        PinballMachineManager.getInstance().savePinballMachine(pinballMachine);
+        pinballMachine.saveToDisk();
 
         //Den vorher gespeicherten Automaten neu laden
         PinballMachine loadedPinballMachine = null;
@@ -69,7 +64,7 @@ public class PinballMachineSaveTest
         assertFalse(difference);*/
 
         //Loeschen des vorher gespeicherten Automaten
-        PinballMachineManager.getInstance().deleteMachine(pinballMachine);
+        pinballMachine.deleteFromDisk();
     }
 
     class TestPinballMachineManager

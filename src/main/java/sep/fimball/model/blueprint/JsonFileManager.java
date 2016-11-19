@@ -16,9 +16,10 @@ public class JsonFileManager
 {
     /**
      * Lädt eine Instanz der Klasse {@code T} aus der im {@path} angebenen JSON-Datei.
-     * @param path Der Pfad zur JSON-Datei.
+     *
+     * @param path   Der Pfad zur JSON-Datei.
      * @param aClass Der Klassentyp der in der JSON-Datei gespeicherten Klasse.
-     * @param <T> Die Klasse, deren Instanz geladen werden soll.
+     * @param <T>    Die Klasse, deren Instanz geladen werden soll.
      * @return Ein Container, der die geladene Instanz enthält oder nichts, falls das Laden nicht funktioniert hat.
      */
     public static <T> Optional<T> loadFromJson(Path path, Class<T> aClass)
@@ -57,20 +58,23 @@ public class JsonFileManager
 
     /**
      * Speichert die Instanz einer Klasse in einer JSON-Datei in dem gegebenen Pfad.
-     * @param path Der Pfad, in dem die JSON-Datei liegen soll.
+     *
+     * @param path          Der Pfad, in dem die JSON-Datei liegen soll.
      * @param classInstance Die Instanz einer Klasse, die gespeichert werden soll.
      */
-    public static void saveToJson(String path, Object classInstance)
+    public static boolean saveToJson(String path, Object classInstance)
     {
         try (FileWriter writer = new FileWriter(path))
         {
             Gson gson = new Gson();
             gson.toJson(classInstance, writer);
-
-        } catch (IOException e)
+            return true;
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
             System.err.println("Json saving failed : " + path);
+            return false;
         }
     }
 }

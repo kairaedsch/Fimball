@@ -2,6 +2,7 @@ package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -19,6 +20,9 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
+    @FXML
+    private Label nameLabel;
+
     @FXML
     private StackPane pinballCanvasContainer;
 
@@ -55,6 +59,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
+
+        nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
 
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.TABLE_EDITOR_AVAILABLE_ELEMENT);
 

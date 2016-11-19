@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.model.trigger.ElementTrigger;
 import sep.fimball.model.trigger.GameTrigger;
@@ -86,7 +85,7 @@ public class GameTest
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
 
         //Loeschen des vorher erstellten Automaten
-        PinballMachineManager.getInstance().deleteMachine(pinballMachine);
+        pinballMachine.deleteFromDisk();
     }
 
     public synchronized void addCollidedGameElement(GameElement gameElement)
