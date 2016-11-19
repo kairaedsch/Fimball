@@ -89,7 +89,7 @@ public class PinballMachine
      * Gibt das Property des Namens des Flipperautomaten als ReadOnly zurück.
      * @return Das Property des Namens des Flipperautomaten.
      */
-    public ReadOnlyStringProperty nameProperty()
+    public StringProperty nameProperty()
     {
         return name;
     }

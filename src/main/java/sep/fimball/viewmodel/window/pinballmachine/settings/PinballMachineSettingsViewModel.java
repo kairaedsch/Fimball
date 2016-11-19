@@ -35,7 +35,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         this.pinballMachine = pinballMachine;
 
         machineName = new SimpleStringProperty();
-        machineName.bind(pinballMachine.nameProperty());
+        machineName.bindBidirectional(pinballMachine.nameProperty());
     }
 
     /**
@@ -43,6 +43,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void savePinballMachine()
     {
+        pinballMachine.setName(machineName.getValue());
         pinballMachine.saveToDisk();
         sceneManager.setWindow(new MainMenuViewModel());
     }
