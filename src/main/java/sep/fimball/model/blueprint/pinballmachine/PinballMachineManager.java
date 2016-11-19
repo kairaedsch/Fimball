@@ -150,7 +150,7 @@ public class PinballMachineManager
     void savePinballMachine(PinballMachine pinballMachine)
     {
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
-        pinballMachineJson.name = pinballMachine.nameProperty().getName();
+        pinballMachineJson.name = pinballMachine.nameProperty().getValue();
 
         pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[pinballMachine.highscoreListProperty().size()];
         int counter = 0;
