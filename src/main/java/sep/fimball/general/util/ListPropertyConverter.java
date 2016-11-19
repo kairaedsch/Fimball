@@ -6,6 +6,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +17,7 @@ public class ListPropertyConverter
     /**
      * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der listPropertyMaster, wenn sich letztere ändert.
      * TODO
+     *
      * @param listPropertySlave
      * @param listPropertyMaster
      * @param converter
@@ -26,11 +28,45 @@ public class ListPropertyConverter
     {
         ListChangeListener<MasterT> listChangeListener = (change) ->
         {
-            listPropertySlave.clear();
-
-            for(MasterT master : listPropertyMaster)
+            if (change == null)
             {
-                listPropertySlave.add(converter.convert(master));
+                listPropertySlave.clear();
+                for (MasterT master : listPropertyMaster)
+                {
+                    listPropertySlave.add(converter.convert(master));
+                }
+            }
+            else
+            {
+                while (change.next())
+                {
+                    if (change.wasRemoved())
+                    {
+                        for (int p = change.getFrom(); p <= change.getTo(); p++)
+                        {
+                            listPropertySlave.remove(change.getFrom());
+                        }
+                    }
+                    if (change.wasAdded())
+                    {
+                        List<? extends MasterT> newElementsList = change.getAddedSubList();
+
+                        for (MasterT master : newElementsList)
+                        {
+                            listPropertySlave.add(converter.convert(master));
+                        }
+                    }
+                    if (change.wasPermutated())
+                    {
+                        for (int p = change.getFrom(); p <= change.getTo(); p++)
+                        {
+                            int newPos = change.getPermutation(p);
+                            SlaveT temp = listPropertySlave.get(p);
+                            listPropertySlave.set(p, listPropertySlave.get(newPos));
+                            listPropertySlave.set(newPos, temp);
+                        }
+                    }
+                }
             }
         };
 
@@ -41,6 +77,7 @@ public class ListPropertyConverter
     /**
      * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der MapPropertyMaster, wenn sich letztere ändert.
      * TODO
+     *
      * @param listPropertySlave
      * @param MapPropertyMaster
      * @param converter
@@ -48,13 +85,14 @@ public class ListPropertyConverter
      * @param <MasterKeyT>
      * @param <MasterValueT>
      */
+
     public static <SlaveT, MasterKeyT, MasterValueT> void bindAndConvertMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, MapConverter<SlaveT, MasterKeyT, MasterValueT> converter)
     {
         MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
         {
             listPropertySlave.clear();
 
-            for(Map.Entry<MasterKeyT, MasterValueT> masterEntry : MapPropertyMaster.entrySet())
+            for (Map.Entry<MasterKeyT, MasterValueT> masterEntry : MapPropertyMaster.entrySet())
             {
                 listPropertySlave.add(converter.convert(masterEntry.getKey(), masterEntry.getValue()));
             }
