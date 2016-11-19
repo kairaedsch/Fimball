@@ -191,6 +191,7 @@ public class PinballMachineManager
         {
             Files.deleteIfExists(Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(Config.pathToPinballMachineImagePreview(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(Config.pathToPinballMachine(pinballMachine.getID())));
 
             return true;
