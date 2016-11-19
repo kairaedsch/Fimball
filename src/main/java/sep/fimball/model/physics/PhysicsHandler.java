@@ -76,8 +76,38 @@ public class PhysicsHandler
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.DEBUG_LEFT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.DEBUG_RIGHT, args -> bufferedKeyEvents.add(args));
+    }
 
-        timerTask = new TimerTask()
+    /**
+     * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
+     * @param ball Der Ball, der hinzugefügt werden soll.
+     */
+    public void addBall(BallElement ball)
+    {
+        ballElement = ball;
+        physicsElements.add(ball.getSubElement());
+    }
+
+    /**
+     * Entfernt den aktuellen Ball aus dem Spiel.
+     */
+    public void removeBall()
+    {
+        ballElement = null;
+    }
+
+    /**
+     * Startet die Physik Schleife
+     */
+    public void startTicking()
+    {
+        physicTimer = new Timer(false);
+        physicTimer.scheduleAtFixedRate(createTask(), TIMER_DELAY, TICK_RATE);
+    }
+
+    private TimerTask createTask()
+    {
+        return new TimerTask()
         {
             /**
              * Diese Methode wird 60 mal pro Sekund e ausgeführt und ist für die physikalischen Berechnungen zuständig.
@@ -127,33 +157,6 @@ public class PhysicsHandler
                 // TODO Check if ball is lost
             }
         };
-    }
-
-    /**
-     * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
-     * @param ball Der Ball, der hinzugefügt werden soll.
-     */
-    public void addBall(BallElement ball)
-    {
-        ballElement = ball;
-        physicsElements.add(ball.getSubElement());
-    }
-
-    /**
-     * Entfernt den aktuellen Ball aus dem Spiel.
-     */
-    public void removeBall()
-    {
-        ballElement = null;
-    }
-
-    /**
-     * Startet die Physik Schleife
-     */
-    public void startTicking()
-    {
-        physicTimer = new Timer(false);
-        physicTimer.scheduleAtFixedRate(timerTask, TIMER_DELAY, TICK_RATE);
     }
 
     /**
