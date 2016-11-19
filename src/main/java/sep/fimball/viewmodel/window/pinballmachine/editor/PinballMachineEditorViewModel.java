@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -191,5 +192,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public StringProperty machineNameProperty()
     {
         return machineName;
+    }
+
+    public void handlyKeyEvent(KeyEvent keyEvent) {
+
     }
 }

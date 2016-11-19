@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.dialog.pause;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
@@ -50,5 +51,9 @@ public class PauseViewModel extends DialogViewModel
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;
+    }
+
+    public void handleKeyEvents(KeyEvent keyEvent) {
+
     }
 }

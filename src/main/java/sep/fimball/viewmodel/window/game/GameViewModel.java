@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.game;
 
 import javafx.beans.property.*;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -122,5 +123,9 @@ public class GameViewModel extends WindowViewModel
     public PinballCanvasViewModel getPinballCanvasViewModel()
     {
         return pinballCanvasViewModel;
+    }
+
+    public void handlyKeyEvent(KeyEvent keyEvent) {
+
     }
 }

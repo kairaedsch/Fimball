@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -159,5 +160,9 @@ public class GameSettingsViewModel extends DialogViewModel
         ObservableList<Language> languages = FXCollections.observableArrayList();
         Collections.addAll(languages, Language.values());
         return languages;
+    }
+
+    public void handleKeyEvents(KeyEvent keyEvent) {
+
     }
 }

@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.settings;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -76,5 +77,9 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
 
     public StringProperty machineNameProperty() {
         return machineName;
+    }
+
+    public void handlyKeyEvent(KeyEvent keyEvent) {
+
     }
 }
