@@ -203,4 +203,14 @@ public class Settings
     {
         return fullscreen;
     }
+
+    public KeyBinding getKeyBinding(KeyCode code)
+    {
+        for (KeyBinding binding: keyBindingsMap.keySet()) {
+            if (keyBindingsMap.get(binding).equals(code)) {
+                return binding;
+            }
+        }
+        return null;
+    }
 }

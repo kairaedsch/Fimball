@@ -47,7 +47,12 @@ public class SceneManagerViewModel
      */
     public void onKeyEvent(KeyEvent event)
     {
-        inputManager.onKeyEvent(event, windowViewModel.get().getWindowType());
+        if (dialogViewModel.equals(new EmptyViewModel())) {
+            windowViewModel.get().handleKeyEvent(event);
+        } else
+        {
+            dialogViewModel.get().handleKeyEvent(event);
+        }
     }
 
     /**

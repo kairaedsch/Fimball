@@ -3,7 +3,6 @@ package sep.fimball.viewmodel.dialog.gameover;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.dialog.DialogType;
@@ -82,9 +81,5 @@ public class GameOverViewModel extends DialogViewModel
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;
-    }
-
-    public void handleKeyEvents(KeyEvent keyEvent) {
-
     }
 }

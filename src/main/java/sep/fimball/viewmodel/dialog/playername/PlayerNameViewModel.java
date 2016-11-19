@@ -4,7 +4,6 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
@@ -90,7 +89,4 @@ public class PlayerNameViewModel extends DialogViewModel
         return playerNameEntrys;
     }
 
-    public void handleKeyEvents(KeyEvent keyEvent) {
-
-    }
 }
