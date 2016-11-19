@@ -141,6 +141,11 @@ public class GameSession
                 addTiltCounter();
         });
 
+        InputManager.getSingletonInstance().addListener(KeyBinding.PAUSE, args ->
+        {
+            pauseAll();
+        });
+
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
         {

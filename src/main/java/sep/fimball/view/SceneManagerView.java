@@ -64,18 +64,20 @@ public class SceneManagerView
         root.getChildren().add(box);
         root.getChildren().add(new Group());
 
-        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-        stage.setScene(scene);
-        stage.show();
+
 
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
+
+        Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+        scene.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
+        scene.setOnKeyReleased(sceneManagerViewModel::onKeyEvent);
+        stage.setScene(scene);
+        stage.show();
+
         updateContent(sceneManagerViewModel.windowViewModelProperty().get());
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
-
-        root.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
-        root.setOnKeyReleased(sceneManagerViewModel::onKeyEvent);
 
         blurEffect = new GaussianBlur(13);
     }

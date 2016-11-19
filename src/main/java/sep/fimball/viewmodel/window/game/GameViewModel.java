@@ -130,7 +130,8 @@ public class GameViewModel extends WindowViewModel
         return pinballCanvasViewModel;
     }
 
-    public void handlyKeyEvent(KeyEvent keyEvent) {
-        InputManager.getSingletonInstance().addKeyEvent(keyEvent);
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent) {
+       InputManager.getSingletonInstance().addKeyEvent(keyEvent);
     }
 }
