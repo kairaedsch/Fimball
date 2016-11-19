@@ -251,6 +251,13 @@ public class Vector2
         return new Vector2(vec.getY(), -vec.getX());
     }
 
+    public static Vector2 lerp(Vector2 vecOne, Vector2 vecTwo, double t)
+    {
+        double xLerped = (1 - t) * vecOne.getX() + (t * vecTwo.getX());
+        double yLerped = (1 - t) * vecOne.getY() + (t * vecTwo.getY());
+        return new Vector2(xLerped, yLerped);
+    }
+
     /**
      * Normiert den gegebenen Vektor, wobei ein Neuer erstellt wird und der übergebene Vektor nicht verändert wird.
      *

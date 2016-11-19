@@ -66,4 +66,9 @@ public class Collider
     {
         return shapes;
     }
+
+    public int getId()
+    {
+        return id;
+    }
 }
