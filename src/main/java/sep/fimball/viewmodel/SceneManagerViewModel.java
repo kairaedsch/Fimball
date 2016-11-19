@@ -3,6 +3,7 @@ package sep.fimball.viewmodel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.input.KeyEvent;
+import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -47,9 +48,11 @@ public class SceneManagerViewModel
      */
     public void onKeyEvent(KeyEvent event)
     {
-        if (dialogViewModel.equals(new EmptyViewModel())) {
+        if (dialogViewModel.get().getDialogType() == DialogType.NONE)
+        {
             windowViewModel.get().handleKeyEvent(event);
-        } else
+        }
+        else
         {
             dialogViewModel.get().handleKeyEvent(event);
         }
