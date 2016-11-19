@@ -7,6 +7,7 @@ import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.InputManager;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
@@ -145,14 +146,21 @@ public class GameViewModel extends WindowViewModel
     }
 
     @Override
-    public void handleKeyEvent(KeyEvent keyEvent) {
-        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+        {
             return;
         }
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString()=="PAUSE") {
+
+        KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
+        if (binding != null && binding.toString() == "PAUSE")
+        {
             gameSession.pauseAll();
             sceneManager.setDialog(new PauseViewModel(this));
-        } else {
+        }
+        else
+        {
             InputManager.getSingletonInstance().addKeyEvent(keyEvent);
         }
 
