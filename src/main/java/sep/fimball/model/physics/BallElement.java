@@ -100,7 +100,8 @@ public class BallElement
      */
     public void setVelocity(Vector2 velocity)
     {
-        this.velocity = velocity;
+        this.velocity = velocity.clamp(1 / (PhysicsHandler.TICK_RATE / 1000D));
+        System.out.println("speed: " + velocity.magnitude() * (PhysicsHandler.TICK_RATE / 1000D));
     }
 
     /**

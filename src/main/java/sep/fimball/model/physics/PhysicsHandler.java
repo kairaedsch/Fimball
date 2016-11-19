@@ -18,17 +18,17 @@ public class PhysicsHandler
     /**
      * Die Physikschleife beginnt ohne Verzögerung wenn sie gestartet wird
      */
-    private final int TIMER_DELAY = 0;
+    final static int TIMER_DELAY = 0;
 
     /**
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    private final int TICK_RATE = 1000 / 60;
+    final static int TICK_RATE = 1000 / 120;
 
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit einberechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
      */
-    private final double GRAVITY = 1.19554;
+    final static double GRAVITY = 10;
 
     /**
      * Der aktuelle Spielball.

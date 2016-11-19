@@ -312,4 +312,16 @@ public class Vector2
         y = Math.round(y);
         return this;
     }
+
+    public Vector2 clamp(double max)
+    {
+        if(magnitude(this) > max)
+        {
+            double v = max / magnitude(this);
+
+            x = x * v;
+            y = y * v;
+        }
+        return this;
+    }
 }
