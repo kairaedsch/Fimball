@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
@@ -28,21 +29,29 @@ public class PinballMachineSelectorSubViewModel
      */
     private StringProperty imagePath;
 
+    private BooleanProperty isSelected;
+
+    private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
+
     /**
      * Erstellt ein PinballMachineSelectorSubViewModel.
      *
      * @param pinballMachine Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
      */
-    PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
+    PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine, PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel)
     {
         this.mainMenu = mainMenu;
         this.pinballMachine = pinballMachine;
+        this.pinballMachineInfoSubViewModel = pinballMachineInfoSubViewModel;
+        this.isSelected = new SimpleBooleanProperty();
         
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
 
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.imagePathProperty());
+
+        isSelected.bind(Bindings.equal(pinballMachine, pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
     }
 
     /**
@@ -71,5 +80,9 @@ public class PinballMachineSelectorSubViewModel
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePath;
+    }
+
+    public boolean isSelected() {
+        return isSelected.get();
     }
 }

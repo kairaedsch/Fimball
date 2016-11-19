@@ -5,6 +5,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
@@ -36,10 +37,11 @@ public class MainMenuViewModel extends WindowViewModel
     {
         super(WindowType.MAIN_MENU);
 
-        pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().pinballMachinesProperty(), (pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine));
-
         pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
+        pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndConvertList(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().pinballMachinesProperty(), (pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
+
+
     }
 
     /**
@@ -99,6 +101,44 @@ public class MainMenuViewModel extends WindowViewModel
     public void addNewAutomaton()
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
+    }
+
+
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+            return;
+        }
+        int index = findSelectedIndex();
+        System.out.println(index);
+        switch (keyEvent.getCode().toString())
+        {
+            case "UP":
+                if (index >= 1 )
+                {
+                    pinballMachineSelectorSubViewModelList.get(index - 1).selectPinballMachine();
+                }
+                break;
+            case "DOWN":
+                if (index < pinballMachineSelectorSubViewModelList.size() - 1)
+                {
+                    pinballMachineSelectorSubViewModelList.get(index + 1).selectPinballMachine();
+                }
+                break;
+        }
+    }
+
+    private int findSelectedIndex()
+    {
+        for (int i = 0; i < pinballMachineSelectorSubViewModelList.size(); ++i)
+        {
+            if (pinballMachineSelectorSubViewModelList.get(i).isSelected())
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

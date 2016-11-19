@@ -18,7 +18,7 @@ public class PinballMachineInfoSubViewModel
     /**
      * Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden.
      */
-    private PinballMachine pinballMachine;
+    private ObjectProperty<PinballMachine> pinballMachine;
 
     /**
      * Der Name des Flipperautomaten.
@@ -38,13 +38,13 @@ public class PinballMachineInfoSubViewModel
     /**
      * Erstellt ein neues PinballMachineInfoSubViewModel.
      *
-     * @param mainMenu Das korrespondierende MainMenuViewModel.
+     * @param mainMenu       Das korrespondierende MainMenuViewModel.
      * @param pinballMachine Der Flipperautomat, dessen Informationen dargestellt werden sollen.
      */
     PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
     {
         this.mainMenu = mainMenu;
-
+        this.pinballMachine = new SimpleObjectProperty<>();
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -59,7 +59,7 @@ public class PinballMachineInfoSubViewModel
      */
     void update(PinballMachine pinballMachine)
     {
-        this.pinballMachine = pinballMachine;
+        this.pinballMachine.set(pinballMachine);
 
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.imagePathProperty());
@@ -71,7 +71,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void showPlayerNameDialog()
     {
-        mainMenu.showPlayerNameDialog(pinballMachine);
+        mainMenu.showPlayerNameDialog(pinballMachine.get());
     }
 
     /**
@@ -79,7 +79,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void startEditor()
     {
-        mainMenu.startEditor(pinballMachine);
+        mainMenu.startEditor(pinballMachine.get());
     }
 
     /**
@@ -111,4 +111,10 @@ public class PinballMachineInfoSubViewModel
     {
         return highscoreList;
     }
+
+    public ReadOnlyObjectProperty<PinballMachine> pinballMachineReadOnlyProperty()
+    {
+        return pinballMachine;
+    }
+
 }
