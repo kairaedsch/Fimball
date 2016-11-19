@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.JsonFileManager;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -62,6 +63,8 @@ public class PinballMachineManager
     public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
+        pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
+        savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;
     }
@@ -147,6 +150,16 @@ public class PinballMachineManager
 
     void savePinballMachine(PinballMachine pinballMachine)
     {
+        Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
+        if(!pathToMachine.toFile().exists())
+        {
+            boolean couldCreateFolder = pathToMachine.toFile().mkdir();
+            if(!couldCreateFolder)
+            {
+                // TODO error
+            }
+        }
+
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
         pinballMachineJson.name = pinballMachine.nameProperty().getValue();
 
@@ -192,11 +205,11 @@ public class PinballMachineManager
             Files.deleteIfExists(Paths.get(Config.pathToPinballMachineImagePreview(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(Config.pathToPinballMachine(pinballMachine.getID())));
 
-            return true;
+            return pinballMachines.remove(pinballMachine);
         }
         catch (IOException e)
         {
-            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not saved");
+            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not deleted");
             e.printStackTrace();
             return false;
         }
