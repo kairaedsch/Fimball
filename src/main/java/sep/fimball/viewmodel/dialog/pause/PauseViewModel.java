@@ -10,6 +10,7 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinball zur Verfügung und ermöglicht deren Fortsetzung oder Abbrechung.
@@ -21,26 +22,33 @@ public class PauseViewModel extends DialogViewModel
      */
     private ListProperty<Highscore> playerHighscores;
 
+    /**
+     * Das GameViewModel, aus dem heraus das PauseViewModel erstellt wurde.
+     */
     private GameViewModel gameViewModel;
 
-    private Boolean gameStartedFromEditor;
 
     /**
      * Erstellt ein neues PauseViewModel.
      */
-    public PauseViewModel(GameViewModel gameViewModel, boolean gameStartedFromEditor)
+    public PauseViewModel(GameViewModel gameViewModel)
     {
         super(DialogType.PAUSE);
         this.gameViewModel = gameViewModel;
-        this.gameStartedFromEditor = gameStartedFromEditor;
     }
 
     /**
      * Führt den Benutzer in's Hauptmenü zurück.
      */
-    public void exitDialogToMainMenu()
+    public void exitDialog()
     {
-        sceneManager.setWindow(new MainMenuViewModel());
+        if (gameViewModel.startedFromEditor())
+        {
+            sceneManager.setWindow(new PinballMachineEditorViewModel(gameViewModel.getPinballMachine()));
+        } else
+        {
+            sceneManager.setWindow(new MainMenuViewModel());
+        }
     }
 
     /**
@@ -62,16 +70,16 @@ public class PauseViewModel extends DialogViewModel
         return playerHighscores;
     }
 
-    public boolean gameStartetFromEditor() {
-        return gameStartedFromEditor;
-    }
 
     @Override
-    public void handleKeyEvent(KeyEvent keyEvent) {
-        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+        {
             return;
         }
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString() == "PAUSE") {
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString() == "PAUSE")
+        {
             resumeGame();
         }
     }

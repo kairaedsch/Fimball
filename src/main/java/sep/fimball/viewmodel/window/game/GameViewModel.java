@@ -47,8 +47,14 @@ public class GameViewModel extends WindowViewModel
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
+    /**
+     * Die zu diesem GameViewModel gehörende GameSession.
+     */
     private GameSession gameSession;
 
+    /**
+     * Gibt an, ob die Partie aus dem Editor gestartet wurde.
+     */
     private boolean startedFromEditor;
 
     /**
@@ -145,15 +151,26 @@ public class GameViewModel extends WindowViewModel
         }
         if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString()=="PAUSE") {
             gameSession.pauseAll();
-            sceneManager.setDialog(new PauseViewModel(this,startedFromEditor));
+            sceneManager.setDialog(new PauseViewModel(this));
         } else {
             InputManager.getSingletonInstance().addKeyEvent(keyEvent);
         }
 
     }
 
+    /**
+     * Setzt das Spiel im Model fort.
+     */
     public void resume()
     {
         gameSession.startAll();
+    }
+
+    public PinballMachine getPinballMachine() {
+        return gameSession.getPinballMachine();
+    }
+
+    public boolean startedFromEditor() {
+        return startedFromEditor;
     }
 }

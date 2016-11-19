@@ -349,4 +349,8 @@ public class GameSession
     {
         return gameBall;
     }
+
+    public PinballMachine getPinballMachine() {
+        return machineBlueprint;
+    }
 }
