@@ -27,7 +27,7 @@ public class BounceCollision implements CollisionType
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();
-        Vector2 newVel = Vector2.sub(ball.getVelocity(), Vector2.scale(shortestIntersectNorm, 2 * Vector2.dot(ball.getVelocity(), shortestIntersectNorm)));
+        Vector2 newVel = Vector2.sub(ball.getVelocity(), Vector2.scale(shortestIntersectNorm, 2.0 * Vector2.dot(ball.getVelocity(), shortestIntersectNorm)));
         ball.setVelocity(Vector2.add(newVel, Vector2.scale(shortestIntersect.normalized(), strength)));
     }
 }
