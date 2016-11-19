@@ -7,9 +7,18 @@ import sep.fimball.general.data.Vector2;
  */
 public class FlipperCollision implements CollisionType
 {
+    private NormalCollision normalCollision = new NormalCollision();
+
+    private boolean moving = false;
+
     @Override
     public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
+        normalCollision.applyCollision(ball, shortestIntersect);
 
+        if (moving)
+        {
+            // TODO
+        }
     }
 }
