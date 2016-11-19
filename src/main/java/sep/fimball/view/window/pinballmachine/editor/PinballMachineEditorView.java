@@ -83,6 +83,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
+        //TODO make mor beautyful
         dragButton.disabledProperty().addListener((observable, oldValue, newValue) -> dragButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.DRAGGING));
         selectButton.disabledProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.SELECTING));
         placeButton.disabledProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.PLACING));

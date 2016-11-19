@@ -48,15 +48,19 @@ public class GameViewModel extends WindowViewModel
     /**
      * Erstellt ein neues GameViewModel.
      */
-    public GameViewModel(PinballMachine machineBlueprint, String[] playerNames)
+    public GameViewModel(PinballMachine pinballMachine, String[] playerNames)
     {
         super(WindowType.GAME);
-        GameSession gameSession = GameSession.generateGameSession(machineBlueprint, playerNames);
+        GameSession gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();
-        cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
+
+        // TODO lost bind on ball change
+        cameraPosition = new SimpleObjectProperty<>();
+        cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
+
         cameraZoom = new SimpleDoubleProperty(0.75);
 
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());

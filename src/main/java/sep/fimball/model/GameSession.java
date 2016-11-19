@@ -2,7 +2,9 @@ package sep.fimball.model;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
@@ -114,6 +116,8 @@ public class GameSession
      */
     private Observable gameLoopObservable;
 
+    private ObjectProperty<GameElement> gameBall;
+
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
      *
@@ -123,6 +127,8 @@ public class GameSession
     public GameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         this.machineBlueprint = machineBlueprint;
+
+        gameBall = new SimpleObjectProperty<>();
 
         InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
         {
@@ -256,11 +262,11 @@ public class GameSession
      */
     private void spawnNewBall()
     {
-        GameElement gameBall = new GameElement(world.getBallTemplate());
-        world.addGameElement(gameBall);
+        gameBall.set(new GameElement(world.getBallTemplate()));
+        world.addGameElement(gameBall.get());
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
-        physicsHandler.addBall(new BallElement(gameBall, ballCollider, WorldLayer.GROUND));
+        physicsHandler.addBall(new BallElement(gameBall.get(), ballCollider, WorldLayer.GROUND));
     }
 
     /**
@@ -337,5 +343,10 @@ public class GameSession
     public World getWorld()
     {
         return world;
+    }
+
+    public ObjectProperty<GameElement> gameBallProperty()
+    {
+        return gameBall;
     }
 }

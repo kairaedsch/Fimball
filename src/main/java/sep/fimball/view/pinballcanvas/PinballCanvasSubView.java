@@ -88,7 +88,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
-        graphicsContext.translate(canvas.getWidth() / 2d + cameraPosition.get().getX() * Config.pixelsPerGridUnit * cameraZoom.get(), canvas.getHeight() / 2d + cameraPosition.get().getY() * Config.pixelsPerGridUnit * cameraZoom.get());
+        graphicsContext.translate(canvas.getWidth() / 2d - cameraPosition.get().getX() * Config.pixelsPerGridUnit * cameraZoom.get(), canvas.getHeight() / 2d - cameraPosition.get().getY() * Config.pixelsPerGridUnit * cameraZoom.get());
 
         graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
 
@@ -96,6 +96,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
         }
+
         for (SpriteSubView sprite : sprites)
         {
             sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
@@ -111,8 +112,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Vector2 posToMiddle = new Vector2(mouseEvent.getX() - canvas.getWidth() / 2d, mouseEvent.getY() - canvas.getHeight() / 2d);
 
         Vector2 posOnGrid = new Vector2();
-        posOnGrid.setX(posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) - cameraPosition.get().getX());
-        posOnGrid.setY(posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) - cameraPosition.get().getY());
+        posOnGrid.setX(posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX());
+        posOnGrid.setY(posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY());
         pinballCanvasViewModel.mouseClickedOnGame(posOnGrid);
     }
 }
