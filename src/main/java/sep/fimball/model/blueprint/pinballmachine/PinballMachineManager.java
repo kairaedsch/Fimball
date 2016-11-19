@@ -90,8 +90,6 @@ public class PinballMachineManager
                 PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores);
                 pinballMachines.add(pinballMachine);
                 System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
-
-                loadMachineElements(pinballMachine, pinballMachineId);
             }
             catch (NullPointerException e)
             {
@@ -106,9 +104,9 @@ public class PinballMachineManager
         }
     }
 
-    private void loadMachineElements(PinballMachine pinballMachine, String pinballMachineId)
+    void loadMachineElements(PinballMachine pinballMachine)
     {
-        Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachineId));
+        Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 
         Optional<PlacedElementListJson> placedElementListOptional = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
 
@@ -131,19 +129,19 @@ public class PinballMachineManager
                     }
                     else
                     {
-                        System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
+                        System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
                     }
                 }
-                System.out.println("Machine elem \"" + pinballMachineId + "\" loaded: (" + loaded + "/" + placedElementListJson.elements.length + ")");
+                System.out.println("Machine elem \"" + pinballMachine.getID() + "\" loaded: (" + loaded + "/" + placedElementListJson.elements.length + ")");
             }
             else
             {
-                System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: Element List null");
+                System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: Element List null");
             }
         }
         else
         {
-            System.err.println("Machine elem \"" + pinballMachineId + "\" not loaded: All");
+            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: All");
         }
     }
 

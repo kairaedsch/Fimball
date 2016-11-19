@@ -38,6 +38,8 @@ public class PinballMachine
      */
     private ListProperty<PlacedElement> elements;
 
+    private boolean elementsLoaded;
+
     /**
      * Speicherpfad des Hintergrundbildes des Automaten.
      */
@@ -45,23 +47,27 @@ public class PinballMachine
 
     /**
      * Legt einen leeren Automaten mit gegebenen Namen und ID an. TODO
-     * @param name Name des Automaten
+     *
+     * @param name             Name des Automaten
      * @param pinballMachineId Id des Automaten
      */
     public PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
-        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        this.elements = null;
+        elementsLoaded = false;
 
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        if(highscores != null) this.highscoreList.addAll(highscores);
+        if (highscores != null) this.highscoreList.addAll(highscores);
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
 
     public Optional<PlacedElement> getElementAt(Vector2 point)
     {
+        checkElementsLoaded();
         for (PlacedElement element : elements)
         {
             for (Collider collider : element.getBaseElement().getPhysics().getColliders())
@@ -85,8 +91,71 @@ public class PinballMachine
         return Optional.empty();
     }
 
+    public void saveToDisk()
+    {
+        checkElementsLoaded();
+        PinballMachineManager.getInstance().savePinballMachine(this);
+        checkUnloadElements();
+    }
+
+    public void deleteFromDisk()
+    {
+        PinballMachineManager.getInstance().deleteMachine(this);
+    }
+
+    /**
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu.
+     *
+     * @param highscore Der Highscore, der hinzugefügt werden soll.
+     */
+    public void addHighscore(Highscore highscore)
+    {
+        highscoreList.add(highscore);
+        if (highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
+    }
+
+    public void addElement(PlacedElement placedElement)
+    {
+        checkElementsLoaded();
+        elements.add(placedElement);
+    }
+
+    public void addElement(BaseElement baseElement, Vector2 position)
+    {
+        checkElementsLoaded();
+        PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
+        addElement(placedElement);
+    }
+
+    public void removeElement(PlacedElement placedElement)
+    {
+        checkElementsLoaded();
+        elements.remove(placedElement);
+    }
+
+    public void checkUnloadElements()
+    {
+        if(elementsLoaded)
+        {
+            elements.clear();
+            elements = null;
+            elementsLoaded = false;
+        }
+    }
+
+    private void checkElementsLoaded()
+    {
+        if (!elementsLoaded)
+        {
+            elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+            PinballMachineManager.getInstance().loadMachineElements(this);
+            elementsLoaded = true;
+        }
+    }
+
     /**
      * Gibt das Property des Namens des Flipperautomaten als ReadOnly zurück.
+     *
      * @return Das Property des Namens des Flipperautomaten.
      */
     public StringProperty nameProperty()
@@ -96,6 +165,7 @@ public class PinballMachine
 
     /**
      * Gibt das Property der Liste der Highscores des Flipperautomaten als ReadOnly zurück.
+     *
      * @return Das Property der Liste der Highscores des Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
@@ -105,15 +175,18 @@ public class PinballMachine
 
     /**
      * Gibt die Liste der Elemente des Flipperautomaten zurück.
-     * @return  Die Liste der Elemente des Flipperautomaten zurück.
+     *
+     * @return Die Liste der Elemente des Flipperautomaten zurück.
      */
     public ReadOnlyListProperty<PlacedElement> getElements()
     {
+        checkElementsLoaded();
         return elements;
     }
 
     /**
      * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     *
      * @return Der Speicherpfad des Hintergrundbildes des Automaten.
      */
     public ReadOnlyStringProperty imagePathProperty()
@@ -123,6 +196,7 @@ public class PinballMachine
 
     /**
      * Setzt den Namen des Flipperautomaten auf den übergebenen Wert.
+     *
      * @param name Der neue Name des Flipperautomaten.
      */
     public void setName(String name)
@@ -130,45 +204,8 @@ public class PinballMachine
         this.name.set(name);
     }
 
-    /**
-     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu.
-     * @param highscore Der Highscore, der hinzugefügt werden soll.
-     */
-    public void addHighscore(Highscore highscore)
+    public String getID()
     {
-        highscoreList.add(highscore);
-        if(highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
-    }
-
-    public void addElement(PlacedElement placedElement)
-    {
-        elements.add(placedElement);
-    }
-
-    public void removeElement(PlacedElement placedElement)
-    {
-        elements.remove(placedElement);
-    }
-
-    public String getID() {
         return pinballMachineId.getValue();
-    }
-
-    public void addElement(BaseElement baseElement, Vector2 position)
-    {
-        PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
-        addElement(placedElement);
-    }
-
-    public void saveToDisk()
-    {
-        PinballMachineManager.getInstance().savePinballMachine(this);
-        elements.clear();
-        elements = null;
-    }
-
-    public void deleteFromDisk()
-    {
-        PinballMachineManager.getInstance().deleteMachine(this);
     }
 }

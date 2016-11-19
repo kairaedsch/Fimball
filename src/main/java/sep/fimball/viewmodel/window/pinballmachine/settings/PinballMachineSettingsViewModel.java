@@ -62,6 +62,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void exitWindowToMainMenu()
     {
+        pinballMachine.checkUnloadElements();
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
