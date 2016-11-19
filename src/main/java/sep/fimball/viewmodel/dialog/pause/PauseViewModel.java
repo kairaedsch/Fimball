@@ -6,6 +6,7 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
+import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
@@ -18,12 +19,15 @@ public class PauseViewModel extends DialogViewModel
      */
     private ListProperty<Highscore> playerHighscores;
 
+    private GameViewModel gameViewModel;
+
     /**
      * Erstellt ein neues PauseViewModel.
      */
-    public PauseViewModel()
+    public PauseViewModel(GameViewModel gameViewModel)
     {
         super(DialogType.PAUSE);
+        this.gameViewModel = gameViewModel;
     }
 
     /**
@@ -40,6 +44,7 @@ public class PauseViewModel extends DialogViewModel
     public void resumeGame()
     {
         sceneManager.setDialog(new EmptyViewModel());
+        gameViewModel.resume();
     }
 
     /**

@@ -130,6 +130,8 @@ public class SceneManagerView
             case PLAYER_NAMES:
                 setDialog(DialogType.PLAYER_NAME_DIALOG, dialogViewModel);
                 break;
+            case PAUSE:
+                setDialog(DialogType.PAUSE, dialogViewModel);
         }
     }
 

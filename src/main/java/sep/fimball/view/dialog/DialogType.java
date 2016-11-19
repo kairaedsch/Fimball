@@ -30,7 +30,12 @@ public enum DialogType implements ViewType
     /**
      * Ein Spielernameneintrag im Spielernamendialog.
      */
-    PLAYER_NAME_ENTRY("playername/nameEntry.fxml");
+    PLAYER_NAME_ENTRY("playername/nameEntry.fxml"),
+
+    /**
+     * Der Pausedialog.
+     */
+    PAUSE("pause/pauseDialog.fxml");
 
     /**
      * Der Pfad zu der zum Fenstertyp gehörende FXML-Datei.

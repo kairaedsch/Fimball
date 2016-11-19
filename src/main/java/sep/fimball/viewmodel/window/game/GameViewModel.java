@@ -5,7 +5,9 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.GameSession;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.InputManager;
+import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -45,13 +47,15 @@ public class GameViewModel extends WindowViewModel
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
+    private GameSession gameSession;
+
     /**
      * Erstellt ein neues GameViewModel.
      */
     public GameViewModel(PinballMachine pinballMachine, String[] playerNames)
     {
         super(WindowType.GAME);
-        GameSession gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
+        gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
@@ -132,6 +136,17 @@ public class GameViewModel extends WindowViewModel
 
     @Override
     public void handleKeyEvent(KeyEvent keyEvent) {
-       InputManager.getSingletonInstance().addKeyEvent(keyEvent);
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString()=="PAUSE") {
+            gameSession.pauseAll();
+            sceneManager.setDialog(new PauseViewModel(this));
+        } else {
+            InputManager.getSingletonInstance().addKeyEvent(keyEvent);
+        }
+
+    }
+
+    public void resume()
+    {
+        gameSession.startAll();
     }
 }
