@@ -111,7 +111,6 @@ public class MainMenuViewModel extends WindowViewModel
             return;
         }
         int index = findSelectedIndex();
-        System.out.println(index);
         switch (keyEvent.getCode().toString())
         {
             case "UP":
