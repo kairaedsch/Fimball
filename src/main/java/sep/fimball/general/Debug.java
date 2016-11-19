@@ -13,6 +13,7 @@ import java.util.List;
 public class Debug
 {
     private static List<DrawEntry> drawEntries = new ArrayList<>();
+    private static final long LIFE_TIME_MS = 1000;
 
     public static void addDrawEntry(Vector2 position, Vector2 direction, Color color)
     {
@@ -22,15 +23,8 @@ public class Debug
             de.position = Vector2.scale(position, 30.0);
             de.direction = Vector2.scale(direction, 30.0);
             de.color = color;
+            de.creationTime = System.currentTimeMillis();
             drawEntries.add(de);
-        }
-    }
-
-    public static void clearDraw()
-    {
-        synchronized (drawEntries)
-        {
-            drawEntries.clear();
         }
     }
 
@@ -38,6 +32,9 @@ public class Debug
     {
         synchronized (drawEntries)
         {
+            long time = System.currentTimeMillis();
+            drawEntries.removeIf(drawEntry -> drawEntry.creationTime + LIFE_TIME_MS <= time);
+
             for (DrawEntry entry : drawEntries)
             {
                 context.setStroke(entry.color);

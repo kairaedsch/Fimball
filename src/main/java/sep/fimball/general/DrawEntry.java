@@ -13,4 +13,5 @@ public class DrawEntry
     public Vector2 position;
     public Vector2 direction;
     public Color color;
+    public long creationTime;
 }
