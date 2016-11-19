@@ -55,6 +55,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private Optional<BaseElement> selectedAvailableElement;
 
     private Optional<PlacedElement> selectedPlacedElement;
+    private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -150,9 +151,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else if(mouseModus.get() == MouseModus.SELECTING && selectedPlacedElement.isPresent())
         {
-            Vector2 position = selectedPlacedElement.get().positionProperty().get();
-            position.add(new Vector2(divX, divY));
-            selectedPlacedElement.get().setPosition(position);
+            selectedPlacedElementPosition.set(new Vector2(divX, divY).add(selectedPlacedElementPosition.get()));
         }
     }
 
@@ -171,6 +170,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if(mouseModus.get() == MouseModus.SELECTING)
         {
             selectedPlacedElement = pinballMachine.getElementAt(gridPosition);
+            if(selectedPlacedElement.isPresent())
+            {
+                selectedPlacedElementPosition = new SimpleObjectProperty<>(new Vector2().add(selectedPlacedElement.get().positionProperty().get()));
+                selectedPlacedElementPosition.addListener((observable, oldValue, newValue) -> selectedPlacedElement.get().setPosition(new Vector2().add(newValue).round()));
+            }
 
             selectedElementSubViewModel.setPlacedElement(selectedPlacedElement);
         }

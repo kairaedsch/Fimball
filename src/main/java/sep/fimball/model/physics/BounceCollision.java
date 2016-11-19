@@ -11,7 +11,7 @@ public class BounceCollision implements CollisionType
     /**
      * Wie viel Geschwindigkeit der Ball beim abprallen zusätzlich bekommt.
      */
-    private double strength = 1.0;
+    private double strength;
 
     /**
      * Erstellt eine neue Instanz von BounceCollision.
@@ -28,6 +28,6 @@ public class BounceCollision implements CollisionType
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();
         Vector2 newVel = Vector2.sub(ball.getVelocity(), Vector2.scale(shortestIntersectNorm, 2 * Vector2.dot(ball.getVelocity(), shortestIntersectNorm)));
-        ball.setVelocity(Vector2.add(newVel, Vector2.scale(shortestIntersect, strength)));
+        ball.setVelocity(Vector2.add(newVel, Vector2.scale(shortestIntersect.normalized(), strength)));
     }
 }

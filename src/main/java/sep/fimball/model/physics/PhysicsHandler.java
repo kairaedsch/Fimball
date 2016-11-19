@@ -28,7 +28,7 @@ public class PhysicsHandler
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit einberechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
      */
-    private final double GRAVITY = 1.19554 * 10;
+    private final double GRAVITY = 1.19554 * 20;
 
     /**
      * Der aktuelle Spielball.

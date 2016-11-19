@@ -54,10 +54,11 @@ public class Vector2
      *
      * @param otherVec Der zu addierende Vektor.
      */
-    public void add(Vector2 otherVec)
+    public Vector2 add(Vector2 otherVec)
     {
         this.x += otherVec.getX();
         this.y += otherVec.getY();
+        return this;
     }
 
     /**
@@ -65,10 +66,11 @@ public class Vector2
      *
      * @param otherVec Der zu subtrahierende Vektor.
      */
-    public void sub(Vector2 otherVec)
+    public Vector2 sub(Vector2 otherVec)
     {
         this.x -= otherVec.getX();
         this.y -= otherVec.getY();
+        return this;
     }
 
     /**
@@ -76,10 +78,11 @@ public class Vector2
      *
      * @param scalar Der Skalar, mit dem der Vektor skaliert wird.
      */
-    public void scale(double scalar)
+    public Vector2 scale(double scalar)
     {
         this.x *= scalar;
         this.y *= scalar;
+        return this;
     }
 
     /**
@@ -106,11 +109,12 @@ public class Vector2
     /**
      * Normiert den Vektor.
      */
-    public void normalize()
+    public Vector2 normalize()
     {
         double norm = magnitude();
         this.x /= norm;
         this.y /= norm;
+        return this;
     }
 
     /**
@@ -119,11 +123,12 @@ public class Vector2
      * @param radianAngle Der Winkel als Radiant.
      * @param pivot Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
      */
-    public void rotate(double radianAngle, Vector2 pivot)
+    public Vector2 rotate(double radianAngle, Vector2 pivot)
     {
         this.sub(pivot);
         this.rotate(radianAngle);
         this.add(pivot);
+        return this;
     }
 
     /**
@@ -131,10 +136,11 @@ public class Vector2
      *
      * @param radianAngle Der Winkel, um den rotiert werden soll, gegeben in Radianten.
      */
-    public void rotate(double radianAngle)
+    public Vector2 rotate(double radianAngle)
     {
         this.x = (Math.cos(radianAngle) * this.x) - (Math.sin(radianAngle) * this.y);
         this.y = (Math.sin(radianAngle) * this.x) + (Math.cos(radianAngle) * this.y);
+        return this;
     }
 
     /**
