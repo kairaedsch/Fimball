@@ -148,8 +148,8 @@ public class PinballMachine
         if (!elementsLoaded)
         {
             elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-            PinballMachineManager.getInstance().loadMachineElements(this);
             elementsLoaded = true;
+            PinballMachineManager.getInstance().loadMachineElements(this);
         }
     }
 
