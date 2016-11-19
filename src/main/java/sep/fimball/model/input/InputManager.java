@@ -3,6 +3,7 @@ package sep.fimball.model.input;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.settings.Settings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +79,10 @@ public class InputManager
         {
             throw new IllegalArgumentException("KeyObserver can't be null");
         }
-        // TODO actually add to that ugly thing
+
+        if (!keyObserversMap.containsKey(binding)) {
+            keyObserversMap.put(binding, new ArrayList<>());
+        }
+        keyObserversMap.get(binding).add(observer);
     }
 }
