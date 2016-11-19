@@ -11,8 +11,8 @@ public class Plunger extends GameElement
      * Erzeugt eine neue Instanz von Plunger.
      * @param element
      */
-    public Plunger(PlacedElement element)
+    public Plunger(PlacedElement element, boolean bind)
     {
-        super(element);
+        super(element, bind);
     }
 }

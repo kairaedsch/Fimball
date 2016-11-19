@@ -51,7 +51,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private PinballCanvasViewModel pinballCanvasViewModel;
 
     private ObjectProperty<MouseModus> mouseModus;
-    private BaseElement selectedAvailableElement;
+
+    private Optional<BaseElement> selectedAvailableElement;
+
+    private Optional<PlacedElement> selectedPlacedElement;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -70,7 +73,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
         cameraZoom = new SimpleDoubleProperty(0.75);
-        selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine, pinballMachine.getElements().get(0));
+        selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine);
 
         availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
@@ -137,10 +140,19 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void dragged(double x, double y)
     {
+        double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
+
         if(mouseModus.get() == MouseModus.DRAGGING)
         {
-            cameraPosition.get().setX(cameraPosition.get().getX() - ((x / Config.pixelsPerGridUnit) / cameraZoom.get()));
-            cameraPosition.get().setY(cameraPosition.get().getY() - ((y / Config.pixelsPerGridUnit) / cameraZoom.get()));
+            cameraPosition.get().setX(cameraPosition.get().getX() - divX);
+            cameraPosition.get().setY(cameraPosition.get().getY() - divY);
+        }
+        else if(mouseModus.get() == MouseModus.SELECTING && selectedPlacedElement.isPresent())
+        {
+            Vector2 position = selectedPlacedElement.get().positionProperty().get();
+            position.add(new Vector2(divX, divY));
+            selectedPlacedElement.get().setPosition(position);
         }
     }
 
@@ -151,23 +163,20 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
     {
-        this.selectedAvailableElement = selectedAvailableElement;
+        this.selectedAvailableElement = Optional.of(selectedAvailableElement);
     }
 
-    public void mouseClickedOnGame(Vector2 gridPosition)
+    public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
         if(mouseModus.get() == MouseModus.SELECTING)
         {
-            Optional<PlacedElement> selectedElement = pinballMachine.getElementAt(gridPosition);
+            selectedPlacedElement = pinballMachine.getElementAt(gridPosition);
 
-            if (selectedElement.isPresent())
-            {
-                selectedElementSubViewModel.setPlacedElement(selectedElement.get());
-            }
+            selectedElementSubViewModel.setPlacedElement(selectedPlacedElement);
         }
-        else if(mouseModus.get() == MouseModus.PLACING)
+        else if(mouseModus.get() == MouseModus.PLACING && selectedAvailableElement.isPresent() && !onlyPressed)
         {
-            pinballMachine.addElement(selectedAvailableElement, gridPosition.round());
+            pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
         }
     }
 

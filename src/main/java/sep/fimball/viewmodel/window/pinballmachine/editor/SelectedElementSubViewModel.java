@@ -4,16 +4,19 @@ import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
+import java.util.Optional;
+
 /**
  * Das SelectedElementSubViewModel stellt der View Daten über das akuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
  */
 public class SelectedElementSubViewModel
 {
     private PinballMachine pinballMachine;
+
     /**
      * Das Flipperautomat-Element, das aktuell ausgewählt ist.
      */
-    private PlacedElement placedElement;
+    private Optional<PlacedElement> placedElement;
 
     /**
      * Der Name des Flipperautomat-Elements.
@@ -35,12 +38,12 @@ public class SelectedElementSubViewModel
      */
     private DoubleProperty multiplier;
 
+    private BooleanProperty isSomethingSelected;
+
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
-     *
-     * @param placedElement Das Flipperautomat-Element, das ausgewählt ist.
      */
-    public SelectedElementSubViewModel(PinballMachine pinballMachine, PlacedElement placedElement)
+    public SelectedElementSubViewModel(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
 
@@ -51,19 +54,32 @@ public class SelectedElementSubViewModel
 
         multiplier = new SimpleDoubleProperty();
 
-        setPlacedElement(placedElement);
+        setPlacedElement(Optional.empty());
     }
 
-    public void setPlacedElement(PlacedElement placedElement)
+    public void setPlacedElement(Optional<PlacedElement> placedElement)
     {
         this.placedElement = placedElement;
 
-        name.set(placedElement.getBaseElement().getMedia().getName());
-        description.set(placedElement.getBaseElement().getMedia().getDescription());
+        if(placedElement.isPresent())
+        {
+            name.set(placedElement.get().getBaseElement().getMedia().getName());
+            description.set(placedElement.get().getBaseElement().getMedia().getDescription());
 
-        points.bindBidirectional(placedElement.pointsProperty());
+            points.bindBidirectional(placedElement.get().pointsProperty());
 
-        multiplier.bindBidirectional(placedElement.multiplierProperty());
+            multiplier.bindBidirectional(placedElement.get().multiplierProperty());
+        }
+        else
+        {
+            name.unbind();
+            description.unbind();
+            points.unbind();
+            multiplier.unbind();
+
+            name.set("Nothing selected");
+            description.set("");
+        }
     }
 
     /**
@@ -71,7 +87,7 @@ public class SelectedElementSubViewModel
      */
     public void rotateClockwise()
     {
-        placedElement.rotateClockwise();
+        if(placedElement.isPresent()) placedElement.get().rotateClockwise();
     }
 
     /**
@@ -79,7 +95,7 @@ public class SelectedElementSubViewModel
      */
     public void rotateCounterclockwise()
     {
-        placedElement.rotateCounterclockwise();
+        if(placedElement.isPresent()) placedElement.get().rotateCounterclockwise();
     }
 
     /**
@@ -107,7 +123,6 @@ public class SelectedElementSubViewModel
      *
      * @return Die Anzahl der Punkte des Flipperautomat-Elements, die dem Spieler bei einer Kollision mit diesem hinzugefügt werden.
      */
-    // TODO bind bidirect
     public IntegerProperty pointsProperty()
     {
         return points;
@@ -118,7 +133,6 @@ public class SelectedElementSubViewModel
      *
      * @return Der Multiplier, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert,
      */
-    // TODO bind bidirect
     public DoubleProperty multiplierProperty()
     {
         return multiplier;
@@ -126,6 +140,11 @@ public class SelectedElementSubViewModel
 
     public void remove()
     {
-        pinballMachine.removeElement(placedElement);
+        if(placedElement.isPresent()) pinballMachine.removeElement(placedElement.get());
+    }
+
+    public ReadOnlyBooleanProperty isSomethingSelectedProperty()
+    {
+        return isSomethingSelected;
     }
 }

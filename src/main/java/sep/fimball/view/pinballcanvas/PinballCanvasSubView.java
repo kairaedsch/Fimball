@@ -109,11 +109,21 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     public void mouseClicked(MouseEvent mouseEvent)
     {
+        pinballCanvasViewModel.mouseClickedOnGame(mousePosToGridPos(mouseEvent));
+    }
+
+    public void mousePressed(MouseEvent mouseEvent)
+    {
+        pinballCanvasViewModel.mousePressedOnGame(mousePosToGridPos(mouseEvent));
+    }
+
+    private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
+    {
         Vector2 posToMiddle = new Vector2(mouseEvent.getX() - canvas.getWidth() / 2d, mouseEvent.getY() - canvas.getHeight() / 2d);
 
         Vector2 posOnGrid = new Vector2();
         posOnGrid.setX(posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX());
         posOnGrid.setY(posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY());
-        pinballCanvasViewModel.mouseClickedOnGame(posOnGrid);
+        return posOnGrid;
     }
 }

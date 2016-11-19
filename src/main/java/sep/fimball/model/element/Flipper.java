@@ -16,9 +16,9 @@ public class Flipper extends GameElement
      * Erstellt einen neuen Flipperarm.
      * @param element
      */
-    public Flipper(PlacedElement element, boolean isLeft)
+    public Flipper(PlacedElement element, boolean bind, boolean isLeft)
     {
-        super(element);
+        super(element, bind);
         this.isLeft = isLeft;
     }
 

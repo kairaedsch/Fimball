@@ -5,5 +5,5 @@
 <?import java.lang.*?>
 
 
-<Canvas xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.pinballcanvas.PinballCanvasSubView" height="200.0" width="200.0" fx:id="canvas" onMouseClicked="#mouseClicked"/>
+<Canvas xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.pinballcanvas.PinballCanvasSubView" height="200.0" width="200.0" fx:id="canvas" onMouseClicked="#mouseClicked" onMousePressed="#mousePressed"/>
 

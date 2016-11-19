@@ -44,14 +44,27 @@ public class GameElement
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      * @param element Das PlacedElement, das zu diesem GameElement gehört und  desssen Eigenschaften übernommen werden sollen.
      */
-    public GameElement(PlacedElement element)
+    public GameElement(PlacedElement element, boolean bind)
     {
         this.placedElement = element;
-        this.position = new SimpleObjectProperty<>(element.positionProperty().get());
-        this.rotation = new SimpleDoubleProperty(element.rotationProperty().get());
+        this.position = new SimpleObjectProperty<>();
+        this.rotation = new SimpleDoubleProperty();
         this.hitCount = new SimpleIntegerProperty();
         this.currentAnimation = new SimpleObjectProperty<>();
-        this.pointReward = new SimpleIntegerProperty(element.pointsProperty().get());
+        this.pointReward = new SimpleIntegerProperty();
+
+        if(bind)
+        {
+            position.bind(element.positionProperty());
+            rotation.bind(element.rotationProperty());
+            pointReward.bind(element.pointsProperty());
+        }
+        else
+        {
+            position.set(element.positionProperty().get());
+            rotation.set(element.rotationProperty().get());
+            pointReward.set(element.pointsProperty().get());
+        }
     }
 
     /**

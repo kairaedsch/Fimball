@@ -51,7 +51,7 @@ public class GameSession
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
         gameSession.stopPhysics();
-        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.getElements(), (GameElement::new));
+        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.getElements(), element -> new GameElement(element, true));
         return gameSession;
     }
 
@@ -157,9 +157,10 @@ public class GameSession
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
                 ballTemplate = element;
-            } else
+            }
+            else
             {
-                GameElement gameElem = new GameElement(element);
+                GameElement gameElem = new GameElement(element, false);
                 elements.add(gameElem);
 
                 PhysicsElement physElem = new PhysicsElement(gameElem);
@@ -262,7 +263,7 @@ public class GameSession
      */
     private void spawnNewBall()
     {
-        gameBall.set(new GameElement(world.getBallTemplate()));
+        gameBall.set(new GameElement(world.getBallTemplate(), false));
         world.addGameElement(gameBall.get());
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
@@ -350,7 +351,8 @@ public class GameSession
         return gameBall;
     }
 
-    public PinballMachine getPinballMachine() {
+    public PinballMachine getPinballMachine()
+    {
         return machineBlueprint;
     }
 }

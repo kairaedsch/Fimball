@@ -41,6 +41,7 @@ public class PinballCanvasViewModel
     private PinballMachineEditorViewModel editorViewModel;
 
     private long lastDrawing;
+
     private long nowDrawing;
 
     /**
@@ -92,7 +93,15 @@ public class PinballCanvasViewModel
     {
         if (editorEnabled)
         {
-            editorViewModel.mouseClickedOnGame(gridPos);
+            editorViewModel.mouseClickedOnGame(gridPos, false);
+        }
+    }
+
+    public void mousePressedOnGame(Vector2 gridPos)
+    {
+        if (editorEnabled)
+        {
+            editorViewModel.mouseClickedOnGame(gridPos, true);
         }
     }
 

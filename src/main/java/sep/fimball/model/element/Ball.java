@@ -22,9 +22,9 @@ public class Ball extends GameElement
      * Erstellt einen neuen Ball aus einer Vorlage.
      * @param element
      */
-    public Ball(PlacedElement element)
+    public Ball(PlacedElement element, boolean bind)
     {
-        super(element);
+        super(element, bind);
     }
 
     /**
