@@ -49,10 +49,12 @@ public class GameViewModel extends WindowViewModel
 
     private GameSession gameSession;
 
+    private boolean startedFromEditor;
+
     /**
      * Erstellt ein neues GameViewModel.
      */
-    public GameViewModel(PinballMachine pinballMachine, String[] playerNames)
+    public GameViewModel(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
         super(WindowType.GAME);
         gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
@@ -72,6 +74,8 @@ public class GameViewModel extends WindowViewModel
         playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
 
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+
+        this.startedFromEditor = startedFromEditor;
     }
 
     /**
@@ -136,9 +140,12 @@ public class GameViewModel extends WindowViewModel
 
     @Override
     public void handleKeyEvent(KeyEvent keyEvent) {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+            return;
+        }
         if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString()=="PAUSE") {
             gameSession.pauseAll();
-            sceneManager.setDialog(new PauseViewModel(this));
+            sceneManager.setDialog(new PauseViewModel(this,startedFromEditor));
         } else {
             InputManager.getSingletonInstance().addKeyEvent(keyEvent);
         }

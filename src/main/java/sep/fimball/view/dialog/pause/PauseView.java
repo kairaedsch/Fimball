@@ -1,6 +1,7 @@
 package sep.fimball.view.dialog.pause;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
@@ -20,6 +21,9 @@ public class PauseView extends DialogView<PauseViewModel>
      * Das zur PauseView gehörende PauseViewModel.
      */
     private PauseViewModel pauseViewModel;
+
+    @FXML
+    private Button abortButton;
 
     /**
      * Setzt das zum PauseView gehörende PauseViewModel.

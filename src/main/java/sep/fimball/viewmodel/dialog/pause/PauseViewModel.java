@@ -2,7 +2,9 @@ package sep.fimball.viewmodel.dialog.pause;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -21,13 +23,16 @@ public class PauseViewModel extends DialogViewModel
 
     private GameViewModel gameViewModel;
 
+    private Boolean gameStartedFromEditor;
+
     /**
      * Erstellt ein neues PauseViewModel.
      */
-    public PauseViewModel(GameViewModel gameViewModel)
+    public PauseViewModel(GameViewModel gameViewModel, boolean gameStartedFromEditor)
     {
         super(DialogType.PAUSE);
         this.gameViewModel = gameViewModel;
+        this.gameStartedFromEditor = gameStartedFromEditor;
     }
 
     /**
@@ -55,6 +60,20 @@ public class PauseViewModel extends DialogViewModel
     public ReadOnlyListProperty<Highscore> playerHighscoresProperty()
     {
         return playerHighscores;
+    }
+
+    public boolean gameStartetFromEditor() {
+        return gameStartedFromEditor;
+    }
+
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent) {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+            return;
+        }
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString() == "PAUSE") {
+            resumeGame();
+        }
     }
 
 }
