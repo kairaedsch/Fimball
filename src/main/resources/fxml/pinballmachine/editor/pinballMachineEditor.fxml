@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 
@@ -18,6 +17,19 @@
                                     <children>
                                         <Button mnemonicParsing="false" text="Settings" onMouseClicked="#settingsClicked"/>
                                         <Label text="Tills Automat" fx:id="nameLabel"/>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets/>
+                                    </VBox.margin>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" text="drag" onMouseClicked="#dragClicked" fx:id="dragButton"/>
+                                        <Button mnemonicParsing="false" text="select" onMouseClicked="#selectClicked" fx:id="selectButton"/>
+                                        <Button mnemonicParsing="false" text="place" onMouseClicked="#placeClicked" fx:id="placeButton"/>
                                     </children>
                                     <VBox.margin>
                                         <Insets/>

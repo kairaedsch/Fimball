@@ -305,4 +305,11 @@ public class Vector2
     {
         return "{" + x + "|" + y + "}";
     }
+
+    public Vector2 round()
+    {
+        x = Math.round(x);
+        y = Math.round(y);
+        return this;
+    }
 }
