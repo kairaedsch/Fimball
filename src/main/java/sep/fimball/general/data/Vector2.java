@@ -165,6 +165,20 @@ public class Vector2
         return Vector2.angleBetween(this, otherVec);
     }
 
+    public static Vector2 rotate(Vector2 vec, double radianAngle)
+    {
+        double rotatedX = (Math.cos(radianAngle) * vec.getX()) - (Math.sin(radianAngle) * vec.getY());
+        double rotatedY = (Math.sin(radianAngle) * vec.getX()) + (Math.cos(radianAngle) * vec.getY());
+        return new Vector2(rotatedX, rotatedY);
+    }
+
+    public static Vector2 rotate(Vector2 vec, double radianAngle, Vector2 pivot)
+    {
+        Vector2 originPoint = Vector2.sub(vec, pivot);
+        Vector2 rotatedVec = Vector2.rotate(originPoint, radianAngle);
+        return Vector2.add(rotatedVec, pivot);
+    }
+
     /**
      * Addiert zwei Vektoren und gibt das Ergebnis zurück.
      *
