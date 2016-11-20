@@ -75,7 +75,7 @@ public class Config
     /**
      * Die maximal einstellbare Lautstärke.
      */
-    public final static double maxVolume = 10;
+    public final static double maxVolume = 100;
 
     /**
      * Die Hintergrundfarbe des Flipperautomaten.

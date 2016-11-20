@@ -102,13 +102,13 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         fullscreen.selectedProperty().bindBidirectional(gameSettingsViewModel.fullscreenProperty());
 
         masterVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMasterProperty());
-        masterVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeMasterProperty(), Config.maxVolume * 0.01).asString(), "%"));
+        masterVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMasterProperty().asString(), "%"));
 
         musicVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMusicProperty());
-        musicVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeMusicProperty(), Config.maxVolume * 0.01), "%"));
+        musicVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeMusicProperty().asString(), "%"));
 
         sfxVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeSFXProperty());
-        sfxVolumePercent.textProperty().bind(Bindings.concat(Bindings.divide(gameSettingsViewModel.volumeSFXProperty(), Config.maxVolume * 0.01), "%"));
+        sfxVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeSFXProperty().asString(), "%"));
     }
 
     /**

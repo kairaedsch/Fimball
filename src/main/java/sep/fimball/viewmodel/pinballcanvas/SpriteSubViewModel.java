@@ -50,7 +50,6 @@ public class SpriteSubViewModel
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
         currentImagePath = new SimpleObjectProperty<>();
-
         isSelected = new SimpleBooleanProperty(false);
 
         gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImagePath());
