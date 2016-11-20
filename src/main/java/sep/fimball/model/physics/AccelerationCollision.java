@@ -11,21 +11,21 @@ public class AccelerationCollision implements CollisionType
     /**
      * Wie stark, und in welche Richtung der Ball beschleunigt wird.
      */
-    private Vector2 acceleration;
+    private double strength;
 
     /**
      * Erstellt eine neue Instanz von AccelerationCollision.
      * @param acceleration Wie stark, und in welche Richtung der Ball beschleunigt wird.
      */
-    public AccelerationCollision(Vector2 acceleration)
+    public AccelerationCollision(double strength)
     {
-        this.acceleration = acceleration;
+        this.strength = strength;
     }
 
     @Override
     public void applyCollision(BallElement ball, Vector2 shortestIntersect)
     {
         Vector2 ballDirection = ball.getVelocity().normalized();
-        ball.setVelocity(Vector2.add(ball.getVelocity(), Vector2.add(ballDirection, acceleration)));
+        //ball.setVelocity(Vector2.add(ball.getVelocity(), Vector2.add(ballDirection, acceleration)));
     }
 }

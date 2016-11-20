@@ -119,16 +119,6 @@ public class BaseElementJson
                  * Speichert die Kraft, die der ColliderType auf die Kugel ausübt.
                  */
                 public double strength;
-
-                /**
-                 * Speichert die Beschleunigung, die der ColliderType auf die Kugel ausübt, in x-Richtung.
-                 */
-                public double accelX;
-
-                /**
-                 * Speichert die Beschleunigung, die der ColliderType auf die Kugel ausübt, in x-Richtung.
-                 */
-                public double accelY;
             }
         }
     }

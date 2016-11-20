@@ -43,7 +43,7 @@ public class PhysicsElementType
                     collisionType = new NormalCollision();
                     break;
                 case "acceleration":
-                    collisionType = new AccelerationCollision(new Vector2(collider.collisionType.accelX, collider.collisionType.accelY));
+                    collisionType = new AccelerationCollision(collider.collisionType.strength);
                     break;
                 case "bounce":
                     collisionType = new BounceCollision(collider.collisionType.strength);
