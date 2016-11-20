@@ -24,7 +24,7 @@ public class ScoreTrigger implements ElementTrigger
 
 
     @Override
-    public void activateTrigger(GameElement element, int colliderID)
+    public void activateElementTrigger(GameElement element, int colliderID)
     {
         session.getCurrentPlayer().pointsProperty().set(session.getCurrentPlayer().getPoints() + element.getPointReward());
     }

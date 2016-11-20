@@ -8,41 +8,37 @@ import sep.fimball.model.blueprint.base.BaseElementJson;
 public class Animation
 {
     /**
-     * Array mit den Pfaden der einzelnen Bilder der Animation.
-     */
-    private ElementImage[] elementImages;
-
-    /**
      * Wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
      */
     private int duration;
 
+    private int frameCount;
+
+    private String name;
+
     public Animation(BaseElementJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
     {
         duration = animation.duration;
-
-        elementImages = new ElementImage[animation.frameCount];
-        for(int f = 0; f < animation.frameCount; f++)
-        {
-            //elementImages[f] = new ElementImage();
-        }
-    }
-
-    /**
-     * Gibt das Array mit den Pfaden der einzelnen Bilder der Animation zurück.
-     * @return Ein Array  mit den Pfaden der einzelnen Bilder der Animation.
-     */
-    public ElementImage[] getElementImages()
-    {
-        return elementImages;
+        name = animation.animationName;
+        frameCount = animation.frameCount;
     }
 
     /**
      *  Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
      * @return Die Anzeigedauer eines einzelnen Bildes in Sekunden.
      */
-    public double getDuration()
+    public int getDuration()
     {
         return duration;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getFrameCount()
+    {
+        return frameCount;
     }
 }

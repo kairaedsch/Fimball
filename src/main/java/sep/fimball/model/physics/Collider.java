@@ -48,14 +48,19 @@ public class Collider
      * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des  Colliders hat.
      * @param ball Der Ball, dessen Kollisionen überprüft werden sollen.
      */
-    public void checkCollision(BallElement ball, Vector2 colliderObjectPosition)
+    public boolean checkCollision(BallElement ball, Vector2 colliderObjectPosition)
     {
+        boolean hit = false;
         for (ColliderShape shape : shapes)
         {
             HitInfo info = shape.calculateHitInfo(ball, colliderObjectPosition);
             if (info.isHit())
+            {
                 type.applyCollision(ball, info.getShortestIntersect());
+                hit = true;
+            }
         }
+        return hit;
     }
 
     /**

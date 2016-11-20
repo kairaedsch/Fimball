@@ -2,8 +2,10 @@ package sep.fimball.model.element;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.media.Animation;
+
+import java.util.Optional;
 
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
@@ -33,7 +35,7 @@ public class GameElement
     /**
      * TODO
      */
-    private ObjectProperty<Animation> currentAnimation;
+    private ObjectProperty<Optional<Animation>> currentAnimation;
 
     /**
      * Das zu diesem GameElement korrespondierende GameElement.
@@ -50,7 +52,7 @@ public class GameElement
         this.position = new SimpleObjectProperty<>();
         this.rotation = new SimpleDoubleProperty();
         this.hitCount = new SimpleIntegerProperty();
-        this.currentAnimation = new SimpleObjectProperty<>();
+        this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
 
         if(bind)
@@ -149,7 +151,7 @@ public class GameElement
      * TODO
      * @return
      */
-    public ObjectProperty<Animation> currentAnimationProperty()
+    public ObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;
     }

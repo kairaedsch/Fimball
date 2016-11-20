@@ -31,6 +31,10 @@ public class TriggerFactory
         soundTrigger.setElementTrigger(new SoundTrigger());
         triggers.add(soundTrigger);
 
+        Trigger animationTrigger = new Trigger();
+        animationTrigger.setElementTrigger(new AnimationTrigger());
+        triggers.add(animationTrigger);
+
         return triggers;
     }
 }

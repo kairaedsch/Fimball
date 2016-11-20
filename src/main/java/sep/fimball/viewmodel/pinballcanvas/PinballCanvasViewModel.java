@@ -40,10 +40,6 @@ public class PinballCanvasViewModel
 
     private PinballMachineEditorViewModel editorViewModel;
 
-    private long lastDrawing;
-
-    private long nowDrawing;
-
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
@@ -58,9 +54,6 @@ public class PinballCanvasViewModel
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
         editorMode = false;
-
-        lastDrawing = System.currentTimeMillis();
-        nowDrawing = System.currentTimeMillis();
     }
 
     public PinballCanvasViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
@@ -143,14 +136,7 @@ public class PinballCanvasViewModel
     // TODO Umbenennen
     public void notifyToRedraw(Observer observer)
     {
-        lastDrawing = nowDrawing;
-        nowDrawing = System.currentTimeMillis();
         redrawObservable.addObserver(observer);
-    }
-
-    public int getDrawingTime()
-    {
-        return (int) (nowDrawing - lastDrawing);
     }
 
     /**

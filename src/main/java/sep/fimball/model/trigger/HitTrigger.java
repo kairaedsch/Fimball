@@ -8,7 +8,7 @@ import sep.fimball.model.element.GameElement;
 public class HitTrigger implements ElementTrigger
 {
     @Override
-    public void activateTrigger(GameElement element, int colliderID)
+    public void activateElementTrigger(GameElement element, int colliderID)
     {
         element.setHitCount(element.getHitCount() + 1);
     }

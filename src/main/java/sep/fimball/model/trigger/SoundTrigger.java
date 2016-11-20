@@ -10,7 +10,7 @@ import sep.fimball.model.element.GameElement;
 public class SoundTrigger implements ElementTrigger
 {
     @Override
-    public void activateTrigger(GameElement element, int colliderID)
+    public void activateElementTrigger(GameElement element, int colliderID)
     {
         Sound soundToPlay = element.getPlacedElement().getBaseElement().getMedia().getEventMap().get(colliderID).getSound();
 

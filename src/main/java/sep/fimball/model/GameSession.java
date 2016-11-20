@@ -15,16 +15,11 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
-import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.physics.*;
 import sep.fimball.model.trigger.Trigger;
 import sep.fimball.model.trigger.TriggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -118,6 +113,9 @@ public class GameSession
 
     private ObjectProperty<GameElement> gameBall;
 
+    private LinkedList<List<CollisionEventArg>> collisionEventArgsList;
+    private Object collisionEventArgsLocker;
+
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
      *
@@ -127,9 +125,13 @@ public class GameSession
     public GameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         this.machineBlueprint = machineBlueprint;
+        this.triggers = new ArrayList<>();
+        collisionEventArgsLocker = new Object();
+        collisionEventArgsList = new LinkedList<List<CollisionEventArg>>();
 
         gameBall = new SimpleObjectProperty<>();
 
+        /*
         InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
@@ -139,7 +141,7 @@ public class GameSession
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
                 addTiltCounter();
-        });
+        });*/
 
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
@@ -172,7 +174,7 @@ public class GameSession
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements, ballTemplate);
-        physicsHandler = new PhysicsHandler(physicsElements);
+        physicsHandler = new PhysicsHandler(physicsElements, this);
 
         gameLoopObservable = new Observable();
 
@@ -200,7 +202,24 @@ public class GameSession
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
-            // TODO update GameElements
+            LinkedList<List<CollisionEventArg>> argsList;
+            synchronized (collisionEventArgsLocker)
+            {
+                argsList = this.collisionEventArgsList;
+                this.collisionEventArgsList =  new LinkedList<List<CollisionEventArg>>();
+            }
+
+            for (List<CollisionEventArg> args : argsList)
+            {
+                for (CollisionEventArg arg : args)
+                {
+                    for (Trigger trigger : triggers)
+                    {
+                        trigger.activateElementTrigger(arg.getOtherElement(), arg.getColliderId());
+                    }
+                }
+            }
+
             gameLoopObservable.setChanged();
             gameLoopObservable.notifyObservers();
         }));
@@ -280,10 +299,12 @@ public class GameSession
         machineBlueprint.addHighscore(score);
     }
 
-    private void addTiltCounter()
+    public void addCollisionEventArgs(List<CollisionEventArg> collisionEventArg)
     {
-        tiltCounter++;
-        // tilt logic etc.
+        synchronized (collisionEventArgsLocker)
+        {
+            collisionEventArgsList.add(collisionEventArg);
+        }
     }
 
     /**

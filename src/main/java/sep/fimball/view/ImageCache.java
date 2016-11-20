@@ -35,7 +35,7 @@ public class ImageCache
         else
         {
             File topFile = new File(imagePath);
-            Image loadedImage = new Image(topFile.toURI().toString());
+            Image loadedImage = new Image(topFile.toURI().toString(), true);
             cachedImages.put(imagePath, loadedImage);
             return loadedImage;
         }

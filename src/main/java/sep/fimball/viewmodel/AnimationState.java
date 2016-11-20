@@ -21,12 +21,12 @@ public class AnimationState
 
     public int getAnimationSize()
     {
-        return animation.get().getElementImages().length;
+        return 0;
     }
 
     public ElementImage getCurrentFrame()
     {
-        return animation.get().getElementImages()[currentFrameIndex];
+        return null;
     }
 
     public void setCurrentFrameIndex(int index)

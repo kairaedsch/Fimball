@@ -1,8 +1,6 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -19,18 +17,6 @@ import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
  */
 public class SpriteSubView
 {
-    /**
-     * Das Bild des Sprites.
-     */
-    private Image topImage;
-
-    private Image bottomImage;
-
-    /**
-     * Die Drehung des Sprites.
-     */
-    private DoubleProperty rotationProperty;
-
     /**
      * Die Position des Sprites.
      */
@@ -50,28 +36,8 @@ public class SpriteSubView
     {
         this.viewModel = viewModel;
 
-        rotationProperty = new SimpleDoubleProperty();
-
         positionProperty = new SimpleObjectProperty<>();
         positionProperty.bind(viewModel.positionProperty());
-
-        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> loadImage());
-        viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> loadImage());
-        loadImage();
-    }
-
-    /**
-     * Lädt das im {@imagePath} gespeicherte Bild.
-     */
-    private void loadImage()
-    {
-        double rotation = viewModel.rotationProperty().get();
-        ElementImage elementImage = viewModel.animationFramePathProperty().get();
-
-        topImage = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
-        bottomImage = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
-
-        rotationProperty.setValue(elementImage.getRestRotation((int) rotation) + (rotation - (int) rotation));
     }
 
     /**
@@ -84,21 +50,23 @@ public class SpriteSubView
         double x = positionProperty.get().getX();
         double y = positionProperty.get().getY();
 
-        graphicsContext.save(); // saves the current state on stack, including the current transform
-        if(rotationProperty.get() != 0) rotate(graphicsContext, rotationProperty.doubleValue(), x + bottomImage.getWidth() / 2, y + bottomImage.getHeight() / 2);
-
         Image image;
-        if (imageLayer == ImageLayer.TOP) image = topImage;
-        else image = bottomImage;
+        ElementImage elementImage = viewModel.animationFramePathProperty().get();
+        double rotation = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
+        if (imageLayer == ImageLayer.TOP) image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
+        else image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
+
+        graphicsContext.save(); // saves the current state on stack, including the current transform
+        if(rotation != 0) rotate(graphicsContext, rotation, x + image.getWidth() / 2, y + image.getHeight() / 2);
 
         if(viewModel.isSelectedProperty().get())
         {
             double plus = +0.5 * Config.pixelsPerGridUnit;
             graphicsContext.setLineWidth(Config.pixelsPerGridUnit);
-            graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) (y * Config.pixelsPerGridUnit) - plus, topImage.getWidth() + plus * 2, topImage.getHeight() + plus * 2);
+            graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) (y * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2);
         }
 
-        graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), topImage.getWidth(), topImage.getHeight());
+        graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
         graphicsContext.restore(); // back to original state (before rotation)
     }
 

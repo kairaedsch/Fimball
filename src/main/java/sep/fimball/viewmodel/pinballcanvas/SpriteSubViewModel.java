@@ -2,10 +2,11 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.media.ElementImage;
-import sep.fimball.model.element.GameElement;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.element.GameElement;
+import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.Optional;
 
@@ -34,6 +35,8 @@ public class SpriteSubViewModel
      */
     private BooleanProperty isSelected;
 
+    private GameElement gameElement;
+
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
@@ -41,14 +44,30 @@ public class SpriteSubViewModel
      */
     SpriteSubViewModel(GameElement gameElement)
     {
+        this.gameElement = gameElement;
         position = new SimpleObjectProperty<>();
         position.bind(gameElement.positionProperty());
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
         currentImagePath = new SimpleObjectProperty<>();
-        currentImagePath.bind(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty());
 
         isSelected = new SimpleBooleanProperty(false);
+
+        gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImagePath());
+        updateImagePath();
+    }
+
+    private void updateImagePath()
+    {
+        if(gameElement.currentAnimationProperty().get().isPresent())
+        {
+            Animation animation = gameElement.currentAnimationProperty().get().get();
+            currentImagePath.set(new ElementImage(gameElement, animation));
+        }
+        else
+        {
+            currentImagePath.set(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get());
+        }
     }
 
     public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)

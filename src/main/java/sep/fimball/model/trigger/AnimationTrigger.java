@@ -8,8 +8,8 @@ import sep.fimball.model.element.GameElement;
 public class AnimationTrigger implements ElementTrigger
 {
     @Override
-    public void activateTrigger(GameElement element, int colliderId)
+    public void activateElementTrigger(GameElement element, int colliderId)
     {
-        element.currentAnimationProperty().set(element.getPlacedElement().getBaseElement().getMedia().getEventMap().get(colliderId).getAnimation());
+        element.currentAnimationProperty().set(java.util.Optional.ofNullable(element.getPlacedElement().getBaseElement().getMedia().getEventMap().get(colliderId).getAnimation()));
     }
 }

@@ -134,7 +134,7 @@ public class Config
         if(canRotate) path += "-" + rotation;
 
         if(animation) path += "+" + animationName + "_" + animationId;
-
+        System.out.println(path);
         return path + ".png";
     }
 

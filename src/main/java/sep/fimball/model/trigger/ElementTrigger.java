@@ -12,5 +12,5 @@ public interface ElementTrigger
      * @param element Das Element, das mit dem Ball kollidiert ist.
      * @param colliderId Die ID des Colliders des Elements, das mit dem Ball kollidiert ist.
      */
-    public void activateTrigger(GameElement element, int colliderId);
+    public void activateElementTrigger(GameElement element, int colliderId);
 }

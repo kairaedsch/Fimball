@@ -16,7 +16,7 @@ public class MediaElementType
     private String name;
     private String description;
     private boolean canRotate;
-    private double rotationAccuracy;
+    private int rotationAccuracy;
 
     private ObjectProperty<ElementImage> elementImage;
 
@@ -40,7 +40,7 @@ public class MediaElementType
         }
         if (canRotate)
         {
-            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId, (int)rotationAccuracy));
+            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId, rotationAccuracy));
         }
         else
         {
@@ -64,7 +64,7 @@ public class MediaElementType
         return canRotate;
     }
 
-    public double getRotationAccuracy()
+    public int getRotationAccuracy()
     {
         return rotationAccuracy;
     }

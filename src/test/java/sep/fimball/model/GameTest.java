@@ -108,7 +108,7 @@ public class GameTest
         }
 
         @Override
-        public void activateTrigger(GameElement element, int colliderID)
+        public void activateElementTrigger(GameElement element, int colliderID)
         {
             gameTest.addCollidedGameElement(element);
         }
@@ -124,7 +124,7 @@ public class GameTest
         }
 
         @Override
-        public void activateTrigger()
+        public void activateGameTrigger()
         {
             gameTest.ballLost();
         }

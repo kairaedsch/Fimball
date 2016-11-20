@@ -1,6 +1,7 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -56,15 +57,18 @@ public class PhysicsHandler
      */
     private List<PhysicsElement> physicsElements;
 
+    private GameSession gameSession;
+
     private final boolean debug = false;
 
     /**
      * Zrzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      */
-    public PhysicsHandler(List<PhysicsElement> elements)
+    public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession)
     {
         this.physicsElements = elements;
+        this.gameSession = gameSession;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -140,17 +144,26 @@ public class PhysicsHandler
                     ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
                 }
 
+                List<CollisionEventArg> collisionEventArgs = new ArrayList<>();
+
                 for (PhysicsElement element : physicsElements)
                 {
                     if (ballElement != null && element != ballElement.getSubElement())
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            collider.checkCollision(ballElement, element.getPosition());
+                            boolean hit = collider.checkCollision(ballElement, element.getPosition());
+
+                            if(hit)
+                            {
+                                collisionEventArgs.add(new CollisionEventArg(element.getElement(), collider.getId()));
+                            }
                         }
                     }
                     element.writeToGameElement();
                 }
+
+                gameSession.addCollisionEventArgs(collisionEventArgs);
 
                 // TODO Notify GameElements about collisions
 
