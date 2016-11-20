@@ -2,13 +2,18 @@ package sep.fimball.model.blueprint;
 
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.ReadOnlyMapProperty;
+import javafx.print.Collation;
 import org.junit.Ignore;
 import org.junit.Test;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+
+import java.util.Collection;
 
 import static junit.framework.TestCase.assertFalse;
 
@@ -23,15 +28,16 @@ public class PinballMachineSaveTest
     public void pinballMachineShouldSave()
     {
         //Erstellen eines neuen Automaten, der alle verschiedene Elemente enthaelt
+        Config.config();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        String[] elementTypeIds = null;
-        BaseElementManager.getInstance().elementsProperty().keySet().toArray(elementTypeIds);
         ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.getElements();
-        for (int i = 0; i < elementTypeIds.length; i++)
+        int i = 0;
+        for (BaseElement b : BaseElementManager.getInstance().elementsProperty().values())
         {
-            PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(elementTypeIds[i]), new Vector2(0, MAX_ELEMENT_SIZE * i), 0, 1, 0);
+            PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(b.getId()), new Vector2(0, MAX_ELEMENT_SIZE * i), 0, 1, 0);
             pinballMachine.addElement(p);
             originalElements.add(p);
+            i++;
         }
 
         //Den gerade erstellten Automaten serialisieren und speichern
