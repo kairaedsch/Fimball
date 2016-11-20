@@ -8,6 +8,7 @@ import sep.fimball.model.RectangleDouble;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementierung eines Colliders, welcher die Form eines Polygons hat. Um Kollisionen korrekt erkennen zu können muss das Polygon konvex sein.
@@ -175,12 +176,6 @@ public class PolygonColliderShape implements ColliderShape
 
     private List<Vector2> rotate(double rotation, Vector2 pivotPoint)
     {
-        List<Vector2> retList = new ArrayList<>();
-
-        for (Vector2 vec : vertices)
-        {
-            retList.add(Vector2.rotate(vec, Math.toRadians(rotation), pivotPoint));
-        }
-        return retList;
+        return vertices.stream().map(vec -> Vector2.rotate(vec, Math.toRadians(rotation), pivotPoint)).collect(Collectors.toList());
     }
 }
