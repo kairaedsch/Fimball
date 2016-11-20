@@ -2,7 +2,6 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -54,7 +53,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private Optional<BaseElement> selectedAvailableElement;
 
-    private Optional<PlacedElement> selectedPlacedElement;
+    private ObjectProperty<Optional<PlacedElement>> selectedPlacedElement;
+
     private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
     /**
@@ -66,6 +66,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         super(WindowType.TABLE_EDITOR);
         this.pinballMachine = pinballMachine;
+
+        this.selectedAvailableElement = Optional.empty();
+        selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
 
         mouseModus = new SimpleObjectProperty<>(MouseModus.SELECTING);
 
@@ -149,7 +152,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             cameraPosition.get().setX(cameraPosition.get().getX() - divX);
             cameraPosition.get().setY(cameraPosition.get().getY() - divY);
         }
-        else if(mouseModus.get() == MouseModus.SELECTING && selectedPlacedElement.isPresent())
+        else if(mouseModus.get() == MouseModus.SELECTING && selectedPlacedElement.get().isPresent())
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).add(selectedPlacedElementPosition.get()));
         }
@@ -167,21 +170,28 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
-        if(mouseModus.get() == MouseModus.SELECTING)
+        if(mouseModus.get() == MouseModus.SELECTING && onlyPressed)
         {
-            selectedPlacedElement = pinballMachine.getElementAt(gridPosition);
-            if(selectedPlacedElement.isPresent())
-            {
-                selectedPlacedElementPosition = new SimpleObjectProperty<>(new Vector2().add(selectedPlacedElement.get().positionProperty().get()));
-                selectedPlacedElementPosition.addListener((observable, oldValue, newValue) -> selectedPlacedElement.get().setPosition(new Vector2().add(newValue).round()));
-            }
+            setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
+        }
+        else if(mouseModus.get() == MouseModus.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
+        {
+            PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
+            setMouseModus(MouseModus.SELECTING);
+            setSelectedPlacedElement(Optional.of(placedElement));
+        }
+    }
 
-            selectedElementSubViewModel.setPlacedElement(selectedPlacedElement);
-        }
-        else if(mouseModus.get() == MouseModus.PLACING && selectedAvailableElement.isPresent() && !onlyPressed)
+    private void setSelectedPlacedElement(Optional<PlacedElement> placedElement)
+    {
+        selectedPlacedElement.set(placedElement);
+        if(selectedPlacedElement.get().isPresent())
         {
-            pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
+            selectedPlacedElementPosition = new SimpleObjectProperty<>(new Vector2().add(selectedPlacedElement.get().get().positionProperty().get()));
+            selectedPlacedElementPosition.addListener((observable, oldValue, newValue) -> selectedPlacedElement.get().get().setPosition(new Vector2().add(newValue).round()));
         }
+
+        selectedElementSubViewModel.setPlacedElement(selectedPlacedElement.get());
     }
 
     public PinballCanvasViewModel getPinballCanvasViewModel()
@@ -189,12 +199,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return pinballCanvasViewModel;
     }
 
-    public ObjectProperty<Vector2> cameraPositionProperty()
+    public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
     {
         return cameraPosition;
     }
 
-    public DoubleProperty cameraZoomProperty()
+    public ReadOnlyDoubleProperty cameraZoomProperty()
     {
         return cameraZoom;
     }
@@ -204,17 +214,18 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedElementSubViewModel;
     }
 
-    public StringProperty machineNameProperty()
+    public ReadOnlyStringProperty machineNameProperty()
     {
         return machineName;
     }
 
-    public ObjectProperty<MouseModus> mouseModusProperty()
+    public ReadOnlyObjectProperty<MouseModus> mouseModusProperty()
     {
         return mouseModus;
     }
 
-    public void handlyKeyEvent(KeyEvent keyEvent) {
-
+    public ReadOnlyObjectProperty<Optional<PlacedElement>> getSelectedPlacedElement()
+    {
+        return selectedPlacedElement;
     }
 }

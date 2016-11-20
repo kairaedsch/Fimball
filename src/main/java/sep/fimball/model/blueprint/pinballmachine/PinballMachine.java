@@ -120,11 +120,12 @@ public class PinballMachine
         elements.add(placedElement);
     }
 
-    public void addElement(BaseElement baseElement, Vector2 position)
+    public PlacedElement addElement(BaseElement baseElement, Vector2 position)
     {
         checkElementsLoaded();
         PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
         addElement(placedElement);
+        return placedElement;
     }
 
     public void removeElement(PlacedElement placedElement)

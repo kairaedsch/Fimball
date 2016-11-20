@@ -1,9 +1,13 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.general.data.Vector2;
+
+import java.util.Optional;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -45,6 +49,13 @@ public class SpriteSubViewModel
         currentImagePath.bind(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty());
 
         isSelected = new SimpleBooleanProperty(false);
+    }
+
+    public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)
+    {
+        this(gameElement);
+
+        isSelected.bind(Bindings.createBooleanBinding(() -> selectedPlacedElement.get().isPresent() && selectedPlacedElement.get().get() == gameElement.getPlacedElement(), selectedPlacedElement));
     }
 
     /**

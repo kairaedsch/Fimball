@@ -66,7 +66,6 @@
                 <AnchorPane>
                     <children>
                         <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onScroll="#zoom" onMouseDragged="#dragged" onMousePressed="#down"/>
-                        <Rectangle arcHeight="1.0" arcWidth="1.0" fill="#8f8f8fa3" height="55.0" layoutX="144.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="55.0"/>
                         <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" onMouseClicked="#playClicked"/>
                         <Button mnemonicParsing="false" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" onMouseClicked="#zoomInClicked"/>
                         <Button mnemonicParsing="false" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" onMouseClicked="#zoomOutClicked"/>

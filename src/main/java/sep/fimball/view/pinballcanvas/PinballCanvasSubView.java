@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import sep.fimball.general.Debug;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
@@ -107,6 +108,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             }
         }
 
+        graphicsContext.setStroke(new Color(Config.contraColor.getRed(), Config.contraColor.getGreen(), Config.contraColor.getBlue(), 0.25));
         for (SpriteSubView spriteTop : sprites)
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);

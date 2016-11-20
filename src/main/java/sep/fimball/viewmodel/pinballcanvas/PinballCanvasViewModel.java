@@ -53,6 +53,7 @@ public class PinballCanvasViewModel
     public PinballCanvasViewModel(GameSession gameSession, GameViewModel gameViewModel)
     {
         init(gameSession);
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
@@ -70,23 +71,24 @@ public class PinballCanvasViewModel
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
         editorMode = true;
+
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
     }
 
     /**
      * Initialisiert die Zeichnung des Canvas.
      */
-    private void init(GameSession session)
+    private void init(GameSession gameSession)
     {
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
 
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, session.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
 
         redrawObservable = new Observable();
 
         Observer gameObserver = (o, args) -> redraw();
-        session.addGameLoopObserver(gameObserver);
+        gameSession.addGameLoopObserver(gameObserver);
     }
 
     public void mouseClickedOnGame(Vector2 gridPos)

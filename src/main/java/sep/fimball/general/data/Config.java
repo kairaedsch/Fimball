@@ -80,6 +80,8 @@ public class Config
 
     public final static Color baseColorLight = new Color(255 / 255., 147 / 255., 147 / 255., 1);
 
+    public final static Color contraColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
+
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
      */

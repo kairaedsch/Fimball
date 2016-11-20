@@ -91,6 +91,13 @@ public class SpriteSubView
         if (imageLayer == ImageLayer.TOP) image = topImage;
         else image = bottomImage;
 
+        if(viewModel.isSelectedProperty().get())
+        {
+            double plus = +0.5 * Config.pixelsPerGridUnit;
+            graphicsContext.setLineWidth(Config.pixelsPerGridUnit);
+            graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) (y * Config.pixelsPerGridUnit) - plus, topImage.getWidth() + plus * 2, topImage.getHeight() + plus * 2);
+        }
+
         graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), topImage.getWidth(), topImage.getHeight());
         graphicsContext.restore(); // back to original state (before rotation)
     }
