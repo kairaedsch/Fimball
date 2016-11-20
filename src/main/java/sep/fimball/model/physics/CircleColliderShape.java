@@ -49,8 +49,10 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
+    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
+        // TODO rotate
+
         // Collision check between two circles
         Vector2 globalColliderPosition = Vector2.add(position, colliderObjectPosition);
         Vector2 ballGlobalColliderPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
@@ -66,8 +68,10 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public RectangleDouble getBoundingBox()
+    public RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint)
     {
+        // TODO rotate
+
         Vector2 origin = new Vector2(position.getX() - radius, position.getY() - radius);
         return new RectangleDouble(origin, 2 * radius, 2 * radius);
     }

@@ -74,7 +74,7 @@ public class PinballMachine
             {
                 for (ColliderShape shape : collider.getShapes())
                 {
-                    RectangleDouble boundingBox = shape.getBoundingBox();
+                    RectangleDouble boundingBox = shape.getBoundingBox(elements.get(i).rotationProperty().get(), elements.get(i).getBaseElement().getPhysics().getPivotPoint());
                     Vector2 globalPosition = elements.get(i).positionProperty().get();
                     double minX = boundingBox.getOrigin().getX() + globalPosition.getX();
                     double minY = boundingBox.getOrigin().getY() + globalPosition.getY();

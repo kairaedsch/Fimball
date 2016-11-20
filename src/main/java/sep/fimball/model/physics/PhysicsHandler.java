@@ -152,7 +152,7 @@ public class PhysicsHandler
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            boolean hit = collider.checkCollision(ballElement, element.getPosition());
+                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getElement().getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
                             if(hit)
                             {

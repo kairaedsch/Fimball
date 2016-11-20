@@ -13,7 +13,7 @@ public interface ColliderShape
      * @param ball Der Ball, der auf Überschneidung mit der Fläche geprüft werden soll.
      * @return Informationen über eine mögliche Überschneidung der Fläche mit dem Ball.
      */
-    HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition);
+    HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint);
 
-    RectangleDouble getBoundingBox();
+    RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 }

@@ -12,12 +12,15 @@ import java.util.List;
  */
 public class PhysicsElementType
 {
+    private Vector2 pivotPoint;
+
     private List<Collider> colliders;
 
-    public PhysicsElementType(BaseElementJson.PhysicElementTypeJson physicElement)
+    public PhysicsElementType(BaseElementJson.PhysicElementTypeJson physicsElement)
     {
+        pivotPoint = physicsElement.pivotPoint;
         colliders = new ArrayList<>();
-        for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson collider : physicElement.colliders)
+        for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson collider : physicsElement.colliders)
         {
             List<ColliderShape> shapes = new ArrayList<>();
 
@@ -51,6 +54,11 @@ public class PhysicsElementType
 
             colliders.add(new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode()));
         }
+    }
+
+    public Vector2 getPivotPoint()
+    {
+        return pivotPoint;
     }
 
     public List<Collider> getColliders()

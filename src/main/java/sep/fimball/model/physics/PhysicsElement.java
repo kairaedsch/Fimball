@@ -77,6 +77,15 @@ public class PhysicsElement
 
     /**
      * Gibt die Rotation des PhysicsElements zurück.
+     * @return Gibt die Rotation des PhysicsElements zurück.
+     */
+    public double getRotation()
+    {
+        return rotation;
+    }
+
+    /**
+     * Setzt die Rotation.
      * @param rotation Die Rotation des PhysicsElements zurück.
      */
     public void setRotation(double rotation)

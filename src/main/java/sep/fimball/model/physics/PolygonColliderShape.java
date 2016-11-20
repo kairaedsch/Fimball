@@ -38,8 +38,10 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition)
+    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
+        // TODO rotate
+
         Vector2 globalBallPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();
@@ -134,8 +136,10 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public RectangleDouble getBoundingBox()
+    public RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint)
     {
+        // TODO rotate
+
         double minX = vertices.get(0).getX();
         double minY = vertices.get(0).getY();
         double maxX = vertices.get(0).getX();

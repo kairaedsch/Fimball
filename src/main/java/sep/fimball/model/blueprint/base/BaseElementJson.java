@@ -34,6 +34,11 @@ public class BaseElementJson
     public static class PhysicElementTypeJson
     {
         /**
+         * Punkt um den das Element rotiert wird.
+         */
+        public Vector2 pivotPoint;
+
+        /**
          * Speichert die Collider des PhysicElements.
          */
         public PhysicColliderJson[] colliders;
