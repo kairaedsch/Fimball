@@ -68,14 +68,14 @@ public class PinballMachine
     public Optional<PlacedElement> getElementAt(Vector2 point)
     {
         checkElementsLoaded();
-        for (PlacedElement element : elements)
+        for (int i = elements.size() -1; i >= 0; i--)
         {
-            for (Collider collider : element.getBaseElement().getPhysics().getColliders())
+            for (Collider collider : elements.get(i).getBaseElement().getPhysics().getColliders())
             {
                 for (ColliderShape shape : collider.getShapes())
                 {
                     RectangleDouble boundingBox = shape.getBoundingBox();
-                    Vector2 globalPosition = element.positionProperty().get();
+                    Vector2 globalPosition = elements.get(i).positionProperty().get();
                     double minX = boundingBox.getOrigin().getX() + globalPosition.getX();
                     double minY = boundingBox.getOrigin().getY() + globalPosition.getY();
                     double maxX = minX + boundingBox.getWidth();
@@ -83,7 +83,7 @@ public class PinballMachine
 
                     if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
                     {
-                        return Optional.of(element);
+                        return Optional.of(elements.get(i));
                     }
                 }
             }
