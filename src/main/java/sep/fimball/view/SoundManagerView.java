@@ -1,5 +1,6 @@
 package sep.fimball.view;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
@@ -57,8 +58,8 @@ public class SoundManagerView
         this.soundManagerViewModel = new SoundManagerViewModel();
 
         musicVolume = new SimpleDoubleProperty();
-        sfxVolume = new SimpleDoubleProperty();
         musicVolume.bind(soundManagerViewModel.musicVolumeProperty());
+        sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(soundManagerViewModel.sfxVolumeProperty());
 
         loadedAudioClips = new HashMap<>();
@@ -84,7 +85,7 @@ public class SoundManagerView
 
         mediaPlayer = new MediaPlayer(backgroundMusic);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.setVolume(musicVolume.getValue());
+        mediaPlayer.volumeProperty().bind(musicVolume);
         mediaPlayer.play();
     }
 
@@ -100,7 +101,7 @@ public class SoundManagerView
         } else {
             AudioClip clip = new AudioClip(clipPath);
             loadedAudioClips.put(clipPath, clip);
-            clip.setVolume(sfxVolume.getValue());
+            clip.volumeProperty().bind(sfxVolume);
             clip.play();
         }
     }

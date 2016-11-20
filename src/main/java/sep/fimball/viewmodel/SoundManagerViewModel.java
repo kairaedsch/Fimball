@@ -29,9 +29,9 @@ public class SoundManagerViewModel {
         settings = Settings.getSingletonInstance();
 
         musicVolume = new SimpleDoubleProperty();
-        musicVolume.bind(settings.musicVolumeProperty());
+        musicVolume.bind(settings.musicVolumeProperty().divide(100).multiply(settings.masterVolumeProperty().divide(100)));
         sfxVolume = new SimpleDoubleProperty();
-        sfxVolume.bind(settings.sfxVolumeProperty());
+        sfxVolume.bind(settings.sfxVolumeProperty().divide(100).multiply(settings.masterVolumeProperty().divide(100)));
 
         Observer clipObserver = ((o, arg) -> playClip((String)arg));
         Observer mediaObserver = ((o, arg) -> playMedia((String)arg));

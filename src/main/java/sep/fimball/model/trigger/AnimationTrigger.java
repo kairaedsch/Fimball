@@ -2,6 +2,7 @@ package sep.fimball.model.trigger;
 
 import sep.fimball.model.blueprint.base.MediaElementEvent;
 import sep.fimball.model.element.GameElement;
+import sep.fimball.model.media.Animation;
 
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public class AnimationTrigger implements ElementTrigger
 
         if (eventMap.containsKey(colliderId))
         {
-            element.setCurrentAnimation(java.util.Optional.of(eventMap.get(colliderId).getAnimation()));
+            Animation animation = eventMap.get(colliderId).getAnimation();
+            if(animation != null) element.setCurrentAnimation(java.util.Optional.of(animation));
         }
     }
 }
