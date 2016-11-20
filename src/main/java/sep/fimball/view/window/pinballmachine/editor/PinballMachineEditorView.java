@@ -14,7 +14,7 @@ import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.window.pinballmachine.editor.MouseModus;
+import sep.fimball.viewmodel.window.pinballmachine.editor.MouseMode;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
@@ -84,12 +84,12 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
         //TODO make mor beautyful
-        dragButton.disabledProperty().addListener((observable, oldValue, newValue) -> dragButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.DRAGGING));
-        selectButton.disabledProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.SELECTING));
-        placeButton.disabledProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.PLACING));
-        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> dragButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.DRAGGING));
-        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.SELECTING));
-        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseModus.PLACING));
+        dragButton.disabledProperty().addListener((observable, oldValue, newValue) -> dragButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.DRAGGING));
+        selectButton.disabledProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.SELECTING));
+        placeButton.disabledProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.PLACING));
+        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> dragButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.DRAGGING));
+        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.SELECTING));
+        pinballMachineEditorViewModel.mouseModusProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModusProperty().get() == MouseMode.PLACING));
     }
 
     /**
@@ -143,16 +143,16 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     public void placeClicked(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.setMouseModus(MouseModus.PLACING);
+        pinballMachineEditorViewModel.setMouseModus(MouseMode.PLACING);
     }
 
     public void selectClicked(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.setMouseModus(MouseModus.SELECTING);
+        pinballMachineEditorViewModel.setMouseModus(MouseMode.SELECTING);
     }
 
     public void dragClicked(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.setMouseModus(MouseModus.DRAGGING);
+        pinballMachineEditorViewModel.setMouseModus(MouseMode.DRAGGING);
     }
 }

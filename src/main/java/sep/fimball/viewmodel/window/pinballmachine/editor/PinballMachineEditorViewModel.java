@@ -49,7 +49,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private PinballCanvasViewModel pinballCanvasViewModel;
 
-    private ObjectProperty<MouseModus> mouseModus;
+    private ObjectProperty<MouseMode> mouseModus;
 
     private Optional<BaseElement> selectedAvailableElement;
 
@@ -70,7 +70,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.selectedAvailableElement = Optional.empty();
         selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
 
-        mouseModus = new SimpleObjectProperty<>(MouseModus.SELECTING);
+        mouseModus = new SimpleObjectProperty<>(MouseMode.SELECTING);
 
         machineName = new SimpleStringProperty();
         machineName.bind(pinballMachine.nameProperty());
@@ -147,20 +147,20 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
         double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
 
-        if(mouseModus.get() == MouseModus.DRAGGING)
+        if(mouseModus.get() == MouseMode.DRAGGING)
         {
             cameraPosition.get().setX(cameraPosition.get().getX() - divX);
             cameraPosition.get().setY(cameraPosition.get().getY() - divY);
         }
-        else if(mouseModus.get() == MouseModus.SELECTING && selectedPlacedElement.get().isPresent())
+        else if(mouseModus.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).add(selectedPlacedElementPosition.get()));
         }
     }
 
-    public void setMouseModus(MouseModus mouseModus)
+    public void setMouseModus(MouseMode mouseMode)
     {
-        this.mouseModus.set(mouseModus);
+        this.mouseModus.set(mouseMode);
     }
 
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
@@ -170,14 +170,14 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
-        if(mouseModus.get() == MouseModus.SELECTING && onlyPressed)
+        if(mouseModus.get() == MouseMode.SELECTING && onlyPressed)
         {
             setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
         }
-        else if(mouseModus.get() == MouseModus.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
+        else if(mouseModus.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
         {
             PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
-            setMouseModus(MouseModus.SELECTING);
+            setMouseModus(MouseMode.SELECTING);
             setSelectedPlacedElement(Optional.of(placedElement));
         }
     }
@@ -219,7 +219,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return machineName;
     }
 
-    public ReadOnlyObjectProperty<MouseModus> mouseModusProperty()
+    public ReadOnlyObjectProperty<MouseMode> mouseModusProperty()
     {
         return mouseModus;
     }
