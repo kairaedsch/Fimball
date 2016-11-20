@@ -107,7 +107,7 @@ public class PinballMachineManager
         }
     }
 
-    void loadMachineElements(PinballMachine pinballMachine)
+    public void loadMachineElements(PinballMachine pinballMachine)
     {
         Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 
