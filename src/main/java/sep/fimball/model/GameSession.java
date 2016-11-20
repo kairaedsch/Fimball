@@ -117,6 +117,9 @@ public class GameSession
     private LinkedList<List<CollisionEventArg>> collisionEventArgsList;
     private Object collisionEventArgsLocker;
 
+    /**
+     *  Der LightManager, der die in der GameSession vorhandenen Lichter verwaltet.
+     */
     private LightManager lightManager;
 
     /**
