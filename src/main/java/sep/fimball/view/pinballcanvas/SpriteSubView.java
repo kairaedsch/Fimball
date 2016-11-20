@@ -85,13 +85,13 @@ public class SpriteSubView
         double y = positionProperty.get().getY();
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
-        rotate(graphicsContext, rotationProperty.doubleValue(), x + bottomImage.getWidth() / 2, y + bottomImage.getHeight() / 2);
+        if(rotationProperty.get() != 0) rotate(graphicsContext, rotationProperty.doubleValue(), x + bottomImage.getWidth() / 2, y + bottomImage.getHeight() / 2);
 
         Image image;
         if (imageLayer == ImageLayer.TOP) image = topImage;
         else image = bottomImage;
 
-        graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, topImage.getWidth(), topImage.getHeight());
+        graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), topImage.getWidth(), topImage.getHeight());
         graphicsContext.restore(); // back to original state (before rotation)
     }
 

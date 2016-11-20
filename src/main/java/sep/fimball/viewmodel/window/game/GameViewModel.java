@@ -12,12 +12,15 @@ import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven Spieler.
  */
 public class GameViewModel extends WindowViewModel
 {
+    private final PinballMachine pinballMachine;
+
     /**
      * Die aktuelle Punktzahl des aktiven Spielers.
      */
@@ -64,6 +67,7 @@ public class GameViewModel extends WindowViewModel
     public GameViewModel(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
         super(WindowType.GAME);
+        this.pinballMachine = pinballMachine;
         gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
         playerPoints = new SimpleIntegerProperty();
@@ -161,7 +165,14 @@ public class GameViewModel extends WindowViewModel
         if (binding != null && binding.toString() == "PAUSE")
         {
             gameSession.pauseAll();
-            sceneManager.setDialog(new PauseViewModel(this));
+            if(startedFromEditor)
+            {
+                sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+            }
+            else
+            {
+                sceneManager.setDialog(new PauseViewModel(this));
+            }
         }
         else
         {
@@ -180,9 +191,5 @@ public class GameViewModel extends WindowViewModel
 
     public PinballMachine getPinballMachine() {
         return gameSession.getPinballMachine();
-    }
-
-    public boolean startedFromEditor() {
-        return startedFromEditor;
     }
 }

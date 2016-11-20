@@ -36,7 +36,7 @@ public class PinballCanvasViewModel
      */
     private Observable redrawObservable;
 
-    private boolean editorEnabled;
+    private boolean editorMode;
 
     private PinballMachineEditorViewModel editorViewModel;
 
@@ -56,7 +56,7 @@ public class PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
-        editorEnabled = false;
+        editorMode = false;
 
         lastDrawing = System.currentTimeMillis();
         nowDrawing = System.currentTimeMillis();
@@ -69,7 +69,7 @@ public class PinballCanvasViewModel
         this.editorViewModel = pinballMachineEditorViewModel;
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
-        editorEnabled = true;
+        editorMode = true;
     }
 
     /**
@@ -91,7 +91,7 @@ public class PinballCanvasViewModel
 
     public void mouseClickedOnGame(Vector2 gridPos)
     {
-        if (editorEnabled)
+        if (editorMode)
         {
             editorViewModel.mouseClickedOnGame(gridPos, false);
         }
@@ -99,7 +99,7 @@ public class PinballCanvasViewModel
 
     public void mousePressedOnGame(Vector2 gridPos)
     {
-        if (editorEnabled)
+        if (editorMode)
         {
             editorViewModel.mouseClickedOnGame(gridPos, true);
         }
@@ -158,5 +158,10 @@ public class PinballCanvasViewModel
     {
         redrawObservable.setChanged();
         redrawObservable.notifyObservers();
+    }
+
+    public boolean isEditorMode()
+    {
+        return editorMode;
     }
 }

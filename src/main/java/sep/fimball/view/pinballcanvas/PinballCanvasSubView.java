@@ -92,11 +92,25 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
 
+        if(pinballCanvasViewModel.isEditorMode())
+        {
+            graphicsContext.setStroke(Config.baseColorLight);
+            Vector2 gridStart = mousePosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
+            Vector2 gridEnd = mousePosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(Config.pixelsPerGridUnit);
+            for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % Config.pixelsPerGridUnit; gx <= gridEnd.getX(); gx += Config.pixelsPerGridUnit)
+            {
+                graphicsContext.strokeLine(gx, gridStart.getY(), gx, gridEnd.getY());
+            }
+            for (int gy = (int) gridStart.getY() - (int) gridStart.getY() % Config.pixelsPerGridUnit; gy <= gridEnd.getY(); gy += Config.pixelsPerGridUnit)
+            {
+                graphicsContext.strokeLine(gridStart.getX(), gy, gridEnd.getX(), gy);
+            }
+        }
+
         for (SpriteSubView spriteTop : sprites)
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
         }
-
         for (SpriteSubView sprite : sprites)
         {
             sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
@@ -119,7 +133,12 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        Vector2 posToMiddle = new Vector2(mouseEvent.getX() - canvas.getWidth() / 2d, mouseEvent.getY() - canvas.getHeight() / 2d);
+        return mousePosToGridPos(mouseEvent.getX(), mouseEvent.getY());
+    }
+
+    private Vector2 mousePosToGridPos(double x, double y)
+    {
+        Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
 
         Vector2 posOnGrid = new Vector2();
         posOnGrid.setX(posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX());

@@ -10,7 +10,6 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinball zur Verfügung und ermöglicht deren Fortsetzung oder Abbrechung.
@@ -42,13 +41,7 @@ public class PauseViewModel extends DialogViewModel
      */
     public void exitDialog()
     {
-        if (gameViewModel.startedFromEditor())
-        {
-            sceneManager.setWindow(new PinballMachineEditorViewModel(gameViewModel.getPinballMachine()));
-        } else
-        {
-            sceneManager.setWindow(new MainMenuViewModel());
-        }
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     /**
@@ -69,7 +62,6 @@ public class PauseViewModel extends DialogViewModel
     {
         return playerHighscores;
     }
-
 
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
