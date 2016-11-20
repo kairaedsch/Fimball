@@ -12,9 +12,9 @@ public class FlipperCollision implements CollisionType
     private boolean moving = false;
 
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect)
+    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
     {
-        normalCollision.applyCollision(ball, shortestIntersect);
+        normalCollision.applyCollision(ball, shortestIntersect, rotation);
 
         if (moving)
         {

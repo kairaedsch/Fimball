@@ -12,7 +12,7 @@ public class NormalCollision implements CollisionType
     private final double bounce = 0.7;
 
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect)
+    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();

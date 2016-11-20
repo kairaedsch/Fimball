@@ -56,7 +56,7 @@ public class Collider
             HitInfo info = shape.calculateHitInfo(ball, colliderObjectPosition, rotation, pivotPoint);
             if (info.isHit())
             {
-                type.applyCollision(ball, info.getShortestIntersect());
+                type.applyCollision(ball, info.getShortestIntersect(), rotation);
                 hit = true;
             }
         }

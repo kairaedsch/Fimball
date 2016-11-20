@@ -12,5 +12,5 @@ public interface CollisionType
      * @param ball Der Ball der sich mit dem Collider überschneidet.
      * @param shortestIntersect Der kürzeste Weg, um den Ball aus dem Collider heraus zu bewegen.
      */
-    void applyCollision(BallElement ball, Vector2 shortestIntersect);
+    void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation);
 }
