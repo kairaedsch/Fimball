@@ -15,6 +15,7 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
+import sep.fimball.model.media.LightManager;
 import sep.fimball.model.physics.*;
 import sep.fimball.model.trigger.Trigger;
 import sep.fimball.model.trigger.TriggerFactory;
@@ -116,6 +117,8 @@ public class GameSession
     private LinkedList<List<CollisionEventArg>> collisionEventArgsList;
     private Object collisionEventArgsLocker;
 
+    private LightManager lightManager;
+
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
      *
@@ -153,6 +156,7 @@ public class GameSession
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
+        lightManager = new LightManager();
 
         for (PlacedElement element : machineBlueprint.getElements())
         {
@@ -165,8 +169,13 @@ public class GameSession
                 GameElement gameElem = new GameElement(element, false);
                 elements.add(gameElem);
 
-                PhysicsElement physElem = new PhysicsElement(gameElem);
-                physicsElements.add(physElem);
+                if (element.getBaseElement().getType() == BaseElementType.LIGHT) {
+                    lightManager.addLight(element);
+                } else
+                {
+                    PhysicsElement physElem = new PhysicsElement(gameElem);
+                    physicsElements.add(physElem);
+                }
             }
         }
 
@@ -219,7 +228,7 @@ public class GameSession
                     }
                 }
             }
-
+            lightManager.changeLightColors();
             gameLoopObservable.setChanged();
             gameLoopObservable.notifyObservers();
         }));

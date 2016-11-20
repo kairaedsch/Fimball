@@ -23,5 +23,10 @@ public enum BaseElementType
     /**
      * Kennzeichnet einen Flipperarm.
      */
-    FLIPPER
+    FLIPPER,
+
+    /**
+     * Kennzeichnet ein Lichtelement.
+     */
+    LIGHT
 }
