@@ -22,15 +22,15 @@ public class ReserveBallsAndPlayerChangeTest {
 
     @Ignore
     public static void testReserveBalls() {
-        // TODO Mit Plunger einschießen
+        // TODO Mit Plunger einscheißen
         // TODO Warten bis Kugel weg
         // assertEquals(3, game.getCurrentPlayer().getBalls());
         // assertEquals("test", game.getCurrentPlayer().getName());
-        // TODO Kugel mit Plunger einschießen
+        // TODO Kugel mit Plunger einscheißen
         // TODO Warten bis Kugel weg
         // assertEquals(2, game.getCurrentPlayer().getBalls());
         // assertEquals("tester", game.getCurrentPlayer().getName());
-        // TODO Mit Plunger einschießen
+        // TODO Mit Plunger einscheißen
         // TODO Warten bis Kugel weg
         // assertEquals(2, game.getCurrentPlayer().getBalls());
         // assertEquals("test", game.getCurrentPlayer().getName());
