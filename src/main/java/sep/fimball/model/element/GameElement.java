@@ -151,8 +151,14 @@ public class GameElement
      * TODO
      * @return
      */
-    public ObjectProperty<Optional<Animation>> currentAnimationProperty()
+    public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;
+    }
+
+    public void setCurrentAnimation(Optional<Animation> currentAnimation)
+    {
+        this.currentAnimation.set(Optional.empty());
+        this.currentAnimation.set(currentAnimation);
     }
 }
