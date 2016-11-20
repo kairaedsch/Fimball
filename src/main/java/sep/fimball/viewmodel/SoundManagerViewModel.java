@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.media.SoundManager;
@@ -27,7 +28,9 @@ public class SoundManagerViewModel {
         mediaObservable = new Observable();
         settings = Settings.getSingletonInstance();
 
+        musicVolume = new SimpleDoubleProperty();
         musicVolume.bind(settings.musicVolumeProperty());
+        sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(settings.sfxVolumeProperty());
 
         Observer clipObserver = ((o, arg) -> playClip((String)arg));

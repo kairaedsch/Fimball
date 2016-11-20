@@ -80,6 +80,8 @@ public class SceneManagerView
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
 
         blurEffect = new GaussianBlur(13);
+
+        new SoundManagerView();
     }
 
     /**

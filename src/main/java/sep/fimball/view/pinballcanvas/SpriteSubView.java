@@ -53,8 +53,8 @@ public class SpriteSubView
         Image image;
         ElementImage elementImage = viewModel.animationFramePathProperty().get();
         double rotation = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
-        if (imageLayer == ImageLayer.TOP) image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) rotation));
-        else image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) rotation));
+        if (imageLayer == ImageLayer.TOP) image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        else image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
         if(rotation != 0) rotate(graphicsContext, rotation, x + image.getWidth() / 2, y + image.getHeight() / 2);

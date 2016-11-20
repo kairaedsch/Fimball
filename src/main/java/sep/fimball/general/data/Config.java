@@ -63,6 +63,10 @@ public class Config
      */
     private static String pathDataToSettings ="/settings.json";
 
+    private static String pathDataToSounds = "/sounds";
+
+    private static String pathSoundToSoundType = ".mp3";
+
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
      */
@@ -205,5 +209,10 @@ public class Config
     {
         // TODO make unique
         return System.currentTimeMillis();
+    }
+
+    public static String pathToSound(String clipName)
+    {
+        return "file:///" + pathToData + pathDataToSounds + "/" + clipName + pathSoundToSoundType;
     }
 }

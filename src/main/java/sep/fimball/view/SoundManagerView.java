@@ -1,10 +1,12 @@
 package sep.fimball.view;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import sep.fimball.general.data.Config;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 
 import java.util.HashMap;
@@ -50,15 +52,23 @@ public class SoundManagerView
      *
      * @param soundManagerViewModel Das zu dieser View gehörende ViewModel.
      */
-    public SoundManagerView(SoundManagerViewModel soundManagerViewModel)
+    public SoundManagerView()
     {
-        this.soundManagerViewModel = soundManagerViewModel;
-        Observer playClipObserver = (o, clipPath) -> playClip((String) clipPath);
-        Observer playMediaObserver = (o, mediaPath) -> playMedia((String) mediaPath);
-        soundManagerViewModel.notifyToPlayClip(playClipObserver);
-        soundManagerViewModel.notifyToPlayMedia(playMediaObserver);
+        this.soundManagerViewModel = new SoundManagerViewModel();
+
+        musicVolume = new SimpleDoubleProperty();
+        sfxVolume = new SimpleDoubleProperty();
         musicVolume.bind(soundManagerViewModel.musicVolumeProperty());
         sfxVolume.bind(soundManagerViewModel.sfxVolumeProperty());
+
+        loadedAudioClips = new HashMap<>();
+
+        Observer playClipObserver = (o, clipPath) -> playClip((String) clipPath);
+        Observer playMediaObserver = (o, mediaPath) -> playMedia((String) mediaPath);
+
+        soundManagerViewModel.notifyToPlayClip(playClipObserver);
+        soundManagerViewModel.notifyToPlayMedia(playMediaObserver);
+
     }
 
     /**
@@ -66,8 +76,9 @@ public class SoundManagerView
      *
      * @param mediaPath Der Pfad zur Musikdatei.
      */
-    private void playMedia(String mediaPath) {
-        backgroundMusic = new Media(mediaPath);
+    private void playMedia(String clipName) {
+        String clipPath = Config.pathToSound(clipName);
+        backgroundMusic = new Media(clipPath);
         if (mediaPlayer != null)
             mediaPlayer.dispose();
 
@@ -82,7 +93,8 @@ public class SoundManagerView
      *
      * @param clipPath Der Pfad zur Sound-Datei.
      */
-    private void playClip(String clipPath) {
+    private void playClip(String clipName) {
+        String clipPath = Config.pathToSound(clipName);
         if (loadedAudioClips.containsKey(clipPath)) {
             loadedAudioClips.get(clipPath).play();
         } else {
