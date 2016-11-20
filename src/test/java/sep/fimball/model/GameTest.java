@@ -1,10 +1,15 @@
 package sep.fimball.model;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.element.GameElement;
+import sep.fimball.model.input.InputManager;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.trigger.ElementTrigger;
 import sep.fimball.model.trigger.GameTrigger;
 import sep.fimball.model.trigger.Trigger;
@@ -28,6 +33,8 @@ public class GameTest
      * The maximum amount of seconds the Test will run before it is failed.
      */
     private static final int MAX_ITERATIONS = 30;
+    private static final long waitingTime = 30000;
+    private static final long keyHoldingTime = 1000;
 
     //TODO correct id
     private static final String WALL_ID = "Wall";
@@ -60,7 +67,15 @@ public class GameTest
         session.setTriggers(triggerList);
 
         session.startAll();
-        //TODO ball mit plunger wegschießen
+        KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
+        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
+        try {
+            Thread.sleep(keyHoldingTime);
+        } catch (InterruptedException e) { }
+        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
+        try {
+            Thread.sleep(waitingTime);
+        } catch (InterruptedException e) { }
 
         //Aufzeichnen der Kollisionen
         while (!stop && !forcedStop)
@@ -71,7 +86,7 @@ public class GameTest
                 forcedStop = true;
             }
             try {
-                sleep(1000);
+                sleep(waitingTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -81,8 +96,8 @@ public class GameTest
 
         //Aufzeichnungen auswerten
         assertTrue(stop);
-        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
+        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
 
         //Loeschen des vorher erstellten Automaten
         pinballMachine.deleteFromDisk();
