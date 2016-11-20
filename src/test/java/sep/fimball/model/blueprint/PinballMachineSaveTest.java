@@ -1,10 +1,16 @@
 package sep.fimball.model.blueprint;
 
+import javafx.beans.property.ReadOnlyListProperty;
+import javafx.beans.property.ReadOnlyMapProperty;
 import org.junit.Ignore;
 import org.junit.Test;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+
+import static junit.framework.TestCase.assertFalse;
 
 /**
  *
@@ -20,33 +26,22 @@ public class PinballMachineSaveTest
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         String[] elementTypeIds = null;
         BaseElementManager.getInstance().elementsProperty().keySet().toArray(elementTypeIds);
-
+        ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.getElements();
         for (int i = 0; i < elementTypeIds.length; i++)
         {
             PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(elementTypeIds[i]), new Vector2(0, MAX_ELEMENT_SIZE * i), 0, 1, 0);
             pinballMachine.addElement(p);
+            originalElements.add(p);
         }
 
         //Den gerade erstellten Automaten serialisieren und speichern
         pinballMachine.saveToDisk();
 
         //Den gespeicherten Automaten neu laden
-        PinballMachine loadedPinballMachine = null;
-        for (PinballMachine machine : TestPinballMachineManager.getInstance().pinballMachinesProperty().get())
-        {
-            if (pinballMachine.getID().equals(machine.getID()))
-            {
-                loadedPinballMachine = machine;
-            }
-        }
-
-        assert loadedPinballMachine ==null;
+        pinballMachine.checkUnloadElements();
+        ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.getElements();
 
         //Vergleichen des erstellten und des geladenen Automaten
-        //TODO vllt pinballmachine.equals(loadedPinballMachine), da name etc noch nicht verglichen werden
-        ReadOnlyMapProperty<Integer, PlacedElement> originalElements = pinballMachine.getElements();
-        ReadOnlyMapProperty<Integer, PlacedElement> loadedElements = pinballMachine.getElements();
-
         boolean difference = false;
         for (PlacedElement original : originalElements)
         {
@@ -69,10 +64,6 @@ public class PinballMachineSaveTest
 
         //Loeschen des vorher gespeicherten Automaten
         pinballMachine.deleteFromDisk();
-    }
-
-    class TestPinballMachineManager
-    {
     }
 
 }
