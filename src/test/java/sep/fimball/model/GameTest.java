@@ -5,7 +5,12 @@ import javafx.scene.input.KeyEvent;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import sep.fimball.general.data.Config;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.model.input.InputManager;
@@ -18,48 +23,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-/**
- * Created by marc on 16.11.16.
- */
 
 @Ignore
 public class GameTest
 {
-    //nach wie vielen Sekunden wird abgebrochen
-    private static final int MAX_ITERATIONS = 30;
-    private static final long waitingTime = 30000;
-    private static final long keyHoldingTime = 1000;
-
-    //TODO correct id
-    private static final String WALL_ID = "Wall";
-    private static final String BUMPER_ID = "Bumper";
+    private static final long MAX_TEST_DURATION = 30;   //nach wie vielen Sekunden wird abgebrochen
+    private static final long HOLD_KEY_DURATION = 1000; //wie lange wird der Plunger gespannt
+    private static final String WALL_ID = "Wall";       //TODO correct id
+    private static final String BUMPER_ID = "bumper_blue";
+    private static final String PLUNGER_ID = "Plunger"; //TODO correct id
+    private static final String BALL_SPAWN_ID = "ball";
 
     private Stack<GameElement> collidedGameElements;
     private boolean stop = false;
     private boolean forcedStop = false;
-    private int iterations = 0;
 
     @Before
     public void initialize()
     {
         collidedGameElements = new Stack<GameElement>();
+        Config.config();
     }
 
     @Test
     public void gameCollisionTest()
     {
         //TODO Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
-        PinballMachine pinballMachine = null;
+        PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 0), 0, 0, 0));
+
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 5), 0, 0, 0));
+
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, 20), 0, 0, 0));
+
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(5, 17), 0, 0, 0));
 
         //Starten des Spiels
-        GameSession session = new GameSession(pinballMachine, new String[] {"Testautomat"});
+        GameSession session = new GameSession(pinballMachine, new String[]{"Testautomat"});
         ElementTrigger collisionTrigger = new CollisionTrigger(this);
         GameTrigger ballLostTrigger = new BallLostTrigger(this);
-        List<Trigger> triggerList = new ArrayList<Trigger>();
+        List<Trigger> triggerList = new ArrayList<>();
         Trigger trigger = new Trigger();
         trigger.setElementTrigger(collisionTrigger);
         trigger.setGameTrigger(ballLostTrigger);
@@ -67,30 +77,36 @@ public class GameTest
         session.setTriggers(triggerList);
 
         session.startAll();
+
+        //Wegschießen der Kugel durch den Plunger
         KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        try {
-            Thread.sleep(keyHoldingTime);
-        } catch (InterruptedException e) { }
+        try
+        {
+            Thread.sleep(HOLD_KEY_DURATION);
+        } catch (InterruptedException e)
+        {
+        }
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        try {
-            Thread.sleep(waitingTime);
-        } catch (InterruptedException e) { }
 
         //Aufzeichnen der Kollisionen
+        int iteration = 0;
         while (!stop && !forcedStop)
         {
-            iterations++;
-            if (iterations >= MAX_ITERATIONS)
+            try
+            {
+                Thread.sleep(1000);
+                iteration++;
+            } catch (InterruptedException e)
+            {
+            }
+
+            if (iteration >= MAX_TEST_DURATION)
             {
                 forcedStop = true;
             }
-            try {
-                sleep(waitingTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
+
         session.stopPhysics();
         session.stopTimeline();
 
@@ -103,12 +119,12 @@ public class GameTest
         pinballMachine.deleteFromDisk();
     }
 
-    public synchronized void addCollidedGameElement(GameElement gameElement)
+    public void addCollidedGameElement(GameElement gameElement)
     {
         collidedGameElements.push(gameElement);
     }
 
-    public synchronized void ballLost()
+    public void ballLost()
     {
         stop = true;
     }
