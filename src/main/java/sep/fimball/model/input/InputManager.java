@@ -45,7 +45,7 @@ public class InputManager
 
     /**
      * Wenn in einer View ein Tastendruck ausgelöst wurde, wird dieser hier weitergeleitet, um mögliche Observer zu benachrichtigen.
-     * @param keyEvent Das KeyEvent, das beobachet werden soll.
+     * @param keyEvent Das KeyEvent, das beobachtet werden soll.
      */
     public void addKeyEvent(KeyEvent keyEvent)
     {

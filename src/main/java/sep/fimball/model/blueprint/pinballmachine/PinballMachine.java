@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * TODO Bessere Beschreibung finden
  * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.
  */
 public class PinballMachine
@@ -111,7 +112,7 @@ public class PinballMachine
     }
 
     /**
-     * Löscht die gespeicherte und geladene Version dieses Automatens.
+     * Löscht die gespeicherte und geladene Version dieses Automaten.
      */
     public void deleteFromDisk()
     {
@@ -180,7 +181,7 @@ public class PinballMachine
     }
 
     /**
-     * Lädt, falls nötig Elemente aus der gespeicherten Form des Automaten.
+     * Lädt, falls nötig, Elemente aus der gespeicherten Form des Automaten.
      */
     private void checkElementsLoaded()
     {

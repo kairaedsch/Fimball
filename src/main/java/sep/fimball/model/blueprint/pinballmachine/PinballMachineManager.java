@@ -164,7 +164,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Speichert die gegebene PinballMachine und ihre Bahnelemte.
+     * Speichert die gegebene PinballMachine und ihre Bahnelemente.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
      */

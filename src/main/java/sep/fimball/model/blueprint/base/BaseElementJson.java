@@ -4,6 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.WorldLayer;
 
 /**
+ * TODO Bessere Beschreibung finden
  * Diese Klasse stellt einen Elementtyp im Allgemeinen dar, der im Flipperautomat genutzt werden kann, um dieses serialisiert abzuspeichern (z.B. Bumper).
  */
 public class BaseElementJson

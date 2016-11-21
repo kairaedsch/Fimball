@@ -44,7 +44,7 @@ public class GameElement
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
-     * @param element Das PlacedElement, das zu diesem GameElement gehört und  desssen Eigenschaften übernommen werden sollen.
+     * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
      */
     public GameElement(PlacedElement element, boolean bind)
     {

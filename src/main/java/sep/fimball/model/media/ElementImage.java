@@ -34,6 +34,9 @@ public class ElementImage
      */
     private Animation animation;
 
+    /**
+     * TODO
+     */
     private long creationTime;
 
     /**
@@ -48,7 +51,7 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden könen soll.
+     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden können soll.
      */
     public ElementImage(String elementTypeId, int rotationAccuracy)
     {
@@ -67,7 +70,7 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden könen soll.
+     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden können soll.
      */
     public ElementImage(String elementTypeId, int rotationAccuracy, Animation animation)
     {
@@ -112,7 +115,7 @@ public class ElementImage
     /**
      * Gibt zurück, welcher Anzahl von {@code rotationAccuracy} {@code rotation} entspicht.
      * @param rotation Der Wert, der mit der {@code rotationAccuracy} verglichen werden soll.
-     * @return Die Anzahl von {@code rotationAccuracy}, die {@code rotation} entspicht.
+     * @return Die Anzahl von {@code rotationAccuracy}, die {@code rotation} entspricht.
      */
     public int getRestRotation(int rotation)
     {

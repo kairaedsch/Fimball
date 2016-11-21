@@ -12,7 +12,7 @@ import java.util.List;
 public class LightManager
 {
     /**
-     * Die Lichter, die vewaltet werden.
+     * Die Lichter, die verwaltet werden.
      */
     private List<PlacedElement> lights;
 
