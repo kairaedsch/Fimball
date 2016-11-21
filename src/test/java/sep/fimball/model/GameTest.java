@@ -29,11 +29,11 @@ import static org.junit.Assert.assertTrue;
 @Ignore
 public class GameTest
 {
-    private static final long MAX_TEST_DURATION = 30;   //nach wie vielen Sekunden wird abgebrochen
+    private static final long MAX_TEST_DURATION = 20;   //nach wie vielen Sekunden wird abgebrochen
     private static final long HOLD_KEY_DURATION = 1000; //wie lange wird der Plunger gespannt
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
     private static final String BUMPER_ID = "bumper_blue";
-    private static final String PLUNGER_ID = "plunger"; //TODO correct id and uncomment line 56
+    private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
 
     private Stack<GameElement> collidedGameElements;
@@ -53,8 +53,8 @@ public class GameTest
         //Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
 
-        //pinballMachine.addElement(new PlacedElement(
-        //        BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 0), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 0), 0, 0, 0));
 
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 5), 0, 0, 0));
