@@ -249,7 +249,6 @@ public class GameSession
                     }
                 }
             }
-            lightManager.changeLightColors();
             gameLoopObservable.setChanged();
             gameLoopObservable.notifyObservers();
         }));

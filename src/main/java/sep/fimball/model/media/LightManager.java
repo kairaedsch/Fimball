@@ -40,14 +40,11 @@ public class LightManager
     /**
      * Wechselt die Farbe der verwalteten Lichter zufällig auf andere verfügbaren Farben.
      */
-    public void changeLightColors()
+    public void changeLights()
     {
         for (PlacedElement light : lights)
         {
-            int random = (int) Math.random() * LightColor.values().length;
-            LightColor color = LightColor.values()[random];
             //TODO
-            // change light color
         }
     }
 }
