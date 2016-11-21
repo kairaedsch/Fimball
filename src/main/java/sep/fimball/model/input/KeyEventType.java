@@ -1,9 +1,17 @@
 package sep.fimball.model.input;
 
 /**
- * Created by kaira on 20.11.2016.
+ * Status eines Tastendrucks.
  */
 public enum KeyEventType
 {
-    UP, DOWN
+    /**
+     * Die Taste wurde losgelassen.
+     */
+    UP,
+
+    /**
+     * Die Taste wurde gedrückt.
+     */
+    DOWN
 }
