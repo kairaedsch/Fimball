@@ -38,6 +38,9 @@ public class PinballMachine
      */
     private ListProperty<PlacedElement> elements;
 
+    /**
+     * Gibt an, ob die PinballMachine komplett aus der PinballMachineJson geladen wurde.
+     */
     private boolean elementsLoaded;
 
     /**
@@ -65,6 +68,12 @@ public class PinballMachine
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
 
+    /**
+     * Überprüft ob sich ein Bahnelement in der gegebenen Position befindet.
+     *
+     * @param point Die Position.
+     * @return Das Bahnelement an der gegebenen Position.
+     */
     public Optional<PlacedElement> getElementAt(Vector2 point)
     {
         checkElementsLoaded();
@@ -91,6 +100,9 @@ public class PinballMachine
         return Optional.empty();
     }
 
+    /**
+     * Serialisiert und speichert diesen Automaten.
+     */
     public void saveToDisk()
     {
         checkElementsLoaded();
@@ -98,6 +110,9 @@ public class PinballMachine
         checkUnloadElements();
     }
 
+    /**
+     * Löscht die gespeicherte und geladene Version dieses Automatens.
+     */
     public void deleteFromDisk()
     {
         PinballMachineManager.getInstance().deleteMachine(this);
@@ -114,12 +129,24 @@ public class PinballMachine
         if (highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
     }
 
+    /**
+     * Fügt das gegebene Element zur Liste der Bahnelemente hinzu.
+     *
+     * @param placedElement Das einzufügende Element.
+     */
     public void addElement(PlacedElement placedElement)
     {
         checkElementsLoaded();
         elements.add(placedElement);
     }
 
+    /**
+     * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente hinzu.
+     *
+     * @param baseElement Der Typ des einzufügenden Elements.
+     * @param position Die Position des einzufügenden Elements.
+     * @return Das erstellte und hinzugefügte Bahnelement.
+     */
     public PlacedElement addElement(BaseElement baseElement, Vector2 position)
     {
         checkElementsLoaded();
@@ -128,12 +155,20 @@ public class PinballMachine
         return placedElement;
     }
 
+    /**
+     * Entfernt das gegebene Element von dem Automaten.
+     *
+     * @param placedElement Das zu entfernende Element.
+     */
     public void removeElement(PlacedElement placedElement)
     {
         checkElementsLoaded();
         elements.remove(placedElement);
     }
 
+    /**
+     * Verwirft den geladenen Automaten.
+     */
     public void checkUnloadElements()
     {
         if(elementsLoaded)
@@ -144,6 +179,9 @@ public class PinballMachine
         }
     }
 
+    /**
+     * Lädt, falls nötig Elemente aus der gespeicherten Form des Automaten.
+     */
     private void checkElementsLoaded()
     {
         if (!elementsLoaded)

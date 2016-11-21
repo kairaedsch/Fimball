@@ -56,6 +56,11 @@ public class BaseElementManager
         }
     }
 
+    /**
+     * Liest ein BaseElement aus einer BaseElementJson aus und fügt es {@code elements} hinzu.
+     *
+     * @param path Der Pfad zu der gespeicherten BaseElementJson.
+     */
     private void loadElement(Path path)
     {
         String elementTypeId = path.getFileName().toString();

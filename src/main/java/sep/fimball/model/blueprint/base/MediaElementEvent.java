@@ -8,7 +8,14 @@ import sep.fimball.model.media.Sound;
  */
 public class MediaElementEvent
 {
+    /**
+     * Hält gegebenenfalls die Animation des jeweiligen Bahnelements.
+     */
     private Animation animation = null;
+
+    /**
+     * Hält gegebenenfalls den Soundeffekt des jeweiligen Bahnelements.
+     */
     private Sound sound = null;
 
     /**

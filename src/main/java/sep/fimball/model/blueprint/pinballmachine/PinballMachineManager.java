@@ -60,6 +60,11 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Erstellt eine neue PinballMachine und fügt sie zur Liste hinzu.
+     *
+     * @return Die neu erstellte PinballMachine.
+     */
     public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
@@ -69,6 +74,11 @@ public class PinballMachineManager
         return pinballMachine;
     }
 
+    /**
+     * Liest eine PinballMachineJson aus und erstellt daraus eine neue PinballMachine.
+     *
+     * @param path Der Pfad zur gespeicherten PinballMachineJson.
+     */
     private void loadMachine(Path path)
     {
         String pinballMachineId = path.getFileName().toString();
@@ -107,6 +117,11 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Lädt die Elemente einer gegebenen PinballMachine.
+     *
+     * @param pinballMachine Die PinballMachine deren Elemente geladen werden sollen.
+     */
     public void loadMachineElements(PinballMachine pinballMachine)
     {
         Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
@@ -148,6 +163,11 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Speichert die gegebene PinballMachine und ihre Bahnelemte.
+     *
+     * @param pinballMachine Die zu speichernde PinballMachine.
+     */
     void savePinballMachine(PinballMachine pinballMachine)
     {
         Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
@@ -196,6 +216,12 @@ public class PinballMachineManager
         // TODO save image of pinballmachine
     }
 
+    /**
+     * Löscht die gegebene PinballMachine.
+     *
+     * @param pinballMachine Die PinballMachine, die gelöscht werden soll.
+     * @return Gibt zurück ob die erfolgreich gelöscht wurde.
+     */
     boolean deleteMachine(PinballMachine pinballMachine)
     {
         try
