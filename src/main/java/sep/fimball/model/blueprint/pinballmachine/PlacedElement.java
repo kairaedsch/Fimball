@@ -39,6 +39,9 @@ public class PlacedElement
      *
      * @param baseElement Das korrespondierende BaseElement.
      * @param position    Die Position des PlacedElement.
+     * @param points Die Punkte, die das Element vergibt.
+     * @param multiplier er Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
+     * @param rotation Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
      */
     public PlacedElement(BaseElement baseElement, Vector2 position, int points, double multiplier, double rotation)
     {
@@ -84,12 +87,18 @@ public class PlacedElement
         this.points.set(points);
     }
 
+    /**
+     * Dreht das PlacedElement im Uhrzeigersinn.
+     */
     public void rotateClockwise()
     {
         if (baseElement.getMedia().canRotate())
             rotation.setValue(rotation.get() + baseElement.getMedia().getRotationAccuracy());
     }
 
+    /**
+     * Dreht das PlacedElement gegen den Uhrzeigersinn.
+     */
     public void rotateCounterclockwise()
     {
         if (baseElement.getMedia().canRotate())

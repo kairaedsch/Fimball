@@ -54,6 +54,7 @@ public class PinballMachine
      *
      * @param name             Name des Automaten
      * @param pinballMachineId Id des Automaten
+     * @param highscores Die auf diesem Automaten bisher erreichten Highscores.
      */
     public PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
