@@ -313,7 +313,7 @@ public class GameSession
     }
 
     /**
-     * Spwant einen neuen Ball auf dem Spielfeld.
+     * Spawnt einen neuen Ball auf dem Spielfeld.
      */
     private void spawnNewBall()
     {
