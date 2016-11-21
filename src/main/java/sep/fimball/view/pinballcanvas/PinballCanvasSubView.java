@@ -128,7 +128,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
-     * Benachrightigt das {@code pinballCanvasViewModel}, dass der Spieler die Mausstaste  einer bestimmten Stelle im Grid gedrückt hat.
+     * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler die Maustaste  einer bestimmten Stelle im Grid gedrückt hat.
      * @param mouseEvent
      */
     public void mousePressed(MouseEvent mouseEvent)

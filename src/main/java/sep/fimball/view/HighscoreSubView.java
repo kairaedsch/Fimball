@@ -24,10 +24,6 @@ public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
     @Override
     public void setViewModel(Highscore highscore)
     {
-        if (highscore == null) {
-            System.out.println("highscore fehler");
-            return;
-        }
         playerName.textProperty().bind(highscore.playerNameProperty());
         score.textProperty().bind(highscore.scoreProperty().asString());
     }

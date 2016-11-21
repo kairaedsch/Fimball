@@ -43,7 +43,7 @@ public class World
     }
 
     /**
-     * Generiert das Rechteck, das das Spielfeld umschließt und den Spielfeldrand darstellt, und gibt dieses zurück.
+     * Generiert das Rechteck, welches das Spielfeld umschließt und den Spielfeldrand darstellt, und gibt dieses zurück.
      * @return Ein Rechteck, das den Spielfeldrand darstellt.
      */
     private RectangleDouble generateWalls()

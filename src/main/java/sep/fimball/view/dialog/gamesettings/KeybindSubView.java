@@ -39,8 +39,8 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     }
 
     /**
-     *  Ändert die die Tastenbelegung für die von dieser KeybindSubView dargestellten Funktion.
-     * @param keyEvent Die die neue Taste für die Fuknktion der Tastaturbelegung.
+     *  Ändert die Tastenbelegung für die von dieser KeybindSubView dargestellten Funktion.
+     * @param keyEvent Die neue Taste für die Funktion der Tastaturbelegung.
      */
     @FXML
     private void changeKey(KeyEvent keyEvent) {

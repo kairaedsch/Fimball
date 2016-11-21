@@ -3,7 +3,7 @@ package sep.fimball.view.dialog;
 import sep.fimball.view.ViewType;
 
 /**
- * Der DialogType enhält alle Dialogtypen, sowohl die Haupt-Views als auch die SubViews. Jeder DialogType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
+ * Der DialogType enthält alle Dialogtypen, sowohl die Haupt-Views als auch die SubViews. Jeder DialogType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
  */
 public enum DialogType implements ViewType
 {

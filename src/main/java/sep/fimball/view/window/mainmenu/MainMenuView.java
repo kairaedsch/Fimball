@@ -57,7 +57,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     private Button settingsButton;
 
     /**
-     * Der Button, der zur Erstelllung eines neuen Automaten führt.
+     * Der Button, der zur Erstellung eines neuen Automaten führt.
      */
     @FXML
     private Button addButton;
@@ -160,7 +160,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     }
 
     /**
-     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer einen neuen Automaten erstellen und der Liste der verfügaberen Automaten hinzufügen möchte.
+     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer einen neuen Automaten erstellen und der Liste der verfügbaren Automaten hinzufügen möchte.
      */
     @FXML
     private void addClicked()

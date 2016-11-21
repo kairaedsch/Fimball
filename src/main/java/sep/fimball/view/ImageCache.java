@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.HashMap;
 
 /**
- * Cached bereits geladenen Bilder, um Ladezeiten zu verküzren.
+ * Cached bereits geladenen Bilder, um Ladezeiten zu verkürzen.
  */
 public class ImageCache
 {
