@@ -11,6 +11,9 @@ import java.util.Optional;
  */
 public class SelectedElementSubViewModel
 {
+    /**
+     * Der Flipperautomat, zu dem das ausgewählte Element gehört.
+     */
     private PinballMachine pinballMachine;
 
     /**

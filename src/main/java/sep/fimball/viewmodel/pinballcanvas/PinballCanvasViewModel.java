@@ -156,8 +156,8 @@ public class PinballCanvasViewModel
 
     /**
      * Ermöglicht es der View, sich als Observer zu registrieren, um bei Änderungen benachrichtigt zu werden.
+     * @param observer Der Observer, der registriert werden soll.
      */
-    // TODO Umbenennen
     public void addRedrawObserver(Observer observer)
     {
         redrawObservable.addObserver(observer);
