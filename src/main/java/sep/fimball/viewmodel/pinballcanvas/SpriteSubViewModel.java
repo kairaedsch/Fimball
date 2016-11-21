@@ -40,6 +40,8 @@ public class SpriteSubViewModel
      */
     private GameElement gameElement;
 
+    private ObjectProperty<Vector2> pivotPoint;
+
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
@@ -50,9 +52,14 @@ public class SpriteSubViewModel
         this.gameElement = gameElement;
         position = new SimpleObjectProperty<>();
         position.bind(gameElement.positionProperty());
+
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
+
         currentImage = new SimpleObjectProperty<>();
+
+        pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+
         isSelected = new SimpleBooleanProperty(false);
 
         gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImage());
@@ -126,5 +133,10 @@ public class SpriteSubViewModel
     public ReadOnlyBooleanProperty isSelectedProperty()
     {
         return isSelected;
+    }
+
+    public ReadOnlyObjectProperty<Vector2> pivotPointProperty()
+    {
+        return pivotPoint;
     }
 }

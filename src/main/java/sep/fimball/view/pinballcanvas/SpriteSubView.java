@@ -44,7 +44,7 @@ public class SpriteSubView
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
-     * @param imageLayer Das Layer, das gezeicnet werden soll.
+     * @param imageLayer      Das Layer, das gezeicnet werden soll.
      */
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
@@ -60,8 +60,28 @@ public class SpriteSubView
             image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
-        if (rotation != 0)
-            rotate(graphicsContext, rotation, x + image.getWidth() / 2, y + image.getHeight() / 2);
+
+        int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
+        if (picRotate == 270)
+        {
+            double div = (image.getWidth() / 2.0);
+            rotate(graphicsContext, 90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
+            graphicsContext.translate(image.getHeight(), 0);
+        }
+        else if (picRotate == 180)
+        {
+            double height = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, 90)).getWidth();
+            rotate(graphicsContext, -180, new Vector2(x * Config.pixelsPerGridUnit + (image.getWidth() / 2.0), y * Config.pixelsPerGridUnit + (height / 2.0)));
+            //graphicsContext.translate(image.getHeight(), 0);
+        }
+        else if (picRotate == 90)
+        {
+            double div = (image.getWidth() / 2.0);
+            rotate(graphicsContext, -90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
+        }
+
+        if (viewModel.rotationProperty().get() != 0)
+            rotate(graphicsContext, viewModel.rotationProperty().get(), Vector2.scale(Vector2.add(viewModel.pivotPointProperty().get(), new Vector2(x, y)), Config.pixelsPerGridUnit));
 
         if (viewModel.isSelectedProperty().get())
         {
@@ -82,9 +102,9 @@ public class SpriteSubView
      * @param px    TODO
      * @param py    TODO
      */
-    private void rotate(GraphicsContext gc, double angle, double px, double py)
+    private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)
     {
-        Rotate r = new Rotate(angle, px, py);
+        Rotate r = new Rotate(angle, pivotPoint.getX(), pivotPoint.getY());
         gc.transform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 }
