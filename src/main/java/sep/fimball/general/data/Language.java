@@ -15,6 +15,9 @@ public enum Language
      */
     ENGLISH("English");
 
+    /**
+     * Der Name der Sprache.
+     */
     String name;
 
     /**

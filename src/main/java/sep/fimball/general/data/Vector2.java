@@ -53,6 +53,7 @@ public class Vector2
      * Addiert einen anderen Vektor auf diesen Vektor.
      *
      * @param otherVec Der zu addierende Vektor.
+     * @return Der geänderte Vektor.
      */
     public Vector2 add(Vector2 otherVec)
     {
@@ -65,6 +66,7 @@ public class Vector2
      * Subtrahiert einen anderen Vektor von diesem Vektor.
      *
      * @param otherVec Der zu subtrahierende Vektor.
+     * @return Der geönderte Vektor.
      */
     public Vector2 sub(Vector2 otherVec)
     {
@@ -77,6 +79,7 @@ public class Vector2
      * Skaliert einen Vektor mit dem gegebenen Skalar.
      *
      * @param scalar Der Skalar, mit dem der Vektor skaliert wird.
+     * @return Der geänderte Vektor.
      */
     public Vector2 scale(double scalar)
     {
@@ -108,6 +111,8 @@ public class Vector2
 
     /**
      * Normiert den Vektor.
+     *
+     * @return Der geänderte Vektor.
      */
     public Vector2 normalize()
     {
@@ -122,6 +127,7 @@ public class Vector2
      *
      * @param radianAngle Der Winkel als Radiant.
      * @param pivot       Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
+     * @return Der geänderte Vektor.
      */
     public Vector2 rotate(double radianAngle, Vector2 pivot)
     {
@@ -135,6 +141,7 @@ public class Vector2
      * Dreht den Vektor gegen den Uhrzeigersinn um den gegebene Winkel.
      *
      * @param radianAngle Der Winkel, um den rotiert werden soll, gegeben in Radianten.
+     * @return Den gänderten Vektor.
      */
     public Vector2 rotate(double radianAngle)
     {
@@ -362,6 +369,10 @@ public class Vector2
         return "{" + x + "|" + y + "}";
     }
 
+    /**
+     * Rundet die x- und y-Werte des Vektors.
+     * @return Der geänderte Vektor.
+     */
     public Vector2 round()
     {
         x = Math.round(x);

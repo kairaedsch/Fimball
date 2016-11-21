@@ -92,8 +92,14 @@ public class Config
      */
     public final static Color baseColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
 
+    /**
+     * TODO
+     */
     public final static Color baseColorLight = new Color(255 / 255., 147 / 255., 147 / 255., 1);
 
+    /**
+     * TODO
+     */
     public final static Color contraColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
 
     /**
