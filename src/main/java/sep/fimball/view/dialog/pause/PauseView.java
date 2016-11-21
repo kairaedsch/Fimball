@@ -28,11 +28,6 @@ public class PauseView extends DialogView<PauseViewModel>
     @FXML
     private Button exitToMainMenuButton;
 
-    /**
-     * Setzt das zum PauseView gehörende PauseViewModel.
-     *
-     * @param pauseViewModel Das zu setzende PauseViewModel.
-     */
     @Override
     public void setViewModel(PauseViewModel pauseViewModel)
     {

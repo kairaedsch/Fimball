@@ -45,11 +45,6 @@ public class GameView extends WindowView<GameViewModel>
      */
     private GameViewModel gameViewModel;
 
-    /**
-     * Setzt das zur GameView gehörende GameViewModel.
-     *
-     * @param gameViewModel Das zu setzende GameViewModel.
-     */
     @Override
     public void setViewModel(GameViewModel gameViewModel)
     {

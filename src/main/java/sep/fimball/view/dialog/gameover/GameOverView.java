@@ -29,11 +29,6 @@ public class GameOverView extends DialogView<GameOverViewModel>
      */
     private GameOverViewModel gameOverViewModel;
 
-    /**
-     * Setzt das zur GameOverView gehörende GameOverViewModel.
-     *
-     * @param gameOverViewModel Das zu setzende GameOverViewModel.
-     */
     @Override
     public void setViewModel(GameOverViewModel gameOverViewModel)
     {

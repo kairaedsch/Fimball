@@ -6,7 +6,7 @@ package sep.fimball.view;
 public interface ViewBoundToViewModel<ViewModelT>
 {
     /**
-     * Injiziert das ViewModel.
+     * Setzt das ViewModel, das zur View gehören soll und bindet sich an dessen Properties wenn nötig.
      *
      * @param viewModelT Das ViewModel, das gesetzt werden soll.
      */

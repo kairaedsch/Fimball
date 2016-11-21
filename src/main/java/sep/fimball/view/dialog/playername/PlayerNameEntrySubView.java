@@ -28,11 +28,6 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
      */
     private PlayerNameEntrySubViewModel playerNameEntrySubViewModel;
 
-    /**
-     * Setzt das zur PlayerNameEntrySubView gehörende PlayerNameEntrySubViewModel.
-     *
-     * @param playerNameEntrySubViewModel Das zu setzende PlayerNameEntrySubViewModel.
-     */
     @Override
     public void setViewModel(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {

@@ -58,11 +58,6 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      */
     private SelectedElementSubViewModel selectedElementSubViewModel;
 
-    /**
-     * Setzt das zur SelectedElementSubView gehörende SelectedElementSubViewModel.
-     *
-     * @param selectedElementSubViewModel Das zu setzende SelectedElementSubViewModel-
-     */
     @Override
     public void setViewModel(SelectedElementSubViewModel selectedElementSubViewModel)
     {

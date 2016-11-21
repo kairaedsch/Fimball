@@ -29,11 +29,6 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
      */
     private AvailableElementSubViewModel availableElementSubViewModel;
 
-    /**
-     * Setzt das zur AvailableElementSubView gehörende AvailableElementSubViewModel.
-     *
-     * @param availableElementSubViewModel Das zu setzende AvailableElementSubViewModel.
-     */
     @Override
     public void setViewModel(AvailableElementSubViewModel availableElementSubViewModel)
     {

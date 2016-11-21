@@ -54,11 +54,6 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     @FXML
     private Button exitButton;
 
-    /**
-     * Setzt das zur PlayerNameView gehörende PlayerNameViewModel.
-     *
-     * @param playerNameViewModel Das zu setzende PlayerNameViewModel.
-     */
     @Override
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
     {

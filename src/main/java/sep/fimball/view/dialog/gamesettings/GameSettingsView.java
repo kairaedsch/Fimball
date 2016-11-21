@@ -80,11 +80,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      */
     private GameSettingsViewModel gameSettingsViewModel;
 
-    /**
-     * Setzt das zum GameSettingsView gehörende GameSettingsViewModel.
-     *
-     * @param gameSettingsViewModel Das zu setzende GameSettingsViewModel.
-     */
     @Override
     public void setViewModel(GameSettingsViewModel gameSettingsViewModel)
     {

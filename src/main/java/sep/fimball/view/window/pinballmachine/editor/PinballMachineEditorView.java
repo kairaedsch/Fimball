@@ -73,11 +73,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     private MouseEvent mouseDown;
 
-    /**
-     * Setzt das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
-     *
-     * @param pinballMachineEditorViewModel Das zu setzende PinballMachineEditorViewModel.
-     */
     @Override
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {

@@ -21,11 +21,6 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
      */
     private PinballMachineSettingsViewModel pinballMachineSettingsViewModel;
 
-    /**
-     * Setzt das zur PinballMachineSettingsView gehörende PinballMachineSettingsViewModel.
-     *
-     * @param pinballMachineSettingsViewModel Das zu setzende PinballMachineSettingsViewModel.
-     */
     @Override
     public void setViewModel(PinballMachineSettingsViewModel pinballMachineSettingsViewModel)
     {
