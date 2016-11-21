@@ -10,7 +10,7 @@ import sep.fimball.general.data.Vector2;
 public class NormalCollision implements CollisionType
 {
     /**
-     * Wie viel Prozent der Geschwindigkeit sollen nach der Kollision erhalten bleiben.
+     * Gibt an, wie viel Prozent der Geschwindigkeit nach der Kollision erhalten bleiben sollen.
      */
     private final double bounce = 0.7;
 

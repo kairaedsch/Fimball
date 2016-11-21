@@ -8,7 +8,7 @@ import sep.fimball.general.data.Vector2;
 public class OverlapAxis
 {
     /**
-     * Auf welche Achse die überschneidenden Objekte projiziert wurden.
+     * Gibt an, auf welche Achse die überschneidenden Objekte projiziert wurden.
      */
     private Vector2 axis;
 

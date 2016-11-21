@@ -9,7 +9,7 @@ import sep.fimball.general.data.Vector2;
 public class AccelerationCollision implements CollisionType
 {
     /**
-     * Wie stark der Ball in Richtung des Elements beschleunigt wird.
+     * Gibt an, wie stark der Ball in Richtung des Elements beschleunigt wird.
      */
     private double strength;
 
