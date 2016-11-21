@@ -18,17 +18,17 @@ public class SettingsJson
     /**
      * Speichert die Master-Lautstärke.
      */
-    public double masterVolume;
+    public int masterVolume;
 
     /**
      * Speichert die Musik-Lautstärke.
      */
-    public double musicVolume;
+    public int musicVolume;
 
     /**
      * Speichert die Soundeffekt-Lautstärke.
      */
-    public double sfxVolume;
+    public int sfxVolume;
 
     /**
      * Speichert die Tastenbelegungen für Benutzeraktionen von FIMBall.

@@ -43,17 +43,17 @@ public class Settings
     /**
      * Allgemeine Lautstärke von 0-100\%, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
      */
-    private DoubleProperty masterVolume;
+    private IntegerProperty masterVolume;
 
     /**
      * Lautstärke der Musik von 0-100%.
      */
-    private DoubleProperty musicVolume;
+    private IntegerProperty musicVolume;
 
     /**
      * Lautstärke der Soundeffekte von 0-100%.
      */
-    private DoubleProperty sfxVolume;
+    private IntegerProperty sfxVolume;
 
     /**
      * Aktuell ausgewählte Sprache, ein Teil der Aufzählung <enum> Language.
@@ -76,9 +76,9 @@ public class Settings
 
         fullscreen = new SimpleBooleanProperty(false);
 
-        masterVolume = new SimpleDoubleProperty(100);
-        musicVolume = new SimpleDoubleProperty(50);
-        sfxVolume = new SimpleDoubleProperty(75);
+        masterVolume = new SimpleIntegerProperty();
+        musicVolume = new SimpleIntegerProperty();
+        sfxVolume = new SimpleIntegerProperty();
 
         loadSettings(Paths.get(Config.pathToSettings()));
     }
@@ -145,7 +145,7 @@ public class Settings
      *
      * @return Das Property der Master-Lautstärke.
      */
-    public DoubleProperty masterVolumeProperty()
+    public IntegerProperty masterVolumeProperty()
     {
         return masterVolume;
     }
@@ -155,7 +155,7 @@ public class Settings
      *
      * @return Das Property der Musik-Lautstärke.
      */
-    public DoubleProperty musicVolumeProperty()
+    public IntegerProperty musicVolumeProperty()
     {
         return musicVolume;
     }
@@ -165,7 +165,7 @@ public class Settings
      *
      * @return Das Property der Soundeffekt-Lautstärke.
      */
-    public DoubleProperty sfxVolumeProperty()
+    public IntegerProperty sfxVolumeProperty()
     {
         return sfxVolume;
     }
