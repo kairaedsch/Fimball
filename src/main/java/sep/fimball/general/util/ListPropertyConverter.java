@@ -78,12 +78,12 @@ public class ListPropertyConverter
      * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der MapPropertyMaster, wenn sich letztere ändert.
      * TODO
      *
-     * @param listPropertySlave
-     * @param MapPropertyMaster
-     * @param converter
-     * @param <SlaveT>
-     * @param <MasterKeyT>
-     * @param <MasterValueT>
+     * @param listPropertySlave Die Liste, die neu befüllt werden soll
+     * @param MapPropertyMaster Die Map, deren Werte in die {@code listPropertySlave} eingefügt werden sollen.
+     * @param converter Der Converter, der angibt, wie ein Wert vom Paar MasterKeyT, MasterValueT in ein SlaveT konvertiert werden sollen.
+     * @param <SlaveT> Die Klasse der Elemente in der Slave-Liste.
+     * @param <MasterKeyT> Die Klasse der Key in der Master-Map.
+     * @param <MasterValueT> Die Klasse der Values in der Master-Map.
      */
 
     public static <SlaveT, MasterKeyT, MasterValueT> void bindAndConvertMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, MapConverter<SlaveT, MasterKeyT, MasterValueT> converter)
@@ -133,11 +133,11 @@ public class ListPropertyConverter
     public interface MapConverter<SlaveT, MasterKeyT, MasterValueT>
     {
         /**
-         * Erstellt ein Objekt vom Typ SlaveT aus einem Key/Value Paar vom Typ MasterT
+         * Erstellt ein Objekt vom Typ SlaveT aus einem Key/Value Paar vom Typ MasterT.
          *
-         * @param masterKey
-         * @param masterValueT
-         * @return Ein Objekt vom Typ SlaveT
+         * @param masterKey Der Kay vom Typ MasterKeyT.
+         * @param masterValueT Der Value vom Typ masterValueT.
+         * @return Ein Objekt vom Typ SlaveT.
          */
         SlaveT convert(MasterKeyT masterKey, MasterValueT masterValueT);
     }
