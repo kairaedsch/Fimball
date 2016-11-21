@@ -6,13 +6,13 @@ import java.util.Map;
 /**
  * Created by kaira on 15.11.2016.
  */
-public class RuleElementType
+public class BaseRuleElement
 {
     private boolean givesPoints;
 
     private Map<Integer, RuleElementEvent> eventMap;
 
-    public RuleElementType(BaseElementJson.RuleElementTypeJson ruleElement)
+    public BaseRuleElement(BaseElementJson.RuleElementTypeJson ruleElement)
     {
         eventMap = new HashMap<>();
         if (ruleElement.events != null)

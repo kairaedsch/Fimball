@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by kaira on 15.11.2016.
  */
-public class MediaElementType
+public class BaseMediaElement
 {
     private String name;
     private String description;
@@ -22,7 +22,7 @@ public class MediaElementType
 
     private Map<Integer, MediaElementEvent> eventMap;
 
-    public MediaElementType(BaseElementJson.MediaElementTypeJson mediaElement, String elementId)
+    public BaseMediaElement(BaseElementJson.MediaElementTypeJson mediaElement, String elementId)
     {
         name = mediaElement.general.editorName;
         description  = mediaElement.general.editorDescription;

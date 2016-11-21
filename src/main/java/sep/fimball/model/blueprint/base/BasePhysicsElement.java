@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Created by kaira on 15.11.2016.
  */
-public class PhysicsElementType
+public class BasePhysicsElement
 {
     private Vector2 pivotPoint;
 
     private List<Collider> colliders;
 
-    public PhysicsElementType(BaseElementJson.PhysicElementTypeJson physicsElement)
+    public BasePhysicsElement(BaseElementJson.PhysicElementTypeJson physicsElement)
     {
         pivotPoint = physicsElement.pivotPoint;
         colliders = new ArrayList<>();

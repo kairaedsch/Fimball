@@ -5,15 +5,21 @@ package sep.fimball.model.blueprint.base;
  */
 public class BaseElement
 {
+    /**
+     * Die ÌD des BaseElements.
+     */
     private String id;
 
+    /**
+     * Die Art des BaseElements.
+     */
     private BaseElementType type;
 
-    private PhysicsElementType physics;
+    private BasePhysicsElement physics;
 
-    private MediaElementType media;
+    private BaseMediaElement media;
 
-    private RuleElementType rule;
+    private BaseRuleElement rule;
 
     /**
      * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt.
@@ -26,9 +32,9 @@ public class BaseElement
         this.id = id;
         type = baseElementJson.elementType;
 
-        physics = new PhysicsElementType(baseElementJson.physicElement);
-        media = new MediaElementType(baseElementJson.mediaElement, id);
-        rule = new RuleElementType(baseElementJson.ruleElement);
+        physics = new BasePhysicsElement(baseElementJson.physicElement);
+        media = new BaseMediaElement(baseElementJson.mediaElement, id);
+        rule = new BaseRuleElement(baseElementJson.ruleElement);
     }
 
     /**
@@ -46,7 +52,7 @@ public class BaseElement
      *
      * @return Die physikalischen Eigenschaften des Spielelements.
      */
-    public PhysicsElementType getPhysics()
+    public BasePhysicsElement getPhysics()
     {
         return physics;
     }
@@ -56,7 +62,7 @@ public class BaseElement
      *
      * @return Informationen über das Bild, die Möglichkeiten, das Spielelement im Editor zu drehen, den Soundeffekt und die Animation des Spielelements.
      */
-    public MediaElementType getMedia()
+    public BaseMediaElement getMedia()
     {
         return media;
     }
@@ -66,7 +72,7 @@ public class BaseElement
      *
      * @return Für das Regelwerk wichtige Informationen des Spielelements.
      */
-    public RuleElementType getRule()
+    public BaseRuleElement getRule()
     {
         return rule;
     }
