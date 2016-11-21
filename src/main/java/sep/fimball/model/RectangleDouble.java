@@ -24,9 +24,9 @@ public class RectangleDouble
 
     /**
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.
-     * @param origin
-     * @param width
-     * @param height
+     * @param origin Linke obere Ecke des Rechtecks.
+     * @param width Breite des Rechtecks.
+     * @param height Höhe des Rechtecks.
      */
     public RectangleDouble(Vector2 origin, double width, double height)
     {

@@ -25,6 +25,7 @@ public class Player
 
     /**
      * Erzeugt einen neuen Spieler.
+     * @param name Name des Spielers.
      */
     public Player(String name)
     {

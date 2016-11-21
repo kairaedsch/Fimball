@@ -18,13 +18,14 @@ public class World
     private ListProperty<GameElement> gameElements;
 
     /**
-     * TODO
+     * Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
      */
     private PlacedElement ballTemplate;
 
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
-     * @param elements
+     * @param elements Liste der Elemente in der Spielwelt.
+     * @param ballTemplate Vorlage für den Ball.
      */
 	public World(ObservableList<GameElement> elements, PlacedElement ballTemplate)
     {
@@ -34,22 +35,11 @@ public class World
 
     /**
      * Fügt das gegebene Element in die Spielwelt ein.
-     * @param element
+     * @param element Element, welches in die Spielwelt eingefügt wird.
      */
     public void addGameElement(GameElement element)
     {
         gameElements.add(element);
-    }
-
-    //Called by a timeline created in this class, update all gameobjects
-    //is NOT the physics loop
-
-    /**
-     * TODO
-     */
-    private void updateWorld()
-    {
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -101,19 +91,11 @@ public class World
         return gameElements;
     }
 
-    /**
-     * TODO
-     * @return
-     */
     public PlacedElement getBallTemplate()
     {
         return ballTemplate;
     }
 
-    /**
-     * TODO
-     * @param ballTemplate
-     */
     public void setBallTemplate(PlacedElement ballTemplate)
     {
         this.ballTemplate = ballTemplate;

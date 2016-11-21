@@ -32,7 +32,7 @@ public class GameSession
      *
      * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames      Die Namen der Spieler.
-     * @return Die generierte Game Session.
+     * @return Die generierte GameSession.
      */
     public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
@@ -41,6 +41,12 @@ public class GameSession
         return gameSession;
     }
 
+    /**
+     * Generiert eine neue GameSession für den Editor, und initialisiert alle nötigen Trigger.
+     *
+     * @param machineBlueprint Der Flipperautomat, der im Editor geladen ist.
+     * @return Die generierte GameSession.
+     */
     public static GameSession generateEditorSession(PinballMachine machineBlueprint)
     {
         String[] editorPlayers = {"Editor-Player"};
@@ -87,7 +93,7 @@ public class GameSession
     private World world;
 
     /**
-     * TODO
+     * Der aktuelle Flipperautomat.
      */
     private PinballMachine machineBlueprint;
 
@@ -112,13 +118,23 @@ public class GameSession
      */
     private Observable gameLoopObservable;
 
+    /**
+     * Der aktive Ball, falls vorhanden.
+     */
     private ObjectProperty<GameElement> gameBall;
 
+    /**
+     *
+     */
     private LinkedList<List<CollisionEventArg>> collisionEventArgsList;
+
+    /**
+     * Dummy object for locking while accessing {@see collisionEventArgsList}
+     */
     private Object collisionEventArgsLocker;
 
     /**
-     *  Der LightManager, der die in der GameSession vorhandenen Lichter verwaltet.
+     * Der LightManager, der die in der GameSession vorhandenen Lichter verwaltet.
      */
     private LightManager lightManager;
 
@@ -166,13 +182,13 @@ public class GameSession
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
                 ballTemplate = element;
-            }
-            else
+            } else
             {
                 GameElement gameElem = new GameElement(element, false);
                 elements.add(gameElem);
 
-                if (element.getBaseElement().getType() == BaseElementType.LIGHT) {
+                if (element.getBaseElement().getType() == BaseElementType.LIGHT)
+                {
                     lightManager.addLight(element);
                 } else
                 {
@@ -218,7 +234,7 @@ public class GameSession
             synchronized (collisionEventArgsLocker)
             {
                 argsList = this.collisionEventArgsList;
-                this.collisionEventArgsList =  new LinkedList<List<CollisionEventArg>>();
+                this.collisionEventArgsList = new LinkedList<List<CollisionEventArg>>();
             }
 
             for (List<CollisionEventArg> args : argsList)
@@ -252,6 +268,9 @@ public class GameSession
         gameLoop.stop();
     }
 
+    /**
+     * Stoppt die Physikberechnung.
+     */
     public void stopPhysics()
     {
         physicsHandler.stopTicking();
@@ -273,7 +292,7 @@ public class GameSession
     public void startAll()
     {
         startTimeline();
-        physicsHandler.startTicking();
+        startPhysics();
         paused = false;
     }
 
@@ -311,6 +330,11 @@ public class GameSession
         machineBlueprint.addHighscore(score);
     }
 
+    /**
+     * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
+     *
+     * @param collisionEventArg
+     */
     public void addCollisionEventArgs(List<CollisionEventArg> collisionEventArg)
     {
         synchronized (collisionEventArgsLocker)
