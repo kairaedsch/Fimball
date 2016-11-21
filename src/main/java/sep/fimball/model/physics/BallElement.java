@@ -74,7 +74,7 @@ public class BallElement
     }
 
     /**
-     * Gibt die Geschwindigkeit ders des Balls zurück.
+     * Gibt die Geschwindigkeit des Balls zurück.
      * @return Die Geschwindigkeit des Balls.
      */
     public Vector2 getVelocity()
@@ -130,7 +130,7 @@ public class BallElement
 
     /**
      * Setzt die Ebene, auf der sich der Ball befindet, auf den übergebenen Wert.
-     * @param layer Die neue Ebene, auf der sich der Ball befindem soll.
+     * @param layer Die neue Ebene, auf der sich der Ball befinden soll.
      */
     public void setLayer(WorldLayer layer)
     {
