@@ -19,7 +19,7 @@ public class Sound
      * Erstellt eine neue Instanz von Sound.
      *
      * @param soundName Name der Audioquelle.
-     * @param repeating Gibt an ob der Sound als Dauerschleife laufen soll.
+     * @param repeating Gibt an, ob der Sound als Dauerschleife laufen soll.
      */
     public Sound(String soundName, boolean repeating)
     {

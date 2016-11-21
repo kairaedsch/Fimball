@@ -3,19 +3,29 @@ package sep.fimball.model.media;
 import sep.fimball.model.blueprint.base.BaseElementJson;
 
 /**
- * Enthält die Pfade zu den Bild-Dateien einer Animation, und stellt das aktuell angezeigte Bild bereit.
+ * Enthält Informationen über die Anzeige einer Animation.
  */
 public class Animation
 {
     /**
-     * Wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     * Gibt an, ie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
      */
     private int duration;
 
+    /**
+     * Gibt an, aus wie vielen Bildern die Animation besteht.
+     */
     private int frameCount;
 
+    /**
+     * Der Name der Animation.
+     */
     private String name;
 
+    /**
+     * Erstellt eine neue Animation.
+     * @param animation Das AnimationJson, dessen Informationen übernommen werden sollen.
+     */
     public Animation(BaseElementJson.MediaElementJson.MediaElementEventJson.AnimationJson animation)
     {
         duration = animation.duration;

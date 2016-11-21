@@ -15,22 +15,22 @@ public class ElementImage
     private final int rotationAccuracy;
 
     /**
-     * Die ID des Elementtypen, zu dem das ElementImage gehört.
+     * Die ID des BaseElements, zu dem das ElementImage gehört.
      */
-    private String elementTypeId;
+    private String baseElementId;
 
     /**
-     * Gibt an, ob das Bild rotiert werden kann.
+     * Gibt an, ob das ElementImage gedreht werden kann.
      */
     private boolean canRotate;
 
     /**
-     * TODO
+     * Gibt an, ob das ElementImage eine Animation ist.
      */
     private boolean isAnimation;
 
     /**
-     * TODO
+     * Die zugehörige Animation.
      */
     private Animation animation;
 
@@ -41,52 +41,53 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit der gegebenen {@code baseElementId}.
-     * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
+     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
      */
-    public ElementImage(String elementTypeId)
+    public ElementImage(String baseElementId)
     {
-        this(elementTypeId, false, 360, false, null);
+        this(baseElementId, false, 360, false, null);
     }
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden können soll.
+     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
      */
-    public ElementImage(String elementTypeId, int rotationAccuracy)
+    public ElementImage(String baseElementId, int rotationAccuracy)
     {
-        this(elementTypeId, true, rotationAccuracy, false, null);
+        this(baseElementId, true, rotationAccuracy, false, null);
     }
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
+     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
      */
-    public ElementImage(String elementTypeId, Animation animation)
+    public ElementImage(String baseElementId, Animation animation)
     {
-        this(elementTypeId, false, 360, true, animation);
+        this(baseElementId, false, 360, true, animation);
     }
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden können soll.
+     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
      */
-    public ElementImage(String elementTypeId, int rotationAccuracy, Animation animation)
+    public ElementImage(String baseElementId, int rotationAccuracy, Animation animation)
     {
-       this(elementTypeId, true, rotationAccuracy, true, animation);
+       this(baseElementId, true, rotationAccuracy, true, animation);
     }
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param elementTypeId Die ID des Elementtypen, zu dem das ElementImage gehören soll.
-     * @param canRotate Gibt an, ob das ElementImage rotiert werden können soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das Bild gedreht werden können soll.
-     * @param animation TODO
+     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param canRotate Gibt an, ob das zugehörige BaseElement gedreht werden kann.
+     * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
+     * @param isAnimation Gibt am, ob das ElementImage eine Animation ist.
+     * @param animation Die zuugehörige Animation.
      */
-    private ElementImage(String elementTypeId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
+    private ElementImage(String baseElementId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
     {
-        this.elementTypeId = elementTypeId;
+        this.baseElementId = baseElementId;
         this.canRotate = canRotate;
         this.rotationAccuracy = rotationAccuracy <= 0 ? 360 : rotationAccuracy;
         this.isAnimation = isAnimation;
@@ -94,6 +95,11 @@ public class ElementImage
         creationTime = System.currentTimeMillis();
     }
 
+    /**
+     * Erzeugt ein neues ElementImage mit den übergebenen Werten.
+     * @param gameElement Das Element, zu dessen BaseElement das ElementImage gehört,
+     * @param animation Die zugehörige Animation.
+     */
     public ElementImage(GameElement gameElement, Animation animation)
     {
         this(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getPlacedElement().getBaseElement().getMedia().canRotate(), gameElement.getPlacedElement().getBaseElement().getMedia().getRotationAccuracy(), true, animation);
@@ -108,8 +114,8 @@ public class ElementImage
     public String getImagePath(ImageLayer imageLayer, int rotation)
     {
         int framePos = animation == null ? 0 : (int) ((System.currentTimeMillis() - creationTime) / animation.getDuration());
-        if(isAnimation && framePos < animation.getFrameCount()) return Config.pathToElementImage(elementTypeId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
-        else return Config.pathToElementImage(elementTypeId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
+        if(isAnimation && framePos < animation.getFrameCount()) return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
+        else return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
     }
 
     /**
