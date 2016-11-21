@@ -16,7 +16,7 @@ public class Animation
 
     private String name;
 
-    public Animation(BaseElementJson.MediaElementTypeJson.MediaElementEventJson.AnimationJson animation)
+    public Animation(BaseElementJson.MediaElementJson.MediaElementEventJson.AnimationJson animation)
     {
         duration = animation.duration;
         name = animation.animationName;

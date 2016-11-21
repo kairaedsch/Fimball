@@ -9,20 +9,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by kaira on 15.11.2016.
+ *  Diese Klasse enthält alle Informationen zu den Media-Eigenschaften eines BaseElements.
  */
 public class BaseMediaElement
 {
+    /**
+     * Der Name des BaseElements im Editor.
+     */
     private String name;
+
+    /**
+     * Die Beschreibung des BaseElements im Editor.
+     */
     private String description;
+
+    /**
+     * Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     */
     private boolean canRotate;
+
+    /**
+     * Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     */
     private int rotationAccuracy;
 
+    /**
+     * Das Bild des BaseElements.
+     */
     private ObjectProperty<ElementImage> elementImage;
 
+    /**
+     * Enthält die MediaElementEvents. TODO
+     */
     private Map<Integer, MediaElementEvent> eventMap;
 
-    public BaseMediaElement(BaseElementJson.MediaElementTypeJson mediaElement, String elementId)
+    /**
+     * Estellt ein neues BaseMediaElement.
+     * @param mediaElement Das MediaElementJson, dessen Eigenschaften übernommen werden sollen.
+     * @param elementId TODO
+     */
+    public BaseMediaElement(BaseElementJson.MediaElementJson mediaElement, String elementId)
     {
         name = mediaElement.general.editorName;
         description  = mediaElement.general.editorDescription;
@@ -32,7 +58,7 @@ public class BaseMediaElement
         eventMap = new HashMap<>();
         if (mediaElement.events != null)
         {
-            for (BaseElementJson.MediaElementTypeJson.MediaElementEventJson event : mediaElement.events)
+            for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
                 // TODO hashCode must not be unique
                 eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));

@@ -25,12 +25,12 @@ public class PlacedElement
     private IntegerProperty points;
 
     /**
-     * TODO
+     * Der Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
      */
     private DoubleProperty multiplier;
 
     /**
-     * TODO
+     * Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
      */
     private DoubleProperty rotation;
 

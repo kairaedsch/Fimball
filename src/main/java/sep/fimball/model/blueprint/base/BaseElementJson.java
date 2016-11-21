@@ -17,22 +17,22 @@ public class BaseElementJson
     /**
      * Speichert den Typ des korrespondierenden PhysicElements.
      */
-    public PhysicElementTypeJson physicElement;
+    public PhysicElementJson physicElement;
 
     /**
      * Speichert den Typ des korrespondierenden MediaElements.
      */
-    public MediaElementTypeJson mediaElement;
+    public MediaElementJson mediaElement;
 
     /**
      * Speichert den Typ des korrespondierenden RuleElements.
      */
-    public RuleElementTypeJson ruleElement;
+    public RuleElementJson ruleElement;
 
     /**
      * Diese Klasse enthält die zur Serialisierung und Erzeugung der Repräsentation eines Spielelements in der Physik wichtigen Informationen.
      */
-    public static class PhysicElementTypeJson
+    public static class PhysicElementJson
     {
         /**
          * Punkt um den das Element rotiert wird.
@@ -127,12 +127,12 @@ public class BaseElementJson
     /**
      * Diese Klasse enthält die Informationen über Animationen, die Eigenschaften im Editor und Soundeffekte des Spielelements.
      */
-    public static class MediaElementTypeJson
+    public static class MediaElementJson
     {
         /**
          * Enthält die Eigenschaften des Elements im Editor.
          */
-        public MediaElementTypeGeneralJson general;
+        public MediaElementGeneralJson general;
 
         /**
          * Enthält die Animation und Soundtracks des Objekts, falls vorhanden.
@@ -142,7 +142,7 @@ public class BaseElementJson
         /**
          * Repräsentiert die Eigenschaften des Objekts im Editor.
          */
-        public static class MediaElementTypeGeneralJson
+        public static class MediaElementGeneralJson
         {
             /**
              * Bezeichnung des Elementtyps im Editor.
@@ -211,12 +211,12 @@ public class BaseElementJson
     /**
      * Enthält die zur Serialisierung des Regelwerks nötigen Informationen.
      */
-    public static class RuleElementTypeJson
+    public static class RuleElementJson
     {
         /**
          * Gibt an, ob ein Zusammenstoß die Punkte des Spielers erhöht.
          */
-        public RuleElementTypeGeneralJson general;
+        public RuleElementGeneralJson general;
 
         /**
          * Speichert, zu welchem Collider dieses Regelwerk gehört.
@@ -226,7 +226,7 @@ public class BaseElementJson
         /**
          * Enthält die Information, ob ein Zusammenstoß die Punktzahl des Spielers erhöht.
          */
-        public static class RuleElementTypeGeneralJson
+        public static class RuleElementGeneralJson
         {
             /**
              * Speichert, ob ein Treffer durch die Kugel Punkte bringt.

@@ -38,7 +38,7 @@ public class PlacedElementListJson {
         public int points;
 
         /**
-         * TODO
+         * Der Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
          */
         public double multiplier;
     }

@@ -15,16 +15,25 @@ public class BaseElement
      */
     private BaseElementType type;
 
+    /**
+     * Das zum BaseElement gehörige BasePhysicsElement.
+     */
     private BasePhysicsElement physics;
 
+    /**
+     * Das zum BaseElement gehörige BaseMediaElement.
+     */
     private BaseMediaElement media;
 
+    /**
+     * Das zum BaseElement gehörige BaseRuleElement.
+     */
     private BaseRuleElement rule;
 
     /**
      * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt.
      *
-     * @param id Die Identifikationsnummer des Bauplans.
+     * @param id Die gewünschte ID des BaseElements.
      * @param baseElementJson Das Objekt, das die Informationen über das Spielelement enthält.
      */
     public BaseElement(String id, BaseElementJson baseElementJson)

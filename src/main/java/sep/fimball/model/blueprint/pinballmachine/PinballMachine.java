@@ -70,7 +70,7 @@ public class PinballMachine
     }
 
     /**
-     * Überprüft ob sich ein Bahnelement in der gegebenen Position befindet.
+     * Überprüft, ob sich ein Bahnelement in der gegebenen Position befindet.
      *
      * @param point Die Position.
      * @return Das Bahnelement an der gegebenen Position.

@@ -23,7 +23,7 @@ public class MediaElementEvent
      *
      * @param event Das Objekt, in dem die Informationen über Animation und Soundeffekt gespeichert sind.
      */
-    public MediaElementEvent(BaseElementJson.MediaElementTypeJson.MediaElementEventJson event)
+    public MediaElementEvent(BaseElementJson.MediaElementJson.MediaElementEventJson event)
     {
         if (event.animation != null) animation = new Animation(event.animation);
         if (event.soundName != null) sound = new Sound(event.soundName, false);

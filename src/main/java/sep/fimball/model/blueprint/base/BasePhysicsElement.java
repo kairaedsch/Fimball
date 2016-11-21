@@ -8,29 +8,39 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by kaira on 15.11.2016.
+ * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
  */
 public class BasePhysicsElement
 {
+    /**
+     * Die Position des Pivot-Punktes des Elements.
+     */
     private Vector2 pivotPoint;
 
+    /**
+     * Die Collider, die dieses Element hat.
+     */
     private List<Collider> colliders;
 
-    public BasePhysicsElement(BaseElementJson.PhysicElementTypeJson physicsElement)
+    /**
+     * Erstellt ein neues BasePhysicsElement.
+     * @param physicsElement Das PhysicElementJson, dessen Eigenschaften übernpmmen werden sollen.
+     */
+    public BasePhysicsElement(BaseElementJson.PhysicElementJson physicsElement)
     {
         pivotPoint = physicsElement.pivotPoint;
         colliders = new ArrayList<>();
-        for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson collider : physicsElement.colliders)
+        for (BaseElementJson.PhysicElementJson.PhysicColliderJson collider : physicsElement.colliders)
         {
             List<ColliderShape> shapes = new ArrayList<>();
 
-            if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
+            if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
             {
                 PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
                 shapes.add(polygonColliderShape);
             }
 
-            if(collider.circleShapes != null) for (BaseElementJson.PhysicElementTypeJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
+            if(collider.circleShapes != null) for (BaseElementJson.PhysicElementJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
             {
                 CircleColliderShape circleColliderShape = new CircleColliderShape(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
                 shapes.add(circleColliderShape);

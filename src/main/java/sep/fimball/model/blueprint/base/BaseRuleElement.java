@@ -4,20 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by kaira on 15.11.2016.
+ * Diese Klasse enthält alle Informationen zu den Regel-Eigenschaften eines BaseElements.
  */
 public class BaseRuleElement
 {
+    /**
+     * Gibt an, ob ein Zusammenprallen der Kugel mit dem BaseElement Punkte bringt.
+     */
     private boolean givesPoints;
 
+    /**
+     * Enthält die RuleElementEvents. TODO
+     */
     private Map<Integer, RuleElementEvent> eventMap;
 
-    public BaseRuleElement(BaseElementJson.RuleElementTypeJson ruleElement)
+    /**
+     * Erstellt ein neues BaseRuleElement.
+     * @param ruleElement Das RuleElementJson, dessen Eigenschaften übernpmmen werden sollen.
+     */
+    public BaseRuleElement(BaseElementJson.RuleElementJson ruleElement)
     {
         eventMap = new HashMap<>();
         if (ruleElement.events != null)
         {
-            for (BaseElementJson.RuleElementTypeJson.RuleElementEventJson event : ruleElement.events)
+            for (BaseElementJson.RuleElementJson.RuleElementEventJson event : ruleElement.events)
             {
                 // TODO hashCode musst not be unique
                 eventMap.put(event.colliderId.hashCode(), new RuleElementEvent(event));

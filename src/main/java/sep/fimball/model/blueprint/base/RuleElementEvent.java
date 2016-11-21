@@ -1,11 +1,15 @@
 package sep.fimball.model.blueprint.base;
 
 /**
- * Created by kaira on 15.11.2016.
+ * TODO
  */
 public class RuleElementEvent
 {
-    public RuleElementEvent(BaseElementJson.RuleElementTypeJson.RuleElementEventJson event)
+    /**
+     * TODO
+     * @param event
+     */
+    public RuleElementEvent(BaseElementJson.RuleElementJson.RuleElementEventJson event)
     {
 
     }
