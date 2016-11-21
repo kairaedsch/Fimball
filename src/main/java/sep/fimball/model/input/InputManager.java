@@ -47,7 +47,7 @@ public class InputManager
     /**
      * Wenn in einer View ein Tastendruck ausgelöst wurde, wird dieser hier weitergeleitet, um mögliche Observer zu benachrichtigen.
      *
-     * @param keyEvent Das KeyEvent, das beobachtet werden soll.
+     * @param keyEvent Das KeyEvent, welches von der View registriert wurde.
      */
     public void addKeyEvent(KeyEvent keyEvent)
     {
@@ -73,7 +73,7 @@ public class InputManager
     /**
      * Registriert einen neuen Observer, der bei einem bestimmten Tastendruck benachrichtigt wird.
      *
-     * @param binding  Die Funktion, die beobachtet wird.
+     * @param binding  Das Binding über welches der Observer benachrichtigt werden soll
      * @param observer Der Observer, der über den Tastendruck der zu {@code} binding gehörende Taste informiert wird.
      */
     public void addListener(KeyBinding binding, KeyObserver observer)

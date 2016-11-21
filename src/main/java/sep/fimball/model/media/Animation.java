@@ -8,7 +8,7 @@ import sep.fimball.model.blueprint.base.BaseElementJson;
 public class Animation
 {
     /**
-     * Gibt an, ie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     * Gibt an, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Millisekunden.
      */
     private int duration;
 
@@ -35,9 +35,9 @@ public class Animation
     }
 
     /**
-     * Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     * Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Millisekunden.
      *
-     * @return Die Anzeigedauer eines einzelnen Bildes in Sekunden.
+     * @return Die Anzeigedauer eines einzelnen Bildes in Millisekunden.
      */
     public int getDuration()
     {
