@@ -33,7 +33,7 @@ public class GameElement
     private IntegerProperty pointReward;
 
     /**
-     * TODO
+     * Die aktuell angzeigte Animation.
      */
     private ObjectProperty<Optional<Animation>> currentAnimation;
 

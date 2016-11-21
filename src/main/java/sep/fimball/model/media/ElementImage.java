@@ -35,7 +35,7 @@ public class ElementImage
     private Animation animation;
 
     /**
-     * TODO
+     * Die Zeit, zu der das ElementImage erstellt wurde.
      */
     private long creationTime;
 
