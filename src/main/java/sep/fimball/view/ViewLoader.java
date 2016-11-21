@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eigetragen ist.
+ * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
  */
 public class ViewLoader<ViewT>
 {

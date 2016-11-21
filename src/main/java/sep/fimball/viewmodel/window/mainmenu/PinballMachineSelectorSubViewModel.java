@@ -41,8 +41,9 @@ public class PinballMachineSelectorSubViewModel
 
     /**
      * Erstellt ein neues PinballMachineSelectorSubViewModel.
-     * @param mainMenu Das zugehörige Hauptmenü.
-     * @param pinballMachine Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
+     *
+     * @param mainMenu                       Das zugehörige Hauptmenü.
+     * @param pinballMachine                 Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
      * @param pinballMachineInfoSubViewModel Das zugehörige PinballMachineInfoSubViewModel.
      */
     PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine, PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel)
@@ -51,7 +52,7 @@ public class PinballMachineSelectorSubViewModel
         this.pinballMachine = pinballMachine;
         this.pinballMachineInfoSubViewModel = pinballMachineInfoSubViewModel;
         this.isSelected = new SimpleBooleanProperty();
-        
+
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
 
@@ -89,7 +90,8 @@ public class PinballMachineSelectorSubViewModel
         return imagePath;
     }
 
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         return isSelected.get();
     }
 }

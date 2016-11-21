@@ -54,7 +54,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private SelectedElementSubViewModel selectedElementSubViewModel;
 
     /**
-     * Das PinballCanvasViewModel des angezigten Spielfelds.
+     * Das PinballCanvasViewModel des angezeigten Spielfelds.
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 

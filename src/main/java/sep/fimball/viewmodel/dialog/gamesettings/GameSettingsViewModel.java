@@ -107,7 +107,7 @@ public class GameSettingsViewModel extends DialogViewModel
     /**
      * Stellt die aktuell eingestellte Sprache zur Verfügung und diese kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
      *
-     * @return Die aktuell eingestellte Spache.
+     * @return Die aktuell eingestellte Sprache.
      */
     public ObjectProperty<Language> languageProperty()
     {
@@ -155,7 +155,7 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Gibt eine Liste aller verfügbaren Sprachen zuürck.
+     * Gibt eine Liste aller verfügbaren Sprachen zurück.
      * @return Eine Liste aller verfügbaren Sprachen.
      */
     public ObservableList<Language> getLanguages() {

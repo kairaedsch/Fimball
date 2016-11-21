@@ -121,7 +121,7 @@ public class ViewModelListToPaneBinder
     public interface ViewAndViewModelCaller<ViewT, ViewModelT>
     {
         /**
-         * Erlaubt das manipulieren der View und des ViewModels, wie zum Beispiel das Injezieren des ViewModel in die View.
+         * Erlaubt das manipulieren der View und des ViewModels, wie zum Beispiel das Injizieren des ViewModel in die View.
          *
          * @param view Die zu manipulierende View.
          * @param viewModel Das zu manipulierende ViewModel.

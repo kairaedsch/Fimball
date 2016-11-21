@@ -7,7 +7,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import java.util.Optional;
 
 /**
- * Das SelectedElementSubViewModel stellt der View Daten über das akuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
+ * Das SelectedElementSubViewModel stellt der View Daten über das aktuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
  */
 public class SelectedElementSubViewModel
 {

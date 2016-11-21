@@ -47,7 +47,7 @@ public class MainMenuViewModel extends WindowViewModel
     /**
      * Wechselt den Flipper-Automaten, der detailreich dargestellt wird, auf den Übergebenen.
      *
-     * @param pinballMachine Der neue Flipperautomat, der dargstellt werden soll.
+     * @param pinballMachine Der neue Flipperautomat, der dargestellt werden soll.
      */
     public void switchPinballMachineInfo(PinballMachine pinballMachine)
     {
