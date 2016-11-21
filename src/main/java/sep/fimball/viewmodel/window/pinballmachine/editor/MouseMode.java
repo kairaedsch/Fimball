@@ -1,9 +1,22 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 /**
- * Created by kaira on 17.11.2016.
+ * MouseMode enthält die unterschiedlichen Modi der Benutzung der Elemente im Editor durch die Maus.
  */
 public enum MouseMode
 {
-    DRAGGING, PLACING, SELECTING
+    /**
+     * TODO
+     */
+    DRAGGING,
+
+    /**
+     * TODO
+     */
+    PLACING,
+
+    /**
+     * TODO
+     */
+    SELECTING
 }

@@ -43,18 +43,39 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private DoubleProperty cameraZoom;
 
+    /**
+     * Der Name des editierten Automaten.
+     */
     private StringProperty machineName;
 
+    /**
+     * Das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld.
+     */
     private SelectedElementSubViewModel selectedElementSubViewModel;
 
+    /**
+     * Das PinballCanvasViewModel des angezigten Spielfelds.
+     */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
+    /**
+     * Der ausgewählte MouseMode.
+     */
     private ObjectProperty<MouseMode> mouseModus;
 
+    /**
+     * Das aktuell ausgewählte Element aus der Liste der platzierbaren Elemente.
+     */
     private Optional<BaseElement> selectedAvailableElement;
 
+    /**
+     * Das aktuell auf dem Spielfeld ausgewählte Element.
+     */
     private ObjectProperty<Optional<PlacedElement>> selectedPlacedElement;
 
+    /**
+     * Die Position des aktuell auf dem Spielfeld ausgewählten Elements.
+     */
     private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
     /**
@@ -168,6 +189,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.selectedAvailableElement = Optional.of(selectedAvailableElement);
     }
 
+    /**
+     * TODO
+     * @param gridPosition
+     * @param onlyPressed
+     */
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
         if(mouseModus.get() == MouseMode.SELECTING && onlyPressed)

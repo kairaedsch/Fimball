@@ -36,8 +36,14 @@ public class PinballCanvasViewModel
      */
     private Observable redrawObservable;
 
+    /**
+     * Gibt an, ob das Pinball-Canvas im Editor benutzt wird.
+     */
     private boolean editorMode;
 
+    /**
+     * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
+     */
     private PinballMachineEditorViewModel editorViewModel;
 
     /**
@@ -56,6 +62,11 @@ public class PinballCanvasViewModel
         editorMode = false;
     }
 
+    /**
+     * Erstellt ein neues PinballCanvasViewModel.
+     * @param gameSession Die Spielsitzung.
+     * @param pinballMachineEditorViewModel Das korrespondierende PinballMachineEditorViewModel.
+     */
     public PinballCanvasViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         init(gameSession);
@@ -70,6 +81,7 @@ public class PinballCanvasViewModel
 
     /**
      * Initialisiert die Zeichnung des Canvas.
+     * @param gameSession Die zugehörige GameSession.
      */
     private void init(GameSession gameSession)
     {
@@ -84,6 +96,10 @@ public class PinballCanvasViewModel
         gameSession.addGameLoopObserver(gameObserver);
     }
 
+    /**
+     * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf das Spielfeld geklickt hat.
+     * @param gridPos Die Position im Grid, auf die der Nutzer geklickt hat.
+     */
     public void mouseClickedOnGame(Vector2 gridPos)
     {
         if (editorMode)
@@ -92,6 +108,10 @@ public class PinballCanvasViewModel
         }
     }
 
+    /**
+     * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf dem Spielfeld die Maustaste gedrückt hat.
+     * @param gridPos Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
+     */
     public void mousePressedOnGame(Vector2 gridPos)
     {
         if (editorMode)

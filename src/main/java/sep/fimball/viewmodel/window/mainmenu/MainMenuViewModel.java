@@ -128,6 +128,10 @@ public class MainMenuViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Findet den Index des aktuell ausgewählten Automaten in der Vorschauliste.
+     * @return Der Index des aktuell ausgewählten Automaten in der Vorschauliste.
+     */
     private int findSelectedIndex()
     {
         for (int i = 0; i < pinballMachineSelectorSubViewModelList.size(); ++i)

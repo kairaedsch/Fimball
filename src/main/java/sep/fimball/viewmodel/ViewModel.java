@@ -24,6 +24,10 @@ public abstract class ViewModel
     }
 
 
+    /**
+     * Verarbeitet das gegebene KeyEvent.
+     * @param keyEvent Das KeyEvent, das verarbeitet werden soll.
+     */
     public void handleKeyEvent(KeyEvent keyEvent) {
 
     }

@@ -42,7 +42,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Leitet das Key-Event an den inputManager weiter.
+     * Leitet das Key-Event an das zuständige WindowViewModel bzw. DialogViewModel weiter.
      *
      * @param event Das Key-Event, das weitergeleitet werden soll.
      */

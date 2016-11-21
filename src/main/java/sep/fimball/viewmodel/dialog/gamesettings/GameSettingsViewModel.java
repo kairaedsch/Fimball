@@ -86,6 +86,9 @@ public class GameSettingsViewModel extends DialogViewModel
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
+    /**
+     * Speichert die Einstellungen persistent.
+     */
     private void saveSettings()
     {
         Settings.getSingletonInstance().Serialize();

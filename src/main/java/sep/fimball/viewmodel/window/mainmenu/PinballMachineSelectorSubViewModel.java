@@ -29,14 +29,21 @@ public class PinballMachineSelectorSubViewModel
      */
     private StringProperty imagePath;
 
+    /**
+     * Gibt an, ob der Automat ausgewählt ist.
+     */
     private BooleanProperty isSelected;
 
+    /**
+     * Das zugehörige PinBallMachineInfoSubViewModel.
+     */
     private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
 
     /**
-     * Erstellt ein PinballMachineSelectorSubViewModel.
-     *
+     * Erstellt ein neues PinballMachineSelectorSubViewModel.
+     * @param mainMenu Das zugehörige Hauptmenü.
      * @param pinballMachine Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
+     * @param pinballMachineInfoSubViewModel Das zugehörige PinballMachineInfoSubViewModel.
      */
     PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine, PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel)
     {

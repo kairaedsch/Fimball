@@ -26,15 +26,18 @@ public class SpriteSubViewModel
     private DoubleProperty rotation;
 
     /**
-     * Der Pfad zu dem Bild, das von der View gezeichnet werden soll.
+     * Das aktuelle Bild, das von der View gezeichnet werden soll.
      */
-    private ObjectProperty<ElementImage> currentImagePath;
+    private ObjectProperty<ElementImage> currentImage;
 
     /**
      * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
      */
     private BooleanProperty isSelected;
 
+    /**
+     * Das zugehörige GameElement.
+     */
     private GameElement gameElement;
 
     /**
@@ -49,26 +52,34 @@ public class SpriteSubViewModel
         position.bind(gameElement.positionProperty());
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
-        currentImagePath = new SimpleObjectProperty<>();
+        currentImage = new SimpleObjectProperty<>();
         isSelected = new SimpleBooleanProperty(false);
 
-        gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImagePath());
-        updateImagePath();
+        gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImage());
+        updateImage();
     }
 
-    private void updateImagePath()
+    /**
+     * Aktualisiert das zu zeichnende Bild.
+     */
+    private void updateImage()
     {
         if(gameElement.currentAnimationProperty().get().isPresent())
         {
             Animation animation = gameElement.currentAnimationProperty().get().get();
-            currentImagePath.set(new ElementImage(gameElement, animation));
+            currentImage.set(new ElementImage(gameElement, animation));
         }
         else
         {
-            currentImagePath.set(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get());
+            currentImage.set(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get());
         }
     }
 
+    /**
+     * Ezstellt ein neues SpriteSubViewModel.
+     * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     * @param selectedPlacedElement Das aktuell ausgewählte Element.
+     */
     public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)
     {
         this(gameElement);
@@ -103,7 +114,7 @@ public class SpriteSubViewModel
      */
     public ReadOnlyObjectProperty<ElementImage> animationFramePathProperty()
     {
-        return currentImagePath;
+        return currentImage;
     }
 
     /**

@@ -28,5 +28,5 @@ public enum WindowType
     /**
      * Das Fenster, in dem die Einstellungen von Fimball verwaltet werden.
      */
-    TABLE_SETTINGS;
+    TABLE_SETTINGS
 }

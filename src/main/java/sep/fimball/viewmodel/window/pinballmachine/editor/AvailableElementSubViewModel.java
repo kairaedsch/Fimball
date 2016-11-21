@@ -27,12 +27,15 @@ public class AvailableElementSubViewModel
      */
     private StringProperty imagePath;
 
+    /**
+     * Das zugehörige PinballMachineEditorViewModel.
+     */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     /**
-     * Erstellt ein neues AvailableElementSubViewModel.
-     *
-     * @param baseElement Der Elementtyp, dessen Informationen angezeigt werden sollen.
+     * Erstellt ein neues AvailableElementSubViewModel
+     * @param pinballMachineEditorViewModel Das zugehörige PinballMachineEditorViewModel.
+     * @param baseElement Das zugehörige BaseElement, dessen Informationen dargstellt werden sollen.
      */
     public AvailableElementSubViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel, BaseElement baseElement)
     {
@@ -62,6 +65,9 @@ public class AvailableElementSubViewModel
         return imagePath;
     }
 
+    /**
+     * TODO
+     */
     public void selected()
     {
         pinballMachineEditorViewModel.setMouseModus(MouseMode.PLACING);

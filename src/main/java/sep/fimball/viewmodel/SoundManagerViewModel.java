@@ -12,12 +12,29 @@ import java.util.Observer;
  * Diese Klasse gibt Anweisungen, die Soundclips, die Hintergrundmusik und die Lautstärke zu ändern, an das Model weiter und stellt der View diese Informationen zur Verfügung.
  */
 public class SoundManagerViewModel {
+    /**
+     * Das Observable, das angibt, dass ein Sound abgespielt werden soll.
+     */
     private Observable clipObservable;
+
+    /**
+     * Das Observable, das angibt, dass eine Hintergrundmusik abgespielt werden soll.
+     */
     private Observable mediaObservable;
 
+    /**
+     * Die Lautstärke der Hintergrundmusik.
+     */
     private DoubleProperty musicVolume;
+
+    /**
+     * Die Lautstärke der Sounds.
+     */
     private DoubleProperty sfxVolume;
 
+    /**
+     * Die aktuellen Einstellungen.
+     */
     Settings settings;
 
     /**

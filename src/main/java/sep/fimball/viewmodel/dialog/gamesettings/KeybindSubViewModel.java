@@ -34,8 +34,9 @@ public class KeybindSubViewModel
     private Settings settings;
 
     /**
-     * Erstellt ein neues KeybindSubViewModel.
+     * Erzeugt ein neues KeyBindSubViewModel.
      *
+     * @param settings Die aktuellen Einstellungen.
      * @param keyBinding Die Funktion des Automaten, an die die Taste gebunden wird.
      * @param keyCode Die Taste, an die die Funktion gebunden wird.
      */

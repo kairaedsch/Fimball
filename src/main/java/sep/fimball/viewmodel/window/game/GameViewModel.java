@@ -63,6 +63,9 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues GameViewModel.
+     * @param pinballMachine Der gespielte Flipperautomat.
+     * @param playerNames Die Namen der teilnehmenden Spieler.
+     * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
      */
     public GameViewModel(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
