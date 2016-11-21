@@ -61,6 +61,7 @@ public class JsonFileManager
      *
      * @param path          Der Pfad, in dem die JSON-Datei liegen soll.
      * @param classInstance Die Instanz einer Klasse, die gespeichert werden soll.
+     * @return {@code true}, falls das Speichern funktioniert hat, {@code false} sonst.
      */
     public static boolean saveToJson(String path, Object classInstance)
     {

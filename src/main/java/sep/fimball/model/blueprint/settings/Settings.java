@@ -193,8 +193,8 @@ public class Settings
     /**
      * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die durch {@code keycode} beschriebene Taste nicht schon von einem anderen KeyBinding belegt ist.
      *
-     * @param keyBinding
-     * @param keyCode
+     * @param keyBinding Das Keybinding, das hinzugefügt werden soll.
+     * @param keyCode Der KeyCode, der hinzugefügt werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
