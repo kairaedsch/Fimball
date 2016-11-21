@@ -47,6 +47,10 @@ public class Collider
     /**
      * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des Colliders hat.
      * @param ball Der Ball, dessen Kollisionen überprüft werden sollen.
+     * @param colliderObjectPosition Die Position des Elements, mit dem kollidiert wird.
+     * @param rotation Die Drehung des Elements, mit dem kollidiert wird.
+     * @param pivotPoint Der Pivot-Punkt des Elements, mit dem kollidiert wird.
+     * @return {@code true}, wenn eine Kollision stattfindet, {@code false} sonst.
      */
     public boolean checkCollision(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {

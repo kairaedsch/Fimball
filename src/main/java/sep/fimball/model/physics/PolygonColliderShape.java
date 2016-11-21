@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 public class PolygonColliderShape implements ColliderShape
 {
     /**
-     * Die Kanten des Polygons, die den Collider formen.
+     * Die Eckpunkte des Polygons, die den Collider formen.
      */
     private List<Vector2> vertices;
 
     /**
      * Erstellt einen neuen Collider in Polygonform.
-     * @param vertices
+     * @param vertices Die Ecken des Polygons.
      */
     public PolygonColliderShape(List<Vector2> vertices)
     {
@@ -30,8 +30,8 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     /**
-     * Gibt die Kanten des Polygons, die den Collider formen, zurück.
-     * @return Die Kanten des Polygons, die den Collider formen.
+     * Gibt die Eckpunkte des Polygons, die den Collider formen, zurück.
+     * @return Die Eckpunkte des Polygons, die den Collider formen.
      */
     public List<Vector2> getVertices()
     {
@@ -187,7 +187,7 @@ public class PolygonColliderShape implements ColliderShape
      * Rotiert alle Elemente in vertices um einen Punkt.
      * @param rotation Der Winkel in Grad, um den die Vertices rotiert werden.
      * @param pivotPoint Der Punkt, um den rotiert wird.
-     * @return Die Liste von rotierten Vektoren.
+     * @return Die Liste von rotierten Eckpunkten.
      */
     private List<Vector2> rotate(double rotation, Vector2 pivotPoint)
     {

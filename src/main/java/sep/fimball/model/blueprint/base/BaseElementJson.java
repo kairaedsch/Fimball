@@ -80,7 +80,7 @@ public class BaseElementJson
             public static class PolygonJson
             {
                 /**
-                 * Speichert die Kanten des Polygons.
+                 * Speichert die Eckpunkte des Polygons.
                  */
                 public Vector2[] vertices;
             }

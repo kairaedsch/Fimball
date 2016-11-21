@@ -3,13 +3,13 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Bei einem Collider mit dieser Art von Collision prallt der Ball ab, und bekommt zusätzlich noch eine vorgegebene
+ * Bei einem Collider mit dieser Art von Collision prallt der Ball ab und bekommt zusätzlich noch eine vorgegebene
  * Geschwindigkeit hinzugefügt.
  */
 public class BounceCollision implements CollisionType
 {
     /**
-     * Wie viel Geschwindigkeit der Ball beim abprallen zusätzlich bekommt.
+     * Gibt an, wie viel Geschwindigkeit der Ball beim abprallen zusätzlich bekommt.
      */
     private double strength;
 
