@@ -112,6 +112,7 @@ public class Config
 
     /**
      * Gibt den Pfad des Verzeichnis, an dem sich Infos über ein einzelnes BaseElements befinden, basierend auf der übergebenen ElementID zurück
+     *
      * @param elementTypeId Id des BaseElements
      * @return Pfad des BaseElements
      */
@@ -168,6 +169,7 @@ public class Config
 
     /**
      * Gibt den Pfad zu einem serialisierten Flipperautomaten basierend auf der übergebenen MachineID zurück
+     *
      * @param pinballMachineId Id des Flipperautomaten
      * @return Pfad des serialisierten Flipperautomaten
      */
@@ -232,6 +234,7 @@ public class Config
 
     /**
      * Gibt den Pfad zu einer Sounddatei basierend auf deren Name zurück.
+     * 
      * @param clipName Der Name der Sounddatei.
      * @return Der Pfad an dem sich die Sounddatei befindet.
      */
