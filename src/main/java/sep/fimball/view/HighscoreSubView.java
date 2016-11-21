@@ -21,11 +21,7 @@ public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
     @FXML
     public Label score;
 
-    /**
-     * Bindet die HighscoreSubView an den zugehörigen Highscore.
-     *
-     * @param highscore Der Highscore, an den diese HighscoreSubView gebunden werden soll.
-     */
+    @Override
     public void setViewModel(Highscore highscore)
     {
         if (highscore == null) {

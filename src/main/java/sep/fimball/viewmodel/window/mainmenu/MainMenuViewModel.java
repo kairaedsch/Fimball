@@ -63,7 +63,8 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu der Spielerauswahl, wobei der detailreich dargestellte Flipper-Automat nach der Spielerauswahl gespielt werden kann.
+     * Führt den Benutzer zu der Spielerauswahl, wobei der gegebene Flipperautomat nach der Spielerauswahl gespielt werden kann.
+     * @param pinballMachine Der Flipperautomat, der nach der Spielerauswahl gestartet werden können soll.
      */
     void showPlayerNameDialog(PinballMachine pinballMachine)
     {
@@ -71,7 +72,8 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu den Fimball-Einstellungen.
+     * Führt den Benutzer zu den Fimball-Einstellungen des gegebenen Flipperautomatens.
+     * @param pinballMachine Der Flipperautomat, dessen Einstellungen angezeigt werden sollen.
      */
     void startEditor(PinballMachine pinballMachine)
     {
@@ -98,6 +100,10 @@ public class MainMenuViewModel extends WindowViewModel
         return pinballMachineInfoSubViewModel;
     }
 
+
+    /**
+     *  Führt den Benutzer zu den Fimball-Einstellungen eines neuen Automaten.
+     */
     public void addNewAutomaton()
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));

@@ -38,10 +38,14 @@ public class SelectedElementSubViewModel
      */
     private DoubleProperty multiplier;
 
+    /**
+     * TODO
+     */
     private BooleanProperty isSomethingSelected;
 
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
+     * @param pinballMachine Der Flipperautomat, der das ausgewählte Element enthält.
      */
     public SelectedElementSubViewModel(PinballMachine pinballMachine)
     {
@@ -138,6 +142,9 @@ public class SelectedElementSubViewModel
         return multiplier;
     }
 
+    /**
+     * Entfernt das ausgewählte Element vom Flipperautomaten.
+     */
     public void remove()
     {
         if(placedElement.isPresent()) pinballMachine.removeElement(placedElement.get());

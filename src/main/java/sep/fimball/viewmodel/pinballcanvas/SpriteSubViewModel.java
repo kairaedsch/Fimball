@@ -60,7 +60,7 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Aktualisiert das zu zeichnende Bild.
+     * Aktualisiert abhänigig vom GameElement das zu zeichnende Bild.
      */
     private void updateImage()
     {

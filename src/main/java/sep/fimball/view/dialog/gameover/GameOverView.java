@@ -13,13 +13,13 @@ import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 public class GameOverView extends DialogView<GameOverViewModel>
 {
     /**
-     * Das Pane zur Anzeige der Highscores, die am Flipperautomaten erreicht wurden.
+     * Der Behälter zur Anzeige der Highscores, die am Flipperautomaten erreicht wurden.
      */
     @FXML
     private VBox highscores;
 
     /**
-     * Das Pane zur Anzeige der in der gerade gespielten Partie erreichten Punktestände.
+     * Der Behälter zur Anzeige der in der gerade gespielten Partie erreichten Punktestände.
      */
     @FXML
     private VBox playerScores;

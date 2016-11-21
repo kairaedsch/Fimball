@@ -29,6 +29,7 @@ public class PauseViewModel extends DialogViewModel
 
     /**
      * Erstellt ein neues PauseViewModel.
+     * @param gameViewModel Das zugehörige GameViewModel.
      */
     public PauseViewModel(GameViewModel gameViewModel)
     {

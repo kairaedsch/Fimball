@@ -163,6 +163,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
+    /**
+     * TODO
+     * @param x
+     * @param y
+     */
     public void dragged(double x, double y)
     {
         double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
@@ -178,6 +183,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             selectedPlacedElementPosition.set(new Vector2(divX, divY).add(selectedPlacedElementPosition.get()));
         }
     }
+
 
     public void setMouseModus(MouseMode mouseMode)
     {

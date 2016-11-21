@@ -29,6 +29,7 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
      */
     private PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel;
 
+    @Override
     public void setViewModel(PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel)
     {
         this.pinballMachineSelectorSubViewModel = pinballMachineSelectorSubViewModel;

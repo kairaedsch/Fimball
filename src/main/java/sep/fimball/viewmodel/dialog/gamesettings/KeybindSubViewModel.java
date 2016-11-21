@@ -54,6 +54,7 @@ public class KeybindSubViewModel
 
     /**
      * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.element.GameElement} bedient, auf die Übergebene zu ändern.
+     * @param keyCode Der Code der neuen Taste.
      */
     public void changeKeyBinding(KeyCode keyCode)
     {

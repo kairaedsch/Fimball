@@ -51,7 +51,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Slider sfxVolumeSlider;
 
     /**
-     * Das Pane zur Einstellung der Tastenbelegungen.
+     * Der Behälter zur Einstellung der Tastenbelegungen.
      */
     @FXML
     private VBox keyBindings;

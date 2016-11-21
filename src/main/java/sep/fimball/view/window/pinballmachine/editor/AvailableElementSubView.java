@@ -13,7 +13,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubVie
 public class AvailableElementSubView implements ViewBoundToViewModel<AvailableElementSubViewModel>
 {
     /**
-     * Zeigt das Vorschaubild des Elements an.
+     * Das Pane, das Vorschaubild des Elements anzeigt.
      */
     @FXML
     public Pane previewImage;
