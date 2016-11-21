@@ -64,6 +64,7 @@ public class ElementImage
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      *
      * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param animation Die zum ElementImage gehörende Animation.
      */
     public ElementImage(String baseElementId, Animation animation)
     {
@@ -75,6 +76,7 @@ public class ElementImage
      *
      * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
      * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
+     * @param animation Die zum ElementImage gehörende Animation.
      */
     public ElementImage(String baseElementId, int rotationAccuracy, Animation animation)
     {

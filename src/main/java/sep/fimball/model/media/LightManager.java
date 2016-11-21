@@ -27,7 +27,7 @@ public class LightManager
     /**
      * Fügt das gegebene PlacedElement der Liste der verwalteten Lichter hinzu, falls dieses ein Licht ist.
      *
-     * @param light
+     * @param light Das PlacedElement, das hinzugefügt werden soll, wenn es ein Licht ist.
      */
     public void addLight(PlacedElement light)
     {
