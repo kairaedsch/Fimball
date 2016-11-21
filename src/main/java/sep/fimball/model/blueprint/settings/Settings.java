@@ -194,7 +194,7 @@ public class Settings
      * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die durch {@code keycode} beschriebene Taste nicht schon von einem anderen KeyBinding belegt ist.
      *
      * @param keyBinding Das Keybinding, das hinzugefügt werden soll.
-     * @param keyCode Der KeyCode, der hinzugefügt werden soll.
+     * @param keyCode    Der KeyCode, der hinzugefügt werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
@@ -205,15 +205,11 @@ public class Settings
     }
 
     /**
-     * Gibt das Property zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück
      *
-     * @return Das Property, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * @param code Der KeyCode für den das entsprechende KeyBinding gesucht werden soll
+     * @return Das Keybinding welches zum übergebenen KeyCode passt
      */
-    public BooleanProperty fullscreenProperty()
-    {
-        return fullscreen;
-    }
-
     public KeyBinding getKeyBinding(KeyCode code)
     {
         for (KeyBinding binding : keyBindingsMap.keySet())
@@ -224,5 +220,15 @@ public class Settings
             }
         }
         return null;
+    }
+
+    /**
+     * Gibt das Property zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     *
+     * @return Das Property, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     */
+    public BooleanProperty fullscreenProperty()
+    {
+        return fullscreen;
     }
 }

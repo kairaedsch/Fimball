@@ -11,5 +11,5 @@ public interface UserTrigger
     /**
      * TODO
      */
-    public void activateUserTrigger(KeyBinding keyBinding, KeyEventType keyEventType);
+    void activateUserTrigger(KeyBinding keyBinding, KeyEventType keyEventType);
 }

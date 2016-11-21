@@ -13,6 +13,7 @@ public class InputManagerViewModel
      * Leitet ein Key-Event an das Model weiter.
      *
      * @param event Das Key-Event, dass weitergeleitet wird.
+     * @param currentWindowType TODO
      */
     public void onKeyEvent(KeyEvent event, WindowType currentWindowType)
     {

@@ -8,5 +8,5 @@ public interface GameTrigger
     /**
      * TODO
      */
-    public void activateGameTrigger();
+    void activateGameTrigger();
 }
