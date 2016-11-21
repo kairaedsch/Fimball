@@ -53,16 +53,19 @@ public class PhysicsHandler
     private List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
-     * Eine Liste aller GameElements
+     * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
      */
     private List<PhysicsElement> physicsElements;
 
+    /**
+     * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
+     */
     private GameSession gameSession;
 
     private final boolean debug = false;
 
     /**
-     * Zrzeugt einen neuen PhysicsHandler mit den gegebenen Element.
+     * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      */
     public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession)
@@ -101,7 +104,7 @@ public class PhysicsHandler
     }
 
     /**
-     * Startet die Physik Schleife
+     * Startet die Physik-Schleife.
      */
     public void startTicking()
     {
@@ -109,6 +112,10 @@ public class PhysicsHandler
         physicTimer.scheduleAtFixedRate(createTask(), TIMER_DELAY, TICK_RATE);
     }
 
+    /**
+     * Erstellt einen neuen TimerTask, welcher die Physikberechnungen ausführt.
+     * @return Den TimerTask.
+     */
     private TimerTask createTask()
     {
         return new TimerTask()
@@ -144,7 +151,7 @@ public class PhysicsHandler
                     ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
                 }
 
-                List<CollisionEventArg> collisionEventArgs = new ArrayList<>();
+                List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
 
                 for (PhysicsElement element : physicsElements)
                 {
@@ -156,14 +163,14 @@ public class PhysicsHandler
 
                             if(hit)
                             {
-                                collisionEventArgs.add(new CollisionEventArg(element.getElement(), collider.getId()));
+                                collisionEventArgses.add(new CollisionEventArgs(element.getElement(), collider.getId()));
                             }
                         }
                     }
                     element.writeToGameElement();
                 }
 
-                gameSession.addCollisionEventArgs(collisionEventArgs);
+                gameSession.addCollisionEventArgs(collisionEventArgses);
 
                 // TODO Notify GameElements about collisions
 
@@ -173,7 +180,7 @@ public class PhysicsHandler
     }
 
     /**
-     * Stoppt die Physik Schleife
+     * Stoppt die Physik-Schleife.
      */
     public void stopTicking()
     {

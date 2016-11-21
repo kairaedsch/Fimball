@@ -126,7 +126,7 @@ public class GameSession
     /**
      *
      */
-    private LinkedList<List<CollisionEventArg>> collisionEventArgsList;
+    private LinkedList<List<CollisionEventArgs>> collisionEventArgsList;
 
     /**
      * Dummy object for locking while accessing {@see collisionEventArgsList}
@@ -149,7 +149,7 @@ public class GameSession
         this.machineBlueprint = machineBlueprint;
         this.triggers = new ArrayList<>();
         collisionEventArgsLocker = new Object();
-        collisionEventArgsList = new LinkedList<List<CollisionEventArg>>();
+        collisionEventArgsList = new LinkedList<List<CollisionEventArgs>>();
 
         gameBall = new SimpleObjectProperty<>();
 
@@ -230,16 +230,16 @@ public class GameSession
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
-            LinkedList<List<CollisionEventArg>> argsList;
+            LinkedList<List<CollisionEventArgs>> argsList;
             synchronized (collisionEventArgsLocker)
             {
                 argsList = this.collisionEventArgsList;
-                this.collisionEventArgsList = new LinkedList<List<CollisionEventArg>>();
+                this.collisionEventArgsList = new LinkedList<List<CollisionEventArgs>>();
             }
 
-            for (List<CollisionEventArg> args : argsList)
+            for (List<CollisionEventArgs> args : argsList)
             {
-                for (CollisionEventArg arg : args)
+                for (CollisionEventArgs arg : args)
                 {
                     for (Trigger trigger : triggers)
                     {
@@ -333,13 +333,13 @@ public class GameSession
     /**
      * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
      *
-     * @param collisionEventArg
+     * @param collisionEventArgs
      */
-    public void addCollisionEventArgs(List<CollisionEventArg> collisionEventArg)
+    public void addCollisionEventArgs(List<CollisionEventArgs> collisionEventArgs)
     {
         synchronized (collisionEventArgsLocker)
         {
-            collisionEventArgsList.add(collisionEventArg);
+            collisionEventArgsList.add(collisionEventArgs);
         }
     }
 

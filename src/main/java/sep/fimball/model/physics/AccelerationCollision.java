@@ -9,13 +9,13 @@ import sep.fimball.general.data.Vector2;
 public class AccelerationCollision implements CollisionType
 {
     /**
-     * Wie stark, und in welche Richtung der Ball beschleunigt wird.
+     * Wie stark der Ball in Richtung des Elements beschleunigt wird.
      */
     private double strength;
 
     /**
      * Erstellt eine neue Instanz von AccelerationCollision.
-     * @param acceleration Wie stark, und in welche Richtung der Ball beschleunigt wird.
+     * @param strength Wie stark der Ball in Richtung des Elements beschleunigt wird.
      */
     public AccelerationCollision(double strength)
     {

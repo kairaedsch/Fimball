@@ -5,10 +5,13 @@ import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Diese Klasse repäsentiert die Kollision des Balls mit einem "normalen" Element (kein Flipper oder Plunger).
+ * Diese Klasse repäsentiert die Kollision des Balls mit einem "normalen" Element (z.B. eine einfache Wand).
  */
 public class NormalCollision implements CollisionType
 {
+    /**
+     * Wie viel Prozent der Geschwindigkeit sollen nach der Kollision erhalten bleiben.
+     */
     private final double bounce = 0.7;
 
     @Override

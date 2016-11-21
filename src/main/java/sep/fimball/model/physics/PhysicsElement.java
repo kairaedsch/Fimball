@@ -25,11 +25,14 @@ public class PhysicsElement
      */
     private double rotation;
 
+    /**
+     * Die Liste der Collider, welche die Kollisionsflächen dieses Elements darstellen.
+     */
     private List<Collider> colliders;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
-     * @param element
+     * @param element Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
      */
     public PhysicsElement(GameElement element)
     {

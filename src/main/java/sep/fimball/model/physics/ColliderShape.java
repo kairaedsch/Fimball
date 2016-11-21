@@ -15,5 +15,11 @@ public interface ColliderShape
      */
     HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint);
 
+    /**
+     * Gibt eine axis-aligned Box zurück, welche die Form der Fläche enthält.
+     * @param rotation Rotation der Form.
+     * @param pivotPoint Punkt, um den die Form rotiert wird.
+     * @return Axis-aligned Box zurück, welche die Form der Fläche enthält.
+     */
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 }

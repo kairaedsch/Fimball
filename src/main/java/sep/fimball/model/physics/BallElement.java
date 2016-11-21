@@ -50,7 +50,7 @@ public class BallElement
     }
 
     /**
-     * TODO
+     * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
      * @return
      */
     public PhysicsElement getSubElement()
@@ -58,28 +58,16 @@ public class BallElement
         return subElement;
     }
 
-    /**
-     * Gibt die Position des Balls zurück.
-     * @return Die Position des Balls.
-     */
     public Vector2 getPosition()
     {
         return subElement.getPosition();
     }
 
-    /**
-     * Setzt die Position des Balls auf den gegebenen Wert.
-     * @param position Die neue Position des Balls.
-     */
     public void setPosition(Vector2 position)
     {
         subElement.setPosition(position);
     }
 
-    /**
-     * TODO
-     * @param rotation
-     */
     public void setRotation(double rotation)
     {
         subElement.setRotation(rotation);

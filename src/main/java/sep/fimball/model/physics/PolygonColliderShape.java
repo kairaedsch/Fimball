@@ -183,6 +183,12 @@ public class PolygonColliderShape implements ColliderShape
         return new RectangleDouble(origin, maxX - minX, maxY - minY);
     }
 
+    /**
+     * Rotiert alle Elemente in vertices um einen Punkt.
+     * @param rotation Der Winkel in Grad, um den die Vertices rotiert werden.
+     * @param pivotPoint Der Punkt, um den rotiert wird.
+     * @return Die Liste von rotierten Vektoren.
+     */
     private List<Vector2> rotate(double rotation, Vector2 pivotPoint)
     {
         return vertices.stream().map(vec -> Vector2.rotate(vec, Math.toRadians(rotation), pivotPoint)).collect(Collectors.toList());
