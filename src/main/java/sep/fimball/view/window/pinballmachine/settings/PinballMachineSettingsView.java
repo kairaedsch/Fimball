@@ -34,7 +34,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer die PinballMachine-Elemente editieren möchte.
+     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer die PinballMachine-Elemente editieren möchte.
      */
     @FXML
     private void editClicked()
@@ -43,7 +43,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer zurück zum Hauptmenü wechseln möchte.
+     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer zurück zum Hauptmenü wechseln möchte.
      */
     @FXML
     private void menuClicked()
@@ -52,7 +52,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer den aktuellen Stand der PinballMachine speichern möchte.
+     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer den aktuellen Stand der PinballMachine speichern möchte.
      */
     @FXML
     private void saveClicked()
@@ -61,7 +61,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer die PinballMachine löschen möchte.
+     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer die PinballMachine löschen möchte.
      */
     @FXML
     private void deleteClicked()

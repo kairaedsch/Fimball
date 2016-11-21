@@ -1,8 +1,6 @@
 package sep.fimball.model.blueprint;
 
 import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.ReadOnlyMapProperty;
-import javafx.print.Collation;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Config;
@@ -13,13 +11,12 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
-import java.util.Collection;
-
 import static junit.framework.TestCase.assertFalse;
 
 /**
  *
  */
+@Ignore
 public class PinballMachineSaveTest
 {
     private static final int MAX_ELEMENT_SIZE = 20;

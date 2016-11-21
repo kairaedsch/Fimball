@@ -29,9 +29,15 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     @FXML
     private Slider pointsSlider;
 
+    /**
+     * Zeigt die eingestellten Multiplier des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
+     */
     @FXML
     private Label strengthLabel;
 
+    /**
+     * Zeigt die eingestellten Punkte, die ein Treffer des Elements durch die Kugel bringt.
+     */
     @FXML
     private Label pointsLabel;
 
@@ -73,22 +79,18 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element nach rechts drehen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element drehen möchte.
      */
     @FXML
-    private void rotateClockwiseClicked() {
+    private void rotateClicked() {
         selectedElementSubViewModel.rotateClockwise();
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element nach links drehen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählt Element löschen möchte.
      */
     @FXML
-    private void rotateCounterclockwiseClicked() {
-        selectedElementSubViewModel.rotateCounterclockwise();
-    }
-
-    public void removeClicked()
+    private void removeClicked()
     {
         selectedElementSubViewModel.remove();
     }

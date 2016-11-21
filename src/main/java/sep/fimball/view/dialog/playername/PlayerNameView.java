@@ -68,7 +68,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     }
 
     /**
-     * Benachrichtigt das PlayerNameViewModel, dass der Nutzer eine Partie mit den gerade getätigten Einstellungen spielen möchte.
+     * Benachrichtigt das {@code playerNameViewModel}, dass der Nutzer eine Partie mit den gerade getätigten Einstellungen spielen möchte.
      */
     @FXML
     private void okClicked()
@@ -77,7 +77,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     }
 
     /**
-     * Benachrichtigt das PlayerNameViewModel, dass der Nutzer den Spieler-Name-Dialog abbrechen möchte.
+     * Benachrichtigt das {@code playerNameViewModel}, dass der Nutzer den Spieler-Name-Dialog abbrechen möchte.
      */
     @FXML
     private void abortClicked()
@@ -86,7 +86,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     }
 
     /**
-     * Benachrichtigt das PlayerNameViewModel, dass der Nutzer einen Spieler zu den Partie-Teilnehmern hinzufügen möchte.
+     * Benachrichtigt das {@code playerNameViewModel}, dass der Nutzer einen Spieler zu den Partie-Teilnehmern hinzufügen möchte.
      */
     @FXML
     private void addPlayerClicked()

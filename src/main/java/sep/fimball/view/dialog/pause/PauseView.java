@@ -22,8 +22,11 @@ public class PauseView extends DialogView<PauseViewModel>
      */
     private PauseViewModel pauseViewModel;
 
+    /**
+     *  Der Button, der zurück in das Hauptmenü führt.
+     */
     @FXML
-    private Button abortButton;
+    private Button exitToMainMenuButton;
 
     /**
      * Setzt das zum PauseView gehörende PauseViewModel.
@@ -37,7 +40,7 @@ public class PauseView extends DialogView<PauseViewModel>
     }
 
     /**
-     * Benachrichtigt das PauseViewModel, dass der Nutzer das Spiel abbrechen möchte.
+     * Benachrichtigt das {@code pauseViewModel}, dass der Nutzer das Spiel abbrechen möchte.
      */
     @FXML
     private void abortClicked()
@@ -46,7 +49,7 @@ public class PauseView extends DialogView<PauseViewModel>
     }
 
     /**
-     * Benachrichtigt das PauseViewModel, dass der Nutzer weiterspielen möchte.
+     * Benachrichtigt das {@code pauseViewModel}, dass der Nutzer weiterspielen möchte.
      */
     @FXML
     private void okClicked()

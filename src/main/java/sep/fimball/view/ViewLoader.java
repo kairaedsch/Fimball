@@ -34,7 +34,7 @@ public class ViewLoader<ViewT>
     }
 
     /**
-     * Lädt aus der gegebenen FXML-Datei, setzt die RootNode als {@code rootNode} und lädt und setzt die zur {@code rootNode} gehörende View.
+     * Lädt aus der gegebenen FXML-Datei, setzt die RootNode als {@code rootNode}, lädt die eingestellte Sprache und lädt und setzt die zur {@code rootNode} gehörende View.
      *
      * @param fxmlPath Der Pfad zur FXML-Datei, aus der geladen werden soll.
      */

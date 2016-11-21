@@ -12,9 +12,15 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubVie
  */
 public class AvailableElementSubView implements ViewBoundToViewModel<AvailableElementSubViewModel>
 {
+    /**
+     * Zeigt das Vorschaubild des Elements an.
+     */
     @FXML
     public Pane previewImage;
 
+    /**
+     * Zeigt den Namen des Elements an.
+     */
     @FXML
     public Label previewName;
 
@@ -36,6 +42,9 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
         previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", availableElementSubViewModel.imagePathProperty().get(), "\");"));
     }
 
+    /**
+     * Benachrightigt das {@code availableElementSubViewModel}, dass der Spieler auf dieses Element geklickt hat.
+     */
     public void mouseClicked()
     {
         availableElementSubViewModel.selected();

@@ -112,7 +112,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     }
 
     /**
-     * Benachrichtigt das GameSettingsViewModel, dass der Nutzer die Einstellungen schließen möchte.
+     * Benachrichtigt das {@code gameSettingsViewModel}, dass der Nutzer die Einstellungen schließen möchte.
      */
     @FXML
     private void okClicked()

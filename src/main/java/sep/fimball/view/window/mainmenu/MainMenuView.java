@@ -89,7 +89,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer den aktuell ausgewählten Automaten bearbeiten möchte.
+     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer den aktuell ausgewählten Automaten bearbeiten möchte.
      */
     @FXML
     private void editClicked()
@@ -98,7 +98,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer den aktuell ausgewählten Automaten spielen möchte.
+     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer den aktuell ausgewählten Automaten spielen möchte.
      */
     @FXML
     private void playClicked()
@@ -107,7 +107,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer die Einstellungen des Spiels einsehen und unter Umständen ändern möchte.
+     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer die Einstellungen des Spiels einsehen und unter Umständen ändern möchte.
      */
     @FXML
     private void settingsClicked()
@@ -160,7 +160,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer einen neuen Automaten erstellen und der Liste der verfügaberen Automaten hinzufügen möchte.
+     * Benachrichtigt das {@code mainMenuViewModel}, dass der Nutzer einen neuen Automaten erstellen und der Liste der verfügaberen Automaten hinzufügen möchte.
      */
     @FXML
     private void addClicked()

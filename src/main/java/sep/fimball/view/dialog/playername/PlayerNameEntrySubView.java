@@ -42,7 +42,7 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
     }
 
     /**
-     * Benachrichtigt das PlayerNameEntrySubViewModel, dass der Nutzer den Spieler löschen möchte.
+     * Benachrichtigt das {@code playerNameEntrySubViewModel}, dass der Nutzer den Spieler löschen möchte.
      */
     @FXML
     private void deleteClicked()

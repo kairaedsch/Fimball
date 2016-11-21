@@ -1,7 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -22,25 +21,35 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
+    /**
+     * TODO
+     */
     @FXML
     private Button dragButton;
 
+    /**
+     * TODO
+     */
     @FXML
     private Button selectButton;
 
+    /**
+     * TODO
+     */
     @FXML
     private Button placeButton;
 
+    /**
+     * Zeigt den Namen des editierten Automaten an.
+     */
     @FXML
     private Label nameLabel;
 
+    /**
+     * Enthält das Pinball-Canvas des Automaten.
+     */
     @FXML
     private StackPane pinballCanvasContainer;
-
-    /**
-     * Das Canvas, in dem der Flipperautomat gezeichnet wird.
-     */
-    private Canvas canvas;
 
     /**
      * Das zur Zeit auf dem Spielfeld vom Nutzer ausgewählte Element.
@@ -59,6 +68,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
+    /**
+     * TODO
+     */
     private MouseEvent mouseDown;
 
     /**
@@ -124,33 +136,57 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         pinballMachineEditorViewModel.zoomOut();
     }
 
+    /**
+     * Benachrichtig das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im ScrollEvent rein- oder rauszoomen möchte.
+     * @param scrollEvent
+     */
     public void zoom(ScrollEvent scrollEvent)
     {
         if(scrollEvent.getDeltaY() < 0) pinballMachineEditorViewModel.zoomOut();
         else if(scrollEvent.getDeltaY() > 0) pinballMachineEditorViewModel.zoomIn();
     }
 
+    /**
+     * TODO
+     * @param mouseEvent
+     */
     public void dragged(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.dragged(mouseEvent.getX() - mouseDown.getX(), mouseEvent.getY() - mouseDown.getY());
         mouseDown = mouseEvent;
     }
 
+    /**
+     * TODO
+     * @param mouseEvent
+     */
     public void down(MouseEvent mouseEvent)
     {
         mouseDown = mouseEvent;
     }
 
+    /**
+     * TODO
+     * @param mouseEvent
+     */
     public void placeClicked(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.setMouseModus(MouseMode.PLACING);
     }
 
+    /**
+     * TODO
+     * @param mouseEvent
+     */
     public void selectClicked(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.setMouseModus(MouseMode.SELECTING);
     }
 
+    /**
+     * TODO
+     * @param mouseEvent
+     */
     public void dragClicked(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.setMouseModus(MouseMode.DRAGGING);

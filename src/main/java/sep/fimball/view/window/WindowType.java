@@ -42,10 +42,19 @@ public enum WindowType implements ViewType
      */
     GAME_WINDOW("game/gameWindow.fxml"),
 
+    /**
+     * Das Spielfeld eines Automaten.
+     */
     PINBALL_CANVAS("pinballcanvas/pinballCanvas.fxml"),
 
+    /**
+     * Eines zum Platzieren im Editor verfügbares Element.
+     */
     TABLE_EDITOR_AVAILABLE_ELEMENT("pinballmachine/editor/availableElement.fxml"),
 
+    /**
+     * Das im Editor ausgewählte Element.
+     */
     TABLE_EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml");
 
     /**

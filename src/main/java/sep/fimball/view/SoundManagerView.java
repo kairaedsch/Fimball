@@ -1,6 +1,5 @@
 package sep.fimball.view;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
@@ -49,9 +48,7 @@ public class SoundManagerView
     private SoundManagerViewModel soundManagerViewModel;
 
     /**
-     * Erzeugt einen neuen Soundmanager in der View mit dem gegebenen SoundManagerViewModel.
-     *
-     * @param soundManagerViewModel Das zu dieser View gehörende ViewModel.
+     * Erzeugt eine neue SoundManagerView.
      */
     public SoundManagerView()
     {
@@ -73,9 +70,9 @@ public class SoundManagerView
     }
 
     /**
-     * Lädt die durch {@code mediaPath} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
+     * Lädt die durch {@code clipName} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
      *
-     * @param mediaPath Der Pfad zur Musikdatei.
+     * @param clipName Der Name der Musikdatei.
      */
     private void playMedia(String clipName) {
         String clipPath = Config.pathToSound(clipName);
@@ -92,7 +89,7 @@ public class SoundManagerView
     /**
      * Lädt den angegeben Soundclip und spielt ihn ab.
      *
-     * @param clipPath Der Pfad zur Sound-Datei.
+     * @param clipName Der Name der Sound-Datei.
      */
     private void playClip(String clipName) {
         String clipPath = Config.pathToSound(clipName);

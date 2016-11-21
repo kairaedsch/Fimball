@@ -16,6 +16,9 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
  */
 public class GameView extends WindowView<GameViewModel>
 {
+    /**
+     * Die StackPane, die den Pinball-Canvas enthält.
+     */
     @FXML
     public StackPane pinballCanvasContainer;
 

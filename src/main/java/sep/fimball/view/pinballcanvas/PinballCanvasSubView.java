@@ -96,8 +96,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         if(pinballCanvasViewModel.isEditorMode())
         {
             graphicsContext.setStroke(Config.baseColorLight);
-            Vector2 gridStart = mousePosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
-            Vector2 gridEnd = mousePosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(Config.pixelsPerGridUnit);
+            Vector2 gridStart = canvasPosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
+            Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(Config.pixelsPerGridUnit);
             for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % Config.pixelsPerGridUnit; gx <= gridEnd.getX(); gx += Config.pixelsPerGridUnit)
             {
                 graphicsContext.strokeLine(gx, gridStart.getY(), gx, gridEnd.getY());
@@ -123,22 +123,41 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         graphicsContext.restore();
     }
 
+    /**
+     * Benachrightigt das {@code pinballCanvasViewModel}, dass der Spieler an einer bestimmten Stelle im Grid geklickt hat.
+     * @param mouseEvent
+     */
     public void mouseClicked(MouseEvent mouseEvent)
     {
         pinballCanvasViewModel.mouseClickedOnGame(mousePosToGridPos(mouseEvent));
     }
 
+    /**
+     * Benachrightigt das {@code pinballCanvasViewModel}, dass der Spieler die Mausstaste  einer bestimmten Stelle im Grid gedrückt hat.
+     * @param mouseEvent
+     */
     public void mousePressed(MouseEvent mouseEvent)
     {
         pinballCanvasViewModel.mousePressedOnGame(mousePosToGridPos(mouseEvent));
     }
 
+    /**
+     * Berechnet die Position des MouseEvents auf dem Grid.
+     * @param mouseEvent Das MouseEvent, dessen Position berechnet werden soll.
+     * @return Die Position des MouseEvents auf dem Grid.
+     */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return mousePosToGridPos(mouseEvent.getX(), mouseEvent.getY());
+        return canvasPosToGridPos(mouseEvent.getX(), mouseEvent.getY());
     }
 
-    private Vector2 mousePosToGridPos(double x, double y)
+    /**
+     * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Gridposition um.
+     * @param x Der x-Wert der Position auf dem Canvas.
+     * @param y Der y-Wert der Position auf dem Canvas.
+     * @return Die Position auf dem Grid.
+     */
+    private Vector2 canvasPosToGridPos(double x, double y)
     {
         Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
 

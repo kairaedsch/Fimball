@@ -38,7 +38,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Button mnemonicParsing="false" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" onMouseClicked="#rotateClockwiseClicked"/>
+        <Button mnemonicParsing="false" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" onMouseClicked="#rotateClicked"/>
         <Button mnemonicParsing="false" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" onMouseClicked="#removeClicked" />
     </children>
 </AnchorPane>
