@@ -7,6 +7,9 @@ import javafx.scene.paint.Color;
  */
 public class Config
 {
+    /**
+     * Muss vor Nutzung der anderen Methoden dieser Klasse aufgerufen werden. Kümmert sich um die Unterscheidung der Pfade auf Windows und Linux.
+     */
     public static void config()
     {
         String mode = System.getProperty("mode");
@@ -63,8 +66,14 @@ public class Config
      */
     private static String pathDataToSettings ="/settings.json";
 
+    /**
+     * Der Unterpfad an dem die Sounddateien gespeichert werden.
+     */
     private static String pathDataToSounds = "/sounds";
 
+    /**
+     * Die Dateiendung der Sounddateien.
+     */
     private static String pathSoundToSoundType = ".mp3";
 
     /**
@@ -101,13 +110,18 @@ public class Config
         return pathToData + pathDataToElements;
     }
 
+    /**
+     * Gibt den Pfad des Verzeichnis, an dem sich Infos über ein einzelnes BaseElements befinden, basierend auf der übergebenen ElementID zurück
+     * @param elementTypeId Id des BaseElements
+     * @return Pfad des BaseElements
+     */
     public static String pathToElement(String elementTypeId)
     {
         return  pathToElements() + "/" + elementTypeId;
     }
 
     /**
-     * Gibt den kombinierten Pfad zurück, der den Namen der Datei eines gewissen BaseElements angibt.
+     * Gibt den kombinierten Pfad zurück, der den Namen der Beschreibungsdatei eines gewissen BaseElements angibt.
      *
      * @param elementTypeId Id des BaseElements.
      * @return Pfad des BaseElements.
@@ -152,6 +166,11 @@ public class Config
         return pathToData + pathDataToMachines;
     }
 
+    /**
+     * Gibt den Pfad zu einem serialisierten Flipperautomaten basierend auf der übergebenen MachineID zurück
+     * @param pinballMachineId Id des Flipperautomaten
+     * @return Pfad des serialisierten Flipperautomaten
+     */
     public static String pathToPinballMachine(String pinballMachineId)
     {
         return pathToPinballMachines() + "/" + pinballMachineId;
@@ -211,6 +230,11 @@ public class Config
         return System.currentTimeMillis();
     }
 
+    /**
+     * Gibt den Pfad zu einer Sounddatei basierend auf deren Name zurück.
+     * @param clipName Der Name der Sounddatei.
+     * @return Der Pfad an dem sich die Sounddatei befindet.
+     */
     public static String pathToSound(String clipName)
     {
         return "file:///" + pathToData + pathDataToSounds + "/" + clipName + pathSoundToSoundType;
