@@ -83,7 +83,7 @@ public class SoundManagerViewModel {
      * @param playClipObserver Das Objekt, das bei Änderungen des Soundclips benachrichtigt werden soll.
      */
     // TODO Umbenennen
-    public void notifyToPlayClip(Observer playClipObserver) {
+    public void addClipObserver(Observer playClipObserver) {
         clipObservable.addObserver(playClipObserver);
     }
 
@@ -93,7 +93,7 @@ public class SoundManagerViewModel {
      * @param playMediaObserver Das Objekt, das bei Änderungen der Hintergrundmusik benachrichtigt werden soll.
      */
     // TODO Umbenennen
-    public void notifyToPlayMedia(Observer playMediaObserver) {
+    public void addMediaObserver(Observer playMediaObserver) {
         mediaObservable.addObserver(playMediaObserver);
     }
 

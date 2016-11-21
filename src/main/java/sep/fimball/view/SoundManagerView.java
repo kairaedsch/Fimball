@@ -64,8 +64,8 @@ public class SoundManagerView
         Observer playClipObserver = (o, clipPath) -> playClip((String) clipPath);
         Observer playMediaObserver = (o, mediaPath) -> playMedia((String) mediaPath);
 
-        soundManagerViewModel.notifyToPlayClip(playClipObserver);
-        soundManagerViewModel.notifyToPlayMedia(playMediaObserver);
+        soundManagerViewModel.addClipObserver(playClipObserver);
+        soundManagerViewModel.addMediaObserver(playMediaObserver);
 
     }
 
