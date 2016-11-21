@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 import java.util.List;
 
 /**
- * Repräsentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
+ * Repräsentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken.
  */
 public class Collider
 {

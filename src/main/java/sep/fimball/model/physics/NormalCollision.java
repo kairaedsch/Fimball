@@ -5,7 +5,7 @@ import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Diese Klasse repräsentiert die Kollision des Balls mit einem "normalen" Element (z.B. eine einfache Wand).
+ * Diese Klasse repräsentiert eine einfache Kollision, bei der der Ball einfach abprallt, es wirken keine weiteren Kräfte.
  */
 public class NormalCollision implements CollisionType
 {

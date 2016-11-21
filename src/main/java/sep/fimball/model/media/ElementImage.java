@@ -40,7 +40,7 @@ public class ElementImage
     private long creationTime;
 
     /**
-     * Erzeugt ein neues ElementImage mit der gegebenen {@code baseElementId}.
+     * Erzeugt ein neues ElementImage.
      *
      * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
      */
@@ -90,7 +90,7 @@ public class ElementImage
      * @param canRotate        Gibt an, ob das zugehörige BaseElement gedreht werden kann.
      * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
      * @param isAnimation      Gibt am, ob das ElementImage eine Animation ist.
-     * @param animation        Die zuugehörige Animation.
+     * @param animation        Die zugehörige Animation.
      */
     private ElementImage(String baseElementId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
     {

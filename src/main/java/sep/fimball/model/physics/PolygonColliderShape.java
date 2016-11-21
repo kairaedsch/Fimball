@@ -186,7 +186,7 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     /**
-     * Rotiert alle Elemente in vertices um einen Punkt.
+     * Rotiert alle Vertices um einen Punkt.
      *
      * @param rotation   Der Winkel in Grad, um den die Vertices rotiert werden.
      * @param pivotPoint Der Punkt, um den rotiert wird.
