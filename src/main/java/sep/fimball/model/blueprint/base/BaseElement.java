@@ -6,7 +6,7 @@ package sep.fimball.model.blueprint.base;
 public class BaseElement
 {
     /**
-     * Die ÌD des BaseElements.
+     * Die ID des BaseElements.
      */
     private String id;
 
@@ -33,7 +33,7 @@ public class BaseElement
     /**
      * Lädt den Bauplan eines Spielelements aus dem angegebenen Serialisierungsobjekt.
      *
-     * @param id              Die gewünschte ID des BaseElements.
+     * @param id              Die ID des BaseElements.
      * @param baseElementJson Das Objekt, das die Informationen über das Spielelement enthält.
      */
     public BaseElement(String id, BaseElementJson baseElementJson)

@@ -36,7 +36,7 @@ public class Settings
     }
 
     /**
-     * Vollbild- oder Fenstermodus.
+     * Gibt an ob der Vollbild- oder Fenstermodus eingestellt ist.
      */
     private BooleanProperty fullscreen;
 

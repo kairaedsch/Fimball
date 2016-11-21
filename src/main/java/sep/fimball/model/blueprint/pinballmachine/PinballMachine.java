@@ -54,7 +54,7 @@ public class PinballMachine
      *
      * @param name             Name des Automaten
      * @param pinballMachineId Id des Automaten
-     * @param highscores Die auf diesem Automaten bisher erreichten Highscores.
+     * @param highscores       Die auf diesem Automaten bisher erreichten Highscores.
      */
     public PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
@@ -72,7 +72,7 @@ public class PinballMachine
     }
 
     /**
-     * Überprüft, ob sich ein Bahnelement in der gegebenen Position befindet.
+     * Überprüft, ob sich ein Bahnelement an der gegebenen Position befindet.
      *
      * @param point Die Position.
      * @return Das Bahnelement an der gegebenen Position.

@@ -18,12 +18,12 @@ public class GameElement
     private ObjectProperty<Vector2> position;
 
     /**
-     * Die Rotation in Grad, um die das ElementTypeJson gedreht ist.
+     * Die Rotation in Grad, um die das GameElement gedreht ist.
      */
     private DoubleProperty rotation;
 
     /**
-     * Diese Zahl zählt wie oft das ElementTypeJson in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
+     * Diese Zahl zählt wie oft das GameElement in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
     private IntegerProperty hitCount;
 
@@ -38,7 +38,7 @@ public class GameElement
     private ObjectProperty<Optional<Animation>> currentAnimation;
 
     /**
-     * Das zu diesem GameElement korrespondierende GameElement.
+     * Das zu diesem GameElement korrespondierende PlacedElement.
      */
     private PlacedElement placedElement;
 

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Stellt Funktionen zum konvertieren einer Liste in eine andere bereit.
+ * Stellt Funktionen zum konvertieren einer Liste sowie einer Map in eine andere bereit.
  */
 public class ListPropertyConverter
 {

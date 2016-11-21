@@ -141,7 +141,7 @@ public class Vector2
      * Dreht den Vektor gegen den Uhrzeigersinn um den gegebene Winkel.
      *
      * @param radianAngle Der Winkel, um den rotiert werden soll, gegeben in Radianten.
-     * @return Den gänderten Vektor.
+     * @return Den geänderten Vektor.
      */
     public Vector2 rotate(double radianAngle)
     {

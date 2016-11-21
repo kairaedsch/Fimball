@@ -29,7 +29,7 @@ public class BaseMediaElement
     private boolean canRotate;
 
     /**
-     * Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     * Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
      */
     private int rotationAccuracy;
 

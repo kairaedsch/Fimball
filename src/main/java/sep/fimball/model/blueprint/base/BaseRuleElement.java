@@ -21,7 +21,7 @@ public class BaseRuleElement
     /**
      * Erstellt ein neues BaseRuleElement.
      *
-     * @param ruleElement Das RuleElementJson, dessen Eigenschaften übernpmmen werden sollen.
+     * @param ruleElement Das RuleElementJson, dessen Eigenschaften übernommen werden sollen.
      */
     public BaseRuleElement(BaseElementJson.RuleElementJson ruleElement)
     {

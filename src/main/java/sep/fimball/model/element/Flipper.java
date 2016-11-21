@@ -16,8 +16,8 @@ public class Flipper extends GameElement
      * Erstellt einen neuen Flipperarm.
      *
      * @param element Die Vorlage, aus der der Flipper erstellt werden soll.
-     * @param bind Gibt an, ob sich der Ball an die Properties des PlacedElements binden soll.
-     * @param isLeft Gibt an, ob der Flipper ein linksseitiger oder rechtsseitiger Flipper ist.
+     * @param bind    Gibt an, ob sich der Ball an die Properties des PlacedElements binden soll.
+     * @param isLeft  Gibt an, ob der Flipper ein linksseitiger oder rechtsseitiger Flipper ist.
      */
     public Flipper(PlacedElement element, boolean bind, boolean isLeft)
     {

@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
 /**
- * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Wie auch BaseElementJson wird diese Klasse zur Serialisierung genutzt.
+ * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar.
  */
 public class PlacedElement
 {
@@ -39,9 +39,9 @@ public class PlacedElement
      *
      * @param baseElement Das korrespondierende BaseElement.
      * @param position    Die Position des PlacedElement.
-     * @param points Die Punkte, die das Element vergibt.
-     * @param multiplier er Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
-     * @param rotation Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
+     * @param points      Die Punkte, die das Element vergibt.
+     * @param multiplier  er Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
+     * @param rotation    Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
      */
     public PlacedElement(BaseElement baseElement, Vector2 position, int points, double multiplier, double rotation)
     {

@@ -25,7 +25,7 @@ public class BasePhysicsElement
     /**
      * Erstellt ein neues BasePhysicsElement.
      *
-     * @param physicsElement Das PhysicElementJson, dessen Eigenschaften übernpmmen werden sollen.
+     * @param physicsElement Das PhysicElementJson, dessen Eigenschaften übernommen werden sollen.
      */
     public BasePhysicsElement(BaseElementJson.PhysicElementJson physicsElement)
     {

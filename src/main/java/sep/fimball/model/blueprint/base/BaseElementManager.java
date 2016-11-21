@@ -36,12 +36,12 @@ public class BaseElementManager
     }
 
     /**
-     * Liste von Elementtypen.
+     * Eine Map von IDs auf BaseElemente
      */
     private MapProperty<String, BaseElement> elements;
 
     /**
-     * Gibt die vom ElementManager verwalteten Elemente zurück.
+     * Konstruiert einen BaseElementManager, dabei werden die Baupläne aller Spielelemente geladen
      */
     private BaseElementManager()
     {
