@@ -21,7 +21,8 @@ public class Ball extends GameElement
     /**
      * Erstellt einen neuen Ball aus einer Vorlage.
      *
-     * @param element
+     * @param element Die Vorlage, aus der der Ball erstellt  werden soll.
+     * @param bind Gibt an, ob sich der Ball an die Properties des PlacedElements binden soll.
      */
     public Ball(PlacedElement element, boolean bind)
     {

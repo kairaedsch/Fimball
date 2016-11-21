@@ -46,6 +46,7 @@ public class GameElement
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
+     * @param bind Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
      */
     public GameElement(PlacedElement element, boolean bind)
     {
@@ -156,11 +157,6 @@ public class GameElement
         return placedElement;
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;

@@ -10,7 +10,8 @@ public class Plunger extends GameElement
     /**
      * Erzeugt eine neue Instanz von Plunger.
      *
-     * @param element
+     * @param element Die Vorlage, aus der der Plunger erstellt werden soll.
+     * @param bind Gibt an, ob sich der Plunger an die Properties des PlacedElement binden soll.
      */
     public Plunger(PlacedElement element, boolean bind)
     {
