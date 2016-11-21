@@ -53,7 +53,7 @@ public class BallElement
     /**
      * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
      *
-     * @return
+     * @return Das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
      */
     public PhysicsElement getSubElement()
     {

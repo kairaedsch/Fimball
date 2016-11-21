@@ -68,6 +68,7 @@ public class PhysicsHandler
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      *
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
+     * @param gameSession Die zugehörige GameSession.
      */
     public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession)
     {
