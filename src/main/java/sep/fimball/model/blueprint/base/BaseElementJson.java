@@ -35,7 +35,7 @@ public class BaseElementJson
     public static class PhysicElementJson
     {
         /**
-         * Punkt um den das Element rotiert wird.
+         * Speichert den Punkt, um den das Element rotiert wird.
          */
         public Vector2 pivotPoint;
 
@@ -140,7 +140,7 @@ public class BaseElementJson
         public MediaElementEventJson[] events;
 
         /**
-         * Repräsentiert die Eigenschaften des Objekts im Editor.
+         * Diese Klasse repräsentiert die Eigenschaften des Objekts im Editor.
          */
         public static class MediaElementGeneralJson
         {
@@ -166,22 +166,22 @@ public class BaseElementJson
         }
 
         /**
-         * Enthält alle Informationen über Animation und Soundeffekt bei einem Zusammenstoß.
+         * Diese Klasse enthält alle Informationen über Animation und Soundeffekt bei einem Zusammenstoß.
          */
         public static class MediaElementEventJson
         {
             /**
-             * Die Identifikationsnummer des Colliders.
+             * Speichert die Identifikationsnummer des Colliders.
              */
             public String colliderId;
 
             /**
-             * Der Soundeffekt, der beim Zusammenstoß abgespielt wird.
+             * Speichert den Soundeffekt, der beim Zusammenstoß abgespielt wird.
              */
             public String soundName;
 
             /**
-             * Die Animationen, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
+             * Speichert die Animation, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
              */
             public AnimationJson animation;
 
@@ -191,17 +191,17 @@ public class BaseElementJson
             public static class AnimationJson
             {
                 /**
-                 * Gibt an, wie viele Bilder die Animation darstellt.
+                 * Speichert, wie viele Bilder die Animation darstellt.
                  */
                 public int frameCount;
 
                 /**
-                 * Die Dauer der Animation.
+                 * Speichert die Dauer der Animation.
                  */
                 public int duration;
 
                 /**
-                 * Der Name der Animation.
+                 * Speichert den Namen der Animation.
                  */
                 public String animationName;
             }
@@ -209,12 +209,12 @@ public class BaseElementJson
     }
 
     /**
-     * Enthält die zur Serialisierung des Regelwerks nötigen Informationen.
+     * Diese Klasse enthält die zur Serialisierung des Regelwerks nötigen Informationen.
      */
     public static class RuleElementJson
     {
         /**
-         * Gibt an, ob ein Zusammenstoß die Punkte des Spielers erhöht.
+         * Speichert, ob ein Zusammenstoß die Punkte des Spielers erhöht.
          */
         public RuleElementGeneralJson general;
 
@@ -240,7 +240,7 @@ public class BaseElementJson
         public static class RuleElementEventJson
         {
             /**
-             * Die Identifikationsnummer des Colliders, zu dem dieses Regelwerk gehört.
+             * Speichert die Identifikationsnummer des Colliders, zu dem dieses Regelwerk gehört.
              */
             public String colliderId;
         }
