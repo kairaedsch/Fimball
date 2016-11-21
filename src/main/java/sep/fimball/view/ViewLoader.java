@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
+ * @param <ViewT> Die Klasse der View.
  */
 public class ViewLoader<ViewT>
 {
@@ -24,9 +25,9 @@ public class ViewLoader<ViewT>
     private ViewT view = null;
 
     /**
-     * Erzeugt einen ViewLoader und lädt die zur viewType gehörende FXML-Datei mit zugehöriger View (FxController).
+     * Erzeugt einen ViewLoader und lädt die zur {@code viewType} gehörende FXML-Datei mit zugehöriger View (FxController).
      *
-     * @param viewType
+     * @param viewType Die Art der View, die geladen werden soll.
      */
     public ViewLoader(ViewType viewType)
     {

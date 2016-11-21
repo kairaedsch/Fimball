@@ -2,6 +2,7 @@ package sep.fimball.view;
 
 /**
  * Das ViewBoundToViewModel-Interface wird von Klassen der View implementiert, die an ein einziges ViewModel gebunden sind, das dann durch eine Methode gesetzt werden kann.
+ * @param <ViewModelT> Die Klasse des ViewModels.
  */
 public interface ViewBoundToViewModel<ViewModelT>
 {

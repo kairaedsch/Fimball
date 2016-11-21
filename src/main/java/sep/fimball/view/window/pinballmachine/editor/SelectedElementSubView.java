@@ -12,9 +12,15 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubView
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
+    /**
+     * Das Label, das die Beschreibung des ausgewählten Elements anzeigt.
+     */
     @FXML
     private Label descriptionLabel;
 
+    /**
+     * Das Label, das den Namen des ausgewählten Elements anzeigt.
+     */
     @FXML
     private Label nameLabel;
     /**

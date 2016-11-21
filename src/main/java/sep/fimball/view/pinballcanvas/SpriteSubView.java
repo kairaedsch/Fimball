@@ -44,6 +44,7 @@ public class SpriteSubView
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
+     * @param imageLayer Das Layer, das gezeicnet werden soll.
      */
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
