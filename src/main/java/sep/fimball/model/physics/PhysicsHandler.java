@@ -121,7 +121,7 @@ public class PhysicsHandler
         return new TimerTask()
         {
             /**
-             * Diese Methode wird 60 mal pro Sekund e ausgeführt und ist für die physikalischen Berechnungen zuständig.
+             * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig.
              */
             @Override
             public void run()

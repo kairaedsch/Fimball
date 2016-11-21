@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 import java.util.List;
 
 /**
- * Reprästentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
+ * Repräsentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken. Außerdem kann bei Berührung eine Animation ausgelöst werden.
  */
 public class Collider
 {
@@ -45,7 +45,7 @@ public class Collider
     }
 
     /**
-     * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des  Colliders hat.
+     * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des Colliders hat.
      * @param ball Der Ball, dessen Kollisionen überprüft werden sollen.
      */
     public boolean checkCollision(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)

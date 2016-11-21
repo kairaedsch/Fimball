@@ -62,7 +62,7 @@ public class PhysicsElement
 
     /**
      * Gibt die Position des PhysicsElements zurück.
-     * @return Die Position des PhysiscsElements.
+     * @return Die Position des PhysicsElements.
      */
     public Vector2 getPosition()
     {

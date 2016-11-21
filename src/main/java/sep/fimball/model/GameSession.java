@@ -129,7 +129,7 @@ public class GameSession
     private LinkedList<List<CollisionEventArgs>> collisionEventArgsList;
 
     /**
-     * Dummy object for locking while accessing {@see collisionEventArgsList}
+     * Platzhalter welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
      */
     private Object collisionEventArgsLocker;
 
@@ -287,7 +287,7 @@ public class GameSession
     }
 
     /**
-     * Startet das Spiel oder setzt es fort, nachdem dieses Pausiert wurde.
+     * Startet das Spiel oder setzt es fort, nachdem dieses pausiert wurde.
      */
     public void startAll()
     {
