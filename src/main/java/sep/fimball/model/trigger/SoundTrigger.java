@@ -1,6 +1,6 @@
 package sep.fimball.model.trigger;
 
-import sep.fimball.model.blueprint.base.MediaElementEvent;
+import sep.fimball.model.blueprint.base.BaseMediaElementEvent;
 import sep.fimball.model.element.GameElement;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
@@ -15,7 +15,7 @@ public class SoundTrigger implements ElementTrigger
     @Override
     public void activateElementTrigger(GameElement element, int colliderID)
     {
-        Map<Integer, MediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
+        Map<Integer, BaseMediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
 
         if (eventMap.containsKey(colliderID))
         {

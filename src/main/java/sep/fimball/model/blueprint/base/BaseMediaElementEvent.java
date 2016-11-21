@@ -4,9 +4,9 @@ import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.Sound;
 
 /**
- * Stellt Informationen über ausgelöste Animationen und Soundeffekte bereit, die bei Bedarf abgerufen werden können.
+ * Stellt Informationen über ausgelöste Animationen und Soundeffekte bereit für einen Collider, die bei Bedarf abgerufen werden können.
  */
-public class MediaElementEvent
+public class BaseMediaElementEvent
 {
     /**
      * Hält gegebenenfalls die Animation des jeweiligen Bahnelements.
@@ -23,7 +23,7 @@ public class MediaElementEvent
      *
      * @param event Das Objekt, in dem die Informationen über Animation und Soundeffekt gespeichert sind.
      */
-    public MediaElementEvent(BaseElementJson.MediaElementJson.MediaElementEventJson event)
+    public BaseMediaElementEvent(BaseElementJson.MediaElementJson.MediaElementEventJson event)
     {
         if (event.animation != null)
             animation = new Animation(event.animation);

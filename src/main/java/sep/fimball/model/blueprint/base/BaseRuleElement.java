@@ -16,7 +16,7 @@ public class BaseRuleElement
     /**
      * Enthält die RuleElementEvents. TODO
      */
-    private Map<Integer, RuleElementEvent> eventMap;
+    private Map<Integer, BaseRuleElementEvent> eventMap;
 
     /**
      * Erstellt ein neues BaseRuleElement.
@@ -31,7 +31,7 @@ public class BaseRuleElement
             for (BaseElementJson.RuleElementJson.RuleElementEventJson event : ruleElement.events)
             {
                 // TODO hashCode musst not be unique
-                eventMap.put(event.colliderId.hashCode(), new RuleElementEvent(event));
+                eventMap.put(event.colliderId.hashCode(), new BaseRuleElementEvent(event));
             }
         }
     }
@@ -41,7 +41,7 @@ public class BaseRuleElement
         return givesPoints;
     }
 
-    public Map<Integer, RuleElementEvent> getEventMap()
+    public Map<Integer, BaseRuleElementEvent> getEventMap()
     {
         return eventMap;
     }

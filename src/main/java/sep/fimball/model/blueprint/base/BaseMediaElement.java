@@ -41,7 +41,7 @@ public class BaseMediaElement
     /**
      * Enthält die MediaElementEvents. TODO
      */
-    private Map<Integer, MediaElementEvent> eventMap;
+    private Map<Integer, BaseMediaElementEvent> eventMap;
 
     /**
      * Estellt ein neues BaseMediaElement.
@@ -62,7 +62,7 @@ public class BaseMediaElement
             for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
                 // TODO hashCode must not be unique
-                eventMap.put(event.colliderId.hashCode(), new MediaElementEvent(event));
+                eventMap.put(event.colliderId.hashCode(), new BaseMediaElementEvent(event));
             }
         }
         if (canRotate)
@@ -96,7 +96,7 @@ public class BaseMediaElement
         return rotationAccuracy;
     }
 
-    public Map<Integer, MediaElementEvent> getEventMap()
+    public Map<Integer, BaseMediaElementEvent> getEventMap()
     {
         return eventMap;
     }
