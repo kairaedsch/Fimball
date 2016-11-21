@@ -256,6 +256,9 @@ public class GameSession
         gameLoop.play();
     }
 
+    /**
+     * Startet die Physikberechnung.
+     */
     public void startPhysics()
     {
         physicsHandler.startTicking();
@@ -334,7 +337,7 @@ public class GameSession
     /**
      * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
      *
-     * @param collisionEventArgs
+     * @param collisionEventArgs Die Liste von Kollisions-Events, die hinzugefügt werden soll.
      */
     public void addCollisionEventArgs(List<CollisionEventArgs> collisionEventArgs)
     {
