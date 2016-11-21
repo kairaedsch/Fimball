@@ -165,6 +165,12 @@ public class Vector2
         return Vector2.angleBetween(this, otherVec);
     }
 
+    /**
+     * Dreht einen Vektor um den gegebenen Radianten.
+     * @param vec Der Vektor der gedreht werden soll.
+     * @param radianAngle Der Radiant um den gedreht wird.
+     * @return Ein neuer gedrehter Vektor.
+     */
     public static Vector2 rotate(Vector2 vec, double radianAngle)
     {
         double rotatedX = (Math.cos(radianAngle) * vec.getX()) - (Math.sin(radianAngle) * vec.getY());
@@ -172,6 +178,13 @@ public class Vector2
         return new Vector2(rotatedX, rotatedY);
     }
 
+    /**
+     * Dreht einen Vektor um einen Pivotpunkt um den gegebenen Radianten.
+     * @param vec Der Vektor der gedreht werden soll.
+     * @param radianAngle Der Radiant um den gedreht wird.
+     * @param pivot Der Punkt um den gedreht wird.
+     * @return Der gegebene Vektor nach der Drehung.
+     */
     public static Vector2 rotate(Vector2 vec, double radianAngle, Vector2 pivot)
     {
         Vector2 originPoint = Vector2.sub(vec, pivot);
@@ -266,11 +279,25 @@ public class Vector2
         return vecOne;
     }
 
+    /**
+     * Gibt einen Vektor zurück, der senkrecht auf dem gegebenen Vektor steht.
+     *
+     * @param vec Der Vektor, zu dem eine Normale gesucht wird.
+     * @return Die Normale des gegebenen Vektors.
+     */
     public static Vector2 createNormal(Vector2 vec)
     {
         return new Vector2(vec.getY(), -vec.getX());
     }
 
+    /**
+     * Mittelt zwei gewichtete Vektoren.
+     *
+     * @param vecOne Der erste Vektor.
+     * @param vecTwo Der zweite Vektor.
+     * @param t Die Gewichtung des zweiten Vektors.
+     * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
+     */
     public static Vector2 lerp(Vector2 vecOne, Vector2 vecTwo, double t)
     {
         double xLerped = (1 - t) * vecOne.getX() + (t * vecTwo.getX());
@@ -340,6 +367,12 @@ public class Vector2
         return this;
     }
 
+    /**
+     * Beschränkt die Länge des jeweiligen Vektors.
+     *
+     * @param max Die maximale Länge.
+     * @return Der jeweilige Vektor mit gegebenenfalls beschränkter Länge.
+     */
     public Vector2 clamp(double max)
     {
         if(magnitude(this) > max)

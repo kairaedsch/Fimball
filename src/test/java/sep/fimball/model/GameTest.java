@@ -29,9 +29,7 @@ import static org.junit.Assert.assertTrue;
 @Ignore
 public class GameTest
 {
-    /**
-     * The maximum amount of seconds the Test will run before it is failed.
-     */
+    //nach wie vielen Sekunden wird abgebrochen
     private static final int MAX_ITERATIONS = 30;
     private static final long waitingTime = 30000;
     private static final long keyHoldingTime = 1000;
@@ -59,11 +57,13 @@ public class GameTest
 
         //Starten des Spiels
         GameSession session = new GameSession(pinballMachine, new String[] {"Testautomat"});
-        CollisionTrigger collisionTrigger = new CollisionTrigger(this);
-        BallLostTrigger ballLostTrigger = new BallLostTrigger(this);
+        ElementTrigger collisionTrigger = new CollisionTrigger(this);
+        GameTrigger ballLostTrigger = new BallLostTrigger(this);
         List<Trigger> triggerList = new ArrayList<Trigger>();
-        //triggerList.add(collisionTrigger);
-        //triggerList.add(ballLostTrigger);
+        Trigger trigger = new Trigger();
+        trigger.setElementTrigger(collisionTrigger);
+        trigger.setGameTrigger(ballLostTrigger);
+        triggerList.add(trigger);
         session.setTriggers(triggerList);
 
         session.startAll();
@@ -96,8 +96,8 @@ public class GameTest
 
         //Aufzeichnungen auswerten
         assertTrue(stop);
-        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
+        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
 
         //Loeschen des vorher erstellten Automaten
         pinballMachine.deleteFromDisk();

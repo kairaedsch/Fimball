@@ -18,7 +18,7 @@ public enum Language
     String name;
 
     /**
-     * Erzeugt ein neues Objekt zur Kennzeichnung der Sprache, das die durch [@code name} gegebene Sprache kennzeichnet.
+     * Erzeugt ein neues Objekt zur Kennzeichnung der Sprache, das die durch {@code name} gegebene Sprache kennzeichnet.
      *
      * @param name Die Sprache, {@code GERMAN} oder {@code ENGLISH}.
      */
