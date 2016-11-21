@@ -20,6 +20,7 @@ public class InputManager
 
     /**
      * Gibt den bereits existierenden Inputmanager oder einen neu angelegten zurück, falls noch keiner existiert
+     *
      * @return Eine Instanz von Inputmanager.
      */
     public static InputManager getSingletonInstance()
@@ -45,6 +46,7 @@ public class InputManager
 
     /**
      * Wenn in einer View ein Tastendruck ausgelöst wurde, wird dieser hier weitergeleitet, um mögliche Observer zu benachrichtigen.
+     *
      * @param keyEvent Das KeyEvent, das beobachtet werden soll.
      */
     public void addKeyEvent(KeyEvent keyEvent)
@@ -70,7 +72,8 @@ public class InputManager
 
     /**
      * Registriert einen neuen Observer, der bei einem bestimmten Tastendruck benachrichtigt wird.
-     * @param binding Die Funktion, die beobachtet wird.
+     *
+     * @param binding  Die Funktion, die beobachtet wird.
      * @param observer Der Observer, der über den Tastendruck der zu {@code} binding gehörende Taste informiert wird.
      */
     public void addListener(KeyBinding binding, KeyObserver observer)
@@ -80,7 +83,8 @@ public class InputManager
             throw new IllegalArgumentException("KeyObserver can't be null");
         }
 
-        if (!keyObserversMap.containsKey(binding)) {
+        if (!keyObserversMap.containsKey(binding))
+        {
             keyObserversMap.put(binding, new ArrayList<>());
         }
         keyObserversMap.get(binding).add(observer);

@@ -33,8 +33,8 @@ public class GameOverView extends DialogView<GameOverViewModel>
     public void setViewModel(GameOverViewModel gameOverViewModel)
     {
         this.gameOverViewModel = gameOverViewModel;
-        ViewModelListToPaneBinder.bindViewModelsToViews(highscores,gameOverViewModel.machineHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
-        ViewModelListToPaneBinder.bindViewModelsToViews(playerScores,gameOverViewModel.playerHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(highscores, gameOverViewModel.machineHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(playerScores, gameOverViewModel.playerHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
 
     /**

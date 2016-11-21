@@ -8,7 +8,7 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
 /**
- *  Die SelectedElementSubView ist für die Darstellung des ausgewählten Elements auf dem Spielfeld im Editor zuständig und ermöglicht dem Nutzer, dieses zu bearbeiten.
+ * Die SelectedElementSubView ist für die Darstellung des ausgewählten Elements auf dem Spielfeld im Editor zuständig und ermöglicht dem Nutzer, dieses zu bearbeiten.
  */
 public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElementSubViewModel>
 {
@@ -77,7 +77,8 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element drehen möchte.
      */
     @FXML
-    private void rotateClicked() {
+    private void rotateClicked()
+    {
         selectedElementSubViewModel.rotateClockwise();
     }
 

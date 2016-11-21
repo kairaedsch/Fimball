@@ -156,9 +156,11 @@ public class GameSettingsViewModel extends DialogViewModel
 
     /**
      * Gibt eine Liste aller verfügbaren Sprachen zurück.
+     *
      * @return Eine Liste aller verfügbaren Sprachen.
      */
-    public ObservableList<Language> getLanguages() {
+    public ObservableList<Language> getLanguages()
+    {
         ObservableList<Language> languages = FXCollections.observableArrayList();
         Collections.addAll(languages, Language.values());
         return languages;

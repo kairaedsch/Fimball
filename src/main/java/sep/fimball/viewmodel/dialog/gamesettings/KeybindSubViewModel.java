@@ -24,21 +24,21 @@ public class KeybindSubViewModel
     private StringProperty keyName;
 
     /**
-     *  Die Funktion, für die die Tastenbelegung festgelegt wird.
+     * Die Funktion, für die die Tastenbelegung festgelegt wird.
      */
     private KeyBinding keyBinding;
 
     /**
-     *  Die Einstellungen, die die Tastenbelegungen speichert.
+     * Die Einstellungen, die die Tastenbelegungen speichert.
      */
     private Settings settings;
 
     /**
      * Erzeugt ein neues KeyBindSubViewModel.
      *
-     * @param settings Die aktuellen Einstellungen.
+     * @param settings   Die aktuellen Einstellungen.
      * @param keyBinding Die Funktion des Automaten, an die die Taste gebunden wird.
-     * @param keyCode Die Taste, an die die Funktion gebunden wird.
+     * @param keyCode    Die Taste, an die die Funktion gebunden wird.
      */
     public KeybindSubViewModel(Settings settings, KeyBinding keyBinding, KeyCode keyCode)
     {
@@ -54,6 +54,7 @@ public class KeybindSubViewModel
 
     /**
      * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.element.GameElement} bedient, auf die Übergebene zu ändern.
+     *
      * @param keyCode Der Code der neuen Taste.
      */
     public void changeKeyBinding(KeyCode keyCode)

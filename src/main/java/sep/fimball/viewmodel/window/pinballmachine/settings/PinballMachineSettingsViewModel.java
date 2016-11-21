@@ -74,7 +74,8 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
     }
 
-    public StringProperty machineNameProperty() {
+    public StringProperty machineNameProperty()
+    {
         return machineName;
     }
 }

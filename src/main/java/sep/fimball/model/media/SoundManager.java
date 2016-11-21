@@ -1,6 +1,7 @@
 package sep.fimball.model.media;
 
 import sep.fimball.general.util.Observable;
+
 import java.util.Observer;
 
 /**
@@ -25,6 +26,7 @@ public class SoundManager
 
     /**
      * Gibt den bereits existierenden SoundManager oder einen neu angelegten zurück, falls noch keiner existiert.
+     *
      * @return Eine Instanz von SoundManager.
      */
     public static SoundManager getInstance()
@@ -47,6 +49,7 @@ public class SoundManager
 
     /**
      * Fügt den gegebenen Observer zu dem {@code clipObservable} hinzu.
+     *
      * @param observer Der Observer, der hinzugefügt werden soll.
      */
     public void addClipObserver(Observer observer)
@@ -56,6 +59,7 @@ public class SoundManager
 
     /**
      * Fügt den gegebenen Observer zu dem {@code mediaObservable} hinzu.
+     *
      * @param observer Der Observer, der hinzugefügt werden soll.
      */
     public void addMediaObserver(Observer observer)
@@ -65,6 +69,7 @@ public class SoundManager
 
     /**
      * Benachrichtigt die Observer, dass der in {@code clipPath} gespeicherte SoundClip abgespielt werden soll.
+     *
      * @param clipPath Der Pfad, an dem der abzuspielende SoundClip gespeichert ist.
      */
     public void addClipToPlay(String clipPath)
@@ -75,6 +80,7 @@ public class SoundManager
 
     /**
      * Benachrichtigt die Observer, dass die in {@code clipPath} gespeicherte Musik abgespielt werden soll.
+     *
      * @param musicPath Der Pfad, an dem die abzuspielende Musik gespeichert ist.
      */
     public void addMediaToPlay(String musicPath)

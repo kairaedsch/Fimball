@@ -19,7 +19,8 @@ public class AnimationTrigger implements ElementTrigger
         if (eventMap.containsKey(colliderId))
         {
             Animation animation = eventMap.get(colliderId).getAnimation();
-            if(animation != null) element.setCurrentAnimation(java.util.Optional.of(animation));
+            if (animation != null)
+                element.setCurrentAnimation(java.util.Optional.of(animation));
         }
     }
 }

@@ -64,7 +64,8 @@ public class PinballMachine
         elementsLoaded = false;
 
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        if (highscores != null) this.highscoreList.addAll(highscores);
+        if (highscores != null)
+            this.highscoreList.addAll(highscores);
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
@@ -78,7 +79,7 @@ public class PinballMachine
     public Optional<PlacedElement> getElementAt(Vector2 point)
     {
         checkElementsLoaded();
-        for (int i = elements.size() -1; i >= 0; i--)
+        for (int i = elements.size() - 1; i >= 0; i--)
         {
             for (Collider collider : elements.get(i).getBaseElement().getPhysics().getColliders())
             {
@@ -127,7 +128,8 @@ public class PinballMachine
     public void addHighscore(Highscore highscore)
     {
         highscoreList.add(highscore);
-        if (highscoreList.size() > Config.maxHighscores) highscoreList.remove(0);
+        if (highscoreList.size() > Config.maxHighscores)
+            highscoreList.remove(0);
     }
 
     /**
@@ -145,7 +147,7 @@ public class PinballMachine
      * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente hinzu.
      *
      * @param baseElement Der Typ des einzufügenden Elements.
-     * @param position Die Position des einzufügenden Elements.
+     * @param position    Die Position des einzufügenden Elements.
      * @return Das erstellte und hinzugefügte Bahnelement.
      */
     public PlacedElement addElement(BaseElement baseElement, Vector2 position)
@@ -172,7 +174,7 @@ public class PinballMachine
      */
     public void checkUnloadElements()
     {
-        if(elementsLoaded)
+        if (elementsLoaded)
         {
             elements.clear();
             elements = null;

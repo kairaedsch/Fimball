@@ -24,6 +24,7 @@ public class BasePhysicsElement
 
     /**
      * Erstellt ein neues BasePhysicsElement.
+     *
      * @param physicsElement Das PhysicElementJson, dessen Eigenschaften übernpmmen werden sollen.
      */
     public BasePhysicsElement(BaseElementJson.PhysicElementJson physicsElement)
@@ -34,17 +35,19 @@ public class BasePhysicsElement
         {
             List<ColliderShape> shapes = new ArrayList<>();
 
-            if(collider.polygonShapes != null) for (BaseElementJson.PhysicElementJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
-            {
-                PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
-                shapes.add(polygonColliderShape);
-            }
+            if (collider.polygonShapes != null)
+                for (BaseElementJson.PhysicElementJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
+                {
+                    PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
+                    shapes.add(polygonColliderShape);
+                }
 
-            if(collider.circleShapes != null) for (BaseElementJson.PhysicElementJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
-            {
-                CircleColliderShape circleColliderShape = new CircleColliderShape(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
-                shapes.add(circleColliderShape);
-            }
+            if (collider.circleShapes != null)
+                for (BaseElementJson.PhysicElementJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
+                {
+                    CircleColliderShape circleColliderShape = new CircleColliderShape(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
+                    shapes.add(circleColliderShape);
+                }
 
             CollisionType collisionType;
             switch (collider.collisionType.type)

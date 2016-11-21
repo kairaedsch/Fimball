@@ -22,7 +22,8 @@ public enum Language
      *
      * @param name Die Sprache, {@code GERMAN} oder {@code ENGLISH}.
      */
-    Language(String name) {
+    Language(String name)
+    {
         this.name = name;
     }
 

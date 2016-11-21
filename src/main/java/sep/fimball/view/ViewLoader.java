@@ -42,7 +42,8 @@ public class ViewLoader<ViewT>
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
         Locale locale = null;
-        switch(Settings.getSingletonInstance().languageProperty().getValue().toString()) {
+        switch (Settings.getSingletonInstance().languageProperty().getValue().toString())
+        {
             case "ENGLISH":
                 locale = Locale.ENGLISH;
                 break;
@@ -52,7 +53,7 @@ public class ViewLoader<ViewT>
             default:
                 locale = Locale.ENGLISH;
         }
-        loader.setResources(ResourceBundle.getBundle("bundles.fimball",locale));
+        loader.setResources(ResourceBundle.getBundle("bundles.fimball", locale));
 
         try
         {

@@ -8,6 +8,7 @@ public class RuleElementEvent
 {
     /**
      * Erzeugt ein neues RuleElementEvent.
+     *
      * @param event Das RuleElementEventJson, dessen Informationen übernommen werden sollen.
      */
     public RuleElementEvent(BaseElementJson.RuleElementJson.RuleElementEventJson event)

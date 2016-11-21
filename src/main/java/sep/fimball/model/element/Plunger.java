@@ -9,6 +9,7 @@ public class Plunger extends GameElement
 {
     /**
      * Erzeugt eine neue Instanz von Plunger.
+     *
      * @param element
      */
     public Plunger(PlacedElement element, boolean bind)

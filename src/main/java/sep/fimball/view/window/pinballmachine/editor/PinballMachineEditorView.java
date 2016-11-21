@@ -103,7 +103,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den bearbeiteten Automaten spielen möchte.
      */
     @FXML
-    private void playClicked() {
+    private void playClicked()
+    {
         pinballMachineEditorViewModel.startPinballMachine();
     }
 
@@ -111,7 +112,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
      */
     @FXML
-    private void settingsClicked() {
+    private void settingsClicked()
+    {
         pinballMachineEditorViewModel.showSettingsDialog();
     }
 
@@ -119,7 +121,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten heranzoomen möchte.
      */
     @FXML
-    private void zoomInClicked() {
+    private void zoomInClicked()
+    {
         pinballMachineEditorViewModel.zoomIn();
     }
 
@@ -127,22 +130,27 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem geöffneten Automaten herauszoomen möchte.
      */
     @FXML
-    private void zoomOutClicked() {
+    private void zoomOutClicked()
+    {
         pinballMachineEditorViewModel.zoomOut();
     }
 
     /**
      * Benachrichtig das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im ScrollEvent rein- oder rauszoomen möchte.
+     *
      * @param scrollEvent
      */
     public void zoom(ScrollEvent scrollEvent)
     {
-        if(scrollEvent.getDeltaY() < 0) pinballMachineEditorViewModel.zoomOut();
-        else if(scrollEvent.getDeltaY() > 0) pinballMachineEditorViewModel.zoomIn();
+        if (scrollEvent.getDeltaY() < 0)
+            pinballMachineEditorViewModel.zoomOut();
+        else if (scrollEvent.getDeltaY() > 0)
+            pinballMachineEditorViewModel.zoomIn();
     }
 
     /**
      * TODO
+     *
      * @param mouseEvent
      */
     public void dragged(MouseEvent mouseEvent)
@@ -153,6 +161,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * TODO
+     *
      * @param mouseEvent
      */
     public void down(MouseEvent mouseEvent)
@@ -162,6 +171,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * TODO
+     *
      * @param mouseEvent
      */
     public void placeClicked(MouseEvent mouseEvent)
@@ -171,6 +181,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * TODO
+     *
      * @param mouseEvent
      */
     public void selectClicked(MouseEvent mouseEvent)
@@ -180,6 +191,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * TODO
+     *
      * @param mouseEvent
      */
     public void dragClicked(MouseEvent mouseEvent)

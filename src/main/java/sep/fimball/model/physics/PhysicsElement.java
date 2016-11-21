@@ -32,6 +32,7 @@ public class PhysicsElement
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
+     *
      * @param element Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
      */
     public PhysicsElement(GameElement element)
@@ -53,6 +54,7 @@ public class PhysicsElement
 
     /**
      * Gibt das zu diesem PhysicElement gehörende GameElement zurück.
+     *
      * @return Das zu diesem PhysicElement gehörende GameElement.
      */
     public GameElement getElement()
@@ -62,6 +64,7 @@ public class PhysicsElement
 
     /**
      * Gibt die Position des PhysicsElements zurück.
+     *
      * @return Die Position des PhysicsElements.
      */
     public Vector2 getPosition()
@@ -71,6 +74,7 @@ public class PhysicsElement
 
     /**
      * Setzt die Position des PhysicsElements auf den übergebenen Wert.
+     *
      * @param position Die neue Position des PhysicsElement
      */
     public void setPosition(Vector2 position)
@@ -80,6 +84,7 @@ public class PhysicsElement
 
     /**
      * Gibt die Rotation des PhysicsElements zurück.
+     *
      * @return Gibt die Rotation des PhysicsElements zurück.
      */
     public double getRotation()
@@ -89,6 +94,7 @@ public class PhysicsElement
 
     /**
      * Setzt die Rotation.
+     *
      * @param rotation Die Rotation des PhysicsElements zurück.
      */
     public void setRotation(double rotation)
@@ -98,6 +104,7 @@ public class PhysicsElement
 
     /**
      * Gibt eine Liste der Collider des PhysicsElements zurück.
+     *
      * @return Eine Liste der Collider des PhysicsElements.
      */
     public List<Collider> getColliders()

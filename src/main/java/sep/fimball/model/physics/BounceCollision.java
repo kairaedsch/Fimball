@@ -15,6 +15,7 @@ public class BounceCollision implements CollisionType
 
     /**
      * Erstellt eine neue Instanz von BounceCollision.
+     *
      * @param strength Wie viel Geschwindigkeit der Ball beim abprallen zusätzlich bekommt.
      */
     public BounceCollision(double strength)

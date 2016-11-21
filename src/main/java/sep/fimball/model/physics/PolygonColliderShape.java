@@ -22,6 +22,7 @@ public class PolygonColliderShape implements ColliderShape
 
     /**
      * Erstellt einen neuen Collider in Polygonform.
+     *
      * @param vertices Die Ecken des Polygons.
      */
     public PolygonColliderShape(List<Vector2> vertices)
@@ -31,6 +32,7 @@ public class PolygonColliderShape implements ColliderShape
 
     /**
      * Gibt die Eckpunkte des Polygons, die den Collider formen, zurück.
+     *
      * @return Die Eckpunkte des Polygons, die den Collider formen.
      */
     public List<Vector2> getVertices()
@@ -103,7 +105,7 @@ public class PolygonColliderShape implements ColliderShape
             }
             else
             {
-                Vector2 vec = Vector2.sub(rotatedVerts.get(i+1), rotatedVerts.get(i));
+                Vector2 vec = Vector2.sub(rotatedVerts.get(i + 1), rotatedVerts.get(i));
                 currentAxis = Vector2.createNormal(vec).normalized();
             }
             Debug.addDrawVector(rotatedVerts.get(i), currentAxis, Color.YELLOW);
@@ -185,7 +187,8 @@ public class PolygonColliderShape implements ColliderShape
 
     /**
      * Rotiert alle Elemente in vertices um einen Punkt.
-     * @param rotation Der Winkel in Grad, um den die Vertices rotiert werden.
+     *
+     * @param rotation   Der Winkel in Grad, um den die Vertices rotiert werden.
      * @param pivotPoint Der Punkt, um den rotiert wird.
      * @return Die Liste von rotierten Eckpunkten.
      */

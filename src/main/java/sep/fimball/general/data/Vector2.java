@@ -121,7 +121,7 @@ public class Vector2
      * Dreht den Vektor gegen den Uhrzeigersinn um den durch {@code pivot} gegebenen Pivotpunkt im angegeben Winkel.
      *
      * @param radianAngle Der Winkel als Radiant.
-     * @param pivot Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
+     * @param pivot       Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
      */
     public Vector2 rotate(double radianAngle, Vector2 pivot)
     {
@@ -167,7 +167,8 @@ public class Vector2
 
     /**
      * Dreht einen Vektor um den gegebenen Radianten.
-     * @param vec Der Vektor der gedreht werden soll.
+     *
+     * @param vec         Der Vektor der gedreht werden soll.
      * @param radianAngle Der Radiant um den gedreht wird.
      * @return Ein neuer gedrehter Vektor.
      */
@@ -180,9 +181,10 @@ public class Vector2
 
     /**
      * Dreht einen Vektor um einen Pivotpunkt um den gegebenen Radianten.
-     * @param vec Der Vektor der gedreht werden soll.
+     *
+     * @param vec         Der Vektor der gedreht werden soll.
      * @param radianAngle Der Radiant um den gedreht wird.
-     * @param pivot Der Punkt um den gedreht wird.
+     * @param pivot       Der Punkt um den gedreht wird.
      * @return Der gegebene Vektor nach der Drehung.
      */
     public static Vector2 rotate(Vector2 vec, double radianAngle, Vector2 pivot)
@@ -295,7 +297,7 @@ public class Vector2
      *
      * @param vecOne Der erste Vektor.
      * @param vecTwo Der zweite Vektor.
-     * @param t Die Gewichtung des zweiten Vektors.
+     * @param t      Die Gewichtung des zweiten Vektors.
      * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
      */
     public static Vector2 lerp(Vector2 vecOne, Vector2 vecTwo, double t)
@@ -375,7 +377,7 @@ public class Vector2
      */
     public Vector2 clamp(double max)
     {
-        if(magnitude(this) > max)
+        if (magnitude(this) > max)
         {
             double v = max / magnitude(this);
 

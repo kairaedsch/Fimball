@@ -64,7 +64,7 @@ public class SpriteSubViewModel
      */
     private void updateImage()
     {
-        if(gameElement.currentAnimationProperty().get().isPresent())
+        if (gameElement.currentAnimationProperty().get().isPresent())
         {
             Animation animation = gameElement.currentAnimationProperty().get().get();
             currentImage.set(new ElementImage(gameElement, animation));
@@ -77,7 +77,8 @@ public class SpriteSubViewModel
 
     /**
      * Ezstellt ein neues SpriteSubViewModel.
-     * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     *
+     * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
      * @param selectedPlacedElement Das aktuell ausgewählte Element.
      */
     public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)

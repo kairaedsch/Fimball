@@ -25,6 +25,7 @@ public class Player
 
     /**
      * Erzeugt einen neuen Spieler.
+     *
      * @param name Name des Spielers.
      */
     public Player(String name)
@@ -36,6 +37,7 @@ public class Player
 
     /**
      * Gibt die vom Spieler erreichten Punkte zurück.
+     *
      * @return Die vom Spieler erreichten Punkte.
      */
     public int getPoints()
@@ -45,6 +47,7 @@ public class Player
 
     /**
      * Gibt das Property der Punkte, die ein Spieler erreicht hat, zurück.
+     *
      * @return Das Property der Punkte, die ein Spieler erreicht hat,
      */
     public IntegerProperty pointsProperty()
@@ -54,6 +57,7 @@ public class Player
 
     /**
      * Gibt den Namen des Spielers zurück.
+     *
      * @return Der Name des Spielers.
      */
     public String getName()
@@ -63,6 +67,7 @@ public class Player
 
     /**
      * Gibt das Property des Namens des Spielers zurück.
+     *
      * @return Das Property des Namens des Spielers.
      */
     public StringProperty nameProperty()
@@ -72,6 +77,7 @@ public class Player
 
     /**
      * Gibt das Property der Reservebälle des Spielers zurück.
+     *
      * @return Das Property der Reservebälle des Spielers.
      */
     public IntegerProperty ballsProperty()

@@ -19,7 +19,8 @@ public class HitInfo
 
     /**
      * Erstellt eine neue Instanz von HitInfo.
-     * @param isHit Überschneiden sich Fläche und Ball?
+     *
+     * @param isHit             Überschneiden sich Fläche und Ball?
      * @param shortestIntersect Falls eine Überschneidung statt findet, ist dies der kürzeste Weg um diese aufzulösen.
      *                          Andernfalls undefiniert.
      */

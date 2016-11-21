@@ -34,7 +34,8 @@ public class PinballMachineManager
      */
     public static PinballMachineManager getInstance()
     {
-        if (singletonInstance == null) singletonInstance = new PinballMachineManager();
+        if (singletonInstance == null)
+            singletonInstance = new PinballMachineManager();
         return singletonInstance;
     }
 
@@ -171,10 +172,10 @@ public class PinballMachineManager
     void savePinballMachine(PinballMachine pinballMachine)
     {
         Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
-        if(!pathToMachine.toFile().exists())
+        if (!pathToMachine.toFile().exists())
         {
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
-            if(!couldCreateFolder)
+            if (!couldCreateFolder)
             {
                 // TODO error
             }

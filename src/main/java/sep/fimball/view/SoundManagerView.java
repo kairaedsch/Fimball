@@ -23,7 +23,7 @@ public class SoundManagerView
     private MediaPlayer mediaPlayer;
 
     /**
-     *  Hashed die bereits geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
+     * Hashed die bereits geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
      */
     private HashMap<String, AudioClip> loadedAudioClips;
 
@@ -74,7 +74,8 @@ public class SoundManagerView
      *
      * @param clipName Der Name der Musikdatei.
      */
-    private void playMedia(String clipName) {
+    private void playMedia(String clipName)
+    {
         String clipPath = Config.pathToSound(clipName);
         backgroundMusic = new Media(clipPath);
         if (mediaPlayer != null)
@@ -91,11 +92,15 @@ public class SoundManagerView
      *
      * @param clipName Der Name der Sound-Datei.
      */
-    private void playClip(String clipName) {
+    private void playClip(String clipName)
+    {
         String clipPath = Config.pathToSound(clipName);
-        if (loadedAudioClips.containsKey(clipPath)) {
+        if (loadedAudioClips.containsKey(clipPath))
+        {
             loadedAudioClips.get(clipPath).play();
-        } else {
+        }
+        else
+        {
             AudioClip clip = new AudioClip(clipPath);
             loadedAudioClips.put(clipPath, clip);
             clip.volumeProperty().bind(sfxVolume);

@@ -14,6 +14,7 @@ public class Flipper extends GameElement
 
     /**
      * Erstellt einen neuen Flipperarm.
+     *
      * @param element
      */
     public Flipper(PlacedElement element, boolean bind, boolean isLeft)
@@ -24,6 +25,7 @@ public class Flipper extends GameElement
 
     /**
      * Gibt an, ob der Flipper ein linksseitiger oder rechtsseitiger Flipper ist.
+     *
      * @return {@code true}, wenn der Flipper linksseitig ist, {@code false} sonst.
      */
     public boolean isLeft()

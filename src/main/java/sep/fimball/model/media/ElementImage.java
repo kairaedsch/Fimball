@@ -41,6 +41,7 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit der gegebenen {@code baseElementId}.
+     *
      * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
      */
     public ElementImage(String baseElementId)
@@ -50,7 +51,8 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     *
+     * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
      * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
      */
     public ElementImage(String baseElementId, int rotationAccuracy)
@@ -60,6 +62,7 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
+     *
      * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
      */
     public ElementImage(String baseElementId, Animation animation)
@@ -69,21 +72,23 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     *
+     * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
      * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
      */
     public ElementImage(String baseElementId, int rotationAccuracy, Animation animation)
     {
-       this(baseElementId, true, rotationAccuracy, true, animation);
+        this(baseElementId, true, rotationAccuracy, true, animation);
     }
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
-     * @param canRotate Gibt an, ob das zugehörige BaseElement gedreht werden kann.
+     *
+     * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param canRotate        Gibt an, ob das zugehörige BaseElement gedreht werden kann.
      * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
-     * @param isAnimation Gibt am, ob das ElementImage eine Animation ist.
-     * @param animation Die zuugehörige Animation.
+     * @param isAnimation      Gibt am, ob das ElementImage eine Animation ist.
+     * @param animation        Die zuugehörige Animation.
      */
     private ElementImage(String baseElementId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
     {
@@ -97,8 +102,9 @@ public class ElementImage
 
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
+     *
      * @param gameElement Das Element, zu dessen BaseElement das ElementImage gehört,
-     * @param animation Die zugehörige Animation.
+     * @param animation   Die zugehörige Animation.
      */
     public ElementImage(GameElement gameElement, Animation animation)
     {
@@ -107,19 +113,23 @@ public class ElementImage
 
     /**
      * Gibt den Pfad zu dem zu diesem ElementImage gehörenden Bild in Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
+     *
      * @param imageLayer Das ImageLayer des Bildes.
-     * @param rotation Die Drehung des Bildes.
+     * @param rotation   Die Drehung des Bildes.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
     public String getImagePath(ImageLayer imageLayer, int rotation)
     {
         int framePos = animation == null ? 0 : (int) ((System.currentTimeMillis() - creationTime) / animation.getDuration());
-        if(isAnimation && framePos < animation.getFrameCount()) return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
-        else return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
+        if (isAnimation && framePos < animation.getFrameCount())
+            return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
+        else
+            return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
     }
 
     /**
      * Gibt zurück, welcher Anzahl von {@code rotationAccuracy} {@code rotation} entspicht.
+     *
      * @param rotation Der Wert, der mit der {@code rotationAccuracy} verglichen werden soll.
      * @return Die Anzahl von {@code rotationAccuracy}, die {@code rotation} entspricht.
      */

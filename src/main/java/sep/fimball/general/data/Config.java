@@ -18,7 +18,8 @@ public class Config
             if (System.getProperty("os.name").startsWith("Windows"))
             {
                 pathToData = "A:/data";
-            } else
+            }
+            else
             {
                 String home = System.getProperty("user.home");
                 pathToData = home + "/link/SEP/data";
@@ -64,7 +65,7 @@ public class Config
     /**
      * Die Datei, in der die Spieleinstellungen gespeichert werden.
      */
-    private static String pathDataToSettings ="/settings.json";
+    private static String pathDataToSettings = "/settings.json";
 
     /**
      * Der Unterpfad an dem die Sounddateien gespeichert werden.
@@ -118,7 +119,7 @@ public class Config
      */
     public static String pathToElement(String elementTypeId)
     {
-        return  pathToElements() + "/" + elementTypeId;
+        return pathToElements() + "/" + elementTypeId;
     }
 
     /**
@@ -136,12 +137,12 @@ public class Config
      * Gibt den Pfad zu einem der Bilder, die ein BaseElement darstellen, zurück.
      *
      * @param elementTypeId Id des BaseElements.
-     * @param imageLayer Top oder Bottom Image.
-     * @param canRotate Gibt an ob das Element rotieren kann.
-     * @param rotation Gibt an, um wie viel Grad das Element rotiert ist.
-     * @param animation Gibt an, ob das Element eine Animation hat.
+     * @param imageLayer    Top oder Bottom Image.
+     * @param canRotate     Gibt an ob das Element rotieren kann.
+     * @param rotation      Gibt an, um wie viel Grad das Element rotiert ist.
+     * @param animation     Gibt an, ob das Element eine Animation hat.
      * @param animationName Gibt den Namen der Animation an.
-     * @param animationId Gibt die Id der Animation an.
+     * @param animationId   Gibt die Id der Animation an.
      * @return Der Pfad des Bildes.
      */
     public static String pathToElementImage(String elementTypeId, ImageLayer imageLayer, boolean canRotate, int rotation, boolean animation, String animationName, int animationId)
@@ -150,9 +151,11 @@ public class Config
 
         path += imageLayer.getName();
 
-        if(canRotate) path += "-" + rotation;
+        if (canRotate)
+            path += "-" + rotation;
 
-        if(animation) path += "+" + animationName + "_" + animationId;
+        if (animation)
+            path += "+" + animationName + "_" + animationId;
 
         return path + ".png";
     }
@@ -234,7 +237,7 @@ public class Config
 
     /**
      * Gibt den Pfad zu einer Sounddatei basierend auf deren Name zurück.
-     * 
+     *
      * @param clipName Der Name der Sounddatei.
      * @return Der Pfad an dem sich die Sounddatei befindet.
      */

@@ -182,7 +182,8 @@ public class GameSession
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
                 ballTemplate = element;
-            } else
+            }
+            else
             {
                 GameElement gameElem = new GameElement(element, false);
                 elements.add(gameElem);
@@ -190,7 +191,8 @@ public class GameSession
                 if (element.getBaseElement().getType() == BaseElementType.LIGHT)
                 {
                     lightManager.addLight(element);
-                } else
+                }
+                else
                 {
                     PhysicsElement physElem = new PhysicsElement(gameElem);
                     physicsElements.add(physElem);

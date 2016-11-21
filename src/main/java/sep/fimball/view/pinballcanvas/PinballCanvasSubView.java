@@ -88,7 +88,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
 
-        if(pinballCanvasViewModel.isEditorMode())
+        if (pinballCanvasViewModel.isEditorMode())
         {
             graphicsContext.setStroke(Config.baseColorLight);
             Vector2 gridStart = canvasPosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
@@ -120,6 +120,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Benachrightigt das {@code pinballCanvasViewModel}, dass der Spieler an einer bestimmten Stelle im Grid geklickt hat.
+     *
      * @param mouseEvent
      */
     public void mouseClicked(MouseEvent mouseEvent)
@@ -129,6 +130,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler die Maustaste  einer bestimmten Stelle im Grid gedrückt hat.
+     *
      * @param mouseEvent
      */
     public void mousePressed(MouseEvent mouseEvent)
@@ -138,6 +140,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Berechnet die Position des MouseEvents auf dem Grid.
+     *
      * @param mouseEvent Das MouseEvent, dessen Position berechnet werden soll.
      * @return Die Position des MouseEvents auf dem Grid.
      */
@@ -148,6 +151,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     /**
      * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Gridposition um.
+     *
      * @param x Der x-Wert der Position auf dem Canvas.
      * @param y Der y-Wert der Position auf dem Canvas.
      * @return Die Position auf dem Grid.

@@ -30,7 +30,8 @@ public class BaseElementManager
      */
     public static BaseElementManager getInstance()
     {
-        if (singletonInstance == null) singletonInstance = new BaseElementManager();
+        if (singletonInstance == null)
+            singletonInstance = new BaseElementManager();
         return singletonInstance;
     }
 

@@ -31,7 +31,8 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     private KeybindSubViewModel keybindSubViewModel;
 
     @Override
-    public void setViewModel(KeybindSubViewModel keybindSubViewModel) {
+    public void setViewModel(KeybindSubViewModel keybindSubViewModel)
+    {
         this.keybindSubViewModel = keybindSubViewModel;
 
         keybindName.textProperty().bind(keybindSubViewModel.elementNameProperty());
@@ -39,11 +40,13 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     }
 
     /**
-     *  Ändert die Tastenbelegung für die von dieser KeybindSubView dargestellten Funktion.
+     * Ändert die Tastenbelegung für die von dieser KeybindSubView dargestellten Funktion.
+     *
      * @param keyEvent Die neue Taste für die Funktion der Tastaturbelegung.
      */
     @FXML
-    private void changeKey(KeyEvent keyEvent) {
+    private void changeKey(KeyEvent keyEvent)
+    {
         keybindSubViewModel.changeKeyBinding(keyEvent.getCode());
     }
 }

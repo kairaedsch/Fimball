@@ -10,7 +10,9 @@ import java.util.List;
  */
 public class DrawEntry
 {
-    public DrawEntry() {}
+    public DrawEntry()
+    {
+    }
 
     public String type;
     public Vector2 position;

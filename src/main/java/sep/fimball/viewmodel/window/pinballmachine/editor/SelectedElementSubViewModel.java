@@ -45,6 +45,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
+     *
      * @param pinballMachine Der Flipperautomat, der das ausgewählte Element enthält.
      */
     public SelectedElementSubViewModel(PinballMachine pinballMachine)
@@ -65,7 +66,7 @@ public class SelectedElementSubViewModel
     {
         this.placedElement = placedElement;
 
-        if(placedElement.isPresent())
+        if (placedElement.isPresent())
         {
             name.set(placedElement.get().getBaseElement().getMedia().getName());
             description.set(placedElement.get().getBaseElement().getMedia().getDescription());
@@ -91,7 +92,8 @@ public class SelectedElementSubViewModel
      */
     public void rotateClockwise()
     {
-        if(placedElement.isPresent()) placedElement.get().rotateClockwise();
+        if (placedElement.isPresent())
+            placedElement.get().rotateClockwise();
     }
 
     /**
@@ -99,7 +101,8 @@ public class SelectedElementSubViewModel
      */
     public void rotateCounterclockwise()
     {
-        if(placedElement.isPresent()) placedElement.get().rotateCounterclockwise();
+        if (placedElement.isPresent())
+            placedElement.get().rotateCounterclockwise();
     }
 
     /**
@@ -147,7 +150,8 @@ public class SelectedElementSubViewModel
      */
     public void remove()
     {
-        if(placedElement.isPresent()) pinballMachine.removeElement(placedElement.get());
+        if (placedElement.isPresent())
+            pinballMachine.removeElement(placedElement.get());
     }
 
     public ReadOnlyBooleanProperty isSomethingSelectedProperty()

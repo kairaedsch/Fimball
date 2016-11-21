@@ -24,8 +24,9 @@ public class RectangleDouble
 
     /**
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.
+     *
      * @param origin Linke obere Ecke des Rechtecks.
-     * @param width Breite des Rechtecks.
+     * @param width  Breite des Rechtecks.
      * @param height Höhe des Rechtecks.
      */
     public RectangleDouble(Vector2 origin, double width, double height)
@@ -37,6 +38,7 @@ public class RectangleDouble
 
     /**
      * Gibt die Position der linken oberen Ecke des Rechtecks zurück.
+     *
      * @return Die Position der linken oberen Ecke des Rechtecks.
      */
     public Vector2 getOrigin()
@@ -46,6 +48,7 @@ public class RectangleDouble
 
     /**
      * Gibt die Länge des Rechtecks zurück.
+     *
      * @return Die Länge des Rechtecks.
      */
     public double getWidth()
@@ -55,6 +58,7 @@ public class RectangleDouble
 
     /**
      * Gibt die Höhe des Rechtecks zurück.
+     *
      * @return Die Höhe des Rechtecks.
      */
     public double getHeight()

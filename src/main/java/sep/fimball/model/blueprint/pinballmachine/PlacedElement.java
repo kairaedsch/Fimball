@@ -36,8 +36,9 @@ public class PlacedElement
 
     /**
      * Erzeugt ein neues PlacedElement.
+     *
      * @param baseElement Das korrespondierende BaseElement.
-     * @param position Die Position des PlacedElement.
+     * @param position    Die Position des PlacedElement.
      */
     public PlacedElement(BaseElement baseElement, Vector2 position, int points, double multiplier, double rotation)
     {
@@ -85,29 +86,29 @@ public class PlacedElement
 
     public void rotateClockwise()
     {
-        if(baseElement.getMedia().canRotate()) rotation.setValue(rotation.get() + baseElement.getMedia().getRotationAccuracy());
+        if (baseElement.getMedia().canRotate())
+            rotation.setValue(rotation.get() + baseElement.getMedia().getRotationAccuracy());
     }
 
     public void rotateCounterclockwise()
     {
-        if(baseElement.getMedia().canRotate()) rotation.setValue(360 + rotation.get() - baseElement.getMedia().getRotationAccuracy());
+        if (baseElement.getMedia().canRotate())
+            rotation.setValue(360 + rotation.get() - baseElement.getMedia().getRotationAccuracy());
     }
 
     @Override
-    public boolean equals(Object other) {
-        if(other != null && other instanceof PlacedElement) {
+    public boolean equals(Object other)
+    {
+        if (other != null && other instanceof PlacedElement)
+        {
             PlacedElement p = (PlacedElement) other;
-            return this.baseElement == p.getBaseElement()
-                    && this.position.equals(p.positionProperty())
-                    && this.rotation.equals(p.rotationProperty())
-                    && this.multiplier.equals(p.multiplierProperty())
-                    && this.points.equals(p.pointsProperty());
-        } else {
+            return this.baseElement == p.getBaseElement() && this.position.equals(p.positionProperty()) && this.rotation.equals(p.rotationProperty()) && this.multiplier.equals(p.multiplierProperty()) && this.points.equals(p.pointsProperty());
+        }
+        else
+        {
             return false;
         }
     }
-
-
 
 
 }

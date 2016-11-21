@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *  Diese Klasse enthält alle Informationen zu den Media-Eigenschaften eines BaseElements.
+ * Diese Klasse enthält alle Informationen zu den Media-Eigenschaften eines BaseElements.
  */
 public class BaseMediaElement
 {
@@ -45,13 +45,14 @@ public class BaseMediaElement
 
     /**
      * Estellt ein neues BaseMediaElement.
+     *
      * @param mediaElement Das MediaElementJson, dessen Eigenschaften übernommen werden sollen.
-     * @param elementId TODO
+     * @param elementId    TODO
      */
     public BaseMediaElement(BaseElementJson.MediaElementJson mediaElement, String elementId)
     {
         name = mediaElement.general.editorName;
-        description  = mediaElement.general.editorDescription;
+        description = mediaElement.general.editorDescription;
         canRotate = mediaElement.general.canRotate;
         rotationAccuracy = mediaElement.general.rotationAccuracy;
 

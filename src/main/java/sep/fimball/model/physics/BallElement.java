@@ -19,7 +19,7 @@ public class BallElement
     private Vector2 velocity;
 
     /**
-     *  Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
+     * Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
      */
     private double angularVelocity;
 
@@ -35,9 +35,10 @@ public class BallElement
 
     /**
      * Erzeugt einen neuen Ball.
+     *
      * @param gameElement Das GameElement, dessen Eigenschaften kopiert werden.
-     * @param collider Die Form des Colliders, die der Ball haben soll.
-     * @param layer Die Ebene, auf der sich der Ball befinden soll.
+     * @param collider    Die Form des Colliders, die der Ball haben soll.
+     * @param layer       Die Ebene, auf der sich der Ball befinden soll.
      */
     public BallElement(GameElement gameElement, CircleColliderShape collider, WorldLayer layer)
     {
@@ -51,6 +52,7 @@ public class BallElement
 
     /**
      * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
+     *
      * @return
      */
     public PhysicsElement getSubElement()
@@ -75,6 +77,7 @@ public class BallElement
 
     /**
      * Gibt die Geschwindigkeit des Balls zurück.
+     *
      * @return Die Geschwindigkeit des Balls.
      */
     public Vector2 getVelocity()
@@ -84,6 +87,7 @@ public class BallElement
 
     /**
      * Setzt die Geschwindigkeit des Balls auf den übergebenen Wert.
+     *
      * @param velocity Die neue Geschwindigkeit des Balls.
      */
     public void setVelocity(Vector2 velocity)
@@ -94,6 +98,7 @@ public class BallElement
 
     /**
      * Gibt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", zurück.
+     *
      * @return Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
      */
     public double getAngularVelocity()
@@ -103,6 +108,7 @@ public class BallElement
 
     /**
      * Setzt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt" auf den übergebenen Wert.
+     *
      * @param angularVelocity Die neue Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
      */
     public void setAngularVelocity(double angularVelocity)
@@ -112,6 +118,7 @@ public class BallElement
 
     /**
      * Gibt die Form des Colliders des Balls zurück.
+     *
      * @return Die Form des Colliders des Balls.
      */
     public CircleColliderShape getCollider()
@@ -121,6 +128,7 @@ public class BallElement
 
     /**
      * Gibt die Ebene, auf der sich der Ball befindet, zurück.
+     *
      * @return Die Ebene, auf der sich der Ball befindet.
      */
     public WorldLayer getLayer()
@@ -130,6 +138,7 @@ public class BallElement
 
     /**
      * Setzt die Ebene, auf der sich der Ball befindet, auf den übergebenen Wert.
+     *
      * @param layer Die neue Ebene, auf der sich der Ball befinden soll.
      */
     public void setLayer(WorldLayer layer)

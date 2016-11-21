@@ -14,6 +14,7 @@ public class Main extends Application
 {
     /**
      * Der Einstiegspunkt der Applikation
+     *
      * @param args Argumente welche an die Applikation gegeben werden
      */
     public static void main(String args[])

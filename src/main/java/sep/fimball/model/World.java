@@ -24,10 +24,11 @@ public class World
 
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
-     * @param elements Liste der Elemente in der Spielwelt.
+     *
+     * @param elements     Liste der Elemente in der Spielwelt.
      * @param ballTemplate Vorlage für den Ball.
      */
-	public World(ObservableList<GameElement> elements, PlacedElement ballTemplate)
+    public World(ObservableList<GameElement> elements, PlacedElement ballTemplate)
     {
         this.gameElements = new SimpleListProperty<>(elements);
         this.ballTemplate = ballTemplate;
@@ -35,6 +36,7 @@ public class World
 
     /**
      * Fügt das gegebene Element in die Spielwelt ein.
+     *
      * @param element Element, welches in die Spielwelt eingefügt wird.
      */
     public void addGameElement(GameElement element)
@@ -44,6 +46,7 @@ public class World
 
     /**
      * Generiert das Rechteck, welches das Spielfeld umschließt und den Spielfeldrand darstellt, und gibt dieses zurück.
+     *
      * @return Ein Rechteck, das den Spielfeldrand darstellt.
      */
     private RectangleDouble generateWalls()
@@ -84,6 +87,7 @@ public class World
 
     /**
      * Gibt das Property der Liste der in der World enthaltenen GameElements zurück.
+     *
      * @return Das Property der Liste der in der World enthaltenen GameElements
      */
     public ListProperty<GameElement> gameElementsProperty()

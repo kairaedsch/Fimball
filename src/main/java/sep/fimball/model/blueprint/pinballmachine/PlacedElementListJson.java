@@ -5,7 +5,8 @@ import sep.fimball.general.data.Vector2;
 /**
  * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platzierten Elementen.
  */
-public class PlacedElementListJson {
+public class PlacedElementListJson
+{
 
     /**
      * Speichert die platzierten Spielelemente.
@@ -15,8 +16,8 @@ public class PlacedElementListJson {
     /**
      * Diese Klasse repräsentiert die JSON-Beschreibung eines platzierten Spielelements.
      */
-    public static class PlacedElementJson {
-
+    public static class PlacedElementJson
+    {
         /**
          * Speichert die Id des BaseElements des platzierten Elements.
          */

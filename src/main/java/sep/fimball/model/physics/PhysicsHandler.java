@@ -66,6 +66,7 @@ public class PhysicsHandler
 
     /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
+     *
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      */
     public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession)
@@ -87,6 +88,7 @@ public class PhysicsHandler
 
     /**
      * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
+     *
      * @param ball Der Ball, der hinzugefügt werden soll.
      */
     public void addBall(BallElement ball)
@@ -114,6 +116,7 @@ public class PhysicsHandler
 
     /**
      * Erstellt einen neuen TimerTask, welcher die Physikberechnungen ausführt.
+     *
      * @return Den TimerTask.
      */
     private TimerTask createTask()
@@ -161,7 +164,7 @@ public class PhysicsHandler
                         {
                             boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getElement().getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
-                            if(hit)
+                            if (hit)
                             {
                                 collisionEventArgses.add(new CollisionEventArgs(element.getElement(), collider.getId()));
                             }

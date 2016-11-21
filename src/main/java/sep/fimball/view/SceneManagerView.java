@@ -65,7 +65,6 @@ public class SceneManagerView
         root.getChildren().add(new Group());
 
 
-
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
@@ -141,7 +140,7 @@ public class SceneManagerView
      * Erzeugt ein Fenster des übergebenden WindowType, setzt dieses als aktuelles Fenster und verbindet es mit dem gegebenen ViewModel.
      *
      * @param windowType Der WindowType des zu setzenden Fensters.
-     * @param viewModel Das zum windowType gehörende ViewModel.
+     * @param viewModel  Das zum windowType gehörende ViewModel.
      */
     private void setWindow(WindowType windowType, ViewModel viewModel)
     {
@@ -153,7 +152,7 @@ public class SceneManagerView
      * Erzeugt einen Dialog des übergebenden DialogType, setzt diesen als aktuelles Fenster und verbindet ihn mit dem gegebenen ViewModel.
      *
      * @param dialogType Der DialogType des zu setzenden Dialogs.
-     * @param viewModel Das zum dialogType gehörende ViewModel.
+     * @param viewModel  Das zum dialogType gehörende ViewModel.
      */
     private void setDialog(DialogType dialogType, ViewModel viewModel)
     {
@@ -168,7 +167,7 @@ public class SceneManagerView
     /**
      * Lädt eine View aus dem gegebenen ViewType und verbindet diese mit dem gegebenen ViewModel.
      *
-     * @param viewType Der gegebene ViewType der zu ladenden View.
+     * @param viewType  Der gegebene ViewType der zu ladenden View.
      * @param viewModel Das zur geladenen View gehörende ViewModel.
      * @return Eine Node, die die geladene View verbunden mit dem (@code viewmodel} enthält.
      */
@@ -244,6 +243,7 @@ public class SceneManagerView
         {
             root.getChildren().add(node);
         }
-        else root.getChildren().add(new Group());
+        else
+            root.getChildren().add(new Group());
     }
 }

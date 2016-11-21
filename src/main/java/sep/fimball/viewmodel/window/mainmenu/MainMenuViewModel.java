@@ -64,6 +64,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Führt den Benutzer zu der Spielerauswahl, wobei der gegebene Flipperautomat nach der Spielerauswahl gespielt werden kann.
+     *
      * @param pinballMachine Der Flipperautomat, der nach der Spielerauswahl gestartet werden können soll.
      */
     void showPlayerNameDialog(PinballMachine pinballMachine)
@@ -73,6 +74,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Führt den Benutzer zu den Fimball-Einstellungen des gegebenen Flipperautomatens.
+     *
      * @param pinballMachine Der Flipperautomat, dessen Einstellungen angezeigt werden sollen.
      */
     void startEditor(PinballMachine pinballMachine)
@@ -102,7 +104,7 @@ public class MainMenuViewModel extends WindowViewModel
 
 
     /**
-     *  Führt den Benutzer zu den Fimball-Einstellungen eines neuen Automaten.
+     * Führt den Benutzer zu den Fimball-Einstellungen eines neuen Automaten.
      */
     public void addNewAutomaton()
     {
@@ -113,14 +115,15 @@ public class MainMenuViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+        {
             return;
         }
         int index = findSelectedIndex();
         switch (keyEvent.getCode().toString())
         {
             case "UP":
-                if (index >= 1 )
+                if (index >= 1)
                 {
                     pinballMachineSelectorSubViewModelList.get(index - 1).selectPinballMachine();
                 }
@@ -136,6 +139,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Findet den Index des aktuell ausgewählten Automaten in der Vorschauliste.
+     *
      * @return Der Index des aktuell ausgewählten Automaten in der Vorschauliste.
      */
     private int findSelectedIndex()

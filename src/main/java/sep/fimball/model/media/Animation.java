@@ -24,6 +24,7 @@ public class Animation
 
     /**
      * Erstellt eine neue Animation.
+     *
      * @param animation Das AnimationJson, dessen Informationen übernommen werden sollen.
      */
     public Animation(BaseElementJson.MediaElementJson.MediaElementEventJson.AnimationJson animation)
@@ -34,7 +35,8 @@ public class Animation
     }
 
     /**
-     *  Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     * Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Sekunden.
+     *
      * @return Die Anzeigedauer eines einzelnen Bildes in Sekunden.
      */
     public int getDuration()

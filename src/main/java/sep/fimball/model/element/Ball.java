@@ -20,6 +20,7 @@ public class Ball extends GameElement
 
     /**
      * Erstellt einen neuen Ball aus einer Vorlage.
+     *
      * @param element
      */
     public Ball(PlacedElement element, boolean bind)
@@ -29,6 +30,7 @@ public class Ball extends GameElement
 
     /**
      * Gibt den Geschwindigkeitsvektor des Balls zurück.
+     *
      * @return Der Geschindigkeitsvektor des Balls.
      */
     public Vector2 getVelocity()
@@ -38,6 +40,7 @@ public class Ball extends GameElement
 
     /**
      * Setzt den Geschwindigkeitsvektor auf den übergebenen Vektor.
+     *
      * @param velocity Der neue Geschwindigkeitsvektor des Balls.
      */
     public void setVelocity(Vector2 velocity)
@@ -47,6 +50,7 @@ public class Ball extends GameElement
 
     /**
      * Gibt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", zurück.
+     *
      * @return Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
      */
     public double getAngularVelocity()
@@ -56,6 +60,7 @@ public class Ball extends GameElement
 
     /**
      * Setzt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", auf den gegebenen Wert.
+     *
      * @param angularVelocity Die neue Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
      */
     public void setAngularVelocity(double angularVelocity)

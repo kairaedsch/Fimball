@@ -32,8 +32,9 @@ public class KeyObserverEventArgs
 
     /**
      * Erstellt eine neue Instanz der Klasse.
+     *
      * @param binding Die Funktion, die ausgeführt werden soll.
-     * @param state Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
+     * @param state   Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
      */
     public KeyObserverEventArgs(KeyBinding binding, KeyChangedToState state)
     {
@@ -43,6 +44,7 @@ public class KeyObserverEventArgs
 
     /**
      * Gibt die Funktion, die ausgeführt werden soll, zurück.
+     *
      * @return Die Funktion, die ausgeführt werden soll.
      */
     public KeyBinding getBinding()
@@ -52,6 +54,7 @@ public class KeyObserverEventArgs
 
     /**
      * Gibt den Status, zu dem die im InputManager festgelegte Taste gewechselt hat, zurück.
+     *
      * @return Der Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
      */
     public KeyChangedToState getState()

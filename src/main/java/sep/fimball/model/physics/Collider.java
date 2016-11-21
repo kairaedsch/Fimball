@@ -31,10 +31,11 @@ public class Collider
 
     /**
      * Erzeugt einen neuen Collider.
-     * @param layer Die Ebene, auf der sich der Collider befindet.
+     *
+     * @param layer  Die Ebene, auf der sich der Collider befindet.
      * @param shapes Die ColliderShapes des Colliders.
-     * @param type Der Typ der Kollision.
-     * @param id Die ID des Colliders.
+     * @param type   Der Typ der Kollision.
+     * @param id     Die ID des Colliders.
      */
     public Collider(WorldLayer layer, List<ColliderShape> shapes, CollisionType type, int id)
     {
@@ -46,10 +47,11 @@ public class Collider
 
     /**
      * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des Colliders hat.
-     * @param ball Der Ball, dessen Kollisionen überprüft werden sollen.
+     *
+     * @param ball                   Der Ball, dessen Kollisionen überprüft werden sollen.
      * @param colliderObjectPosition Die Position des Elements, mit dem kollidiert wird.
-     * @param rotation Die Drehung des Elements, mit dem kollidiert wird.
-     * @param pivotPoint Der Pivot-Punkt des Elements, mit dem kollidiert wird.
+     * @param rotation               Die Drehung des Elements, mit dem kollidiert wird.
+     * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
      * @return {@code true}, wenn eine Kollision stattfindet, {@code false} sonst.
      */
     public boolean checkCollision(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
@@ -69,6 +71,7 @@ public class Collider
 
     /**
      * Gibt die Liste der ColliderShapes des Colliders zurück.
+     *
      * @return Die Liste der ColliderShapes des Colliders.
      */
     public List<ColliderShape> getShapes()

@@ -85,6 +85,7 @@ public class Settings
 
     /**
      * Lädt die Einstellungen aus dem in {@code jsonPath} angegebenen Datei und setzt diese als die Attribute.
+     *
      * @param jsonPath Der Pfad, wo die gespeicherte Settings-Datei liegt.
      */
     private void loadSettings(Path jsonPath)
@@ -107,7 +108,8 @@ public class Settings
             {
                 keyBindingsMap.put(KeyBinding.valueOf(layout.bindingName), KeyCode.valueOf(layout.keyCode));
             }
-        } else
+        }
+        else
         {
             System.err.println("Settings not loaded");
         }
@@ -127,7 +129,8 @@ public class Settings
         settingsJson.keyLayouts = new SettingsJson.KeyLayout[keyBindingsMap.size()];
 
         int counter = 0;
-        for (KeyBinding binding: keyBindingsMap.keySet()) {
+        for (KeyBinding binding : keyBindingsMap.keySet())
+        {
             settingsJson.keyLayouts[counter] = new SettingsJson.KeyLayout();
             settingsJson.keyLayouts[counter].bindingName = binding.name();
             settingsJson.keyLayouts[counter].keyCode = keyBindingsMap.get(binding).name();
@@ -139,6 +142,7 @@ public class Settings
 
     /**
      * Gibt das Property der Master-Lautstärke zurück.
+     *
      * @return Das Property der Master-Lautstärke.
      */
     public DoubleProperty masterVolumeProperty()
@@ -148,6 +152,7 @@ public class Settings
 
     /**
      * Gibt das Property der Musik-Lautstärke zurück.
+     *
      * @return Das Property der Musik-Lautstärke.
      */
     public DoubleProperty musicVolumeProperty()
@@ -157,6 +162,7 @@ public class Settings
 
     /**
      * Gibt das Property der Soundeffekt-Lautstärke zurück.
+     *
      * @return Das Property der Soundeffekt-Lautstärke.
      */
     public DoubleProperty sfxVolumeProperty()
@@ -166,6 +172,7 @@ public class Settings
 
     /**
      * Gibt das Property der eingestellten Sprache zurück.
+     *
      * @return Das Property der eingestellten Sprache.
      */
     public ObjectProperty<Language> languageProperty()
@@ -175,6 +182,7 @@ public class Settings
 
     /**
      * Gibt das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist, als ReadOnly zurück.
+     *
      * @return Das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
      */
     public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
@@ -184,6 +192,7 @@ public class Settings
 
     /**
      * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die durch {@code keycode} beschriebene Taste nicht schon von einem anderen KeyBinding belegt ist.
+     *
      * @param keyBinding
      * @param keyCode
      */
@@ -197,6 +206,7 @@ public class Settings
 
     /**
      * Gibt das Property zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     *
      * @return Das Property, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
      */
     public BooleanProperty fullscreenProperty()
@@ -206,8 +216,10 @@ public class Settings
 
     public KeyBinding getKeyBinding(KeyCode code)
     {
-        for (KeyBinding binding: keyBindingsMap.keySet()) {
-            if (keyBindingsMap.get(binding).equals(code)) {
+        for (KeyBinding binding : keyBindingsMap.keySet())
+        {
+            if (keyBindingsMap.get(binding).equals(code))
+            {
                 return binding;
             }
         }

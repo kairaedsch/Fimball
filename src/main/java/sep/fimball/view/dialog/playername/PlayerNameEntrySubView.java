@@ -12,7 +12,7 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameEntrySubViewModel;
 public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEntrySubViewModel>
 {
     /**
-     *  Ermöglicht Eingabe und Darstellung des Spielernamens.
+     * Ermöglicht Eingabe und Darstellung des Spielernamens.
      */
     @FXML
     private TextField nameTextField;

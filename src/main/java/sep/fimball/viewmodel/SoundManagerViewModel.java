@@ -11,7 +11,8 @@ import java.util.Observer;
 /**
  * Diese Klasse gibt Anweisungen, die Soundclips, die Hintergrundmusik und die Lautstärke zu ändern, an das Model weiter und stellt der View diese Informationen zur Verfügung.
  */
-public class SoundManagerViewModel {
+public class SoundManagerViewModel
+{
     /**
      * Das Observable, das angibt, dass ein Sound abgespielt werden soll.
      */
@@ -40,7 +41,8 @@ public class SoundManagerViewModel {
     /**
      * Erzeugt ein neues SoundManagerViewModel, das sich an die Lautstärke-Properties in {@link Settings} bindet.
      */
-    public SoundManagerViewModel() {
+    public SoundManagerViewModel()
+    {
         clipObservable = new Observable();
         mediaObservable = new Observable();
         settings = Settings.getSingletonInstance();
@@ -50,8 +52,8 @@ public class SoundManagerViewModel {
         sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(settings.sfxVolumeProperty().divide(100).multiply(settings.masterVolumeProperty().divide(100)));
 
-        Observer clipObserver = ((o, arg) -> playClip((String)arg));
-        Observer mediaObserver = ((o, arg) -> playMedia((String)arg));
+        Observer clipObserver = ((o, arg) -> playClip((String) arg));
+        Observer mediaObserver = ((o, arg) -> playMedia((String) arg));
         SoundManager.getInstance().addClipObserver(clipObserver);
         SoundManager.getInstance().addMediaObserver(mediaObserver);
     }
@@ -72,7 +74,8 @@ public class SoundManagerViewModel {
      *
      * @param mediaPath Der Pfad zur Datei der neuen Hintergrundmusik.
      */
-    private void playMedia(String mediaPath) {
+    private void playMedia(String mediaPath)
+    {
         mediaObservable.setChanged();
         mediaObservable.notifyObservers(mediaPath);
     }
@@ -83,7 +86,8 @@ public class SoundManagerViewModel {
      * @param playClipObserver Das Objekt, das bei Änderungen des Soundclips benachrichtigt werden soll.
      */
     // TODO Umbenennen
-    public void addClipObserver(Observer playClipObserver) {
+    public void addClipObserver(Observer playClipObserver)
+    {
         clipObservable.addObserver(playClipObserver);
     }
 
@@ -93,7 +97,8 @@ public class SoundManagerViewModel {
      * @param playMediaObserver Das Objekt, das bei Änderungen der Hintergrundmusik benachrichtigt werden soll.
      */
     // TODO Umbenennen
-    public void addMediaObserver(Observer playMediaObserver) {
+    public void addMediaObserver(Observer playMediaObserver)
+    {
         mediaObservable.addObserver(playMediaObserver);
     }
 
@@ -102,7 +107,8 @@ public class SoundManagerViewModel {
      *
      * @return Die Lautstärke der Hintergrundmusik.
      */
-    public DoubleProperty musicVolumeProperty() {
+    public DoubleProperty musicVolumeProperty()
+    {
         return musicVolume;
     }
 
@@ -111,7 +117,8 @@ public class SoundManagerViewModel {
      *
      * @return Die Lautstärke der Soundeffekte.
      */
-    public DoubleProperty sfxVolumeProperty() {
+    public DoubleProperty sfxVolumeProperty()
+    {
         return sfxVolume;
     }
 }

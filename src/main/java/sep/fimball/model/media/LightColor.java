@@ -6,7 +6,7 @@ package sep.fimball.model.media;
 public enum LightColor
 {
     /**
-     *  Die Farbe Blau.
+     * Die Farbe Blau.
      */
     BLUE,
 

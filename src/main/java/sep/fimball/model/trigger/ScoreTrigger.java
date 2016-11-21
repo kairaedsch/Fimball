@@ -15,6 +15,7 @@ public class ScoreTrigger implements ElementTrigger
 
     /**
      * Erstellt einen neuen Trigger.
+     *
      * @param session Aktuelle GameSession.
      */
     public ScoreTrigger(GameSession session)

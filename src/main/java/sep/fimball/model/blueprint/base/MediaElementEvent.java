@@ -25,8 +25,10 @@ public class MediaElementEvent
      */
     public MediaElementEvent(BaseElementJson.MediaElementJson.MediaElementEventJson event)
     {
-        if (event.animation != null) animation = new Animation(event.animation);
-        if (event.soundName != null) sound = new Sound(event.soundName, false);
+        if (event.animation != null)
+            animation = new Animation(event.animation);
+        if (event.soundName != null)
+            sound = new Sound(event.soundName, false);
     }
 
     /**

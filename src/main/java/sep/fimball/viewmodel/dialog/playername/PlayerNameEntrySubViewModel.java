@@ -27,7 +27,7 @@ public class PlayerNameEntrySubViewModel
      * Erstellt ein neues PlayerNameEntrySubViewModel
      *
      * @param playerNameViewModel Das korrespondierende PlayerNameViewModel.
-     * @param name Der Name des Spielers.
+     * @param name                Der Name des Spielers.
      */
     public PlayerNameEntrySubViewModel(PlayerNameViewModel playerNameViewModel, String name)
     {
@@ -43,7 +43,8 @@ public class PlayerNameEntrySubViewModel
      */
     public void deletePlayerName()
     {
-        if(isDeleteAble.get()) playerNameViewModel.removePlayerNameEntry(this);
+        if (isDeleteAble.get())
+            playerNameViewModel.removePlayerNameEntry(this);
     }
 
     /**

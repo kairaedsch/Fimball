@@ -15,6 +15,7 @@ public class AccelerationCollision implements CollisionType
 
     /**
      * Erstellt eine neue Instanz von AccelerationCollision.
+     *
      * @param strength Wie stark der Ball in Richtung des Elements beschleunigt wird.
      */
     public AccelerationCollision(double strength)

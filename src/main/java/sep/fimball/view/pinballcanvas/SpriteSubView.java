@@ -53,13 +53,16 @@ public class SpriteSubView
         Image image;
         ElementImage elementImage = viewModel.animationFramePathProperty().get();
         double rotation = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
-        if (imageLayer == ImageLayer.TOP) image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
-        else image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
+        if (imageLayer == ImageLayer.TOP)
+            image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        else
+            image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
-        if(rotation != 0) rotate(graphicsContext, rotation, x + image.getWidth() / 2, y + image.getHeight() / 2);
+        if (rotation != 0)
+            rotate(graphicsContext, rotation, x + image.getWidth() / 2, y + image.getHeight() / 2);
 
-        if(viewModel.isSelectedProperty().get())
+        if (viewModel.isSelectedProperty().get())
         {
             double plus = +0.5 * Config.pixelsPerGridUnit;
             graphicsContext.setLineWidth(Config.pixelsPerGridUnit);
@@ -73,12 +76,13 @@ public class SpriteSubView
     /**
      * TODO
      *
-     * @param gc Der GraphicsContext, auf dem rotiert wird.
+     * @param gc    Der GraphicsContext, auf dem rotiert wird.
      * @param angle Die Gradanzahl, um die rotiert wird.
-     * @param px TODO
-     * @param py TODO
+     * @param px    TODO
+     * @param py    TODO
      */
-    private void rotate(GraphicsContext gc, double angle, double px, double py) {
+    private void rotate(GraphicsContext gc, double angle, double px, double py)
+    {
         Rotate r = new Rotate(angle, px, py);
         gc.transform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }

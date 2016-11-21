@@ -7,6 +7,7 @@ public interface KeyObserver
 {
     /**
      * Die Aktion, die beim Drücken/Loslassen der festgelegten Taste ausgeführt werden soll.
+     *
      * @param args Die Argumente, die beim Benachrichtigen der Observer übergeben werden sollen.
      */
     void keyEvent(KeyObserverEventArgs args);

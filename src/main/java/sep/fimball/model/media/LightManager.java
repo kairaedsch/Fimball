@@ -19,16 +19,20 @@ public class LightManager
     /**
      * Erzeugt einen neuen LightManager.
      */
-    public LightManager() {
+    public LightManager()
+    {
         lights = new ArrayList<>();
     }
 
     /**
      * Fügt das gegebene PlacedElement der Liste der verwalteten Lichter hinzu, falls dieses ein Licht ist.
+     *
      * @param light
      */
-    public void addLight (PlacedElement light){
-        if (light.getBaseElement().getType() == BaseElementType.LIGHT) {
+    public void addLight(PlacedElement light)
+    {
+        if (light.getBaseElement().getType() == BaseElementType.LIGHT)
+        {
             lights.add(light);
         }
     }
@@ -36,8 +40,10 @@ public class LightManager
     /**
      * Wechselt die Farbe der verwalteten Lichter zufällig auf andere verfügbaren Farben.
      */
-    public void changeLightColors() {
-        for (PlacedElement light : lights) {
+    public void changeLightColors()
+    {
+        for (PlacedElement light : lights)
+        {
             int random = (int) Math.random() * LightColor.values().length;
             LightColor color = LightColor.values()[random];
             //TODO
