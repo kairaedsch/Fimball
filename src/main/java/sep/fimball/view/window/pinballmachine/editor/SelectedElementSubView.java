@@ -23,6 +23,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
      */
     @FXML
     private Label nameLabel;
+
     /**
      * Regler für den Multiplikator des Standardwertes der Kraft, die dieses Element bei einem Zusammenstoß mit der Kugel auf diese auswirkt.
      */

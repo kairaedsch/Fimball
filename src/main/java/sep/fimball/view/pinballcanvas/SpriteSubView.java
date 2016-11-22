@@ -4,7 +4,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
@@ -45,7 +44,7 @@ public class SpriteSubView
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
      * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
-     * @param imageLayer      Das Layer, das gezeicnet werden soll.
+     * @param imageLayer      Gibt an ob das Sprite sein Top oder Bottom Image zeichnen soll.
      */
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
@@ -105,10 +104,9 @@ public class SpriteSubView
     /**
      * TODO
      *
-     * @param gc    Der GraphicsContext, auf dem rotiert wird.
-     * @param angle Die Gradanzahl, um die rotiert wird.
-     * @param px    TODO
-     * @param py    TODO
+     * @param gc         Der GraphicsContext, auf dem rotiert wird.
+     * @param angle      Die Gradanzahl, um die rotiert wird.
+     * @param pivotPoint Der Punkt um den rotiert werden soll.
      */
     private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)
     {

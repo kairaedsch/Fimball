@@ -51,7 +51,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     private MainMenuViewModel mainMenuViewModel;
 
     /**
-     * Der Button, der zu dein Einstellungen führt.
+     * Der Button, der zu den Einstellungen führt.
      */
     @FXML
     private Button settingsButton;
@@ -63,17 +63,16 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     private Button addButton;
 
     /**
-     * Setzt das zur MainMenuView gehörende MainMenuViewModel.
-     *
-     * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
-     */
-
-    /**
      * Der Tooltip zum settingsButton.
      */
     @FXML
     private Tooltip settingsTip;
 
+    /**
+     * Setzt das zur MainMenuView gehörende MainMenuViewModel.
+     *
+     * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
+     */
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {
@@ -113,50 +112,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     private void settingsClicked()
     {
         mainMenuViewModel.showSettingsDialog();
-        /*
-        final long[] lv = {System.currentTimeMillis()};
-        final long[] lm = {System.currentTimeMillis()};
-
-
-        {
-            Timeline timeline  = new Timeline();
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.getKeyFrames().add(new KeyFrame(new Duration(16.66), "", event -> {
-                long s = System.currentTimeMillis();
-                System.out.println("View Timeline fängt an:  Last run was " + (s - lv[0]) + "ms ago.");
-                try
-                {
-                    Thread.sleep(5);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                System.out.println("View Timeline hört auf:  dauer                 " + (System.currentTimeMillis() - s) + "ms     ");
-                lv[0] = s;
-            }));
-            timeline.play();
-        }
-        {
-            Timeline timeline  = new Timeline();
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.getKeyFrames().add(new KeyFrame(new Duration(16.66), "", event -> {
-                long s = System.currentTimeMillis();
-                System.out.println("Model Timeline fängt an. Last run was " + (s - lm[0]) + "ms ago.");
-                try
-                {
-                    Thread.sleep(33);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-                System.out.println("Model Timeline hört auf: dauer                 " + (System.currentTimeMillis() - s) + "ms     ");
-                lm[0] = s;
-            }));
-            timeline.play();
-        }
-        */
     }
 
     /**
