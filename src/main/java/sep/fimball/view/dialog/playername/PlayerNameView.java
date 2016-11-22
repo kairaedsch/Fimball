@@ -93,9 +93,13 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     public void initialize(URL location, ResourceBundle resources)
     {
         ResourceBundle bundle = resources;
-        title.setText(bundle.getString("playername.title.key"));
-        playerNamesTitle.setText(bundle.getString("playername.names.key"));
-        addPlayerButton.setText(bundle.getString("playername.add.key"));
-        exitButton.setText(bundle.getString("playername.exit.key"));
+        if(resources != null)
+        {
+
+            title.setText(bundle.getString("playername.title.key"));
+            playerNamesTitle.setText(bundle.getString("playername.names.key"));
+            addPlayerButton.setText(bundle.getString("playername.add.key"));
+            exitButton.setText(bundle.getString("playername.exit.key"));
+        }
     }
 }
