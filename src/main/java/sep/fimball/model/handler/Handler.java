@@ -5,7 +5,7 @@ import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyEventType;
 
 /**
- * Wird bei verschiedenen Geschehnissen im Spiel informiert, und kann auf diese Reagieren.
+ * Wird bei verschiedenen Ereignissen im Spiel informiert und kann auf diese reagieren.
  */
 public class Handler implements ElementHandler, UserHandler, GameHandler
 {
@@ -24,6 +24,10 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
      */
     private UserHandler userHandler = null;
 
+    /**
+     * Setzt den ElementHandler, der auf Kollisionen zwischen Ball und Spielelementen reagiert.
+     * @param elementHandler Der neue ElementHandler.
+     */
     public void setElementHandler(ElementHandler elementHandler)
     {
         this.elementHandler = elementHandler;
