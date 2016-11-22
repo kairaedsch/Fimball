@@ -29,6 +29,7 @@ public class BasePhysicsElement
      */
     public BasePhysicsElement(BaseElementJson.PhysicElementJson physicsElement)
     {
+        if(physicsElement.pivotPoint == null) throw new NullPointerException("pivotPoint was null");
         pivotPoint = physicsElement.pivotPoint;
         colliders = new ArrayList<>();
         for (BaseElementJson.PhysicElementJson.PhysicColliderJson collider : physicsElement.colliders)
