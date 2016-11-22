@@ -1,4 +1,4 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.collider;
 
 /**
  * WorldLayer ist eine Aufzählung von Ebenen, die es in einer Spielwelt gibt und auf der sich die Kugel befinden kann.

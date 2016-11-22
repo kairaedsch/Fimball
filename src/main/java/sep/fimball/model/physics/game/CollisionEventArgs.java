@@ -1,4 +1,4 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.game;
 
 /**
  * Argumente, die an das "Ziel-GameElement" (das GameElement welche diese CollisionEventArg beim OnCollision Event übergeben bekommt) bei einer Kollision mit einem anderen GameElement übergeben werden.

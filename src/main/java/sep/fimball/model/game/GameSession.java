@@ -18,6 +18,15 @@ import sep.fimball.model.physics.*;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
+import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.collider.WorldLayer;
+import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.PhysicsElement;
+import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.ElementEventArgs;
+import sep.fimball.model.physics.game.PhysicGameSession;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

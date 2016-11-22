@@ -7,8 +7,8 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.model.blueprint.base.BaseElement;
-import sep.fimball.model.physics.Collider;
-import sep.fimball.model.physics.ColliderShape;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
 
 import java.util.List;
 import java.util.Optional;

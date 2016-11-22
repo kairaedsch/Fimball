@@ -1,7 +1,8 @@
 package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.*;
+import sep.fimball.model.physics.collider.*;
+import sep.fimball.model.physics.collision.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

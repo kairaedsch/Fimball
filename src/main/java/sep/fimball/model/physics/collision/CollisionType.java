@@ -1,6 +1,7 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.element.BallElement;
 
 /**
  * Beschreibt eine Interaktion eines Colliders mit einem Ball.

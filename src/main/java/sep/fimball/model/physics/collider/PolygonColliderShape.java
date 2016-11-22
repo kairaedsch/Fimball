@@ -1,9 +1,10 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.collider;
 
 import javafx.scene.paint.Color;
-import sep.fimball.general.debug.Debug;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.general.debug.Debug;
+import sep.fimball.model.physics.element.BallElement;
 
 import java.util.ArrayList;
 import java.util.Comparator;
