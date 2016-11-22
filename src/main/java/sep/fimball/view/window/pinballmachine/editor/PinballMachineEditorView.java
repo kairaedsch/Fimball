@@ -136,7 +136,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtig das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im ScrollEvent rein- oder rauszoomen möchte.
+     * Benachrichtig das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im ScrollEvent hinein- oder herauszoomen möchte.
      *
      * @param scrollEvent Das ScrollEvent, das verarbeitet werden soll.
      */

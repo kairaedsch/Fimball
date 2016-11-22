@@ -108,7 +108,7 @@ public class SpriteSubView
      * TODO
      *
      * @param gc         Der GraphicsContext, auf dem rotiert wird.
-     * @param angle      Die Gradanzahl, um die rotiert wird.
+     * @param angle      Die Grad-Zahl, um die rotiert wird.
      * @param pivotPoint Der Punkt um den rotiert werden soll.
      */
     private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)

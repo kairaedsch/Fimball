@@ -13,7 +13,7 @@ public enum WindowType implements ViewType
     MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"),
 
     /**
-     * Die Vorschau eines Automaten in der Vorschauliste im Hauptmenüfenster.
+     * Die Vorschau eines Automaten in der Vorschau-Liste im Hauptmenü-Fenster.
      */
     MAIN_MENU_PREVIEW("mainmenu/mainMenuPreview.fxml"),
 
@@ -28,17 +28,17 @@ public enum WindowType implements ViewType
     SPLASH_SCREEN_WINDOW("TODO"),
 
     /**
-     * Das Editorfenster.
+     * Das Editor-Fenster.
      */
     TABLE_EDITOR_WINDOW("pinballmachine/editor/pinballMachineEditor.fxml"),
 
     /**
-     * Das Editoreinstellungsfenster.
+     * Das Editoreinstellungen-Fenster.
      */
     TABLE_SETTINGS_WINDOW("pinballmachine/settings/pinballMachineSettings.fxml"),
 
     /**
-     * Das Spielfenster.
+     * Das Spiel-Fenster.
      */
     GAME_WINDOW("game/gameWindow.fxml"),
 
@@ -58,7 +58,7 @@ public enum WindowType implements ViewType
     TABLE_EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml");
 
     /**
-     * Der Pfad der zum Fenstertyp gehörenden FXML-Datei.
+     * Der Pfad der zum Fenster-Typ gehörenden FXML-Datei.
      */
     private String fxmlPath;
 

@@ -37,7 +37,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     private TitledPane title;
 
     /**
-     * Das Label mit der Überschrift der Spielernamenliste.
+     * Das Label mit der Überschrift der Spielernamen-Liste.
      */
     @FXML
     private Label playerNamesTitle;

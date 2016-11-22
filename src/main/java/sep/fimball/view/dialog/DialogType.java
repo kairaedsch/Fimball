@@ -3,7 +3,7 @@ package sep.fimball.view.dialog;
 import sep.fimball.view.ViewType;
 
 /**
- * Der DialogType enthält alle Dialogtypen, sowohl die Haupt-Views als auch die SubViews. Jeder DialogType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
+ * Der DialogType enthält alle Dialog-Typen, sowohl die Haupt-Views als auch die SubViews. Jeder DialogType speichert dabei den Pfad zu der jeweiligen FXML-Datei.
  */
 public enum DialogType implements ViewType
 {
@@ -23,22 +23,22 @@ public enum DialogType implements ViewType
     KEY_BINDING_ENTRY("gamesettings/keybind.fxml"),
 
     /**
-     * Der Spielernamendialog.
+     * Der Spielernamen-Dialog.
      */
     PLAYER_NAME_DIALOG("playername/playerNameWindow.fxml"),
 
     /**
-     * Ein Spielernameneintrag im Spielernamendialog.
+     * Ein Spielernameneintrag im Spielernamen-Dialog.
      */
     PLAYER_NAME_ENTRY("playername/nameEntry.fxml"),
 
     /**
-     * Der Pausedialog.
+     * Der Pause-Dialog.
      */
     PAUSE("pause/pauseDialog.fxml");
 
     /**
-     * Der Pfad zu der zum Fenstertyp gehörende FXML-Datei.
+     * Der Pfad zu der zum Fenster-Typ gehörende FXML-Datei.
      */
     private String fxmlPath;
 

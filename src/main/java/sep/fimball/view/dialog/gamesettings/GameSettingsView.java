@@ -33,7 +33,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private CheckBox fullscreen;
 
     /**
-     * Regler für die Gesamtlautstärke.
+     * Regler für die Master-lautstärke.
      */
     @FXML
     private Slider masterVolumeSlider;

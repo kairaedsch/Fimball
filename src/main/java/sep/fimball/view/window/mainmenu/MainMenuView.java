@@ -28,7 +28,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
     private VBox machineOverview;
 
     /**
-     * Zeigt das Vorschaubild des aktuell ausgewählten Automaten an.
+     * Zeigt das Vorschau-Bild des aktuell ausgewählten Automaten an.
      */
     @FXML
     private Pane detailedPreviewImage;

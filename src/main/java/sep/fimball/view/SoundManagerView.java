@@ -72,7 +72,7 @@ public class SoundManagerView
     /**
      * Lädt die durch {@code clipName} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
      *
-     * @param clipName Der Name der Musikdatei.
+     * @param clipName Der Name der Musik-Datei.
      */
     private void playMedia(String clipName)
     {

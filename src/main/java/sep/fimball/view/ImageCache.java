@@ -42,7 +42,7 @@ public class ImageCache
     }
 
     /**
-     * Gibt das im {code imagePath} gespeicherte Bild zurück. Falls dieses noch nicht gecached wurde, wird es nun zusammen mit {@code imagePath} gespeichert.
+     * Gibt das im {code imagePath} gespeicherte Bild zurück. Falls dieses noch nicht gespeichert wurde, wird es nun zusammen mit {@code imagePath} gespeichert.
      *
      * @param imagePath Der Pfad zum gewünschten Image.
      * @return Das in {@code imagePath} gespeicherte Bild.
