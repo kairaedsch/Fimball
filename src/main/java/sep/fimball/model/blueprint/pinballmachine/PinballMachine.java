@@ -188,8 +188,8 @@ public class PinballMachine
     {
         if (!elementsLoaded)
         {
-            PinballMachineManager.getInstance().loadMachineElements(this);
             elementsLoaded = true;
+            PinballMachineManager.getInstance().loadMachineElements(this);
         }
     }
 
