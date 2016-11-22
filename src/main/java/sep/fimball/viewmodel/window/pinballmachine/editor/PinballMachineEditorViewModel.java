@@ -176,8 +176,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         if (mouseModus.get() == MouseMode.DRAGGING)
         {
-            cameraPosition.get().setX(cameraPosition.get().getX() - divX);
-            cameraPosition.get().setY(cameraPosition.get().getY() - divY);
+            cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
         }
         else if (mouseModus.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
         {

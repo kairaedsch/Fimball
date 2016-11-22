@@ -94,17 +94,17 @@ public class Config
     /**
      * Die Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color baseColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
+    public final static Color primaryColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
 
     /**
      * Die hellere Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color baseColorLight = new Color(255 / 255., 147 / 255., 147 / 255., 1);
+    public final static Color primaryColorLight = new Color(255 / 255., 147 / 255., 147 / 255., 1);
 
     /**
      * Die Komplementfarbe des Flipperautomaten.
      */
-    public final static Color contraColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
+    public final static Color complementColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
 
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.

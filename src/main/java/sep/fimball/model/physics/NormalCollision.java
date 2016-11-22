@@ -1,7 +1,7 @@
 package sep.fimball.model.physics;
 
 import javafx.scene.paint.Color;
-import sep.fimball.general.Debug;
+import sep.fimball.general.debug.Debug;
 import sep.fimball.general.data.Vector2;
 
 /**

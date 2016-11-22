@@ -1,4 +1,4 @@
-package sep.fimball.general;
+package sep.fimball.general.debug;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

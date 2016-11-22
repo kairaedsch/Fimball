@@ -70,20 +70,19 @@ public class SpriteSubView
             double height = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, 180)).getWidth();
             rotate(graphicsContext, 90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
             y += (image.getWidth() - height) / Config.pixelsPerGridUnit;
-            pivot.setY((height / Config.pixelsPerGridUnit) - pivot.getY());
+            pivot = new Vector2(pivot.getX(), (height / Config.pixelsPerGridUnit) - pivot.getY());
         }
         else if (picRotate == 180)
         {
             double height = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, 90)).getWidth();
             rotate(graphicsContext, 180, new Vector2(x * Config.pixelsPerGridUnit + (image.getWidth() / 2.0), y * Config.pixelsPerGridUnit + (height / 2.0)));
-            pivot.setX((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX());
-            pivot.setY((height / Config.pixelsPerGridUnit) - pivot.getY());
+            pivot = new Vector2((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX(), (height / Config.pixelsPerGridUnit) - pivot.getY());
         }
         else if (picRotate == 90)
         {
             double div = (image.getWidth() / 2.0);
             rotate(graphicsContext, -90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
-            pivot.setX((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX());
+            pivot = new Vector2((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX(), pivot.getY());
         }
 
         if (viewModel.rotationProperty().get() != 0)

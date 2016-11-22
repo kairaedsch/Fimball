@@ -11,7 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import sep.fimball.general.Debug;
+import sep.fimball.general.debug.Debug;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
@@ -80,7 +80,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
-        graphicsContext.setFill(Config.baseColor);
+        graphicsContext.setFill(Config.primaryColor);
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
@@ -90,7 +90,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         if (pinballCanvasViewModel.isEditorMode())
         {
-            graphicsContext.setStroke(Config.baseColorLight);
+            graphicsContext.setStroke(Config.primaryColorLight);
             Vector2 gridStart = canvasPosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
             Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(Config.pixelsPerGridUnit);
             for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % Config.pixelsPerGridUnit; gx <= gridEnd.getX(); gx += Config.pixelsPerGridUnit)
@@ -103,7 +103,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             }
         }
 
-        graphicsContext.setStroke(new Color(Config.contraColor.getRed(), Config.contraColor.getGreen(), Config.contraColor.getBlue(), 0.25));
+        graphicsContext.setStroke(new Color(Config.complementColor.getRed(), Config.complementColor.getGreen(), Config.complementColor.getBlue(), 0.25));
         for (SpriteSubView spriteTop : sprites)
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
@@ -160,9 +160,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
 
-        Vector2 posOnGrid = new Vector2();
-        posOnGrid.setX(posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX());
-        posOnGrid.setY(posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY());
-        return posOnGrid;
+        double vx = posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX();
+        double vy = posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY();
+        return new Vector2(x, y);
     }
 }

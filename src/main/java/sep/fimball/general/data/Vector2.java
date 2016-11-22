@@ -10,12 +10,12 @@ public class Vector2
     /**
      * Erste Komponente des Vektors.
      */
-    private double x;
+    private final double x;
 
     /**
      * Zweite Komponente des Vektors.
      */
-    private double y;
+    private final double y;
 
     /**
      * Konstruiert einen Vektor, bei dem sowohl die erste als auch die zweite Komponente 0 sind.
@@ -57,9 +57,7 @@ public class Vector2
      */
     public Vector2 add(Vector2 otherVec)
     {
-        this.x += otherVec.getX();
-        this.y += otherVec.getY();
-        return this;
+        return new Vector2(x + otherVec.getX(), y + otherVec.getY());
     }
 
     /**
@@ -70,9 +68,7 @@ public class Vector2
      */
     public Vector2 sub(Vector2 otherVec)
     {
-        this.x -= otherVec.getX();
-        this.y -= otherVec.getY();
-        return this;
+        return new Vector2(x - otherVec.getX(), y - otherVec.getY());
     }
 
     /**
@@ -83,9 +79,7 @@ public class Vector2
      */
     public Vector2 scale(double scalar)
     {
-        this.x *= scalar;
-        this.y *= scalar;
-        return this;
+        return new Vector2(x * scalar, y * scalar);
     }
 
     /**
@@ -110,19 +104,6 @@ public class Vector2
     }
 
     /**
-     * Normiert den Vektor.
-     *
-     * @return Der geänderte Vektor.
-     */
-    public Vector2 normalize()
-    {
-        double norm = magnitude();
-        this.x /= norm;
-        this.y /= norm;
-        return this;
-    }
-
-    /**
      * Dreht den Vektor gegen den Uhrzeigersinn um den durch {@code pivot} gegebenen Pivotpunkt im angegeben Winkel.
      *
      * @param radianAngle Der Winkel als Radiant.
@@ -131,10 +112,10 @@ public class Vector2
      */
     public Vector2 rotate(double radianAngle, Vector2 pivot)
     {
-        this.sub(pivot);
-        this.rotate(radianAngle);
-        this.add(pivot);
-        return this;
+        Vector2 temp = this.sub(pivot);
+        temp = temp.rotate(radianAngle);
+        temp = temp.add(pivot);
+        return temp;
     }
 
     /**
@@ -145,9 +126,7 @@ public class Vector2
      */
     public Vector2 rotate(double radianAngle)
     {
-        this.x = (Math.cos(radianAngle) * this.x) - (Math.sin(radianAngle) * this.y);
-        this.y = (Math.sin(radianAngle) * this.x) + (Math.cos(radianAngle) * this.y);
-        return this;
+        return new Vector2((Math.cos(radianAngle) * this.x) - (Math.sin(radianAngle) * this.y), (Math.sin(radianAngle) * this.x) + (Math.cos(radianAngle) * this.y));
     }
 
     /**
@@ -157,7 +136,7 @@ public class Vector2
      */
     public Vector2 normalized()
     {
-        double norm = magnitude(this);
+        double norm = this.magnitude();
         return new Vector2(getX() / norm, getY() / norm);
     }
 
@@ -169,7 +148,7 @@ public class Vector2
      */
     public double angleBetween(Vector2 otherVec)
     {
-        return Vector2.angleBetween(this, otherVec);
+        return Math.acos(Vector2.dot(this.normalized(), otherVec.normalized()));
     }
 
     /**
@@ -181,9 +160,7 @@ public class Vector2
      */
     public static Vector2 rotate(Vector2 vec, double radianAngle)
     {
-        double rotatedX = (Math.cos(radianAngle) * vec.getX()) - (Math.sin(radianAngle) * vec.getY());
-        double rotatedY = (Math.sin(radianAngle) * vec.getX()) + (Math.cos(radianAngle) * vec.getY());
-        return new Vector2(rotatedX, rotatedY);
+        return vec.rotate(radianAngle);
     }
 
     /**
@@ -196,9 +173,7 @@ public class Vector2
      */
     public static Vector2 rotate(Vector2 vec, double radianAngle, Vector2 pivot)
     {
-        Vector2 originPoint = Vector2.sub(vec, pivot);
-        Vector2 rotatedVec = Vector2.rotate(originPoint, radianAngle);
-        return Vector2.add(rotatedVec, pivot);
+        return vec.rotate(radianAngle, pivot);
     }
 
     /**
@@ -210,7 +185,7 @@ public class Vector2
      */
     public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
     {
-        return new Vector2(vecOne.getX() + vecTwo.getX(), vecOne.getY() + vecTwo.getY());
+        return vecOne.add(vecTwo);
     }
 
     /**
@@ -222,7 +197,7 @@ public class Vector2
      */
     public static Vector2 sub(Vector2 vecOne, Vector2 vecTwo)
     {
-        return new Vector2(vecOne.getX() - vecTwo.getX(), vecOne.getY() - vecTwo.getY());
+        return vecOne.sub(vecTwo);
     }
 
     /**
@@ -234,7 +209,7 @@ public class Vector2
      */
     public static Vector2 scale(Vector2 vecOne, double scalar)
     {
-        return new Vector2(vecOne.getX() * scalar, vecOne.getY() * scalar);
+        return vecOne.scale(scalar);
     }
 
     /**
@@ -246,9 +221,9 @@ public class Vector2
      */
     public static Vector2 project(Vector2 source, Vector2 target)
     {
-        Vector2 targetNorm = normalize(target);
+        Vector2 targetNorm = normalized(target);
         double targetLength = dot(source, targetNorm);
-        return scale(target, targetLength);
+        return target.scale(targetLength);
     }
 
     /**
@@ -259,7 +234,7 @@ public class Vector2
      */
     public static double magnitude(Vector2 vecOne)
     {
-        return Math.sqrt(vecOne.getX() * vecOne.getX() + vecOne.getY() * vecOne.getY());
+        return vecOne.magnitude();
     }
 
     /**
@@ -271,21 +246,7 @@ public class Vector2
      */
     public static double dot(Vector2 vecOne, Vector2 vecTwo)
     {
-        return (vecOne.getX() * vecTwo.getX()) + (vecOne.getY() * vecTwo.getY());
-    }
-
-    /**
-     * Normiert den gegebenen Vektor und gibt das Ergebnis zurück.
-     *
-     * @param vecOne Der zu normierende Vektor.
-     * @return Der normierte Vektor.
-     */
-    public static Vector2 normalize(Vector2 vecOne)
-    {
-        double norm = magnitude(vecOne);
-        vecOne.setX(vecOne.getX() / norm);
-        vecOne.setY(vecOne.getY() / norm);
-        return vecOne;
+        return vecOne.dot(vecTwo);
     }
 
     /**
@@ -296,7 +257,12 @@ public class Vector2
      */
     public static Vector2 createNormal(Vector2 vec)
     {
-        return new Vector2(vec.getY(), -vec.getX());
+        return vec.normal();
+    }
+
+    public Vector2 normal()
+    {
+        return new Vector2(y, -x);
     }
 
     /**
@@ -309,8 +275,13 @@ public class Vector2
      */
     public static Vector2 lerp(Vector2 vecOne, Vector2 vecTwo, double t)
     {
-        double xLerped = (1 - t) * vecOne.getX() + (t * vecTwo.getX());
-        double yLerped = (1 - t) * vecOne.getY() + (t * vecTwo.getY());
+        return vecOne.lerp(vecTwo, t);
+    }
+
+    public Vector2 lerp(Vector2 vecTwo, double t)
+    {
+        double xLerped = (1 - t) * x + (t * vecTwo.getX());
+        double yLerped = (1 - t) * y + (t * vecTwo.getY());
         return new Vector2(xLerped, yLerped);
     }
 
@@ -322,8 +293,7 @@ public class Vector2
      */
     public static Vector2 normalized(Vector2 input)
     {
-        double norm = magnitude(input);
-        return new Vector2(input.getX() / norm, input.getY() / norm);
+        return input.normalized();
     }
 
     /**
@@ -335,7 +305,7 @@ public class Vector2
      */
     public static double angleBetween(Vector2 vecOne, Vector2 vecTwo)
     {
-        return Math.acos(Vector2.dot(vecOne.normalized(), vecTwo.normalized()));
+        return vecOne.angleBetween(vecTwo);
     }
 
     public double getX()
@@ -343,19 +313,9 @@ public class Vector2
         return x;
     }
 
-    public void setX(double x)
-    {
-        this.x = x;
-    }
-
     public double getY()
     {
         return y;
-    }
-
-    public void setY(double y)
-    {
-        this.y = y;
     }
 
     /**
@@ -375,9 +335,7 @@ public class Vector2
      */
     public Vector2 round()
     {
-        x = Math.round(x);
-        y = Math.round(y);
-        return this;
+        return new Vector2(Math.round(x), Math.round(y));
     }
 
     /**
@@ -392,9 +350,9 @@ public class Vector2
         {
             double v = max / magnitude(this);
 
-            x = x * v;
-            y = y * v;
+            return new Vector2(x * v,  y * v);
         }
-        return this;
+
+        return new Vector2(x, y);
     }
 }

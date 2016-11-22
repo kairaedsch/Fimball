@@ -57,7 +57,7 @@ public class SceneManagerView
         Rectangle box = new Rectangle();
         box.widthProperty().bind(root.widthProperty());
         box.heightProperty().bind(root.heightProperty());
-        box.setFill(Config.baseColor);
+        box.setFill(Config.primaryColor);
         box.setOpacity(0.60);
 
         root.getChildren().add(new Group());
