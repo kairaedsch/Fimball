@@ -2,7 +2,6 @@ package sep.fimball.view.window.mainmenu;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -11,15 +10,13 @@ import javafx.scene.layout.VBox;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Die MainMenuView ist für die Darstellung des Hauptmenüs zuständig und ermöglicht dem Nutzer, sich einen Automaten auszusuchen und diesen dann zu bearbeiten oder zu spielen.
  */
-public class MainMenuView extends WindowView<MainMenuViewModel> implements Initializable
+public class MainMenuView extends WindowView<MainMenuViewModel>
 {
     /**
      * Das Pane zur Anzeige aller verfügbaren Flipperautomaten, die auch auswählbar sind, wodurch eine größere Vorschau erscheint.
@@ -85,6 +82,8 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
 
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
 
+        settingsButton.textProperty().bind(LanguageManagerViewModel.getInstance().getText("mainmenu.settings.key"));
+
     }
 
     /**
@@ -123,11 +122,5 @@ public class MainMenuView extends WindowView<MainMenuViewModel> implements Initi
         mainMenuViewModel.addNewAutomaton();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        ResourceBundle bundle = resources;
-        settingsButton.setText(bundle.getString("mainmenu.settings.key"));
-        settingsTip.setText(bundle.getString("mainmenu.settingstip.key"));
-    }
+
 }

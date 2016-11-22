@@ -12,6 +12,7 @@ import sep.fimball.general.data.Language;
 import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 
 
@@ -74,6 +75,8 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     public Label sfxVolumePercent;
 
+    @FXML
+    private Label languageTitle;
 
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
@@ -104,6 +107,8 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
 
         sfxVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeSFXProperty());
         sfxVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeSFXProperty().asString(), "%"));
+
+        bindTexts();
     }
 
     /**
@@ -113,5 +118,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private void okClicked()
     {
         gameSettingsViewModel.exitDialogToMainMenu();
+    }
+
+    private void bindTexts() {
+        languageTitle.textProperty().bind(LanguageManagerViewModel.getInstance().getText("gamesettings.language.key"));
     }
 }
