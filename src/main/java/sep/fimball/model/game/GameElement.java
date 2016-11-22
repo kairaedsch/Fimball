@@ -33,7 +33,7 @@ public class GameElement
     private IntegerProperty pointReward;
 
     /**
-     * Die aktuell angzeigte Animation.
+     * Die aktuelle Animation des Elements.
      */
     private ObjectProperty<Optional<Animation>> currentAnimation;
 
@@ -157,11 +157,19 @@ public class GameElement
         return placedElement;
     }
 
+    /**
+     * Gibt das Property, das ein Optional der aktuellen Animation des Elements enthält, als ReadOnly zurück
+     * @return Das Property, das ein Optional der aktuellen Animation des Elements enthält.
+     */
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;
     }
 
+    /**
+     * Setzt die aktuelle Animation des Elements.
+     * @param currentAnimation Die neue aktuelle Animation des Elements.
+     */
     public void setCurrentAnimation(Optional<Animation> currentAnimation)
     {
         this.currentAnimation.set(Optional.empty());

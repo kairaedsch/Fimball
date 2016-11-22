@@ -136,16 +136,22 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private ObjectProperty<GameElement> gameBall;
 
     /**
-     *
+     * Die Liste der von der Physik-Loop übertragenen Kollisionsevent-Argumente.
      */
     private LinkedList<List<CollisionEventArgs<GameElement>>> collisionEventArgsesList;
 
+    /**
+     * Die Liste der von der Physik-Loop übertragenen ElementEvent-Argumente.
+     */
     private LinkedList<List<ElementEventArgs<GameElement>>> elementEventArgsesList;
 
+    /**
+     * Gibt an, ob die Kugel verloren wurde.
+     */
     private boolean isBallLost;
 
     /**
-     * Platzhalter welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
+     * Platzhalter, welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
      */
     private final Object physicLocker;
 
@@ -397,7 +403,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu.
+     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu, der benachrichtigt wird, wenn das Update der GameLoop fertig ist..
      *
      * @param gameLoopObserver Der Observer, der hinzugefügt werden soll.
      */
@@ -456,11 +462,19 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return world;
     }
 
+    /**
+     * Gibt das Property, das das Ball-Element enthält, zurück gibt.
+     * @return Das Property, das das Ball-Element enthält.
+     */
     public ObjectProperty<GameElement> gameBallProperty()
     {
         return gameBall;
     }
 
+    /**
+     * Gibt den zur GameSession gehörenden Flipperautomaten zurück.
+     * @return Der zur GameSession gehörende Flipperautomat.
+     */
     public PinballMachine getPinballMachine()
     {
         return machineBlueprint;

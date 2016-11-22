@@ -96,11 +96,19 @@ public class World implements HandlerWorld
         return gameElements;
     }
 
+    /**
+     * Gibt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können, zurück.
+     * @return Die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
+     */
     public PlacedElement getBallTemplate()
     {
         return ballTemplate;
     }
 
+    /**
+     * Setzt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
+     * @param ballTemplate Die neue Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
+     */
     public void setBallTemplate(PlacedElement ballTemplate)
     {
         this.ballTemplate = ballTemplate;
