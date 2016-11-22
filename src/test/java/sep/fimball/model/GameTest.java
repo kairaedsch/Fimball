@@ -111,6 +111,10 @@ public class GameTest
         collidedGameElements.push(gameElement);
     }
 
+    public synchronized void ballLost() {
+        this.notify();
+    }
+
     private synchronized void initializeGameSession() {
         session = new GameSession(pinballMachine, new String[]{"TestSpieler"});
 
@@ -149,7 +153,7 @@ public class GameTest
         @Override
         public void activateElementHandler(GameElement element, int colliderID)
         {
-            System.out.println(element.getPlacedElement().getBaseElement().getId());
+            System.out.println("Kugel kollidiert mit " + element.getPlacedElement().getBaseElement().getId());
             gameTest.addCollidedGameElement(element);
         }
     }
@@ -164,9 +168,10 @@ public class GameTest
         }
 
         @Override
-        public synchronized void activateGameHandler(GameEvent gameEvent)
+        public void activateGameHandler(GameEvent gameEvent)
         {
-            gameTest.notify();
+            System.out.println("Kugel verlässt das Spiel");
+            gameTest.ballLost();
         }
     }
 
