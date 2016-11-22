@@ -3,7 +3,6 @@ package sep.fimball.model.blueprint;
 import javafx.beans.property.ReadOnlyListProperty;
 import org.junit.Ignore;
 import org.junit.Test;
-import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -11,7 +10,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
-import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -49,8 +48,7 @@ public class PinballMachineSaveTest
         ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
 
         // Überprüft, ob beide Listen die gleichen Elemente enthalten
-        assertFalse(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch((PlacedElement loaded)->original.equals(loaded))));
-
+        assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch((PlacedElement loaded)->original.equals(loaded))));
 
         // Löscht den Automaten
         pinballMachine.deleteFromDisk();
