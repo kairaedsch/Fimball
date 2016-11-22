@@ -42,18 +42,21 @@ public class Trigger implements ElementTrigger, UserTrigger, GameTrigger
     @Override
     public void activateElementTrigger(GameElement element, int colliderId)
     {
-        elementTrigger.activateElementTrigger(element, colliderId);
+        if (elementTrigger != null)
+            elementTrigger.activateElementTrigger(element, colliderId);
     }
 
     @Override
     public void activateGameTrigger()
     {
-        gameTrigger.activateGameTrigger();
+        if (gameTrigger != null)
+            gameTrigger.activateGameTrigger();
     }
 
     @Override
     public void activateUserTrigger(KeyBinding keyBinding, KeyEventType keyEventType)
     {
-        userTrigger.activateUserTrigger(keyBinding, keyEventType);
+        if (userTrigger != null)
+            userTrigger.activateUserTrigger(keyBinding, keyEventType);
     }
 }

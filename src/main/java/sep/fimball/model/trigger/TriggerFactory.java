@@ -36,7 +36,7 @@ public class TriggerFactory
 
         Trigger lightTrigger = new Trigger();
         animationTrigger.setGameTrigger(new LightTrigger(gameSession.getWorld()));
-        triggers.add(animationTrigger);
+        triggers.add(lightTrigger);
 
         return triggers;
     }
