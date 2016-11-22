@@ -1,6 +1,6 @@
 package sep.fimball.model.trigger;
 
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.game.GameElement;
 
 /**
  * Trigger, der bei Kollision mit dem Ball ausgelöst wird, und die Punkte des aktuellen Spielers erhöht.

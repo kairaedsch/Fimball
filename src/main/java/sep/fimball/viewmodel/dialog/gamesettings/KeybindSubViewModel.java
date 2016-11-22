@@ -9,17 +9,17 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.KeyBinding;
 
 /**
- * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.element.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
+ * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.game.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
  */
 public class KeybindSubViewModel
 {
     /**
-     * Der Name des {@link sep.fimball.model.element.GameElement}, das durch die Taste bedient wird.
+     * Der Name des {@link sep.fimball.model.game.GameElement}, das durch die Taste bedient wird.
      */
     private StringProperty elementName;
 
     /**
-     * Der Name der Taste, die das {@link sep.fimball.model.element.GameElement} bedient.
+     * Der Name der Taste, die das {@link sep.fimball.model.game.GameElement} bedient.
      */
     private StringProperty keyName;
 
@@ -53,7 +53,7 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.element.GameElement} bedient, auf die Übergebene zu ändern.
+     * Erteilt dem Model den Befehl, die Taste, die das {@link sep.fimball.model.game.GameElement} bedient, auf die Übergebene zu ändern.
      *
      * @param keyCode Der Code der neuen Taste.
      */

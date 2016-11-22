@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.game;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,7 +14,6 @@ import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.element.GameElement;
 import sep.fimball.model.physics.*;
 import sep.fimball.model.trigger.Trigger;
 import sep.fimball.model.trigger.TriggerFactory;

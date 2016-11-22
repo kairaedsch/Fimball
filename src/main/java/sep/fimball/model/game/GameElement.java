@@ -1,4 +1,4 @@
-package sep.fimball.model.element;
+package sep.fimball.model.game;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;

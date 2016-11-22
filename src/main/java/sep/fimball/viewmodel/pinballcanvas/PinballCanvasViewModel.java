@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
-import sep.fimball.model.GameSession;
+import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 

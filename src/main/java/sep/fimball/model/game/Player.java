@@ -1,4 +1,4 @@
-package sep.fimball.model;
+package sep.fimball.model.game;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

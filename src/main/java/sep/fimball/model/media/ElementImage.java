@@ -2,7 +2,7 @@ package sep.fimball.model.media;
 
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.game.GameElement;
 
 /**
  * ElementImage stellt ein Bild oder Animation eines BaseElements dar.

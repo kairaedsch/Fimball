@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.game.GameElement;
 
 import java.util.Optional;
 

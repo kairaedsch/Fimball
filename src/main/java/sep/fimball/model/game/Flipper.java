@@ -1,4 +1,4 @@
-package sep.fimball.model.element;
+package sep.fimball.model.game;
 
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 

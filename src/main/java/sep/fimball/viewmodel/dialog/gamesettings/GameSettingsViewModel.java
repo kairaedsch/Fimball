@@ -19,7 +19,7 @@ import java.util.Collections;
 public class GameSettingsViewModel extends DialogViewModel
 {
     /**
-     * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.element.GameElement} zu bedienen, z.B. den rechten Flipperarm.
+     * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.game.GameElement} zu bedienen, z.B. den rechten Flipperarm.
      */
     private ListProperty<KeybindSubViewModel> keybinds;
 
@@ -95,7 +95,7 @@ public class GameSettingsViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt der View die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.element.GameElement GameElements} zu bedienen, zur Verfügung.
+     * Stellt der View die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.game.GameElement GameElements} zu bedienen, zur Verfügung.
      *
      * @return Eine Liste der aktuell eingestellten Tasten.
      */

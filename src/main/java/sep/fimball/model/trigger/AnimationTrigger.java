@@ -1,7 +1,7 @@
 package sep.fimball.model.trigger;
 
 import sep.fimball.model.blueprint.base.BaseMediaElementEvent;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
 
 import java.util.Map;

@@ -4,7 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.ElementImage;
 
