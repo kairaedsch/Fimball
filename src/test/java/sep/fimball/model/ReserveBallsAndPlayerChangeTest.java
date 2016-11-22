@@ -7,7 +7,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
-import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -17,7 +16,6 @@ import sep.fimball.model.trigger.GameTrigger;
 import sep.fimball.model.trigger.Trigger;
 import sep.fimball.model.trigger.TriggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -86,7 +84,7 @@ public class ReserveBallsAndPlayerChangeTest {
 
         public BallLostTrigger(GameSession game)
         {
-            this.game = game
+            this.game = game;
         }
 
         @Override

@@ -24,29 +24,31 @@ public class PinballMachineSaveTest
     @Test
     public void pinballMachineShouldSave()
     {
-        //Erstellen eines neuen Automaten, der alle verschiedene Elemente enthält
         Config.config();
+        // Erstellt einen leeren Automaten
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.elementsProperty();
+        ReadOnlyListProperty<PlacedElement> pinballMachineElements = pinballMachine.elementsProperty();
+
+        // Lädt alle im Spiel verfügbaren BaseElements und fügt sie in den Auotmaten ein
         int i = 0;
         for (BaseElement b : BaseElementManager.getInstance().elementsProperty().values())
         {
             PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(b.getId()), new Vector2(0, MAX_ELEMENT_SIZE * i), 0, 1, 0);
             pinballMachine.addElement(p);
-            originalElements.add(p);
+            pinballMachineElements.add(p);
             i++;
         }
 
-        //Den gerade erstellten Automaten serialisieren und speichern
+        // Speichert den erstellten Automaten
         pinballMachine.saveToDisk();
 
-        //Den gespeicherten Automaten neu laden
-        pinballMachine.checkUnloadElements();
+        // Leert den aktuellen Automaten
+        pinballMachine.unloadElements();
         ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
 
         //Vergleichen des erstellten und des geladenen Automaten
         boolean difference = false;
-        for (PlacedElement original : originalElements)
+        for (PlacedElement original : pinballMachineElements)
         {
             boolean match = false;
             for (PlacedElement loaded : loadedElements)

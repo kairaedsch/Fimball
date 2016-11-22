@@ -60,7 +60,7 @@ public class PinballMachine
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
 
-        this.elements = null;
+        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementsLoaded = false;
 
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -109,7 +109,7 @@ public class PinballMachine
     {
         checkElementsLoaded();
         PinballMachineManager.getInstance().savePinballMachine(this);
-        checkUnloadElements();
+        unloadElements();
     }
 
     /**
@@ -172,13 +172,12 @@ public class PinballMachine
     /**
      * Verwirft den geladenen Automaten.
      */
-    public void checkUnloadElements()
+    public void unloadElements()
     {
         if (elementsLoaded)
         {
-            elements.clear();
-            elements = null;
             elementsLoaded = false;
+            elements.clear();
         }
     }
 
@@ -189,9 +188,8 @@ public class PinballMachine
     {
         if (!elementsLoaded)
         {
-            elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-            elementsLoaded = true;
             PinballMachineManager.getInstance().loadMachineElements(this);
+            elementsLoaded = true;
         }
     }
 
