@@ -68,7 +68,7 @@ public class GameTest
                 BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
 
         pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(6, -16), 0, 0, 0));
+                BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
 
         //Starten des Spiels
@@ -103,7 +103,8 @@ public class GameTest
     {
         session.stopPhysics();
         session.stopTimeline();
-        pinballMachine.deleteFromDisk();
+        //pinballMachine.deleteFromDisk();
+        pinballMachine.saveToDisk();
     }
 
     public void addCollidedGameElement(GameElement gameElement)
@@ -123,7 +124,7 @@ public class GameTest
         Handler ballLostTrigger = new Handler();
         ballLostTrigger.setGameHandler(new BallLostHandler(this));
 
-        List<Handler> triggerList = new ArrayList<>();
+        List<Handler> triggerList = HandlerFactory.generateAllHandlers(session);
         triggerList.add(collisionTrigger);
         triggerList.add(ballLostTrigger);
         session.setTriggers(triggerList);
