@@ -75,6 +75,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     public Label sfxVolumePercent;
 
+    /**
+     * Das Label mit der Überschrift über der Sprachauswahl.
+     */
     @FXML
     private Label languageTitle;
 
@@ -120,6 +123,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         gameSettingsViewModel.exitDialogToMainMenu();
     }
 
+    /**
+     * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
+     */
     private void bindTexts() {
         languageTitle.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.language.key"));
     }
