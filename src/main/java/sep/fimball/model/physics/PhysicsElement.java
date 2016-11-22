@@ -1,14 +1,14 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.blueprint.base.BasePhysicsElement;
 
 import java.util.List;
 
 /**
  * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden
  */
-public class PhysicsElement
+public class PhysicsElement<gameElementT>
 {
     /**
      * Die aktuelle Position des PhysikElements.
@@ -24,19 +24,23 @@ public class PhysicsElement
      * Die Liste der Collider, welche die Kollisionsflächen dieses Elements darstellen.
      */
     private List<Collider> colliders;
-    private GameElement gameElement;
+
+    private gameElementT gameElement;
+
+    private BasePhysicsElement basePhysicsElement;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
      *
      * @param gameElement Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
      */
-    public PhysicsElement(GameElement gameElement)
+    public PhysicsElement(gameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
-        this.position = gameElement.positionProperty().get();
-        this.rotation = gameElement.rotationProperty().get();
-        this.colliders = gameElement.getPlacedElement().getBaseElement().getPhysics().getColliders();
+        this.position = position;
+        this.rotation = rotation;
         this.gameElement = gameElement;
+        this.colliders = basePhysicsElement.getColliders();
+        this.basePhysicsElement = basePhysicsElement;
     }
 
     /**
@@ -44,7 +48,7 @@ public class PhysicsElement
      *
      * @return Das zu diesem PhysicElement gehörende GameElement.
      */
-    public GameElement getGameElement()
+    public gameElementT getGameElement()
     {
         return gameElement;
     }
@@ -97,5 +101,10 @@ public class PhysicsElement
     public List<Collider> getColliders()
     {
         return colliders;
+    }
+
+    public BasePhysicsElement getBasePhysicsElement()
+    {
+        return basePhysicsElement;
     }
 }

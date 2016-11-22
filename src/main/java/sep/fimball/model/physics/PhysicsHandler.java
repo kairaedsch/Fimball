@@ -13,7 +13,7 @@ import java.util.TimerTask;
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
  */
-public class PhysicsHandler
+public class PhysicsHandler<GameElementT>
 {
     /**
      * Die Physikschleife beginnt ohne Verzögerung wenn sie gestartet wird
@@ -54,7 +54,7 @@ public class PhysicsHandler
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
      */
-    private List<PhysicsElement> physicsElements;
+    private List<PhysicsElement<GameElementT>> physicsElements;
 
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
@@ -71,7 +71,7 @@ public class PhysicsHandler
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession Die zugehörige GameSession.
      */
-    public PhysicsHandler(List<PhysicsElement> elements, PhysicGameSession gameSession, double maxElementPos)
+    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPos)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
@@ -166,21 +166,21 @@ public class PhysicsHandler
                 List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
                 List<ElementEventArgs> elementEventArgses = new ArrayList<>();
 
-                for (PhysicsElement element : physicsElements)
+                for (PhysicsElement<GameElementT> element : physicsElements)
                 {
                     if (ballElement != null && element != ballElement.getSubElement())
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getGameElement().getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
 
                             if (hit)
                             {
-                                collisionEventArgses.add(new CollisionEventArgs(element.getGameElement(), collider.getId()));
+                                collisionEventArgses.add(new CollisionEventArgs<>(element.getGameElement(), collider.getId()));
                             }
                         }
                     }
-                    elementEventArgses.add(new ElementEventArgs(element.getGameElement(), element.getPosition(), element.getRotation()));
+                    elementEventArgses.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
                 }
 
                 gameSession.addEventArgses(collisionEventArgses, elementEventArgses);

@@ -1,12 +1,12 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.element.GameElement;
+import sep.fimball.model.blueprint.base.BasePhysicsElement;
 
 /**
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
  */
-public class BallElement
+public class BallElement<GameElementT>
 {
     /**
      * Darstellung des Balls als PhysicsElement.
@@ -40,9 +40,9 @@ public class BallElement
      * @param collider    Die Form des Colliders, die der Ball haben soll.
      * @param layer       Die Ebene, auf der sich der Ball befinden soll.
      */
-    public BallElement(GameElement gameElement, CircleColliderShape collider, WorldLayer layer)
+    public BallElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
-        subElement = new PhysicsElement(gameElement);
+        subElement = new PhysicsElement<>(gameElement, position, rotation, basePhysicsElement);
 
         this.collider = collider;
         this.velocity = new Vector2();
@@ -55,7 +55,7 @@ public class BallElement
      *
      * @return Das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
      */
-    public PhysicsElement getSubElement()
+    public PhysicsElement<GameElementT> getSubElement()
     {
         return subElement;
     }

@@ -28,7 +28,7 @@ import java.util.Observer;
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession implements PhysicGameSession, TriggerGameSession
+public class GameSession implements PhysicGameSession<GameElement>, TriggerGameSession
 {
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Trigger für diese Game Session.
@@ -129,9 +129,9 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
     /**
      *
      */
-    private LinkedList<List<CollisionEventArgs>> collisionEventArgsesList;
+    private LinkedList<List<CollisionEventArgs<GameElement>>> collisionEventArgsesList;
 
-    private LinkedList<List<ElementEventArgs>> elementEventArgsesList;
+    private LinkedList<List<ElementEventArgs<GameElement>>> elementEventArgsesList;
 
     private boolean isBallLost;
 
@@ -188,17 +188,17 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
             }
             else
             {
-                GameElement gameElem = new GameElement(element, false);
-                elements.add(gameElem);
+                GameElement gameElement = new GameElement(element, false);
+                elements.add(gameElement);
 
-                PhysicsElement physElem = new PhysicsElement(gameElem);
+                PhysicsElement physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                 physicsElements.add(physElem);
 
                 for (Collider collider : physElem.getColliders())
                 {
                     for (ColliderShape shape : collider.getShapes())
                     {
-                        double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElem.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+                        double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
                         double globalPos = physElem.getPosition().getY() + yPos;
 
                         if (globalPos > maxElementPos)
@@ -242,8 +242,8 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
-            LinkedList<List<CollisionEventArgs>> localCollisionEventArgsesList;
-            LinkedList<List<ElementEventArgs>> localElementEventArgsesList;
+            LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
+            LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
             synchronized (physicLocker)
             {
                 localCollisionEventArgsesList = this.collisionEventArgsesList;
@@ -253,18 +253,18 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
                 this.elementEventArgsesList = new LinkedList<>();
             }
 
-            for (List<ElementEventArgs> elementEventArgses : localElementEventArgsesList)
+            for (List<ElementEventArgs<GameElement>> elementEventArgses : localElementEventArgsesList)
             {
-                for (ElementEventArgs elementEventArgs : elementEventArgses)
+                for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgses)
                 {
                     elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
                     elementEventArgs.getGameElement().setRotation(elementEventArgs.getRoation());
                 }
             }
 
-            for (List<CollisionEventArgs> collisionEventArgses : localCollisionEventArgsesList)
+            for (List<CollisionEventArgs<GameElement>> collisionEventArgses : localCollisionEventArgsesList)
             {
-                for (CollisionEventArgs collisionEventArgs : collisionEventArgses)
+                for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
                 {
                     for (Trigger trigger : triggers)
                     {
@@ -352,7 +352,7 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
         world.addGameElement(gameBall.get());
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
-        physicsHandler.addBall(new BallElement(gameBall.get(), ballCollider, WorldLayer.GROUND));
+        physicsHandler.addBall(new BallElement<GameElement>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(),  gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
     }
 
     /**
@@ -370,7 +370,7 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
      *
      * @param collisionEventArgses Die Liste von Kollisions-Events, die hinzugefügt werden soll.
      */
-    public void addEventArgses(List<CollisionEventArgs> collisionEventArgses, List<ElementEventArgs> elementEventArgsesList)
+    public void addEventArgses(List<CollisionEventArgs<GameElement>> collisionEventArgses, List<ElementEventArgs<GameElement>> elementEventArgsesList)
     {
         synchronized (physicLocker)
         {

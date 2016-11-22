@@ -1,16 +1,14 @@
 package sep.fimball.model.physics;
 
-import sep.fimball.model.element.GameElement;
-
 /**
  * Argumente, die an das "Ziel-GameElement" (das GameElement welche diese CollisionEventArg beim OnCollision Event übergeben bekommt) bei einer Kollision mit einem anderen GameElement übergeben werden.
  */
-public class CollisionEventArgs
+public class CollisionEventArgs<GameElementT>
 {
     /**
      * Das GameElement, das mit dem Ziel-GameElement zusammengestoßen ist.
      */
-    private GameElement otherElement;
+    private GameElementT otherElement;
 
     /**
      * Der Collider des Ziel-GameElements, der mit dem anderen GameElement zusammengestoßen ist.
@@ -23,7 +21,7 @@ public class CollisionEventArgs
      * @param otherElement Mit welchem GameElement das Ziel-GameElement zusammengestoßen ist.
      * @param colliderId   Die ID des Colliders von otherElement, an dem die Kollision passiert ist.
      */
-    public CollisionEventArgs(GameElement otherElement, int colliderId)
+    public CollisionEventArgs(GameElementT otherElement, int colliderId)
     {
         this.otherElement = otherElement;
         this.colliderId = colliderId;
@@ -34,7 +32,7 @@ public class CollisionEventArgs
      *
      * @return Das GameElement, das mit dem Ziel-GameElement zusammengestoßen ist.
      */
-    public GameElement getOtherElement()
+    public GameElementT getOtherElement()
     {
         return otherElement;
     }
