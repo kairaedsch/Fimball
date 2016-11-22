@@ -29,11 +29,19 @@ public class OverlapAxis
         this.overlap = overlap;
     }
 
+    /**
+     * Gibt die Achse, auf welche die überschneidenden Objekte projiziert wurden, zurück..
+     * @return Die Achse.
+     */
     public Vector2 getAxis()
     {
         return axis;
     }
 
+    /**
+     * Gibt die Überschneidung der Objekte auf der Achse zurück.
+     * @return Die Überschneidung.
+     */
     public double getOverlap()
     {
         return overlap;

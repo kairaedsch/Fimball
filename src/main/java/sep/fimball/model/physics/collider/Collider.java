@@ -82,6 +82,10 @@ public class Collider
         return shapes;
     }
 
+    /**
+     * Gibt die ID des Colliders zurück.
+     * @return Die ID des Colliders.
+     */
     public int getId()
     {
         return id;

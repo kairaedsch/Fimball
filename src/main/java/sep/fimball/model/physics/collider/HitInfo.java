@@ -8,7 +8,7 @@ import sep.fimball.general.data.Vector2;
 public class HitInfo
 {
     /**
-     * Überschneiden sich Fläche und Ball?
+     * Gibt an, ob sich Fläche und Ball überschneiden.
      */
     private boolean isHit;
 
@@ -30,11 +30,19 @@ public class HitInfo
         this.shortestIntersect = shortestIntersect;
     }
 
+    /**
+     * Gibt zurück, ob sich die Fläche und der Ball überschneiden.
+     * @return {@code true} falls sich die Fläche und der Ball überschneiden, {@code false} sonst.
+     */
     public boolean isHit()
     {
         return isHit;
     }
 
+    /**
+     * Gibt dee kürzesten Weg um eine Überschneidung zwischen Ball und Fläche aufzulösen. Falls keine Überschneidung vorhanden ist, wird {@code null} zurückgegeben.
+     * @return Den kürzesten Weg oder {@code null}.
+     */
     public Vector2 getShortestIntersect()
     {
         return shortestIntersect;
