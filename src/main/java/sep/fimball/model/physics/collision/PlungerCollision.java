@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Diese Klasse repräsentiert die Kollision des Balls mit einem Plunger.
@@ -9,7 +9,7 @@ import sep.fimball.model.physics.element.BallElement;
 public class PlungerCollision implements CollisionType
 {
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
+    public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
         //TODO Apply collision
         //TODO Increase y velocity

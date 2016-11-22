@@ -2,7 +2,7 @@ package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
@@ -53,7 +53,7 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
         // TODO rotate
 

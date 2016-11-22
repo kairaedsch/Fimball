@@ -23,7 +23,7 @@ import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.collider.WorldLayer;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -360,7 +360,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         world.addGameElement(gameBall.get());
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
-        physicsHandler.addBall(new BallElement<GameElement>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(),  gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
+        physicsHandler.addBall(new BallPhysicsElement<GameElement>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(),  gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
         setBallLost(false);
     }
 

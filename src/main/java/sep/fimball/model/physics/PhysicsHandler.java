@@ -5,7 +5,7 @@ import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.physics.collider.Collider;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -39,7 +39,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Der aktuelle Spielball.
      */
-    private BallElement ballElement;
+    private BallPhysicsElement ballPhysicsElement;
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -96,9 +96,9 @@ public class PhysicsHandler<GameElementT>
      *
      * @param ball Der Ball, der hinzugefügt werden soll.
      */
-    public void addBall(BallElement ball)
+    public void addBall(BallPhysicsElement ball)
     {
-        ballElement = ball;
+        ballPhysicsElement = ball;
         physicsElements.add(ball.getSubElement());
     }
 
@@ -107,7 +107,7 @@ public class PhysicsHandler<GameElementT>
      */
     public void removeBall()
     {
-        ballElement = null;
+        ballPhysicsElement = null;
     }
 
     /**
@@ -148,17 +148,17 @@ public class PhysicsHandler<GameElementT>
 
                 // Check all PhysicsElements for collisions with the ball
 
-                if (ballElement != null)
+                if (ballPhysicsElement != null)
                 {
                     double delta = TICK_RATE / 1000.0;
 
                     // Wende Schwerkraft auf den Ball an
-                    ballElement.setVelocity(Vector2.add(ballElement.getVelocity(), new Vector2(0.0, GRAVITY * delta)));
+                    ballPhysicsElement.setVelocity(Vector2.add(ballPhysicsElement.getVelocity(), new Vector2(0.0, GRAVITY * delta)));
 
                     // Bewege den Ball
-                    ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
+                    ballPhysicsElement.setPosition(Vector2.add(ballPhysicsElement.getPosition(), Vector2.scale(ballPhysicsElement.getVelocity(), delta)));
 
-                    if (ballElement.getPosition().getY() >= maxElementPos)
+                    if (ballPhysicsElement.getPosition().getY() >= maxElementPos)
                     {
                         gameSession.setBallLost(true);
                     }
@@ -169,11 +169,11 @@ public class PhysicsHandler<GameElementT>
 
                 for (PhysicsElement<GameElementT> element : physicsElements)
                 {
-                    if (ballElement != null && element != ballElement.getSubElement())
+                    if (ballPhysicsElement != null && element != ballPhysicsElement.getSubElement())
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
+                            boolean hit = collider.checkCollision(ballPhysicsElement, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
 
                             if (hit)
                             {

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -42,7 +42,7 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
         List<Vector2> rotatedVerts;
 

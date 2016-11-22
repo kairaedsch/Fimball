@@ -9,7 +9,7 @@ import sep.fimball.model.physics.collider.WorldLayer;
 /**
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
  */
-public class BallElement<GameElementT>
+public class BallPhysicsElement<GameElementT>
 {
     /**
      * Darstellung des Balls als PhysicsElement.
@@ -43,7 +43,7 @@ public class BallElement<GameElementT>
      * @param collider    Die Form des Colliders, die der Ball haben soll.
      * @param layer       Die Ebene, auf der sich der Ball befinden soll.
      */
-    public BallElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public BallPhysicsElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         subElement = new PhysicsElement<>(gameElement, position, rotation, basePhysicsElement);
 

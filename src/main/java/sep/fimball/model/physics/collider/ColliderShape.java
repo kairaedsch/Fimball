@@ -2,7 +2,7 @@ package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Beschreibt die Form einer Fläche die mit dem Ball interagieren kann.
@@ -18,7 +18,7 @@ public interface ColliderShape
      * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
      * @return Informationen, ob der Ball in der Fläche liegt.
      */
-    HitInfo calculateHitInfo(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint);
+    HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint);
 
     /**
      * Gibt eine Box zurück, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind.

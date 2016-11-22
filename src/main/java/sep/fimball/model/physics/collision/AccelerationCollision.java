@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Bei einem Collider mit dieser Art von Collision prallt der Ball nicht ab, sondern wird in eine vorher festgelegte
@@ -25,7 +25,7 @@ public class AccelerationCollision implements CollisionType
     }
 
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
+    public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
         Vector2 direction = Vector2.rotate(new Vector2(0, -1), Math.toRadians(rotation));
         ball.setVelocity(Vector2.add(ball.getVelocity(), Vector2.scale(direction, strength)));

@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Bei einem Collider mit dieser Art von Collision prallt der Ball ab und bekommt zusätzlich noch eine vorgegebene
@@ -25,7 +25,7 @@ public class BounceCollision implements CollisionType
     }
 
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
+    public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();

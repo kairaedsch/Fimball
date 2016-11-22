@@ -3,7 +3,7 @@ package sep.fimball.model.physics.collision;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Diese Klasse repräsentiert eine einfache Kollision, bei der der Ball einfach abprallt, es wirken keine weiteren Kräfte.
@@ -16,7 +16,7 @@ public class NormalCollision implements CollisionType
     private final double bounce = 0.7;
 
     @Override
-    public void applyCollision(BallElement ball, Vector2 shortestIntersect, double rotation)
+    public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
         ball.setPosition(Vector2.add(ball.getPosition(), shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();

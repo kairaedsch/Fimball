@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.collision.CollisionType;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class Collider
     }
 
     /**
-     * Überprüft, ob das gegebene BallElement eine Kollision mit einer der ColliderShapes des Colliders hat.
+     * Überprüft, ob das gegebene BallPhysicsElement eine Kollision mit einer der ColliderShapes des Colliders hat.
      *
      * @param ball                   Der Ball, dessen Kollisionen überprüft werden sollen.
      * @param colliderObjectPosition Die Position des Elements, mit dem kollidiert wird.
@@ -57,7 +57,7 @@ public class Collider
      * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
      * @return {@code true}, wenn eine Kollision stattfindet, {@code false} sonst.
      */
-    public boolean checkCollision(BallElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public boolean checkCollision(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
         boolean hit = false;
         for (ColliderShape shape : shapes)
