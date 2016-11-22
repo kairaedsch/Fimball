@@ -39,7 +39,7 @@ public class HandlerFactory
         triggers.add(lightTrigger);
 
         Handler ballLostHandler = new Handler();
-        ballLostHandler.setGameHandler(new BallLostHandler());
+        ballLostHandler.setGameHandler(new BallLostHandler(gameSession));
         triggers.add(ballLostHandler);
 
         return triggers;

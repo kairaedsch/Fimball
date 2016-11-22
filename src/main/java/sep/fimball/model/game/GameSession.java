@@ -288,7 +288,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 {
                     for (Handler trigger : triggers)
                     {
-                        trigger.activateGameHandler(GameEvent.BALL_LOST, this);
+                        trigger.activateGameHandler(GameEvent.BALL_LOST);
                     }
                 }
             }
