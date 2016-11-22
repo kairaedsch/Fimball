@@ -46,7 +46,6 @@ public class GameTest
     public void initialize()
     {
         collidedGameElements = new Stack<>();
-        Config.config();
     }
 
     @Test

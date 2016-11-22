@@ -24,7 +24,7 @@ public class PinballMachineSaveTest
     @Test
     public void pinballMachineShouldSave()
     {
-        Config.config();
+        //Config.config();
         // Erstellt einen leeren Automaten
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         ReadOnlyListProperty<PlacedElement> pinballMachineElements = pinballMachine.elementsProperty();

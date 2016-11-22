@@ -7,10 +7,14 @@ import javafx.scene.paint.Color;
  */
 public class Config
 {
+    static {
+        config();
+    }
+
     /**
      * Muss vor Nutzung der anderen Methoden dieser Klasse aufgerufen werden. Kümmert sich um die Unterscheidung der Pfade auf Windows und Linux.
      */
-    public static void config()
+    private static void config()
     {
         String mode = System.getProperty("mode");
         if (true || (mode != null && mode.equalsIgnoreCase("development")))
