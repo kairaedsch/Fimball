@@ -2,7 +2,7 @@ package sep.fimball.model.physics;
 
 import java.util.List;
 
-public interface IGameSession
+public interface PhysicGameSession
 {
     void setBallLost(boolean b);
 

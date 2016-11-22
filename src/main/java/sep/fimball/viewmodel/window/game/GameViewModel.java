@@ -192,9 +192,4 @@ public class GameViewModel extends WindowViewModel
     {
         gameSession.startAll();
     }
-
-    public PinballMachine getPinballMachine()
-    {
-        return gameSession.getPinballMachine();
-    }
 }

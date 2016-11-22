@@ -1,6 +1,5 @@
 package sep.fimball.model.trigger;
 
-import sep.fimball.model.GameSession;
 import sep.fimball.model.element.GameElement;
 
 /**
@@ -11,14 +10,14 @@ public class ScoreTrigger implements ElementTrigger
     /**
      * Aktuelle GameSession.
      */
-    private GameSession session;
+    private TriggerGameSession session;
 
     /**
      * Erstellt einen neuen Trigger.
      *
      * @param session Aktuelle GameSession.
      */
-    public ScoreTrigger(GameSession session)
+    public ScoreTrigger(TriggerGameSession session)
     {
         this.session = session;
     }

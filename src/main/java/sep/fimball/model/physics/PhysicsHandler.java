@@ -1,7 +1,6 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
@@ -60,7 +59,7 @@ public class PhysicsHandler
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
      */
-    private IGameSession gameSession;
+    private PhysicGameSession gameSession;
 
     private double maxElementPos;
 
@@ -72,7 +71,7 @@ public class PhysicsHandler
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession Die zugehörige GameSession.
      */
-    public PhysicsHandler(List<PhysicsElement> elements, IGameSession gameSession, double maxElementPos)
+    public PhysicsHandler(List<PhysicsElement> elements, PhysicGameSession gameSession, double maxElementPos)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;

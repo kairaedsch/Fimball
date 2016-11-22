@@ -15,17 +15,20 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.element.GameElement;
-import sep.fimball.model.media.LightManager;
 import sep.fimball.model.physics.*;
 import sep.fimball.model.trigger.Trigger;
 import sep.fimball.model.trigger.TriggerFactory;
+import sep.fimball.model.trigger.TriggerGameSession;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Observer;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession implements IGameSession
+public class GameSession implements PhysicGameSession, TriggerGameSession
 {
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Trigger für diese Game Session.
@@ -138,11 +141,6 @@ public class GameSession implements IGameSession
     private Object ballLostMutex;
 
     /**
-     * Der LightManager, der die in der GameSession vorhandenen Lichter verwaltet.
-     */
-    private LightManager lightManager;
-
-    /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
      *
      * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
@@ -180,7 +178,6 @@ public class GameSession implements IGameSession
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
-        lightManager = new LightManager();
         double maxElementPos = machineBlueprint.getElements().get(0).positionProperty().get().getY();
 
         for (PlacedElement element : machineBlueprint.getElements())
@@ -194,26 +191,19 @@ public class GameSession implements IGameSession
                 GameElement gameElem = new GameElement(element, false);
                 elements.add(gameElem);
 
-                if (element.getBaseElement().getType() == BaseElementType.LIGHT)
-                {
-                    lightManager.addLight(element);
-                }
-                else
-                {
-                    PhysicsElement physElem = new PhysicsElement(gameElem);
-                    physicsElements.add(physElem);
+                PhysicsElement physElem = new PhysicsElement(gameElem);
+                physicsElements.add(physElem);
 
-                    for (Collider collider : physElem.getColliders())
+                for (Collider collider : physElem.getColliders())
+                {
+                    for (ColliderShape shape : collider.getShapes())
                     {
-                        for (ColliderShape shape : collider.getShapes())
-                        {
-                            double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElem.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
-                            double globalPos = physElem.getPosition().getY() + yPos;
+                        double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElem.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+                        double globalPos = physElem.getPosition().getY() + yPos;
 
-                            if (globalPos > maxElementPos)
-                            {
-                                maxElementPos = globalPos;
-                            }
+                        if (globalPos > maxElementPos)
+                        {
+                            maxElementPos = globalPos;
                         }
                     }
                 }

@@ -73,6 +73,21 @@ public class ListPropertyConverter
         listChangeListener.onChanged(null);
     }
 
+    public static <OriginalT> void bindAndFilterList(ListProperty<OriginalT> listPropertyConverted, ObservableList<OriginalT> listPropertyOriginal, ListFilter<OriginalT> filter)
+    {
+        ListChangeListener<OriginalT> listChangeListener = (change) ->
+        {
+            listPropertyConverted.clear();
+            for (OriginalT original : listPropertyOriginal)
+            {
+                if(filter.shouldKeep(original)) listPropertyConverted.add(original);
+            }
+        };
+
+        listPropertyOriginal.addListener(listChangeListener);
+        listChangeListener.onChanged(null);
+    }
+
     /**
      * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code mapPropertyOriginal}, wenn sich die Werte in der {@code mapPropertyOriginal} ändern.
      *
@@ -139,5 +154,11 @@ public class ListPropertyConverter
          * @return Ein Objekt vom Typ ConvertedT.
          */
         ConvertedT convert(OriginalKeyT originalKey, OriginalValueT originalValueT);
+    }
+
+    @FunctionalInterface
+    public interface ListFilter<OriginalT>
+    {
+        boolean shouldKeep(OriginalT original);
     }
 }

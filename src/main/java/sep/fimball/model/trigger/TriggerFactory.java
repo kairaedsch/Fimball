@@ -1,7 +1,5 @@
 package sep.fimball.model.trigger;
 
-import sep.fimball.model.GameSession;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class TriggerFactory
      * @param gameSession Die GameSession, für die die Trigger generiert werden sollen.
      * @return Eine Liste aller Trigger.
      */
-    public static List<Trigger> generateAllTriggers(GameSession gameSession)
+    public static List<Trigger> generateAllTriggers(TriggerGameSession gameSession)
     {
         List<Trigger> triggers = new ArrayList<>();
 
@@ -34,6 +32,10 @@ public class TriggerFactory
 
         Trigger animationTrigger = new Trigger();
         animationTrigger.setElementTrigger(new AnimationTrigger());
+        triggers.add(animationTrigger);
+
+        Trigger lightTrigger = new Trigger();
+        animationTrigger.setGameTrigger(new LightTrigger(gameSession.getWorld()));
         triggers.add(animationTrigger);
 
         return triggers;
