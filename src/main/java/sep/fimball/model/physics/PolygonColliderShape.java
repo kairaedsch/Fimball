@@ -185,6 +185,31 @@ public class PolygonColliderShape implements ColliderShape
         return new RectangleDouble(origin, maxX - minX, maxY - minY);
     }
 
+    @Override
+    public double getMaximumYPos(double rotation, Vector2 pivotPoint)
+    {
+        List<Vector2> newVertices;
+
+        if (rotation != 0)
+        {
+            newVertices = rotate(rotation, pivotPoint);
+        }
+        else
+        {
+            newVertices = vertices;
+        }
+        double maxY = newVertices.get(0).getY();
+
+        for (Vector2 vertex : newVertices)
+        {
+            if (vertex.getY() > maxY)
+            {
+                maxY = vertex.getY();
+            }
+        }
+        return maxY;
+    }
+
     /**
      * Rotiert alle Vertices um einen Punkt.
      *

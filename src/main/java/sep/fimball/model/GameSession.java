@@ -128,10 +128,14 @@ public class GameSession
      */
     private LinkedList<List<CollisionEventArgs>> collisionEventArgsList;
 
+    private boolean isBallLost;
+
     /**
      * Platzhalter welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
      */
     private Object collisionEventArgsLocker;
+
+    private Object ballLostMutex;
 
     /**
      * Der LightManager, der die in der GameSession vorhandenen Lichter verwaltet.
@@ -149,6 +153,7 @@ public class GameSession
         this.machineBlueprint = machineBlueprint;
         this.triggers = new ArrayList<>();
         collisionEventArgsLocker = new Object();
+        ballLostMutex = new Object();
         collisionEventArgsList = new LinkedList<List<CollisionEventArgs>>();
 
         gameBall = new SimpleObjectProperty<>();
@@ -176,6 +181,7 @@ public class GameSession
         List<PhysicsElement> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
         lightManager = new LightManager();
+        double maxElementPos = machineBlueprint.getElements().get(0).positionProperty().get().getY();
 
         for (PlacedElement element : machineBlueprint.getElements())
         {
@@ -196,6 +202,20 @@ public class GameSession
                 {
                     PhysicsElement physElem = new PhysicsElement(gameElem);
                     physicsElements.add(physElem);
+
+                    for (Collider collider : physElem.getColliders())
+                    {
+                        for (ColliderShape shape : collider.getShapes())
+                        {
+                            double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElem.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+                            double globalPos = physElem.getPosition().getY() + yPos;
+
+                            if (globalPos > maxElementPos)
+                            {
+                                maxElementPos = globalPos;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -204,7 +224,7 @@ public class GameSession
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements, ballTemplate);
-        physicsHandler = new PhysicsHandler(physicsElements, this);
+        physicsHandler = new PhysicsHandler(physicsElements, this, maxElementPos);
 
         gameLoopObservable = new Observable();
 
@@ -247,6 +267,14 @@ public class GameSession
                     {
                         trigger.activateElementTrigger(arg.getOtherElement(), arg.getColliderId());
                     }
+                }
+            }
+
+            synchronized (ballLostMutex)
+            {
+                if (isBallLost)
+                {
+                    onBallLost();
                 }
             }
             gameLoopObservable.setChanged();
@@ -344,6 +372,14 @@ public class GameSession
         synchronized (collisionEventArgsLocker)
         {
             collisionEventArgsList.add(collisionEventArgs);
+        }
+    }
+
+    public void setBallLost(boolean status)
+    {
+        synchronized (ballLostMutex)
+        {
+            isBallLost = status;
         }
     }
 

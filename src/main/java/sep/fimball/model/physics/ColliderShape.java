@@ -27,4 +27,6 @@ public interface ColliderShape
      * @return Eine Box, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind..
      */
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
+
+    double getMaximumYPos(double rotation, Vector2 pivotPoint);
 }

@@ -78,4 +78,10 @@ public class CircleColliderShape implements ColliderShape
         Vector2 origin = new Vector2(position.getX() - radius, position.getY() - radius);
         return new RectangleDouble(origin, 2 * radius, 2 * radius);
     }
+
+    @Override
+    public double getMaximumYPos(double rotation, Vector2 pivotPoint)
+    {
+        return position.getY() + radius;
+    }
 }

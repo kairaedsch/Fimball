@@ -62,6 +62,8 @@ public class PhysicsHandler
      */
     private GameSession gameSession;
 
+    private double maxElementPos;
+
     private final boolean debug = false;
 
     /**
@@ -70,10 +72,11 @@ public class PhysicsHandler
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession Die zugehörige GameSession.
      */
-    public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession)
+    public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession, double maxElementPos)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
+        this.maxElementPos = maxElementPos;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -96,6 +99,7 @@ public class PhysicsHandler
     {
         ballElement = ball;
         physicsElements.add(ball.getSubElement());
+        gameSession.setBallLost(false);
     }
 
     /**
@@ -153,6 +157,11 @@ public class PhysicsHandler
 
                     // Bewege den Ball
                     ballElement.setPosition(Vector2.add(ballElement.getPosition(), Vector2.scale(ballElement.getVelocity(), delta)));
+
+                    if (ballElement.getPosition().getY() >= maxElementPos)
+                    {
+                        gameSession.setBallLost(true);
+                    }
                 }
 
                 List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
