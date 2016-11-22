@@ -162,6 +162,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         double vx = posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX();
         double vy = posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY();
-        return new Vector2(x, y);
+        return new Vector2(vx, vy);
     }
 }
