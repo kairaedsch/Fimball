@@ -220,7 +220,7 @@ public class PinballMachine
      *
      * @return Die Liste der Elemente des Flipperautomaten zurück.
      */
-    public ReadOnlyListProperty<PlacedElement> getElements()
+    public ReadOnlyListProperty<PlacedElement> elementsProperty()
     {
         checkElementsLoaded();
         return elements;

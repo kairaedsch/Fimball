@@ -198,9 +198,9 @@ public class PinballMachineManager
         JsonFileManager.saveToJson(Config.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = new PlacedElementListJson();
-        placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.getElements().size()];
+        placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.elementsProperty().size()];
         counter = 0;
-        for (PlacedElement placedElement : pinballMachine.getElements())
+        for (PlacedElement placedElement : pinballMachine.elementsProperty())
         {
             PlacedElementListJson.PlacedElementJson placedElementJson = new PlacedElementListJson.PlacedElementJson();
             placedElementJson.baseElementId = placedElement.getBaseElement().getId();

@@ -27,7 +27,7 @@ public class PinballMachineSaveTest
         //Erstellen eines neuen Automaten, der alle verschiedene Elemente enthält
         Config.config();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.getElements();
+        ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.elementsProperty();
         int i = 0;
         for (BaseElement b : BaseElementManager.getInstance().elementsProperty().values())
         {
@@ -42,7 +42,7 @@ public class PinballMachineSaveTest
 
         //Den gespeicherten Automaten neu laden
         pinballMachine.checkUnloadElements();
-        ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.getElements();
+        ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
 
         //Vergleichen des erstellten und des geladenen Automaten
         boolean difference = false;

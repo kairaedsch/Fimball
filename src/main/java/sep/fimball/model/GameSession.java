@@ -56,7 +56,7 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
         gameSession.stopPhysics();
-        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.getElements(), element -> new GameElement(element, true));
+        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.elementsProperty(), element -> new GameElement(element, true));
         return gameSession;
     }
 
@@ -178,9 +178,9 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
-        double maxElementPos = machineBlueprint.getElements().get(0).positionProperty().get().getY();
+        double maxElementPos = machineBlueprint.elementsProperty().get(0).positionProperty().get().getY();
 
-        for (PlacedElement element : machineBlueprint.getElements())
+        for (PlacedElement element : machineBlueprint.elementsProperty())
         {
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
