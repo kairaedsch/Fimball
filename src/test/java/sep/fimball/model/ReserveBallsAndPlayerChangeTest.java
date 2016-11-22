@@ -23,18 +23,17 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by marc on 16.11.16.
  */
-@Ignore
+//@Ignore
 public class ReserveBallsAndPlayerChangeTest {
     private static String[] players = new String[] {"tester", "test"};
-    private static PinballMachine automaton;
-    private static GameSession game;
+    private PinballMachine automaton;
+    private GameSession game;
     private static final long waitingTime = 2000;
     private static final long keyHoldingTime = 1000;
-    private static boolean ballLost = false;
-    @Rule public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
+    private boolean ballLost = false;
 
     @Before
-    public static void initGame() {
+    public void initGame() {
         automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("testmachine-2")).findFirst().get();
         game = new GameSession(automaton, players);
         List<Trigger> triggers = TriggerFactory.generateAllTriggers(game);
@@ -44,7 +43,7 @@ public class ReserveBallsAndPlayerChangeTest {
     }
 
     @Test(timeout = 120000)
-    public static void testReserveBalls() {
+    public void testReserveBalls() {
         usePlunger();
         while (!ballLost) { }
         waitForStartOfNewSession();
@@ -64,13 +63,13 @@ public class ReserveBallsAndPlayerChangeTest {
         assertEquals("test", game.getCurrentPlayer().getName());
     }
 
-    private static void waitForStartOfNewSession() {
+    private void waitForStartOfNewSession() {
         try {
             Thread.sleep(waitingTime);
         } catch (InterruptedException e) { }
     }
 
-    private static void usePlunger() {
+    private void usePlunger() {
         KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
         try {
@@ -79,7 +78,7 @@ public class ReserveBallsAndPlayerChangeTest {
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
     }
 
-    private static class BallLostTrigger implements GameTrigger {
+    private class BallLostTrigger implements GameTrigger {
         private GameSession game;
 
         public BallLostTrigger(GameSession game)
