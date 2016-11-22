@@ -42,7 +42,7 @@ public class LightHandler implements GameHandler
     }
 
     @Override
-    public void activateGameHandler()
+    public void activateGameHandler(GameEvent gameEvent, HandlerGameSession handlerGameSession)
     {
 
     }

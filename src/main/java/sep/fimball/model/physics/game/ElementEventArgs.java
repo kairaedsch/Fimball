@@ -1,4 +1,4 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.game;
 
 import sep.fimball.general.data.Vector2;
 

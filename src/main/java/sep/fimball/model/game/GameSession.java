@@ -14,10 +14,20 @@ import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.physics.*;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
+import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.collider.WorldLayer;
+import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.PhysicsElement;
+import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.ElementEventArgs;
+import sep.fimball.model.physics.game.PhysicGameSession;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -276,7 +286,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 if (isBallLost)
                 {
-                    onBallLost();
+                    for (Handler trigger : triggers)
+                    {
+                        trigger.activateGameHandler(GameEvent.BALL_LOST, this);
+                    }
                 }
             }
             gameLoopObservable.setChanged();
@@ -330,28 +343,25 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         paused = false;
     }
 
-    /**
-     * Wird aufgerufen, nachdem der Spieler einen Ball verloren hat. Falls möglich wird zum nächsten Spieler gewechselt und ein neuer Ball gesetzt. Falls keine Spieler mehr Bälle haben, wird zum Game-Over-Bildschirm gewechselt.
-     */
-    public void onBallLost()
+
+    public void switchToNextPlayer()
     {
         playerIndex++;
         if (playerIndex >= players.length)
             playerIndex = 0;
-
-        spawnNewBall();
     }
 
     /**
      * Spawnt einen neuen Ball auf dem Spielfeld.
      */
-    private void spawnNewBall()
+    public void spawnNewBall()
     {
         gameBall.set(new GameElement(world.getBallTemplate(), false));
         world.addGameElement(gameBall.get());
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
         physicsHandler.addBall(new BallElement<GameElement>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(),  gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
+        setBallLost(false);
     }
 
     /**

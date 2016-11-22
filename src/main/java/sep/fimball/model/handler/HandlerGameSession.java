@@ -7,7 +7,11 @@ import sep.fimball.model.game.Player;
  */
 public interface HandlerGameSession
 {
-    public Player getCurrentPlayer();
+    Player getCurrentPlayer();
+
+    void switchToNextPlayer();
+
+    void spawnNewBall();
 
     HandlerWorld getWorld();
 }

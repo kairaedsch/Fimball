@@ -38,6 +38,10 @@ public class HandlerFactory
         animationTrigger.setGameHandler(new LightHandler(gameSession.getWorld()));
         triggers.add(lightTrigger);
 
+        Handler ballLostHandler = new Handler();
+        ballLostHandler.setGameHandler(new BallLostHandler());
+        triggers.add(ballLostHandler);
+
         return triggers;
     }
 }

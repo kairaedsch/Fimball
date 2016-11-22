@@ -1,6 +1,7 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.element.BallElement;
 
 /**
  * Bei einem Collider mit dieser Art von Collision prallt der Ball ab und bekommt zusätzlich noch eine vorgegebene

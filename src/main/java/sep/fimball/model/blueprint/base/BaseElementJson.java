@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.WorldLayer;
+import sep.fimball.model.physics.collider.WorldLayer;
 
 /**
  * Diese Klasse stellt die JSON-Repräsentation eines BaseElements dar, das alle Informationen enthält, die gemeinsam ein Spielfeldelement bestimmen.

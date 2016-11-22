@@ -4,6 +4,12 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyObserverEventArgs;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.element.BallElement;
+import sep.fimball.model.physics.element.PhysicsElement;
+import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.ElementEventArgs;
+import sep.fimball.model.physics.game.PhysicGameSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +24,12 @@ public class PhysicsHandler<GameElementT>
     /**
      * Die Physikschleife beginnt ohne Verzögerung wenn sie gestartet wird
      */
-    final static int TIMER_DELAY = 0;
+    public final static int TIMER_DELAY = 0;
 
     /**
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    final static int TICK_RATE = 1000 / 120;
+    public final static int TICK_RATE = 1000 / 120;
 
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit einberechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
@@ -94,7 +100,6 @@ public class PhysicsHandler<GameElementT>
     {
         ballElement = ball;
         physicsElements.add(ball.getSubElement());
-        gameSession.setBallLost(false);
     }
 
     /**

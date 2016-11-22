@@ -14,11 +14,11 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.GameSession;
+import sep.fimball.model.handler.BallLostHandler;
+import sep.fimball.model.handler.ElementHandler;
+import sep.fimball.model.handler.Handler;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.handler.ElementHandler;
-import sep.fimball.model.handler.GameHandler;
-import sep.fimball.model.handler.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +75,7 @@ public class GameTest
         Handler collisionTrigger = new Handler();
         collisionTrigger.setElementHandler(new CollisionHandler(this));
         Handler ballLostTrigger = new Handler();
-        ballLostTrigger.setGameHandler(new BallLostHandler(this));
+        //ballLostTrigger.setGameHandler(new BallLostHandler(this));
 
         List<Handler> triggerList = new ArrayList<>();
         triggerList.add(collisionTrigger);
@@ -151,7 +151,7 @@ public class GameTest
             gameTest.addCollidedGameElement(element);
         }
     }
-
+    /*
     class BallLostHandler implements GameHandler
     {
         private GameTest gameTest;
@@ -167,4 +167,5 @@ public class GameTest
             gameTest.ballLost();
         }
     }
+    */
 }

@@ -8,5 +8,5 @@ public interface GameHandler
     /**
      * TODO
      */
-    void activateGameHandler();
+    void activateGameHandler(GameEvent gameEvent, HandlerGameSession handlerGameSession);
 }

@@ -1,7 +1,8 @@
-package sep.fimball.model.physics;
+package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.model.physics.element.BallElement;
 
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
