@@ -123,7 +123,7 @@ public class PinballMachineManager
      *
      * @param pinballMachine Die PinballMachine deren Elemente geladen werden sollen.
      */
-    public void loadMachineElements(PinballMachine pinballMachine)
+    void loadMachineElements(PinballMachine pinballMachine)
     {
         Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 

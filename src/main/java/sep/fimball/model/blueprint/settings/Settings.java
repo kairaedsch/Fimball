@@ -90,7 +90,6 @@ public class Settings
      */
     private void loadSettings(Path jsonPath)
     {
-
         Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(jsonPath, SettingsJson.class);
 
         if (settingsOptional.isPresent())
@@ -118,7 +117,7 @@ public class Settings
     /**
      * Serialisiert und speichert die Einstelunngen in der Settings-Datei.
      */
-    public void Serialize()
+    public void saveToDisk()
     {
         SettingsJson settingsJson = new SettingsJson();
         settingsJson.language = language.get().toString();

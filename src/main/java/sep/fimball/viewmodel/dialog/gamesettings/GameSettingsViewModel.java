@@ -91,7 +91,7 @@ public class GameSettingsViewModel extends DialogViewModel
      */
     private void saveSettings()
     {
-        Settings.getSingletonInstance().Serialize();
+        Settings.getSingletonInstance().saveToDisk();
     }
 
     /**

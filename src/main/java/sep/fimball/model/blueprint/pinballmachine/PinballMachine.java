@@ -56,7 +56,7 @@ public class PinballMachine
      * @param pinballMachineId Id des Automaten
      * @param highscores       Die auf diesem Automaten bisher erreichten Highscores.
      */
-    public PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
+    PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
