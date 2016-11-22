@@ -16,9 +16,9 @@ import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.trigger.ElementHandler;
-import sep.fimball.model.trigger.GameHandler;
-import sep.fimball.model.trigger.Handler;
+import sep.fimball.model.handler.ElementHandler;
+import sep.fimball.model.handler.GameHandler;
+import sep.fimball.model.handler.Handler;
 
 import java.util.ArrayList;
 import java.util.List;

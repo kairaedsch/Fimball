@@ -1,4 +1,4 @@
-package sep.fimball.model.trigger;
+package sep.fimball.model.handler;
 
 /**
  * TODO

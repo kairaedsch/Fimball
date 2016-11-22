@@ -1,4 +1,4 @@
-package sep.fimball.model.trigger;
+package sep.fimball.model.handler;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;

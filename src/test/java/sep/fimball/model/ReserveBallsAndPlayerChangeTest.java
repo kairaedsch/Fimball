@@ -10,9 +10,9 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.trigger.GameHandler;
-import sep.fimball.model.trigger.Handler;
-import sep.fimball.model.trigger.HandlerFactory;
+import sep.fimball.model.handler.GameHandler;
+import sep.fimball.model.handler.Handler;
+import sep.fimball.model.handler.HandlerFactory;
 
 import java.util.List;
 

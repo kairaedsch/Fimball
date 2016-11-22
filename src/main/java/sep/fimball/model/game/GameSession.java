@@ -15,9 +15,9 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.physics.*;
-import sep.fimball.model.trigger.Handler;
-import sep.fimball.model.trigger.HandlerFactory;
-import sep.fimball.model.trigger.HandlerGameSession;
+import sep.fimball.model.handler.Handler;
+import sep.fimball.model.handler.HandlerFactory;
+import sep.fimball.model.handler.HandlerGameSession;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
