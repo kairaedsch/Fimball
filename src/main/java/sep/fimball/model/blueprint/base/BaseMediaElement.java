@@ -39,7 +39,7 @@ public class BaseMediaElement
     private ObjectProperty<ElementImage> elementImage;
 
     /**
-     * Enthält die MediaElementEvents. TODO
+     * Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     private Map<Integer, BaseMediaElementEvent> eventMap;
 

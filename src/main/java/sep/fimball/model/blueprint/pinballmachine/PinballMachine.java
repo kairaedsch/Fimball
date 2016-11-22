@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * TODO Bessere Beschreibung finden
- * Eine PinballMachine stellt einen Flipperautomaten zur Serialisierung dar. Da Flipperautomaten sowohl eine Id als auch einen Namen haben ist es möglich zwei Automaten gleich zu benennen.
+ * Eine PinballMachine stellt einen Flipperautomaten dar und enthält allgemeine Informationen über den Automaten sowie über die im Automaten platzierten Elemente.
  */
 public class PinballMachine
 {
@@ -50,7 +49,7 @@ public class PinballMachine
     private StringProperty imagePath;
 
     /**
-     * Legt einen leeren Automaten mit gegebenen Namen und ID an. TODO
+     * Estellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *
      * @param name             Name des Automaten
      * @param pinballMachineId Id des Automaten

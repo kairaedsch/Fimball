@@ -14,7 +14,7 @@ public class BaseRuleElement
     private boolean givesPoints;
 
     /**
-     * Enthält die RuleElementEvents. TODO
+     * Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     private Map<Integer, BaseRuleElementEvent> eventMap;
 
