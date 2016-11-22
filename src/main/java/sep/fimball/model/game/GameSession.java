@@ -296,6 +296,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     {
                         trigger.activateGameHandler(GameEvent.BALL_LOST);
                     }
+                    isBallLost = false;
                 }
             }
             gameLoopObservable.setChanged();
@@ -367,7 +368,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
         physicsHandler.addBall(new BallPhysicsElement<GameElement>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(),  gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
-        setBallLost(false);
     }
 
     /**
