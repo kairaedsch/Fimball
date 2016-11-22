@@ -6,17 +6,17 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 public enum MouseMode
 {
     /**
-     * TODO
+     * Die Maus wird zum "ziehen" der gesamten Spielfläche genutzt. Es wird die Position der Kamera geändert.
      */
     DRAGGING,
 
     /**
-     * TODO
+     * Die Maus wird zum platzieren von Spielelementen genutzt
      */
     PLACING,
 
     /**
-     * TODO
+     * Die Maus wird zur Auswahl von Spielelementen genutzt
      */
     SELECTING
 }

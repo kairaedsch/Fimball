@@ -29,7 +29,7 @@ public class Main extends Application
      * Startet das Userinterface der Applikation
      *
      * @param primaryStage Die von JavaFX erstellte Stage, auf der gearbeitet wird
-     * @throws Exception Falls Probleme mit der Hardware auftreten.
+     * @throws Exception Falls Probleme beim Starten von JavaFX auftreten
      */
     @Override
     public void start(Stage primaryStage) throws Exception
