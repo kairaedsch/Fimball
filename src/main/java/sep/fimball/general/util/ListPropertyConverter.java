@@ -15,25 +15,24 @@ import java.util.Map;
 public class ListPropertyConverter
 {
     /**
-     * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der listPropertyMaster, wenn sich letztere ändert.
-     * TODO
+     * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code listPropertyOriginal}, wenn sich die Werte in der {@code listPropertyOriginal} ändern.
      *
-     * @param listPropertySlave  Die Liste in welcher die konvertierten Objekte gespeichert werden
-     * @param listPropertyMaster Die Liste welche bei Änderung in die Liste listPropertySlave konvertiert wird
-     * @param converter          Ein Converter welcher angibt wie zwischen den Typen MasterT und SlaveT konvertiert wird
-     * @param <SlaveT>           Der Typ der listPropertySlave Liste
-     * @param <MasterT>          Der Typ der listPropertyMaster Liste
+     * @param listPropertyConverted  Die Liste, in welcher die konvertierten Objekte gespeichert werden
+     * @param listPropertyOriginal Die Liste, welche bei Änderung in die Liste listPropertyConverted konvertiert wird
+     * @param converter          Ein Converter welcher angibt wie zwischen den Typen OriginalT und ConvertedT konvertiert wird
+     * @param <ConvertedT>           Der Typ der listPropertyConverted-Liste
+     * @param <OriginalT>          Der Typ der listPropertyOriginal-Liste
      */
-    public static <SlaveT, MasterT> void bindAndConvertList(ListProperty<SlaveT> listPropertySlave, ObservableList<MasterT> listPropertyMaster, ListConverter<SlaveT, MasterT> converter)
+    public static <ConvertedT, OriginalT> void bindAndConvertList(ListProperty<ConvertedT> listPropertyConverted, ObservableList<OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
     {
-        ListChangeListener<MasterT> listChangeListener = (change) ->
+        ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
             if (change == null)
             {
-                listPropertySlave.clear();
-                for (MasterT master : listPropertyMaster)
+                listPropertyConverted.clear();
+                for (OriginalT original : listPropertyOriginal)
                 {
-                    listPropertySlave.add(converter.convert(master));
+                    listPropertyConverted.add(converter.convert(original));
                 }
             }
             else
@@ -44,16 +43,16 @@ public class ListPropertyConverter
                     {
                         for (int p = change.getFrom(); p <= change.getTo(); p++)
                         {
-                            listPropertySlave.remove(change.getFrom());
+                            listPropertyConverted.remove(change.getFrom());
                         }
                     }
                     if (change.wasAdded())
                     {
-                        List<? extends MasterT> newElementsList = change.getAddedSubList();
+                        List<? extends OriginalT> newElementsList = change.getAddedSubList();
 
-                        for (MasterT master : newElementsList)
+                        for (OriginalT original : newElementsList)
                         {
-                            listPropertySlave.add(converter.convert(master));
+                            listPropertyConverted.add(converter.convert(original));
                         }
                     }
                     if (change.wasPermutated())
@@ -61,84 +60,84 @@ public class ListPropertyConverter
                         for (int p = change.getFrom(); p <= change.getTo(); p++)
                         {
                             int newPos = change.getPermutation(p);
-                            SlaveT temp = listPropertySlave.get(p);
-                            listPropertySlave.set(p, listPropertySlave.get(newPos));
-                            listPropertySlave.set(newPos, temp);
+                            ConvertedT temp = listPropertyConverted.get(p);
+                            listPropertyConverted.set(p, listPropertyConverted.get(newPos));
+                            listPropertyConverted.set(newPos, temp);
                         }
                     }
                 }
             }
         };
 
-        listPropertyMaster.addListener(listChangeListener);
+        listPropertyOriginal.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 
     /**
-     * Löscht die Werte der listPropertySlave und füllt diese mit den Werten der MapPropertyMaster, wenn sich letztere ändert.
-     * TODO
+     * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code mapPropertyOriginal}, wenn sich die Werte in der {@code mapPropertyOriginal} ändern.
      *
-     * @param listPropertySlave Die Liste, die neu befüllt werden soll
-     * @param MapPropertyMaster Die Map, deren Werte in die {@code listPropertySlave} eingefügt werden sollen.
-     * @param converter Der Converter, der angibt, wie ein Wert vom Paar MasterKeyT, MasterValueT in ein SlaveT konvertiert werden sollen.
-     * @param <SlaveT> Die Klasse der Elemente in der Slave-Liste.
-     * @param <MasterKeyT> Die Klasse der Key in der Master-Map.
-     * @param <MasterValueT> Die Klasse der Values in der Master-Map.
+     *
+     * @param listPropertyConverted Die Liste, die neu befüllt werden soll
+     * @param mapPropertyOriginal Die Map, deren Werte in die {@code listPropertyConverted} eingefügt werden sollen.
+     * @param converter Der Converter, der angibt, wie ein Wert vom Paar OriginalKeyT, OriginalValueT in ein ConvertedT konvertiert werden sollen.
+     * @param <ConvertedT> Die Klasse der Elemente in der konvertierten List.
+     * @param <OriginalKeyT> Die Klasse der Key in der Original-Map.
+     * @param <OriginalValueT> Die Klasse der Values in der Original-Map.
      */
 
-    public static <SlaveT, MasterKeyT, MasterValueT> void bindAndConvertMap(ListProperty<SlaveT> listPropertySlave, ObservableMap<MasterKeyT, MasterValueT> MapPropertyMaster, MapConverter<SlaveT, MasterKeyT, MasterValueT> converter)
+    public static <ConvertedT, OriginalKeyT, OriginalValueT> void bindAndConvertMap(ListProperty<ConvertedT> listPropertyConverted, ObservableMap<OriginalKeyT, OriginalValueT> mapPropertyOriginal, MapConverter<ConvertedT, OriginalKeyT, OriginalValueT> converter)
     {
-        MapChangeListener<MasterKeyT, MasterValueT> listChangeListener = (change) ->
+        MapChangeListener<OriginalKeyT, OriginalValueT> listChangeListener = (change) ->
         {
-            listPropertySlave.clear();
+            listPropertyConverted.clear();
 
-            for (Map.Entry<MasterKeyT, MasterValueT> masterEntry : MapPropertyMaster.entrySet())
+            for (Map.Entry<OriginalKeyT, OriginalValueT> originalEntry : mapPropertyOriginal.entrySet())
             {
-                listPropertySlave.add(converter.convert(masterEntry.getKey(), masterEntry.getValue()));
+                listPropertyConverted.add(converter.convert(originalEntry.getKey(), originalEntry.getValue()));
             }
         };
 
-        MapPropertyMaster.addListener(listChangeListener);
+        mapPropertyOriginal.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 
     /**
-     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Objekt vom Typ MasterT
-     * ein Objekt vom Typ SlaveT zu erstellen
+     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Objekt vom Typ OriginalT
+     * ein Objekt vom Typ ConvertedT zu erstellen
      *
-     * @param <SlaveT>  Der Typ der listPropertySlave Liste
-     * @param <MasterT> Der Typ der listPropertyMaster Liste
+     * @param <ConvertedT>  Der Typ der listPropertyConverted Liste
+     * @param <OriginalT> Der Typ der listPropertyOriginal Liste
      */
     @FunctionalInterface
-    public interface ListConverter<SlaveT, MasterT>
+    public interface ListConverter<ConvertedT, OriginalT>
     {
         /**
-         * Erstellt ein Objekt vom Typ SlaveT aus einem Objekt vom Typ MasterT
+         * Erstellt ein Objekt vom Typ ConvertedT aus einem Objekt vom Typ OriginalT
          *
-         * @param master Das Objekt vom Typ MasterT aus dem ein SlaveT erstellt wird
-         * @return Ein Objekt vom Typ SlaveT
+         * @param original Das Objekt vom Typ OriginalT aus dem ein ConvertedT erstellt wird
+         * @return Ein Objekt vom Typ ConvertedT
          */
-        SlaveT convert(MasterT master);
+        ConvertedT convert(OriginalT original);
     }
 
     /**
-     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Key/Value Paar vom Typ MasterT
-     * ein Objekt vom Typ SlaveT zu erzeugen
+     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Key/Value Paar vom Typ OriginalT
+     * ein Objekt vom Typ ConvertedT zu erzeugen
      *
-     * @param <SlaveT>
-     * @param <MasterKeyT>
-     * @param <MasterValueT>
+     * @param <ConvertedT>
+     * @param <OriginalKeyT>
+     * @param <OriginalValueT>
      */
     @FunctionalInterface
-    public interface MapConverter<SlaveT, MasterKeyT, MasterValueT>
+    public interface MapConverter<ConvertedT, OriginalKeyT, OriginalValueT>
     {
         /**
-         * Erstellt ein Objekt vom Typ SlaveT aus einem Key/Value Paar vom Typ MasterT.
+         * Erstellt ein Objekt vom Typ ConvertedT aus einem Key/Value Paar vom Typ OriginalT.
          *
-         * @param masterKey Der Kay vom Typ MasterKeyT.
-         * @param masterValueT Der Value vom Typ masterValueT.
-         * @return Ein Objekt vom Typ SlaveT.
+         * @param originalKey Der Kay vom Typ OriginalKeyT.
+         * @param originalValueT Der Value vom Typ originalValueT.
+         * @return Ein Objekt vom Typ ConvertedT.
          */
-        SlaveT convert(MasterKeyT masterKey, MasterValueT masterValueT);
+        ConvertedT convert(OriginalKeyT originalKey, OriginalValueT originalValueT);
     }
 }
