@@ -1,8 +1,10 @@
 package sep.fimball.model;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
@@ -21,47 +23,57 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by marc on 16.11.16.
  */
-//@Ignore
+@Ignore
 public class ReserveBallsAndPlayerChangeTest {
     private static String[] players = new String[] {"tester", "test"};
     private PinballMachine automaton;
     private GameSession game;
     private static final long waitingTime = 2000;
     private static final long keyHoldingTime = 1000;
-    private boolean ballLost = false;
+    private volatile boolean ballLost = false;
 
-    @Before
-    public void initGame() {
-        automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("testmachine-2")).findFirst().get();
-        game = new GameSession(automaton, players);
-        List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
-        Handler ballLostChecker = new Handler();
-        ballLostChecker.setGameHandler(new BallLostHandler(game));
-        triggers.add(ballLostChecker);
-    }
-
-    @Test(timeout = 120000)
+    @Test(timeout = 12000)
     public void testReserveBalls() {
-        usePlunger();
+        new JFXPanel();
+        Platform.runLater(()-> initGameSession());
+        Platform.runLater(()->usePlunger());
         while (!ballLost) { }
-        waitForStartOfNewSession();
+        waitForRoundChange();
         assertEquals(3, game.getCurrentPlayer().ballsProperty().get());
         assertEquals("test", game.getCurrentPlayer().getName());
         ballLost = false;
-        usePlunger();
+        Platform.runLater(()->usePlunger());
         while (!ballLost) { }
-        waitForStartOfNewSession();
+        waitForRoundChange();
         assertEquals(2, game.getCurrentPlayer().ballsProperty().get());
         assertEquals("tester", game.getCurrentPlayer().getName());
         ballLost = false;
-        usePlunger();
+        Platform.runLater(()->usePlunger());
         while (!ballLost) { }
-        waitForStartOfNewSession();
+        waitForRoundChange();
         assertEquals(2, game.getCurrentPlayer().ballsProperty().get());
         assertEquals("test", game.getCurrentPlayer().getName());
+        Platform.runLater(()->{
+            game.stopPhysics();
+            game.stopTimeline();
+        });
     }
 
-    private void waitForStartOfNewSession() {
+    private void initGameSession() {
+        automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("0")).findFirst().get();
+        game = new GameSession(automaton, players);
+        List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
+        Handler ballLostChecker = new Handler();
+        ballLostChecker.setGameHandler(()->{
+            if() {
+                ballLost = true;
+            }
+        });
+        triggers.add(ballLostChecker);
+        game.setTriggers(triggers);
+    }
+
+    private void waitForRoundChange() {
         try {
             Thread.sleep(waitingTime);
         } catch (InterruptedException e) { }
@@ -74,21 +86,5 @@ public class ReserveBallsAndPlayerChangeTest {
             Thread.sleep(keyHoldingTime);
         } catch (InterruptedException e) { }
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-    }
-
-    private class BallLostHandler implements GameHandler
-    {
-        private GameSession game;
-
-        public BallLostHandler(GameSession game)
-        {
-            this.game = game;
-        }
-
-        @Override
-        public void activateGameHandler()
-        {
-            ballLost = true;
-        }
     }
 }
