@@ -47,9 +47,9 @@ public class BaseMediaElement
      * Estellt ein neues BaseMediaElement.
      *
      * @param mediaElement Das MediaElementJson, dessen Eigenschaften übernommen werden sollen.
-     * @param elementId    TODO
+     * @param baseElementId Die ID des zugehörigen BaseElements.
      */
-    public BaseMediaElement(BaseElementJson.MediaElementJson mediaElement, String elementId)
+    public BaseMediaElement(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
     {
         name = mediaElement.general.editorName;
         description = mediaElement.general.editorDescription;
@@ -67,11 +67,11 @@ public class BaseMediaElement
         }
         if (canRotate)
         {
-            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId, rotationAccuracy));
+            elementImage = new SimpleObjectProperty<>(new ElementImage(baseElementId, rotationAccuracy));
         }
         else
         {
-            elementImage = new SimpleObjectProperty<>(new ElementImage(elementId));
+            elementImage = new SimpleObjectProperty<>(new ElementImage(baseElementId));
         }
 
     }

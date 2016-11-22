@@ -4,7 +4,7 @@ import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.Sound;
 
 /**
- * Stellt Informationen über ausgelöste Animationen und Soundeffekte bereit für einen Collider, die bei Bedarf abgerufen werden können.
+ * Stellt Informationen über bei einem Collider ausgelöste Animationen und Soundeffekte bereit, die bei Bedarf abgerufen werden können.
  */
 public class BaseMediaElementEvent
 {

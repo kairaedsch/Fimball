@@ -1,8 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
 /**
- * Stellt Informationen über Spielregeln für einen Collider bereit, die bei Bedarf abgerufen werden können.
- * TODO
+ * Stellt Informationen über bei einem Collider eintretende Spielregeln bereit, die bei Bedarf abgerufen werden können.
  */
 public class BaseRuleElementEvent
 {
