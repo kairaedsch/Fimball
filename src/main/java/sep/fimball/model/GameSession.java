@@ -251,11 +251,11 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
 
             for (List<CollisionEventArgs> args : argsList)
             {
-                for (CollisionEventArgs arg : args)
+                for (CollisionEventArgs collision : args)
                 {
                     for (Trigger trigger : triggers)
                     {
-                        trigger.activateElementTrigger(arg.getOtherElement(), arg.getColliderId());
+                        trigger.activateElementTrigger(collision.getOtherElement(), collision.getColliderId());
                     }
                 }
             }

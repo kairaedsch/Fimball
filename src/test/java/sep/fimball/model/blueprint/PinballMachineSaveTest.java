@@ -24,7 +24,7 @@ public class PinballMachineSaveTest
     @Test
     public void pinballMachineShouldSave()
     {
-        //Erstellen eines neuen Automaten, der alle verschiedene Elemente enthaelt
+        //Erstellen eines neuen Automaten, der alle verschiedene Elemente enthält
         Config.config();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         ReadOnlyListProperty<PlacedElement> originalElements = pinballMachine.getElements();
