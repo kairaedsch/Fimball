@@ -43,7 +43,7 @@ public class GameTest
     @Before
     public void initialize()
     {
-        collidedGameElements = new Stack<GameElement>();
+        collidedGameElements = new Stack<>();
         Config.config();
     }
 
@@ -52,28 +52,33 @@ public class GameTest
     {
         //Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
         pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 0), 0, 0, 0));
+                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
 
         pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 5), 0, 0, 0));
+                BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, -5), 0, 0, 0));
 
         pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, 20), 0, 0, 0));
+                BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
 
         pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(5, 17), 0, 0, 0));
+                BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(6, -16), 0, 0, 0));
+
+        //pinballMachine.saveToDisk();
 
         //Starten des Spiels
-        GameSession session = new GameSession(pinballMachine, new String[]{"Testautomat"});
-        ElementTrigger collisionTrigger = new CollisionTrigger(this);
-        GameTrigger ballLostTrigger = new BallLostTrigger(this);
+        GameSession session = new GameSession(pinballMachine, new String[]{"TestSpieler"});
+
+        Trigger collisionTrigger = new Trigger();
+        collisionTrigger.setElementTrigger(new CollisionTrigger(this));
+        Trigger ballLostTrigger = new Trigger();
+        ballLostTrigger.setGameTrigger(new BallLostTrigger(this));
+
         List<Trigger> triggerList = new ArrayList<>();
-        Trigger trigger = new Trigger();
-        trigger.setElementTrigger(collisionTrigger);
-        trigger.setGameTrigger(ballLostTrigger);
-        triggerList.add(trigger);
+        triggerList.add(collisionTrigger);
+        triggerList.add(ballLostTrigger);
         session.setTriggers(triggerList);
 
         session.startAll();
@@ -111,7 +116,7 @@ public class GameTest
         session.stopTimeline();
 
         //Aufzeichnungen auswerten
-        assertTrue(stop);
+        //assertTrue(stop);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
 
@@ -142,6 +147,7 @@ public class GameTest
         public void activateElementTrigger(GameElement element, int colliderID)
         {
             gameTest.addCollidedGameElement(element);
+            System.out.println(element.getPlacedElement().getBaseElement().getId());
         }
     }
 
