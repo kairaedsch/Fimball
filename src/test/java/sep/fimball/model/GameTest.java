@@ -3,8 +3,9 @@ package sep.fimball.model;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.ClassRule;
 import org.junit.Test;
+import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -24,11 +25,12 @@ import java.util.List;
 import java.util.Stack;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-@Ignore
 public class GameTest
 {
+    @ClassRule
+    public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+
     private static final long MAX_TEST_DURATION = 20;   //nach wie vielen Sekunden wird abgebrochen
     private static final long HOLD_KEY_DURATION = 1000; //wie lange wird der Plunger gespannt
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
@@ -146,8 +148,8 @@ public class GameTest
         @Override
         public void activateElementTrigger(GameElement element, int colliderID)
         {
-            gameTest.addCollidedGameElement(element);
             System.out.println(element.getPlacedElement().getBaseElement().getId());
+            gameTest.addCollidedGameElement(element);
         }
     }
 

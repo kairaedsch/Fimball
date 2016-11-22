@@ -1,5 +1,7 @@
 package sep.fimball.model.media;
 
+import sep.fimball.general.data.Config;
+
 /**
  * Eine Audioquelle, wie Musik oder Soundeffekt.
  */
@@ -27,9 +29,9 @@ public class Sound
         this.repeating = repeating;
     }
 
-    public String getSoundName()
+    public String getSoundPath()
     {
-        return soundName;
+        return Config.pathToSound(soundName);
     }
 
     public boolean isRepeating()

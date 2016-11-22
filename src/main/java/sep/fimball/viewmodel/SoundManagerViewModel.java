@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
 
 import java.util.Observer;
@@ -14,14 +15,10 @@ import java.util.Observer;
 public class SoundManagerViewModel
 {
     /**
+     * //TODO false
      * Das Observable, das angibt, dass ein Sound abgespielt werden soll.
      */
-    private Observable clipObservable;
-
-    /**
-     * Das Observable, das angibt, dass eine Hintergrundmusik abgespielt werden soll.
-     */
-    private Observable mediaObservable;
+    private Observable observable;
 
     /**
      * Die Lautstärke der Hintergrundmusik.
@@ -43,8 +40,7 @@ public class SoundManagerViewModel
      */
     public SoundManagerViewModel()
     {
-        clipObservable = new Observable();
-        mediaObservable = new Observable();
+        observable = new Observable();
         settings = Settings.getSingletonInstance();
 
         musicVolume = new SimpleDoubleProperty();
@@ -52,54 +48,31 @@ public class SoundManagerViewModel
         sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(settings.sfxVolumeProperty().divide(100).multiply(settings.masterVolumeProperty().divide(100)));
 
-        Observer clipObserver = ((o, arg) -> playClip((String) arg));
-        Observer mediaObserver = ((o, arg) -> playMedia((String) arg));
-        SoundManager.getInstance().addClipObserver(clipObserver);
-        SoundManager.getInstance().addMediaObserver(mediaObserver);
+        Observer observer = ((o, sound) -> playClip((Sound) sound));
+        SoundManager.getInstance().addObserver(observer);
     }
 
     /**
+     * //TODO false
      * Benachrichtigt die eingetragenen Observer darüber, dass sich der Soundclip, der abgespielt wird, auf den durch {@code clipPath} angegebenen Soundclip geändert hat.
      *
-     * @param clipPath Der Pfad zur Datei des neuen Soundclips.
+     * @param sound Der Pfad zur Datei des neuen Soundclips.
      */
-    private void playClip(String clipPath)
+    private void playClip(Sound sound)
     {
-        clipObservable.setChanged();
-        clipObservable.notifyObservers(clipPath);
+        observable.setChanged();
+        observable.notifyObservers(sound);
     }
 
     /**
-     * Benachrichtigt die eingetragenen Observer darüber, dass sich die Hintergrundmusik auf den durch {@code mediaPath} angegebenen Soundclip geändert hat.
-     *
-     * @param mediaPath Der Pfad zur Datei der neuen Hintergrundmusik.
-     */
-    private void playMedia(String mediaPath)
-    {
-        mediaObservable.setChanged();
-        mediaObservable.notifyObservers(mediaPath);
-    }
-
-    /**
+     * //TODO false
      * Registriert das übergebene Objekt als Observer auf Änderungen des gespielten Soundclips.
      *
-     * @param playClipObserver Das Objekt, das bei Änderungen des Soundclips benachrichtigt werden soll.
+     * @param playobserver Das Objekt, das bei Änderungen des Soundclips benachrichtigt werden soll.
      */
-    // TODO Umbenennen
-    public void addClipObserver(Observer playClipObserver)
+    public void addObserver(Observer playobserver)
     {
-        clipObservable.addObserver(playClipObserver);
-    }
-
-    /**
-     * Registriert das übergebene Objekt als Observer auf Änderungen der gespielten Hintergrundmusik.
-     *
-     * @param playMediaObserver Das Objekt, das bei Änderungen der Hintergrundmusik benachrichtigt werden soll.
-     */
-    // TODO Umbenennen
-    public void addMediaObserver(Observer playMediaObserver)
-    {
-        mediaObservable.addObserver(playMediaObserver);
+        observable.addObserver(playobserver);
     }
 
     /**

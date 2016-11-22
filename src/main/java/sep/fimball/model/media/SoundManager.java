@@ -15,14 +15,10 @@ public class SoundManager
     private static SoundManager instance;
 
     /**
+     * // TODO is false
      * Das Observable, dass das Abspielen von Soundeffekten verwaltet
      */
-    private Observable clipObservable;
-
-    /**
-     * Das Observable, dass das Abspielen von Musik verwaltet.
-     */
-    private Observable mediaObservable;
+    private Observable observable;
 
     /**
      * Gibt den bereits existierenden SoundManager oder einen neu angelegten zurück, falls noch keiner existiert.
@@ -43,49 +39,27 @@ public class SoundManager
      */
     private SoundManager()
     {
-        clipObservable = new Observable();
-        mediaObservable = new Observable();
+        observable = new Observable();
     }
 
     /**
+     * // TODO is false
      * Fügt den gegebenen Observer zu dem {@code clipObservable} hinzu.
      *
      * @param observer Der Observer, der hinzugefügt werden soll.
      */
-    public void addClipObserver(Observer observer)
+    public void addObserver(Observer observer)
     {
-        clipObservable.addObserver(observer);
+        observable.addObserver(observer);
     }
 
     /**
-     * Fügt den gegebenen Observer zu dem {@code mediaObservable} hinzu.
-     *
-     * @param observer Der Observer, der hinzugefügt werden soll.
-     */
-    public void addMediaObserver(Observer observer)
-    {
-        mediaObservable.addObserver(observer);
-    }
-
-    /**
+     * // TODO is false
      * Benachrichtigt die Observer, dass der in {@code clipPath} gespeicherte SoundClip abgespielt werden soll.
-     *
-     * @param clipPath Der Pfad, an dem der abzuspielende SoundClip gespeichert ist.
      */
-    public void addClipToPlay(String clipPath)
+    public void addSoundToPlay(Sound sound)
     {
-        clipObservable.setChanged();
-        clipObservable.notifyObservers(clipPath);
-    }
-
-    /**
-     * Benachrichtigt die Observer, dass die in {@code clipPath} gespeicherte Musik abgespielt werden soll.
-     *
-     * @param musicPath Der Pfad, an dem die abzuspielende Musik gespeichert ist.
-     */
-    public void addMediaToPlay(String musicPath)
-    {
-        mediaObservable.setChanged();
-        mediaObservable.notifyObservers(musicPath);
+        observable.setChanged();
+        observable.notifyObservers(sound);
     }
 }

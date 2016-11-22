@@ -23,14 +23,7 @@ public class SoundTrigger implements ElementTrigger
 
             if (soundToPlay != null)
             {
-                if (soundToPlay.isRepeating())
-                {
-                    SoundManager.getInstance().addMediaToPlay(soundToPlay.getSoundName());
-                }
-                else
-                {
-                    SoundManager.getInstance().addClipToPlay(soundToPlay.getSoundName());
-                }
+                SoundManager.getInstance().addSoundToPlay(soundToPlay);
             }
         }
     }

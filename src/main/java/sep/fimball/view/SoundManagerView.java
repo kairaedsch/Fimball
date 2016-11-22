@@ -6,7 +6,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import sep.fimball.general.data.Config;
+import sep.fimball.model.media.Sound;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 
 import java.util.HashMap;
@@ -61,51 +61,42 @@ public class SoundManagerView
 
         loadedAudioClips = new HashMap<>();
 
-        Observer playClipObserver = (o, clipPath) -> playClip((String) clipPath);
-        Observer playMediaObserver = (o, mediaPath) -> playMedia((String) mediaPath);
+        Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
 
-        soundManagerViewModel.addClipObserver(playClipObserver);
-        soundManagerViewModel.addMediaObserver(playMediaObserver);
-
+        soundManagerViewModel.addObserver(playClipObserver);
     }
 
     /**
+     * // TODO false
      * Lädt die durch {@code clipName} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
      *
-     * @param clipName Der Name der Musik-Datei.
+     * @param sound Der Name der Musik-Datei.
      */
-    private void playMedia(String clipName)
+    private void play(Sound sound)
     {
-        String clipPath = Config.pathToSound(clipName);
-        backgroundMusic = new Media(clipPath);
-        if (mediaPlayer != null)
-            mediaPlayer.dispose();
-
-        mediaPlayer = new MediaPlayer(backgroundMusic);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.volumeProperty().bind(musicVolume);
-        mediaPlayer.play();
-    }
-
-    /**
-     * Lädt den angegeben Soundclip und spielt ihn ab.
-     *
-     * @param clipName Der Name der Sound-Datei.
-     */
-    private void playClip(String clipName)
-    {
-        String clipPath = Config.pathToSound(clipName);
-        if (loadedAudioClips.containsKey(clipPath))
+        String soundPath = sound.getSoundPath();
+        if(sound.isRepeating())
         {
-            loadedAudioClips.get(clipPath).play();
+            backgroundMusic = new Media(soundPath);
+            if (mediaPlayer != null)
+                mediaPlayer.dispose();
+
+            mediaPlayer = new MediaPlayer(backgroundMusic);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.volumeProperty().bind(musicVolume);
+            mediaPlayer.play();
         }
         else
         {
-            AudioClip clip = new AudioClip(clipPath);
-            loadedAudioClips.put(clipPath, clip);
-            clip.volumeProperty().bind(sfxVolume);
-            clip.play();
+            if (!loadedAudioClips.containsKey(soundPath))
+            {
+                AudioClip clip = new AudioClip(soundPath);
+                loadedAudioClips.put(soundPath, clip);
+                clip.volumeProperty().bind(sfxVolume);
+                clip.play();
+            }
+
+            loadedAudioClips.get(soundPath).play();
         }
     }
-
 }
