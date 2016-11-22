@@ -356,6 +356,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         playerIndex++;
         if (playerIndex >= players.length)
             playerIndex = 0;
+
     }
 
     /**

@@ -28,7 +28,7 @@ public class ReserveBallsAndPlayerChangeTest {
     private PinballMachine automaton;
     private GameSession game;
     private static final long WAITING_TIME = 2000;
-    private static final long KEY_HOLDING_TIME = 1000;
+    private static final long KEY_HOLDING_TIME = 200;
     private static final long MAX_TEST_TIME = 120000;
     private static Object monitor = new Object();
 
