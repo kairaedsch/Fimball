@@ -25,7 +25,7 @@ import java.util.*;
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession
+public class GameSession implements IGameSession
 {
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Trigger für diese Game Session.

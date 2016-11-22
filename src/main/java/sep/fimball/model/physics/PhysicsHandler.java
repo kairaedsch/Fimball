@@ -60,7 +60,7 @@ public class PhysicsHandler
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
      */
-    private GameSession gameSession;
+    private IGameSession gameSession;
 
     private double maxElementPos;
 
@@ -72,7 +72,7 @@ public class PhysicsHandler
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession Die zugehörige GameSession.
      */
-    public PhysicsHandler(List<PhysicsElement> elements, GameSession gameSession, double maxElementPos)
+    public PhysicsHandler(List<PhysicsElement> elements, IGameSession gameSession, double maxElementPos)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
