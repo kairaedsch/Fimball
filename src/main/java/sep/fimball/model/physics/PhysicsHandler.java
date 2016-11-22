@@ -41,10 +41,6 @@ public class PhysicsHandler<GameElementT>
     private Timer physicTimer;
 
     /**
-     * Die Aufgabe, die in jedem Schritt der Physikschleife ausgeführt werden soll.
-     */
-    private TimerTask timerTask;
-    /**
      * Hier werden alle Tastendrücke die vom InputManager an den PhysikHandler mithilfe des Observer Pattern gesendet
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Threadübergreifenden Kommunikation gedacht ist.

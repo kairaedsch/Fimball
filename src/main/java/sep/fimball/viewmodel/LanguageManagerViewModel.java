@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
@@ -50,68 +50,54 @@ public class LanguageManagerViewModel
     private LanguageManagerViewModel()
     {
         texts = new SimpleMapProperty<>(FXCollections.observableHashMap());
+
         properties = new HashMap<>();
-        for (Language language : Language.values()) {
-            properties.put(language, new Properties());
-            loadProperties(properties.get(language), language);
+        for (Language language : Language.values())
+        {
+            properties.put(language, loadProperties(language));
         }
+
         loadTextsFromProperties(properties.get(Settings.getSingletonInstance().languageProperty().get()));
         Settings.getSingletonInstance().languageProperty().addListener((observable, oldValue, newValue) -> loadTextsFromProperties(properties.get(newValue)));
     }
 
-    public void loadProperties(Properties properties, Language language)
+    private Properties loadProperties(Language language)
     {
-        String propertiesFileName = "";
-        switch (language)
+        Properties properties = new Properties();
+
+        String path = Config.pathToLanguage(language.getCode());
+        try(InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
-            case GERMAN:
-                propertiesFileName = "bundles\\fimball_de.properties";
-                break;
-            case ENGLISH:
-                propertiesFileName = "bundles\\fimball_en.properties";
-                break;
-        }
-
-        try
-        {
-            InputStream inputStream = null;
-
-            inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(propertiesFileName);
-
-            if (inputStream != null)
-            {
-                properties.load(inputStream);
-            } else
-            {
-                throw new FileNotFoundException("property file '" + propertiesFileName + "' not found in the classpath");
-            }
-
+            properties.load(inputStream);
             inputStream.close();
-
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
+            System.err.println("property file '" + path + "' not loaded");
             System.out.println("Exception: " + e);
         }
+
+        return properties;
     }
 
 
-
-    private void loadTextsFromProperties(Properties properties) {
+    private void loadTextsFromProperties(Properties properties)
+    {
         for (Object key : properties.keySet())
         {
-            if (texts.containsKey(key)) {
-                texts.get().get(key).setValue((String)properties.get(key));
-                texts.get().put((String) key, texts.get().get(key));
-            } else
+            if (texts.containsKey(key))
+            {
+                texts.get().get(key).setValue((String) properties.get(key));
+            }
+            else
             {
                 texts.get().put((String) key, new SimpleStringProperty((String) properties.get(key)));
             }
         }
     }
 
-    public StringProperty getText(String key)
+    public StringProperty textProperty(String key)
     {
         return texts.get(key);
     }
-
 }

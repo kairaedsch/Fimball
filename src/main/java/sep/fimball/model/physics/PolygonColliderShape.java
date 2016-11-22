@@ -3,7 +3,7 @@ package sep.fimball.model.physics;
 import javafx.scene.paint.Color;
 import sep.fimball.general.Debug;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.RectangleDouble;
+import sep.fimball.general.data.RectangleDouble;
 
 import java.util.ArrayList;
 import java.util.Comparator;

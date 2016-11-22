@@ -82,7 +82,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
 
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
 
-        settingsButton.textProperty().bind(LanguageManagerViewModel.getInstance().getText("mainmenu.settings.key"));
+        settingsButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("mainmenu.settings.key"));
 
     }
 

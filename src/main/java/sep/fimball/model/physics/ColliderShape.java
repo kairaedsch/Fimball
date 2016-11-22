@@ -1,7 +1,7 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.RectangleDouble;
+import sep.fimball.general.data.RectangleDouble;
 
 /**
  * Beschreibt die Form einer Fläche die mit dem Ball interagieren kann.

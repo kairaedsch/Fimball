@@ -8,12 +8,12 @@ public enum Language
     /**
      * Die deutsche Sprache
      */
-    GERMAN("Deutsch"),
+    GERMAN("Deutsch", "de"),
 
     /**
      * Die englische Sprache
      */
-    ENGLISH("English");
+    ENGLISH("English", "en");
 
     /**
      * Der Name der Sprache.
@@ -21,13 +21,19 @@ public enum Language
     String name;
 
     /**
+     * Sprachcode;
+     */
+    private String code;
+
+    /**
      * Erzeugt ein neues Objekt zur Kennzeichnung der Sprache, das die durch {@code name} gegebene Sprache kennzeichnet.
      *
      * @param name Die Sprache, {@code GERMAN} oder {@code ENGLISH}.
      */
-    Language(String name)
+    Language(String name, String code)
     {
         this.name = name;
+        this.code = code;
     }
 
     /**
@@ -38,5 +44,14 @@ public enum Language
     public String getName()
     {
         return name;
+    }
+
+    /**
+     *
+     * @return Den Sprachcode.
+     */
+    public String getCode()
+    {
+        return code;
     }
 }

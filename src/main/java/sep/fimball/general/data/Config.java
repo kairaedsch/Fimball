@@ -251,4 +251,9 @@ public class Config
     {
         return "file:///" + pathToData + pathDataToSounds + "/" + clipName + pathSoundToSoundType;
     }
+
+    public static String pathToLanguage(String languageCode)
+    {
+        return "bundles/fimball_" + languageCode + ".properties";
+    }
 }

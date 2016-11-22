@@ -121,6 +121,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     }
 
     private void bindTexts() {
-        languageTitle.textProperty().bind(LanguageManagerViewModel.getInstance().getText("gamesettings.language.key"));
+        languageTitle.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.language.key"));
     }
 }
