@@ -194,7 +194,7 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
                 PhysicsElement physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                 physicsElements.add(physElem);
 
-                for (Collider collider : physElem.getColliders())
+                for (Collider collider : (List<Collider>) physElem.getColliders())
                 {
                     for (ColliderShape shape : collider.getShapes())
                     {
