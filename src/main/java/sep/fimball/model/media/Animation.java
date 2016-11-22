@@ -44,11 +44,19 @@ public class Animation
         return duration;
     }
 
+    /**
+     * Gibt den Namen der Animation zurück.
+     * @return Der Name der Animation.
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Gibt die Anzahl der Bilder, aus denen die Animation besteht.
+     * @return Die Anzahl der Bilder, aus denen die Animation besteht.
+     */
     public int getFrameCount()
     {
         return frameCount;

@@ -29,11 +29,19 @@ public class Sound
         this.repeating = repeating;
     }
 
+    /**
+     * Giibt den Pfad zur Datei des Sounds zurück.
+     * @return Der Pfad zur Datei des Sounds.
+     */
     public String getSoundPath()
     {
         return Config.pathToSound(soundName);
     }
 
+    /**
+     * Gibt zurück, ob sich der Sound wiederholt.
+     * @return {@code true} falls sich der Sound wiederholt, {@code false} sonst.
+     */
     public boolean isRepeating()
     {
         return repeating;
