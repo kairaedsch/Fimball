@@ -4,12 +4,12 @@ import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyEventType;
 
 /**
- * Trigger, der bei User-Aktionen ausgelöst wird.
+ * Handler, der bei User-Aktionen ausgelöst wird.
  */
-public interface UserTrigger
+public interface UserHandler
 {
     /**
      * TODO
      */
-    void activateUserTrigger(KeyBinding keyBinding, KeyEventType keyEventType);
+    void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType);
 }

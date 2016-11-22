@@ -15,9 +15,9 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.physics.*;
-import sep.fimball.model.trigger.Trigger;
-import sep.fimball.model.trigger.TriggerFactory;
-import sep.fimball.model.trigger.TriggerGameSession;
+import sep.fimball.model.trigger.Handler;
+import sep.fimball.model.trigger.HandlerFactory;
+import sep.fimball.model.trigger.HandlerGameSession;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,10 +27,10 @@ import java.util.Observer;
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession implements PhysicGameSession<GameElement>, TriggerGameSession
+public class GameSession implements PhysicGameSession<GameElement>, HandlerGameSession
 {
     /**
-     * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Trigger für diese Game Session.
+     * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
      * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames      Die Namen der Spieler.
@@ -39,12 +39,12 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
     public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         GameSession gameSession = new GameSession(machineBlueprint, playerNames);
-        gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
+        gameSession.setTriggers(HandlerFactory.generateAllHandlers(gameSession));
         return gameSession;
     }
 
     /**
-     * Generiert eine neue GameSession für den Editor, und initialisiert alle nötigen Trigger.
+     * Generiert eine neue GameSession für den Editor, und initialisiert alle nötigen Handler.
      *
      * @param machineBlueprint Der Flipperautomat, der im Editor geladen ist.
      * @return Die generierte GameSession.
@@ -53,7 +53,7 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
     {
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
-        gameSession.setTriggers(TriggerFactory.generateAllTriggers(gameSession));
+        gameSession.setTriggers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.stopPhysics();
         ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.elementsProperty(), element -> new GameElement(element, true));
         return gameSession;
@@ -110,9 +110,9 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
     private KeyFrame keyFrame;
 
     /**
-     * Speichert die in dieser GameSession verwendeten Trigger.
+     * Speichert die in dieser GameSession verwendeten Handler.
      */
-    private List<Trigger> triggers;
+    private List<Handler> triggers;
 
     /**
      * Das Observable welches genutzt wird um Observer darüber zu benachrichtigen dass der nächste Tick der Spielschleife
@@ -223,11 +223,11 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
     }
 
     /**
-     * Setzt die gegebenen Trigger als die Trigger, die in dieser Game Session verwendet werden.
+     * Setzt die gegebenen Handler als die Handler, die in dieser Game Session verwendet werden.
      *
-     * @param triggers Die Trigger, die gesetzt werden sollen.
+     * @param triggers Die Handler, die gesetzt werden sollen.
      */
-    public void setTriggers(List<Trigger> triggers)
+    public void setTriggers(List<Handler> triggers)
     {
         this.triggers = triggers;
     }
@@ -265,9 +265,9 @@ public class GameSession implements PhysicGameSession<GameElement>, TriggerGameS
             {
                 for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
                 {
-                    for (Trigger trigger : triggers)
+                    for (Handler trigger : triggers)
                     {
-                        trigger.activateElementTrigger(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
+                        trigger.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
                     }
                 }
             }

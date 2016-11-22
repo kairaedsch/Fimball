@@ -10,9 +10,9 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.trigger.GameTrigger;
-import sep.fimball.model.trigger.Trigger;
-import sep.fimball.model.trigger.TriggerFactory;
+import sep.fimball.model.trigger.GameHandler;
+import sep.fimball.model.trigger.Handler;
+import sep.fimball.model.trigger.HandlerFactory;
 
 import java.util.List;
 
@@ -34,9 +34,9 @@ public class ReserveBallsAndPlayerChangeTest {
     public void initGame() {
         automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("testmachine-2")).findFirst().get();
         game = new GameSession(automaton, players);
-        List<Trigger> triggers = TriggerFactory.generateAllTriggers(game);
-        Trigger ballLostChecker = new Trigger();
-        ballLostChecker.setGameTrigger(new BallLostTrigger(game));
+        List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
+        Handler ballLostChecker = new Handler();
+        ballLostChecker.setGameHandler(new BallLostHandler(game));
         triggers.add(ballLostChecker);
     }
 
@@ -76,16 +76,17 @@ public class ReserveBallsAndPlayerChangeTest {
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
     }
 
-    private class BallLostTrigger implements GameTrigger {
+    private class BallLostHandler implements GameHandler
+    {
         private GameSession game;
 
-        public BallLostTrigger(GameSession game)
+        public BallLostHandler(GameSession game)
         {
             this.game = game;
         }
 
         @Override
-        public void activateGameTrigger()
+        public void activateGameHandler()
         {
             ballLost = true;
         }

@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Verwaltet die im Spielfeld platzierten Lichter.
  */
-public class LightTrigger implements GameTrigger
+public class LightHandler implements GameHandler
 {
     /**
      * Die Lichter, die verwaltet werden.
@@ -20,11 +20,11 @@ public class LightTrigger implements GameTrigger
     private ListProperty<GameElement> lights;
 
     /**
-     * Erstellt einen neuen LightTrigger.
+     * Erstellt einen neuen LightHandler.
      *
      * @param world Aktuelle World.
      */
-    public LightTrigger(TriggerWorld world)
+    public LightHandler(HandlerWorld world)
     {
         lights = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndFilterList(lights, world.gameElementsProperty(), original -> original.getPlacedElement().getBaseElement().getType() == BaseElementType.LIGHT);
@@ -42,7 +42,7 @@ public class LightTrigger implements GameTrigger
     }
 
     @Override
-    public void activateGameTrigger()
+    public void activateGameHandler()
     {
 
     }

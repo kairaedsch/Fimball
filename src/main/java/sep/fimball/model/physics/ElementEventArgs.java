@@ -5,15 +5,15 @@ import sep.fimball.general.data.Vector2;
 /**
  * Created by kaira on 22.11.2016.
  */
-public class ElementEventArgs<gameElementT>
+public class ElementEventArgs<GameElementT>
 {
-    private gameElementT gameElement;
+    private GameElementT gameElement;
 
     private Vector2 position;
 
     private double roation;
 
-    public ElementEventArgs(gameElementT gameElement, Vector2 position, double roation)
+    public ElementEventArgs(GameElementT gameElement, Vector2 position, double roation)
     {
         this.gameElement = gameElement;
         this.position = position;
@@ -30,7 +30,7 @@ public class ElementEventArgs<gameElementT>
         return position;
     }
 
-    public gameElementT getGameElement()
+    public GameElementT getGameElement()
     {
         return gameElement;
     }

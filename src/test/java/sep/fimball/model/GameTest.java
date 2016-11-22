@@ -16,9 +16,9 @@ import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.trigger.ElementTrigger;
-import sep.fimball.model.trigger.GameTrigger;
-import sep.fimball.model.trigger.Trigger;
+import sep.fimball.model.trigger.ElementHandler;
+import sep.fimball.model.trigger.GameHandler;
+import sep.fimball.model.trigger.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +72,12 @@ public class GameTest
         //Starten des Spiels
         GameSession session = new GameSession(pinballMachine, new String[]{"TestSpieler"});
 
-        Trigger collisionTrigger = new Trigger();
-        collisionTrigger.setElementTrigger(new CollisionTrigger(this));
-        Trigger ballLostTrigger = new Trigger();
-        ballLostTrigger.setGameTrigger(new BallLostTrigger(this));
+        Handler collisionTrigger = new Handler();
+        collisionTrigger.setElementHandler(new CollisionHandler(this));
+        Handler ballLostTrigger = new Handler();
+        ballLostTrigger.setGameHandler(new BallLostHandler(this));
 
-        List<Trigger> triggerList = new ArrayList<>();
+        List<Handler> triggerList = new ArrayList<>();
         triggerList.add(collisionTrigger);
         triggerList.add(ballLostTrigger);
         session.setTriggers(triggerList);
@@ -135,34 +135,34 @@ public class GameTest
         stop = true;
     }
 
-    class CollisionTrigger implements ElementTrigger
+    class CollisionHandler implements ElementHandler
     {
         private GameTest gameTest;
 
-        public CollisionTrigger(GameTest gameTest)
+        public CollisionHandler(GameTest gameTest)
         {
             this.gameTest = gameTest;
         }
 
         @Override
-        public void activateElementTrigger(GameElement element, int colliderID)
+        public void activateElementHandler(GameElement element, int colliderID)
         {
             System.out.println(element.getPlacedElement().getBaseElement().getId());
             gameTest.addCollidedGameElement(element);
         }
     }
 
-    class BallLostTrigger implements GameTrigger
+    class BallLostHandler implements GameHandler
     {
         private GameTest gameTest;
 
-        public BallLostTrigger(GameTest gameTest)
+        public BallLostHandler(GameTest gameTest)
         {
             this.gameTest = gameTest;
         }
 
         @Override
-        public void activateGameTrigger()
+        public void activateGameHandler()
         {
             gameTest.ballLost();
         }

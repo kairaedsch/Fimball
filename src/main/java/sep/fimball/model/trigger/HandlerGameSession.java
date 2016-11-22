@@ -5,9 +5,9 @@ import sep.fimball.model.game.Player;
 /**
  * Created by kaira on 22.11.2016.
  */
-public interface TriggerGameSession
+public interface HandlerGameSession
 {
     public Player getCurrentPlayer();
 
-    TriggerWorld getWorld();
+    HandlerWorld getWorld();
 }

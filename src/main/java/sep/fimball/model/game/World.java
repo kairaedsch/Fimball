@@ -6,12 +6,12 @@ import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.trigger.TriggerWorld;
+import sep.fimball.model.trigger.HandlerWorld;
 
 /**
  * Eine World stellt die Spielwelt eines Automaten dar.
  */
-public class World implements TriggerWorld
+public class World implements HandlerWorld
 {
     /**
      * Liste der Elemente in der Spielwelt.

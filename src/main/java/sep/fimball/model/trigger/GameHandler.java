@@ -3,10 +3,10 @@ package sep.fimball.model.trigger;
 /**
  * TODO
  */
-public interface GameTrigger
+public interface GameHandler
 {
     /**
      * TODO
      */
-    void activateGameTrigger();
+    void activateGameHandler();
 }

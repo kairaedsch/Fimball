@@ -7,12 +7,12 @@ import sep.fimball.model.media.Animation;
 import java.util.Map;
 
 /**
- * Trigger, der bei einer Kollision die Animation des kollidierenden GameElements setzt.
+ * Handler, der bei einer Kollision die Animation des kollidierenden GameElements setzt.
  */
-public class AnimationTrigger implements ElementTrigger
+public class AnimationHandler implements ElementHandler
 {
     @Override
-    public void activateElementTrigger(GameElement element, int colliderId)
+    public void activateElementHandler(GameElement element, int colliderId)
     {
         Map<Integer, BaseMediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
 

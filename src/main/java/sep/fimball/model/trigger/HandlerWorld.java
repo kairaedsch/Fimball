@@ -6,7 +6,7 @@ import sep.fimball.model.game.GameElement;
 /**
  * Created by kaira on 22.11.2016.
  */
-public interface TriggerWorld
+public interface HandlerWorld
 {
     ReadOnlyListProperty<GameElement> gameElementsProperty();
 }

@@ -3,28 +3,28 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.game.GameElement;
 
 /**
- * Trigger, der bei Kollision mit dem Ball ausgelöst wird, und die Punkte des aktuellen Spielers erhöht.
+ * Handler, der bei Kollision mit dem Ball ausgelöst wird, und die Punkte des aktuellen Spielers erhöht.
  */
-public class ScoreTrigger implements ElementTrigger
+public class ScoreHandler implements ElementHandler
 {
     /**
      * Aktuelle GameSession.
      */
-    private TriggerGameSession session;
+    private HandlerGameSession session;
 
     /**
-     * Erstellt einen neuen Trigger.
+     * Erstellt einen neuen Handler.
      *
      * @param session Aktuelle GameSession.
      */
-    public ScoreTrigger(TriggerGameSession session)
+    public ScoreHandler(HandlerGameSession session)
     {
         this.session = session;
     }
 
 
     @Override
-    public void activateElementTrigger(GameElement element, int colliderID)
+    public void activateElementHandler(GameElement element, int colliderID)
     {
         session.getCurrentPlayer().pointsProperty().set(session.getCurrentPlayer().getPoints() + element.getPointReward());
     }

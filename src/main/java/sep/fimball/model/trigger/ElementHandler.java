@@ -3,15 +3,15 @@ package sep.fimball.model.trigger;
 import sep.fimball.model.game.GameElement;
 
 /**
- * Trigger, der bei der Kollision von Spielelement und Ball ausgelöst wird.
+ * Handler, der bei der Kollision von Spielelement und Ball ausgelöst wird.
  */
-public interface ElementTrigger
+public interface ElementHandler
 {
     /**
-     * Ist eine Kollision passiert, wird der Trigger aktiviert.
+     * Ist eine Kollision passiert, wird der Handler aktiviert.
      *
      * @param element    Das Element, das mit dem Ball kollidiert ist.
      * @param colliderId Die ID des Colliders des Elements, das mit dem Ball kollidiert ist.
      */
-     void activateElementTrigger(GameElement element, int colliderId);
+     void activateElementHandler(GameElement element, int colliderId);
 }
