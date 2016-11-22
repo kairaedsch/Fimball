@@ -64,11 +64,12 @@ public class ReserveBallsAndPlayerChangeTest {
         game = new GameSession(automaton, players);
         List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
         Handler ballLostChecker = new Handler();
-        ballLostChecker.setGameHandler(()->{
+        /*ballLostChecker.setGameHandler(()->{
             if() {
                 ballLost = true;
             }
         });
+        */
         triggers.add(ballLostChecker);
         game.setTriggers(triggers);
     }

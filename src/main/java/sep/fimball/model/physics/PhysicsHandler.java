@@ -100,7 +100,6 @@ public class PhysicsHandler<GameElementT>
     {
         ballElement = ball;
         physicsElements.add(ball.getSubElement());
-        gameSession.setBallLost(false);
     }
 
     /**

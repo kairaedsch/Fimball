@@ -47,10 +47,10 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
     }
 
     @Override
-    public void activateGameHandler()
+    public void activateGameHandler(GameEvent gameEvent, HandlerGameSession handlerGameSession)
     {
         if (gameHandler != null)
-            gameHandler.activateGameHandler();
+            gameHandler.activateGameHandler(gameEvent, handlerGameSession);
     }
 
     @Override
