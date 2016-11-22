@@ -23,7 +23,6 @@ public class PinballMachineSaveTest
     @Test
     public void pinballMachineShouldSave()
     {
-        //Config.config();
         // Erstellt einen leeren Automaten
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         ReadOnlyListProperty<PlacedElement> pinballMachineElements = pinballMachine.elementsProperty();
@@ -48,7 +47,7 @@ public class PinballMachineSaveTest
         ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
 
         // Überprüft, ob beide Listen die gleichen Elemente enthalten
-        assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch((PlacedElement loaded)->original.equals(loaded))));
+        assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch(original::equals)));
 
         // Löscht den Automaten
         pinballMachine.deleteFromDisk();
