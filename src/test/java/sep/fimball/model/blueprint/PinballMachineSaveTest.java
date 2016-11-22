@@ -44,10 +44,12 @@ public class PinballMachineSaveTest
 
         // Leert den aktuellen Automaten
         pinballMachine.unloadElements();
+
+        // Bei erneutem Zugriff auf die Property werden die Elemente neu geladen
         ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
 
-        //Vergleichen des erstellten und des geladenen Automaten
-        boolean difference = false;
+        // Überprüft, ob beide Listen die gleichen Elemente enthalten
+        boolean different = false;
         for (PlacedElement original : pinballMachineElements)
         {
             boolean match = false;
@@ -61,13 +63,13 @@ public class PinballMachineSaveTest
 
             if (!match)
             {
-                difference = true;
+                different = true;
             }
         }
 
-        assertFalse(difference);
+        assertFalse(different);
 
-        //Loeschen des vorher gespeicherten Automaten
+        // Löscht den Automaten
         pinballMachine.deleteFromDisk();
     }
 
