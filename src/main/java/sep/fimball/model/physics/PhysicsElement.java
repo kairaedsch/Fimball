@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden
  */
-public class PhysicsElement<gameElementT>
+public class PhysicsElement<GameElementT>
 {
     /**
      * Die aktuelle Position des PhysikElements.
@@ -25,7 +25,7 @@ public class PhysicsElement<gameElementT>
      */
     private List<Collider> colliders;
 
-    private gameElementT gameElement;
+    private GameElementT gameElement;
 
     private BasePhysicsElement basePhysicsElement;
 
@@ -34,7 +34,7 @@ public class PhysicsElement<gameElementT>
      *
      * @param gameElement Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
      */
-    public PhysicsElement(gameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         this.position = position;
         this.rotation = rotation;
@@ -48,7 +48,7 @@ public class PhysicsElement<gameElementT>
      *
      * @return Das zu diesem PhysicElement gehörende GameElement.
      */
-    public gameElementT getGameElement()
+    public GameElementT getGameElement()
     {
         return gameElement;
     }

@@ -40,13 +40,11 @@ public class LanguageManagerViewModel
      */
     public static LanguageManagerViewModel getInstance()
     {
-        if (instance != null)
+        if (instance == null)
         {
-            return instance;
-        } else
-        {
-            return new LanguageManagerViewModel();
+            instance = new LanguageManagerViewModel();
         }
+        return instance;
     }
 
     private LanguageManagerViewModel()
