@@ -164,7 +164,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Reagiert auf eine Drag-Bewegung. TODO
+     * Verarbeitet eine Drag-Bewegung.
      *
      * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
      * @param y Die y-Positon, an der sich die Drag-Bewegung befindet.
@@ -197,7 +197,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Reagiert auf einen Mausklick auf das Spielfeld. TODO
+     * Verarbeitet einen Mausklick auf das Spielfeld.
      *
      * @param gridPosition Die Position im Grid, auf die geklickt wurde.
      * @param onlyPressed Gibt an, ob die Maustaste nur gedrückt wurde.
