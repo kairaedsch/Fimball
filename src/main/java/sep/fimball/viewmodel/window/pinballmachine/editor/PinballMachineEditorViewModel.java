@@ -197,7 +197,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Reagiert auf einen Maus-Klick auf das Spielfeld. TODO
+     * Reagiert auf einen Mausklick auf das Spielfeld. TODO
      *
      * @param gridPosition Die Position im Grid, auf die geklickt wurde.
      * @param onlyPressed Gibt an, ob die Maustaste nur gedrückt wurde.

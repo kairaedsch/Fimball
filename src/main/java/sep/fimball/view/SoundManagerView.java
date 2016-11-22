@@ -67,10 +67,9 @@ public class SoundManagerView
     }
 
     /**
-     * // TODO false
-     * Lädt die durch {@code clipName} gegebene Datei und setzt die darin enthaltene Musik als Hintergrundmusik.
+     * Spielt den gegebenen Sound ab.
      *
-     * @param sound Der Name der Musik-Datei.
+     * @param sound Der Sound der abgespielt werden soll.
      */
     private void play(Sound sound)
     {

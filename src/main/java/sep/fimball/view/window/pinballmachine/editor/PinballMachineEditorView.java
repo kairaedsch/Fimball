@@ -160,9 +160,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * TODO
+     * Setzt das gegebene MouseEvent als das Event, bei dem als letztes auf dem Spielfeld die Maustaste gedürckt wurde.
      *
-     * @param mouseEvent
+     * @param mouseEvent Das MouseEvent, bei dem die Maustaste auf dem Spielfeld gedrückt wurde.
      */
     public void down(MouseEvent mouseEvent)
     {
