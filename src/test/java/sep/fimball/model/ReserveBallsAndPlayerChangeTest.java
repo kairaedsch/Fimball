@@ -10,11 +10,9 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
+import sep.fimball.model.handler.*;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.handler.GameHandler;
-import sep.fimball.model.handler.Handler;
-import sep.fimball.model.handler.HandlerFactory;
 
 import java.util.List;
 
@@ -64,12 +62,11 @@ public class ReserveBallsAndPlayerChangeTest {
         game = new GameSession(automaton, players);
         List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
         Handler ballLostChecker = new Handler();
-        /*ballLostChecker.setGameHandler(()->{
-            if() {
+        ballLostChecker.setGameHandler((GameEvent gameEvent, HandlerGameSession game)->{
+            if(gameEvent == GameEvent.BALL_LOST) {
                 ballLost = true;
             }
         });
-        */
         triggers.add(ballLostChecker);
         game.setTriggers(triggers);
     }
