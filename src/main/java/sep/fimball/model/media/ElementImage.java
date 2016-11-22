@@ -5,12 +5,12 @@ import sep.fimball.general.data.ImageLayer;
 import sep.fimball.model.element.GameElement;
 
 /**
- * ElementImage stellt ein Bild eines Elements mit weiteren Informationen zur Darstellung dar.
+ * ElementImage stellt ein Bild oder Animation eines BaseElements dar.
  */
 public class ElementImage
 {
     /**
-     * Gibt an, um wie viel Grad das Bild gedreht werden kann.
+     * Gibt an, in welchen Grad-Schritten Bilder vorliegen. So bedeutet z.B. der Wert 90, das Bilder mit 0, 90, 180, und 270 Grad vorliegen.
      */
     private final int rotationAccuracy;
 
@@ -20,7 +20,7 @@ public class ElementImage
     private String baseElementId;
 
     /**
-     * Gibt an, ob das ElementImage gedreht werden kann.
+     * Gibt an, ob Bilder in Grad-Schritten vorliegen.
      */
     private boolean canRotate;
 
@@ -30,7 +30,7 @@ public class ElementImage
     private boolean isAnimation;
 
     /**
-     * Die zugehörige Animation.
+     * Die zugehörige Animation, falls isAnimation true ist, andernfalls null.
      */
     private Animation animation;
 
@@ -58,29 +58,6 @@ public class ElementImage
     public ElementImage(String baseElementId, int rotationAccuracy)
     {
         this(baseElementId, true, rotationAccuracy, false, null);
-    }
-
-    /**
-     * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     *
-     * @param baseElementId Die ID des BaseElements, zu dem das ElementImage gehören soll.
-     * @param animation Die zum ElementImage gehörende Animation.
-     */
-    public ElementImage(String baseElementId, Animation animation)
-    {
-        this(baseElementId, false, 360, true, animation);
-    }
-
-    /**
-     * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     *
-     * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
-     * @param animation Die zum ElementImage gehörende Animation.
-     */
-    public ElementImage(String baseElementId, int rotationAccuracy, Animation animation)
-    {
-        this(baseElementId, true, rotationAccuracy, true, animation);
     }
 
     /**
