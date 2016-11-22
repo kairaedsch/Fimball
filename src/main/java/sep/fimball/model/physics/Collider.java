@@ -29,6 +29,7 @@ public class Collider
      */
     private int id;
 
+
     /**
      * Erzeugt einen neuen Collider.
      *

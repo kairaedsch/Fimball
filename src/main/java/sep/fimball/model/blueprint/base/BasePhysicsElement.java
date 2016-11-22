@@ -62,11 +62,14 @@ public class BasePhysicsElement
                 case "bounce":
                     collisionType = new BounceCollision(collider.collisionType.strength);
                     break;
+                case "empty":
+                    collisionType = new EmptyCollision();
+                    break;
                 default:
                     throw new NullPointerException();
             }
-
-            colliders.add(new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode()));
+            Collider newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+            colliders.add(newCollider);
         }
     }
 
