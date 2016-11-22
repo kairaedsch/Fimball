@@ -164,6 +164,7 @@ public class PhysicsHandler
                 }
 
                 List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
+                List<ElementEventArgs> elementEventArgses = new ArrayList<>();
 
                 for (PhysicsElement element : physicsElements)
                 {
@@ -171,18 +172,18 @@ public class PhysicsHandler
                     {
                         for (Collider collider : element.getColliders())
                         {
-                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getElement().getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+                            boolean hit = collider.checkCollision(ballElement, element.getPosition(), element.getRotation(), element.getGameElement().getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
                             if (hit)
                             {
-                                collisionEventArgses.add(new CollisionEventArgs(element.getElement(), collider.getId()));
+                                collisionEventArgses.add(new CollisionEventArgs(element.getGameElement(), collider.getId()));
                             }
                         }
                     }
-                    element.writeToGameElement();
+                    elementEventArgses.add(new ElementEventArgs(element.getGameElement(), element.getPosition(), element.getRotation()));
                 }
 
-                gameSession.addCollisionEventArgs(collisionEventArgses);
+                gameSession.addEventArgses(collisionEventArgses, elementEventArgses);
 
                 // TODO Notify GameElements about collisions
 

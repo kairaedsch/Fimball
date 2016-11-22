@@ -11,11 +11,6 @@ import java.util.List;
 public class PhysicsElement
 {
     /**
-     * Das zugehörige GameElement.
-     */
-    private GameElement element;
-
-    /**
      * Die aktuelle Position des PhysikElements.
      */
     private Vector2 position;
@@ -29,27 +24,19 @@ public class PhysicsElement
      * Die Liste der Collider, welche die Kollisionsflächen dieses Elements darstellen.
      */
     private List<Collider> colliders;
+    private GameElement gameElement;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
      *
-     * @param element Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
+     * @param gameElement Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
      */
-    public PhysicsElement(GameElement element)
+    public PhysicsElement(GameElement gameElement)
     {
-        this.element = element;
-        this.position = element.positionProperty().get();
-        this.rotation = element.rotationProperty().get();
-        this.colliders = element.getPlacedElement().getBaseElement().getPhysics().getColliders();
-    }
-
-    /**
-     * Aktualisiert Position und Rotation des zugehörigen GameElements.
-     */
-    public void writeToGameElement()
-    {
-        element.setPosition(position);
-        element.setRotation(rotation);
+        this.position = gameElement.positionProperty().get();
+        this.rotation = gameElement.rotationProperty().get();
+        this.colliders = gameElement.getPlacedElement().getBaseElement().getPhysics().getColliders();
+        this.gameElement = gameElement;
     }
 
     /**
@@ -57,9 +44,9 @@ public class PhysicsElement
      *
      * @return Das zu diesem PhysicElement gehörende GameElement.
      */
-    public GameElement getElement()
+    public GameElement getGameElement()
     {
-        return element;
+        return gameElement;
     }
 
     /**

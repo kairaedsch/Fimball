@@ -129,16 +129,16 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
     /**
      *
      */
-    private LinkedList<List<CollisionEventArgs>> collisionEventArgsList;
+    private LinkedList<List<CollisionEventArgs>> collisionEventArgsesList;
+
+    private LinkedList<List<ElementEventArgs>> elementEventArgsesList;
 
     private boolean isBallLost;
 
     /**
      * Platzhalter welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
      */
-    private Object collisionEventArgsLocker;
-
-    private Object ballLostMutex;
+    private final Object physicLocker;
 
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
@@ -150,9 +150,9 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
     {
         this.machineBlueprint = machineBlueprint;
         this.triggers = new ArrayList<>();
-        collisionEventArgsLocker = new Object();
-        ballLostMutex = new Object();
-        collisionEventArgsList = new LinkedList<List<CollisionEventArgs>>();
+        physicLocker = new Object();
+        collisionEventArgsesList = new LinkedList<>();
+        elementEventArgsesList = new LinkedList<>();
 
         gameBall = new SimpleObjectProperty<>();
 
@@ -242,25 +242,38 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
         {
-            LinkedList<List<CollisionEventArgs>> argsList;
-            synchronized (collisionEventArgsLocker)
+            LinkedList<List<CollisionEventArgs>> localCollisionEventArgsesList;
+            LinkedList<List<ElementEventArgs>> localElementEventArgsesList;
+            synchronized (physicLocker)
             {
-                argsList = this.collisionEventArgsList;
-                this.collisionEventArgsList = new LinkedList<List<CollisionEventArgs>>();
+                localCollisionEventArgsesList = this.collisionEventArgsesList;
+                this.collisionEventArgsesList = new LinkedList<>();
+
+                localElementEventArgsesList = this.elementEventArgsesList;
+                this.elementEventArgsesList = new LinkedList<>();
             }
 
-            for (List<CollisionEventArgs> args : argsList)
+            for (List<ElementEventArgs> argses : localElementEventArgsesList)
             {
-                for (CollisionEventArgs collision : args)
+                for (ElementEventArgs args : argses)
+                {
+                    args.getGameElement().setPosition(args.getPosition());
+                    args.getGameElement().setRotation(args.getRoation());
+                }
+            }
+
+            for (List<CollisionEventArgs> argses : localCollisionEventArgsesList)
+            {
+                for (CollisionEventArgs args : argses)
                 {
                     for (Trigger trigger : triggers)
                     {
-                        trigger.activateElementTrigger(collision.getOtherElement(), collision.getColliderId());
+                        trigger.activateElementTrigger(args.getOtherElement(), args.getColliderId());
                     }
                 }
             }
 
-            synchronized (ballLostMutex)
+            synchronized (physicLocker)
             {
                 if (isBallLost)
                 {
@@ -355,19 +368,20 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
     /**
      * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
      *
-     * @param collisionEventArgs Die Liste von Kollisions-Events, die hinzugefügt werden soll.
+     * @param collisionEventArgses Die Liste von Kollisions-Events, die hinzugefügt werden soll.
      */
-    public void addCollisionEventArgs(List<CollisionEventArgs> collisionEventArgs)
+    public void addEventArgses(List<CollisionEventArgs> collisionEventArgses, List<ElementEventArgs> elementEventArgsesList)
     {
-        synchronized (collisionEventArgsLocker)
+        synchronized (physicLocker)
         {
-            collisionEventArgsList.add(collisionEventArgs);
+            this.collisionEventArgsesList.add(collisionEventArgses);
+            this.elementEventArgsesList.add(elementEventArgsesList);
         }
     }
 
     public void setBallLost(boolean status)
     {
-        synchronized (ballLostMutex)
+        synchronized (physicLocker)
         {
             isBallLost = status;
         }

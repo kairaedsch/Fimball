@@ -6,5 +6,5 @@ public interface PhysicGameSession
 {
     void setBallLost(boolean b);
 
-    void addCollisionEventArgs(List<CollisionEventArgs> collisionEventArgses);
+    void addEventArgses(List<CollisionEventArgs> collisionEventArgses, List<ElementEventArgs> elementEventArgses);
 }
