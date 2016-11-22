@@ -50,6 +50,7 @@ public class PinballMachineSaveTest
 
         // Überprüft, ob beide Listen die gleichen Elemente enthalten
         boolean different = false;
+        //assertFalse(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch((PlacedElement loaded)->original.equals(loaded))));
         for (PlacedElement original : pinballMachineElements)
         {
             boolean match = false;
@@ -58,6 +59,7 @@ public class PinballMachineSaveTest
                 if (original.equals(loaded))
                 {
                     match = true;
+                    //break;
                 }
             }
 

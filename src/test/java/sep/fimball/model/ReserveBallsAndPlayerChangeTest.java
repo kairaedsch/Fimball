@@ -60,7 +60,7 @@ public class ReserveBallsAndPlayerChangeTest {
     }
 
     private void initGameSession() {
-        automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("0")).findFirst().get();
+        automaton = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine)->machine.getID().equals("testmachine2")).findFirst().get();
         game = new GameSession(automaton, players);
         List<Handler> triggers = HandlerFactory.generateAllHandlers(game);
         Handler ballLostChecker = new Handler();
