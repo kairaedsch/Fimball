@@ -164,10 +164,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * TODO
+     * Reagiert auf eine Drag-Bewegung. TODO
      *
-     * @param x
-     * @param y
+     * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
+     * @param y Die y-Positon, an der sich die Drag-Bewegung befindet.
      */
     public void dragged(double x, double y)
     {
@@ -197,10 +197,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * TODO
+     * Reagiert auf einen Maus-Klick auf das Spielfeld. TODO
      *
-     * @param gridPosition
-     * @param onlyPressed
+     * @param gridPosition Die Position im Grid, auf die geklickt wurde.
+     * @param onlyPressed Gibt an, ob die Maustaste nur gedrückt wurde.
      */
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {

@@ -72,27 +72,27 @@ public class ViewModelListToPaneBinder
     }
 
     /**
-     * Bindet die Einträge aus dem MapPropertyViewModel an die parentNode, indem einzelne Nodes mithilfe des viewModelToNodeConverter erzeugt werden.
+     * Bindet die Einträge aus dem {@code mapPropertyViewModel} an die parentNode, indem einzelne Nodes mithilfe des viewModelToNodeConverter erzeugt werden.
      *
      * @param parentNode               Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
-     * @param MapPropertyViewModel     Die Map, deren Einträge an die {@code parentNode} gehängt werden sollen.
+     * @param mapPropertyViewModel     Die Map, deren Einträge an die {@code parentNode} gehängt werden sollen.
      * @param viewModelToNodeConverter Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
-     * @param <ViewModelKeyT>          TODO
-     * @param <ViewModelT>             Das ViewModel der Einträge in {@code MapPropertyViewModel}.
+     * @param <ViewModelKeyT>          Das ViewModel der Key in {@code mapPropertyViewModel}.
+     * @param <ViewModelT>             Das ViewModel der Einträge in {@code mapPropertyViewModel}.
      */
-    public static <ViewModelKeyT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableMap<ViewModelKeyT, ViewModelT> MapPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
+    public static <ViewModelKeyT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableMap<ViewModelKeyT, ViewModelT> mapPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
     {
         MapChangeListener<ViewModelKeyT, ViewModelT> listChangeListener = (change) ->
         {
             parentNode.getChildren().clear();
 
-            for (Map.Entry<ViewModelKeyT, ViewModelT> b : MapPropertyViewModel.entrySet())
+            for (Map.Entry<ViewModelKeyT, ViewModelT> b : mapPropertyViewModel.entrySet())
             {
                 parentNode.getChildren().add(viewModelToNodeConverter.convert(b.getValue()));
             }
         };
 
-        MapPropertyViewModel.addListener(listChangeListener);
+        mapPropertyViewModel.addListener(listChangeListener);
         listChangeListener.onChanged(null);
     }
 

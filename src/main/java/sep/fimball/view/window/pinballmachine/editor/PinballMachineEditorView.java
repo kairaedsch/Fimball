@@ -22,19 +22,19 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     /**
-     * TODO
+     * Der Button, der den "Drag"-Modus der Bedienung stellt.
      */
     @FXML
     private Button dragButton;
 
     /**
-     * TODO
+     * Der Button, der den "Auswählen"-Modus der Bedienung stellt.
      */
     @FXML
     private Button selectButton;
 
     /**
-     * TODO
+     * Der Button, der den "Platzieren"-Modus der Bedienung stellt.
      */
     @FXML
     private Button placeButton;
@@ -69,7 +69,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     /**
-     * TODO
+     * Das letzte MouseEvent, bei dem die Maus auf dem Spielfeld gedrückt worden ist.
      */
     private MouseEvent mouseDown;
 
@@ -149,9 +149,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * TODO
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer eine Drag-Bewegung mit der Maus ausgeführt hat.
      *
-     * @param mouseEvent
+     * @param mouseEvent Das Event, das die "Drag"-Bewegung ausgelöst hat.
      */
     public void dragged(MouseEvent mouseEvent)
     {
@@ -170,9 +170,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * TODO
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Benutzer in den "Platzieren"-Modus wechseln möchte.
      *
-     * @param mouseEvent
+     * @param mouseEvent Das MouseEvent, das den Wechsel auslöst.
      */
     public void placeClicked(MouseEvent mouseEvent)
     {
@@ -180,9 +180,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * TODO
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Benutzer in den "Auswählen"-Modus wechseln möchte.
      *
-     * @param mouseEvent
+     * @param mouseEvent Das MouseEvent, das den Wechsel auslöst.
      */
     public void selectClicked(MouseEvent mouseEvent)
     {
@@ -190,9 +190,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * TODO
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Benutzer in den "Drag"-Modus wechseln möchte.
      *
-     * @param mouseEvent
+     * @param mouseEvent Das MouseEvent, das den Wechsel auslöst.
      */
     public void dragClicked(MouseEvent mouseEvent)
     {

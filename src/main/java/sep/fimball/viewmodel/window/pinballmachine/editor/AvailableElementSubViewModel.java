@@ -67,7 +67,7 @@ public class AvailableElementSubViewModel
     }
 
     /**
-     * TODO
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass das Element ausgewählt wurde.
      */
     public void selected()
     {
