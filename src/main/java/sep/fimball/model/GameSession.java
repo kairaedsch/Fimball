@@ -253,22 +253,22 @@ public class GameSession implements PhysicGameSession, TriggerGameSession
                 this.elementEventArgsesList = new LinkedList<>();
             }
 
-            for (List<ElementEventArgs> argses : localElementEventArgsesList)
+            for (List<ElementEventArgs> elementEventArgses : localElementEventArgsesList)
             {
-                for (ElementEventArgs args : argses)
+                for (ElementEventArgs elementEventArgs : elementEventArgses)
                 {
-                    args.getGameElement().setPosition(args.getPosition());
-                    args.getGameElement().setRotation(args.getRoation());
+                    elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
+                    elementEventArgs.getGameElement().setRotation(elementEventArgs.getRoation());
                 }
             }
 
-            for (List<CollisionEventArgs> argses : localCollisionEventArgsesList)
+            for (List<CollisionEventArgs> collisionEventArgses : localCollisionEventArgsesList)
             {
-                for (CollisionEventArgs args : argses)
+                for (CollisionEventArgs collisionEventArgs : collisionEventArgses)
                 {
                     for (Trigger trigger : triggers)
                     {
-                        trigger.activateElementTrigger(args.getOtherElement(), args.getColliderId());
+                        trigger.activateElementTrigger(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
                     }
                 }
             }
