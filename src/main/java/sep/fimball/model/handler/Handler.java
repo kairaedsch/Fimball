@@ -15,7 +15,7 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
     private ElementHandler elementHandler = null;
 
     /**
-     * TODO
+     * Reagiert auf gewisse Spielereignisse.
      */
     private GameHandler gameHandler = null;
 
@@ -26,6 +26,7 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
 
     /**
      * Setzt den ElementHandler, der auf Kollisionen zwischen Ball und Spielelementen reagiert.
+     *
      * @param elementHandler Der neue ElementHandler.
      */
     public void setElementHandler(ElementHandler elementHandler)
@@ -33,11 +34,21 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
         this.elementHandler = elementHandler;
     }
 
+    /**
+     * Setzt den GameHandler, der auf Spielereignisse reagiert.
+     *
+     * @param gameHandler Der neue GameHandler.
+     */
     public void setGameHandler(GameHandler gameHandler)
     {
         this.gameHandler = gameHandler;
     }
 
+    /**
+     * Setzt den UserHandler, der auf Spielereingaben reagiert.
+     *
+     * @param userHandler Der neue UserHandler.
+     */
     public void setUserHandler(UserHandler userHandler)
     {
         this.userHandler = userHandler;

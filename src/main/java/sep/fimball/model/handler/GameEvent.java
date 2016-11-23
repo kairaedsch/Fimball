@@ -1,12 +1,12 @@
 package sep.fimball.model.handler;
 
 /**
- * TODO
+ * Aufzählung verschiedener Spielereignisse.
  */
 public enum GameEvent
 {
     /**
-     * TODO
+     * Spielereignis, das ausgelöst wird, wenn der Ball als verloren gilt.
      */
     BALL_LOST
 }

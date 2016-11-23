@@ -1,23 +1,25 @@
 package sep.fimball.model.handler;
 
 /**
- * Created by alexcekay on 22.11.16.
+ * Handler, der bei gewissen Spielereignissen aufgerufen wird.
  */
 public class BallLostHandler implements GameHandler
 {
     /**
-     * TODO
+     * Session, die diesen Handler aufruft.
      */
     private HandlerGameSession handlerGameSession;
 
     /**
-     * TODO
-     * @param handlerGameSession
+     * Erzeugt eine neue Instanz von BallLostHandler und setzt die jeweilige Session.
+     *
+     * @param handlerGameSession Session, die diesen Handler aufruft.
      */
     public BallLostHandler(HandlerGameSession handlerGameSession)
     {
         this.handlerGameSession = handlerGameSession;
     }
+
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
