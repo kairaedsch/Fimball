@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
 /**
- * Die HandlerGameSession stellt die GameSession aus der Sicht der Trigger dar.
+ * Die HandlerGameSession stellt die GameSession aus der Sicht der Handler dar.
  */
 public interface HandlerGameSession
 {

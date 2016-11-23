@@ -3,7 +3,7 @@ package sep.fimball.model.handler;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 
 /**
- * Der Player aus der Sicht der handler.
+ * Der Player aus der Sicht der Handler.
  */
 public interface HandlerPlayer
 {
@@ -30,6 +30,8 @@ public interface HandlerPlayer
 
     /**
      * Reduziert die Reservebälle des Spielers um eins.
+     *
+     * @return Gibt zurück ob der Spieler vor dem Entfernen einer Kugel noch mindestens eine Reservekugel hatte
      */
     boolean removeOneReserveBall();
 }

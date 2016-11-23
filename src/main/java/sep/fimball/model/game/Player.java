@@ -46,7 +46,6 @@ public class Player implements HandlerPlayer
     {
         if (balls.get() > 0)
         {
-
             balls.set(balls.get() - 1);
             return true;
         }

@@ -6,7 +6,7 @@ import sep.fimball.model.media.Animation;
 import java.util.Optional;
 
 /**
- * Das GameElement aus der Sicht der Hander.
+ * Das GameElement aus der Sicht der Handler.
  */
 public interface HandlerGameElement
 {
@@ -19,6 +19,7 @@ public interface HandlerGameElement
 
     /**
      * Setzt die aktuelle Animation des Elements.
+     *
      * @param animation Die neue aktuelle Animation des Elements.
      */
     void setCurrentAnimation(Optional<Animation> animation);
