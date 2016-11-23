@@ -29,17 +29,17 @@ public class GameTest
     // Wie lange wird der Plunger gespannt
     private static final long HOLD_KEY_DURATION = 1000;
 
+    private static final long MAX_TEST_DURATION = 20000;   // Nach wie vielen Millisekunden wird abgebrochen
+    private static final long HOLD_KEY_DURATION = 1000; // Wie lange wird der Plunger gespannt
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
     private static final String BUMPER_ID = "bumper_blue";
     private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
+    private static Object monitor = new Object();
 
-    // Speichert Kollisionen, die während dem Test passieren
-    private Stack<GameElement> collidedGameElements = new Stack<>();
-    // Spiel-Session, die zum Test erstellt wird
-    private TestGameSession session;
-    // Automat, der getestet wird
-    private PinballMachine pinballMachine;
+    private Stack<GameElement> collidedGameElements = new Stack<>(); // Speichert Kollisionen, die während dem Test passieren
+    private TestGameSession session; // Spiel-Session, die zum Test erstellt wird
+    private PinballMachine pinballMachine; // Automat, der getestet wird
 
     @Test(timeout = MAX_TEST_DURATION)
     public synchronized void gameCollisionTest() throws InterruptedException
@@ -68,7 +68,10 @@ public class GameTest
         usePlunger();
 
         // Warten, bis der Ball verloren gegangen ist
-        wait();
+        synchronized (monitor)
+        {
+            monitor.wait();
+        }
 
         //Aufzeichnungen auswerten
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
@@ -82,6 +85,8 @@ public class GameTest
     {
         session.stopPhysics();
         session.stopGameLoop();
+        //pinballMachine.deleteFromDisk();
+        pinballMachine.saveToDisk();
     }
 
     public void addCollidedGameElement(GameElement gameElement)
@@ -89,9 +94,12 @@ public class GameTest
         collidedGameElements.push(gameElement);
     }
 
-    public synchronized void ballLost()
+    public void ballLost()
     {
-        this.notify();
+        synchronized (monitor)
+        {
+            monitor.notify();
+        }
     }
 
     private synchronized void initializeGameSession()
@@ -154,8 +162,11 @@ public class GameTest
         @Override
         public void activateGameHandler(GameEvent gameEvent)
         {
-            System.out.println("Kugel verlässt das Spiel");
-            gameTest.ballLost();
+            if (gameEvent == GameEvent.BALL_LOST)
+            {
+                System.out.println("Kugel verlässt das Spiel");
+                gameTest.ballLost();
+            }
         }
     }
 }
