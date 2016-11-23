@@ -1,7 +1,5 @@
 package sep.fimball.model.media;
 
-import sep.fimball.model.blueprint.base.BaseElementJson;
-
 /**
  * Enthält Informationen über die Anzeige einer Animation.
  */
@@ -24,14 +22,12 @@ public class Animation
 
     /**
      * Erstellt eine neue Animation.
-     *
-     * @param animation Das AnimationJson, dessen Informationen übernommen werden sollen.
      */
-    public Animation(BaseElementJson.MediaElementJson.MediaElementEventJson.AnimationJson animation)
+    public Animation(int duration, int frameCount, String name)
     {
-        duration = animation.duration;
-        name = animation.animationName;
-        frameCount = animation.frameCount;
+        this.duration = duration;
+        this.frameCount = frameCount;
+        this.name = name;
     }
 
     /**

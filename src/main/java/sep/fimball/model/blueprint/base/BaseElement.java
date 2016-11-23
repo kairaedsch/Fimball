@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.model.handler.BaseRuleElement;
+import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
 /**
@@ -44,8 +46,8 @@ public class BaseElement
         type = baseElementJson.elementType;
 
         physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);
-        media = new BaseMediaElement(baseElementJson.mediaElement, id);
-        rule = new BaseRuleElement(baseElementJson.ruleElement);
+        media = BaseMediaElementFactory.generate(baseElementJson.mediaElement, id);
+        rule = BaseRuleElementFactory.generate(baseElementJson.ruleElement);
     }
 
     /**

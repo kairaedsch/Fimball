@@ -1,6 +1,5 @@
-package sep.fimball.model.blueprint.base;
+package sep.fimball.model.handler;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,20 +19,11 @@ public class BaseRuleElement
 
     /**
      * Erstellt ein neues BaseRuleElement.
-     *
-     * @param ruleElement Das RuleElementJson, dessen Eigenschaften übernommen werden sollen.
      */
-    public BaseRuleElement(BaseElementJson.RuleElementJson ruleElement)
+    public BaseRuleElement(boolean givesPoints, Map<Integer, BaseRuleElementEvent> eventMap)
     {
-        eventMap = new HashMap<>();
-        if (ruleElement.events != null)
-        {
-            for (BaseElementJson.RuleElementJson.RuleElementEventJson event : ruleElement.events)
-            {
-                // TODO hashCode musst not be unique
-                eventMap.put(event.colliderId.hashCode(), new BaseRuleElementEvent(event));
-            }
-        }
+        this.givesPoints = givesPoints;
+        this.eventMap = eventMap;
     }
 
     /**

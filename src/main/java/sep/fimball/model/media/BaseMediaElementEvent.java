@@ -1,7 +1,4 @@
-package sep.fimball.model.blueprint.base;
-
-import sep.fimball.model.media.Animation;
-import sep.fimball.model.media.Sound;
+package sep.fimball.model.media;
 
 /**
  * Stellt Informationen über bei einem Collider ausgelöste Animationen und Soundeffekte bereit, die bei Bedarf abgerufen werden können.
@@ -20,15 +17,11 @@ public class BaseMediaElementEvent
 
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.
-     *
-     * @param event Das Objekt, in dem die Informationen über Animation und Soundeffekt gespeichert sind.
      */
-    public BaseMediaElementEvent(BaseElementJson.MediaElementJson.MediaElementEventJson event)
+    public BaseMediaElementEvent(Animation animation, String soundName)
     {
-        if (event.animation != null)
-            animation = new Animation(event.animation);
-        if (event.soundName != null)
-            sound = new Sound(event.soundName, false);
+        this.animation = animation;
+        this.sound = new Sound(soundName, false);
     }
 
     /**

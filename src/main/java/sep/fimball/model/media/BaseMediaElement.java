@@ -1,11 +1,9 @@
-package sep.fimball.model.blueprint.base;
+package sep.fimball.model.media;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import sep.fimball.model.media.ElementImage;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,35 +43,15 @@ public class BaseMediaElement
 
     /**
      * Erstellt ein neues BaseMediaElement.
-     *
-     * @param mediaElement Das MediaElementJson, dessen Eigenschaften übernommen werden sollen.
-     * @param baseElementId Die ID des zugehörigen BaseElements.
      */
-    public BaseMediaElement(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
+    public BaseMediaElement(String name, String description, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap)
     {
-        name = mediaElement.general.editorName;
-        description = mediaElement.general.editorDescription;
-        canRotate = mediaElement.general.canRotate;
-        rotationAccuracy = mediaElement.general.rotationAccuracy;
-
-        eventMap = new HashMap<>();
-        if (mediaElement.events != null)
-        {
-            for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
-            {
-                // TODO hashCode must not be unique
-                eventMap.put(event.colliderId.hashCode(), new BaseMediaElementEvent(event));
-            }
-        }
-        if (canRotate)
-        {
-            elementImage = new SimpleObjectProperty<>(new ElementImage(baseElementId, rotationAccuracy));
-        }
-        else
-        {
-            elementImage = new SimpleObjectProperty<>(new ElementImage(baseElementId));
-        }
-
+        this.name = name;
+        this.description = description;
+        this.canRotate = canRotate;
+        this.rotationAccuracy = rotationAccuracy;
+        this.elementImage = new SimpleObjectProperty<>(elementImage);
+        this.eventMap = eventMap;
     }
 
     /**
