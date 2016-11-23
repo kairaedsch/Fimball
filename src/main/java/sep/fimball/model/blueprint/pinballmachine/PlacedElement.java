@@ -108,7 +108,7 @@ public class PlacedElement
 
 
     /**
-     * Setztdie Punkte, die das Element vergibt.
+     * Setzt die Punkte, die das Element vergibt.
      * @param points Die neuen Punkte, die das Element vergibt.
      */
     public void setPoints(int points)

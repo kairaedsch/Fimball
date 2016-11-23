@@ -146,7 +146,7 @@ public class PinballMachine
     /**
      * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente hinzu.
      *
-     * @param baseElement Der Typ des einzufügenden Elements.
+     * @param baseElement Der Bauplan des einzufügenden Elements.
      * @param position    Die Position des einzufügenden Elements.
      * @return Das erstellte und hinzugefügte Bahnelement.
      */

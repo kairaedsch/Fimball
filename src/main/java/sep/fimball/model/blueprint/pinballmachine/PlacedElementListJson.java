@@ -29,7 +29,7 @@ public class PlacedElementListJson
         public Vector2 position;
 
         /**
-         * Speichert die y-Position des platzierten Elements.
+         * Speichert die Rotation des platzierten Elements.
          */
         public double rotation;
 
