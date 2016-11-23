@@ -21,8 +21,8 @@ public class Debug
         {
             DrawEntry de = new DrawEntry();
             de.type = "vector";
-            de.position = Vector2.scale(position, 30.0);
-            de.direction = Vector2.scale(direction, 30.0);
+            de.position = position.scale(30.0);
+            de.direction = direction.scale(30.0);
             de.color = color;
             de.creationTime = System.currentTimeMillis();
             drawEntries.add(de);
@@ -35,7 +35,7 @@ public class Debug
         {
             DrawEntry de = new DrawEntry();
             de.type = "circle";
-            de.position = Vector2.scale(position, 30.0);
+            de.position = position.scale(30.0);
             de.radius = radius * 30.0;
             de.color = color;
             de.creationTime = -1;

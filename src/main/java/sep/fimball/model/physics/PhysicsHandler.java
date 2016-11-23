@@ -78,8 +78,8 @@ public class PhysicsHandler<GameElementT>
     /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      *
-     * @param elements      Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
-     * @param gameSession   Die zugehörige GameSession.
+     * @param elements       Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
+     * @param gameSession    Die zugehörige GameSession.
      * @param maxElementPosY TODO
      */
     public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPosY)
@@ -165,10 +165,10 @@ public class PhysicsHandler<GameElementT>
                     double delta = TICK_RATE / 1000.0;
 
                     // Wende Schwerkraft auf den Ball an
-                    ballPhysicsElement.setVelocity(Vector2.add(ballPhysicsElement.getVelocity(), new Vector2(0.0, GRAVITY * delta)));
+                    ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().add(new Vector2(0.0, GRAVITY * delta)));
 
                     // Bewege den Ball
-                    ballPhysicsElement.setPosition(Vector2.add(ballPhysicsElement.getPosition(), Vector2.scale(ballPhysicsElement.getVelocity(), delta)));
+                    ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().add(ballPhysicsElement.getVelocity().scale(delta)));
 
                     if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
                     {

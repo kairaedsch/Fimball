@@ -86,7 +86,7 @@ public class GameViewModel extends WindowViewModel
         cameraPosition.set(gameSession.gameBallProperty().get().positionProperty().get());
         gameSession.gameBallProperty().get().positionProperty().addListener((obs, ballPosition, t1) ->
         {
-            cameraPosition.set(Vector2.lerp(cameraPosition.get(), ballPosition, 0.01));
+            cameraPosition.set(cameraPosition.get().lerp(ballPosition, 0.01));
         });
 
         cameraZoom = new SimpleDoubleProperty(0.75);

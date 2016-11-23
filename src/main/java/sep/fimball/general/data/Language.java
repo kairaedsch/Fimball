@@ -6,12 +6,12 @@ package sep.fimball.general.data;
 public enum Language
 {
     /**
-     * Die deutsche Sprache
+     * Die deutsche Sprache.
      */
     GERMAN("Deutsch", "de"),
 
     /**
-     * Die englische Sprache
+     * Die englische Sprache.
      */
     ENGLISH("English", "en");
 
@@ -48,6 +48,7 @@ public enum Language
     }
 
     /**
+     * Gibt den Sprachcode zurück. (z.B. "en" oder "de").
      *
      * @return Den Sprachcode.
      */

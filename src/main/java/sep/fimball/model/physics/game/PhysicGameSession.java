@@ -4,20 +4,23 @@ import java.util.List;
 
 /**
  * Die PhysicGameSession stellt die GameSession aus der Sichtweise der Physic da.
+ *
  * @param <GameElementT> Die Klasse des GameElements.
  */
 public interface PhysicGameSession<GameElementT>
 {
     /**
      * Setzt den aktuellen Ball Zustand.
+     *
      * @param isBallLost Gibt an, ob der Ball verloren ist.
      */
     void setBallLost(boolean isBallLost);
 
     /**
      * Überreicht die verschiedenen Events, die in der Physik passiert sind, an die GameSession weiter.
+     *
      * @param collisionEventArgs Liste aller CollisionsEvents.
-     * @param elementEventArgs Liste aller ElemnentEvents.
+     * @param elementEventArgs   Liste aller ElemnentEvents.
      */
     void addEventArgs(List<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
 }

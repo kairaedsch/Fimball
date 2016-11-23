@@ -148,118 +148,27 @@ public class Vector2
      */
     public double angleBetween(Vector2 otherVec)
     {
-        return Math.acos(Vector2.dot(this.normalized(), otherVec.normalized()));
-    }
-
-    /**
-     * Dreht einen Vektor um den gegebenen Radianten.
-     *
-     * @param vec         Der Vektor der gedreht werden soll.
-     * @param radianAngle Der Radiant um den gedreht wird.
-     * @return Ein neuer gedrehter Vektor.
-     */
-    public static Vector2 rotate(Vector2 vec, double radianAngle)
-    {
-        return vec.rotate(radianAngle);
-    }
-
-    /**
-     * Dreht einen Vektor um einen Pivotpunkt um den gegebenen Radianten.
-     *
-     * @param vec         Der Vektor der gedreht werden soll.
-     * @param radianAngle Der Radiant um den gedreht wird.
-     * @param pivot       Der Punkt um den gedreht wird.
-     * @return Der gegebene Vektor nach der Drehung.
-     */
-    public static Vector2 rotate(Vector2 vec, double radianAngle, Vector2 pivot)
-    {
-        return vec.rotate(radianAngle, pivot);
-    }
-
-    /**
-     * Addiert zwei Vektoren und gibt das Ergebnis zurück.
-     *
-     * @param vecOne Der erste Vektor.
-     * @param vecTwo Der zu addierende Vektor.
-     * @return Das Ergebnis der Addition.
-     */
-    public static Vector2 add(Vector2 vecOne, Vector2 vecTwo)
-    {
-        return vecOne.add(vecTwo);
-    }
-
-    /**
-     * Subtrahiert zwei Vektoren und gibt das Ergebnis zurück.
-     *
-     * @param vecOne Der erste Vektor.
-     * @param vecTwo Der zu subtrahierende Vektor.
-     * @return Das Ergebnis der Subtraktion.
-     */
-    public static Vector2 sub(Vector2 vecOne, Vector2 vecTwo)
-    {
-        return vecOne.sub(vecTwo);
-    }
-
-    /**
-     * Skaliert einen gegebenen Vektor mit einem Skalar und gibt das Ergebnis zurück.
-     *
-     * @param vecOne Der Vektor.
-     * @param scalar Der Skalar.
-     * @return Das Ergebnis der Skalierung.
-     */
-    public static Vector2 scale(Vector2 vecOne, double scalar)
-    {
-        return vecOne.scale(scalar);
+        return Math.acos(this.normalized().dot(otherVec.normalized()));
     }
 
     /**
      * Projiziert einen Vektor auf einen Anderen.
      *
-     * @param source Der Vektor, der projiziert werden soll.
      * @param target Der Vektor, auf den projiziert wird.
      * @return Der projizierte Vektor.
      */
-    public static Vector2 project(Vector2 source, Vector2 target)
+    public Vector2 project(Vector2 target)
     {
-        Vector2 targetNorm = normalized(target);
-        double targetLength = dot(source, targetNorm);
+        Vector2 targetNorm = target.normalized();
+        double targetLength = this.dot(targetNorm);
         return target.scale(targetLength);
     }
 
     /**
-     * Gibt die euklidische Norm eines gegebenen Vektors zurück.
+     * Gibt einen Vektor zurück, der senkrecht auf diesen steht.
      *
-     * @param vecOne Der Vektor, dessen L2-Norm bestimmt werden soll.
-     * @return Die L2-Norm des Vektors.
+     * @return Die Normale dieses Vektors.
      */
-    public static double magnitude(Vector2 vecOne)
-    {
-        return vecOne.magnitude();
-    }
-
-    /**
-     * Gibt das Skalarprodukt von zwei Vektoren zurück.
-     *
-     * @param vecOne Der erste Vektor.
-     * @param vecTwo Der zweite Vektor.
-     * @return Das Skalarprodukt der beiden Vektoren.
-     */
-    public static double dot(Vector2 vecOne, Vector2 vecTwo)
-    {
-        return vecOne.dot(vecTwo);
-    }
-
-    /**
-     * Gibt einen Vektor zurück, der senkrecht auf dem gegebenen Vektor steht.
-     *
-     * @param vec Der Vektor, zu dem eine Normale gesucht wird.
-     * @return Die Normale des gegebenen Vektors.
-     */
-    public static Vector2 createNormal(Vector2 vec)
-    {
-        return vec.normal();
-    }
-
     public Vector2 normal()
     {
         return new Vector2(y, -x);
@@ -268,44 +177,15 @@ public class Vector2
     /**
      * Mittelt zwei gewichtete Vektoren.
      *
-     * @param vecOne Der erste Vektor.
      * @param vecTwo Der zweite Vektor.
      * @param t      Die Gewichtung des zweiten Vektors.
      * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
      */
-    public static Vector2 lerp(Vector2 vecOne, Vector2 vecTwo, double t)
-    {
-        return vecOne.lerp(vecTwo, t);
-    }
-
     public Vector2 lerp(Vector2 vecTwo, double t)
     {
         double xLerped = (1 - t) * x + (t * vecTwo.getX());
         double yLerped = (1 - t) * y + (t * vecTwo.getY());
         return new Vector2(xLerped, yLerped);
-    }
-
-    /**
-     * Normiert den gegebenen Vektor, wobei ein Neuer erstellt wird und der übergebene Vektor nicht verändert wird.
-     *
-     * @param input Der zu normierende Vektor.
-     * @return Der normierte Vektor.
-     */
-    public static Vector2 normalized(Vector2 input)
-    {
-        return input.normalized();
-    }
-
-    /**
-     * Gibt den Winkel zwischen zwei Vektoren als Radianten zurück.
-     *
-     * @param vecOne Der erste Vektor.
-     * @param vecTwo Der zweite Vektor.
-     * @return Der Winkel zwischen den beiden Vektoren.
-     */
-    public static double angleBetween(Vector2 vecOne, Vector2 vecTwo)
-    {
-        return vecOne.angleBetween(vecTwo);
     }
 
     /**
@@ -354,9 +234,9 @@ public class Vector2
      */
     public Vector2 clamp(double max)
     {
-        if (magnitude(this) > max)
+        if (this.magnitude() > max)
         {
-            double v = max / magnitude(this);
+            double v = max / this.magnitude();
 
             return new Vector2(x * v,  y * v);
         }

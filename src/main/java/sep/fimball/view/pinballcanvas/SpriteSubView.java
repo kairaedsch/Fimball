@@ -62,7 +62,7 @@ public class SpriteSubView
 
         graphicsContext.save(); // saves the current state on stack, including the current transform
 
-        Vector2 pivot = Vector2.add(viewModel.pivotPointProperty().get(), new Vector2(0, 0));
+        Vector2 pivot = viewModel.pivotPointProperty().get().add(new Vector2(0, 0));
         int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
         if (picRotate == 270)
         {
@@ -86,7 +86,7 @@ public class SpriteSubView
         }
 
         if (viewModel.rotationProperty().get() != 0)
-           rotate(graphicsContext, viewModel.rotationProperty().get(), Vector2.scale(Vector2.add(pivot, new Vector2(x, y)), Config.pixelsPerGridUnit));
+           rotate(graphicsContext, viewModel.rotationProperty().get(), pivot.add(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
 
         if (viewModel.isSelectedProperty().get())
         {

@@ -58,14 +58,14 @@ public class CircleColliderShape implements ColliderShape
         // TODO rotate
 
         // Collision check between two circles
-        Vector2 globalColliderPosition = Vector2.add(position, colliderObjectPosition);
-        Vector2 ballGlobalColliderPosition = Vector2.add(ball.getPosition(), ball.getCollider().getPosition());
-        Vector2 distance = Vector2.sub(ballGlobalColliderPosition, globalColliderPosition);
+        Vector2 globalColliderPosition = position.add(colliderObjectPosition);
+        Vector2 ballGlobalColliderPosition = ball.getPosition().add(ball.getCollider().getPosition());
+        Vector2 distance = ballGlobalColliderPosition.sub(globalColliderPosition);
 
         if (distance.magnitude() < ball.getCollider().getRadius() + radius)
         {
             double overlapDistance = (ball.getCollider().getRadius() + radius) - distance.magnitude();
-            return new HitInfo(true, Vector2.scale(distance.normalized(), overlapDistance));
+            return new HitInfo(true, distance.normalized().scale(overlapDistance));
         }
 
         return new HitInfo(false, null);

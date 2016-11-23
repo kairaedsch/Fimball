@@ -7,12 +7,12 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.view.SceneManagerView;
 
 /**
- * Stellt den Einstiegspunkt der Applikation dar
+ * Stellt den Einstiegspunkt der Applikation dar.
  */
 public class Main extends Application
 {
     /**
-     * Der Einstiegspunkt der Applikation
+     * Der Einstiegspunkt der Applikation.
      *
      * @param args Argumente welche an die Applikation gegeben werden
      */
@@ -24,7 +24,7 @@ public class Main extends Application
     }
 
     /**
-     * Startet das Userinterface der Applikation
+     * Startet das Userinterface der Applikation und damit die gesamte Anwendung.
      *
      * @param primaryStage Die von JavaFX erstellte Stage, auf der gearbeitet wird
      * @throws Exception Falls Probleme beim Starten von JavaFX auftreten
