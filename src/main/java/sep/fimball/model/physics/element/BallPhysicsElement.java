@@ -43,7 +43,7 @@ public class BallPhysicsElement<GameElementT>
      * @param collider    Die Form des Colliders, die der Ball haben soll.
      * @param layer       Die Ebene, auf der sich der Ball befinden soll.
      * @param position Die Position, auf der sich der Ball befinden soll.
-     * @param rotation Die Rotation, um die der Ball gedreht sein soll TODO
+     * @param rotation Die Rotation, um die der Ball gedreht sein soll.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public BallPhysicsElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)

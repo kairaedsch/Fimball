@@ -66,7 +66,7 @@ public class PhysicsHandler<GameElementT>
     private PhysicGameSession gameSession;
 
     /**
-     * Die Maximale Y-Position aller PhysicElement.
+     * Die maximale Y-Position aller PhysicElements.
      */
     private double maxElementPosY;
 
@@ -78,7 +78,7 @@ public class PhysicsHandler<GameElementT>
      *
      * @param elements       Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession    Die zugehörige GameSession.
-     * @param maxElementPosY TODO
+     * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
      */
     public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPosY)
     {

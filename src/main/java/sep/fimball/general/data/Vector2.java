@@ -181,7 +181,6 @@ public class Vector2
      * @param t      Die Gewichtung des zweiten Vektors.
      * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
      */
-    //TODO umbenennen
     public Vector2 lerp(Vector2 vecTwo, double t)
     {
         double xLerped = (1 - t) * x + (t * vecTwo.getX());
