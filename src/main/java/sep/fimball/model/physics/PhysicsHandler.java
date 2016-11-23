@@ -165,10 +165,10 @@ public class PhysicsHandler<GameElementT>
                     double delta = TICK_RATE / 1000.0;
 
                     // Wende Schwerkraft auf den Ball an
-                    ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().add(new Vector2(0.0, GRAVITY * delta)));
+                    ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().plus(new Vector2(0.0, GRAVITY * delta)));
 
                     // Bewege den Ball
-                    ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().add(ballPhysicsElement.getVelocity().scale(delta)));
+                    ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().plus(ballPhysicsElement.getVelocity().scale(delta)));
 
                     if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
                     {

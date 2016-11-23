@@ -18,11 +18,11 @@ public class NormalCollision implements CollisionType
     @Override
     public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
-        ball.setPosition(ball.getPosition().add(shortestIntersect));
+        ball.setPosition(ball.getPosition().plus(shortestIntersect));
         Vector2 shortestIntersectNorm = shortestIntersect.normalized();
         Debug.addDrawVector(ball.getPosition(), shortestIntersect.normalized(), Color.RED);
         //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.GREEN);
-        Vector2 newVel = ball.getVelocity().sub(shortestIntersectNorm.scale((1.0 + bounce) * ball.getVelocity().dot(shortestIntersectNorm)));
+        Vector2 newVel = ball.getVelocity().minus(shortestIntersectNorm.scale((1.0 + bounce) * ball.getVelocity().dot(shortestIntersectNorm)));
         ball.setVelocity(newVel);
         //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.BLUE);
     }

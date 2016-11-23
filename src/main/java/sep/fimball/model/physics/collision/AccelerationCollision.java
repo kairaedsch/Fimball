@@ -28,6 +28,6 @@ public class AccelerationCollision implements CollisionType
     public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
     {
         Vector2 direction = new Vector2(0, -1).rotate(Math.toRadians(rotation));
-        ball.setVelocity(ball.getVelocity().add(direction.scale(strength)));
+        ball.setVelocity(ball.getVelocity().plus(direction.scale(strength)));
     }
 }

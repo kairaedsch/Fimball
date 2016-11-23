@@ -55,7 +55,7 @@ public class Vector2
      * @param otherVec Der zu addierende Vektor.
      * @return Der geänderte Vektor.
      */
-    public Vector2 add(Vector2 otherVec)
+    public Vector2 plus(Vector2 otherVec)
     {
         return new Vector2(x + otherVec.getX(), y + otherVec.getY());
     }
@@ -66,7 +66,7 @@ public class Vector2
      * @param otherVec Der zu subtrahierende Vektor.
      * @return Der geönderte Vektor.
      */
-    public Vector2 sub(Vector2 otherVec)
+    public Vector2 minus(Vector2 otherVec)
     {
         return new Vector2(x - otherVec.getX(), y - otherVec.getY());
     }
@@ -112,9 +112,9 @@ public class Vector2
      */
     public Vector2 rotate(double radianAngle, Vector2 pivot)
     {
-        Vector2 temp = this.sub(pivot);
+        Vector2 temp = this.minus(pivot);
         temp = temp.rotate(radianAngle);
-        temp = temp.add(pivot);
+        temp = temp.plus(pivot);
         return temp;
     }
 

@@ -55,15 +55,15 @@ public class PolygonColliderShape implements ColliderShape
             rotatedVerts = vertices;
         }
 
-        Vector2 globalBallPosition = ball.getPosition().add(ball.getCollider().getPosition());
+        Vector2 globalBallPosition = ball.getPosition().plus(ball.getCollider().getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();
         Vector2 ballAxis;
 
         for (Vector2 vertex : rotatedVerts)
         {
-            Vector2 globalVertexPosition = vertex.add(colliderObjectPosition);
-            ballAxisList.add(globalBallPosition.sub(globalVertexPosition));
+            Vector2 globalVertexPosition = vertex.plus(colliderObjectPosition);
+            ballAxisList.add(globalBallPosition.minus(globalVertexPosition));
         }
         ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
         ballAxis = ballAxisList.get(0).normalized();
@@ -72,7 +72,7 @@ public class PolygonColliderShape implements ColliderShape
 
         for (Vector2 vertex : rotatedVerts)
         {
-            Vector2 globalVertex = vertex.add(colliderObjectPosition);
+            Vector2 globalVertex = vertex.plus(colliderObjectPosition);
             points.add(globalVertex.dot(ballAxis));
         }
         points.sort(Comparator.naturalOrder());
@@ -101,12 +101,12 @@ public class PolygonColliderShape implements ColliderShape
 
             if (i == rotatedVerts.size() - 1)
             {
-                Vector2 vec = rotatedVerts.get(0).sub(rotatedVerts.get(i));
+                Vector2 vec = rotatedVerts.get(0).minus(rotatedVerts.get(i));
                 currentAxis = vec.normal().normalized();
             }
             else
             {
-                Vector2 vec = rotatedVerts.get(i + 1).sub(rotatedVerts.get(i));
+                Vector2 vec = rotatedVerts.get(i + 1).minus(rotatedVerts.get(i));
                 currentAxis = vec.normal().normalized();
             }
             Debug.addDrawVector(rotatedVerts.get(i), currentAxis, Color.YELLOW);
@@ -114,7 +114,7 @@ public class PolygonColliderShape implements ColliderShape
 
             for (Vector2 vert : rotatedVerts)
             {
-                Vector2 globalVert = vert.add(colliderObjectPosition);
+                Vector2 globalVert = vert.plus(colliderObjectPosition);
                 newPoints.add(globalVert.dot(currentAxis));
             }
             newPoints.sort(Comparator.naturalOrder());

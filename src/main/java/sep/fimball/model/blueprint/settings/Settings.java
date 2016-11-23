@@ -204,7 +204,7 @@ public class Settings
     }
 
     /**
-     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück
+     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück.
      *
      * @param code Der KeyCode für den das entsprechende KeyBinding gesucht werden soll
      * @return Das Keybinding welches zum übergebenen KeyCode passt
