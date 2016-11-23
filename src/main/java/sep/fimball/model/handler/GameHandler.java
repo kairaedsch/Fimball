@@ -6,7 +6,7 @@ package sep.fimball.model.handler;
 public interface GameHandler
 {
     /**
-     * Benachrichtigt den handler über ein passiertes GameEvent.
+     * Benachrichtigt den Handler über ein eingetretenes GameEvent.
      * @param gameEvent Das GameEvent, welches aufgetreten ist.
      */
     void activateGameHandler(GameEvent gameEvent);
