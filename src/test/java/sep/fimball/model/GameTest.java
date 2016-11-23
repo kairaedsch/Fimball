@@ -16,18 +16,19 @@ import sep.fimball.model.handler.*;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Diese Klasse repräsentiert einen Test, der prüft, ob ein Ball den erwarteten Verlauf im angegebenen Automaten nimmt.
+ */
 public class GameTest
 {
-    // Nach wie vielen Millisekunden wird abgebrochen
-    private static final long MAX_TEST_DURATION = 20000;
-    // Wie lange wird der Plunger gespannt
-    private static final long HOLD_KEY_DURATION = 1000;
+    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
+    private static final long HOLD_KEY_DURATION = 1000;     // Die Zeit, die der Plunger gespannt wird.
+    private boolean ballIsLost = false;
 
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
     private static final String BUMPER_ID = "bumper_blue";
@@ -35,45 +36,43 @@ public class GameTest
     private static final String BALL_SPAWN_ID = "ball";
     private static Object monitor = new Object();
 
-    // Speichert Kollisionen, die während dem Test passieren
-    private Stack<GameElement> collidedGameElements = new Stack<>();
-    // Spiel-Session, die zum Test erstellt wird
+    private Deque<GameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
     private TestGameSession session;
-    // Automat, der getestet wird
     private PinballMachine pinballMachine;
 
+    /**
+     * Baut einen Testautomaten und testet, ob die Kugel mit der wand kollidiert, mit dem Bumper kollidiert und anschließend verloren geht.
+     *
+     * @throws InterruptedException Bricht den Test ab, falls im Test unvorhergesehenerweise ein Interrupt aufgetreten ist.
+     */
     @Test(timeout = MAX_TEST_DURATION)
     public void gameCollisionTest() throws InterruptedException
     {
-        // Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
+        // Aufbau des Automaten.
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
-        // Plunger, Ball, Wand und Bumper einfügen
+        // Einfügen von Plunger, Ball, Wand und Bumper.
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
-
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, -5), 0, 0, 0));
-
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
-
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
-        // Starten des Spiels
-        session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});
+        session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});        // Start des Spiels
 
-        // Erstellt Handler, der Kollisionen aufzeichnet
+        // Erstellung des Handler, der Kollisionen aufzeichnet.
         Handler collisionHandler = new Handler();
-        collisionHandler.setElementHandler(new CollisionHandler(this));
+        collisionHandler.setElementHandler(new CollisionHandler());
 
-        // Erstellt Handler, der bei Ballverlust ballLost() aufruft
+        // Erstellung des Handler, der bei Ballverlust ballLost() aufruft.
         Handler ballLostHandler = new Handler();
-        ballLostHandler.setGameHandler(new BallLostHandler(this));
+        ballLostHandler.setGameHandler(new BallLostHandler());
 
-        // Registriert Handler
+        // Registrierung der Handler.
         List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
         handlerList.add(collisionHandler);
         handlerList.add(ballLostHandler);
@@ -81,22 +80,27 @@ public class GameTest
 
         session.startAll();
 
-        // Wegschießen der Kugel durch den Plunger
         usePlunger();
 
-        // Warten, bis der Ball verloren gegangen ist
+        // Warten, bis der Ball verloren gegangen ist.
         synchronized (monitor)
         {
-            monitor.wait();
+            while (!ballIsLost)
+            {
+                monitor.wait(MAX_TEST_DURATION);
+            }
         }
 
-        //Aufzeichnungen auswerten
+        //Auswertung der Aufzeichnungen.
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), PLUNGER_ID);
-        assertTrue(collidedGameElements.empty());
+        assertTrue(collidedGameElements.isEmpty());
     }
 
+    /**
+     * Stoppt die Ausführung des Physik- und des Regelwerkthreads.
+     */
     @After
     public void cleanup()
     {
@@ -104,62 +108,74 @@ public class GameTest
         session.stopGameLoop();
     }
 
-    public void addCollidedGameElement(GameElement gameElement)
+    /**
+     * Speichert die Kollision des Balls mit einem Spielelement für die spätere Überprüfung.
+     *
+     * @param gameElement Das Spielelement, mit dem die Kugel kollidiert ist.
+     */
+    private void addCollidedGameElement(GameElement gameElement)
     {
         collidedGameElements.push(gameElement);
     }
 
+    /**
+     * Benachrichtigt den Test, dass der Ball nun aus dem Spiel ist.
+     */
     public void ballLost()
     {
+        ballIsLost = true;
         synchronized (monitor)
         {
             monitor.notify();
         }
     }
 
+    /**
+     * Hält die Plunger-Taste für {@code HOLD_KEY_DURATION} gedrückt und lässt sie anschließend wieder los.
+     *
+     * @throws InterruptedException Falls ein Interrupt auftritt, während der Thread schläft, da dann nicht mehr der geplante Testverlauf gewährleistet werden kann.
+     */
     private void usePlunger() throws InterruptedException
     {
         KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-
         Thread.sleep(HOLD_KEY_DURATION);
-
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
     }
 
+    /**
+     * Gibt bei einer Kollision das Spielelement, mit dem die Kugel kollidiert ist, in die Deque.
+     */
     private class CollisionHandler implements ElementHandler
     {
-        private GameTest gameTest;
 
-        public CollisionHandler(GameTest gameTest)
-        {
-            this.gameTest = gameTest;
-        }
-
+        /**
+         * Gibt das Spielelement, mit dem die Kugel kollidiert ist, in die Deque.
+         */
         @Override
         public void activateElementHandler(GameElement element, int colliderID)
         {
             System.out.println("Kugel kollidiert mit " + element.getPlacedElement().getBaseElement().getId());
-            gameTest.addCollidedGameElement(element);
+                addCollidedGameElement(element);
         }
     }
 
+    /**
+     * Benachrichtigt den Test, dass der Ball verloren gegangen ist.
+     */
     private class BallLostHandler implements GameHandler
     {
-        private GameTest gameTest;
-
-        public BallLostHandler(GameTest gameTest)
-        {
-            this.gameTest = gameTest;
-        }
-
+        /**
+         * Benachrichtigt den Test, dass der Ball verloren gegangen ist.
+         *
+         * @param gameEvent Beinhaltet die Information, was geschehen ist.
+         */
         @Override
         public void activateGameHandler(GameEvent gameEvent)
         {
             if (gameEvent == GameEvent.BALL_LOST)
             {
-                System.out.println("Kugel verlässt das Spiel");
-                gameTest.ballLost();
+                ballLost();
             }
         }
     }

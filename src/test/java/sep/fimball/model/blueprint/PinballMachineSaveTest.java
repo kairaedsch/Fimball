@@ -1,6 +1,5 @@
 package sep.fimball.model.blueprint;
 
-import javafx.beans.property.ReadOnlyListProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -9,21 +8,29 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 /**
- *
+ * Diese Klasse repräsentiert einen JUnit-Test, der einen neuen Automaten erstellt, in diesen Elemente einfügt, ihn speichert und anschließend den gespeicherten Automaten lädt, um diesen abschließend mit dem erstellten Automaten zu vergleichen und sicherzustellen, dass die beiden identisch sind.
  */
 public class PinballMachineSaveTest
 {
     private static final int MAX_ELEMENT_SIZE = 20;
 
+    /**
+     * Erstellt einen neuen Automaten, platziert jedes verfügbare Spielelement darin, speichert den erstellten Automaten und lädt ihn von der Festplatte. Anschließend wird sichergestellt, dass der geladene Automat mit dem erstellten Automat übereinstimmt.
+     */
     @Test
     public void pinballMachineShouldSave()
     {
         // Erstellt einen leeren Automaten
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        ReadOnlyListProperty<PlacedElement> pinballMachineElements = pinballMachine.elementsProperty();
+
+        List<PlacedElement> pinballMachineElements = new ArrayList<>();
+        pinballMachineElements.addAll(pinballMachine.elementsProperty().get());
 
         // Lädt alle im Spiel verfügbaren BaseElements und fügt sie in den Automaten ein
         int i = 0;
@@ -35,19 +42,13 @@ public class PinballMachineSaveTest
             i++;
         }
 
-        // Speichert den erstellten Automaten
+        //Speichert den Automaten auf der Festplatte, wodurch die Elementliste des Automaten geleert wird, und lädt die Elemente neu von der Festplatte durch Zugriff auf elementsProperty.
         pinballMachine.saveToDisk();
-
-        // Leert den aktuellen Automaten
-        pinballMachine.unloadElements();
-
-        // Bei erneutem Zugriff auf die Property werden die Elemente neu geladen
-        ReadOnlyListProperty<PlacedElement> loadedElements = pinballMachine.elementsProperty();
+        List<PlacedElement> loadedElements = pinballMachine.elementsProperty().get();
 
         // Überprüft, ob beide Listen die gleichen Elemente enthalten
         assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch(original::equals)));
 
-        // Löscht den Automaten
         pinballMachine.deleteFromDisk();
     }
 }

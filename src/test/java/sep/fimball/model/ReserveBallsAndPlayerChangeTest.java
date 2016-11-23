@@ -19,61 +19,53 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by marc on 16.11.16.
+ * Repräsentiert einen JUnit-Test, der abprüft, ob die Anzahl der verbleibenden Bälle richtig gesetzt wird und der Spielerwechsel richtig von statten geht.
  */
 public class ReserveBallsAndPlayerChangeTest
 {
     private static String[] players = new String[]{"tester", "test"};
-    // Wie lange wird der Plunger gespannt
-    private static final long KEY_HOLDING_TIME = 200;
-    // Nach wie vielen Millisekunden wird abgebrochen
-    private static final long MAX_TEST_TIME = 120000;
+    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
+    private static final long KEY_HOLDING_DURATION = 1000;     // Die Zeit, die der Plunger gespannt wird.
     private static Object monitor = new Object();
+    private volatile boolean ballIsLost = false;
 
     private TestGameSession session;
 
-    @Test(timeout = MAX_TEST_TIME)
+    /**
+     * Testet, ob bei Ballverlust in einem Mehrspielerspiel der Spieler gewechselt und die Anzahl der verbleibenden Kugeln ordnungsgemäß gesenkt wird.
+     *
+     * @throws InterruptedException Falls ein Interrupt auftritt.
+     */
+    @Test(timeout = MAX_TEST_DURATION)
     public void testReserveBalls() throws InterruptedException
     {
-        // Starten des Spiels
-        initGameSession();
-        // Wegschießen der Kugel durch den Plunger
-        usePlunger();
-        // Warten, bis der Ball verloren gegangen ist und zum zweiten Spieler gewechselt wurde
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TEST_TIME);
-        }
 
-        // Hat der zweite Spieler noch alle Bälle?
+        initGameSession();      // Start des Spiels
+        usePlunger();
+        waitTillBallIsLost();
+
+        // Hat der zweite Spieler noch alle Bälle und ist er am Zug?
         assertEquals(3, session.getCurrentPlayer().ballsProperty().get());
-        // Ist der zweite Spieler am Zug?
         assertEquals("test", session.getCurrentPlayer().getName());
 
         usePlunger();
-        // Warten, bis der Ball verloren gegangen ist und zum ersten Spieler zurück gewechselt wurde
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TEST_TIME);
-        }
+        waitTillBallIsLost();
 
-        // Hat der erste Spieler einen Ball verloren?
+        // Hat der erste Spieler einen Ball verloren und ist der erste Spieler am Zug?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
-        // Ist der erste Spieler am Zug?
         assertEquals("tester", session.getCurrentPlayer().getName());
 
         usePlunger();
-        // Warten, bis der Ball verloren gegangen ist und zum zweiten Spieler gewechselt wurde
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TEST_TIME);
-        }
-        // Hat auch der zweite Spieler einen Ball verloren?
+        waitTillBallIsLost();
+
+        // Hat auch der zweite Spieler einen Ball verloren und ist der zweite Spieler am Zug?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
-        // Ist der zweite Spieler am Zug?
         assertEquals("test", session.getCurrentPlayer().getName());
     }
 
+    /**
+     * Hält den Physik- und Regelauswertungsthread an.
+     */
     @After
     public void stopThreads()
     {
@@ -81,6 +73,9 @@ public class ReserveBallsAndPlayerChangeTest
         session.stopGameLoop();
     }
 
+    /**
+     * Lädt den Automaten von der Festplatte, erstellt einen Handler, der den Test bei Verlust der Kugel benachrichtigt und initialisiert eine neue GameSession.
+     */
     private void initGameSession()
     {
         PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
@@ -91,6 +86,7 @@ public class ReserveBallsAndPlayerChangeTest
         {
             if (gameEvent == GameEvent.BALL_LOST)
             {
+                ballIsLost = true;
                 synchronized (monitor)
                 {
                     monitor.notify();
@@ -101,18 +97,33 @@ public class ReserveBallsAndPlayerChangeTest
         session.addHandlers(handlers);
     }
 
-    private void usePlunger()
+    /**
+     * Hält die Plunger-Taste für {@code HOLD_KEY_DURATION} gedrückt und lässt sie anschließend wieder los.
+     *
+     * @throws InterruptedException Falls ein Interrupt auftritt, während der Thread schläft, da dann nicht mehr der geplante Testverlauf gewährleistet werden kann.
+     */
+    private void usePlunger() throws InterruptedException
     {
         KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        try
-        {
-            Thread.sleep(KEY_HOLDING_TIME);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        Thread.sleep(KEY_HOLDING_DURATION);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
+    }
+
+    /**
+     * Lässt den Test warten, bis der Ball verloren wurde.
+     *
+     * @throws InterruptedException Falls ein Interrupt aufgetreten ist.
+     */
+    private void waitTillBallIsLost() throws InterruptedException
+    {
+        while (!ballIsLost)
+        {
+            synchronized (monitor)
+            {
+                monitor.wait(MAX_TEST_DURATION);
+            }
+        }
+        ballIsLost = false;
     }
 }
