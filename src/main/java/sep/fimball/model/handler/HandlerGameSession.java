@@ -18,7 +18,7 @@ public interface HandlerGameSession
     void switchToNextPlayer();
 
     /**
-     * Spawnt einen neuen Ball auf dem Spielfeld.
+     * Spawned einen neuen Ball auf dem Spielfeld.
      */
     void spawnNewBall();
 

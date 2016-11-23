@@ -167,7 +167,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Verarbeitet eine Drag-Bewegung.
      *
      * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
-     * @param y Die y-Positon, an der sich die Drag-Bewegung befindet.
+     * @param y Die y-Position, an der sich die Drag-Bewegung befindet.
      */
     public void dragged(double x, double y)
     {

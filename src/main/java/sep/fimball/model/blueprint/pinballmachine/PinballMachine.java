@@ -49,7 +49,7 @@ public class PinballMachine
     private StringProperty imagePath;
 
     /**
-     * Estellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
+     * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *
      * @param name             Name des Automaten
      * @param pinballMachineId Id des Automaten

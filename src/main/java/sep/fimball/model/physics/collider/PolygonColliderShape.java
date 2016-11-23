@@ -22,7 +22,7 @@ public class PolygonColliderShape implements ColliderShape
     private List<Vector2> vertices;
 
     /**
-     * Erstellt einen neuen Collider in Polygonform.
+     * Erstellt einen neuen Collider in der Form eines Polygons.
      *
      * @param vertices Die Ecken des Polygons.
      */
@@ -44,15 +44,15 @@ public class PolygonColliderShape implements ColliderShape
     @Override
     public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
-        List<Vector2> rotatedVerts;
+        List<Vector2> rotatedVertices;
 
         if (rotation != 0)
         {
-            rotatedVerts = rotate(rotation, pivotPoint);
+            rotatedVertices = rotate(rotation, pivotPoint);
         }
         else
         {
-            rotatedVerts = vertices;
+            rotatedVertices = vertices;
         }
 
         Vector2 globalBallPosition = ball.getPosition().plus(ball.getCollider().getPosition());
@@ -60,7 +60,7 @@ public class PolygonColliderShape implements ColliderShape
         List<Vector2> ballAxisList = new ArrayList<>();
         Vector2 ballAxis;
 
-        for (Vector2 vertex : rotatedVerts)
+        for (Vector2 vertex : rotatedVertices)
         {
             Vector2 globalVertexPosition = vertex.plus(colliderObjectPosition);
             ballAxisList.add(globalBallPosition.minus(globalVertexPosition));
@@ -70,7 +70,7 @@ public class PolygonColliderShape implements ColliderShape
 
         List<Double> points = new ArrayList<>();
 
-        for (Vector2 vertex : rotatedVerts)
+        for (Vector2 vertex : rotatedVertices)
         {
             Vector2 globalVertex = vertex.plus(colliderObjectPosition);
             points.add(globalVertex.dot(ballAxis));
@@ -95,27 +95,27 @@ public class PolygonColliderShape implements ColliderShape
             return new HitInfo(false, null);
         }
 
-        for (int i = 0; i < rotatedVerts.size(); i++)
+        for (int i = 0; i < rotatedVertices.size(); i++)
         {
             Vector2 currentAxis;
 
-            if (i == rotatedVerts.size() - 1)
+            if (i == rotatedVertices.size() - 1)
             {
-                Vector2 vec = rotatedVerts.get(0).minus(rotatedVerts.get(i));
+                Vector2 vec = rotatedVertices.get(0).minus(rotatedVertices.get(i));
                 currentAxis = vec.normal().normalized();
             }
             else
             {
-                Vector2 vec = rotatedVerts.get(i + 1).minus(rotatedVerts.get(i));
+                Vector2 vec = rotatedVertices.get(i + 1).minus(rotatedVertices.get(i));
                 currentAxis = vec.normal().normalized();
             }
-            Debug.addDrawVector(rotatedVerts.get(i), currentAxis, Color.YELLOW);
+            Debug.addDrawVector(rotatedVertices.get(i), currentAxis, Color.YELLOW);
             List<Double> newPoints = new ArrayList<>();
 
-            for (Vector2 vert : rotatedVerts)
+            for (Vector2 vertices : rotatedVertices)
             {
-                Vector2 globalVert = vert.plus(colliderObjectPosition);
-                newPoints.add(globalVert.dot(currentAxis));
+                Vector2 globalVertices = vertices.plus(colliderObjectPosition);
+                newPoints.add(globalVertices.dot(currentAxis));
             }
             newPoints.sort(Comparator.naturalOrder());
 

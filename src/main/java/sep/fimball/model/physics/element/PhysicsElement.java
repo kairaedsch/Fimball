@@ -6,7 +6,7 @@ import sep.fimball.model.physics.collider.Collider;
 import java.util.List;
 
 /**
- * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden.
+ * Repräsentiert ein GameElement in der Berechnung der Physik. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden.
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public class PhysicsElement<GameElementT>

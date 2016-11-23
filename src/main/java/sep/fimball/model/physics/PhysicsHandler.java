@@ -24,7 +24,7 @@ import java.util.TimerTask;
 public class PhysicsHandler<GameElementT>
 {
     /**
-     * Die Verzögerung des Startes des Physic Timers in Millisekunden.
+     * Die Verzögerung des Startens des Physic Timers in Millisekunden.
      */
     public final static int TIMER_DELAY = 0;
 
@@ -34,7 +34,7 @@ public class PhysicsHandler<GameElementT>
     public final static int TICK_RATE = 1000 / 120;
 
     /**
-     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit einberechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
+     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit eingerechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
      */
     private final double GRAVITY = 1.19554 * 20;
 
@@ -51,7 +51,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Hier werden alle Tastendrücke die vom InputManager an den PhysikHandler mithilfe des Observer Pattern gesendet
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
-     * da das Observer Pattern nicht zur Threadübergreifenden Kommunikation gedacht ist.
+     * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
      */
     private List<KeyObserverEventArgs> bufferedKeyEvents;
 
@@ -132,7 +132,7 @@ public class PhysicsHandler<GameElementT>
     }
 
     /**
-     * Erstellt einen neuen TimerTask, welcher die Physikberechnungen ausführt.
+     * Erstellt einen neuen TimerTask, welcher die Berechnung der Physik ausführt.
      *
      * @return Den TimerTask.
      */

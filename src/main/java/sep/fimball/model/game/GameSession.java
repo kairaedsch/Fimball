@@ -135,7 +135,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private ObjectProperty<GameElement> gameBall;
 
     /**
-     * Die Liste der von der Physik-Loop übertragenen Kollisionsevent-Argumente.
+     * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
      */
     private LinkedList<List<CollisionEventArgs<GameElement>>> collisionEventArgsesList;
 
@@ -317,7 +317,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Startet die Physikberechnung.
+     * Startet die Berechnung der Physik.
      */
     public void startPhysics()
     {
@@ -333,7 +333,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Stoppt die Physikberechnung.
+     * Stoppt die Berechnung der Physik.
      */
     public void stopPhysics()
     {
@@ -341,7 +341,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Pausiert das Spiel, in dem die Physikberechnung sowie die Spielschleife gestoppt wird.
+     * Pausiert das Spiel, in dem die Berechnung der Physik sowie die Spielschleife gestoppt wird.
      */
     public void pauseAll()
     {

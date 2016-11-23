@@ -104,10 +104,10 @@ public class Vector2
     }
 
     /**
-     * Dreht den Vektor gegen den Uhrzeigersinn um den durch {@code pivot} gegebenen Pivotpunkt im angegeben Winkel.
+     * Dreht den Vektor gegen den Uhrzeigersinn um den durch {@code pivot} gegebenen Pivot-Punkt im angegeben Winkel.
      *
      * @param radianAngle Der Winkel als Radiant.
-     * @param pivot       Der Vektor zwischen Nullpunkt und dem Pivotpunkt.
+     * @param pivot       Der Vektor zwischen Nullpunkt und dem Pivot-Punkt.
      * @return Der geänderte Vektor.
      */
     public Vector2 rotate(double radianAngle, Vector2 pivot)
@@ -181,6 +181,7 @@ public class Vector2
      * @param t      Die Gewichtung des zweiten Vektors.
      * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
      */
+    //TODO umbenennen
     public Vector2 lerp(Vector2 vecTwo, double t)
     {
         double xLerped = (1 - t) * x + (t * vecTwo.getX());

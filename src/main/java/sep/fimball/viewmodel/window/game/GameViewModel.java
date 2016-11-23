@@ -217,7 +217,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Gibt zurück, ob die Partie aus dem Editor gestartet wurde.
-     * @return {@code true} falls die Parite aus dem Editor gestartet wurde, {@code false} sonst.
+     * @return {@code true} falls die Partie aus dem Editor gestartet wurde, {@code false} sonst.
      */
     public boolean isStartedFromEditor()
     {
