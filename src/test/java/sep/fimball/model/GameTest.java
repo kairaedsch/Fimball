@@ -62,7 +62,7 @@ public class GameTest
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
-        //Starten des Spiels
+        // Starten des Spiels
         initializeGameSession();
 
         // Wegschießen der Kugel durch den Plunger

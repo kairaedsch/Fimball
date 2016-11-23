@@ -24,7 +24,9 @@ import static org.junit.Assert.assertEquals;
 public class ReserveBallsAndPlayerChangeTest
 {
     private static String[] players = new String[]{"tester", "test"};
+    // Wie lange wird der Plunger gespannt
     private static final long KEY_HOLDING_TIME = 200;
+    // Nach wie vielen Millisekunden wird abgebrochen
     private static final long MAX_TEST_TIME = 120000;
     private static Object monitor = new Object();
 
@@ -33,27 +35,42 @@ public class ReserveBallsAndPlayerChangeTest
     @Test(timeout = MAX_TEST_TIME)
     public void testReserveBalls() throws InterruptedException
     {
+        // Starten des Spiels
         initGameSession();
+        // Wegschießen der Kugel durch den Plunger
         usePlunger();
+        // Warten, bis der Ball verloren gegangen ist und zum zweiten Spieler gewechselt wurde
         synchronized (monitor)
         {
             monitor.wait(MAX_TEST_TIME);
         }
+
+        // Hat der zweite Spieler noch alle Bälle?
         assertEquals(3, session.getCurrentPlayer().ballsProperty().get());
+        // Ist der zweite Spieler am Zug?
         assertEquals("test", session.getCurrentPlayer().getName());
+
         usePlunger();
+        // Warten, bis der Ball verloren gegangen ist und zum ersten Spieler zurück gewechselt wurde
         synchronized (monitor)
         {
             monitor.wait(MAX_TEST_TIME);
         }
+
+        // Hat der erste Spieler einen Ball verloren?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
+        // Ist der erste Spieler am Zug?
         assertEquals("tester", session.getCurrentPlayer().getName());
+
         usePlunger();
+        // Warten, bis der Ball verloren gegangen ist und zum zweiten Spieler gewechselt wurde
         synchronized (monitor)
         {
             monitor.wait(MAX_TEST_TIME);
         }
+        // Hat auch der zweite Spieler einen Ball verloren?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
+        // Ist der zweite Spieler am Zug?
         assertEquals("test", session.getCurrentPlayer().getName());
     }
 
