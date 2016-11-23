@@ -8,6 +8,7 @@ import sep.fimball.model.physics.collider.WorldLayer;
 
 /**
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
+ * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public class BallPhysicsElement<GameElementT>
 {
@@ -42,6 +43,9 @@ public class BallPhysicsElement<GameElementT>
      * @param gameElement Das GameElement, dessen Eigenschaften kopiert werden.
      * @param collider    Die Form des Colliders, die der Ball haben soll.
      * @param layer       Die Ebene, auf der sich der Ball befinden soll.
+     * @param position Die Position, auf der sich der Ball befinden soll.
+     * @param rotation Die Rotation, um die der Ball gedreht sein soll TODO
+     * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public BallPhysicsElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
@@ -63,16 +67,28 @@ public class BallPhysicsElement<GameElementT>
         return subElement;
     }
 
+    /**
+     * Gibt die Position des Balls zurück.
+     * @return Die Psition des Balls.
+     */
     public Vector2 getPosition()
     {
         return subElement.getPosition();
     }
 
+    /**
+     * Setzt die Position des Balls.
+     * @param position Die neue Position des Balls.
+     */
     public void setPosition(Vector2 position)
     {
         subElement.setPosition(position);
     }
 
+    /**
+     * Setzt die Drehung des Balls.
+     * @param rotation Die neue Drehung des Balls.
+     */
     public void setRotation(double rotation)
     {
         subElement.setRotation(rotation);

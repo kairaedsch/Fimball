@@ -4,7 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
- * Created by alexcekay on 22.11.16.
+ * TODO
  */
 public class EmptyCollision implements CollisionType
 {

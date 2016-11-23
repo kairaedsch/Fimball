@@ -7,7 +7,8 @@ import sep.fimball.model.physics.collider.Collider;
 import java.util.List;
 
 /**
- * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden
+ * Repräsentiert ein GameElement in der Physikberechnung. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden.
+ * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public class PhysicsElement<GameElementT>
 {
@@ -26,14 +27,23 @@ public class PhysicsElement<GameElementT>
      */
     private List<Collider> colliders;
 
+    /**
+     * Das korrespondierende GameElement.
+     */
     private GameElementT gameElement;
 
+    /**
+     * Das korrespondierende BasePhysicsElement.
+     */
     private BasePhysicsElement basePhysicsElement;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
      *
      * @param gameElement Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
+     * @param position Die Position des PhysicsElements.
+     * @param rotation Die Rotation des PhysicsElement.
+     * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
@@ -104,6 +114,10 @@ public class PhysicsElement<GameElementT>
         return colliders;
     }
 
+    /**
+     * Gibt das korrespondierende BasePhysicsElement zurück.
+     * @return Das korrespondierende BasePhysicsElement
+     */
     public BasePhysicsElement getBasePhysicsElement()
     {
         return basePhysicsElement;
