@@ -24,17 +24,22 @@ import static org.junit.Assert.assertTrue;
 
 public class GameTest
 {
+    // Nach wie vielen Millisekunden wird abgebrochen
+    private static final long MAX_TEST_DURATION = 20000;
+    // Wie lange wird der Plunger gespannt
+    private static final long HOLD_KEY_DURATION = 1000;
 
-    private static final long MAX_TEST_DURATION = 20000;   // Nach wie vielen Millisekunden wird abgebrochen
-    private static final long HOLD_KEY_DURATION = 1000; // Wie lange wird der Plunger gespannt
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
     private static final String BUMPER_ID = "bumper_blue";
     private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
 
-    private Stack<GameElement> collidedGameElements = new Stack<>(); // Speichert Kollisionen, die während dem Test passieren
-    private TestGameSession session; // Spiel-Session, die zum Test erstellt wird
-    private PinballMachine pinballMachine; // Automat, der getestet wird
+    // Speichert Kollisionen, die während dem Test passieren
+    private Stack<GameElement> collidedGameElements = new Stack<>();
+    // Spiel-Session, die zum Test erstellt wird
+    private TestGameSession session;
+    // Automat, der getestet wird
+    private PinballMachine pinballMachine;
 
     @Test(timeout = MAX_TEST_DURATION)
     public synchronized void gameCollisionTest() throws InterruptedException
@@ -77,8 +82,6 @@ public class GameTest
     {
         session.stopPhysics();
         session.stopGameLoop();
-        //pinballMachine.deleteFromDisk();
-        pinballMachine.saveToDisk();
     }
 
     public void addCollidedGameElement(GameElement gameElement)
@@ -95,15 +98,19 @@ public class GameTest
     {
         session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});
 
-        Handler collisionTrigger = new Handler();
-        collisionTrigger.setElementHandler(new CollisionHandler(this));
-        Handler ballLostTrigger = new Handler();
-        ballLostTrigger.setGameHandler(new BallLostHandler(this));
+        // Erstellt Handler, der Kollisionen aufzeichnet
+        Handler collisionHandler = new Handler();
+        collisionHandler.setElementHandler(new CollisionHandler(this));
 
-        List<Handler> triggerList = HandlerFactory.generateAllHandlers(session);
-        triggerList.add(collisionTrigger);
-        triggerList.add(ballLostTrigger);
-        session.setTriggers(triggerList);
+        // Erstellt Handler, der bei Ballverlust this.notify() aufruft
+        Handler ballLostHandler = new Handler();
+        ballLostHandler.setGameHandler(new BallLostHandler(this));
+
+        // Registriert Handler
+        List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
+        handlerList.add(collisionHandler);
+        handlerList.add(ballLostHandler);
+        session.setTriggers(handlerList);
 
         session.startAll();
     }
