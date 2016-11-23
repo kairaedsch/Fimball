@@ -100,7 +100,7 @@ public class GameTest
     }
 
     /**
-     * Stoppt die Ausführung des Physik- und des Regelwerkthreads.
+     * Stoppt die Ausführung des Physik- und des Regelwerk-Threads.
      */
     @After
     public void cleanup()

@@ -193,7 +193,7 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zum Speicherort des Vorschaubilds eines gewissen Flipperautomaten zurück.
+     * Gibt den Pfad zum Speicherort des Vorschaubildes eines gewissen Flipperautomaten zurück.
      *
      * @param pinballMachineId Id des Flipperautomaten.
      * @return Pfad zum Vorschaubild des Flipperautomaten.

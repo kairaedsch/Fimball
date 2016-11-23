@@ -59,7 +59,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
     {
         this.playerNameViewModel = playerNameViewModel;
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntrysProperty(), DialogType.PLAYER_NAME_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntriesProperty(), DialogType.PLAYER_NAME_ENTRY);
     }
 
     /**

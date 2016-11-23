@@ -38,7 +38,7 @@ public class GameViewModel extends WindowViewModel
     private StringProperty playerName;
 
     /**
-     * Die Anzahl der Reservebälle des aktiven Spielers.
+     * Die Anzahl der Reservekugeln des aktiven Spielers.
      */
     private IntegerProperty playerReserveBalls;
 
@@ -48,7 +48,7 @@ public class GameViewModel extends WindowViewModel
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die aktuelle Zoomstärke der Kamera, die ihren Wert immer an die Kamera Zoomstärke in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private DoubleProperty cameraZoom;
 
@@ -124,9 +124,9 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt der View die Anzahl der Reservebälle des aktiven Spielers zur Verfügung.
+     * Stellt der View die Anzahl der Reservekugeln des aktiven Spielers zur Verfügung.
      *
-     * @return Die Anzahl der Reservebälle des aktiven Spielers.
+     * @return Die Anzahl der Reservekugeln des aktiven Spielers.
      */
     public ReadOnlyIntegerProperty playerReserveBallsProperty()
     {

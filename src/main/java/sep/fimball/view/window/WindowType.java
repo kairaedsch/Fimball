@@ -8,7 +8,7 @@ import sep.fimball.view.ViewType;
 public enum WindowType implements ViewType
 {
     /**
-     * Das Hauptmenüfenster.
+     * Das Hauptmenü-Fenster.
      */
     MAIN_MENU_WINDOW("mainmenu/mainMenuWindow.fxml"),
 

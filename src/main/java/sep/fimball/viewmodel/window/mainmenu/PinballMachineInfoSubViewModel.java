@@ -31,7 +31,7 @@ public class PinballMachineInfoSubViewModel
     private StringProperty imagePath;
 
     /**
-     * Die Highscoreliste des Flipperautomaten.
+     * Die Highscore-Liste des Flipperautomaten.
      */
     private ListProperty<Highscore> highscoreList;
 
@@ -103,7 +103,7 @@ public class PinballMachineInfoSubViewModel
     }
 
     /**
-     * Stellt der View die Highscoreliste des Flipperautomaten zur Verfügung.
+     * Stellt der View die Highscore-Liste des Flipperautomaten zur Verfügung.
      *
      * @return Eine Liste der Highscores des Flipperautomaten.
      */

@@ -39,7 +39,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die aktuelle Zoomstärke der Kamera, die ihren Wert immer an die Kamera Zoomstärke in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private DoubleProperty cameraZoom;
 

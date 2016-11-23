@@ -23,7 +23,7 @@ public class PlayerNameViewModel extends DialogViewModel
     /**
      * Liste der möglichen Spieler für die nächste Partie.
      */
-    private ListProperty<PlayerNameEntrySubViewModel> playerNameEntrys;
+    private ListProperty<PlayerNameEntrySubViewModel> playerNameEntries;
 
     /**
      * Erstellt ein neues PlayerNameViewModel.
@@ -35,8 +35,8 @@ public class PlayerNameViewModel extends DialogViewModel
         super(DialogType.PLAYER_NAMES);
         this.pinballMachine = pinballMachine;
 
-        playerNameEntrys = new SimpleListProperty<>(FXCollections.observableArrayList());
-        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player 1"));
+        playerNameEntries = new SimpleListProperty<>(FXCollections.observableArrayList());
+        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, "Player 1"));
     }
 
     /**
@@ -46,7 +46,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     void removePlayerNameEntry(PlayerNameEntrySubViewModel playerNameEntrySubViewModel)
     {
-        playerNameEntrys.remove(playerNameEntrySubViewModel);
+        playerNameEntries.remove(playerNameEntrySubViewModel);
     }
 
     /**
@@ -54,7 +54,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void addPlayer()
     {
-        playerNameEntrys.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntrys.size() + 1)));
+        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntries.size() + 1)));
     }
 
     /**
@@ -62,10 +62,10 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void startPinballMachine()
     {
-        String[] names = new String[playerNameEntrys.size()];
-        for (int i = 0; i < playerNameEntrys.size(); i++)
+        String[] names = new String[playerNameEntries.size()];
+        for (int i = 0; i < playerNameEntries.size(); i++)
         {
-            names[i] = playerNameEntrys.get(i).playerNameProperty().get();
+            names[i] = playerNameEntries.get(i).playerNameProperty().get();
         }
 
         sceneManager.setWindow(new GameViewModel(pinballMachine, names, false));
@@ -84,9 +84,9 @@ public class PlayerNameViewModel extends DialogViewModel
      *
      * @return Eine Liste der möglichen Spieler.
      */
-    public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntrysProperty()
+    public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntriesProperty()
     {
-        return playerNameEntrys;
+        return playerNameEntries;
     }
 
 }

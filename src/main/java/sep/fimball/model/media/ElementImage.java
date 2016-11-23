@@ -107,7 +107,7 @@ public class ElementImage
     }
 
     /**
-     * Gibt zurück, welcher Anzahl von {@code rotationAccuracy} {@code rotation} entspicht.
+     * Gibt zurück, welcher Anzahl von {@code rotationAccuracy} {@code rotation} entspricht.
      *
      * @param rotation Der Wert, der mit der {@code rotationAccuracy} verglichen werden soll.
      * @return Die Anzahl von {@code rotationAccuracy}, die {@code rotation} entspricht.

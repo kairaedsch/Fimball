@@ -15,9 +15,9 @@ public interface HandlerPlayer
     ReadOnlyIntegerProperty pointsProperty();
 
     /**
-     * Gibt die Anzahl der Reservebälle des Spielers zurück.
+     * Gibt die Anzahl der Reservekugeln des Spielers zurück.
      *
-     * @return Die Anzahl der Reservebälle des Spielers.
+     * @return Die Anzahl der Reservekugeln des Spielers.
      */
     ReadOnlyIntegerProperty ballsProperty();
 
@@ -29,7 +29,7 @@ public interface HandlerPlayer
     void addPoints(int pointReward);
 
     /**
-     * Reduziert die Reservebälle des Spielers um eins.
+     * Reduziert die Reservekugeln des Spielers um eins.
      *
      * @return Gibt zurück ob der Spieler vor dem Entfernen einer Kugel noch mindestens eine Reservekugel hatte
      */

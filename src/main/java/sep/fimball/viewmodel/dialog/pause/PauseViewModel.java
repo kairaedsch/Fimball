@@ -19,7 +19,7 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 public class PauseViewModel extends DialogViewModel
 {
     /**
-     * Eine Highscoreliste, die alle Highscores der aktuellen Partie enthält.
+     * Eine Highscore-Liste, die alle Highscores der aktuellen Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
 

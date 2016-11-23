@@ -17,12 +17,12 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 public class GameOverViewModel extends DialogViewModel
 {
     /**
-     * Die Highscoreliste des zuletzt gespielten Flipperautomaten.
+     * Die Highscore-Liste des zuletzt gespielten Flipperautomaten.
      */
     private ListProperty<Highscore> machineHighscores;
 
     /**
-     * Eine Highscoreliste, die alle Highscores der zuletzt gespielten Partie enthält.
+     * Eine Highscore-Liste, die alle Highscores der zuletzt gespielten Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
 
@@ -72,7 +72,7 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt die Highscoreliste des zuletzt gespielten Flipperautomaten für die View zur Verfügung.
+     * Stellt die Highscore-Liste des zuletzt gespielten Flipperautomaten für die View zur Verfügung.
      *
      * @return Eine Liste von Highscores der zuletzt gespielten Flipperautomaten.
      */
@@ -82,7 +82,7 @@ public class GameOverViewModel extends DialogViewModel
     }
 
     /**
-     * Stellt der View eine Highscoreliste, die alle Highscores der zuletzt gespielten Partie enthält, zur Verfügung.
+     * Stellt der View eine Highscore-Liste, die alle Highscores der zuletzt gespielten Partie enthält, zur Verfügung.
      *
      * @return Eine Liste von Highscores der zuletzt gespielten Partie.
      */

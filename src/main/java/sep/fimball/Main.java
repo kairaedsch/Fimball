@@ -24,7 +24,7 @@ public class Main extends Application
     }
 
     /**
-     * Startet das Userinterface der Applikation und damit die gesamte Anwendung.
+     * Startet das User-Interface der Applikation und damit die gesamte Anwendung.
      *
      * @param primaryStage Die von JavaFX erstellte Stage, auf der gearbeitet wird
      * @throws Exception Falls Probleme beim Starten von JavaFX auftreten

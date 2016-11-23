@@ -1,6 +1,5 @@
 package sep.fimball.viewmodel.dialog.playername;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 
 /**
@@ -35,7 +34,7 @@ public class PlayerNameEntrySubViewModel
 
         this.playerName = new SimpleStringProperty(name);
         this.isDeleteAble = new SimpleBooleanProperty();
-        isDeleteAble.bind(playerNameViewModel.playerNameEntrysProperty().sizeProperty().greaterThan(1));
+        isDeleteAble.bind(playerNameViewModel.playerNameEntriesProperty().sizeProperty().greaterThan(1));
     }
 
     /**
