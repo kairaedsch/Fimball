@@ -246,7 +246,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Fügt die gegebenen Handler zu den Handler, die in dieser Game Session verwendet werden, hinzu.
      *
-     * @param handlers Die Handler, die gesetzt werden sollen.
+     * @param handlers Die Handler, die hinzugefügt werden sollen.
      */
     public void addHandlers(List<Handler> handlers)
     {

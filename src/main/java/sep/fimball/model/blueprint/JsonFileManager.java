@@ -15,7 +15,7 @@ import java.util.Optional;
 public class JsonFileManager
 {
     /**
-     * Lädt eine Instanz der Klasse {@code T} aus der im {@code path} angebenen JSON-Datei.
+     * Lädt eine Instanz der Klasse {@code T} aus der im {@code path} angegebenen JSON-Datei.
      *
      * @param path   Der Pfad zur JSON-Datei.
      * @param aClass Der Klassentyp der in der JSON-Datei gespeicherten Klasse.
