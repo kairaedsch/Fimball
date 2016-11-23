@@ -1,7 +1,6 @@
 package sep.fimball.model.blueprint;
 
 import javafx.beans.property.ReadOnlyListProperty;
-import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -15,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 /**
  *
  */
-@Ignore
 public class PinballMachineSaveTest
 {
     private static final int MAX_ELEMENT_SIZE = 20;

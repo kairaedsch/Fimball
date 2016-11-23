@@ -38,7 +38,7 @@ public class GameTest
     @Test(timeout = MAX_TEST_DURATION)
     public synchronized void gameCollisionTest()
     {
-        //Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
+        // Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
@@ -53,7 +53,6 @@ public class GameTest
 
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
-
 
         //Starten des Spiels
         initializeGameSession();
