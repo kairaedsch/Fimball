@@ -4,22 +4,18 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
+import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zur Verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach Spielende an.
  */
 public class GameOverViewModel extends DialogViewModel
 {
-    /**
-     * Der zuletzt gespielte Flipperautomat.
-     */
-    private PinballMachine pinballMachine;
-
     /**
      * Die Highscoreliste des zuletzt gespielten Flipperautomaten.
      */
@@ -31,19 +27,25 @@ public class GameOverViewModel extends DialogViewModel
     private ListProperty<Highscore> playerHighscores;
 
     /**
+     * Das zugehörige GameViewModel.
+     */
+    private GameViewModel gameViewModel;
+
+    /**
      * Erstellt ein neues GameOverViewModel.
      *
-     * @param pinballMachine Der Flipperautomat, der zu dem GameOverViewModel gehört.
+     * @param gameViewModel Das zugehörige GameViewModel.
      */
-    public GameOverViewModel(PinballMachine pinballMachine)
+    public GameOverViewModel(GameViewModel gameViewModel)
     {
         super(DialogType.GAME_OVER);
-        this.pinballMachine = pinballMachine;
+        this.gameViewModel = gameViewModel;
 
         machineHighscores = new SimpleListProperty<>();
         playerHighscores = new SimpleListProperty<>();
 
-        machineHighscores.bind(pinballMachine.highscoreListProperty());
+        machineHighscores.bind(gameViewModel.getPinballMachine().highscoreListProperty());
+        playerHighscores.set(gameViewModel.getScores());
     }
 
     /**
@@ -52,15 +54,21 @@ public class GameOverViewModel extends DialogViewModel
     public void restartGame()
     {
         sceneManager.setWindow(new MainMenuViewModel());
-        sceneManager.setDialog(new PlayerNameViewModel(pinballMachine));
+        sceneManager.setDialog(new PlayerNameViewModel(gameViewModel.getPinballMachine()));
     }
 
     /**
      * Führt den Benutzer zurück ins Hauptmenü.
      */
-    public void exitDialogToMainMenu()
+    public void exitDialog()
     {
-        sceneManager.setWindow(new MainMenuViewModel());
+        if (gameViewModel.isStartedFromEditor())
+        {
+            sceneManager.setWindow(new PinballMachineEditorViewModel(gameViewModel.getPinballMachine()));
+        } else
+        {
+            sceneManager.setWindow(new MainMenuViewModel());
+        }
     }
 
     /**

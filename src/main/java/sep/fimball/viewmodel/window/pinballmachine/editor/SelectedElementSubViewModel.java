@@ -72,6 +72,7 @@ public class SelectedElementSubViewModel
     public void setPlacedElement(Optional<PlacedElement> placedElement)
     {
         this.placedElement = placedElement;
+        isSomethingSelected = new SimpleBooleanProperty();
 
         if (placedElement.isPresent())
         {
@@ -103,15 +104,6 @@ public class SelectedElementSubViewModel
     {
         if (placedElement.isPresent())
             placedElement.get().rotateClockwise();
-    }
-
-    /**
-     * Erteilt dem Model den Befehl, das Flipperautomat-Element linksherum zu drehen.
-     */
-    public void rotateCounterclockwise()
-    {
-        if (placedElement.isPresent())
-            placedElement.get().rotateCounterclockwise();
     }
 
     /**

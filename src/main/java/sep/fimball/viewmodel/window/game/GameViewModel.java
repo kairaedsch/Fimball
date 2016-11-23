@@ -214,4 +214,22 @@ public class GameViewModel extends WindowViewModel
         }
         return scores;
     }
+
+    /**
+     * Gibt zurück, ob die Partie aus dem Editor gestartet wurde.
+     * @return {@code true} falls die Parite aus dem Editor gestartet wurde, {@code false} sonst.
+     */
+    public boolean isStartedFromEditor()
+    {
+        return startedFromEditor;
+    }
+
+    /**
+     * Gibt den gespielten Flipperautomaten zurück,
+     * @return Der gespielte Flipperautomat.
+     */
+    public PinballMachine getPinballMachine()
+    {
+        return pinballMachine;
+    }
 }
