@@ -1,6 +1,7 @@
 package sep.fimball.model.input;
 
 import javafx.scene.input.KeyEvent;
+import sep.fimball.model.blueprint.settings.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class InputManager
     private static InputManager singletonInstance;
 
     /**
-     * Gibt den bereits existierenden Inputmanager oder einen neu angelegten zurück, falls noch keiner existiert
+     * Gibt den bereits existierenden Inputmanager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
      * @return Eine Instanz von Inputmanager.
      */

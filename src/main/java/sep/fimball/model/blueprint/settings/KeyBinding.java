@@ -1,4 +1,4 @@
-package sep.fimball.model.input;
+package sep.fimball.model.blueprint.settings;
 
 /**
  * Enthält eine Liste von Funktionen, die von einem Tastendruck des Spielers ausgelöst werden können. Welche Taste diese auslöst kann in den Settings festgelegt werden.

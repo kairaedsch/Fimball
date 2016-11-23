@@ -1,7 +1,6 @@
 package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BasePhysicsElement;
 import sep.fimball.model.physics.collider.Collider;
 
 import java.util.List;

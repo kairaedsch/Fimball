@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.model.physics.element.BasePhysicsElement;
+
 /**
  * Diese Klasse enthält alle Informationen, die gemeinsam ein Spielfeldelement bestimmen. Sie stellt also einen Bauplan für die eigentlichen Spielelemente dar.
  */
@@ -41,7 +43,7 @@ public class BaseElement
         this.id = id;
         type = baseElementJson.elementType;
 
-        physics = new BasePhysicsElement(baseElementJson.physicElement);
+        physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);
         media = new BaseMediaElement(baseElementJson.mediaElement, id);
         rule = new BaseRuleElement(baseElementJson.ruleElement);
     }

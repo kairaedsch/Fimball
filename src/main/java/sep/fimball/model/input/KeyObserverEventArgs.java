@@ -1,5 +1,7 @@
 package sep.fimball.model.input;
 
+import sep.fimball.model.blueprint.settings.KeyBinding;
+
 /**
  * Die Argumente, die beim Auslösen eines Tastendruck-Events im InputManager übergeben werden.
  */

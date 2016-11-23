@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.blueprint.settings.KeyBinding;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.game.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.

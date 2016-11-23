@@ -10,7 +10,7 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
 import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.blueprint.settings.KeyBinding;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
