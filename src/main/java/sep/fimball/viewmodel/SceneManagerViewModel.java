@@ -25,11 +25,6 @@ public class SceneManagerViewModel
     private ObjectProperty<DialogViewModel> dialogViewModel;
 
     /**
-     * Der Inputmanager, der Inputevents von der View entgegen nimmt.
-     */
-    private InputManagerViewModel inputManager;
-
-    /**
      * Erstellt ein neues SceneManagerViewModel.
      */
     public SceneManagerViewModel()
@@ -38,7 +33,6 @@ public class SceneManagerViewModel
         dialogViewModel = new SimpleObjectProperty<>();
         setWindow(new MainMenuViewModel());
         setDialog(new EmptyViewModel());
-        inputManager = new InputManagerViewModel();
     }
 
     /**
