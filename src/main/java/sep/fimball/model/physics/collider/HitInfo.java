@@ -40,7 +40,7 @@ public class HitInfo
     }
 
     /**
-     * Gibt dee kürzesten Weg um eine Überschneidung zwischen Ball und Fläche aufzulösen. Falls keine Überschneidung vorhanden ist, wird {@code null} zurückgegeben.
+     * Gibt den kürzesten Weg um eine Überschneidung zwischen Ball und Fläche aufzulösen. Falls keine Überschneidung vorhanden ist, wird {@code null} zurückgegeben.
      * @return Den kürzesten Weg oder {@code null}.
      */
     public Vector2 getShortestIntersect()
