@@ -23,41 +23,10 @@
                                 <Insets top="20.0"/>
                             </VBox.margin>
                         </Label>
-                        <GridPane fx:id="playerScores" hgap="20.0">
+                        <VBox fx:id="playerScores" >
                             <children>
-                                <Label text="341235" GridPane.columnIndex="1">
-                                    <GridPane.margin>
-                                        <Insets/>
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="Kai" GridPane.halignment="RIGHT">
-                                    <GridPane.margin>
-                                        <Insets/>
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="Till" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets/>
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="Alex" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                                    <GridPane.margin>
-                                        <Insets/>
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="341122" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                <Label text="331234" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                             </children>
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                        </GridPane>
+                        </VBox>
                     </children>
                 </VBox>
                 <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"

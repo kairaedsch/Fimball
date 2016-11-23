@@ -2,7 +2,7 @@ package sep.fimball.view.dialog.pause;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 
@@ -12,10 +12,10 @@ import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 public class PauseView extends DialogView<PauseViewModel>
 {
     /**
-     * Das Pane zur Darstellung der Highscore-Einträge der einzelnen Spieler dieser Partie.
+     * Der Behälter zur Darstellung der Highscore-Einträge der einzelnen Spieler dieser Partie.
      */
     @FXML
-    private GridPane playerScores;
+    private VBox playerScores;
 
     /**
      * Das zur PauseView gehörende PauseViewModel.

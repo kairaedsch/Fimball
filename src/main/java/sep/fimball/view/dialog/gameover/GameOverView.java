@@ -38,7 +38,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     }
 
     /**
-     * Benachrichtigt das {@code gameOverViewModel}, dass der Nutzer das GameOverView schließen möchte.
+     * Benachrichtigt das {@code gameOverViewModel}, dass der Nutzer den GameOver-Dialog schließen möchte.
      */
     @FXML
     private void okClicked()

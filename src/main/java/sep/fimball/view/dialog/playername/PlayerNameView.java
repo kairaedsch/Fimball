@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class PlayerNameView extends DialogView<PlayerNameViewModel> implements Initializable
 {
     /**
-     * Das Pane zur Einstellung der Spielernamen.
+     * Der Behälter zur Einstellung der Spielernamen.
      */
     @FXML
     private VBox nameEntryList;
