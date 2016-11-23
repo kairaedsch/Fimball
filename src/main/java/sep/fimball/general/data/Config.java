@@ -13,7 +13,7 @@ public class Config
     }
 
     /**
-     * Muss vor Nutzung der anderen Methoden dieser Klasse aufgerufen werden. Kümmert sich um die Unterscheidung der Pfade auf Windows und Linux.
+     * Kümmert sich um die Unterscheidung der Pfade auf Windows und Linux. Wird automatisch aufgerufen
      */
     private static void config()
     {
@@ -33,7 +33,7 @@ public class Config
     }
 
     /**
-     * Der Pfad, an dem sowohl die Automaten als auch die Einstellungen gespeichert werden.
+     * Der Pfad, an dem sowohl die Automaten, die BaseElements als auch die Einstellungen gespeichert werden.
      */
     private static String pathToData;
 
@@ -126,7 +126,7 @@ public class Config
      * Gibt den Pfad des Verzeichnis, an dem sich Infos über ein einzelnes BaseElements befinden, basierend auf der übergebenen ElementID zurück.
      *
      * @param elementTypeId Id des BaseElements
-     * @return Pfad des BaseElements
+     * @return Verzeichnis des BaseElements
      */
     public static String pathToElement(String elementTypeId)
     {
@@ -258,7 +258,7 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zu der Properties-Datei der Sprache an.
+     * Gibt den Pfad zu der Properties-Datei der gegebenen Sprache an.
      *
      * @param languageCode Die Sprache
      * @return Der Pfad zur Datei.

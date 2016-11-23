@@ -64,7 +64,7 @@ public class Vector2
      * Subtrahiert einen anderen Vektor von diesem Vektor.
      *
      * @param otherVec Der zu subtrahierende Vektor.
-     * @return Der geönderte Vektor.
+     * @return Der geänderte Vektor.
      */
     public Vector2 minus(Vector2 otherVec)
     {
@@ -130,7 +130,7 @@ public class Vector2
     }
 
     /**
-     * Gibt den normierten Vektor zurück, ohne die Normierung an diesem Vektor zu übernehmen.
+     * Gibt den normierten Vektor zurück.
      *
      * @return Der normierte Vektor.
      */
@@ -258,6 +258,11 @@ public class Vector2
         return otherVector.getX() == x && otherVector.getY() == y;
     }
 
+    /**
+     * Klont diesen Vektor und gibt den geklonten Vektor zurück.
+     *
+     * @return Der geklonte Vektor.
+     */
     public Vector2 clone()
     {
         return new Vector2(x, y);
