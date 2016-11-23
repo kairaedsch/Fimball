@@ -36,7 +36,7 @@ public class GameTest
     private static final String BALL_SPAWN_ID = "ball";
     private static Object monitor = new Object();
 
-    private Deque<GameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
+    private Deque<HandlerGameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
     private TestGameSession session;
     private PinballMachine pinballMachine;
 
@@ -113,7 +113,7 @@ public class GameTest
      *
      * @param gameElement Das Spielelement, mit dem die Kugel kollidiert ist.
      */
-    private void addCollidedGameElement(GameElement gameElement)
+    private void addCollidedGameElement(HandlerGameElement gameElement)
     {
         collidedGameElements.push(gameElement);
     }
@@ -153,10 +153,9 @@ public class GameTest
          * Gibt das Spielelement, mit dem die Kugel kollidiert ist, in die Deque.
          */
         @Override
-        public void activateElementHandler(GameElement element, int colliderID)
+        public void activateElementHandler(HandlerGameElement element, int colliderID)
         {
-            System.out.println("Kugel kollidiert mit " + element.getPlacedElement().getBaseElement().getId());
-                addCollidedGameElement(element);
+            addCollidedGameElement(element);
         }
     }
 
