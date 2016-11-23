@@ -26,7 +26,7 @@ public class TestGameSession extends GameSession
             @Override
             public void run()
             {
-                gameLoop();
+                gameLoopUpdate();
             }
         };
         timer.scheduleAtFixedRate(task, 0, (long)(GAMELOOP_TICK * 1000.0));

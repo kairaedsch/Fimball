@@ -260,15 +260,15 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoop()));
+        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
     }
 
     /**
-     * Der gameLoop, welcher bis zu 60 mal in der Sekunde ausgeführt wird.
+     * Der gameLoopUpdate, welcher bis zu 60 mal in der Sekunde ausgeführt wird.
      */
-    protected void gameLoop()
+    protected void gameLoopUpdate()
     {
         LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
         LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
