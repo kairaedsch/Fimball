@@ -37,12 +37,13 @@ public class GameTest
     private PinballMachine pinballMachine; // Automat, der getestet wird
 
     @Test(timeout = MAX_TEST_DURATION)
-    public synchronized void gameCollisionTest()
+    public synchronized void gameCollisionTest() throws InterruptedException
     {
         // Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
+        // Plunger, Ball, Wand und Bumper einfügen
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
 
@@ -57,26 +58,15 @@ public class GameTest
 
         //Starten des Spiels
         initializeGameSession();
-        try
-        {
-            wait();
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
 
-        //Wegschießen der Kugel durch den Plunger
+        // Warten, bis der Ball verloren gegangen ist
+        wait();
+
+        // Wegschießen der Kugel durch den Plunger
         usePlunger();
 
-        try
-        {
-            wait();
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        // Warten, bis der Ball verloren gegangen ist
+        wait();
 
         //Aufzeichnungen auswerten
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
@@ -121,21 +111,17 @@ public class GameTest
         this.notify();
     }
 
-    private void usePlunger()
+    private void usePlunger() throws InterruptedException
     {
         KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        try
-        {
-            Thread.sleep(HOLD_KEY_DURATION);
-        }
-        catch (InterruptedException e)
-        {
-        }
+
+        Thread.sleep(HOLD_KEY_DURATION);
+
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
     }
 
-    class CollisionHandler implements ElementHandler
+    private class CollisionHandler implements ElementHandler
     {
         private GameTest gameTest;
 
@@ -152,7 +138,7 @@ public class GameTest
         }
     }
 
-    class BallLostHandler implements GameHandler
+    private class BallLostHandler implements GameHandler
     {
         private GameTest gameTest;
 
@@ -168,5 +154,4 @@ public class GameTest
             gameTest.ballLost();
         }
     }
-
 }
