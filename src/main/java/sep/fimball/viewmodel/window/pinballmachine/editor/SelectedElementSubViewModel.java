@@ -42,7 +42,7 @@ public class SelectedElementSubViewModel
     private DoubleProperty multiplier;
 
     /**
-     * TODO
+     * Gibt an, ob aktuell ein Element auf dem Spielfeld ausgewählt ist.
      */
     private BooleanProperty isSomethingSelected;
 
@@ -81,6 +81,7 @@ public class SelectedElementSubViewModel
             points.bindBidirectional(placedElement.get().pointsProperty());
 
             multiplier.bindBidirectional(placedElement.get().multiplierProperty());
+            isSomethingSelected.set(true);
         }
         else
         {
@@ -91,6 +92,7 @@ public class SelectedElementSubViewModel
 
             name.set("Nothing selected");
             description.set("");
+            isSomethingSelected.set(false);
         }
     }
 
@@ -162,8 +164,8 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * TODO
-     * @return
+     * Gibt an, ob aktuell ein Element auf dem Spielfeld ausgewählt ist.
+     * @return {@code true} falls ein Element ausgewählt ist, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isSomethingSelectedProperty()
     {
