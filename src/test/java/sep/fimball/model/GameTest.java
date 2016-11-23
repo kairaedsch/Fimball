@@ -29,20 +29,21 @@ public class GameTest
     // Wie lange wird der Plunger gespannt
     private static final long HOLD_KEY_DURATION = 1000;
 
-    private static final long MAX_TEST_DURATION = 20000;   // Nach wie vielen Millisekunden wird abgebrochen
-    private static final long HOLD_KEY_DURATION = 1000; // Wie lange wird der Plunger gespannt
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
     private static final String BUMPER_ID = "bumper_blue";
     private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
     private static Object monitor = new Object();
 
-    private Stack<GameElement> collidedGameElements = new Stack<>(); // Speichert Kollisionen, die während dem Test passieren
-    private TestGameSession session; // Spiel-Session, die zum Test erstellt wird
-    private PinballMachine pinballMachine; // Automat, der getestet wird
+    // Speichert Kollisionen, die während dem Test passieren
+    private Stack<GameElement> collidedGameElements = new Stack<>();
+    // Spiel-Session, die zum Test erstellt wird
+    private TestGameSession session;
+    // Automat, der getestet wird
+    private PinballMachine pinballMachine;
 
     @Test(timeout = MAX_TEST_DURATION)
-    public synchronized void gameCollisionTest() throws InterruptedException
+    public void gameCollisionTest() throws InterruptedException
     {
         // Pinballautomat so aufbauen, dass der gegebene Verlauf eintritt
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
@@ -85,8 +86,6 @@ public class GameTest
     {
         session.stopPhysics();
         session.stopGameLoop();
-        //pinballMachine.deleteFromDisk();
-        pinballMachine.saveToDisk();
     }
 
     public void addCollidedGameElement(GameElement gameElement)
@@ -102,7 +101,7 @@ public class GameTest
         }
     }
 
-    private synchronized void initializeGameSession()
+    private void initializeGameSession()
     {
         session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});
 

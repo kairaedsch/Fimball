@@ -1,6 +1,5 @@
 package sep.fimball.model;
 
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.After;
@@ -25,17 +24,16 @@ import static org.junit.Assert.assertEquals;
 public class ReserveBallsAndPlayerChangeTest
 {
     private static String[] players = new String[]{"tester", "test"};
-    private PinballMachine automat;
-    private TestGameSession session;
     private static final long WAITING_TIME = 2000;
     private static final long KEY_HOLDING_TIME = 200;
     private static final long MAX_TEST_TIME = 120000;
     private static Object monitor = new Object();
 
+    private TestGameSession session;
+
     @Test(timeout = MAX_TEST_TIME)
     public void testReserveBalls() throws InterruptedException
     {
-        new JFXPanel();
         initGameSession();
         usePlunger();
         synchronized (monitor)
@@ -72,7 +70,7 @@ public class ReserveBallsAndPlayerChangeTest
 
     private void initGameSession()
     {
-        automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
+        PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
         session = new TestGameSession(automat, players);
         List<Handler> triggers = HandlerFactory.generateAllHandlers(session);
         Handler ballLostChecker = new Handler();
