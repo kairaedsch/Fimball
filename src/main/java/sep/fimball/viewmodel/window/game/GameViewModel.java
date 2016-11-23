@@ -169,7 +169,7 @@ public class GameViewModel extends WindowViewModel
         }
 
         KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        if (binding != null && binding.toString() == "PAUSE")
+        if (binding != null && binding == KeyBinding.PAUSE)
         {
             gameSession.pauseAll();
             if (startedFromEditor)

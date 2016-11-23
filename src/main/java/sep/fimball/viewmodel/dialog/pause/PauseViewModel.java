@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -72,7 +73,7 @@ public class PauseViewModel extends DialogViewModel
         {
             return;
         }
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).toString() == "PAUSE")
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE)
         {
             resumeGame();
         }
