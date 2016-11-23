@@ -49,7 +49,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         GameSession gameSession = new GameSession(machineBlueprint, playerNames);
-        gameSession.setTriggers(HandlerFactory.generateAllHandlers(gameSession));
+        gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         return gameSession;
     }
 
@@ -63,7 +63,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
-        gameSession.setTriggers(HandlerFactory.generateAllHandlers(gameSession));
+        gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.stopPhysics();
         ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.elementsProperty(), element -> new GameElement(element, true));
         return gameSession;
@@ -122,7 +122,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Speichert die in dieser GameSession verwendeten Handler.
      */
-    private List<Handler> triggers;
+    private List<Handler> handlers;
 
     /**
      * Das Observable welches genutzt wird um Observer darüber zu benachrichtigen dass der nächste Tick der Spielschleife
@@ -164,7 +164,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public GameSession(PinballMachine machineBlueprint, String[] playerNames)
     {
         this.machineBlueprint = machineBlueprint;
-        this.triggers = new ArrayList<>();
+        this.handlers = new ArrayList<>();
         physicLocker = new Object();
         collisionEventArgsesList = new LinkedList<>();
         elementEventArgsesList = new LinkedList<>();
@@ -239,13 +239,13 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Setzt die gegebenen Handler als die Handler, die in dieser Game Session verwendet werden.
+     * Fügt die gegebenen Handler zu den Handler, die in dieser Game Session verwendet werden, hinzu.
      *
-     * @param triggers Die Handler, die gesetzt werden sollen.
+     * @param handlers Die Handler, die gesetzt werden sollen.
      */
-    public void setTriggers(List<Handler> triggers)
+    public void addHandlers(List<Handler> handlers)
     {
-        this.triggers = triggers;
+        this.handlers.addAll(handlers);
     }
 
     /**
@@ -286,7 +286,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
             {
-                for (Handler trigger : triggers)
+                for (Handler trigger : handlers)
                 {
                     trigger.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
                 }
@@ -297,7 +297,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (isBallLost)
             {
-                for (Handler trigger : triggers)
+                for (Handler trigger : handlers)
                 {
                     trigger.activateGameHandler(GameEvent.BALL_LOST);
                 }

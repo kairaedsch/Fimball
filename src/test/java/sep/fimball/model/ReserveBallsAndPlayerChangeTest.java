@@ -98,7 +98,7 @@ public class ReserveBallsAndPlayerChangeTest
             }
         });
         triggers.add(ballLostChecker);
-        session.setTriggers(triggers);
+        session.addHandlers(triggers);
     }
 
     private void usePlunger()

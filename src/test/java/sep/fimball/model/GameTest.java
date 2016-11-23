@@ -77,7 +77,7 @@ public class GameTest
         List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
         handlerList.add(collisionHandler);
         handlerList.add(ballLostHandler);
-        session.setTriggers(handlerList);
+        session.addHandlers(handlerList);
 
         session.startAll();
 
