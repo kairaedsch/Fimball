@@ -23,7 +23,7 @@ public class PlayerNameEntrySubViewModel
     private BooleanProperty isDeleteAble;
 
     /**
-     * Erstellt ein neues PlayerNameEntrySubViewModel
+     * Erstellt ein neues PlayerNameEntrySubViewModel.
      *
      * @param playerNameViewModel Das korrespondierende PlayerNameViewModel.
      * @param name                Der Name des Spielers.

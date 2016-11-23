@@ -225,7 +225,7 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Gibt den gespielten Flipperautomaten zurück,
+     * Gibt den gespielten Flipperautomaten zurück.
      * @return Der gespielte Flipperautomat.
      */
     public PinballMachine getPinballMachine()

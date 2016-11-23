@@ -70,9 +70,7 @@ public class PhysicsHandler<GameElementT>
      */
     private double maxElementPosY;
 
-    /**
-     * TODO
-     */
+    //TODO entfernen
     private final boolean debug = false;
 
     /**

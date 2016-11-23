@@ -1,7 +1,7 @@
 package sep.fimball.model.input;
 
 /**
- * Dieses Interface wird von Observern implementiert die über KeyEvents benachrichtigt werden wollen
+ * Dieses Interface wird von Observern implementiert die über KeyEvents benachrichtigt werden wollen.
  */
 public interface KeyObserver
 {

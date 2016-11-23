@@ -1,8 +1,10 @@
 package sep.fimball.model.blueprint.base;
 
-import org.apache.batik.css.engine.value.svg12.CIELabColor;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.collider.*;
+import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.collider.PolygonColliderShape;
 import sep.fimball.model.physics.collision.*;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
@@ -15,6 +17,11 @@ import java.util.List;
  */
 public class BasePhysicsElementFactory
 {
+    /**
+     * Generiert ein BasePhysicsElement aus dem gegebenen PhysicElementJson.
+     * @param physicsElement Die Vorlage, aus der das BasePhysicsElement erstellt wird.
+     * @return Das generierte BasePhysicsElement.
+     */
     static BasePhysicsElement generate(BaseElementJson.PhysicElementJson physicsElement)
     {
         if(physicsElement.pivotPoint == null) throw new NullPointerException("pivotPoint was null");

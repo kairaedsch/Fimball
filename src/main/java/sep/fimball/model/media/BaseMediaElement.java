@@ -43,6 +43,12 @@ public class BaseMediaElement
 
     /**
      * Erstellt ein neues BaseMediaElement.
+     * @param name Der Name des BaseElements im Editor.
+     * @param description Die Beschreibung des BaseElements im Editor.
+     * @param canRotate Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     * @param rotationAccuracy  Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
+     * @param elementImage Das Bild des BaseElements.
+     * @param eventMap Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     public BaseMediaElement(String name, String description, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap)
     {

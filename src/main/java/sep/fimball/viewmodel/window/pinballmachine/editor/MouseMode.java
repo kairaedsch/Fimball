@@ -11,12 +11,12 @@ public enum MouseMode
     DRAGGING,
 
     /**
-     * Die Maus wird zum Platzieren von Spielelementen genutzt
+     * Die Maus wird zum Platzieren von Spielelementen genutzt.
      */
     PLACING,
 
     /**
-     * Die Maus wird zur Auswahl von Spielelementen genutzt
+     * Die Maus wird zur Auswahl von Spielelementen genutzt.
      */
     SELECTING
 }

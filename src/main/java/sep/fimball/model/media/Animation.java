@@ -22,6 +22,9 @@ public class Animation
 
     /**
      * Erstellt eine neue Animation.
+     * @param duration Die Dauer der Anzeige eines einzelnen Bildes.
+     * @param frameCount Die Anzahl der Bilder, aus denen die Animation besteht.
+     * @param name Der Name der Animation.
      */
     public Animation(int duration, int frameCount, String name)
     {

@@ -45,6 +45,7 @@ public enum KeyBinding
      */
     EDITOR_DELETE,
 
+    //TODO remove
     DEBUG_LEFT,
     DEBUG_RIGHT
 }

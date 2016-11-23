@@ -13,6 +13,12 @@ import java.util.Map;
  */
 public class BaseMediaElementFactory
 {
+    /**
+     * Generiert ein BaseMediaElement aus dem gegebenen MediaElementJson.
+     * @param mediaElement Die Vorlage, aus der das BaseMediaElement erstellt wird.
+     * @param baseElementId Die ID des zugehörigen BaseElements.
+     * @return Das generierte BaseMediaElement.
+     */
     static BaseMediaElement generate(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
     {
         String name = mediaElement.general.editorName;

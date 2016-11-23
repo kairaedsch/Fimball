@@ -6,17 +6,19 @@ package sep.fimball.model.media;
 public class BaseMediaElementEvent
 {
     /**
-     * Hält gegebenenfalls die Animation des jeweiligen Bahnelements.
+     * Die Animation des jeweiligen Bahnelements.
      */
     private Animation animation = null;
 
     /**
-     * Hält gegebenenfalls den Soundeffekt des jeweiligen Bahnelements.
+     * Der Soundeffekt des jeweiligen Bahnelements.
      */
     private Sound sound = null;
 
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.
+     * @param animation Die Animation des jeweiligen Bahnelements.
+     * @param soundName Die Animation des jeweiligen Bahnelements.
      */
     public BaseMediaElementEvent(Animation animation, String soundName)
     {

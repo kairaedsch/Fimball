@@ -133,7 +133,7 @@ public class ListPropertyConverter
     public interface ListConverter<ConvertedT, OriginalT>
     {
         /**
-         * Erstellt ein Objekt vom Typ ConvertedT aus einem Objekt vom Typ OriginalT
+         * Erstellt ein Objekt vom Typ ConvertedT aus einem Objekt vom Typ OriginalT.
          *
          * @param original Das Objekt vom Typ OriginalT aus dem ein ConvertedT erstellt wird
          * @return Ein Objekt vom Typ ConvertedT
