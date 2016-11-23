@@ -3,8 +3,6 @@ package sep.fimball.model.handler;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.blueprint.base.BaseElementType;
 
 import java.util.Optional;
 
@@ -26,7 +24,8 @@ public class LightHandler implements GameHandler
     public LightHandler(HandlerWorld world)
     {
         lights = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(lights, world.gameElementsProperty(), original -> original.getPlacedElement().getBaseElement().getType() == BaseElementType.LIGHT);
+        // TODO cycle
+        //ListPropertyConverter.bindAndFilterList(lights, world.gameElementsProperty(), original -> original.getPlacedElement().getBaseElement().getType() == BaseElementType.LIGHT);
 
     }
 
@@ -37,7 +36,7 @@ public class LightHandler implements GameHandler
     {
         for (HandlerGameElement light : lights)
         {
-            light.setCurrentAnimation(Optional.of(light.getPlacedElement().getBaseElement().getMedia().getEventMap().entrySet().iterator().next().getValue().getAnimation()));
+            light.setCurrentAnimation(Optional.of(light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation()));
         }
     }
 

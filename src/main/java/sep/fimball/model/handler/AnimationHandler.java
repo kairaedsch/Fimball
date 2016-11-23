@@ -13,7 +13,7 @@ public class AnimationHandler implements ElementHandler
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
-        Map<Integer, BaseMediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
+        Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
 
         if (eventMap.containsKey(colliderId))
         {

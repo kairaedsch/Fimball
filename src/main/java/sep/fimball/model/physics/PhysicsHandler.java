@@ -1,8 +1,8 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.input.InputManager;
 import sep.fimball.model.blueprint.settings.KeyBinding;
+import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyObserverEventArgs;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.element.BallPhysicsElement;

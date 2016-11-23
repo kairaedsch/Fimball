@@ -14,7 +14,7 @@ public class SoundHandler implements ElementHandler
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderID)
     {
-        Map<Integer, BaseMediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
+        Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
 
         if (eventMap.containsKey(colliderID))
         {

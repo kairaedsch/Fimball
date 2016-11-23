@@ -3,8 +3,10 @@ package sep.fimball.model.game;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.BaseMediaElement;
 
 import java.util.Optional;
 
@@ -133,9 +135,26 @@ public class GameElement implements HandlerGameElement
         this.hitCount.set(hitCount);
     }
 
+    /**
+     * Gibt das zu diesem GameElement gehörende PlacedElement zurück.
+     *
+     * @return Das zu diesem GameElement gehörende PlacedElement.
+     */
     public PlacedElement getPlacedElement()
     {
         return placedElement;
+    }
+
+    @Override
+    public BaseMediaElement getMediaElement()
+    {
+        return placedElement.getBaseElement().getMedia();
+    }
+
+    @Override
+    public BaseRuleElement getRuleElement()
+    {
+        return placedElement.getBaseElement().getRule();
     }
 
     public void setCurrentAnimation(Optional<Animation> currentAnimation)
