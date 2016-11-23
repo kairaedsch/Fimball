@@ -99,7 +99,10 @@ public class PhysicsHandler<GameElementT>
     public void addBall(BallPhysicsElement ball)
     {
         ballPhysicsElement = ball;
-        physicsElements.add(ball.getSubElement());
+        synchronized (physicsElements)
+        {
+            physicsElements.add(ball.getSubElement());
+        }
     }
 
     /**
@@ -167,21 +170,24 @@ public class PhysicsHandler<GameElementT>
                 List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
                 List<ElementEventArgs> elementEventArgses = new ArrayList<>();
 
-                for (PhysicsElement<GameElementT> element : physicsElements)
+                synchronized (physicsElements)
                 {
-                    if (ballPhysicsElement != null && element != ballPhysicsElement.getSubElement())
+                    for (PhysicsElement<GameElementT> element : physicsElements)
                     {
-                        for (Collider collider : element.getColliders())
+                        if (ballPhysicsElement != null && element != ballPhysicsElement.getSubElement())
                         {
-                            boolean hit = collider.checkCollision(ballPhysicsElement, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
-
-                            if (hit)
+                            for (Collider collider : element.getColliders())
                             {
-                                collisionEventArgses.add(new CollisionEventArgs<>(element.getGameElement(), collider.getId()));
+                                boolean hit = collider.checkCollision(ballPhysicsElement, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
+
+                                if (hit)
+                                {
+                                    collisionEventArgses.add(new CollisionEventArgs<>(element.getGameElement(), collider.getId()));
+                                }
                             }
                         }
+                        elementEventArgses.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
                     }
-                    elementEventArgses.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
                 }
 
                 gameSession.addEventArgses(collisionEventArgses, elementEventArgses);

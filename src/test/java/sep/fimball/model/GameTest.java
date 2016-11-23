@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Stack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest
 {
@@ -80,7 +81,7 @@ public class GameTest
         //Aufzeichnungen auswerten
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
-
+        assertTrue(collidedGameElements.empty());
     }
 
     @After
