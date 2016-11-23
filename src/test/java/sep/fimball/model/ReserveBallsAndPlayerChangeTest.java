@@ -24,7 +24,6 @@ import static org.junit.Assert.assertEquals;
 public class ReserveBallsAndPlayerChangeTest
 {
     private static String[] players = new String[]{"tester", "test"};
-    private static final long WAITING_TIME = 2000;
     private static final long KEY_HOLDING_TIME = 200;
     private static final long MAX_TEST_TIME = 120000;
     private static Object monitor = new Object();
@@ -40,7 +39,6 @@ public class ReserveBallsAndPlayerChangeTest
         {
             monitor.wait(MAX_TEST_TIME);
         }
-        waitForRoundChange();
         assertEquals(3, session.getCurrentPlayer().ballsProperty().get());
         assertEquals("test", session.getCurrentPlayer().getName());
         usePlunger();
@@ -48,7 +46,6 @@ public class ReserveBallsAndPlayerChangeTest
         {
             monitor.wait(MAX_TEST_TIME);
         }
-        waitForRoundChange();
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
         assertEquals("tester", session.getCurrentPlayer().getName());
         usePlunger();
@@ -56,7 +53,6 @@ public class ReserveBallsAndPlayerChangeTest
         {
             monitor.wait(MAX_TEST_TIME);
         }
-        waitForRoundChange();
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
         assertEquals("test", session.getCurrentPlayer().getName());
     }
@@ -86,11 +82,6 @@ public class ReserveBallsAndPlayerChangeTest
         });
         triggers.add(ballLostChecker);
         session.setTriggers(triggers);
-    }
-
-    private void waitForRoundChange() throws InterruptedException
-    {
-        Thread.sleep(WAITING_TIME);
     }
 
     private void usePlunger()
