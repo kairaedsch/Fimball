@@ -206,18 +206,24 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 GameElement gameElement = new GameElement(element, false);
                 elements.add(gameElement);
 
+                // TODO Schlimmer als AIDS.
                 PhysicsElement<GameElement> physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                 physicsElements.add(physElem);
 
+                // TODO Schlimmer als AIDS. Collider in GameSession????
                 for (Collider collider : physElem.getColliders())
                 {
+                    // TODO Schlimmer als AIDS. ColliderShape in GameSession????
                     for (ColliderShape shape : collider.getShapes())
                     {
+                        // TODO Schlimmer als AIDS.
                         double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
                         double globalPos = physElem.getPosition().getY() + yPos;
 
+                        // TODO Schlimmer als AIDS.
                         if (globalPos > maxElementPos)
                         {
+                            // TODO Schlimmer als AIDS.
                             maxElementPos = globalPos;
                         }
                     }
@@ -400,11 +406,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         }
     }
 
-    public void setBallLost(boolean status)
+    public void setBallLost(boolean isBallLost)
     {
         synchronized (physicLocker)
         {
-            isBallLost = status;
+            this.isBallLost = isBallLost;
         }
     }
 

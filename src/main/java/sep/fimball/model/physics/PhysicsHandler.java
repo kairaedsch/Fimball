@@ -24,7 +24,7 @@ import java.util.TimerTask;
 public class PhysicsHandler<GameElementT>
 {
     /**
-     * Die Physikschleife beginnt ohne Verzögerung wenn sie gestartet wird
+     * Die Verzögerung des Startes des Physic Timers in Millisekunden.
      */
     public final static int TIMER_DELAY = 0;
 
@@ -66,9 +66,9 @@ public class PhysicsHandler<GameElementT>
     private PhysicGameSession gameSession;
 
     /**
-     * TODO
+     * Die Maximale Y-Position aller PhysicElement.
      */
-    private double maxElementPos;
+    private double maxElementPosY;
 
     /**
      * TODO
@@ -80,13 +80,13 @@ public class PhysicsHandler<GameElementT>
      *
      * @param elements      Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession   Die zugehörige GameSession.
-     * @param maxElementPos TODO
+     * @param maxElementPosY TODO
      */
-    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPos)
+    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPosY)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
-        this.maxElementPos = maxElementPos;
+        this.maxElementPosY = maxElementPosY;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -170,7 +170,7 @@ public class PhysicsHandler<GameElementT>
                     // Bewege den Ball
                     ballPhysicsElement.setPosition(Vector2.add(ballPhysicsElement.getPosition(), Vector2.scale(ballPhysicsElement.getVelocity(), delta)));
 
-                    if (ballPhysicsElement.getPosition().getY() >= maxElementPos)
+                    if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
                     {
                         gameSession.setBallLost(true);
                     }

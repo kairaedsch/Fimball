@@ -18,7 +18,7 @@ public class OverlapAxis
     private double overlap;
 
     /**
-     * Erstellt eine neue OverlapAxis
+     * Erstellt eine neue OverlapAxis.
      *
      * @param axis    Auf welche Achse die überschneidenden Objekte projiziert wurden.
      * @param overlap Die Überschneidung der Objekte auf der Achse.
