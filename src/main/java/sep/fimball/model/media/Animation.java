@@ -33,7 +33,7 @@ public class Animation
     /**
      * Gibt den Wert zurück, wie lang ein einzelnes Bild angezeigt wird, bevor zum nächsten gewechselt wird. In Millisekunden.
      *
-     * @return Die Anzeigedauer eines einzelnen Bildes in Millisekunden.
+     * @return Die Dauer der Anzeige eines einzelnen Bildes in Millisekunden.
      */
     public int getDuration()
     {

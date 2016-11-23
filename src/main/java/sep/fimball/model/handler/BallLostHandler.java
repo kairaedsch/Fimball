@@ -6,14 +6,14 @@ package sep.fimball.model.handler;
 public class BallLostHandler implements GameHandler
 {
     /**
-     * Die Gamesession, welche von dem handler beeinflusst wird.
+     * Die GameSession, welche von dem handler beeinflusst wird.
      */
     private HandlerGameSession handlerGameSession;
 
     /**
      * Erstellt ein neuen BallLostHandler.
      *
-     * @param handlerGameSession Die Gamesession, welche von dem handler beeinflusst werden soll.
+     * @param handlerGameSession Die GameSession, welche von dem handler beeinflusst werden soll.
      */
     public BallLostHandler(HandlerGameSession handlerGameSession)
     {

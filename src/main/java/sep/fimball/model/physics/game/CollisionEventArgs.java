@@ -18,7 +18,7 @@ public class CollisionEventArgs<GameElementT>
     private int colliderId;
 
     /**
-     * Erstellt eine neue Instanz von Kollisionsargumenten.
+     * Erstellt eine neue Instanz von CollisionEventArgs.
      *
      * @param otherElement Mit welchem GameElement das Ziel-GameElement zusammengestoßen ist.
      * @param colliderId   Die ID des Colliders von otherElement, an dem die Kollision passiert ist.

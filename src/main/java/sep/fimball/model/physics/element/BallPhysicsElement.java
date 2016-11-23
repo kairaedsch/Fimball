@@ -68,7 +68,7 @@ public class BallPhysicsElement<GameElementT>
 
     /**
      * Gibt die Position des Balls zurück.
-     * @return Die Psition des Balls.
+     * @return Die Position des Balls.
      */
     public Vector2 getPosition()
     {

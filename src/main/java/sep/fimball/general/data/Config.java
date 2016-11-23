@@ -73,12 +73,12 @@ public class Config
     private static String pathDataToSettings = "/settings.json";
 
     /**
-     * Der Unterpfad an dem die Sounddateien gespeichert werden.
+     * Der Unterpfad an dem die Sound-Dateien gespeichert werden.
      */
     private static String pathDataToSounds = "/sounds";
 
     /**
-     * Die Dateiendung der Sounddateien.
+     * Die Dateiendung der Sound-Dateien.
      */
     private static String pathSoundToSoundType = ".mp3";
 
@@ -247,10 +247,10 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zu einer Sounddatei basierend auf deren Name zurück.
+     * Gibt den Pfad zu einer Sound-Datei basierend auf deren Name zurück.
      *
-     * @param clipName Der Name der Sounddatei.
-     * @return Der Pfad an dem sich die Sounddatei befindet.
+     * @param clipName Der Name der Sound-Datei.
+     * @return Der Pfad an dem sich die Sound-Datei befindet.
      */
     public static String pathToSound(String clipName)
     {

@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
- * Der ElementManager verwaltet die Serialisierung aller Elementtypen.
+ * Der ElementManager verwaltet die Serialisierung aller Element-Typen.
  */
 public class BaseElementManager
 {

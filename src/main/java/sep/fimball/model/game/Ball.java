@@ -32,7 +32,7 @@ public class Ball extends GameElement
     /**
      * Gibt den Geschwindigkeitsvektor des Balls zurück.
      *
-     * @return Der Geschindigkeitsvektor des Balls.
+     * @return Der Geschwindigkeitsvektor des Balls.
      */
     public Vector2 getVelocity()
     {

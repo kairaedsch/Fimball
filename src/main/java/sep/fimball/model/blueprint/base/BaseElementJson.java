@@ -59,17 +59,17 @@ public class BaseElementJson
             public WorldLayer layer;
 
             /**
-             * Speichert die Polygon-Collider des Elementtyps.
+             * Speichert die Polygon-Collider des Element-Typs.
              */
             public PolygonJson[] polygonShapes;
 
             /**
-             * Speichert die Kreis-Collider des Elementtyps.
+             * Speichert die Kreis-Collider des Element-Typs.
              */
             public CircleJson[] circleShapes;
 
             /**
-             * Die Kräfte, die bei Interaktion mit diesem Elementtyp auftreten.
+             * Die Kräfte, die bei Interaktion mit diesem Element-Typ auftreten.
              */
             public ColliderTypeJson collisionType;
 
@@ -144,12 +144,12 @@ public class BaseElementJson
         public static class MediaElementGeneralJson
         {
             /**
-             * Bezeichnung des Elementtyps im Editor.
+             * Bezeichnung des Element-Typs im Editor.
              */
             public String editorName;
 
             /**
-             * Text, der den Elementtyp im Editor beschreibt.
+             * Text, der den Element-Typ im Editor beschreibt.
              */
             public String editorDescription;
 
@@ -180,7 +180,7 @@ public class BaseElementJson
             public String soundName;
 
             /**
-             * Speichert die Animation, die dieser Elementtyp bei Kollision mit dem Collider abspielt.
+             * Speichert die Animation, die dieser Element-Typ bei Kollision mit dem Collider abspielt.
              */
             public AnimationJson animation;
 

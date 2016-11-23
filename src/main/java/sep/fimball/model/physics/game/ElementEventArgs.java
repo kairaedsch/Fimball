@@ -3,7 +3,7 @@ package sep.fimball.model.physics.game;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Argumente, welche die Gamesession über Änderungen an GameElementen benachrichtigt, welche durch die Physik entstanden sind.
+ * Argumente, welche die GameSession über Änderungen an GameElementen benachrichtigt, welche durch die Physik entstanden sind.
  *
  * @param <GameElementT> Die Klasse des GameElements.
  */
@@ -22,20 +22,20 @@ public class ElementEventArgs<GameElementT>
     /**
      * Die neue Rotation des GameElements.
      */
-    private double roation;
+    private double rotation;
 
     /**
      * Erstellt ein neues ElementEventArgs.
      *
      * @param gameElement Das zu ändernde GameElement.
      * @param position    Die neue Position.
-     * @param roation     Die neue Rotation.
+     * @param rotation     Die neue Rotation.
      */
-    public ElementEventArgs(GameElementT gameElement, Vector2 position, double roation)
+    public ElementEventArgs(GameElementT gameElement, Vector2 position, double rotation)
     {
         this.gameElement = gameElement;
         this.position = position;
-        this.roation = roation;
+        this.rotation = rotation;
     }
 
     /**
@@ -45,7 +45,7 @@ public class ElementEventArgs<GameElementT>
      */
     public double getRotation()
     {
-        return roation;
+        return rotation;
     }
 
     /**

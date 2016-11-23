@@ -20,7 +20,7 @@ public class CircleColliderShape implements ColliderShape
     private double radius;
 
     /**
-     * Erstellt einen neuen Collider in Kreisform.
+     * Erstellt einen neuen Collider in der Form eines Kreises.
      *
      * @param position Mittelpunkt des Kreises, der den Collider formt.
      * @param radius   Radius des Kreises, der den Collider formt.
