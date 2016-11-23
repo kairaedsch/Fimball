@@ -125,8 +125,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private List<Handler> handlers;
 
     /**
-     * Das Observable welches genutzt wird um Observer darüber zu benachrichtigen dass der nächste Tick der Spielschleife
-     * ausgeführt wird
+     * Das Observable, welches genutzt wird um Observer darüber zu benachrichtigen, dass der nächste Tick der Spielschleife ausgeführt wurde.
      */
     private Observable gameLoopObservable;
 
@@ -151,9 +150,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private boolean isBallLost;
 
     /**
-     * Platzhalter, welcher für die Synchronisierung von Threads genutzt wird {@see collisionEventArgsList}
+     * Monitor, welcher für die Synchronisierung zwischen Physik und Spiel genutzt wird {@see collisionEventArgsList}.
      */
-    private final Object physicLocker;
+    private final Object physicMonitor;
 
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
@@ -165,7 +164,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         this.machineBlueprint = machineBlueprint;
         this.handlers = new ArrayList<>();
-        physicLocker = new Object();
+        physicMonitor = new Object();
         collisionEventArgsesList = new LinkedList<>();
         elementEventArgsesList = new LinkedList<>();
 
@@ -261,19 +260,19 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> update()));
+        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoop()));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
     }
 
     /**
-     * TODO
+     * Der gameLoop, welcher bis zu 60 mal in der Sekunde ausgeführt wird.
      */
-    protected void update()
+    protected void gameLoop()
     {
         LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
         LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
-        synchronized (physicLocker)
+        synchronized (physicMonitor)
         {
             localCollisionEventArgsesList = this.collisionEventArgsesList;
             this.collisionEventArgsesList = new LinkedList<>();
@@ -302,7 +301,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             }
         }
 
-        synchronized (physicLocker)
+        synchronized (physicMonitor)
         {
             if (isBallLost)
             {
@@ -361,7 +360,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         paused = false;
     }
 
-
     public void switchToNextPlayer()
     {
         playerIndex++;
@@ -392,14 +390,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         machineBlueprint.addHighscore(score);
     }
 
-    /**
-     * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
-     *
-     * @param collisionEventArgs Die Liste von Kollisions-Events, die hinzugefügt werden soll.
-     */
     public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
-        synchronized (physicLocker)
+        synchronized (physicMonitor)
         {
             this.collisionEventArgsesList.add(collisionEventArgs);
             this.elementEventArgsesList.add(elementEventArgs);
@@ -408,14 +401,14 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
     public void setBallLost(boolean isBallLost)
     {
-        synchronized (physicLocker)
+        synchronized (physicMonitor)
         {
             this.isBallLost = isBallLost;
         }
     }
 
     /**
-     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu, der benachrichtigt wird, wenn das Update der GameLoop fertig ist..
+     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu, der benachrichtigt wird, wenn das Update der GameLoop fertig ist.
      *
      * @param gameLoopObserver Der Observer, der hinzugefügt werden soll.
      */
