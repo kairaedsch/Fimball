@@ -2,7 +2,7 @@ package sep.fimball.model.media;
 
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
-import sep.fimball.model.game.GameElement;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 /**
  * ElementImage stellt ein Bild oder Animation eines BaseElements dar.
@@ -82,12 +82,12 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      *
-     * @param gameElement Das Element, zu dessen BaseElement das ElementImage gehört,
+     * @param placedElement Das Element, zu dessen BaseElement das ElementImage gehört,
      * @param animation   Die zugehörige Animation.
      */
-    public ElementImage(GameElement gameElement, Animation animation)
+    public ElementImage(PlacedElement placedElement, Animation animation)
     {
-        this(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getPlacedElement().getBaseElement().getMedia().canRotate(), gameElement.getPlacedElement().getBaseElement().getMedia().getRotationAccuracy(), true, animation);
+        this(placedElement.getBaseElement().getId(), placedElement.getBaseElement().getMedia().canRotate(), placedElement.getBaseElement().getMedia().getRotationAccuracy(), true, animation);
     }
 
     /**

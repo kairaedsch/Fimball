@@ -77,7 +77,7 @@ public class SpriteSubViewModel
         if (gameElement.currentAnimationProperty().get().isPresent())
         {
             Animation animation = gameElement.currentAnimationProperty().get().get();
-            currentImage.set(new ElementImage(gameElement, animation));
+            currentImage.set(new ElementImage(gameElement.getPlacedElement(), animation));
         }
         else
         {
