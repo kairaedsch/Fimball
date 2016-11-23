@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.InputManager;
@@ -37,7 +38,7 @@ public class GameTest
     private static final String BALL_SPAWN_ID = "ball";
     private static Object monitor = new Object();
 
-    private Deque<HandlerGameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
+    private Deque<GameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
     private TestGameSession session;
     private PinballMachine pinballMachine;
 
@@ -116,7 +117,7 @@ public class GameTest
      */
     private void addCollidedGameElement(HandlerGameElement gameElement)
     {
-        collidedGameElements.push(gameElement);
+        collidedGameElements.push((GameElement) gameElement);
     }
 
     /**
