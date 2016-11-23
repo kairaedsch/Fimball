@@ -111,7 +111,7 @@ public class BaseElementJson
             public static class ColliderTypeJson
             {
                 /**
-                 * Speichert den Named des Typs des Colliders.
+                 * Speichert den Namen der Kraft die bei Interaktion mit der Kugel auftreten.
                  */
                 public String type;
 
@@ -159,7 +159,7 @@ public class BaseElementJson
             public boolean canRotate;
 
             /**
-             * Die Genaugigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
+             * Die Genauigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
              */
             public int rotationAccuracy;
         }
@@ -190,12 +190,12 @@ public class BaseElementJson
             public static class AnimationJson
             {
                 /**
-                 * Speichert, wie viele Bilder die Animation darstellt.
+                 * Speichert, aus wie viele Bilder die Animation besteht.
                  */
                 public int frameCount;
 
                 /**
-                 * Speichert die Dauer der Animation.
+                 * Speichert die Dauer eines Bildes der Animation.
                  */
                 public int duration;
 

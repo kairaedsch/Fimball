@@ -44,7 +44,7 @@ public class BaseMediaElement
     private Map<Integer, BaseMediaElementEvent> eventMap;
 
     /**
-     * Estellt ein neues BaseMediaElement.
+     * Erstellt ein neues BaseMediaElement.
      *
      * @param mediaElement Das MediaElementJson, dessen Eigenschaften übernommen werden sollen.
      * @param baseElementId Die ID des zugehörigen BaseElements.

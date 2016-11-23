@@ -85,7 +85,6 @@ public class BaseElementManager
                 System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
                 e.printStackTrace();
             }
-
         }
         else
         {
