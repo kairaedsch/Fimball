@@ -59,9 +59,6 @@ public class GameTest
         //Starten des Spiels
         initializeGameSession();
 
-        // Warten, bis der Ball verloren gegangen ist
-        wait();
-
         // Wegschießen der Kugel durch den Plunger
         usePlunger();
 
@@ -71,6 +68,7 @@ public class GameTest
         //Aufzeichnungen auswerten
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
+        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), PLUNGER_ID);
         assertTrue(collidedGameElements.empty());
     }
 
@@ -108,7 +106,6 @@ public class GameTest
         session.setTriggers(triggerList);
 
         session.startAll();
-        this.notify();
     }
 
     private void usePlunger() throws InterruptedException
