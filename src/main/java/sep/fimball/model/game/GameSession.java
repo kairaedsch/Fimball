@@ -72,7 +72,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
-    private final double TIMELINE_TICK = 1 / 60D;
+    protected final double GAMELOOP_TICK = 1 / 60D;
 
     /**
      * Array der Spieler, die am aktuellen Spiel teilnehmen.
@@ -251,59 +251,61 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Startet die Gameloop.
      */
-    public void startTimeline()
+    public void startGameLoop()
     {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(TIMELINE_TICK), (event ->
-        {
-            LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
-            LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
-            synchronized (physicLocker)
-            {
-                localCollisionEventArgsesList = this.collisionEventArgsesList;
-                this.collisionEventArgsesList = new LinkedList<>();
-
-                localElementEventArgsesList = this.elementEventArgsesList;
-                this.elementEventArgsesList = new LinkedList<>();
-            }
-
-            for (List<ElementEventArgs<GameElement>> elementEventArgses : localElementEventArgsesList)
-            {
-                for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgses)
-                {
-                    elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
-                    elementEventArgs.getGameElement().setRotation(elementEventArgs.getRoation());
-                }
-            }
-
-            for (List<CollisionEventArgs<GameElement>> collisionEventArgses : localCollisionEventArgsesList)
-            {
-                for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
-                {
-                    for (Handler trigger : triggers)
-                    {
-                        trigger.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
-                    }
-                }
-            }
-
-            synchronized (physicLocker)
-            {
-                if (isBallLost)
-                {
-                    for (Handler trigger : triggers)
-                    {
-                        trigger.activateGameHandler(GameEvent.BALL_LOST);
-                    }
-                    isBallLost = false;
-                }
-            }
-            gameLoopObservable.setChanged();
-            gameLoopObservable.notifyObservers();
-        }));
+        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> update()));
         gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
+    }
+
+    protected void update()
+    {
+        LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
+        LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
+        synchronized (physicLocker)
+        {
+            localCollisionEventArgsesList = this.collisionEventArgsesList;
+            this.collisionEventArgsesList = new LinkedList<>();
+
+            localElementEventArgsesList = this.elementEventArgsesList;
+            this.elementEventArgsesList = new LinkedList<>();
+        }
+
+        for (List<ElementEventArgs<GameElement>> elementEventArgses : localElementEventArgsesList)
+        {
+            for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgses)
+            {
+                elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
+                elementEventArgs.getGameElement().setRotation(elementEventArgs.getRoation());
+            }
+        }
+
+        for (List<CollisionEventArgs<GameElement>> collisionEventArgses : localCollisionEventArgsesList)
+        {
+            for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
+            {
+                for (Handler trigger : triggers)
+                {
+                    trigger.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
+                }
+            }
+        }
+
+        synchronized (physicLocker)
+        {
+            if (isBallLost)
+            {
+                for (Handler trigger : triggers)
+                {
+                    trigger.activateGameHandler(GameEvent.BALL_LOST);
+                }
+                isBallLost = false;
+            }
+        }
+        gameLoopObservable.setChanged();
+        gameLoopObservable.notifyObservers();
     }
 
     /**
@@ -317,7 +319,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Stoppt die Gameloop.
      */
-    public void stopTimeline()
+    public void stopGameLoop()
     {
         gameLoop.stop();
     }
@@ -336,7 +338,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public void pauseAll()
     {
         paused = true;
-        stopTimeline();
+        stopGameLoop();
         physicsHandler.stopTicking();
     }
 
@@ -345,7 +347,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void startAll()
     {
-        startTimeline();
+        startGameLoop();
         startPhysics();
         paused = false;
     }

@@ -63,7 +63,7 @@ public class ReserveBallsAndPlayerChangeTest {
     public void stopThreads () {
         Platform.runLater(()->{
             game.stopPhysics();
-            game.stopTimeline();
+            game.stopGameLoop();
         });
         Platform.exit();
     }
