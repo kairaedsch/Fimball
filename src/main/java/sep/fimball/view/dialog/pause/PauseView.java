@@ -3,7 +3,9 @@ package sep.fimball.view.dialog.pause;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import sep.fimball.view.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogView;
+import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 
 /**
@@ -32,6 +34,7 @@ public class PauseView extends DialogView<PauseViewModel>
     public void setViewModel(PauseViewModel pauseViewModel)
     {
         this.pauseViewModel = pauseViewModel;
+        ViewModelListToPaneBinder.bindViewModelsToViews(playerScores, pauseViewModel.playerHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
 
     /**

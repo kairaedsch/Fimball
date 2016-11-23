@@ -1,11 +1,14 @@
 package sep.fimball.viewmodel.window.game;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
+import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.game.GameSession;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.game.GameSession;
+import sep.fimball.model.game.Player;
 import sep.fimball.model.input.InputManager;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
@@ -194,5 +197,21 @@ public class GameViewModel extends WindowViewModel
     public void resume()
     {
         gameSession.startAll();
+    }
+
+    /**
+     * Gibt die Scores der Spieler der aktuellen Partie zurück.
+     * @return Die Scores der Spieler der aktuellen Partie.
+     */
+    public ReadOnlyListProperty<Highscore> getScores()
+    {
+        ListProperty<Highscore> scores = new SimpleListProperty<>();
+        scores.set(FXCollections.observableArrayList());
+        for (Player player : gameSession.getPlayers())
+        {
+            Highscore score = new Highscore(player.pointsProperty().get(), player.getName());
+            scores.get().add(score);
+        }
+        return scores;
     }
 }
