@@ -44,7 +44,7 @@ public class BaseElementJson
         public PhysicColliderJson[] colliders;
 
         /**
-         * Diese Klasse enthält die Informationen über die Collider eines Spielelements
+         * Diese Klasse enthält die Informationen über die Collider eines Spielelements.
          */
         public static class PhysicColliderJson
         {
@@ -54,7 +54,7 @@ public class BaseElementJson
             public String colliderId;
 
             /**
-             * Speichert die Ebene des Colliders
+             * Speichert die Ebene des Colliders.
              */
             public WorldLayer layer;
 

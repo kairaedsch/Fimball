@@ -191,7 +191,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         playerIndex = 0;
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        List<PhysicsElement> physicsElements = new ArrayList<>();
+        List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
         double maxElementPos = machineBlueprint.elementsProperty().get(0).positionProperty().get().getY();
 
@@ -206,10 +206,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 GameElement gameElement = new GameElement(element, false);
                 elements.add(gameElement);
 
-                PhysicsElement physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                PhysicsElement<GameElement> physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                 physicsElements.add(physElem);
 
-                for (Collider collider : (List<Collider>) physElem.getColliders())
+                for (Collider collider : physElem.getColliders())
                 {
                     for (ColliderShape shape : collider.getShapes())
                     {
@@ -229,7 +229,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements, ballTemplate);
-        physicsHandler = new PhysicsHandler(physicsElements, this, maxElementPos);
+        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos);
 
         gameLoopObservable = new Observable();
 

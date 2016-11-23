@@ -11,22 +11,22 @@ public enum DialogType
     NONE,
 
     /**
-     * Game-Over-Dialog
+     * Der Game-Over-Dialog.
      */
     GAME_OVER,
 
     /**
-     * Spieleinstellungen-Dialog
+     * Der Spieleinstellungen-Dialog.
      */
     GAME_SETTINGS,
 
     /**
-     * Spielernamen-Dialog
+     * Der Spielernamen-Dialog.
      */
     PLAYER_NAMES,
 
     /**
-     * Pause-Dialog
+     * Der Pause-Dialog.
      */
     PAUSE
 }

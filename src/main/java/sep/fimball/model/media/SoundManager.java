@@ -5,18 +5,17 @@ import sep.fimball.general.util.Observable;
 import java.util.Observer;
 
 /**
- * SoundManager stellt die Schnittstelle vom Model zum ViewModel zum Abspielen der Sounds dar. Dabei wird das ViewModel über das Observer-Pattern über Änderungen informiert.
+ * Der SoundManager stellt die Schnittstelle vom Model zum ViewModel zum Abspielen der Sounds dar. Dabei wird das ViewModel über das Observer-Pattern darüber Informiert, welche Sounds abgespielt werden sollen.
  */
 public class SoundManager
 {
     /**
-     * Die einzige existierende Instanz des SoundManager
+     * Die einzige existierende Instanz des SoundManager.
      */
     private static SoundManager instance;
 
     /**
-     * // TODO is false
-     * Das Observable, dass das Abspielen von Soundeffekten verwaltet
+     * Das Observable, welche die darauf registrierte Observer benachrichtigt, falls ein Sound abgespielt werden soll.
      */
     private Observable observable;
 
@@ -43,8 +42,7 @@ public class SoundManager
     }
 
     /**
-     * // TODO is false
-     * Fügt den gegebenen Observer zu dem {@code clipObservable} hinzu.
+     * Fügt den gegebenen Observer zu dem {@code observable} hinzu, sodass dieser, falls ein Sound abgespielt werden soll, benachrichigt wird.
      *
      * @param observer Der Observer, der hinzugefügt werden soll.
      */
@@ -54,8 +52,7 @@ public class SoundManager
     }
 
     /**
-     * // TODO is false
-     * Benachrichtigt die Observer, dass der in {@code clipPath} gespeicherte SoundClip abgespielt werden soll.
+     * Benachrichtigt die Observer, dass ein Sound abgespielt werden soll.
      */
     public void addSoundToPlay(Sound sound)
     {

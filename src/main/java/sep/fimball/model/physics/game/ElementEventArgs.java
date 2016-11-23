@@ -3,31 +3,31 @@ package sep.fimball.model.physics.game;
 import sep.fimball.general.data.Vector2;
 
 /**
- * TODO
- * @param <GameElementT>
+ * Argumente, welche die Gamesession über Änderungen an GameElementen benachrichtigt, welche durch die Physik entstanden sind.
+ * @param <GameElementT> Die Klasse des GameElements.
  */
 public class ElementEventArgs<GameElementT>
 {
     /**
-     * TODO
+     * Das zu ändernde GameElement.
      */
     private GameElementT gameElement;
 
     /**
-     * TODO
+     * Die neue Position des GameElements.
      */
     private Vector2 position;
 
     /**
-     * TODO
+     * Die neue Rotation des GameElements.
      */
     private double roation;
 
     /**
-     * TODO
-     * @param gameElement
-     * @param position
-     * @param roation
+     * Erstellt ein neues ElementEventArgs.
+     * @param gameElement Das zu ändernde GameElement.
+     * @param position Die neue Position.
+     * @param roation Die neue Rotation.
      */
     public ElementEventArgs(GameElementT gameElement, Vector2 position, double roation)
     {
@@ -37,8 +37,8 @@ public class ElementEventArgs<GameElementT>
     }
 
     /**
-     * TODO
-     * @return
+     * Gibt die neue Rotation zurück.
+     * @return Die neue Rotation.
      */
     public double getRotation()
     {
@@ -46,8 +46,8 @@ public class ElementEventArgs<GameElementT>
     }
 
     /**
-     * TODO
-     * @return
+     * Gibt die neue Position zurück.
+     * @return Die neue Position.
      */
     public Vector2 getPosition()
     {
@@ -55,8 +55,8 @@ public class ElementEventArgs<GameElementT>
     }
 
     /**
-     * TODO
-     * @return
+     * Gibt das zu ändernde GameElement zurück.
+     * @return Das zu ändernde GameElement.
      */
     public GameElementT getGameElement()
     {

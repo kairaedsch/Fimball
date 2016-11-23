@@ -1,19 +1,18 @@
 package sep.fimball.model.handler;
 
 /**
- * Handler, der bei gewissen Spielereignissen aufgerufen wird.
+ * Der BallLostHandler reagiert auf GameEvent.BALL_LOST Events und kümmert sich um das Wechseln zwischen zwei Spielern bei einer Partie.
  */
 public class BallLostHandler implements GameHandler
 {
     /**
-     * Session, die diesen Handler aufruft.
+     * Die Gamesession, welche von dem handler beeinflusst wird.
      */
     private HandlerGameSession handlerGameSession;
 
     /**
-     * Erzeugt eine neue Instanz von BallLostHandler und setzt die jeweilige Session.
-     *
-     * @param handlerGameSession Session, die diesen Handler aufruft.
+     * Erstellt ein neuen BallLostHandler.
+     * @param handlerGameSession Die Gamesession, welche von dem handler beeinflusst werden soll.
      */
     public BallLostHandler(HandlerGameSession handlerGameSession)
     {

@@ -30,10 +30,11 @@ public interface ColliderShape
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 
     /**
-     * TODO
-     * @param rotation
-     * @param pivotPoint
-     * @return
+     * Gibt die Maximale Y Position dieses Colliders bei der gegebenen Rotation zurück.
+     *
+     * @param rotation   Die rotation des Colliders
+     * @param pivotPoint Der Drehpunkt des Kolliders
+     * @return Die Maximale Y Position dieses Colliders bei der gegebenen Rotation.
      */
     double getMaximumYPos(double rotation, Vector2 pivotPoint);
 }
