@@ -190,6 +190,7 @@ public class Vector2
 
     /**
      * Gibt die erste Komponente des Vektors zurück.
+     *
      * @return Die erste Komponente des Vektors.
      */
     public double getX()
@@ -199,6 +200,7 @@ public class Vector2
 
     /**
      * Gibt die zweite Komponente des Vektors zurück.
+     *
      * @return Die zweite Komponente des Vektors.
      */
     public double getY()
@@ -219,6 +221,7 @@ public class Vector2
 
     /**
      * Rundet die x- und y-Werte des Vektors.
+     *
      * @return Der geänderte Vektor.
      */
     public Vector2 round()
@@ -238,9 +241,25 @@ public class Vector2
         {
             double v = max / this.magnitude();
 
-            return new Vector2(x * v,  y * v);
+            return new Vector2(x * v, y * v);
         }
 
+        return new Vector2(x, y);
+    }
+
+    /**
+     * Prüft ob der gegebene Vector die selbe Position hat.
+     *
+     * @param otherVector Der gegebene Vector.
+     * @return Ob der gegebene Vector die selbe Position hat.
+     */
+    public boolean equals(Vector2 otherVector)
+    {
+        return otherVector.getX() == x && otherVector.getY() == y;
+    }
+
+    public Vector2 clone()
+    {
         return new Vector2(x, y);
     }
 }
