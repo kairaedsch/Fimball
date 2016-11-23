@@ -11,8 +11,8 @@ import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
-import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.data.KeyBinding;
 
 import java.util.List;
 

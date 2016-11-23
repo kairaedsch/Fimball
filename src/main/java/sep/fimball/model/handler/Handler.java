@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.input.KeyEventType;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
 
 /**
  * Wird bei verschiedenen Ereignissen im Spiel informiert und kann auf diese reagieren.

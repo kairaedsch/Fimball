@@ -1,6 +1,6 @@
 package sep.fimball.model.blueprint.settings;
 
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.data.KeyBinding;
 
 /**
  * Diese Klasse repräsentiert die JSON-Beschreibung der Settings.

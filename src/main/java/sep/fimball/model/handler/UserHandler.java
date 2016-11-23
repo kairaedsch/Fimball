@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.input.KeyEventType;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
 
 /**
  * Handler, der bei User-Aktionen ausgelöst wird.

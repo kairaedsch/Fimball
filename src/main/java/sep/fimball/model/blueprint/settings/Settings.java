@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import java.nio.file.Path;
@@ -103,9 +103,18 @@ public class Settings
             musicVolume.set(settingsJson.musicVolume);
             sfxVolume.set(settingsJson.sfxVolume);
 
+            for (KeyBinding keyBinding : KeyBinding.values())
+            {
+                keyBindingsMap.put(keyBinding, null);
+            }
+
             for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
             {
-                keyBindingsMap.put(layout.keyBinding, KeyCode.valueOf(layout.keyCode));
+                if(layout.keyCode != null)
+                {
+                    KeyCode keyCode = KeyCode.valueOf(layout.keyCode);
+                    if(layout.keyBinding != null && keyCode != null) keyBindingsMap.put(layout.keyBinding, keyCode);
+                }
             }
         }
         else
@@ -132,7 +141,8 @@ public class Settings
         {
             settingsJson.keyLayouts[counter] = new SettingsJson.KeyLayout();
             settingsJson.keyLayouts[counter].keyBinding = binding;
-            settingsJson.keyLayouts[counter].keyCode = keyBindingsMap.get(binding).name();
+            KeyCode keyCode = keyBindingsMap.get(binding);
+            settingsJson.keyLayouts[counter].keyCode = keyCode != null ? keyCode.name() : null;
             counter++;
         }
 

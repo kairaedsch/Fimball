@@ -1,9 +1,9 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.input.KeyBinding;
-import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyObserverEventArgs;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;

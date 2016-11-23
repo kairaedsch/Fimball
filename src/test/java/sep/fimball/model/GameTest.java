@@ -13,8 +13,8 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
-import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.data.KeyBinding;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

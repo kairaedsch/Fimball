@@ -1,7 +1,8 @@
-package sep.fimball.model.input;
+package sep.fimball.model.input.manager;
 
 import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.input.data.KeyBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;

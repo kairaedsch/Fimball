@@ -1,4 +1,4 @@
-package sep.fimball.model.input;
+package sep.fimball.model.input.manager;
 
 /**
  * Dieses Interface wird von Observern implementiert die über KeyEvents benachrichtigt werden wollen.

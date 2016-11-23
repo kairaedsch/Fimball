@@ -5,7 +5,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
-import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 
 /**
@@ -49,7 +49,7 @@ public class KeybindSubViewModel
         keyName.setValue(keyCode != null ? keyCode.getName() : "No Key set");
 
         elementName = new SimpleStringProperty();
-        elementName.bind(Bindings.concat(keyBinding.toString()));
+        elementName.bind(Bindings.concat(keyBinding.getName()));
     }
 
     /**

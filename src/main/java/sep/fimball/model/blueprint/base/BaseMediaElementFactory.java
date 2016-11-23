@@ -32,7 +32,7 @@ public class BaseMediaElementFactory
             for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
                 Animation animation = null;
-                if(event.animation != null) animation = new Animation(animation.getDuration(), animation.getFrameCount(), animation.getName());
+                if(event.animation != null) animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
 
                 // TODO hashCode must not be unique
                 eventMap.put(event.colliderId.hashCode(), new BaseMediaElementEvent(animation, event.soundName));

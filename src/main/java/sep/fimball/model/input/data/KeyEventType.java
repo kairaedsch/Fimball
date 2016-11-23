@@ -1,4 +1,4 @@
-package sep.fimball.model.input;
+package sep.fimball.model.input.data;
 
 /**
  * Status eines Tastendrucks.
