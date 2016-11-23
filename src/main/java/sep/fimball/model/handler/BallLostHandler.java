@@ -26,7 +26,7 @@ public class BallLostHandler implements GameHandler
         if (gameEvent.equals(GameEvent.BALL_LOST))
         {
             //TODO Check if no balls left
-            handlerGameSession.getCurrentPlayer().ballsProperty().setValue(handlerGameSession.getCurrentPlayer().ballsProperty().get() - 1);
+            handlerGameSession.getCurrentPlayer().removeOneReserveBall();
             handlerGameSession.switchToNextPlayer();
             handlerGameSession.spawnNewBall();
         }

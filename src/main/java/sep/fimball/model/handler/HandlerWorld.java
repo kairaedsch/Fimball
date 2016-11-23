@@ -12,5 +12,5 @@ public interface HandlerWorld
      *
      * @return Die Liste der in der World enthaltenen GameElements
      */
-    ReadOnlyListProperty<HandlerGameElement> gameElementsProperty();
+    ReadOnlyListProperty<? extends HandlerGameElement> gameElementsProperty();
 }

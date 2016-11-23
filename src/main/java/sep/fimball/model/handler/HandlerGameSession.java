@@ -1,7 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.game.Player;
-
 /**
  * Die HandlerGameSession stellt die GameSession aus der Sicht der Trigger dar.
  */
@@ -12,7 +10,7 @@ public interface HandlerGameSession
      *
      * @return Der aktive Spieler.
      */
-    Player getCurrentPlayer();
+    HandlerPlayer getCurrentPlayer();
 
     /**
      * Wechselt zum nächsten Spieler.

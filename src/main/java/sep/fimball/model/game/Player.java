@@ -1,23 +1,23 @@
 package sep.fimball.model.game;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import sep.fimball.model.handler.HandlerPlayer;
 
 /**
  * Stellt einen Spieler dar welcher an einer Partie teilnimmt.
  */
-public class Player
+public class Player implements HandlerPlayer
 {
     /**
      * Die Anzahl an Punkten welcher der Spieler in der aktuellen Partie hat.
      */
     private IntegerProperty points;
+
     /**
      * Der Name des Spielers.
      */
     private StringProperty name;
+
     /**
      * Die Anzahl an Reservekugeln die dem Spieler verbleiben.
      */
@@ -35,22 +35,28 @@ public class Player
         this.balls = new SimpleIntegerProperty(3);
     }
 
-    /**
-     * Gibt die vom Spieler erreichten Punkte zurück.
-     *
-     * @return Die vom Spieler erreichten Punkte.
-     */
-    public int getPoints()
+    @Override
+    public void addPoints(int pointReward)
     {
-        return points.get();
+        points.add(pointReward);
     }
 
-    /**
-     * Gibt die Punkte, die ein Spieler erreicht hat, zurück.
-     *
-     * @return Die Punkte, die ein Spieler erreicht hat,
-     */
-    public IntegerProperty pointsProperty()
+    @Override
+    public boolean removeOneReserveBall()
+    {
+        if (balls.get() > 0)
+        {
+
+            balls.set(balls.get() - 1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public ReadOnlyIntegerProperty pointsProperty()
     {
         return points;
     }
@@ -70,17 +76,12 @@ public class Player
      *
      * @return Der Name des Spielers.
      */
-    public StringProperty nameProperty()
+    public ReadOnlyStringProperty nameProperty()
     {
         return name;
     }
 
-    /**
-     * Gibt die Anzahl der Reservebälle des Spielers zurück.
-     *
-     * @return Die Anzahl der Reservebälle des Spielers.
-     */
-    public IntegerProperty ballsProperty()
+    public ReadOnlyIntegerProperty ballsProperty()
     {
         return balls;
     }

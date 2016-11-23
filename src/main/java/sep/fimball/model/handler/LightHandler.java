@@ -16,7 +16,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Lichter, die verwaltet werden.
      */
-    private ListProperty<HandlerGameElement> lights;
+    private ListProperty<? extends HandlerGameElement> lights;
 
     /**
      * Erstellt einen neuen LightHandler.
