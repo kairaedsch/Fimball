@@ -42,7 +42,7 @@ public class SoundManager
     }
 
     /**
-     * Fügt den gegebenen Observer zu dem {@code observable} hinzu, sodass dieser, falls ein Sound abgespielt werden soll, benachrichigt wird.
+     * Fügt den gegebenen Observer zu dem {@code observable} hinzu, sodass dieser, falls ein Sound abgespielt werden soll, benachrichtigt wird.
      *
      * @param observer Der Observer, der hinzugefügt werden soll.
      */
@@ -53,6 +53,8 @@ public class SoundManager
 
     /**
      * Benachrichtigt die Observer, dass ein Sound abgespielt werden soll.
+     *
+     * @param sound Der Sound welcher abgespielt werden soll
      */
     public void addSoundToPlay(Sound sound)
     {
