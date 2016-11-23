@@ -46,9 +46,9 @@ public class Player
     }
 
     /**
-     * Gibt das Property der Punkte, die ein Spieler erreicht hat, zurück.
+     * Gibt die Punkte, die ein Spieler erreicht hat, zurück.
      *
-     * @return Das Property der Punkte, die ein Spieler erreicht hat,
+     * @return Die Punkte, die ein Spieler erreicht hat,
      */
     public IntegerProperty pointsProperty()
     {
@@ -66,9 +66,9 @@ public class Player
     }
 
     /**
-     * Gibt das Property des Namens des Spielers zurück.
+     * Gibt den Mamen des Spielers zurück.
      *
-     * @return Das Property des Namens des Spielers.
+     * @return Der Name des Spielers.
      */
     public StringProperty nameProperty()
     {
@@ -76,9 +76,9 @@ public class Player
     }
 
     /**
-     * Gibt das Property der Reservebälle des Spielers zurück.
+     * Gibt die Anzahl der Reservebälle des Spielers zurück.
      *
-     * @return Das Property der Reservebälle des Spielers.
+     * @return Die Anzahl der Reservebälle des Spielers.
      */
     public IntegerProperty ballsProperty()
     {

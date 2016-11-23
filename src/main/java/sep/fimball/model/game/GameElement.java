@@ -72,9 +72,9 @@ public class GameElement
     }
 
     /**
-     * Gibt das Property der Position des GameElements zurück.
+     * Gibt die Position des GameElements zurück.
      *
-     * @return das Property der Position des GameElements.
+     * @return Die Position des GameElements.
      */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
@@ -95,9 +95,9 @@ public class GameElement
     }
 
     /**
-     * Gibt das Property der Rotation des GameElements als ReadOnly zurück.
+     * Gibt die Rotation des GameElements zurück.
      *
-     * @return Das Property der Rotation des GameElements
+     * @return Die Rotation des GameElements
      */
     public ReadOnlyDoubleProperty rotationProperty()
     {
@@ -158,8 +158,8 @@ public class GameElement
     }
 
     /**
-     * Gibt das Property, das ein Optional der aktuellen Animation des Elements enthält, als ReadOnly zurück
-     * @return Das Property, das ein Optional der aktuellen Animation des Elements enthält.
+     * Gibt die aktuelle Animation des Elements zurück.
+     * @return Die aktuelle Animation des Elements.
      */
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {

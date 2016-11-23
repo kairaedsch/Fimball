@@ -194,9 +194,9 @@ public class PinballMachine
     }
 
     /**
-     * Gibt das Property des Namens des Flipperautomaten als ReadOnly zurück.
+     * Gibt den Namen des Flipperautomaten zurück.
      *
-     * @return Das Property des Namens des Flipperautomaten.
+     * @return Der Name des Flipperautomaten.
      */
     public StringProperty nameProperty()
     {
@@ -204,9 +204,9 @@ public class PinballMachine
     }
 
     /**
-     * Gibt das Property der Liste der Highscores des Flipperautomaten als ReadOnly zurück.
+     * Gibt die Liste der Highscores des Flipperautomaten zurück.
      *
-     * @return Das Property der Liste der Highscores des Flipperautomaten.
+     * @return Die Liste der Highscores des Flipperautomaten.
      */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {

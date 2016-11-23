@@ -87,9 +87,9 @@ public class World implements HandlerWorld
     }
 
     /**
-     * Gibt das Property der Liste der in der World enthaltenen GameElements zurück.
+     * Gibt die Liste der in der World enthaltenen GameElements zurück.
      *
-     * @return Das Property der Liste der in der World enthaltenen GameElements
+     * @return Die Liste der in der World enthaltenen GameElements
      */
     public ListProperty<GameElement> gameElementsProperty()
     {

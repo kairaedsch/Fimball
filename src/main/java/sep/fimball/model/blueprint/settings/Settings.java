@@ -140,9 +140,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property der Master-Lautstärke zurück.
+     * Gibt die Master-Lautstärke zurück.
      *
-     * @return Das Property der Master-Lautstärke.
+     * @return Die Master-Lautstärke.
      */
     public IntegerProperty masterVolumeProperty()
     {
@@ -150,9 +150,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property der Musik-Lautstärke zurück.
+     * Gibt die Musik-Lautstärke zurück.
      *
-     * @return Das Property der Musik-Lautstärke.
+     * @return Die Musik-Lautstärke.
      */
     public IntegerProperty musicVolumeProperty()
     {
@@ -160,9 +160,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property der Soundeffekt-Lautstärke zurück.
+     * Gibt die Soundeffekt-Lautstärke zurück.
      *
-     * @return Das Property der Soundeffekt-Lautstärke.
+     * @return Die Soundeffekt-Lautstärke.
      */
     public IntegerProperty sfxVolumeProperty()
     {
@@ -170,9 +170,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property der eingestellten Sprache zurück.
+     * Gibt die eingestellte Sprache zurück.
      *
-     * @return Das Property der eingestellten Sprache.
+     * @return Die eingestellte Sprache.
      */
     public ObjectProperty<Language> languageProperty()
     {
@@ -180,9 +180,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist, als ReadOnly zurück.
+     * Gibt die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist, zurück.
      *
-     * @return Das Property der Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
+     * @return Die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
      */
     public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
     {
@@ -222,9 +222,9 @@ public class Settings
     }
 
     /**
-     * Gibt das Property zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * Gibt zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
      *
-     * @return Das Property, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * @return {@code true}, falls das Spiel im Vollbildmodus angezeigt werden soll, {@code false} sonst.
      */
     public BooleanProperty fullscreenProperty()
     {

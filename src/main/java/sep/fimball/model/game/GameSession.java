@@ -466,8 +466,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Gibt das Property, das das Ball-Element enthält, zurück gibt.
-     * @return Das Property, das das Ball-Element enthält.
+     * Gibt das Ball-Element zurück.
+     * @return Das Ball-Element.
      */
     public ObjectProperty<GameElement> gameBallProperty()
     {
