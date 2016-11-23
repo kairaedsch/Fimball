@@ -61,7 +61,7 @@ public class Settings
     private ObjectProperty<Language> language;
 
     /**
-     * Speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
+     * Speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielereignis gebunden ist.
      */
     private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
 
@@ -115,7 +115,7 @@ public class Settings
     }
 
     /**
-     * Serialisiert und speichert die Einstelunngen in der Settings-Datei.
+     * Serialisiert und speichert die Einstellungen in der Settings-Datei.
      */
     public void saveToDisk()
     {
@@ -222,7 +222,7 @@ public class Settings
     }
 
     /**
-     * Gibt zurück, das angibt, ob das Spiel im Vollbildmodus angzeigt werden soll, zurück.
+     * Gibt zurück, ob das Spiel im Vollbildmodus angezeigt werden soll.
      *
      * @return {@code true}, falls das Spiel im Vollbildmodus angezeigt werden soll, {@code false} sonst.
      */

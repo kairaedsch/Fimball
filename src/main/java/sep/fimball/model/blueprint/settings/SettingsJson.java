@@ -36,7 +36,7 @@ public class SettingsJson
     public KeyLayout[] keyLayouts;
 
     /**
-     * Ein KeyLaout stellt eine Tastenbelegung in den Einstellungen  zur Speicherung in einer JSON-Datei dar.
+     * Ein KeyLayout stellt eine Tastenbelegung in den Einstellungen zur Speicherung in einer JSON-Datei dar.
      */
     public static class KeyLayout
     {
