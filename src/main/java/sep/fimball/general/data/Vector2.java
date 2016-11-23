@@ -308,11 +308,19 @@ public class Vector2
         return vecOne.angleBetween(vecTwo);
     }
 
+    /**
+     * Gibt die erste Komponente des Vektors zurück.
+     * @return Die erste Komponente des Vektors.
+     */
     public double getX()
     {
         return x;
     }
 
+    /**
+     * Gibt die zweite Komponente des Vektors zurück.
+     * @return Die zweite Komponente des Vektors.
+     */
     public double getY()
     {
         return y;

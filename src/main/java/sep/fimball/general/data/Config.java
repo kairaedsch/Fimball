@@ -256,6 +256,11 @@ public class Config
         return "file:///" + pathToData + pathDataToSounds + "/" + clipName + pathSoundToSoundType;
     }
 
+    /**
+     * Gibt den Pfad zu der Properties-Datei der Sprache an.
+     * @param languageCode Die Sprache
+     * @return Der Pfad zur Datei.
+     */
     public static String pathToLanguage(String languageCode)
     {
         return "bundles/fimball_" + languageCode + ".properties";

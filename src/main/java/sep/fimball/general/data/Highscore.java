@@ -29,11 +29,19 @@ public class Highscore
         this.playerName = new SimpleStringProperty(playerName);
     }
 
+    /**
+     * Gibt die erreichten Punkte des Highscores zurück.
+     * @return Die erreichten Punkte.
+     */
     public ReadOnlyLongProperty scoreProperty()
     {
         return score;
     }
 
+    /**
+     * Gibt den Namen des Spielers im Highscore zurück.
+     * @return Der Name des Spielers.
+     */
     public ReadOnlyStringProperty playerNameProperty()
     {
         return playerName;
