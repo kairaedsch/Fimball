@@ -81,6 +81,8 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      *
+     * @param baseElementId Die ID des zugehörigen BaseElements.
+     * @param baseMediaElement Das zugehörige BaseMediaElement.
      * @param animation   Die zugehörige Animation.
      */
     public ElementImage(String baseElementId, BaseMediaElement baseMediaElement, Animation animation)

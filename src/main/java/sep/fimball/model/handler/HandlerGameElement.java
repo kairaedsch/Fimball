@@ -38,8 +38,16 @@ public interface HandlerGameElement
      */
     int getPointReward();
 
+    /**
+     * Gibt das zum Element zugehörige BaseMediaElement zurück.
+     * @return Das zum Element zugehörige BaseMediaElement.
+     */
     BaseMediaElement getMediaElement();
 
+    /**
+     * Gibt das zum Element zugehörige RuleElement zurück.
+     * @return Das zum Element zugehörige RuleElement
+     */
     BaseRuleElement getRuleElement();
 
 }
