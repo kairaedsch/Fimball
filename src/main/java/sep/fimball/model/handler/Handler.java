@@ -1,6 +1,6 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.blueprint.settings.KeyBinding;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyEventType;
 
 /**

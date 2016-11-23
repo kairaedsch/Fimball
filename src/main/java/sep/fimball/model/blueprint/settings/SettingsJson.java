@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.settings;
 
+import sep.fimball.model.input.KeyBinding;
+
 /**
  * Diese Klasse repräsentiert die JSON-Beschreibung der Settings.
  */
@@ -43,7 +45,7 @@ public class SettingsJson
         /**
          * Speichert den Namen der Funktion, die das Drücken der entsprechenden Taste auslösen soll.
          */
-        public String bindingName;
+        public KeyBinding keyBinding;
 
         /**
          * Speichert den KeyCode der Taste, die an eine Funktion gebunden ist.

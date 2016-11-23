@@ -5,7 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
-import sep.fimball.model.blueprint.JsonFileManager;
+import sep.fimball.model.input.KeyBinding;
+import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -104,7 +105,7 @@ public class Settings
 
             for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
             {
-                keyBindingsMap.put(KeyBinding.valueOf(layout.bindingName), KeyCode.valueOf(layout.keyCode));
+                keyBindingsMap.put(layout.keyBinding, KeyCode.valueOf(layout.keyCode));
             }
         }
         else
@@ -130,7 +131,7 @@ public class Settings
         for (KeyBinding binding : keyBindingsMap.keySet())
         {
             settingsJson.keyLayouts[counter] = new SettingsJson.KeyLayout();
-            settingsJson.keyLayouts[counter].bindingName = binding.name();
+            settingsJson.keyLayouts[counter].keyBinding = binding;
             settingsJson.keyLayouts[counter].keyCode = keyBindingsMap.get(binding).name();
             counter++;
         }

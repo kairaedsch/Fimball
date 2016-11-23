@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.settings.KeyBinding;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;

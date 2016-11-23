@@ -1,7 +1,6 @@
 package sep.fimball.model.input;
 
 import javafx.scene.input.KeyEvent;
-import sep.fimball.model.blueprint.settings.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 
 import java.util.ArrayList;

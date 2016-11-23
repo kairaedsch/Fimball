@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.JsonFileManager;
+import sep.fimball.model.blueprint.json.JsonFileManager;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 

@@ -5,7 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.model.blueprint.settings.KeyBinding;
+import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;

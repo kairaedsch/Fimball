@@ -1,4 +1,4 @@
-package sep.fimball.model.blueprint;
+package sep.fimball.model.blueprint.json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
