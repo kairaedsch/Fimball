@@ -42,7 +42,7 @@ public class PinballMachineSaveTest
             i++;
         }
 
-        //Speichert den Automaten auf der Festplatte, wodurch die Elementliste des Automaten geleert wird, und lädt die Elemente neu von der Festplatte durch Zugriff auf elementsProperty.
+        //Speichert den Automaten auf der Festplatte, wodurch die Element-Liste des Automaten geleert wird, und lädt die Elemente neu von der Festplatte durch Zugriff auf elementsProperty.
         pinballMachine.saveToDisk();
         List<PlacedElement> loadedElements = pinballMachine.elementsProperty().get();
 

@@ -86,7 +86,7 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Ezstellt ein neues SpriteSubViewModel.
+     * Erstellt ein neues SpriteSubViewModel.
      *
      * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
      * @param selectedPlacedElement Das aktuell ausgewählte Element.

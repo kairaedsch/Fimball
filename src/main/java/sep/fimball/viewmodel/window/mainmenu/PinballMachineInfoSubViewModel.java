@@ -95,7 +95,7 @@ public class PinballMachineInfoSubViewModel
     /**
      * Stellt der View den Pfad zum Vorschaubild des Flipperautomaten zur Verfügung.
      *
-     * @return Der Pfad zum Vorschaubild des Flipperautomatens.
+     * @return Der Pfad zum Vorschaubild des Flipperautomaten.
      */
     public ReadOnlyStringProperty imagePathProperty()
     {

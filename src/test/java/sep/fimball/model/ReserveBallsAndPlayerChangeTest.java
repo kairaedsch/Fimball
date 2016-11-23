@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Repräsentiert einen JUnit-Test, der abprüft, ob die Anzahl der verbleibenden Bälle richtig gesetzt wird und der Spielerwechsel richtig von statten geht.
+ * Repräsentiert einen JUnit-Test, der prüft, ob die Anzahl der verbleibenden Bälle richtig gesetzt wird und der Spielerwechsel richtig von statten geht.
  */
 public class ReserveBallsAndPlayerChangeTest
 {
@@ -64,7 +64,7 @@ public class ReserveBallsAndPlayerChangeTest
     }
 
     /**
-     * Hält den Physik- und Regelauswertungsthread an.
+     * Hält den Physik- und Regelauswertung-Thread an.
      */
     @After
     public void stopThreads()

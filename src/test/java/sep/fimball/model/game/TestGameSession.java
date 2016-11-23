@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Diese Klasse abstrahiert von viewspezifischen Eigenschaften einer GameSession wie zum Beispiel Animationen, sodass .
+ * Diese Klasse abstrahiert von View-spezifischen Eigenschaften einer GameSession wie zum Beispiel Animationen, sodass .
  */
 public class TestGameSession extends GameSession
 {

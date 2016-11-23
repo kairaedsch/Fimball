@@ -30,7 +30,7 @@ public class Sound
     }
 
     /**
-     * Giibt den Pfad zur Datei des Sounds zurück.
+     * Gibt den Pfad zur Datei des Sounds zurück.
      * @return Der Pfad zur Datei des Sounds.
      */
     public String getSoundPath()

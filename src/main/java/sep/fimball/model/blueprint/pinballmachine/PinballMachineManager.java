@@ -40,7 +40,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Die Liste der gespeicherten Pinballautomaten.
+     * Die Liste der gespeicherten Flipperautomaten.
      */
     private ListProperty<PinballMachine> pinballMachines;
 
@@ -243,8 +243,8 @@ public class PinballMachineManager
     }
 
     /**
-     * Gibt die Liste der gespeicherten Pinballautomaten zurück.
-     * @return  Die Liste der gespeicherten Pinballautomaten.
+     * Gibt die Liste der gespeicherten Flipperautomaten zurück.
+     * @return  Die Liste der gespeicherten Flipperautomaten.
      */
     public ListProperty<PinballMachine> pinballMachinesProperty()
     {

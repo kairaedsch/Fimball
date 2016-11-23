@@ -10,7 +10,7 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und welcher Dialog angezeigt werden, indem das Viewmodel an die View übergeben wird. Es gewährleistet weiterhin, dass Nutzereingaben problemlos an das Model weitergeleitet werden können.
+ * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und welcher Dialog angezeigt werden, indem das ViewModel an die View übergeben wird. Es gewährleistet weiterhin, dass Nutzereingaben problemlos an das Model weitergeleitet werden können.
  */
 public class SceneManagerViewModel
 {

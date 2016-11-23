@@ -195,7 +195,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Setzt das aktuell ausgewählte ELement aus der Liste der möglichen Elemente auf das gegebene Element.
+     * Setzt das aktuell ausgewählte Element aus der Liste der möglichen Elemente auf das gegebene Element.
      * @param selectedAvailableElement Das neue ausgewählte Element.
      */
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
@@ -224,7 +224,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Setzt das aktuell ausgewählte ELement auf dem Automaten auf das gegebene Element.
+     * Setzt das aktuell ausgewählte Element auf dem Automaten auf das gegebene Element.
      * @param placedElement Das neue ausgewählte Element.
      */
     private void setSelectedPlacedElement(Optional<PlacedElement> placedElement)

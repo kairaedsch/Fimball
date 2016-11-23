@@ -20,7 +20,7 @@ public interface PhysicGameSession<GameElementT>
      * Überreicht die verschiedenen Events, die in der Physik passiert sind, an die GameSession weiter.
      *
      * @param collisionEventArgs Liste aller CollisionsEvents.
-     * @param elementEventArgs   Liste aller ElemnentEvents.
+     * @param elementEventArgs   Liste aller ElementEvents.
      */
     void addEventArgs(List<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
 }

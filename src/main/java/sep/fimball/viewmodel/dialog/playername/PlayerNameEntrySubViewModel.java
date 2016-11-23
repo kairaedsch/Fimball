@@ -3,7 +3,7 @@ package sep.fimball.viewmodel.dialog.playername;
 import javafx.beans.property.*;
 
 /**
- * Das PlayerNameEntrySubViewModel stellt der View Daten über einen möglichen Spieler für eine Partie zu Verfügung und ermöglicht die Änderung des Namens des Spielers sowie gegebenfalls die Löschung des Spielers.
+ * Das PlayerNameEntrySubViewModel stellt der View Daten über einen möglichen Spieler für eine Partie zu Verfügung und ermöglicht die Änderung des Namens des Spielers sowie gegebenenfalls die Löschung des Spielers.
  */
 public class PlayerNameEntrySubViewModel
 {
@@ -49,7 +49,7 @@ public class PlayerNameEntrySubViewModel
     /**
      * Stellt der View den Spielernamen zur Verfügung und dieser kann durch eine bidirektionale Bindung zwischen ViewModel und View von der View geändert werden.
      *
-     * @return Der Spielername.
+     * @return Der Name des Spielers.
      */
     // TODO bind bidirekt
     public StringProperty playerNameProperty()

@@ -169,7 +169,7 @@ public class SceneManagerView
      *
      * @param viewType  Der gegebene ViewType der zu ladenden View.
      * @param viewModel Das zur geladenen View gehörende ViewModel.
-     * @return Eine Node, die die geladene View verbunden mit dem (@code viewmodel} enthält.
+     * @return Eine Node, die die geladene View verbunden mit dem (@code viewModel} enthält.
      */
     private Node loadView(ViewType viewType, ViewModel viewModel)
     {
@@ -181,7 +181,7 @@ public class SceneManagerView
         }
         catch (ClassCastException e)
         {
-            System.err.println("Could not inject viemodel into view");
+            System.err.println("Could not inject viewmodel into view");
             throw e;
         }
 

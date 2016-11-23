@@ -73,7 +73,7 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu den Fimball-Einstellungen des gegebenen Flipperautomatens.
+     * Führt den Benutzer zu den Fimball-Einstellungen des gegebenen Flipperautomaten.
      *
      * @param pinballMachine Der Flipperautomat, dessen Einstellungen angezeigt werden sollen.
      */
@@ -138,9 +138,9 @@ public class MainMenuViewModel extends WindowViewModel
     }
 
     /**
-     * Findet den Index des aktuell ausgewählten Automaten in der Vorschauliste.
+     * Findet den Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
      *
-     * @return Der Index des aktuell ausgewählten Automaten in der Vorschauliste.
+     * @return Der Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
      */
     private int findSelectedIndex()
     {

@@ -71,7 +71,7 @@ public class Player implements HandlerPlayer
     }
 
     /**
-     * Gibt den Mamen des Spielers zurück.
+     * Gibt den Namen des Spielers zurück.
      *
      * @return Der Name des Spielers.
      */

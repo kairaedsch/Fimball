@@ -10,7 +10,7 @@ import sep.fimball.model.media.SoundManager;
 import java.util.Observer;
 
 /**
- * Diese Klasse gibt Anweisungen, die Soundclips, die Hintergrundmusik und die Lautstärke zu ändern, an das Model weiter und stellt der View diese Informationen zur Verfügung.
+ * Diese Klasse gibt Anweisungen, die Sounds und die Lautstärke zu ändern, an das Model weiter und stellt der View diese Informationen zur Verfügung.
  */
 public class SoundManagerViewModel
 {
@@ -56,7 +56,7 @@ public class SoundManagerViewModel
      * //TODO false
      * Benachrichtigt die eingetragenen Observer darüber, dass sich der Soundclip, der abgespielt wird, auf den durch {@code clipPath} angegebenen Soundclip geändert hat.
      *
-     * @param sound Der Pfad zur Datei des neuen Soundclips.
+     * @param sound Der Pfad zur Datei des neuen Sounds.
      */
     private void playClip(Sound sound)
     {
@@ -66,13 +66,13 @@ public class SoundManagerViewModel
 
     /**
      * //TODO false
-     * Registriert das übergebene Objekt als Observer auf Änderungen des gespielten Soundclips.
+     * Registriert das übergebene Objekt als Observer auf Änderungen des gespielten Sounds.
      *
-     * @param playobserver Das Objekt, das bei Änderungen des Soundclips benachrichtigt werden soll.
+     * @param playObserver Das Objekt, das bei Änderungen des Sounds benachrichtigt werden soll.
      */
-    public void addObserver(Observer playobserver)
+    public void addObserver(Observer playObserver)
     {
-        observable.addObserver(playobserver);
+        observable.addObserver(playObserver);
     }
 
     /**
