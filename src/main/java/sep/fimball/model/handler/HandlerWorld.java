@@ -1,16 +1,16 @@
 package sep.fimball.model.handler;
 
 import javafx.beans.property.ReadOnlyListProperty;
-import sep.fimball.model.game.GameElement;
 
 /**
- * TODO
+ * Die World aus der Sicht der Handler.
  */
 public interface HandlerWorld
 {
     /**
-     * TODO
-     * @return
+     * Gibt die Liste der in der World enthaltenen GameElements zurück.
+     *
+     * @return Die Liste der in der World enthaltenen GameElements
      */
-    ReadOnlyListProperty<GameElement> gameElementsProperty();
+    ReadOnlyListProperty<HandlerGameElement> gameElementsProperty();
 }

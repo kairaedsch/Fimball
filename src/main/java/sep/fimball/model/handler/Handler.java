@@ -1,6 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.input.KeyBinding;
 import sep.fimball.model.input.KeyEventType;
 
@@ -55,7 +54,7 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
     }
 
     @Override
-    public void activateElementHandler(GameElement element, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
         if (elementHandler != null)
             elementHandler.activateElementHandler(element, colliderId);

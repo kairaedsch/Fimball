@@ -1,7 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.game.GameElement;
-
 /**
  * Handler, der bei Kollision mit dem Ball ausgelöst wird, und die Punkte des aktuellen Spielers erhöht.
  */
@@ -24,7 +22,7 @@ public class ScoreHandler implements ElementHandler
 
 
     @Override
-    public void activateElementHandler(GameElement element, int colliderID)
+    public void activateElementHandler(HandlerGameElement element, int colliderID)
     {
         session.getCurrentPlayer().pointsProperty().set(session.getCurrentPlayer().getPoints() + element.getPointReward());
     }

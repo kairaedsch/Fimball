@@ -1,7 +1,6 @@
 package sep.fimball.model.handler;
 
 import sep.fimball.model.blueprint.base.BaseMediaElementEvent;
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
 
 import java.util.Map;
@@ -12,7 +11,7 @@ import java.util.Map;
 public class AnimationHandler implements ElementHandler
 {
     @Override
-    public void activateElementHandler(GameElement element, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
         Map<Integer, BaseMediaElementEvent> eventMap = element.getPlacedElement().getBaseElement().getMedia().getEventMap();
 

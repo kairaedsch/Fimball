@@ -86,11 +86,6 @@ public class World implements HandlerWorld
         return new RectangleDouble(rectOrigin, width, height);
     }
 
-    /**
-     * Gibt die Liste der in der World enthaltenen GameElements zurück.
-     *
-     * @return Die Liste der in der World enthaltenen GameElements
-     */
     public ListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;

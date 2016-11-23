@@ -3,6 +3,7 @@ package sep.fimball.model.game;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.media.Animation;
 
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.Optional;
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiellogik genutzt und wird nicht direkt serialisiert
  */
-public class GameElement
+public class GameElement implements HandlerGameElement
 {
     /**
      * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
@@ -117,44 +118,30 @@ public class GameElement
         }
     }
 
-    /**
-     * Gibt die Punkte, die ein Treffen dieses GameElements durch die Kugel bringt, zurück.
-     *
-     * @return Die Punkte, die ein Treffen dieses GameElements durch die Kugel bringt.
-     */
     public int getPointReward()
     {
         return pointReward.get();
     }
 
-    /**
-     * Gibt die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat, zurück.
-     *
-     * @return Die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat
-     */
     public int getHitCount()
     {
         return hitCount.get();
     }
 
-    /**
-     * Setzt die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
-     *
-     * @param hitCount Die neue Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
-     */
     public void setHitCount(int hitCount)
     {
         this.hitCount.set(hitCount);
     }
 
-    /**
-     * Gibt das zu diesem GameElement gehörende PlacedElement zurück.
-     *
-     * @return Das zu diesem GameElement gehörende PlacedElement.
-     */
     public PlacedElement getPlacedElement()
     {
         return placedElement;
+    }
+
+    public void setCurrentAnimation(Optional<Animation> currentAnimation)
+    {
+        this.currentAnimation.set(Optional.empty());
+        this.currentAnimation.set(currentAnimation);
     }
 
     /**
@@ -164,15 +151,5 @@ public class GameElement
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;
-    }
-
-    /**
-     * Setzt die aktuelle Animation des Elements.
-     * @param currentAnimation Die neue aktuelle Animation des Elements.
-     */
-    public void setCurrentAnimation(Optional<Animation> currentAnimation)
-    {
-        this.currentAnimation.set(Optional.empty());
-        this.currentAnimation.set(currentAnimation);
     }
 }

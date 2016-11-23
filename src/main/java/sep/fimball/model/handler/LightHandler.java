@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.game.GameElement;
 
 import java.util.Optional;
 
@@ -17,7 +16,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Lichter, die verwaltet werden.
      */
-    private ListProperty<GameElement> lights;
+    private ListProperty<HandlerGameElement> lights;
 
     /**
      * Erstellt einen neuen LightHandler.
@@ -35,7 +34,7 @@ public class LightHandler implements GameHandler
      */
     public void changeLights()
     {
-        for (GameElement light : lights)
+        for (HandlerGameElement light : lights)
         {
             light.setCurrentAnimation(Optional.of(light.getPlacedElement().getBaseElement().getMedia().getEventMap().entrySet().iterator().next().getValue().getAnimation()));
         }
