@@ -33,7 +33,7 @@ public class AvailableElementSubViewModel
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     /**
-     * Erstellt ein neues AvailableElementSubViewMode.
+     * Erstellt ein neues AvailableElementSubViewModel.
      *
      * @param pinballMachineEditorViewModel Das zugehörige PinballMachineEditorViewModel.
      * @param baseElement                   Das zugehörige BaseElement, dessen Informationen dargestellt werden sollen.
