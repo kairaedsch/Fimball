@@ -65,6 +65,10 @@ public class SelectedElementSubViewModel
         setPlacedElement(Optional.empty());
     }
 
+    /**
+     * Setzt das Flipperautomat-Element, das aktuell ausgewählt ist, auf das gegebene Element.
+     * @param placedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
+     */
     public void setPlacedElement(Optional<PlacedElement> placedElement)
     {
         this.placedElement = placedElement;
@@ -157,6 +161,10 @@ public class SelectedElementSubViewModel
             pinballMachine.removeElement(placedElement.get());
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public ReadOnlyBooleanProperty isSomethingSelectedProperty()
     {
         return isSomethingSelected;

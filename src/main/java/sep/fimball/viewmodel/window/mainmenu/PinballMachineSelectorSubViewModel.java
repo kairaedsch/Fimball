@@ -90,6 +90,10 @@ public class PinballMachineSelectorSubViewModel
         return imagePath;
     }
 
+    /**
+     * Stellt der View die Information, ob der Flipperautomat aktuell ausgewählt ist, zur Verfügung.
+     * @return {@code true}, wenn der Flipperautomat ausgewählt ist, {@code false} sonst.
+     */
     public boolean isSelected()
     {
         return isSelected.get();

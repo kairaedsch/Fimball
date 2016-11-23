@@ -47,6 +47,9 @@ public class LanguageManagerViewModel
         return instance;
     }
 
+    /**
+     * Erstellt ein neues LanguageManagerViewModel.
+     */
     private LanguageManagerViewModel()
     {
         texts = new SimpleMapProperty<>(FXCollections.observableHashMap());
@@ -61,6 +64,11 @@ public class LanguageManagerViewModel
         Settings.getSingletonInstance().languageProperty().addListener((observable, oldValue, newValue) -> loadTextsFromProperties(properties.get(newValue)));
     }
 
+    /**
+     * Lädt die zur gegebenen Sprache gehörenden Properties aus der entsprechenden Datei.
+     * @param language Die Sprache, zu der die geladenen Properties gehören sollen.
+     * @return Die Properties der gegebenen Sprache.
+     */
     private Properties loadProperties(Language language)
     {
         Properties properties = new Properties();
@@ -80,7 +88,10 @@ public class LanguageManagerViewModel
         return properties;
     }
 
-
+    /**
+     * Lädt die Texte aus den gegebenen Properties.
+     * @param properties Die Properties, deren Texte geladen werden sollen.
+     */
     private void loadTextsFromProperties(Properties properties)
     {
         for (Object key : properties.keySet())
@@ -96,6 +107,11 @@ public class LanguageManagerViewModel
         }
     }
 
+    /**
+     * Stellt der View den Text, der durch den {@code key} spezifiziert ist, in der aktuell ausgewählten Sprache zur Verfügung.
+     * @param key Der Key, der den Text spezifiziert.
+     * @return Der gewünschte Text.
+     */
     public StringProperty textProperty(String key)
     {
         return texts.get(key);

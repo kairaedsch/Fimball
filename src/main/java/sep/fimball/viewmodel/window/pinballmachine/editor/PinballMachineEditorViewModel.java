@@ -61,7 +61,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Der ausgewählte MouseMode.
      */
-    private ObjectProperty<MouseMode> mouseModus;
+    private ObjectProperty<MouseMode> mouseMode;
 
     /**
      * Das aktuell ausgewählte Element aus der Liste der platzierbaren Elemente.
@@ -91,7 +91,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.selectedAvailableElement = Optional.empty();
         selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
 
-        mouseModus = new SimpleObjectProperty<>(MouseMode.SELECTING);
+        mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
 
         machineName = new SimpleStringProperty();
         machineName.bind(pinballMachine.nameProperty());
@@ -174,22 +174,30 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
         double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
 
-        if (mouseModus.get() == MouseMode.DRAGGING)
+        if (mouseMode.get() == MouseMode.DRAGGING)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
         }
-        else if (mouseModus.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
+        else if (mouseMode.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).add(selectedPlacedElementPosition.get()));
         }
     }
 
 
-    public void setMouseModus(MouseMode mouseMode)
+    /**
+     * Setzt den MouseMode.
+     * @param mouseMode Der neue MouseMode.
+     */
+    public void setMouseMode(MouseMode mouseMode)
     {
-        this.mouseModus.set(mouseMode);
+        this.mouseMode.set(mouseMode);
     }
 
+    /**
+     * Setzt das aktuell ausgewählte ELement aus der Liste der möglichen Elemente auf das gegebene Element.
+     * @param selectedAvailableElement Das neue ausgewählte Element.
+     */
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
     {
         this.selectedAvailableElement = Optional.of(selectedAvailableElement);
@@ -203,18 +211,22 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
-        if (mouseModus.get() == MouseMode.SELECTING && onlyPressed)
+        if (mouseMode.get() == MouseMode.SELECTING && onlyPressed)
         {
             setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
         }
-        else if (mouseModus.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
+        else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
         {
             PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
-            setMouseModus(MouseMode.SELECTING);
+            setMouseMode(MouseMode.SELECTING);
             setSelectedPlacedElement(Optional.of(placedElement));
         }
     }
 
+    /**
+     * Setzt das aktuell ausgewählte ELement auf dem Automaten auf das gegebene Element.
+     * @param placedElement Das neue ausgewählte Element.
+     */
     private void setSelectedPlacedElement(Optional<PlacedElement> placedElement)
     {
         selectedPlacedElement.set(placedElement);
@@ -227,36 +239,64 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         selectedElementSubViewModel.setPlacedElement(selectedPlacedElement.get());
     }
 
+    /**
+     * Stellt der View das PinballCanvasViewModel des angezeigten Spielfelds zur Verfügung.
+     * @return Das PinballCanvasViewModel des angezeigten Spielfelds.
+     */
     public PinballCanvasViewModel getPinballCanvasViewModel()
     {
         return pinballCanvasViewModel;
     }
 
+    /**
+     * Stellt der View die Position der Kamera zur Verfügung.
+     * @return Die Position der Kamera
+     */
     public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
     {
         return cameraPosition;
     }
 
+    /**
+     * Stellt der View die Stärke des Zooms der Kamera zur Verfügung.
+     * @return Die Stärke des Zooms der Kamera.
+     */
     public ReadOnlyDoubleProperty cameraZoomProperty()
     {
         return cameraZoom;
     }
 
+    /**
+     * Stellt der View das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld zur Verfügung.
+     * @return Das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld
+     */
     public SelectedElementSubViewModel getSelectedElementSubViewModel()
     {
         return selectedElementSubViewModel;
     }
 
+    /**
+     * Stellt der View den Namen des Automaten zur Verfügung.
+     * @return Der Name des Automaten.
+     */
     public ReadOnlyStringProperty machineNameProperty()
     {
         return machineName;
     }
 
-    public ReadOnlyObjectProperty<MouseMode> mouseModusProperty()
+    /**
+     * Stellt der View den ausgewählten MouseMode zur Verfügung.
+     * @return Der ausgewählte MouseMode.
+     */
+    public ReadOnlyObjectProperty<MouseMode> mouseModeProperty()
     {
-        return mouseModus;
+        return mouseMode;
     }
 
+    /**
+     * Stellt der View as aktuell auf dem Spielfeld ausgewählte Element zur Verfügung.
+     * @return Das aktuell auf dem Spielfeld ausgewählte Element.
+     */
     public ReadOnlyObjectProperty<Optional<PlacedElement>> getSelectedPlacedElement()
     {
         return selectedPlacedElement;

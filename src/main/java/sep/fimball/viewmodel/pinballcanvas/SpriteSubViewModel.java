@@ -40,6 +40,9 @@ public class SpriteSubViewModel
      */
     private GameElement gameElement;
 
+    /**
+     * Der Pivot-Punkt des Sprites.
+     */
     private ObjectProperty<Vector2> pivotPoint;
 
     /**
@@ -135,6 +138,10 @@ public class SpriteSubViewModel
         return isSelected;
     }
 
+    /**
+     * Stellt der View den PivotPunkt des Sprites zur Verfügung.
+     * @return Der PivotPunkt des Sprites.
+     */
     public ReadOnlyObjectProperty<Vector2> pivotPointProperty()
     {
         return pivotPoint;

@@ -112,6 +112,11 @@ public class PinballMachineInfoSubViewModel
         return highscoreList;
     }
 
+    /**
+     * Stellt der View den Flipperautomaten zur Verfügung.
+     *
+     * @return Der Flipperautomat.
+     */
     public ReadOnlyObjectProperty<PinballMachine> pinballMachineReadOnlyProperty()
     {
         return pinballMachine;

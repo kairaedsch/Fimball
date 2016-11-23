@@ -74,6 +74,10 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
     }
 
+    /**
+     * Stellt der View den Namen des Automaten zur Verfügung.
+     * @return Der Name des Automaten.
+     */
     public StringProperty machineNameProperty()
     {
         return machineName;

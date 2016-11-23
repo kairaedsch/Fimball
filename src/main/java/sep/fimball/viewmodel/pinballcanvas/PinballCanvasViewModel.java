@@ -172,6 +172,10 @@ public class PinballCanvasViewModel
         redrawObservable.notifyObservers();
     }
 
+    /**
+     * Stellt der View die Information, ob der Flipperautomat im Editor benutzt wird, zur Verfügung.
+     * @return {@code true}, falls das Pinball-Canvas im Editor benutzt wird, {@code false} sonst.
+     */
     public boolean isEditorMode()
     {
         return editorMode;
