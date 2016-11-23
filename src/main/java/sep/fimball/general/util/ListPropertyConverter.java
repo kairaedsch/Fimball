@@ -34,8 +34,7 @@ public class ListPropertyConverter
                 {
                     listPropertyConverted.add(converter.convert(original));
                 }
-            }
-            else
+            } else
             {
                 while (change.next())
                 {
@@ -77,9 +76,9 @@ public class ListPropertyConverter
      * Synchronisiert die Elemente der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code listPropertyOriginal}, wobei Elemente durch den {@code filter} von der Synchronisation ausgeschlossen werden können.
      *
      * @param listPropertyConverted Die Liste, in welche die gefilterten Elemente gespeichert werden.
-     * @param listPropertyOriginal Die Orginale Liste.
-     * @param filter 
-     * @param <elementT>
+     * @param listPropertyOriginal  Die originale Liste.
+     * @param filter                Der Filter, der angewendet wird.
+     * @param <elementT>            Die Klasse der Elemente der konvertierten Liste.
      */
     public static <elementT> void bindAndFilterList(ListProperty<elementT> listPropertyConverted, ObservableList<elementT> listPropertyOriginal, ListFilter<elementT> filter)
     {
@@ -102,9 +101,9 @@ public class ListPropertyConverter
      * @param listPropertyConverted Die Liste, die neu befüllt werden soll
      * @param mapPropertyOriginal   Die Map, deren Werte in die {@code listPropertyConverted} eingefügt werden sollen.
      * @param converter             Der Converter, der angibt, wie ein Wert vom Paar OriginalKeyT, OriginalValueT in ein ConvertedT konvertiert werden sollen.
-     * @param <ConvertedT>          Die Klasse der Elemente in der konvertierten List.
-     * @param <OriginalKeyT>        Die Klasse der Key in der Original-Map.
-     * @param <OriginalValueT>      Die Klasse der Values in der Original-Map.
+     * @param <ConvertedT>          Der Typ der Elemente in der konvertierten List.
+     * @param <OriginalKeyT>        Der Typ der Keys in der Original-Map.
+     * @param <OriginalValueT>      Der Typ der Values in der Original-Map.
      */
 
     public static <ConvertedT, OriginalKeyT, OriginalValueT> void bindAndConvertMap(ListProperty<ConvertedT> listPropertyConverted, ObservableMap<OriginalKeyT, OriginalValueT> mapPropertyOriginal, MapConverter<ConvertedT, OriginalKeyT, OriginalValueT> converter)
@@ -124,8 +123,8 @@ public class ListPropertyConverter
     }
 
     /**
-     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Objekt vom Typ OriginalT
-     * ein Objekt vom Typ ConvertedT zu erstellen
+     * Das Interface stellt einen allgemeinen Converter dar, welcher angegeben werden muss, um aus einem Objekt vom Typ OriginalT
+     * ein Objekt vom Typ ConvertedT zu erstellen.
      *
      * @param <ConvertedT> Der Typ der listPropertyConverted Liste
      * @param <OriginalT>  Der Typ der listPropertyOriginal Liste
@@ -143,12 +142,12 @@ public class ListPropertyConverter
     }
 
     /**
-     * Das Interface stellt einen allgemeinen Converter da welcher angegeben werden muss um aus einem Key/Value Paar vom Typ OriginalT
-     * ein Objekt vom Typ ConvertedT zu erzeugen
+     * Das Interface stellt einen allgemeinen Converter dar, welcher angegeben werden muss, um aus einem Key/Value Paar vom Typ OriginalT
+     * ein Objekt vom Typ ConvertedT zu erzeugen.
      *
-     * @param <ConvertedT>
-     * @param <OriginalKeyT>
-     * @param <OriginalValueT>
+     * @param <ConvertedT>     Der Typ des konvertierten Objekts.
+     * @param <OriginalKeyT>   Der Typ des Keys des originalen Objekts.
+     * @param <OriginalValueT> Der Typ des Values des originalen Objekts.
      */
     @FunctionalInterface
     public interface MapConverter<ConvertedT, OriginalKeyT, OriginalValueT>
@@ -163,9 +162,20 @@ public class ListPropertyConverter
         ConvertedT convert(OriginalKeyT originalKey, OriginalValueT originalValueT);
     }
 
+    /**
+     * Das Interface stellt einen allgemeinen Filter dar, der angibt, ob Elemente aus einer Liste behalten werden sollen.
+     *
+     * @param <elementT> Der Typ der Elemente der Liste, die gefiltert werden soll.
+     */
     @FunctionalInterface
     public interface ListFilter<elementT>
     {
+        /**
+         * Gibt an, ob das Element behalten werden soll oder nicht.
+         *
+         * @param original Das Element, das überprüft werden soll.
+         * @return {@code true}, wenn das Element behalten werden soll, {@code false} sonst.
+         */
         boolean shouldKeep(elementT original);
     }
 }
