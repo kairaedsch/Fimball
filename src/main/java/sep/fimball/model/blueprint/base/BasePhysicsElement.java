@@ -74,11 +74,19 @@ public class BasePhysicsElement
         }
     }
 
+    /**
+     * Gibt die Position des Pivot-Punktes des Elements zurück.
+     * @return Die Position des Pivot-Punktes des Elements.
+     */
     public Vector2 getPivotPoint()
     {
         return pivotPoint;
     }
 
+    /**
+     * Gibt die Liste der Collider, die dieses Element hat, zurück.
+     * @return Eine Liste von Collidern, die dieses Element hat.
+     */
     public List<Collider> getColliders()
     {
         return colliders;
