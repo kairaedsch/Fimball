@@ -9,14 +9,15 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.blueprint.settings.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.InputManager;
-import sep.fimball.model.input.KeyBinding;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
