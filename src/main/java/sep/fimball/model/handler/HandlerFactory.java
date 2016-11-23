@@ -16,32 +16,32 @@ public class HandlerFactory
      */
     public static List<Handler> generateAllHandlers(HandlerGameSession gameSession)
     {
-        List<Handler> triggers = new ArrayList<>();
+        List<Handler> handlers = new ArrayList<>();
 
-        Handler hitTrigger = new Handler();
-        hitTrigger.setElementHandler(new HitHandler());
-        triggers.add(hitTrigger);
+        Handler hitHandler = new Handler();
+        hitHandler.setElementHandler(new HitHandler());
+        handlers.add(hitHandler);
 
-        Handler scoreTrigger = new Handler();
-        scoreTrigger.setElementHandler(new ScoreHandler(gameSession));
-        triggers.add(scoreTrigger);
+        Handler scoreHandler = new Handler();
+        scoreHandler.setElementHandler(new ScoreHandler(gameSession));
+        handlers.add(scoreHandler);
 
-        Handler soundTrigger = new Handler();
-        soundTrigger.setElementHandler(new SoundHandler());
-        triggers.add(soundTrigger);
+        Handler soundHandler = new Handler();
+        soundHandler.setElementHandler(new SoundHandler());
+        handlers.add(soundHandler);
 
-        Handler animationTrigger = new Handler();
-        animationTrigger.setElementHandler(new AnimationHandler());
-        triggers.add(animationTrigger);
+        Handler animationHandler = new Handler();
+        animationHandler.setElementHandler(new AnimationHandler());
+        handlers.add(animationHandler);
 
-        Handler lightTrigger = new Handler();
-        animationTrigger.setGameHandler(new LightHandler(gameSession.getWorld()));
-        triggers.add(lightTrigger);
+        Handler lightHandler = new Handler();
+        animationHandler.setGameHandler(new LightHandler(gameSession.getWorld()));
+        handlers.add(lightHandler);
 
         Handler ballLostHandler = new Handler();
         ballLostHandler.setGameHandler(new BallLostHandler(gameSession));
-        triggers.add(ballLostHandler);
+        handlers.add(ballLostHandler);
 
-        return triggers;
+        return handlers;
     }
 }

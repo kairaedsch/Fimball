@@ -85,7 +85,7 @@ public class ReserveBallsAndPlayerChangeTest
     {
         PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
         session = new TestGameSession(automat, players);
-        List<Handler> triggers = HandlerFactory.generateAllHandlers(session);
+        List<Handler> handlers = HandlerFactory.generateAllHandlers(session);
         Handler ballLostChecker = new Handler();
         ballLostChecker.setGameHandler((GameEvent gameEvent) ->
         {
@@ -97,8 +97,8 @@ public class ReserveBallsAndPlayerChangeTest
                 }
             }
         });
-        triggers.add(ballLostChecker);
-        session.addHandlers(triggers);
+        handlers.add(ballLostChecker);
+        session.addHandlers(handlers);
     }
 
     private void usePlunger()

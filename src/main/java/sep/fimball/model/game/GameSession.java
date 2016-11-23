@@ -294,9 +294,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
             {
-                for (Handler trigger : handlers)
+                for (Handler handler : handlers)
                 {
-                    trigger.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
+                    handler.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
                 }
             }
         }
@@ -305,9 +305,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (isBallLost)
             {
-                for (Handler trigger : handlers)
+                for (Handler handler : handlers)
                 {
-                    trigger.activateGameHandler(GameEvent.BALL_LOST);
+                    handler.activateGameHandler(GameEvent.BALL_LOST);
                 }
                 isBallLost = false;
             }
