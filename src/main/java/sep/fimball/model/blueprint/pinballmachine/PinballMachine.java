@@ -244,6 +244,10 @@ public class PinballMachine
         this.name.set(name);
     }
 
+    /**
+     * Gibt die ID zur Identifizierung des Automaten zurück.
+     * @return Die ID zur Identifizierung des Automaten.
+     */
     public String getID()
     {
         return pinballMachineId.getValue();

@@ -10,7 +10,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 public class PlacedElement
 {
     /**
-     * Verweis auf den Typ des Elements.
+     * Verweis auf die Vorlage des Elements.
      */
     private BaseElement baseElement;
 
@@ -30,7 +30,7 @@ public class PlacedElement
     private DoubleProperty multiplier;
 
     /**
-     * Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
+     * Die Rotation in Grad, um die das PlacedElement gedreht ist.
      */
     private DoubleProperty rotation;
 
@@ -40,8 +40,8 @@ public class PlacedElement
      * @param baseElement Das korrespondierende BaseElement.
      * @param position    Die Position des PlacedElement.
      * @param points      Die Punkte, die das Element vergibt.
-     * @param multiplier  er Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
-     * @param rotation    Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
+     * @param multiplier  Der Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert.
+     * @param rotation    Die Rotation in Grad, um die das PlacedElement gedreht sein soll.
      */
     public PlacedElement(BaseElement baseElement, Vector2 position, int points, double multiplier, double rotation)
     {
@@ -52,36 +52,65 @@ public class PlacedElement
         this.rotation = new SimpleDoubleProperty(rotation);
     }
 
+    /**
+     * Gibt die Position des Elementes auf dem Automaten zurück.
+     * @return Die Position des Elementes auf dem Automaten.
+     */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
     {
         return position;
     }
 
+    /**
+     * Gibt die Punkte, die das Element vergibt, zurück.
+     * @return Die Punkte, die das Element vergibt.
+     */
     public IntegerProperty pointsProperty()
     {
         return points;
     }
 
+    /**
+     * Gibt den Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert, zurück.
+     * @return Der Multiplikator
+     */
     public DoubleProperty multiplierProperty()
     {
         return multiplier;
     }
 
+    /**
+     * Gibt die Rotation in Grad, um die das PlacedElementJson gedreht ist, zurück.
+     * @return Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
+     */
     public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
     }
 
+    /**
+     * Gibt den Verweis auf die Vorlage des Elements zurück.
+     * @return Der Verweis auf die Vorlage des Elements.
+     */
     public BaseElement getBaseElement()
     {
         return baseElement;
     }
 
+    /**
+     * Setzt die Position des Elementes auf dem Automaten.
+     * @param position Die neue Position des Elementes auf dem Automaten.
+     */
     public void setPosition(Vector2 position)
     {
         this.position.set(position);
     }
 
+
+    /**
+     * Setztdie Punkte, die das Element vergibt.
+     * @param points Die neuen Punkte, die das Element vergibt.
+     */
     public void setPoints(int points)
     {
         this.points.set(points);

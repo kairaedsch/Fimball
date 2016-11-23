@@ -242,6 +242,10 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Gibt die Liste der gespeicherten Pinballautomaten zurück.
+     * @return  Die Liste der gespeicherten Pinballautomaten.
+     */
     public ListProperty<PinballMachine> pinballMachinesProperty()
     {
         return pinballMachines;
