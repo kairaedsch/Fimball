@@ -25,7 +25,7 @@ public class PinballMachineSaveTest
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         ReadOnlyListProperty<PlacedElement> pinballMachineElements = pinballMachine.elementsProperty();
 
-        // Lädt alle im Spiel verfügbaren BaseElements und fügt sie in den Auotmaten ein
+        // Lädt alle im Spiel verfügbaren BaseElements und fügt sie in den Automaten ein
         int i = 0;
         for (BaseElement b : BaseElementManager.getInstance().elementsProperty().values())
         {
@@ -50,5 +50,4 @@ public class PinballMachineSaveTest
         // Löscht den Automaten
         pinballMachine.deleteFromDisk();
     }
-
 }
