@@ -20,8 +20,8 @@ public class ListPropertyConverter
      * @param listPropertyConverted Die Liste, in welcher die konvertierten Objekte gespeichert werden
      * @param listPropertyOriginal  Die Liste, welche bei Änderung in die Liste listPropertyConverted konvertiert wird
      * @param converter             Ein Converter welcher angibt wie zwischen den Typen OriginalT und ConvertedT konvertiert wird
-     * @param <ConvertedT>          Der Typ der listPropertyConverted-Liste
-     * @param <OriginalT>           Der Typ der listPropertyOriginal-Liste
+     * @param <ConvertedT>          Der Typ der Elemente in der listPropertyConverted-Liste
+     * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ListProperty<ConvertedT> listPropertyConverted, ObservableList<OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
     {
@@ -78,14 +78,14 @@ public class ListPropertyConverter
      * @param listPropertyConverted Die Liste, in welche die gefilterten Elemente gespeichert werden.
      * @param listPropertyOriginal  Die originale Liste.
      * @param filter                Der Filter, der angewendet wird.
-     * @param <elementT>            Die Klasse der Elemente der konvertierten Liste.
+     * @param <ElementT>            Der Typ der Elemente der konvertierten Liste.
      */
-    public static <elementT> void bindAndFilterList(ListProperty<elementT> listPropertyConverted, ObservableList<elementT> listPropertyOriginal, ListFilter<elementT> filter)
+    public static <ElementT> void bindAndFilterList(ListProperty<ElementT> listPropertyConverted, ObservableList<ElementT> listPropertyOriginal, ListFilter<ElementT> filter)
     {
-        ListChangeListener<elementT> listChangeListener = (change) ->
+        ListChangeListener<ElementT> listChangeListener = (change) ->
         {
             listPropertyConverted.clear();
-            for (elementT original : listPropertyOriginal)
+            for (ElementT original : listPropertyOriginal)
             {
                 if (filter.shouldKeep(original)) listPropertyConverted.add(original);
             }
@@ -126,8 +126,8 @@ public class ListPropertyConverter
      * Das Interface stellt einen allgemeinen Converter dar, welcher angegeben werden muss, um aus einem Objekt vom Typ OriginalT
      * ein Objekt vom Typ ConvertedT zu erstellen.
      *
-     * @param <ConvertedT> Der Typ der listPropertyConverted Liste
-     * @param <OriginalT>  Der Typ der listPropertyOriginal Liste
+     * @param <ConvertedT> Der Typ der Elemente in der listPropertyConverted Liste
+     * @param <OriginalT>  Der Typ der Elemente in der listPropertyOriginal Liste
      */
     @FunctionalInterface
     public interface ListConverter<ConvertedT, OriginalT>
@@ -155,7 +155,7 @@ public class ListPropertyConverter
         /**
          * Erstellt ein Objekt vom Typ ConvertedT aus einem Key/Value Paar vom Typ OriginalT.
          *
-         * @param originalKey    Der Kay vom Typ OriginalKeyT.
+         * @param originalKey    Der Key vom Typ OriginalKeyT.
          * @param originalValueT Der Value vom Typ originalValueT.
          * @return Ein Objekt vom Typ ConvertedT.
          */
@@ -165,10 +165,10 @@ public class ListPropertyConverter
     /**
      * Das Interface stellt einen allgemeinen Filter dar, der angibt, ob Elemente aus einer Liste behalten werden sollen.
      *
-     * @param <elementT> Der Typ der Elemente der Liste, die gefiltert werden soll.
+     * @param <ElementT> Der Typ der Elemente der Liste, die gefiltert werden soll.
      */
     @FunctionalInterface
-    public interface ListFilter<elementT>
+    public interface ListFilter<ElementT>
     {
         /**
          * Gibt an, ob das Element behalten werden soll oder nicht.
@@ -176,6 +176,6 @@ public class ListPropertyConverter
          * @param original Das Element, das überprüft werden soll.
          * @return {@code true}, wenn das Element behalten werden soll, {@code false} sonst.
          */
-        boolean shouldKeep(elementT original);
+        boolean shouldKeep(ElementT original);
     }
 }
