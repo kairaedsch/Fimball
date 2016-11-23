@@ -12,6 +12,7 @@ public class BallLostHandler implements GameHandler
 
     /**
      * Erstellt ein neuen BallLostHandler.
+     *
      * @param handlerGameSession Die Gamesession, welche von dem handler beeinflusst werden soll.
      */
     public BallLostHandler(HandlerGameSession handlerGameSession)

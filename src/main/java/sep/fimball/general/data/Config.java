@@ -7,7 +7,8 @@ import javafx.scene.paint.Color;
  */
 public class Config
 {
-    static {
+    static
+    {
         config();
     }
 
@@ -258,6 +259,7 @@ public class Config
 
     /**
      * Gibt den Pfad zu der Properties-Datei der Sprache an.
+     *
      * @param languageCode Die Sprache
      * @return Der Pfad zur Datei.
      */
