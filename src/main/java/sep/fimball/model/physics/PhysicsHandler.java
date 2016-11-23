@@ -190,7 +190,7 @@ public class PhysicsHandler<GameElementT>
                     }
                 }
 
-                gameSession.addEventArgses(collisionEventArgses, elementEventArgses);
+                gameSession.addEventArgs(collisionEventArgses, elementEventArgses);
 
                 // TODO Notify GameElements about collisions
 

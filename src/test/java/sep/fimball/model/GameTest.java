@@ -63,7 +63,23 @@ public class GameTest
                 BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
         // Starten des Spiels
-        initializeGameSession();
+        session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});
+
+        // Erstellt Handler, der Kollisionen aufzeichnet
+        Handler collisionHandler = new Handler();
+        collisionHandler.setElementHandler(new CollisionHandler(this));
+
+        // Erstellt Handler, der bei Ballverlust ballLost() aufruft
+        Handler ballLostHandler = new Handler();
+        ballLostHandler.setGameHandler(new BallLostHandler(this));
+
+        // Registriert Handler
+        List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
+        handlerList.add(collisionHandler);
+        handlerList.add(ballLostHandler);
+        session.setTriggers(handlerList);
+
+        session.startAll();
 
         // Wegschießen der Kugel durch den Plunger
         usePlunger();
@@ -99,27 +115,6 @@ public class GameTest
         {
             monitor.notify();
         }
-    }
-
-    private void initializeGameSession()
-    {
-        session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});
-
-        // Erstellt Handler, der Kollisionen aufzeichnet
-        Handler collisionHandler = new Handler();
-        collisionHandler.setElementHandler(new CollisionHandler(this));
-
-        // Erstellt Handler, der bei Ballverlust this.notify() aufruft
-        Handler ballLostHandler = new Handler();
-        ballLostHandler.setGameHandler(new BallLostHandler(this));
-
-        // Registriert Handler
-        List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
-        handlerList.add(collisionHandler);
-        handlerList.add(ballLostHandler);
-        session.setTriggers(handlerList);
-
-        session.startAll();
     }
 
     private void usePlunger() throws InterruptedException

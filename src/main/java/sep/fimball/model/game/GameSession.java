@@ -386,14 +386,14 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Fügt eine neue Liste von Kollisions-Events zur Liste von Listen von collisionEventArgs hinzu (TODO lol)
      *
-     * @param collisionEventArgses Die Liste von Kollisions-Events, die hinzugefügt werden soll.
+     * @param collisionEventArgs Die Liste von Kollisions-Events, die hinzugefügt werden soll.
      */
-    public void addEventArgses(List<CollisionEventArgs<GameElement>> collisionEventArgses, List<ElementEventArgs<GameElement>> elementEventArgsesList)
+    public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
         synchronized (physicLocker)
         {
-            this.collisionEventArgsesList.add(collisionEventArgses);
-            this.elementEventArgsesList.add(elementEventArgsesList);
+            this.collisionEventArgsesList.add(collisionEventArgs);
+            this.elementEventArgsesList.add(elementEventArgs);
         }
     }
 
