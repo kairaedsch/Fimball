@@ -3,29 +3,31 @@ package sep.fimball.model.handler;
 import sep.fimball.model.game.Player;
 
 /**
- * TODO
+ * Die HandlerGameSession stellt die GameSession aus der Sicht der Trigger dar.
  */
 public interface HandlerGameSession
 {
     /**
-     * TODO
-     * @return
+     * Gibt den aktiven Spieler zurück.
+     *
+     * @return Der aktive Spieler.
      */
     Player getCurrentPlayer();
 
     /**
-     * TODO
+     * Wechselt zum nächsten Spieler.
      */
     void switchToNextPlayer();
 
     /**
-     * TODO
+     * Spawnt einen neuen Ball auf dem Spielfeld.
      */
     void spawnNewBall();
 
     /**
-     * TODO
-     * @return
+     * Gibt die zu dieser GameSession gehörende World zurück.
+     *
+     * @return Die zu dieser GameSession gehörende World.
      */
     HandlerWorld getWorld();
 }

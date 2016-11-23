@@ -368,9 +368,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
     }
 
-    /**
-     * Spawnt einen neuen Ball auf dem Spielfeld.
-     */
     public void spawnNewBall()
     {
         gameBall.set(new GameElement(world.getBallTemplate(), false));
@@ -417,11 +414,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         gameLoopObservable.addObserver(gameLoopObserver);
     }
 
-    /**
-     * Gibt den aktiven Spieler zurück.
-     *
-     * @return Der aktive Spieler.
-     */
     public Player getCurrentPlayer()
     {
         return players[playerIndex];
