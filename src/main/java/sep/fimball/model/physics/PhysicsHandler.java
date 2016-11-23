@@ -18,6 +18,7 @@ import java.util.TimerTask;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
+ * @param <GameElementT> TODO
  */
 public class PhysicsHandler<GameElementT>
 {
@@ -63,8 +64,14 @@ public class PhysicsHandler<GameElementT>
      */
     private PhysicGameSession gameSession;
 
+    /**
+     * TODO
+     */
     private double maxElementPos;
 
+    /**
+     * TODO
+     */
     private final boolean debug = false;
 
     /**
@@ -72,6 +79,7 @@ public class PhysicsHandler<GameElementT>
      *
      * @param elements Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession Die zugehörige GameSession.
+     * @param maxElementPos TODO
      */
     public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPos)
     {

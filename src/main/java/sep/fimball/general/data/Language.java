@@ -21,7 +21,7 @@ public enum Language
     String name;
 
     /**
-     * Sprachcode;
+     * Der Code, der die Sprache identifiziert.
      */
     private String code;
 
@@ -29,6 +29,7 @@ public enum Language
      * Erzeugt ein neues Objekt zur Kennzeichnung der Sprache, das die durch {@code name} gegebene Sprache kennzeichnet.
      *
      * @param name Die Sprache, {@code GERMAN} oder {@code ENGLISH}.
+     * @param code Der Code, der die Sprache identifiziert.
      */
     Language(String name, String code)
     {

@@ -73,6 +73,13 @@ public class ListPropertyConverter
         listChangeListener.onChanged(null);
     }
 
+    /**
+     * TODO
+     * @param listPropertyConverted
+     * @param listPropertyOriginal
+     * @param filter
+     * @param <OriginalT>
+     */
     public static <OriginalT> void bindAndFilterList(ListProperty<OriginalT> listPropertyConverted, ObservableList<OriginalT> listPropertyOriginal, ListFilter<OriginalT> filter)
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->

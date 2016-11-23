@@ -5,8 +5,15 @@ package sep.fimball.model.handler;
  */
 public class BallLostHandler implements GameHandler
 {
+    /**
+     * TODO
+     */
     private HandlerGameSession handlerGameSession;
 
+    /**
+     * TODO
+     * @param handlerGameSession
+     */
     public BallLostHandler(HandlerGameSession handlerGameSession)
     {
         this.handlerGameSession = handlerGameSession;

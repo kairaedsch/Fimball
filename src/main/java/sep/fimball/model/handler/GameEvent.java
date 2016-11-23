@@ -1,9 +1,12 @@
 package sep.fimball.model.handler;
 
 /**
- * Created by alexcekay on 22.11.16.
+ * TODO
  */
 public enum GameEvent
 {
+    /**
+     * TODO
+     */
     BALL_LOST
 }

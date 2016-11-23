@@ -260,6 +260,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         gameLoop.play();
     }
 
+    /**
+     * TODO
+     */
     protected void update()
     {
         LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
@@ -278,7 +281,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgses)
             {
                 elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
-                elementEventArgs.getGameElement().setRotation(elementEventArgs.getRoation());
+                elementEventArgs.getGameElement().setRotation(elementEventArgs.getRotation());
             }
         }
 

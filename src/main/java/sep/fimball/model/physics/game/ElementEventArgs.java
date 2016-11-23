@@ -3,16 +3,32 @@ package sep.fimball.model.physics.game;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by kaira on 22.11.2016.
+ * TODO
+ * @param <GameElementT>
  */
 public class ElementEventArgs<GameElementT>
 {
+    /**
+     * TODO
+     */
     private GameElementT gameElement;
 
+    /**
+     * TODO
+     */
     private Vector2 position;
 
+    /**
+     * TODO
+     */
     private double roation;
 
+    /**
+     * TODO
+     * @param gameElement
+     * @param position
+     * @param roation
+     */
     public ElementEventArgs(GameElementT gameElement, Vector2 position, double roation)
     {
         this.gameElement = gameElement;
@@ -20,16 +36,28 @@ public class ElementEventArgs<GameElementT>
         this.roation = roation;
     }
 
-    public double getRoation()
+    /**
+     * TODO
+     * @return
+     */
+    public double getRotation()
     {
         return roation;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public Vector2 getPosition()
     {
         return position;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public GameElementT getGameElement()
     {
         return gameElement;

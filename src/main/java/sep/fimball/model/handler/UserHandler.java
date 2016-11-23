@@ -10,6 +10,8 @@ public interface UserHandler
 {
     /**
      * TODO
+     * @param keyBinding
+     * @param keyEventType
      */
     void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType);
 }

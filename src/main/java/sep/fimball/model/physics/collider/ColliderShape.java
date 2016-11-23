@@ -29,5 +29,11 @@ public interface ColliderShape
      */
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 
+    /**
+     * TODO
+     * @param rotation
+     * @param pivotPoint
+     * @return
+     */
     double getMaximumYPos(double rotation, Vector2 pivotPoint);
 }
