@@ -16,7 +16,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Lichter, die verwaltet werden.
      */
-    private ListProperty<? extends HandlerGameElement> lights;
+    private ListProperty<HandlerGameElement> lights;
 
     /**
      * Erstellt einen neuen LightHandler.
@@ -27,6 +27,7 @@ public class LightHandler implements GameHandler
     {
         lights = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndFilterList(lights, world.gameElementsProperty(), original -> original.getPlacedElement().getBaseElement().getType() == BaseElementType.LIGHT);
+
     }
 
     /**

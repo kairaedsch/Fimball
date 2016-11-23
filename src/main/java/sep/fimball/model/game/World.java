@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.handler.HandlerWorld;
 
 /**

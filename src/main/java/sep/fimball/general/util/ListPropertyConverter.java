@@ -23,7 +23,7 @@ public class ListPropertyConverter
      * @param <ConvertedT>          Der Typ der Elemente in der listPropertyConverted-Liste
      * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
-    public static <ConvertedT, OriginalT> void bindAndConvertList(ListProperty<ConvertedT> listPropertyConverted, ObservableList<OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
+    public static <ConvertedT, OriginalT> void bindAndConvertList(ListProperty<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
@@ -80,7 +80,7 @@ public class ListPropertyConverter
      * @param filter                Der Filter, der angewendet wird.
      * @param <ElementT>            Der Typ der Elemente der konvertierten Liste.
      */
-    public static <ElementT> void bindAndFilterList(ListProperty<ElementT> listPropertyConverted, ObservableList<ElementT> listPropertyOriginal, ListFilter<ElementT> filter)
+    public static <ElementT> void bindAndFilterList(ListProperty<ElementT> listPropertyConverted, ObservableList<? extends ElementT> listPropertyOriginal, ListFilter<ElementT> filter)
     {
         ListChangeListener<ElementT> listChangeListener = (change) ->
         {
