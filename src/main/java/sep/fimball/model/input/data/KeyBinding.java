@@ -43,11 +43,7 @@ public enum KeyBinding
     /**
      * Löscht das im Editor ausgewählte BaseElement.
      */
-    EDITOR_DELETE("Editor delete"),
-
-    //TODO remove
-    DEBUG_LEFT("Plunger"),
-    DEBUG_RIGHT("Plunger");
+    EDITOR_DELETE("Editor delete");
 
     /**
      * Der Name der Funktion.

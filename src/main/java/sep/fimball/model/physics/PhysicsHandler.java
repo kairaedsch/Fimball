@@ -70,9 +70,6 @@ public class PhysicsHandler<GameElementT>
      */
     private double maxElementPosY;
 
-    //TODO entfernen
-    private final boolean debug = false;
-
     /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      *
@@ -144,17 +141,8 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                boolean cont = !debug;
 
                 // TODO check bufferedKeyEvents
-                for (KeyObserverEventArgs args : bufferedKeyEvents)
-                {
-                    if (args.getBinding() == KeyBinding.DEBUG_RIGHT)
-                        cont = true;
-                }
-
-                if (!cont)
-                    return;
 
                 // Check all PhysicsElements for collisions with the ball
 
