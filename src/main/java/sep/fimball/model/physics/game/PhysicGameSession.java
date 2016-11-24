@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Die PhysicGameSession stellt die GameSession aus der Sichtweise der Physic da.
  *
- * @param <GameElementT> Die Klasse des GameElements.
+ * @param <GameElementT> TODO
  */
 public interface PhysicGameSession<GameElementT>
 {

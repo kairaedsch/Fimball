@@ -91,8 +91,6 @@ public class PhysicsHandler<GameElementT>
         inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> bufferedKeyEvents.add(args));
         inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.DEBUG_LEFT, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.DEBUG_RIGHT, args -> bufferedKeyEvents.add(args));
     }
 
     /**
