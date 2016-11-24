@@ -199,8 +199,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
                 ballTemplate = element;
-            }
-            else
+            } else
             {
                 GameElement gameElement = new GameElement(element, false);
                 elements.add(gameElement);
@@ -360,6 +359,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         paused = false;
     }
 
+    /**
+     * Wechselt zu dem nächsten Spieler.
+     */
     public void switchToNextPlayer()
     {
         playerIndex++;
@@ -368,6 +370,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
     }
 
+    /**
+     * Erstellt einen neuen Ball an dem Ballursprung.
+     */
     public void spawnNewBall()
     {
         gameBall.set(new GameElement(world.getBallTemplate(), false));
@@ -387,6 +392,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         machineBlueprint.addHighscore(score);
     }
 
+    /**
+     * Fügt ein neues Kollisions- und ElementEvent zu der jeweiligen Liste hinzu.
+     *
+     * @param collisionEventArgs Liste aller CollisionsEvents.
+     * @param elementEventArgs   Liste aller ElementEvents.
+     */
     public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
         synchronized (physicMonitor)
@@ -396,6 +407,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         }
     }
 
+    /**
+     * Lässt den Ball als verloren gelten.
+     *
+     * @param isBallLost Gibt an, ob der Ball verloren ist.
+     */
     public void setBallLost(boolean isBallLost)
     {
         synchronized (physicMonitor)
@@ -414,6 +430,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         gameLoopObservable.addObserver(gameLoopObserver);
     }
 
+    /**
+     * Gibt den Spieler zurück, der gerade spielt.
+     *
+     * @return Der Spieler, der gerade spielt.
+     */
     public Player getCurrentPlayer()
     {
         return players[playerIndex];

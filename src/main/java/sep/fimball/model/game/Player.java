@@ -55,6 +55,11 @@ public class Player implements HandlerPlayer
         }
     }
 
+    /**
+     * Gibt die Punkte des Spielers zurück.
+     *
+     * @return Der Punktestand des Spielers.
+     */
     public ReadOnlyIntegerProperty pointsProperty()
     {
         return points;
@@ -80,6 +85,10 @@ public class Player implements HandlerPlayer
         return name;
     }
 
+    /**
+     * Gibt die Kugel des aktiven Spielers zurück.
+     * @return Die Kugel des aktiven Spielers.
+     */
     public ReadOnlyIntegerProperty ballsProperty()
     {
         return balls;
