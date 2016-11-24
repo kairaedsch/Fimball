@@ -49,7 +49,7 @@ public class GameElement implements HandlerGameElement
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
-     * @param bind Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
+     * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
      */
     public GameElement(PlacedElement element, boolean bind)
     {
@@ -65,8 +65,7 @@ public class GameElement implements HandlerGameElement
             position.bind(element.positionProperty());
             rotation.bind(element.rotationProperty());
             pointReward.bind(element.pointsProperty());
-        }
-        else
+        } else
         {
             position.set(element.positionProperty().get());
             rotation.set(element.rotationProperty().get());
@@ -120,16 +119,31 @@ public class GameElement implements HandlerGameElement
         }
     }
 
+    /**
+     * Gibt zurück wie viele Punkte beim Treffer vergeben werden.
+     *
+     * @return Die Anzahl der Punkte, die vergeben weden soll.
+     */
     public int getPointReward()
     {
         return pointReward.get();
     }
 
+    /**
+     * Gibt zurück wie oft das GameElement von der Kugel getroffen wurde.
+     *
+     * @return Anzahl wie oft das GameElement getroffen wurde.
+     */
     public int getHitCount()
     {
         return hitCount.get();
     }
 
+    /**
+     * Setzt die neue Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
+     *
+     * @param hitCount Die neue Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.
+     */
     public void setHitCount(int hitCount)
     {
         this.hitCount.set(hitCount);
@@ -157,6 +171,11 @@ public class GameElement implements HandlerGameElement
         return placedElement.getBaseElement().getRule();
     }
 
+    /**
+     * Setzt die von diesem GameElement verwendete Animation.
+     *
+     * @param currentAnimation Die Animation.
+     */
     public void setCurrentAnimation(Optional<Animation> currentAnimation)
     {
         this.currentAnimation.set(Optional.empty());
@@ -165,6 +184,7 @@ public class GameElement implements HandlerGameElement
 
     /**
      * Gibt die aktuelle Animation des Elements zurück.
+     *
      * @return Die aktuelle Animation des Elements.
      */
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
