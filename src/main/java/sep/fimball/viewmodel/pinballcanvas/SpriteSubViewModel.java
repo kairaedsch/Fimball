@@ -77,11 +77,11 @@ public class SpriteSubViewModel
         if (gameElement.currentAnimationProperty().get().isPresent())
         {
             Animation animation = gameElement.currentAnimationProperty().get().get();
-            currentImage.set(new ElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getPlacedElement().getBaseElement().getMedia(), animation));
+            currentImage.set(new ElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), animation));
         }
         else
         {
-            currentImage.set(gameElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get());
+            currentImage.set(gameElement.getMediaElement().elementImageProperty().get());
         }
     }
 

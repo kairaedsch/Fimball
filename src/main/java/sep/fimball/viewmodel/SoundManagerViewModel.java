@@ -15,8 +15,7 @@ import java.util.Observer;
 public class SoundManagerViewModel
 {
     /**
-     * //TODO false
-     * Das Observable, das angibt, dass ein Sound abgespielt werden soll.
+     * Das Observable, das benachrichtigt wird, wenn ein Sound abgespielt werden soll.
      */
     private Observable observable;
 
@@ -36,7 +35,7 @@ public class SoundManagerViewModel
     Settings settings;
 
     /**
-     * Erzeugt ein neues SoundManagerViewModel, das sich an die Lautstärke-Properties in {@link Settings} bindet.
+     * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
      */
     public SoundManagerViewModel()
     {
@@ -53,8 +52,7 @@ public class SoundManagerViewModel
     }
 
     /**
-     * //TODO false
-     * Benachrichtigt die eingetragenen Observer darüber, dass sich der Soundclip, der abgespielt wird, auf den durch {@code clipPath} angegebenen Soundclip geändert hat.
+     * Benachrichtigt die eingetragenen Observer darüber, dass ein Sound abgespielt werden soll..
      *
      * @param sound Der Pfad zur Datei des neuen Sounds.
      */
@@ -65,8 +63,7 @@ public class SoundManagerViewModel
     }
 
     /**
-     * //TODO false
-     * Registriert das übergebene Objekt als Observer auf Änderungen des gespielten Sounds.
+     * Registriert das übergebene Objekt als Observer um es zu benachrichtigen, falls ein Sound abgespielt werden soll.
      *
      * @param playObserver Das Objekt, das bei Änderungen des Sounds benachrichtigt werden soll.
      */
