@@ -63,12 +63,14 @@ public class PhysicsHandler<GameElementT>
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
      */
-    private PhysicGameSession gameSession;
+    private PhysicGameSession<GameElementT> gameSession;
 
     /**
      * Die maximale Y-Position aller PhysicElements.
      */
     private double maxElementPosY;
+
+    private final Object monitor = new Object();
 
     /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
@@ -77,7 +79,7 @@ public class PhysicsHandler<GameElementT>
      * @param gameSession    Die zugehörige GameSession.
      * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
      */
-    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession gameSession, double maxElementPosY)
+    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
@@ -98,10 +100,10 @@ public class PhysicsHandler<GameElementT>
      *
      * @param ball Der Ball, der hinzugefügt werden soll.
      */
-    public void addBall(BallPhysicsElement ball)
+    public void addBall(BallPhysicsElement<GameElementT> ball)
     {
         ballPhysicsElement = ball;
-        synchronized (physicsElements)
+        synchronized (monitor)
         {
             physicsElements.add(ball.getSubElement());
         }
@@ -160,10 +162,10 @@ public class PhysicsHandler<GameElementT>
                     }
                 }
 
-                List<CollisionEventArgs> collisionEventArgses = new ArrayList<>();
-                List<ElementEventArgs> elementEventArgses = new ArrayList<>();
+                List<CollisionEventArgs<GameElementT>> collisionEventArgses = new ArrayList<>();
+                List<ElementEventArgs<GameElementT>> elementEventArgses = new ArrayList<>();
 
-                synchronized (physicsElements)
+                synchronized (monitor)
                 {
                     for (PhysicsElement<GameElementT> element : physicsElements)
                     {

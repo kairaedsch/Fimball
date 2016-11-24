@@ -25,7 +25,7 @@ public interface ColliderShape
      *
      * @param rotation   Rotation der Form.
      * @param pivotPoint Punkt, um den die Form rotiert wird.
-     * @return Eine Box, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind..
+     * @return Eine Box, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind.
      */
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 

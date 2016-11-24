@@ -2,6 +2,12 @@ package sep.fimball.general.data;
 
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.file.Paths;
+import java.security.CodeSource;
+
 /**
  * Stellt die Konfiguration dar. Hier sind bestimmte Standardwerte gesetzt welche nicht über die Einstellungen geändert werden können, z.B. der Pfad wo Einstellungen gespeichert werden.
  */
@@ -18,8 +24,14 @@ public class Config
     private static void config()
     {
         String mode = System.getProperty("mode");
-        if (true || (mode != null && mode.equalsIgnoreCase("development")))
+        if (mode != null && mode.equalsIgnoreCase("dev"))
         {
+            // Aktivierbar durch hinzufügen folgender Startparameter:
+            // VM options: -Dmode="dev"
+            System.err.println("|--------------------------------------------------|");
+            System.err.println("|------ WARNING: RUNNING IN DEVELOPMENT MODE ------|");
+            System.err.println("|--------------------------------------------------|");
+
             if (System.getProperty("os.name").startsWith("Windows"))
             {
                 pathToData = "A:/data";
@@ -30,6 +42,39 @@ public class Config
                 pathToData = home + "/link/SEP/data";
             }
         }
+        else
+        {
+            System.out.println("|-----------------------------------------|");
+            System.out.println("|------ RUNNING IN PRODUCTION MODE -------|");
+            System.out.println("|-----------------------------------------|");
+            try
+            {
+                pathToData = getJarContainingFolder(Config.class).replace('\\', '/') + "/data";
+                System.out.println(pathToData);
+            }
+            catch (Exception e)
+            {
+                System.err.println("Could not determine jar Folder: ");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static String getJarContainingFolder(Class aclass) throws Exception {
+        CodeSource codeSource = aclass.getProtectionDomain().getCodeSource();
+
+        File jarFile;
+
+        if (codeSource.getLocation() != null) {
+            jarFile = new File(codeSource.getLocation().toURI());
+        }
+        else {
+            String path = aclass.getResource(aclass.getSimpleName() + ".class").getPath();
+            String jarFilePath = path.substring(path.indexOf(":") + 1, path.indexOf("!"));
+            jarFilePath = URLDecoder.decode(jarFilePath, "UTF-8");
+            jarFile = new File(jarFilePath);
+        }
+        return jarFile.getParentFile().getAbsolutePath();
     }
 
     /**

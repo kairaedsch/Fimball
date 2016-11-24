@@ -30,7 +30,7 @@ public class OverlapAxis
     }
 
     /**
-     * Gibt die Achse, auf welche die überschneidenden Objekte projiziert wurden, zurück..
+     * Gibt die Achse, auf welche die überschneidenden Objekte projiziert wurden, zurück.
      *
      * @return Die Achse.
      */
