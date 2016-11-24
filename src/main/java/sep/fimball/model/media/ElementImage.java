@@ -81,13 +81,13 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      *
-     * @param baseElementId Die ID des zugehörigen BaseElements.
+     * @param baseElementId    Die ID des zugehörigen BaseElements.
      * @param baseMediaElement Das zugehörige BaseMediaElement.
-     * @param animation   Die zugehörige Animation.
+     * @param animation        Die zugehörige Animation.
      */
     public ElementImage(String baseElementId, BaseMediaElement baseMediaElement, Animation animation)
     {
-        this(baseElementId, baseMediaElement.canRotate(),baseMediaElement.getRotationAccuracy(), true, animation);
+        this(baseElementId, baseMediaElement.canRotate(), baseMediaElement.getRotationAccuracy(), true, animation);
     }
 
     /**
@@ -107,10 +107,10 @@ public class ElementImage
     }
 
     /**
-     * Gibt zurück, welcher Anzahl von {@code rotationAccuracy} {@code rotation} entspricht.
+     * Gibt die gegebene Rotation minus die Rotation des Bildes zurück.
      *
-     * @param rotation Der Wert, der mit der {@code rotationAccuracy} verglichen werden soll.
-     * @return Die Anzahl von {@code rotationAccuracy}, die {@code rotation} entspricht.
+     * @param rotation Die gegebene Rotation.
+     * @return Die gegebene Rotation minus die Rotation des Bildes.
      */
     public int getRestRotation(int rotation)
     {
