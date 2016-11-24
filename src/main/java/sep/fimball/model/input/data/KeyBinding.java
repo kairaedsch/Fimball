@@ -8,12 +8,12 @@ public enum KeyBinding
     /**
      * Bewegt den linken Flipper beim Drücken der Taste nach oben, beim loslassen kehrt dieser in die Ausgangsposition zurück.
      */
-    LEFT_FLIPPER("Linker flipper"),
+    LEFT_FLIPPER("Linker Flipper"),
 
     /**
      * Bewegt den rechten Flipper beim Drücken der Taste nach oben, beim loslassen kehrt dieser in die Ausgangsposition zurück.
      */
-    RIGHT_FLIPPER("Rechter Fipper"),
+    RIGHT_FLIPPER("Rechter Flipper"),
 
     /**
      * Zieht den Plunger auf, sodass dieser den Ball in's Spiel schießen kann.
