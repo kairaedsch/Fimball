@@ -17,7 +17,8 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
- * Die SceneManagerView verwaltet die aktuelle WindowView und DialogView und reagiert bei Änderungen im ViewModel damit, dass sie die richtige WindowView und DialogView erstellt und in die Stage einbindet.
+ * Die SceneManagerView verwaltet die aktuelle WindowView und DialogView und reagiert bei Änderungen im ViewModel damit,
+ * dass sie die richtige WindowView und DialogView erstellt und in die Stage einbindet.
  */
 public class SceneManagerView
 {
@@ -37,7 +38,9 @@ public class SceneManagerView
     private GaussianBlur blurEffect;
 
     /**
-     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in die der oberste Container gelegt wird. Auch die initiale Größe des Fensters wird festgelegt und das SceneManagerViewModel initialisiert, an das sich dann auch gleich gebunden wird, um bei Änderungen des ViewModels reagieren zu können.
+     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welcher dann die jeweils aktiven Views eingefügt werden.
+     * Auch wird ein SceneManagerViewModel geholt, an das sich dieses SceneManagerView bindet, um bei Änderungen des ViewModels reagieren zu können,
+     * um z.B. den Dialog zu wechseln.
      *
      * @param stage Die Stage, die gesetzt werden soll.
      */
@@ -63,7 +66,6 @@ public class SceneManagerView
         root.getChildren().add(new Group());
         root.getChildren().add(box);
         root.getChildren().add(new Group());
-
 
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));

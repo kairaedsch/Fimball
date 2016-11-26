@@ -14,7 +14,7 @@ public class BallPhysicsElement<GameElementT>
     /**
      * Darstellung des Balls als PhysicsElement.
      */
-    private PhysicsElement subElement;
+    private PhysicsElement<GameElementT> subElement;
 
     /**
      * Die Geschwindigkeit des Balls.
@@ -27,11 +27,6 @@ public class BallPhysicsElement<GameElementT>
     private double angularVelocity;
 
     /**
-     * Die Form des Colliders des Balls.
-     */
-    private CircleColliderShape collider;
-
-    /**
      * Die Ebene, auf der sich der Ball befindet.
      */
     private WorldLayer layer;
@@ -40,20 +35,17 @@ public class BallPhysicsElement<GameElementT>
      * Erzeugt einen neuen Ball.
      *
      * @param gameElement Das GameElement, dessen Eigenschaften kopiert werden.
-     * @param collider    Die Form des Colliders, die der Ball haben soll.
-     * @param layer       Die Ebene, auf der sich der Ball befinden soll.
      * @param position Die Position, auf der sich der Ball befinden soll.
      * @param rotation Die Rotation, um die der Ball gedreht sein soll.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public BallPhysicsElement(GameElementT gameElement, CircleColliderShape collider, WorldLayer layer, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public BallPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         subElement = new PhysicsElement<>(gameElement, position, rotation, basePhysicsElement);
 
-        this.collider = collider;
         this.velocity = new Vector2();
         this.angularVelocity = 0.0;
-        this.layer = layer;
+        this.layer = WorldLayer.GROUND;
     }
 
     /**
@@ -141,7 +133,7 @@ public class BallPhysicsElement<GameElementT>
      */
     public CircleColliderShape getCollider()
     {
-        return collider;
+        return (CircleColliderShape) subElement.getColliders().get(0).getShapes().get(0);
     }
 
     /**

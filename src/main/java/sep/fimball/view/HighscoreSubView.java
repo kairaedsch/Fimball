@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import sep.fimball.general.data.Highscore;
 
 /**
- * Die HighscoreSubView ist für die Darstellung eines Highscores zuständig.
+ * Die HighscoreSubView ist für die Darstellung eines {@link Highscore}s zuständig.
  */
 public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
 {
@@ -13,13 +13,13 @@ public class HighscoreSubView implements ViewBoundToViewModel<Highscore>
      * Zeigt den Namen des Spielers, der den Highscore erreicht hat.
      */
     @FXML
-    public Label playerName;
+    private Label playerName;
 
     /**
      * Zeigt die Höhe des Highscores.
      */
     @FXML
-    public Label score;
+    private Label score;
 
     @Override
     public void setViewModel(Highscore highscore)

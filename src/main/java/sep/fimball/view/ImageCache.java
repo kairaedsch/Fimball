@@ -11,12 +11,12 @@ import java.util.HashMap;
 public class ImageCache
 {
     /**
-     * Stellt sicher, dass es nur eine Instanz von Settings gibt.
+     * Stellt sicher, dass es nur eine Instanz von ImageCache gibt.
      */
     private static ImageCache instance;
 
     /**
-     * Speichert Bilder zusammen mit dem Pfad, der zu diesem führt.
+     * Speichert Bilder zusammen mit dem Pfad, sodass schon geladenen Bilder durch den pfad gefunden werden können.
      */
     private HashMap<String, Image> cachedImages;
 
@@ -42,7 +42,7 @@ public class ImageCache
     }
 
     /**
-     * Gibt das im {code imagePath} gespeicherte Bild zurück. Falls dieses noch nicht gespeichert wurde, wird es nun zusammen mit {@code imagePath} gespeichert.
+     * Gibt das im {code imagePath} gespeicherte Bild zurück. Falls dieses noch nicht gecached wurde, wird es geladen und zusammen mit {@code imagePath} gecached.
      *
      * @param imagePath Der Pfad zum gewünschten Image.
      * @return Das in {@code imagePath} gespeicherte Bild.

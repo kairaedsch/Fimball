@@ -41,7 +41,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Der aktuelle Spielball.
      */
-    private BallPhysicsElement ballPhysicsElement;
+    private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -79,11 +79,12 @@ public class PhysicsHandler<GameElementT>
      * @param gameSession    Die zugehörige GameSession.
      * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
      */
-    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY)
+    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
         this.maxElementPosY = maxElementPosY;
+        this.ballPhysicsElement = ballPhysicsElement;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -97,24 +98,16 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
-     *
-     * @param ball Der Ball, der hinzugefügt werden soll.
      */
-    public void addBall(BallPhysicsElement<GameElementT> ball)
+    public void setBall(Vector2 position, double rotation)
     {
-        ballPhysicsElement = ball;
         synchronized (monitor)
         {
-            physicsElements.add(ball.getSubElement());
+            ballPhysicsElement.setRotation(rotation);
+            ballPhysicsElement.setPosition(position);
+            ballPhysicsElement.setVelocity(new Vector2(0, 0));
+            ballPhysicsElement.setAngularVelocity(0);
         }
-    }
-
-    /**
-     * Entfernt den aktuellen Ball aus dem Spiel.
-     */
-    public void removeBall()
-    {
-        ballPhysicsElement = null;
     }
 
     /**
@@ -146,27 +139,28 @@ public class PhysicsHandler<GameElementT>
 
                 // Check all PhysicsElements for collisions with the ball
 
-                if (ballPhysicsElement != null)
-                {
-                    double delta = TICK_RATE / 1000.0;
-
-                    // Wende Schwerkraft auf den Ball an
-                    ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().plus(new Vector2(0.0, GRAVITY * delta)));
-
-                    // Bewege den Ball
-                    ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().plus(ballPhysicsElement.getVelocity().scale(delta)));
-
-                    if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
-                    {
-                        gameSession.setBallLost(true);
-                    }
-                }
-
                 List<CollisionEventArgs<GameElementT>> collisionEventArgses = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgses = new ArrayList<>();
+                boolean ballLost = false;
 
                 synchronized (monitor)
                 {
+                    if (ballPhysicsElement != null)
+                    {
+                        double delta = TICK_RATE / 1000.0;
+
+                        // Wende Schwerkraft auf den Ball an
+                        ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().plus(new Vector2(0.0, GRAVITY * delta)));
+
+                        // Bewege den Ball
+                        ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().plus(ballPhysicsElement.getVelocity().scale(delta)));
+
+                        if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
+                        {
+                            ballLost = true;
+                        }
+                    }
+
                     for (PhysicsElement<GameElementT> element : physicsElements)
                     {
                         if (ballPhysicsElement != null && element != ballPhysicsElement.getSubElement())
@@ -185,6 +179,7 @@ public class PhysicsHandler<GameElementT>
                     }
                 }
 
+                gameSession.setBallLost(ballLost);
                 gameSession.addEventArgs(collisionEventArgses, elementEventArgses);
 
                 // TODO Notify GameElements about collisions

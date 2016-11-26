@@ -15,14 +15,12 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.GameEvent;
-import sep.fimball.model.physics.*;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
-import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
-import sep.fimball.model.physics.collider.WorldLayer;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
@@ -199,7 +197,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             if (element.getBaseElement().getType() == BaseElementType.BALL)
             {
                 ballTemplate = element;
-            } else
+                GameElement gameElement = new GameElement(element, false);
+                gameBall.set(gameElement);
+            }
+            else
             {
                 GameElement gameElement = new GameElement(element, false);
                 elements.add(gameElement);
@@ -233,7 +234,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements, ballTemplate);
-        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos);
+        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        physicsElements.add(physElem.getSubElement());
+        elements.add(gameBall.get());
+        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem);
 
         gameLoopObservable = new Observable();
 
@@ -375,11 +379,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void spawnNewBall()
     {
-        gameBall.set(new GameElement(world.getBallTemplate(), false));
-        world.addGameElement(gameBall.get());
-
-        CircleColliderShape ballCollider = (CircleColliderShape) world.getBallTemplate().getBaseElement().getPhysics().getColliders().get(0).getShapes().get(0);
-        physicsHandler.addBall(new BallPhysicsElement<>(gameBall.get(), ballCollider, WorldLayer.GROUND, gameBall.get().getPlacedElement().positionProperty().get(), gameBall.get().getPlacedElement().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics()));
+        PlacedElement originalBall = gameBall.get().getPlacedElement();
+        physicsHandler.setBall(originalBall.positionProperty().get(), originalBall.rotationProperty().get());
     }
 
     /**

@@ -103,7 +103,7 @@ public class PinballMachineManager
 
                 PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores);
                 pinballMachines.add(pinballMachine);
-                System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
+                System.out.println("Machine      \"" + pinballMachineId + ": " + pinballMachine.nameProperty().get() + "\" loaded");
             }
             catch (NullPointerException e)
             {
