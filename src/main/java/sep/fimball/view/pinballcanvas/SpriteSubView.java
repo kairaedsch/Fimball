@@ -88,17 +88,35 @@ public class SpriteSubView
         if (viewModel.rotationProperty().get() != 0)
            rotate(graphicsContext, viewModel.rotationProperty().get(), pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
 
+        if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
+
         if (viewModel.isSelectedProperty().get())
         {
-            double plus = +0.5 * Config.pixelsPerGridUnit;
-            graphicsContext.setLineWidth(Config.pixelsPerGridUnit);
-            graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) (y * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2);
+            double width = Config.pixelsPerGridUnit * 0.25;
+            double plus = +0.5 * width;
+            graphicsContext.setLineWidth(width);
+
+            double time = (System.currentTimeMillis() % 1000) / 1000.0;
+            double trans = -2 * time * (time - 1);
+
+            if(imageLayer == ImageLayer.TOP)
+            {
+                Color color = Config.complementColor.interpolate(Config.secundaryColor, trans);
+                graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
+                graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+            }
+            else
+            {
+                Color color = Config.complementColorDark.interpolate(Config.secundaryColorDark, trans);
+                graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
+                graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y + 1) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+            }
         }
 
-        graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
+        if(imageLayer == ImageLayer.BOTTOM) graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
 
-        graphicsContext.setFill(Color.GRAY);
-        graphicsContext.fillRect((int) ((x + pivot.getX()) * Config.pixelsPerGridUnit), (int) ((y + pivot.getY()) * Config.pixelsPerGridUnit), 10, 10);
+        //graphicsContext.setFill(Color.GRAY);
+        //graphicsContext.fillRect((int) ((x + pivot.getX()) * Config.pixelsPerGridUnit), (int) ((y + pivot.getY()) * Config.pixelsPerGridUnit), 10, 10);
 
         graphicsContext.restore(); // back to original state (before rotation)
     }

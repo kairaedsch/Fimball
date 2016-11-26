@@ -124,11 +124,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(cameraZoom.get() - 0.5);
+            cameraZoom.set(Math.max(Config.maxZoom, cameraZoom.get() - 0.5));
         }
         else
         {
-            cameraZoom.set(cameraZoom.get() / 2);
+            cameraZoom.set(Math.max(Config.maxZoom, cameraZoom.get() / 2));
         }
     }
 
@@ -139,11 +139,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(cameraZoom.get() + 0.5);
+            cameraZoom.set(Math.min(Config.minZoom, cameraZoom.get() + 0.5));
         }
         else
         {
-            cameraZoom.set(cameraZoom.get() * 2);
+            cameraZoom.set(Math.min(Config.minZoom, cameraZoom.get() * 2));
         }
     }
 

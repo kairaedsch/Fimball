@@ -2,9 +2,7 @@ package sep.fimball.model.game;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
@@ -14,10 +12,7 @@ import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.GameEvent;
-import sep.fimball.model.handler.Handler;
-import sep.fimball.model.handler.HandlerFactory;
-import sep.fimball.model.handler.HandlerGameSession;
+import sep.fimball.model.handler.*;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
@@ -80,7 +75,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Der Spieler, der aktuell den Flipperautomaten bedient.
      */
-    private int playerIndex;
+    private IntegerProperty playerIndex;
 
     /**
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
@@ -152,6 +147,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     private final Object physicMonitor;
 
+    private BooleanProperty isOver;
+
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
      *
@@ -165,6 +162,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         physicMonitor = new Object();
         collisionEventArgsesList = new LinkedList<>();
         elementEventArgsesList = new LinkedList<>();
+        isOver = new SimpleBooleanProperty(false);
 
         gameBall = new SimpleObjectProperty<>();
 
@@ -185,7 +183,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             players[i] = new Player(playerNames[i]);
         }
-        playerIndex = 0;
+        playerIndex = new SimpleIntegerProperty(0);
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
@@ -368,10 +366,24 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void switchToNextPlayer()
     {
-        playerIndex++;
-        if (playerIndex >= players.length)
-            playerIndex = 0;
+        int newPlayerIndex = (playerIndex.get() + 1) % players.length;
 
+        int rounds = 0;
+        while (players[newPlayerIndex].ballsProperty().get() == 0 && rounds < players.length)
+        {
+            newPlayerIndex = (newPlayerIndex + 1) % players.length;
+            rounds++;
+        }
+
+        if (rounds >= players.length)
+        {
+            isOver.setValue(true);
+            pauseAll();
+        }
+        else
+        {
+            playerIndex.setValue(newPlayerIndex);
+        }
     }
 
     /**
@@ -431,14 +443,22 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         gameLoopObservable.addObserver(gameLoopObserver);
     }
 
+    @Override
+    public Player getCurrentPlayer()
+    {
+        return players[playerIndex.get()];
+    }
+
     /**
      * Gibt den Spieler zurück, der gerade spielt.
      *
      * @return Der Spieler, der gerade spielt.
      */
-    public Player getCurrentPlayer()
+    public ReadOnlyObjectProperty<Player> currentPlayer()
     {
-        return players[playerIndex];
+        ObjectProperty<Player> currentPlayer = new SimpleObjectProperty<>(players[playerIndex.get()]);
+        playerIndex.addListener((observable, oldValue, newValue) -> currentPlayer.set(players[playerIndex.get()]));
+        return currentPlayer;
     }
 
     /**
@@ -486,7 +506,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      *
      * @return Das Ball-Element.
      */
-    public ObjectProperty<GameElement> gameBallProperty()
+    public ReadOnlyObjectProperty<GameElement> gameBallProperty()
     {
         return gameBall;
     }
@@ -499,5 +519,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public PinballMachine getPinballMachine()
     {
         return machineBlueprint;
+    }
+
+    public ReadOnlyBooleanProperty isOverProperty()
+    {
+        return isOver;
     }
 }

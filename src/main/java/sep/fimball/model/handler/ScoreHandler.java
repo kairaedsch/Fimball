@@ -24,6 +24,6 @@ public class ScoreHandler implements ElementHandler
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderID)
     {
-        session.getCurrentPlayer().addPoints(element.getPointReward());
+        session.getCurrentPlayer().addPoints(element.getPointReward() + 1);
     }
 }

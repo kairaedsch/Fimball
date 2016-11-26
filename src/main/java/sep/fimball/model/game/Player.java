@@ -38,7 +38,7 @@ public class Player implements HandlerPlayer
     @Override
     public void addPoints(int pointReward)
     {
-        points.add(pointReward);
+        points.set(points.get() + pointReward);
     }
 
     @Override

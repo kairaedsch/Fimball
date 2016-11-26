@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
 import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
@@ -26,6 +27,7 @@ public class GameViewModel extends WindowViewModel
      * Der Flipperautomat, der in der aktuellen Partie gespielt wird.
      */
     private final PinballMachine pinballMachine;
+    private String[] playerNames;
 
     /**
      * Die aktuelle Punktzahl des aktiven Spielers.
@@ -78,6 +80,7 @@ public class GameViewModel extends WindowViewModel
     {
         super(WindowType.GAME);
         this.pinballMachine = pinballMachine;
+        this.playerNames = playerNames;
         gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
         playerPoints = new SimpleIntegerProperty();
@@ -94,6 +97,12 @@ public class GameViewModel extends WindowViewModel
 
         cameraZoom = new SimpleDoubleProperty(0.75);
 
+        gameSession.currentPlayer().addListener((observable, oldValue, newValue) -> {
+            playerPoints.bind(newValue.pointsProperty());
+            playerName.bind(newValue.nameProperty());
+            playerReserveBalls.bind(newValue.ballsProperty());
+        });
+
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
         playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
@@ -101,6 +110,13 @@ public class GameViewModel extends WindowViewModel
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
         this.startedFromEditor = startedFromEditor;
+
+        gameSession.isOverProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue)
+            {
+                sceneManager.setDialog(new GameOverViewModel(pinballMachine, getScores(), playerNames, startedFromEditor));
+            }
+        });
     }
 
     /**

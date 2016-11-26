@@ -10,16 +10,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.debug.Debug;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
 import java.util.Observer;
+
+import static sep.fimball.general.data.Config.pixelsPerGridUnit;
 
 /**
  * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
@@ -84,26 +85,25 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
-        graphicsContext.translate((int) (canvas.getWidth() / 2d - cameraPosition.get().getX() * Config.pixelsPerGridUnit * cameraZoom.get()), (int) (canvas.getHeight() / 2d - cameraPosition.get().getY() * Config.pixelsPerGridUnit * cameraZoom.get()));
+        graphicsContext.translate((int) (canvas.getWidth() / 2d - cameraPosition.get().getX() * pixelsPerGridUnit * cameraZoom.get()), (int) (canvas.getHeight() / 2d - cameraPosition.get().getY() * pixelsPerGridUnit * cameraZoom.get()));
 
         graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
 
         if (pinballCanvasViewModel.isEditorMode())
         {
             graphicsContext.setStroke(Config.primaryColorLight);
-            Vector2 gridStart = canvasPosToGridPos(0, 0).scale(Config.pixelsPerGridUnit);
-            Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(Config.pixelsPerGridUnit);
-            for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % Config.pixelsPerGridUnit; gx <= gridEnd.getX(); gx += Config.pixelsPerGridUnit)
+            Vector2 gridStart = canvasPosToGridPos(0, 0).scale(pixelsPerGridUnit);
+            Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(pixelsPerGridUnit);
+            for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % pixelsPerGridUnit; gx <= gridEnd.getX(); gx += pixelsPerGridUnit)
             {
                 graphicsContext.strokeLine(gx, gridStart.getY(), gx, gridEnd.getY());
             }
-            for (int gy = (int) gridStart.getY() - (int) gridStart.getY() % Config.pixelsPerGridUnit; gy <= gridEnd.getY(); gy += Config.pixelsPerGridUnit)
+            for (int gy = (int) gridStart.getY() - (int) gridStart.getY() % pixelsPerGridUnit; gy <= gridEnd.getY(); gy += pixelsPerGridUnit)
             {
                 graphicsContext.strokeLine(gridStart.getX(), gy, gridEnd.getX(), gy);
             }
         }
 
-        graphicsContext.setStroke(new Color(Config.complementColor.getRed(), Config.complementColor.getGreen(), Config.complementColor.getBlue(), 0.25));
         for (SpriteSubView spriteTop : sprites)
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
@@ -160,8 +160,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
 
-        double vx = posToMiddle.getX() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX();
-        double vy = posToMiddle.getY() / (Config.pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY();
+        double vx = posToMiddle.getX() / (pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX();
+        double vy = posToMiddle.getY() / (pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY();
         return new Vector2(vx, vy);
     }
 }

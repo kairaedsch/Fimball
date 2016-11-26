@@ -152,10 +152,20 @@ public class Config
      */
     public final static Color complementColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
 
+    public final static Color complementColorDark = new Color(165 / 255., 119 / 255., 47 / 255., 1);
+
+    public final static Color secundaryColor = new Color(68 / 255., 102 / 255., 143 / 255., 1);
+
+    public final static Color secundaryColorDark = new Color(37 / 255., 69 / 255., 108 / 255., 1);
+
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
      */
     public final static int pixelsPerGridUnit = 15;
+
+    public final static double maxZoom = 1.0 / pixelsPerGridUnit;
+
+    public final static double minZoom = 2;
 
     /**
      * Gibt den kombinierten Pfad zurück, der angibt, wo die BaseElements gespeichert werden.
