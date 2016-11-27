@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.HashMap;
 
 /**
- * Cached bereits geladenen Bilder, um Ladezeiten zu verkürzen.
+ * Lädt Bilder und cached diese, um unnötiges Laden von mehreren Images des selben Bildes zu verhindern.
  */
 public class ImageCache
 {
@@ -42,10 +42,10 @@ public class ImageCache
     }
 
     /**
-     * Gibt das im {code imagePath} gespeicherte Bild zurück. Falls dieses noch nicht gecached wurde, wird es geladen und zusammen mit {@code imagePath} gecached.
+     * Gibt das im {code imagePath} liegende Bild zurück. Falls dieses noch nicht gecached wurde, wird es geladen und zusammen mit {@code imagePath} gecached.
      *
      * @param imagePath Der Pfad zum gewünschten Image.
-     * @return Das in {@code imagePath} gespeicherte Bild.
+     * @return Das in {@code imagePath} liegende Bild.
      */
     public Image getImage(String imagePath)
     {
@@ -55,8 +55,8 @@ public class ImageCache
         }
         else
         {
-            File topFile = new File(imagePath);
-            Image loadedImage = new Image(topFile.toURI().toString(), true);
+            File imageFile = new File(imagePath);
+            Image loadedImage = new Image(imageFile.toURI().toString(), true);
             cachedImages.put(imagePath, loadedImage);
             return loadedImage;
         }
