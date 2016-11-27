@@ -62,22 +62,18 @@ public class Debug
         }
     }
 
-    private static double offset(double val)
-    {
-        return val * Config.pixelsPerGridUnit;
-    }
-
     private static void drawVector(GraphicsContext context, Vector2 pos, Vector2 dir)
     {
-        context.strokeLine(offset(pos.getX()), offset(pos.getY()), offset(pos.getX() + dir.getX()), offset(pos.getY() + dir.getY()));
-        context.fillOval(offset(pos.getX() + dir.getX()) - 1.5, offset(pos.getY() + dir.getY()) - 1.5, 6.0, 6.0);
+        context.strokeLine(pos.getX() * Config.pixelsPerGridUnit, pos.getY() * Config.pixelsPerGridUnit, (pos.getX() + dir.getX()) * Config.pixelsPerGridUnit, (pos.getY() + dir.getY()) * Config.pixelsPerGridUnit);
+        context.fillOval((pos.getX() + dir.getX()) * Config.pixelsPerGridUnit - 1.5, (pos.getY() + dir.getY()) * Config.pixelsPerGridUnit - 1.5, 6.0, 6.0);
         context.setFill(Color.BLACK);
-        context.fillOval(offset(pos.getX()), offset(pos.getY()), 6.0, 6.0);
+        context.fillOval(pos.getX() * Config.pixelsPerGridUnit, pos.getY() * Config.pixelsPerGridUnit, 6.0, 6.0);
     }
 
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
     {
-        context.strokeOval(offset(pos.getX()) - radius, offset(pos.getY()) - radius, offset(pos.getX()) + radius, offset(pos.getY()) + radius);
+        radius = 2.0;
+        context.strokeOval((pos.getX() - radius) * Config.pixelsPerGridUnit, (pos.getY() - radius) * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit);
     }
 
     public static void draw(GraphicsContext context)
