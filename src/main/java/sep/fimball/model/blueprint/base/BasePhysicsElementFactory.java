@@ -60,6 +60,10 @@ public class BasePhysicsElementFactory
                 case "empty":
                     collisionType = new EmptyCollision();
                     break;
+                case "ramp":
+                    //TODO: Add Ramp Collision
+                    collisionType = new EmptyCollision();
+                    break;
                 default:
                     throw new NullPointerException();
             }

@@ -43,16 +43,6 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
         subElement.setRotation(Math.min(Math.max(newRotation, minRotation), maxRotation));
     }
 
-    private boolean isAtTop()
-    {
-        return subElement.getRotation() >= maxRotation;
-    }
-
-    private boolean isAtBottom()
-    {
-        return subElement.getRotation() <= minRotation;
-    }
-
     /**
      * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
      *
