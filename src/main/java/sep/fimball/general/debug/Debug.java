@@ -2,7 +2,13 @@ package sep.fimball.general.debug;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.game.GameElement;
+import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +27,8 @@ public class Debug
         {
             DrawEntry de = new DrawEntry();
             de.type = "vector";
-            de.position = position.scale(30.0);
-            de.direction = direction.scale(30.0);
+            de.position = position;
+            de.direction = direction;
             de.color = color;
             de.creationTime = System.currentTimeMillis();
             drawEntries.add(de);
@@ -35,8 +41,8 @@ public class Debug
         {
             DrawEntry de = new DrawEntry();
             de.type = "circle";
-            de.position = position.scale(30.0);
-            de.radius = radius * 30.0;
+            de.position = position;
+            de.radius = radius;
             de.color = color;
             de.creationTime = -1;
             drawEntries.add(de);
@@ -56,12 +62,37 @@ public class Debug
         }
     }
 
+    private static double offset(double val)
+    {
+        return val * Config.pixelsPerGridUnit;
+    }
+
+    private static void drawVector(GraphicsContext context, Vector2 pos, Vector2 dir)
+    {
+        context.strokeLine(offset(pos.getX()), offset(pos.getY()), offset(pos.getX() + dir.getX()), offset(pos.getY() + dir.getY()));
+        context.fillOval(offset(pos.getX() + dir.getX()) - 1.5, offset(pos.getY() + dir.getY()) - 1.5, 6.0, 6.0);
+        context.setFill(Color.BLACK);
+        context.fillOval(offset(pos.getX()), offset(pos.getY()), 6.0, 6.0);
+    }
+
+    private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
+    {
+        context.strokeOval(offset(pos.getX()) - radius, offset(pos.getY()) - radius, offset(pos.getX()) + radius, offset(pos.getY()) + radius);
+    }
+
     public static void draw(GraphicsContext context)
     {
         synchronized (drawEntries)
         {
             long time = System.currentTimeMillis();
             drawEntries.removeIf(drawEntry -> drawEntry.creationTime != -1 && (drawEntry.creationTime + LIFE_TIME_MS <= time));
+
+            context.save();
+            PhysicsElement.thisIsForDebug.forEach((PhysicsElement pe) -> ((PhysicsElement<GameElement>)pe).getColliders().forEach((Collider col) -> col.getShapes().stream().filter(shape -> shape.getClass().equals(CircleColliderShape.class)).forEach((ColliderShape shape) ->
+            {
+                CircleColliderShape circle = (CircleColliderShape)shape;
+                drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius());
+            })));
 
             for (DrawEntry entry : drawEntries)
             {
@@ -71,13 +102,10 @@ public class Debug
                 switch (entry.type)
                 {
                     case "vector":
-                        context.strokeLine(entry.position.getX(), entry.position.getY(), entry.position.getX() + entry.direction.getX(), entry.position.getY() + entry.direction.getY());
-                        context.fillOval(entry.position.getX() + entry.direction.getX() - 1.5, entry.position.getY() + entry.direction.getY() - 1.5, 6.0, 6.0);
-                        context.setFill(Color.BLACK);
-                        context.fillOval(entry.position.getX(), entry.position.getY(), 6.0, 6.0);
+                        drawVector(context, entry.position, entry.direction);
                         break;
                     case "circle":
-                        context.strokeOval(entry.position.getX() - entry.radius, entry.position.getY() - entry.radius, entry.position.getX() + entry.radius, entry.position.getY() + entry.radius);
+                        drawCircle(context, entry.position, entry.radius);
                         break;
                     case "poly":
 
@@ -87,6 +115,7 @@ public class Debug
                         System.err.println("Invalid debug shape");
                 }
             }
+            context.restore();
         }
     }
 }

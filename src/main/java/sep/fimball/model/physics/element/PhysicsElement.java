@@ -3,6 +3,7 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,8 @@ import java.util.List;
  */
 public class PhysicsElement<GameElementT>
 {
+    public static List<PhysicsElement> thisIsForDebug = new ArrayList<>();
+
     /**
      * Die aktuelle Position des PhysikElements.
      */
@@ -46,6 +49,8 @@ public class PhysicsElement<GameElementT>
      */
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
+        thisIsForDebug.add(this);
+
         this.position = position;
         this.rotation = rotation;
         this.gameElement = gameElement;

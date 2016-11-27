@@ -148,18 +148,18 @@ public class PhysicsHandler<GameElementT>
                                 leftFlippers.forEach(flipper ->
                                 {
                                     if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                        flipper.rotateUp();
-                                    else
                                         flipper.rotateDown();
+                                    else
+                                        flipper.rotateUp();
                                 });
                                 break;
                             case RIGHT_FLIPPER:
                                 rightFlippers.forEach(flipper ->
                                 {
                                     if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                        flipper.rotateUp();
-                                    else
                                         flipper.rotateDown();
+                                    else
+                                        flipper.rotateUp();
                                 });
                                 break;
                         }

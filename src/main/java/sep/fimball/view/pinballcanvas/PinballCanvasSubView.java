@@ -104,6 +104,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             }
         }
 
+        Debug.draw(graphicsContext);
+
         for (SpriteSubView spriteTop : sprites)
         {
             spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
@@ -112,8 +114,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         {
             sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
         }
-
-        Debug.draw(graphicsContext);
 
         graphicsContext.restore();
     }
