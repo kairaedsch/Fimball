@@ -7,7 +7,7 @@ import sep.fimball.general.data.Vector2;
  */
 public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
 {
-    private final double movingAngularVelocity = 200.0;
+    private final double movingAngularVelocity = 500.0;
     private final double minRotation = -15.0;
     private final double maxRotation = 15.0;
 
@@ -20,7 +20,7 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
 
     public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement)
     {
-        subElement = new PhysicsElement<>(gameElement, position, minRotation, basePhysicsElement);
+        subElement = new PhysicsElement<>(gameElement, position, maxRotation, basePhysicsElement);
     }
 
     public void rotateUp()
@@ -37,19 +37,10 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
     public void update(double deltaTime)
     {
         // Rotate flipper if it is moving
-        subElement.setRotation(subElement.getRotation() + angularVelocity * deltaTime);
+        double newRotation = subElement.getRotation() + angularVelocity * deltaTime;
 
         // Clamp flipper rotation to min/max
-        if (isAtTop())
-        {
-            subElement.setRotation(Math.max(subElement.getRotation(), minRotation));
-            angularVelocity = 0.0;
-        }
-        if (isAtBottom())
-        {
-            subElement.setRotation(Math.min(subElement.getRotation(), maxRotation));
-            angularVelocity = 0.0;
-        }
+        subElement.setRotation(Math.min(Math.max(newRotation, minRotation), maxRotation));
     }
 
     private boolean isAtTop()
