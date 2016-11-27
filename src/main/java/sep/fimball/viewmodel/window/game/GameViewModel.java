@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Sounds;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.input.data.KeyBinding;
@@ -253,6 +254,6 @@ public class GameViewModel extends WindowViewModel
 
     @Override
     public void changeBackgroundMusic() {
-        SoundManagerViewModel.getInstance().playMusic("game");
+        SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
     }
 }

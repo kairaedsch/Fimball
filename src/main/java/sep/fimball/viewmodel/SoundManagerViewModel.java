@@ -2,6 +2,7 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.media.Sound;
@@ -137,8 +138,8 @@ public class SoundManagerViewModel
      * Benachrichtigt die Observer, dass die gegebene Hintergrundmusik abgespielt werden soll.
      * @param music Die Hintergrundmusik, die abgespielt werden soll.
      */
-    public void playMusic(String music)
+    public void playMusic(Sounds music)
     {
-        playClip(new Sound(music,true));
+        playClip(new Sound(music.getSoundName(),true));
     }
 }
