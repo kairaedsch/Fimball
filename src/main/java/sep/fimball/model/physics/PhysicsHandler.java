@@ -6,6 +6,7 @@ import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -34,14 +35,12 @@ public class PhysicsHandler<GameElementT>
     public final static int TICK_RATE = 1000 / 120;
 
     /**
-     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit eingerechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
-     */
-    private final double GRAVITY = 1.19554 * 20;
-
-    /**
      * Der aktuelle Spielball.
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
+
+    private List<FlipperPhysicsElement<GameElementT>> leftFlippers;
+    private List<FlipperPhysicsElement<GameElementT>> rightFlippers;
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -79,12 +78,14 @@ public class PhysicsHandler<GameElementT>
      * @param gameSession    Die zugehörige GameSession.
      * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
      */
-    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement, List<FlipperPhysicsElement<GameElementT>> leftFlippers, List<FlipperPhysicsElement<GameElementT>> rightFlippers)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
+        this.leftFlippers = leftFlippers;
+        this.rightFlippers = rightFlippers;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -134,11 +135,35 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
+                double delta = TICK_RATE / 1000.0;
 
-                // TODO check bufferedKeyEvents
+                // Check bufferedKeyEvents
+                for (KeyObserverEventArgs args : bufferedKeyEvents)
+                {
+                    switch (args.getBinding())
+                    {
+                        case LEFT_FLIPPER:
+                            leftFlippers.forEach(flipper ->
+                            {
+                                if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                                    flipper.rotateUp();
+                                else
+                                    flipper.rotateDown();
+                            });
+                            break;
+                        case RIGHT_FLIPPER:
+                            rightFlippers.forEach(flipper ->
+                            {
+                                if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                                    flipper.rotateUp();
+                                else
+                                    flipper.rotateDown();
+                            });
+                            break;
+                    }
+                }
 
                 // Check all PhysicsElements for collisions with the ball
-
                 List<CollisionEventArgs<GameElementT>> collisionEventArgses = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgses = new ArrayList<>();
                 boolean ballLost = false;
@@ -147,13 +172,7 @@ public class PhysicsHandler<GameElementT>
                 {
                     if (ballPhysicsElement != null)
                     {
-                        double delta = TICK_RATE / 1000.0;
-
-                        // Wende Schwerkraft auf den Ball an
-                        ballPhysicsElement.setVelocity(ballPhysicsElement.getVelocity().plus(new Vector2(0.0, GRAVITY * delta)));
-
-                        // Bewege den Ball
-                        ballPhysicsElement.setPosition(ballPhysicsElement.getPosition().plus(ballPhysicsElement.getVelocity().scale(delta)));
+                        ballPhysicsElement.update(delta);
 
                         if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
                         {
@@ -179,12 +198,11 @@ public class PhysicsHandler<GameElementT>
                     }
                 }
 
+                leftFlippers.forEach(flipper -> flipper.update(delta));
+                rightFlippers.forEach(flipper -> flipper.update(delta));
+
                 gameSession.setBallLost(ballLost);
                 gameSession.addEventArgs(collisionEventArgses, elementEventArgses);
-
-                // TODO Notify GameElements about collisions
-
-                // TODO Check if ball is lost
             }
         };
     }

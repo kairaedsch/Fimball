@@ -9,8 +9,13 @@ import sep.fimball.model.physics.collider.WorldLayer;
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT>
+public class BallPhysicsElement<GameElementT> implements PhysicsUpdateable
 {
+    /**
+     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit eingerechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
+     */
+    private final double GRAVITY = 1.19554 * 20;
+
     /**
      * Darstellung des Balls als PhysicsElement.
      */
@@ -46,6 +51,16 @@ public class BallPhysicsElement<GameElementT>
         this.velocity = new Vector2();
         this.angularVelocity = 0.0;
         this.layer = WorldLayer.GROUND;
+    }
+
+    @Override
+    public void update(double deltaTime)
+    {
+        // Wende Schwerkraft auf den Ball an
+        setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
+
+        // Bewege den Ball
+        setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
     }
 
     /**

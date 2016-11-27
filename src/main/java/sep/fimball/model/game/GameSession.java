@@ -17,6 +17,7 @@ import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -189,6 +190,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
         double maxElementPos = machineBlueprint.elementsProperty().get(0).positionProperty().get().getY();
+        List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
+        List<FlipperPhysicsElement<GameElement>> rightFlippers = new ArrayList<>();
 
         for (PlacedElement element : machineBlueprint.elementsProperty())
         {
@@ -204,7 +207,17 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 elements.add(gameElement);
 
                 // TODO Schlimmer als AIDS.
-                PhysicsElement<GameElement> physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                PhysicsElement<GameElement> physElem;
+                if (element.getBaseElement().getType() == BaseElementType.FLIPPER)
+                {
+                    FlipperPhysicsElement flipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    leftFlippers.add(flipperPhysicsElement);
+                    physElem = flipperPhysicsElement.getSubElement();
+                }
+                else
+                {
+                    physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                }
                 physicsElements.add(physElem);
 
                 // TODO Schlimmer als AIDS. Collider in GameSession????
@@ -235,7 +248,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
         physicsElements.add(physElem.getSubElement());
         elements.add(gameBall.get());
-        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem);
+        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
 
         gameLoopObservable = new Observable();
 
