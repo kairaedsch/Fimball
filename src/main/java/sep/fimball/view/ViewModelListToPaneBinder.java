@@ -1,13 +1,9 @@
 package sep.fimball.view;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
-import java.util.Map;
+import sep.fimball.general.util.ListPropertyConverter;
 
 /**
  * ViewModelListToPaneBinder stellt Funktionen zum Binden einer Liste von ViewModels an ein Pane-Node bereit, sodass für jedes Element in der Liste ein Kinder-Node im Pane-Node eingefügt wird.
@@ -55,61 +51,9 @@ public class ViewModelListToPaneBinder
      * @param viewModelToNodeConverter Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
      * @param <ViewModelT>             Das ViewModel der Einträge in {@code viewModelList}.
      */
-    public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
+    public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ListPropertyConverter.ListConverter<Node, ViewModelT> viewModelToNodeConverter)
     {
-        ListChangeListener<ViewModelT> listChangeListener = (change) ->
-        {
-            parentNode.getChildren().clear();
-
-            for (ViewModelT viewModel : viewModelList)
-            {
-                parentNode.getChildren().add(viewModelToNodeConverter.convert(viewModel));
-            }
-        };
-
-        viewModelList.addListener(listChangeListener);
-        listChangeListener.onChanged(null);
-    }
-
-    /**
-     * Bindet die Einträge aus dem {@code mapPropertyViewModel} an die parentNode, indem einzelne Nodes mithilfe des viewModelToNodeConverter erzeugt werden.
-     *
-     * @param parentNode               Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
-     * @param mapPropertyViewModel     Die Map, deren Einträge an die {@code parentNode} gehängt werden sollen.
-     * @param viewModelToNodeConverter Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
-     * @param <ViewModelKeyT>          Das ViewModel der Key in {@code mapPropertyViewModel}.
-     * @param <ViewModelT>             Das ViewModel der Einträge in {@code mapPropertyViewModel}.
-     */
-    public static <ViewModelKeyT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableMap<ViewModelKeyT, ViewModelT> mapPropertyViewModel, ViewModelToNodeConverter<ViewModelT> viewModelToNodeConverter)
-    {
-        MapChangeListener<ViewModelKeyT, ViewModelT> listChangeListener = (change) ->
-        {
-            parentNode.getChildren().clear();
-
-            for (Map.Entry<ViewModelKeyT, ViewModelT> b : mapPropertyViewModel.entrySet())
-            {
-                parentNode.getChildren().add(viewModelToNodeConverter.convert(b.getValue()));
-            }
-        };
-
-        mapPropertyViewModel.addListener(listChangeListener);
-        listChangeListener.onChanged(null);
-    }
-
-    /**
-     * Das ViewModelToNodeConverter-Interface ermöglicht es, ein Node aus einem ViewModel-Object zu erstellen.
-     *
-     * @param <ViewModelT> Das ViewModel, aus dem die Node erstellt werden soll.
-     */
-    public interface ViewModelToNodeConverter<ViewModelT>
-    {
-        /**
-         * Erzeugt ein Node aus einem ViewModel und gibt das Node-Objekt zurück.
-         *
-         * @param viewModel Das ViewModel, aus dem die Node erstellt werden soll.
-         * @return Die erzeugte Node.
-         */
-        Node convert(ViewModelT viewModel);
+        ListPropertyConverter.bindAndConvertList(parentNode.getChildren(), viewModelList, viewModelToNodeConverter);
     }
 
     /**

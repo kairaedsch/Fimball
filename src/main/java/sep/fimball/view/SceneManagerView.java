@@ -28,17 +28,17 @@ public class SceneManagerView
     private SceneManagerViewModel sceneManagerViewModel;
 
     /**
-     * Der oberste Container, in den die gesamte View geladen wird.
+     * Der oberste Container, in denen alle Nodes der aktiven Views geladen werden.
      */
     private StackPane root;
 
     /**
-     * Ein Blur-Effekt, der bei einem aktiven DialogView das darunter liegende WindowView ausblendet.
+     * Ein Blur-Effekt, der bei einem aktiven DialogView das Node der WindowView ausblendet.
      */
     private GaussianBlur blurEffect;
 
     /**
-     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welcher dann die jeweils aktiven Views eingefügt werden.
+     * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welcher dann die Nodes der jeweils aktiven Views eingefügt werden.
      * Auch wird ein SceneManagerViewModel geholt, an das sich dieses SceneManagerView bindet, um bei Änderungen des ViewModels reagieren zu können,
      * um z.B. den Dialog zu wechseln.
      *
@@ -83,67 +83,76 @@ public class SceneManagerView
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
 
         blurEffect = new GaussianBlur(13);
-
     }
 
     /**
-     * Ersetzt das aktuelle Fenster durch das zum übergebenen WindowViewModel gehörende Fenster.
+     * Ersetzt die aktuelle aktive WindowView durch die zum übergebenen WindowViewModel gehörende WindowView.
      *
      * @param windowViewModel Das übergebene WindowViewModel.
      */
     private void updateContent(WindowViewModel windowViewModel)
     {
+        WindowType windowType;
         switch (windowViewModel.getWindowType())
         {
             case SPLASH_SCREEN:
-                setWindow(WindowType.SPLASH_SCREEN_WINDOW, windowViewModel);
+                windowType = WindowType.MAIN_MENU_WINDOW;
                 break;
             case MAIN_MENU:
-                setWindow(WindowType.MAIN_MENU_WINDOW, windowViewModel);
+                windowType = WindowType.MAIN_MENU_WINDOW;
                 break;
             case GAME:
-                setWindow(WindowType.GAME_WINDOW, windowViewModel);
+                windowType = WindowType.GAME_WINDOW;
                 break;
             case TABLE_EDITOR:
-                setWindow(WindowType.TABLE_EDITOR_WINDOW, windowViewModel);
+                windowType = WindowType.TABLE_EDITOR_WINDOW;
                 break;
             case TABLE_SETTINGS:
-                setWindow(WindowType.TABLE_SETTINGS_WINDOW, windowViewModel);
+                windowType = WindowType.TABLE_SETTINGS_WINDOW;
                 break;
+            default:
+                throw new RuntimeException("Unkown WindowType");
         }
+        setWindow(windowType, windowViewModel);
     }
 
     /**
-     * Ersetzt den aktuellen Dialog durch den zum übergebenen DialogViewModel gehörenden Dialog.
+     * Ersetzt die aktuelle aktive DialogView durch die zum übergebenen DialogViewModel gehörende DialogView.
      *
      * @param dialogViewModel Das übergebene DialogViewModel.
      */
     private void updateContent(DialogViewModel dialogViewModel)
     {
+        DialogType dialogType = null;
         switch (dialogViewModel.getDialogType())
         {
             case NONE:
-                removeDialog();
                 break;
             case GAME_OVER:
-                setDialog(DialogType.GAME_OVER_DIALOG, dialogViewModel);
+                dialogType = DialogType.GAME_OVER_DIALOG;
                 break;
             case GAME_SETTINGS:
-                setDialog(DialogType.GAME_SETTINGS_DIALOG, dialogViewModel);
+                dialogType = DialogType.GAME_SETTINGS_DIALOG;
                 break;
             case PLAYER_NAMES:
-                setDialog(DialogType.PLAYER_NAME_DIALOG, dialogViewModel);
+                dialogType = DialogType.PLAYER_NAME_DIALOG;
                 break;
             case PAUSE:
-                setDialog(DialogType.PAUSE, dialogViewModel);
+                dialogType = DialogType.PAUSE;
+                break;
+            default:
+                throw new RuntimeException("Unkown DialogType");
         }
+
+        if(dialogType != null) setDialog(dialogType, dialogViewModel);
+        else removeDialog();
     }
 
     /**
-     * Erzeugt ein Fenster des übergebenden WindowType, setzt dieses als aktuelles Fenster und verbindet es mit dem gegebenen ViewModel.
+     * Erzeugt ein WindowView des übergebenden WindowType, setzt diese als aktive WindowView und verbindet diese mit dem gegebenen ViewModel.
      *
-     * @param windowType Der WindowType des zu setzenden Fensters.
-     * @param viewModel  Das zum windowType gehörende ViewModel.
+     * @param windowType Der WindowType des zu erzeugenden WindowView.
+     * @param viewModel  Das zu bindende ViewModel.
      */
     private void setWindow(WindowType windowType, ViewModel viewModel)
     {
@@ -152,10 +161,10 @@ public class SceneManagerView
     }
 
     /**
-     * Erzeugt einen Dialog des übergebenden DialogType, setzt diesen als aktuelles Fenster und verbindet ihn mit dem gegebenen ViewModel.
+     * Erzeugt ein DialogView des übergebenden DialogType, setzt diese als aktive DialogView und verbindet diese mit dem gegebenen ViewModel.
      *
      * @param dialogType Der DialogType des zu setzenden Dialogs.
-     * @param viewModel  Das zum dialogType gehörende ViewModel.
+     * @param viewModel  Das zu bindende ViewModel.
      */
     private void setDialog(DialogType dialogType, ViewModel viewModel)
     {
@@ -168,11 +177,11 @@ public class SceneManagerView
     }
 
     /**
-     * Lädt eine View aus dem gegebenen ViewType und verbindet diese mit dem gegebenen ViewModel.
+     * Lädt eine View mit RootNode aus dem gegebenen ViewType und verbindet diese mit dem gegebenen ViewModel.
      *
-     * @param viewType  Der gegebene ViewType der zu ladenden View.
+     * @param viewType  Der gegebene ViewType der zu ladenen View.
      * @param viewModel Das zur geladenen View gehörende ViewModel.
-     * @return Eine Node, die die geladene View verbunden mit dem (@code viewModel} enthält.
+     * @return Das RootNode der geladenen View.
      */
     private Node loadView(ViewType viewType, ViewModel viewModel)
     {
@@ -192,7 +201,7 @@ public class SceneManagerView
     }
 
     /**
-     * Blendet den angezeigten Dialog aus und entfernt diesen.
+     * Entfernt den aktuell aktiven Dialog.
      */
     private void removeDialog()
     {
@@ -204,9 +213,9 @@ public class SceneManagerView
     }
 
     /**
-     * Gibt das aktuell angezeigte Fenster zurück.
+     * Gibt das RootNode der aktuell angezeigten WindowView zurück.
      *
-     * @return Das aktuell angezeigte Fenster.
+     * @return Das RootNode der aktuell angezeigten WindowView.
      */
     private Node getWindow()
     {
@@ -216,7 +225,7 @@ public class SceneManagerView
     /**
      * Gibt die transparente Zwischenebene zwischen dem Fenster und eventuell darüber liegenden Dialogen zurück.
      *
-     * @return Die Zwischenebene zwischen Fenstern und Dialogen.
+     * @return Die Zwischenebene zwischen WindowView und DialogView.
      */
     private Node getGlass()
     {
@@ -224,9 +233,9 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt das aktuell angezeigte Fenster mit dem in {@code node} gespeicherten Fenster.
+     * Ersetzt das aktuell angezeigte RootNode einer WindowView mit einem anderen RootNode einer WindowView.
      *
-     * @param node Eine Node, die eine Fenster-View enthält.
+     * @param node Das neue RootNode der aktiven WindowView.
      */
     private void replaceWindow(Node node)
     {
@@ -235,7 +244,7 @@ public class SceneManagerView
     }
 
     /**
-     * Ersetzt den aktuell angezeigten Dialog mit dem in {@code node} gespeicherten Dialog.
+     * Ersetzt das aktuell angezeigte RootNode einer DialogView mit einem anderen RootNode einer DialogView.
      *
      * @param node Eine Node, die eine Dialog-View enthält.
      */
