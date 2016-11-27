@@ -33,10 +33,6 @@ public class ElementImage
      */
     private Animation animation;
 
-    /**
-     * Die Zeit, zu der das ElementImage erstellt wurde.
-     */
-    private long creationTime;
 
     /**
      * Erzeugt ein neues ElementImage.
@@ -75,7 +71,6 @@ public class ElementImage
         this.rotationAccuracy = rotationAccuracy <= 0 ? 360 : rotationAccuracy;
         this.isAnimation = isAnimation;
         this.animation = animation;
-        creationTime = System.currentTimeMillis();
     }
 
     /**
@@ -100,8 +95,8 @@ public class ElementImage
      */
     public String getImagePath(ImageLayer imageLayer, int rotation, long time)
     {
-        int framePos = animation == null ? 0 : (int) ((System.currentTimeMillis() - creationTime) / animation.getDuration());
-        if (isAnimation && framePos < animation.getFrameCount())
+        int framePos = animation == null ? 0 : (int) (time / animation.getDuration());
+        if (isAnimation && animation != null && framePos < animation.getFrameCount())
             return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
         else
             return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
