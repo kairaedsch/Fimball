@@ -9,8 +9,8 @@ import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.media.ElementImage;
 import sep.fimball.view.ImageCache;
+import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 /**
@@ -53,7 +53,7 @@ public class SpriteSubView
         double y = positionProperty.get().getY();
 
         Image image;
-        ElementImage elementImage = viewModel.animationFramePathProperty().get();
+        ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         double rotation = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
         if (imageLayer == ImageLayer.TOP)
             image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));

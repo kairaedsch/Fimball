@@ -6,7 +6,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
-import sep.fimball.model.media.ElementImage;
+import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public class SpriteSubViewModel
     /**
      * Das aktuelle Bild, das von der View gezeichnet werden soll.
      */
-    private ObjectProperty<ElementImage> currentImage;
+    private ObjectProperty<ElementImageViewModel> currentImage;
 
     /**
      * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
@@ -60,6 +60,7 @@ public class SpriteSubViewModel
         rotation.bind(gameElement.rotationProperty());
 
         currentImage = new SimpleObjectProperty<>();
+        currentImage.set(new ElementImageViewModel());
 
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
@@ -77,11 +78,11 @@ public class SpriteSubViewModel
         if (gameElement.currentAnimationProperty().get().isPresent())
         {
             Animation animation = gameElement.currentAnimationProperty().get().get();
-            currentImage.set(new ElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), animation));
+            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), animation);
         }
         else
         {
-            currentImage.set(gameElement.getMediaElement().elementImageProperty().get());
+            currentImage.get().setElementImage(gameElement.getMediaElement().elementImageProperty().get());
         }
     }
 
@@ -123,7 +124,7 @@ public class SpriteSubViewModel
      *
      * @return Der Pfad zum Bild des Sprites.
      */
-    public ReadOnlyObjectProperty<ElementImage> animationFramePathProperty()
+    public ReadOnlyObjectProperty<ElementImageViewModel> animationFramePathProperty()
     {
         return currentImage;
     }

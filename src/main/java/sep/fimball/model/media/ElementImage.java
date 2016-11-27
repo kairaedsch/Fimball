@@ -95,9 +95,10 @@ public class ElementImage
      *
      * @param imageLayer Das ImageLayer des Bildes.
      * @param rotation   Die Drehung des Bildes.
+     * @param time TODO
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
-    public String getImagePath(ImageLayer imageLayer, int rotation)
+    public String getImagePath(ImageLayer imageLayer, int rotation, long time)
     {
         int framePos = animation == null ? 0 : (int) ((System.currentTimeMillis() - creationTime) / animation.getDuration());
         if (isAnimation && framePos < animation.getFrameCount())

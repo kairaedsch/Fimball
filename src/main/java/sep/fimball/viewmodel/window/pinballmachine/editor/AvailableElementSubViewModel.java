@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.viewmodel.ElementImageViewModel;
 
 /**
  * Das AvailableElementSubViewModel stellt der View Daten über ein Flipperautomaten-Element bereit und ermöglicht dem Nutzer, dieses in seinem Flipperautomat zu platzieren.
@@ -42,7 +43,7 @@ public class AvailableElementSubViewModel
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
         this.baseElement = baseElement;
-        imagePath = new SimpleStringProperty(baseElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0));
+        imagePath = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.TOP, 0));
         name = new SimpleStringProperty(baseElement.getMedia().getName());
     }
 
