@@ -3,13 +3,13 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Created by TheAsuro on 27.11.2016.
+ * TODO - flipper halt
  */
 public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
 {
+    private final double movingAngularVelocity = 200.0;
     private final double minRotation = -15.0;
     private final double maxRotation = 15.0;
-    private final double movingAngularVelocity = 5.0;
 
     private double angularVelocity = 0.0;
 
@@ -18,9 +18,9 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
      */
     private PhysicsElement<GameElementT> subElement;
 
-    public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement)
     {
-        subElement = new PhysicsElement<>(gameElement, position, rotation, basePhysicsElement);
+        subElement = new PhysicsElement<>(gameElement, position, minRotation, basePhysicsElement);
     }
 
     public void rotateUp()
@@ -38,11 +38,6 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
     {
         // Rotate flipper if it is moving
         subElement.setRotation(subElement.getRotation() + angularVelocity * deltaTime);
-
-        if (subElement.getRotation() != 0.0)
-            System.out.println("FLIPPER ROTATION: " + subElement.getRotation());
-        if (angularVelocity != 0.0)
-            System.out.println("ANGVEL: " + angularVelocity);
 
         // Clamp flipper rotation to min/max
         if (isAtTop())

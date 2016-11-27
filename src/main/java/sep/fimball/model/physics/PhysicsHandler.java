@@ -90,11 +90,11 @@ public class PhysicsHandler<GameElementT>
         bufferedKeyEvents = new ArrayList<>();
 
         InputManager inputManager = InputManager.getSingletonInstance();
-        inputManager.addListener(KeyBinding.LEFT_FLIPPER, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> bufferedKeyEvents.add(args));
-        inputManager.addListener(KeyBinding.PAUSE, args -> bufferedKeyEvents.add(args));
+        inputManager.addListener(KeyBinding.LEFT_FLIPPER, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
+        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
+        inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
+        inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
+        inputManager.addListener(KeyBinding.PAUSE, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
     }
 
     /**
@@ -138,28 +138,31 @@ public class PhysicsHandler<GameElementT>
                 double delta = TICK_RATE / 1000.0;
 
                 // Check bufferedKeyEvents
-                for (KeyObserverEventArgs args : bufferedKeyEvents)
+                synchronized (bufferedKeyEvents)
                 {
-                    switch (args.getBinding())
+                    for (KeyObserverEventArgs args : bufferedKeyEvents)
                     {
-                        case LEFT_FLIPPER:
-                            leftFlippers.forEach(flipper ->
-                            {
-                                if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                    flipper.rotateUp();
-                                else
-                                    flipper.rotateDown();
-                            });
-                            break;
-                        case RIGHT_FLIPPER:
-                            rightFlippers.forEach(flipper ->
-                            {
-                                if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                    flipper.rotateUp();
-                                else
-                                    flipper.rotateDown();
-                            });
-                            break;
+                        switch (args.getBinding())
+                        {
+                            case LEFT_FLIPPER:
+                                leftFlippers.forEach(flipper ->
+                                {
+                                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                                        flipper.rotateUp();
+                                    else
+                                        flipper.rotateDown();
+                                });
+                                break;
+                            case RIGHT_FLIPPER:
+                                rightFlippers.forEach(flipper ->
+                                {
+                                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                                        flipper.rotateUp();
+                                    else
+                                        flipper.rotateDown();
+                                });
+                                break;
+                        }
                     }
                 }
 
