@@ -57,6 +57,9 @@ public class BasePhysicsElementFactory
                 case "bounce":
                     collisionType = new BounceCollision(collider.collisionType.strength);
                     break;
+                case "flipper":
+                    collisionType = new FlipperCollision();
+                    break;
                 case "empty":
                     collisionType = new EmptyCollision();
                     break;

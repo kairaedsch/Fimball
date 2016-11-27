@@ -1,8 +1,9 @@
 package sep.fimball.model.physics.collider;
 
-import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.collision.CollisionInfo;
 import sep.fimball.model.physics.collision.CollisionType;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.List;
 
@@ -51,21 +52,19 @@ public class Collider
     /**
      * Überprüft, ob das gegebene BallPhysicsElement eine Kollision mit einer der ColliderShapes des Colliders hat.
      *
-     * @param ball                   Der Ball, dessen Kollisionen überprüft werden sollen.
-     * @param colliderObjectPosition Die Position des Elements, mit dem kollidiert wird.
-     * @param rotation               Die Drehung des Elements, mit dem kollidiert wird.
-     * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
+     * @param ball    Der Ball, dessen Kollisionen überprüft werden sollen.
+     * @param element Das Element, bei dem die Kollision mit dem Ball überprüft wird
      * @return {@code true}, wenn eine Kollision stattfindet, {@code false} sonst.
      */
-    public boolean checkCollision(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public boolean checkCollision(BallPhysicsElement ball, PhysicsElement element)
     {
         boolean hit = false;
         for (ColliderShape shape : shapes)
         {
-            HitInfo info = shape.calculateHitInfo(ball, colliderObjectPosition, rotation, pivotPoint);
+            HitInfo info = shape.calculateHitInfo(ball, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
             if (info.isHit())
             {
-                type.applyCollision(ball, info.getShortestIntersect(), rotation);
+                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element.getRotation()));
                 hit = true;
             }
         }
@@ -84,6 +83,7 @@ public class Collider
 
     /**
      * Gibt die ID des Colliders zurück.
+     *
      * @return Die ID des Colliders.
      */
     public int getId()

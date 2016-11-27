@@ -36,10 +36,8 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
     @Override
     public void update(double deltaTime)
     {
-        // Rotate flipper if it is moving
+        // Rotate flipper
         double newRotation = subElement.getRotation() + angularVelocity * deltaTime;
-
-        // Clamp flipper rotation to min/max
         subElement.setRotation(Math.min(Math.max(newRotation, minRotation), maxRotation));
     }
 

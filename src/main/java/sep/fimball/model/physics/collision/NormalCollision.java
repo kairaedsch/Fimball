@@ -3,7 +3,6 @@ package sep.fimball.model.physics.collision;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Diese Klasse repräsentiert eine einfache Kollision, bei der der Ball einfach abprallt, es wirken keine weiteren Kräfte.
@@ -16,14 +15,14 @@ public class NormalCollision implements CollisionType
     private final double bounce = 0.7;
 
     @Override
-    public void applyCollision(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
+    public void applyCollision(CollisionInfo info)
     {
-        ball.setPosition(ball.getPosition().plus(shortestIntersect));
-        Vector2 shortestIntersectNorm = shortestIntersect.normalized();
-        Debug.addDrawVector(ball.getPosition().plus(new Vector2(ball.getCollider().getRadius(), ball.getCollider().getRadius())), shortestIntersect.normalized(), Color.RED);
+        info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
+        Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
+        Debug.addDrawVector(info.getBall().getPosition().plus(new Vector2(info.getBall().getCollider().getRadius(), info.getBall().getCollider().getRadius())), info.getShortestIntersect().normalized(), Color.RED);
         //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.GREEN);
-        Vector2 newVel = ball.getVelocity().minus(shortestIntersectNorm.scale((1.0 + bounce) * ball.getVelocity().dot(shortestIntersectNorm)));
-        ball.setVelocity(newVel);
+        Vector2 newVel = info.getBall().getVelocity().minus(shortestIntersectNorm.scale((1.0 + bounce) * info.getBall().getVelocity().dot(shortestIntersectNorm)));
+        info.getBall().setVelocity(newVel);
         //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.BLUE);
     }
 }
