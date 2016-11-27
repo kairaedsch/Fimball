@@ -8,10 +8,12 @@ import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.collider.PolygonColliderShape;
 import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by TheAsuro on 17.11.2016.
@@ -72,8 +74,36 @@ public class Debug
 
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
     {
-        radius = 2.0;
         context.strokeOval((pos.getX() - radius) * Config.pixelsPerGridUnit, (pos.getY() - radius) * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit);
+    }
+
+    private static void drawCircle(GraphicsContext context, Vector2 pos, double radius, double rotation, Vector2 pivotPoint)
+    {
+        Vector2 rotatedPos = pos.rotate(rotation, pivotPoint);
+        drawCircle(context, rotatedPos, radius);
+    }
+
+    private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset)
+    {
+        if (offset == null)
+            offset = new Vector2();
+
+        double[] xPoints = new double[verts.size()];
+        double[] yPoints = new double[verts.size()];
+
+        for (int i = 0; i < verts.size(); i++)
+        {
+            xPoints[i] = (verts.get(i).getX() + offset.getX()) * Config.pixelsPerGridUnit;
+            yPoints[i] = (verts.get(i).getY() + offset.getY()) * Config.pixelsPerGridUnit;
+        }
+
+        context.strokePolygon(xPoints, yPoints, verts.size());
+    }
+
+    private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset, double rotation, Vector2 pivotPoint)
+    {
+        List<Vector2> rotatedVerts = verts.stream().map(v2 -> v2.rotate(rotation, pivotPoint)).collect(Collectors.toList());
+        drawPolygon(context, rotatedVerts, offset);
     }
 
     public static void draw(GraphicsContext context)
@@ -84,10 +114,18 @@ public class Debug
             drawEntries.removeIf(drawEntry -> drawEntry.creationTime != -1 && (drawEntry.creationTime + LIFE_TIME_MS <= time));
 
             context.save();
-            PhysicsElement.thisIsForDebug.forEach((PhysicsElement pe) -> ((PhysicsElement<GameElement>)pe).getColliders().forEach((Collider col) -> col.getShapes().stream().filter(shape -> shape.getClass().equals(CircleColliderShape.class)).forEach((ColliderShape shape) ->
+            PhysicsElement.thisIsForDebug.forEach((PhysicsElement pe) -> ((PhysicsElement<GameElement>)pe).getColliders().forEach((Collider col) -> col.getShapes().forEach((ColliderShape shape) ->
             {
-                CircleColliderShape circle = (CircleColliderShape)shape;
-                drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius());
+                if (shape.getClass() == CircleColliderShape.class)
+                {
+                    CircleColliderShape circle = (CircleColliderShape)shape;
+                    drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius(), pe.getRotation(), pe.getBasePhysicsElement().getPivotPoint());
+                }
+                else if (shape.getClass() == PolygonColliderShape.class)
+                {
+                    PolygonColliderShape poly = (PolygonColliderShape)shape;
+                    drawPolygon(context, poly.getVertices(), pe.getPosition(), pe.getRotation(), pe.getBasePhysicsElement().getPivotPoint());
+                }
             })));
 
             for (DrawEntry entry : drawEntries)
@@ -104,8 +142,7 @@ public class Debug
                         drawCircle(context, entry.position, entry.radius);
                         break;
                     case "poly":
-
-                        //context.strokePolygon();
+                        drawPolygon(context, entry.positions, entry.position);
                         break;
                     default:
                         System.err.println("Invalid debug shape");

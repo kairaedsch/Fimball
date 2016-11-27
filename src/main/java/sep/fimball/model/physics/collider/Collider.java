@@ -1,8 +1,8 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.collision.CollisionType;
+import sep.fimball.model.physics.element.BallPhysicsElement;
 
 import java.util.List;
 
