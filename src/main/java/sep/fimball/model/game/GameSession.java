@@ -59,7 +59,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.stopPhysics();
-        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), machineBlueprint.elementsProperty(), element -> new GameElement(element, true));
+        ListPropertyConverter.bindAndConvertList(
+                gameSession.getWorld().gameElementsProperty(),
+                machineBlueprint.elementsProperty(),
+                element -> new GameElement(element, true));
+
         return gameSession;
     }
 
@@ -131,12 +135,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
      */
-    private LinkedList<List<CollisionEventArgs<GameElement>>> collisionEventArgsesList;
+    private LinkedList<List<CollisionEventArgs<GameElement>>> collisionEventArgsList;
 
     /**
      * Die Liste der von der Physik-Loop übertragenen ElementEvent-Argumente.
      */
-    private LinkedList<List<ElementEventArgs<GameElement>>> elementEventArgsesList;
+    private LinkedList<List<ElementEventArgs<GameElement>>> elementEventArgsList;
 
     /**
      * Gibt an, ob die Kugel verloren wurde.
@@ -148,7 +152,15 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     private final Object physicMonitor;
 
+    /**
+     * TODO
+     */
     private BooleanProperty isOver;
+
+    /**
+     * Gibt nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
+     */
+    private static final double BALL_LOST_TOLERANCE = 10;
 
     /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
@@ -160,10 +172,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         this.machineBlueprint = machineBlueprint;
         this.handlers = new ArrayList<>();
-        physicMonitor = new Object();
-        collisionEventArgsesList = new LinkedList<>();
-        elementEventArgsesList = new LinkedList<>();
-        isOver = new SimpleBooleanProperty(false);
+        this.physicMonitor = new Object();
+        this.collisionEventArgsList = new LinkedList<>();
+        this.elementEventArgsList = new LinkedList<>();
+        this.isOver = new SimpleBooleanProperty(false);
 
         gameBall = new SimpleObjectProperty<>();
 
@@ -179,12 +191,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 addTiltCounter();
         });*/
 
-        players = new Player[playerNames.length];
+        this.players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
         {
-            players[i] = new Player(playerNames[i]);
+            this.players[i] = new Player(playerNames[i]);
         }
-        playerIndex = new SimpleIntegerProperty(0);
+        this.playerIndex = new SimpleIntegerProperty(0);
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
@@ -199,9 +211,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 ballTemplate = element;
                 GameElement gameElement = new GameElement(element, false);
-                gameBall.set(gameElement);
-            }
-            else
+                this.gameBall.set(gameElement);
+
+            } else
             {
                 GameElement gameElement = new GameElement(element, false);
                 elements.add(gameElement);
@@ -244,13 +256,18 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         if (ballTemplate == null)
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
-        world = new World(elements, ballTemplate);
-        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        this.world = new World(elements, ballTemplate);
+        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(
+                this.gameBall.get(),
+                this.gameBall.get().positionProperty().get(),
+                this.gameBall.get().rotationProperty().get(),
+                this.gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+
         physicsElements.add(physElem.getSubElement());
         elements.add(gameBall.get());
         physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
 
-        gameLoopObservable = new Observable();
+        this.gameLoopObservable = new Observable();
 
         spawnNewBall();
 
@@ -284,33 +301,35 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     protected void gameLoopUpdate()
     {
-        LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsesList;
-        LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsesList;
+        LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
+        LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
         {
-            localCollisionEventArgsesList = this.collisionEventArgsesList;
-            this.collisionEventArgsesList = new LinkedList<>();
+            localCollisionEventArgsList = this.collisionEventArgsList;
+            this.collisionEventArgsList = new LinkedList<>();
 
-            localElementEventArgsesList = this.elementEventArgsesList;
-            this.elementEventArgsesList = new LinkedList<>();
+            localElementEventArgsList = this.elementEventArgsList;
+            this.elementEventArgsList = new LinkedList<>();
         }
 
-        for (List<ElementEventArgs<GameElement>> elementEventArgses : localElementEventArgsesList)
+        for (List<ElementEventArgs<GameElement>> elementEventArgsList : localElementEventArgsList)
         {
-            for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgses)
+            for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
             {
                 elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
                 elementEventArgs.getGameElement().setRotation(elementEventArgs.getRotation());
             }
         }
 
-        for (List<CollisionEventArgs<GameElement>> collisionEventArgses : localCollisionEventArgsesList)
+        for (List<CollisionEventArgs<GameElement>> collisionEventArgsList : localCollisionEventArgsList)
         {
-            for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgses)
+            for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgsList)
             {
                 for (Handler handler : handlers)
                 {
-                    handler.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
+                    handler.activateElementHandler(
+                            collisionEventArgs.getOtherElement(),
+                            collisionEventArgs.getColliderId());
                 }
             }
         }
@@ -428,8 +447,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         synchronized (physicMonitor)
         {
-            this.collisionEventArgsesList.add(collisionEventArgs);
-            this.elementEventArgsesList.add(elementEventArgs);
+            this.collisionEventArgsList.add(collisionEventArgs);
+            this.elementEventArgsList.add(elementEventArgs);
         }
     }
 
@@ -534,6 +553,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return machineBlueprint;
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public ReadOnlyBooleanProperty isOverProperty()
     {
         return isOver;

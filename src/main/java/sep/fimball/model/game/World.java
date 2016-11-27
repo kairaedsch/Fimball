@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.handler.HandlerWorld;
@@ -53,7 +54,6 @@ public class World implements HandlerWorld
      */
     private RectangleDouble generateWalls()
     {
-        //TODO If GameElements contain the ball this method won't work anymore
         double minX = gameElements.get(0).positionProperty().get().getX();
         double maxX = gameElements.get(0).positionProperty().get().getX();
         double minY = gameElements.get(0).positionProperty().get().getY();
@@ -61,6 +61,8 @@ public class World implements HandlerWorld
 
         for (GameElement gameElement : gameElements)
         {
+            if(gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL)) continue;
+
             double currentX = gameElement.positionProperty().get().getX();
             double currentY = gameElement.positionProperty().get().getY();
 
