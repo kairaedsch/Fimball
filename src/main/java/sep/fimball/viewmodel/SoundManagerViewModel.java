@@ -15,9 +15,19 @@ import java.util.Observer;
 public class SoundManagerViewModel
 {
     /**
+     * Stellt sicher, dass es nur eine Instanz vom SoundManagerViewModel gibt.
+     */
+    private static SoundManagerViewModel instance;
+
+    /**
      * Das Observable, das benachrichtigt wird, wenn ein Sound abgespielt werden soll.
      */
-    private Observable observable;
+    private Observable playObservable;
+
+    /**
+     * Das Observable, das benachrichtigt wird, wenn die Musik stoppen soll.
+     */
+    private Observable stopObservable;
 
     /**
      * Die Lautstärke der Hintergrundmusik.
@@ -37,9 +47,10 @@ public class SoundManagerViewModel
     /**
      * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
      */
-    public SoundManagerViewModel()
+    private SoundManagerViewModel()
     {
-        observable = new Observable();
+        playObservable = new Observable();
+        stopObservable = new Observable();
         settings = Settings.getSingletonInstance();
 
         musicVolume = new SimpleDoubleProperty();
@@ -58,8 +69,16 @@ public class SoundManagerViewModel
      */
     private void playClip(Sound sound)
     {
-        observable.setChanged();
-        observable.notifyObservers(sound);
+        playObservable.setChanged();
+        playObservable.notifyObservers(sound);
+    }
+
+    /**
+     * Benachrichtigt die eingetragenen Observer darüber, dass die Hintergrundmusik gestoppt werden soll.
+     */
+    public void stopBackgroundMusic() {
+        stopObservable.setChanged();
+        stopObservable.notifyObservers();
     }
 
     /**
@@ -67,9 +86,9 @@ public class SoundManagerViewModel
      *
      * @param playObserver Das Objekt, das bei Änderungen des Sounds benachrichtigt werden soll.
      */
-    public void addObserver(Observer playObserver)
+    public void addPlayObserver(Observer playObserver)
     {
-        observable.addObserver(playObserver);
+        playObservable.addObserver(playObserver);
     }
 
     /**
@@ -90,5 +109,36 @@ public class SoundManagerViewModel
     public DoubleProperty sfxVolumeProperty()
     {
         return sfxVolume;
+    }
+
+    /**
+     * Registriert das übergebene Objekt als Observer um es zu benachrichtigen, falls die Hintergrundmusik gestoppt werden soll.
+     *
+     * @param stopObserver Das Objekt, das benachrichtigt werden soll, wenn die Hintergrundmusik gestoppt werden soll.
+     */
+    public void addStopObvserver(Observer stopObserver)
+    {
+        stopObservable.addObserver(stopObserver);
+    }
+
+    /**
+     * Gibt das bereits existierende SoundManagerViewModel oder ein neu angelegtes zurück, falls noch keines existiert.
+     *
+     * @return Eine Instanz von SoundManagerViewModel.
+     */
+    public static SoundManagerViewModel getInstance() {
+        if (instance == null) {
+            instance = new SoundManagerViewModel();
+        }
+        return instance;
+    }
+
+    /**
+     * Benachrichtigt die Observer, dass die gegebene Hintergrundmusik abgespielt werden soll.
+     * @param music Die Hintergrundmusik, die abgespielt werden soll.
+     */
+    public void playMusic(String music)
+    {
+        playClip(new Sound(music,true));
     }
 }

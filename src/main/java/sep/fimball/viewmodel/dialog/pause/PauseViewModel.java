@@ -82,4 +82,9 @@ public class PauseViewModel extends DialogViewModel
         }
     }
 
+    @Override
+    public void changeBackgroundMusic() {
+            System.out.println("pause background");
+    }
+
 }

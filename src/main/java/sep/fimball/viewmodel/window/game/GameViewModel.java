@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
 import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
@@ -247,5 +248,11 @@ public class GameViewModel extends WindowViewModel
     public PinballMachine getPinballMachine()
     {
         return pinballMachine;
+    }
+
+
+    @Override
+    public void changeBackgroundMusic() {
+        SoundManagerViewModel.getInstance().playMusic("game");
     }
 }

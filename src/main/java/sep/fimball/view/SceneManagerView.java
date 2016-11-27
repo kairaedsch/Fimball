@@ -67,6 +67,8 @@ public class SceneManagerView
         root.getChildren().add(box);
         root.getChildren().add(new Group());
 
+        new SoundManagerView();
+
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
@@ -82,7 +84,6 @@ public class SceneManagerView
 
         blurEffect = new GaussianBlur(13);
 
-        new SoundManagerView();
     }
 
     /**

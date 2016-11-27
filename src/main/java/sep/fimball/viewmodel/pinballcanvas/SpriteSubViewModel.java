@@ -59,8 +59,7 @@ public class SpriteSubViewModel
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
 
-        currentImage = new SimpleObjectProperty<>();
-        currentImage.set(new ElementImageViewModel());
+        currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 

@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
@@ -152,6 +153,12 @@ public class MainMenuViewModel extends WindowViewModel
             }
         }
         return -1;
+    }
+
+    @Override
+    public void changeBackgroundMusic() {
+        System.out.println("mainmenmu music");
+        SoundManagerViewModel.getInstance().playMusic("mainmenu");
     }
 
 }

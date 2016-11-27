@@ -17,6 +17,7 @@ import java.util.Observer;
  */
 public class SoundManagerView
 {
+
     /**
      * Spielt die Hintergrundmusik ab.
      */
@@ -52,7 +53,7 @@ public class SoundManagerView
      */
     public SoundManagerView()
     {
-        this.soundManagerViewModel = new SoundManagerViewModel();
+        this.soundManagerViewModel = SoundManagerViewModel.getInstance();
 
         musicVolume = new SimpleDoubleProperty();
         musicVolume.bind(soundManagerViewModel.musicVolumeProperty());
@@ -62,8 +63,10 @@ public class SoundManagerView
         loadedAudioClips = new HashMap<>();
 
         Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
+        Observer stopObserver = (o, args) -> stopBackgroundMusic();
 
-        soundManagerViewModel.addObserver(playClipObserver);
+        soundManagerViewModel.addPlayObserver(playClipObserver);
+        soundManagerViewModel.addStopObvserver(stopObserver);
     }
 
     /**
@@ -74,7 +77,7 @@ public class SoundManagerView
     private void play(Sound sound)
     {
         String soundPath = sound.getSoundPath();
-        if(sound.isRepeating())
+        if (sound.isRepeating())
         {
             backgroundMusic = new Media(soundPath);
             if (mediaPlayer != null)
@@ -84,8 +87,7 @@ public class SoundManagerView
             mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
             mediaPlayer.volumeProperty().bind(musicVolume);
             mediaPlayer.play();
-        }
-        else
+        } else
         {
             if (!loadedAudioClips.containsKey(soundPath))
             {
@@ -97,5 +99,13 @@ public class SoundManagerView
 
             loadedAudioClips.get(soundPath).play();
         }
+    }
+
+    /**
+     * Stoppt die Hintergrundmusik, falls eine abgespielt wird.
+     */
+    private void stopBackgroundMusic()
+    {
+        if (mediaPlayer != null) mediaPlayer.stop();
     }
 }

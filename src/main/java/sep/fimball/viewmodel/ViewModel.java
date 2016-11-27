@@ -33,4 +33,10 @@ public abstract class ViewModel
     {
 
     }
+
+    /**
+     * Ändert die abgespielte Hintergrundmusik.
+     */
+    public void changeBackgroundMusic() {
+    }
 }

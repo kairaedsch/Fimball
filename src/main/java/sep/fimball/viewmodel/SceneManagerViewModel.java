@@ -45,8 +45,7 @@ public class SceneManagerViewModel
         if (dialogViewModel.get().getDialogType() == DialogType.NONE)
         {
             windowViewModel.get().handleKeyEvent(event);
-        }
-        else
+        } else
         {
             dialogViewModel.get().handleKeyEvent(event);
         }
@@ -61,6 +60,7 @@ public class SceneManagerViewModel
     {
         windowViewModel.setSceneManager(this);
         this.windowViewModel.set(windowViewModel);
+        this.windowViewModel.get().changeBackgroundMusic();
         this.dialogViewModel.set(new EmptyViewModel());
     }
 
@@ -73,6 +73,8 @@ public class SceneManagerViewModel
     {
         dialogViewModel.setSceneManager(this);
         this.dialogViewModel.set(dialogViewModel);
+        if (dialogViewModel.getDialogType() != DialogType.NONE)
+            this.dialogViewModel.get().changeBackgroundMusic();
     }
 
     /**
