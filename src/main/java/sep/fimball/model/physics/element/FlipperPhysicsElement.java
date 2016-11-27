@@ -25,12 +25,12 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
 
     public void rotateUp()
     {
-        if (!isAtTop()) angularVelocity = movingAngularVelocity;
+        angularVelocity = movingAngularVelocity;
     }
 
     public void rotateDown()
     {
-        if (!isAtBottom()) angularVelocity = -movingAngularVelocity;
+        angularVelocity = -movingAngularVelocity;
     }
 
     @Override

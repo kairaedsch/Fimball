@@ -222,7 +222,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 PhysicsElement<GameElement> physElem;
                 if (element.getBaseElement().getType() == BaseElementType.FLIPPER)
                 {
-                    FlipperPhysicsElement flipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    FlipperPhysicsElement<GameElement> flipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     leftFlippers.add(flipperPhysicsElement);
                     physElem = flipperPhysicsElement.getSubElement();
                 }
