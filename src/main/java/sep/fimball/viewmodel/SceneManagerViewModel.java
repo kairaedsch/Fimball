@@ -13,7 +13,10 @@ import sep.fimball.viewmodel.window.SplashScreenViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
 /**
- * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und welcher Dialog angezeigt werden, indem das ViewModel an die View übergeben wird. Es gewährleistet weiterhin, dass Nutzereingaben problemlos an das Model weitergeleitet werden können.
+ * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und
+ * welcher Dialog angezeigt werden, indem das ViewModel an die View übergeben
+ * wird. Es gewährleistet weiterhin, dass Nutzereingaben problemlos an das Model
+ * weitergeleitet werden können.
  */
 public class SceneManagerViewModel
 {
@@ -33,7 +36,8 @@ public class SceneManagerViewModel
     private BooleanProperty fullscreen;
 
     /**
-     * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel verwaltet.
+     * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel 
+     * verwaltet.
      */
     public SceneManagerViewModel()
     {
@@ -46,7 +50,8 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Leitet das Key-Event an das zuständige WindowViewModel bzw. DialogViewModel weiter.
+     * Leitet das Key-Event an das aktuell aktive WindowViewModel bzw.
+     * DialogViewModel weiter.
      *
      * @param event Das Key-Event, das weitergeleitet werden soll.
      */
@@ -55,14 +60,16 @@ public class SceneManagerViewModel
         if (dialogViewModel.get().getDialogType() == DialogType.NONE)
         {
             windowViewModel.get().handleKeyEvent(event);
-        } else
+        }
+        else
         {
             dialogViewModel.get().handleKeyEvent(event);
         }
     }
 
     /**
-     * Ändert das aktuelle WindowViewModel auf das, das der Methode übergeben wird und leert den aktuell offenen Dialog, falls vorhanden.
+     * Ändert das aktuelle WindowViewModel auf das, das der Methode übergeben
+     * wird und löscht den aktuell offenen Dialog, falls vorhanden.
      *
      * @param windowViewModel Das neue WindowViewModel.
      */
@@ -75,7 +82,8 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Ändert das aktuelle DialogViewModel auf das, das der Methode übergeben wird.
+     * Ändert das aktuelle DialogViewModel auf das, das der Methode übergeben
+     * wird.
      *
      * @param dialogViewModel Das neue DialogViewModel.
      */
@@ -88,7 +96,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Stellt der View das aktuelle WindowViewModel zur Verfügung.
+     * Stellt das aktuelle WindowViewModel als ObjectProperty zur Verfügung.
      *
      * @return Das aktuelle WindowViewModel.
      */
@@ -98,7 +106,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Stellt der View das aktuelle DialogViewModel zur Verfügung.
+     * Stellt das aktuelle DialogViewModel als ObjectProperty zur Verfügung.
      *
      * @return Das aktuelle DialogViewModel.
      */

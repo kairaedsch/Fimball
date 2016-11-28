@@ -25,7 +25,7 @@ public abstract class ViewModel
 
 
     /**
-     * Verarbeitet das gegebene KeyEvent.
+     * Verarbeitet das gegebene KeyEvent. Standardmäßig erfolgt keine Reaktion.
      *
      * @param keyEvent Das KeyEvent, das verarbeitet werden soll.
      */
@@ -35,8 +35,10 @@ public abstract class ViewModel
     }
 
     /**
-     * Ändert die abgespielte Hintergrundmusik.
+     * Ändert die abgespielte Hintergrundmusik.Standardmäßig bleibt die Musik gleich.
      */
-    public void changeBackgroundMusic() {
+    public void changeBackgroundMusic()
+    {
+
     }
 }

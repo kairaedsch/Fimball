@@ -9,7 +9,7 @@ import sep.fimball.model.media.ElementImage;
 /**
  * Diese Klasse stellt das Bild eines Elements dar.
  */
-public  class ElementImageViewModel
+public class ElementImageViewModel
 {
 
     /**
@@ -24,11 +24,13 @@ public  class ElementImageViewModel
 
     /**
      * Erstellt ein neues ElementImageViewModel.
+     *
      * @param elementImage Das zugehörige ElementImage.
      */
-    public ElementImageViewModel(ElementImage elementImage) {
-       this.elementImage = elementImage;
-       creationTime = System.currentTimeMillis();
+    public ElementImageViewModel(ElementImage elementImage)
+    {
+        this.elementImage = elementImage;
+        creationTime = System.currentTimeMillis();
     }
 
     /**
@@ -40,13 +42,15 @@ public  class ElementImageViewModel
     }
 
     /**
-     * Gibt den Pfad zu dem zu diesem ElementImageViewModel gehörenden Bild in Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
+     * Gibt den Pfad zu dem zu diesem ElementImageViewModel gehörenden Bild in
+     * Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
      *
      * @param imageLayer Das ImageLayer des Bildes.
-     * @param rotation   Die Drehung des Bildes.
+     * @param rotation Die Drehung des Bildes.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
-    public String getImagePath(ImageLayer imageLayer, int rotation) {
+    public String getImagePath(ImageLayer imageLayer, int rotation)
+    {
         return elementImage.getImagePath(imageLayer, rotation, System.currentTimeMillis() - creationTime);
     }
 
@@ -59,25 +63,29 @@ public  class ElementImageViewModel
      */
     public double getRestRotation(int rotation)
     {
-       return elementImage.getRestRotation(rotation);
+        return elementImage.getRestRotation(rotation);
     }
 
     /**
      * Setzt das ElementImage.
+     *
      * @param elementImage Das neue ElementImage.
      */
-    public void setElementImage(ElementImage elementImage) {
+    public void setElementImage(ElementImage elementImage)
+    {
         this.elementImage = elementImage;
         creationTime = System.currentTimeMillis();
     }
 
     /**
      * Setzt ein aus den übergebenen Werten erstelltes ElementImage.
-     * @param id    Die ID des zugehörigen BaseElements.
+     *
+     * @param id Die ID des zugehörigen BaseElements.
      * @param mediaElement Das zugehörige BaseMediaElement.
-     * @param animation        Die zugehörige Animation.
+     * @param animation Die zugehörige Animation.
      */
-    public void setElementImage(String id, BaseMediaElement mediaElement, Animation animation) {
+    public void setElementImage(String id, BaseMediaElement mediaElement, Animation animation)
+    {
         this.elementImage = new ElementImage(id, mediaElement, animation);
         creationTime = System.currentTimeMillis();
     }
