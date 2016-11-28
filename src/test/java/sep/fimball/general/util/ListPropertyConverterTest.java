@@ -17,6 +17,7 @@ public class ListPropertyConverterTest {
 
     private ListProperty<DummyOne> originalList;
     private MapProperty<Integer, DummyOne> originalMap;
+    private ListProperty<DummyOne> filteredList;
     private ListProperty<DummyTwo> convertedList;
     private final int originalSize = 100;
 
@@ -24,8 +25,9 @@ public class ListPropertyConverterTest {
     public void initialize()
     {
         originalList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        convertedList = new SimpleListProperty<>(FXCollections.observableArrayList());
         originalMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
+        filteredList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        convertedList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         for (int i = 0; i < originalSize; i++)
         {
@@ -79,6 +81,28 @@ public class ListPropertyConverterTest {
         //Den erstellten Map Eintrag entfernen und überprüfen ob die Größen noch immer gleich sind
         originalMap.remove(100);
         assertTrue(convertedList.size() == originalMap.size());
+    }
+
+    @Test
+    public void filterListTest()
+    {
+        ListPropertyConverter.bindAndFilterList(filteredList, originalList, (original -> original.getData() >= 50));
+
+        //Überprüfen ob alle Elemente der Liste die Bedingung erfüllen
+        filteredList.forEach((dummyOne -> assertTrue(dummyOne.getData() >= 50)));
+
+        int currentSize = filteredList.size();
+        //Ein neues Element einfügen welches die Bedingung erfüllt
+        originalList.add(new DummyOne(1337));
+        //Überprüfen ob die gefilterte Liste um eins größer ist
+        assertTrue(filteredList.size() == currentSize+1);
+        //Überprüfen ob das eingefügte Element die Bedingung erfüllt
+        assertTrue(filteredList.get(currentSize).getData() >= 50);
+
+        //Ein neues Element einfügen welches die Bedingung erfüllt
+        originalList.add(new DummyOne(10));
+        //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen
+        filteredList.forEach((dummyOne -> assertTrue(dummyOne.getData() >= 50)));
     }
 
     public static class DummyOne
