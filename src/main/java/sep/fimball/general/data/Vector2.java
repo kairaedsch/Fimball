@@ -250,12 +250,20 @@ public class Vector2
     /**
      * Prüft ob der gegebene Vector die selbe Position hat.
      *
-     * @param otherVector Der gegebene Vector.
+     * @param o Der gegebene Vector.
      * @return Ob der gegebene Vector die selbe Position hat.
      */
-    public boolean equals(Vector2 otherVector)
-    {
-        return otherVector.getX() == x && otherVector.getY() == y;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null)
+            return false;
+        if (o == this)
+            return true;
+        if (!(o instanceof Vector2))
+            return false;
+
+        Vector2 other = (Vector2)o;
+        return x == other.getX() && y == other.getY();
     }
 
     /**
