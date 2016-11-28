@@ -33,7 +33,8 @@ public class ListPropertyConverter
                 {
                     listPropertyConverted.add(converter.convert(original));
                 }
-            } else
+            }
+            else
             {
                 while (change.next())
                 {
@@ -91,7 +92,8 @@ public class ListPropertyConverter
             listPropertyConverted.clear();
             for (ElementT original : listPropertyOriginal)
             {
-                if (filter.shouldKeep(original)) listPropertyConverted.add(original);
+                if (filter.shouldKeep(original))
+                    listPropertyConverted.add(original);
             }
         };
 

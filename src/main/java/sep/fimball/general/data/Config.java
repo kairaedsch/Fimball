@@ -60,15 +60,17 @@ public class Config
         }
     }
 
-    private static String getJarContainingFolder(Class aclass) throws Exception {
+    private static String getJarContainingFolder(Class aclass) throws Exception
+    {
         CodeSource codeSource = aclass.getProtectionDomain().getCodeSource();
-
         File jarFile;
 
-        if (codeSource.getLocation() != null) {
+        if (codeSource.getLocation() != null)
+        {
             jarFile = new File(codeSource.getLocation().toURI());
         }
-        else {
+        else
+        {
             String path = aclass.getResource(aclass.getSimpleName() + ".class").getPath();
             String jarFilePath = path.substring(path.indexOf(":") + 1, path.indexOf("!"));
             jarFilePath = URLDecoder.decode(jarFilePath, "UTF-8");
@@ -349,9 +351,11 @@ public class Config
 
     /**
      * Gibt den Pfad zur Logo.Datei zurück.
+     *
      * @return Der Pfad zur Logo Datei.
      */
-    public static String pathToLogo() {
+    public static String pathToLogo()
+    {
         return dataPath + logoFile;
     }
 }

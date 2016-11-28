@@ -254,7 +254,8 @@ public class Vector2
      * @return Ob der gegebene Vector die selbe Position hat.
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (o == null)
             return false;
         if (o == this)
@@ -262,7 +263,7 @@ public class Vector2
         if (!(o instanceof Vector2))
             return false;
 
-        Vector2 other = (Vector2)o;
+        Vector2 other = (Vector2) o;
         return x == other.getX() && y == other.getY();
     }
 

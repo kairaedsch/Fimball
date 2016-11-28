@@ -31,6 +31,7 @@ public class Highscore
 
     /**
      * Gibt die erreichten Punkte des Highscores zurück.
+     *
      * @return Die erreichten Punkte.
      */
     public ReadOnlyLongProperty scoreProperty()
@@ -40,6 +41,7 @@ public class Highscore
 
     /**
      * Gibt den Namen des Spielers, der den Highscore erreicht hat, zurück.
+     *
      * @return Der Name des Spielers.
      */
     public ReadOnlyStringProperty playerNameProperty()

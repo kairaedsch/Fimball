@@ -32,7 +32,8 @@ public enum Sounds
 
     /**
      * Gibt den Namen der Sound-Datei zurück.
-     * @return  Der Name der Sound-Datei.
+     *
+     * @return Der Name der Sound-Datei.
      */
     public String getSoundName()
     {
