@@ -48,11 +48,26 @@ public class Player implements HandlerPlayer
         {
             balls.set(balls.get() - 1);
             return true;
-        }
-        else
+        } else
         {
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other != null && other instanceof Player)
+        {
+            Player player = (Player) other;
+            return player.nameProperty().get() == this.nameProperty().get()
+                    && player.pointsProperty().get() == this.pointsProperty().get()
+                    && player.ballsProperty().get() == this.ballsProperty().get();
+        } else
+        {
+            return false;
+        }
+
     }
 
     /**
@@ -87,6 +102,7 @@ public class Player implements HandlerPlayer
 
     /**
      * Gibt die Kugel des aktiven Spielers zurück.
+     *
      * @return Die Kugel des aktiven Spielers.
      */
     public ReadOnlyIntegerProperty ballsProperty()

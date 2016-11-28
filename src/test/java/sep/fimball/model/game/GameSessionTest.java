@@ -30,6 +30,8 @@ public class GameSessionTest
     private PinballMachine pinballMachine;
     private GameSession gameSession;
 
+    private String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
+    private Player[] players;
     private List<GameElement> collidedGameElements = new ArrayList<>();
     private boolean gameLoopObserverNotified;
     private boolean isBallLost;
@@ -38,19 +40,25 @@ public class GameSessionTest
     public void initialize()
     {
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        gameSession = new GameSession(pinballMachine, new String[]{"TestPlayer"});
+        gameSession = new GameSession(pinballMachine, playerNames);
+        players = new Player[playerNames.length];
+        for (int i = 0; i < playerNames.length; i++)
+        {
+            players[i] = new Player(playerNames[i]);
+        }
     }
 
     @Test
     public void generateGameSessionTest()
     {
-        String[] playerNames = {"TestPlayer1"};
-        Player[] players = {new Player(playerNames[0])};
-
         GameSession session = GameSession.generateGameSession(pinballMachine, playerNames);
 
         assertEquals(pinballMachine, session.getPinballMachine());
-        assertEquals(players[0], session.getPlayers()[0]);
+
+        for (int i = 0; i < players.length; i++)
+        {
+            assertEquals(players[i], session.getPlayers()[i]);
+        }
     }
 
     @Test
@@ -95,6 +103,7 @@ public class GameSessionTest
 
         gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
+        gameSession.setBallLost(true);
 
         gameSession.gameLoopUpdate();
 
@@ -166,6 +175,16 @@ public class GameSessionTest
         public void update(Observable observable, Object o)
         {
             test.setGameLoopObserverNotified(true);
+        }
+    }
+
+    @Test
+    public void switchPlayerTest()
+    {
+        for (int i = 0; i < players.length; i++)
+        {
+            assertEquals(players[i], gameSession.getCurrentPlayer());
+            gameSession.switchToNextPlayer();
         }
     }
 
