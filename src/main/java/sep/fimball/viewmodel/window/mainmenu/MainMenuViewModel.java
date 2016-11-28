@@ -158,7 +158,6 @@ public class MainMenuViewModel extends WindowViewModel
 
     @Override
     public void changeBackgroundMusic() {
-        System.out.println("mainmenmu music");
         SoundManagerViewModel.getInstance().playMusic(Sounds.MAIN_MENU);
     }
 
