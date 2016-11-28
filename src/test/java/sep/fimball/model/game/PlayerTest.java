@@ -10,24 +10,31 @@ public class PlayerTest
 {
 
     @Test
-    public void testPlayers() {
-        Player testPlayer = new Player("Test");
-        assertEquals(testPlayer.ballsProperty().get(), 3);
-        testPlayer.removeOneReserveBall();
-        assertEquals(testPlayer.ballsProperty().get(), 2);
-        testPlayer.removeOneReserveBall();
-        assertEquals(testPlayer.ballsProperty().get(),1);
-        testPlayer.removeOneReserveBall();
-        testPlayer.removeOneReserveBall();
-        assertEquals(testPlayer.ballsProperty().get(), 0);
+    public void removeOneReserveBallTest()
+    {
+        Player player = new Player("TestPlayer");
 
-        testPlayer.addPoints(200);
-        assertEquals(testPlayer.pointsProperty().get(),200);
-        testPlayer.addPoints(0);
-        assertEquals(testPlayer.pointsProperty().get(), 200);
-        testPlayer.addPoints(3);
-        assertEquals(testPlayer.pointsProperty().get(), 203);
-        testPlayer.addPoints(-30);
-        assertEquals(testPlayer.pointsProperty().get(), 173);
+        for (int i = 0; i < 3; i++)
+        {
+            assertEquals(3 - i, player.ballsProperty().get());
+            player.removeOneReserveBall();
+        }
+        player.removeOneReserveBall();
+        assertEquals(0, player.ballsProperty().get());
+    }
+
+    @Test
+    public void addPointsTest()
+    {
+        Player player = new Player("TestPlayer");
+
+        player.addPoints(200);
+        assertEquals(player.pointsProperty().get(), 200);
+        player.addPoints(0);
+        assertEquals(player.pointsProperty().get(), 200);
+        player.addPoints(3);
+        assertEquals(player.pointsProperty().get(), 203);
+        player.addPoints(-30);
+        assertEquals(player.pointsProperty().get(), 173);
     }
 }

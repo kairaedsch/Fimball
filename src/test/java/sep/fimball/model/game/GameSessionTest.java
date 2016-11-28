@@ -1,11 +1,13 @@
 package sep.fimball.model.game;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.embed.swing.JFXPanel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
@@ -193,13 +195,24 @@ public class GameSessionTest
     @Test
     public synchronized void spawnNewBallTest()
     {
-        new JFXPanel(); //JavaFx initialisieren
-        gameSession.startPhysics();
+        pinballMachine.addElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement("ball"),
+                new Vector2(0, 0), 0, 0, 0));
 
+        gameSession = new GameSession(pinballMachine, playerNames);
+
+        new JFXPanel(); //JavaFx initialisieren
+        //gameSession.startPhysics();
+
+/*
         GameElement gameElement = new GameElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0), false);
+        ObjectProperty gameBall = (ObjectProperty) gameSession.gameBallProperty();
+        gameBall.setValue(gameElement);
+*/
+        GameElement gameElement = gameSession.gameBallProperty().get();
 
-        gameSession.getWorld().addGameElement(gameElement);
+        //gameSession.getWorld().addGameElement(gameElement);
 
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
 
