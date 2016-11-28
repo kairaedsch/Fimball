@@ -99,7 +99,7 @@ public class ListPropertyConverterTest {
         //Überprüfen ob das eingefügte Element die Bedingung erfüllt
         assertTrue(filteredList.get(currentSize).getData() >= 50);
 
-        //Ein neues Element einfügen welches die Bedingung erfüllt
+        //Ein neues Element einfügen welches die Bedingung nicht erfüllt
         originalList.add(new DummyOne(10));
         //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen
         filteredList.forEach((dummyOne -> assertTrue(dummyOne.getData() >= 50)));
