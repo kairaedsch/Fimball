@@ -10,9 +10,9 @@ public class FlipperCollision extends NormalCollision
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        Vector2 flipperVel = new Vector2(0, -1).scale(info.getFlipper().getAngularVelocity()).rotate(Math.toRadians(info.getRotation()));
+        Vector2 flipperVel = new Vector2(0, -1).scale(-info.getFlipper().getAngularVelocity()).rotate(Math.toRadians(info.getRotation()));
         Vector2 relativeVel = info.getBall().getVelocity().minus(flipperVel);
-        Vector2 newVel = calculateNewSpeed(relativeVel, info.getShortestIntersect(), BOUNCE);
+        Vector2 newVel = calculateNewSpeed(relativeVel, info.getShortestIntersect().normalized(), BOUNCE);
         info.getBall().setVelocity(newVel);
     }
 }
