@@ -34,12 +34,12 @@ public class Config
 
             if (System.getProperty("os.name").startsWith("Windows"))
             {
-                pathToData = "A:/data";
+                dataPath = "A:/data";
             }
             else
             {
                 String home = System.getProperty("user.home");
-                pathToData = home + "/link/SEP/data";
+                dataPath = home + "/link/SEP/data";
             }
         }
         else
@@ -49,8 +49,8 @@ public class Config
             System.out.println("|-----------------------------------------|");
             try
             {
-                pathToData = getJarContainingFolder(Config.class).replace('\\', '/') + "/data";
-                System.out.println(pathToData);
+                dataPath = getJarContainingFolder(Config.class).replace('\\', '/') + "/data";
+                System.out.println(dataPath);
             }
             catch (Exception e)
             {
@@ -80,52 +80,62 @@ public class Config
     /**
      * Der Pfad, an dem sowohl die Automaten, die BaseElements als auch die Einstellungen gespeichert werden.
      */
-    private static String pathToData;
+    private static String dataPath;
 
     /**
      * Der Unterpfad, an dem die serialisierten BaseElements gespeichert werden.
      */
-    private static String pathDataToElements = "/elements";
+    private final static String elementsPath = "/elements";
 
     /**
      * Die Datei, in der die Beschreibung eines serialisierten BaseElement gespeichert wird.
      */
-    private static String pathElementToDataJson = "/data.json";
+    private final static String elementDescriptionFile = "/data.json";
 
     /**
      * Der Unterpfad, an dem die serialisierten Flipperautomaten gespeichert werden.
      */
-    private static String pathDataToMachines = "/machines";
+    private final static String machinesPath = "/machines";
 
     /**
      * Die Datei, in der das Vorschaubild eines Flipperautomaten gespeichert wird.
      */
-    private static String pathMachineToImagePreview = "/preview.png";
+    private final static String machinePreviewImageFile = "/preview.png";
 
     /**
      * Die Datei, in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden.
      */
-    private static String pathMachineToGeneralJson = "/general.json";
+    private final static String machineGeneralDescriptionFile = "/general.json";
 
     /**
      * Die Datei, in der die Liste von platzierten Elementen eines serialisierten Flipperautomaten gespeichert wird.
      */
-    private static String pathMachineToPlacedElementsJson = "/elements.json";
+    private final static String machinePlacedElementsFile = "/elements.json";
 
     /**
      * Die Datei, in der die Spieleinstellungen gespeichert werden.
      */
-    private static String pathDataToSettings = "/settings.json";
+    private final static String settingsFile = "/settings.json";
 
     /**
      * Der Unterpfad an dem die Sound-Dateien gespeichert werden.
      */
-    private static String pathDataToSounds = "/sounds";
+    private final static String soundsPath = "/sounds";
 
     /**
      * Die Dateiendung der Sound-Dateien.
      */
-    private static String pathSoundToSoundType = ".mp3";
+    private final static String soundFileEnding = ".mp3";
+
+    /**
+     * Die Dateiendung der Bild-Dateien.
+     */
+    private final static String imageFileEnding = ".png";
+
+    /**
+     * Die Logo Bilddatei
+     */
+    private final static String logoFile = "/logo.png";
 
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
@@ -140,32 +150,32 @@ public class Config
     /**
      * Die Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color primaryColor = new Color(219 / 255., 93 / 255., 93 / 255., 1);
+    public final static Color primaryColor = new Color(219 / 255.0, 93 / 255.0, 93 / 255.0, 1);
 
     /**
      * Die hellere Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color primaryColorLight = new Color(255 / 255., 147 / 255., 147 / 255., 1);
+    public final static Color primaryColorLight = new Color(255 / 255.0, 147 / 255.0, 147 / 255.0, 1);
 
     /**
      * Die Komplementfarbe des Flipperautomaten.
      */
-    public final static Color complementColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
+    public final static Color complementColor = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);
 
     /**
      * Die dunklere Komplementfarbe des Flipperautomaten
      */
-    public final static Color complementColorDark = new Color(165 / 255., 119 / 255., 47 / 255., 1);
+    public final static Color complementColorDark = new Color(165 / 255.0, 119 / 255.0, 47 / 255.0, 1);
 
     /**
      * Die Sekundärfarbe
      */
-    public final static Color secondaryColor = new Color(68 / 255., 102 / 255., 143 / 255., 1);
+    public final static Color secondaryColor = new Color(68 / 255.0, 102 / 255.0, 143 / 255.0, 1);
 
     /**
      * Die dunklere Sekundärfarbe
      */
-    public final static Color secondaryColorDark = new Color(37 / 255., 69 / 255., 108 / 255., 1);
+    public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
@@ -189,7 +199,7 @@ public class Config
      */
     public static String pathToElements()
     {
-        return pathToData + pathDataToElements;
+        return dataPath + elementsPath;
     }
 
     /**
@@ -211,7 +221,7 @@ public class Config
      */
     public static String pathToElementDataJson(String elementTypeId)
     {
-        return pathToElement(elementTypeId) + pathElementToDataJson;
+        return pathToElement(elementTypeId) + elementDescriptionFile;
     }
 
     /**
@@ -238,7 +248,7 @@ public class Config
         if (animation)
             path += "+" + animationName + "_" + animationId;
 
-        return path + ".png";
+        return path + imageFileEnding;
     }
 
     /**
@@ -248,7 +258,7 @@ public class Config
      */
     public static String pathToPinballMachines()
     {
-        return pathToData + pathDataToMachines;
+        return dataPath + machinesPath;
     }
 
     /**
@@ -270,7 +280,7 @@ public class Config
      */
     public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
-        return pathToPinballMachine(pinballMachineId) + pathMachineToImagePreview;
+        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile;
     }
 
     /**
@@ -281,7 +291,7 @@ public class Config
      */
     public static String pathToPinballMachineGeneralJson(String pinballMachineId)
     {
-        return pathToPinballMachine(pinballMachineId) + pathMachineToGeneralJson;
+        return pathToPinballMachine(pinballMachineId) + machineGeneralDescriptionFile;
     }
 
     /**
@@ -292,7 +302,7 @@ public class Config
      */
     public static String pathToPinballMachinePlacedElementsJson(String pinballMachineId)
     {
-        return pathToPinballMachine(pinballMachineId) + pathMachineToPlacedElementsJson;
+        return pathToPinballMachine(pinballMachineId) + machinePlacedElementsFile;
     }
 
     /**
@@ -302,7 +312,7 @@ public class Config
      */
     public static String pathToSettings()
     {
-        return pathToData + pathDataToSettings;
+        return dataPath + settingsFile;
     }
 
     /**
@@ -323,7 +333,7 @@ public class Config
      */
     public static String pathToSound(String clipName)
     {
-        return "file:///" + pathToData + pathDataToSounds + "/" + clipName + pathSoundToSoundType;
+        return "file:///" + dataPath + soundsPath + "/" + clipName + soundFileEnding;
     }
 
     /**
@@ -342,6 +352,6 @@ public class Config
      * @return Der Pfad zur Logo Datei.
      */
     public static String pathToLogo() {
-        return pathToData + "/logo.png";
+        return dataPath + logoFile;
     }
 }
