@@ -39,7 +39,7 @@ public class Highscore
     }
 
     /**
-     * Gibt den Namen des Spielers im Highscore zurück.
+     * Gibt den Namen des Spielers, der den Highscore erreicht hat, zurück.
      * @return Der Name des Spielers.
      */
     public ReadOnlyStringProperty playerNameProperty()

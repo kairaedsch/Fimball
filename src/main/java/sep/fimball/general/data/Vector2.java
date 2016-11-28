@@ -137,7 +137,7 @@ public class Vector2
     public Vector2 normalized()
     {
         double norm = this.magnitude();
-        return new Vector2(getX() / norm, getY() / norm);
+        return new Vector2(x / norm, y / norm);
     }
 
     /**

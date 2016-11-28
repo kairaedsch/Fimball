@@ -18,7 +18,7 @@ public enum Language
     /**
      * Der Name der Sprache.
      */
-    String name;
+    private String name;
 
     /**
      * Der Code, der die Sprache identifiziert.
