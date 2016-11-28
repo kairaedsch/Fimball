@@ -114,11 +114,18 @@ public class ListPropertyConverter
     {
         MapChangeListener<OriginalKeyT, OriginalValueT> listChangeListener = (change) ->
         {
-            listPropertyConverted.clear();
-
-            for (Map.Entry<OriginalKeyT, OriginalValueT> originalEntry : mapPropertyOriginal.entrySet())
+            if (change == null || change.wasRemoved())
             {
-                listPropertyConverted.add(converter.convert(originalEntry.getKey(), originalEntry.getValue()));
+                listPropertyConverted.clear();
+
+                for (Map.Entry<OriginalKeyT, OriginalValueT> originalEntry : mapPropertyOriginal.entrySet())
+                {
+                    listPropertyConverted.add(converter.convert(originalEntry.getKey(), originalEntry.getValue()));
+                }
+            }
+            else if (change.wasAdded())
+            {
+                listPropertyConverted.add(converter.convert(change.getKey(), change.getValueAdded()));
             }
         };
 
