@@ -3,9 +3,7 @@ package sep.fimball.general.data;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.file.Paths;
 import java.security.CodeSource;
 
 /**
@@ -321,5 +319,13 @@ public class Config
     public static String pathToLanguage(String languageCode)
     {
         return "bundles/fimball_" + languageCode + ".properties";
+    }
+
+    /**
+     * Gibt den Pfad zur Logo.Datei zurück.
+     * @return Der Pfad zur Logo Datei.
+     */
+    public static String pathToLogo() {
+        return pathToData + "/logo.png";
     }
 }

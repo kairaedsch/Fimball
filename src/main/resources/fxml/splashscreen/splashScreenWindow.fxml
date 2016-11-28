@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="500.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../Pflichtenheft/logo.png" />
-         </image>
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </ImageView>
-      <Label text="Created by Marc Schott, Alex Lerach, Till Wübbers, Kai Rädsch, Felix Gruber and Jenny Bauer" textAlignment="CENTER" wrapText="true">
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </Label>
-      <Label text="Version: 0.0.1" />
-   </children>
+
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.SplashScreenView" fx:id="splashLayout" alignment="CENTER">
+    <children>
+        <ImageView fx:id="splash" />
+        <ProgressBar fx:id="loadProgress"  progress="0.0" />
+        <Label fx:id="progressText" alignment="CENTER"/>
+    </children>
 </VBox>

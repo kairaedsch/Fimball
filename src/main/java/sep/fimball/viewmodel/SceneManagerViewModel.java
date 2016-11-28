@@ -6,8 +6,8 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
+import sep.fimball.viewmodel.window.SplashScreenViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
-import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
  * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und welcher Dialog angezeigt werden, indem das ViewModel an die View übergeben wird. Es gewährleistet weiterhin, dass Nutzereingaben problemlos an das Model weitergeleitet werden können.
@@ -31,7 +31,7 @@ public class SceneManagerViewModel
     {
         windowViewModel = new SimpleObjectProperty<>();
         dialogViewModel = new SimpleObjectProperty<>();
-        setWindow(new MainMenuViewModel());
+        setWindow(new SplashScreenViewModel());
         setDialog(new EmptyViewModel());
     }
 

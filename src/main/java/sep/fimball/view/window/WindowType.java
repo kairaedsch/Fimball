@@ -25,7 +25,7 @@ public enum WindowType implements ViewType
     /**
      * Der Splashscreen.
      */
-    SPLASH_SCREEN_WINDOW("TODO"),
+    SPLASH_SCREEN_WINDOW("splashscreen/splashScreenWindow.fxml"),
 
     /**
      * Das Editor-Fenster.

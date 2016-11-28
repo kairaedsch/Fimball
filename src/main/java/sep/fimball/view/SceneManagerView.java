@@ -96,7 +96,7 @@ public class SceneManagerView
         switch (windowViewModel.getWindowType())
         {
             case SPLASH_SCREEN:
-                windowType = WindowType.MAIN_MENU_WINDOW;
+                windowType = WindowType.SPLASH_SCREEN_WINDOW;
                 break;
             case MAIN_MENU:
                 windowType = WindowType.MAIN_MENU_WINDOW;
