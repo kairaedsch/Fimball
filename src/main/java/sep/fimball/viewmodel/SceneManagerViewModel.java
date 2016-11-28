@@ -25,7 +25,7 @@ public class SceneManagerViewModel
     private ObjectProperty<DialogViewModel> dialogViewModel;
 
     /**
-     * Erstellt ein neues SceneManagerViewModel.
+     * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel verwaltet.
      */
     public SceneManagerViewModel()
     {
@@ -52,7 +52,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Ändert das aktuelle WindowViewModel auf das, das der Methode übergeben wird.
+     * Ändert das aktuelle WindowViewModel auf das, das der Methode übergeben wird und leert den aktuell offenen Dialog, falls vorhanden.
      *
      * @param windowViewModel Das neue WindowViewModel.
      */

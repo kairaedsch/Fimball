@@ -66,6 +66,7 @@ public class LanguageManagerViewModel
 
     /**
      * Lädt die zur gegebenen Sprache gehörenden Properties aus der entsprechenden Datei.
+     *
      * @param language Die Sprache, zu der die geladenen Properties gehören sollen.
      * @return Die Properties der gegebenen Sprache.
      */
@@ -90,6 +91,7 @@ public class LanguageManagerViewModel
 
     /**
      * Lädt die Texte aus den gegebenen Properties.
+     *
      * @param properties Die Properties, deren Texte geladen werden sollen.
      */
     private void loadTextsFromProperties(Properties properties)
@@ -109,6 +111,7 @@ public class LanguageManagerViewModel
 
     /**
      * Stellt der View den Text, der durch den {@code key} spezifiziert ist, in der aktuell ausgewählten Sprache zur Verfügung.
+     *
      * @param key Der Key, der den Text spezifiziert.
      * @return Der gewünschte Text.
      */

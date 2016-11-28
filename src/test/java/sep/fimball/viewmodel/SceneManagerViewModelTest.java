@@ -68,5 +68,8 @@ public class SceneManagerViewModelTest
         sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
         assertEquals(numberOfDialogHandledKeyEvents, 1);
         sceneManagerViewModel.setDialog(new EmptyViewModel());
+        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
+        assertEquals(numberOfDialogHandledKeyEvents, 1);
+        assertEquals(numberOfWindowHandledKeyEvents, 2);
     }
 }
