@@ -45,6 +45,7 @@ public class GameSessionTest
     {
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         gameSession = new GameSession(pinballMachine, playerNames);
+
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
         {
@@ -195,13 +196,13 @@ public class GameSessionTest
     @Test
     public synchronized void spawnNewBallTest()
     {
+        new JFXPanel(); //JavaFx initialisieren
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0));
 
         gameSession = new GameSession(pinballMachine, playerNames);
 
-        new JFXPanel(); //JavaFx initialisieren
         //gameSession.startPhysics();
 
 /*
@@ -224,25 +225,23 @@ public class GameSessionTest
         gameSession.gameLoopUpdate();
 
         assertNotSame(gameSession.getWorld().getBallTemplate().pointsProperty().get(),
-                gameElement.positionProperty().get());
+                gameSession.gameBallProperty().get().positionProperty().get());
         assertNotSame(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
-                gameElement.rotationProperty().get());
+                gameSession.gameBallProperty().get().rotationProperty().get());
 
         // TODO some magic
         gameSession.spawnNewBall();
         gameSession.gameLoopUpdate();
 
         assertEquals(gameSession.getWorld().getBallTemplate().positionProperty().get(),
-                gameElement.positionProperty().get());
+                gameSession.gameBallProperty().get().positionProperty().get());
         assertEquals(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
-                gameElement.rotationProperty().get());
+                gameSession.gameBallProperty().get().rotationProperty().get());
     }
 
     @After
     public void cleanup()
     {
         pinballMachine.deleteFromDisk();
-        gameSession.stopGameLoop();
-        gameSession.stopPhysics();
     }
 }
