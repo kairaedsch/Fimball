@@ -73,14 +73,13 @@ public class BaseElementManager
         {
             BaseElementJson baseElementJson = baseElementOptional.get();
 
-            // TODO NullPointerException not very good
             try
             {
                 BaseElement baseElement = new BaseElement(elementTypeId, baseElementJson);
                 elements.put(path.getFileName().toString(), baseElement);
                 System.out.println("Element Type \"" + elementTypeId + "\" loaded");
             }
-            catch (NullPointerException e)
+            catch (IllegalArgumentException e)
             {
                 System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
                 e.printStackTrace();

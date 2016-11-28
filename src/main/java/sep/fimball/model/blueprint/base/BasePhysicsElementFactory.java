@@ -21,7 +21,9 @@ public class BasePhysicsElementFactory
      */
     static BasePhysicsElement generate(BaseElementJson.PhysicElementJson physicsElement)
     {
-        if(physicsElement.pivotPoint == null) throw new NullPointerException("pivotPoint was null");
+        if (physicsElement.pivotPoint == null)
+            throw new IllegalArgumentException("PhysicsElement needs to contain a pivotPoint!");
+
         Vector2 pivotPoint = physicsElement.pivotPoint;
         List<Collider> colliders = new ArrayList<>();
         for (BaseElementJson.PhysicElementJson.PhysicColliderJson collider : physicsElement.colliders)
@@ -65,7 +67,7 @@ public class BasePhysicsElementFactory
                     collisionType = new EmptyCollision();
                     break;
                 default:
-                    throw new NullPointerException();
+                    throw new IllegalArgumentException("Unknown collision type '" + collider.collisionType.type + "' in PhysicsElement!");
             }
 
             Collider newCollider;
