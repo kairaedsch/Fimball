@@ -2,6 +2,7 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.game.CollisionEventArgs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,5 +126,18 @@ public class PhysicsElement<GameElementT>
     public BasePhysicsElement getBasePhysicsElement()
     {
         return basePhysicsElement;
+    }
+
+    public CollisionEventArgs checkCollision(BallPhysicsElement<GameElementT> ballPhysicsElement)
+    {
+        for (Collider collider : colliders)
+        {
+            if (collider.checkCollision(ballPhysicsElement, this))
+            {
+                // TODO allow for multiple collisions in one object?
+                return new CollisionEventArgs<>(getGameElement(), collider.getId());
+            }
+        }
+        return null;
     }
 }

@@ -1,26 +1,23 @@
 package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.game.CollisionEventArgs;
 
 /**
  * TODO - flipper halt
  */
-public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
+public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
-    private final double movingAngularVelocity = 500.0;
-    private final double minRotation = -15.0;
-    private final double maxRotation = 15.0;
+    private static final double movingAngularVelocity = 500.0;
+    private static final double minRotation = -15.0;
+    private static final double maxRotation = 15.0;
 
     private double angularVelocity = 0.0;
 
-    /**
-     * Darstellung des Balls als PhysicsElement.
-     */
-    private PhysicsElement<GameElementT> subElement;
-
     public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement)
     {
-        subElement = new PhysicsElement<>(gameElement, position, maxRotation, basePhysicsElement);
+        super(gameElement, position, maxRotation, basePhysicsElement);
     }
 
     public void rotateUp()
@@ -37,17 +34,28 @@ public class FlipperPhysicsElement<GameElementT> implements PhysicsUpdateable
     public void update(double deltaTime)
     {
         // Rotate flipper
-        double newRotation = subElement.getRotation() + angularVelocity * deltaTime;
-        subElement.setRotation(Math.min(Math.max(newRotation, minRotation), maxRotation));
+        double newRotation = getRotation() + angularVelocity * deltaTime;
+        setRotation(Math.min(Math.max(newRotation, minRotation), maxRotation));
     }
 
-    /**
-     * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
-     *
-     * @return Das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
-     */
-    public PhysicsElement<GameElementT> getSubElement()
+    @Override
+    public CollisionEventArgs checkCollision(BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
-        return subElement;
+        for (Collider collider : getColliders())
+        {
+            if (collider.checkCollision(ballPhysicsElement, this))
+            {
+                // TODO IMPORTANT - THIS ASSUMES FLIPPER ONLY HAS FLIPPER COLLISIONS!
+
+                // TODO allow for multiple collisions in one object?
+                return new CollisionEventArgs<>(getGameElement(), collider.getId());
+            }
+        }
+        return null;
+    }
+
+    public double getAngularVelocity()
+    {
+        return angularVelocity;
     }
 }

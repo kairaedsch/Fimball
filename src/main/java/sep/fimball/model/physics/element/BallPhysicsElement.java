@@ -9,17 +9,12 @@ import sep.fimball.model.physics.collider.WorldLayer;
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> implements PhysicsUpdateable
+public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit eingerechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
      */
     private final double GRAVITY = 1.19554 * 20;
-
-    /**
-     * Darstellung des Balls als PhysicsElement.
-     */
-    private PhysicsElement<GameElementT> subElement;
 
     /**
      * Die Geschwindigkeit des Balls.
@@ -46,7 +41,7 @@ public class BallPhysicsElement<GameElementT> implements PhysicsUpdateable
      */
     public BallPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
-        subElement = new PhysicsElement<>(gameElement, position, rotation, basePhysicsElement);
+        super(gameElement, position, rotation, basePhysicsElement);
 
         this.velocity = new Vector2();
         this.angularVelocity = 0.0;
@@ -61,43 +56,6 @@ public class BallPhysicsElement<GameElementT> implements PhysicsUpdateable
 
         // Bewege den Ball
         setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
-    }
-
-    /**
-     * Gibt das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
-     *
-     * @return Das PhysicsElement, welches die Position und physikalische Eigenschaften des Balls hat, zurück.
-     */
-    public PhysicsElement<GameElementT> getSubElement()
-    {
-        return subElement;
-    }
-
-    /**
-     * Gibt die Position des Balls zurück.
-     * @return Die Position des Balls.
-     */
-    public Vector2 getPosition()
-    {
-        return subElement.getPosition();
-    }
-
-    /**
-     * Setzt die Position des Balls.
-     * @param position Die neue Position des Balls.
-     */
-    public void setPosition(Vector2 position)
-    {
-        subElement.setPosition(position);
-    }
-
-    /**
-     * Setzt die Drehung des Balls.
-     * @param rotation Die neue Drehung des Balls.
-     */
-    public void setRotation(double rotation)
-    {
-        subElement.setRotation(rotation);
     }
 
     /**
@@ -148,7 +106,7 @@ public class BallPhysicsElement<GameElementT> implements PhysicsUpdateable
      */
     public CircleColliderShape getCollider()
     {
-        return (CircleColliderShape) subElement.getColliders().get(0).getShapes().get(0);
+        return (CircleColliderShape) getColliders().get(0).getShapes().get(0);
     }
 
     /**

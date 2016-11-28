@@ -4,7 +4,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
-import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
@@ -167,8 +166,8 @@ public class PhysicsHandler<GameElementT>
                 }
 
                 // Check all PhysicsElements for collisions with the ball
-                List<CollisionEventArgs<GameElementT>> collisionEventArgses = new ArrayList<>();
-                List<ElementEventArgs<GameElementT>> elementEventArgses = new ArrayList<>();
+                List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
+                List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
                 boolean ballLost = false;
 
                 synchronized (monitor)
@@ -185,19 +184,13 @@ public class PhysicsHandler<GameElementT>
 
                     for (PhysicsElement<GameElementT> element : physicsElements)
                     {
-                        if (ballPhysicsElement != null && element != ballPhysicsElement.getSubElement())
+                        if (ballPhysicsElement != null && element != ballPhysicsElement)
                         {
-                            for (Collider collider : element.getColliders())
-                            {
-                                boolean hit = collider.checkCollision(ballPhysicsElement, element);
-
-                                if (hit)
-                                {
-                                    collisionEventArgses.add(new CollisionEventArgs<>(element.getGameElement(), collider.getId()));
-                                }
-                            }
+                            CollisionEventArgs args = element.checkCollision(ballPhysicsElement);
+                            if (args != null)
+                                collisionEventArgsList.add(args);
                         }
-                        elementEventArgses.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
+                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
                     }
                 }
 
@@ -205,7 +198,7 @@ public class PhysicsHandler<GameElementT>
                 rightFlippers.forEach(flipper -> flipper.update(delta));
 
                 gameSession.setBallLost(ballLost);
-                gameSession.addEventArgs(collisionEventArgses, elementEventArgses);
+                gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };
     }

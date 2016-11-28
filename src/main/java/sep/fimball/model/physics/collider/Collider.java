@@ -20,12 +20,12 @@ public class Collider
     /**
      * Eine Liste der ColliderShapes des Colliders.
      */
-    private List<ColliderShape> shapes;
+    protected List<ColliderShape> shapes;
 
     /**
      * Der Typ der Kollision.
      */
-    private CollisionType type;
+    protected CollisionType type;
 
     /**
      * Die ID des Colliders.

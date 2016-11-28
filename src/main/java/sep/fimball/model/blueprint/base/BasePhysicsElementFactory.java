@@ -1,10 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.collider.CircleColliderShape;
-import sep.fimball.model.physics.collider.Collider;
-import sep.fimball.model.physics.collider.ColliderShape;
-import sep.fimball.model.physics.collider.PolygonColliderShape;
+import sep.fimball.model.physics.collider.*;
 import sep.fimball.model.physics.collision.*;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
@@ -70,7 +67,13 @@ public class BasePhysicsElementFactory
                 default:
                     throw new NullPointerException();
             }
-            Collider newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+
+            Collider newCollider;
+            if (collider.collisionType.type.equals("flipper"))
+                newCollider = new FlipperCollider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+            else
+                newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+
             colliders.add(newCollider);
         }
 
