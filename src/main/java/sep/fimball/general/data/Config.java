@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.net.URLDecoder;
 import java.security.CodeSource;
+import java.util.UUID;
 
 /**
  * Stellt die Konfiguration dar. Hier sind bestimmte Standardwerte gesetzt welche nicht über die Einstellungen geändert werden können, z.B. der Pfad wo Einstellungen gespeichert werden.
@@ -309,10 +310,9 @@ public class Config
      *
      * @return Eine eindeutige ID für Automaten.
      */
-    public static long uniqueId()
+    public static String uniqueId()
     {
-        // TODO make unique
-        return System.currentTimeMillis();
+        return UUID.randomUUID().toString();
     }
 
     /**
