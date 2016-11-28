@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import javafx.embed.swing.JFXPanel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,6 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotSame;
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -186,6 +188,41 @@ public class GameSessionTest
             assertEquals(players[i], gameSession.getCurrentPlayer());
             gameSession.switchToNextPlayer();
         }
+    }
+
+    @Test
+    public synchronized void spawnNewBallTest()
+    {
+        new JFXPanel(); //JavaFx initialisieren
+        gameSession.startPhysics();
+
+        GameElement gameElement = new GameElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0), false);
+
+        gameSession.getWorld().addGameElement(gameElement);
+
+        List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
+
+        ElementEventArgs elementEventArgs = new ElementEventArgs<>(gameElement, new Vector2(1, 1), 1);
+        List<ElementEventArgs<GameElement>> elementEventArgsList = new ArrayList<>();
+        elementEventArgsList.add(elementEventArgs);
+
+        gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
+        gameSession.gameLoopUpdate();
+
+        assertNotSame(gameSession.getWorld().getBallTemplate().pointsProperty().get(),
+                gameElement.positionProperty().get());
+        assertNotSame(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
+                gameElement.rotationProperty().get());
+
+        // TODO some magic
+        gameSession.spawnNewBall();
+        gameSession.gameLoopUpdate();
+
+        assertEquals(gameSession.getWorld().getBallTemplate().positionProperty().get(),
+                gameElement.positionProperty().get());
+        assertEquals(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
+                gameElement.rotationProperty().get());
     }
 
     @After
