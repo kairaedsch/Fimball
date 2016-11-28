@@ -2,6 +2,7 @@ package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 /**
  * Created by TheAsuro on 27.11.2016.
@@ -10,14 +11,14 @@ public class CollisionInfo
 {
     private BallPhysicsElement ball;
     private Vector2 shortestIntersect;
-    private double angularVelocity;
     private double rotation;
+    private FlipperPhysicsElement flipper;
 
-    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, double angularVelocity, double rotation)
+    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation, FlipperPhysicsElement flipper)
     {
         this.ball = ball;
         this.shortestIntersect = shortestIntersect;
-        this.angularVelocity = angularVelocity;
+        this.flipper = flipper;
         this.rotation = rotation;
     }
 
@@ -25,8 +26,8 @@ public class CollisionInfo
     {
         this.ball = ball;
         this.shortestIntersect = shortestIntersect;
-        this.angularVelocity = 0;
         this.rotation = rotation;
+        this.flipper = null;
     }
 
     public BallPhysicsElement getBall()
@@ -39,9 +40,9 @@ public class CollisionInfo
         return shortestIntersect;
     }
 
-    public double getAngularVelocity()
+    public FlipperPhysicsElement getFlipper()
     {
-        return angularVelocity;
+        return flipper;
     }
 
     public double getRotation()

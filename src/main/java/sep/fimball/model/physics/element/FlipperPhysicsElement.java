@@ -45,8 +45,6 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         {
             if (collider.checkCollision(ballPhysicsElement, this))
             {
-                // TODO IMPORTANT - THIS ASSUMES FLIPPER ONLY HAS FLIPPER COLLISIONS!
-
                 // TODO allow for multiple collisions in one object?
                 return new CollisionEventArgs<>(getGameElement(), collider.getId());
             }

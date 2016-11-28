@@ -27,7 +27,7 @@ public class FlipperCollider extends Collider
             HitInfo info = shape.calculateHitInfo(ball, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
             if (info.isHit())
             {
-                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), ((FlipperPhysicsElement)element).getAngularVelocity(), element.getRotation()));
+                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element.getRotation(), (FlipperPhysicsElement)element));
                 hit = true;
             }
         }

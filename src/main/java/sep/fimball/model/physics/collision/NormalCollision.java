@@ -12,7 +12,7 @@ public class NormalCollision implements CollisionType
     /**
      * Gibt an, wie viel Prozent der Geschwindigkeit nach der Kollision erhalten bleiben sollen.
      */
-    private final double bounce = 0.7;
+    protected final double BOUNCE = 0.7;
 
     @Override
     public void applyCollision(CollisionInfo info)
@@ -20,9 +20,12 @@ public class NormalCollision implements CollisionType
         info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
         Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
         Debug.addDrawVector(info.getBall().getPosition().plus(new Vector2(info.getBall().getCollider().getRadius(), info.getBall().getCollider().getRadius())), info.getShortestIntersect().normalized(), Color.RED);
-        //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.GREEN);
-        Vector2 newVel = info.getBall().getVelocity().minus(shortestIntersectNorm.scale((1.0 + bounce) * info.getBall().getVelocity().dot(shortestIntersectNorm)));
+        Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm, BOUNCE);
         info.getBall().setVelocity(newVel);
-        //Debug.addDrawVector(ball.getPosition(), ball.getVelocity().normalized(), Color.BLUE);
+    }
+
+    protected Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal, double bounce)
+    {
+        return ballVelocity.minus(normal.scale((1.0 + bounce) * ballVelocity.dot(normal)));
     }
 }
