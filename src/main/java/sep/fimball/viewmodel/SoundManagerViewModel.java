@@ -21,12 +21,12 @@ public class SoundManagerViewModel
     private static SoundManagerViewModel instance;
 
     /**
-     * Das Observable, das benachrichtigt wird, wenn ein Sound abgespielt werden soll.
+     * Das Observable, das die Observer benachrichtigt, wenn ein Sound abgespielt werden soll.
      */
     private Observable playObservable;
 
     /**
-     * Das Observable, das benachrichtigt wird, wenn die Musik stoppen soll.
+     * Das Observable, das die Observer benachrichtigt, wenn die Musik stoppen soll.
      */
     private Observable stopObservable;
 
@@ -43,7 +43,7 @@ public class SoundManagerViewModel
     /**
      * Die aktuellen Einstellungen.
      */
-    Settings settings;
+    private Settings settings;
 
     /**
      * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
@@ -136,6 +136,7 @@ public class SoundManagerViewModel
 
     /**
      * Benachrichtigt die Observer, dass die gegebene Hintergrundmusik abgespielt werden soll.
+     *
      * @param music Die Hintergrundmusik, die abgespielt werden soll.
      */
     public void playMusic(Sounds music)
