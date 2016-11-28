@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotSame;
 import static junit.framework.TestCase.assertTrue;

@@ -1,5 +1,8 @@
 package sep.fimball.general.data;
 
+/**
+ * Sounds ist eine Aufzählung von Bezeichnungen für Sounds und deren korrespondierenden Dateinamen ohne Endung.
+ */
 public enum Sounds
 {
     /**

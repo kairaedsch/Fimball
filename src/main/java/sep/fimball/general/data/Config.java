@@ -13,11 +13,12 @@ public class Config
 {
     static
     {
+        //Die Methode config() wird automatisch aufgerufen um die Config zu initialisieren
         config();
     }
 
     /**
-     * Kümmert sich um die Unterscheidung der Pfade auf Windows und Linux. Wird automatisch aufgerufen
+     * Initialisiert die Konfiguration. Dabei wird die Unterscheidung zwischen den Pfaden auf Windows und Linux durchgeführt. Ebenfalls wird zwischen Development und Production Modus unterschieden.
      */
     private static void config()
     {
@@ -86,7 +87,7 @@ public class Config
     private static String pathDataToElements = "/elements";
 
     /**
-     * Die Datei, in der ein serialisiertes BaseElement gespeichert wird.
+     * Die Datei, in der die Beschreibung eines serialisierten BaseElement gespeichert wird.
      */
     private static String pathElementToDataJson = "/data.json";
 
@@ -150,19 +151,34 @@ public class Config
      */
     public final static Color complementColor = new Color(219 / 255., 170 / 255., 93 / 255., 1);
 
+    /**
+     * Die dunklere Komplementfarbe des Flipperautomaten
+     */
     public final static Color complementColorDark = new Color(165 / 255., 119 / 255., 47 / 255., 1);
 
-    public final static Color secundaryColor = new Color(68 / 255., 102 / 255., 143 / 255., 1);
+    /**
+     * Die Sekundärfarbe
+     */
+    public final static Color secondaryColor = new Color(68 / 255., 102 / 255., 143 / 255., 1);
 
-    public final static Color secundaryColorDark = new Color(37 / 255., 69 / 255., 108 / 255., 1);
+    /**
+     * Die dunklere Sekundärfarbe
+     */
+    public final static Color secondaryColorDark = new Color(37 / 255., 69 / 255., 108 / 255., 1);
 
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
      */
     public final static int pixelsPerGridUnit = 15;
 
+    /**
+     * Der maximale Zoom im Editor
+     */
     public final static double maxZoom = 1.0 / pixelsPerGridUnit;
 
+    /**
+     * Der minimale Zoom im Editor
+     */
     public final static double minZoom = 2;
 
     /**

@@ -18,7 +18,7 @@ public class Highscore
     private StringProperty playerName;
 
     /**
-     * Erzeugt einen neuen Highscore mit gegebenen Punkten und Namen.
+     * Erzeugt einen neuen Highscore mit gegebenen Punkten und Spielernamen.
      *
      * @param score      Der erreichte Punktestand.
      * @param playerName Der Name des Spielers, der den zu erzeugenden Highscore erreicht hat.

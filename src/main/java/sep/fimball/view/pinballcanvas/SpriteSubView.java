@@ -101,13 +101,13 @@ public class SpriteSubView
 
             if(imageLayer == ImageLayer.TOP)
             {
-                Color color = Config.complementColor.interpolate(Config.secundaryColor, trans);
+                Color color = Config.complementColor.interpolate(Config.secondaryColor, trans);
                 graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
                 graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
             }
             else
             {
-                Color color = Config.complementColorDark.interpolate(Config.secundaryColorDark, trans);
+                Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, trans);
                 graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
                 graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y + 1) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
             }
