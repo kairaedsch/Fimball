@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Stellt Funktionen zum konvertieren einer Liste sowie einer Map in eine andere bereit.
+ * Stellt Funktionen zum Konvertieren einer Liste sowie einer Map in eine andere mit Elementen eines unterschiedlichen Typ bereit.
  */
 public class ListPropertyConverter
 {
@@ -39,18 +39,23 @@ public class ListPropertyConverter
                 {
                     if (change.wasRemoved())
                     {
-                        for (int p = change.getFrom(); p <= change.getTo(); p++)
+                        if (change.getFrom() == change.getTo())
                         {
                             listPropertyConverted.remove(change.getFrom());
+                        }
+                        else
+                        {
+                            for (int p = change.getFrom(); p < change.getTo(); p++)
+                            {
+                                listPropertyConverted.remove(change.getFrom());
+                            }
                         }
                     }
                     if (change.wasAdded())
                     {
-                        List<? extends OriginalT> newElementsList = change.getAddedSubList();
-
-                        for (OriginalT original : newElementsList)
+                        for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
-                            listPropertyConverted.add(converter.convert(original));
+                            listPropertyConverted.add(p, converter.convert(listPropertyOriginal.get(p)));
                         }
                     }
                     if (change.wasPermutated())
