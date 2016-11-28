@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,27 +16,27 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" text="Settings" onMouseClicked="#settingsClicked"/>
-                                        <Label text="Tills Automat" fx:id="nameLabel"/>
+                                        <Button mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings" />
+                                        <Label fx:id="nameLabel" text="Tills Automat" />
                                     </children>
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" text="drag" onMouseClicked="#dragClicked" fx:id="dragButton"/>
-                                        <Button mnemonicParsing="false" text="select" onMouseClicked="#selectClicked" fx:id="selectButton"/>
-                                        <Button mnemonicParsing="false" text="place" onMouseClicked="#placeClicked" fx:id="placeButton"/>
+                                        <Button fx:id="dragButton" mnemonicParsing="false" onMouseClicked="#dragClicked" text="drag" />
+                                        <Button fx:id="selectButton" mnemonicParsing="false" onMouseClicked="#selectClicked" text="select" />
+                                        <Button fx:id="placeButton" mnemonicParsing="false" onMouseClicked="#placeClicked" text="place" />
                                     </children>
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </HBox>
                                 <Accordion VBox.vgrow="ALWAYS">
@@ -44,17 +45,28 @@
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
                                                     <children>
-                                                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="availableElements">
-                                                            <children>
-                                                            </children>
-                                                        </VBox>
+                                                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane>
+                                                                    <children>
+                                                                        <VBox fx:id="availableElements"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                                        </ScrollPane>
                                                     </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
                                         <TitledPane animated="false" text="Advanced Elements">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                                             </content>
                                         </TitledPane>
                                     </panes>
@@ -65,15 +77,15 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onScroll="#zoom" onMouseDragged="#dragged" onMousePressed="#down"/>
-                        <Button mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" onMouseClicked="#playClicked"/>
-                        <Button mnemonicParsing="false" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" onMouseClicked="#zoomInClicked"/>
-                        <Button mnemonicParsing="false" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" onMouseClicked="#zoomOutClicked"/>
+                        <StackPane fx:id="pinballCanvasContainer" onMouseDragged="#dragged" onMousePressed="#down" onScroll="#zoom" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#playClicked" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zoomInClicked" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zoomOutClicked" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minWidth="130.0">
                     <children>
-                        <TitledPane animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="selectedElement">
+                        <TitledPane fx:id="selectedElement" animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                             </content>
                         </TitledPane>
