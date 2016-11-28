@@ -16,7 +16,7 @@ public enum ImageLayer
     BOTTOM("bottom");
 
     /**
-     * Der Name des Layers.
+     * Der Name der Ebene.
      */
     private String name;
 
