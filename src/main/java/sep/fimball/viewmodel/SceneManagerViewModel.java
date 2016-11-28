@@ -1,8 +1,11 @@
 package sep.fimball.viewmodel;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.input.KeyEvent;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -25,14 +28,21 @@ public class SceneManagerViewModel
     private ObjectProperty<DialogViewModel> dialogViewModel;
 
     /**
+     * Gibt an, ob das Fenster im Vollbildmodus dargestellt werden soll.
+     */
+    private BooleanProperty fullscreen;
+
+    /**
      * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel verwaltet.
      */
     public SceneManagerViewModel()
     {
         windowViewModel = new SimpleObjectProperty<>();
         dialogViewModel = new SimpleObjectProperty<>();
+        fullscreen = new SimpleBooleanProperty();
         setWindow(new SplashScreenViewModel());
         setDialog(new EmptyViewModel());
+        fullscreen.bind(Settings.getSingletonInstance().fullscreenProperty());
     }
 
     /**
@@ -95,5 +105,13 @@ public class SceneManagerViewModel
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
         return dialogViewModel;
+    }
+
+    /**
+     * Stellt der View die Information zu Verfügung, ob das Programm im Vollbildmodus dargstellt werden soll.
+     * @return {@code true}, wenn das Programm im Vollbildmodus gestartet werden soll, {@code false} sonst.
+     */
+    public BooleanProperty fullscreenProperty() {
+        return fullscreen;
     }
 }

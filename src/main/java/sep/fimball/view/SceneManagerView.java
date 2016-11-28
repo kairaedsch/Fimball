@@ -72,6 +72,7 @@ public class SceneManagerView
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
+        sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setMaximized(newValue));
 
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         scene.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
@@ -81,6 +82,7 @@ public class SceneManagerView
 
         updateContent(sceneManagerViewModel.windowViewModelProperty().get());
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
+        stage.setMaximized(sceneManagerViewModel.fullscreenProperty().get());
 
         blurEffect = new GaussianBlur(13);
     }
