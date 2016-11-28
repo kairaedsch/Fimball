@@ -72,7 +72,9 @@ public class SceneManagerView
         sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
-        sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setMaximized(newValue));
+        sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
+
+        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> sceneManagerViewModel.fullscreenProperty().set(newValue));
 
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         scene.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
@@ -82,7 +84,7 @@ public class SceneManagerView
 
         updateContent(sceneManagerViewModel.windowViewModelProperty().get());
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
-        stage.setMaximized(sceneManagerViewModel.fullscreenProperty().get());
+        stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
 
         blurEffect = new GaussianBlur(13);
     }
@@ -146,7 +148,7 @@ public class SceneManagerView
                 throw new RuntimeException("Unkown DialogType");
         }
 
-        if(dialogType != null) setDialog(dialogType, dialogViewModel);
+        if (dialogType != null) setDialog(dialogType, dialogViewModel);
         else removeDialog();
     }
 
@@ -192,8 +194,7 @@ public class SceneManagerView
         {
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
             view.setViewModel(viewModel);
-        }
-        catch (ClassCastException e)
+        } catch (ClassCastException e)
         {
             System.err.println("Could not inject viewmodel into view");
             throw e;
@@ -256,8 +257,7 @@ public class SceneManagerView
         if (node != null)
         {
             root.getChildren().add(node);
-        }
-        else
+        } else
             root.getChildren().add(new Group());
     }
 }
