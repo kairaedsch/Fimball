@@ -42,7 +42,7 @@ public class SceneManagerViewModel
         fullscreen = new SimpleBooleanProperty();
         setWindow(new SplashScreenViewModel());
         setDialog(new EmptyViewModel());
-        fullscreen.bindBidirectional(Settings.getSingletonInstance().fullscreenProperty());
+        fullscreen.bind(Settings.getSingletonInstance().fullscreenProperty());
     }
 
     /**

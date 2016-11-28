@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -74,7 +75,7 @@ public class SceneManagerView
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
         sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
 
-        stage.fullScreenProperty().addListener((observable, oldValue, newValue) -> sceneManagerViewModel.fullscreenProperty().set(newValue));
+        stage.fullScreenExitKeyProperty().set(KeyCombination.NO_MATCH);
 
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         scene.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
