@@ -1,6 +1,7 @@
 package sep.fimball.model.media;
 
 import org.junit.Test;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 
 import static junit.framework.TestCase.assertEquals;
@@ -24,8 +25,8 @@ public class ElementImageTest
         assertEquals(test.getRestRotation(40), 0);
         assertEquals(test.getRestRotation(75), 35);
 
-        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 35, 20), "D:/Dokumente/Fimball/target/data/elements/test2/bottom-0.png" );
-        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 60, 20), "D:/Dokumente/Fimball/target/data/elements/test2/bottom-40.png" );
+        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 35, 20), Config.pathToElements() + "/test2/bottom-0.png" );
+        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 60, 20), Config.pathToElements() + "/test2/bottom-40.png" );
       //  assertEquals(test.getImagePath(ImageLayer.TOP, 60, 25), "D:/Dokumente/Fimball/target/data/elements/test2/top+glow_0-40.png" );
     }
 
