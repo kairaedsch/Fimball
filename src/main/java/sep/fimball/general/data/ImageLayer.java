@@ -18,7 +18,7 @@ public enum ImageLayer
     /**
      * Der Name der Ebene.
      */
-    private String name;
+    private final String name;
 
     /**
      * Erzeugt ein neues Objekt zur Kennzeichnung der Bildebene, das die durch {@code name} gegebene Ebene kennzeichnet.

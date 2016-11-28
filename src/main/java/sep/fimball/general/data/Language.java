@@ -18,12 +18,12 @@ public enum Language
     /**
      * Der Name der Sprache.
      */
-    private String name;
+    private final String name;
 
     /**
      * Der Code, der die Sprache identifiziert.
      */
-    private String code;
+    private final String code;
 
     /**
      * Erzeugt ein neues Objekt zur Kennzeichnung der Sprache, das die durch {@code name} gegebene Sprache kennzeichnet.

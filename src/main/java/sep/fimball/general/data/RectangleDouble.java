@@ -8,17 +8,17 @@ public class RectangleDouble
     /**
      * Die Position der linken oberen Ecke des Rechtecks.
      */
-    private Vector2 origin;
+    private final Vector2 origin;
 
     /**
      * Die Breite des Rechtecks.
      */
-    private double width;
+    private final double width;
 
     /**
      * Die Höhe des Rechtecks.
      */
-    private double height;
+    private final double height;
 
     /**
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.

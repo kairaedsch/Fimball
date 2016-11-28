@@ -10,12 +10,12 @@ public class Highscore
     /**
      * Die erreichten Punkte.
      */
-    private LongProperty score;
+    private final LongProperty score;
 
     /**
      * Der Name des Spielers.
      */
-    private StringProperty playerName;
+    private final StringProperty playerName;
 
     /**
      * Erzeugt einen neuen Highscore mit gegebenen Punkten und Spielernamen.

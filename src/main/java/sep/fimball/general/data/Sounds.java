@@ -18,7 +18,7 @@ public enum Sounds
     /**
      * Der Name der Sound-Datei.
      */
-    private String soundName;
+    private final String soundName;
 
     /**
      * Erzeugt ein neues Objekt zur Kennzeichnung des Sounds, das den durch {@code name} gegebenen Sound kennzeichnet.
