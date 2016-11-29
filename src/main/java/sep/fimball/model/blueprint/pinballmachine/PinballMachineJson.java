@@ -31,8 +31,13 @@ public class PinballMachineJson
         public String playerName;
     }
 
-    /**
-     * Speichert die Liste der platzierten Elemente.
-     */
-    public PlacedElementListJson placedElementList;
+    public boolean isValid()
+    {
+        if (highscores == null || name == null)
+            return false;
+        for (HighscoreJson score : highscores)
+            if (score == null || score.playerName == null)
+                return false;
+        return true;
+    }
 }

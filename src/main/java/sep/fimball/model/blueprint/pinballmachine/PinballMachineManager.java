@@ -88,11 +88,10 @@ public class PinballMachineManager
 
         Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
 
-        if (pinballMachineOptional.isPresent())
+        if (pinballMachineOptional.isPresent() && pinballMachineOptional.get().isValid())
         {
             PinballMachineJson pinballMachineJson = pinballMachineOptional.get();
 
-            // TODO NullPointerException not very good
             try
             {
                 ArrayList<Highscore> highscores = new ArrayList<>();
@@ -105,12 +104,11 @@ public class PinballMachineManager
                 pinballMachines.add(pinballMachine);
                 System.out.println("Machine      \"" + pinballMachineId + ": " + pinballMachine.nameProperty().get() + "\" loaded");
             }
-            catch (NullPointerException e)
+            catch (IllegalArgumentException e)
             {
                 System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
                 e.printStackTrace();
             }
-
         }
         else
         {
