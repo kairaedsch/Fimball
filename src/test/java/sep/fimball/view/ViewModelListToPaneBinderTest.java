@@ -32,7 +32,7 @@ public class ViewModelListToPaneBinderTest
         originalList.add("Test 1");
         originalList.add("Test 2");
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(pane, originalList, () -> "viewModelListToPaneBinder.fxml");
+        ViewModelListToPaneBinder.bindViewModelsToViews(pane, originalList, () -> "label.fxml");
 
         assertThat(((Label) pane.getChildren().get(0)).getText(), equalTo("Test 0"));
         assertThat(((Label) pane.getChildren().get(1)).getText(), equalTo("Test 1"));
