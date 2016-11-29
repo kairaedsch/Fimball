@@ -1,4 +1,6 @@
 package sep.fimball;
+
+import com.sun.glass.ui.monocle.MonoclePlatformFactory;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import org.junit.Rule;
@@ -84,6 +86,7 @@ public class JavaFXThreadingRule implements TestRule {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     // initializes JavaFX environment
+                    MonoclePlatformFactory.getPlatformFactory();
                     new JFXPanel();
 
                     latch.countDown();
