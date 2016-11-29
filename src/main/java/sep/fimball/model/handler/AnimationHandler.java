@@ -4,6 +4,7 @@ import sep.fimball.model.media.BaseMediaElementEvent;
 import sep.fimball.model.media.Animation;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Handler, der bei einer Kollision die Animation des kollidierenden GameElements setzt.
@@ -17,9 +18,9 @@ public class AnimationHandler implements ElementHandler
 
         if (eventMap.containsKey(colliderId))
         {
-            Animation animation = eventMap.get(colliderId).getAnimation();
-            if (animation != null)
-                element.setCurrentAnimation(java.util.Optional.of(animation));
+            Optional<Animation> animation = eventMap.get(colliderId).getAnimation();
+            if (animation.isPresent())
+                element.setCurrentAnimation(animation);
         }
     }
 }

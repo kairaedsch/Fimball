@@ -3,6 +3,7 @@ package sep.fimball.model.handler;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import sep.fimball.model.media.Animation;
 
 import java.util.Optional;
 
@@ -36,7 +37,11 @@ public class LightHandler implements GameHandler
     {
         for (HandlerGameElement light : lights)
         {
-            light.setCurrentAnimation(Optional.of(light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation()));
+            Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
+            if (animation.isPresent()) {
+                light.setCurrentAnimation(animation);
+            }
+
         }
     }
 
