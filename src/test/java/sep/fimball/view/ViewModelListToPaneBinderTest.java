@@ -39,12 +39,23 @@ public class ViewModelListToPaneBinderTest
         assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 2"));
 
         originalList.add("Test 3");
+
+        assertThat(((Label) pane.getChildren().get(0)).getText(), equalTo("Test 0"));
+        assertThat(((Label) pane.getChildren().get(1)).getText(), equalTo("Test 1"));
+        assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 2"));
         assertThat(((Label) pane.getChildren().get(3)).getText(), equalTo("Test 3"));
 
         originalList.remove(0);
+
+        assertThat(((Label) pane.getChildren().get(0)).getText(), equalTo("Test 1"));
+        assertThat(((Label) pane.getChildren().get(1)).getText(), equalTo("Test 2"));
         assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 3"));
 
         originalList.add(0, "Test 0");
+
+        assertThat(((Label) pane.getChildren().get(0)).getText(), equalTo("Test 0"));
+        assertThat(((Label) pane.getChildren().get(1)).getText(), equalTo("Test 1"));
+        assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 2"));
         assertThat(((Label) pane.getChildren().get(3)).getText(), equalTo("Test 3"));
     }
 }
