@@ -43,6 +43,8 @@ public class SoundManagerView
      */
     public SoundManagerView()
     {
+        mediaPlayer = Optional.empty();
+
         SoundManagerViewModel soundManagerViewModel = SoundManagerViewModel.getInstance();
 
         musicVolume = new SimpleDoubleProperty();

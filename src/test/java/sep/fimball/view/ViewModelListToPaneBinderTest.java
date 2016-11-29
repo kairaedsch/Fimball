@@ -10,6 +10,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -33,17 +34,17 @@ public class ViewModelListToPaneBinderTest
 
         ViewModelListToPaneBinder.bindViewModelsToViews(pane, originalList, () -> "viewModelListToPaneBinder.fxml");
 
-        assertThat(((Label) pane.getChildren().get(0)).getText(), new IsEqual<>("Test 0"));
-        assertThat(((Label) pane.getChildren().get(1)).getText(), new IsEqual<>("Test 1"));
-        assertThat(((Label) pane.getChildren().get(2)).getText(), new IsEqual<>("Test 2"));
+        assertThat(((Label) pane.getChildren().get(0)).getText(), equalTo("Test 0"));
+        assertThat(((Label) pane.getChildren().get(1)).getText(), equalTo("Test 1"));
+        assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 2"));
 
         originalList.add("Test 3");
-        assertThat(((Label) pane.getChildren().get(3)).getText(), new IsEqual<>("Test 3"));
+        assertThat(((Label) pane.getChildren().get(3)).getText(), equalTo("Test 3"));
 
         originalList.remove(0);
-        assertThat(((Label) pane.getChildren().get(2)).getText(), new IsEqual<>("Test 3"));
+        assertThat(((Label) pane.getChildren().get(2)).getText(), equalTo("Test 3"));
 
         originalList.add(0, "Test 0");
-        assertThat(((Label) pane.getChildren().get(3)).getText(), new IsEqual<>("Test 3"));
+        assertThat(((Label) pane.getChildren().get(3)).getText(), equalTo("Test 3"));
     }
 }
