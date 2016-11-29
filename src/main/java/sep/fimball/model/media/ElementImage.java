@@ -97,7 +97,7 @@ public class ElementImage
     {
         int framePos = animation == null ? 0 : (int) (time / animation.getDuration());
         if (isAnimation && animation != null && framePos < animation.getFrameCount())
-            return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos % animation.getFrameCount());
+            return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), isAnimation, animation.getName(), framePos);
         else
             return Config.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - (rotation % rotationAccuracy), false, "", 0);
     }

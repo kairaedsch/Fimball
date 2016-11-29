@@ -35,9 +35,11 @@ public class ElementImageTest
     public void imagePathTest()
     {
         // Testet, ob der richtige Bildpfad angegeben wird.
-        assertThat(test.getImagePath(ImageLayer.BOTTOM, 35, 20), equalTo(Config.pathToElements() + "/test2/bottom-0.png"));
-        assertThat(test.getImagePath(ImageLayer.BOTTOM, 60, 20), equalTo(Config.pathToElements() + "/test2/bottom-40.png"));
-        //  assertEquals(test.getImagePath(ImageLayer.TOP, 60, 25), "D:/Dokumente/Fimball/target/data/elements/test2/top+glow_0-40.png" );
+        assertThat(test.getImagePath(ImageLayer.BOTTOM, 35, 9), equalTo(Config.pathToElements() + "/test2/bottom-0.png"));
+        assertThat(test.getImagePath(ImageLayer.TOP, 60, 1), equalTo(Config.pathToElements() + "/test2/top-40+test_0.png"));
+        assertThat(test.getImagePath(ImageLayer.TOP, 60, 2), equalTo(Config.pathToElements() + "/test2/top-40+test_1.png"));
+        assertThat(test.getImagePath(ImageLayer.TOP, 90, 5), equalTo(Config.pathToElements() + "/test2/top-80+test_2.png"));
+        assertThat(test.getImagePath(ImageLayer.TOP, 90, 7), equalTo(Config.pathToElements() + "/test2/top-80.png"));
     }
 
 
