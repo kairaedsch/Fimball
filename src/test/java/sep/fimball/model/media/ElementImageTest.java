@@ -1,6 +1,5 @@
 package sep.fimball.model.media;
 
-import org.junit.Test;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 
@@ -9,10 +8,6 @@ import static junit.framework.TestCase.assertEquals;
 
 public class ElementImageTest
 {
-    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
-
-
-    @Test(timeout = MAX_TEST_DURATION)
     public void elementImageTest()
     {
 

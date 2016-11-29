@@ -9,12 +9,11 @@ import static junit.framework.TestCase.assertEquals;
 
 public class SoundManagerTest
 {
-    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
     static String soundName;
     static boolean repeating;
     static Sound testSound;
 
-    @Test(timeout = MAX_TEST_DURATION)
+    @Test
     public void soundManagerTest()
     {
 
