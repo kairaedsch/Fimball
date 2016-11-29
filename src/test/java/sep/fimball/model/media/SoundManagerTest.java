@@ -5,7 +5,8 @@ import sep.fimball.general.data.Config;
 
 import java.util.Observer;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 
 public class SoundManagerTest
@@ -33,9 +34,9 @@ public class SoundManagerTest
         SoundManager.getInstance().addSoundToPlay(givenSound);
 
         // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager der übergebene ist.
-        assertEquals(testSound,givenSound);
-        assertEquals(soundName, Config.pathToSound("testSound"));
-        assertEquals(repeating, false);
+        assertThat(testSound,equalTo(givenSound));
+        assertThat(soundName, equalTo(Config.pathToSound("testSound")));
+        assertThat(repeating, equalTo(false));
 
     }
 

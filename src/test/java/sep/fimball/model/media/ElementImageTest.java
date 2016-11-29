@@ -4,7 +4,8 @@ import org.junit.Test;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 
 public class ElementImageTest
@@ -19,13 +20,13 @@ public class ElementImageTest
         ElementImage test = new ElementImage("test2", testMediaElement, testAnimation);
 
         //Testet, ob die Berechnung der Rest-Rotation funktioniert.
-        assertEquals(test.getRestRotation(25), 25);
-        assertEquals(test.getRestRotation(40), 0);
-        assertEquals(test.getRestRotation(75), 35);
+        assertThat(test.getRestRotation(25), equalTo( 25));
+        assertThat(test.getRestRotation(40), equalTo(0));
+        assertThat(test.getRestRotation(75), equalTo(35));
 
         // Testet, ob der richtige Bildpfad angegeben wird.
-        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 35, 20), Config.pathToElements() + "/test2/bottom-0.png" );
-        assertEquals(test.getImagePath(ImageLayer.BOTTOM, 60, 20), Config.pathToElements() + "/test2/bottom-40.png" );
+        assertThat(test.getImagePath(ImageLayer.BOTTOM, 35, 20),equalTo(Config.pathToElements() + "/test2/bottom-0.png"));
+        assertThat(test.getImagePath(ImageLayer.BOTTOM, 60, 20), equalTo(Config.pathToElements() + "/test2/bottom-40.png"));
       //  assertEquals(test.getImagePath(ImageLayer.TOP, 60, 25), "D:/Dokumente/Fimball/target/data/elements/test2/top+glow_0-40.png" );
     }
 
