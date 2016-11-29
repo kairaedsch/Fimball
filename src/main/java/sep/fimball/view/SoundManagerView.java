@@ -11,30 +11,25 @@ import sep.fimball.viewmodel.SoundManagerViewModel;
 
 import java.util.HashMap;
 import java.util.Observer;
+import java.util.Optional;
 
 /**
- * SoundManagerView ist für das Abspielen der Effektsounds sowie der Hintergrundmusik zuständig.
+ * SoundManagerView ist für das Abspielen der SoundEffekte sowie der Hintergrundmusik zuständig.
  */
 public class SoundManagerView
 {
-
     /**
      * Spielt die Hintergrundmusik ab.
      */
-    private MediaPlayer mediaPlayer;
+    private Optional<MediaPlayer> mediaPlayer;
 
     /**
-     * Hashed die bereits geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
+     * Cashed geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
      */
     private HashMap<String, AudioClip> loadedAudioClips;
 
     /**
-     * Die Hintergrundmusik, die abgespielt werden soll.
-     */
-    private Media backgroundMusic;
-
-    /**
-     * Die Lautstärke, mit der die Hintergrundmusik abgespielt werden soll.
+     * Die Lautstärke, mit der die Hintergrundmusik abgespielt wird.
      */
     private DoubleProperty musicVolume;
 
@@ -44,16 +39,11 @@ public class SoundManagerView
     private DoubleProperty sfxVolume;
 
     /**
-     * Das zum SoundManager gehörende SoundManagerViewModel.
-     */
-    private SoundManagerViewModel soundManagerViewModel;
-
-    /**
      * Erzeugt eine neue SoundManagerView.
      */
     public SoundManagerView()
     {
-        this.soundManagerViewModel = SoundManagerViewModel.getInstance();
+        SoundManagerViewModel soundManagerViewModel = SoundManagerViewModel.getInstance();
 
         musicVolume = new SimpleDoubleProperty();
         musicVolume.bind(soundManagerViewModel.musicVolumeProperty());
@@ -62,11 +52,11 @@ public class SoundManagerView
 
         loadedAudioClips = new HashMap<>();
 
-        Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
         Observer stopObserver = (o, args) -> stopBackgroundMusic();
-
-        soundManagerViewModel.addPlayObserver(playClipObserver);
         soundManagerViewModel.addStopObvserver(stopObserver);
+
+        Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
+        soundManagerViewModel.addPlayObserver(playClipObserver);
     }
 
     /**
@@ -79,22 +69,21 @@ public class SoundManagerView
         String soundPath = sound.getSoundPath();
         if (sound.isRepeating())
         {
-            backgroundMusic = new Media(soundPath);
-            if (mediaPlayer != null)
-                mediaPlayer.dispose();
+            MediaPlayer newMediaPlayer = new MediaPlayer(new Media(soundPath));
+            newMediaPlayer.setOnEndOfMedia(() -> newMediaPlayer.seek(Duration.ZERO));
+            newMediaPlayer.volumeProperty().bind(musicVolume);
+            newMediaPlayer.play();
 
-            mediaPlayer = new MediaPlayer(backgroundMusic);
-            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-            mediaPlayer.volumeProperty().bind(musicVolume);
-            mediaPlayer.play();
-        } else
+            mediaPlayer.ifPresent(MediaPlayer::dispose);
+            mediaPlayer = Optional.of(newMediaPlayer);
+        }
+        else
         {
             if (!loadedAudioClips.containsKey(soundPath))
             {
                 AudioClip clip = new AudioClip(soundPath);
-                loadedAudioClips.put(soundPath, clip);
                 clip.volumeProperty().bind(sfxVolume);
-                clip.play();
+                loadedAudioClips.put(soundPath, clip);
             }
 
             loadedAudioClips.get(soundPath).play();
@@ -106,6 +95,10 @@ public class SoundManagerView
      */
     private void stopBackgroundMusic()
     {
-        if (mediaPlayer != null) mediaPlayer.stop();
+        if (mediaPlayer.isPresent())
+        {
+            mediaPlayer.get().dispose();
+            mediaPlayer = Optional.empty();
+        }
     }
 }

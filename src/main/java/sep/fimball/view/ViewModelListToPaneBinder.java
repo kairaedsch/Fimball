@@ -1,7 +1,6 @@
 package sep.fimball.view;
 
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import sep.fimball.general.util.ListPropertyConverter;
 
@@ -35,25 +34,12 @@ public class ViewModelListToPaneBinder
      */
     public static <ViewT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
     {
-        ViewModelListToPaneBinder.bindViewModelsToViews(parentNode, viewModelList, (viewModel) ->
+        ListPropertyConverter.bindAndConvertList(parentNode.getChildren(), viewModelList, (viewModel) ->
         {
             ViewLoader<ViewT> viewLoader = new ViewLoader<>(viewType);
             caller.call(viewLoader.getView(), viewModel);
             return viewLoader.getRootNode();
         });
-    }
-
-    /**
-     * Bindet die Einträge aus der {@code viewModelList} an die {@code parentNode}, indem einzelne Nodes mithilfe des {@code viewModelToNodeConverter} erzeugt werden.
-     *
-     * @param parentNode               Die Node, an die die Einträge aus der {@code viewModelList} gehängt und gebunden werden sollen.
-     * @param viewModelList            Die Liste, deren Einträge an die {@code parentNode} gehängt werden sollen.
-     * @param viewModelToNodeConverter Der Converter, mit dessen Hilfe die einzelnen Nodes erzeugt werden.
-     * @param <ViewModelT>             Das ViewModel der Einträge in {@code viewModelList}.
-     */
-    public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ListPropertyConverter.ListConverter<Node, ViewModelT> viewModelToNodeConverter)
-    {
-        ListPropertyConverter.bindAndConvertList(parentNode.getChildren(), viewModelList, viewModelToNodeConverter);
     }
 
     /**

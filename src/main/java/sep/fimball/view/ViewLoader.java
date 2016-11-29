@@ -7,19 +7,19 @@ import java.io.IOException;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
- * @param <ViewT> Die Klasse der View.
+ * @param <ViewT> Die Klasse der View (FxController).
  */
 public class ViewLoader<ViewT>
 {
     /**
      * Die aus der FXML-Datei geladene RootNode.
      */
-    private Node rootNode = null;
+    private Node rootNode;
 
     /**
      * Die zur rootNode gehörende View (FxController).
      */
-    private ViewT view = null;
+    private ViewT view;
 
     /**
      * Erzeugt einen ViewLoader und lädt die zur {@code viewType} gehörende FXML-Datei mit zugehöriger View (FxController).
@@ -38,15 +38,23 @@ public class ViewLoader<ViewT>
      */
     private void load(String fxmlPath)
     {
+        rootNode = null;
+        view = null;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlPath));
         try
         {
-            rootNode = (Node) loader.load();
+            rootNode = loader.load();
             view = loader.getController();
         }
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+
+        if(rootNode == null || view == null)
+        {
+            throw new IllegalStateException();
         }
     }
 

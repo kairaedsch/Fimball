@@ -224,19 +224,15 @@ public class GameSessionTest
         gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
         gameSession.gameLoopUpdate();
 
-        assertNotSame(gameSession.getWorld().getBallTemplate().pointsProperty().get(),
-                gameSession.gameBallProperty().get().positionProperty().get());
-        assertNotSame(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
-                gameSession.gameBallProperty().get().rotationProperty().get());
+        assertNotSame(gameSession.getWorld().getBallTemplate().pointsProperty().get(), gameSession.gameBallProperty().get().positionProperty().get());
+        assertNotSame(gameSession.getWorld().getBallTemplate().rotationProperty().get(), gameSession.gameBallProperty().get().rotationProperty().get());
 
         // TODO some magic
         gameSession.spawnNewBall();
         gameSession.gameLoopUpdate();
 
-        assertEquals(gameSession.getWorld().getBallTemplate().positionProperty().get(),
-                gameSession.gameBallProperty().get().positionProperty().get());
-        assertEquals(gameSession.getWorld().getBallTemplate().rotationProperty().get(),
-                gameSession.gameBallProperty().get().rotationProperty().get());
+        assertEquals(gameSession.getWorld().getBallTemplate().positionProperty().get(), gameSession.gameBallProperty().get().positionProperty().get());
+        assertEquals(gameSession.getWorld().getBallTemplate().rotationProperty().get(), gameSession.gameBallProperty().get().rotationProperty().get());
     }
 
     @After
