@@ -1,6 +1,7 @@
 package sep.fimball.model.media;
 
 import org.junit.Test;
+import sep.fimball.general.data.Config;
 
 import java.util.Observer;
 
@@ -33,7 +34,7 @@ public class SoundManagerTest
 
         // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager der übergebene ist.
         assertEquals(testSound,givenSound);
-        assertEquals(soundName, "file:///D:/Dokumente/Fimball/target/data/sounds/testSound.mp3");
+        assertEquals(soundName, Config.pathToSound("testSound"));
         assertEquals(repeating, false);
 
     }

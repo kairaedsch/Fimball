@@ -22,12 +22,18 @@ public class LanguageManagerViewModelTest
     public void languageTest()
     {
         LanguageManagerViewModel languageManagerViewModel = LanguageManagerViewModel.getInstance();
+
+        //Testet, ob das LanguageManagerViewModel eine richtige Instanz zurück gibt.
         assertFalse(languageManagerViewModel == null);
+
+        //Testet das LanguageManagerViewModel mit allen verfügbaren Sprachen.
         for (Language language : Language.values())
         {
             Set<String> texts = new HashSet<>();
             Properties properties = new Properties();
             String path = Config.pathToLanguage(language.getCode());
+
+            //Lädt die Properties aus der Datei
             try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
             {
                 properties.load(inputStream);
@@ -39,6 +45,8 @@ public class LanguageManagerViewModelTest
                 System.out.println("Exception: " + e);
             }
             texts.addAll(properties.keySet().stream().map(key -> (String) properties.get(key)).collect(Collectors.toList()));
+
+            //Testet, ob alle ausgelesenen Keys aus der Properties-Datei
             for (Object key : properties.keySet())
             {
                 assertTrue(texts.stream().anyMatch((String str) -> (str.equals(properties.get(key)))));

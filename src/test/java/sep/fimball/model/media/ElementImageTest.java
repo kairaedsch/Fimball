@@ -1,5 +1,6 @@
 package sep.fimball.model.media;
 
+import org.junit.Test;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 
@@ -8,6 +9,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class ElementImageTest
 {
+    @Test
     public void elementImageTest()
     {
 
