@@ -270,6 +270,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.gameLoopObservable = new Observable();
 
         spawnNewBall();
+
+        startAll();
     }
 
     /**
