@@ -9,9 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Testet, ob der JsonFileManager json-Dateien richtig speichern und laden kann.
@@ -40,10 +39,10 @@ public class JsonFileManagerTest
     public void jsonLoadTest()
     {
         Optional<JsonTest> test = JsonFileManager.loadFromJson(Paths.get(Config.pathToTestData() + "JsonTestFile.json"), JsonTest.class);
-        assertTrue(test.isPresent());
-        assertEquals(test.get().testInt, 42);
-        assertEquals(test.get().testDouble, 13.37);
-        assertEquals(test.get().testString, "test-string-\uD83D\uDC09");
+        assertThat(test.isPresent(), is(true));
+        assertThat(test.get().testInt, is(42));
+        assertThat(test.get().testDouble, is(13.37));
+        assertThat(test.get().testString, is("test-string-\uD83D\uDC09"));
     }
 
     @Test
@@ -55,10 +54,10 @@ public class JsonFileManagerTest
         test.testString = "save-test-\uD83D\uDC09";
         JsonFileManager.saveToJson(Config.pathToTestData() + SAVE_FILE_NAME, test);
         Optional<JsonTest> loaded = JsonFileManager.loadFromJson(Paths.get(Config.pathToTestData() + SAVE_FILE_NAME), JsonTest.class);
-        assertTrue(loaded.isPresent());
-        assertEquals(test.testInt, loaded.get().testInt);
-        assertEquals(test.testDouble, loaded.get().testDouble);
-        assertEquals(test.testString, loaded.get().testString);
+        assertThat(loaded.isPresent(), is(true));
+        assertThat(test.testInt, is(loaded.get().testInt));
+        assertThat(test.testDouble, is(loaded.get().testDouble));
+        assertThat(test.testString, is(loaded.get().testString));
     }
 
     @After
