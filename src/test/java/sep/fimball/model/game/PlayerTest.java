@@ -1,11 +1,9 @@
 package sep.fimball.model.game;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
-@Ignore
 public class PlayerTest
 {
 
