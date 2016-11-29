@@ -2,11 +2,8 @@ package sep.fimball.general.data;
 
 import com.sun.org.apache.xerces.internal.util.PropertyState;
 import org.junit.Test;
-import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by alexcekay on 11/28/16.
