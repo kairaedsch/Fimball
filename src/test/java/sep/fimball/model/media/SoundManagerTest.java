@@ -18,6 +18,7 @@ public class SoundManagerTest
     public void soundManagerTest()
     {
 
+        // Legt einen neuen Test-Observer an
         Observer testObserver = (o, sound) ->
         {
             testSound = (Sound) sound;
@@ -27,9 +28,11 @@ public class SoundManagerTest
 
         SoundManager.getInstance().addObserver(testObserver);
 
+        // Gibt den SoundManager einen Sound zum abspielen
         Sound givenSound = new Sound("testSound", false);
         SoundManager.getInstance().addSoundToPlay(givenSound);
 
+        // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager der übergebene ist.
         assertEquals(testSound,givenSound);
         assertEquals(soundName, "file:///D:/Dokumente/Fimball/target/data/sounds/testSound.mp3");
         assertEquals(repeating, false);
