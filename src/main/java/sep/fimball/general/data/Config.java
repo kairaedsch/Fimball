@@ -350,12 +350,21 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zur Logo.Datei zurück.
+     * Gibt den Pfad zur Logo-Datei zurück.
      *
      * @return Der Pfad zur Logo Datei.
      */
     public static String pathToLogo()
     {
         return dataPath + logoFile;
+    }
+
+    /**
+     * Gibt den Pfad zum Ordner zurück, in dem sich Dateien für Tests befinden.
+     * @return Pfad zum Test-Ordner, endet mit /
+     */
+    public static String pathToTestData()
+    {
+        return dataPath + "/testdata/";
     }
 }

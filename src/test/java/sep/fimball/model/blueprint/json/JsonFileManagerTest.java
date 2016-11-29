@@ -14,12 +14,18 @@ import static junit.framework.TestCase.assertTrue;
 
 
 /**
- * Created by TheAsuro on 28.11.2016.
+ * Testet, ob der JsonFileManager json-Dateien richtig speichern und laden kann.
  */
 public class JsonFileManagerTest
 {
+    /**
+     * Dateiname der Datei, welche im jsonSaveTest erstellt wird.
+     */
     private static final String SAVE_FILE_NAME = "JsonSaveTest.json";
 
+    /**
+     * Testklasse, welche im Test serialisiert und deserialisiert wird.
+     */
     private static class JsonTest
     {
         private int testInt;
@@ -27,6 +33,9 @@ public class JsonFileManagerTest
         private String testString;
     }
 
+    /**
+     * Lädt
+     */
     @Test
     public void jsonLoadTest()
     {
