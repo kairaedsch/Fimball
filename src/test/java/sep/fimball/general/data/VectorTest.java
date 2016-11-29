@@ -1,8 +1,11 @@
 package sep.fimball.general.data;
 
+import com.sun.org.apache.xerces.internal.util.PropertyState;
 import org.junit.Test;
-
 import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -17,7 +20,7 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 vecTwo = new Vector2(0, 1);
-        assertEquals(new Vector2(1, 1), vecOne.plus(vecTwo));
+        assertThat(vecOne.plus(vecTwo), is(new Vector2(1, 1)));
     }
 
     @Test
@@ -25,7 +28,7 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(100, 150);
         Vector2 vecTwo = new Vector2(50, 100);
-        assertEquals(new Vector2(50, 50), vecOne.minus(vecTwo));
+        assertThat(vecOne.minus(vecTwo), is(new Vector2(50, 50)));
     }
 
     @Test
@@ -33,14 +36,14 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(191, 6);
         double scalar = 7;
-        assertEquals(new Vector2(1337, 42), vecOne.scale(scalar));
+        assertThat(vecOne.scale(scalar), is(new Vector2(1337, 42)));
     }
 
     @Test
     public void magnitudeTest()
     {
         Vector2 vec = new Vector2(0, 9);
-        assertEquals(9.0, vec.magnitude());
+        assertThat(vec.magnitude(), is(9.0));
     }
 
     @Test
@@ -48,7 +51,7 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(21, 17);
         Vector2 vecTwo = new Vector2(3, 2);
-        assertEquals(97.0, vecOne.dot(vecTwo));
+        assertThat(vecOne.dot(vecTwo), is(97.0));
     }
 
     @Test
@@ -56,8 +59,8 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 rotatedVec = vecOne.rotate(Math.toRadians(90));
-        assertTrue(Math.abs(0.0 - rotatedVec.getX()) < EPSILON);
-        assertTrue(Math.abs(1.0 - rotatedVec.getY()) < EPSILON);
+        assertThat(Math.abs(0.0 - rotatedVec.getX()) < EPSILON, is(true));
+        assertThat(Math.abs(1.0 - rotatedVec.getY()) < EPSILON, is(true));
     }
 
     @Test
@@ -65,14 +68,14 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(3, 7);
         Vector2 normedVec = vecOne.normalized();
-        assertTrue(Math.abs(1.0 - normedVec.magnitude()) < EPSILON);
+        assertThat(Math.abs(1.0 - normedVec.magnitude()) < EPSILON, is(true));
     }
 
     @Test
     public void normalTest()
     {
         Vector2 vecOne = new Vector2(5, 5);
-        assertEquals(new Vector2(5, -5), vecOne.normal());
+        assertThat(vecOne.normal(), is(new Vector2(5, -5)));
     }
 
     @Test
@@ -80,7 +83,7 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1, 1);
         Vector2 vecTwo = new Vector2(11, 11);
-        assertEquals(new Vector2(6, 6), vecOne.lerp(vecTwo, 0.5));
+        assertThat(vecOne.lerp(vecTwo, 0.5), is(new Vector2(6, 6)));
     }
 
     @Test
@@ -88,13 +91,13 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 vecTwo = new Vector2(0, 1);
-        assertEquals(90.0, Math.toDegrees(vecOne.angleBetween(vecTwo)));
+        assertThat(Math.toDegrees(vecOne.angleBetween(vecTwo)), is(90.0));
     }
 
     @Test
     public void roundTest()
     {
        Vector2 vecOne = new Vector2(1.2, 1.5);
-        assertEquals(new Vector2(1.0, 2.0), vecOne.round());
+        assertThat(vecOne.round(), is(new Vector2(1.0, 2.0)));
     }
 }
