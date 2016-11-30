@@ -56,14 +56,10 @@ public class GameTest
         pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
-        pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
-        pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, -5), 0, 0, 0));
-        pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
-        pinballMachine.addElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, -5), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
         session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});        // Start des Spiels
 

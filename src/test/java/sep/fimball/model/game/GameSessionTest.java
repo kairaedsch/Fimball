@@ -34,7 +34,7 @@ public class GameSessionTest
         // Erstellen eines leeren Automaten.
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
         ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
+        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
 
 
         new GameSession(pinballMachineMock, new String[]{"TestPlayer"});
@@ -56,7 +56,7 @@ public class GameSessionTest
 
         ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
-        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
+        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
 
         GameSession gameSession = new GameSession(pinballMachineMock, playerNames);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
@@ -72,7 +72,7 @@ public class GameSessionTest
         GameElement gameElement = gameSession.gameBallProperty().get();
 
         // künstliches Erstellen einer Kollision.
-        CollisionEventArgs collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
@@ -80,7 +80,7 @@ public class GameSessionTest
         final Vector2 newPos = new Vector2(1, 1);
         final double newRot = 1;
 
-        ElementEventArgs elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot);
+        ElementEventArgs<GameElement> elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot);
         List<ElementEventArgs<GameElement>> elementEventArgsList = new ArrayList<>();
         elementEventArgsList.add(elementEventArgs);
 
@@ -176,7 +176,7 @@ public class GameSessionTest
 
         ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
-        when(pinballMachine.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
+        when(pinballMachine.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
 
         GameSession gameSession = new GameSession(pinballMachine, playerNames);
         for (int i = 0; i < playerNames.length; i++)
