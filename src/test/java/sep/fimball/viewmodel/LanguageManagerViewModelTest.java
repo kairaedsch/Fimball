@@ -3,22 +3,21 @@ package sep.fimball.viewmodel;
 import org.junit.Test;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
+import sep.fimball.model.blueprint.settings.Settings;
 
 import java.io.InputStream;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by marc on 28.11.16.
  */
 public class LanguageManagerViewModelTest
 {
-    @Test(timeout = 3000)
+    @Test
     public void languageTest()
     {
         LanguageManagerViewModel languageManagerViewModel = LanguageManagerViewModel.getInstance();
@@ -26,31 +25,34 @@ public class LanguageManagerViewModelTest
         //Testet, ob das LanguageManagerViewModel eine richtige Instanz zurück gibt.
         assertFalse(languageManagerViewModel == null);
 
-        //Testet das LanguageManagerViewModel mit allen verfügbaren Sprachen.
         for (Language language : Language.values())
         {
-            Set<String> texts = new HashSet<>();
+            Settings.getSingletonInstance().languageProperty().set(language);
+
             Properties properties = new Properties();
             String path = Config.pathToLanguage(language.getCode());
+            loadProperties(properties, path);
 
-            //Lädt die Properties aus der Datei
-            try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
-            {
-                properties.load(inputStream);
-                inputStream.close();
-            }
-            catch (Exception e)
-            {
-                System.err.println("property file '" + path + "' not loaded");
-                System.out.println("Exception: " + e);
-            }
-            texts.addAll(properties.keySet().stream().map(key -> (String) properties.get(key)).collect(Collectors.toList()));
-
-            //Testet, ob alle ausgelesenen Keys aus der Properties-Datei
+            //Testet, ob die Texte aller ausgelesenen Keys aus der Properties-Datei auch im LanguageManagerViewModel enthalten sind.
             for (Object key : properties.keySet())
             {
-                assertTrue(texts.stream().anyMatch((String str) -> (str.equals(properties.get(key)))));
+                assertThat(properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
             }
+        }
+
+    }
+
+    private void loadProperties(Properties properties, String path)
+    {
+        //Lädt die Properties aus der Datei
+        try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
+        {
+            properties.load(inputStream);
+            inputStream.close();
+        } catch (Exception e)
+        {
+            System.err.println("property file '" + path + "' not loaded");
+            System.out.println("Exception: " + e);
         }
     }
 }
