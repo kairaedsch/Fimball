@@ -66,7 +66,7 @@ public class PinballMachineManager
      *
      * @return Die neu erstellte PinballMachine.
      */
-    public PinballMachine createNewMachine()
+    public PinballMachine createNewMachine() throws IOException
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
         pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
@@ -131,8 +131,6 @@ public class PinballMachineManager
         {
             PlacedElementListJson placedElementListJson = placedElementListOptional.get();
 
-            // TODO NullPointerException not very good
-
             if (placedElementListJson.elements != null)
             {
                 int loaded = 0;
@@ -167,7 +165,7 @@ public class PinballMachineManager
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
      */
-    void savePinballMachine(PinballMachine pinballMachine)
+    void savePinballMachine(PinballMachine pinballMachine) throws IOException
     {
         Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
         if (!pathToMachine.toFile().exists())
@@ -175,7 +173,7 @@ public class PinballMachineManager
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
             if (!couldCreateFolder)
             {
-                // TODO error
+                throw new IOException("Could not create folder!");
             }
         }
 

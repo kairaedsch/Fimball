@@ -8,6 +8,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class PinballMachineSaveTest
      * Erstellt einen neuen Automaten, platziert jedes verfügbare Spielelement darin, speichert den erstellten Automaten und lädt ihn von der Festplatte. Anschließend wird sichergestellt, dass der geladene Automat mit dem erstellten Automat übereinstimmt.
      */
     @Test
-    public void pinballMachineShouldSave()
+    public void pinballMachineShouldSave() throws IOException
     {
         // Erstellt einen leeren Automaten
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();

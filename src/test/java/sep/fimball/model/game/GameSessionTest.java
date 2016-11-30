@@ -15,6 +15,7 @@ import sep.fimball.model.handler.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -43,7 +44,7 @@ public class GameSessionTest
     private boolean isBallLost = false;
 
     @Test
-    public void gameLoopUpdateTest()
+    public void gameLoopUpdateTest() throws IOException
     {
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
 

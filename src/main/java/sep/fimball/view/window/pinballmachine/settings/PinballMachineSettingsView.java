@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
+import java.io.IOException;
+
 /**
  * Die PinballMachineSettingsView ist für die Darstellung der Editoreinstellungen zuständig und ermöglicht dem Nutzer u.a. Änderungen am Flipperautomaten zu speichern.
  */
@@ -52,7 +54,14 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     @FXML
     private void saveClicked()
     {
-        pinballMachineSettingsViewModel.savePinballMachine();
+        try
+        {
+            pinballMachineSettingsViewModel.savePinballMachine();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**

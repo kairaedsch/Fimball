@@ -10,6 +10,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +106,7 @@ public class PinballMachine
     /**
      * Serialisiert und speichert diesen Automaten.
      */
-    public void saveToDisk()
+    public void saveToDisk() throws IOException
     {
         checkElementsLoaded();
         PinballMachineManager.getInstance().savePinballMachine(this);

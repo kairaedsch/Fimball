@@ -17,6 +17,8 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
+import java.io.IOException;
+
 /**
  * Das MainMenuViewModel stellt der View Daten über alle Flipper-Automaten zur Verfügung und ermöglicht den Start eines Automaten, wobei zuvor noch die Spieler festgelegt werden müssen.
  */
@@ -110,7 +112,14 @@ public class MainMenuViewModel extends WindowViewModel
      */
     public void addNewAutomaton()
     {
-        sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
+        try
+        {
+            sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
