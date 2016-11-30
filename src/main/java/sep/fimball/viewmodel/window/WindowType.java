@@ -23,10 +23,10 @@ public enum WindowType
     /**
      * Das Fenster, das den Editor darstellt.
      */
-    TABLE_EDITOR,
+    MACHINE_EDITOR,
 
     /**
      * Das Fenster, in dem die Einstellungen von Fimball verwaltet werden.
      */
-    TABLE_SETTINGS
+    MACHINE_SETTINGS
 }

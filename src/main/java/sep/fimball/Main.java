@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import sep.fimball.view.SceneManagerView;
+import sep.fimball.viewmodel.SceneManagerViewModel;
 
 /**
  * Stellt den Einstiegspunkt der Applikation dar.
@@ -37,6 +38,6 @@ public class Main extends Application
             System.exit(0);
         });
 
-        new SceneManagerView(primaryStage);
+        new SceneManagerView(primaryStage, new SceneManagerViewModel());
     }
 }

@@ -17,7 +17,7 @@ public class ImageCacheTest
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
     @Test
-    public void getImageSpeedTest() throws Exception
+    public void getImageSpeedTest()
     {
         ImageCache imageCache = ImageCache.getInstance();
 
@@ -48,7 +48,7 @@ public class ImageCacheTest
     }
 
     @Test
-    public void getImageMultiPicTest() throws Exception
+    public void getImageMultiPicTest()
     {
         ImageCache imageCache = ImageCache.getInstance();
 

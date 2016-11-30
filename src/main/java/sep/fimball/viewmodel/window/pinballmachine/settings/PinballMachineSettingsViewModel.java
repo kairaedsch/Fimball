@@ -33,7 +33,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public PinballMachineSettingsViewModel(PinballMachine pinballMachine)
     {
-        super(WindowType.TABLE_SETTINGS);
+        super(WindowType.MACHINE_SETTINGS);
         this.pinballMachine = pinballMachine;
 
         machineName = new SimpleStringProperty();

@@ -87,7 +87,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public PinballMachineEditorViewModel(PinballMachine pinballMachine)
     {
-        super(WindowType.TABLE_EDITOR);
+        super(WindowType.MACHINE_EDITOR);
         this.pinballMachine = pinballMachine;
 
         this.selectedAvailableElement = Optional.empty();

@@ -19,7 +19,7 @@ public class ViewModelListToPaneBinderTest
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
     @Test
-    public void bindViewModelsToViews() throws Exception
+    public void bindViewModelsToViews()
     {
         Pane pane = new Pane();
 

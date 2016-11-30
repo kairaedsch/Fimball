@@ -1,6 +1,5 @@
 package sep.fimball.view;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,11 +23,6 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 public class SceneManagerView
 {
     /**
-     * Das zum SceneManagerView gehörende ViewModel.
-     */
-    private SceneManagerViewModel sceneManagerViewModel;
-
-    /**
      * Der oberste Container, in denen alle Nodes der aktiven Views geladen werden.
      */
     private StackPane root;
@@ -45,7 +39,7 @@ public class SceneManagerView
      *
      * @param stage Die Stage, die gesetzt werden soll.
      */
-    public SceneManagerView(Stage stage)
+    public SceneManagerView(Stage stage, SceneManagerViewModel sceneManagerViewModel)
     {
         stage.setWidth(Config.defaultStageWidth);
         stage.setHeight(Config.defaultStageHeight);
@@ -64,7 +58,6 @@ public class SceneManagerView
 
         new SoundManagerView();
 
-        sceneManagerViewModel = new SceneManagerViewModel();
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
         sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
@@ -103,10 +96,10 @@ public class SceneManagerView
             case GAME:
                 windowType = WindowType.GAME_WINDOW;
                 break;
-            case TABLE_EDITOR:
+            case MACHINE_EDITOR:
                 windowType = WindowType.TABLE_EDITOR_WINDOW;
                 break;
-            case TABLE_SETTINGS:
+            case MACHINE_SETTINGS:
                 windowType = WindowType.TABLE_SETTINGS_WINDOW;
                 break;
             default:
@@ -215,9 +208,19 @@ public class SceneManagerView
      *
      * @return Das RootNode der aktuell angezeigten WindowView.
      */
-    private Node getWindow()
+    Node getWindow()
     {
         return root.getChildren().get(0);
+    }
+
+    /**
+     * Gibt das RootNode der aktuell angezeigten DialogView zurück.
+     *
+     * @return Das RootNode der aktuell angezeigten WindowView.
+     */
+    Node getDialog()
+    {
+        return root.getChildren().get(2);
     }
 
     /**
