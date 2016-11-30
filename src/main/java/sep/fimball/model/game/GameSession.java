@@ -9,13 +9,16 @@ import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
-import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.*;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.Handler;
+import sep.fimball.model.handler.HandlerFactory;
+import sep.fimball.model.handler.HandlerGameSession;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
-import sep.fimball.model.physics.collider.Collider;
-import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
@@ -44,7 +47,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         GameSession gameSession = new GameSession(machineBlueprint, playerNames);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
-        gameSession.startAll();
         return gameSession;
     }
 
@@ -59,6 +61,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
+        gameSession.stopPhysics();
         ListPropertyConverter.bindAndConvertList(
                 gameSession.getWorld().gameElementsProperty(),
                 machineBlueprint.elementsProperty(),
@@ -86,6 +89,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
      */
     private int tiltCounter;
+
+    /**
+     * TODO
+     */
+    private static final int MAX_TILT_COUNTER = 5;
 
     /**
      * Beschreibt, ob das Spiel pausiert ist.
@@ -176,28 +184,17 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.collisionEventArgsList = new LinkedList<>();
         this.elementEventArgsList = new LinkedList<>();
         this.isOver = new SimpleBooleanProperty(false);
+        this.gameBall = new SimpleObjectProperty<>();
 
-        gameBall = new SimpleObjectProperty<>();
-
-        /*
-        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
-        {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                addTiltCounter();
-        });
-        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_RIGHT, args ->
-        {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                addTiltCounter();
-        });*/
-
-        this.players = new Player[playerNames.length];
+        players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
         {
-            this.players[i] = new Player(playerNames[i]);
+            players[i] = new Player(playerNames[i]);
         }
-        this.playerIndex = new SimpleIntegerProperty(0);
+        playerIndex = new SimpleIntegerProperty(0);
 
+
+        // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
@@ -207,69 +204,107 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         for (PlacedElement element : machineBlueprint.elementsProperty())
         {
-            if (element.getBaseElement().getType() == BaseElementType.BALL)
+
+            PhysicsElement<GameElement> physicsElement = null;
+            GameElement gameElement = new GameElement(element, false);
+
+            switch (element.getBaseElement().getType())
             {
-                ballTemplate = element;
-                GameElement gameElement = new GameElement(element, false);
-                this.gameBall.set(gameElement);
 
-            } else
-            {
-                GameElement gameElement = new GameElement(element, false);
-                elements.add(gameElement);
-
-                // TODO Schlimmer als AIDS.
-                PhysicsElement<GameElement> physElem;
-                if (element.getBaseElement().getType() == BaseElementType.FLIPPER)
-                {
-                    FlipperPhysicsElement<GameElement> flipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-                    leftFlippers.add(flipperPhysicsElement);
-                    physElem = flipperPhysicsElement;
-                }
-                else
-                {
-                    physElem = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-                }
-                physicsElements.add(physElem);
-
-                // TODO Schlimmer als AIDS. Collider in GameSession????
-                for (Collider collider : physElem.getColliders())
-                {
-                    // TODO Schlimmer als AIDS. ColliderShape in GameSession????
-                    for (ColliderShape shape : collider.getShapes())
-                    {
-                        // TODO Schlimmer als AIDS.
-                        double yPos = shape.getMaximumYPos(physElem.getRotation(), gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
-                        double globalPos = physElem.getPosition().getY() + yPos;
-
-                        // TODO Schlimmer als AIDS.
-                        if (globalPos > maxElementPos)
-                        {
-                            // TODO Schlimmer als AIDS.
-                            maxElementPos = globalPos;
-                        }
-                    }
-                }
+                case NORMAL:
+                    physicsElement = new PhysicsElement<>(
+                            gameElement,
+                            gameElement.positionProperty().get(),
+                            gameElement.rotationProperty().get(),
+                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    break;
+                case BALL:
+                    // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
+                    ballTemplate = element;
+                    this.gameBall.set(gameElement);
+                    break;
+                case PLUNGER:/*
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(
+                            gameElement,
+                            gameElement.positionProperty().get(),
+                            gameElement.getPlacedElement().getBaseElement().getPhysics());*/
+                    break;
+                case LEFT_FLIPPER:
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(
+                            gameElement,
+                            gameElement.positionProperty().get(),
+                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    leftFlippers.add(leftFlipperPhysicsElement);
+                    physicsElement = leftFlipperPhysicsElement;
+                    break;
+                case RIGHT_FLIPPER:
+                    FlipperPhysicsElement<GameElement> rightFlipperPhysicsElement = new FlipperPhysicsElement<>(
+                            gameElement,
+                            gameElement.positionProperty().get(),
+                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    rightFlippers.add(rightFlipperPhysicsElement);
+                    physicsElement = rightFlipperPhysicsElement;
+                    break;
+                case LIGHT:
+                    break;
+                default:
+                    throw new IllegalArgumentException(
+                            "At least one given PlacedElement does not have a correct BaseElementType");
             }
+
+            elements.add(gameElement);
+
+            if (physicsElement != null)
+            {
+                physicsElements.add(physicsElement);
+            }
+
+            // Setze die y-Position des aktuell untersten Elements
+            maxElementPos = Math.max(element.positionProperty().get().getX() + BALL_LOST_TOLERANCE, maxElementPos);
         }
 
         if (ballTemplate == null)
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
-        this.world = new World(elements, ballTemplate);
+        world = new World(elements, ballTemplate);
         BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(
-                this.gameBall.get(),
-                this.gameBall.get().positionProperty().get(),
-                this.gameBall.get().rotationProperty().get(),
-                this.gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+                gameBall.get(),
+                gameBall.get().positionProperty().get(),
+                gameBall.get().rotationProperty().get(),
+                gameBall.get().getPlacedElement().getBaseElement().getPhysics());
 
         physicsElements.add(physElem);
         elements.add(gameBall.get());
-        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
 
-        this.gameLoopObservable = new Observable();
+        gameLoopObservable = new Observable();
 
-        spawnNewBall();
+        physicsHandler =
+                new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
+
+        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
+        {
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+            {
+                physicsHandler.nudge(true);
+                tiltCounter++;
+                if (tiltCounter >= MAX_TILT_COUNTER)
+                {
+                    //TODO
+                }
+            }
+        });
+        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_RIGHT, args ->
+        {
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+            {
+                physicsHandler.nudge(false);
+                tiltCounter++;
+                if (tiltCounter >= MAX_TILT_COUNTER)
+                {
+                    // TODO
+                }
+            }
+        });
     }
 
     /**
@@ -279,7 +314,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void addHandlers(List<Handler> handlers)
     {
-        this.handlers.addAll(handlers);
+        handlers.addAll(handlers);
     }
 
     /**
@@ -409,8 +444,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             isOver.setValue(true);
             pauseAll();
-        }
-        else
+        } else
         {
             playerIndex.setValue(newPlayerIndex);
         }
@@ -553,6 +587,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
     /**
      * TODO
+     *
      * @return
      */
     public ReadOnlyBooleanProperty isOverProperty()

@@ -89,11 +89,41 @@ public class PhysicsHandler<GameElementT>
         bufferedKeyEvents = new ArrayList<>();
 
         InputManager inputManager = InputManager.getSingletonInstance();
-        inputManager.addListener(KeyBinding.LEFT_FLIPPER, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
-        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
-        inputManager.addListener(KeyBinding.NUDGE_LEFT, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
-        inputManager.addListener(KeyBinding.NUDGE_RIGHT, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
-        inputManager.addListener(KeyBinding.PAUSE, args -> {synchronized(bufferedKeyEvents) { bufferedKeyEvents.add(args); }});
+        inputManager.addListener(KeyBinding.LEFT_FLIPPER, args ->
+        {
+            synchronized (bufferedKeyEvents)
+            {
+                bufferedKeyEvents.add(args);
+            }
+        });
+        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args ->
+        {
+            synchronized (bufferedKeyEvents)
+            {
+                bufferedKeyEvents.add(args);
+            }
+        });
+        inputManager.addListener(KeyBinding.NUDGE_LEFT, args ->
+        {
+            synchronized (bufferedKeyEvents)
+            {
+                bufferedKeyEvents.add(args);
+            }
+        });
+        inputManager.addListener(KeyBinding.NUDGE_RIGHT, args ->
+        {
+            synchronized (bufferedKeyEvents)
+            {
+                bufferedKeyEvents.add(args);
+            }
+        });
+        inputManager.addListener(KeyBinding.PAUSE, args ->
+        {
+            synchronized (bufferedKeyEvents)
+            {
+                bufferedKeyEvents.add(args);
+            }
+        });
     }
 
     /**
@@ -108,6 +138,16 @@ public class PhysicsHandler<GameElementT>
             ballPhysicsElement.setVelocity(new Vector2(0, 0));
             ballPhysicsElement.setAngularVelocity(0);
         }
+    }
+
+    /**
+     * TODO
+     *
+     * @param left
+     */
+    public void nudge(boolean left)
+    {
+        // TODO
     }
 
     /**

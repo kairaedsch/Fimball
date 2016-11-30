@@ -192,28 +192,17 @@ public class GameSessionTest
             gameSession.switchToNextPlayer();
         }
     }
-
+/*
     @Test
     public synchronized void spawnNewBallTest()
     {
-        new JFXPanel(); //JavaFx initialisieren
         pinballMachine.addElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0));
 
         gameSession = new GameSession(pinballMachine, playerNames);
 
-        //gameSession.startPhysics();
-
-/*
-        GameElement gameElement = new GameElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0), false);
-        ObjectProperty gameBall = (ObjectProperty) gameSession.gameBallProperty();
-        gameBall.setValue(gameElement);
-*/
         GameElement gameElement = gameSession.gameBallProperty().get();
-
-        //gameSession.getWorld().addGameElement(gameElement);
 
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
 
@@ -240,4 +229,5 @@ public class GameSessionTest
     {
         pinballMachine.deleteFromDisk();
     }
+*/
 }

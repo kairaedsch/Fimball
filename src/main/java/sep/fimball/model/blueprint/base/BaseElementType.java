@@ -21,9 +21,14 @@ public enum BaseElementType
     PLUNGER,
 
     /**
-     * Kennzeichnet einen Flipperarm.
+     * Kennzeichnet einen linken Flipperarm.
      */
-    FLIPPER,
+    LEFT_FLIPPER,
+
+    /**
+     * Kennzeichnet einen rechten Flipperarm.
+     */
+    RIGHT_FLIPPER,
 
     /**
      * Kennzeichnet ein Lichtelement.
