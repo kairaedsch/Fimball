@@ -51,7 +51,7 @@ public class Config
                 dataPath = getFolderContainingJar().replace('\\', '/') + "/data";
                 System.out.println(dataPath);
             }
-            catch (Exception e)
+            catch (URISyntaxException e)
             {
                 System.err.println("Could not determine jar Folder: ");
                 e.printStackTrace();
@@ -340,7 +340,8 @@ public class Config
     }
 
     /**
-     * Gibt den Pfad zu einer Sound-Datei basierend auf deren Name zurück.
+     * Gibt den Pfad zu einer Sound-Datei basierend auf deren Name zurück. Da der JavaFX Media Player unter Linux Probleme
+     * mit Pfaden hat, wird eine URI Notation zurückgegeben.
      *
      * @param clipName Der Name der Sound-Datei.
      * @return Der Pfad an dem sich die Sound-Datei befindet.
