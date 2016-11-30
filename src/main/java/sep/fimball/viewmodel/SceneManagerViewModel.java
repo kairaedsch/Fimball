@@ -91,8 +91,7 @@ public class SceneManagerViewModel
     {
         dialogViewModel.setSceneManager(this);
         this.dialogViewModel.set(dialogViewModel);
-        if (dialogViewModel.getDialogType() != DialogType.NONE)
-            this.dialogViewModel.get().changeBackgroundMusic();
+        this.dialogViewModel.get().changeBackgroundMusic();
     }
 
     /**

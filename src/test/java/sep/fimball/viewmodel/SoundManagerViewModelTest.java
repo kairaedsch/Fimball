@@ -55,7 +55,7 @@ public class SoundManagerViewModelTest
         NotificationObserver playObserver = new NotificationObserver();
         SoundManagerViewModel.getInstance().addPlayObserver(playObserver);
 
-        assertThat("Es soll noch kein Sound abgepsielt werden",playObserver.getNumberOfNotifications(), is(0));
+        assertThat("Es soll noch kein Sound abgespielt werden",playObserver.getNumberOfNotifications(), is(0));
 
         //Die Observer werden über das Abspielen der Hintergrundmusik informiert.
         SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);

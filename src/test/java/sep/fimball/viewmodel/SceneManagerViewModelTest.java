@@ -9,41 +9,65 @@ import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-/**
- * Created by marc on 28.11.16.
- */
+
 public class SceneManagerViewModelTest
 {
-    private static int numberOfWindowHandledKeyEvents = 0;
-    private static int numberOfDialogHandledKeyEvents = 0;
+    private int numberOfWindowHandledKeyEvents = 0;
+    private int numberOfDialogHandledKeyEvents = 0;
+    private WindowViewModel window;
+    private DialogViewModel dialog;
+    private SceneManagerViewModel sceneManagerViewModel;
 
-    @Test(timeout = 1000)
+
+    @Test
     public void setterTest()
     {
-        WindowViewModel window = new WindowViewModel(WindowType.GAME)
-        {
-        };
-
-        DialogViewModel dialog = new DialogViewModel(DialogType.GAME_OVER)
-        {
-        };
-
-        SceneManagerViewModel sceneManagerViewModel = new SceneManagerViewModel();
-        assertFalse(sceneManagerViewModel == null);
+        init();
         sceneManagerViewModel.setWindow(window);
-        assertEquals(window, sceneManagerViewModel.windowViewModelProperty().get());
+
+        assertThat(sceneManagerViewModel.windowViewModelProperty().get(), equalTo(window));
+        assertThat(sceneManagerViewModel.dialogViewModelProperty().get().getDialogType(), is(DialogType.NONE));
+
         sceneManagerViewModel.setDialog(dialog);
-        assertEquals(dialog, sceneManagerViewModel.dialogViewModelProperty().get());
+        assertThat(sceneManagerViewModel.dialogViewModelProperty().get(), equalTo(dialog));
     }
 
-    @Test(timeout = 2000)
+    @Test
     public void keyEventHandlingTest()
     {
-        SceneManagerViewModel sceneManagerViewModel = new SceneManagerViewModel();
-        WindowViewModel window = new WindowViewModel(WindowType.GAME)
+        init();
+
+        //Setzt das Window.
+        sceneManagerViewModel.setWindow(window);
+
+        //Testet, dass das KeyEvent an das WindowViewModel weitergeleitet wird.
+        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
+        assertThat(numberOfWindowHandledKeyEvents, is(1));
+
+        //Setzt den Dialog.
+        sceneManagerViewModel.setDialog(dialog);
+
+        //Testet, dass das KeyEvent an das DialogViewModel weitergeleitet wird.
+        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
+        assertThat(numberOfDialogHandledKeyEvents, is(1));
+
+        //Setzt einen leeren Dialog.
+        sceneManagerViewModel.setDialog(new EmptyViewModel());
+
+        //Testet, ob das KeyEvent wieder an das WindowViewModel weitergeleitet wird.
+        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
+        assertThat(numberOfDialogHandledKeyEvents, is(1));
+        assertThat(numberOfWindowHandledKeyEvents, is(2));
+    }
+
+    //Initialisiert die benötigten Variablen.
+    private void init()
+    {
+        window = new WindowViewModel(WindowType.GAME)
         {
             @Override
             public void handleKeyEvent(KeyEvent keyEvent)
@@ -51,11 +75,8 @@ public class SceneManagerViewModelTest
                 numberOfWindowHandledKeyEvents++;
             }
         };
-        sceneManagerViewModel.setWindow(window);
-        assertEquals(numberOfWindowHandledKeyEvents, 0);
-        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
-        assertEquals(numberOfWindowHandledKeyEvents, 1);
-        DialogViewModel dialog = new DialogViewModel(DialogType.GAME_OVER)
+
+        dialog = new DialogViewModel(DialogType.GAME_OVER)
         {
             @Override
             public void handleKeyEvent(KeyEvent keyEvent)
@@ -63,13 +84,6 @@ public class SceneManagerViewModelTest
                 numberOfDialogHandledKeyEvents++;
             }
         };
-        sceneManagerViewModel.setDialog(dialog);
-        assertEquals(numberOfDialogHandledKeyEvents, 0);
-        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
-        assertEquals(numberOfDialogHandledKeyEvents, 1);
-        sceneManagerViewModel.setDialog(new EmptyViewModel());
-        sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
-        assertEquals(numberOfDialogHandledKeyEvents, 1);
-        assertEquals(numberOfWindowHandledKeyEvents, 2);
+        sceneManagerViewModel = new SceneManagerViewModel();
     }
 }
