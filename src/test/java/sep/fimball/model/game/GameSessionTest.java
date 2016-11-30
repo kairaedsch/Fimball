@@ -34,8 +34,8 @@ public class GameSessionTest
     {
         // Erstellen eines leeren Automaten.
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
-        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        when(pinballMachineMock.elementsProperty()).thenReturn(list);
+        ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
 
         new GameSession(pinballMachineMock, new String[]{"TestPlayer"});
     }
@@ -54,9 +54,9 @@ public class GameSessionTest
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0);
 
-        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        list.add(ball);
-        when(pinballMachineMock.elementsProperty()).thenReturn(list);
+        ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        elementList.add(ball);
+        when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
 
         GameSession gameSession = new GameSession(pinballMachineMock, playerNames);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
