@@ -4,9 +4,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
-/**
- * Created by TheAsuro on 27.11.2016.
- */
 public class CollisionInfo
 {
     private BallPhysicsElement ball;

@@ -8,9 +8,6 @@ import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.List;
 
-/**
- * Created by TheAsuro on 28.11.2016.
- */
 public class FlipperCollider extends Collider
 {
     public FlipperCollider(WorldLayer layer, List<ColliderShape> shapes, CollisionType type, int id)

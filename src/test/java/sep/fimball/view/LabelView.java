@@ -1,5 +1,6 @@
 package sep.fimball.view;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 /**
@@ -7,7 +8,8 @@ import javafx.scene.control.Label;
  */
 public class LabelView implements ViewBoundToViewModel<String>
 {
-    public Label label;
+    @FXML
+    private Label label;
 
     @Override
     public void setViewModel(String testText)

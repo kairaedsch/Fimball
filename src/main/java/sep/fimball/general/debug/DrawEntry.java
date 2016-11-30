@@ -5,9 +5,6 @@ import sep.fimball.general.data.Vector2;
 
 import java.util.List;
 
-/**
- * Created by TheAsuro on 17.11.2016.
- */
 public class DrawEntry
 {
     public DrawEntry()

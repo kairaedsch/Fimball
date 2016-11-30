@@ -4,9 +4,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by alexcekay on 11/28/16.
- */
 public class VectorTest {
 
     private final double EPSILON = 1e-15;

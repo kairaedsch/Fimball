@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by TheAsuro on 17.11.2016.
- */
 public class Debug
 {
     private static List<DrawEntry> drawEntries = new ArrayList<>();
