@@ -198,7 +198,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         PlacedElement ballTemplate = null;
-        double maxElementPos = machineBlueprint.elementsProperty().get(0).positionProperty().get().getY();
+        double maxElementPos = 0;
         List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
         List<FlipperPhysicsElement<GameElement>> rightFlippers = new ArrayList<>();
 

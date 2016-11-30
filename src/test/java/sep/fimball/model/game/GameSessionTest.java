@@ -1,29 +1,21 @@
 package sep.fimball.model.game;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.embed.swing.JFXPanel;
-import org.junit.After;
-import org.junit.Before;
+import javafx.beans.property.ReadOnlyListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.Ignore;
 import org.junit.Test;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElement;
-import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.*;
-import sep.fimball.model.physics.game.CollisionEventArgs;
-import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotSame;
-import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 /**
  * Created by felix on 27.11.16.
@@ -31,6 +23,40 @@ import static junit.framework.TestCase.assertTrue;
 @Ignore
 public class GameSessionTest
 {
+
+    @Test
+    public void constructorTest()
+    {
+
+    }
+
+    @Test
+    public void gameLoopUpdateTest()
+    {
+
+    }
+
+    @Test
+    public void switchToNextPlayerTest()
+    {
+        String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
+
+        PinballMachine pinballMachine = mock(PinballMachine.class);
+        PlacedElement ball = mock(PlacedElement.class);
+        ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
+        list.add(ball);
+        when(pinballMachine.elementsProperty().get()).thenReturn((ReadOnlyListProperty) list);
+
+        GameSession gameSession = new GameSession(pinballMachine, playerNames);
+
+        for (int i = 0; i < playerNames.length; i++)
+        {
+            assertThat(gameSession.getCurrentPlayer().getName(), is(playerNames[i]));
+            gameSession.switchToNextPlayer();
+        }
+    }
+
+    /*
     private PinballMachine pinballMachine;
     private GameSession gameSession;
 
@@ -192,7 +218,7 @@ public class GameSessionTest
             gameSession.switchToNextPlayer();
         }
     }
-/*
+
     @Test
     public synchronized void spawnNewBallTest()
     {
