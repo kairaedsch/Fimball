@@ -60,6 +60,13 @@ public class VectorTest {
     }
 
     @Test
+    public void rotatePivotTest()
+    {
+        Vector2 vecOne = new Vector2(2, 0);
+        assertThat(vecOne.rotate(Math.toRadians(90), new Vector2(1, 0)), is(new Vector2(1, 1)));
+    }
+
+    @Test
     public void normalizeTest()
     {
         Vector2 vecOne = new Vector2(3, 7);
@@ -95,5 +102,19 @@ public class VectorTest {
     {
        Vector2 vecOne = new Vector2(1.2, 1.5);
         assertThat(vecOne.round(), is(new Vector2(1.0, 2.0)));
+    }
+
+    @Test
+    public void clampTest()
+    {
+        Vector2 vecOne = new Vector2(1.0, 1.0);
+        assertThat(Math.abs(1.0 - vecOne.clamp(1.0).magnitude()) < EPSILON, is(true));
+    }
+
+    @Test
+    public void projectTest()
+    {
+        Vector2 vecOne = new Vector2(1, 1);
+        assertThat(vecOne.project(new Vector2(1, 0)), is(new Vector2(1, 0)));
     }
 }
