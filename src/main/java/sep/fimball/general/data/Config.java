@@ -3,8 +3,7 @@ package sep.fimball.general.data;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.net.URLDecoder;
-import java.security.CodeSource;
+import java.net.URISyntaxException;
 import java.util.UUID;
 
 /**
@@ -49,7 +48,7 @@ public class Config
             System.out.println("|-----------------------------------------|");
             try
             {
-                dataPath = getJarContainingFolder(Config.class).replace('\\', '/') + "/data";
+                dataPath = getFolderContainingJar().replace('\\', '/') + "/data";
                 System.out.println(dataPath);
             }
             catch (Exception e)
@@ -60,22 +59,9 @@ public class Config
         }
     }
 
-    private static String getJarContainingFolder(Class aclass) throws Exception
+    private static String getFolderContainingJar() throws URISyntaxException
     {
-        CodeSource codeSource = aclass.getProtectionDomain().getCodeSource();
-        File jarFile;
-
-        if (codeSource.getLocation() != null)
-        {
-            jarFile = new File(codeSource.getLocation().toURI());
-        }
-        else
-        {
-            String path = aclass.getResource(aclass.getSimpleName() + ".class").getPath();
-            String jarFilePath = path.substring(path.indexOf(":") + 1, path.indexOf("!"));
-            jarFilePath = URLDecoder.decode(jarFilePath, "UTF-8");
-            jarFile = new File(jarFilePath);
-        }
+        File jarFile = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI());
         return jarFile.getParentFile().getAbsolutePath();
     }
 
