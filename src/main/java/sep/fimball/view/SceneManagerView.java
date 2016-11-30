@@ -183,7 +183,8 @@ public class SceneManagerView
         {
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
             view.setViewModel(viewModel);
-        } catch (ClassCastException e)
+        }
+        catch (ClassCastException e)
         {
             System.err.println("Could not inject viewmodel into view");
             throw e;
@@ -256,7 +257,8 @@ public class SceneManagerView
         if (node != null)
         {
             root.getChildren().add(node);
-        } else
+        }
+        else
             root.getChildren().add(new Group());
     }
 }

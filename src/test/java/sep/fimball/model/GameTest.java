@@ -3,6 +3,7 @@ package sep.fimball.model;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -48,6 +49,7 @@ public class GameTest
      *
      * @throws InterruptedException Bricht den Test ab, falls im Test unvorhergesehenerweise ein Interrupt aufgetreten ist.
      */
+    @Ignore
     @Test(timeout = MAX_TEST_DURATION)
     public void gameCollisionTest() throws InterruptedException, IOException
     {
