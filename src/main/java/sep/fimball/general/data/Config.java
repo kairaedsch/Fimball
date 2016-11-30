@@ -79,6 +79,14 @@ public class Config
         return jarFile.getParentFile().getAbsolutePath();
     }
 
+    public final static int defaultStageWidth = 1280;
+
+    public final static int defaultStageHeight = 720;
+
+    public final static double stageDividerLayerOpacity = 0.6;
+
+    public final static int stageDividerLayerBlur = 13;
+
     /**
      * Der Pfad, an dem sowohl die Automaten, die BaseElements als auch die Einstellungen gespeichert werden.
      */

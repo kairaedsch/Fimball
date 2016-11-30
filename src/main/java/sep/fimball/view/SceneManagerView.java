@@ -53,8 +53,8 @@ public class SceneManagerView
             System.exit(0);
         });
 
-        stage.setWidth(1280);
-        stage.setHeight(720);
+        stage.setWidth(Config.defaultStageWidth);
+        stage.setHeight(Config.defaultStageHeight);
 
         root = new StackPane();
 
@@ -62,7 +62,7 @@ public class SceneManagerView
         box.widthProperty().bind(root.widthProperty());
         box.heightProperty().bind(root.heightProperty());
         box.setFill(Config.primaryColor);
-        box.setOpacity(0.60);
+        box.setOpacity(Config.stageDividerLayerOpacity);
 
         root.getChildren().add(new Group());
         root.getChildren().add(box);
@@ -87,7 +87,7 @@ public class SceneManagerView
         updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
         stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
 
-        blurEffect = new GaussianBlur(13);
+        blurEffect = new GaussianBlur(Config.stageDividerLayerBlur);
     }
 
     /**
