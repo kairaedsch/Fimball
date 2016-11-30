@@ -5,12 +5,10 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
 
-import static javafx.scene.input.KeyCode.M;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.assertThat;
-/**
- * Created by kaira on 29.11.2016.
- */
+
 public class ImageCacheTest
 {
     @ClassRule
@@ -32,23 +30,16 @@ public class ImageCacheTest
             durationLoadingFromFile = (int) (end - start);
         }
 
-        Image imageFromCache;
-        int durationLoadingFromCache;
+        // Test wird wiederholt, um sicher zu stellen, dass das Bild nicht zufällig schneller geladen wird.
+        for (int i = 0; i < 100; i++)
         {
             long start = System.currentTimeMillis();
-            imageFromCache = imageCache.getImage(testImagepath);
+            Image imageFromCache = imageCache.getImage(testImagepath);
             long end = System.currentTimeMillis();
-            durationLoadingFromCache = (int) (end - start);
-        }
+            int durationLoadingFromCache = (int) (end - start);
 
-        assertThat(imageFromFile, equalTo(imageFromCache));
-
-        for(int i = 0; i < 1000; i++)
-        {
-            long start = System.currentTimeMillis();
-            imageCache.getImage(testImagepath);
-            long end = System.currentTimeMillis();
-            assertThat((int) (end - start));
+            assertThat("Es wird immer das selbe Bild zurückgegeben", imageFromCache, equalTo(imageFromFile));
+            assertThat("Das laden des gecachten Bildes geht schneller", durationLoadingFromCache, lessThan(durationLoadingFromFile));
         }
     }
 }
