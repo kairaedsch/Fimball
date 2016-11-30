@@ -3,7 +3,7 @@ package sep.fimball.general.data;
 import javafx.beans.property.*;
 
 /**
- * Highscore speichert den Namen und den erreichten Punktestand eines Highscores.
+ * Highscore speichert den Namen des Spielers, der einen Highscore erreicht hat, als auch den Punktestand welcher erreicht wurde.
  */
 public class Highscore
 {

@@ -60,7 +60,7 @@ public class Config
     }
 
     /**
-     * Gibt den absoluten Pfad zurück in dem sich die JAR Datei befindet.
+     * Gibt den absoluten Pfad zurück in dem sich die JAR Datei, welche ausgeführt wird, befindet.
      *
      * @return Der Pfad an dem sich die JAR befindet.
      * @throws URISyntaxException Wird geworfen falls der Pfad nicht korrekt in eine URI verwandelt werden kann.

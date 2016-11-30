@@ -5,11 +5,10 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * Stellt Funktionen zum Konvertieren einer Liste sowie einer Map in eine andere mit Elementen eines unterschiedlichen Typ bereit.
+ * Stellt Funktionen zum Konvertieren einer Liste sowie einer Map in eine andere Liste mit Elementen eines unterschiedlichen Typ bereit.
  */
 public class ListPropertyConverter
 {
