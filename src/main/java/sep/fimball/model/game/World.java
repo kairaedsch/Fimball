@@ -7,7 +7,6 @@ import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.handler.HandlerWorld;
 
 /**
@@ -61,7 +60,7 @@ public class World implements HandlerWorld
 
         for (GameElement gameElement : gameElements)
         {
-            if(gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL)) continue;
+            if (gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL)) continue;
 
             double currentX = gameElement.positionProperty().get().getX();
             double currentY = gameElement.positionProperty().get().getY();
@@ -91,6 +90,7 @@ public class World implements HandlerWorld
 
     /**
      * Gibt die Liste der GameElements zurück.
+     *
      * @return Die Liste der GameElements.
      */
     public ListProperty<GameElement> gameElementsProperty()
@@ -100,6 +100,7 @@ public class World implements HandlerWorld
 
     /**
      * Gibt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können, zurück.
+     *
      * @return Die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
      */
     public PlacedElement getBallTemplate()
@@ -109,6 +110,7 @@ public class World implements HandlerWorld
 
     /**
      * Setzt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
+     *
      * @param ballTemplate Die neue Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
      */
     public void setBallTemplate(PlacedElement ballTemplate)

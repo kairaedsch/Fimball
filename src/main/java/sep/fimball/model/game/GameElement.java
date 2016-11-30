@@ -65,7 +65,8 @@ public class GameElement implements HandlerGameElement
             position.bind(element.positionProperty());
             rotation.bind(element.rotationProperty());
             pointReward.bind(element.pointsProperty());
-        } else
+        }
+        else
         {
             position.set(element.positionProperty().get());
             rotation.set(element.rotationProperty().get());

@@ -48,7 +48,8 @@ public class Player implements HandlerPlayer
         {
             balls.set(balls.get() - 1);
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
@@ -63,7 +64,8 @@ public class Player implements HandlerPlayer
             return player.nameProperty().get() == this.nameProperty().get()
                     && player.pointsProperty().get() == this.pointsProperty().get()
                     && player.ballsProperty().get() == this.ballsProperty().get();
-        } else
+        }
+        else
         {
             return false;
         }

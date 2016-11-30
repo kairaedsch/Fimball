@@ -16,6 +16,7 @@ import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
 import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
@@ -91,7 +92,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private int tiltCounter;
 
     /**
-     * TODO
+     * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
      */
     private static final int MAX_TILT_COUNTER = 5;
 
@@ -161,7 +162,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private final Object physicMonitor;
 
     /**
-     * TODO
+     * Gibt an ob das Spiel vorbei ist.
      */
     private BooleanProperty isOver;
 
@@ -286,11 +287,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
             {
-                physicsHandler.nudge(true);
-                tiltCounter++;
-                if (tiltCounter >= MAX_TILT_COUNTER)
+                for (Handler handler: handlers                     )
                 {
-                    //TODO
+                    handler.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
                 }
             }
         });
@@ -298,11 +297,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
             {
-                physicsHandler.nudge(false);
-                tiltCounter++;
-                if (tiltCounter >= MAX_TILT_COUNTER)
+                for (Handler handler: handlers                     )
                 {
-                    // TODO
+                    handler.activateUserHandler(KeyBinding.NUDGE_RIGHT, KeyEventType.DOWN);
                 }
             }
         });
@@ -445,7 +442,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             isOver.setValue(true);
             pauseAll();
-        } else
+        }
+        else
         {
             playerIndex.setValue(newPlayerIndex);
         }
@@ -587,9 +585,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * TODO
+     * Gibt zurück ob das Spiel vorbei ist.
      *
-     * @return
+     * @return Gibt an ob das Spiel vorbei ist.
      */
     public ReadOnlyBooleanProperty isOverProperty()
     {
