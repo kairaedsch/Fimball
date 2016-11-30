@@ -14,12 +14,34 @@ import static org.junit.Assert.assertTrue;
 
 public class ListPropertyConverterTest {
 
+    /**
+     * Original Liste auf der die Listenoperationen ausgeführt werden.
+     */
     private ListProperty<DummyOne> originalList;
+
+    /**
+     * Original Map auf der die Mapoperationen ausgeführt werden.
+     */
     private MapProperty<Integer, DummyOne> originalMap;
+
+    /**
+     * Liste die mit der originalList synchronisiert wird und nur gefilterte Werte enthält.
+     */
     private ListProperty<DummyOne> filteredList;
+
+    /**
+     * Liste die mit der originalList/originalMap synchronisiert wird, vorher werden die Werte konvertiert.
+     */
     private ListProperty<DummyTwo> convertedList;
+
+    /**
+     * Die Anfangsgröße der originalList und originalMap.
+     */
     private final int originalSize = 100;
 
+    /**
+     * Wird vor jedem Test zur Initialisierung der Listen und Map genutzt.
+     */
     @Before
     public void initialize()
     {
@@ -28,6 +50,7 @@ public class ListPropertyConverterTest {
         filteredList = new SimpleListProperty<>(FXCollections.observableArrayList());
         convertedList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
+        //Die Liste und Map mit werten von 0-99 füllen.
         for (int i = 0; i < originalSize; i++)
         {
             originalList.add(new DummyOne(i));
@@ -35,75 +58,93 @@ public class ListPropertyConverterTest {
         }
     }
 
+    /**
+     * Testet ob das Binden einer Liste an eine andere Liste mit Konvertierung funktioniert.
+     */
     @Test
     public void convertAndBindListTest()
     {
         ListPropertyConverter.bindAndConvertList(convertedList, originalList, (DummyTwo::new));
+        //Überprüfen ob beide Listen nach der Bindung gleich groß sind.
         assertThat(convertedList.size(), is(originalSize));
 
+        //Überprüfen ob alle Daten in beiden Listen gleich sind.
         for (int i = 0; i < originalSize; i++)
         {
             assertThat(originalList.get(i).getData() == (int)convertedList.get(i).getData(), is(true));
         }
-        //Ein Element hinzufügen, überprüfen ob Größe der Converted um eins höher und Elemente gleich
+        //Ein Element hinzufügen, überprüfen ob Größe der convertedList ebenfalls um eins gestiegen ist und das eingefügte Element in beiden Listen gleich ist.
         originalList.add(new DummyOne(100));
         assertThat(convertedList.size(), is(originalSize + 1));
         assertThat(originalList.get(originalSize).getData() == (int)convertedList.get(originalSize).getData(), is(true));
 
-        //Ein Element entfernen, überprüfen ob Größe der Converted um eins geringer
+        //Ein Element entfernen, überprüfen ob Größe der convertedList ebenfalls um eins gesunken ist.
         originalList.remove(originalSize);
         assertThat(convertedList.size(), is(originalSize));
 
-        //Zwei Elemente vertauschen, überprüfen ob Größe der Converted gleich
+        //Zwei Elemente vertauschen, überprüfen ob Größe der convertedList nach der Permutation ebenfalls gleich geblieben ist.
         DummyOne temp = originalList.get(0);
         originalList.set(0, originalList.get(originalSize - 1));
         originalList.set(originalSize - 1, temp);
         assertThat(convertedList.size(), is(originalSize));
+        //Überprüfen ob die Permutation auch in der convertedList durchgeführt worden ist.
         assertThat(originalList.get(0).getData() == (int)convertedList.get(0).getData(), is(true));
         assertThat(originalList.get(originalSize - 1).getData() == (int)convertedList.get(originalSize - 1).getData(), is(true));
     }
 
+    /**
+     * Testet ob das Binden einer Liste an eine Map mit Konvertierung funktioniert.
+     */
     @Test
     public void convertAndBindMapTest()
     {
         ListPropertyConverter.bindAndConvertMap(convertedList, originalMap, ((originalKey, dummyOne) -> new DummyTwo(dummyOne)));
+        //Überprüfen ob die Größe der Map und Liste nach der Bindung gleich groß ist.
         assertThat(convertedList.size(), is(originalMap.size()));
         originalMap.put(100, new DummyOne(100));
+        //Überprüfen ob nach einfügen eines Elements in die Map die Größe der Liste ebenfalls um eins gestiegen ist.
         assertThat(convertedList.size(), is(originalSize + 1));
+        //Überprüfen ob das eingefügte Element in beiden gleich ist.
         assertThat(originalMap.get(100).getData() == (int)convertedList.get(originalSize).getData(), is(true));
 
-        //Selben Key erneut setzen um zu überprüfen ob nicht unnötigerweise in die Liste eingefügt wird
+        //Selben Key erneut setzen um zu überprüfen ob nicht unnötigerweise in die Liste eingefügt wird.
         originalMap.put(100, new DummyOne(100));
         assertThat(convertedList.size(), is(originalSize + 1));
         assertThat(originalMap.get(100).getData() == (int)convertedList.get(originalSize).getData(), is(true));
 
-        //Den erstellten Map Eintrag entfernen und überprüfen ob die Größen noch immer gleich sind
+        //Den erstellten Map Eintrag entfernen und überprüfen ob danach die Größe der beiden gleich ist.
         originalMap.remove(100);
         assertThat(convertedList.size(), is(originalMap.size()));
     }
 
+    /**
+     * Testet ob das Binden einer Liste an eine andere mit Filterung funktioniert.
+     */
     @Test
     public void filterListTest()
     {
         ListPropertyConverter.bindAndFilterList(filteredList, originalList, (original -> original.getData() >= 50));
 
-        //Überprüfen ob alle Elemente der Liste die Bedingung erfüllen
+        //Überprüfen ob alle Elemente der Liste die Bedingung erfüllen.
         filteredList.forEach(dummyOne -> assertThat(dummyOne.getData() >= 50, is(true)));
 
         int currentSize = filteredList.size();
-        //Ein neues Element einfügen welches die Bedingung erfüllt
+        //Ein neues Element einfügen welches die Bedingung erfüllt.
         originalList.add(new DummyOne(1337));
-        //Überprüfen ob die gefilterte Liste um eins größer ist
+        //Überprüfen ob die gefilterte Liste um eins größer ist.
         assertThat(filteredList.size(), is(currentSize + 1));
-        //Überprüfen ob das eingefügte Element die Bedingung erfüllt
+        //Überprüfen ob das eingefügte Element die Bedingung erfüllt.
         assertThat(filteredList.get(currentSize).getData() >= 50, is(true));
 
-        //Ein neues Element einfügen welches die Bedingung nicht erfüllt
+        //Ein neues Element einfügen welches die Bedingung nicht erfüllt.
         originalList.add(new DummyOne(10));
-        //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen
+        //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen.
         filteredList.forEach(dummyOne -> assertThat(dummyOne.getData() >= 50, is (true)));
     }
 
+    /**
+     * Dummy Datentyp welcher Integer Werte nutzt.
+     */
     public static class DummyOne
     {
         private int data;
@@ -119,6 +160,9 @@ public class ListPropertyConverterTest {
         }
     }
 
+    /**
+     * Dummy Datentyp welcher Double Werte nutzt.
+     */
     public static class DummyTwo
     {
         private double data;
