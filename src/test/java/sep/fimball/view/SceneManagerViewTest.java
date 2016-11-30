@@ -12,13 +12,9 @@ import org.mockito.Mockito;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.ViewModel;
-import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
-import sep.fimball.viewmodel.window.SplashScreenViewModel;
-import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
@@ -45,7 +41,7 @@ public class SceneManagerViewTest
         Mockito.when(sceneManagerViewModelMock.fullscreenProperty()).thenReturn(new SimpleBooleanProperty());
 
         PinballMachine pinballMachineMock = Mockito.mock(PinballMachine.class);
-        Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty());
+        Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty("any Name"));
 
 
         // Testing
@@ -53,19 +49,16 @@ public class SceneManagerViewTest
         dialogViewModel.setValue(new EmptyViewModel());
 
         SceneManagerView sceneManagerView = new SceneManagerView(new Stage(), sceneManagerViewModelMock);
-
         Node mainMenuWindowRootNode = sceneManagerView.getWindow();
-        Node emptyDialogRootNode = sceneManagerView.getWindow();
+        Node emptyDialogRootNode = sceneManagerView.getDialog();
 
         windowViewModel.setValue(new PinballMachineSettingsViewModel(pinballMachineMock));
-
         Node machineSettingsWindowRootNode = sceneManagerView.getWindow();
 
         dialogViewModel.setValue(new GameSettingsViewModel());
+        Node gameSettingsDialogRootNode = sceneManagerView.getDialog();
 
-        Node gameSettingsDialogRootNode = sceneManagerView.getWindow();
-
-        assertThat(mainMenuWindowRootNode, not(equalTo(machineSettingsWindowRootNode)));
-        assertThat(emptyDialogRootNode, not(equalTo(gameSettingsDialogRootNode)));
+        assertThat("Es wurde ein anderes Window geladen", mainMenuWindowRootNode, not(equalTo(machineSettingsWindowRootNode)));
+        assertThat("Es wurde ein anderer Dialog geladen", emptyDialogRootNode, not(equalTo(gameSettingsDialogRootNode)));
     }
 }

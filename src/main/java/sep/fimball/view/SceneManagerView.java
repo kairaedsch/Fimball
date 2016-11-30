@@ -59,8 +59,13 @@ public class SceneManagerView
         new SoundManagerView();
 
         sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
+        updateContent(sceneManagerViewModel.windowViewModelProperty().get());
+
         sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
+        updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
+
         sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
+        stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
 
         stage.fullScreenExitKeyProperty().set(KeyCombination.NO_MATCH);
 
@@ -69,10 +74,6 @@ public class SceneManagerView
         scene.setOnKeyReleased(sceneManagerViewModel::onKeyEvent);
         stage.setScene(scene);
         stage.show();
-
-        updateContent(sceneManagerViewModel.windowViewModelProperty().get());
-        updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
-        stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
 
         blurEffect = new GaussianBlur(Config.stageDividerLayerBlur);
     }
