@@ -3,6 +3,8 @@ package sep.fimball.model.game;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class PlayerTest
 {
@@ -27,12 +29,12 @@ public class PlayerTest
         Player player = new Player("TestPlayer");
 
         player.addPoints(200);
-        assertEquals(player.pointsProperty().get(), 200);
+        assertThat(player.pointsProperty().get(), is(200));
         player.addPoints(0);
-        assertEquals(player.pointsProperty().get(), 200);
+        assertThat(player.pointsProperty().get(), is(200));
         player.addPoints(3);
-        assertEquals(player.pointsProperty().get(), 203);
+        assertThat(player.pointsProperty().get(), is(203));
         player.addPoints(-30);
-        assertEquals(player.pointsProperty().get(), 173);
+        assertThat(player.pointsProperty().get(), is(173));
     }
 }
