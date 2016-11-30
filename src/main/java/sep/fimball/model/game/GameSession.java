@@ -171,7 +171,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private static final double BALL_LOST_TOLERANCE = 10;
 
     /**
-     * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten.
+     * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten,
+     * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
      * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames      Die Namen der Spieler.
@@ -330,7 +331,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Der gameLoopUpdate, welcher bis zu 60 mal in der Sekunde ausgeführt wird.
+     * Wendet die Element- und CollisionEvents an und aktiviert ggf. Handler.
      */
     protected void gameLoopUpdate()
     {
@@ -451,7 +452,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Erstellt einen neuen Ball an dem Ballursprung.
+     * Setzt den Ball auf seinen Ursprung.
      */
     public void spawnNewBall()
     {
