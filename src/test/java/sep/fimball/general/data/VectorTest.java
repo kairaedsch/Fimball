@@ -1,10 +1,12 @@
 package sep.fimball.general.data;
 
 import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class VectorTest {
+public class VectorTest
+{
 
     /**
      * Sehr kleines Epsilon welches bei Tests mit Rundungsfehlern verwendet wird.
@@ -162,7 +164,7 @@ public class VectorTest {
     @Test
     public void roundTest()
     {
-       Vector2 vecOne = new Vector2(1.2, 1.5);
+        Vector2 vecOne = new Vector2(1.2, 1.5);
         assertThat(vecOne.round(), is(new Vector2(1.0, 2.0)));
     }
 
