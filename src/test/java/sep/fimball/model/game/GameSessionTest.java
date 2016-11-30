@@ -179,9 +179,9 @@ public class GameSessionTest
         when(pinballMachine.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
 
         GameSession gameSession = new GameSession(pinballMachine, playerNames);
-        for (int i = 0; i < playerNames.length; i++)
+        for (String playerName : playerNames)
         {
-            assertThat(gameSession.getCurrentPlayer().getName(), is(playerNames[i]));
+            assertThat(gameSession.getCurrentPlayer().getName(), is(playerName));
             gameSession.switchToNextPlayer();
         }
     }
