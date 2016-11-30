@@ -1,7 +1,6 @@
 package sep.fimball.model.media;
 
 import org.junit.Test;
-import sep.fimball.general.data.Config;
 
 import java.util.Observer;
 
@@ -21,11 +20,7 @@ public class SoundManagerTest
 
         // Legt einen neuen Test-Observer an
         Observer testObserver = (o, sound) ->
-        {
-            testSound = (Sound) sound;
-            soundName = ((Sound) sound).getSoundPath();
-            repeating = ((Sound) sound).isRepeating();
-        };
+                testSound = (Sound) sound;
 
         SoundManager.getInstance().addObserver(testObserver);
 
@@ -34,10 +29,7 @@ public class SoundManagerTest
         SoundManager.getInstance().addSoundToPlay(givenSound);
 
         // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager der übergebene ist.
-        assertThat(testSound,equalTo(givenSound));
-        assertThat(soundName, equalTo(Config.pathToSound("testSound")));
-        assertThat(repeating, equalTo(false));
-
+        assertThat("Die Observer wurden benachrichtigt, den gewünschten Sound abzuspielen",testSound,equalTo(givenSound));
     }
 
 

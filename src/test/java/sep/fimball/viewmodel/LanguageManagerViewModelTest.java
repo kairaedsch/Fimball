@@ -36,7 +36,7 @@ public class LanguageManagerViewModelTest
             //Testet, ob die Texte aller ausgelesenen Keys aus der Properties-Datei auch im LanguageManagerViewModel enthalten sind.
             for (Object key : properties.keySet())
             {
-                assertThat(properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
+                assertThat("LanguageManagerViewModel lädt den richtigen Text zum gegebenen Key in der richtigen Sprache",properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
             }
         }
 
