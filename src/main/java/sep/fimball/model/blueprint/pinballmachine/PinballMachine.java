@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static javafx.scene.input.KeyCode.M;
+
 /**
  * Eine PinballMachine stellt einen Flipperautomaten dar und enthält allgemeine Informationen über den Automaten sowie über die im Automaten platzierten Elemente.
  */
@@ -130,7 +132,10 @@ public class PinballMachine
     {
         highscoreList.add(highscore);
         if (highscoreList.size() > Config.maxHighscores)
-            highscoreList.remove(0);
+        {
+            Optional<Highscore> worstHigscore = highscoreList.stream().min((o1, o2) -> (int) (o1.scoreProperty().get() - o2.scoreProperty().get()));
+            highscoreList.remove(worstHigscore.get());
+        }
     }
 
     /**
