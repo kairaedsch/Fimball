@@ -41,18 +41,12 @@ public class SoundManagerViewModel
     private DoubleProperty sfxVolume;
 
     /**
-     * Die aktuellen Einstellungen.
-     */
-    private Settings settings;
-
-    /**
      * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
      */
-    private SoundManagerViewModel()
+    SoundManagerViewModel(Settings settings)
     {
         playObservable = new Observable();
         stopObservable = new Observable();
-        settings = Settings.getSingletonInstance();
 
         musicVolume = new SimpleDoubleProperty();
         musicVolume.bind(settings.musicVolumeProperty().divide(100.0).multiply(settings.masterVolumeProperty().divide(100.0)));
@@ -129,7 +123,7 @@ public class SoundManagerViewModel
      */
     public static SoundManagerViewModel getInstance() {
         if (instance == null) {
-            instance = new SoundManagerViewModel();
+            instance = new SoundManagerViewModel(Settings.getSingletonInstance());
         }
         return instance;
     }

@@ -3,7 +3,7 @@ package sep.fimball.view;
 import javafx.scene.control.Label;
 
 /**
- * Created by kaira on 29.11.2016.
+ * Dient als kleine Test-View für andere Tests.
  */
 public class LabelView implements ViewBoundToViewModel<String>
 {

@@ -43,6 +43,7 @@ public class BaseElement
     public BaseElement(String id, BaseElementJson baseElementJson)
     {
         this.id = id;
+        if(baseElementJson.elementType == null) throw new IllegalArgumentException("Element Type must be set");
         type = baseElementJson.elementType;
 
         physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);
