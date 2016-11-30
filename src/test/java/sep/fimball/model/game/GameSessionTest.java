@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -33,9 +34,8 @@ public class GameSessionTest
     {
         // Erstellen eines leeren Automaten.
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
-        ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
-
+        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
+        when(pinballMachineMock.elementsProperty()).thenReturn(list);
 
         new GameSession(pinballMachineMock, new String[]{"TestPlayer"});
     }
@@ -54,9 +54,9 @@ public class GameSessionTest
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0);
 
-        ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
-        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
+        when(pinballMachineMock.elementsProperty()).thenReturn(list);
 
         GameSession gameSession = new GameSession(pinballMachineMock, playerNames);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
@@ -174,9 +174,9 @@ public class GameSessionTest
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0);
 
-        ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
-        when(pinballMachine.elementsProperty()).thenReturn((ReadOnlyListProperty<PlacedElement>) list);
+        when(pinballMachine.elementsProperty()).thenReturn(list);
 
         GameSession gameSession = new GameSession(pinballMachine, playerNames);
         for (String playerName : playerNames)
