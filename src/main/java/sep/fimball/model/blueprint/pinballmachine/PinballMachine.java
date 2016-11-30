@@ -4,17 +4,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
-import static javafx.scene.input.KeyCode.M;
 
 /**
  * Eine PinballMachine stellt einen Flipperautomaten dar und enthält allgemeine Informationen über den Automaten sowie über die im Automaten platzierten Elemente.
@@ -108,7 +105,7 @@ public class PinballMachine
     /**
      * Serialisiert und speichert diesen Automaten.
      */
-    public void saveToDisk() throws IOException
+    public void saveToDisk()
     {
         checkElementsLoaded();
         PinballMachineManager.getInstance().savePinballMachine(this);
@@ -131,10 +128,20 @@ public class PinballMachine
     public void addHighscore(Highscore highscore)
     {
         highscoreList.add(highscore);
-        if (highscoreList.size() > Config.maxHighscores)
+        if (highscoreList.size() >= Config.maxHighscores)
         {
-            Optional<Highscore> worstHigscore = highscoreList.stream().min((o1, o2) -> (int) (o1.scoreProperty().get() - o2.scoreProperty().get()));
-            highscoreList.remove(worstHigscore.get());
+            Highscore worstHigscore = highscoreList.stream().min((o1, o2) -> (int) (o1.scoreProperty().get() - o2.scoreProperty().get())).get();
+            if(worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
+            {
+                highscoreList.remove(worstHigscore);
+                highscoreList.add(highscore);
+            }
+            saveToDisk();
+        }
+        else
+        {
+            highscoreList.add(highscore);
+            saveToDisk();
         }
     }
 

@@ -72,9 +72,9 @@ public class BasePhysicsElementFactory
 
             Collider newCollider;
             if (collider.collisionType.type.equals("flipper"))
-                newCollider = new FlipperCollider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+                newCollider = new FlipperCollider(collider.layer, shapes, collisionType, collider.colliderId);
             else
-                newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId.hashCode());
+                newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId);
 
             colliders.add(newCollider);
         }

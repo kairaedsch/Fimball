@@ -440,6 +440,13 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         if (rounds >= players.length)
         {
+            if(!isOver.get())
+            {
+                for (Player player : players)
+                {
+                    pinballMachine.addHighscore(new Highscore(player.pointsProperty().get(), player.nameProperty().get()));
+                }
+            }
             isOver.setValue(true);
             pauseAll();
         }
@@ -456,16 +463,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         PlacedElement originalBall = gameBall.get().getPlacedElement();
         physicsHandler.setBall(originalBall.positionProperty().get(), originalBall.rotationProperty().get());
-    }
-
-    /**
-     * Speichert den gegebenen Highscore in den Flipperautomaten dieser Game Session.
-     *
-     * @param score Der Highscore, der gespeichert werden soll.
-     */
-    public void saveHighscore(Highscore score)
-    {
-        pinballMachine.addHighscore(score);
     }
 
     /**

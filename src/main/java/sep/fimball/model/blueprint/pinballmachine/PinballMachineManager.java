@@ -165,7 +165,7 @@ public class PinballMachineManager
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
      */
-    void savePinballMachine(PinballMachine pinballMachine) throws IOException
+    void savePinballMachine(PinballMachine pinballMachine)
     {
         Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
         if (!pathToMachine.toFile().exists())
@@ -173,7 +173,8 @@ public class PinballMachineManager
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
             if (!couldCreateFolder)
             {
-                throw new IOException("Could not create folder!");
+                System.err.println("Could not create folder: " + pathToMachine);
+                return;
             }
         }
 

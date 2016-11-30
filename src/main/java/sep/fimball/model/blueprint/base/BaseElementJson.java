@@ -51,7 +51,7 @@ public class BaseElementJson
             /**
              * Speichert die ID des Colliders.
              */
-            public String colliderId;
+            public int colliderId;
 
             /**
              * Speichert die Ebene des Colliders.
