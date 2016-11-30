@@ -72,12 +72,11 @@ public class LanguageManagerViewModel
         Properties properties = new Properties();
 
         String path = Config.pathToLanguage(language.getCode());
-        try(InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
+        try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
             properties.load(inputStream);
             inputStream.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             System.err.println("property file '" + path + "' not loaded");
             System.out.println("Exception: " + e);
@@ -95,11 +94,10 @@ public class LanguageManagerViewModel
     {
         for (Object key : properties.keySet())
         {
-            if (texts.containsKey(key))
+            if (texts.containsKey((String) key))
             {
                 texts.get(key).setValue((String) properties.get(key));
-            }
-            else
+            } else
             {
                 texts.put((String) key, new SimpleStringProperty((String) properties.get(key)));
             }
