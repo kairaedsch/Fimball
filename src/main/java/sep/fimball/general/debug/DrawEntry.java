@@ -5,6 +5,9 @@ import sep.fimball.general.data.Vector2;
 
 import java.util.List;
 
+/**
+ * Debug Klasse welche nur für das Debugging relevant ist und deshalb kein JavaDoc enthält.
+ */
 public class DrawEntry
 {
     public DrawEntry()

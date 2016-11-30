@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Debug Klasse welche nur für das Debugging relevant ist und deshalb kein JavaDoc enthält.
+ */
 public class Debug
 {
     private static List<DrawEntry> drawEntries = new ArrayList<>();

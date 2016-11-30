@@ -5,7 +5,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by alexcekay on 30.11.16.
+ * Tests für die Klasse Config. Bei diesen Tests ist zu beachten dass immer nur der Pfad relativ zur JAR-Datei getestet wird.
+ * Dies hat den Grund, dass zum korrekten Testen der Funktion welche herausfindet wo sich die JAR-Datei befindet dieselbe Funktion
+ * genutzt werden müsste, was den Test überflüssig machen würde. Die Alternative den Pfad zur JAR fest zu setzen wurde absichtlich nicht
+ * genutzt, da dadurch die Tests auf anderen Maschinen sowie dem Jenkins Server nicht mehr funktionieren würden ohne den Pfad bei jeder
+ * Maschine zu ändern.
  */
 public class ConfigTest
 {
