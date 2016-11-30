@@ -59,18 +59,36 @@ public class Config
         }
     }
 
+    /**
+     * Gibt den absoluten Pfad zurück in dem sich die JAR Datei befindet.
+     *
+     * @return Der Pfad an dem sich die JAR befindet.
+     * @throws URISyntaxException Wird geworfen falls der Pfad nicht korrekt in eine URI verwandelt werden kann.
+     */
     private static String getFolderContainingJar() throws URISyntaxException
     {
         File jarFile = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI());
         return jarFile.getParentFile().getAbsolutePath();
     }
 
+    /**
+     * Die Standardbreite des Anwendungsfensters.
+     */
     public final static int defaultStageWidth = 1280;
 
+    /**
+     * Die Standardhöhe des Anwendungsfensters.
+     */
     public final static int defaultStageHeight = 720;
 
+    /**
+     * Die Durchsichtigkeit der Zwischenebene.
+     */
     public final static double stageDividerLayerOpacity = 0.6;
 
+    /**
+     * Der Parameter des Blur Effekts welcher auf die Zwischenebene angewandt wird.
+     */
     public final static int stageDividerLayerBlur = 13;
 
     /**
@@ -159,17 +177,17 @@ public class Config
     public final static Color complementColor = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);
 
     /**
-     * Die dunklere Komplementfarbe des Flipperautomaten
+     * Die dunklere Komplementfarbe des Flipperautomaten.
      */
     public final static Color complementColorDark = new Color(165 / 255.0, 119 / 255.0, 47 / 255.0, 1);
 
     /**
-     * Die Sekundärfarbe
+     * Die Sekundärfarbe.
      */
     public final static Color secondaryColor = new Color(68 / 255.0, 102 / 255.0, 143 / 255.0, 1);
 
     /**
-     * Die dunklere Sekundärfarbe
+     * Die dunklere Sekundärfarbe.
      */
     public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
@@ -179,12 +197,12 @@ public class Config
     public final static int pixelsPerGridUnit = 15;
 
     /**
-     * Der maximale Zoom im Editor
+     * Der maximale Zoom im Editor.
      */
     public final static double maxZoom = 1.0 / pixelsPerGridUnit;
 
     /**
-     * Der minimale Zoom im Editor
+     * Der minimale Zoom im Editor.
      */
     public final static double minZoom = 2;
 
@@ -201,8 +219,8 @@ public class Config
     /**
      * Gibt den Pfad des Verzeichnis, an dem sich Infos über ein einzelnes BaseElements befinden, basierend auf der übergebenen ElementID zurück.
      *
-     * @param elementTypeId Id des BaseElements
-     * @return Verzeichnis des BaseElements
+     * @param elementTypeId Id des BaseElements.
+     * @return Verzeichnis des BaseElements.
      */
     public static String pathToElement(String elementTypeId)
     {
@@ -260,8 +278,8 @@ public class Config
     /**
      * Gibt den Pfad zu einem serialisierten Flipperautomaten basierend auf der übergebenen MachineID zurück.
      *
-     * @param pinballMachineId Id des Flipperautomaten
-     * @return Pfad des serialisierten Flipperautomaten
+     * @param pinballMachineId Id des Flipperautomaten.
+     * @return Pfad des serialisierten Flipperautomaten.
      */
     public static String pathToPinballMachine(String pinballMachineId)
     {
@@ -335,7 +353,7 @@ public class Config
     /**
      * Gibt den Pfad zu der Properties-Datei der gegebenen Sprache an.
      *
-     * @param languageCode Die Sprache
+     * @param languageCode Die Sprache.
      * @return Der Pfad zur Datei.
      */
     public static String pathToLanguage(String languageCode)
@@ -355,7 +373,8 @@ public class Config
 
     /**
      * Gibt den Pfad zum Ordner zurück, in dem sich Dateien für Tests befinden.
-     * @return Pfad zum Test-Ordner, endet mit /
+     *
+     * @return Pfad zum Test-Ordner, endet mit /.
      */
     public static String pathToTestData()
     {
