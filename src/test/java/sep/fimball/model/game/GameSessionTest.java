@@ -9,7 +9,6 @@ import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
@@ -26,17 +25,19 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
-/**
- * Created by felix on 27.11.16.
- */
 @Ignore
 public class GameSessionTest
 {
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void constructorTest()
     {
+        // Erstellen eines leeren Automaten.
+        PinballMachine pinballMachineMock = mock(PinballMachine.class);
+        ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
+        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
 
+
+        new GameSession(pinballMachineMock, new String[]{"TestPlayer"});
     }
 
     private GameElement collidedGameElement;
@@ -46,37 +47,36 @@ public class GameSessionTest
     @Test
     public void gameLoopUpdateTest() throws IOException
     {
+        // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
-
-        PinballMachine pinballMachine = mock(PinballMachine.class);
-
+        PinballMachine pinballMachineMock = mock(PinballMachine.class);
         PlacedElement ball = new PlacedElement(
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0);
 
         ObservableList<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
-        when(pinballMachine.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
+        when(pinballMachineMock.elementsProperty()).thenReturn((ReadOnlyListProperty) list);
 
-        GameSession gameSession = new GameSession(pinballMachine, playerNames);
-
+        GameSession gameSession = new GameSession(pinballMachineMock, playerNames);
+        gameSession.addGameLoopObserver(new GameLoopObserver(this));
 
         Handler handler = new Handler();
         handler.setElementHandler(new CollisionHandler(this));
+        handler.setGameHandler(new BallLostHandler(this));
         List<Handler> handlerList = HandlerFactory.generateAllHandlers(gameSession);
         handlerList.add(handler);
-        Handler myHandler = new Handler();
-        myHandler.setElementHandler(new CollisionHandler(this));
-        myHandler.setGameHandler(new BallLostHandler(this));
-        handlerList.add(myHandler);
+
         gameSession.addHandlers(handlerList);
 
         GameElement gameElement = gameSession.gameBallProperty().get();
 
+        // künstliches Erstellen einer Kollision.
         CollisionEventArgs collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
+        // künstliches Erstellen einer Bewegung des Balls.
         final Vector2 newPos = new Vector2(1, 1);
         final double newRot = 1;
 
@@ -84,12 +84,14 @@ public class GameSessionTest
         List<ElementEventArgs<GameElement>> elementEventArgsList = new ArrayList<>();
         elementEventArgsList.add(elementEventArgs);
 
+        // künstliche Änderungen am Spielfluss hinzufügen
         gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
-        gameSession.addGameLoopObserver(new GameLoopObserver(this));
         gameSession.setBallLost(true);
 
+        // Anwenden der Änderungen
         gameSession.gameLoopUpdate();
 
+        // Auswertung
         assertThat(collidedGameElement, equalTo(gameElement));
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
