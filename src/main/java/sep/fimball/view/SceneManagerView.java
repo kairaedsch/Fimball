@@ -47,12 +47,6 @@ public class SceneManagerView
      */
     public SceneManagerView(Stage stage)
     {
-        stage.setOnCloseRequest(t ->
-        {
-            Platform.exit();
-            System.exit(0);
-        });
-
         stage.setWidth(Config.defaultStageWidth);
         stage.setHeight(Config.defaultStageHeight);
 

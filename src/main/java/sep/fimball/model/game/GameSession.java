@@ -314,7 +314,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void addHandlers(List<Handler> handlers)
     {
-        handlers.addAll(handlers);
+        this.handlers.addAll(handlers);
     }
 
     /**

@@ -2,8 +2,8 @@ package sep.fimball;
 
 import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
-import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.view.SceneManagerView;
 
 /**
@@ -18,7 +18,6 @@ public class Main extends Application
      */
     public static void main(String args[])
     {
-        BaseElementManager.getInstance();
         SvgImageLoaderFactory.install();
         launch();
     }
@@ -32,6 +31,12 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        primaryStage.setOnCloseRequest(t ->
+        {
+            Platform.exit();
+            System.exit(0);
+        });
+
         new SceneManagerView(primaryStage);
     }
 }
