@@ -1,7 +1,5 @@
 package sep.fimball.general.data;
 
-import java.awt.*;
-
 /**
  * Vector2 stellt einen Vektor mit zwei Komponenten dar.
  */
@@ -36,17 +34,6 @@ public class Vector2
     {
         this.x = x;
         this.y = y;
-    }
-
-    /**
-     * Erzeugt einen Vektor aus einem gegebenen Punkt.
-     *
-     * @param p Der Punkt, aus dem der Vektor erzeugt wird.
-     */
-    public Vector2(Point p)
-    {
-        this.x = p.x;
-        this.y = p.y;
     }
 
     /**

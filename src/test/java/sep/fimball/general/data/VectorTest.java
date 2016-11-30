@@ -2,6 +2,7 @@ package sep.fimball.general.data;
 
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 public class VectorTest {
@@ -12,8 +13,8 @@ public class VectorTest {
     public void plusTest()
     {
         Vector2 vecOne = new Vector2(1, 0);
-        Vector2 vecTwo = new Vector2(0, 1);
-        assertThat(vecOne.plus(vecTwo), is(new Vector2(1, 1)));
+        Vector2 vecTwo = new Vector2();
+        assertThat(vecOne.plus(vecTwo), is(new Vector2(1, 0)));
     }
 
     @Test
@@ -106,6 +107,12 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1.0, 1.0);
         assertThat(Math.abs(1.0 - vecOne.clamp(1.0).magnitude()) < EPSILON, is(true));
+
+        Vector2 vecTwo = new Vector2(1.0, 0.0);
+        assertThat(vecTwo.clamp(1.0), is(vecTwo));
+
+        Vector2 vecThree = new Vector2(0.0, 2.0);
+        assertThat(vecThree.clamp(3.0), is(vecThree));
     }
 
     @Test
@@ -113,5 +120,29 @@ public class VectorTest {
     {
         Vector2 vecOne = new Vector2(1, 1);
         assertThat(vecOne.project(new Vector2(1, 0)), is(new Vector2(1, 0)));
+    }
+
+    @Test
+    public void vectorToStringTest()
+    {
+        Vector2 vecOne = new Vector2(1, 1);
+        assertThat(vecOne.toString(), is("{1.0|1.0}"));
+    }
+
+    @Test
+    public void vectorCloneTest()
+    {
+        Vector2 vecOne = new Vector2(1.2, 5.1);
+        Vector2 vecClone = vecOne.clone();
+        assertThat(vecOne, is(vecClone));
+    }
+
+    @Test
+    public void equalTest()
+    {
+        Vector2 vecOne = new Vector2(13.37, 42);
+        assertThat(vecOne, is(vecOne));
+        assertThat(vecOne.equals(null), is(false));
+        assertThat(vecOne.equals(42), is(false));
     }
 }
