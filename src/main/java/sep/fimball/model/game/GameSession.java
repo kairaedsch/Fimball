@@ -44,6 +44,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         GameSession gameSession = new GameSession(machineBlueprint, playerNames);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
+        gameSession.startAll();
         return gameSession;
     }
 
@@ -58,7 +59,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
-        gameSession.stopPhysics();
         ListPropertyConverter.bindAndConvertList(
                 gameSession.getWorld().gameElementsProperty(),
                 machineBlueprint.elementsProperty(),
@@ -270,8 +270,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.gameLoopObservable = new Observable();
 
         spawnNewBall();
-
-        startAll();
     }
 
     /**
