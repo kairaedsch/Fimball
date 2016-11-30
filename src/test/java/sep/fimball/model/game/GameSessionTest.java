@@ -64,7 +64,7 @@ public class GameSessionTest
         Handler handler = new Handler();
         handler.setElementHandler(new CollisionHandler(this));
         handler.setGameHandler(new BallLostHandler(this));
-        List<Handler> handlerList = HandlerFactory.generateAllHandlers(gameSession);
+        List<Handler> handlerList = new ArrayList<>();
         handlerList.add(handler);
 
         gameSession.addHandlers(handlerList);
