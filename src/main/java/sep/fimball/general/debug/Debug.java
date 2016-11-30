@@ -110,6 +110,8 @@ public class Debug
 
     public static void draw(GraphicsContext context)
     {
+        context.setStroke(Color.BLACK);
+
         synchronized (drawEntries)
         {
             long time = System.currentTimeMillis();

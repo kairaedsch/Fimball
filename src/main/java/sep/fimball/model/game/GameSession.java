@@ -66,7 +66,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 gameSession.getWorld().gameElementsProperty(),
                 machineBlueprint.elementsProperty(),
                 element -> new GameElement(element, true));
-
+        gameSession.startGameLoop();
         return gameSession;
     }
 

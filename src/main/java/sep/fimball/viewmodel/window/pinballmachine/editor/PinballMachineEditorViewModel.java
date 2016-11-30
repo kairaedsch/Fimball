@@ -78,6 +78,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
+    private GameSession gameSession;
+
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
      *
@@ -103,7 +105,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
 
-        GameSession gameSession = GameSession.generateEditorSession(pinballMachine);
+        gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
     }
 
@@ -160,6 +162,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
+        gameSession.pauseAll();
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
