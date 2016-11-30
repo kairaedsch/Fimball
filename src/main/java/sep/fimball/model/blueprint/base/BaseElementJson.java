@@ -172,7 +172,7 @@ public class BaseElementJson
             /**
              * Speichert die Identifikationsnummer des Colliders.
              */
-            public String colliderId;
+            public int colliderId;
 
             /**
              * Speichert den Soundeffekt, der beim Zusammenstoß abgespielt wird.
@@ -241,7 +241,7 @@ public class BaseElementJson
             /**
              * Speichert die Identifikationsnummer des Colliders, zu dem dieses Regelwerk gehört.
              */
-            public String colliderId;
+            public int colliderId;
         }
     }
 }

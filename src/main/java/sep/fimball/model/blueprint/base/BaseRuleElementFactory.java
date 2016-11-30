@@ -23,8 +23,7 @@ public class BaseRuleElementFactory
         {
             for (BaseElementJson.RuleElementJson.RuleElementEventJson event : ruleElement.events)
             {
-                // TODO hashCode musst not be unique
-                eventMap.put(event.colliderId.hashCode(), new BaseRuleElementEvent());
+                eventMap.put(event.colliderId, new BaseRuleElementEvent());
             }
         }
         return new BaseRuleElement(ruleElement.general.givesPoints, eventMap);

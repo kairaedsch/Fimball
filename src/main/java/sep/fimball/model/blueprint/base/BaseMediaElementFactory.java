@@ -34,8 +34,7 @@ public class BaseMediaElementFactory
                 Animation animation = null;
                 if(event.animation != null) animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
 
-                // TODO hashCode must not be unique
-                eventMap.put(event.colliderId.hashCode(), new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), event.soundName));
+                eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), event.soundName));
             }
         }
         ElementImage elementImage;
