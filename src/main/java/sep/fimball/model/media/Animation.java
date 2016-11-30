@@ -38,7 +38,7 @@ public class Animation
      *
      * @return Die Dauer der Anzeige eines einzelnen Bildes in Millisekunden.
      */
-    public int getDuration()
+    int getDuration()
     {
         return duration;
     }
@@ -56,7 +56,7 @@ public class Animation
      * Gibt die Anzahl der Bilder, aus denen die Animation besteht.
      * @return Die Anzahl der Bilder, aus denen die Animation besteht.
      */
-    public int getFrameCount()
+    int getFrameCount()
     {
         return frameCount;
     }

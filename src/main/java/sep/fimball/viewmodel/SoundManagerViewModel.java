@@ -42,6 +42,7 @@ public class SoundManagerViewModel
 
     /**
      * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
+     * @param settings Die Einstellungen, aus denen die Daten für die Lautstärke bezogen werden.
      */
     SoundManagerViewModel(Settings settings)
     {
@@ -71,7 +72,7 @@ public class SoundManagerViewModel
     /**
      * Benachrichtigt die eingetragenen Observer darüber, dass die Hintergrundmusik gestoppt werden soll.
      */
-    public void stopBackgroundMusic() {
+    void stopBackgroundMusic() {
         stopObservable.setChanged();
         stopObservable.notifyObservers();
     }
