@@ -1,6 +1,5 @@
 package sep.fimball.general.data;
 
-import com.sun.org.apache.xerces.internal.util.PropertyState;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
