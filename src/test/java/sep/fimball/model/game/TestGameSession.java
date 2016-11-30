@@ -13,14 +13,14 @@ public class TestGameSession extends GameSession
     private Timer timer;
 
     /**
-     * Erstellt ein neues Spiel sowie die dazugehörige Physik im durch {@code machineBlueprint} angegebenen Automaten und mit den durch {@code playerNames} angegebenen Spielern.
+     * Erstellt ein neues Spiel sowie die dazugehörige Physik im durch {@code pinballMachine} angegebenen Automaten und mit den durch {@code playerNames} angegebenen Spielern.
      *
-     * @param machineBlueprint Der Bauplan des Automaten.
+     * @param pinballMachine Der Bauplan des Automaten.
      * @param playerNames Die Namen der Spieler.
      */
-    public TestGameSession(PinballMachine machineBlueprint, String[] playerNames)
+    public TestGameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        super(machineBlueprint, playerNames);
+        super(pinballMachine, playerNames);
     }
 
     /**

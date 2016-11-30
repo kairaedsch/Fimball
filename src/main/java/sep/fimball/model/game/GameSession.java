@@ -40,13 +40,13 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
-     * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames      Die Namen der Spieler.
      * @return Die generierte GameSession.
      */
-    public static GameSession generateGameSession(PinballMachine machineBlueprint, String[] playerNames)
+    public static GameSession generateGameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        GameSession gameSession = new GameSession(machineBlueprint, playerNames);
+        GameSession gameSession = new GameSession(pinballMachine, playerNames);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.startAll();
         return gameSession;
@@ -55,17 +55,17 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Generiert eine neue GameSession für den Editor, und initialisiert alle nötigen Handler.
      *
-     * @param machineBlueprint Der Flipperautomat, der im Editor geladen ist.
+     * @param pinballMachine Der Flipperautomat, der im Editor geladen ist.
      * @return Die generierte GameSession.
      */
-    public static GameSession generateEditorSession(PinballMachine machineBlueprint)
+    public static GameSession generateEditorSession(PinballMachine pinballMachine)
     {
         String[] editorPlayers = {"Editor-Player"};
-        GameSession gameSession = new GameSession(machineBlueprint, editorPlayers);
+        GameSession gameSession = new GameSession(pinballMachine, editorPlayers);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         ListPropertyConverter.bindAndConvertList(
                 gameSession.getWorld().gameElementsProperty(),
-                machineBlueprint.elementsProperty(),
+                pinballMachine.elementsProperty(),
                 element -> new GameElement(element, true));
         gameSession.startGameLoop();
         return gameSession;
@@ -114,7 +114,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Der aktuelle Flipperautomat.
      */
-    private PinballMachine machineBlueprint;
+    private PinballMachine pinballMachine;
 
     /**
      * Die Schleife, die die Spielwelt aktualisiert.
@@ -175,12 +175,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten,
      * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
-     * @param machineBlueprint Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames      Die Namen der Spieler.
      */
-    public GameSession(PinballMachine machineBlueprint, String[] playerNames)
+    public GameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        this.machineBlueprint = machineBlueprint;
+        this.pinballMachine = pinballMachine;
         this.handlers = new ArrayList<>();
         this.physicMonitor = new Object();
         this.collisionEventArgsList = new LinkedList<>();
@@ -204,7 +204,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
         List<FlipperPhysicsElement<GameElement>> rightFlippers = new ArrayList<>();
 
-        for (PlacedElement element : machineBlueprint.elementsProperty())
+        for (PlacedElement element : pinballMachine.elementsProperty())
         {
 
             PhysicsElement<GameElement> physicsElement = null;
@@ -465,7 +465,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void saveHighscore(Highscore score)
     {
-        machineBlueprint.addHighscore(score);
+        pinballMachine.addHighscore(score);
     }
 
     /**
@@ -581,7 +581,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public PinballMachine getPinballMachine()
     {
-        return machineBlueprint;
+        return pinballMachine;
     }
 
     /**
