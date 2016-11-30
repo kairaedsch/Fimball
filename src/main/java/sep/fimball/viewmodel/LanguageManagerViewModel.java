@@ -1,10 +1,7 @@
 package sep.fimball.viewmodel;
 
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -21,7 +18,7 @@ public class LanguageManagerViewModel
     /**
      * Die Texte mit dem Key, über den man sie erreicht.
      */
-    private MapProperty<String, StringProperty> texts;
+    private HashMap<String, StringProperty> texts;
 
     /**
      * Die Properties, die zu den verschiedenen Sprachen gehören.
@@ -52,7 +49,7 @@ public class LanguageManagerViewModel
      */
     private LanguageManagerViewModel()
     {
-        texts = new SimpleMapProperty<>(FXCollections.observableHashMap());
+        texts = new HashMap<>();
 
         properties = new HashMap<>();
         for (Language language : Language.values())
@@ -98,13 +95,13 @@ public class LanguageManagerViewModel
     {
         for (Object key : properties.keySet())
         {
-            if (texts.get().containsKey(key))
+            if (texts.containsKey(key))
             {
-                texts.get().get(key).setValue((String) properties.get(key));
+                texts.get(key).setValue((String) properties.get(key));
             }
             else
             {
-                texts.get().put((String) key, new SimpleStringProperty((String) properties.get(key)));
+                texts.put((String) key, new SimpleStringProperty((String) properties.get(key)));
             }
         }
     }
