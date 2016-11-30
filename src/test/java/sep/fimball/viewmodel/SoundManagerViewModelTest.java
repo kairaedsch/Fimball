@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -9,52 +10,73 @@ import sep.fimball.model.media.SoundManager;
 import java.util.Observable;
 import java.util.Observer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-/**
- * Created by marc on 28.11.16.
- */
+
 public class SoundManagerViewModelTest
 {
-    private final double TEST_VOLUME = 10.0;
-    private Settings settings = Settings.getSingletonInstance();
 
-    @Test (timeout = 1000)
+    //Es werden gemockte Settings erstellt, um die eigentlichen Settings nicht zu ändern, und ein neues SoundManagerViewModel mit den gemockten Settings zurück.
+    private SoundManagerViewModel init()
+    {
+
+        Settings mockedSettings = mock(Settings.class);
+        when(mockedSettings.sfxVolumeProperty()).thenReturn(new SimpleIntegerProperty(20));
+        when(mockedSettings.musicVolumeProperty()).thenReturn(new SimpleIntegerProperty(30));
+        when(mockedSettings.masterVolumeProperty()).thenReturn(new SimpleIntegerProperty(50));
+
+        return new SoundManagerViewModel(mockedSettings);
+
+    }
+
+    @Test
     public void singletonTest()
     {
-        assertTrue(SoundManagerViewModel.getInstance() != null);
+        assertThat(SoundManagerViewModel.getInstance() , is(not(nullValue())));
     }
 
-    @Test (timeout = 1000)
+    //Testet. ob die Lautstärken des SoundManagerViewModels stimmen
+    @Test
     public void testVolumes()
     {
-        assertTrue(SoundManagerViewModel.getInstance().sfxVolumeProperty().get() == settings.sfxVolumeProperty().divide(100.0).multiply(settings.masterVolumeProperty().divide(100.0)).get());
-        Settings.getSingletonInstance().sfxVolumeProperty().setValue(TEST_VOLUME);
-        assertTrue(SoundManagerViewModel.getInstance().sfxVolumeProperty().get() == TEST_VOLUME / 100 * settings.masterVolumeProperty().divide(100.0).get());
-        assertTrue(SoundManagerViewModel.getInstance().musicVolumeProperty().get() == settings.musicVolumeProperty().divide(100.0).multiply(settings.masterVolumeProperty().divide(100.0)).get());
-        Settings.getSingletonInstance().musicVolumeProperty().setValue(TEST_VOLUME);
-        assertTrue(SoundManagerViewModel.getInstance().musicVolumeProperty().get() == TEST_VOLUME / 100 * settings.masterVolumeProperty().divide(100.0).get());
+        SoundManagerViewModel testSoundManagerViewModel = init();
+        assertThat("Die Musik-Lautstärke stimmt",testSoundManagerViewModel.musicVolumeProperty().get(), is(0.15));
+        assertThat("Die Effekt-Lautstärke stimmt",testSoundManagerViewModel.sfxVolumeProperty().get(), is(0.1));
+
     }
 
-    @Test (timeout = 2000)
+    @Test
     public void testSoundStateChange()
     {
-        NotificationObserver notificationObserver = new NotificationObserver();
-        SoundManagerViewModel.getInstance().addPlayObserver(notificationObserver);
-        assertEquals(notificationObserver.getNumberOfNotifications(), 0);
+        //Fügt einen NotificationObserver zum SoundManagerVIewModel hinzu.
+        NotificationObserver playObserver = new NotificationObserver();
+        SoundManagerViewModel.getInstance().addPlayObserver(playObserver);
+
+        assertThat("Es soll noch kein Sound abgepsielt werden",playObserver.getNumberOfNotifications(), is(0));
+
+        //Die Observer werden über das Abspielen der Hintergrundmusik informiert.
         SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
-        assertEquals(notificationObserver.getNumberOfNotifications(), 1);
-        SoundManager.getInstance().addSoundToPlay(new Sound("test", false));
-        assertEquals(notificationObserver.getNumberOfNotifications(), 2);
-        SoundManagerViewModel.getInstance().addStopObvserver(notificationObserver);
+        assertThat("Der abzuspielende Sound soll wiederholt werden",playObserver.getSound().isRepeating(), is(true));
+
+        //Die Observer werden über das Abspielen des richtigen SoundClips informiert.
+        Sound testSound = new Sound("test", false);
+        SoundManager.getInstance().addSoundToPlay(testSound);
+        assertThat("Der Observer wurde über das Abspielen des richtigen Sounds informiert",playObserver.getSound(), equalTo(testSound));
+
+        //Die Observer werden über das Stoppen der Hintergrundmusik informiert.
+        NotificationObserver stopObsever = new NotificationObserver();
+        SoundManagerViewModel.getInstance().addStopObvserver(stopObsever);
         SoundManagerViewModel.getInstance().stopBackgroundMusic();
-        assertEquals(notificationObserver.getNumberOfNotifications(), 3);
+        assertThat("Der Observer wurde über das Stoppen benachrichtigt",stopObsever.getNumberOfNotifications(), is(1));
     }
 
     class NotificationObserver implements Observer
     {
         private int notifications;
+        private Sound sound;
 
         NotificationObserver()
         {
@@ -62,14 +84,20 @@ public class SoundManagerViewModelTest
         }
 
         @Override
-        public void update(Observable o, Object arg)
+        public void update(Observable o, Object sound)
         {
             notifications++;
+            this.sound = (Sound) sound;
         }
 
         int getNumberOfNotifications()
         {
             return notifications;
+        }
+
+        Sound getSound()
+        {
+            return sound;
         }
     }
 

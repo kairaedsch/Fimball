@@ -41,17 +41,17 @@ public class Settings
     private BooleanProperty fullscreen;
 
     /**
-     * Allgemeine Lautstärke von 0-100\%, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
+     * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
      */
     private IntegerProperty masterVolume;
 
     /**
-     * Lautstärke der Musik von 0-100%.
+     * Lautstärke der Musik
      */
     private IntegerProperty musicVolume;
 
     /**
-     * Lautstärke der Soundeffekte von 0-100%.
+     * Lautstärke der Soundeffekte.
      */
     private IntegerProperty sfxVolume;
 

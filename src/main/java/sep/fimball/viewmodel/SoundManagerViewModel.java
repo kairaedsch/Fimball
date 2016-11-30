@@ -31,12 +31,12 @@ public class SoundManagerViewModel
     private Observable stopObservable;
 
     /**
-     * Die Lautstärke der Hintergrundmusik.
+     * Die Lautstärke der Hintergrundmusik von 0-100%.
      */
     private DoubleProperty musicVolume;
 
     /**
-     * Die Lautstärke der Sounds.
+     * Die Lautstärke der Sounds von 0-100%.
      */
     private DoubleProperty sfxVolume;
 
@@ -87,7 +87,7 @@ public class SoundManagerViewModel
     }
 
     /**
-     * Gibt die Lautstärke der Hintergrundmusik zurück.
+     * Gibt die Lautstärke der Hintergrundmusik von 0-100% zurück.
      *
      * @return Die Lautstärke der Hintergrundmusik.
      */
@@ -97,7 +97,7 @@ public class SoundManagerViewModel
     }
 
     /**
-     * Gibt die Lautstärke der Soundeffekte zurück.
+     * Gibt die Lautstärke der Soundeffekte von 0-100% zurück.
      *
      * @return Die Lautstärke der Soundeffekte.
      */

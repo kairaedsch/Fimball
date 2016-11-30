@@ -12,9 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by marc on 28.11.16.
- */
+
 public class LanguageManagerViewModelTest
 {
     @Test
@@ -31,6 +29,8 @@ public class LanguageManagerViewModelTest
 
             Properties properties = new Properties();
             String path = Config.pathToLanguage(language.getCode());
+
+            //Lädt die Properties aus der Datei
             loadProperties(properties, path);
 
             //Testet, ob die Texte aller ausgelesenen Keys aus der Properties-Datei auch im LanguageManagerViewModel enthalten sind.
@@ -44,7 +44,6 @@ public class LanguageManagerViewModelTest
 
     private void loadProperties(Properties properties, String path)
     {
-        //Lädt die Properties aus der Datei
         try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
             properties.load(inputStream);
