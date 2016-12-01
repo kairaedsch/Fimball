@@ -1,6 +1,7 @@
 package sep.fimball.model.game;
 
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.RectangleDouble;
@@ -20,12 +21,17 @@ import static org.junit.Assert.assertThat;
 @Ignore
 public class WorldTest
 {
+    /**
+     * Testet, ob das Rechteck, das den Automaten umschließen soll richtig berechenet wird.
+     */
     @Test
     public void generateWallTest()
     {
-        World world = new World(new SimpleListProperty<GameElement>(),
+        // Initialisierung der World
+        World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()),
                 new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
 
+        // Hinzufügen einiger Elemente
         world.addGameElement(new GameElement(new PlacedElement(
                 BaseElementManager.getInstance().getElement("bumper_blue"), new Vector2(10, 20), 0, 0, 0), false));
 
@@ -37,9 +43,10 @@ public class WorldTest
 
         RectangleDouble rect = world.generateWalls();
 
+        // Auswertung
         assertThat(rect.getOrigin(), equalTo(new Vector2(0, 0)));
-        assertThat(rect.getHeight(), is(10));
-        assertThat(rect.getWidth(), is(20));
+        assertThat(rect.getHeight(), is(20.0));
+        assertThat(rect.getWidth(), is(10.0));
     }
 
 
