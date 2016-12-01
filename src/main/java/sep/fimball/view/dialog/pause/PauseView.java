@@ -3,7 +3,7 @@ package sep.fimball.view.dialog.pause;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.ViewModelListToPaneBinder;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;

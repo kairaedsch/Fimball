@@ -28,7 +28,6 @@
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                     <children>
-                                        <Button fx:id="dragButton" mnemonicParsing="false" onMouseClicked="#dragClicked" text="drag" />
                                         <Button fx:id="selectButton" mnemonicParsing="false" onMouseClicked="#selectClicked" text="select" />
                                         <Button fx:id="placeButton" mnemonicParsing="false" onMouseClicked="#placeClicked" text="place" />
                                     </children>

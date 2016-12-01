@@ -1,4 +1,4 @@
-package sep.fimball.view;
+package sep.fimball.view.pinballcanvas;
 
 import javafx.scene.image.Image;
 import org.junit.ClassRule;

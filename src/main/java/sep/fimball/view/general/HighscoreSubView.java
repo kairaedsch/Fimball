@@ -1,8 +1,9 @@
-package sep.fimball.view;
+package sep.fimball.view.general;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.view.ViewBoundToViewModel;
 
 /**
  * Die HighscoreSubView ist für die Darstellung eines {@link Highscore}s zuständig.

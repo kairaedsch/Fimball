@@ -199,12 +199,12 @@ public class Config
     /**
      * Der maximale Zoom im Editor.
      */
-    public final static double maxZoom = 1.0 / pixelsPerGridUnit;
+    public final static double minZoom = 0.1;
 
     /**
      * Der minimale Zoom im Editor.
      */
-    public final static double minZoom = 2;
+    public final static double maxZoom = 2;
 
     /**
      * Gibt den kombinierten Pfad zurück, der angibt, wo die BaseElements gespeichert werden.

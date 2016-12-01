@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sep.fimball.general.data.Config;
 import sep.fimball.view.dialog.DialogType;
+import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.ViewModel;

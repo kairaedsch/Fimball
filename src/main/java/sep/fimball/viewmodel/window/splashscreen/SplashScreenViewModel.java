@@ -73,13 +73,13 @@ public class SplashScreenViewModel extends WindowViewModel
                 updateMessage("Initialising");
                 for (int i = 0; i < availableMessages.size(); i++)
                 {
-                    Thread.sleep(400);
+                    Thread.sleep(40);
                     updateProgress(i + 1, availableMessages.size());
                     String nextMessage = availableMessages.get(i);
                     messages.add(nextMessage);
                     updateMessage(nextMessage);
                 }
-                Thread.sleep(400);
+                Thread.sleep(40);
                 updateMessage("Everything done");
 
                 return messages;

@@ -91,12 +91,7 @@ public class GameViewModel extends WindowViewModel
 
         // TODO lost bind on ball change
         cameraPosition = new SimpleObjectProperty<>();
-        cameraPosition.set(gameSession.gameBallProperty().get().positionProperty().get());
-        gameSession.gameBallProperty().get().positionProperty().addListener((obs, ballPosition, t1) ->
-        {
-            cameraPosition.set(cameraPosition.get().lerp(ballPosition, 0.01));
-        });
-
+        cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
         cameraZoom = new SimpleDoubleProperty(0.75);
 
         gameSession.currentPlayer().addListener((observable, oldValue, newValue) -> {

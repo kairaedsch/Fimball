@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import org.hamcrest.core.IsEqual;
 import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

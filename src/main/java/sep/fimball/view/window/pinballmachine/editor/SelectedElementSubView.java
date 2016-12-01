@@ -49,18 +49,6 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     private Label pointsLabel;
 
     /**
-     * Zeigt den Namen des Elements an.
-     */
-    @FXML
-    private Label name;
-
-    /**
-     * Zeigt die Beschreibung des Elements an.
-     */
-    @FXML
-    private Label description;
-
-    /**
      * Das zur SelectedElementSubView gehörende SelectedElementSubViewModel.
      */
     private SelectedElementSubViewModel selectedElementSubViewModel;

@@ -42,29 +42,36 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      * Die Position der Kamera, die den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
      */
     private SimpleObjectProperty<Vector2> cameraPosition;
+    private Vector2 softCameraPosition;
 
     /**
      * Die Stärke des Zooms der Kamera, die die Größe der Flipperautomaten-Elemente bestimmt.
      */
     private SimpleDoubleProperty cameraZoom;
+    private double softCameraZoom;
 
     /**
      * Das zum PinballCanvasSubView gehörende PinballCanvasViewModel.
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
+    private long lastDraw;
+
     @Override
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
         this.pinballCanvasViewModel = pinballCanvasViewModel;
+        lastDraw = System.currentTimeMillis();
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), SpriteSubView::new);
 
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(pinballCanvasViewModel.cameraPositionProperty());
+        softCameraPosition = cameraPosition.get();
 
         cameraZoom = new SimpleDoubleProperty();
         cameraZoom.bind(pinballCanvasViewModel.cameraZoomProperty());
+        softCameraZoom = cameraZoom.get();
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
@@ -79,15 +86,27 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private void redraw()
     {
+        long currentDraw = System.currentTimeMillis();
+        int delta = (int) (currentDraw - lastDraw);
+
+        int interv = 200;
+        double n = (delta * 1.0) / interv;
+
+        int interv2 = 50;
+        double n2 = (delta * 1.0) / interv2;
+
+        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), n);
+        softCameraZoom = softCameraZoom * (1 - n2) + cameraZoom.get() * n2;
+
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         graphicsContext.setFill(Config.primaryColor);
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
-        graphicsContext.translate((int) (canvas.getWidth() / 2d - cameraPosition.get().getX() * pixelsPerGridUnit * cameraZoom.get()), (int) (canvas.getHeight() / 2d - cameraPosition.get().getY() * pixelsPerGridUnit * cameraZoom.get()));
+        graphicsContext.translate(canvas.getWidth() / 2d - softCameraPosition.getX() * pixelsPerGridUnit * softCameraZoom, canvas.getHeight() / 2d - softCameraPosition.getY() * pixelsPerGridUnit * softCameraZoom);
 
-        graphicsContext.scale(cameraZoom.get(), cameraZoom.get());
+        graphicsContext.scale(softCameraZoom, softCameraZoom);
 
         if (pinballCanvasViewModel.isEditorMode())
         {
@@ -116,6 +135,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Debug.draw(graphicsContext);
 
         graphicsContext.restore();
+
+        lastDraw = currentDraw;
     }
 
     /**
@@ -160,8 +181,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
 
-        double vx = posToMiddle.getX() / (pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getX();
-        double vy = posToMiddle.getY() / (pixelsPerGridUnit * cameraZoom.get()) + cameraPosition.get().getY();
+        double vx = posToMiddle.getX() / (pixelsPerGridUnit * softCameraZoom) + softCameraPosition.getX();
+        double vy = posToMiddle.getY() / (pixelsPerGridUnit * softCameraZoom) + softCameraPosition.getY();
         return new Vector2(vx, vy);
     }
 }

@@ -3,6 +3,7 @@ package sep.fimball.view;
 import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
+import sep.fimball.view.tools.ViewLoader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;

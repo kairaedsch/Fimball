@@ -9,7 +9,6 @@ import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.view.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
@@ -88,7 +87,7 @@ public class SpriteSubView
         if (viewModel.rotationProperty().get() != 0)
            rotate(graphicsContext, viewModel.rotationProperty().get(), pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
 
-        if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
+        if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
 
         if (viewModel.isSelectedProperty().get())
         {
@@ -103,17 +102,17 @@ public class SpriteSubView
             {
                 Color color = Config.complementColor.interpolate(Config.secondaryColor, trans);
                 graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
-                graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - plus, y * Config.pixelsPerGridUnit - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
             }
             else
             {
                 Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, trans);
                 graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
-                graphicsContext.strokeRect((int) (x * Config.pixelsPerGridUnit) - plus, (int) ((y + 1) * Config.pixelsPerGridUnit) - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - plus, (y + 1) * Config.pixelsPerGridUnit - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
             }
         }
 
-        if(imageLayer == ImageLayer.BOTTOM) graphicsContext.drawImage(image, (int) (x * Config.pixelsPerGridUnit), (int) (y * Config.pixelsPerGridUnit), image.getWidth(), image.getHeight());
+        if(imageLayer == ImageLayer.BOTTOM) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
 
         //graphicsContext.setFill(Color.GRAY);
         //graphicsContext.fillRect((int) ((x + pivot.getX()) * Config.pixelsPerGridUnit), (int) ((y + pivot.getY()) * Config.pixelsPerGridUnit), 10, 10);

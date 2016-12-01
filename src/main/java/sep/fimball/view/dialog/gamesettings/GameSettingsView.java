@@ -9,7 +9,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
-import sep.fimball.view.ViewModelListToPaneBinder;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.LanguageManagerViewModel;

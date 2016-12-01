@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import sep.fimball.view.ViewLoader;
+import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;

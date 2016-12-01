@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.ViewModelListToPaneBinder;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.LanguageManagerViewModel;

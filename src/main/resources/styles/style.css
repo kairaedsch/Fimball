@@ -4,7 +4,8 @@
 .machineOverview .scroll-bar:horizontal,
 .machineOverview .scroll-bar:vertical {
     -fx-background-color: #708BAC;
-
+    -fx-unit-increment: 100px;
+    -fx-block-increment: 100px;
 }
 
 /* The increment and decrement button CSS class of scrollbar */

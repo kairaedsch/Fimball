@@ -55,46 +55,46 @@ public class SelectedElementSubViewModel
     {
         this.pinballMachine = pinballMachine;
 
+        isSomethingSelected = new SimpleBooleanProperty();
         name = new SimpleStringProperty();
         description = new SimpleStringProperty();
-
         points = new SimpleIntegerProperty();
-
         multiplier = new SimpleDoubleProperty();
+        placedElement = Optional.empty();
 
         setPlacedElement(Optional.empty());
     }
 
     /**
      * Setzt das Flipperautomat-Element, das aktuell ausgewählt ist, auf das gegebene Element.
-     * @param placedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
+     * @param newPlacedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
      */
-    public void setPlacedElement(Optional<PlacedElement> placedElement)
+    public void setPlacedElement(Optional<PlacedElement> newPlacedElement)
     {
-        this.placedElement = placedElement;
-        isSomethingSelected = new SimpleBooleanProperty();
-
-        if (placedElement.isPresent())
+        if(placedElement.isPresent())
         {
-            name.set(placedElement.get().getBaseElement().getMedia().getName());
-            description.set(placedElement.get().getBaseElement().getMedia().getDescription());
+            points.unbindBidirectional(placedElement.get().pointsProperty());
+            multiplier.unbindBidirectional(placedElement.get().multiplierProperty());
+        }
 
-            points.bindBidirectional(placedElement.get().pointsProperty());
+        if (newPlacedElement.isPresent())
+        {
+            name.set(newPlacedElement.get().getBaseElement().getMedia().getName());
+            description.set(newPlacedElement.get().getBaseElement().getMedia().getDescription());
 
-            multiplier.bindBidirectional(placedElement.get().multiplierProperty());
+            points.bindBidirectional(newPlacedElement.get().pointsProperty());
+
+            multiplier.bindBidirectional(newPlacedElement.get().multiplierProperty());
             isSomethingSelected.set(true);
         }
         else
         {
-            name.unbind();
-            description.unbind();
-            points.unbind();
-            multiplier.unbind();
-
             name.set("Nothing selected");
             description.set("");
             isSomethingSelected.set(false);
         }
+
+        this.placedElement = newPlacedElement;
     }
 
     /**

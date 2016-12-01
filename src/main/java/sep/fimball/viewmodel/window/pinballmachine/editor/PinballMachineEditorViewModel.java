@@ -126,11 +126,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(Math.max(Config.maxZoom, cameraZoom.get() - 0.5));
+            cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.125));
         }
         else
         {
-            cameraZoom.set(Math.max(Config.maxZoom, cameraZoom.get() / 2));
+            cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.1));
         }
     }
 
@@ -141,11 +141,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(Math.min(Config.minZoom, cameraZoom.get() + 0.5));
+            cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.125));
         }
         else
         {
-            cameraZoom.set(Math.min(Config.minZoom, cameraZoom.get() * 2));
+            cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.1));
         }
     }
 
@@ -172,12 +172,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
      * @param y Die y-Position, an der sich die Drag-Bewegung befindet.
      */
-    public void dragged(double x, double y)
+    public void dragged(double x, double y, boolean primaryMouse)
     {
         double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
         double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
 
-        if (mouseMode.get() == MouseMode.DRAGGING)
+        if (!primaryMouse)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
         }

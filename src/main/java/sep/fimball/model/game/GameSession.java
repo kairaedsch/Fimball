@@ -260,7 +260,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             }
 
             // Setze die y-Position des aktuell untersten Elements
-            maxElementPos = Math.max(element.positionProperty().get().getX() + BALL_LOST_TOLERANCE, maxElementPos);
+            maxElementPos = Math.max(element.positionProperty().get().getY() + BALL_LOST_TOLERANCE, maxElementPos);
         }
 
         if (ballTemplate == null)
@@ -438,12 +438,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         if (rounds >= players.length)
         {
-            if(!isOver.get())
+            for (Player player : players)
             {
-                for (Player player : players)
-                {
-                    pinballMachine.addHighscore(new Highscore(player.pointsProperty().get(), player.nameProperty().get()));
-                }
+                pinballMachine.addHighscore(new Highscore(player.pointsProperty().get(), player.nameProperty().get()));
             }
             isOver.setValue(true);
             pauseAll();

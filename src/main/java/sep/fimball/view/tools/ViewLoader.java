@@ -1,7 +1,8 @@
-package sep.fimball.view;
+package sep.fimball.view.tools;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import sep.fimball.view.ViewType;
 
 import java.io.IOException;
 

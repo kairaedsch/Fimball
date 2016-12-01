@@ -1,8 +1,10 @@
-package sep.fimball.view;
+package sep.fimball.view.tools;
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.view.ViewType;
 
 /**
  * ViewModelListToPaneBinder stellt Funktionen zum Binden einer Liste von ViewModels an ein Pane-Node bereit, sodass für jedes Element in der Liste ein Kinder-Node im Pane-Node eingefügt wird.

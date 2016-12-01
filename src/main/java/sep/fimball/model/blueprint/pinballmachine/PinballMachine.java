@@ -65,7 +65,13 @@ public class PinballMachine
 
         this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         if (highscores != null)
-            this.highscoreList.addAll(highscores);
+        {
+            for (Highscore highscore : highscores)
+            {
+                if(this.highscoreList.size() <= Config.maxHighscores) this.highscoreList.add(highscore);
+            }
+        }
+
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
@@ -127,7 +133,6 @@ public class PinballMachine
      */
     public void addHighscore(Highscore highscore)
     {
-        highscoreList.add(highscore);
         if (highscoreList.size() >= Config.maxHighscores)
         {
             Highscore worstHigscore = highscoreList.stream().min((o1, o2) -> (int) (o1.scoreProperty().get() - o2.scoreProperty().get())).get();
@@ -135,8 +140,8 @@ public class PinballMachine
             {
                 highscoreList.remove(worstHigscore);
                 highscoreList.add(highscore);
+                saveToDisk();
             }
-            saveToDisk();
         }
         else
         {

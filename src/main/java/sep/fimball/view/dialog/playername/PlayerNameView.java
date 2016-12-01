@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import sep.fimball.view.ViewModelListToPaneBinder;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
