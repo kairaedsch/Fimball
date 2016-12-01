@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.window;
+package sep.fimball.viewmodel.window.splashscreen;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -8,31 +8,56 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
+import sep.fimball.viewmodel.window.WindowType;
+import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
+/**
+ * Das SplashScreenViewModel stellt der View Informationen über den Fortschritt des Ladens im Splashscreen bereit.
+ */
 public class SplashScreenViewModel extends WindowViewModel
 {
+    /**
+     * Der Text, der während des Lade-Fortschritts anzeigt wird.
+     */
     private StringProperty progressText;
+
+    /**
+     * Der Fortschritt des Ladens.
+     */
     private DoubleProperty loadProgress;
+
+    /**
+     * Das MainMenuViewModel, das nach dem SplashScreen angezeigt werden soll.
+     */
     private MainMenuViewModel mainMenuViewModel;
 
+    /**
+     * Erzeugt ein neues SplashScreenViewModel.
+     */
     public SplashScreenViewModel()
     {
         super(WindowType.SPLASH_SCREEN);
         progressText = new SimpleStringProperty();
         loadProgress = new SimpleDoubleProperty();
         mainMenuViewModel = new MainMenuViewModel();
-        start();
+        startLoading();
     }
 
 
-    public void showMainMenu()
+    /**
+     * Benachrichtigt den ScemeManager, dass das Hauptmenü angezeigt werden soll.
+     */
+    private void showMainMenu()
     {
         sceneManager.setWindow(mainMenuViewModel);
     }
 
 
-    public void start()
+    /**
+     * Startet das simulierte Laden.
+     */
+    private void startLoading()
     {
         final Task<ObservableList<String>> messageTask = new Task<ObservableList<String>>()
         {
@@ -40,7 +65,7 @@ public class SplashScreenViewModel extends WindowViewModel
             protected ObservableList<String> call() throws InterruptedException
             {
                 ObservableList<String> messages =
-                        FXCollections.<String>observableArrayList();
+                        FXCollections.observableArrayList();
                 ObservableList<String> availableMessages =
                         FXCollections.observableArrayList(
                                 "Elements loaded", "Machines loaded", "Settings loaded", "Sounds loaded");
@@ -61,20 +86,22 @@ public class SplashScreenViewModel extends WindowViewModel
             }
         };
 
-        showSplash(
+        bindToTask(
                 messageTask,
-                () -> showMainMenu()
+                this::showMainMenu
         );
         new Thread(messageTask).start();
     }
 
 
-    private void showSplash(
-            Task<?> task,
-            InitCompletionHandler initCompletionHandler
-    )
+    /**
+     * Bindet den {@code progressText} und den {@code loadProgress} an die Properties des Tasks.
+     *
+     * @param task              Der Task, an den gebunden werden soll.
+     * @param completionHandler Der Handler, der das Ende des Tasks händelt.
+     */
+    private void bindToTask(Task<?> task, completionHandler completionHandler)
     {
-
         progressText.bind(task.messageProperty());
 
         loadProgress.bind(task.progressProperty());
@@ -85,25 +112,41 @@ public class SplashScreenViewModel extends WindowViewModel
                 loadProgress.unbind();
                 loadProgress.set(1);
 
-                initCompletionHandler.complete();
+                completionHandler.complete();
             } // todo add code to gracefully handle other task states.
         });
 
 
     }
 
+    /**
+     * Gibt den Fortschritt des Ladens zurück.
+     *
+     * @return Der Fortschritt des Ladens.
+     */
     public DoubleProperty getLoadProgress()
     {
         return loadProgress;
     }
 
+    /**
+     * Gibt den Text, der das Laden beschreibt, zurück.
+     *
+     * @return Der Text, der das Laden beschreibt.
+     */
     public StringProperty getProgressText()
     {
         return progressText;
     }
 
-    public interface InitCompletionHandler
+    /**
+     * Händelt das Abschließen eines Tasks.
+     */
+    public interface completionHandler
     {
+        /**
+         * Wird aufgerufen, wenn der Task fertig ist.
+         */
         void complete();
     }
 }
