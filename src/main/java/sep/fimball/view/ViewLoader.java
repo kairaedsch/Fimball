@@ -25,8 +25,9 @@ public class ViewLoader<ViewT>
      * Erzeugt einen ViewLoader und lädt die zur {@code viewType} gehörende FXML-Datei mit zugehöriger View (FxController).
      *
      * @param viewType Die Art der View, die geladen werden soll.
+     * @throws IllegalStateException Falls das Laden fehlschlägt.
      */
-    public ViewLoader(ViewType viewType)
+    public ViewLoader(ViewType viewType) throws IllegalStateException
     {
         load(viewType.getFxmlPath());
     }
@@ -35,8 +36,9 @@ public class ViewLoader<ViewT>
      * Lädt aus der gegebenen FXML-Datei, setzt die RootNode als {@code rootNode}, lädt die eingestellte Sprache und lädt und setzt die zur {@code rootNode} gehörende View.
      *
      * @param fxmlPath Der Pfad zur FXML-Datei, aus der geladen werden soll.
+     * @throws IllegalStateException Falls das Laden fehlschlägt.
      */
-    private void load(String fxmlPath)
+    private void load(String fxmlPath) throws IllegalStateException
     {
         rootNode = null;
         view = null;
@@ -50,6 +52,7 @@ public class ViewLoader<ViewT>
         catch (IOException e)
         {
             e.printStackTrace();
+            throw new IllegalStateException();
         }
 
         if(rootNode == null || view == null)

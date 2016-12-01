@@ -43,20 +43,22 @@ public class SoundManagerView
      */
     public SoundManagerView()
     {
-        mediaPlayer = Optional.empty();
-
         SoundManagerViewModel soundManagerViewModel = SoundManagerViewModel.getInstance();
 
+        mediaPlayer = Optional.empty();
+        loadedAudioClips = new HashMap<>();
+
+        // Holen der Lautstärke aus dem ViewModel
         musicVolume = new SimpleDoubleProperty();
         musicVolume.bind(soundManagerViewModel.musicVolumeProperty());
         sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(soundManagerViewModel.sfxVolumeProperty());
 
-        loadedAudioClips = new HashMap<>();
-
+        // Erstelle Listener zum stoppen der backgroundmusic
         Observer stopObserver = (o, args) -> stopBackgroundMusic();
         soundManagerViewModel.addStopObvserver(stopObserver);
 
+        // Erstelle Listener zum abspielen der Sounds
         Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
         soundManagerViewModel.addPlayObserver(playClipObserver);
     }
@@ -69,6 +71,8 @@ public class SoundManagerView
     private void play(Sound sound)
     {
         String soundPath = sound.getSoundPath();
+
+        // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
             MediaPlayer newMediaPlayer = new MediaPlayer(new Media(soundPath));
@@ -76,11 +80,15 @@ public class SoundManagerView
             newMediaPlayer.volumeProperty().bind(musicVolume);
             newMediaPlayer.play();
 
+            // Es kann sich immer nur ein Sound wiederholen
             mediaPlayer.ifPresent(MediaPlayer::dispose);
+
             mediaPlayer = Optional.of(newMediaPlayer);
         }
+        // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
         else
         {
+            // Cache den AudioClip, falls er noch nicht existiert
             if (!loadedAudioClips.containsKey(soundPath))
             {
                 AudioClip clip = new AudioClip(soundPath);
@@ -88,6 +96,7 @@ public class SoundManagerView
                 loadedAudioClips.put(soundPath, clip);
             }
 
+            // Spiele den AudioClip ab
             loadedAudioClips.get(soundPath).play();
         }
     }
