@@ -12,9 +12,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
-
+/**
+ * Testet die Klasse LanguageManagerVIewModel.
+ */
 public class LanguageManagerViewModelTest
 {
+    /**
+     * Testet, ob das LanguageManagerViewModel die gewünschten Texte in der richtigen Sprache anzeigt.
+     */
     @Test
     public void languageTest()
     {
@@ -27,23 +32,31 @@ public class LanguageManagerViewModelTest
         {
             Settings.getSingletonInstance().languageProperty().set(language);
 
-            Properties properties = new Properties();
             String path = Config.pathToLanguage(language.getCode());
 
             //Lädt die Properties aus der Datei
-            loadProperties(properties, path);
+            Properties properties = loadProperties(path);
 
-            //Testet, ob die Texte aller ausgelesenen Keys aus der Properties-Datei auch im LanguageManagerViewModel enthalten sind.
+            //Testet, ob die Texte aller ausgelesenen Keys aus der Properties-Datei auch im LanguageManagerViewModel enthalten
+            // sind.
             for (Object key : properties.keySet())
             {
-                assertThat("LanguageManagerViewModel lädt den richtigen Text zum gegebenen Key in der richtigen Sprache",properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
+                assertThat("LanguageManagerViewModel lädt den richtigen Text zum gegebenen Key in der richtigen Sprache",
+                        properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
             }
         }
 
     }
 
-    private void loadProperties(Properties properties, String path)
+    /**
+     * Lädt die Properties aus der in {@code path} angegebenen Datei.
+     *
+     * @param path Der Pfad zur Datei.
+     * @return Die geladenen Properties
+     */
+    private Properties loadProperties(String path)
     {
+        Properties properties = new Properties();
         try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
             properties.load(inputStream);
@@ -53,5 +66,6 @@ public class LanguageManagerViewModelTest
             System.err.println("property file '" + path + "' not loaded");
             System.out.println("Exception: " + e);
         }
+        return properties;
     }
 }

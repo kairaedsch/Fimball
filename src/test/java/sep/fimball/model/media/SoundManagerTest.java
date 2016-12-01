@@ -7,13 +7,19 @@ import java.util.Observer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-
+/**
+ * Testet die Klasse SoundManager.
+ */
 public class SoundManagerTest
 {
-    static String soundName;
-    static boolean repeating;
-    static Sound testSound;
+    /**
+     * Ein Test-Sound.
+     */
+    private Sound testSound;
 
+    /**
+     * Testet, ob das Weiterleiten von abzuspielenden Sounds funktioniert.
+     */
     @Test
     public void soundManagerTest()
     {
@@ -28,11 +34,10 @@ public class SoundManagerTest
         Sound givenSound = new Sound("testSound", false);
         SoundManager.getInstance().addSoundToPlay(givenSound);
 
-        // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager der übergebene ist.
-        assertThat("Die Observer wurden benachrichtigt, den gewünschten Sound abzuspielen",testSound,equalTo(givenSound));
+        // Testet, ob der SoundManager die Observer über das Abspielen informiert und  der abzuspielende Sound vom SoundManager
+        // der übergebene ist.
+        assertThat("Die Observer wurden benachrichtigt, den gewünschten Sound abzuspielen", testSound, equalTo(givenSound));
     }
-
-
 
 
 }
