@@ -27,10 +27,13 @@ public class WorldTest
                 new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
 
         world.addGameElement(new GameElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement("ball"), new Vector2(10, 20), 0, 0, 0), false));
+                BaseElementManager.getInstance().getElement("bumper_blue"), new Vector2(10, 20), 0, 0, 0), false));
 
         world.addGameElement(new GameElement(new PlacedElement(
-                BaseElementManager.getInstance().getElement("ball"), new Vector2(5, 5), 0, 0, 0), false));
+                BaseElementManager.getInstance().getElement("bumper_blue"), new Vector2(5, 5), 0, 0, 0), false));
+
+        world.addGameElement(new GameElement(new PlacedElement(
+                BaseElementManager.getInstance().getElement("bumper_blue"), new Vector2(0, 0), 0, 0, 0), false));
 
         RectangleDouble rect = world.generateWalls();
 
