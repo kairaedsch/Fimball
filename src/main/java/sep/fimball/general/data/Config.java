@@ -231,7 +231,7 @@ public class Config
      * Gibt den kombinierten Pfad zurück, der den Namen der Beschreibungsdatei eines gewissen BaseElements angibt.
      *
      * @param elementTypeId Id des BaseElements.
-     * @return Pfad des BaseElements.
+     * @return Pfad des BaseElements. //TODO: Beschreibungsdatei nicht Pfad des BaseElements
      */
     public static String pathToElementDataJson(String elementTypeId)
     {

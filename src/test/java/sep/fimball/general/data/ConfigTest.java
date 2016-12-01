@@ -24,56 +24,6 @@ public class ConfigTest
     private final String testMachineId = "machineOne";
 
     /**
-     * Das erwartete Pfadende einer Sprachbeschreibung.
-     */
-    private final String expectedLanguagePathEnding = "bundles/fimball_de.properties";
-
-    /**
-     * Das erwartete Pfadende einer Sounddatei.
-     */
-    private final String expectedSoundPathEnding = "/sounds/game.mp3";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die obere Ebene darstellt.
-     */
-    private final String expectedTopEnding = "/elementOne/top.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die untere Ebene darstellt.
-     */
-    private final String expectedBottomEnding = "/elementOne/bottom.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die obere Ebene und die Drehung um 90 Grad darstellt.
-     */
-    private final String expectedTopRotatedEnding = "/elementOne/top-90.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die untere Ebene und die Drehung um 270 Grad darstellt.
-     */
-    private final String expectedBottomRotatedEnding = "/elementOne/bottom-270.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die obere Ebene des ersten (0. Index) Frame einer "glow" Animation darstellt.
-     */
-    private final String expectedTopAnimationEnding = "/elementOne/top+glow_0.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die untere Ebene des zweiten (1. Index) Frame einer "glow" Animation darstellt.
-     */
-    private final String expectedBottomAnimationEnding = "/elementOne/bottom+glow_1.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die obere Ebene des ersten (0. Index) Frame einer "spinn" Animation, welche um 0 Grad gedreht ist darstellt.
-     */
-    private final String expectedTopRotatedAnimationEnding = "/elementOne/top-0+spinn_0.png";
-
-    /**
-     * Das erwartete Pfadende eines Bilds, welches die untere Ebene des sechsten (5. Index) Frame einer "spinn" Animation, welche um 90 Grad gedreht ist darstellt.
-     */
-    private final String expectedBottomRotatedAnimationEnding = "/elementOne/bottom-90+spinn_5.png";
-
-    /**
      * Überprüft, ob das Ende des Pfades, auf dem sich die Spielelemente befinden korrekt ist.
      */
     @Test
@@ -170,6 +120,8 @@ public class ConfigTest
     public void testPathToLanguage()
     {
         String path = Config.pathToLanguage("de");
+        // Das erwartete Pfadende einer Sprachbeschreibung.
+        String expectedLanguagePathEnding = "bundles/fimball_de.properties";
         assertThat(path, is(expectedLanguagePathEnding));
     }
 
@@ -200,6 +152,8 @@ public class ConfigTest
     public void testPathToSound()
     {
         String path = Config.pathToSound("game");
+        // Das erwartete Pfadende einer Sounddatei.
+        String expectedSoundPathEnding = "/sounds/game.mp3";
         assertThat(path.endsWith(expectedSoundPathEnding), is(true));
     }
 
@@ -217,13 +171,29 @@ public class ConfigTest
         String bottomAnimation = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, false, 0, true, "glow", 1);
         String topAnimationRotated = Config.pathToElementImage(testElementName, ImageLayer.TOP, true, 0, true, "spinn", 0);
         String bottomAnimationRotated = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, true, 90, true, "spinn", 5);
+        // Das erwartete Pfadende eines Bilds, welches die obere Ebene darstellt.
+        String expectedTopEnding = "/elementOne/top.png";
         assertThat(topPath.endsWith(expectedTopEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die untere Ebene darstellt.
+        String expectedBottomEnding = "/elementOne/bottom.png";
         assertThat(bottomPath.endsWith(expectedBottomEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die obere Ebene und die Drehung um 90 Grad darstellt.
+        String expectedTopRotatedEnding = "/elementOne/top-90.png";
         assertThat(topRotated.endsWith(expectedTopRotatedEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die untere Ebene und die Drehung um 270 Grad darstellt.
+        String expectedBottomRotatedEnding = "/elementOne/bottom-270.png";
         assertThat(bottomRotated.endsWith(expectedBottomRotatedEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die obere Ebene des ersten (0. Index) Frame einer "glow" Animation darstellt.
+        String expectedTopAnimationEnding = "/elementOne/top+glow_0.png";
         assertThat(topAnimation.endsWith(expectedTopAnimationEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die untere Ebene des zweiten (1. Index) Frame einer "glow" Animation darstellt.
+        String expectedBottomAnimationEnding = "/elementOne/bottom+glow_1.png";
         assertThat(bottomAnimation.endsWith(expectedBottomAnimationEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die obere Ebene des ersten (0. Index) Frame einer "spinn" Animation, welche um 0 Grad gedreht ist darstellt.
+        String expectedTopRotatedAnimationEnding = "/elementOne/top-0+spinn_0.png";
         assertThat(topAnimationRotated.endsWith(expectedTopRotatedAnimationEnding), is(true));
+        // Das erwartete Pfadende eines Bilds, welches die untere Ebene des sechsten (5. Index) Frame einer "spinn" Animation, welche um 90 Grad gedreht ist darstellt.
+        String expectedBottomRotatedAnimationEnding = "/elementOne/bottom-90+spinn_5.png";
         assertThat(bottomAnimationRotated.endsWith(expectedBottomRotatedAnimationEnding), is(true));
     }
 }

@@ -25,11 +25,11 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 vecTwo = new Vector2();
-        assertThat(vecOne.plus(vecTwo), is(new Vector2(1, 0)));
+        assertThat("(1, 0) + (0, 0) = (1, 0)", vecOne.plus(vecTwo), is(new Vector2(1, 0)));
 
         Vector2 vecThree = new Vector2(0, 1.1);
         Vector2 vecFour = new Vector2(0, -0.1);
-        assertThat(vecThree.plus(vecFour), is(new Vector2(0, 1)));
+        assertThat("(0, 1.1) + (0, -0.1) = (0, 1)", vecThree.plus(vecFour), is(new Vector2(0, 1)));
     }
 
     /**
@@ -41,11 +41,11 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(100, 150);
         Vector2 vecTwo = new Vector2(50, 100);
-        assertThat(vecOne.minus(vecTwo), is(new Vector2(50, 50)));
+        assertThat("(100, 150) - (50, 100) = (50, 50)", vecOne.minus(vecTwo), is(new Vector2(50, 50)));
 
         Vector2 vecThree = new Vector2(0.5, -0.5);
         Vector2 vecFour = new Vector2(0.5, -0.5);
-        assertThat(vecThree.minus(vecFour), is(new Vector2(0, 0)));
+        assertThat("(0.5, -0.5) - (0.5, -0.5) = (0, 0)", vecThree.minus(vecFour), is(new Vector2(0, 0)));
     }
 
     /**
@@ -57,15 +57,15 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(191, 6);
         double scalar = 7;
-        assertThat(vecOne.scale(scalar), is(new Vector2(1337, 42)));
+        assertThat("7 * (191, 6) = (1337, 42)", vecOne.scale(scalar), is(new Vector2(1337, 42)));
 
         Vector2 vecTwo = new Vector2(0.7, 0.9);
         double scalarTwo = -2;
-        assertThat(vecTwo.scale(scalarTwo), is(new Vector2(-1.4, -1.8)));
+        assertThat("-2 * (0.7, 0.9) = (-1.4, -1.8)", (vecTwo.scale(scalarTwo)), is(new Vector2(-1.4, -1.8)));
 
         Vector2 vecThree = new Vector2(-1, 1.5);
         double scalarThree = -0.5;
-        assertThat(vecThree.scale(scalarThree), is(new Vector2(0.5, -0.75)));
+        assertThat("-0.5 * (-1, 1.5) = (0.5, -0.75)", vecThree.scale(scalarThree), is(new Vector2(0.5, -0.75)));
     }
 
     /**
@@ -76,10 +76,10 @@ public class VectorTest
     public void magnitudeTest()
     {
         Vector2 vec = new Vector2(0, 9);
-        assertThat(vec.magnitude(), is(9.0));
+        assertThat("|(0, 9)| = 9", vec.magnitude(), is(9.0));
 
         Vector2 vecTwo = new Vector2(0, -9);
-        assertThat(vecTwo.magnitude(), is(9.0));
+        assertThat("|(0, -9)| = 9", vecTwo.magnitude(), is(9.0));
     }
 
     /**
@@ -90,7 +90,7 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(21, 17);
         Vector2 vecTwo = new Vector2(3, 2);
-        assertThat(vecOne.dot(vecTwo), is(97.0));
+        assertThat("(21, 17) dot (3, 2) = 97.0", vecOne.dot(vecTwo), is(97.0));
     }
 
     /**
@@ -102,8 +102,8 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 rotatedVec = vecOne.rotate(Math.toRadians(90));
-        assertThat(Math.abs(0.0 - rotatedVec.getX()) < EPSILON, is(true));
-        assertThat(Math.abs(1.0 - rotatedVec.getY()) < EPSILON, is(true));
+        assertThat("(1, 0) rotiert um 90 Grad hat x Komponente 0.0 +- EPSILON", Math.abs(0.0 - rotatedVec.getX()) < EPSILON, is(true));
+        assertThat("(1, 0) rotiert um 90 Grad hat y Komponente 1.0 +- EPSILON", Math.abs(1.0 - rotatedVec.getY()) < EPSILON, is(true));
     }
 
     /**
@@ -114,7 +114,7 @@ public class VectorTest
     public void rotatePivotTest()
     {
         Vector2 vecOne = new Vector2(2, 0);
-        assertThat(vecOne.rotate(Math.toRadians(90), new Vector2(1, 0)), is(new Vector2(1, 1)));
+        assertThat("(2, 0) um 90 Grad am Pivotpunkt (1, 0) gedreht ist (1, 1)", vecOne.rotate(Math.toRadians(90), new Vector2(1, 0)), is(new Vector2(1, 1)));
     }
 
     /**
@@ -126,7 +126,7 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(3, 7);
         Vector2 normedVec = vecOne.normalized();
-        assertThat(Math.abs(1.0 - normedVec.magnitude()) < EPSILON, is(true));
+        assertThat("Die Normierung von (3, 7) ist 1.0 +- EPSILON", Math.abs(1.0 - normedVec.magnitude()) < EPSILON, is(true));
     }
 
     /**
@@ -136,7 +136,7 @@ public class VectorTest
     public void normalTest()
     {
         Vector2 vecOne = new Vector2(5, 5);
-        assertThat(vecOne.normal(), is(new Vector2(5, -5)));
+        assertThat("Die Normale von (5, 5) ist (5, -5)", vecOne.normal(), is(new Vector2(5, -5)));
     }
 
     /**
@@ -147,7 +147,7 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1, 1);
         Vector2 vecTwo = new Vector2(11, 11);
-        assertThat(vecOne.lerp(vecTwo, 0.5), is(new Vector2(6, 6)));
+        assertThat("Das mit 0.5 gewichtete Mittel von (1, 1) und (11, 11) ist (6, 6)", vecOne.lerp(vecTwo, 0.5), is(new Vector2(6, 6)));
     }
 
     /**
@@ -158,7 +158,7 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1, 0);
         Vector2 vecTwo = new Vector2(0, 1);
-        assertThat(Math.toDegrees(vecOne.angleBetween(vecTwo)), is(90.0));
+        assertThat("Der Winkel zwischen (1, 0) und (0, 1) ist 90 Grad", Math.toDegrees(vecOne.angleBetween(vecTwo)), is(90.0));
     }
 
     /**
@@ -168,7 +168,7 @@ public class VectorTest
     public void roundTest()
     {
         Vector2 vecOne = new Vector2(1.2, 1.5);
-        assertThat(vecOne.round(), is(new Vector2(1.0, 2.0)));
+        assertThat("(1.2, 1.5) gerundet ist (1.0, 2.0)", vecOne.round(), is(new Vector2(1.0, 2.0)));
     }
 
     /**
@@ -179,15 +179,15 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1.0, 1.0);
         //Der Wert auf den die Länge beschränkt werden soll ist kleiner als die aktuelle Länge des Vektors.
-        assertThat(Math.abs(1.0 - vecOne.clamp(1.0).magnitude()) < EPSILON, is(true));
+        assertThat("Betrag von (1.0, 1.0) beschränkt auf 1.0 ist 1.0 +- EPSILON", Math.abs(1.0 - vecOne.clamp(1.0).magnitude()) < EPSILON, is(true));
 
         Vector2 vecTwo = new Vector2(1.0, 0.0);
         //Der Wert auf den die Länge beschränkt werden soll ist gleich der aktuellen Länge des Vektors.
-        assertThat(vecTwo.clamp(1.0), is(vecTwo));
+        assertThat("(1.0, 0.0) beschränkt auf 1.0 ist immer noch (1.0, 0.0)", vecTwo.clamp(1.0), is(vecTwo));
 
         Vector2 vecThree = new Vector2(0.0, 2.0);
         //Der Wert auf den die Länge beschränkt werden soll ist größer als die aktuelle Länge des Vektors.
-        assertThat(vecThree.clamp(3.0), is(vecThree));
+        assertThat("(0.0, 2.0) beschränkt auf 3.0 ist immer noch (0.0, 2.0)", vecThree.clamp(3.0), is(vecThree));
     }
 
     /**
@@ -197,7 +197,7 @@ public class VectorTest
     public void projectTest()
     {
         Vector2 vecOne = new Vector2(1, 1);
-        assertThat(vecOne.project(new Vector2(1, 0)), is(new Vector2(1, 0)));
+        assertThat("(1, 1) projiziert auf (1, 0) ist (1, 0)", vecOne.project(new Vector2(1, 0)), is(new Vector2(1, 0)));
     }
 
     /**
@@ -207,7 +207,7 @@ public class VectorTest
     public void vectorToStringTest()
     {
         Vector2 vecOne = new Vector2(1, 1);
-        assertThat(vecOne.toString(), is("{1.0|1.0}"));
+        assertThat("(1, 1) toString() ist {1.0|1.0}", vecOne.toString(), is("{1.0|1.0}"));
     }
 
     /**
@@ -218,7 +218,7 @@ public class VectorTest
     {
         Vector2 vecOne = new Vector2(1.2, 5.1);
         Vector2 vecClone = vecOne.clone();
-        assertThat(vecOne, is(vecClone));
+        assertThat("Der Klon von (1.2, 5.1) ist (1.2, 5.1)", vecOne, is(vecClone));
     }
 
     /**
@@ -230,12 +230,12 @@ public class VectorTest
         Vector2 vecOne = new Vector2(13.37, 42);
         Vector2 vecTwo = new Vector2(0.5, 0.5);
         //Test der Gleichheit mit sich selbst.
-        assertThat(vecOne, is(vecOne));
+        assertThat("(13.37, 42) ist gleich mit sich selbst", vecOne, is(vecOne));
         //Test der Gleichheit mit einem Vektor der nicht gleich ist.
-        assertThat(vecOne.equals(vecTwo), is(false));
+        assertThat("(13.37, 42) und (0.5, 0.5) sind ungleich", vecOne.equals(vecTwo), is(false));
         //Test der Gleichheit mit null.
-        assertThat(vecOne.equals(null), is(false));
+        assertThat("(13.37, 42) ist ungleich null", vecOne.equals(null), is(false));
         //Test der Gleichheit mit einem anderen Datentyp.
-        assertThat(vecOne.equals(42), is(false));
+        assertThat("(13.37, 42) ist ungleich 42", vecOne.equals(42), is(false));
     }
 }
