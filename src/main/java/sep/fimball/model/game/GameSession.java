@@ -212,7 +212,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
             switch (element.getBaseElement().getType())
             {
-
                 case NORMAL:
                     physicsElement = new PhysicsElement<>(
                             gameElement,
@@ -250,8 +249,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 case LIGHT:
                     break;
                 default:
-                    throw new IllegalArgumentException(
-                            "At least one given PlacedElement does not have a correct BaseElementType");
+                    throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
             }
 
             elements.add(gameElement);

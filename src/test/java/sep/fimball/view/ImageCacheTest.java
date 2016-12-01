@@ -16,6 +16,9 @@ public class ImageCacheTest
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
+    /**
+     * Stellt sicher, dass gecachete Bilder schneller laden als welche die von der Festplatte bzw. durch JavaFx geladen werden.
+     */
     @Test
     public void getImageSpeedTest()
     {
@@ -23,7 +26,7 @@ public class ImageCacheTest
 
         String testImagePath = ImageCacheTest.class.getClassLoader().getResource("images/bigpic.png").toString();
 
-        // Lade das Bild zum ersten mal von der Festplatte
+        // Lade das Bild zum ersten mal von der Festplatte bzw. lade es durch JavaFx
         Image imageFromFile;
         int durationLoadingFromFile;
         {
@@ -47,15 +50,18 @@ public class ImageCacheTest
         }
     }
 
+    /**
+     * Stellt sicher, dass auch bei mehreren Bildern im ImageCache immer das richtige Bild zurückgegeben wird.
+     */
     @Test
-    public void getImageMultiPicTest()
+    public void getImageMultiImageTest()
     {
         ImageCache imageCache = ImageCache.getInstance();
 
         String testImage1Path = ImageCacheTest.class.getClassLoader().getResource("images/bigpic.png").toString();
         String testImage2Path = ImageCacheTest.class.getClassLoader().getResource("images/otherpic.png").toString();
 
-        // Lade die Bilder zum ersten mal von der Festplatte
+        // Lade die Bilder zum ersten mal von der Festplatte bzw. lade es durch JavaFx
         Image image1FromFile = imageCache.getImage(testImage1Path);
         Image image2FromFile = imageCache.getImage(testImage2Path);
 

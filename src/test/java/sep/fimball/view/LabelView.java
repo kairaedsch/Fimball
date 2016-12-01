@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
  */
 public class LabelView implements ViewBoundToViewModel<String>
 {
+    /**
+     * Kleines test label.
+     */
     @FXML
     private Label label;
 

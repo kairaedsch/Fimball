@@ -14,9 +14,15 @@ public class ViewLoaderTest
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
+    /**
+     * Stellt sicher, dass fxml-Dateien vom ViewLoader geladen werden können und die View sowie das RootNode nicht null sind.
+     *
+     * @throws Exception
+     */
     @Test
     public void testAll() throws Exception
     {
+        // Lade Test fxml-Datei
         ViewLoader viewLoader = new ViewLoader<>(() -> "label.fxml");
 
         assertThat("Es existiert ein Rootnode", viewLoader.getRootNode(), is(not(nullValue())));

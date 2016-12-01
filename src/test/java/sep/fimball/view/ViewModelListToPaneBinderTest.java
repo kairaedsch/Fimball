@@ -18,6 +18,9 @@ public class ViewModelListToPaneBinderTest
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
+    /**
+     * Stellt sicher, dass das Binden eines Panes an eine Liste funktioniert, auch wenn sich die Liste nach dem Binden ändert.
+     */
     @Test
     public void bindViewModelsToViews()
     {

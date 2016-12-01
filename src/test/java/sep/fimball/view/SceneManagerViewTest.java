@@ -28,40 +28,43 @@ public class SceneManagerViewTest
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
+    /**
+     * Stellt sicher, dass der Wechsel zwischen WindowViews und DialogViews funktioniert.
+     */
     @Test
     public void testAll()
     {
-        // Creating Mocks - create fake ViewModelProperties
+        // Erstelle Mocks - Erstelle fake ViewModelProperties
         ObjectProperty<WindowViewModel> windowViewModel = new SimpleObjectProperty<>();
         ObjectProperty<DialogViewModel> dialogViewModel = new SimpleObjectProperty<>();
 
-        // Creating Mocks - create fake SceneManagerViewModel with fake ViewModelProperties
+        // Erstelle Mocks - Erstelle fake SceneManagerViewModel mit fake ViewModelProperties
         SceneManagerViewModel sceneManagerViewModelMock = Mockito.mock(SceneManagerViewModel.class);
         Mockito.when(sceneManagerViewModelMock.windowViewModelProperty()).thenReturn(windowViewModel);
         Mockito.when(sceneManagerViewModelMock.dialogViewModelProperty()).thenReturn(dialogViewModel);
         Mockito.when(sceneManagerViewModelMock.fullscreenProperty()).thenReturn(new SimpleBooleanProperty());
 
-        // Creating Mocks - create fake PinballMachine
+        // Erstelle Mocks - Erstelle fake PinballMachine
         PinballMachine pinballMachineMock = Mockito.mock(PinballMachine.class);
         Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty("any Name"));
 
 
-        // Testing - set current ViewModels
+        // Teste - Setzte die aktuellen ViewModels
         windowViewModel.setValue(new MainMenuViewModel());
         dialogViewModel.setValue(new EmptyViewModel());
 
-        // Testing - Create new SceneManagerView with Mocks and get current RootNodes
+        // Teste - Erstelle eine neue SceneManagerView mit Mocks und hole die aktuellen RootNodes
         SceneManagerView sceneManagerView = new SceneManagerView(new Stage(), sceneManagerViewModelMock);
         Node mainMenuWindowRootNode = sceneManagerView.getWindow();
         Node emptyDialogRootNode = sceneManagerView.getDialog();
 
-        // Testing - Switch WindowViewModel and get current WindowRootNodes
+        // Teste - Wechselt das WindowViewModel und holt das aktuelle WindowRootNodes
         windowViewModel.setValue(new PinballMachineSettingsViewModel(pinballMachineMock));
         Node machineSettingsWindowRootNode = sceneManagerView.getWindow();
 
         assertThat("Es wurde ein anderes Window geladen", mainMenuWindowRootNode, not(equalTo(machineSettingsWindowRootNode)));
 
-        // Testing - Switch DialogViewModel and get current DialogRootNodes
+        // Teste - Wechselt das DialogViewModel und holt das aktuelle DialogRootNodes
         dialogViewModel.setValue(new GameSettingsViewModel());
         Node gameSettingsDialogRootNode = sceneManagerView.getDialog();
 
