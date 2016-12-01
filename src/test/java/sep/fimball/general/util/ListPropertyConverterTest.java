@@ -15,7 +15,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests für die Klasse ListPropertyConverter
  */
-public class ListPropertyConverterTest {
+public class ListPropertyConverterTest
+{
 
     /**
      * Original Liste auf der die Listenoperationen ausgeführt werden.
@@ -74,13 +75,12 @@ public class ListPropertyConverterTest {
         //Überprüfen ob alle Daten in beiden Listen gleich sind.
         for (int i = 0; i < originalSize; i++)
         {
-            assertThat("Element " + i + " ist in originalList und convertedList gleich", originalList.get(i).getData() == (int)convertedList.get(i).getData(), is(true));
+            assertThat("Element " + i + " ist in originalList und convertedList gleich", originalList.get(i).getData() == (int) convertedList.get(i).getData(), is(true));
         }
         //Ein Element hinzufügen, überprüfen ob Größe der convertedList ebenfalls um eins gestiegen ist und das eingefügte Element in beiden Listen gleich ist.
         originalList.add(new DummyOne(100));
         assertThat("Die Größe der convertedList ist 101", convertedList.size(), is(originalSize + 1));
-        assertThat("Element 100 ist in originalList und convertedList gleich", originalList.get(originalSize).getData() == (int)convertedList.get(originalSize).getData()
-                , is(true));
+        assertThat("Element 100 ist in originalList und convertedList gleich", originalList.get(originalSize).getData() == (int) convertedList.get(originalSize).getData(), is(true));
 
         //Ein Element entfernen, überprüfen ob Größe der convertedList ebenfalls um eins gesunken ist.
         originalList.remove(originalSize);
@@ -92,9 +92,8 @@ public class ListPropertyConverterTest {
         originalList.set(originalSize - 1, temp);
         assertThat("Die Größe der convertedList ist 100", convertedList.size(), is(originalSize));
         //Überprüfen ob die Permutation auch in der convertedList durchgeführt worden ist.
-        assertThat("Element 0 ist in der originalList und convertedList gleich", originalList.get(0).getData() == (int)convertedList.get(0).getData(), is(true));
-        assertThat("Element 99 ist in der originalList und convertedList gleich", originalList.get(originalSize - 1).getData()
-                == (int)convertedList.get(originalSize - 1).getData(), is(true));
+        assertThat("Element 0 ist in der originalList und convertedList gleich", originalList.get(0).getData() == (int) convertedList.get(0).getData(), is(true));
+        assertThat("Element 99 ist in der originalList und convertedList gleich", originalList.get(originalSize - 1).getData() == (int) convertedList.get(originalSize - 1).getData(), is(true));
     }
 
     /**
@@ -110,12 +109,12 @@ public class ListPropertyConverterTest {
         //Überprüfen ob nach einfügen eines Elements in die Map die Größe der Liste ebenfalls um eins gestiegen ist.
         assertThat("Die Größe der convertedList ist 101", convertedList.size(), is(originalSize + 1));
         //Überprüfen ob das eingefügte Element in beiden gleich ist.
-        assertThat("Element 100 der convertedList und originalMap sind gleich", originalMap.get(100).getData() == (int)convertedList.get(originalSize).getData(), is(true));
+        assertThat("Element 100 der convertedList und originalMap sind gleich", originalMap.get(100).getData() == (int) convertedList.get(originalSize).getData(), is(true));
 
         //Selben Key erneut setzen um zu überprüfen ob nicht unnötigerweise in die Liste eingefügt wird.
         originalMap.put(100, new DummyOne(100));
         assertThat("Die Größe der convertedList ist 101", convertedList.size(), is(originalSize + 1));
-        assertThat("Element 100 der convertedList und originalMap sind gleich", originalMap.get(100).getData() == (int)convertedList.get(originalSize).getData(), is(true));
+        assertThat("Element 100 der convertedList und originalMap sind gleich", originalMap.get(100).getData() == (int) convertedList.get(originalSize).getData(), is(true));
 
         //Den erstellten Map Eintrag entfernen und überprüfen ob danach die Größe der beiden gleich ist.
         originalMap.remove(100);
@@ -144,7 +143,7 @@ public class ListPropertyConverterTest {
         //Ein neues Element einfügen welches die Bedingung nicht erfüllt.
         originalList.add(new DummyOne(10));
         //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen.
-        filteredList.forEach(dummyOne -> assertThat("Der Datenwert des aktuellen dummyOne ist größer gleich 50", dummyOne.getData() >= 50, is (true)));
+        filteredList.forEach(dummyOne -> assertThat("Der Datenwert des aktuellen dummyOne ist größer gleich 50", dummyOne.getData() >= 50, is(true)));
     }
 
     /**
