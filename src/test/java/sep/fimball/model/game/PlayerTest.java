@@ -9,6 +9,9 @@ import static org.junit.Assert.assertThat;
 public class PlayerTest
 {
 
+    /**
+     * Testet, ob Reservebälle eines Spielers richtige entfernt werden.
+     */
     @Test
     public void removeOneReserveBallTest()
     {
@@ -23,6 +26,9 @@ public class PlayerTest
         assertEquals(0, player.ballsProperty().get());
     }
 
+    /**
+     * Testet, ob Punkte richtig hinzugefügt/abgezogen werden
+     */
     @Test
     public void addPointsTest()
     {

@@ -2,23 +2,16 @@ package sep.fimball.model.game;
 
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
-import java.util.ArrayList;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by felix on 28.11.16.
- */
-@Ignore
 public class WorldTest
 {
     /**
