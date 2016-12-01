@@ -231,7 +231,7 @@ public class Config
      * Gibt den kombinierten Pfad zurück, der den Namen der Beschreibungsdatei eines gewissen BaseElements angibt.
      *
      * @param elementTypeId Id des BaseElements.
-     * @return Pfad des BaseElements. //TODO: Beschreibungsdatei nicht Pfad des BaseElements
+     * @return Pfad der Beschreibungsdatei des BaseElements.
      */
     public static String pathToElementDataJson(String elementTypeId)
     {
@@ -355,7 +355,7 @@ public class Config
      * Gibt den Pfad zu der Properties-Datei der gegebenen Sprache an.
      *
      * @param languageCode Die Sprache.
-     * @return Der Pfad zur Datei.
+     * @return Der Pfad zur Properties-Datei.
      */
     public static String pathToLanguage(String languageCode)
     {
