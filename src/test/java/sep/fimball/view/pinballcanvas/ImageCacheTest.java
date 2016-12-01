@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
+import sep.fimball.view.tools.ImageCache;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;

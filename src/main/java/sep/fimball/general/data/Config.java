@@ -172,6 +172,11 @@ public class Config
     public final static Color primaryColorLight = new Color(255 / 255.0, 147 / 255.0, 147 / 255.0, 1);
 
     /**
+     * Die hellere Hintergrundfarbe des Flipperautomaten.
+     */
+    public final static Color primaryColorLightLight = new Color(255 / 255.0, 187 / 255.0, 187 / 255.0, 1);
+
+    /**
      * Die Komplementfarbe des Flipperautomaten.
      */
     public final static Color complementColor = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);

@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
@@ -110,17 +111,46 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         if (pinballCanvasViewModel.isEditorMode())
         {
-            graphicsContext.setStroke(Config.primaryColorLight);
+            graphicsContext.save();
             Vector2 gridStart = canvasPosToGridPos(0, 0).scale(pixelsPerGridUnit);
             Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(pixelsPerGridUnit);
             for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % pixelsPerGridUnit; gx <= gridEnd.getX(); gx += pixelsPerGridUnit)
             {
+                Color color;
+                int width;
+                if (Math.abs(gx) % (pixelsPerGridUnit * 2) == 0)
+                {
+                    color = Config.primaryColorLightLight;
+                    width = 2;
+                }
+                else
+                {
+                    color = Config.primaryColorLight;
+                    width = 1;
+                }
+                graphicsContext.setStroke(color);
+                graphicsContext.setLineWidth(width);
                 graphicsContext.strokeLine(gx, gridStart.getY(), gx, gridEnd.getY());
             }
             for (int gy = (int) gridStart.getY() - (int) gridStart.getY() % pixelsPerGridUnit; gy <= gridEnd.getY(); gy += pixelsPerGridUnit)
             {
+                Color color;
+                int width;
+                if (Math.abs(gy) % (pixelsPerGridUnit * 2) == pixelsPerGridUnit)
+                {
+                    color = Config.primaryColorLightLight;
+                    width = 2;
+                }
+                else
+                {
+                    color = Config.primaryColorLight;
+                    width = 1;
+                }
+                graphicsContext.setStroke(color);
+                graphicsContext.setLineWidth(width);
                 graphicsContext.strokeLine(gridStart.getX(), gy, gridEnd.getX(), gy);
             }
+            graphicsContext.restore();
         }
 
         for (SpriteSubView spriteTop : sprites)

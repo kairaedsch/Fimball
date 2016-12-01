@@ -9,6 +9,7 @@ import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 

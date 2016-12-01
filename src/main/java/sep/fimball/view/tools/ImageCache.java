@@ -1,4 +1,4 @@
-package sep.fimball.view.pinballcanvas;
+package sep.fimball.view.tools;
 
 import javafx.scene.image.Image;
 
