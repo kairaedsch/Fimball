@@ -1,11 +1,8 @@
 package sep.fimball.model.game;
 
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -28,6 +25,9 @@ import static org.mockito.Mockito.when;
 
 public class GameSessionTest
 {
+    /**
+     * Testet, ob der Konstruktor richtig auf eine falsche Eingabe reagiert.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void constructorTest()
     {
@@ -43,6 +43,11 @@ public class GameSessionTest
     private boolean gameLoopObserverNotified = false;
     private boolean isBallLost = false;
 
+    /**
+     * Testet, ob Events richtig verarbeitet, Handler aktiviert und der GameLoopObserver benachrichtigt wird.
+     *
+     * @throws IOException
+     */
     @Test
     public void gameLoopUpdateTest() throws IOException
     {
@@ -162,13 +167,15 @@ public class GameSessionTest
         }
     }
 
+    /**
+     * Testet, ob der aktuelle Spieler richtig gewechselt wird.
+     */
     @Test
     public void switchToNextPlayerTest()
     {
+        // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
-
         PinballMachine pinballMachine = mock(PinballMachine.class);
-
         PlacedElement ball = new PlacedElement(
                 BaseElementManager.getInstance().getElement("ball"),
                 new Vector2(0, 0), 0, 0, 0);
@@ -178,6 +185,8 @@ public class GameSessionTest
         when(pinballMachine.elementsProperty()).thenReturn(list);
 
         GameSession gameSession = new GameSession(pinballMachine, playerNames);
+
+        // Auswertung
         for (String playerName : playerNames)
         {
             assertThat(gameSession.getCurrentPlayer().getName(), is(playerName));

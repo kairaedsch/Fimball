@@ -51,7 +51,7 @@ public class World implements HandlerWorld
      *
      * @return Ein Rechteck, das den Spielfeldrand darstellt.
      */
-    private RectangleDouble generateWalls()
+    public RectangleDouble generateWalls()
     {
         double minX = gameElements.get(0).positionProperty().get().getX();
         double maxX = gameElements.get(0).positionProperty().get().getX();
