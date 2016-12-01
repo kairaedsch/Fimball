@@ -37,45 +37,56 @@ public class SceneManagerView
      * Auch wird ein SceneManagerViewModel geholt, an das sich dieses SceneManagerView bindet, um bei Änderungen des ViewModels reagieren zu können,
      * um z.B. den Dialog zu wechseln.
      *
-     * @param stage Die Stage, die gesetzt werden soll.
+     * @param stage                 Die Stage, die gesetzt werden soll.
+     * @param sceneManagerViewModel Das SceneManagerViewModel, welches das SceneManagerView steuert.
      */
     public SceneManagerView(Stage stage, SceneManagerViewModel sceneManagerViewModel)
     {
+        // Blureffekt für das glass.
+        blurEffect = new GaussianBlur(Config.stageDividerLayerBlur);
+
+        // Initialisiere den SoundManager
+        new SoundManagerView();
+
+        // Setzt die Anfangsgröße des gesamten Spiels
         stage.setWidth(Config.defaultStageWidth);
         stage.setHeight(Config.defaultStageHeight);
 
         root = new StackPane();
 
-        Rectangle box = new Rectangle();
-        box.widthProperty().bind(root.widthProperty());
-        box.heightProperty().bind(root.heightProperty());
-        box.setFill(Config.primaryColor);
-        box.setOpacity(Config.stageDividerLayerOpacity);
+        // Erstellt das Node, welches zwischen Window und Dialog platziert wird, um die Window auszublenden
+        Rectangle glass = new Rectangle();
+        glass.widthProperty().bind(root.widthProperty());
+        glass.heightProperty().bind(root.heightProperty());
+        glass.setFill(Config.primaryColor);
+        glass.setOpacity(Config.stageDividerLayerOpacity);
 
+        // Fügt die verschiedenen Schichten zum rootNode hinzu
         root.getChildren().add(new Group());
-        root.getChildren().add(box);
+        root.getChildren().add(glass);
         root.getChildren().add(new Group());
 
-        new SoundManagerView();
-
-        sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
-        updateContent(sceneManagerViewModel.windowViewModelProperty().get());
-
-        sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
-        updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
-
-        sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
-        stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
-
-        stage.fullScreenExitKeyProperty().set(KeyCombination.NO_MATCH);
-
+        // Erstellt eine Scene aus dem rootNode und fügt sie zu der Stage hinzu
         Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
         scene.setOnKeyPressed(sceneManagerViewModel::onKeyEvent);
         scene.setOnKeyReleased(sceneManagerViewModel::onKeyEvent);
         stage.setScene(scene);
-        stage.show();
 
-        blurEffect = new GaussianBlur(Config.stageDividerLayerBlur);
+        // Fügt einen Listener für das WindowViewModel hinzu
+        sceneManagerViewModel.windowViewModelProperty().addListener((observableValue, oldWindowViewModel, newWindowViewModel) -> updateContent(newWindowViewModel));
+        updateContent(sceneManagerViewModel.windowViewModelProperty().get());
+
+        // Fügt einen Listener für das DialogViewModel hinzu
+        sceneManagerViewModel.dialogViewModelProperty().addListener((observableValue, oldDialogViewModel, newDialogViewModel) -> updateContent(newDialogViewModel));
+        updateContent(sceneManagerViewModel.dialogViewModelProperty().get());
+
+        // Fügt einen Listener für Fullscreen hinzu und stellt die Fullscreen Keys ein
+        sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
+        stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
+        stage.fullScreenExitKeyProperty().set(KeyCombination.NO_MATCH);
+
+        // Zeigt die Stage dem Benutzer
+        stage.show();
     }
 
     /**
@@ -85,6 +96,7 @@ public class SceneManagerView
      */
     private void updateContent(WindowViewModel windowViewModel)
     {
+        // Holt das zum ViewModelWindowType gehörige ViewWindowType
         WindowType windowType;
         switch (windowViewModel.getWindowType())
         {
@@ -116,11 +128,10 @@ public class SceneManagerView
      */
     private void updateContent(DialogViewModel dialogViewModel)
     {
-        DialogType dialogType = null;
+        // Holt das zum ViewModelDialogType gehörige ViewDialogType
+        DialogType dialogType;
         switch (dialogViewModel.getDialogType())
         {
-            case NONE:
-                break;
             case GAME_OVER:
                 dialogType = DialogType.GAME_OVER_DIALOG;
                 break;
@@ -133,16 +144,19 @@ public class SceneManagerView
             case PAUSE:
                 dialogType = DialogType.PAUSE;
                 break;
+            case NONE:
+                // Entfernt Dialog und returnt falls DialogType.NONE
+                removeDialog();
+                return;
             default:
                 throw new RuntimeException("Unkown DialogType");
         }
 
-        if (dialogType != null) setDialog(dialogType, dialogViewModel);
-        else removeDialog();
+        setDialog(dialogType, dialogViewModel);
     }
 
     /**
-     * Erzeugt ein WindowView des übergebenden WindowType, setzt diese als aktive WindowView und verbindet diese mit dem gegebenen ViewModel.
+     * Erzeugt ein WindowView des übergebenen WindowType, setzt diese als aktive WindowView und verbindet diese mit dem gegebenen ViewModel.
      *
      * @param windowType Der WindowType des zu erzeugenden WindowView.
      * @param viewModel  Das zu bindende ViewModel.
@@ -164,6 +178,7 @@ public class SceneManagerView
         Node dialogNode = loadView(dialogType, viewModel);
         replaceDialog(dialogNode);
 
+        // Deaktiviert das Window und blendet es aus
         getWindow().setEffect(blurEffect);
         getWindow().setDisable(true);
         getGlass().setVisible(true);
@@ -200,6 +215,7 @@ public class SceneManagerView
     {
         replaceDialog(null);
 
+        // Aktiviert das Window und blendet es ein
         getWindow().setEffect(null);
         getWindow().setDisable(false);
         getGlass().setVisible(false);
@@ -258,7 +274,6 @@ public class SceneManagerView
         {
             root.getChildren().add(node);
         }
-        else
-            root.getChildren().add(new Group());
+        else root.getChildren().add(new Group());
     }
 }

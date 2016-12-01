@@ -27,8 +27,7 @@ public class ImageCache
      */
     public static ImageCache getInstance()
     {
-        if (instance == null)
-            instance = new ImageCache();
+        if (instance == null) instance = new ImageCache();
 
         return instance;
     }
@@ -49,16 +48,14 @@ public class ImageCache
      */
     public Image getImage(String imagePath)
     {
-        if (cachedImages.containsKey(imagePath))
-        {
-            return cachedImages.get(imagePath);
-        }
-        else
+        // Falls das Bild noch nicht im cache ist, wird es geladen und zur {code cachedImages} hinzugefügt.
+        if (!cachedImages.containsKey(imagePath))
         {
             File imageFile = new File(imagePath);
             Image loadedImage = new Image(imageFile.toURI().toString(), true);
             cachedImages.put(imagePath, loadedImage);
-            return loadedImage;
         }
+
+        return cachedImages.get(imagePath);
     }
 }

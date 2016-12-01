@@ -6,7 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests für die Klasse Vector2
+ * Tests für die Klasse Vector2.
  */
 public class VectorTest
 {

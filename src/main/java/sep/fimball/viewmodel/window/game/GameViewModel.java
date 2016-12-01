@@ -227,7 +227,7 @@ public class GameViewModel extends WindowViewModel
         for (Player player : gameSession.getPlayers())
         {
             Highscore score = new Highscore(player.pointsProperty().get(), player.getName());
-            scores.get().add(score);
+            scores.add(score);
         }
         return scores;
     }
