@@ -8,6 +8,7 @@ import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -45,6 +46,8 @@ public class SpriteSubViewModel
      */
     private ObjectProperty<Vector2> pivotPoint;
 
+    private Map<Integer, Vector2> localCoords;
+
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
@@ -62,6 +65,8 @@ public class SpriteSubViewModel
         currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
+
+        localCoords = gameElement.getPlacedElement().getBaseElement().getMedia().getLocalCoords();
 
         isSelected = new SimpleBooleanProperty(false);
 
@@ -145,5 +150,11 @@ public class SpriteSubViewModel
     public ReadOnlyObjectProperty<Vector2> pivotPointProperty()
     {
         return pivotPoint;
+    }
+
+    public Map<Integer, Vector2> getLocalCoords()
+    {
+        //TODO Make immutable
+        return localCoords;
     }
 }

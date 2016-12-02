@@ -24,7 +24,7 @@ public class ElementImageTest
     @Before
     public void init()
     {
-        BaseMediaElement testMediaElement = new BaseMediaElement("testMedia", "testMediaDesc", true, 40, null, null);
+        BaseMediaElement testMediaElement = new BaseMediaElement("testMedia", "testMediaDesc", true, 40, null, null, null);
         Animation testAnimation = new Animation(2, 3, "testAnimation");
         testElementImage = new ElementImage("testElement", testMediaElement, testAnimation);
     }

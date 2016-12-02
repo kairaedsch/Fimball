@@ -138,6 +138,8 @@ public class BaseElementJson
          */
         public MediaElementEventJson[] events;
 
+        public MediaElementLocalCoordinateJson[] localCoordinates;
+
         /**
          * Diese Klasse repräsentiert die Eigenschaften des Objekts im Editor.
          */
@@ -204,6 +206,13 @@ public class BaseElementJson
                  */
                 public String animationName;
             }
+        }
+
+        public static class MediaElementLocalCoordinateJson
+        {
+            public int rotation;
+
+            public Vector2 localCoord;
         }
     }
 

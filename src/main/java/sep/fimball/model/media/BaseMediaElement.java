@@ -3,6 +3,7 @@ package sep.fimball.model.media;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import sep.fimball.general.data.Vector2;
 
 import java.util.Map;
 
@@ -41,6 +42,8 @@ public class BaseMediaElement
      */
     private Map<Integer, BaseMediaElementEvent> eventMap;
 
+    private Map<Integer, Vector2> localCoords;
+
     /**
      * Erstellt ein neues BaseMediaElement.
      * @param name Der Name des BaseElements im Editor.
@@ -50,7 +53,8 @@ public class BaseMediaElement
      * @param elementImage Das Bild des BaseElements.
      * @param eventMap Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
-    public BaseMediaElement(String name, String description, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap)
+    public BaseMediaElement(String name, String description, boolean canRotate, int rotationAccuracy, ElementImage elementImage,
+                            Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoords)
     {
         this.name = name;
         this.description = description;
@@ -58,6 +62,7 @@ public class BaseMediaElement
         this.rotationAccuracy = rotationAccuracy;
         this.elementImage = new SimpleObjectProperty<>(elementImage);
         this.eventMap = eventMap;
+        this.localCoords = localCoords;
     }
 
     /**
@@ -112,5 +117,10 @@ public class BaseMediaElement
     public ReadOnlyObjectProperty<ElementImage> elementImageProperty()
     {
         return elementImage;
+    }
+
+    public Map<Integer, Vector2> getLocalCoords()
+    {
+        return localCoords;
     }
 }

@@ -64,29 +64,18 @@ public class SpriteSubView
 
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
         int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
-        if (picRotate == 270)
+
+        if (picRotate != 0)
         {
-            double div = (image.getWidth() / 2.0);
-            double height = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, 180)).getWidth();
-            rotate(graphicsContext, 90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
-            y += (image.getWidth() - height) / Config.pixelsPerGridUnit;
-            pivot = new Vector2(pivot.getX(), (height / Config.pixelsPerGridUnit) - pivot.getY());
-        }
-        else if (picRotate == 180)
-        {
-            double height = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, 90)).getWidth();
-            rotate(graphicsContext, 180, new Vector2(x * Config.pixelsPerGridUnit + (image.getWidth() / 2.0), y * Config.pixelsPerGridUnit + (height / 2.0)));
-            pivot = new Vector2((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX(), (height / Config.pixelsPerGridUnit) - pivot.getY());
-        }
-        else if (picRotate == 90)
-        {
-            double div = (image.getWidth() / 2.0);
-            rotate(graphicsContext, -90, new Vector2(x * Config.pixelsPerGridUnit + div, y * Config.pixelsPerGridUnit + div));
-            pivot = new Vector2((image.getWidth() / Config.pixelsPerGridUnit) - pivot.getX(), pivot.getY());
+            Vector2 localCoords = viewModel.getLocalCoords().get(picRotate);
+            graphicsContext.translate(localCoords.getX() * Config.pixelsPerGridUnit,localCoords.getY() * Config.pixelsPerGridUnit);
+            pivot = pivot.plus(localCoords.scale(-1));
         }
 
-        if (viewModel.rotationProperty().get() != 0)
-           rotate(graphicsContext, viewModel.rotationProperty().get(), pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
+        if (rotation != 0)
+        {
+            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
+        }
 
         if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
 

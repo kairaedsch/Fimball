@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
@@ -37,6 +38,17 @@ public class BaseMediaElementFactory
                 eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), event.soundName));
             }
         }
+
+        Map<Integer, Vector2> localCoords = new HashMap<>();
+
+        if (mediaElement.localCoordinates != null)
+        {
+            for (BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoordinate : mediaElement.localCoordinates)
+            {
+                localCoords.put(localCoordinate.rotation, localCoordinate.localCoord);
+            }
+        }
+
         ElementImage elementImage;
         if (canRotate)
         {
@@ -47,6 +59,6 @@ public class BaseMediaElementFactory
             elementImage = new ElementImage(baseElementId);
         }
 
-        return new BaseMediaElement(name, description, canRotate, rotationAccuracy, elementImage, eventMap);
+        return new BaseMediaElement(name, description, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
     }
 }
