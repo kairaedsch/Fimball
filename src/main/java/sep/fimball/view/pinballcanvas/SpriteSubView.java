@@ -54,7 +54,8 @@ public class SpriteSubView
 
         Image image;
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
-        double rotation = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
+        //Berechne den double Rest der bei mod rotationAccuracy bleibt
+        double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
         if (imageLayer == ImageLayer.TOP)
             image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
         else
@@ -63,7 +64,7 @@ public class SpriteSubView
         graphicsContext.save(); // saves the current state on stack, including the current transform
 
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
-        int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
+        int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
 
         if (picRotate != 0)
         {
@@ -72,9 +73,9 @@ public class SpriteSubView
             pivot = pivot.plus(localCoords.scale(-1));
         }
 
-        if (rotation != 0)
+        if (rotationRest != 0)
         {
-            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
+            rotate(graphicsContext, rotationRest, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
         }
 
         if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());

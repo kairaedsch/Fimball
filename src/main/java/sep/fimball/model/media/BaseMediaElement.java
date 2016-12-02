@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.general.data.Vector2;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -121,6 +122,6 @@ public class BaseMediaElement
 
     public Map<Integer, Vector2> getLocalCoords()
     {
-        return localCoords;
+        return Collections.unmodifiableMap(localCoords);
     }
 }

@@ -154,7 +154,6 @@ public class SpriteSubViewModel
 
     public Map<Integer, Vector2> getLocalCoords()
     {
-        //TODO Make immutable
         return localCoords;
     }
 }
