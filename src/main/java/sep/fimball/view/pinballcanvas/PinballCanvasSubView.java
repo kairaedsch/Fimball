@@ -90,14 +90,14 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
-        int interv = 200;
-        double n = (delta * 1.0) / interv;
+        double camFollowSpeed = 200.0;
+        double camFollowStep = delta / camFollowSpeed;
 
-        int interv2 = 50;
-        double n2 = (delta * 1.0) / interv2;
+        double cameraZoomSpeed = 50.0;
+        double camZoomStep = delta / cameraZoomSpeed;
 
-        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), n);
-        softCameraZoom = softCameraZoom * (1 - n2) + cameraZoom.get() * n2;
+        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
+        softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -105,7 +105,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
-        graphicsContext.translate(canvas.getWidth() / 2d - softCameraPosition.getX() * pixelsPerGridUnit * softCameraZoom, canvas.getHeight() / 2d - softCameraPosition.getY() * pixelsPerGridUnit * softCameraZoom);
+        graphicsContext.translate(canvas.getWidth() / 2.0 - softCameraPosition.getX() * pixelsPerGridUnit * softCameraZoom, canvas.getHeight() / 2.0 - softCameraPosition.getY() * pixelsPerGridUnit * softCameraZoom);
 
         graphicsContext.scale(softCameraZoom, softCameraZoom);
 
@@ -114,41 +114,47 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             graphicsContext.save();
             Vector2 gridStart = canvasPosToGridPos(0, 0).scale(pixelsPerGridUnit);
             Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(pixelsPerGridUnit);
-            for (int gx = (int) gridStart.getX() - (int) gridStart.getX() % pixelsPerGridUnit; gx <= gridEnd.getX(); gx += pixelsPerGridUnit)
+            for (int gridX = (int) gridStart.getX() - (int) gridStart.getX() % pixelsPerGridUnit; gridX <= gridEnd.getX(); gridX += pixelsPerGridUnit)
             {
-                Color color;
-                int width;
-                if (Math.abs(gx) % (pixelsPerGridUnit * 2) == 0)
+                Color lineColor;
+                int lineWidth;
+
+                // Make every second line bigger
+                if (Math.abs(gridX) % (pixelsPerGridUnit * 2) == 0)
                 {
-                    color = Config.primaryColorLightLight;
-                    width = 2;
+                    lineColor = Config.primaryColorLightLight;
+                    lineWidth = 2;
                 }
                 else
                 {
-                    color = Config.primaryColorLight;
-                    width = 1;
+                    lineColor = Config.primaryColorLight;
+                    lineWidth = 1;
                 }
-                graphicsContext.setStroke(color);
-                graphicsContext.setLineWidth(width);
-                graphicsContext.strokeLine(gx, gridStart.getY(), gx, gridEnd.getY());
+
+                graphicsContext.setStroke(lineColor);
+                graphicsContext.setLineWidth(lineWidth);
+                graphicsContext.strokeLine(gridX, gridStart.getY(), gridX, gridEnd.getY());
             }
-            for (int gy = (int) gridStart.getY() - (int) gridStart.getY() % pixelsPerGridUnit; gy <= gridEnd.getY(); gy += pixelsPerGridUnit)
+            for (int gridY = (int) gridStart.getY() - (int) gridStart.getY() % pixelsPerGridUnit; gridY <= gridEnd.getY(); gridY += pixelsPerGridUnit)
             {
-                Color color;
-                int width;
-                if (Math.abs(gy) % (pixelsPerGridUnit * 2) == pixelsPerGridUnit)
+                Color lineColor;
+                int lineWidth;
+
+                // Make every second line bigger
+                if (Math.abs(gridY) % (pixelsPerGridUnit * 2) == pixelsPerGridUnit)
                 {
-                    color = Config.primaryColorLightLight;
-                    width = 2;
+                    lineColor = Config.primaryColorLightLight;
+                    lineWidth = 2;
                 }
                 else
                 {
-                    color = Config.primaryColorLight;
-                    width = 1;
+                    lineColor = Config.primaryColorLight;
+                    lineWidth = 1;
                 }
-                graphicsContext.setStroke(color);
-                graphicsContext.setLineWidth(width);
-                graphicsContext.strokeLine(gridStart.getX(), gy, gridEnd.getX(), gy);
+
+                graphicsContext.setStroke(lineColor);
+                graphicsContext.setLineWidth(lineWidth);
+                graphicsContext.strokeLine(gridStart.getX(), gridY, gridEnd.getX(), gridY);
             }
             graphicsContext.restore();
         }
