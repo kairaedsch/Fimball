@@ -80,33 +80,34 @@ public class SpriteSubView
 
         if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
 
+        // Draw border around selected element
         if (viewModel.isSelectedProperty().get())
         {
-            double width = Config.pixelsPerGridUnit * 0.25;
-            double plus = +0.5 * width;
-            graphicsContext.setLineWidth(width);
+            final double borderBlinkRate = 1000.0;
+            double borderWidth = Config.pixelsPerGridUnit * 0.25;
+            double borderOffset = 0.5 * borderWidth;
 
-            double time = (System.currentTimeMillis() % 1000) / 1000.0;
-            double trans = -2 * time * (time - 1);
+            graphicsContext.setLineWidth(borderWidth);
+
+            double effectTime = (System.currentTimeMillis() % borderBlinkRate) / borderBlinkRate;
+            double effectValue = -2 * effectTime * (effectTime - 1);
 
             if(imageLayer == ImageLayer.TOP)
             {
-                Color color = Config.complementColor.interpolate(Config.secondaryColor, trans);
-                graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
-                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - plus, y * Config.pixelsPerGridUnit - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+                Color color = Config.complementColor.interpolate(Config.secondaryColor, effectValue);
+                graphicsContext.setStroke(color);
+                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, y * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
             }
             else
             {
-                Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, trans);
-                graphicsContext.setStroke(new Color(color.getRed(), color.getGreen(), color.getBlue(), 1));
-                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - plus, (y + 1) * Config.pixelsPerGridUnit - plus, image.getWidth() + plus * 2, image.getHeight() + plus * 2 - Config.pixelsPerGridUnit);
+                Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, effectValue);
+                graphicsContext.setStroke(color);
+                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, (y + 1) * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
             }
         }
 
-        if(imageLayer == ImageLayer.BOTTOM) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
-
-        //graphicsContext.setFill(Color.GRAY);
-        //graphicsContext.fillRect((int) ((x + pivot.getX()) * Config.pixelsPerGridUnit), (int) ((y + pivot.getY()) * Config.pixelsPerGridUnit), 10, 10);
+        if(imageLayer == ImageLayer.BOTTOM)
+            graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
 
         graphicsContext.restore(); // back to original state (before rotation)
     }
