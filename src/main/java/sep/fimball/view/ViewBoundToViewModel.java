@@ -14,5 +14,5 @@ public interface ViewBoundToViewModel<ViewModelT>
      *
      * @param viewModelT Das ViewModel, das gesetzt werden soll.
      */
-    public void setViewModel(ViewModelT viewModelT);
+    void setViewModel(ViewModelT viewModelT);
 }

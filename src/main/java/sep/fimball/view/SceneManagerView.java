@@ -111,10 +111,10 @@ public class SceneManagerView
                 windowType = WindowType.GAME_WINDOW;
                 break;
             case MACHINE_EDITOR:
-                windowType = WindowType.TABLE_EDITOR_WINDOW;
+                windowType = WindowType.EDITOR_WINDOW;
                 break;
             case MACHINE_SETTINGS:
-                windowType = WindowType.TABLE_SETTINGS_WINDOW;
+                windowType = WindowType.EDITOR_SETTINGS_WINDOW;
                 break;
             default:
                 throw new RuntimeException("Unkown WindowType");

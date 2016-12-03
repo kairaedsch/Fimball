@@ -30,12 +30,12 @@ public enum WindowType implements ViewType
     /**
      * Das Editor-Fenster.
      */
-    TABLE_EDITOR_WINDOW("pinballmachine/editor/pinballMachineEditor.fxml"),
+    EDITOR_WINDOW("pinballmachine/editor/pinballMachineEditor.fxml"),
 
     /**
      * Das Editoreinstellungen-Fenster.
      */
-    TABLE_SETTINGS_WINDOW("pinballmachine/settings/pinballMachineSettings.fxml"),
+    EDITOR_SETTINGS_WINDOW("pinballmachine/settings/pinballMachineSettings.fxml"),
 
     /**
      * Das Spiel-Fenster.
@@ -50,12 +50,12 @@ public enum WindowType implements ViewType
     /**
      * Eines zum Platzieren im Editor verfügbares Element.
      */
-    TABLE_EDITOR_AVAILABLE_ELEMENT("pinballmachine/editor/availableElement.fxml"),
+    EDITOR_AVAILABLE_ELEMENT("pinballmachine/editor/availableElement.fxml"),
 
     /**
      * Das im Editor ausgewählte Element.
      */
-    TABLE_EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml");
+    EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml");
 
     /**
      * Der Pfad der zum Fenster-Typ gehörenden FXML-Datei.

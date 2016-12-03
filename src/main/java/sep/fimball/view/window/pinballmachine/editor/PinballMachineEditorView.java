@@ -75,13 +75,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.TABLE_EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
         viewLoaderCanvas.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
 
-        ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.TABLE_EDITOR_SELECTED_ELEMENT);
+        ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
