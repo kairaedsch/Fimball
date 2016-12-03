@@ -16,6 +16,8 @@ public class BaseElement
      */
     private String id;
 
+    private BaseElementCategory elementCategory;
+
     /**
      * Die Art des BaseElements.
      */
@@ -46,8 +48,10 @@ public class BaseElement
     {
         nullCheck(baseElementJson);
         nullCheck(baseElementJson.elementType == null);
+        nullCheck(baseElementJson.elementCategory == null);
 
         this.id = id;
+        elementCategory = baseElementJson.elementCategory;
         type = baseElementJson.elementType;
 
         physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);

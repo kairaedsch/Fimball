@@ -56,8 +56,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Die zur Platzierung auf dem Spielfeld verfügbaren Elemente.
      */
     @FXML
-    private VBox availableElements;
+    private VBox availableElementsBasic;
 
+    @FXML
+    private VBox availableElementsAdvanced;
+
+    @FXML
+    private VBox availableElementsObstacles;
     /**
      * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
      */
@@ -75,7 +80,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElements, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());

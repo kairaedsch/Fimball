@@ -13,6 +13,8 @@ public class BaseElementJson
      */
     public BaseElementType elementType;
 
+    public BaseElementCategory elementCategory;
+
     /**
      * Speichert den Typ des korrespondierenden PhysicElements.
      */
