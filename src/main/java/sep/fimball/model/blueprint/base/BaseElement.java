@@ -69,6 +69,11 @@ public class BaseElement
         return type;
     }
 
+    public BaseElementCategory getElementCategory()
+    {
+        return elementCategory;
+    }
+
     /**
      * Gibt die für die physikalischen Eigenschaften des Spielelements wichtigen Informationen zurück.
      *
