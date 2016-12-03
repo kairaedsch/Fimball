@@ -9,6 +9,8 @@ import sep.fimball.model.media.ElementImage;
 import java.util.HashMap;
 import java.util.Map;
 
+import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
+
 /**
  * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
  */
@@ -22,6 +24,12 @@ public class BaseMediaElementFactory
      */
     static BaseMediaElement generate(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
     {
+        nullCheck(mediaElement);
+        nullCheck(mediaElement.general);
+        nullCheck(mediaElement.general.editorName);
+        nullCheck(mediaElement.general.editorDescription);
+        nullCheck(baseElementId);
+
         String name = mediaElement.general.editorName;
         String description = mediaElement.general.editorDescription;
         boolean canRotate = mediaElement.general.canRotate;
@@ -33,8 +41,13 @@ public class BaseMediaElementFactory
             for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
                 Animation animation = null;
-                if(event.animation != null) animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
+                if(event.animation != null)
+                {
+                    nullCheck(event.animation.animationName);
+                    animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
+                }
 
+                nullCheck(event.soundName);
                 eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), event.soundName));
             }
         }
@@ -45,6 +58,7 @@ public class BaseMediaElementFactory
         {
             for (BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoordinate : mediaElement.localCoordinates)
             {
+                nullCheck(localCoordinate.localCoord);
                 localCoords.put(localCoordinate.rotation, localCoordinate.localCoord);
             }
         }
