@@ -66,7 +66,7 @@ public class SpriteSubView
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
         int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
 
-        if (picRotate != 0)
+        if (viewModel.getLocalCoords().containsKey(picRotate))
         {
             Vector2 localCoords = viewModel.getLocalCoords().get(picRotate);
             graphicsContext.translate(localCoords.getX() * Config.pixelsPerGridUnit,localCoords.getY() * Config.pixelsPerGridUnit);
