@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import java.lang.String?>
-<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView" onMouseClicked="#mouseClicked">
+
+<HBox onMouseClicked="#mouseClicked" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView">
     <children>
-        <Pane minHeight="40.0" minWidth="40.0" fx:id="previewImage" />
-        <Label maxHeight="9999" text="Marcs Automat" fx:id="previewName"/>
+        <Pane fx:id="previewImageBot" minHeight="40.0" minWidth="40.0">
+         <children>
+            <Pane fx:id="previewImageTop" minHeight="40.0" minWidth="40.0" />
+         </children></Pane>
+        <Label fx:id="previewName" maxHeight="9999" text="Marcs Automat" />
     </children>
     <stylesheets>
-        <String fx:value="styles/style.css"/>
+        <String fx:value="styles/style.css" />
     </stylesheets>
 </HBox>

@@ -24,9 +24,14 @@ public class AvailableElementSubViewModel
     private StringProperty name;
 
     /**
-     * Der Pfad zum Vorschau-Bild des Flipperautomaten-Elements.
+     * Der Pfad zum oberen Teil des Vorschau-Bild des Flipperautomaten-Elements.
      */
-    private StringProperty imagePath;
+    private StringProperty imagePathTop;
+
+    /**
+     * Der Pfad zum unteren Teil des Vorschau-Bild des Flipperautomaten-Elements.
+     */
+    private StringProperty imagePathBot;
 
     /**
      * Das zugehörige PinballMachineEditorViewModel.
@@ -43,7 +48,8 @@ public class AvailableElementSubViewModel
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
         this.baseElement = baseElement;
-        imagePath = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.TOP, 0));
+        imagePathTop = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.TOP, 0));
+        imagePathBot = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.BOTTOM, 0));
         name = new SimpleStringProperty(baseElement.getMedia().getName());
     }
 
@@ -58,13 +64,23 @@ public class AvailableElementSubViewModel
     }
 
     /**
-     * Stellt der View den Namen des Flipperautomaten-Elements zur Verfügung.
+     * Stellt der View den Pfad des oberen Bilds des Flipperautomaten-Elements zur Verfügung.
      *
      * @return Der Name des Flipperautomaten-Elements.
      */
-    public ReadOnlyStringProperty imagePathProperty()
+    public ReadOnlyStringProperty imagePathTopProperty()
     {
-        return imagePath;
+        return imagePathTop;
+    }
+
+    /**
+     * Stellt der View den Pfad des unteren Bilds des Flipperautomaten-Elements zur Verfügung.
+     *
+     * @return Der Name des Flipperautomaten-Elements.
+     */
+    public ReadOnlyStringProperty imagePathBotProperty()
+    {
+        return imagePathBot;
     }
 
     /**

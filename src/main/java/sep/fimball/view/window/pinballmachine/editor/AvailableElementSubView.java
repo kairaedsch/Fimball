@@ -1,6 +1,7 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringExpression;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -16,7 +17,10 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
      * Das Pane, welches das Vorschau-Bild des Elements anzeigt.
      */
     @FXML
-    public Pane previewImage;
+    public Pane previewImageTop;
+
+    @FXML
+    public Pane previewImageBot;
 
     /**
      * Zeigt den Namen des Elements an.
@@ -34,7 +38,14 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     {
         this.availableElementSubViewModel = availableElementSubViewModel;
         previewName.textProperty().bind(availableElementSubViewModel.nameProperty());
-        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", availableElementSubViewModel.imagePathProperty().get(), "\");"));
+        previewImageTop.styleProperty().bind(generatePreviewCss(true));
+        previewImageBot.styleProperty().bind(generatePreviewCss(false));
+    }
+
+    private StringExpression generatePreviewCss(boolean top)
+    {
+        String imagePath = top ? availableElementSubViewModel.imagePathTopProperty().get() : availableElementSubViewModel.imagePathBotProperty().get();
+        return Bindings.concat("-fx-background-image: url(\"file:///", imagePath, "\");", "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;");
     }
 
     /**
