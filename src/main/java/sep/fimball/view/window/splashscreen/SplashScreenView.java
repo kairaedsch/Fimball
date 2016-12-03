@@ -19,11 +19,6 @@ import java.io.File;
 public class SplashScreenView extends WindowView<SplashScreenViewModel>
 {
     /**
-     * Die Weite des Splash-Bildes.
-     */
-    private static final int SPLASH_WIDTH = 510;
-
-    /**
      * Der Container, der die Elemente der Splashscreens enthält.
      */
     @FXML
@@ -48,29 +43,14 @@ public class SplashScreenView extends WindowView<SplashScreenViewModel>
     private
     ImageView splash;
 
-
     @Override
     public void setViewModel(SplashScreenViewModel splashScreenViewModel)
     {
         progressText.textProperty().bind(splashScreenViewModel.getProgressText());
         loadProgress.progressProperty().bind(splashScreenViewModel.getLoadProgress());
-        init();
-    }
-
-    /**
-     * Setzt die Werte der Element in der View.
-     */
-    private void init()
-    {
         File imageFile = new File(Config.pathToLogo());
         Image loadedImage = new Image(imageFile.toURI().toString(), true);
         splash.setImage(loadedImage);
-        splash.setFitWidth(SPLASH_WIDTH);
-        splash.setFitHeight(SPLASH_WIDTH);
-        loadProgress.setMaxWidth(SPLASH_WIDTH);
-        progressText.setPrefWidth(SPLASH_WIDTH);
         splashLayout.setEffect(new DropShadow());
     }
-
-
 }

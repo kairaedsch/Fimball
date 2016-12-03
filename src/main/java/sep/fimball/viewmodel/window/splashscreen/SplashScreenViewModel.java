@@ -28,11 +28,6 @@ public class SplashScreenViewModel extends WindowViewModel
     private DoubleProperty loadProgress;
 
     /**
-     * Das MainMenuViewModel, das nach dem SplashScreen angezeigt werden soll.
-     */
-    private MainMenuViewModel mainMenuViewModel;
-
-    /**
      * Erzeugt ein neues SplashScreenViewModel.
      */
     public SplashScreenViewModel()
@@ -40,19 +35,16 @@ public class SplashScreenViewModel extends WindowViewModel
         super(WindowType.SPLASH_SCREEN);
         progressText = new SimpleStringProperty();
         loadProgress = new SimpleDoubleProperty();
-        mainMenuViewModel = new MainMenuViewModel();
         startLoading();
     }
-
 
     /**
      * Benachrichtigt den ScemeManager, dass das Hauptmenü angezeigt werden soll.
      */
     private void showMainMenu()
     {
-        sceneManager.setWindow(mainMenuViewModel);
+        sceneManager.setWindow(new MainMenuViewModel());
     }
-
 
     /**
      * Startet das simulierte Laden.
@@ -64,11 +56,8 @@ public class SplashScreenViewModel extends WindowViewModel
             @Override
             protected ObservableList<String> call() throws InterruptedException
             {
-                ObservableList<String> messages =
-                        FXCollections.observableArrayList();
-                ObservableList<String> availableMessages =
-                        FXCollections.observableArrayList(
-                                "Elements loaded", "Machines loaded", "Settings loaded", "Sounds loaded");
+                ObservableList<String> messages = FXCollections.observableArrayList();
+                ObservableList<String> availableMessages = FXCollections.observableArrayList("Elements loaded", "Machines loaded", "Settings loaded", "Sounds loaded");
 
                 updateMessage("Initialising");
                 for (int i = 0; i < availableMessages.size(); i++)
@@ -86,10 +75,7 @@ public class SplashScreenViewModel extends WindowViewModel
             }
         };
 
-        bindToTask(
-                messageTask,
-                this::showMainMenu
-        );
+        bindToTask(messageTask, this::showMainMenu);
         new Thread(messageTask).start();
     }
 
@@ -98,9 +84,9 @@ public class SplashScreenViewModel extends WindowViewModel
      * Bindet den {@code progressText} und den {@code loadProgress} an die Properties des Tasks.
      *
      * @param task              Der Task, an den gebunden werden soll.
-     * @param completionHandler Der Handler, der das Ende des Tasks händelt.
+     * @param CompletionHandler Der Handler, der das Ende des Tasks händelt.
      */
-    private void bindToTask(Task<?> task, completionHandler completionHandler)
+    private void bindToTask(Task<?> task, CompletionHandler CompletionHandler)
     {
         progressText.bind(task.messageProperty());
 
@@ -112,7 +98,7 @@ public class SplashScreenViewModel extends WindowViewModel
                 loadProgress.unbind();
                 loadProgress.set(1);
 
-                completionHandler.complete();
+                CompletionHandler.complete();
             } // todo add code to gracefully handle other task states.
         });
 
@@ -142,7 +128,7 @@ public class SplashScreenViewModel extends WindowViewModel
     /**
      * Händelt das Abschließen eines Tasks.
      */
-    public interface completionHandler
+    public interface CompletionHandler
     {
         /**
          * Wird aufgerufen, wenn der Task fertig ist.
