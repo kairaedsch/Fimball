@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import sep.fimball.model.media.Sound;
@@ -75,15 +76,23 @@ public class SoundManagerView
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
-            MediaPlayer newMediaPlayer = new MediaPlayer(new Media(soundPath));
-            newMediaPlayer.setOnEndOfMedia(() -> newMediaPlayer.seek(Duration.ZERO));
-            newMediaPlayer.volumeProperty().bind(musicVolume);
-            newMediaPlayer.play();
+            try
+            {
+                MediaPlayer newMediaPlayer = new MediaPlayer(new Media(soundPath));
+                newMediaPlayer.setOnEndOfMedia(() -> newMediaPlayer.seek(Duration.ZERO));
+                newMediaPlayer.volumeProperty().bind(musicVolume);
+                newMediaPlayer.play();
 
-            // Es kann sich immer nur ein Sound wiederholen
-            mediaPlayer.ifPresent(MediaPlayer::dispose);
 
-            mediaPlayer = Optional.of(newMediaPlayer);
+                // Es kann sich immer nur ein Sound wiederholen
+                mediaPlayer.ifPresent(MediaPlayer::dispose);
+
+                mediaPlayer = Optional.of(newMediaPlayer);
+            }
+            catch (MediaException e)
+            {
+
+            }
         }
         // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
         else
