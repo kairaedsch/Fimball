@@ -49,6 +49,7 @@ public class BaseElementManager
 
         try
         {
+            // Loads all directories
             Files.list(Paths.get(Config.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
         }
         catch (IOException e)
