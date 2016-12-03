@@ -4,6 +4,8 @@ import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
+import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
+
 /**
  * Diese Klasse enthält alle Informationen, die gemeinsam ein Spielfeldelement bestimmen. Sie stellt also einen Bauplan für die eigentlichen Spielelemente dar.
  */
@@ -42,8 +44,10 @@ public class BaseElement
      */
     public BaseElement(String id, BaseElementJson baseElementJson)
     {
+        nullCheck(baseElementJson);
+        nullCheck(baseElementJson.elementType == null);
+
         this.id = id;
-        if(baseElementJson.elementType == null) throw new IllegalArgumentException("Element Type must be set");
         type = baseElementJson.elementType;
 
         physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);
