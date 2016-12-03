@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
+
 /**
  * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
  */
@@ -21,28 +23,37 @@ public class BasePhysicsElementFactory
      */
     static BasePhysicsElement generate(BaseElementJson.PhysicElementJson physicsElement)
     {
-        if (physicsElement.pivotPoint == null)
-            throw new IllegalArgumentException("PhysicsElement needs to contain a pivotPoint!");
+        nullCheck(physicsElement);
+        nullCheck(physicsElement.pivotPoint);
+        nullCheck(physicsElement.colliders);
 
         Vector2 pivotPoint = physicsElement.pivotPoint;
         List<Collider> colliders = new ArrayList<>();
         for (BaseElementJson.PhysicElementJson.PhysicColliderJson collider : physicsElement.colliders)
         {
+            nullCheck(collider.collisionType);
+            nullCheck(collider.collisionType.type);
+
             List<ColliderShape> shapes = new ArrayList<>();
 
             if (collider.polygonShapes != null)
+            {
                 for (BaseElementJson.PhysicElementJson.PhysicColliderJson.PolygonJson polygonShape : collider.polygonShapes)
                 {
+                    nullCheck(polygonShape.vertices);
                     PolygonColliderShape polygonColliderShape = new PolygonColliderShape(Arrays.asList(polygonShape.vertices));
                     shapes.add(polygonColliderShape);
                 }
+            }
 
             if (collider.circleShapes != null)
+            {
                 for (BaseElementJson.PhysicElementJson.PhysicColliderJson.CircleJson circleJson : collider.circleShapes)
                 {
                     CircleColliderShape circleColliderShape = new CircleColliderShape(new Vector2(circleJson.x, circleJson.y), circleJson.radius);
                     shapes.add(circleColliderShape);
                 }
+            }
 
             CollisionType collisionType;
             switch (collider.collisionType.type)
@@ -71,10 +82,14 @@ public class BasePhysicsElementFactory
             }
 
             Collider newCollider;
+            WorldLayer layer = collider.layer;
+            if (layer == null)
+                layer = WorldLayer.GROUND;
+
             if (collider.collisionType.type.equals("flipper"))
-                newCollider = new FlipperCollider(collider.layer, shapes, collisionType, collider.colliderId);
+                newCollider = new FlipperCollider(layer, shapes, collisionType, collider.colliderId);
             else
-                newCollider = new Collider(collider.layer, shapes, collisionType, collider.colliderId);
+                newCollider = new Collider(layer, shapes, collisionType, collider.colliderId);
 
             colliders.add(newCollider);
         }
