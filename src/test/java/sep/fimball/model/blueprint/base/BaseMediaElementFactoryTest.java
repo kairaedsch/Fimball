@@ -46,15 +46,17 @@ public class BaseMediaElementFactoryTest
         BaseMediaElement generatedElement = BaseMediaElementFactory.generate(testJson, TEST_STRING);
 
         assertThat(generatedElement.getEventMap().size(), is(1));
-        generatedElement.getEventMap().forEach((i, e) ->
+        generatedElement.getEventMap().forEach((id, ev) ->
         {
-            assertThat(e.getAnimation().get().getName(), is(TEST_STRING));
-            assertThat(e.getSound(), notNullValue());
+            assertThat(id, is(TEST_INT));
+            assertThat(ev.getAnimation().get().getName(), is(TEST_STRING));
+            assertThat(ev.getSound(), notNullValue());
         });
         assertThat(generatedElement.getLocalCoords().size(), is(1));
-        generatedElement.getLocalCoords().forEach((i, v) ->
+        generatedElement.getLocalCoords().forEach((id, v2) ->
         {
-            assertThat(v, equalTo(new Vector2(TEST_DOUBLE, TEST_DOUBLE)));
+            assertThat(id, is(TEST_INT));
+            assertThat(v2, equalTo(new Vector2(TEST_DOUBLE, TEST_DOUBLE)));
         });
         assertThat(generatedElement.canRotate(), is(TEST_BOOL));
         assertThat(generatedElement.getDescription(), is(TEST_STRING));
