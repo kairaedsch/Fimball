@@ -1,10 +1,9 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 /**
@@ -38,6 +37,8 @@ public class AvailableElementSubViewModel
      */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
+    private ObjectProperty<BaseElementCategory> elementCategory;
+
     /**
      * Erstellt ein neues AvailableElementSubViewModel.
      *
@@ -50,6 +51,7 @@ public class AvailableElementSubViewModel
         this.baseElement = baseElement;
         imagePathTop = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.TOP, 0));
         imagePathBot = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.BOTTOM, 0));
+        elementCategory = new SimpleObjectProperty<>(baseElement.getElementCategory());
         name = new SimpleStringProperty(baseElement.getMedia().getName());
     }
 
@@ -81,6 +83,11 @@ public class AvailableElementSubViewModel
     public ReadOnlyStringProperty imagePathBotProperty()
     {
         return imagePathBot;
+    }
+
+    public ReadOnlyObjectProperty<BaseElementCategory> getElementCategory()
+    {
+        return elementCategory;
     }
 
     /**

@@ -5,11 +5,13 @@ import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -28,10 +30,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private PinballMachine pinballMachine;
 
-    /**
-     * Eine Liste, die alle Flipperautomat-Elemente enthält, die vom Nutzer platziert werden können.
-     */
-    private ListProperty<AvailableElementSubViewModel> availableElements;
+    private ListProperty<AvailableElementSubViewModel> availableBasicElements;
+
+    private ListProperty<AvailableElementSubViewModel> availableObstacleElements;
+
+    private ListProperty<AvailableElementSubViewModel> availableAdvancedElements;
 
     /**
      * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
@@ -102,21 +105,35 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine);
 
-        availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        ListProperty<AvailableElementSubViewModel> availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
 
+        availableBasicElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndFilterList(availableBasicElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC)));
+
+        availableObstacleElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndFilterList(availableObstacleElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE)));
+
+        availableAdvancedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndFilterList(availableAdvancedElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED)));
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
     }
 
-    /**
-     * Stellt der View die Liste, die alle Flipperautomat-Elemente enthält, die vom Nutzer platziert werden können, zur Verfügung.
-     *
-     * @return Eine Liste aller platzierbaren Flipperautomat-Elemente.
-     */
-    public ReadOnlyListProperty<AvailableElementSubViewModel> availableElementsProperty()
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
     {
-        return availableElements;
+        return availableBasicElements;
+    }
+
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableObstacleElementsProperty()
+    {
+        return availableObstacleElements;
+    }
+
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableAdvancedElementsProperty()
+    {
+        return availableAdvancedElements;
     }
 
     /**
