@@ -6,6 +6,8 @@ import sep.fimball.model.handler.BaseRuleElementEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
+
 /**
  * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
  */
@@ -18,6 +20,9 @@ public class BaseRuleElementFactory
      */
     static BaseRuleElement generate(BaseElementJson.RuleElementJson ruleElement)
     {
+        nullCheck(ruleElement);
+        nullCheck(ruleElement.general);
+
         Map<Integer, BaseRuleElementEvent> eventMap = new HashMap<>();
         if (ruleElement.events != null)
         {
