@@ -108,6 +108,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         ListProperty<AvailableElementSubViewModel> availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
+        ListPropertyConverter.autoSort(availableElements, (o1, o2) -> o1.nameProperty().get().compareTo(o2.nameProperty().get()));
 
         availableBasicElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndFilterList(availableBasicElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC)));

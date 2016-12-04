@@ -1,9 +1,6 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -44,6 +41,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private SimpleObjectProperty<Vector2> cameraPosition;
     private Vector2 softCameraPosition;
+    private SimpleBooleanProperty softCamera;
 
     /**
      * Die Stärke des Zooms der Kamera, die die Größe der Flipperautomaten-Elemente bestimmt.
@@ -80,6 +78,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Region parent = (Region) canvas.getParent();
         canvas.widthProperty().bind(parent.widthProperty());
         canvas.heightProperty().bind(parent.heightProperty());
+
+        softCamera = new SimpleBooleanProperty();
+        softCamera.bind(pinballCanvasViewModel.editorModeProperty().not());
     }
 
     /**
@@ -90,11 +91,13 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
-        double camFollowSpeed = 200.0;
+        double camFollowSpeed = softCamera.get() ? 200.0 : 50;
         double camFollowStep = delta / camFollowSpeed;
+        camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
 
         double cameraZoomSpeed = 50.0;
         double camZoomStep = delta / cameraZoomSpeed;
+        camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
 
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
@@ -109,7 +112,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         graphicsContext.scale(softCameraZoom, softCameraZoom);
 
-        if (pinballCanvasViewModel.isEditorMode())
+        if (pinballCanvasViewModel.editorModeProperty().get())
         {
             graphicsContext.save();
             Vector2 gridStart = canvasPosToGridPos(0, 0).scale(pixelsPerGridUnit);

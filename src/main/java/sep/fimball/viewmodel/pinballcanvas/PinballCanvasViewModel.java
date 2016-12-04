@@ -39,7 +39,7 @@ public class PinballCanvasViewModel
     /**
      * Gibt an, ob das Pinball-Canvas im Editor benutzt wird.
      */
-    private boolean editorMode;
+    private BooleanProperty editorMode;
 
     /**
      * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
@@ -59,7 +59,7 @@ public class PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
-        editorMode = false;
+        editorMode = new SimpleBooleanProperty(false);
     }
 
     /**
@@ -75,7 +75,7 @@ public class PinballCanvasViewModel
         this.editorViewModel = pinballMachineEditorViewModel;
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
-        editorMode = true;
+        editorMode = new SimpleBooleanProperty(true);
 
         ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
     }
@@ -105,7 +105,7 @@ public class PinballCanvasViewModel
      */
     public void mouseClickedOnGame(Vector2 gridPos)
     {
-        if (editorMode)
+        if (editorMode.get())
         {
             editorViewModel.mouseClickedOnGame(gridPos, false);
         }
@@ -118,7 +118,7 @@ public class PinballCanvasViewModel
      */
     public void mousePressedOnGame(Vector2 gridPos)
     {
-        if (editorMode)
+        if (editorMode.get())
         {
             editorViewModel.mouseClickedOnGame(gridPos, true);
         }
@@ -174,9 +174,9 @@ public class PinballCanvasViewModel
 
     /**
      * Stellt der View die Information, ob der Flipperautomat im Editor benutzt wird, zur Verfügung.
-     * @return {@code true}, falls das Pinball-Canvas im Editor benutzt wird, {@code false} sonst.
+     * @return Ob das Pinball-Canvas im Editor benutzt wird.
      */
-    public boolean isEditorMode()
+    public BooleanProperty editorModeProperty()
     {
         return editorMode;
     }
