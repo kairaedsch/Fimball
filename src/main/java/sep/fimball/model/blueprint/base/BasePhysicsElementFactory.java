@@ -18,6 +18,7 @@ public class BasePhysicsElementFactory
 {
     /**
      * Generiert ein BasePhysicsElement aus dem gegebenen PhysicElementJson.
+     *
      * @param physicsElement Die Vorlage, aus der das BasePhysicsElement erstellt wird.
      * @return Das generierte BasePhysicsElement.
      */
@@ -75,12 +76,10 @@ public class BasePhysicsElementFactory
                     collisionType = new EmptyCollision();
                     break;
                 case "ramp":
-                    //TODO: Add Ramp Collision
-                    collisionType = new EmptyCollision();
+                    collisionType = new RampCollision();
                     break;
-                case "rampentry":
-                    //TODO: Add Ramp Entry Collision
-                    collisionType = new EmptyCollision();
+                case "rampClimbing":
+                    collisionType = new RampClimbingCollision();
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown collision type '" + collider.collisionType.type + "' in PhysicsElement!");
@@ -88,13 +87,16 @@ public class BasePhysicsElementFactory
 
             Collider newCollider;
             WorldLayer layer = collider.layer;
-            if (layer == null)
-                layer = WorldLayer.GROUND;
+            if (!"empty".equals(collider.collisionType.type)) nullCheck(layer);
 
             if (collider.collisionType.type.equals("flipper"))
+            {
                 newCollider = new FlipperCollider(layer, shapes, collisionType, collider.colliderId);
+            }
             else
+            {
                 newCollider = new Collider(layer, shapes, collisionType, collider.colliderId);
+            }
 
             colliders.add(newCollider);
         }

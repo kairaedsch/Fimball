@@ -7,6 +7,7 @@ import sep.fimball.model.physics.collider.WorldLayer;
 
 /**
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
+ *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
@@ -27,16 +28,16 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     private double angularVelocity;
 
     /**
-     * Die Ebene, auf der sich der Ball befindet.
+     * Die Höhe des Balles.
      */
-    private WorldLayer layer;
+    private double height;
 
     /**
      * Erzeugt einen neuen Ball.
      *
-     * @param gameElement Das GameElement, dessen Eigenschaften kopiert werden.
-     * @param position Die Position, auf der sich der Ball befinden soll.
-     * @param rotation Die Rotation, um die der Ball gedreht sein soll.
+     * @param gameElement        Das GameElement, dessen Eigenschaften kopiert werden.
+     * @param position           Die Position, auf der sich der Ball befinden soll.
+     * @param rotation           Die Rotation, um die der Ball gedreht sein soll.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public BallPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
@@ -45,7 +46,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
 
         this.velocity = new Vector2();
         this.angularVelocity = 0.0;
-        this.layer = WorldLayer.GROUND;
+        this.height = 0;
     }
 
     @Override
@@ -54,8 +55,12 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         // Wende Schwerkraft auf den Ball an
         setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
 
+        setHeight(Math.max(0, height - 0.05 * deltaTime));
+        System.out.println(getLayer() + " " + height);
+
         // Bewege den Ball
         setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
+
     }
 
     /**
@@ -116,16 +121,16 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     public WorldLayer getLayer()
     {
-        return layer;
+        return height > 1 ? WorldLayer.RAMP : WorldLayer.GROUND;
     }
 
-    /**
-     * Setzt die Ebene, auf der sich der Ball befindet, auf den übergebenen Wert.
-     *
-     * @param layer Die neue Ebene, auf der sich der Ball befinden soll.
-     */
-    public void setLayer(WorldLayer layer)
+    public void setHeight(double height)
     {
-        this.layer = layer;
+        this.height = height;
+    }
+
+    public double getHeight()
+    {
+        return height;
     }
 }
