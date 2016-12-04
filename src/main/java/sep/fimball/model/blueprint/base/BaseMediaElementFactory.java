@@ -73,6 +73,6 @@ public class BaseMediaElementFactory
             elementImage = new ElementImage(baseElementId);
         }
 
-        return new BaseMediaElement(name, description, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
+        return new BaseMediaElement(name, description, mediaElement.general.elementHeight, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
     }
 }

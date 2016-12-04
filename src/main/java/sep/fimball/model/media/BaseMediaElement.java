@@ -45,16 +45,20 @@ public class BaseMediaElement
 
     private Map<Integer, Vector2> localCoords;
 
+    private double elementHeight;
+
     /**
      * Erstellt ein neues BaseMediaElement.
-     * @param name Der Name des BaseElements im Editor.
-     * @param description Die Beschreibung des BaseElements im Editor.
-     * @param canRotate Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
-     * @param rotationAccuracy  Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
-     * @param elementImage Das Bild des BaseElements.
-     * @param eventMap Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
+     *
+     * @param name             Der Name des BaseElements im Editor.
+     * @param description      Die Beschreibung des BaseElements im Editor.
+     * @param elementHeight    Die Höhe des Elements in Grideinheiten.
+     * @param canRotate        Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     * @param rotationAccuracy Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
+     * @param elementImage     Das Bild des BaseElements.
+     * @param eventMap         Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
-    public BaseMediaElement(String name, String description, boolean canRotate, int rotationAccuracy, ElementImage elementImage,
+    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage,
                             Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoords)
     {
         this.name = name;
@@ -64,10 +68,12 @@ public class BaseMediaElement
         this.elementImage = new SimpleObjectProperty<>(elementImage);
         this.eventMap = eventMap;
         this.localCoords = localCoords;
+        this.elementHeight = elementHeight;
     }
 
     /**
      * Gibt den Namen des BaseElements im Editor zurück.
+     *
      * @return Der Name des BaseElements im Editor.
      */
     public String getName()
@@ -77,6 +83,7 @@ public class BaseMediaElement
 
     /**
      * Gibt die Beschreibung des BaseElements im Editor zurück.
+     *
      * @return Die Beschreibung des BaseElements im Editor.
      */
     public String getDescription()
@@ -86,6 +93,7 @@ public class BaseMediaElement
 
     /**
      * Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
+     *
      * @return {@code true}, wenn die Elemente gedreht werden können, {@code false} sonst.
      */
     public boolean canRotate()
@@ -95,6 +103,7 @@ public class BaseMediaElement
 
     /**
      * Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
+     *
      * @return Die Gradzahl.
      */
     public int getRotationAccuracy()
@@ -104,7 +113,8 @@ public class BaseMediaElement
 
     /**
      * Gibt die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können, zurück.
-     * @return  Eine Map, die die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können, enthält.
+     *
+     * @return Eine Map, die die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können, enthält.
      */
     public Map<Integer, BaseMediaElementEvent> getEventMap()
     {
@@ -113,6 +123,7 @@ public class BaseMediaElement
 
     /**
      * Gibt das Bild des BaseElements zurück.
+     *
      * @return Das Bild des BaseElements.
      */
     public ReadOnlyObjectProperty<ElementImage> elementImageProperty()
@@ -123,5 +134,10 @@ public class BaseMediaElement
     public Map<Integer, Vector2> getLocalCoords()
     {
         return Collections.unmodifiableMap(localCoords);
+    }
+
+    public double getElementHeight()
+    {
+        return elementHeight;
     }
 }

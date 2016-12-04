@@ -171,6 +171,8 @@ public class BaseElementJson
              * Die Genauigkeit der Rotation beim Setzen und Bearbeiten im Editor, d.h. um wie viel Grad man Elemente von diesem Typ drehen kann.
              */
             public int rotationAccuracy;
+
+            public double elementHeight;
         }
 
         /**
