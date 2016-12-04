@@ -226,9 +226,7 @@ public class PhysicsHandler<GameElementT>
                     {
                         if (ballPhysicsElement != null && element != ballPhysicsElement)
                         {
-                            CollisionEventArgs args = element.checkCollision(ballPhysicsElement);
-                            if (args != null)
-                                collisionEventArgsList.add(args);
+                            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
                         }
                         elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
                     }

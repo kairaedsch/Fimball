@@ -129,16 +129,14 @@ public class PhysicsElement<GameElementT>
         return basePhysicsElement;
     }
 
-    public CollisionEventArgs checkCollision(BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         for (Collider collider : colliders)
         {
             if (collider.checkCollision(ballPhysicsElement, this))
             {
-                // TODO allow for multiple collisions in one object?
-                return new CollisionEventArgs<>(getGameElement(), collider.getId());
+                eventArgsList.add(new CollisionEventArgs<>(getGameElement(), collider.getId()));
             }
         }
-        return null;
     }
 }

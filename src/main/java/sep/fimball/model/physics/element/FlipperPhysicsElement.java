@@ -6,6 +6,8 @@ import sep.fimball.general.debug.Debug;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 
+import java.util.List;
+
 /**
  * TODO - flipper halt
  */
@@ -61,17 +63,15 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     }
 
     @Override
-    public CollisionEventArgs checkCollision(BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         for (Collider collider : getColliders())
         {
             if (collider.checkCollision(ballPhysicsElement, this))
             {
-                // TODO allow for multiple collisions in one object?
-                return new CollisionEventArgs<>(getGameElement(), collider.getId());
+                eventArgsList.add(new CollisionEventArgs<>(getGameElement(), collider.getId()));
             }
         }
-        return null;
     }
 
     public double getAngularVelocity()
