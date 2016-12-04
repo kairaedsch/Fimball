@@ -13,5 +13,10 @@ public enum WorldLayer
     /**
      * Die Ebene der Rampen.
      */
-    RAMP
+    RAMP,
+
+    /**
+     * Beide Ebenen.
+     */
+    BOTH
 }
