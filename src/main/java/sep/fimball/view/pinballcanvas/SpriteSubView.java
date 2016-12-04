@@ -63,17 +63,28 @@ public class SpriteSubView
 
         setupDrawLocation(graphicsContext, rotationRest);
 
+        Vector2 position = positionProperty.get();
+        Vector2 size = new Vector2(image.getWidth(), image.getHeight());
+
+        if (viewModel.scaleProperty().get() != 1)
+        {
+            double scale = viewModel.scaleProperty().get();
+            Vector2 oldSize = size;
+            size = size.scale(scale);
+            position = position.plus(oldSize.minus(size).scale(0.5).scale(1.0 / Config.pixelsPerGridUnit));
+        }
+
         if (imageLayer == ImageLayer.TOP)
         {
-            drawImage(graphicsContext, imageLayer, image);
+            drawImage(graphicsContext, imageLayer, image, position, size);
         }
         if (viewModel.isSelectedProperty().get())
         {
-            drawBorder(graphicsContext, imageLayer, image);
+            drawBorder(graphicsContext, imageLayer, image, position, size);
         }
         if (imageLayer == ImageLayer.BOTTOM)
         {
-            drawImage(graphicsContext, imageLayer, image);
+            drawImage(graphicsContext, imageLayer, image, position, size);
         }
 
         graphicsContext.restore();
@@ -86,18 +97,15 @@ public class SpriteSubView
      * @param imageLayer      Bestimmt, ob das Bild sich auf der oberen oder unteren Bildebene befinden soll.
      * @param image           Das zu zeichnende Bild.
      */
-    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image)
+    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, Vector2 position, Vector2 size)
     {
-        double x = positionProperty.get().getX();
-        double y = positionProperty.get().getY();
-
         if (imageLayer == ImageLayer.TOP)
         {
-            graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
+            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
         }
         else
         {
-            graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
+            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
         }
     }
 
@@ -134,11 +142,8 @@ public class SpriteSubView
      * @param imageLayer      Bestimmt, ob der Rahmen auf der oberen oder unteren Bildebene gezeichnet wird.
      * @param image           Das Bild, das umrahmt werden soll.
      */
-    private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image)
+    private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, Vector2 position, Vector2 size)
     {
-        double x = positionProperty.get().getX();
-        double y = positionProperty.get().getY();
-
         final double borderBlinkRate = 1000.0;
         double borderWidth = Config.pixelsPerGridUnit * 0.25;
         double borderOffset = 0.5 * borderWidth;
@@ -151,13 +156,13 @@ public class SpriteSubView
         {
             Color color = Config.complementColor.interpolate(Config.secondaryColor, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, y * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
+            graphicsContext.strokeRect(position.getX() * Config.pixelsPerGridUnit - borderOffset, position.getY() * Config.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
         }
         else
         {
             Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, (y + viewModel.getElementHeight()) * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
+            graphicsContext.strokeRect( position.getX()* Config.pixelsPerGridUnit - borderOffset, (position.getY() + viewModel.getElementHeight()) * Config.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
         }
     }
 

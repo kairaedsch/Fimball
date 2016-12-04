@@ -228,7 +228,10 @@ public class PhysicsHandler<GameElementT>
                         {
                             element.checkCollision(collisionEventArgsList, ballPhysicsElement);
                         }
-                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation()));
+
+                        double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
+                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
+
                     }
                 }
 

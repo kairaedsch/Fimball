@@ -50,6 +50,8 @@ public class SpriteSubViewModel
 
     private double elementHeight;
 
+    private DoubleProperty scale;
+
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
@@ -63,6 +65,9 @@ public class SpriteSubViewModel
 
         rotation = new SimpleDoubleProperty();
         rotation.bind(gameElement.rotationProperty());
+
+        scale = new SimpleDoubleProperty();
+        scale.bind(gameElement.scaleProperty());
 
         currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 
@@ -164,5 +169,10 @@ public class SpriteSubViewModel
     public double getElementHeight()
     {
         return elementHeight;
+    }
+
+    public DoubleProperty scaleProperty()
+    {
+        return scale;
     }
 }

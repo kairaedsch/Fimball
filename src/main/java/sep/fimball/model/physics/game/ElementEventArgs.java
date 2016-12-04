@@ -24,6 +24,8 @@ public class ElementEventArgs<GameElementT>
      */
     private double rotation;
 
+    private double scale;
+
     /**
      * Erstellt ein neues ElementEventArgs.
      *
@@ -31,11 +33,12 @@ public class ElementEventArgs<GameElementT>
      * @param position    Die neue Position.
      * @param rotation     Die neue Rotation.
      */
-    public ElementEventArgs(GameElementT gameElement, Vector2 position, double rotation)
+    public ElementEventArgs(GameElementT gameElement, Vector2 position, double rotation, double scale)
     {
         this.gameElement = gameElement;
         this.position = position;
         this.rotation = rotation;
+        this.scale = scale;
     }
 
     /**
@@ -66,5 +69,10 @@ public class ElementEventArgs<GameElementT>
     public GameElementT getGameElement()
     {
         return gameElement;
+    }
+
+    public double getScale()
+    {
+        return scale;
     }
 }

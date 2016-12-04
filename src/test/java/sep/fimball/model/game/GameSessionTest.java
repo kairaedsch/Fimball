@@ -84,7 +84,7 @@ public class GameSessionTest
         final Vector2 newPos = new Vector2(1, 1);
         final double newRot = 1;
 
-        ElementEventArgs<GameElement> elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot);
+        ElementEventArgs<GameElement> elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot, 1);
         List<ElementEventArgs<GameElement>> elementEventArgsList = new ArrayList<>();
         elementEventArgsList.add(elementEventArgs);
 

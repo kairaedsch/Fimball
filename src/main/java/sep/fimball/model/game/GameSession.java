@@ -347,6 +347,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
                 elementEventArgs.getGameElement().setRotation(elementEventArgs.getRotation());
+                elementEventArgs.getGameElement().setScale(elementEventArgs.getScale());
             }
         }
 

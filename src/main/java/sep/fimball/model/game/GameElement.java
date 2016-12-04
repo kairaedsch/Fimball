@@ -25,6 +25,8 @@ public class GameElement implements HandlerGameElement
      */
     private DoubleProperty rotation;
 
+    private DoubleProperty scale;
+
     /**
      * Diese Zahl zählt wie oft das GameElement in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
      */
@@ -59,6 +61,7 @@ public class GameElement implements HandlerGameElement
         this.hitCount = new SimpleIntegerProperty();
         this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
+        this.scale = new SimpleDoubleProperty(1);
 
         if (bind)
         {
@@ -191,5 +194,15 @@ public class GameElement implements HandlerGameElement
     public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
     {
         return currentAnimation;
+    }
+
+    public void setScale(double scale)
+    {
+        this.scale.set(scale);
+    }
+
+    public DoubleProperty scaleProperty()
+    {
+        return scale;
     }
 }

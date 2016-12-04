@@ -91,7 +91,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
-        double camFollowSpeed = softCamera.get() ? 200.0 : 50;
+        double camFollowSpeed = softCamera.get() ? 500.0 : 50;
         double camFollowStep = delta / camFollowSpeed;
         camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
 
@@ -171,7 +171,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
         }
 
-        Debug.draw(graphicsContext);
+        //Debug.draw(graphicsContext);
 
         graphicsContext.restore();
 
