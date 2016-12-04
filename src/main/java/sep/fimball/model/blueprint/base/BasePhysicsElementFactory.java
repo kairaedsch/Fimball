@@ -62,6 +62,7 @@ public class BasePhysicsElementFactory
                     collisionType = new NormalCollision();
                     break;
                 case "acceleration":
+                    nullCheck(collider.collisionType.acceleration);
                     collisionType = new AccelerationCollision(collider.collisionType.acceleration);
                     break;
                 case "bounce":
