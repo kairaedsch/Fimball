@@ -78,7 +78,7 @@ public class SoundManagerViewModelTest
         assertThat("Der abzuspielende Sound soll wiederholt werden", playObserver.getSound().isRepeating(), is(true));
 
         //Die Observer werden über das Abspielen des richtigen SoundClips informiert.
-        Sound testSound = new Sound("test", false);
+        Sound testSound = mock(Sound.class);
         SoundManager.getInstance().addSoundToPlay(testSound);
         assertThat("Der Observer wurde über das Abspielen des richtigen Sounds informiert", playObserver.getSound(), equalTo
                 (testSound));
