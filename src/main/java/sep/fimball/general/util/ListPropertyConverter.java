@@ -5,6 +5,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -12,6 +13,38 @@ import java.util.Map;
  */
 public class ListPropertyConverter
 {
+    /**
+     * Sortiert die Liste automatisch, wenn sie sich verändert.
+     *
+     * @param list       Die zu sortierende Liste.
+     * @param comparator Der Vergleichsoperator für die Liste.
+     * @param <T>        Der Typ der Listelemente.
+     */
+    public static <T> void autoSort(ObservableList<T> list, Comparator<T> comparator)
+    {
+        ListChangeListener<T> listChangeListener = new ListChangeListener<T>()
+        {
+            /**
+             * Gibt an, ob die Liste gerade sortiert wird.
+             */
+            boolean sorting = false;
+
+            @Override
+            public void onChanged(Change<? extends T> change)
+            {
+                if(!sorting)
+                {
+                    sorting = true;
+                    list.sort(comparator);
+                    sorting = false;
+                }
+            }
+        };
+
+        list.addListener(listChangeListener);
+        listChangeListener.onChanged(null);
+    }
+
     /**
      * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code listPropertyOriginal}, wenn sich die Werte in der {@code listPropertyOriginal} ändern.
      *
@@ -25,7 +58,7 @@ public class ListPropertyConverter
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
-            if (change == null)
+            if (change == null || listPropertyOriginal.isEmpty())
             {
                 listPropertyConverted.clear();
                 for (OriginalT original : listPropertyOriginal)

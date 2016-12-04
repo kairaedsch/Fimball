@@ -4,7 +4,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import sep.fimball.model.media.Sound;
@@ -13,6 +12,7 @@ import sep.fimball.viewmodel.SoundManagerViewModel;
 import java.util.HashMap;
 import java.util.Observer;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * SoundManagerView ist für das Abspielen der SoundEffekte sowie der Hintergrundmusik zuständig.
@@ -76,22 +76,18 @@ public class SoundManagerView
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
-            try
-            {
-                MediaPlayer newMediaPlayer = new MediaPlayer(new Media(soundPath));
-                newMediaPlayer.setOnEndOfMedia(() -> newMediaPlayer.seek(Duration.ZERO));
-                newMediaPlayer.volumeProperty().bind(musicVolume);
-                newMediaPlayer.play();
+            Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
 
+            if (newMediaPlayer.isPresent())
+            {
+                newMediaPlayer.get().setOnEndOfMedia(() -> newMediaPlayer.get().seek(Duration.ZERO));
+                newMediaPlayer.get().volumeProperty().bind(musicVolume);
+                newMediaPlayer.get().play();
 
                 // Es kann sich immer nur ein Sound wiederholen
                 mediaPlayer.ifPresent(MediaPlayer::dispose);
 
-                mediaPlayer = Optional.of(newMediaPlayer);
-            }
-            catch (MediaException e)
-            {
-
+                mediaPlayer = newMediaPlayer;
             }
         }
         // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
@@ -100,13 +96,45 @@ public class SoundManagerView
             // Cache den AudioClip, falls er noch nicht existiert
             if (!loadedAudioClips.containsKey(soundPath))
             {
-                AudioClip clip = new AudioClip(soundPath);
-                clip.volumeProperty().bind(sfxVolume);
-                loadedAudioClips.put(soundPath, clip);
-            }
+                Optional<AudioClip> audioClip = tryToLoad(AudioClip::new, soundPath);
 
-            // Spiele den AudioClip ab
-            loadedAudioClips.get(soundPath).play();
+                if (audioClip.isPresent())
+                {
+                    audioClip.get().volumeProperty().bind(sfxVolume);
+                    loadedAudioClips.put(soundPath, audioClip.get());
+                    audioClip.get().play();
+                }
+            }
+            else
+            {
+                // Spiele den AudioClip ab
+                loadedAudioClips.get(soundPath).play();
+            }
+        }
+    }
+
+    /**
+     * Versucht den {@code creater} mit dem Parameter {@code input} auszuführen.
+     *
+     * @param creater Der Creater, welcher ein Object vom Typ {@code R} erstellen soll.
+     * @param input   Der Input für den {@code creater}.
+     * @param <T>     Der Typ vom {@code input}.
+     * @param <R>     Der Typ vom Output von {@code creater}.
+     * @return Gibt entweder ein Optional mit dem vom {@code creater} zurück gegebenen Object zurück, oder ein Optional.emtpy, falls ein Fehler aufgetreten ist.
+     */
+    private <T, R> Optional<R> tryToLoad(Function<T, R> creater, T input)
+    {
+        try
+        {
+            return Optional.of(creater.apply(input));
+        }
+        /* Wir fangen hier Throwable, da es egal ist, wenn wir Sounds nicht abspielen können. Wir wollen aber auf gar keinen Fall,
+         * dass das gesamte Spiel abstürzt, nur weil ein Sound nicht abgespielt werden kann. */
+        catch (Throwable t)
+        {
+            System.err.println("Kann nicht laden: \"" + input + "\"");
+            t.printStackTrace();
+            return Optional.empty();
         }
     }
 

@@ -6,6 +6,7 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
@@ -63,15 +64,13 @@ public class PinballMachine
         this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementsLoaded = false;
 
-        this.highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         if (highscores != null)
         {
-            for (Highscore highscore : highscores)
-            {
-                if(this.highscoreList.size() <= Config.maxHighscores) this.highscoreList.add(highscore);
-            }
+            highscoreList.addAll(highscores);
         }
-
+        ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
+        while(highscoreList.size() > Config.maxHighscores) highscoreList.remove(highscoreList.size() - 1);
 
         this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
@@ -135,7 +134,7 @@ public class PinballMachine
     {
         if (highscoreList.size() >= Config.maxHighscores)
         {
-            Highscore worstHigscore = highscoreList.stream().min((o1, o2) -> (int) (o1.scoreProperty().get() - o2.scoreProperty().get())).get();
+            Highscore worstHigscore = highscoreList.get(highscoreList.size() - 1);
             if(worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
             {
                 highscoreList.remove(worstHigscore);
