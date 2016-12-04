@@ -14,7 +14,8 @@ import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 /**
- * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements zuständig.
+ * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements
+ * zuständig.
  */
 public class SpriteSubView
 {
@@ -29,7 +30,8 @@ public class SpriteSubView
     private SpriteSubViewModel viewModel;
 
     /**
-     * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und bindet sich an dieses.
+     * , Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
+     * bindet sich an dieses.
      *
      * @param viewModel Das zu setzende SpriteSubViewModel.
      */
@@ -44,79 +46,113 @@ public class SpriteSubView
     /**
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
-     * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
-     * @param imageLayer      Gibt an ob das Sprite sein Top oder Bottom Image zeichnen soll.
+     * @param graphicsContext Der GraphicsContext, auf dem die View sich
+     * zeichnen soll.
+     * @param imageLayer Gibt an, ob das Sprite sein Top- oder Bottom-Image
+     * zeichnen soll.
      */
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
-        double x = positionProperty.get().getX();
-        double y = positionProperty.get().getY();
-
         Image image;
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
-        //Berechne den double Rest der bei mod rotationAccuracy bleibt
-        double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
+        double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());    //Berechne den double Rest der bei mod rotationAccuracy bleibt
         if (imageLayer == ImageLayer.TOP)
+        {
             image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        }
         else
+        {
             image = ImageCache.getInstance().getImage(elementImage.getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
+        }
 
-        graphicsContext.save(); // saves the current state on stack, including the current transform
+        graphicsContext.save();
 
+        drawImage(graphicsContext, imageLayer, image, rotationRest);
+        if (viewModel.isSelectedProperty().get())
+        {
+            drawBorder(graphicsContext, imageLayer, image);
+        }
+
+        graphicsContext.restore();
+    }
+
+    /**
+     * Zeichnet das Bild auf den angegebenen GraphicsContext.
+     *
+     * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
+     * @param imageLayer Bestimmt, ob das Bild sich auf der oberen oder unteren Bildebene befinden soll.
+     * @param image Das zu zeichnende Bild.
+     * @param rotation Der Winkel, um den das Bild vor der Zeichnung gedreht werden soll.
+     */
+    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, double rotation)
+    {
+        double x = positionProperty.get().getX();
+        double y = positionProperty.get().getY();
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
-        int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
+        int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
 
         if (viewModel.getLocalCoords().containsKey(picRotate))
         {
             Vector2 localCoords = viewModel.getLocalCoords().get(picRotate);
-            graphicsContext.translate(localCoords.getX() * Config.pixelsPerGridUnit,localCoords.getY() * Config.pixelsPerGridUnit);
+            graphicsContext.translate(localCoords.getX() * Config.pixelsPerGridUnit, localCoords.getY() * Config.pixelsPerGridUnit);
             pivot = pivot.plus(localCoords.scale(-1));
         }
 
-        if (rotationRest != 0)
+        if (rotation != 0)
         {
-            rotate(graphicsContext, rotationRest, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
+            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
         }
 
-        if(imageLayer == ImageLayer.TOP) graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
-
-        // Draw border around selected element
-        if (viewModel.isSelectedProperty().get())
+        if (imageLayer == ImageLayer.TOP)
         {
-            final double borderBlinkRate = 1000.0;
-            double borderWidth = Config.pixelsPerGridUnit * 0.25;
-            double borderOffset = 0.5 * borderWidth;
-
-            graphicsContext.setLineWidth(borderWidth);
-
-            double effectTime = (System.currentTimeMillis() % borderBlinkRate) / borderBlinkRate;
-            double effectValue = -2 * effectTime * (effectTime - 1);
-
-            if(imageLayer == ImageLayer.TOP)
-            {
-                Color color = Config.complementColor.interpolate(Config.secondaryColor, effectValue);
-                graphicsContext.setStroke(color);
-                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, y * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
-            }
-            else
-            {
-                Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, effectValue);
-                graphicsContext.setStroke(color);
-                graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, (y + 1) * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
-            }
-        }
-
-        if(imageLayer == ImageLayer.BOTTOM)
             graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
-
-        graphicsContext.restore(); // back to original state (before rotation)
+        }
+        else
+        {
+            graphicsContext.drawImage(image, x * Config.pixelsPerGridUnit, y * Config.pixelsPerGridUnit, image.getWidth(), image.getHeight());
+        }
     }
+
+    /**
+     * Zeichnet einen Rahmen um {@code image}.
+     *
+     * @param graphicsContext Der GraphicsContext, in dem der Rahmen gezeichnet werden soll.
+     * @param imageLayer Bestimmt, ob der Rahmen auf der oberen oder unteren Bildebene gezeichnet wird.
+     * @param image Das Bild, das umrahmt werden soll.
+     */
+    private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image)
+    {
+        double x = positionProperty.get().getX();
+        double y = positionProperty.get().getY();
+        final double borderBlinkRate = 1000.0;
+        double borderWidth = Config.pixelsPerGridUnit * 0.25;
+        double borderOffset = 0.5 * borderWidth;
+
+        graphicsContext.setLineWidth(borderWidth);
+
+        double effectTime = (System.currentTimeMillis() % borderBlinkRate) / borderBlinkRate;
+        double effectValue = -2 * effectTime * (effectTime - 1);
+
+        if (imageLayer == ImageLayer.TOP)
+        {
+            Color color = Config.complementColor.interpolate(Config.secondaryColor, effectValue);
+            graphicsContext.setStroke(color);
+            graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, y * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
+        }
+        else
+        {
+            Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, effectValue);
+            graphicsContext.setStroke(color);
+            graphicsContext.strokeRect(x * Config.pixelsPerGridUnit - borderOffset, (y + 1) * Config.pixelsPerGridUnit - borderOffset, image.getWidth() + borderOffset * 2, image.getHeight() + borderOffset * 2 - Config.pixelsPerGridUnit);
+        }
+    }
+
 
     /**
      * Dreht das Sprite um den gegebenen Winkel am Pivot-Punkt.
      *
-     * @param gc         Der GraphicsContext, auf dem rotiert wird.
-     * @param angle      Die Grad-Zahl, um die rotiert wird.
+     * @param gc Der GraphicsContext, auf dem rotiert wird.
+     * @param angle Die Grad-Zahl, um die rotiert wird.
      * @param pivotPoint Der Punkt, um den rotiert werden soll.
      */
     private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)
