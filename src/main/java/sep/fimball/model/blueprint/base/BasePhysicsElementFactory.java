@@ -62,7 +62,7 @@ public class BasePhysicsElementFactory
                     collisionType = new NormalCollision();
                     break;
                 case "acceleration":
-                    collisionType = new AccelerationCollision(collider.collisionType.strength);
+                    collisionType = new AccelerationCollision(collider.collisionType.acceleration);
                     break;
                 case "bounce":
                     collisionType = new BounceCollision(collider.collisionType.strength);
@@ -75,6 +75,10 @@ public class BasePhysicsElementFactory
                     break;
                 case "ramp":
                     //TODO: Add Ramp Collision
+                    collisionType = new EmptyCollision();
+                    break;
+                case "rampentry":
+                    //TODO: Add Ramp Entry Collision
                     collisionType = new EmptyCollision();
                     break;
                 default:

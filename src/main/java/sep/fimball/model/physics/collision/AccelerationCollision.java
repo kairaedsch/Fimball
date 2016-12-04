@@ -1,6 +1,7 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.PhysicsHandler;
 
 /**
  * Bei einem Collider mit dieser Art von Collision prallt der Ball nicht ab, sondern wird in eine vorher festgelegte
@@ -11,22 +12,22 @@ public class AccelerationCollision implements CollisionType
     /**
      * Gibt an, wie stark der Ball in Richtung des Elements beschleunigt wird.
      */
-    private double strength;
+    private Vector2 acceleration;
 
     /**
      * Erstellt eine neue Instanz von AccelerationCollision.
      *
-     * @param strength Wie stark der Ball in Richtung des Elements beschleunigt wird.
+     * @param acceleration Wie stark der Ball beschleunigt wird.
      */
-    public AccelerationCollision(double strength)
+    public AccelerationCollision(Vector2 acceleration)
     {
-        this.strength = strength;
+        this.acceleration = acceleration;
     }
 
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        Vector2 direction = new Vector2(0, -1).rotate(Math.toRadians(info.getRotation()));
-        info.getBall().setVelocity(info.getBall().getVelocity().plus(direction.scale(strength)));
+        Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getRotation())).scale(PhysicsHandler.TICK_RATE / 1000.0);
+        info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp));
     }
 }

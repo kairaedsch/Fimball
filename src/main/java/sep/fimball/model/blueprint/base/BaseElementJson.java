@@ -121,6 +121,11 @@ public class BaseElementJson
                  * Speichert die Kraft, die der ColliderType auf die Kugel ausübt.
                  */
                 public double strength;
+
+                /**
+                 * Speichert die Acceleration, die der ColliderType auf die Kugel ausübt.
+                 */
+                public Vector2 acceleration;
             }
         }
     }
