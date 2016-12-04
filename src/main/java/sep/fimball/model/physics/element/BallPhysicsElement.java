@@ -55,7 +55,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         // Wende Schwerkraft auf den Ball an
         setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
 
-        setHeight(Math.max(0, height - 0.05 * deltaTime));
+        setHeight(Math.max(0, height - 5 * deltaTime));
         System.out.println(getLayer() + " " + height);
 
         // Bewege den Ball
@@ -126,7 +126,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
 
     public void setHeight(double height)
     {
-        this.height = height;
+        this.height = Math.min(2, Math.max(0, height));
     }
 
     public double getHeight()
