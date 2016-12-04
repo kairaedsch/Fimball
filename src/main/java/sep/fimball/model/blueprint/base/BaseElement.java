@@ -47,8 +47,8 @@ public class BaseElement
     public BaseElement(String id, BaseElementJson baseElementJson)
     {
         nullCheck(baseElementJson);
-        nullCheck(baseElementJson.elementType == null);
-        nullCheck(baseElementJson.elementCategory == null);
+        nullCheck(baseElementJson.elementType);
+        nullCheck(baseElementJson.elementCategory);
 
         this.id = id;
         elementCategory = baseElementJson.elementCategory;
