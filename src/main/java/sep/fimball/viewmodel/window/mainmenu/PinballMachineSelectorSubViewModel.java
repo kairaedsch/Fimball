@@ -35,11 +35,6 @@ public class PinballMachineSelectorSubViewModel
     private BooleanProperty isSelected;
 
     /**
-     * Das zugehörige PinBallMachineInfoSubViewModel.
-     */
-    private PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel;
-
-    /**
      * Erstellt ein neues PinballMachineSelectorSubViewModel.
      *
      * @param mainMenu                       Das zugehörige Hauptmenü.
@@ -50,7 +45,6 @@ public class PinballMachineSelectorSubViewModel
     {
         this.mainMenu = mainMenu;
         this.pinballMachine = pinballMachine;
-        this.pinballMachineInfoSubViewModel = pinballMachineInfoSubViewModel;
         this.isSelected = new SimpleBooleanProperty();
 
         name = new SimpleStringProperty();
@@ -94,7 +88,7 @@ public class PinballMachineSelectorSubViewModel
      * Stellt der View die Information, ob der Flipperautomat aktuell ausgewählt ist, zur Verfügung.
      * @return {@code true}, wenn der Flipperautomat ausgewählt ist, {@code false} sonst.
      */
-    public boolean isSelected()
+    boolean isSelected()
     {
         return isSelected.get();
     }

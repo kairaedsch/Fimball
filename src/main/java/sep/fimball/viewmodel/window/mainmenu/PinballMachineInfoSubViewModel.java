@@ -119,7 +119,7 @@ public class PinballMachineInfoSubViewModel
      *
      * @return Der Flipperautomat.
      */
-    public ReadOnlyObjectProperty<PinballMachine> pinballMachineReadOnlyProperty()
+    ReadOnlyObjectProperty<PinballMachine> pinballMachineReadOnlyProperty()
     {
         return pinballMachine;
     }

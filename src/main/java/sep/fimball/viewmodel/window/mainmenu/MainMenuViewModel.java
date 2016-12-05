@@ -53,7 +53,7 @@ public class MainMenuViewModel extends WindowViewModel
      *
      * @param pinballMachine Der neue Flipperautomat, der dargestellt werden soll.
      */
-    public void switchPinballMachineInfo(PinballMachine pinballMachine)
+    void switchPinballMachineInfo(PinballMachine pinballMachine)
     {
         pinballMachineInfoSubViewModel.update(pinballMachine);
     }

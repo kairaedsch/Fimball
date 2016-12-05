@@ -106,8 +106,8 @@ public class GameViewModel extends WindowViewModel
 
         this.startedFromEditor = startedFromEditor;
 
-        gameSession.isOverProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue)
+        gameSession.isOverProperty().addListener((observable, oldIsGameOver, newIsGameOver) -> {
+            if(newIsGameOver)
             {
                 sceneManager.setDialog(new GameOverViewModel(pinballMachine, getScores(), playerNames, startedFromEditor));
             }

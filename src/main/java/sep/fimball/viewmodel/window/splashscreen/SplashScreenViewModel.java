@@ -1,22 +1,35 @@
 package sep.fimball.viewmodel.window.splashscreen;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
+import javafx.util.Duration;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  * Das SplashScreenViewModel stellt der View Informationen über den Fortschritt des Ladens im Splashscreen bereit.
  */
 public class SplashScreenViewModel extends WindowViewModel
 {
+    /**
+     * Der Abstand zwischen der Aktualisierungen des Lade-Fortschritts.
+     */
+    private static final double LOOP_TICK = 0.5;
+
+    /**
+     * Die Anzahl der Texte, die bem Fortschritt angezeigt werden sollen.
+     */
+    private final int numberOfTexts;
+
     /**
      * Der Text, der während des Lade-Fortschritts anzeigt wird.
      */
@@ -28,15 +41,35 @@ public class SplashScreenViewModel extends WindowViewModel
     private DoubleProperty loadProgress;
 
     /**
+     * Die Texte, die nacheinander beim Laden angzeigt werden sollen.
+     */
+    private Queue<String> texts;
+
+    /**
      * Erzeugt ein neues SplashScreenViewModel.
      */
     public SplashScreenViewModel()
     {
         super(WindowType.SPLASH_SCREEN);
-        progressText = new SimpleStringProperty();
-        loadProgress = new SimpleDoubleProperty();
+        progressText = new SimpleStringProperty("Loading");
+        loadProgress = new SimpleDoubleProperty(0);
+        texts = new ArrayDeque<>();
+        offerTexts();
+        numberOfTexts = texts.size();
         startLoading();
     }
+
+    /**
+     * Fügt Texte in die Text-Queue ein.
+     */
+    private void offerTexts()
+    {
+        texts.offer("Elements loaded");
+        texts.offer("Machines loaded");
+        texts.offer("Settings loaded");
+        texts.offer("Sounds loaded");
+    }
+
 
     /**
      * Benachrichtigt den ScemeManager, dass das Hauptmenü angezeigt werden soll.
@@ -51,58 +84,27 @@ public class SplashScreenViewModel extends WindowViewModel
      */
     private void startLoading()
     {
-        final Task<ObservableList<String>> messageTask = new Task<ObservableList<String>>()
+        Timeline loop = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(LOOP_TICK), (event -> loopUpdate()));
+        loop.setCycleCount(texts.size() + 1);
+        loop.getKeyFrames().add(keyFrame);
+        loop.play();
+        loop.statusProperty().addListener(((observable, oldStatus, newStatus) ->
         {
-            @Override
-            protected ObservableList<String> call() throws InterruptedException
+            if (newStatus == Animation.Status.STOPPED)
             {
-                ObservableList<String> messages = FXCollections.observableArrayList();
-                ObservableList<String> availableMessages = FXCollections.observableArrayList("Elements loaded", "Machines loaded", "Settings loaded", "Sounds loaded");
-
-                updateMessage("Initialising");
-                for (int i = 0; i < availableMessages.size(); i++)
-                {
-                    Thread.sleep(40);
-                    updateProgress(i + 1, availableMessages.size());
-                    String nextMessage = availableMessages.get(i);
-                    messages.add(nextMessage);
-                    updateMessage(nextMessage);
-                }
-                Thread.sleep(40);
-                updateMessage("Everything done");
-
-                return messages;
+                showMainMenu();
             }
-        };
-
-        bindToTask(messageTask, this::showMainMenu);
-        new Thread(messageTask).start();
+        }));
     }
 
-
     /**
-     * Bindet den {@code progressText} und den {@code loadProgress} an die Properties des Tasks.
-     *
-     * @param task              Der Task, an den gebunden werden soll.
-     * @param CompletionHandler Der Handler, der das Ende des Tasks händelt.
+     * Aktualisiert den Lade-Fortschritt.
      */
-    private void bindToTask(Task<?> task, CompletionHandler CompletionHandler)
+    private void loopUpdate()
     {
-        progressText.bind(task.messageProperty());
-
-        loadProgress.bind(task.progressProperty());
-        task.stateProperty().addListener((observableValue, oldState, newState) ->
-        {
-            if (newState == Worker.State.SUCCEEDED)
-            {
-                loadProgress.unbind();
-                loadProgress.set(1);
-
-                CompletionHandler.complete();
-            } // todo add code to gracefully handle other task states.
-        });
-
-
+        progressText.set(texts.poll());
+        loadProgress.set(loadProgress.get() + (1.0 / numberOfTexts));
     }
 
     /**
@@ -125,14 +127,4 @@ public class SplashScreenViewModel extends WindowViewModel
         return progressText;
     }
 
-    /**
-     * Händelt das Abschließen eines Tasks.
-     */
-    public interface CompletionHandler
-    {
-        /**
-         * Wird aufgerufen, wenn der Task fertig ist.
-         */
-        void complete();
-    }
 }
