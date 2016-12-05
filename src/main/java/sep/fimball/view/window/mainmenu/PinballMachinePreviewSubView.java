@@ -8,9 +8,9 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.mainmenu.PinballMachineSelectorSubViewModel;
 
 /**
- * Die PinballMachineSelectorSubView ist für die Darstellung der Vorschau eines Flipperautomaten in der Vorschau-Liste zuständig und ermöglicht dem Nutzer, diesen auszuwählen, wodurch eine größere Vorschau im MainMenuView erscheint.
+ * Die PinballMachinePreviewSubView ist für die Darstellung der Vorschau eines Flipperautomaten in der Vorschau-Liste zuständig und ermöglicht dem Nutzer, diesen auszuwählen, wodurch eine größere Vorschau im MainMenuView erscheint.
  */
-public class PinballMachineSelectorSubView implements ViewBoundToViewModel<PinballMachineSelectorSubViewModel>
+public class PinballMachinePreviewSubView implements ViewBoundToViewModel<PinballMachineSelectorSubViewModel>
 {
     /**
      * Zeigt das Vorschau-Bild des Flipperautomaten an.
@@ -25,7 +25,7 @@ public class PinballMachineSelectorSubView implements ViewBoundToViewModel<Pinba
     private Label previewName;
 
     /**
-     * Das zum PinballMachineSelectorSubView gehörende PinballMachineSelectorSubViewModel.
+     * Das zum PinballMachinePreviewSubView gehörende PinballMachineSelectorSubViewModel.
      */
     private PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel;
 

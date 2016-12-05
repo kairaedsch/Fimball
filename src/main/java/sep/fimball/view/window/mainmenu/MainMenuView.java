@@ -37,7 +37,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private Label detailedPreviewName;
 
     /**
-     * Das Pane zur Anzeige der Highscores, die an dem Flipperautomaten erreicht wurden.
+     * Das Pane zur Anzeige der Highscores, die auf dem Flipperautomaten erreicht wurden.
      */
     @FXML
     private VBox highscoreTable;
@@ -65,11 +65,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private Tooltip settingsTip;
 
-    /**
-     * Setzt das zur MainMenuView gehörende MainMenuViewModel.
-     *
-     * @param mainMenuViewModel Das zu setzende MainMenuViewModel.
-     */
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {

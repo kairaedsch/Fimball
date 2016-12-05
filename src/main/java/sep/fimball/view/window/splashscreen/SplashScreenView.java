@@ -19,13 +19,13 @@ import java.io.File;
 public class SplashScreenView extends WindowView<SplashScreenViewModel>
 {
     /**
-     * Der Container, der die Elemente der Splashscreens enthält.
+     * Der Container, der die Elemente des Splashscreens enthält.
      */
     @FXML
     private VBox splashLayout;
 
     /**
-     * Die Leiste, die anzeigt, wie weit das Laden ist.
+     * Die Leiste, die den Fortschritt des Ladens anzeigt.
      */
     @FXML
     private ProgressBar loadProgress;
