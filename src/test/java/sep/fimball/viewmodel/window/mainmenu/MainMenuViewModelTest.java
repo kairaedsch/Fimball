@@ -73,6 +73,7 @@ public class MainMenuViewModelTest
         for (PinballMachine name : names) {
             found = name.nameProperty().get().equals(pinballmachinename);
         }
+        //TODO
         //assertThat(found, is(false));
 
     }

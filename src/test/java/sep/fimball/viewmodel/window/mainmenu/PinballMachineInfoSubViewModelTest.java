@@ -1,26 +1,34 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
 import org.junit.Test;
+import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
-import java.io.IOException;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class PinballMachineInfoSubViewModelTest
 {
     @Test
-    public void infoSubViewModelTest() throws IOException
-    {
+    public void updateTest() {
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         mainMenuViewModel.setSceneManager(new TestSceneManagerViewModel());
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        PinballMachine pinballMachine2 = PinballMachineManager.getInstance().createNewMachine();
 
         PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mainMenuViewModel, pinballMachine);
-        //TODO
+        test.update(pinballMachine2);
+        assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine2));
+        assertThat(test.nameProperty().get(), equalTo(pinballMachine2.nameProperty().get()));
+        pinballMachine2.addHighscore(new Highscore(100, "Test"));
+        assertThat(test.highscoreListProperty().get(0).playerNameProperty().get(), equalTo("Test") );
     }
+
+
 
     public class TestSceneManagerViewModel extends SceneManagerViewModel
     {
