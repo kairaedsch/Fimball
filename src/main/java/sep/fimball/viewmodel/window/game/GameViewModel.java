@@ -87,7 +87,6 @@ public class GameViewModel extends WindowViewModel
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();
 
-        // TODO lost bind on ball change
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
         cameraZoom = new SimpleDoubleProperty(0.75);
@@ -223,15 +222,6 @@ public class GameViewModel extends WindowViewModel
             scores.add(score);
         }
         return scores;
-    }
-
-    /**
-     * Gibt zurück, ob die Partie aus dem Editor gestartet wurde.
-     * @return {@code true} falls die Partie aus dem Editor gestartet wurde, {@code false} sonst.
-     */
-    public boolean isStartedFromEditor()
-    {
-        return startedFromEditor;
     }
 
     /**

@@ -66,7 +66,7 @@ public class PinballMachineManager
      *
      * @return Die neu erstellte PinballMachine.
      */
-    public PinballMachine createNewMachine() throws IOException
+    public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
         pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());

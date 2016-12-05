@@ -21,7 +21,7 @@ public class PinballMachineSettingsViewModelTest
     private String nameInEditor;
 
     private PinballMachine pinballMachine;
-    PinballMachineSettingsViewModel test;
+    private PinballMachineSettingsViewModel test;
 
     @Test
     public void saveTest() throws IOException
@@ -33,7 +33,7 @@ public class PinballMachineSettingsViewModelTest
     }
 
     @Test
-    public void deleteTest() throws IOException
+    public void deleteTest()
     {
         init();
         test.deletePinballMachine();
@@ -41,7 +41,7 @@ public class PinballMachineSettingsViewModelTest
         assertThat(mainmenushown, is(true));
     }
 
-    private void init() throws IOException
+    private void init()
     {
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         test = new PinballMachineSettingsViewModel(pinballMachine);
@@ -52,7 +52,7 @@ public class PinballMachineSettingsViewModelTest
     }
 
     @Test
-    public void exitToMainMenuTest() throws IOException
+    public void exitToMainMenuTest()
     {
         init();
         test.exitWindowToMainMenu();
@@ -60,7 +60,7 @@ public class PinballMachineSettingsViewModelTest
     }
 
     @Test
-    public void exitToEditorTest() throws IOException
+    public void exitToEditorTest()
     {
         init();
         test.exitWindowToEditor();
