@@ -8,18 +8,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane fx:id="title" collapsible="false" text="Game Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.playername.PlayerNameView">
+<TitledPane fx:id="title" collapsible="false" text="Game Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sep.fimball.view.dialog.playername.PlayerNameView">
     <content>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0"
+                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label fx:id="playerNamesTitle" text="Player Names">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="System Bold" size="14.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets />
+                                <Insets/>
                             </VBox.margin>
                         </Label>
                         <VBox fx:id="nameEntryList" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,11 +29,13 @@
                             <children>
                             </children>
                         </VBox>
-                  <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#addPlayerClicked" text="Add Player" />
+                        <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#addPlayerClicked" text="Add Player"/>
                     </children>
                 </VBox>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#okClicked" text="OK" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#abortClicked" text="Abort" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#okClicked" text="OK" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0"/>
+                <Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#abortClicked" text="Abort" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0"/>
             </children>
         </AnchorPane>
     </content>

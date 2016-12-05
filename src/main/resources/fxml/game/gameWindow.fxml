@@ -6,36 +6,36 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.game.GameView">
-   <children>
-      <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="2.0">
-         <children>
-            <Label fx:id="score" text="Score: 43563">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="playerName" text="Player: Till" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+    <children>
+        <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="2.0">
+            <children>
+                <Label fx:id="score" text="Score: 43563">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="playerName" text="Player: Till"/>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                    <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../../Grafiken/sprites/generated_sprites/ball/top.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

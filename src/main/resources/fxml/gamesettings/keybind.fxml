@@ -10,9 +10,7 @@
 
 <HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.KeybindSubView">
     <children>
-        <Label fx:id="keybindName" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Left Flipper" HBox.hgrow="ALWAYS" />
-        <TextField fx:id="keybindKey" maxWidth="130.0" onKeyPressed="#changeKey" prefHeight="25.0" prefWidth="129.0" text="Left Shift" HBox.hgrow="ALWAYS" />
+        <Label fx:id="keybindName" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Left Flipper" HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="keybindKey" maxWidth="130.0" onKeyPressed="#changeKey" prefHeight="25.0" prefWidth="129.0" text="Left Shift" HBox.hgrow="ALWAYS"/>
     </children>
-
-
 </HBox>

@@ -11,10 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.splashscreen.SplashScreenView" fx:id="splashLayout" alignment="CENTER">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.splashscreen.SplashScreenView" fx:id="splashLayout"
+      alignment="CENTER">
     <children>
-        <ImageView fx:id="splash" fitWidth="510" fitHeight="510" />
-        <ProgressBar fx:id="loadProgress"  progress="0.0" maxWidth="510"/>
+        <ImageView fx:id="splash" fitWidth="510" fitHeight="510"/>
+        <ProgressBar fx:id="loadProgress" progress="0.0" maxWidth="510"/>
         <Label fx:id="progressText" alignment="CENTER" prefWidth="510"/>
     </children>
 </VBox>

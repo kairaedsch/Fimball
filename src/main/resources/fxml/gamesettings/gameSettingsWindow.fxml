@@ -8,46 +8,50 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            text="Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
             <children>
-                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                         AnchorPane.topAnchor="0.0">
                     <tabs>
                         <Tab closable="false" text="General">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane>
                                                     <children>
-                                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                                                              AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                                             <children>
                                                                 <Label fx:id="languageTitle" text="Language">
                                                                     <font>
-                                                                        <Font name="System Bold" size="14.0" />
+                                                                        <Font name="System Bold" size="14.0"/>
                                                                     </font>
                                                                 </Label>
                                                                 <GridPane>
                                                                     <columnConstraints>
-                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                                                                     </columnConstraints>
                                                                     <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label text="Select" />
-                                                                        <ComboBox fx:id="language"  prefWidth="150.0" GridPane.columnIndex="1" />
+                                                                        <Label text="Select"/>
+                                                                        <ComboBox fx:id="language" prefWidth="150.0" GridPane.columnIndex="1"/>
                                                                     </children>
                                                                 </GridPane>
                                                                 <Label text="Keybinds">
                                                                     <font>
-                                                                        <Font name="System Bold" size="14.0" />
+                                                                        <Font name="System Bold" size="14.0"/>
                                                                     </font>
                                                                     <VBox.margin>
-                                                                        <Insets top="10.0" />
+                                                                        <Insets top="10.0"/>
                                                                     </VBox.margin>
                                                                 </Label>
                                                                 <VBox fx:id="keyBindings">
@@ -56,23 +60,23 @@
                                                                 </VBox>
                                                                 <Label text="Display">
                                                                     <font>
-                                                                        <Font name="System Bold" size="14.0" />
+                                                                        <Font name="System Bold" size="14.0"/>
                                                                     </font>
                                                                     <VBox.margin>
-                                                                        <Insets top="10.0" />
+                                                                        <Insets top="10.0"/>
                                                                     </VBox.margin>
                                                                 </Label>
                                                                 <GridPane>
                                                                     <columnConstraints>
-                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                                                                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
+                                                                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                                                                     </columnConstraints>
                                                                     <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label text="Fullscreen" />
-                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1" />
+                                                                        <Label text="Fullscreen"/>
+                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1"/>
                                                                     </children>
                                                                 </GridPane>
                                                             </children>
@@ -89,34 +93,35 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                                              AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                             <children>
                                                 <Label text="Volume">
                                                     <font>
-                                                        <Font name="System Bold" size="14.0" />
+                                                        <Font name="System Bold" size="14.0"/>
                                                     </font>
                                                 </Label>
                                                 <GridPane>
                                                     <columnConstraints>
-                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                                     </rowConstraints>
                                                     <children>
-                                                        <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" />
-                                                        <Label text="SFX" GridPane.rowIndex="2" />
-                                                        <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                        <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                        <Label text="Music" GridPane.rowIndex="1" />
-                                                        <Label text="Master" />
-                                                        <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                        <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                        <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2" />
+                                                        <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1"/>
+                                                        <Label text="SFX" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                        <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <Label text="Music" GridPane.rowIndex="1"/>
+                                                        <Label text="Master"/>
+                                                        <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2"/>
                                                     </children>
                                                 </GridPane>
                                             </children>
@@ -127,11 +132,11 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="OK" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="OK" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0"/>
             </children>
         </AnchorPane>
     </content>
     <opaqueInsets>
-        <Insets />
+        <Insets/>
     </opaqueInsets>
 </TitledPane>

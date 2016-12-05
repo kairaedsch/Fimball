@@ -23,7 +23,7 @@
                                 <Insets top="20.0"/>
                             </VBox.margin>
                         </Label>
-                        <VBox fx:id="playerScores" >
+                        <VBox fx:id="playerScores">
                             <children>
                             </children>
                         </VBox>
