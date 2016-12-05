@@ -1,6 +1,7 @@
 package sep.fimball.view.window.game;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringExpression;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -40,18 +41,14 @@ public class GameView extends WindowView<GameViewModel>
     @FXML
     private HBox reserveBalls;
 
-    /**
-     * Das zur GameView gehörende GameViewModel.
-     */
-    private GameViewModel gameViewModel;
 
     @Override
     public void setViewModel(GameViewModel gameViewModel)
     {
-        this.gameViewModel = gameViewModel;
-
-        playerName.textProperty().bind(Bindings.concat("Player: ", gameViewModel.playerNameProperty()));
-        score.textProperty().bind(Bindings.concat("Score: ", gameViewModel.playerPointsProperty().asString().concat(" Balls: ").concat(gameViewModel.playerReserveBallsProperty())));
+        StringExpression playerNameText = Bindings.concat("Player: ", gameViewModel.playerNameProperty());
+        StringExpression scoreText = Bindings.concat("Score: ", gameViewModel.playerPointsProperty().asString().concat(" Balls: ").concat(gameViewModel.playerReserveBallsProperty()));
+        playerName.textProperty().bind(playerNameText);
+        score.textProperty().bind(scoreText);
 
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());

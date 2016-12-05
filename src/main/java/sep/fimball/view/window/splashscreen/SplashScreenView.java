@@ -40,8 +40,7 @@ public class SplashScreenView extends WindowView<SplashScreenViewModel>
      * Das anzeigte Bild.
      */
     @FXML
-    private
-    ImageView splash;
+    private ImageView splash;
 
     @Override
     public void setViewModel(SplashScreenViewModel splashScreenViewModel)
