@@ -18,7 +18,7 @@ public class BaseRuleElementFactory
      * @param ruleElement Die Vorlage, aus der das BaseRuleElement erstellt wird.
      * @return Das generierte BaseRuleElement.
      */
-    static BaseRuleElement generate(BaseElementJson.RuleElementJson ruleElement)
+    static BaseRuleElement create(BaseElementJson.RuleElementJson ruleElement)
     {
         nullCheck(ruleElement);
         nullCheck(ruleElement.general);

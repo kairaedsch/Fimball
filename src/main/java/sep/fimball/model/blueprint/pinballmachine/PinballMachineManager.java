@@ -4,17 +4,15 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
-import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.json.JsonFileManager;
-import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
+import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -87,32 +85,11 @@ public class PinballMachineManager
         Path jsonPath = Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachineId));
 
         Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
+        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineOptional, pinballMachineId);
 
-        if (pinballMachineOptional.isPresent() && pinballMachineOptional.get().isValid())
+        if(pinballMachine.isPresent())
         {
-            PinballMachineJson pinballMachineJson = pinballMachineOptional.get();
-
-            try
-            {
-                ArrayList<Highscore> highscores = new ArrayList<>();
-                for (PinballMachineJson.HighscoreJson highscoreJson : pinballMachineJson.highscores)
-                {
-                    highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
-                }
-
-                PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores);
-                pinballMachines.add(pinballMachine);
-                System.out.println("Machine      \"" + pinballMachineId + ": " + pinballMachine.nameProperty().get() + "\" loaded");
-            }
-            catch (IllegalArgumentException e)
-            {
-                System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            System.err.println("Machine      \"" + pinballMachineId + "\" not loaded");
+            pinballMachines.add(pinballMachine.get());
         }
     }
 
@@ -126,37 +103,14 @@ public class PinballMachineManager
         Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 
         Optional<PlacedElementListJson> placedElementListOptional = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
+        Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListOptional);
 
         if (placedElementListOptional.isPresent())
         {
-            PlacedElementListJson placedElementListJson = placedElementListOptional.get();
-
-            if (placedElementListJson.elements != null)
+            for (PlacedElement placedElement : PlacedElementList.get())
             {
-                int loaded = 0;
-                for (PlacedElementListJson.PlacedElementJson element : placedElementListJson.elements)
-                {
-                    BaseElement baseElement = BaseElementManager.getInstance().getElement(element.baseElementId);
-                    if (baseElement != null)
-                    {
-                        pinballMachine.addElement(new PlacedElement(baseElement, element.position, element.points, element.multiplier, element.rotation));
-                        loaded++;
-                    }
-                    else
-                    {
-                        System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
-                    }
-                }
-                System.out.println("Machine elem \"" + pinballMachine.getID() + "\" loaded: (" + loaded + "/" + placedElementListJson.elements.length + ")");
+                pinballMachine.addElement(placedElement);
             }
-            else
-            {
-                System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: Element List null");
-            }
-        }
-        else
-        {
-            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not loaded: All");
         }
     }
 
@@ -178,37 +132,10 @@ public class PinballMachineManager
             }
         }
 
-        PinballMachineJson pinballMachineJson = new PinballMachineJson();
-        pinballMachineJson.name = pinballMachine.nameProperty().getValue();
-
-        pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[pinballMachine.highscoreListProperty().size()];
-        int counter = 0;
-        for (Highscore highscore : pinballMachine.highscoreListProperty())
-        {
-            PinballMachineJson.HighscoreJson highscoreJson = new PinballMachineJson.HighscoreJson();
-            highscoreJson.score = highscore.scoreProperty().getValue();
-            highscoreJson.playerName = highscore.playerNameProperty().getValue();
-            pinballMachineJson.highscores[counter] = highscoreJson;
-            counter++;
-        }
-
+        PinballMachineJson pinballMachineJson = PinballMachineFactory.createPlacedElementListJson(pinballMachine);
         JsonFileManager.saveToJson(Config.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
-        PlacedElementListJson placedElementListJson = new PlacedElementListJson();
-        placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[pinballMachine.elementsProperty().size()];
-        counter = 0;
-        for (PlacedElement placedElement : pinballMachine.elementsProperty())
-        {
-            PlacedElementListJson.PlacedElementJson placedElementJson = new PlacedElementListJson.PlacedElementJson();
-            placedElementJson.baseElementId = placedElement.getBaseElement().getId();
-            placedElementJson.position = placedElement.positionProperty().getValue();
-            placedElementJson.rotation = placedElement.rotationProperty().getValue();
-            placedElementJson.points = placedElement.pointsProperty().getValue();
-            placedElementJson.multiplier = placedElement.multiplierProperty().getValue();
-            placedElementListJson.elements[counter] = placedElementJson;
-            counter++;
-        }
-
+        PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
         JsonFileManager.saveToJson(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
 
         // TODO save image of pinballmachine

@@ -22,7 +22,7 @@ public class BasePhysicsElementFactory
      * @param physicsElement Die Vorlage, aus der das BasePhysicsElement erstellt wird.
      * @return Das generierte BasePhysicsElement.
      */
-    static BasePhysicsElement generate(BaseElementJson.PhysicElementJson physicsElement)
+    static BasePhysicsElement create(BaseElementJson.PhysicElementJson physicsElement)
     {
         nullCheck(physicsElement);
         nullCheck(physicsElement.pivotPoint);

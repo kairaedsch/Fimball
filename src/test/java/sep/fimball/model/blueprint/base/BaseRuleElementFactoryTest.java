@@ -24,7 +24,7 @@ public class BaseRuleElementFactoryTest
         json.general = new BaseElementJson.RuleElementJson.RuleElementGeneralJson();
         json.general.givesPoints = TEST_BOOL;
 
-        BaseRuleElement generatedElement = BaseRuleElementFactory.generate(json);
+        BaseRuleElement generatedElement = BaseRuleElementFactory.create(json);
 
         assertThat(generatedElement.getEventMap().size(), is(1));
         generatedElement.getEventMap().forEach((id, ev) -> assertThat(id, is(TEST_INT)));

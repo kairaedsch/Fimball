@@ -54,9 +54,9 @@ public class BaseElement
         elementCategory = baseElementJson.elementCategory;
         type = baseElementJson.elementType;
 
-        physics = BasePhysicsElementFactory.generate(baseElementJson.physicElement);
-        media = BaseMediaElementFactory.generate(baseElementJson.mediaElement, id);
-        rule = BaseRuleElementFactory.generate(baseElementJson.ruleElement);
+        physics = BasePhysicsElementFactory.create(baseElementJson.physicElement);
+        media = BaseMediaElementFactory.create(baseElementJson.mediaElement, id);
+        rule = BaseRuleElementFactory.create(baseElementJson.ruleElement);
     }
 
     /**

@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
 /**
- * Diese Klasse repräsentiert die JSON-Beschreibung eines Flipperautomaten.
+ * Diese Klasse repräsentiert die JSON-Beschreibung eines Flipperautomaten ohne seine Elemente.
  */
 public class PinballMachineJson
 {
@@ -29,15 +29,5 @@ public class PinballMachineJson
          * Speichert den Namen des Spielers, der den Highscore erreicht hat.
          */
         public String playerName;
-    }
-
-    public boolean isValid()
-    {
-        if (highscores == null || name == null)
-            return false;
-        for (HighscoreJson score : highscores)
-            if (score == null || score.playerName == null)
-                return false;
-        return true;
     }
 }

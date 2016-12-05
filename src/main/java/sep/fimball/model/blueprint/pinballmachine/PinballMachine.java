@@ -40,7 +40,7 @@ public class PinballMachine
     private ListProperty<PlacedElement> elements;
 
     /**
-     * Gibt an, ob die PinballMachine komplett aus der PinballMachineJson geladen wurde.
+     * Gibt an, ob die Flipperautomatenelemente {@code elements} geladen wurde.
      */
     private boolean elementsLoaded;
 
@@ -52,27 +52,29 @@ public class PinballMachine
     /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *
-     * @param name             Name des Automaten
-     * @param pinballMachineId Id des Automaten
+     * @param name             Name des Automaten.
+     * @param pinballMachineId Id des Automaten.
      * @param highscores       Die auf diesem Automaten bisher erreichten Highscores.
      */
     PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
     {
         this.name = new SimpleStringProperty(name);
         this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
-
         this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
         elementsLoaded = false;
 
+        // Fügt die Highscores hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         if (highscores != null)
         {
             highscoreList.addAll(highscores);
         }
         ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
+
+        // Entfernt Highscore Einträge, solange zuviele existieren
         while(highscoreList.size() > Config.maxHighscores) highscoreList.remove(highscoreList.size() - 1);
 
-        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
     }
 
     /**

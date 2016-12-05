@@ -22,7 +22,7 @@ public class BaseMediaElementFactory
      * @param baseElementId Die ID des zugehörigen BaseElements.
      * @return Das generierte BaseMediaElement.
      */
-    static BaseMediaElement generate(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
+    static BaseMediaElement create(BaseElementJson.MediaElementJson mediaElement, String baseElementId)
     {
         nullCheck(mediaElement);
         nullCheck(mediaElement.general);

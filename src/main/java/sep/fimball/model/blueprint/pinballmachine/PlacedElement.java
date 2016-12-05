@@ -5,7 +5,13 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
 /**
- * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar.
+ * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Ein PlacedElement hat dabei immer genau ein BaseElement. Dabei gilt:
+ * <br/>PlacedElement hat z.B.
+ * <br/> - Position
+ * <br/> - Rotation
+ * <br/>BaseElement hat z.B.
+ * <br/> - Größe
+ * <br/> - Aussehen
  */
 public class PlacedElement
 {
@@ -89,8 +95,8 @@ public class PlacedElement
     }
 
     /**
-     * Gibt den Verweis auf die Vorlage des Elements zurück.
-     * @return Der Verweis auf die Vorlage des Elements.
+     * Gibt die Vorlage des Elements zurück.
+     * @return Die Vorlage des Elements.
      */
     public BaseElement getBaseElement()
     {
@@ -147,6 +153,4 @@ public class PlacedElement
             return false;
         }
     }
-
-
 }

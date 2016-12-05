@@ -7,7 +7,6 @@ import sep.fimball.general.data.Vector2;
  */
 public class PlacedElementListJson
 {
-
     /**
      * Speichert die platzierten Spielelemente.
      */

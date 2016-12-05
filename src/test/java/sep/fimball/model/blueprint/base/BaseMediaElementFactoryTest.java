@@ -43,7 +43,7 @@ public class BaseMediaElementFactoryTest
         testJson.general.editorName = TEST_STRING;
         testJson.general.rotationAccuracy = TEST_INT;
 
-        BaseMediaElement generatedElement = BaseMediaElementFactory.generate(testJson, TEST_STRING);
+        BaseMediaElement generatedElement = BaseMediaElementFactory.create(testJson, TEST_STRING);
 
         assertThat(generatedElement.getEventMap().size(), is(1));
         generatedElement.getEventMap().forEach((id, ev) ->

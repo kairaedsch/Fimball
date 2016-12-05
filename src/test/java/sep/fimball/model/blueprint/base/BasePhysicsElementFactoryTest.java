@@ -28,7 +28,7 @@ public class BasePhysicsElementFactoryTest
         json.colliders = new BaseElementJson.PhysicElementJson.PhysicColliderJson[] { collider };
         json.pivotPoint = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
 
-        BasePhysicsElement generateElement = BasePhysicsElementFactory.generate(json);
+        BasePhysicsElement generateElement = BasePhysicsElementFactory.create(json);
 
         assertThat(generateElement.getColliders().size(), is(1));
         assertThat(generateElement.getPivotPoint(), equalTo(new Vector2(TEST_DOUBLE, TEST_DOUBLE)));
