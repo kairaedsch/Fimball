@@ -29,7 +29,6 @@ public class GameViewModel extends WindowViewModel
      * Der Flipperautomat, der in der aktuellen Partie gespielt wird.
      */
     private final PinballMachine pinballMachine;
-    private String[] playerNames;
 
     /**
      * Die aktuelle Punktzahl des aktiven Spielers.
@@ -82,7 +81,6 @@ public class GameViewModel extends WindowViewModel
     {
         super(WindowType.GAME);
         this.pinballMachine = pinballMachine;
-        this.playerNames = playerNames;
         gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
         playerPoints = new SimpleIntegerProperty();

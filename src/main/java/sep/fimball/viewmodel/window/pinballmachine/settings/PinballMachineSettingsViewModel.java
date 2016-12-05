@@ -8,8 +8,6 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
-import java.io.IOException;
-
 /**
  * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipperautomaten zu Verfügung und ermöglicht es u.a. Änderungen an diesem zu speichern oder zu löschen.
  */
@@ -43,7 +41,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     /**
      * Erteilt dem Model den Befehl, die Änderungen am Flipperautomaten zu speichern.
      */
-    public void savePinballMachine() throws IOException
+    public void savePinballMachine()
     {
         pinballMachine.setName(machineName.getValue());
         pinballMachine.saveToDisk();
