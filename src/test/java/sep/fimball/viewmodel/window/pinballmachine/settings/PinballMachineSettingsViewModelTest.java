@@ -18,7 +18,7 @@ public class PinballMachineSettingsViewModelTest
 {
     private boolean mainmenushown = false;
     private boolean editorshown = false;
-    private String nameinEditor;
+    private String nameInEditor;
 
     private PinballMachine pinballMachine;
     PinballMachineSettingsViewModel test;
@@ -46,7 +46,9 @@ public class PinballMachineSettingsViewModelTest
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         test = new PinballMachineSettingsViewModel(pinballMachine);
         test.setSceneManager(new TestSceneManagerViewModel());
-        nameinEditor = "";
+        nameInEditor = "";
+        mainmenushown = false;
+        editorshown = false;
     }
 
     @Test
@@ -63,12 +65,7 @@ public class PinballMachineSettingsViewModelTest
         init();
         test.exitWindowToEditor();
         assertThat(editorshown, is(true));
-        assertThat(nameinEditor, is(pinballMachine.nameProperty().get()));
-    }
-
-    @Test
-    public void keyEventTest() {
-        //TODO
+        assertThat(nameInEditor, is(pinballMachine.nameProperty().get()));
     }
 
 
@@ -80,15 +77,18 @@ public class PinballMachineSettingsViewModelTest
             if (windowViewModel.getWindowType() == WindowType.MAIN_MENU)
             {
                 mainmenushown = true;
-            } else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR) {
+            } else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
+            {
                 editorshown = true;
-                nameinEditor = ((PinballMachineEditorViewModel)(windowViewModel)).machineNameProperty().get();
+                nameInEditor = ((PinballMachineEditorViewModel) (windowViewModel)).machineNameProperty().get();
             }
         }
     }
 
     @After
-    public void cleanuo() {
-        pinballMachine.deleteFromDisk();
+    public void cleanuo()
+    {
+        if (pinballMachine != null)
+            pinballMachine.deleteFromDisk();
     }
 }

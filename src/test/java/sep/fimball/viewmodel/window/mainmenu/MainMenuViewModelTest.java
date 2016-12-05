@@ -41,6 +41,9 @@ public class MainMenuViewModelTest
     {
         test = new MainMenuViewModel();
         test.setSceneManager(new TestSceneManagerViewModel());
+        settingsshown = false;
+        namesshown = false;
+        editorshown = false;
     }
 
     @Test
@@ -82,11 +85,6 @@ public class MainMenuViewModelTest
         test.startEditor(pinballMachine);
         assertThat(editorshown, is(true));
         assertThat(pinballmachinename, is(pinballMachine.nameProperty().get()));
-    }
-
-    @Test
-    public void keyEventTest() {
-        //TODO
     }
 
     public class TestSceneManagerViewModel extends SceneManagerViewModel
