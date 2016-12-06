@@ -26,19 +26,18 @@ public class PinballMachineManager
     private static PinballMachineManager singletonInstance;
 
     /**
-     * Gibt den bereits existierenden ElementManager oder  einen neu angelegten zurück, falls noch keiner existiert.
+     * Gibt den bereits existierenden ElementManager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
      * @return Instanz des PinballMachineManager
      */
     public static PinballMachineManager getInstance()
     {
-        if (singletonInstance == null)
-            singletonInstance = new PinballMachineManager();
+        if (singletonInstance == null) singletonInstance = new PinballMachineManager();
         return singletonInstance;
     }
 
     /**
-     * Die Liste der gespeicherten Flipperautomaten.
+     * Die Liste der Flipperautomaten.
      */
     private ListProperty<PinballMachine> pinballMachines;
 
@@ -66,7 +65,7 @@ public class PinballMachineManager
      */
     public PinballMachine createNewMachine()
     {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId() + "", null);
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), null, this);
         pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
@@ -85,9 +84,9 @@ public class PinballMachineManager
         Path jsonPath = Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachineId));
 
         Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
-        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineOptional, pinballMachineId);
+        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineOptional, pinballMachineId, this);
 
-        if(pinballMachine.isPresent())
+        if (pinballMachine.isPresent())
         {
             pinballMachines.add(pinballMachine.get());
         }
@@ -105,7 +104,7 @@ public class PinballMachineManager
         Optional<PlacedElementListJson> placedElementListOptional = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
         Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListOptional);
 
-        if (placedElementListOptional.isPresent())
+        if (PlacedElementList.isPresent())
         {
             for (PlacedElement placedElement : PlacedElementList.get())
             {
@@ -168,7 +167,8 @@ public class PinballMachineManager
 
     /**
      * Gibt die Liste der gespeicherten Flipperautomaten zurück.
-     * @return  Die Liste der gespeicherten Flipperautomaten.
+     *
+     * @return Die Liste der gespeicherten Flipperautomaten.
      */
     public ListProperty<PinballMachine> pinballMachinesProperty()
     {

@@ -1,7 +1,9 @@
 package sep.fimball.model.physics.element;
 
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
+import sep.fimball.model.physics.collider.ColliderShape;
 
 import java.util.List;
 
@@ -47,5 +49,26 @@ public class BasePhysicsElement
     public List<Collider> getColliders()
     {
         return colliders;
+    }
+
+    public boolean checkIfPointIsInElement(double rotation, Vector2 point)
+    {
+        for (Collider collider : colliders)
+        {
+            for (ColliderShape shape : collider.getShapes())
+            {
+                RectangleDouble boundingBox = shape.getBoundingBox(rotation, pivotPoint);
+                double minX = boundingBox.getOrigin().getX();
+                double minY = boundingBox.getOrigin().getY();
+                double maxX = minX + boundingBox.getWidth();
+                double maxY = minY + boundingBox.getHeight();
+
+                if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

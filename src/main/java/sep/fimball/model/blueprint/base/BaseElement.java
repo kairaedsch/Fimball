@@ -16,6 +16,9 @@ public class BaseElement
      */
     private String id;
 
+    /**
+     * Die BaseElementCategory des BaseElements.
+     */
     private BaseElementCategory elementCategory;
 
     /**

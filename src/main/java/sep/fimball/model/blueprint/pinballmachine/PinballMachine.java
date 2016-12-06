@@ -4,12 +4,9 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
-import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
-import sep.fimball.model.physics.collider.Collider;
-import sep.fimball.model.physics.collider.ColliderShape;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +17,11 @@ import java.util.Optional;
 public class PinballMachine
 {
     /**
+     * Der zu dieser PinballMachine gehörige PinballMachineManager.
+     */
+    private final PinballMachineManager pinballMachineManager;
+
+    /**
      * Der Name des Automaten.
      */
     private StringProperty name;
@@ -27,7 +29,7 @@ public class PinballMachine
     /**
      * ID zur Identifizierung des Automaten.
      */
-    private StringProperty pinballMachineId;
+    private StringProperty id;
 
     /**
      * Liste mit den auf dem Automaten erreichten Highscores.
@@ -45,26 +47,25 @@ public class PinballMachine
     private boolean elementsLoaded;
 
     /**
-     * Speicherpfad des Hintergrundbildes des Automaten.
-     */
-    private StringProperty imagePath;
-
-    /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *
-     * @param name             Name des Automaten.
-     * @param pinballMachineId Id des Automaten.
-     * @param highscores       Die auf diesem Automaten bisher erreichten Highscores.
+     * @param name                  Name des Automaten.
+     * @param pinballMachineId      Id des Automaten.
+     * @param highscores            Die auf diesem Automaten bisher erreichten Highscores.
+     * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
      */
-    PinballMachine(String name, String pinballMachineId, List<Highscore> highscores)
+    PinballMachine(String name, String pinballMachineId, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
     {
         this.name = new SimpleStringProperty(name);
-        this.pinballMachineId = new SimpleStringProperty(pinballMachineId);
-        this.elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        this.imagePath = new SimpleStringProperty(Config.pathToPinballMachineImagePreview(pinballMachineId));
+        this.id = new SimpleStringProperty(pinballMachineId);
+        this.pinballMachineManager = pinballMachineManager;
+
+        // Set up element list
+        elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        //ListPropertyConverter.autoSort(elements, PlacedElement::compare);
         elementsLoaded = false;
 
-        // Fügt die Highscores hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
+        // Fügt die Highscores zu highscoreList hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
         if (highscores != null)
         {
@@ -73,8 +74,7 @@ public class PinballMachine
         ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
 
         // Entfernt Highscore Einträge, solange zuviele existieren
-        while(highscoreList.size() > Config.maxHighscores) highscoreList.remove(highscoreList.size() - 1);
-
+        while (highscoreList.size() > Config.maxHighscores) highscoreList.remove(highscoreList.size() - 1);
     }
 
     /**
@@ -88,22 +88,11 @@ public class PinballMachine
         checkElementsLoaded();
         for (int i = elements.size() - 1; i >= 0; i--)
         {
-            for (Collider collider : elements.get(i).getBaseElement().getPhysics().getColliders())
+            PlacedElement placedElement = elements.get(i);
+            Vector2 relativPoint = point.minus(placedElement.positionProperty().get());
+            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), relativPoint))
             {
-                for (ColliderShape shape : collider.getShapes())
-                {
-                    RectangleDouble boundingBox = shape.getBoundingBox(elements.get(i).rotationProperty().get(), elements.get(i).getBaseElement().getPhysics().getPivotPoint());
-                    Vector2 globalPosition = elements.get(i).positionProperty().get();
-                    double minX = boundingBox.getOrigin().getX() + globalPosition.getX();
-                    double minY = boundingBox.getOrigin().getY() + globalPosition.getY();
-                    double maxX = minX + boundingBox.getWidth();
-                    double maxY = minY + boundingBox.getHeight();
-
-                    if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
-                    {
-                        return Optional.of(elements.get(i));
-                    }
-                }
+                return Optional.of(elements.get(i));
             }
         }
         return Optional.empty();
@@ -115,7 +104,7 @@ public class PinballMachine
     public void saveToDisk()
     {
         checkElementsLoaded();
-        PinballMachineManager.getInstance().savePinballMachine(this);
+        pinballMachineManager.savePinballMachine(this);
         unloadElements();
     }
 
@@ -124,11 +113,11 @@ public class PinballMachine
      */
     public void deleteFromDisk()
     {
-        PinballMachineManager.getInstance().deleteMachine(this);
+        pinballMachineManager.deleteMachine(this);
     }
 
     /**
-     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu.
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gutgenug ist.
      *
      * @param highscore Der Highscore, der hinzugefügt werden soll.
      */
@@ -137,7 +126,7 @@ public class PinballMachine
         if (highscoreList.size() >= Config.maxHighscores)
         {
             Highscore worstHigscore = highscoreList.get(highscoreList.size() - 1);
-            if(worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
+            if (worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
             {
                 highscoreList.remove(worstHigscore);
                 highscoreList.add(highscore);
@@ -152,7 +141,7 @@ public class PinballMachine
     }
 
     /**
-     * Fügt das gegebene Element zur Liste der Bahnelemente hinzu.
+     * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu.
      *
      * @param placedElement Das einzufügende Element.
      */
@@ -163,7 +152,7 @@ public class PinballMachine
     }
 
     /**
-     * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente hinzu.
+     * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente {@code elements} hinzu.
      *
      * @param baseElement Der Bauplan des einzufügenden Elements.
      * @param position    Die Position des einzufügenden Elements.
@@ -201,14 +190,14 @@ public class PinballMachine
     }
 
     /**
-     * Lädt, falls nötig, Elemente aus der gespeicherten Form des Automaten.
+     * Lädt, falls noch nicht geladen, die Elemente aus der gespeicherten Form des Automaten.
      */
     private void checkElementsLoaded()
     {
         if (!elementsLoaded)
         {
             elementsLoaded = true;
-            PinballMachineManager.getInstance().loadMachineElements(this);
+            pinballMachineManager.loadMachineElements(this);
         }
     }
 
@@ -248,27 +237,18 @@ public class PinballMachine
      *
      * @return Der Speicherpfad des Hintergrundbildes des Automaten.
      */
-    public ReadOnlyStringProperty imagePathProperty()
+    public String getImagePath()
     {
-        return imagePath;
-    }
-
-    /**
-     * Setzt den Namen des Flipperautomaten auf den übergebenen Wert.
-     *
-     * @param name Der neue Name des Flipperautomaten.
-     */
-    public void setName(String name)
-    {
-        this.name.set(name);
+        return Config.pathToPinballMachineImagePreview(id.get());
     }
 
     /**
      * Gibt die ID zur Identifizierung des Automaten zurück.
+     *
      * @return Die ID zur Identifizierung des Automaten.
      */
     public String getID()
     {
-        return pinballMachineId.getValue();
+        return id.getValue();
     }
 }

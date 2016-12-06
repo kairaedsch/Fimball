@@ -153,4 +153,16 @@ public class PlacedElement
             return false;
         }
     }
+
+    /**
+     * Vergleicht zwei PlacedElements.
+     *
+     * @param element1 Das erste Element.
+     * @param element2 Das zweite Element.
+     * @return Ob das erste Element vor dem zweiten sein sollte.
+     */
+    public static int compare(PlacedElement element1, PlacedElement element2)
+    {
+        return (int) (element1.positionProperty().get().getY() - element2.positionProperty().get().getY());
+    }
 }

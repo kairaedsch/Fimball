@@ -3,14 +3,13 @@ package sep.fimball.model.blueprint.pinballmachine;
 import sep.fimball.general.data.Highscore;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
 
 class PinballMachineFactory
 {
-    static Optional<PinballMachine> createPinballMachine(Optional<PinballMachineJson> pinballMachineJsonOptional, String pinballMachineId)
+    static Optional<PinballMachine> createPinballMachine(Optional<PinballMachineJson> pinballMachineJsonOptional, String pinballMachineId, PinballMachineManager pinballMachineManager)
     {
         try
         {
@@ -25,7 +24,7 @@ class PinballMachineFactory
                 highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
             }
 
-            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores);
+            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores, pinballMachineManager);
 
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
             return Optional.of(pinballMachine);
