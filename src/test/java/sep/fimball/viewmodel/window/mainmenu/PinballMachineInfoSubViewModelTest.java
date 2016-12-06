@@ -22,13 +22,13 @@ public class PinballMachineInfoSubViewModelTest
     @Test
     public void updateTest()
     {
-        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        MainMenuViewModel mockedMainMenuViewModel = mock(MainMenuViewModel.class);
         SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
-        mainMenuViewModel.setSceneManager(mockedSceneManager);
+        mockedMainMenuViewModel.setSceneManager(mockedSceneManager);
         PinballMachine pinballMachine = getMockedPinballMachine();
         PinballMachine pinballMachine2 = getMockedPinballMachine();
 
-        PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mainMenuViewModel, pinballMachine);
+        PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, pinballMachine);
         test.update(pinballMachine2);
         assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine2));
         assertThat(test.nameProperty().get(), equalTo(pinballMachine2.nameProperty().get()));
