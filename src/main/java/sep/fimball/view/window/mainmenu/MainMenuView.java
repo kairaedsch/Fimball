@@ -113,7 +113,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void addClicked()
     {
-        mainMenuViewModel.addNewAutomaton();
+        mainMenuViewModel.addNewPinballMachine();
     }
 
 

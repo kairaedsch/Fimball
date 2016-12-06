@@ -108,7 +108,7 @@ public class MainMenuViewModel extends WindowViewModel
     /**
      * Führt den Benutzer zu den Fimball-Einstellungen eines neuen Automaten.
      */
-    public void addNewAutomaton()
+    public void addNewPinballMachine()
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
     }
