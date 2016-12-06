@@ -43,7 +43,6 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void savePinballMachine()
     {
-        pinballMachine.setName(machineName.getValue());
         pinballMachine.saveToDisk();
         sceneManager.setWindow(new MainMenuViewModel());
     }
