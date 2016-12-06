@@ -201,8 +201,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
 
         sfxVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeSFXProperty());
         sfxVolumePercent.textProperty().bind(Bindings.concat(gameSettingsViewModel.volumeSFXProperty().asString(), "%"));
-
-        bindTexts();
     }
 
     /**
@@ -214,27 +212,4 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         gameSettingsViewModel.exitDialogToMainMenu();
     }
 
-    /**
-     * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
-     */
-    private void bindTexts()
-    {
-        //title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.key"));
-        //okButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.continue.key"));
-        //general.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.key"));
-        //languageLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.key"));
-        //select.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.select.key"));
-        //keybindingLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.keybinding.key"));
-        //displayLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.key"));
-        //fullscreenLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.fullscreen.key"));
-        //audio.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.key"));
-        //volumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.key"));
-        //masterVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.master.key"));
-        //sfxVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.sfx.key"));
-        //musicVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.music.key"));
-        //fullscreenTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.fullscreen.tip.key"));
-        //masterTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.master.tip.key"));
-        //sfxTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.sfx.tip.key"));
-        //musicTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.music.tip.key"));
-    }
 }

@@ -10,7 +10,7 @@
     <items>
         <VBox>
             <children>
-                <Button fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings">
+                <Button fx:id="settingsButton" mnemonicParsing="false" onMouseClicked="#settingsClicked" text="!mainmenu.settings.key!">
                     <tooltip>
                         <Tooltip fx:id="settingsTip" text="Show settings"/>
                     </tooltip>

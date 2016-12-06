@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
@@ -76,8 +75,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachineSelectorSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
 
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
-
-        settingsButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("mainmenu.settings.key"));
     }
 
     /**

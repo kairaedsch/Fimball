@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Game Over"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="!gameover.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
     <content>
@@ -18,13 +18,13 @@
                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label fx:id="highscoreLabel" text="Highscores">
+                        <Label fx:id="highscoreLabel" text="!gameover.highscores.key!">
                             <font>
                                 <Font name="System Bold" size="18.0"/>
                             </font>
                         </Label>
                         <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0"/>
-                        <Label fx:id="playerScoresLabel" text="Player Scores">
+                        <Label fx:id="playerScoresLabel" text="!gameover.playerscores.key!">
                             <font>
                                 <Font name="System Bold" size="18.0"/>
                             </font>
@@ -35,9 +35,9 @@
                         <VBox fx:id="playerScores" prefHeight="200.0" prefWidth="100.0"/>
                     </children>
                 </VBox>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="OK"
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!gameover.continue.key!"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked" text="Play Again"
+                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked" text="!gameover.restart.key!"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
             </children>
         </AnchorPane>

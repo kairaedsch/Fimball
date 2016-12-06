@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import sep.fimball.view.ViewBoundToViewModel;
-import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameEntrySubViewModel;
 
 /**
@@ -42,7 +41,6 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
         this.playerNameEntrySubViewModel = playerNameEntrySubViewModel;
         nameTextField.textProperty().bindBidirectional(playerNameEntrySubViewModel.playerNameProperty());
         deleteButton.visibleProperty().bind(playerNameEntrySubViewModel.isDeleteAbleProperty());
-        bindTexts();
     }
 
     /**
@@ -54,10 +52,4 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
         playerNameEntrySubViewModel.deletePlayerName();
     }
 
-    /**
-     * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
-     */
-    private void bindTexts() {
-        deleteButtonTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.remove.tip.key"));
-    }
 }

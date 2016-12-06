@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Tooltip;
 import sep.fimball.view.ViewType;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 
@@ -84,6 +85,11 @@ public class ViewLoader<ViewT>
                 {
                     Tab tab = (Tab) o;
                     bind(tab.textProperty(), tab.getText());
+                }
+                if (o instanceof Tooltip)
+                {
+                    Tooltip labeled = (Tooltip) o;
+                    bind(labeled.textProperty(), labeled.getText());
                 }
             }
         }));
