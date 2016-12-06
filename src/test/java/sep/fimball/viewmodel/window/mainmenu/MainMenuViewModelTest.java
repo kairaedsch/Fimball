@@ -14,8 +14,8 @@ import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettin
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 /**
  * Testet die Klasse MainMenuViewModel.
@@ -86,7 +86,30 @@ public class MainMenuViewModelTest
     private void init()
     {
         test = new TestMainMenuViewModel();
-        test.setSceneManager(new TestSceneManagerViewModel());
+        SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
+
+        doAnswer(invocationOnMock ->
+        {
+            WindowViewModel windowViewModel= invocationOnMock.getArgument(0);
+            if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS) {
+                editorSettingsShown = true;
+                pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
+            }
+            return null;
+        }).when(mockedSceneManager).setWindow(any());
+
+        doAnswer(invocationOnMock ->
+        {
+            DialogViewModel dialogViewModel= invocationOnMock.getArgument(0);
+            if (dialogViewModel.getDialogType() == DialogType.GAME_SETTINGS) {
+                settingsShown = true;
+            } else if (dialogViewModel.getDialogType() == DialogType.PLAYER_NAMES) {
+                namesShown = true;
+            }
+            return null;
+        }).when(mockedSceneManager).setDialog(any());
+
+        test.setSceneManager(mockedSceneManager);
         settingsShown = false;
         namesShown = false;
         editorSettingsShown = false;
@@ -137,31 +160,6 @@ public class MainMenuViewModelTest
         test.startEditor(pinballMachine);
         assertThat(editorSettingsShown, is(true));
         assertThat(pinballMachineName, is(pinballMachine.nameProperty().get()));
-    }
-
-    /**
-     * Ein SceneManagerViewModel, das zum Testen benötigt wird.
-     */
-    public class TestSceneManagerViewModel extends SceneManagerViewModel
-    {
-        @Override
-        public void setWindow(WindowViewModel windowViewModel)
-        {
-            if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS) {
-                editorSettingsShown = true;
-                pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
-            }
-        }
-
-        @Override
-        public void setDialog(DialogViewModel dialogViewModel)
-        {
-            if (dialogViewModel.getDialogType() == DialogType.GAME_SETTINGS) {
-                settingsShown = true;
-            } else if (dialogViewModel.getDialogType() == DialogType.PLAYER_NAMES) {
-                namesShown = true;
-            }
-        }
     }
 
     /**
