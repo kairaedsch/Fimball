@@ -4,17 +4,16 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.Tab;
 import sep.fimball.view.ViewType;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
+ *
  * @param <ViewT> Die Klasse der View (FxController).
  */
 public class ViewLoader<ViewT>
@@ -64,7 +63,7 @@ public class ViewLoader<ViewT>
             throw new IllegalStateException();
         }
 
-        if(rootNode == null || view == null)
+        if (rootNode == null || view == null)
         {
             throw new IllegalStateException();
         }
@@ -74,33 +73,29 @@ public class ViewLoader<ViewT>
     {
         fxmlProperties.forEach(((s, o) ->
         {
-                if (o != null)
+            if (o != null)
+            {
+                if (o instanceof Labeled)
                 {
-                    Method[] methods = o.getClass().getMethods();
-
-                    for (Method method : methods)
-                    {
-                        if (method.getName().equals("textProperty"))
-                        {
-                            try
-                            {
-                                StringProperty textProperty = (StringProperty)method.invoke(o, (Object[]) null);
-                                String labeledText = textProperty.get();
-
-                                if (labeledText.matches("!.*!"))
-                                {
-                                    String keyvalue = labeledText.replace("!", "");
-                                    textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyvalue));
-                                }
-                            }
-                            catch (IllegalAccessException | InvocationTargetException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
+                    Labeled labeled = (Labeled) o;
+                    bind(labeled.textProperty(), labeled.getText());
                 }
+                if (o instanceof Tab)
+                {
+                    Tab labeled = (Tab) o;
+                    bind(labeled.textProperty(), labeled.getText());
+                }
+            }
         }));
+    }
+
+    private void bind(StringProperty textProperty, String labeledText)
+    {
+        if (labeledText.matches("!.*!"))
+        {
+            String keyvalue = labeledText.replace("!", "");
+            textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyvalue));
+        }
     }
 
     /**
