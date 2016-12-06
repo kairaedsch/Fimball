@@ -14,6 +14,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
 import java.util.Observer;
@@ -164,11 +165,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         for (SpriteSubView spriteTop : sprites)
         {
-            spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM);
+            spriteTop.draw(canvas.getGraphicsContext2D(), ImageLayer.BOTTOM, ImageCache.getInstance());
         }
         for (SpriteSubView sprite : sprites)
         {
-            sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP);
+            sprite.draw(canvas.getGraphicsContext2D(), ImageLayer.TOP, ImageCache.getInstance());
         }
 
         //Debug.draw(graphicsContext);

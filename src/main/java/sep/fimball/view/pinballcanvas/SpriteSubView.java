@@ -51,13 +51,13 @@ public class SpriteSubView
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, ImageCache imageCache)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
 
         //Berechne den double Rest der bei mod rotationAccuracy bleibt
         double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
-        Image image = ImageCache.getInstance().getImage(elementImage.getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
+        Image image = imageCache.getImage(elementImage.getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
 
         graphicsContext.save();
 
@@ -91,25 +91,6 @@ public class SpriteSubView
     }
 
     /**
-     * Zeichnet das Bild auf den angegebenen GraphicsContext.
-     *
-     * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
-     * @param imageLayer      Bestimmt, ob das Bild sich auf der oberen oder unteren Bildebene befinden soll.
-     * @param image           Das zu zeichnende Bild.
-     */
-    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, Vector2 position, Vector2 size)
-    {
-        if (imageLayer == ImageLayer.TOP)
-        {
-            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
-        }
-        else
-        {
-            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
-        }
-    }
-
-    /**
      * Bereitet das GraphicsContext für das Zeichnen vor.
      *
      * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
@@ -132,6 +113,38 @@ public class SpriteSubView
         if (rotation != 0)
         {
             rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(Config.pixelsPerGridUnit));
+        }
+    }
+
+    /**
+     * Dreht das Sprite um den gegebenen Winkel am Pivot-Punkt.
+     *
+     * @param gc         Der GraphicsContext, auf dem rotiert wird.
+     * @param angle      Die Grad-Zahl, um die rotiert wird.
+     * @param pivotPoint Der Punkt, um den rotiert werden soll.
+     */
+    private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)
+    {
+        Rotate r = new Rotate(angle, pivotPoint.getX(), pivotPoint.getY());
+        gc.transform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+    }
+
+    /**
+     * Zeichnet das Bild auf den angegebenen GraphicsContext.
+     *
+     * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
+     * @param imageLayer      Bestimmt, ob das Bild sich auf der oberen oder unteren Bildebene befinden soll.
+     * @param image           Das zu zeichnende Bild.
+     */
+    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, Vector2 position, Vector2 size)
+    {
+        if (imageLayer == ImageLayer.TOP)
+        {
+            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
+        }
+        else
+        {
+            graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
         }
     }
 
@@ -164,18 +177,5 @@ public class SpriteSubView
             graphicsContext.setStroke(color);
             graphicsContext.strokeRect( position.getX()* Config.pixelsPerGridUnit - borderOffset, (position.getY() + viewModel.getElementHeight()) * Config.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
         }
-    }
-
-    /**
-     * Dreht das Sprite um den gegebenen Winkel am Pivot-Punkt.
-     *
-     * @param gc         Der GraphicsContext, auf dem rotiert wird.
-     * @param angle      Die Grad-Zahl, um die rotiert wird.
-     * @param pivotPoint Der Punkt, um den rotiert werden soll.
-     */
-    private void rotate(GraphicsContext gc, double angle, Vector2 pivotPoint)
-    {
-        Rotate r = new Rotate(angle, pivotPoint.getX(), pivotPoint.getY());
-        gc.transform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 }
