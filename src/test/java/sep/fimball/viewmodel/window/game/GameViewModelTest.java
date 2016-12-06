@@ -24,6 +24,11 @@ public class GameViewModelTest
         //TODO
     }
 
+    @Test
+    public void keyEventTest() {
+
+    }
+
     public class TestSceneManagerViewModel extends SceneManagerViewModel
     {
         @Override

@@ -10,23 +10,45 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
-import java.io.IOException;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse MainMenuViewModel.
+ */
 public class MainMenuViewModelTest
 {
-    MainMenuViewModel test;
-    boolean settingsshown = false;
-    boolean namesshown = false;
-    boolean editorshown = false;
-    String pinballmachinename;
+    /**
+     * Das MainMenuViewModel, dass getestet wird.
+     */
+    private MainMenuViewModel test;
 
+    /**
+     * Gibt an, ob der Settings-Dialog anzeigt wird.
+     */
+    private boolean settingsShown = false;
+
+    /**
+     * Gibt an, ob der Spielernamen-Dialog angezeigt wird.
+     */
+    private boolean namesShown = false;
+
+    /**
+     * Gibt an, ob der Editor angezeigt wird.
+     */
+    private boolean editorShown = false;
+
+    /**
+     * Der Name des im Editor angezeigten Namens.
+     */
+    private String pinballMachineName;
+
+    /**
+     * Testet, ob das Tauschen des im Detail angezeigten Automaten funktioniert.
+     */
     @Test
-    public void switchTest() throws IOException
+    public void switchTest()
     {
         init();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
@@ -37,65 +59,77 @@ public class MainMenuViewModelTest
 
     }
 
+    /**
+     * Initialisiert die Test-Werte.
+     */
     private void init()
     {
         test = new MainMenuViewModel();
         test.setSceneManager(new TestSceneManagerViewModel());
-        settingsshown = false;
-        namesshown = false;
-        editorshown = false;
+        settingsShown = false;
+        namesShown = false;
+        editorShown = false;
     }
 
+    /**
+     * Testet, ob der Settings-Dialog angezeigt wird.
+     */
     @Test
     public void settingsTest() {
         init();
         test.showSettingsDialog();
-        assertThat(settingsshown, is(true));
+        assertThat(settingsShown, is(true));
     }
 
+    /**
+     * Testet, ob der Spielernamen-Dialog angezeigt wird.
+     */
     @Test
-    public void playerNameTest() throws IOException
+    public void playerNameTest()
     {
         init();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         test.showPlayerNameDialog(pinballMachine);
-        assertThat(namesshown, is(true));
+        assertThat(namesShown, is(true));
         //TODO
     }
 
+    /**
+     * Testet, ob das Hinzufügen eines neuen Automaten funktioniert.
+     */
     @Test
     public void addTest() {
         init();
-        List<PinballMachine> names = PinballMachineManager.getInstance().pinballMachinesProperty();
+        int numberOfMachines = test.pinballMachineSelectorSubViewModelListProperty().size();
         test.addNewAutomaton();
-        assertThat(editorshown, is (true));
-        boolean found = false;
-        for (PinballMachine name : names) {
-            found = name.nameProperty().get().equals(pinballmachinename);
-        }
-        //TODO
-        //assertThat(found, is(false));
-
+        assertThat(editorShown, is (true));
+        assertThat(test.pinballMachineSelectorSubViewModelListProperty().size(), is(numberOfMachines + 1));
     }
 
+    /**
+     * Testet, ob das Starten des Editors funktioniert.
+     */
     @Test
-    public void editorStartTest() throws IOException
+    public void editorStartTest()
     {
         init();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         test.startEditor(pinballMachine);
-        assertThat(editorshown, is(true));
-        assertThat(pinballmachinename, is(pinballMachine.nameProperty().get()));
+        assertThat(editorShown, is(true));
+        assertThat(pinballMachineName, is(pinballMachine.nameProperty().get()));
     }
 
+    /**
+     * Ein SceneManagerViewModel, das zum Testen benötigt wird.
+     */
     public class TestSceneManagerViewModel extends SceneManagerViewModel
     {
         @Override
         public void setWindow(WindowViewModel windowViewModel)
         {
             if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS) {
-                editorshown = true;
-                pinballmachinename = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
+                editorShown = true;
+                pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
             }
         }
 
@@ -103,9 +137,9 @@ public class MainMenuViewModelTest
         public void setDialog(DialogViewModel dialogViewModel)
         {
             if (dialogViewModel.getDialogType() == DialogType.GAME_SETTINGS) {
-                settingsshown = true;
+                settingsShown = true;
             } else if (dialogViewModel.getDialogType() == DialogType.PLAYER_NAMES) {
-                namesshown = true;
+                namesShown = true;
             }
         }
     }
