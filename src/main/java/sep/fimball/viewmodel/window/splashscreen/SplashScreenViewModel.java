@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.util.Duration;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -51,7 +52,7 @@ public class SplashScreenViewModel extends WindowViewModel
     public SplashScreenViewModel()
     {
         super(WindowType.SPLASH_SCREEN);
-        progressText = new SimpleStringProperty("Loading");
+        progressText = new SimpleStringProperty(getTextByKey("splashscreen.loading.key"));
         loadProgress = new SimpleDoubleProperty(0);
         texts = new ArrayDeque<>();
         offerTexts();
@@ -64,10 +65,15 @@ public class SplashScreenViewModel extends WindowViewModel
      */
     private void offerTexts()
     {
-        texts.offer("Elements loaded");
-        texts.offer("Machines loaded");
-        texts.offer("Settings loaded");
-        texts.offer("Sounds loaded");
+        texts.offer(getTextByKey("splashscreen.elements.key"));
+        texts.offer(getTextByKey("splashscreen.machines.key"));
+        texts.offer(getTextByKey("splashscreen.settings.key"));
+        texts.offer(getTextByKey("splashscreen.sounds.key"));
+    }
+
+    private String getTextByKey(String key)
+    {
+        return LanguageManagerViewModel.getInstance().textProperty(key).get();
     }
 
 
