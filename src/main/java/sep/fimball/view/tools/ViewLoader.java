@@ -82,8 +82,8 @@ public class ViewLoader<ViewT>
                 }
                 if (o instanceof Tab)
                 {
-                    Tab labeled = (Tab) o;
-                    bind(labeled.textProperty(), labeled.getText());
+                    Tab tab = (Tab) o;
+                    bind(tab.textProperty(), tab.getText());
                 }
             }
         }));
