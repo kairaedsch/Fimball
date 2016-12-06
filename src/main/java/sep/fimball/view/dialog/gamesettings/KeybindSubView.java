@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.KeybindSubViewModel;
 
 
@@ -35,7 +36,7 @@ public class KeybindSubView implements ViewBoundToViewModel<KeybindSubViewModel>
     {
         this.keybindSubViewModel = keybindSubViewModel;
 
-        keybindName.textProperty().bind(keybindSubViewModel.elementNameProperty());
+        keybindName.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty(keybindSubViewModel.elementNameProperty().get()));
         keybindKey.textProperty().bind(keybindSubViewModel.keyNameProperty());
     }
 

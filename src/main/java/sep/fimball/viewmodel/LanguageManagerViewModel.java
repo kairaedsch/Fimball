@@ -76,7 +76,8 @@ public class LanguageManagerViewModel
         {
             properties.load(inputStream);
             inputStream.close();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.err.println("property file '" + path + "' not loaded");
             System.out.println("Exception: " + e);
@@ -97,7 +98,8 @@ public class LanguageManagerViewModel
             if (texts.containsKey((String) key))
             {
                 texts.get(key).setValue((String) properties.get(key));
-            } else
+            }
+            else
             {
                 texts.put((String) key, new SimpleStringProperty((String) properties.get(key)));
             }
@@ -112,6 +114,14 @@ public class LanguageManagerViewModel
      */
     public StringProperty textProperty(String key)
     {
-        return texts.get(key);
+        if (texts.containsKey(key))
+        {
+            return texts.get(key);
+        }
+        else
+        {
+            System.err.println(key + "could not be found.");
+            return new SimpleStringProperty(key);
+        }
     }
 }

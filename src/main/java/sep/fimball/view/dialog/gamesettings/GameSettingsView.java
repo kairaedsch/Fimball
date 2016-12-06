@@ -12,6 +12,8 @@ import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 
+import javax.xml.ws.FaultAction;
+
 
 /**
  * Die GameSettingsView ist für die Darstellung der Spieleinstellungen zuständig und ermöglicht es dem Nutzer, diese zu ändern.
@@ -83,6 +85,12 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      * TODO
      */
     @FXML
+    private Button okButton;
+
+    /**
+     * TODO
+     */
+    @FXML
     private Tab general;
 
     /**
@@ -102,6 +110,49 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      */
     @FXML
     private Label keybindingLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label displayLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label fullscreenLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Tab audio;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label volumeLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label sfxVolumeLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label masterVolumeLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label musicVolumeLabel;
+
 
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
@@ -150,11 +201,19 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      */
     private void bindTexts()
     {
-        title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("mainmenu.settings.key"));
+        title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.key"));
+        okButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.continue.key"));
         general.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.key"));
         languageLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.key"));
         select.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.select.key"));
         keybindingLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.keybinding.key"));
+        displayLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.key"));
+        fullscreenLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.fullscreen.key"));
+        audio.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.key"));
+        volumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.key"));
+        masterVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.master.key"));
+        sfxVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.sfx.key"));
+        musicVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.music.key"));
 
     }
 }

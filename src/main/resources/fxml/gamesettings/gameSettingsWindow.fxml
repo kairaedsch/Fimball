@@ -58,7 +58,7 @@
                                                                     <children>
                                                                     </children>
                                                                 </VBox>
-                                                                <Label text="Display">
+                                                                <Label fx:id="displayLabel" text="Display">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
@@ -75,7 +75,7 @@
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label text="Fullscreen"/>
+                                                                        <Label fx:id="fullscreenLabel" text="Fullscreen"/>
                                                                         <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1"/>
                                                                     </children>
                                                                 </GridPane>
@@ -89,14 +89,14 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab closable="false" text="Audio">
+                        <Tab fx:id="audio" closable="false" text="Audio">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
                                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                                               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                             <children>
-                                                <Label text="Volume">
+                                                <Label fx:id="volumeLabel" text="Volume">
                                                     <font>
                                                         <Font name="System Bold" size="14.0"/>
                                                     </font>
@@ -114,11 +114,11 @@
                                                     </rowConstraints>
                                                     <children>
                                                         <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1"/>
-                                                        <Label text="SFX" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="sfxVolumeLabel" text="SFX" GridPane.rowIndex="2"/>
                                                         <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
                                                         <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                                        <Label text="Music" GridPane.rowIndex="1"/>
-                                                        <Label text="Master"/>
+                                                        <Label fx:id="musicVolumeLabel" text="Music" GridPane.rowIndex="1"/>
+                                                        <Label fx:id="masterVolumeLabel" text="Master"/>
                                                         <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                                                         <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
                                                         <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2"/>

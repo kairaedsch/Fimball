@@ -1,10 +1,14 @@
 package sep.fimball.view.dialog.gameover;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.view.window.WindowType;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 
 /**
@@ -25,6 +29,37 @@ public class GameOverView extends DialogView<GameOverViewModel>
     private VBox playerScores;
 
     /**
+     * TODO
+     */
+    @FXML
+    private TitledPane title;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label highscoreLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label playerScoresLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Button okButton;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Button restartButton;
+
+
+    /**
      * Das zur GameOverView gehörende GameOverViewModel.
      */
     private GameOverViewModel gameOverViewModel;
@@ -35,6 +70,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
         this.gameOverViewModel = gameOverViewModel;
         ViewModelListToPaneBinder.bindViewModelsToViews(highscores, gameOverViewModel.machineHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
         ViewModelListToPaneBinder.bindViewModelsToViews(playerScores, gameOverViewModel.playerHighscoresProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
+        bindTexts();
     }
 
     /**
@@ -53,5 +89,17 @@ public class GameOverView extends DialogView<GameOverViewModel>
     private void restartClicked()
     {
         gameOverViewModel.restartGame();
+    }
+
+    /**
+     * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
+     */
+    private void bindTexts()
+    {
+        title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gameover.key"));
+        highscoreLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gameover.highscores.key"));
+        playerScoresLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gameover.playerscores.key"));
+        okButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gameover.continue.key"));
+        restartButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gameover.restart.key"));
     }
 }
