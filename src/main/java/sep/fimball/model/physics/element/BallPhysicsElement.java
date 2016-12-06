@@ -62,11 +62,9 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
 
         setHeight(Math.max(0, height - GRAVITY_HEIGHT * deltaTime));
-        System.out.println(getLayer() + " " + height);
 
         // Bewege den Ball
         setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
-
     }
 
     /**
