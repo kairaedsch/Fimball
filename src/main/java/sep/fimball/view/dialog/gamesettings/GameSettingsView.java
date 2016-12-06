@@ -153,6 +153,27 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     @FXML
     private Label musicVolumeLabel;
 
+    /**
+     * Teil der Beschreibung der UI.
+     */
+    @FXML
+    private Tooltip fullscreenTip;
+
+    /**
+     * Teil der Beschreibung der UI.
+     */
+    @FXML
+    private Tooltip masterTip;
+    /**
+     * Teil der Beschreibung der UI.
+     */
+    @FXML
+    private Tooltip sfxTip;
+    /**
+     * Teil der Beschreibung der UI.
+     */
+    @FXML
+    private Tooltip musicTip;
 
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
@@ -214,6 +235,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         masterVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.master.key"));
         sfxVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.sfx.key"));
         musicVolumeLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.music.key"));
-
+        fullscreenTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.display.fullscreen.tip.key"));
+        masterTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.master.tip.key"));
+        sfxTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.sfx.tip.key"));
+        musicTip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.audio.volume.music.tip.key"));
     }
 }
