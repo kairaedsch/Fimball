@@ -25,7 +25,7 @@ public class MainMenuViewModel extends WindowViewModel
     /**
      * Liste aller Flipper-Automaten, die ausgewählt werden können, um eine detailreiche Darstellung zu bekommen.
      */
-    private ListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelList;
+    private ListProperty<PinballMachinePreviewSubViewModel> pinballMachinePreviewSubViewModelList;
 
     /**
      * Der aktuell ausgewählte Flipper-Automat, der detailreicher dargestellt wird.
@@ -40,8 +40,8 @@ public class MainMenuViewModel extends WindowViewModel
         super(WindowType.MAIN_MENU);
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
             pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
-        pinballMachineSelectorSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(pinballMachineSelectorSubViewModelList, PinballMachineManager.getInstance().pinballMachinesProperty(), (pinballMachine) -> new PinballMachineSelectorSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
+        pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, PinballMachineManager.getInstance().pinballMachinesProperty(), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
 
 
     }
@@ -89,9 +89,9 @@ public class MainMenuViewModel extends WindowViewModel
      *
      * @return Der ausgewählte Flipperautomat.
      */
-    public ReadOnlyListProperty<PinballMachineSelectorSubViewModel> pinballMachineSelectorSubViewModelListProperty()
+    public ReadOnlyListProperty<PinballMachinePreviewSubViewModel> pinballMachinePreviewSubViewModelListProperty()
     {
-        return pinballMachineSelectorSubViewModelList;
+        return pinballMachinePreviewSubViewModelList;
     }
 
     /**
@@ -127,13 +127,13 @@ public class MainMenuViewModel extends WindowViewModel
             case "UP":
                 if (index >= 1 && index >= 0)
                 {
-                    pinballMachineSelectorSubViewModelList.get(index - 1).selectPinballMachine();
+                    pinballMachinePreviewSubViewModelList.get(index - 1).selectPinballMachine();
                 }
                 break;
             case "DOWN":
-                if (index < pinballMachineSelectorSubViewModelList.size() - 1 && index >= 0)
+                if (index < pinballMachinePreviewSubViewModelList.size() - 1 && index >= 0)
                 {
-                    pinballMachineSelectorSubViewModelList.get(index + 1).selectPinballMachine();
+                    pinballMachinePreviewSubViewModelList.get(index + 1).selectPinballMachine();
                 }
                 break;
         }
@@ -146,9 +146,9 @@ public class MainMenuViewModel extends WindowViewModel
      */
     private int findSelectedIndex()
     {
-        for (int i = 0; i < pinballMachineSelectorSubViewModelList.size(); ++i)
+        for (int i = 0; i < pinballMachinePreviewSubViewModelList.size(); ++i)
         {
-            if (pinballMachineSelectorSubViewModelList.get(i).isSelected())
+            if (pinballMachinePreviewSubViewModelList.get(i).isSelected())
             {
                 return i;
             }

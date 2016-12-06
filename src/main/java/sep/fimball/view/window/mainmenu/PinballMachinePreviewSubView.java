@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import sep.fimball.view.ViewBoundToViewModel;
-import sep.fimball.viewmodel.window.mainmenu.PinballMachineSelectorSubViewModel;
+import sep.fimball.viewmodel.window.mainmenu.PinballMachinePreviewSubViewModel;
 
 /**
  * Die PinballMachinePreviewSubView ist für die Darstellung der Vorschau eines Flipperautomaten in der Vorschau-Liste zuständig und ermöglicht dem Nutzer, diesen auszuwählen, wodurch eine größere Vorschau im MainMenuView erscheint.
  */
-public class PinballMachinePreviewSubView implements ViewBoundToViewModel<PinballMachineSelectorSubViewModel>
+public class PinballMachinePreviewSubView implements ViewBoundToViewModel<PinballMachinePreviewSubViewModel>
 {
     /**
      * Zeigt das Vorschau-Bild des Flipperautomaten an.
@@ -25,23 +25,23 @@ public class PinballMachinePreviewSubView implements ViewBoundToViewModel<Pinbal
     private Label previewName;
 
     /**
-     * Das zum PinballMachinePreviewSubView gehörende PinballMachineSelectorSubViewModel.
+     * Das zum PinballMachinePreviewSubView gehörende PinballMachinePreviewSubViewModel.
      */
-    private PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel;
+    private PinballMachinePreviewSubViewModel pinballMachinePreviewSubViewModel;
 
     @Override
-    public void setViewModel(PinballMachineSelectorSubViewModel pinballMachineSelectorSubViewModel)
+    public void setViewModel(PinballMachinePreviewSubViewModel pinballMachinePreviewSubViewModel)
     {
-        this.pinballMachineSelectorSubViewModel = pinballMachineSelectorSubViewModel;
-        previewName.textProperty().bind(pinballMachineSelectorSubViewModel.nameProperty());
-        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", pinballMachineSelectorSubViewModel.imagePathProperty().get(), "\");"));
+        this.pinballMachinePreviewSubViewModel = pinballMachinePreviewSubViewModel;
+        previewName.textProperty().bind(pinballMachinePreviewSubViewModel.nameProperty());
+        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", pinballMachinePreviewSubViewModel.imagePathProperty().get(), "\");"));
     }
 
     /**
-     * Benachrichtigt das PinballMachineSelectorSubViewModel, dass der Nutzer den Flipperautomaten auswählen will, um ihn im Detail zu sehen, sodass er diesen auch starten oder bearbeiten kann.
+     * Benachrichtigt das PinballMachinePreviewSubViewModel, dass der Nutzer den Flipperautomaten auswählen will, um ihn im Detail zu sehen, sodass er diesen auch starten oder bearbeiten kann.
      */
     public void mouseClicked()
     {
-        pinballMachineSelectorSubViewModel.selectPinballMachine();
+        pinballMachinePreviewSubViewModel.selectPinballMachine();
     }
 }

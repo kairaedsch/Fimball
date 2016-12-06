@@ -5,12 +5,12 @@ import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 /**
- * Das PinballMachineSelectorSubViewModel stellt der View Daten über einen Flipperautomat bereit und ermöglicht dessen Auswahl, sodass eine detailreichere Darstellung durch das PinballMachineInfoSubViewModel erfolgen kann.
+ * Das PinballMachinePreviewSubViewModel stellt der View Daten über einen Flipperautomat bereit und ermöglicht dessen Auswahl, sodass eine detailreichere Darstellung durch das PinballMachineInfoSubViewModel erfolgen kann.
  */
-public class PinballMachineSelectorSubViewModel
+public class PinballMachinePreviewSubViewModel
 {
     /**
-     * Das zu diesem PinballMachineSelectorSubViewModel gehörige MainMenuViewModel.
+     * Das zu diesem PinballMachinePreviewSubViewModel gehörige MainMenuViewModel.
      */
     private MainMenuViewModel mainMenu;
 
@@ -35,13 +35,13 @@ public class PinballMachineSelectorSubViewModel
     private BooleanProperty isSelected;
 
     /**
-     * Erstellt ein neues PinballMachineSelectorSubViewModel.
+     * Erstellt ein neues PinballMachinePreviewSubViewModel.
      *
      * @param mainMenu                       Das zugehörige Hauptmenü.
      * @param pinballMachine                 Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden sollen.
      * @param pinballMachineInfoSubViewModel Das zugehörige PinballMachineInfoSubViewModel.
      */
-    PinballMachineSelectorSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine, PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel)
+    PinballMachinePreviewSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine, PinballMachineInfoSubViewModel pinballMachineInfoSubViewModel)
     {
         this.mainMenu = mainMenu;
         this.pinballMachine = pinballMachine;
