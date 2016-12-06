@@ -31,7 +31,7 @@
                 </VBox>
                 <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
                         text="Continue" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <Button fx:id="exitToMainMenuButton" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                <Button fx:id="abortButton" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
                         onAction="#abortClicked" text="Abort" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
             </children>
         </AnchorPane>

@@ -2,10 +2,7 @@ package sep.fimball.view.dialog.gamesettings;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Language;
@@ -21,11 +18,18 @@ import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
  */
 public class GameSettingsView extends DialogView<GameSettingsViewModel>
 {
+
     /**
      * Auswahlmöglichkeit zur Einstellung der Sprache.
      */
     @FXML
     private ComboBox<Language> language;
+
+    /**
+     * Der Behälter zur Einstellung der Tastenbelegungen.
+     */
+    @FXML
+    private VBox keybinding;
 
     /**
      * Einstellung des Fullscreens.
@@ -52,12 +56,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Slider sfxVolumeSlider;
 
     /**
-     * Der Behälter zur Einstellung der Tastenbelegungen.
-     */
-    @FXML
-    private VBox keyBindings;
-
-    /**
      * Zeigt die Prozentzahl der Master-Lautstärke.
      */
     @FXML
@@ -76,10 +74,34 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     public Label sfxVolumePercent;
 
     /**
+     * TODO
+     */
+    @FXML
+    private TitledPane title;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Tab general;
+
+    /**
      * Das Label mit der Überschrift über der Sprachauswahl.
      */
     @FXML
-    private Label languageTitle;
+    private Label languageLabel;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label select;
+
+    /**
+     * TODO
+     */
+    @FXML
+    private Label keybindingLabel;
 
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
@@ -91,7 +113,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     {
         this.gameSettingsViewModel = gameSettingsViewModel;
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(keyBindings, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(keybinding, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
 
         masterVolumeSlider.setMax(Config.maxVolume);
         musicVolumeSlider.setMax(Config.maxVolume);
@@ -126,7 +148,13 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     /**
      * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
      */
-    private void bindTexts() {
-        languageTitle.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.language.key"));
+    private void bindTexts()
+    {
+        title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("mainmenu.settings.key"));
+        general.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.key"));
+        languageLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.key"));
+        select.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.language.select.key"));
+        keybindingLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("gamesettings.general.keybinding.key"));
+
     }
 }

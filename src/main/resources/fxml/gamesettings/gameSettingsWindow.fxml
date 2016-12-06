@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
             text="Settings" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
@@ -16,7 +16,7 @@
                 <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                          AnchorPane.topAnchor="0.0">
                     <tabs>
-                        <Tab closable="false" text="General">
+                        <Tab fx:id="general" closable="false" text="General">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -28,7 +28,7 @@
                                                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                                                               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                                             <children>
-                                                                <Label fx:id="languageTitle" text="Language">
+                                                                <Label fx:id="languageLabel" text="Language">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
@@ -42,11 +42,11 @@
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label text="Select"/>
+                                                                        <Label fx:id="select" text="Select"/>
                                                                         <ComboBox fx:id="language" prefWidth="150.0" GridPane.columnIndex="1"/>
                                                                     </children>
                                                                 </GridPane>
-                                                                <Label text="Keybinds">
+                                                                <Label fx:id="keybindingLabel" text="Keybinding">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
@@ -54,7 +54,7 @@
                                                                         <Insets top="10.0"/>
                                                                     </VBox.margin>
                                                                 </Label>
-                                                                <VBox fx:id="keyBindings">
+                                                                <VBox fx:id="keybinding">
                                                                     <children>
                                                                     </children>
                                                                 </VBox>
