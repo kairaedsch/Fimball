@@ -12,10 +12,15 @@ public class RampClimbingCollision implements CollisionType
     {
         ColliderShape shape = info.getShape();
         PhysicsElement physicsElement = info.getPhysicsElement();
-        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getPhysicsElement().getPosition()).plus(new Vector2(BallPhysicsElement.radius, BallPhysicsElement.radius));
+        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getPhysicsElement().getPosition()).plus(new Vector2(BallPhysicsElement.RADIUS, BallPhysicsElement.RADIUS));
 
         Vector2 maxPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
         Vector2 minPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
+
+        if(relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
+        {
+            return;
+        }
 
         if((physicsElement.getRotation() % 360) > 90 && (physicsElement.getRotation() % 360) < 270)
         {
@@ -40,7 +45,7 @@ public class RampClimbingCollision implements CollisionType
         Vector2 schnittpunkt2 = schnittpunkt(maxPos, gerade_direction, relativeBallPos, gerade_direction_normale);
         double ballPos = maxPos.minus(schnittpunkt2).magnitude();
 
-        double height = (ballPos / fieldLength) * BallPhysicsElement.maxHeight;
+        double height = (ballPos / fieldLength) * BallPhysicsElement.MAX_HEIGHT;
 
         info.getBall().setHeight(Math.max(height, info.getBall().getHeight()));
     }

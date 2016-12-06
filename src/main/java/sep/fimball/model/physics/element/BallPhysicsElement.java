@@ -17,9 +17,11 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     private final double GRAVITY = 1.19554 * 20;
 
-    public static final double maxHeight = 2;
+    public static final double GRAVITY_HEIGHT = 5;
 
-    public static final double radius = 2;
+    public static final double MAX_HEIGHT = 2;
+
+    public static final double RADIUS = 2;
 
     /**
      * Die Geschwindigkeit des Balls.
@@ -59,7 +61,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         // Wende Schwerkraft auf den Ball an
         setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
 
-        setHeight(Math.max(0, height - 5 * deltaTime));
+        setHeight(Math.max(0, height - GRAVITY_HEIGHT * deltaTime));
         System.out.println(getLayer() + " " + height);
 
         // Bewege den Ball
