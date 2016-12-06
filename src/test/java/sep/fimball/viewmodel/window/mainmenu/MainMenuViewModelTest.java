@@ -63,7 +63,6 @@ public class MainMenuViewModelTest
 
         test.switchPinballMachineInfo(pinballMachine);
         assertThat(test.getPinballMachineInfoSubViewModel().pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine));
-
     }
 
     /**
@@ -135,7 +134,6 @@ public class MainMenuViewModelTest
         PinballMachine pinballMachine = getMockedPinballMachine();
         test.showPlayerNameDialog(pinballMachine);
         assertThat(namesShown, is(true));
-        //TODO
     }
 
     /**

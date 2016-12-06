@@ -1,15 +1,19 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import org.junit.Test;
+import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 /**
  * Testet die Klasse PinballMachineInfoSubViewModel.
@@ -32,7 +36,9 @@ public class PinballMachineInfoSubViewModelTest
         test.update(pinballMachine2);
         assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine2));
         assertThat(test.nameProperty().get(), equalTo(pinballMachine2.nameProperty().get()));
-        //TODO
+        pinballMachine2.addHighscore(new Highscore(100, "Test"));
+        assertThat(test.highscoreListProperty().get(0).playerNameProperty().get(), is("Test"));
+        assertThat(test.highscoreListProperty().get(0).scoreProperty().get(), is((long) (100)));
     }
 
 
@@ -48,6 +54,16 @@ public class PinballMachineInfoSubViewModelTest
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.getImagePath()).thenReturn("");
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
+        ListProperty<Highscore> highscores = new SimpleListProperty<>(FXCollections.observableArrayList());
+        when(pinballMachine.highscoreListProperty()).thenReturn(highscores);
+
+        doAnswer(invocationOnMock ->
+        {
+            Highscore highscore= invocationOnMock.getArgument(0);
+            highscores.add(highscore);
+            return null;
+        }).when(pinballMachine).addHighscore(any());
+
         return pinballMachine;
     }
 
