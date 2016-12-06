@@ -1,10 +1,17 @@
 package sep.fimball.view.tools;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Labeled;
 import sep.fimball.view.ViewType;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
@@ -49,6 +56,7 @@ public class ViewLoader<ViewT>
         {
             rootNode = loader.load();
             view = loader.getController();
+            replaceLanguages(loader.getNamespace());
         }
         catch (IOException e)
         {
@@ -60,6 +68,39 @@ public class ViewLoader<ViewT>
         {
             throw new IllegalStateException();
         }
+    }
+
+    private void replaceLanguages(ObservableMap<String, Object> fxmlProperties)
+    {
+        fxmlProperties.forEach(((s, o) ->
+        {
+                if (o != null)
+                {
+                    Method[] methods = o.getClass().getMethods();
+
+                    for (Method method : methods)
+                    {
+                        if (method.getName().equals("textProperty"))
+                        {
+                            try
+                            {
+                                StringProperty textProperty = (StringProperty)method.invoke(o, (Object[]) null);
+                                String labeledText = textProperty.get();
+
+                                if (labeledText.matches("!.*!"))
+                                {
+                                    String keyvalue = labeledText.replace("!", "");
+                                    textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyvalue));
+                                }
+                            }
+                            catch (IllegalAccessException | InvocationTargetException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        }));
     }
 
     /**
