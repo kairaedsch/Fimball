@@ -29,7 +29,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer die PinballMachine-Elemente editieren möchte.
+     * Benachrichtigt das {@code pinballMachineSettingsViewModel}, dass der Nutzer den Flipperautomaten editieren möchte.
      */
     @FXML
     private void editClicked()
