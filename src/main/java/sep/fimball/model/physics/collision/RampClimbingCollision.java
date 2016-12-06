@@ -14,8 +14,8 @@ public class RampClimbingCollision implements CollisionType
         PhysicsElement physicsElement = info.getPhysicsElement();
         Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getPhysicsElement().getPosition()).plus(new Vector2(BallPhysicsElement.radius, BallPhysicsElement.radius));
 
-        Vector2 maxPos = shape.getMaximumPos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
-        Vector2 minPos = shape.getMaximumPos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
+        Vector2 maxPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
+        Vector2 minPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
 
         if((physicsElement.getRotation() % 360) > 90 && (physicsElement.getRotation() % 360) < 270)
         {

@@ -36,5 +36,5 @@ public interface ColliderShape
      * @param pivotPoint Der Drehpunkt des Colliders
      * @return Die Maximale Position dieses Colliders bei der gegebenen Rotation.
      */
-    Vector2 getMaximumPos(double rotation, Vector2 pivotPoint, boolean max);
+    Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max);
 }
