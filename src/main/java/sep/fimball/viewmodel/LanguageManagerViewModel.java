@@ -7,6 +7,8 @@ import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -74,7 +76,9 @@ public class LanguageManagerViewModel
         String path = Config.pathToLanguage(language.getCode());
         try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
-            properties.load(inputStream);
+            Reader reader = new InputStreamReader(inputStream, "UTF-8");
+            properties.load(reader);
+            reader.close();
             inputStream.close();
         }
         catch (Exception e)
