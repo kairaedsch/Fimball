@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
@@ -36,7 +37,7 @@ public class PlayerNameViewModel extends DialogViewModel
         this.pinballMachine = pinballMachine;
 
         playerNameEntries = new SimpleListProperty<>(FXCollections.observableArrayList());
-        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, "Player 1"));
+        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " 1"));
     }
 
     /**
@@ -54,7 +55,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void addPlayer()
     {
-        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, "Player " + (playerNameEntries.size() + 1)));
+        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " " + (playerNameEntries.size() + 1)));
     }
 
     /**
@@ -90,7 +91,8 @@ public class PlayerNameViewModel extends DialogViewModel
     }
 
     @Override
-    public void changeBackgroundMusic() {
+    public void changeBackgroundMusic()
+    {
     }
 
 }

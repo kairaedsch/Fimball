@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 
 import java.net.URL;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 /**
  * Die PlayerNameView ist für die Darstellung der Einstellungen der aktuellen Partie zuständig und ermöglicht es dem Nutzer, diese zu ändern und eine Partie zu starten.
  */
-public class PlayerNameView extends DialogView<PlayerNameViewModel> implements Initializable
+public class PlayerNameView extends DialogView<PlayerNameViewModel>
 {
     /**
      * Der Behälter zur Einstellung der Spielernamen.
@@ -40,7 +41,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
      * Das Label mit der Überschrift der Spielernamen-Liste.
      */
     @FXML
-    private Label playerNamesTitle;
+    private Label playerNamesLabel;
 
     /**
      * Der Button, der einen neuen Spieler hinzufügt.
@@ -52,7 +53,13 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
      * Der Button, der den Dialog schließt und wieder zum Hauptmenü führt.
      */
     @FXML
-    private Button exitButton;
+    private Button abortButton;
+
+    /**
+     * Der Button, der den Dialog schließt und zum Spielfenster wechselt.
+     */
+    @FXML
+    private Button okButton;
 
     @Override
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
@@ -60,6 +67,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
         this.playerNameViewModel = playerNameViewModel;
 
         ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntriesProperty(), DialogType.PLAYER_NAME_ENTRY);
+        bindTexts();
     }
 
     /**
@@ -89,17 +97,14 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel> implements I
         playerNameViewModel.addPlayer();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        ResourceBundle bundle = resources;
-        if(resources != null)
-        {
-
-            title.setText(bundle.getString("playername.title.key"));
-            playerNamesTitle.setText(bundle.getString("playername.names.key"));
-            addPlayerButton.setText(bundle.getString("playername.add.key"));
-            exitButton.setText(bundle.getString("playername.exit.key"));
-        }
+    /**
+     * Bindet die Texte der Labels an die vom LanguageManagerViewModel bereitgestellten Texte.
+     */
+    private void bindTexts() {
+        title.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.title.key"));
+        playerNamesLabel.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.names.key"));
+        addPlayerButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.add.key"));
+        abortButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.exit.key"));
+        okButton.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty("playername.continue.key"));
     }
 }
