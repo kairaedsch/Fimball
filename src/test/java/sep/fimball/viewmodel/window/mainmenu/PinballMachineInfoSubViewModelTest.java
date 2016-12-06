@@ -11,8 +11,14 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse PinballMachineInfoSubViewModel.
+ */
 public class PinballMachineInfoSubViewModelTest
 {
+    /**
+     * Testet, ob das Aktualisieren des anzuzeigenden Automaten funktioniert.
+     */
     @Test
     public void updateTest() {
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
@@ -29,7 +35,9 @@ public class PinballMachineInfoSubViewModelTest
     }
 
 
-
+    /**
+     * Ein SceneManagerViewModel, das zum Testen benötigt wird.
+     */
     public class TestSceneManagerViewModel extends SceneManagerViewModel
     {
         @Override
