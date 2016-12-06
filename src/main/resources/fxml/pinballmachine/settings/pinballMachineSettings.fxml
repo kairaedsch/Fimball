@@ -4,8 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Editor Settings - Tills Automat"
+<TitledPane fx:id="mainPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Editor Settings"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView">
     <content>
@@ -14,7 +14,7 @@
                 <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label text="General">
+                        <Label fx:id="generalLabel" text="General">
                             <font>
                                 <Font name="System Bold" size="14.0"/>
                             </font>
@@ -28,11 +28,11 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Label text="Table Name"/>
+                                <Label fx:id="tableNameLabel" text="Table Name"/>
                                 <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1"/>
                             </children>
                         </GridPane>
-                        <Label text="File">
+                        <Label fx:id="fileLabel" text="File">
                             <font>
                                 <Font name="System Bold" size="14.0"/>
                             </font>
