@@ -37,7 +37,7 @@ public class MainMenuViewModelTest
     /**
      * Gibt an, ob der Editor angezeigt wird.
      */
-    private boolean editorShown = false;
+    private boolean editorSettingsShown = false;
 
     /**
      * Der Name des im Editor angezeigten Namens.
@@ -68,7 +68,7 @@ public class MainMenuViewModelTest
         test.setSceneManager(new TestSceneManagerViewModel());
         settingsShown = false;
         namesShown = false;
-        editorShown = false;
+        editorSettingsShown = false;
     }
 
     /**
@@ -102,7 +102,7 @@ public class MainMenuViewModelTest
         init();
         int numberOfMachines = test.pinballMachineSelectorSubViewModelListProperty().size();
         test.addNewAutomaton();
-        assertThat(editorShown, is (true));
+        assertThat(editorSettingsShown, is (true));
         assertThat(test.pinballMachineSelectorSubViewModelListProperty().size(), is(numberOfMachines + 1));
     }
 
@@ -115,7 +115,7 @@ public class MainMenuViewModelTest
         init();
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         test.startEditor(pinballMachine);
-        assertThat(editorShown, is(true));
+        assertThat(editorSettingsShown, is(true));
         assertThat(pinballMachineName, is(pinballMachine.nameProperty().get()));
     }
 
@@ -128,7 +128,7 @@ public class MainMenuViewModelTest
         public void setWindow(WindowViewModel windowViewModel)
         {
             if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS) {
-                editorShown = true;
+                editorSettingsShown = true;
                 pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
             }
         }
