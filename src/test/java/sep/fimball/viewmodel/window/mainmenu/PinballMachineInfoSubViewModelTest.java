@@ -5,8 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.window.WindowViewModel;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -25,7 +23,8 @@ public class PinballMachineInfoSubViewModelTest
     public void updateTest()
     {
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
-        mainMenuViewModel.setSceneManager(new TestSceneManagerViewModel());
+        SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
+        mainMenuViewModel.setSceneManager(mockedSceneManager);
         PinballMachine pinballMachine = getMockedPinballMachine();
         PinballMachine pinballMachine2 = getMockedPinballMachine();
 
@@ -52,19 +51,4 @@ public class PinballMachineInfoSubViewModelTest
         return pinballMachine;
     }
 
-    /**
-     * Ein SceneManagerViewModel, das zum Testen benötigt wird.
-     */
-    public class TestSceneManagerViewModel extends SceneManagerViewModel
-    {
-        @Override
-        public void setWindow(WindowViewModel windowViewModel)
-        {
-        }
-
-        @Override
-        public void setDialog(DialogViewModel dialogViewModel)
-        {
-        }
-    }
 }
