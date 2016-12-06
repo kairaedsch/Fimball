@@ -1,9 +1,17 @@
 package sep.fimball.viewmodel.window.pinballmachine.settings;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import org.junit.After;
 import org.junit.Test;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -11,6 +19,8 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Testet die Klasse PinballMachineSettingsViewModel.
@@ -50,7 +60,6 @@ public class PinballMachineSettingsViewModelTest
     {
         init();
         test.savePinballMachine();
-        //TODO
         assertThat(mainmenuShown, is(true));
     }
 
@@ -71,7 +80,13 @@ public class PinballMachineSettingsViewModelTest
      */
     private void init()
     {
-        testPinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        testPinballMachine = mock(PinballMachine.class);
+        StringProperty machineName = new SimpleStringProperty("Test");
+        ListProperty<PlacedElement> elements = new SimpleListProperty<>();
+        elements.set(FXCollections.observableArrayList());
+        elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
+        when(testPinballMachine.elementsProperty()).thenReturn(elements);
+        when(testPinballMachine.nameProperty()).thenReturn(machineName);
         test = new PinballMachineSettingsViewModel(testPinballMachine);
         test.setSceneManager(new TestSceneManagerViewModel());
         nameInEditor = "";
