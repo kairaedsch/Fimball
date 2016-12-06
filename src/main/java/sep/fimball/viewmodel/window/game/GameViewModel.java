@@ -26,6 +26,10 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 public class GameViewModel extends WindowViewModel
 {
     /**
+     * Der Standard-Zoom der Kamera.
+     */
+    private static final double DEFAULT_ZOOM = 0.75;
+    /**
      * Der Flipperautomat, der in der aktuellen Partie gespielt wird.
      */
     private final PinballMachine pinballMachine;
@@ -89,7 +93,7 @@ public class GameViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
-        cameraZoom = new SimpleDoubleProperty(0.75);
+        cameraZoom = new SimpleDoubleProperty(DEFAULT_ZOOM);
 
         gameSession.currentPlayer().addListener((observable, oldValue, newValue) -> {
             playerPoints.bind(newValue.pointsProperty());

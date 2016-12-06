@@ -46,7 +46,7 @@ public class SplashScreenViewModel extends WindowViewModel
     private Queue<String> texts;
 
     /**
-     * Erzeugt ein neues SplashScreenViewModel.
+     * Erzeugt ein neues SplashScreenViewModel, das den Ladevorgang startet.
      */
     public SplashScreenViewModel()
     {
