@@ -76,7 +76,7 @@ public class MainMenuViewModelTest
         PinballMachine pinballMachine = mock(PinballMachine.class);
         when(pinballMachine.elementsProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
-        when(pinballMachine.imagePathProperty()).thenReturn(new SimpleStringProperty());
+        when(pinballMachine.getImagePath()).thenReturn("");
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
         return pinballMachine;
     }
