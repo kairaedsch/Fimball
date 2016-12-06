@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <TitledPane fx:id="mainPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Editor Settings"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="!editor.settings.pane.key!"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView">
     <content>
@@ -14,7 +14,7 @@
                 <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label fx:id="generalLabel" text="General">
+                        <Label fx:id="generalLabel" text="!editor.settings.general.key!">
                             <font>
                                 <Font name="System Bold" size="14.0"/>
                             </font>
@@ -28,11 +28,11 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Label fx:id="tableNameLabel" text="Table Name"/>
+                                <Label fx:id="tableNameLabel" text="!editor.settings.tablename.key!"/>
                                 <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1"/>
                             </children>
                         </GridPane>
-                        <Label fx:id="fileLabel" text="File">
+                        <Label fx:id="fileLabel" text="!editor.settings.file.key!">
                             <font>
                                 <Font name="System Bold" size="14.0"/>
                             </font>
@@ -51,16 +51,16 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                             <children>
-                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="Save"/>
-                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="Delete"
+                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="!editor.settings.saveButton.key!"/>
+                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="!editor.settings.deleteButton.key!"
                                         GridPane.rowIndex="1"/>
                             </children>
                         </GridPane>
                     </children>
                 </VBox>
                 <Button fx:id="menuButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                        onAction="#menuClicked" text="Menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
-                <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editClicked" text="Edit"
+                        onAction="#menuClicked" text="!editor.settings.menuButton.key!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
+                <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editClicked" text="!editor.settings.editButton.key!"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
             </children>
         </AnchorPane>
