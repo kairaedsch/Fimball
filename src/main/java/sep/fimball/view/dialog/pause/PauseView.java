@@ -23,25 +23,25 @@ public class PauseView extends DialogView<PauseViewModel>
     private VBox playerScores;
 
     /**
-     * TODO
+     * Das Dialogfenster.
      */
     @FXML
     private TitledPane title;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label playerScoresLabel;
 
     /**
-     * TODO
+     * Button, der zurück zum Spielfenster wechselt.
      */
     @FXML
     private Button continueButton;
 
     /**
-     * TODO
+     * Button, der zurück zum Hauptmenü wechselt.
      */
     @FXML
     private Button abortButton;

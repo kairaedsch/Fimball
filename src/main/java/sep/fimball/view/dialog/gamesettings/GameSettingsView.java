@@ -76,19 +76,19 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     public Label sfxVolumePercent;
 
     /**
-     * TODO
+     * Das Dialogfenster.
      */
     @FXML
     private TitledPane title;
 
     /**
-     * TODO
+     * Button, der zurück zum Hauptmenü wechselt.
      */
     @FXML
     private Button okButton;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Tab general;
@@ -100,55 +100,55 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private Label languageLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label select;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label keybindingLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label displayLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label fullscreenLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Tab audio;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label volumeLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label sfxVolumeLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label masterVolumeLabel;
 
     /**
-     * TODO
+     * Teil der Beschreibung der UI.
      */
     @FXML
     private Label musicVolumeLabel;
