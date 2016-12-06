@@ -33,5 +33,10 @@ public enum BaseElementType
     /**
      * Kennzeichnet ein Lichtelement.
      */
-    LIGHT
+    LIGHT,
+
+    /**
+     * Kennzeichnet eine Rampe.
+     */
+    RAMP
 }

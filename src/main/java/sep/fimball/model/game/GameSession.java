@@ -212,6 +212,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
             switch (element.getBaseElement().getType())
             {
+                case RAMP:
                 case NORMAL:
                     physicsElement = new PhysicsElement<>(
                             gameElement,
