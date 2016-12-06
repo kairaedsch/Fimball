@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import org.junit.After;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
@@ -135,15 +134,5 @@ public class PinballMachineSettingsViewModelTest
                 nameInEditor = ((PinballMachineEditorViewModel) (windowViewModel)).machineNameProperty().get();
             }
         }
-    }
-
-    /**
-     * Löscht gegebenenfalls den angelegten Automaten.
-     */
-    @After
-    public void cleanUo()
-    {
-        if (testPinballMachine != null)
-            testPinballMachine.deleteFromDisk();
     }
 }

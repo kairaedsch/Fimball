@@ -63,7 +63,6 @@ public class MainMenuViewModelTest
 
         test.switchPinballMachineInfo(pinballMachine);
         assertThat(test.getPinballMachineInfoSubViewModel().pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine));
-        pinballMachine.deleteFromDisk();
 
     }
 
