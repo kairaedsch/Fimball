@@ -81,8 +81,15 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public double getMaximumYPos(double rotation, Vector2 pivotPoint)
+    public Vector2 getMaximumPos(double rotation, Vector2 pivotPoint, boolean max)
     {
-        return position.getY() + radius;
+        if(max)
+        {
+            return position.plus(new Vector2(radius, radius).scale(2));
+        }
+        else
+        {
+            return position;
+        }
     }
 }

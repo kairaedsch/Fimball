@@ -32,7 +32,6 @@ public class Collider
      */
     private int id;
 
-
     /**
      * Erzeugt einen neuen Collider.
      *
@@ -66,7 +65,7 @@ public class Collider
             HitInfo info = shape.calculateHitInfo(ball, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
             if (info.isHit())
             {
-                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element.getRotation()));
+                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element, shape));
                 hit = true;
             }
         }

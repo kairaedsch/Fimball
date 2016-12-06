@@ -1,30 +1,23 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
-import sep.fimball.model.physics.element.FlipperPhysicsElement;
+import sep.fimball.model.physics.element.PhysicsElement;
 
 public class CollisionInfo
 {
     private BallPhysicsElement ball;
     private Vector2 shortestIntersect;
-    private double rotation;
-    private FlipperPhysicsElement flipper;
+    private ColliderShape shape;
+    private PhysicsElement physicsElement;
 
-    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation, FlipperPhysicsElement flipper)
+    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement physicsElement, ColliderShape shape)
     {
         this.ball = ball;
         this.shortestIntersect = shortestIntersect;
-        this.flipper = flipper;
-        this.rotation = rotation;
-    }
-
-    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, double rotation)
-    {
-        this.ball = ball;
-        this.shortestIntersect = shortestIntersect;
-        this.rotation = rotation;
-        this.flipper = null;
+        this.physicsElement = physicsElement;
+        this.shape = shape;
     }
 
     public BallPhysicsElement getBall()
@@ -37,13 +30,13 @@ public class CollisionInfo
         return shortestIntersect;
     }
 
-    public FlipperPhysicsElement getFlipper()
+    public PhysicsElement getPhysicsElement()
     {
-        return flipper;
+        return physicsElement;
     }
 
-    public double getRotation()
+    public ColliderShape getShape()
     {
-        return rotation;
+        return shape;
     }
 }

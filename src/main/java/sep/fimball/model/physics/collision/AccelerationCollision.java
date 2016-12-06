@@ -27,7 +27,7 @@ public class AccelerationCollision implements CollisionType
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getRotation())).scale(PhysicsHandler.TICK_RATE / 1000.0);
+        Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getPhysicsElement().getRotation())).scale(PhysicsHandler.TICK_RATE / 1000.0);
         info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp));
     }
 }

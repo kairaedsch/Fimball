@@ -187,7 +187,7 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public double getMaximumYPos(double rotation, Vector2 pivotPoint)
+    public Vector2 getMaximumPos(double rotation, Vector2 pivotPoint, boolean max)
     {
         List<Vector2> newVertices;
 
@@ -199,16 +199,20 @@ public class PolygonColliderShape implements ColliderShape
         {
             newVertices = vertices;
         }
-        double maxY = newVertices.get(0).getY();
+        Vector2 extreme = newVertices.get(0);
 
         for (Vector2 vertex : newVertices)
         {
-            if (vertex.getY() > maxY)
+            if (max ? vertex.getY() > extreme.getY() : vertex.getY() < extreme.getY())
             {
-                maxY = vertex.getY();
+                extreme = new Vector2(extreme.getX(), vertex.getY());
+            }
+            if (max ? vertex.getX() > extreme.getX() : vertex.getX() < extreme.getX())
+            {
+                extreme = new Vector2(vertex.getX(), extreme.getY());
             }
         }
-        return maxY;
+        return extreme;
     }
 
     /**

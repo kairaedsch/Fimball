@@ -48,6 +48,7 @@ public class PinballMachineManager
     {
         pinballMachines = new SimpleListProperty<>(FXCollections.observableArrayList());
 
+        // Lädt alle PinballMachinen aus dem PinballMachine Ordner
         try
         {
             Files.list(Paths.get(Config.pathToPinballMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);

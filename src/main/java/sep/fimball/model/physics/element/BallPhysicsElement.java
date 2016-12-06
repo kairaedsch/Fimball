@@ -17,6 +17,10 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     private final double GRAVITY = 1.19554 * 20;
 
+    public static final double maxHeight = 2;
+
+    public static final double radius = 2;
+
     /**
      * Die Geschwindigkeit des Balls.
      */
