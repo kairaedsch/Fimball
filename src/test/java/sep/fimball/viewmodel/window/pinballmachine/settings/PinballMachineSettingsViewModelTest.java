@@ -9,7 +9,6 @@ import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
@@ -18,8 +17,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Testet die Klasse PinballMachineSettingsViewModel.
@@ -70,7 +68,6 @@ public class PinballMachineSettingsViewModelTest
     {
         init();
         test.deletePinballMachine();
-        assertThat(PinballMachineManager.getInstance().pinballMachinesProperty().contains(testPinballMachine), is(false));
         assertThat(mainmenuShown, is(true));
     }
 
@@ -87,7 +84,23 @@ public class PinballMachineSettingsViewModelTest
         when(testPinballMachine.elementsProperty()).thenReturn(elements);
         when(testPinballMachine.nameProperty()).thenReturn(machineName);
         test = new PinballMachineSettingsViewModel(testPinballMachine);
-        test.setSceneManager(new TestSceneManagerViewModel());
+
+        SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
+        doAnswer(invocationOnMock ->
+        {
+            WindowViewModel windowViewModel= invocationOnMock.getArgument(0);
+            if (windowViewModel.getWindowType() == WindowType.MAIN_MENU)
+            {
+                mainmenuShown = true;
+            } else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
+            {
+                editorShown = true;
+                nameInEditor = ((PinballMachineEditorViewModel) (windowViewModel)).machineNameProperty().get();
+            }
+            return null;
+        }).when(mockedSceneManager).setWindow(any());
+
+        test.setSceneManager(mockedSceneManager);
         nameInEditor = "";
         mainmenuShown = false;
         editorShown = false;
@@ -114,25 +127,5 @@ public class PinballMachineSettingsViewModelTest
         test.exitWindowToEditor();
         assertThat(editorShown, is(true));
         assertThat(nameInEditor, is(testPinballMachine.nameProperty().get()));
-    }
-
-
-    /**
-     * Ein SceneManagerViewModel, das zum Testen benötigt wird.
-     */
-    public class TestSceneManagerViewModel extends SceneManagerViewModel
-    {
-        @Override
-        public void setWindow(WindowViewModel windowViewModel)
-        {
-            if (windowViewModel.getWindowType() == WindowType.MAIN_MENU)
-            {
-                mainmenuShown = true;
-            } else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
-            {
-                editorShown = true;
-                nameInEditor = ((PinballMachineEditorViewModel) (windowViewModel)).machineNameProperty().get();
-            }
-        }
     }
 }
