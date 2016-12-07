@@ -139,6 +139,14 @@ public class SpriteSubView
     private void drawImage(GraphicsContext graphicsContext, Image image, Vector2 position, Vector2 size)
     {
         graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
+    private void drawImage(GraphicsContext graphicsContext, ImageLayer imageLayer, Image image, Vector2 position, Vector2 size)
+    {
+        double x = (position.getX() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
+        double y = (position.getY() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
+        double w = size.getX() + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit;
+        double h = size.getY() + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit;
+
+        graphicsContext.drawImage(image, x, y, w, h);
     }
 
     /**

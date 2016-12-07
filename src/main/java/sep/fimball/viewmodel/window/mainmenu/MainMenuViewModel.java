@@ -5,6 +5,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -41,7 +42,7 @@ public class MainMenuViewModel extends WindowViewModel
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
             pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
         pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, PinballMachineManager.getInstance().pinballMachinesProperty(), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
+        ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, new SortedList<>(PinballMachineManager.getInstance().pinballMachinesProperty(), (o1, o2) -> o1.nameProperty().get().toLowerCase().compareTo(o2.nameProperty().get().toLowerCase())), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
     }
 
     /**

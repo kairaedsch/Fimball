@@ -161,6 +161,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     private boolean isBallLost;
 
+    private boolean wereBallLostEventsTriggered;
+
     /**
      * Monitor, welcher für die Synchronisierung zwischen Physik und Spiel genutzt wird {@see collisionEventArgsList}.
      */
@@ -193,6 +195,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.isOver = new SimpleBooleanProperty(false);
         this.gameBall = new SimpleObjectProperty<>();
         this.startedFromEditor = startedFromEditor;
+        this.isBallLost = false;
+        this.wereBallLostEventsTriggered = false;
 
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
@@ -308,7 +312,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 }
             }
         });
-        
+
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
@@ -374,13 +378,14 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         synchronized (physicMonitor)
         {
-            if (isBallLost)
+            if (isBallLost && !wereBallLostEventsTriggered)
             {
+                wereBallLostEventsTriggered = true;
+
                 for (Handler handler : handlers)
                 {
                     handler.activateGameHandler(GameEvent.BALL_LOST);
                 }
-                isBallLost = false;
             }
         }
         gameLoopObservable.setChanged();
@@ -467,6 +472,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         PlacedElement originalBall = gameBall.get().getPlacedElement();
         physicsHandler.setBall(originalBall.positionProperty().get(), originalBall.rotationProperty().get());
+        isBallLost = false;
+        wereBallLostEventsTriggered = false;
     }
 
     /**

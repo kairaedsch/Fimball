@@ -68,6 +68,8 @@ public class PhysicsHandler<GameElementT>
      */
     private double maxElementPosY;
 
+    private boolean ballLost;
+
     private final Object monitor = new Object();
 
     /**
@@ -85,6 +87,7 @@ public class PhysicsHandler<GameElementT>
         this.ballPhysicsElement = ballPhysicsElement;
         this.leftFlippers = leftFlippers;
         this.rightFlippers = rightFlippers;
+        this.ballLost = false;
 
         bufferedKeyEvents = new ArrayList<>();
 
@@ -137,6 +140,7 @@ public class PhysicsHandler<GameElementT>
             ballPhysicsElement.setPosition(position);
             ballPhysicsElement.setVelocity(new Vector2(0, 0));
             ballPhysicsElement.setAngularVelocity(0);
+            ballLost = false;
         }
     }
 
@@ -208,20 +212,10 @@ public class PhysicsHandler<GameElementT>
                 // Check all PhysicsElements for collisions with the ball
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
-                boolean ballLost = false;
+                boolean localBallLost = false;
 
                 synchronized (monitor)
                 {
-                    if (ballPhysicsElement != null)
-                    {
-                        ballPhysicsElement.update(delta);
-
-                        if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
-                        {
-                            ballLost = true;
-                        }
-                    }
-
                     for (PhysicsElement<GameElementT> element : physicsElements)
                     {
                         if (ballPhysicsElement != null && element != ballPhysicsElement)
@@ -233,12 +227,25 @@ public class PhysicsHandler<GameElementT>
                         elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
 
                     }
+
+                    if (ballPhysicsElement != null)
+                    {
+                        ballPhysicsElement.update(delta);
+
+                        if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
+                        {
+                            localBallLost = true;
+                        }
+                    }
+
+                    if (ballLost) localBallLost = false;
+                    if (localBallLost) ballLost = true;
                 }
 
                 leftFlippers.forEach(flipper -> flipper.update(delta));
                 rightFlippers.forEach(flipper -> flipper.update(delta));
 
-                gameSession.setBallLost(ballLost);
+                if (localBallLost) gameSession.setBallLost(true);
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };
