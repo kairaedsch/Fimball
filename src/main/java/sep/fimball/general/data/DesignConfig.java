@@ -8,6 +8,16 @@ import javafx.scene.paint.Color;
 public class DesignConfig
 {
     /**
+     * Die Standardbreite des Anwendungsfensters.
+     */
+    public final static int defaultStageWidth = 1280;
+
+    /**
+     * Die Standardhöhe des Anwendungsfensters.
+     */
+    public final static int defaultStageHeight = 720;
+
+    /**
      * Die Durchsichtigkeit der Zwischenebene.
      */
     public final static double stageDividerLayerOpacity = 0.6;

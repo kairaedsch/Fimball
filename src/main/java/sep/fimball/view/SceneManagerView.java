@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.tools.ViewLoader;
@@ -51,8 +50,8 @@ public class SceneManagerView
         new SoundManagerView();
 
         // Setzt die Anfangsgröße des gesamten Spiels
-        stage.setWidth(Config.defaultStageWidth);
-        stage.setHeight(Config.defaultStageHeight);
+        stage.setWidth(DesignConfig.defaultStageWidth);
+        stage.setHeight(DesignConfig.defaultStageHeight);
 
         root = new StackPane();
 

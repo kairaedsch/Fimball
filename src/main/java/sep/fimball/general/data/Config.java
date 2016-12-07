@@ -7,15 +7,6 @@ import java.util.UUID;
  */
 public class Config
 {
-    /**
-     * Die Standardbreite des Anwendungsfensters.
-     */
-    public final static int defaultStageWidth = 1280;
-
-    /**
-     * Die Standardhöhe des Anwendungsfensters.
-     */
-    public final static int defaultStageHeight = 720;
 
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
