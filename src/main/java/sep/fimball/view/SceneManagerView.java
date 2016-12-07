@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.window.WindowType;
@@ -44,7 +45,7 @@ public class SceneManagerView
     public SceneManagerView(Stage stage, SceneManagerViewModel sceneManagerViewModel)
     {
         // Blureffekt für das glass.
-        blurEffect = new GaussianBlur(Config.stageDividerLayerBlur);
+        blurEffect = new GaussianBlur(DesignConfig.stageDividerLayerBlur);
 
         // Initialisiere den SoundManager
         new SoundManagerView();
@@ -59,8 +60,8 @@ public class SceneManagerView
         Rectangle glass = new Rectangle();
         glass.widthProperty().bind(root.widthProperty());
         glass.heightProperty().bind(root.heightProperty());
-        glass.setFill(Config.primaryColor);
-        glass.setOpacity(Config.stageDividerLayerOpacity);
+        glass.setFill(DesignConfig.primaryColor);
+        glass.setOpacity(DesignConfig.stageDividerLayerOpacity);
 
         // Fügt die verschiedenen Schichten zum rootNode hinzu
         root.getChildren().add(new Group());

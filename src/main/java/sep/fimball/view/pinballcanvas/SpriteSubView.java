@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.tools.ImageCache;
@@ -167,13 +168,13 @@ public class SpriteSubView
 
         if (imageLayer == ImageLayer.TOP)
         {
-            Color color = Config.complementColor.interpolate(Config.secondaryColor, effectValue);
+            Color color = DesignConfig.complementColor.interpolate(DesignConfig.secondaryColor, effectValue);
             graphicsContext.setStroke(color);
             graphicsContext.strokeRect(position.getX() * Config.pixelsPerGridUnit - borderOffset, position.getY() * Config.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
         }
         else
         {
-            Color color = Config.complementColorDark.interpolate(Config.secondaryColorDark, effectValue);
+            Color color = DesignConfig.complementColorDark.interpolate(DesignConfig.secondaryColorDark, effectValue);
             graphicsContext.setStroke(color);
             graphicsContext.strokeRect( position.getX()* Config.pixelsPerGridUnit - borderOffset, (position.getY() + viewModel.getElementHeight()) * Config.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit));
         }

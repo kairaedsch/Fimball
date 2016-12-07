@@ -8,10 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
@@ -105,7 +104,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
-        graphicsContext.setFill(Config.primaryColor);
+        graphicsContext.setFill(DesignConfig.primaryColor);
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
@@ -126,12 +125,12 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
                 // Make every second line bigger
                 if (Math.abs(gridX) % (pixelsPerGridUnit * 2) == 0)
                 {
-                    lineColor = Config.primaryColorLightLight;
+                    lineColor = DesignConfig.primaryColorLightLight;
                     lineWidth = 2;
                 }
                 else
                 {
-                    lineColor = Config.primaryColorLight;
+                    lineColor = DesignConfig.primaryColorLight;
                     lineWidth = 1;
                 }
 
@@ -147,12 +146,12 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
                 // Make every second line bigger
                 if (Math.abs(gridY) % (pixelsPerGridUnit * 2) == pixelsPerGridUnit)
                 {
-                    lineColor = Config.primaryColorLightLight;
+                    lineColor = DesignConfig.primaryColorLightLight;
                     lineWidth = 2;
                 }
                 else
                 {
-                    lineColor = Config.primaryColorLight;
+                    lineColor = DesignConfig.primaryColorLight;
                     lineWidth = 1;
                 }
 
