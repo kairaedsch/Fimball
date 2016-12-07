@@ -2,6 +2,7 @@ package sep.fimball.model.blueprint.base;
 
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.collider.WorldLayer;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -22,6 +23,7 @@ public class BasePhysicsElementFactoryTest
         BaseElementJson.PhysicElementJson.PhysicColliderJson collider = new BaseElementJson.PhysicElementJson.PhysicColliderJson();
         collider.collisionType = new BaseElementJson.PhysicElementJson.PhysicColliderJson.ColliderTypeJson();
         collider.collisionType.type = TEST_COLLISION_TYPE;
+        collider.layer = WorldLayer.GROUND;
         collider.collisionType.strength = TEST_DOUBLE;
 
         BaseElementJson.PhysicElementJson json = new BaseElementJson.PhysicElementJson();
