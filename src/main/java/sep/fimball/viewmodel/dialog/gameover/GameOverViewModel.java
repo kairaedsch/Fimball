@@ -10,15 +10,20 @@ import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zur Verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach Spielende an.
  */
 public class GameOverViewModel extends DialogViewModel
 {
+    /**
+     * Die PinballMachine, auf der die zuletzt gespielte Partie gespielt wurde.
+     */
     private final PinballMachine pinballMachine;
 
+    /**
+     * Die Namen der Spieler, die am Spiel teilnehmen.
+     */
     private final String[] playerNames;
 
     /**
