@@ -28,7 +28,6 @@ public class PauseViewModel extends DialogViewModel
      */
     private GameViewModel gameViewModel;
 
-
     /**
      * Erstellt ein neues PauseViewModel.
      *
@@ -38,8 +37,7 @@ public class PauseViewModel extends DialogViewModel
     {
         super(DialogType.PAUSE);
         this.gameViewModel = gameViewModel;
-        playerHighscores = new SimpleListProperty<>();
-        playerHighscores.set(gameViewModel.getScores());
+        playerHighscores = new SimpleListProperty<>(gameViewModel.getScores());
     }
 
     /**
@@ -72,11 +70,7 @@ public class PauseViewModel extends DialogViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
-        {
-            return;
-        }
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE)
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
         {
             resumeGame();
         }
