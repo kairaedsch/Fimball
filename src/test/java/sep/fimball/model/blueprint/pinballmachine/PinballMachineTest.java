@@ -6,11 +6,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static javafx.scene.input.KeyCode.L;
 import static javafx.scene.input.KeyCode.M;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static sep.fimball.general.data.Config.maxHighscores;
@@ -23,7 +28,20 @@ public class PinballMachineTest
     @Test
     public void getElementAt() throws Exception
     {
+        PinballMachineManager pinballMachineManager = Mockito.mock(PinballMachineManager.class);
+        PinballMachine pinballMachine = new PinballMachine("test", "id", Collections.emptyList(), pinballMachineManager);
 
+        PlacedElement placedElementOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-2, -2));
+        PlacedElement placedElementTwo = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(2, 2));
+        assertThat(pinballMachine.getElementAt(new Vector2(0, 0)).get(), is(equalTo(placedElementOne)));
+
+        PlacedElement placedElementOverOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-2, -2));
+        assertThat(pinballMachine.getElementAt(new Vector2(0, 0)).get(), is(equalTo(placedElementOverOne)));
+
+        assertThat(pinballMachine.getElementAt(new Vector2(0, 0)).get(), is(equalTo(placedElementOne)));
+        assertThat(pinballMachine.getElementAt(new Vector2(4, 4)).get(), is(equalTo(placedElementTwo)));
+
+        assertThat(pinballMachine.getElementAt(new Vector2(8, 8)).isPresent(), is(false));
     }
 
     @Test

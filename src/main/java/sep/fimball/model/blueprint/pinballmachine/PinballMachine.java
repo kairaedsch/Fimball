@@ -71,7 +71,7 @@ public class PinballMachine
         ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
         for (Highscore highscore : highscores)
         {
-            addHighscore(highscore);
+            addHighscore(highscore, false);
         }
     }
 
@@ -121,6 +121,17 @@ public class PinballMachine
      */
     public void addHighscore(Highscore highscore)
     {
+        addHighscore(highscore, true);
+    }
+
+    /**
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gutgenug ist.
+     *
+     * @param highscore Der Highscore, der hinzugefügt werden soll.
+     * @param save Ob gespeichert werden soll.
+     */
+    private void addHighscore(Highscore highscore, boolean save)
+    {
         if (highscoreList.size() >= Config.maxHighscores)
         {
             Highscore worstHigscore = highscoreList.get(highscoreList.size() - 1);
@@ -128,13 +139,13 @@ public class PinballMachine
             {
                 highscoreList.remove(worstHigscore);
                 highscoreList.add(highscore);
-                saveToDisk();
+                if(save) saveToDisk();
             }
         }
         else
         {
             highscoreList.add(highscore);
-            saveToDisk();
+            if(save) saveToDisk();
         }
     }
 
