@@ -61,7 +61,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Erstellt eine neue PinballMachine und fügt sie zur Liste hinzu.
+     * Erstellt eine neue PinballMachine, speichert diese und fügt sie zur Liste der Flipperautomaten hinzu.
      *
      * @return Die neu erstellte PinballMachine.
      */
@@ -75,7 +75,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Liest eine PinballMachineJson aus und erstellt daraus eine neue PinballMachine.
+     * Liest eine PinballMachineJson aus und erstellt daraus eine neue PinballMachine welche zu der Liste der Flipperautomaten hinzugefügt wird.
      *
      * @param path Der Pfad zur gespeicherten PinballMachineJson.
      */
@@ -85,8 +85,8 @@ public class PinballMachineManager
 
         Path jsonPath = Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachineId));
 
-        Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
-        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineOptional, pinballMachineId, this);
+        Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
+        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineId, this);
 
         if (pinballMachine.isPresent())
         {
@@ -95,7 +95,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Lädt die Elemente einer gegebenen PinballMachine.
+     * Lädt die Elemente einer gegebenen PinballMachine und fügt die Elemente zu diese hinzu.
      *
      * @param pinballMachine Die PinballMachine deren Elemente geladen werden sollen.
      */
@@ -103,8 +103,8 @@ public class PinballMachineManager
     {
         Path jsonPath = Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 
-        Optional<PlacedElementListJson> placedElementListOptional = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
-        Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListOptional);
+        Optional<PlacedElementListJson> placedElementListJson = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
+        Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListJson);
 
         if (PlacedElementList.isPresent())
         {
@@ -116,7 +116,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Speichert die gegebene PinballMachine und ihre Bahnelemente.
+     * Speichert die gegebene PinballMachine und ihre Elemente.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
      */
@@ -128,35 +128,39 @@ public class PinballMachineManager
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
             if (!couldCreateFolder)
             {
-                System.err.println("Could not create folder: " + pathToMachine);
+                System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
                 return;
             }
         }
 
-        PinballMachineJson pinballMachineJson = PinballMachineFactory.createPlacedElementListJson(pinballMachine);
+        PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
         JsonFileManager.saveToJson(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
         JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
 
-        // TODO save image of pinballmachine
+        // TODO Save image of pinballmachine
     }
 
     /**
      * Löscht die gegebene PinballMachine.
      *
      * @param pinballMachine Die PinballMachine, die gelöscht werden soll.
-     * @return Gibt zurück ob die erfolgreich gelöscht wurde.
+     * @return Gibt zurück ob diese erfolgreich gelöscht wurde.
      */
     boolean deleteMachine(PinballMachine pinballMachine)
     {
         try
         {
+            // Lösche Dateien
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineImagePreview(pinballMachine.getID())));
+
+            // Lösche Ordner
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));
 
+            // Entferne aus der List
             return pinballMachines.remove(pinballMachine);
         }
         catch (IOException e)

@@ -10,12 +10,15 @@ import java.util.Optional;
 import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
 
 /**
- * Created by kaira on 05.12.2016.
+ * Die PlacedElementListFactory kümmert sich um die Umwandlung zwischen Listen von PlacedElements und PlacedElementListJson.
  */
 class PlacedElementListFactory
 {
     /**
-     * Lädt die Elemente einer gegebenen PinballMachine.
+     * Wandelt eine PlacedElementListJson in eine Liste von PlacedElements um.
+     *
+     * @param placedElementListOptional Die PlacedElementListJson aus der die Liste von PlacedElements erstellt werden soll.
+     * @return Eine Liste von PlacedElements aus der {@code placedElementListOptional}.
      */
     static Optional<List<PlacedElement>> createPlacedElementList(Optional<PlacedElementListJson> placedElementListOptional)
     {
@@ -24,19 +27,22 @@ class PlacedElementListFactory
             if (!placedElementListOptional.isPresent()) throw new IllegalArgumentException();
             PlacedElementListJson placedElementListJson = placedElementListOptional.get();
 
+            // Versuche alle Elemente des Automaten einzulesen. Dabei werden nicht einlesbare Elemente ignoriert
             nullCheck(placedElementListJson.elements);
             List<PlacedElement> placedElements = new ArrayList<>();
             for (PlacedElementListJson.PlacedElementJson element : placedElementListJson.elements)
             {
-                BaseElement baseElement = BaseElementManager.getInstance().getElement(element.baseElementId);
-                if (baseElement != null)
+                boolean success = false;
+                if (element != null)
                 {
-                    placedElements.add(new PlacedElement(baseElement, element.position, element.points, element.multiplier, element.rotation));
+                    BaseElement baseElement = BaseElementManager.getInstance().getElement(element.baseElementId);
+                    if (baseElement != null)
+                    {
+                        placedElements.add(new PlacedElement(baseElement, element.position, element.points, element.multiplier, element.rotation));
+                        success = true;
+                    }
                 }
-                else
-                {
-                    System.err.println("Machine elem not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
-                }
+                if (!success) System.err.println("Machine elem not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
             }
             System.out.println("Machine elem loaded: (" + placedElements.size() + "/" + placedElementListJson.elements.length + ")");
             return Optional.of(placedElements);
@@ -49,12 +55,19 @@ class PlacedElementListFactory
         }
     }
 
+    /**
+     * Wandelt eine Liste von PlacedElements in ein PlacedElementListJson um.
+     *
+     * @param placedElements Die List von PlacedElements aus der die PlacedElementListJson erstellt werden soll.
+     * @return Eine PlacedElementListJson aus der {@code placedElementListOptional}.
+     */
     static PlacedElementListJson createPlacedElementListJson(List<PlacedElement> placedElements)
     {
         PlacedElementListJson placedElementListJson = new PlacedElementListJson();
 
+        // Wandelt alle Elemente um
         placedElementListJson.elements = new PlacedElementListJson.PlacedElementJson[placedElements.size()];
-        int counter = 0;
+        int pos = 0;
         for (PlacedElement placedElement : placedElements)
         {
             PlacedElementListJson.PlacedElementJson placedElementJson = new PlacedElementListJson.PlacedElementJson();
@@ -63,8 +76,8 @@ class PlacedElementListFactory
             placedElementJson.rotation = placedElement.rotationProperty().getValue();
             placedElementJson.points = placedElement.pointsProperty().getValue();
             placedElementJson.multiplier = placedElement.multiplierProperty().getValue();
-            placedElementListJson.elements[counter] = placedElementJson;
-            counter++;
+            placedElementListJson.elements[pos] = placedElementJson;
+            pos++;
         }
 
         return placedElementListJson;

@@ -54,7 +54,8 @@ public class SpriteSubViewTest
      * Tests whether the image is drawn correctly on the GraphicsContext in the given scenario or not.
      */
     @Test(timeout = 10000)
-    public void drawTest() {
+    public void drawTest()
+    {
         MockitoAnnotations.initMocks(this);
         double[] translationArguments = new double[2];
         double[] transformationArguments = new double[6];
@@ -76,63 +77,51 @@ public class SpriteSubViewTest
         Mockito.when(image.getHeight()).thenReturn(10.0);
         Mockito.when(spriteSubViewModelMock.isSelectedProperty()).thenReturn(new SimpleBooleanProperty(true));
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                translationArguments[0] = invocation.getArgument(0);
-                translationArguments[1] = invocation.getArgument(1);
-                return null;
-            }
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            translationArguments[0] = invocation.getArgument(0);
+            translationArguments[1] = invocation.getArgument(1);
+            return null;
         }).when(graphicsContextMock).translate(anyDouble(), anyDouble());
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                for (int i = 0; i < 6; i++)
-                {
-                    transformationArguments[i] = invocation.getArgument(i);
-                }
-                return null;
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                transformationArguments[i] = invocation.getArgument(i);
             }
+            return null;
         }).when(graphicsContextMock).transform(anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                drawnImages[0] = invocation.getArgument(0);
-                for (int i = 1; i < 5; i++)
-                {
-                    drawImageDoubleArguments[i - 1] = invocation.getArgument(i);
-                }
-                return null;
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            drawnImages[0] = invocation.getArgument(0);
+            for (int i = 1; i < 5; i++)
+            {
+                drawImageDoubleArguments[i - 1] = invocation.getArgument(i);
             }
+            return null;
         }).when(graphicsContextMock).drawImage(any(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                borderArguments[0] = invocation.getArgument(0);
-                return null;
-            }
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            borderArguments[0] = invocation.getArgument(0);
+            return null;
         }).when(graphicsContextMock).setLineWidth(anyDouble());
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                borderColor[0] = invocation.getArgument(0);
-                return null;
-            }
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            borderColor[0] = invocation.getArgument(0);
+            return null;
         }).when(graphicsContextMock).setStroke(any());
 
-        Mockito.doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) {
-                for (int i = 0; i < 4; i++)
-                {
-                    borderArguments[i + 1] = invocation.getArgument(i);
-                }
-                return null;
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                borderArguments[i + 1] = invocation.getArgument(i);
             }
+            return null;
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock);

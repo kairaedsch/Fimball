@@ -60,6 +60,7 @@ public class PlacedElement
 
     /**
      * Gibt die Position des Elementes auf dem Automaten zurück.
+     *
      * @return Die Position des Elementes auf dem Automaten.
      */
     public ReadOnlyObjectProperty<Vector2> positionProperty()
@@ -69,6 +70,7 @@ public class PlacedElement
 
     /**
      * Gibt die Punkte, die das Element vergibt, zurück.
+     *
      * @return Die Punkte, die das Element vergibt.
      */
     public IntegerProperty pointsProperty()
@@ -78,6 +80,7 @@ public class PlacedElement
 
     /**
      * Gibt den Multiplikator, der die Stärke der physikalischen Interaktion des Flipperautomat-Elements mit dem Ball verstärkt oder reduziert, zurück.
+     *
      * @return Der Multiplikator
      */
     public DoubleProperty multiplierProperty()
@@ -87,6 +90,7 @@ public class PlacedElement
 
     /**
      * Gibt die Rotation in Grad, um die das PlacedElementJson gedreht ist, zurück.
+     *
      * @return Die Rotation in Grad, um die das PlacedElementJson gedreht ist.
      */
     public ReadOnlyDoubleProperty rotationProperty()
@@ -96,6 +100,7 @@ public class PlacedElement
 
     /**
      * Gibt die Vorlage des Elements zurück.
+     *
      * @return Die Vorlage des Elements.
      */
     public BaseElement getBaseElement()
@@ -105,21 +110,12 @@ public class PlacedElement
 
     /**
      * Setzt die Position des Elementes auf dem Automaten.
+     *
      * @param position Die neue Position des Elementes auf dem Automaten.
      */
     public void setPosition(Vector2 position)
     {
         this.position.set(position);
-    }
-
-
-    /**
-     * Setzt die Punkte, die das Element vergibt.
-     * @param points Die neuen Punkte, die das Element vergibt.
-     */
-    public void setPoints(int points)
-    {
-        this.points.set(points);
     }
 
     /**
@@ -128,7 +124,7 @@ public class PlacedElement
     public void rotateClockwise()
     {
         if (baseElement.getMedia().canRotate())
-            rotation.setValue(rotation.get() + baseElement.getMedia().getRotationAccuracy());
+            rotation.setValue((rotation.get() + baseElement.getMedia().getRotationAccuracy()) % 360);
     }
 
     /**
@@ -137,7 +133,7 @@ public class PlacedElement
     public void rotateCounterclockwise()
     {
         if (baseElement.getMedia().canRotate())
-            rotation.setValue(360 + rotation.get() - baseElement.getMedia().getRotationAccuracy());
+            rotation.setValue((360 + rotation.get() - baseElement.getMedia().getRotationAccuracy()) % 360);
     }
 
     @Override
@@ -146,7 +142,8 @@ public class PlacedElement
         if (other != null && other instanceof PlacedElement)
         {
             PlacedElement p = (PlacedElement) other;
-            return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get() && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
+            return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get()
+                    && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
         }
         else
         {
