@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel;
 
 import org.junit.Test;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
 
@@ -32,7 +32,7 @@ public class LanguageManagerViewModelTest
         {
             Settings.getSingletonInstance().languageProperty().set(language);
 
-            String path = Config.pathToLanguage(language.getCode());
+            String path = DataPath.pathToLanguage(language.getCode());
 
             //Lädt die Properties aus der Datei
             Properties properties = loadProperties(path);

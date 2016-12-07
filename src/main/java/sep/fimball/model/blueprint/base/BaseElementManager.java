@@ -4,7 +4,7 @@ import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyMapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class BaseElementManager
         try
         {
             // Loads all directories
-            Files.list(Paths.get(Config.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
+            Files.list(Paths.get(DataPath.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
         }
         catch (IOException e)
         {
@@ -66,7 +66,7 @@ public class BaseElementManager
     private void loadElement(Path path)
     {
         String elementTypeId = path.getFileName().toString();
-        Path jsonPath = Paths.get(Config.pathToElementDataJson(elementTypeId));
+        Path jsonPath = Paths.get(DataPath.pathToElementDataJson(elementTypeId));
 
         Optional<BaseElementJson> baseElementOptional = JsonFileManager.loadFromJson(jsonPath, BaseElementJson.class);
 

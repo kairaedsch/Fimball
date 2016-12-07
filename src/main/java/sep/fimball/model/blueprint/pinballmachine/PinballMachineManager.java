@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.json.JsonFileManager;
@@ -51,7 +52,7 @@ public class PinballMachineManager
         // Lädt alle PinballMachinen aus dem PinballMachine Ordner
         try
         {
-            Files.list(Paths.get(Config.pathToPinballMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);
+            Files.list(Paths.get(DataPath.pathToPinballMachines())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadMachine);
         }
         catch (IOException e)
         {
@@ -82,7 +83,7 @@ public class PinballMachineManager
     {
         String pinballMachineId = path.getFileName().toString();
 
-        Path jsonPath = Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachineId));
+        Path jsonPath = Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachineId));
 
         Optional<PinballMachineJson> pinballMachineOptional = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
         Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineOptional, pinballMachineId, this);
@@ -100,7 +101,7 @@ public class PinballMachineManager
      */
     void loadMachineElements(PinballMachine pinballMachine)
     {
-        Path jsonPath = Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
+        Path jsonPath = Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()));
 
         Optional<PlacedElementListJson> placedElementListOptional = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
         Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListOptional);
@@ -121,7 +122,7 @@ public class PinballMachineManager
      */
     void savePinballMachine(PinballMachine pinballMachine)
     {
-        Path pathToMachine = Paths.get(Config.pathToPinballMachine(pinballMachine.getID()));
+        Path pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
         if (!pathToMachine.toFile().exists())
         {
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
@@ -133,10 +134,10 @@ public class PinballMachineManager
         }
 
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPlacedElementListJson(pinballMachine);
-        JsonFileManager.saveToJson(Config.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
+        JsonFileManager.saveToJson(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
-        JsonFileManager.saveToJson(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+        JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
 
         // TODO save image of pinballmachine
     }
@@ -151,10 +152,10 @@ public class PinballMachineManager
     {
         try
         {
-            Files.deleteIfExists(Paths.get(Config.pathToPinballMachineGeneralJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(Config.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(Config.pathToPinballMachineImagePreview(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(Config.pathToPinballMachine(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineImagePreview(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));
 
             return pinballMachines.remove(pinballMachine);
         }

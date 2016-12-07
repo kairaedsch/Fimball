@@ -3,6 +3,7 @@ package sep.fimball.model.blueprint.json;
 import org.junit.After;
 import org.junit.Test;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,7 +39,7 @@ public class JsonFileManagerTest
     @Test
     public void jsonLoadTest()
     {
-        Optional<JsonTest> test = JsonFileManager.loadFromJson(Paths.get(Config.pathToTestData() + "JsonTestFile.json"), JsonTest.class);
+        Optional<JsonTest> test = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToTestData() + "JsonTestFile.json"), JsonTest.class);
         assertThat(test.isPresent(), is(true));
         assertThat(test.get().testInt, is(42));
         assertThat(test.get().testDouble, is(13.37));
@@ -52,8 +53,8 @@ public class JsonFileManagerTest
         test.testInt = 12;
         test.testDouble = 34.56;
         test.testString = "save-test-\uD83D\uDC09";
-        JsonFileManager.saveToJson(Config.pathToTestData() + SAVE_FILE_NAME, test);
-        Optional<JsonTest> loaded = JsonFileManager.loadFromJson(Paths.get(Config.pathToTestData() + SAVE_FILE_NAME), JsonTest.class);
+        JsonFileManager.saveToJson(DataPath.pathToTestData() + SAVE_FILE_NAME, test);
+        Optional<JsonTest> loaded = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToTestData() + SAVE_FILE_NAME), JsonTest.class);
         assertThat(loaded.isPresent(), is(true));
         assertThat(test.testInt, is(loaded.get().testInt));
         assertThat(test.testDouble, is(loaded.get().testDouble));
@@ -65,7 +66,7 @@ public class JsonFileManagerTest
     {
         try
         {
-            Files.deleteIfExists(Paths.get(Config.pathToTestData() + SAVE_FILE_NAME));
+            Files.deleteIfExists(Paths.get(DataPath.pathToTestData() + SAVE_FILE_NAME));
         }
         catch (IOException ex)
         {

@@ -3,10 +3,10 @@ package sep.fimball.model.blueprint.settings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
-import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.blueprint.json.JsonFileManager;
+import sep.fimball.model.input.data.KeyBinding;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,7 +80,7 @@ public class Settings
         musicVolume = new SimpleIntegerProperty();
         sfxVolume = new SimpleIntegerProperty();
 
-        loadSettings(Paths.get(Config.pathToSettings()));
+        loadSettings(Paths.get(DataPath.pathToSettings()));
     }
 
     /**
@@ -146,7 +146,7 @@ public class Settings
             counter++;
         }
 
-        JsonFileManager.saveToJson(Config.pathToSettings(), settingsJson);
+        JsonFileManager.saveToJson(DataPath.pathToSettings(), settingsJson);
     }
 
     /**

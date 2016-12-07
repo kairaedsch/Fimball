@@ -3,6 +3,7 @@ package sep.fimball.model.blueprint.pinballmachine;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -239,7 +240,7 @@ public class PinballMachine
      */
     public String getImagePath()
     {
-        return Config.pathToPinballMachineImagePreview(id.get());
+        return DataPath.pathToPinballMachineImagePreview(id.get());
     }
 
     /**

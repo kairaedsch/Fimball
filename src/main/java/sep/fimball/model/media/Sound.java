@@ -1,6 +1,6 @@
 package sep.fimball.model.media;
 
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 
 /**
  * Eine Audioquelle, wie Musik oder Soundeffekt.
@@ -35,7 +35,7 @@ public class Sound
      */
     public String getSoundPath()
     {
-        return Config.pathToSound(soundName);
+        return DataPath.pathToSound(soundName);
     }
 
     /**

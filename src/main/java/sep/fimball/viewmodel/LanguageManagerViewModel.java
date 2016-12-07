@@ -2,7 +2,7 @@ package sep.fimball.viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
 
@@ -73,7 +73,7 @@ public class LanguageManagerViewModel
     {
         Properties properties = new Properties();
 
-        String path = Config.pathToLanguage(language.getCode());
+        String path = DataPath.pathToLanguage(language.getCode());
         try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
             Reader reader = new InputStreamReader(inputStream, "UTF-8");

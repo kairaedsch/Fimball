@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
  * genutzt, da dadurch die Tests auf anderen Maschinen sowie dem Jenkins Server nicht mehr funktionieren würden ohne den Pfad bei jeder
  * Maschine zu ändern.
  */
-public class ConfigTest
+public class DataPathTest
 {
     /**
      * ID eines Test Elements.
@@ -30,7 +30,7 @@ public class ConfigTest
     @Test
     public void testPathToElements()
     {
-        String path = Config.pathToElements();
+        String path = DataPath.pathToElements();
         assertThat(path.endsWith("/elements"), is(true));
     }
 
@@ -40,7 +40,7 @@ public class ConfigTest
     @Test
     public void testPathToElement()
     {
-        String path = Config.pathToElement(testElementName);
+        String path = DataPath.pathToElement(testElementName);
         assertThat(path.endsWith("/elements/" + testElementName), is(true));
     }
 
@@ -50,7 +50,7 @@ public class ConfigTest
     @Test
     public void testPathToElementDataJson()
     {
-        String path = Config.pathToElementDataJson(testElementName);
+        String path = DataPath.pathToElementDataJson(testElementName);
         assertThat(path.endsWith("/elements/" + testElementName + "/data.json"), is(true));
     }
 
@@ -60,7 +60,7 @@ public class ConfigTest
     @Test
     public void testPathToPinballMachines()
     {
-        String path = Config.pathToPinballMachines();
+        String path = DataPath.pathToPinballMachines();
         assertThat(path.endsWith("/machines"), is(true));
     }
 
@@ -70,7 +70,7 @@ public class ConfigTest
     @Test
     public void testPathToPinballMachine()
     {
-        String path = Config.pathToPinballMachine(testMachineId);
+        String path = DataPath.pathToPinballMachine(testMachineId);
         assertThat(path.endsWith("/machines/" + testMachineId), is(true));
     }
 
@@ -80,7 +80,7 @@ public class ConfigTest
     @Test
     public void testPathToPinballMachinePreviewImage()
     {
-        String path = Config.pathToPinballMachineImagePreview(testMachineId);
+        String path = DataPath.pathToPinballMachineImagePreview(testMachineId);
         assertThat(path.endsWith("/machines/" + testMachineId + "/preview.png"), is(true));
     }
 
@@ -90,7 +90,7 @@ public class ConfigTest
     @Test
     public void testPathToPinballMachineGeneralData()
     {
-        String path = Config.pathToPinballMachineGeneralJson(testMachineId);
+        String path = DataPath.pathToPinballMachineGeneralJson(testMachineId);
         assertThat(path.endsWith("/machines/" + testMachineId + "/general.json"), is(true));
     }
 
@@ -100,7 +100,7 @@ public class ConfigTest
     @Test
     public void testPathToPinballMachineData()
     {
-        String path = Config.pathToPinballMachinePlacedElementsJson(testMachineId);
+        String path = DataPath.pathToPinballMachinePlacedElementsJson(testMachineId);
         assertThat(path.endsWith("/machines/" + testMachineId + "/elements.json"), is(true));
     }
 
@@ -110,7 +110,7 @@ public class ConfigTest
     @Test
     public void testPathToSettings()
     {
-        String path = Config.pathToSettings();
+        String path = DataPath.pathToSettings();
         assertThat(path.endsWith("/settings.json"), is(true));
     }
 
@@ -120,7 +120,7 @@ public class ConfigTest
     @Test
     public void testPathToLanguage()
     {
-        String path = Config.pathToLanguage("de");
+        String path = DataPath.pathToLanguage("de");
         // Das erwartete Pfadende einer Sprachbeschreibung.
         String expectedLanguagePathEnding = "bundles/fimball_de.properties";
         assertThat(path, is(expectedLanguagePathEnding));
@@ -132,7 +132,7 @@ public class ConfigTest
     @Test
     public void testPathToLogo()
     {
-        String path = Config.pathToLogo();
+        String path = DataPath.pathToLogo();
         assertThat(path.endsWith("/logo.png"), is(true));
     }
 
@@ -142,7 +142,7 @@ public class ConfigTest
     @Test
     public void testPathToTestData()
     {
-        String path = Config.pathToTestData();
+        String path = DataPath.pathToTestData();
         assertThat(path.endsWith("/testdata/"), is(true));
     }
 
@@ -152,7 +152,7 @@ public class ConfigTest
     @Test
     public void testPathToSound()
     {
-        String path = Config.pathToSound("game");
+        String path = DataPath.pathToSound("game");
         // Das erwartete Pfadende einer Sounddatei.
         String expectedSoundPathEnding = "/sounds/game.mp3";
         assertThat(path.endsWith(expectedSoundPathEnding), is(true));
@@ -164,14 +164,14 @@ public class ConfigTest
     @Test
     public void testPathToElementImage()
     {
-        String topPath = Config.pathToElementImage(testElementName, ImageLayer.TOP, false, 0, false, "", 0);
-        String bottomPath = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, false, 0, false, "", 0);
-        String topRotated = Config.pathToElementImage(testElementName, ImageLayer.TOP, true, 90, false, "", 0);
-        String bottomRotated = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, true, 270, false, "", 0);
-        String topAnimation = Config.pathToElementImage(testElementName, ImageLayer.TOP, false, 0, true, "glow", 0);
-        String bottomAnimation = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, false, 0, true, "glow", 1);
-        String topAnimationRotated = Config.pathToElementImage(testElementName, ImageLayer.TOP, true, 0, true, "spinn", 0);
-        String bottomAnimationRotated = Config.pathToElementImage(testElementName, ImageLayer.BOTTOM, true, 90, true, "spinn", 5);
+        String topPath = DataPath.pathToElementImage(testElementName, ImageLayer.TOP, false, 0, false, "", 0);
+        String bottomPath = DataPath.pathToElementImage(testElementName, ImageLayer.BOTTOM, false, 0, false, "", 0);
+        String topRotated = DataPath.pathToElementImage(testElementName, ImageLayer.TOP, true, 90, false, "", 0);
+        String bottomRotated = DataPath.pathToElementImage(testElementName, ImageLayer.BOTTOM, true, 270, false, "", 0);
+        String topAnimation = DataPath.pathToElementImage(testElementName, ImageLayer.TOP, false, 0, true, "glow", 0);
+        String bottomAnimation = DataPath.pathToElementImage(testElementName, ImageLayer.BOTTOM, false, 0, true, "glow", 1);
+        String topAnimationRotated = DataPath.pathToElementImage(testElementName, ImageLayer.TOP, true, 0, true, "spinn", 0);
+        String bottomAnimationRotated = DataPath.pathToElementImage(testElementName, ImageLayer.BOTTOM, true, 90, true, "spinn", 5);
         // Das erwartete Pfadende eines Bilds, welches die obere Ebene darstellt.
         String expectedTopEnding = "/elementOne/top.png";
         assertThat(topPath.endsWith(expectedTopEnding), is(true));

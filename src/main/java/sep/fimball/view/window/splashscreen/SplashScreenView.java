@@ -7,7 +7,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.splashscreen.SplashScreenViewModel;
 
@@ -47,7 +47,7 @@ public class SplashScreenView extends WindowView<SplashScreenViewModel>
     {
         progressText.textProperty().bind(splashScreenViewModel.getProgressText());
         loadProgress.progressProperty().bind(splashScreenViewModel.getLoadProgress());
-        File imageFile = new File(Config.pathToLogo());
+        File imageFile = new File(DataPath.pathToLogo());
         Image loadedImage = new Image(imageFile.toURI().toString(), true);
         splash.setImage(loadedImage);
         splashLayout.setEffect(new DropShadow());

@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
 import org.junit.Test;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DataPath;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +27,7 @@ public class BaseElementManagerTest
         assertThat(testElement.getId(), is(TEST_ELEMENT_ID));
 
         // Check that all directories in Config.pathToElements are valid BaseElements that get loaded into the game
-        Stream<String> directoryList = Files.list(Paths.get(Config.pathToElements())).filter((e) -> e.toFile().isDirectory()).map((path) -> path.getFileName().toString());
+        Stream<String> directoryList = Files.list(Paths.get(DataPath.pathToElements())).filter((e) -> e.toFile().isDirectory()).map((path) -> path.getFileName().toString());
         directoryList.forEach((directory) ->
         {
             assertThat(BaseElementManager.getInstance().getElement(directory), notNullValue());
