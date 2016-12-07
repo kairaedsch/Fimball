@@ -45,6 +45,16 @@ public class PinballMachineSettingsViewModelTest
     private PinballMachine testPinballMachine;
 
     /**
+     * Gibt an, ob der Automat gespeichert wurde.
+     */
+    private boolean pinballMachineSaved = false;
+
+    /**
+     * Gibt an, ob der Automat gelöscht wurde.
+     */
+    private boolean isPinballMachineDeleted = false;
+
+    /**
      * Das PinballMachineSettingsViewModel. das getestet werden soll.
      */
     private PinballMachineSettingsViewModel test;
@@ -57,6 +67,7 @@ public class PinballMachineSettingsViewModelTest
     {
         init();
         test.savePinballMachine();
+        assertThat(pinballMachineSaved, is(true));
         assertThat(mainmenuShown, is(true));
     }
 
@@ -68,6 +79,7 @@ public class PinballMachineSettingsViewModelTest
     {
         init();
         test.deletePinballMachine();
+        assertThat(isPinballMachineDeleted, is(true));
         assertThat(mainmenuShown, is(true));
     }
 
@@ -83,6 +95,18 @@ public class PinballMachineSettingsViewModelTest
         elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
         when(testPinballMachine.elementsProperty()).thenReturn(elements);
         when(testPinballMachine.nameProperty()).thenReturn(machineName);
+        doAnswer(invocationOnMock ->
+        {
+            pinballMachineSaved = true;
+            return null;
+        }).when(testPinballMachine).saveToDisk();
+
+        doAnswer(invocationOnMock ->
+        {
+            isPinballMachineDeleted = true;
+            return null;
+        }).when(testPinballMachine).deleteFromDisk();
+
         test = new PinballMachineSettingsViewModel(testPinballMachine);
 
         SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
