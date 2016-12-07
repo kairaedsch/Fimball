@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.window.game;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.data.Vector2;
@@ -25,10 +26,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class GameViewModel extends WindowViewModel
 {
-    /**
-     * Der Standard-Zoom der Kamera.
-     */
-    private static final double DEFAULT_ZOOM = 0.75;
+
     /**
      * Der Flipperautomat, der in der aktuellen Partie gespielt wird.
      */
@@ -93,7 +91,7 @@ public class GameViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
-        cameraZoom = new SimpleDoubleProperty(DEFAULT_ZOOM);
+        cameraZoom = new SimpleDoubleProperty(Config.defaultZoom);
 
         gameSession.currentPlayer().addListener((observable, oldValue, newValue) -> {
             playerPoints.bind(newValue.pointsProperty());
