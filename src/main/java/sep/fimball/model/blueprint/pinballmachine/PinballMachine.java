@@ -2,11 +2,12 @@ package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 
 import java.util.List;
@@ -35,7 +36,12 @@ public class PinballMachine
     /**
      * Liste mit den auf dem Automaten erreichten Highscores.
      */
-    private ListProperty<Highscore> highscoreList;
+    private ObservableList<Highscore> highscoreList;
+
+    /**
+     * Liste mit den auf dem Automaten erreichten Highscores.
+     */
+    private ListProperty<Highscore> highscoreListSorted;
 
     /**
      * Liste der auf dem Automaten gesetzten Elemente.
@@ -63,12 +69,11 @@ public class PinballMachine
 
         // Set up element list
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.autoSort(elements, PlacedElement::compare);
         elementsLoaded = false;
 
         // Fügt die Highscores zu highscoreList hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
-        highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
+        highscoreList = FXCollections.observableArrayList();
+        highscoreListSorted = new SimpleListProperty<>(new SortedList<>(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get())));
         for (Highscore highscore : highscores)
         {
             addHighscore(highscore, false);
@@ -134,7 +139,7 @@ public class PinballMachine
     {
         if (highscoreList.size() >= Config.maxHighscores)
         {
-            Highscore worstHigscore = highscoreList.get(highscoreList.size() - 1);
+            Highscore worstHigscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
             if (worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
             {
                 highscoreList.remove(worstHigscore);
@@ -227,7 +232,7 @@ public class PinballMachine
      */
     public ReadOnlyListProperty<Highscore> highscoreListProperty()
     {
-        return highscoreList;
+        return highscoreListSorted;
     }
 
     /**

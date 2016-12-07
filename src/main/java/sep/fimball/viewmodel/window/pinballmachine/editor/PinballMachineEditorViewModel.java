@@ -2,15 +2,17 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.blueprint.base.BaseElementCategory;
-import sep.fimball.model.game.GameSession;
 import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -104,19 +106,19 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine);
 
-
-        ListProperty<AvailableElementSubViewModel> availableElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ObservableList<AvailableElementSubViewModel> availableElements = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
-        ListPropertyConverter.autoSort(availableElements, (o1, o2) -> o1.nameProperty().get().compareTo(o2.nameProperty().get()));
+
+        SortedList<AvailableElementSubViewModel> availableElementsSorted = new SortedList<>(availableElements, (o1, o2) -> o1.nameProperty().get().compareTo(o2.nameProperty().get()));
 
         availableBasicElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableBasicElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC)));
+        ListPropertyConverter.bindAndFilterList(availableBasicElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC)));
 
         availableObstacleElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableObstacleElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE)));
+        ListPropertyConverter.bindAndFilterList(availableObstacleElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE)));
 
         availableAdvancedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableAdvancedElements, availableElements, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED)));
+        ListPropertyConverter.bindAndFilterList(availableAdvancedElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED)));
 
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);

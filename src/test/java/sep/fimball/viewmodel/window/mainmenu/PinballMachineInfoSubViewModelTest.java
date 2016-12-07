@@ -41,7 +41,6 @@ public class PinballMachineInfoSubViewModelTest
         assertThat(test.highscoreListProperty().get(0).scoreProperty().get(), is((long) (100)));
     }
 
-
     /**
      * Erstellt eine gemockten Automaten und gibt diesen zurück.
      *

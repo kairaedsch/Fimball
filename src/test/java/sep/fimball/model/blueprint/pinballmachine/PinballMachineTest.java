@@ -2,27 +2,19 @@ package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.ReadOnlyListProperty;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static javafx.scene.input.KeyCode.L;
-import static javafx.scene.input.KeyCode.M;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
-import static sep.fimball.general.data.Config.maxHighscores;
+import static org.junit.Assert.assertThat;
 
-/**
- * Created by kaira on 07.12.2016.
- */
 public class PinballMachineTest
 {
     @Test
