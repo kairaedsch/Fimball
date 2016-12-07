@@ -198,7 +198,7 @@ public class GameViewModel extends WindowViewModel
                 sceneManager.setDialog(new PauseViewModel(this));
             }
         }
-        else
+        else if (binding != null)
         {
             InputManager.getSingletonInstance().addKeyEvent(keyEvent);
         }

@@ -30,13 +30,13 @@ public class PinballMachineInfoSubViewModelTest
         SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
         mockedMainMenuViewModel.setSceneManager(mockedSceneManager);
         PinballMachine pinballMachine = getMockedPinballMachine();
-        PinballMachine pinballMachine2 = getMockedPinballMachine();
+        PinballMachine newPinballMachine = getMockedPinballMachine();
 
         PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, pinballMachine);
-        test.update(pinballMachine2);
-        assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine2));
-        assertThat(test.nameProperty().get(), equalTo(pinballMachine2.nameProperty().get()));
-        pinballMachine2.addHighscore(new Highscore(100, "Test"));
+        test.update(newPinballMachine);
+        assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(newPinballMachine));
+        assertThat(test.nameProperty().get(), equalTo(newPinballMachine.nameProperty().get()));
+        newPinballMachine.addHighscore(new Highscore(100, "Test"));
         assertThat(test.highscoreListProperty().get(0).playerNameProperty().get(), is("Test"));
         assertThat(test.highscoreListProperty().get(0).scoreProperty().get(), is((long) (100)));
     }
