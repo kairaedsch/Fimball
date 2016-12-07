@@ -88,31 +88,14 @@ public class PinballMachineSettingsViewModelTest
      */
     private void init()
     {
-        testPinballMachine = mock(PinballMachine.class);
-        StringProperty machineName = new SimpleStringProperty("Test");
-        ListProperty<PlacedElement> elements = new SimpleListProperty<>();
-        elements.set(FXCollections.observableArrayList());
-        elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
-        when(testPinballMachine.elementsProperty()).thenReturn(elements);
-        when(testPinballMachine.nameProperty()).thenReturn(machineName);
-        doAnswer(invocationOnMock ->
-        {
-            pinballMachineSaved = true;
-            return null;
-        }).when(testPinballMachine).saveToDisk();
-
-        doAnswer(invocationOnMock ->
-        {
-            isPinballMachineDeleted = true;
-            return null;
-        }).when(testPinballMachine).deleteFromDisk();
+        testPinballMachine = getTestPinballMachine();
 
         test = new PinballMachineSettingsViewModel(testPinballMachine);
 
         SceneManagerViewModel mockedSceneManager = mock(SceneManagerViewModel.class);
         doAnswer(invocationOnMock ->
         {
-            WindowViewModel windowViewModel= invocationOnMock.getArgument(0);
+            WindowViewModel windowViewModel = invocationOnMock.getArgument(0);
             if (windowViewModel.getWindowType() == WindowType.MAIN_MENU)
             {
                 mainmenuShown = true;
@@ -128,6 +111,34 @@ public class PinballMachineSettingsViewModelTest
         nameInEditor = "";
         mainmenuShown = false;
         editorShown = false;
+    }
+
+    /**
+     * Erstellt eine gemockten Automaten und gibt diesen zurück.
+     *
+     * @return Einen gemockten Automaten.
+     */
+    private PinballMachine getTestPinballMachine()
+    {
+        PinballMachine pinballMachine = mock(PinballMachine.class);
+        StringProperty machineName = new SimpleStringProperty("Test");
+        ListProperty<PlacedElement> elements = new SimpleListProperty<>();
+        elements.set(FXCollections.observableArrayList());
+        elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(0, 0), 0, 0, 0));
+        when(pinballMachine.elementsProperty()).thenReturn(elements);
+        when(pinballMachine.nameProperty()).thenReturn(machineName);
+        doAnswer(invocationOnMock ->
+        {
+            pinballMachineSaved = true;
+            return null;
+        }).when(pinballMachine).saveToDisk();
+
+        doAnswer(invocationOnMock ->
+        {
+            isPinballMachineDeleted = true;
+            return null;
+        }).when(pinballMachine).deleteFromDisk();
+        return pinballMachine;
     }
 
     /**
