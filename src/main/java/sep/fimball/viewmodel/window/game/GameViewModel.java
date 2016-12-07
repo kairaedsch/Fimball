@@ -97,19 +97,19 @@ public class GameViewModel extends WindowViewModel
         {
             if (newIsGameOver)
             {
-                Player[] players = gameSession.getPlayers();
+                Player[] players = this.gameSession.getPlayers();
                 String[] playerNames = new String[players.length];
                 for (int i = 0; i < playerNames.length; i++)
                 {
                     playerNames[i] = players[i].nameProperty().get();
                 }
-                if (gameSession.isStartedFromEditor())
+                if (this.gameSession.isStartedFromEditor())
                 {
-                    sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
+                    sceneManager.setWindow(new PinballMachineEditorViewModel(this.gameSession.getPinballMachine()));
                 }
                 else
                 {
-                    sceneManager.setDialog(new GameOverViewModel(gameSession.getPinballMachine(), getScores(), playerNames));
+                    sceneManager.setDialog(new GameOverViewModel(this.gameSession.getPinballMachine(), getScores(), playerNames));
                 }
             }
         });
@@ -225,6 +225,6 @@ public class GameViewModel extends WindowViewModel
     @Override
     public void changeBackgroundMusic()
     {
-        //SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
+        SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
     }
 }
