@@ -41,12 +41,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
      * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
-     * @param playerNames      Die Namen der Spieler.
+     * @param playerNames    Die Namen der Spieler.
      * @return Die generierte GameSession.
      */
-    public static GameSession generateGameSession(PinballMachine pinballMachine, String[] playerNames)
+    public static GameSession generateGameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
-        GameSession gameSession = new GameSession(pinballMachine, playerNames);
+        GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.startAll();
         return gameSession;
@@ -61,7 +61,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public static GameSession generateEditorSession(PinballMachine pinballMachine)
     {
         String[] editorPlayers = {"Editor-Player"};
-        GameSession gameSession = new GameSession(pinballMachine, editorPlayers);
+        GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         ListPropertyConverter.bindAndConvertList(
                 gameSession.getWorld().gameElementsProperty(),
@@ -75,6 +75,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
     protected final double GAMELOOP_TICK = 1 / 60D;
+
+    /**
+     * TODO
+     */
+    private boolean startedFromEditor;
 
     /**
      * Array der Spieler, die am aktuellen Spiel teilnehmen.
@@ -176,9 +181,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
      * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
-     * @param playerNames      Die Namen der Spieler.
+     * @param playerNames    Die Namen der Spieler.
      */
-    public GameSession(PinballMachine pinballMachine, String[] playerNames)
+    public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
         this.pinballMachine = pinballMachine;
         this.handlers = new ArrayList<>();
@@ -187,6 +192,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.elementEventArgsList = new LinkedList<>();
         this.isOver = new SimpleBooleanProperty(false);
         this.gameBall = new SimpleObjectProperty<>();
+        this.startedFromEditor = startedFromEditor;
 
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
@@ -286,7 +292,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
             {
-                for (Handler handler: handlers                     )
+                for (Handler handler : handlers)
                 {
                     handler.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
                 }
@@ -296,7 +302,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
             {
-                for (Handler handler: handlers                     )
+                for (Handler handler : handlers)
                 {
                     handler.activateUserHandler(KeyBinding.NUDGE_RIGHT, KeyEventType.DOWN);
                 }
@@ -586,5 +592,15 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public ReadOnlyBooleanProperty isOverProperty()
     {
         return isOver;
+    }
+
+    /**
+     * TODO
+     *
+     * @return
+     */
+    public boolean isStartedFromEditor()
+    {
+        return startedFromEditor;
     }
 }

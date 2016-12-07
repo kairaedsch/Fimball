@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -19,7 +20,6 @@ public class GameOverViewModel extends DialogViewModel
     private final PinballMachine pinballMachine;
 
     private final String[] playerNames;
-    private final boolean startedFromEditor;
 
     /**
      * Die Highscore-Liste des zuletzt gespielten Flipperautomaten.
@@ -34,12 +34,11 @@ public class GameOverViewModel extends DialogViewModel
     /**
      * Erstellt ein neues GameOverViewModel.
      */
-    public GameOverViewModel(PinballMachine pinballMachine, ReadOnlyListProperty<Highscore> playerHighscores, String[] playerNames, boolean startedFromEditor)
+    public GameOverViewModel(PinballMachine pinballMachine, ReadOnlyListProperty<Highscore> playerHighscores, String[] playerNames)
     {
         super(DialogType.GAME_OVER);
         this.pinballMachine = pinballMachine;
         this.playerNames = playerNames;
-        this.startedFromEditor = startedFromEditor;
 
         this.machineHighscores = new SimpleListProperty<>();
         this.playerHighscores = new SimpleListProperty<>();
@@ -53,7 +52,7 @@ public class GameOverViewModel extends DialogViewModel
      */
     public void restartGame()
     {
-        sceneManager.setWindow(new GameViewModel(pinballMachine, playerNames, startedFromEditor));
+        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, false)));
     }
 
     /**
@@ -61,13 +60,7 @@ public class GameOverViewModel extends DialogViewModel
      */
     public void exitDialog()
     {
-        if (startedFromEditor)
-        {
-            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
-        } else
-        {
-            sceneManager.setWindow(new MainMenuViewModel());
-        }
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     /**

@@ -20,7 +20,7 @@ public class TestGameSession extends GameSession
      */
     public TestGameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        super(pinballMachine, playerNames);
+        super(pinballMachine, playerNames,false);
     }
 
     /**

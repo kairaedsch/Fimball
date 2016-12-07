@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
@@ -69,7 +70,7 @@ public class PlayerNameViewModel extends DialogViewModel
             names[i] = playerNameEntries.get(i).playerNameProperty().get();
         }
 
-        sceneManager.setWindow(new GameViewModel(pinballMachine, names, false));
+        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names,false)));
     }
 
     /**

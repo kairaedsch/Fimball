@@ -174,7 +174,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void startPinballMachine()
     {
-        sceneManager.setWindow(new GameViewModel(pinballMachine, new String[]{new String(new byte[]{71, 111, 116, 116, 105, 109, 112, 101, 114, 97, 116, 111, 114, 32, 84, 114, 117, 109, 112})}, true));
+        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{""}, true)));
     }
 
     /**

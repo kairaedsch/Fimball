@@ -28,11 +28,6 @@ public class GameViewModel extends WindowViewModel
 {
 
     /**
-     * Der Flipperautomat, der in der aktuellen Partie gespielt wird.
-     */
-    private final PinballMachine pinballMachine;
-
-    /**
      * Die aktuelle Punktzahl des aktiven Spielers.
      */
     private IntegerProperty playerPoints;
@@ -68,23 +63,15 @@ public class GameViewModel extends WindowViewModel
     private GameSession gameSession;
 
     /**
-     * Gibt an, ob die Partie aus dem Editor gestartet wurde.
-     */
-    private boolean startedFromEditor;
-
-    /**
-     * Erstellt ein neues GameViewModel.
+     * TODO
      *
-     * @param pinballMachine    Der gespielte Flipperautomat.
-     * @param playerNames       Die Namen der teilnehmenden Spieler.
-     * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
+     * @param gameSession
      */
-    public GameViewModel(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
+    public GameViewModel(GameSession gameSession)
     {
         super(WindowType.GAME);
-        this.pinballMachine = pinballMachine;
-        gameSession = GameSession.generateGameSession(pinballMachine, playerNames);
 
+        this.gameSession = gameSession;
         playerPoints = new SimpleIntegerProperty();
         playerName = new SimpleStringProperty();
         playerReserveBalls = new SimpleIntegerProperty();
@@ -93,7 +80,8 @@ public class GameViewModel extends WindowViewModel
         cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
         cameraZoom = new SimpleDoubleProperty(Config.defaultZoom);
 
-        gameSession.currentPlayer().addListener((observable, oldValue, newValue) -> {
+        gameSession.currentPlayer().addListener((observable, oldValue, newValue) ->
+        {
             playerPoints.bind(newValue.pointsProperty());
             playerName.bind(newValue.nameProperty());
             playerReserveBalls.bind(newValue.ballsProperty());
@@ -105,12 +93,24 @@ public class GameViewModel extends WindowViewModel
 
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
-        this.startedFromEditor = startedFromEditor;
-
-        gameSession.isOverProperty().addListener((observable, oldIsGameOver, newIsGameOver) -> {
-            if(newIsGameOver)
+        gameSession.isOverProperty().addListener((observable, oldIsGameOver, newIsGameOver) ->
+        {
+            if (newIsGameOver)
             {
-                sceneManager.setDialog(new GameOverViewModel(pinballMachine, getScores(), playerNames, startedFromEditor));
+                Player[] players = gameSession.getPlayers();
+                String[] playerNames = new String[players.length];
+                for (int i = 0; i < playerNames.length; i++)
+                {
+                    playerNames[i] = players[i].nameProperty().get();
+                }
+                if (gameSession.isStartedFromEditor())
+                {
+                    sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
+                }
+                else
+                {
+                    sceneManager.setDialog(new GameOverViewModel(gameSession.getPinballMachine(), getScores(), playerNames));
+                }
             }
         });
     }
@@ -187,9 +187,9 @@ public class GameViewModel extends WindowViewModel
             }
 
             gameSession.pauseAll();
-            if (startedFromEditor)
+            if (gameSession.isStartedFromEditor())
             {
-                sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+                sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
             }
             else
             {
@@ -212,6 +212,7 @@ public class GameViewModel extends WindowViewModel
 
     /**
      * Gibt die Scores der Spieler der aktuellen Partie zurück.
+     *
      * @return Die Scores der Spieler der aktuellen Partie.
      */
     public ReadOnlyListProperty<Highscore> getScores()
@@ -226,18 +227,9 @@ public class GameViewModel extends WindowViewModel
         return scores;
     }
 
-    /**
-     * Gibt den gespielten Flipperautomaten zurück.
-     * @return Der gespielte Flipperautomat.
-     */
-    public PinballMachine getPinballMachine()
-    {
-        return pinballMachine;
-    }
-
-
     @Override
-    public void changeBackgroundMusic() {
-        SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
+    public void changeBackgroundMusic()
+    {
+        //SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
     }
 }
