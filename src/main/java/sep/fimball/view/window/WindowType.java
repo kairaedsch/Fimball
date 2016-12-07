@@ -43,6 +43,11 @@ public enum WindowType implements ViewType
     GAME_WINDOW("game/gameWindow.fxml"),
 
     /**
+     * Das Fenster das die verbleibenden Bälle im Spiel anzeigt.
+     */
+    GAME_RESERVEBALL("game/reserveBall.fxml"),
+
+    /**
      * Das Spielfeld eines Automaten.
      */
     PINBALL_CANVAS("pinballcanvas/pinballCanvas.fxml"),

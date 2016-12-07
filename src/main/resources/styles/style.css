@@ -160,3 +160,10 @@
     -fx-background-color: #C84444;
     -fx-padding: 25px 15px 25px 15px;
 }
+
+.reserveBallPic {
+    -fx-background-image: url("../images/ballTop.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: auto;
+}

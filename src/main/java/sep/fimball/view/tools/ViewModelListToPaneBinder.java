@@ -1,5 +1,7 @@
 package sep.fimball.view.tools;
 
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -22,6 +24,22 @@ public class ViewModelListToPaneBinder
     public static <ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType)
     {
         ViewModelListToPaneBinder.<ViewBoundToViewModel<ViewModelT>, ViewModelT>bindViewModelsToViews(parentNode, viewModelList, viewType, ViewBoundToViewModel::setViewModel);
+    }
+
+    public static <ViewT> void bindAmountToViews(Pane parentNode, ReadOnlyIntegerProperty amount, ViewType viewType)
+    {
+        ChangeListener<? super Number> changeListener = ((observable, oldValue, newValue) -> {
+            parentNode.getChildren().clear();
+
+            for (int i = 0; i < newValue.intValue(); i++)
+            {
+                ViewLoader<ViewT> viewLoader = new ViewLoader<>(viewType);
+                parentNode.getChildren().add(viewLoader.getRootNode());
+            }
+        });
+
+        amount.addListener(changeListener);
+        changeListener.changed(null, null, amount.get());
     }
 
     /**

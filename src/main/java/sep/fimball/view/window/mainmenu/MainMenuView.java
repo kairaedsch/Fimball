@@ -43,7 +43,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
      * Das zum MainMenu gehörende MainMenuViewModel.
      */
     private MainMenuViewModel mainMenuViewModel;
-    
+
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {
@@ -53,7 +53,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()));
 
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachinePreviewSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
-
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
 

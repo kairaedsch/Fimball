@@ -6,8 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
+import sep.fimball.view.tools.ViewLoader;
+import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -50,6 +51,7 @@ public class GameView extends WindowView<GameViewModel>
         playerName.textProperty().bind(playerNameText);
         score.textProperty().bind(scoreText);
 
+        ViewModelListToPaneBinder.bindAmountToViews(reserveBalls, gameViewModel.playerReserveBallsProperty(), WindowType.GAME_RESERVEBALL);
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(gameViewModel.getPinballCanvasViewModel());
