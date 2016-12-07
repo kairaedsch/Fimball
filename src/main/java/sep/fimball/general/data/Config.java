@@ -34,6 +34,11 @@ public class Config
     public final static double maxZoom = 2;
 
     /**
+     * Der Standard-Zoom der Kamera.
+     */
+    public final static double defaultZoom = 0.75;
+
+    /**
      * Gibt eine eindeutige ID für Automaten zurück.
      *
      * @return Eine eindeutige ID für Automaten.
