@@ -179,13 +179,8 @@ public class GameViewModel extends WindowViewModel
     public void handleKeyEvent(KeyEvent keyEvent)
     {
         KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        if (binding != null && binding == KeyBinding.PAUSE)
+        if (binding != null && binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
         {
-            if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
-            {
-                return;
-            }
-
             gameSession.pauseAll();
             if (gameSession.isStartedFromEditor())
             {
