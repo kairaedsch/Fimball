@@ -11,6 +11,7 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
@@ -46,8 +47,8 @@ public class GameView extends WindowView<GameViewModel>
     @Override
     public void setViewModel(GameViewModel gameViewModel)
     {
-        StringExpression playerNameText = Bindings.concat("Player: ", gameViewModel.playerNameProperty());
-        StringExpression scoreText = Bindings.concat("Score: ", gameViewModel.playerPointsProperty().asString().concat(" Balls: ").concat(gameViewModel.playerReserveBallsProperty()));
+        StringExpression playerNameText = Bindings.concat(getTranslation("gameview.player.key"), gameViewModel.playerNameProperty());
+        StringExpression scoreText = Bindings.concat(getTranslation("gameview.score.key"), gameViewModel.playerPointsProperty().asString());
         playerName.textProperty().bind(playerNameText);
         score.textProperty().bind(scoreText);
 
@@ -55,5 +56,10 @@ public class GameView extends WindowView<GameViewModel>
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(gameViewModel.getPinballCanvasViewModel());
+    }
+
+    private StringExpression getTranslation(String textKey)
+    {
+        return Bindings.concat(LanguageManagerViewModel.getInstance().textProperty(textKey), ": ");
     }
 }
