@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.dialog;
+package sep.fimball.viewmodel.dialog.gamesettings;
 
 import javafx.scene.input.KeyCode;
 import org.junit.Test;
