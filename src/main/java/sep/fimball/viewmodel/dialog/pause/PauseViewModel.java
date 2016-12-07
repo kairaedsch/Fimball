@@ -81,10 +81,4 @@ public class PauseViewModel extends DialogViewModel
             resumeGame();
         }
     }
-
-    @Override
-    public void changeBackgroundMusic() {
-
-    }
-
 }
