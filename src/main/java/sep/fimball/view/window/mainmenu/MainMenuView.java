@@ -1,9 +1,7 @@
 package sep.fimball.view.window.mainmenu;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import sep.fimball.general.data.DesignConfig;
@@ -18,7 +16,7 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 public class MainMenuView extends WindowView<MainMenuViewModel>
 {
     /**
-     * Das Pane zur Anzeige aller verfügbaren Flipperautomaten, die auch auswählbar sind, wodurch eine größere Vorschau erscheint.
+     * Der Container zur Anzeige aller verfügbaren Flipperautomaten, die auch auswählbar sind, wodurch eine größere Vorschau erscheint.
      */
     @FXML
     private VBox machineOverview;
@@ -36,7 +34,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private Label detailedPreviewName;
 
     /**
-     * Das Pane zur Anzeige der Highscores, die auf dem Flipperautomaten erreicht wurden.
+     * Der Container zur Anzeige der Highscores, die auf dem Flipperautomaten erreicht wurden.
      */
     @FXML
     private VBox highscoreTable;
@@ -45,25 +43,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
      * Das zum MainMenu gehörende MainMenuViewModel.
      */
     private MainMenuViewModel mainMenuViewModel;
-
-    /**
-     * Der Button, der zu den Einstellungen führt.
-     */
-    @FXML
-    private Button settingsButton;
-
-    /**
-     * Der Button, der zur Erstellung eines neuen Automaten führt.
-     */
-    @FXML
-    private Button addButton;
-
-    /**
-     * Der Tooltip zum settingsButton.
-     */
-    @FXML
-    private Tooltip settingsTip;
-
+    
     @Override
     public void setViewModel(MainMenuViewModel mainMenuViewModel)
     {
