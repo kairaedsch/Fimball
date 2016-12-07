@@ -9,7 +9,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import java.util.List;
 
 /**
- * TODO - flipper halt
+ * TODO
  */
 public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
@@ -19,25 +19,48 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
 
     private double angularVelocity = 0.0;
 
-    public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement)
+    private boolean isLeft;
+
+    public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(gameElement, position, maxRotation, basePhysicsElement);
+        super(gameElement, position, isLeft ? maxRotation : minRotation, basePhysicsElement);
+        this.isLeft = isLeft;
     }
 
     public void rotateUp()
     {
-        if (getRotation() < maxRotation)
-            angularVelocity = movingAngularVelocity;
+        if (isLeft)
+        {
+            if (getRotation() < maxRotation)
+                angularVelocity = movingAngularVelocity;
+            else
+                angularVelocity = 0.0;
+        }
         else
-            angularVelocity = 0.0;
+        {
+            if (getRotation() > minRotation)
+                angularVelocity = -movingAngularVelocity;
+            else
+                angularVelocity = 0.0;
+        }
     }
 
     public void rotateDown()
     {
-        if (getRotation() > minRotation)
-            angularVelocity = -movingAngularVelocity;
+        if (isLeft)
+        {
+            if (getRotation() > minRotation)
+                angularVelocity = -movingAngularVelocity;
+            else
+                angularVelocity = 0.0;
+        }
         else
-            angularVelocity = 0.0;
+        {
+            if (getRotation() < maxRotation)
+                angularVelocity = movingAngularVelocity;
+            else
+                angularVelocity = 0.0;
+        }
     }
 
     @Override

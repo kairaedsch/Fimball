@@ -235,7 +235,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(
                             gameElement,
                             gameElement.positionProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                            gameElement.getPlacedElement().getBaseElement().getPhysics(), true);
                     leftFlippers.add(leftFlipperPhysicsElement);
                     physicsElement = leftFlipperPhysicsElement;
                     break;
@@ -243,7 +243,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     FlipperPhysicsElement<GameElement> rightFlipperPhysicsElement = new FlipperPhysicsElement<>(
                             gameElement,
                             gameElement.positionProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                            gameElement.getPlacedElement().getBaseElement().getPhysics(), false);
                     rightFlippers.add(rightFlipperPhysicsElement);
                     physicsElement = rightFlipperPhysicsElement;
                     break;
