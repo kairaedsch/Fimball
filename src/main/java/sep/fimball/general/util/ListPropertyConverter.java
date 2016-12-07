@@ -1,5 +1,6 @@
 package sep.fimball.general.util;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -32,12 +33,16 @@ public class ListPropertyConverter
             @Override
             public void onChanged(Change<? extends T> change)
             {
-                if(!sorting && list.size() > 2)
+                Platform.runLater(() ->
                 {
-                    sorting = true;
-                    list.sort(comparator);
-                    sorting = false;
-                }
+                    if(!sorting && list.size() > 2)
+                    {
+                        sorting = true;
+                        list.sort(comparator);
+                        sorting = false;
+                    }
+                });
+
             }
         };
 
