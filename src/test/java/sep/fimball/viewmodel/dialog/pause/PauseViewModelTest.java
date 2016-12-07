@@ -18,6 +18,7 @@ public class PauseViewModelTest
     @Test
     public void testPauseViewModel()
     {
+        //TODO - Remove dependency from Settings
         KeyCode pauseKeyCode = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PAUSE);
         GameViewModel gameViewModel = mock(GameViewModel.class);
         SceneManagerViewModel sceneManagerViewModel = mock(SceneManagerViewModel.class);
