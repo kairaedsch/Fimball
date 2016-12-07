@@ -90,10 +90,4 @@ public class PlayerNameViewModel extends DialogViewModel
     {
         return playerNameEntries;
     }
-
-    @Override
-    public void changeBackgroundMusic()
-    {
-    }
-
 }
