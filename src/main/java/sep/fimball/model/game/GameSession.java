@@ -308,6 +308,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 }
             }
         });
+        
+        gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
+        gameLoop.getKeyFrames().add(keyFrame);
     }
 
     /**
@@ -325,10 +330,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void startGameLoop()
     {
-        gameLoop = new Timeline();
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
-        gameLoop.getKeyFrames().add(keyFrame);
         gameLoop.play();
     }
 

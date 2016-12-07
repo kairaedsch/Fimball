@@ -1,11 +1,15 @@
 package sep.fimball.viewmodel;
 
+import org.junit.ClassRule;
 import org.junit.Test;
+import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.settings.Settings;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,6 +21,9 @@ import static org.junit.Assert.assertThat;
  */
 public class LanguageManagerViewModelTest
 {
+    @ClassRule
+    public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+
     /**
      * Testet, ob das LanguageManagerViewModel die gewünschten Texte in der richtigen Sprache anzeigt.
      */
@@ -59,7 +66,8 @@ public class LanguageManagerViewModelTest
         Properties properties = new Properties();
         try (InputStream inputStream = LanguageManagerViewModel.class.getClassLoader().getResourceAsStream(path))
         {
-            properties.load(inputStream);
+            Reader reader = new InputStreamReader(inputStream, "UTF-8");
+            properties.load(reader);
             inputStream.close();
         } catch (Exception e)
         {
