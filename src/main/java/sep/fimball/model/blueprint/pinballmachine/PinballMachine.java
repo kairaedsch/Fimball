@@ -63,19 +63,16 @@ public class PinballMachine
 
         // Set up element list
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        //ListPropertyConverter.autoSort(elements, PlacedElement::compare);
+        ListPropertyConverter.autoSort(elements, PlacedElement::compare);
         elementsLoaded = false;
 
         // Fügt die Highscores zu highscoreList hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = new SimpleListProperty<>(FXCollections.observableArrayList());
-        if (highscores != null)
-        {
-            highscoreList.addAll(highscores);
-        }
         ListPropertyConverter.autoSort(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get()));
-
-        // Entfernt Highscore Einträge, solange zuviele existieren
-        while (highscoreList.size() > Config.maxHighscores) highscoreList.remove(highscoreList.size() - 1);
+        for (Highscore highscore : highscores)
+        {
+            addHighscore(highscore);
+        }
     }
 
     /**

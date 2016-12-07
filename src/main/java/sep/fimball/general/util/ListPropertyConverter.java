@@ -32,7 +32,7 @@ public class ListPropertyConverter
             @Override
             public void onChanged(Change<? extends T> change)
             {
-                if(!sorting)
+                if(!sorting && list.size() > 2)
                 {
                     sorting = true;
                     list.sort(comparator);

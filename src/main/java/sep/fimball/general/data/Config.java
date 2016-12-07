@@ -7,7 +7,6 @@ import java.util.UUID;
  */
 public class Config
 {
-
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
      */

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +68,7 @@ public class PinballMachineManager
      */
     public PinballMachine createNewMachine()
     {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), null, this);
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Collections.emptyList(), this);
         pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
