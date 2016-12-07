@@ -1,9 +1,9 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.mainmenu.PinballMachinePreviewSubViewModel;
 
@@ -34,7 +34,7 @@ public class PinballMachinePreviewSubView implements ViewBoundToViewModel<Pinbal
     {
         this.pinballMachinePreviewSubViewModel = pinballMachinePreviewSubViewModel;
         previewName.textProperty().bind(pinballMachinePreviewSubViewModel.nameProperty());
-        previewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", pinballMachinePreviewSubViewModel.imagePathProperty().get(), "\");"));
+        previewImage.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachinePreviewSubViewModel.imagePathProperty()));
     }
 
     /**

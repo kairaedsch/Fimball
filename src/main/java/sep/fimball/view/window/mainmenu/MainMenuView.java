@@ -1,12 +1,12 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
@@ -70,7 +70,7 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         this.mainMenuViewModel = mainMenuViewModel;
 
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getPinballMachineInfoSubViewModel().nameProperty());
-        detailedPreviewImage.styleProperty().bind(Bindings.concat("-fx-background-image: url(\"file:///", mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty(), "\");"));
+        detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()));
 
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachinePreviewSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
 

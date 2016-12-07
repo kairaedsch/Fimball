@@ -1,5 +1,8 @@
 package sep.fimball.general.data;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringExpression;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.paint.Color;
 
 /**
@@ -61,4 +64,9 @@ public class DesignConfig
      * Die dunklere Sekundärfarbe.
      */
     public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
+
+    public static StringExpression backgroundImageCss(ReadOnlyStringProperty path)
+    {
+        return Bindings.concat("-fx-background-image: url(\"file:///", path, "\");");
+    }
 }

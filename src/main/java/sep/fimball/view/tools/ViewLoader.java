@@ -11,6 +11,8 @@ import sep.fimball.view.ViewType;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Der ViewLoader lädt eine FXML-Datei zusammen mit einer View, die als FxController im FXML eingetragen ist.
@@ -80,6 +82,7 @@ public class ViewLoader<ViewT>
                 {
                     Labeled labeled = (Labeled) o;
                     bind(labeled.textProperty(), labeled.getText());
+                    installTooltip(labeled.textProperty(), labeled);
                 }
                 if (o instanceof Tab)
                 {
@@ -101,6 +104,26 @@ public class ViewLoader<ViewT>
         {
             String keyvalue = labeledText.replace("!", "");
             textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyvalue));
+        }
+    }
+
+    private void installTooltip(StringProperty labeledText, Node node)
+    {
+        String regexPattern = "§.*§";
+        Pattern pattern = Pattern.compile(regexPattern);
+        Matcher matcher = pattern.matcher(labeledText.get());
+
+        if (matcher.matches())
+        {
+            String tooltipKey = matcher.group().replace("§", "");
+            Tooltip tooltip = new Tooltip();
+            tooltip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty(tooltipKey));
+            Tooltip.install(node, tooltip);
+
+            if (!labeledText.isBound())
+            {
+                labeledText.set(labeledText.get().replaceAll(regexPattern, ""));
+            }
         }
     }
 

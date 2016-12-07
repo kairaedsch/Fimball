@@ -2,9 +2,11 @@ package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringExpression;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 
@@ -47,8 +49,8 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     private StringExpression generatePreviewCss(boolean top)
     {
-        String imagePath = top ? availableElementSubViewModel.imagePathTopProperty().get() : availableElementSubViewModel.imagePathBotProperty().get();
-        return Bindings.concat("-fx-background-image: url(\"file:///", imagePath, "\");", "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;");
+        ReadOnlyStringProperty imagePath = top ? availableElementSubViewModel.imagePathTopProperty() : availableElementSubViewModel.imagePathBotProperty();
+        return Bindings.concat(DesignConfig.backgroundImageCss(imagePath), "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;");
     }
 
     /**

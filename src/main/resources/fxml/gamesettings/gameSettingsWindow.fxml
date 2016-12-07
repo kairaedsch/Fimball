@@ -77,7 +77,7 @@
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <Label fx:id="fullscreenLabel" text="!gamesettings.general.display.fullscreen.key!"/>
-                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1">
+                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1" text="§gamesettings.general.display.fullscreen.tip.key§">
                                                                             <tooltip>
                                                                                 <Tooltip fx:id="fullscreenTip" text="!gamesettings.general.display.fullscreen.tip.key!"/>
                                                                             </tooltip>
