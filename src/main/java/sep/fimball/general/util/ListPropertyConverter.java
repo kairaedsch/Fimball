@@ -33,15 +33,17 @@ public class ListPropertyConverter
             @Override
             public void onChanged(Change<? extends T> change)
             {
-                Platform.runLater(() ->
-                {
+
                     if(!sorting && list.size() > 2)
                     {
+                        Platform.runLater(() ->
+                        {
                         sorting = true;
                         list.sort(comparator);
                         sorting = false;
+                        });
                     }
-                });
+
 
             }
         };
