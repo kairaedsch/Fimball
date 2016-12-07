@@ -2,6 +2,9 @@ package sep.fimball.general.data;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Die Config für das Designs.
+ */
 public class DesignConfig
 {
     /**
@@ -43,7 +46,7 @@ public class DesignConfig
      * Die Sekundärfarbe.
      */
     public final static Color secondaryColor = new Color(68 / 255.0, 102 / 255.0, 143 / 255.0, 1);
-    
+
     /**
      * Die dunklere Sekundärfarbe.
      */
