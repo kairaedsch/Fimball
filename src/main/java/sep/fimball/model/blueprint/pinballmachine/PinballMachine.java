@@ -39,7 +39,7 @@ public class PinballMachine
     private ObservableList<Highscore> highscoreList;
 
     /**
-     * Liste mit den auf dem Automaten erreichten Highscores.
+     * Liste mit den auf dem Automaten erreichten Highscores (Sortiert).
      */
     private ListProperty<Highscore> highscoreListSorted;
 
@@ -71,7 +71,7 @@ public class PinballMachine
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementsLoaded = false;
 
-        // Fügt die Highscores zu highscoreList hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
+        // Fügt die Highscores zu highscoreliste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
         highscoreListSorted = new SimpleListProperty<>(new SortedList<>(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get())));
         for (Highscore highscore : highscores)
