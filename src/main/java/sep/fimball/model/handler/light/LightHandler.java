@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.transformation.FilteredList;
 import javafx.util.Duration;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.GameHandler;
@@ -11,8 +12,10 @@ import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.handler.HandlerWorld;
 import sep.fimball.model.media.Animation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * Verwaltet die im Spielfeld platzierten Lichter.
@@ -28,6 +31,9 @@ public class LightHandler implements GameHandler
 
     private List<LightChanger> lightChangers;
 
+    private LightChanger currentLightChanger;
+    private long currentLightChangerStart;
+
     /**
      * Erstellt einen neuen LightHandler.
      *
@@ -39,8 +45,13 @@ public class LightHandler implements GameHandler
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> changeLights());
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.25), event -> changeLights());
         gameLoop.getKeyFrames().add(keyFrame);
+
+        lightChangers = new ArrayList<>();
+        lightChangers.add(new SimpleLightChanger());
+
+        currentLightChanger = lightChangers.get(0);
     }
 
     /**
@@ -48,10 +59,19 @@ public class LightHandler implements GameHandler
      */
     public void changeLights()
     {
+        long now = System.currentTimeMillis();
+        long delta = now - currentLightChangerStart;
+
+        if(delta > currentLightChanger.getDuration())
+        {
+            currentLightChanger = lightChangers.get(new Random().nextInt(lightChangers.size()));
+            currentLightChangerStart = now;
+        }
+
         for (HandlerGameElement light : lights)
         {
             Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
-            if (animation.isPresent() && Math.random() > 0.5)
+            if (animation.isPresent() && currentLightChanger.determineStatus(light.positionProperty().get(), delta))
             {
                 light.setCurrentAnimation(animation);
             }

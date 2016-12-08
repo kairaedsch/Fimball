@@ -1,5 +1,7 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
@@ -11,6 +13,8 @@ import java.util.Optional;
  */
 public interface HandlerGameElement
 {
+    public ReadOnlyObjectProperty<Vector2> positionProperty();
+
     /**
      * Setzt die aktuelle Animation des Elements.
      *

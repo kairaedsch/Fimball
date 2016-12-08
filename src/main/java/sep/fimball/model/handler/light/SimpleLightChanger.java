@@ -14,6 +14,6 @@ public class SimpleLightChanger extends LightChanger
     @Override
     public long getDuration()
     {
-        return 0;
+        return 10000;
     }
 }
