@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class PlacedElementTest
 {
     @Test
-    public void rotateClockwise() throws Exception
+    public void rotateClockwise()
     {
         int[] expectedRotations45 = new int[]{45, 90, 135, 180, 225, 270, 315, 0};
         checkRotation(expectedRotations45, 45, false);
@@ -30,7 +30,7 @@ public class PlacedElementTest
     }
 
     @Test
-    public void rotateCounterclockwise() throws Exception
+    public void rotateCounterclockwise()
     {
         int[] expectedRotations45 = new int[]{315, 270, 225, 180, 135, 90, 45, 0};
         checkRotation(expectedRotations45, 45, true);

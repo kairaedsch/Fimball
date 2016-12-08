@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class PinballMachineTest
 {
     @Test
-    public void getElementAt() throws Exception
+    public void getElementAt()
     {
         // Erstelle PinballMachine mit Mock
         PinballMachine pinballMachine = new PinballMachine("test", "id", Collections.emptyList(), Mockito.mock(PinballMachineManager.class));
@@ -41,7 +41,7 @@ public class PinballMachineTest
     }
 
     @Test
-    public void addHighscore() throws Exception
+    public void addHighscore()
     {
         // Erstelle einen PinballMachine mit voller Highscorelist
         ArrayList<Highscore> highscores = new ArrayList<>();
@@ -49,7 +49,7 @@ public class PinballMachineTest
         {
             highscores.add(new Highscore(25, "any"));
         }
-        PinballMachine pinballMachine = new PinballMachine("test", "id", highscores,  Mockito.mock(PinballMachineManager.class));
+        PinballMachine pinballMachine = new PinballMachine("test", "id", highscores, Mockito.mock(PinballMachineManager.class));
         ReadOnlyListProperty<Highscore> realHighscores = pinballMachine.highscoreListProperty();
 
         // Füge einen schlechten Highscore hinzu

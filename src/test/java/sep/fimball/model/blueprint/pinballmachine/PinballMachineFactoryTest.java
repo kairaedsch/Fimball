@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class PinballMachineFactoryTest
 {
     @Test
-    public void createPinballMachine() throws Exception
+    public void createPinballMachine()
     {
         // Test mit valider pinballMachineJson
         {
@@ -76,7 +76,7 @@ public class PinballMachineFactoryTest
     }
 
     @Test
-    public void createPinballMachineJson() throws Exception
+    public void createPinballMachineJson()
     {
         // Erstelle eine PinballMachine
         List<Highscore> highscoreList = new ArrayList<>();

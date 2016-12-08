@@ -16,7 +16,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class PlacedElementListFactoryTest
 {
     @Test
-    public void createPlacedElementList() throws Exception
+    public void createPlacedElementList()
     {
         // Test mit valider placedElementListJson
         {
@@ -84,7 +84,7 @@ public class PlacedElementListFactoryTest
     }
 
     @Test
-    public void createPlacedElementListJson() throws Exception
+    public void createPlacedElementListJson()
     {
         // Erstelle Mocks
         BaseElement baseElementBallMock = Mockito.mock(BaseElement.class);
