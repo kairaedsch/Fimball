@@ -1,12 +1,17 @@
-package sep.fimball.model.handler;
+package sep.fimball.model.handler.light;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.transformation.FilteredList;
 import javafx.util.Duration;
 import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.GameHandler;
+import sep.fimball.model.handler.HandlerGameElement;
+import sep.fimball.model.handler.HandlerWorld;
 import sep.fimball.model.media.Animation;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,6 +25,8 @@ public class LightHandler implements GameHandler
     private FilteredList<? extends HandlerGameElement> lights;
 
     private Timeline gameLoop;
+
+    private List<LightChanger> lightChangers;
 
     /**
      * Erstellt einen neuen LightHandler.

@@ -1,5 +1,7 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.handler.light.LightHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
