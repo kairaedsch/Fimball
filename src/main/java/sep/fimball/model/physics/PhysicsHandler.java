@@ -31,7 +31,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    public final static int TICK_RATE = 1000 / 120;
+    public final static int TICK_RATE = 1000 / 60;
 
     /**
      * Der aktuelle Spielball.
