@@ -42,7 +42,7 @@ class PlacedElementListFactory
                         success = true;
                     }
                 }
-                if (!success) System.err.println("Machine elem not loaded: baseElementId \"" + element.baseElementId + "\" does not exist");
+                if (!success) System.err.println("Machine elem not loaded: baseElementId \"" + (element != null ? element.baseElementId : "") + "\" does not exist");
             }
             System.out.println("Machine elem loaded: (" + placedElements.size() + "/" + placedElementListJson.elements.length + ")");
             return Optional.of(placedElements);

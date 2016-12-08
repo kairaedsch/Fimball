@@ -42,7 +42,7 @@ public class PinballMachineTest
         PinballMachineManager pinballMachineManager = Mockito.mock(PinballMachineManager.class);
 
         ArrayList<Highscore> highscores = new ArrayList<>();
-        for(int i = 0; i < Config.maxHighscores; i++)
+        for (int i = 0; i < Config.maxHighscores; i++)
         {
             highscores.add(new Highscore(25, "any"));
         }
