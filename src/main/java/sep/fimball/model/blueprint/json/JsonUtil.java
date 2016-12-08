@@ -1,14 +1,14 @@
 package sep.fimball.model.blueprint.json;
 
 /**
- * Contains utilities that can be used to check objects parsed from json files.
+ * Überprüft die aus den JSON Dateien erstellten Objekte
  */
 public class JsonUtil
 {
     /**
-     * Checks if the given object is null, throw an IllegalArgument exception otherwise.
+     * Überprüft ob das gegebene Objekt null ist, wenn es null ist wird eine IllegalArgument geworfen.
      *
-     * @param object The object to apply the null check to.
+     * @param object Das Objekt auf das die Überprüfung auf null angewandt werden soll.
      */
     public static void nullCheck(Object object)
     {
