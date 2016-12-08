@@ -70,7 +70,7 @@ public class PlayerNameViewModel extends DialogViewModel
             names[i] = playerNameEntries.get(i).playerNameProperty().get();
         }
 
-        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names,false)));
+        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names, false)));
     }
 
     /**

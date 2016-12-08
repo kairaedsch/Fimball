@@ -77,7 +77,8 @@
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <Label fx:id="fullscreenLabel" text="!gamesettings.general.display.fullscreen.key!"/>
-                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1" text="§gamesettings.general.display.fullscreen.tip.key§">
+                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1"
+                                                                                  text="§gamesettings.general.display.fullscreen.tip.key§">
                                                                             <tooltip>
                                                                                 <Tooltip fx:id="fullscreenTip" text="!gamesettings.general.display.fullscreen.tip.key!"/>
                                                                             </tooltip>
@@ -149,7 +150,8 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!gamesettings.continue.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0"/>
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!gamesettings.continue.key!" AnchorPane.bottomAnchor="10.0"
+                        AnchorPane.rightAnchor="25.0"/>
             </children>
         </AnchorPane>
     </content>

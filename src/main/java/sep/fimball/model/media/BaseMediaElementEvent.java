@@ -10,7 +10,7 @@ public class BaseMediaElementEvent
     /**
      * Die Animation des jeweiligen Bahnelements.
      */
-    private Optional<Animation> animation ;
+    private Optional<Animation> animation;
 
     /**
      * Der Soundeffekt des jeweiligen Bahnelements.
@@ -19,12 +19,13 @@ public class BaseMediaElementEvent
 
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.
+     *
      * @param animation Die Animation des jeweiligen Bahnelements.
      * @param soundName Die Animation des jeweiligen Bahnelements.
      */
     public BaseMediaElementEvent(Optional<Animation> animation, String soundName)
     {
-        this.animation= animation;
+        this.animation = animation;
         this.sound = new Sound(soundName, false);
     }
 

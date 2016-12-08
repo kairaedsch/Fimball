@@ -87,7 +87,8 @@ public class BasePhysicsElementFactory
 
             Collider newCollider;
             WorldLayer layer = collider.layer;
-            if (!"empty".equals(collider.collisionType.type)) nullCheck(layer);
+            if (!"empty".equals(collider.collisionType.type))
+                nullCheck(layer);
 
             newCollider = new Collider(layer, shapes, collisionType, collider.colliderId);
 

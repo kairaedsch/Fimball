@@ -17,19 +17,19 @@ public class RampClimbingCollision implements CollisionType
         Vector2 maxPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
         Vector2 minPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
 
-        if(relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
+        if (relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
         {
             return;
         }
 
-        if((physicsElement.getRotation() % 360) > 90 && (physicsElement.getRotation() % 360) < 270)
+        if ((physicsElement.getRotation() % 360) > 90 && (physicsElement.getRotation() % 360) < 270)
         {
             double maxPosY = maxPos.getY();
             maxPos = new Vector2(maxPos.getX(), minPos.getY());
             minPos = new Vector2(minPos.getX(), maxPosY);
         }
 
-        if((physicsElement.getRotation() % 360) > 0 && (physicsElement.getRotation() % 360) < 180)
+        if ((physicsElement.getRotation() % 360) > 0 && (physicsElement.getRotation() % 360) < 180)
         {
             double maxPosX = maxPos.getX();
             maxPos = new Vector2(minPos.getX(), maxPos.getY());

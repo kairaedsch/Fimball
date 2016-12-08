@@ -31,7 +31,7 @@ public class ElementEventArgs<GameElementT>
      *
      * @param gameElement Das zu ändernde GameElement.
      * @param position    Die neue Position.
-     * @param rotation     Die neue Rotation.
+     * @param rotation    Die neue Rotation.
      */
     public ElementEventArgs(GameElementT gameElement, Vector2 position, double rotation, double scale)
     {

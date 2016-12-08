@@ -63,10 +63,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
-        ListPropertyConverter.bindAndConvertList(
-                gameSession.getWorld().gameElementsProperty(),
-                pinballMachine.elementsProperty(),
-                element -> new GameElement(element, true));
+        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), pinballMachine.elementsProperty(), element -> new GameElement(element, true));
         gameSession.startGameLoop();
         return gameSession;
     }
@@ -224,11 +221,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 case RAMP:
                 case NORMAL:
-                    physicsElement = new PhysicsElement<>(
-                            gameElement,
-                            gameElement.positionProperty().get(),
-                            gameElement.rotationProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
@@ -242,18 +235,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                             gameElement.getPlacedElement().getBaseElement().getPhysics());*/
                     break;
                 case LEFT_FLIPPER:
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(
-                            gameElement,
-                            gameElement.positionProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics(), true);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics(), true);
                     leftFlippers.add(leftFlipperPhysicsElement);
                     physicsElement = leftFlipperPhysicsElement;
                     break;
                 case RIGHT_FLIPPER:
-                    FlipperPhysicsElement<GameElement> rightFlipperPhysicsElement = new FlipperPhysicsElement<>(
-                            gameElement,
-                            gameElement.positionProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics(), false);
+                    FlipperPhysicsElement<GameElement> rightFlipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics(), false);
                     rightFlippers.add(rightFlipperPhysicsElement);
                     physicsElement = rightFlipperPhysicsElement;
                     break;
@@ -278,19 +265,14 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements, ballTemplate);
-        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(
-                gameBall.get(),
-                gameBall.get().positionProperty().get(),
-                gameBall.get().rotationProperty().get(),
-                gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
 
         physicsElements.add(physElem);
         elements.add(gameBall.get());
 
         gameLoopObservable = new Observable();
 
-        physicsHandler =
-                new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
+        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
 
         InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
         {
@@ -369,9 +351,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 for (Handler handler : handlers)
                 {
-                    handler.activateElementHandler(
-                            collisionEventArgs.getOtherElement(),
-                            collisionEventArgs.getColliderId());
+                    handler.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId());
                 }
             }
         }

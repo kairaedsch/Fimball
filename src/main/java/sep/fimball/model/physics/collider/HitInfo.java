@@ -32,6 +32,7 @@ public class HitInfo
 
     /**
      * Gibt zurück, ob sich die Fläche und der Ball überschneiden.
+     *
      * @return {@code true} falls sich die Fläche und der Ball überschneiden, {@code false} sonst.
      */
     public boolean isHit()
@@ -41,6 +42,7 @@ public class HitInfo
 
     /**
      * Gibt den kürzesten Weg um eine Überschneidung zwischen Ball und Fläche aufzulösen. Falls keine Überschneidung vorhanden ist, wird {@code null} zurückgegeben.
+     *
      * @return Den kürzesten Weg oder {@code null}.
      */
     public Vector2 getShortestIntersect()

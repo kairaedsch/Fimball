@@ -133,7 +133,7 @@ public class PinballMachine
      * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gutgenug ist.
      *
      * @param highscore Der Highscore, der hinzugefügt werden soll.
-     * @param save Ob gespeichert werden soll.
+     * @param save      Ob gespeichert werden soll.
      */
     private void addHighscore(Highscore highscore, boolean save)
     {
@@ -144,13 +144,15 @@ public class PinballMachine
             {
                 highscoreList.remove(worstHigscore);
                 highscoreList.add(highscore);
-                if(save) saveToDisk();
+                if (save)
+                    saveToDisk();
             }
         }
         else
         {
             highscoreList.add(highscore);
-            if(save) saveToDisk();
+            if (save)
+                saveToDisk();
         }
     }
 

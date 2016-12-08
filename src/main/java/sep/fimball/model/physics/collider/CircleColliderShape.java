@@ -83,7 +83,7 @@ public class CircleColliderShape implements ColliderShape
     @Override
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
-        if(max)
+        if (max)
         {
             return position.plus(new Vector2(radius, radius).scale(2));
         }

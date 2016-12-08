@@ -15,6 +15,7 @@ public class BaseRuleElementFactory
 {
     /**
      * Generiert ein BaseRuleElement aus dem gegebenen RuleElementJson.
+     *
      * @param ruleElement Die Vorlage, aus der das BaseRuleElement erstellt wird.
      * @return Das generierte BaseRuleElement.
      */

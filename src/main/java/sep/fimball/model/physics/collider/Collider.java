@@ -57,7 +57,8 @@ public class Collider
      */
     public boolean checkCollision(BallPhysicsElement ball, PhysicsElement element)
     {
-        if(ball.getLayer() != layer && layer != WorldLayer.BOTH) return false;
+        if (ball.getLayer() != layer && layer != WorldLayer.BOTH)
+            return false;
 
         boolean hit = false;
         for (ColliderShape shape : shapes)

@@ -210,6 +210,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Setzt den MouseMode.
+     *
      * @param mouseMode Der neue MouseMode.
      */
     public void setMouseMode(MouseMode mouseMode)
@@ -219,6 +220,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Setzt das aktuell ausgewählte Element aus der Liste der möglichen Elemente auf das gegebene Element.
+     *
      * @param selectedAvailableElement Das neue ausgewählte Element.
      */
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
@@ -230,7 +232,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Verarbeitet einen Mausklick auf das Spielfeld.
      *
      * @param gridPosition Die Position im Grid, auf die geklickt wurde.
-     * @param onlyPressed Gibt an, ob die Maustaste nur gedrückt wurde.
+     * @param onlyPressed  Gibt an, ob die Maustaste nur gedrückt wurde.
      */
     public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
     {
@@ -248,6 +250,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Setzt das aktuell ausgewählte Element auf dem Automaten auf das gegebene Element.
+     *
      * @param placedElement Das neue ausgewählte Element.
      */
     private void setSelectedPlacedElement(Optional<PlacedElement> placedElement)
@@ -264,6 +267,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View das PinballCanvasViewModel des angezeigten Spielfelds zur Verfügung.
+     *
      * @return Das PinballCanvasViewModel des angezeigten Spielfelds.
      */
     public PinballCanvasViewModel getPinballCanvasViewModel()
@@ -273,6 +277,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View die Position der Kamera zur Verfügung.
+     *
      * @return Die Position der Kamera
      */
     public ReadOnlyObjectProperty<Vector2> cameraPositionProperty()
@@ -282,6 +287,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View die Stärke des Zooms der Kamera zur Verfügung.
+     *
      * @return Die Stärke des Zooms der Kamera.
      */
     public ReadOnlyDoubleProperty cameraZoomProperty()
@@ -291,6 +297,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld zur Verfügung.
+     *
      * @return Das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld
      */
     public SelectedElementSubViewModel getSelectedElementSubViewModel()
@@ -300,6 +307,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View den Namen des Automaten zur Verfügung.
+     *
      * @return Der Name des Automaten.
      */
     public ReadOnlyStringProperty machineNameProperty()
@@ -309,6 +317,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View den ausgewählten MouseMode zur Verfügung.
+     *
      * @return Der ausgewählte MouseMode.
      */
     public ReadOnlyObjectProperty<MouseMode> mouseModeProperty()
@@ -318,6 +327,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Stellt der View as aktuell auf dem Spielfeld ausgewählte Element zur Verfügung.
+     *
      * @return Das aktuell auf dem Spielfeld ausgewählte Element.
      */
     public ReadOnlyObjectProperty<Optional<PlacedElement>> getSelectedPlacedElement()

@@ -38,7 +38,8 @@ public class LightHandler implements GameHandler
         for (HandlerGameElement light : lights)
         {
             Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
-            if (animation.isPresent()) {
+            if (animation.isPresent())
+            {
                 light.setCurrentAnimation(animation);
             }
 

@@ -42,6 +42,7 @@ public class SoundManagerViewModel
 
     /**
      * Erzeugt ein neues SoundManagerViewModel, welches sich an die Lautstärke-Properties in {@link Settings} bindet.
+     *
      * @param settings Die Einstellungen, aus denen die Daten für die Lautstärke bezogen werden.
      */
     SoundManagerViewModel(Settings settings)
@@ -72,7 +73,8 @@ public class SoundManagerViewModel
     /**
      * Benachrichtigt die eingetragenen Observer darüber, dass die Hintergrundmusik gestoppt werden soll.
      */
-    void stopBackgroundMusic() {
+    void stopBackgroundMusic()
+    {
         stopObservable.setChanged();
         stopObservable.notifyObservers();
     }
@@ -122,8 +124,10 @@ public class SoundManagerViewModel
      *
      * @return Eine Instanz von SoundManagerViewModel.
      */
-    public static SoundManagerViewModel getInstance() {
-        if (instance == null) {
+    public static SoundManagerViewModel getInstance()
+    {
+        if (instance == null)
+        {
             instance = new SoundManagerViewModel(Settings.getSingletonInstance());
         }
         return instance;
@@ -136,6 +140,6 @@ public class SoundManagerViewModel
      */
     public void playMusic(Sounds music)
     {
-        playClip(new Sound(music.getSoundName(),true));
+        playClip(new Sound(music.getSoundName(), true));
     }
 }

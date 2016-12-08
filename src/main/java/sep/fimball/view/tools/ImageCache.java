@@ -27,7 +27,8 @@ public class ImageCache
      */
     public static ImageCache getInstance()
     {
-        if (instance == null) instance = new ImageCache();
+        if (instance == null)
+            instance = new ImageCache();
 
         return instance;
     }

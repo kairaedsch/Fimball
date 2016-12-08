@@ -7,6 +7,7 @@ public class JsonUtil
 {
     /**
      * Checks if the given object is null, throw an IllegalArgument exception otherwise.
+     *
      * @param object The object to apply the null check to.
      */
     public static void nullCheck(Object object)

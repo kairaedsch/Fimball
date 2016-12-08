@@ -75,6 +75,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
 
     /**
      * Stellt der View den Namen des Automaten zur Verfügung.
+     *
      * @return Der Name des Automaten.
      */
     public StringProperty machineNameProperty()

@@ -142,8 +142,7 @@ public class PlacedElement
         if (other != null && other instanceof PlacedElement)
         {
             PlacedElement p = (PlacedElement) other;
-            return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get()
-                    && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
+            return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get() && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
         }
         else
         {

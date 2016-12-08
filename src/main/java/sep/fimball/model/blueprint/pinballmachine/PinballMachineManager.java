@@ -34,7 +34,8 @@ public class PinballMachineManager
      */
     public static PinballMachineManager getInstance()
     {
-        if (singletonInstance == null) singletonInstance = new PinballMachineManager();
+        if (singletonInstance == null)
+            singletonInstance = new PinballMachineManager();
         return singletonInstance;
     }
 

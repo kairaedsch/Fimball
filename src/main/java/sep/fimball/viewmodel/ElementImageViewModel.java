@@ -46,7 +46,7 @@ public class ElementImageViewModel
      * Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
      *
      * @param imageLayer Das ImageLayer des Bildes.
-     * @param rotation Die Drehung des Bildes.
+     * @param rotation   Die Drehung des Bildes.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
     public String getImagePath(ImageLayer imageLayer, int rotation)
@@ -80,9 +80,9 @@ public class ElementImageViewModel
     /**
      * Setzt ein aus den übergebenen Werten erstelltes ElementImage.
      *
-     * @param id Die ID des zugehörigen BaseElements.
+     * @param id           Die ID des zugehörigen BaseElements.
      * @param mediaElement Das zugehörige BaseMediaElement.
-     * @param animation Die zugehörige Animation.
+     * @param animation    Die zugehörige Animation.
      */
     public void setElementImage(String id, BaseMediaElement mediaElement, Animation animation)
     {

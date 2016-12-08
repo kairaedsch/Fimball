@@ -154,6 +154,7 @@ public class SpriteSubViewModel
 
     /**
      * Stellt der View den PivotPunkt des Sprites zur Verfügung.
+     *
      * @return Der PivotPunkt des Sprites.
      */
     public ReadOnlyObjectProperty<Vector2> pivotPointProperty()

@@ -58,8 +58,7 @@ public class BaseMediaElement
      * @param elementImage     Das Bild des BaseElements.
      * @param eventMap         Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
-    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage,
-                            Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoords)
+    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoords)
     {
         this.name = name;
         this.description = description;

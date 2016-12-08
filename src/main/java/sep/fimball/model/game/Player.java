@@ -61,9 +61,7 @@ public class Player implements HandlerPlayer
         if (other != null && other instanceof Player)
         {
             Player player = (Player) other;
-            return player.nameProperty().get() == this.nameProperty().get()
-                    && player.pointsProperty().get() == this.pointsProperty().get()
-                    && player.ballsProperty().get() == this.ballsProperty().get();
+            return player.nameProperty().get() == this.nameProperty().get() && player.pointsProperty().get() == this.pointsProperty().get() && player.ballsProperty().get() == this.ballsProperty().get();
         }
         else
         {

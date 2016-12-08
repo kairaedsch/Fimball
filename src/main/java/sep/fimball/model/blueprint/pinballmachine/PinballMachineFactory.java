@@ -24,7 +24,8 @@ class PinballMachineFactory
     {
         try
         {
-            if (!pinballMachineJsonOptional.isPresent()) throw new IllegalArgumentException();
+            if (!pinballMachineJsonOptional.isPresent())
+                throw new IllegalArgumentException();
             PinballMachineJson pinballMachineJson = pinballMachineJsonOptional.get();
 
             // Lade alle Highscores

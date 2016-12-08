@@ -86,6 +86,7 @@ public class PinballMachinePreviewSubViewModel
 
     /**
      * Stellt der View die Information, ob der Flipperautomat aktuell ausgewählt ist, zur Verfügung.
+     *
      * @return {@code true}, wenn der Flipperautomat ausgewählt ist, {@code false} sonst.
      */
     boolean isSelected()

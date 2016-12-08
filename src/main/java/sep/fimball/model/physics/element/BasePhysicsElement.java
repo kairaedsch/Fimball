@@ -24,8 +24,9 @@ public class BasePhysicsElement
 
     /**
      * Erstellt ein neues BasePhysicsElement.
+     *
      * @param pivotPoint Die Position des Pivot-Punktes des Elements.
-     * @param colliders Die Collider, die dieses Element hat.
+     * @param colliders  Die Collider, die dieses Element hat.
      */
     public BasePhysicsElement(Vector2 pivotPoint, List<Collider> colliders)
     {
@@ -35,6 +36,7 @@ public class BasePhysicsElement
 
     /**
      * Gibt die Position des Pivot-Punktes des Elements zurück.
+     *
      * @return Die Position des Pivot-Punktes des Elements.
      */
     public Vector2 getPivotPoint()
@@ -44,6 +46,7 @@ public class BasePhysicsElement
 
     /**
      * Gibt die Liste der Collider, die dieses Element hat, zurück.
+     *
      * @return Eine Liste von Collidern, die dieses Element hat.
      */
     public List<Collider> getColliders()

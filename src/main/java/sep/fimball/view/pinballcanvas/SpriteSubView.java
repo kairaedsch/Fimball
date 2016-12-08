@@ -40,7 +40,7 @@ public class SpriteSubView
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
      *
-     * @param viewModel Das zu setzende SpriteSubViewModel.
+     * @param viewModel  Das zu setzende SpriteSubViewModel.
      * @param imageCache Der ImageCache.
      */
     SpriteSubView(SpriteSubViewModel viewModel, ImageCache imageCache)

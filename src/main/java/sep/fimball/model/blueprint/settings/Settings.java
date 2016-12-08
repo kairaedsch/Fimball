@@ -110,10 +110,11 @@ public class Settings
 
             for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
             {
-                if(layout.keyCode != null)
+                if (layout.keyCode != null)
                 {
                     KeyCode keyCode = KeyCode.valueOf(layout.keyCode);
-                    if(layout.keyBinding != null && keyCode != null) keyBindingsMap.put(layout.keyBinding, keyCode);
+                    if (layout.keyBinding != null && keyCode != null)
+                        keyBindingsMap.put(layout.keyBinding, keyCode);
                 }
             }
         }

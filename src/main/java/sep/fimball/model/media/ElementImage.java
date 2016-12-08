@@ -90,7 +90,7 @@ public class ElementImage
      *
      * @param imageLayer Das ImageLayer des Bildes.
      * @param rotation   Die Drehung des Bildes.
-     * @param time Die Zeit, die seit der Erstellung des Bildes vergangen ist.
+     * @param time       Die Zeit, die seit der Erstellung des Bildes vergangen ist.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
     public String getImagePath(ImageLayer imageLayer, int rotation, long time)

@@ -238,14 +238,17 @@ public class PhysicsHandler<GameElementT>
                         }
                     }
 
-                    if (ballLost) localBallLost = false;
-                    if (localBallLost) ballLost = true;
+                    if (ballLost)
+                        localBallLost = false;
+                    if (localBallLost)
+                        ballLost = true;
                 }
 
                 leftFlippers.forEach(flipper -> flipper.update(delta));
                 rightFlippers.forEach(flipper -> flipper.update(delta));
 
-                if (localBallLost) gameSession.setBallLost(true);
+                if (localBallLost)
+                    gameSession.setBallLost(true);
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };

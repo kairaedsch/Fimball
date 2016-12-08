@@ -19,8 +19,9 @@ public class BaseRuleElement
 
     /**
      * Erstellt ein neues BaseRuleElement.
+     *
      * @param givesPoints Gibt an, ob ein Zusammenprallen der Kugel mit dem BaseElement Punkte bringt.
-     * @param eventMap Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
+     * @param eventMap    Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     public BaseRuleElement(boolean givesPoints, Map<Integer, BaseRuleElementEvent> eventMap)
     {
@@ -30,6 +31,7 @@ public class BaseRuleElement
 
     /**
      * Gibt zurück, ob ein Zusammenprallen der Kugel mit dem BaseElement Punkte bringt.
+     *
      * @return {@code true} falls ein Treffer Punkte bringt, {@code false} sonst.
      */
     public boolean givesPoints()
@@ -39,6 +41,7 @@ public class BaseRuleElement
 
     /**
      * Gibt die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können, zurück.
+     *
      * @return RuleElementEvents zusammen mit der Id des zugehörigen Colliders.
      */
     public Map<Integer, BaseRuleElementEvent> getEventMap()

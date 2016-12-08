@@ -36,7 +36,7 @@ public class SceneManagerViewModel
     private BooleanProperty fullscreen;
 
     /**
-     * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel 
+     * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel
      * verwaltet.
      */
     public SceneManagerViewModel()
@@ -116,9 +116,11 @@ public class SceneManagerViewModel
 
     /**
      * Stellt der View die Information zu Verfügung, ob das Programm im Vollbildmodus dargstellt werden soll.
+     *
      * @return {@code true}, wenn das Programm im Vollbildmodus gestartet werden soll, {@code false} sonst.
      */
-    public BooleanProperty fullscreenProperty() {
+    public BooleanProperty fullscreenProperty()
+    {
         return fullscreen;
     }
 }

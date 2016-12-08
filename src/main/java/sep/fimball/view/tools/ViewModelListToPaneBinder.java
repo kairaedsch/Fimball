@@ -28,7 +28,8 @@ public class ViewModelListToPaneBinder
 
     public static <ViewT> void bindAmountToViews(Pane parentNode, ReadOnlyIntegerProperty amount, ViewType viewType)
     {
-        ChangeListener<? super Number> changeListener = ((observable, oldValue, newValue) -> {
+        ChangeListener<? super Number> changeListener = ((observable, oldValue, newValue) ->
+        {
             parentNode.getChildren().clear();
 
             for (int i = 0; i < newValue.intValue(); i++)

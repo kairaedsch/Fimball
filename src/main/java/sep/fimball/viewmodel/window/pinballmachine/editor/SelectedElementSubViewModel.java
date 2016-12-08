@@ -67,11 +67,12 @@ public class SelectedElementSubViewModel
 
     /**
      * Setzt das Flipperautomat-Element, das aktuell ausgewählt ist, auf das gegebene Element.
+     *
      * @param newPlacedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
      */
     public void setPlacedElement(Optional<PlacedElement> newPlacedElement)
     {
-        if(placedElement.isPresent())
+        if (placedElement.isPresent())
         {
             points.unbindBidirectional(placedElement.get().pointsProperty());
             multiplier.unbindBidirectional(placedElement.get().multiplierProperty());
@@ -157,6 +158,7 @@ public class SelectedElementSubViewModel
 
     /**
      * Gibt an, ob aktuell ein Element auf dem Spielfeld ausgewählt ist.
+     *
      * @return {@code true} falls ein Element ausgewählt ist, {@code false} sonst.
      */
     public ReadOnlyBooleanProperty isSomethingSelectedProperty()

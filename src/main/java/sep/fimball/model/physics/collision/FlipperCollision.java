@@ -13,7 +13,7 @@ public class FlipperCollision extends NormalCollision
     {
         super.applyCollision(info);
 
-        FlipperPhysicsElement flipper = (FlipperPhysicsElement)info.getPhysicsElement();
+        FlipperPhysicsElement flipper = (FlipperPhysicsElement) info.getPhysicsElement();
 
         Vector2 flipperVel = new Vector2(0, -1).scale(-flipper.getAngularVelocity()).rotate(Math.toRadians(info.getPhysicsElement().getRotation()));
         info.getBall().setVelocity(info.getBall().getVelocity().plus(flipperVel));

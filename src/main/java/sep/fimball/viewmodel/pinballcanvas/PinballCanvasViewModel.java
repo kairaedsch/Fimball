@@ -156,6 +156,7 @@ public class PinballCanvasViewModel
 
     /**
      * Ermöglicht es der View, sich als Observer zu registrieren, um bei Änderungen benachrichtigt zu werden.
+     *
      * @param observer Der Observer, der registriert werden soll.
      */
     public void addRedrawObserver(Observer observer)
@@ -174,6 +175,7 @@ public class PinballCanvasViewModel
 
     /**
      * Stellt der View die Information, ob der Flipperautomat im Editor benutzt wird, zur Verfügung.
+     *
      * @return Ob das Pinball-Canvas im Editor benutzt wird.
      */
     public BooleanProperty editorModeProperty()

@@ -18,7 +18,8 @@ public class BaseMediaElementFactory
 {
     /**
      * Generiert ein BaseMediaElement aus dem gegebenen MediaElementJson.
-     * @param mediaElement Die Vorlage, aus der das BaseMediaElement erstellt wird.
+     *
+     * @param mediaElement  Die Vorlage, aus der das BaseMediaElement erstellt wird.
      * @param baseElementId Die ID des zugehörigen BaseElements.
      * @return Das generierte BaseMediaElement.
      */
@@ -41,7 +42,7 @@ public class BaseMediaElementFactory
             for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
                 Animation animation = null;
-                if(event.animation != null)
+                if (event.animation != null)
                 {
                     nullCheck(event.animation.animationName);
                     animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);

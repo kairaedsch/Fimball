@@ -275,6 +275,7 @@ public class SceneManagerView
         {
             root.getChildren().add(node);
         }
-        else root.getChildren().add(new Group());
+        else
+            root.getChildren().add(new Group());
     }
 }

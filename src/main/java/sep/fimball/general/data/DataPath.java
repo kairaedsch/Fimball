@@ -250,6 +250,7 @@ public class DataPath
     {
         return dataPath + settingsFile;
     }
+
     /**
      * Gibt den Pfad zu einer Sound-Datei basierend auf deren Name zurück. Da der JavaFX Media Player unter Linux Probleme
      * mit Pfaden hat, wird eine URI Notation zurückgegeben.

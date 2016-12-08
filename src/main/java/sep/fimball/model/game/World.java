@@ -60,7 +60,8 @@ public class World implements HandlerWorld
 
         for (GameElement gameElement : gameElements)
         {
-            if (gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL)) continue;
+            if (gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL))
+                continue;
 
             double currentX = gameElement.positionProperty().get().getX();
             double currentY = gameElement.positionProperty().get().getY();

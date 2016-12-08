@@ -31,6 +31,7 @@ public class Sound
 
     /**
      * Gibt den Pfad zur Datei des Sounds zurück.
+     *
      * @return Der Pfad zur Datei des Sounds.
      */
     public String getSoundPath()
@@ -40,6 +41,7 @@ public class Sound
 
     /**
      * Gibt zurück, ob sich der Sound wiederholt.
+     *
      * @return {@code true} falls sich der Sound wiederholt, {@code false} sonst.
      */
     public boolean isRepeating()
