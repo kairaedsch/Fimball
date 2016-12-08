@@ -7,12 +7,14 @@ public class CircleLightChanger extends LightChanger
     @Override
     public boolean determineStatus(Vector2 position, long delta)
     {
-        return Math.random() > 0.5;
+        double radius = (delta * 1.0) / getDuration();
+
+        return Math.abs(radius * 50 - position.magnitude()) <= 1.5;
     }
 
     @Override
     public long getDuration()
     {
-        return 10000;
+        return 3000;
     }
 }

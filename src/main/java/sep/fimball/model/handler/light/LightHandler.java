@@ -45,11 +45,11 @@ public class LightHandler implements GameHandler
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.25), event -> changeLights());
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(50), event -> changeLights());
         gameLoop.getKeyFrames().add(keyFrame);
 
         lightChangers = new ArrayList<>();
-        lightChangers.add(new SimpleLightChanger());
+        //lightChangers.add(new SimpleLightChanger());
         lightChangers.add(new CircleLightChanger());
 
         currentLightChanger = lightChangers.get(0);
