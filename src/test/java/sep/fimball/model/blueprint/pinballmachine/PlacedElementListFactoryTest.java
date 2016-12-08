@@ -38,7 +38,7 @@ public class PlacedElementListFactoryTest
             placedElementListJson.elements[1].position = new Vector2(2, -9.0);
             placedElementListJson.elements[1].rotation = 93;
 
-            placedElementListJson.elements[3] = null;
+            placedElementListJson.elements[2] = null;
 
             // Lasse eine placedElementList aus der validen PlacedElementListJson generieren
             List<PlacedElement> placedElementList = PlacedElementListFactory.createPlacedElementList(Optional.of(placedElementListJson)).get();
