@@ -29,15 +29,26 @@ public class PauseViewModel extends DialogViewModel
     private GameViewModel gameViewModel;
 
     /**
+     * Eine Referenz auf die Singleton Instanz von settings.
+     */
+    private final Settings settings;
+
+    /**
      * Erstellt ein neues PauseViewModel.
      *
      * @param gameViewModel Das zugehörige GameViewModel.
      */
     public PauseViewModel(GameViewModel gameViewModel)
     {
+        this(gameViewModel, Settings.getSingletonInstance());
+    }
+
+    public PauseViewModel(GameViewModel gameViewModel, Settings settings)
+    {
         super(DialogType.PAUSE);
         this.gameViewModel = gameViewModel;
         playerHighscores = new SimpleListProperty<>(gameViewModel.getScores());
+        this.settings = settings;
     }
 
     /**
@@ -70,7 +81,7 @@ public class PauseViewModel extends DialogViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+        if (settings.getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
         {
             resumeGame();
         }

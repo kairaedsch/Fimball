@@ -18,12 +18,13 @@ public class PauseViewModelTest
     @Test
     public void testPauseViewModel()
     {
-        //TODO - Remove dependency from Settings
-        KeyCode pauseKeyCode = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PAUSE);
+        KeyCode pauseKeyCode = KeyCode.ESCAPE;
         GameViewModel gameViewModel = mock(GameViewModel.class);
         SceneManagerViewModel sceneManagerViewModel = mock(SceneManagerViewModel.class);
+        Settings settings = mock(Settings.class);
+        when(settings.getKeyBinding(any())).thenReturn(KeyBinding.PAUSE);
 
-        PauseViewModel pauseViewModel = new PauseViewModel(gameViewModel);
+        PauseViewModel pauseViewModel = new PauseViewModel(gameViewModel, settings);
         pauseViewModel.setSceneManager(sceneManagerViewModel);
         //Das PauseViewModel dazu auffordern das Spiel wieder aufzunehmen.
         pauseViewModel.resumeGame();
