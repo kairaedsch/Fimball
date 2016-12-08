@@ -43,6 +43,12 @@ public class PauseViewModel extends DialogViewModel
         this(gameViewModel, Settings.getSingletonInstance());
     }
 
+    /**
+     * Erstellt ein neues PauseViewModel
+     *
+     * @param gameViewModel Das zugehörige GameViewModel.
+     * @param settings Eine Instanz des Singleton Settings
+     */
     public PauseViewModel(GameViewModel gameViewModel, Settings settings)
     {
         super(DialogType.PAUSE);
