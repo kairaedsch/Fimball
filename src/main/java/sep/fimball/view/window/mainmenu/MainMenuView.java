@@ -11,7 +11,7 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Die MainMenuView ist für die Darstellung des Hauptmenüs zuständig und ermöglicht dem Nutzer, sich einen Automaten auszusuchen und diesen dann zu bearbeiten oder zu spielen.
+ * Die MainMenuView ist für die Darstellung des Hauptmenüs zuständig und ermöglicht dem Nutzer, sich einen Automaten auszusuchen und diesen dann zu bearbeiten oder zu spielen. Auch erlaubt es einen neuen Automaten zu erstellen und in die Einstellungen zu wechseln.
  */
 public class MainMenuView extends WindowView<MainMenuViewModel>
 {
