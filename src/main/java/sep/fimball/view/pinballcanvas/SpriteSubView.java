@@ -32,14 +32,21 @@ public class SpriteSubView
     private SpriteSubViewModel viewModel;
 
     /**
+     * Der ImageCache des Programms.
+     */
+    private ImageCache imageCache;
+
+    /**
      * , Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
      *
      * @param viewModel Das zu setzende SpriteSubViewModel.
+     * @param imageCache Der ImageCache.
      */
-    SpriteSubView(SpriteSubViewModel viewModel)
+    SpriteSubView(SpriteSubViewModel viewModel, ImageCache imageCache)
     {
         this.viewModel = viewModel;
+        this.imageCache = imageCache;
 
         positionProperty = new SimpleObjectProperty<>();
         positionProperty.bind(viewModel.positionProperty());
@@ -53,7 +60,7 @@ public class SpriteSubView
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, ImageCache imageCache)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
 
@@ -138,6 +145,7 @@ public class SpriteSubView
      */
     private void drawImage(GraphicsContext graphicsContext, Image image, Vector2 position, Vector2 size)
     {
+        //graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
         double x = (position.getX() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double y = (position.getY() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double w = size.getX() + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit;
