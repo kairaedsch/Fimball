@@ -50,6 +50,7 @@ public class LightHandler implements GameHandler
 
         lightChangers = new ArrayList<>();
         lightChangers.add(new SimpleLightChanger());
+        lightChangers.add(new CircleLightChanger());
 
         currentLightChanger = lightChangers.get(0);
     }

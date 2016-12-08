@@ -2,7 +2,7 @@ package sep.fimball.model.handler.light;
 
 import sep.fimball.general.data.Vector2;
 
-public class SimpleLightChanger extends LightChanger
+public class CircleLightChanger extends LightChanger
 {
     @Override
     public boolean determineStatus(Vector2 position, long delta)
