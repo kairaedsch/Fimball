@@ -148,7 +148,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (cameraZoom.get() >= 1)
         {
             cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.125));
-        } else
+        }
+        else
         {
             cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.1));
         }
@@ -162,7 +163,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (cameraZoom.get() >= 1)
         {
             cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.125));
-        } else
+        }
+        else
         {
             cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.1));
         }
@@ -199,7 +201,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (button == MouseButton.MIDDLE || moveModifier)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
-        } else if (mouseMode.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
+        }
+        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).plus(selectedPlacedElementPosition.get()));
         }
@@ -231,16 +234,20 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param gridPosition Die Position im Grid, auf die geklickt wurde.
      * @param onlyPressed  Gibt an, ob die Maustaste nur gedrückt wurde.
      */
-    public void mouseClickedOnGame(Vector2 gridPosition, boolean onlyPressed)
+    public void mouseClickedOnGame(Vector2 gridPosition, MouseButton button, boolean onlyPressed)
     {
-        if (mouseMode.get() == MouseMode.SELECTING && onlyPressed)
+        if (!moveModifier && onlyPressed)
         {
-            setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
-        } else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
-        {
-            PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
-            setMouseMode(MouseMode.SELECTING);
-            setSelectedPlacedElement(Optional.of(placedElement));
+            if (mouseMode.get() == MouseMode.SELECTING && button == MouseButton.PRIMARY)
+            {
+                setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
+            }
+            else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && button == MouseButton.PRIMARY)
+            {
+                PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
+                setMouseMode(MouseMode.SELECTING);
+                setSelectedPlacedElement(Optional.of(placedElement));
+            }
         }
     }
 
