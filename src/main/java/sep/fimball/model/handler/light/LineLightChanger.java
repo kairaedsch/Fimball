@@ -2,11 +2,14 @@ package sep.fimball.model.handler.light;
 
 import sep.fimball.general.data.Vector2;
 
-public class CircleLightChanger extends LightChanger
+public class LineLightChanger extends LightChanger
 {
-    public CircleLightChanger(boolean direction)
+    private boolean vertical;
+
+    public LineLightChanger(boolean direction, boolean vertical)
     {
         super(direction);
+        this.vertical = vertical;
     }
 
     @Override
@@ -14,11 +17,11 @@ public class CircleLightChanger extends LightChanger
     {
         // units per second
         double speed = 15;
-        double width = 3;
+        double width = 4;
         double space = 5;
 
         double radius = (delta / 1000.0) * speed;
 
-        return Math.abs(radius - position.magnitude()) % (space + width) <= width;
+        return Math.abs(radius - (vertical ? position.getX() : position.getY())) % (space + width) <= width;
     }
 }

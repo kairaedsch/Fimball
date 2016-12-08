@@ -49,8 +49,12 @@ public class LightHandler implements GameHandler
         gameLoop.getKeyFrames().add(keyFrame);
 
         lightChangers = new ArrayList<>();
-        //lightChangers.add(new SimpleLightChanger());
+        lightChangers.add(new RandomLightChanger());
         lightChangers.add(new CircleLightChanger());
+        lightChangers.add(new LineLightChanger(true, true));
+        lightChangers.add(new LineLightChanger(true, false));
+        lightChangers.add(new LineLightChanger(false, true));
+        lightChangers.add(new LineLightChanger(false, false));
 
         currentLightChanger = lightChangers.get(0);
     }
