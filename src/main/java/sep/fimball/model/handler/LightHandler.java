@@ -1,8 +1,10 @@
 package sep.fimball.model.handler;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.transformation.FilteredList;
+import javafx.util.Duration;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 
 import java.util.Optional;
@@ -15,7 +17,9 @@ public class LightHandler implements GameHandler
     /**
      * Die Lichter, die verwaltet werden.
      */
-    private ListProperty<HandlerGameElement> lights;
+    private FilteredList<? extends HandlerGameElement> lights;
+
+    private Timeline gameLoop;
 
     /**
      * Erstellt einen neuen LightHandler.
@@ -24,10 +28,12 @@ public class LightHandler implements GameHandler
      */
     public LightHandler(HandlerWorld world)
     {
-        lights = new SimpleListProperty<>(FXCollections.observableArrayList());
-        // TODO cycle
-        //ListPropertyConverter.bindAndFilterList(lights, world.gameElementsProperty(), original -> original.getPlacedElement().getBaseElement().getType() == BaseElementType.LIGHT);
+        lights = new FilteredList<>(world.gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
+        gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> changeLights());
+        gameLoop.getKeyFrames().add(keyFrame);
     }
 
     /**
@@ -38,7 +44,7 @@ public class LightHandler implements GameHandler
         for (HandlerGameElement light : lights)
         {
             Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
-            if (animation.isPresent())
+            if (animation.isPresent() && Math.random() > 0.5)
             {
                 light.setCurrentAnimation(animation);
             }
@@ -49,6 +55,13 @@ public class LightHandler implements GameHandler
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-
+        if(gameEvent == GameEvent.BALL_LOST)
+        {
+            gameLoop.stop();
+        }
+        if(gameEvent == GameEvent.BALL_SPAWNED)
+        {
+            gameLoop.play();
+        }
     }
 }

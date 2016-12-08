@@ -8,6 +8,7 @@ import sep.fimball.model.media.ElementImage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
 
@@ -48,8 +49,7 @@ public class BaseMediaElementFactory
                     animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
                 }
 
-                nullCheck(event.soundName);
-                eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), event.soundName));
+                eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), Optional.ofNullable(event.soundName)));
             }
         }
 

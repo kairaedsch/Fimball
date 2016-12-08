@@ -2,6 +2,7 @@ package sep.fimball.model.game;
 
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
@@ -173,6 +174,12 @@ public class GameElement implements HandlerGameElement
     public BaseRuleElement getRuleElement()
     {
         return placedElement.getBaseElement().getRule();
+    }
+
+    @Override
+    public BaseElementType getElementType()
+    {
+        return placedElement.getBaseElement().getType();
     }
 
     /**

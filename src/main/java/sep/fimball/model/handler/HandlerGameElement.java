@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 
@@ -52,4 +53,5 @@ public interface HandlerGameElement
      */
     BaseRuleElement getRuleElement();
 
+    BaseElementType getElementType();
 }

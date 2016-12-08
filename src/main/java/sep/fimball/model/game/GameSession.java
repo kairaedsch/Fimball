@@ -49,6 +49,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         gameSession.startAll();
+        gameSession.spawnNewBall();
         return gameSession;
     }
 
@@ -454,6 +455,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         physicsHandler.setBall(originalBall.positionProperty().get(), originalBall.rotationProperty().get());
         isBallLost = false;
         wereBallLostEventsTriggered = false;
+
+        for (Handler handler : handlers)
+        {
+            handler.activateGameHandler(GameEvent.BALL_SPAWNED);
+        }
     }
 
     /**

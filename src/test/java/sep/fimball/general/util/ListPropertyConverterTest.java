@@ -122,31 +122,6 @@ public class ListPropertyConverterTest
     }
 
     /**
-     * Testet ob das Binden einer Liste an eine andere mit Filterung funktioniert.
-     */
-    @Test
-    public void filterListTest()
-    {
-        ListPropertyConverter.bindAndFilterList(filteredList, originalList, (original -> original.getData() >= 50));
-
-        //Überprüfen ob alle Elemente der Liste die Bedingung erfüllen.
-        filteredList.forEach(dummyOne -> assertThat("Der Datenwert des aktuellen dummyOne ist größer gleich 50", dummyOne.getData() >= 50, is(true)));
-
-        int currentSize = filteredList.size();
-        //Ein neues Element einfügen welches die Bedingung erfüllt.
-        originalList.add(new DummyOne(1337));
-        //Überprüfen ob die gefilterte Liste um eins größer ist.
-        assertThat("Die Größe der filteredList ist " + currentSize + 1, filteredList.size(), is(currentSize + 1));
-        //Überprüfen ob das eingefügte Element die Bedingung erfüllt.
-        assertThat("Der Datenwert des Element " + currentSize + " der filteredList ist größer gleich 50", filteredList.get(currentSize).getData() >= 50, is(true));
-
-        //Ein neues Element einfügen welches die Bedingung nicht erfüllt.
-        originalList.add(new DummyOne(10));
-        //Überprüfen ob weiterhin alle Elemente die Bedingung erfüllen.
-        filteredList.forEach(dummyOne -> assertThat("Der Datenwert des aktuellen dummyOne ist größer gleich 50", dummyOne.getData() >= 50, is(true)));
-    }
-
-    /**
      * Dummy Datentyp welcher Integer Werte nutzt.
      */
     public static class DummyOne

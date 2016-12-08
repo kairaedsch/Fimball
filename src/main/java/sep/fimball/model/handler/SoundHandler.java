@@ -5,6 +5,7 @@ import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Handler, der bei Kollision mit dem Ball ausgelöst wird, und einen SoundClip abspielt.
@@ -18,11 +19,11 @@ public class SoundHandler implements ElementHandler
 
         if (eventMap.containsKey(colliderID))
         {
-            Sound soundToPlay = eventMap.get(colliderID).getSound();
+            Optional<Sound> soundToPlay = eventMap.get(colliderID).getSound();
 
-            if (soundToPlay != null)
+            if (soundToPlay.isPresent())
             {
-                SoundManager.getInstance().addSoundToPlay(soundToPlay);
+                SoundManager.getInstance().addSoundToPlay(soundToPlay.get());
             }
         }
     }

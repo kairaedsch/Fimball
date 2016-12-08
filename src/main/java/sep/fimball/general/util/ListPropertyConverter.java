@@ -77,30 +77,6 @@ public class ListPropertyConverter
     }
 
     /**
-     * Synchronisiert die Elemente der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code listPropertyOriginal}, wobei Elemente durch den {@code filter} von der Synchronisation ausgeschlossen werden können.
-     *
-     * @param listPropertyConverted Die Liste, in welche die gefilterten Elemente gespeichert werden.
-     * @param listPropertyOriginal  Die originale Liste.
-     * @param filter                Der Filter, der angewendet wird.
-     * @param <ElementT>            Der Typ der Elemente der konvertierten Liste.
-     */
-    public static <ElementT> void bindAndFilterList(ObservableList<ElementT> listPropertyConverted, ObservableList<? extends ElementT> listPropertyOriginal, ListFilter<ElementT> filter)
-    {
-        ListChangeListener<ElementT> listChangeListener = (change) ->
-        {
-            listPropertyConverted.clear();
-            for (ElementT original : listPropertyOriginal)
-            {
-                if (filter.shouldKeep(original))
-                    listPropertyConverted.add(original);
-            }
-        };
-
-        listPropertyOriginal.addListener(listChangeListener);
-        listChangeListener.onChanged(null);
-    }
-
-    /**
      * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code mapPropertyOriginal}, wenn sich die Werte in der {@code mapPropertyOriginal} ändern.
      *
      * @param listPropertyConverted Die Liste, die neu befüllt werden soll

@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
@@ -108,17 +109,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         ObservableList<AvailableElementSubViewModel> availableElements = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
-
         SortedList<AvailableElementSubViewModel> availableElementsSorted = new SortedList<>(availableElements, (o1, o2) -> o1.nameProperty().get().compareTo(o2.nameProperty().get()));
 
-        availableBasicElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableBasicElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC)));
-
-        availableObstacleElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableObstacleElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE)));
-
-        availableAdvancedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndFilterList(availableAdvancedElements, availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED)));
+        availableBasicElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC))));
+        availableObstacleElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE))));
+        availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
