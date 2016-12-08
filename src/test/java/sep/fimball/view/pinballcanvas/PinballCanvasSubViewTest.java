@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
@@ -38,7 +39,7 @@ public class PinballCanvasSubViewTest
     @Rule
     public JavaFXThreadingRule javaFXThreadingRule = new JavaFXThreadingRule();
 
-    private final boolean editorMode = false;
+    private final boolean editorMode = true;
     private final double cameraZoom = 2;
     private final double canvasHeight = 200;
     private final double canvasWidth = 300;
@@ -59,6 +60,7 @@ public class PinballCanvasSubViewTest
     public double[] fillRectArguments = new double[4];
     public ArrayList<Color> gridLineColors = new ArrayList<>();
     public ArrayList<Double> lineWidths = new ArrayList<>();
+    public ArrayList<Double> strokeLineArguments = new ArrayList<>();
 
     /**
      * Testet, ob das Neuzeichnen der View nach Änderungen am ViewModel funktioniert.
@@ -106,6 +108,14 @@ public class PinballCanvasSubViewTest
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
+            for (int i = 0; i < 4; i++) {
+                strokeLineArguments.add(invocation.getArgument(i));
+            }
+            return null;
+        }).when(graphicsContextMock).strokeLine(anyDouble(), anyDouble(), anyDouble(), anyDouble());
+
+        Mockito.doAnswer((InvocationOnMock invocation) ->
+        {
             lineWidths.add(invocation.getArgument(0));
             return null;
         }).when(graphicsContextMock).setLineWidth(anyDouble());
@@ -131,7 +141,7 @@ public class PinballCanvasSubViewTest
         assertEquals(edgeSecondComponent, 0, 0);
         assertEquals(width, canvasWidth, 0);
         assertEquals(height, canvasHeight, 0);
-        if (!editorMode)
+        if (editorMode)
         {
             assertThat("The colors of two adjacent lines should not match!", gridLineColors.get(0), not(equalTo(gridLineColors.get(1))));
             if (gridLineColors.get(2) != null)
@@ -142,6 +152,11 @@ public class PinballCanvasSubViewTest
             if (lineWidths.get(2) != null)
             {
                 assertThat("The width of the lines should alternate every two steps!", lineWidths.get(0), equalTo(lineWidths.get(2)));
+            }
+            assertEquals(strokeLineArguments.get(0), strokeLineArguments.get(2), 0);
+            if (canvasHeight != 0)
+            {
+                assertNotEquals(strokeLineArguments.get(1), strokeLineArguments.get(3), 0);
             }
         }
     }
