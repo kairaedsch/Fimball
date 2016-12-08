@@ -16,62 +16,79 @@ public class PinballMachineFactoryTest
     @Test
     public void createPinballMachine() throws Exception
     {
-        PinballMachineJson pinballMachineJson = new PinballMachineJson();
-        pinballMachineJson.name = "testautomat";
-        pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
-        pinballMachineJson.highscores[0] = new PinballMachineJson.HighscoreJson();
-        pinballMachineJson.highscores[0].playerName = "Player 1";
-        pinballMachineJson.highscores[0].score = 100;
-        pinballMachineJson.highscores[1] = new PinballMachineJson.HighscoreJson();
-        pinballMachineJson.highscores[1].playerName = "Player 2";
-        pinballMachineJson.highscores[1].score = 10;
-        pinballMachineJson.highscores[2] = new PinballMachineJson.HighscoreJson();
-        pinballMachineJson.highscores[2].playerName = "Player 3";
-        pinballMachineJson.highscores[2].score = 1;
+        // Test mit valider pinballMachineJson
+        {
+            // Erstelle eine valide pinballMachineJson
+            PinballMachineJson pinballMachineJson = new PinballMachineJson();
+            pinballMachineJson.name = "testautomat";
+            pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
+            pinballMachineJson.highscores[0] = new PinballMachineJson.HighscoreJson();
+            pinballMachineJson.highscores[0].playerName = "Player 1";
+            pinballMachineJson.highscores[0].score = 100;
+            pinballMachineJson.highscores[1] = new PinballMachineJson.HighscoreJson();
+            pinballMachineJson.highscores[1].playerName = "Player 2";
+            pinballMachineJson.highscores[1].score = 10;
+            pinballMachineJson.highscores[2] = new PinballMachineJson.HighscoreJson();
+            pinballMachineJson.highscores[2].playerName = "Player 3";
+            pinballMachineJson.highscores[2].score = 1;
 
-        PinballMachine pinballMachine = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson), "testid", null).get();
+            // Lasse eine PinballMachine aus der validen pinballMachineJson generieren
+            PinballMachine pinballMachine = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson), "testid", null).get();
 
-        assertThat(pinballMachine.nameProperty().get(), is("testautomat"));
-        assertThat(pinballMachine.getID(), is("testid"));
-        assertThat(pinballMachine.highscoreListProperty().get(0).playerNameProperty().get(), is(equalTo("Player 1")));
-        assertThat(pinballMachine.highscoreListProperty().get(0).scoreProperty().get(), is(100L));
-        assertThat(pinballMachine.highscoreListProperty().get(1).playerNameProperty().get(), is(equalTo("Player 2")));
-        assertThat(pinballMachine.highscoreListProperty().get(1).scoreProperty().get(), is(10L));
-        assertThat(pinballMachine.highscoreListProperty().get(2).playerNameProperty().get(), is(equalTo("Player 3")));
-        assertThat(pinballMachine.highscoreListProperty().get(2).scoreProperty().get(), is(1L));
-    }
+            // Prüfe ob die generierte PinballMachine valide ist
+            assertThat(pinballMachine.nameProperty().get(), is("testautomat"));
+            assertThat(pinballMachine.getID(), is("testid"));
+            assertThat(pinballMachine.highscoreListProperty().get(0).playerNameProperty().get(), is(equalTo("Player 1")));
+            assertThat(pinballMachine.highscoreListProperty().get(0).scoreProperty().get(), is(100L));
+            assertThat(pinballMachine.highscoreListProperty().get(1).playerNameProperty().get(), is(equalTo("Player 2")));
+            assertThat(pinballMachine.highscoreListProperty().get(1).scoreProperty().get(), is(10L));
+            assertThat(pinballMachine.highscoreListProperty().get(2).playerNameProperty().get(), is(equalTo("Player 3")));
+            assertThat(pinballMachine.highscoreListProperty().get(2).scoreProperty().get(), is(1L));
+        }
 
-    @Test
-    public void createPinballMachineFailTest() throws Exception
-    {
-        PinballMachineJson pinballMachineJson = new PinballMachineJson();
-        pinballMachineJson.name = "testautomat";
-        pinballMachineJson.highscores = null;
+        // Test mit ungültiger pinballMachineJson
+        {
+            // Erstelle eine ungültige pinballMachineJson
+            PinballMachineJson pinballMachineJson = new PinballMachineJson();
+            pinballMachineJson.name = "testautomat";
+            pinballMachineJson.highscores = null;
 
-        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson), "testid", null);
-        assertThat(pinballMachine.isPresent(), is(false));
+            // Lasse eine PinballMachine aus der ungültigen pinballMachineJson generieren
+            Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson), "testid", null);
 
-        PinballMachineJson pinballMachineJson2 = new PinballMachineJson();
-        pinballMachineJson.name = "testautomat";
-        pinballMachineJson.highscores = null;
-        pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
-        pinballMachineJson.highscores[0] = null;
+            assertThat("Generierung der PinballMachine sollte Fehlgeschlagen sein", pinballMachine.isPresent(), is(false));
+        }
 
-        Optional<PinballMachine> pinballMachine2 = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson2), "testid", null);
-        assertThat(pinballMachine2.isPresent(), is(false));
+        // Test mit ungültiger pinballMachineJson
+        {
+            // Erstelle eine ungültige pinballMachineJson
+            PinballMachineJson pinballMachineJson = new PinballMachineJson();
+            pinballMachineJson.name = "testautomat";
+            pinballMachineJson.highscores = null;
+            pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
+            pinballMachineJson.highscores[0] = null;
+
+            // Lasse eine PinballMachine aus der ungültigen pinballMachineJson generieren
+            Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(Optional.of(pinballMachineJson), "testid", null);
+
+            assertThat("Generierung der PinballMachine sollte Fehlgeschlagen sein", pinballMachine.isPresent(), is(false));
+        }
     }
 
     @Test
     public void createPinballMachineJson() throws Exception
     {
+        // Erstelle eine PinballMachine
         List<Highscore> highscoreList = new ArrayList<>();
         highscoreList.add(new Highscore(100, "Player 1"));
         highscoreList.add(new Highscore(10, "Player 2"));
         highscoreList.add(new Highscore(1, "Player 3"));
         PinballMachine pinballMachine = new PinballMachine("testautomat", "testid", highscoreList, null);
 
+        // Lasse eine pinballMachineJson aus der PinballMachine generieren
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
 
+        // Prüfe ob die generierte pinballMachineJson valide ist
         assertThat(pinballMachineJson.name, is(equalTo("testautomat")));
         assertThat(pinballMachineJson.highscores[0].playerName, is(equalTo("Player 1")));
         assertThat(pinballMachineJson.highscores[0].score, is(100L));

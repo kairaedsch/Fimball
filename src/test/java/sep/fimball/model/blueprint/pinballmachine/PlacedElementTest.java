@@ -16,13 +16,13 @@ public class PlacedElementTest
     @Test
     public void rotateClockwise() throws Exception
     {
-        int[] expectedRotations45 = new int[]{45, 90, 135, 180, 225, 270, 315, 360};
+        int[] expectedRotations45 = new int[]{45, 90, 135, 180, 225, 270, 315, 0};
         checkRotation(expectedRotations45, 45, false);
 
-        int[] expectedRotations90 = new int[]{90, 180, 270, 360};
+        int[] expectedRotations90 = new int[]{90, 180, 270, 0};
         checkRotation(expectedRotations90, 90, false);
 
-        int[] expectedRotations75 = new int[]{75, 150, 225, 300, 375};
+        int[] expectedRotations75 = new int[]{75, 150, 225, 300, 15};
         checkRotation(expectedRotations75, 75, false);
 
         int[] expectedRotations180 = new int[]{180, 0, 180, 0};
@@ -55,12 +55,15 @@ public class PlacedElementTest
     private void checkRotation(int[] expectedRotations, int rotationAccurancy, boolean counterClockwise)
     {
         PlacedElement placedElement = getPlacedElement(0, rotationAccurancy);
+
+        // Rotiere das PlacedElement in jedem Durchgang in die verlangte Richtung und prüfe, ob der Rotationsverlauf mit dem erwarteten übereinstimmt
         for (int expectedRotation : expectedRotations)
         {
             if (counterClockwise) placedElement.rotateCounterclockwise();
             else placedElement.rotateClockwise();
 
-            assertThat("Teste rotation bei Rotationsgenauigkeit von " + rotationAccurancy + " der Liste: " + Arrays.toString(expectedRotations), placedElement.rotationProperty().get(), is((expectedRotation % 360) * 1.0));
+            String commentReason = "Teste rotation bei Rotationsgenauigkeit von " + rotationAccurancy + " der Liste: " + Arrays.toString(expectedRotations);
+            assertThat(commentReason, placedElement.rotationProperty().get(), is(expectedRotation * 1.0));
         }
     }
 
