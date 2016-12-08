@@ -1,7 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
@@ -13,7 +12,6 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.window.pinballmachine.editor.MouseMode;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
@@ -21,18 +19,6 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
-    /**
-     * Der Button, der den "Auswählen"-Modus der Bedienung stellt.
-     */
-    @FXML
-    private Button selectButton;
-
-    /**
-     * Der Button, der den "Platzieren"-Modus der Bedienung stellt.
-     */
-    @FXML
-    private Button placeButton;
-
     /**
      * Zeigt den Namen des editierten Automaten an.
      */
@@ -90,12 +76,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
-
-        //TODO make mor beautyful
-        selectButton.disabledProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModeProperty().get() == MouseMode.SELECTING));
-        placeButton.disabledProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModeProperty().get() == MouseMode.PLACING));
-        pinballMachineEditorViewModel.mouseModeProperty().addListener((observable, oldValue, newValue) -> selectButton.setDisable(pinballMachineEditorViewModel.mouseModeProperty().get() == MouseMode.SELECTING));
-        pinballMachineEditorViewModel.mouseModeProperty().addListener((observable, oldValue, newValue) -> placeButton.setDisable(pinballMachineEditorViewModel.mouseModeProperty().get() == MouseMode.PLACING));
     }
 
     /**
@@ -166,25 +146,5 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void down(MouseEvent mouseEvent)
     {
         mouseDown = mouseEvent;
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Benutzer in den "Platzieren"-Modus wechseln möchte.
-     *
-     * @param mouseEvent Das MouseEvent, das den Wechsel auslöst.
-     */
-    public void placeClicked(MouseEvent mouseEvent)
-    {
-        pinballMachineEditorViewModel.setMouseMode(MouseMode.PLACING);
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Benutzer in den "Auswählen"-Modus wechseln möchte.
-     *
-     * @param mouseEvent Das MouseEvent, das den Wechsel auslöst.
-     */
-    public void selectClicked(MouseEvent mouseEvent)
-    {
-        pinballMachineEditorViewModel.setMouseMode(MouseMode.SELECTING);
     }
 }

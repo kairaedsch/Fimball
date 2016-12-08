@@ -205,7 +205,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
-
     /**
      * Setzt den MouseMode.
      *
