@@ -37,7 +37,7 @@ public class SpriteSubView
     private ImageCache imageCache;
 
     /**
-     * , Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
+     * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
      *
      * @param viewModel Das zu setzende SpriteSubViewModel.
@@ -63,16 +63,13 @@ public class SpriteSubView
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
-
         double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
         Image image = imageCache.getImage(elementImage.getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
-
-        graphicsContext.save();
-
-        setupDrawLocation(graphicsContext, rotationRest);
-
         Vector2 position = positionProperty.get();
         Vector2 size = new Vector2(image.getWidth(), image.getHeight());
+
+        graphicsContext.save();
+        setupDrawLocation(graphicsContext, rotationRest);
 
         if (viewModel.scaleProperty().get() != 1)
         {
@@ -94,7 +91,6 @@ public class SpriteSubView
         {
             drawImage(graphicsContext, image, position, size);
         }
-
         graphicsContext.restore();
     }
 
@@ -145,7 +141,6 @@ public class SpriteSubView
      */
     private void drawImage(GraphicsContext graphicsContext, Image image, Vector2 position, Vector2 size)
     {
-        //graphicsContext.drawImage(image, position.getX() * Config.pixelsPerGridUnit, position.getY() * Config.pixelsPerGridUnit, size.getX(), size.getY());
         double x = (position.getX() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double y = (position.getY() + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double w = size.getX() + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit;
@@ -164,10 +159,10 @@ public class SpriteSubView
     {
         double borderWidth = Config.pixelsPerGridUnit * 0.25;
         double borderOffset = 0.5 * borderWidth;
-
-        graphicsContext.setLineWidth(borderWidth);
         double effectTime = (System.currentTimeMillis() % BORDER_BLINK_RATE) / BORDER_BLINK_RATE;
         double effectValue = -2 * effectTime * (effectTime - 1);
+
+        graphicsContext.setLineWidth(borderWidth);
 
         if (imageLayer == ImageLayer.TOP)
         {

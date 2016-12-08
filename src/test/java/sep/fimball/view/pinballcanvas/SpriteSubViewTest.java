@@ -22,7 +22,6 @@ import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -50,13 +49,13 @@ public class SpriteSubViewTest
     @Mock
     SpriteSubViewModel spriteSubViewModelMock;
     @Mock
-    ElementImageViewModel elementImage;
+    ElementImageViewModel elementImageMock;
     @Mock
     GraphicsContext graphicsContextMock;
     @Mock
-    ImageCache imageCache;
+    ImageCache imageCacheMock;
     @Mock
-    Image image;
+    Image imageMock;
 
     /**
      * Testet das Zeichnen der unteren Bildebene.
@@ -72,15 +71,15 @@ public class SpriteSubViewTest
         localCoords.put(0, localCoordinates);
 
         Mockito.when(spriteSubViewModelMock.positionProperty()).thenReturn(new SimpleObjectProperty<>(position));
-        Mockito.when(spriteSubViewModelMock.animationFramePathProperty()).thenReturn(new SimpleObjectProperty<>(elementImage));
-        Mockito.when(elementImage.getRestRotation(anyInt())).thenReturn(ROTATION);
-        Mockito.when(imageCache.getImage(any())).thenReturn(image);
+        Mockito.when(spriteSubViewModelMock.animationFramePathProperty()).thenReturn(new SimpleObjectProperty<>(elementImageMock));
+        Mockito.when(elementImageMock.getRestRotation(anyInt())).thenReturn(ROTATION);
+        Mockito.when(imageCacheMock.getImage(any())).thenReturn(imageMock);
         Mockito.when(spriteSubViewModelMock.pivotPointProperty()).thenReturn(new SimpleObjectProperty<>(pivot));
         Mockito.when(spriteSubViewModelMock.rotationProperty()).thenReturn(new SimpleDoubleProperty(ROTATION));
         Mockito.when(spriteSubViewModelMock.getLocalCoords()).thenReturn(localCoords);
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
-        Mockito.when(image.getWidth()).thenReturn(IMAGE_WIDTH);
-        Mockito.when(image.getHeight()).thenReturn(IMAGE_HEIGHT);
+        Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
+        Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
         Mockito.when(spriteSubViewModelMock.isSelectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
 
@@ -125,7 +124,7 @@ public class SpriteSubViewTest
             return null;
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
-        SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCache);
+        SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
         spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
@@ -137,7 +136,7 @@ public class SpriteSubViewTest
         assertEquals(r.getMyy(), transformationArguments[3], 0.0);
         assertEquals(r.getTx(), transformationArguments[4], 0.0);
         assertEquals(r.getTy(), transformationArguments[5], 0.0);
-        assertThat(drawnImages[0], equalTo(image));
+        assertThat(drawnImages[0], equalTo(imageMock));
         assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit, 0.0);
@@ -163,15 +162,15 @@ public class SpriteSubViewTest
         localCoords.put(0, localCoordinates);
 
         Mockito.when(spriteSubViewModelMock.positionProperty()).thenReturn(new SimpleObjectProperty<>(position));
-        Mockito.when(spriteSubViewModelMock.animationFramePathProperty()).thenReturn(new SimpleObjectProperty<>(elementImage));
-        Mockito.when(elementImage.getRestRotation(anyInt())).thenReturn(ROTATION);
-        Mockito.when(imageCache.getImage(any())).thenReturn(image);
+        Mockito.when(spriteSubViewModelMock.animationFramePathProperty()).thenReturn(new SimpleObjectProperty<>(elementImageMock));
+        Mockito.when(elementImageMock.getRestRotation(anyInt())).thenReturn(ROTATION);
+        Mockito.when(imageCacheMock.getImage(any())).thenReturn(imageMock);
         Mockito.when(spriteSubViewModelMock.pivotPointProperty()).thenReturn(new SimpleObjectProperty<>(pivot));
         Mockito.when(spriteSubViewModelMock.rotationProperty()).thenReturn(new SimpleDoubleProperty(ROTATION));
         Mockito.when(spriteSubViewModelMock.getLocalCoords()).thenReturn(localCoords);
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
-        Mockito.when(image.getWidth()).thenReturn(IMAGE_WIDTH);
-        Mockito.when(image.getHeight()).thenReturn(IMAGE_HEIGHT);
+        Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
+        Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
         Mockito.when(spriteSubViewModelMock.isSelectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
 
@@ -216,7 +215,7 @@ public class SpriteSubViewTest
             return null;
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
-        SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCache);
+        SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
         spriteSubView.draw(graphicsContextMock, ImageLayer.TOP);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
@@ -228,7 +227,7 @@ public class SpriteSubViewTest
         assertEquals(r.getMyy(), transformationArguments[3], 0.0);
         assertEquals(r.getTx(), transformationArguments[4], 0.0);
         assertEquals(r.getTy(), transformationArguments[5], 0.0);
-        assertThat(drawnImages[0], equalTo(image));
+        assertThat(drawnImages[0], equalTo(imageMock));
         assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit + Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit, 0.0);
