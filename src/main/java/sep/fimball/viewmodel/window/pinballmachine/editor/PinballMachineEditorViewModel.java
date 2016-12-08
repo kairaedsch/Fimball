@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -13,7 +15,9 @@ import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -84,6 +88,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
     private GameSession gameSession;
+
+    private boolean moveModifier = false;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -187,12 +193,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
      * @param y Die y-Position, an der sich die Drag-Bewegung befindet.
      */
-    public void dragged(double x, double y, boolean primaryMouse)
+    public void dragged(double x, double y, MouseButton button)
     {
         double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
         double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
 
-        if (!primaryMouse)
+        if (button == MouseButton.MIDDLE || moveModifier)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
         }
@@ -258,6 +264,14 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
 
         selectedElementSubViewModel.setPlacedElement(selectedPlacedElement.get());
+    }
+
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.EDITOR_MOVE)
+            moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
+        super.handleKeyEvent(keyEvent);
     }
 
     /**

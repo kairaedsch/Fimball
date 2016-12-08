@@ -43,7 +43,12 @@ public enum KeyBinding
     /**
      * Löscht das im Editor ausgewählte BaseElement.
      */
-    EDITOR_DELETE("gamesettings.general.keybinding.editor_delete.key");
+    EDITOR_DELETE("gamesettings.general.keybinding.editor_delete.key"),
+
+    /**
+     * Ist diese Taste gedrückt, wird durch klicken und ziehen der Maus im Editor die Kamera bewegt.
+     */
+    EDITOR_MOVE("gamesettings.general.keybinding.editor_move.key");
 
     /**
      * Der Name der Funktion.

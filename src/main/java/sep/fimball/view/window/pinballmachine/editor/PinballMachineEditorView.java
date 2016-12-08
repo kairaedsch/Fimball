@@ -4,14 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
-import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.MouseMode;
@@ -155,7 +154,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.dragged(mouseEvent.getX() - mouseDown.getX(), mouseEvent.getY() - mouseDown.getY(), mouseEvent.getButton() == MouseButton.PRIMARY);
+        pinballMachineEditorViewModel.dragged(mouseEvent.getX() - mouseDown.getX(), mouseEvent.getY() - mouseDown.getY(), mouseEvent.getButton());
         mouseDown = mouseEvent;
     }
 
