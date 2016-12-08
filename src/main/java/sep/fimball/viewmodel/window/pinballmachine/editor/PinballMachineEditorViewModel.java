@@ -148,8 +148,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (cameraZoom.get() >= 1)
         {
             cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.125));
-        }
-        else
+        } else
         {
             cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.1));
         }
@@ -163,8 +162,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (cameraZoom.get() >= 1)
         {
             cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.125));
-        }
-        else
+        } else
         {
             cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.1));
         }
@@ -201,8 +199,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (button == MouseButton.MIDDLE || moveModifier)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
-        }
-        else if (mouseMode.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
+        } else if (mouseMode.get() == MouseMode.SELECTING && selectedPlacedElement.get().isPresent())
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).plus(selectedPlacedElementPosition.get()));
         }
@@ -240,8 +237,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (mouseMode.get() == MouseMode.SELECTING && onlyPressed)
         {
             setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
-        }
-        else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
+        } else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && onlyPressed)
         {
             PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
             setMouseMode(MouseMode.SELECTING);
@@ -269,8 +265,19 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()) == KeyBinding.EDITOR_MOVE)
+        KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
+        if (binding == KeyBinding.EDITOR_MOVE)
             moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
+
+        if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED && selectedPlacedElement.get().isPresent())
+        {
+            if (binding == KeyBinding.EDITOR_DELETE)
+                pinballMachine.removeElement(selectedPlacedElement.get().get());
+
+            if (binding == KeyBinding.EDITOR_ROTATE)
+                selectedPlacedElement.get().get().rotateClockwise();
+        }
+
         super.handleKeyEvent(keyEvent);
     }
 
