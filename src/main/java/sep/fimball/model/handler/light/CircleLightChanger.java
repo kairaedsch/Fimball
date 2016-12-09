@@ -1,6 +1,5 @@
 package sep.fimball.model.handler.light;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 
@@ -18,9 +17,9 @@ public class CircleLightChanger extends LightChanger
     public boolean determineStatusIntern(Vector2 position, long delta)
     {
         // units per second
-        double speed = 15;
-        double width = 4;
-        double space = 8;
+        double speed = 40;
+        double width = 8;
+        double space = 16;
 
         double radius = (delta / 1000.0) * speed;
 
