@@ -79,48 +79,73 @@
 }
 
 .buttonPlaySinglePlayer {
-    -fx-background-image: url("../images/media-play.svg");
+    -fx-background-image: url("../images/media-play_white.svg");
+    -fx-background-color: #DBAA5D;
 }
 
 .buttonPlaySinglePlayer:hover {
-    -fx-background-color: #4AAF4A;
-    -fx-background-image: url("../images/media-play_white.svg");
-}
-
-.buttonPlayMultiplayer {
     -fx-background-image: url("../images/media-play.svg");
-}
-
-.buttonPlayMultiplayer:hover {
-    -fx-background-color: #4AAF4A;
-    -fx-background-image: url("../images/media-play_white.svg");
+    -fx-background-color: #FFD593;
 }
 
 .buttonEdit {
-    -fx-background-image: url("../images/pencil.svg");
+    -fx-background-image: url("../images/pencil_white.svg");
+    -fx-background-color: #DBAA5D;
 }
 
 .buttonEdit:hover {
-    -fx-background-color: #DBAA5D;
-    -fx-background-image: url("../images/pencil_white.svg");
+    -fx-background-image: url("../images/pencil.svg");
+    -fx-background-color: #FFD593;
 }
 
-.machineOverviewInner {
-    -fx-background-color: #345883;
+.machineOverviewTitle {
+    -fx-font-family: Roboto Medium;
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFF;
+    -fx-padding: 10px 0px 10px 0px;
+}
+
+.machineOverviewHeader {
+    -fx-background-color: #44668F;
+}
+
+.menuButton {
+    -fx-background-image: url("../images/menu_white.svg");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 25px;
+    -fx-cursor: hand;
+}
+
+.menuButton:hover {
+    -fx-background-image: url("../images/menu.svg");
+}
+
+.buttonMachineAdd {
+    -fx-background-position: center;
+    -fx-background-image: url("../images/plus_white.svg");
+    -fx-background-color: #44668F;
+}
+
+.buttonMachineAdd:hover {
+    -fx-background-image: url("../images/plus.svg");
+    -fx-background-color: #FFF;
+}
+
+.machineOverviewInner, .machineOverviewVBox {
+    -fx-background-color: #7090B7;
 }
 
 .machineOverviewInner .machine {
     -fx-background-color: transparent;
     -fx-padding: 10px;
     -fx-cursor: hand;
-}
-
-.machineOverviewInner:even .machine {
-    -fx-background-color: #44668F;
+    -fx-border-color: #ABC5E3;
+    -fx-border-width: 0 0 1px 0;
 }
 
 .machineOverviewInner .machine:hover, .machineOverviewInner .machine.selected {
-    -fx-background-color: #DB5D5D;
+    -fx-background-color: #44668F;
 }
 
 .machineOverviewInner .machinePic {
@@ -154,6 +179,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: contain;
+    -fx-background-color: #DB5D5D;
 }
 
 .machinePreview .machineAktions {
@@ -166,4 +192,33 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: auto;
+}
+
+.highscoreTitle {
+    -fx-font-family: Roboto Medium;
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFF;
+    -fx-padding: 10px 0px 10px 0px;
+}
+
+.highscoreList {
+    -fx-background-color: #DB5D5D;
+}
+
+.highscoreEntry {
+
+}
+
+.highscoreEntryScore {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 18px;
+}
+
+.highscoreEntryName {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 18px;
+}
+
+.highscoreEntryLine {
+    -fx-background-color: #C84444;
 }

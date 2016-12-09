@@ -147,7 +147,7 @@ public class MainMenuViewModel extends WindowViewModel
     {
         for (int i = 0; i < pinballMachinePreviewSubViewModelList.size(); ++i)
         {
-            if (pinballMachinePreviewSubViewModelList.get(i).isSelected())
+            if (pinballMachinePreviewSubViewModelList.get(i).selectedProperty().get())
             {
                 return i;
             }

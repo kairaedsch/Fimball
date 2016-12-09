@@ -32,7 +32,7 @@ public class PinballMachinePreviewSubViewModel
     /**
      * Gibt an, ob der Automat ausgewählt ist.
      */
-    private BooleanProperty isSelected;
+    private BooleanProperty selected;
 
     /**
      * Erstellt ein neues PinballMachinePreviewSubViewModel.
@@ -45,7 +45,7 @@ public class PinballMachinePreviewSubViewModel
     {
         this.mainMenu = mainMenu;
         this.pinballMachine = pinballMachine;
-        this.isSelected = new SimpleBooleanProperty();
+        this.selected = new SimpleBooleanProperty();
 
         name = new SimpleStringProperty();
         imagePath = new SimpleStringProperty();
@@ -53,7 +53,7 @@ public class PinballMachinePreviewSubViewModel
         name.bind(pinballMachine.nameProperty());
         imagePath.set(pinballMachine.getImagePath());
 
-        isSelected.bind(Bindings.equal(pinballMachine, pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
+        selected.bind(Bindings.equal(pinballMachine, pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
     }
 
     /**
@@ -89,8 +89,8 @@ public class PinballMachinePreviewSubViewModel
      *
      * @return {@code true}, wenn der Flipperautomat ausgewählt ist, {@code false} sonst.
      */
-    boolean isSelected()
+    public BooleanProperty selectedProperty()
     {
-        return isSelected.get();
+        return selected;
     }
 }
