@@ -45,8 +45,8 @@ public class LightHandler implements GameHandler
 
         lightChangers = new ArrayList<>();
         lightChangers.add(new RandomLightChanger());
-        lightChangers.add(new CircleLightChanger(true, gameSession.gameBallProperty().get().positionProperty()));
-        lightChangers.add(new CircleLightChanger(false, gameSession.gameBallProperty().get().positionProperty()));
+        lightChangers.add(new CircleLightChanger(true, gameSession.gameBallProperty().get().positionProperty(), false));
+        lightChangers.add(new CircleLightChanger(false, gameSession.gameBallProperty().get().positionProperty(), true));
         lightChangers.add(new LineLightChanger(true, true));
         lightChangers.add(new LineLightChanger(true, false));
         lightChangers.add(new LineLightChanger(false, true));
@@ -67,6 +67,7 @@ public class LightHandler implements GameHandler
         {
             currentLightChanger = lightChangers.get(new Random().nextInt(lightChangers.size()));
             currentLightChangerStart = now;
+            delta = 0;
         }
 
         for (HandlerGameElement light : lights)
