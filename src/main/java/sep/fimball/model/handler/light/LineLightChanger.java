@@ -17,8 +17,8 @@ public class LineLightChanger extends LightChanger
     {
         // units per second
         double speed = 15;
-        double width = 4;
-        double space = 5;
+        double width = 6;
+        double space = 8;
 
         double radius = (delta / 1000.0) * speed;
 

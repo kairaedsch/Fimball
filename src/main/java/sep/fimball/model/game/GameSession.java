@@ -558,11 +558,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return world;
     }
 
-    /**
-     * Gibt das Ball-Element zurück.
-     *
-     * @return Das Ball-Element.
-     */
     public ReadOnlyObjectProperty<GameElement> gameBallProperty()
     {
         return gameBall;

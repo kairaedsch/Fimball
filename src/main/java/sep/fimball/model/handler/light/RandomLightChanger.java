@@ -4,8 +4,13 @@ import sep.fimball.general.data.Vector2;
 
 public class RandomLightChanger extends LightChanger
 {
+    public RandomLightChanger()
+    {
+        super(true);
+    }
+
     @Override
-    public boolean determineStatus(Vector2 position, long delta)
+    protected boolean determineStatusIntern(Vector2 position, long delta)
     {
         return Math.random() > 0.5;
     }

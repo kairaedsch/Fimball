@@ -6,10 +6,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.handler.GameEvent;
-import sep.fimball.model.handler.GameHandler;
-import sep.fimball.model.handler.HandlerGameElement;
-import sep.fimball.model.handler.HandlerWorld;
+import sep.fimball.model.handler.*;
 import sep.fimball.model.media.Animation;
 
 import java.util.ArrayList;
@@ -36,12 +33,10 @@ public class LightHandler implements GameHandler
 
     /**
      * Erstellt einen neuen LightHandler.
-     *
-     * @param world Aktuelle World.
      */
-    public LightHandler(HandlerWorld world)
+    public LightHandler(HandlerGameSession gameSession)
     {
-        lights = new FilteredList<>(world.gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
+        lights = new FilteredList<>(gameSession.getWorld().gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -50,7 +45,8 @@ public class LightHandler implements GameHandler
 
         lightChangers = new ArrayList<>();
         lightChangers.add(new RandomLightChanger());
-        lightChangers.add(new CircleLightChanger());
+        lightChangers.add(new CircleLightChanger(true, gameSession.gameBallProperty().get().positionProperty()));
+        lightChangers.add(new CircleLightChanger(false, gameSession.gameBallProperty().get().positionProperty()));
         lightChangers.add(new LineLightChanger(true, true));
         lightChangers.add(new LineLightChanger(true, false));
         lightChangers.add(new LineLightChanger(false, true));

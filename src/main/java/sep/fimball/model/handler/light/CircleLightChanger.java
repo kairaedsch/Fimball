@@ -1,12 +1,17 @@
 package sep.fimball.model.handler.light;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 
 public class CircleLightChanger extends LightChanger
 {
-    public CircleLightChanger(boolean direction)
+    private final ReadOnlyObjectProperty<Vector2> center;
+
+    public CircleLightChanger(boolean direction, ReadOnlyObjectProperty<Vector2> center)
     {
         super(direction);
+        this.center = center;
     }
 
     @Override
@@ -14,11 +19,11 @@ public class CircleLightChanger extends LightChanger
     {
         // units per second
         double speed = 15;
-        double width = 3;
-        double space = 5;
+        double width = 4;
+        double space = 8;
 
         double radius = (delta / 1000.0) * speed;
 
-        return Math.abs(radius - position.magnitude()) % (space + width) <= width;
+        return Math.abs(radius - position.minus(center.get()).magnitude()) % (space + width) <= width;
     }
 }

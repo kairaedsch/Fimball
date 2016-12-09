@@ -1,5 +1,7 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+
 /**
  * Die HandlerGameSession stellt die GameSession aus der Sicht der Handler dar.
  */
@@ -28,4 +30,11 @@ public interface HandlerGameSession
      * @return Die zu dieser GameSession gehörende World.
      */
     HandlerWorld getWorld();
+
+    /**
+     * Gibt das Ball-Element zurück.
+     *
+     * @return Das Ball-Element.
+     */
+    ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty();
 }

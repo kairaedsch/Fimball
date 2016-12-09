@@ -37,7 +37,7 @@ public class HandlerFactory
         handlers.add(animationHandler);
 
         Handler lightHandler = new Handler();
-        animationHandler.setGameHandler(new LightHandler(gameSession.getWorld()));
+        animationHandler.setGameHandler(new LightHandler(gameSession));
         handlers.add(lightHandler);
 
         Handler ballLostHandler = new Handler();
