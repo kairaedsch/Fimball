@@ -174,7 +174,7 @@
     -fx-padding: 25px 15px 25px 15px;
 }
 
-.machinePreview .machinePic {
+.machinePreview .machinePic, .pinballMachineSettings .machinePic {
     -fx-background-image: url("../images/pinball-machine-test-v6.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -201,7 +201,7 @@
     -fx-padding: 10px 0px 10px 0px;
 }
 
-.highscoreList {
+.highscoreList, .pinballMachineSettings {
     -fx-background-color: #DB5D5D;
 }
 
@@ -221,4 +221,41 @@
 
 .highscoreEntryLine {
     -fx-background-color: #C84444;
+}
+
+.pinballMachineSettingsTextField {
+    -fx-font-family: Roboto Medium;
+    -fx-font-size: 24px;
+    -fx-text-alignment: center;
+}
+
+.buttonSave {
+    -fx-background-image: url("../images/book_white.svg");
+    -fx-background-color: #DBAA5D;
+}
+
+.buttonSave:hover {
+    -fx-background-image: url("../images/book.svg");
+    -fx-background-color: #FFD593;
+}
+
+.buttonDelete {
+    -fx-background-image: url("../images/trash_white.svg");
+    -fx-background-color: #DBAA5D;
+}
+
+.buttonDelete:hover {
+    -fx-background-image: url("../images/trash.svg");
+    -fx-background-color: #FFD593;
+}
+
+.buttonBackToMainMenu {
+    -fx-background-position: center;
+    -fx-background-image: url("../images/spreadsheet_white.svg");
+    -fx-background-color: #DBAA5D;
+}
+
+.buttonBackToMainMenu:hover {
+    -fx-background-image: url("../images/spreadsheet.svg");
+    -fx-background-color: #FFD593;
 }

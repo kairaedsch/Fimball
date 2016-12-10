@@ -1,68 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<TitledPane fx:id="mainPane" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="!editor.settings.pane.key!"
-            xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView">
-    <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <children>
-                <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <Label fx:id="generalLabel" text="!editor.settings.general.key!">
-                            <font>
-                                <Font name="System Bold" size="14.0"/>
-                            </font>
-                        </Label>
-                        <GridPane>
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                            <children>
-                                <Label fx:id="tableNameLabel" text="!editor.settings.tablename.key!"/>
-                                <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1"/>
-                            </children>
-                        </GridPane>
-                        <Label fx:id="fileLabel" text="!editor.settings.file.key!">
-                            <font>
-                                <Font name="System Bold" size="14.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets top="10.0"/>
-                            </VBox.margin>
-                        </Label>
-                        <GridPane>
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                            <children>
-                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveClicked" text="!editor.settings.saveButton.key!"/>
-                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="!editor.settings.deleteButton.key!"
-                                        GridPane.rowIndex="1"/>
-                            </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-                <Button fx:id="menuButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                        onAction="#menuClicked" text="!editor.settings.menuButton.key!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
-                <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editClicked" text="!editor.settings.editButton.key!"
-                        AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-            </children>
-        </AnchorPane>
-    </content>
-</TitledPane>
+<?import java.lang.String?>
+<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView" styleClass="pinballMachineSettings">
+    <stylesheets>
+        <String fx:value="styles/style.css"/>
+    </stylesheets>
+    <Pane VBox.vgrow="ALWAYS"/>
+    <GridPane prefHeight="100.0" styleClass="machineAktions">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <padding>
+            <Insets top="10.0"/>
+        </padding>
+        <Pane GridPane.columnIndex="0"/>
+        <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1" styleClass="pinballMachineSettingsTextField"/>
+        <Pane GridPane.columnIndex="2"/>
+    </GridPane>
+    <Pane prefHeight="500.0" fx:id="previewImage" styleClass="machinePic" VBox.vgrow="ALWAYS"/>
+    <GridPane prefHeight="100.0" styleClass="machineAktions">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <padding>
+            <Insets top="10.0"/>
+        </padding>
+        <Pane GridPane.columnIndex="0"/>
+        <HBox GridPane.columnIndex="1">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#menuClicked"
+                  styleClass="button, buttonBackToMainMenu"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox GridPane.columnIndex="2">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked" prefHeight="60.0" prefWidth="60.0"
+                  styleClass="button, buttonSave"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox GridPane.columnIndex="3">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked" prefHeight="60.0" prefWidth="60.0"
+                  styleClass="button, buttonDelete"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox GridPane.columnIndex="4">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
+                  styleClass="button, buttonEdit"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <Pane GridPane.columnIndex="5"/>
+    </GridPane>
+    <Pane VBox.vgrow="ALWAYS"/>
+</VBox>
