@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.settings;
 
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -18,11 +19,12 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     private PinballMachine pinballMachine;
 
-
     /**
      * Der Name des Flipperautomaten.
      */
     private StringProperty machineName;
+
+    private StringProperty imagePathProperty;
 
     /**
      * Erstellt ein neues PinballMachineSettingsViewModel.
@@ -36,6 +38,12 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
 
         machineName = new SimpleStringProperty();
         machineName.bindBidirectional(pinballMachine.nameProperty());
+        imagePathProperty = new SimpleStringProperty(pinballMachine.getImagePath());
+    }
+
+    public ReadOnlyStringProperty imagePathProperty()
+    {
+        return imagePathProperty;
     }
 
     /**

@@ -2,6 +2,8 @@ package sep.fimball.view.window.pinballmachine.settings;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
@@ -16,6 +18,9 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     @FXML
     private TextField tableName;
 
+    @FXML
+    private Pane previewImage;
+
     /**
      * Das zur PinballMachineSettingsView gehörende PinballMachineSettingsViewModel.
      */
@@ -26,6 +31,7 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     {
         this.pinballMachineSettingsViewModel = pinballMachineSettingsViewModel;
         tableName.textProperty().bindBidirectional(pinballMachineSettingsViewModel.machineNameProperty());
+        previewImage.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineSettingsViewModel.imagePathProperty()));
     }
 
     /**
