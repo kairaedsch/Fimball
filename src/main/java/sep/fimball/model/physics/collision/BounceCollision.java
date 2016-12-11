@@ -9,7 +9,7 @@ import sep.fimball.general.data.Vector2;
 public class BounceCollision implements CollisionType
 {
     /**
-     * Gibt an, wie viel Geschwindigkeit der Ball beim abprallen zusätzlich bekommt.
+     * Gibt an, wie viel Geschwindigkeit der Ball beim Abprallen zusätzlich bekommt.
      */
     private double strength;
 

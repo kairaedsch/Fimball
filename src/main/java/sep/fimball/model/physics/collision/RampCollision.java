@@ -4,6 +4,10 @@ import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.WorldLayer;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 
+/**
+ * Repräsentiert die Kollision des Balls mit einem Rampenelement. Bei jeder Kollision des Balls mit einer Rampe wird dessen
+ * Höhe bis zu einem festgelegten Maximum erhöht.
+ */
 public class RampCollision implements CollisionType
 {
     @Override

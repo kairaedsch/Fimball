@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.otherColliderShape.Polyline?>
 <?import java.lang.*?>
 <VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView" styleClass="pinballMachineSettings">

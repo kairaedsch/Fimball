@@ -5,38 +5,76 @@ import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
+/**
+ * CollisionInfo gibt Auskunft über eine aufgetretene Kollision.
+ */
 public class CollisionInfo
 {
+    /**
+     * Das physikalische Element des Balls der bei jeder Kollision beteiligt ist.
+     */
     private BallPhysicsElement ball;
-    private Vector2 shortestIntersect;
-    private ColliderShape shape;
-    private PhysicsElement physicsElement;
 
-    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement physicsElement, ColliderShape shape)
+    /**
+     * Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
+     */
+    private Vector2 shortestIntersect;
+
+    /**
+     * Die Kollisionsform des Elements mit dem der Ball kollidiert ist.
+     */
+    private ColliderShape otherColliderShape;
+
+    /**
+     * Das physikalische Element mit dem der Ball kollidiert ist.
+     */
+    private PhysicsElement otherPhysicsElement;
+
+    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement otherPhysicsElement, ColliderShape otherColliderShape)
     {
         this.ball = ball;
         this.shortestIntersect = shortestIntersect;
-        this.physicsElement = physicsElement;
-        this.shape = shape;
+        this.otherPhysicsElement = otherPhysicsElement;
+        this.otherColliderShape = otherColliderShape;
     }
 
+    /**
+     * Gibt das physikalische Element des Balls zurück.
+     *
+     * @return Das physikalische Element des Balls.
+     */
     public BallPhysicsElement getBall()
     {
         return ball;
     }
 
+    /**
+     * Gibt den kürzesten Weg um den Ball aus dem anderen Element "hinauszuschieben" zurück.
+     *
+     * @return Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
+     */
     public Vector2 getShortestIntersect()
     {
         return shortestIntersect;
     }
 
-    public PhysicsElement getPhysicsElement()
+    /**
+     * Gibt die Kollisionsform des Elements mit dem der Ball kollidiert ist zurück.
+     *
+     * @return Die Kollisionsform mit der der Ball kollidiert ist.
+     */
+    public ColliderShape getOtherColliderShape()
     {
-        return physicsElement;
+        return otherColliderShape;
     }
 
-    public ColliderShape getShape()
+    /**
+     * Gibt das andere physikalische Element mit dem der Ball kollidiert ist zurück.
+     *
+     * @return Das physikalische Element mit dem der Ball kollidiert ist.
+     */
+    public PhysicsElement getOtherPhysicsElement()
     {
-        return shape;
+        return otherPhysicsElement;
     }
 }

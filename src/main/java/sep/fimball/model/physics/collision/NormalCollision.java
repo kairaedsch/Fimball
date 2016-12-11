@@ -20,12 +20,12 @@ public class NormalCollision implements CollisionType
         info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
         Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
         Debug.addDrawVector(info.getBall().getPosition().plus(new Vector2(info.getBall().getCollider().getRadius(), info.getBall().getCollider().getRadius())), info.getShortestIntersect().normalized(), Color.RED);
-        Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm, BOUNCE);
+        Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm);
         info.getBall().setVelocity(newVel);
     }
 
-    protected Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal, double bounce)
+    protected Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
     {
-        return ballVelocity.minus(normal.scale((1.0 + bounce) * ballVelocity.dot(normal)));
+        return ballVelocity.minus(normal.scale((1.0 + BOUNCE) * ballVelocity.dot(normal)));
     }
 }
