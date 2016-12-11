@@ -28,7 +28,7 @@
             </AnchorPane>
             <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" StackPane.alignment="BOTTOM_RIGHT" onMouseClicked="#addClicked" styleClass="button, buttonMachineAdd">
                 <StackPane.margin>
-                    <Insets right="45" bottom="30"/>
+                    <Insets right="40" bottom="25"/>
                 </StackPane.margin>
             </Pane>
         </StackPane>

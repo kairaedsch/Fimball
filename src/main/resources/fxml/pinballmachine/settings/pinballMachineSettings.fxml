@@ -10,8 +10,8 @@
     <stylesheets>
         <String fx:value="styles/style.css"/>
     </stylesheets>
-    <Pane minHeight="10" VBox.vgrow="ALWAYS"/>
-    <GridPane prefHeight="100.0" styleClass="machineAktions">
+    <Pane minHeight="25" VBox.vgrow="ALWAYS"/>
+    <GridPane minHeight="80.0" styleClass="machineAktions">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0"/>
@@ -100,5 +100,5 @@
         </HBox>
         <Pane GridPane.columnIndex="5"/>
     </GridPane>
-    <Pane minHeight="10" VBox.vgrow="ALWAYS"/>
+    <Pane minHeight="25" VBox.vgrow="ALWAYS"/>
 </VBox>

@@ -139,8 +139,8 @@ public class SpriteSubViewTest
         assertThat(drawnImages[0], equalTo(imageMock));
         assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + Config.antiGraphicStripesExtraSize * Config.pixelsPerGridUnit, 0.0);
+        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit, 0.0);
+        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit, 0.0);
         assertEquals(borderArguments[0], Config.pixelsPerGridUnit * 0.25, 0.0);
         assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit) * Config.pixelsPerGridUnit - 0.125 * Config.pixelsPerGridUnit, 0.0);
         assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit + ELEMENT_HEIGHT) * Config.pixelsPerGridUnit - 0.125 * Config.pixelsPerGridUnit, 0.0);
