@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.debug.Debug;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
@@ -132,6 +133,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             drawEditorGrid(graphicsContext);
         }
         drawElements(graphicsContext);
+        Debug.draw(graphicsContext);
         graphicsContext.restore();
         lastDraw = currentDraw;
     }

@@ -4,6 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class PhysicsElement<GameElementT>
 {
-    public static List<PhysicsElement> thisIsForDebug = new ArrayList<>();
+    public static List<WeakReference<PhysicsElement>> thisIsForDebug = new ArrayList<>();
 
     /**
      * Die aktuelle Position des PhysikElements.
@@ -52,7 +53,7 @@ public class PhysicsElement<GameElementT>
      */
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
-        thisIsForDebug.add(this);
+        thisIsForDebug.add(new WeakReference<>(this));
 
         this.position = position;
         this.rotation = rotation;

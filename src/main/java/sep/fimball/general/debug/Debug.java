@@ -11,6 +11,7 @@ import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.collider.PolygonColliderShape;
 import sep.fimball.model.physics.element.PhysicsElement;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -118,19 +119,26 @@ public class Debug
             drawEntries.removeIf(drawEntry -> drawEntry.creationTime != -1 && (drawEntry.creationTime + LIFE_TIME_MS <= time));
 
             context.save();
-            PhysicsElement.thisIsForDebug.forEach((PhysicsElement pe) -> ((PhysicsElement<GameElement>) pe).getColliders().forEach((Collider col) -> col.getShapes().forEach((ColliderShape shape) ->
+            PhysicsElement.thisIsForDebug.forEach((WeakReference<PhysicsElement> wpe) ->
             {
-                if (shape.getClass() == CircleColliderShape.class)
+                PhysicsElement<GameElement> pe = wpe.get();
+                pe.getColliders().forEach((Collider col) ->
                 {
-                    CircleColliderShape circle = (CircleColliderShape) shape;
-                    drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint().plus(pe.getPosition()));
-                }
-                else if (shape.getClass() == PolygonColliderShape.class)
-                {
-                    PolygonColliderShape poly = (PolygonColliderShape) shape;
-                    drawPolygon(context, poly.getVertices(), pe.getPosition(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint());
-                }
-            })));
+                    col.getShapes().forEach((ColliderShape shape) ->
+                    {
+                        if (shape.getClass() == CircleColliderShape.class)
+                        {
+                            CircleColliderShape circle = (CircleColliderShape) shape;
+                            drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint().plus(pe.getPosition()));
+                        }
+                        else if (shape.getClass() == PolygonColliderShape.class)
+                        {
+                            PolygonColliderShape poly = (PolygonColliderShape) shape;
+                            drawPolygon(context, poly.getVertices(), pe.getPosition(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint());
+                        }
+                    });
+                });
+            });
 
             for (DrawEntry entry : drawEntries)
             {
