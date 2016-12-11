@@ -87,6 +87,11 @@ public class PhysicsHandler<GameElementT>
     private final Object monitor = new Object();
 
     /**
+     * Gibt an, ob die Physik auf auf User Input reagiert.
+     */
+    private boolean reactingToInput;
+
+    /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      *
      * @param elements       Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
@@ -105,45 +110,54 @@ public class PhysicsHandler<GameElementT>
         this.leftFlippers = leftFlippers;
         this.rightFlippers = rightFlippers;
         this.ballLost = false;
+        this.reactingToInput = true;
 
         bufferedKeyEvents = new ArrayList<>();
 
+        addListenersToInputManager();
+    }
+
+    /**
+     * Fügt die Listener für die benötigten Tasten zum InputManager hinzu.
+     */
+    private void addListenersToInputManager()
+    {
         InputManager inputManager = InputManager.getSingletonInstance();
         inputManager.addListener(KeyBinding.LEFT_FLIPPER, args ->
         {
-            synchronized (bufferedKeyEvents)
-            {
-                bufferedKeyEvents.add(args);
-            }
+            addToKeyEvents(args);
         });
         inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args ->
         {
-            synchronized (bufferedKeyEvents)
-            {
-                bufferedKeyEvents.add(args);
-            }
+            addToKeyEvents(args);
         });
         inputManager.addListener(KeyBinding.NUDGE_LEFT, args ->
         {
-            synchronized (bufferedKeyEvents)
-            {
-                bufferedKeyEvents.add(args);
-            }
+            addToKeyEvents(args);
         });
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, args ->
         {
-            synchronized (bufferedKeyEvents)
-            {
-                bufferedKeyEvents.add(args);
-            }
+            addToKeyEvents(args);
         });
         inputManager.addListener(KeyBinding.PAUSE, args ->
+        {
+            addToKeyEvents(args);
+        });
+    }
+
+    /**
+     * Fügt die {@code args} zu den gebufferten Key Events hinzu.
+     * @param args Die Argumenete, die hinzugefügt werden sollen.
+     */
+    private void addToKeyEvents(KeyObserverEventArgs args)
+    {
+        if(reactingToInput)
         {
             synchronized (bufferedKeyEvents)
             {
                 bufferedKeyEvents.add(args);
             }
-        });
+        }
     }
 
     /**
@@ -283,5 +297,20 @@ public class PhysicsHandler<GameElementT>
             physicTimer.cancel();
             physicTimer.purge();
         }
+    }
+
+    /**
+     * Stoppt das Reagieren auf User Input.
+     */
+    public void stopReactingToUserInput()
+    {
+        reactingToInput = false;
+    }
+
+    /**
+     * Der PhysicsHandler soll wieder auf User Input reagieren.
+     */
+    public void doReactToUserInput() {
+        reactingToInput = true;
     }
 }

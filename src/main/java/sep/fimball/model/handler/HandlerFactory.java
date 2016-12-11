@@ -44,6 +44,10 @@ public class HandlerFactory
         ballLostHandler.setGameHandler(new BallLostHandler(gameSession));
         handlers.add(ballLostHandler);
 
+        Handler nudgeHandler = new Handler();
+        nudgeHandler.setUserHandler(new NudgeHandler(gameSession));
+        handlers.add(nudgeHandler);
+
         return handlers;
     }
 }

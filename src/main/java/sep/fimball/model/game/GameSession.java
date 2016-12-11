@@ -447,6 +447,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         else
         {
             playerIndex.setValue(newPlayerIndex);
+            physicsHandler.doReactToUserInput();
         }
     }
 
@@ -565,6 +566,15 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public ReadOnlyObjectProperty<GameElement> gameBallProperty()
     {
         return gameBall;
+    }
+
+    @Override
+    public void tilt()
+    {
+        ++tiltCounter;
+        if (tiltCounter > MAX_TILT_COUNTER) {
+            physicsHandler.stopReactingToUserInput();
+        }
     }
 
     /**

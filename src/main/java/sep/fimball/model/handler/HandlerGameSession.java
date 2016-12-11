@@ -37,4 +37,9 @@ public interface HandlerGameSession
      * @return Das Ball-Element.
      */
     ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty();
+
+    /**
+     * TODO
+     */
+    void tilt();
 }

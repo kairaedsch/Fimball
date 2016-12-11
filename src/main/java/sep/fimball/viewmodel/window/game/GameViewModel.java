@@ -1,6 +1,5 @@
 package sep.fimball.viewmodel.window.game;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
@@ -89,7 +88,7 @@ public class GameViewModel extends WindowViewModel
 
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
-        playerReserveBalls.bind(Bindings.add(- 1, gameSession.getCurrentPlayer().ballsProperty()));
+        playerReserveBalls.bind( gameSession.getCurrentPlayer().ballsProperty());
 
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
