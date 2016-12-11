@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.game.Player;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.data.KeyEventType;
 
@@ -13,6 +14,9 @@ public interface UserHandler
      *
      * @param keyBinding   Die Aktion, die vom Nutzer ausgelöst wurde.
      * @param keyEventType Der Status des Tastendrucks, der die Aktion ausgelöst hat.
-     */
-    void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType);
+
+    void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType);*/
+
+
+    void activateUserHandler(int playerIndex);
 }

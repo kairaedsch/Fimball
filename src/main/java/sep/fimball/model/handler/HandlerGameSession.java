@@ -43,4 +43,10 @@ public interface HandlerGameSession
      * TODO umbenennen.
      */
     void stopUserControllingElements();
+
+    /**
+     * Gibt die Anzahl der Spieler zurück.
+     * @return Die Anzahl der Spieler.
+     */
+    int getNumberOfPlayers();
 }

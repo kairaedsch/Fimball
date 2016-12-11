@@ -17,7 +17,6 @@ import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.media.Sound;
@@ -276,7 +275,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 for (Handler handler : handlers)
                 {
-                    handler.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+                    handler.activateUserHandler(playerIndex.get());
                 }
             }
         });
@@ -286,7 +285,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 for (Handler handler : handlers)
                 {
-                    handler.activateUserHandler(KeyBinding.NUDGE_RIGHT, KeyEventType.DOWN);
+                    handler.activateUserHandler(playerIndex.get());
                 }
             }
         });
@@ -553,6 +552,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public void stopUserControllingElements()
     {
      physicsHandler.stopReactingToUserInput();
+    }
+
+    @Override
+    public int getNumberOfPlayers()
+    {
+        return players.length;
     }
 
     /**

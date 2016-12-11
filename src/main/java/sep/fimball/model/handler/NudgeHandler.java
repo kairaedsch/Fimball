@@ -1,8 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
-
 public class NudgeHandler implements UserHandler
 {
     private HandlerGameSession handlerGameSession;
@@ -11,7 +8,7 @@ public class NudgeHandler implements UserHandler
     /**
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
      */
-    private int tiltCounter;
+    private int[] tiltCounters;
 
     /**
      * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
@@ -20,14 +17,16 @@ public class NudgeHandler implements UserHandler
 
     public NudgeHandler(HandlerGameSession handlerGameSession) {
         this.handlerGameSession = handlerGameSession;
+        this.tiltCounters = new int[handlerGameSession.getNumberOfPlayers()];
     }
 
     @Override
-    public void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType)
+    public void activateUserHandler(int playerIndex)
     {
-        ++tiltCounter;
-        if (tiltCounter > MAX_TILT_COUNTER) {
+        ++tiltCounters[playerIndex];
+        if (tiltCounters[playerIndex] > MAX_TILT_COUNTER) {
             handlerGameSession.stopUserControllingElements();
+            tiltCounters[playerIndex] = 0;
         }
     }
 }
