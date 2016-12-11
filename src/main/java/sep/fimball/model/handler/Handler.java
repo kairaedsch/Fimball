@@ -1,5 +1,8 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
+
 /**
  * Wird bei verschiedenen Ereignissen im Spiel informiert und kann auf diese reagieren.
  */
@@ -65,9 +68,9 @@ public class Handler implements ElementHandler, UserHandler, GameHandler
     }
 
     @Override
-    public void activateUserHandler(int playerIndex)
+    public void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType)
     {
         if (userHandler != null)
-            userHandler.activateUserHandler(playerIndex);
+            userHandler.activateUserHandler(keyBinding, keyEventType);
     }
 }
