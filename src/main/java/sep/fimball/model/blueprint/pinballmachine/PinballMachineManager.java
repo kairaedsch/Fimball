@@ -157,7 +157,7 @@ public class PinballMachineManager
         {
             for (File entry : directoryContent)
             {
-                if (entry.getAbsolutePath().contains(DataPath.machinePreviewImageFile))
+                if (entry.getName().contains(DataPath.machinePreviewImageFile))
                 {
                     if (!entry.delete())
                     {

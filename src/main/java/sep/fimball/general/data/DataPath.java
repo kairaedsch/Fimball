@@ -91,7 +91,7 @@ public class DataPath
     /**
      * Die Datei, in der das Vorschaubild eines Flipperautomaten gespeichert wird.
      */
-    public final static String machinePreviewImageFile = "/preview";
+    public final static String machinePreviewImageFile = "preview";
 
     /**
      * Die Datei, in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden.
@@ -229,7 +229,7 @@ public class DataPath
         {
             for (File entry : content)
             {
-                if (entry.getAbsolutePath().contains(machinePreviewImageFile))
+                if (entry.getName().contains(machinePreviewImageFile))
                 {
                     return entry.toString();
                 }
@@ -241,7 +241,7 @@ public class DataPath
 
     public static String generatePathToNewImagePreview(String pinballMachineId, long timestamp)
     {
-        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile + timestamp + imageFileEnding;
+        return pathToPinballMachine(pinballMachineId) + "/" + machinePreviewImageFile + timestamp + imageFileEnding;
     }
 
     /**
