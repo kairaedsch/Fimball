@@ -2,12 +2,10 @@ package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
@@ -21,10 +19,6 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
-import javax.imageio.ImageIO;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observer;
 
 import static sep.fimball.general.data.Config.pixelsPerGridUnit;

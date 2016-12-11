@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
  */
 public class Debug
 {
+    public static final boolean ENABLED = false;
+
     private static List<DrawEntry> drawEntries = new ArrayList<>();
     private static final long LIFE_TIME_MS = 1000;
 
@@ -47,7 +49,7 @@ public class Debug
             de.position = position;
             de.radius = radius;
             de.color = color;
-            de.creationTime = -1;
+            de.creationTime = System.currentTimeMillis();
             drawEntries.add(de);
         }
     }
@@ -60,7 +62,7 @@ public class Debug
             de.type = "poly";
             de.positions = positions;
             de.color = color;
-            de.creationTime = -1;
+            de.creationTime = System.currentTimeMillis();
             drawEntries.add(de);
         }
     }
@@ -111,6 +113,9 @@ public class Debug
 
     public static void draw(GraphicsContext context)
     {
+        if (!ENABLED)
+            return;
+
         context.setStroke(Color.BLACK);
 
         synchronized (drawEntries)

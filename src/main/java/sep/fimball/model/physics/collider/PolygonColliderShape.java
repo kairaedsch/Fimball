@@ -99,7 +99,7 @@ public class PolygonColliderShape implements ColliderShape
                 Vector2 vec = rotatedVertices.get(i + 1).minus(rotatedVertices.get(i));
                 currentAxis = vec.normal().normalized();
             }
-            Debug.addDrawVector(rotatedVertices.get(i).plus(colliderObjectPosition), currentAxis, Color.YELLOW);
+            //Debug.addDrawVector(rotatedVertices.get(i).plus(colliderObjectPosition), currentAxis, Color.YELLOW);
             List<Double> newPoints = new ArrayList<>();
 
             for (Vector2 vertices : rotatedVertices)

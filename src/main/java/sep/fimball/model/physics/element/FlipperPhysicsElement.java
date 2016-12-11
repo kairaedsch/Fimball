@@ -1,8 +1,6 @@
 package sep.fimball.model.physics.element;
 
-import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 
@@ -25,6 +23,22 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     {
         super(gameElement, position, isLeft ? maxRotation : minRotation, basePhysicsElement);
         this.isLeft = isLeft;
+    }
+
+    public boolean rotatingUp()
+    {
+        if (isLeft)
+            return angularVelocity > 0;
+        else
+            return angularVelocity < 0;
+    }
+
+    public boolean rotatingDown()
+    {
+        if (isLeft)
+            return angularVelocity < 0;
+        else
+            return angularVelocity > 0;
     }
 
     public void rotateUp()
@@ -82,7 +96,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         {
             setRotation(newRotation);
         }
-        Debug.addDrawVector(getPosition(), new Vector2(0, -1).rotate(Math.toRadians(getRotation())).scale(-angularVelocity).normalized(), Color.BLUE);
+        //Debug.addDrawVector(getPosition(), new Vector2(0, -1).rotate(Math.toRadians(getRotation())).scale(-angularVelocity).normalized(), Color.BLUE);
     }
 
     @Override
