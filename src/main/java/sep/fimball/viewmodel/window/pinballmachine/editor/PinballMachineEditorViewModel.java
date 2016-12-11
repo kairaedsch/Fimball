@@ -356,4 +356,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         return selectedPlacedElement;
     }
+
+    public void multiSelect(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
+    {
+    }
 }

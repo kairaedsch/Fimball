@@ -147,4 +147,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     {
         mouseDown = mouseEvent;
     }
+
+    public void multiSelect(MouseEvent mouseEvent) {
+        pinballMachineEditorViewModel.multiSelect(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY());
+        mouseDown = mouseEvent;
+    }
 }
