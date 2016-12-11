@@ -177,7 +177,7 @@ public class PinballMachine
     public PlacedElement addElement(BaseElement baseElement, Vector2 position)
     {
         checkElementsLoaded();
-        PlacedElement placedElement = new PlacedElement(baseElement, position, 1, 1, 0);
+        PlacedElement placedElement = new PlacedElement(baseElement, position, 0, 0, 0);
         addElement(placedElement);
         return placedElement;
     }

@@ -58,8 +58,14 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     {
         this.selectedElementSubViewModel = selectedElementSubViewModel;
 
+        strengthSlider.setMin(0);
+        pointsSlider.setMin(0);
+
         strengthSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.multiplierProperty());
         pointsSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.pointsProperty());
+
+        System.out.println(strengthSlider.valueProperty().get());
+        System.out.println(pointsSlider.valueProperty().get());
 
         strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString()));
         pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString()));
