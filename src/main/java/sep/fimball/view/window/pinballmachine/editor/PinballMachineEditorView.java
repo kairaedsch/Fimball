@@ -145,9 +145,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mouseEvent
-                .getButton
-                        ());
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mouseEvent.getButton());
         mouseDown = mouseEvent;
     }
 

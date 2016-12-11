@@ -26,7 +26,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Die Verzögerung des Startens des Physic Timers in Millisekunden.
      */
-    public final static int TIMER_DELAY = 0;
+    private final static int TIMER_DELAY = 0;
 
     /**
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
@@ -38,7 +38,14 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
+    /**
+     * Die linksseitigen Flipper.
+     */
     private List<FlipperPhysicsElement<GameElementT>> leftFlippers;
+
+    /**
+     * Die rechtsseitigen Flipper.
+     */
     private List<FlipperPhysicsElement<GameElementT>> rightFlippers;
 
     /**
@@ -68,8 +75,15 @@ public class PhysicsHandler<GameElementT>
      */
     private double maxElementPosY;
 
+    /**
+     * Gibt an, ob die Kugel verloren ist.
+     */
     private boolean ballLost;
 
+    /**
+     * Ein Monitor, über den synchronisiert wird.
+     * TODO
+     */
     private final Object monitor = new Object();
 
     /**
@@ -78,6 +92,9 @@ public class PhysicsHandler<GameElementT>
      * @param elements       Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession    Die zugehörige GameSession.
      * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
+     * @param ballPhysicsElement Der physikalische Ball.
+     * @param leftFlippers Die linksseitigen Flipper.
+     * @param rightFlippers Die rechtsseitigen Flipper.
      */
     public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement, List<FlipperPhysicsElement<GameElementT>> leftFlippers, List<FlipperPhysicsElement<GameElementT>> rightFlippers)
     {
@@ -131,6 +148,8 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
+     * @param position Die Position des Balls.
+     * @param rotation Die Rotation des Balls.
      */
     public void setBall(Vector2 position, double rotation)
     {
