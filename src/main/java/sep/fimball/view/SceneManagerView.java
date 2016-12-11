@@ -4,10 +4,12 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.tools.ViewLoader;
@@ -16,6 +18,8 @@ import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.ViewModel;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
+
+import java.io.File;
 
 /**
  * Die SceneManagerView verwaltet die aktuelle WindowView und DialogView und reagiert bei Änderungen im ViewModel damit,
@@ -85,6 +89,11 @@ public class SceneManagerView
         sceneManagerViewModel.fullscreenProperty().addListener((observable, oldValue, newValue) -> stage.setFullScreen(newValue));
         stage.setFullScreen(sceneManagerViewModel.fullscreenProperty().get());
         stage.fullScreenExitKeyProperty().set(KeyCombination.NO_MATCH);
+
+        //Setzt das angezeigte Icon.
+        File imageFile = new File(DataPath.pathToLogo());
+        Image loadedImage = new Image(imageFile.toURI().toString(), false);
+        stage.getIcons().add(loadedImage);
 
         // Zeigt die Stage dem Benutzer
         stage.show();
