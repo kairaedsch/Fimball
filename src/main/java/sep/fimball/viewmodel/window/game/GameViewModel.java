@@ -7,11 +7,10 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
@@ -179,7 +178,7 @@ public class GameViewModel extends WindowViewModel
     public void handleKeyEvent(KeyEvent keyEvent)
     {
         KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        if (binding != null && binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+        if (binding != null && binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
         {
             gameSession.pauseAll();
             if (gameSession.isStartedFromEditor())
