@@ -93,15 +93,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     private IntegerProperty playerIndex;
 
-    /**
-     * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
-     */
-    private int tiltCounter;
-
-    /**
-     * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
-     */
-    private static final int MAX_TILT_COUNTER = 5;
 
     /**
      * Beschreibt, ob das Spiel pausiert ist.
@@ -534,16 +525,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Gibt die Anzahl zurück, wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
-     *
-     * @return Die Anzahl, wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
-     */
-    public int getTiltCounter()
-    {
-        return tiltCounter;
-    }
-
-    /**
      * Gibt an, ob das Spiel pausiert ist.
      *
      * @return {@code true}, wenn das Spiel pausiert ist, {@code false} sonst.
@@ -569,12 +550,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     @Override
-    public void tilt()
+    public void stopUserControllingElements()
     {
-        ++tiltCounter;
-        if (tiltCounter > MAX_TILT_COUNTER) {
-            physicsHandler.stopReactingToUserInput();
-        }
+     physicsHandler.stopReactingToUserInput();
     }
 
     /**

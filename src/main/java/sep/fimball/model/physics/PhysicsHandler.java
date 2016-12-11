@@ -238,6 +238,12 @@ public class PhysicsHandler<GameElementT>
                                         flipper.rotateUp();
                                 });
                                 break;
+                            case NUDGE_LEFT:
+                                nudge(true);
+                                break;
+                            case NUDGE_RIGHT:
+                                nudge(false);
+                                break;
                         }
                     }
                 }
