@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -19,6 +20,8 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.data.KeyEventType;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
@@ -48,6 +51,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
+        SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
         gameSession.startAll();
         gameSession.spawnNewBall();
         return gameSession;

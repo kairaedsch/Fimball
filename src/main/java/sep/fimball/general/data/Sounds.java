@@ -13,7 +13,12 @@ public enum Sounds
     /**
      * Der Sound, der im Hauptmenü abgespielt wird.
      */
-    MAIN_MENU("mainmenu");
+    MAIN_MENU("mainmenu"),
+
+    /**
+     * Der Sound, der beim Starten eines Automaten abspielt wird.
+     */
+    GAME_START("kai");
 
     /**
      * Der Name der Sound-Datei.
