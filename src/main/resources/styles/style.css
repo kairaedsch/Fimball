@@ -187,13 +187,6 @@
     -fx-padding: 25px 15px 25px 15px;
 }
 
-.reserveBallPic {
-    -fx-background-image: url("../images/ballTop.png");
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: auto;
-}
-
 .highscoreTitle {
     -fx-font-family: Roboto Medium;
     -fx-font-size: 22px;
@@ -284,4 +277,34 @@
 .buttonEditContainer .buttonEdit {
     -fx-background-radius: 0%;
     -fx-translate-y: 1px;
+}
+
+.gameInfo {
+    -fx-background-radius: 0 0 15px 15px;
+    -fx-background-color: rgba(219, 93, 93, 0.75);
+    -fx-border-color: #FF9393;
+    -fx-border-width: 0 1px 1px 1px;
+    -fx-border-radius: 0 0 15px 15px;
+}
+
+.gameInfoPlayer, .gameInfoScore  {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 24px;
+    -fx-padding: 5px 10px;
+}
+
+.gameInfoPlayerContainer, .gameInfoScoreContainer  {
+    -fx-border-color: #FF9393;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.gameInfoBalls {
+    -fx-padding: 10px 5px 10px 5px;
+}
+
+.reserveBallPic {
+    -fx-background-image: url("../images/ballTop.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
 }

@@ -47,8 +47,8 @@ public class GameView extends WindowView<GameViewModel>
     @Override
     public void setViewModel(GameViewModel gameViewModel)
     {
-        StringExpression playerNameText = Bindings.concat(getTranslation("gameview.player.key"), gameViewModel.playerNameProperty());
-        StringExpression scoreText = Bindings.concat(getTranslation("gameview.score.key"), gameViewModel.playerPointsProperty().asString());
+        StringExpression playerNameText = Bindings.concat(gameViewModel.playerNameProperty());
+        StringExpression scoreText = Bindings.concat(gameViewModel.playerPointsProperty().asString());
         playerName.textProperty().bind(playerNameText);
         score.textProperty().bind(scoreText);
 

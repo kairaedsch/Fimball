@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.game.GameView">
-    <children>
-        <StackPane fx:id="pinballCanvasContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="2.0">
-            <children>
-                <Label fx:id="score" text="Score: 43563">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="playerName" text="Player: Till"/>
-                <HBox fx:id="reserveBalls" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                </HBox>
-            </children>
-        </VBox>
-    </children>
-</AnchorPane>
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.game.GameView">
+    <StackPane fx:id="pinballCanvasContainer" StackPane.alignment="CENTER"/>
+    <stylesheets>
+        <String fx:value="styles/style.css"/>
+    </stylesheets>
+    <VBox styleClass="gameInfo" maxWidth="300" maxHeight="155" StackPane.alignment="TOP_CENTER">
+        <HBox styleClass="gameInfoPlayerContainer">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label fx:id="playerName" text="Player" styleClass="gameInfoPlayer"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox styleClass="gameInfoScoreContainer">
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label fx:id="score" text="Score" styleClass="gameInfoScore"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <HBox>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <HBox fx:id="reserveBalls" minHeight="40.0" maxHeight="40.0" styleClass="gameInfoBalls" spacing="10"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </VBox>
+</StackPane>
