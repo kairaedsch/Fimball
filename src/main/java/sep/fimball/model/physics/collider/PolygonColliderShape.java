@@ -44,17 +44,7 @@ public class PolygonColliderShape implements ColliderShape
     @Override
     public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
-        List<Vector2> rotatedVertices;
-
-        if (rotation != 0)
-        {
-            rotatedVertices = rotate(rotation, pivotPoint);
-        }
-        else
-        {
-            rotatedVertices = vertices;
-        }
-
+        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
         Vector2 globalBallPosition = ball.getPosition().plus(ball.getCollider().getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();

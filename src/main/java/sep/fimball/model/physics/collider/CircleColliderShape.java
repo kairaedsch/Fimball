@@ -55,8 +55,6 @@ public class CircleColliderShape implements ColliderShape
     @Override
     public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
     {
-        // TODO rotate
-
         // Collision check between two circles
         Vector2 globalColliderPosition = position.plus(colliderObjectPosition).rotate(Math.toRadians(rotation), pivotPoint.plus(colliderObjectPosition));
         Vector2 ballGlobalColliderPosition = ball.getPosition().plus(ball.getCollider().getPosition());
