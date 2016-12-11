@@ -2,9 +2,13 @@ package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -16,6 +20,10 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observer;
 
 import static sep.fimball.general.data.Config.pixelsPerGridUnit;
@@ -59,6 +67,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private long lastDraw;
 
+
     /**
      * Setzt das ViewModel dieses Objekts und bindet die Eigenschaften der View an die entsprechenden Eigenschaften des ViewModels.
      *
@@ -82,6 +91,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
+
+        Observer generateImageObserver = (o, arg) -> drawToImage();
+        pinballCanvasViewModel.addGenerateImageObserver(generateImageObserver);
 
         Region parent = (Region) canvas.getParent();
         canvas.widthProperty().bind(parent.widthProperty());
@@ -122,6 +134,15 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         drawElements(graphicsContext);
         graphicsContext.restore();
         lastDraw = currentDraw;
+    }
+
+    private void drawToImage()
+    {
+        WritableImage writeableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(Color.TRANSPARENT);
+        canvas.snapshot(snapshotParameters, writeableImage);
+        pinballCanvasViewModel.setGeneratedPreviewImage(writeableImage);
     }
 
     /**

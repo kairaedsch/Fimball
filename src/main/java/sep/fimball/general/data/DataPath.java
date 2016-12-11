@@ -121,7 +121,7 @@ public class DataPath
     /**
      * Die Dateiendung der Bild-Dateien.
      */
-    private final static String imageFileEnding = ".png";
+    public final static String imageFileEnding = ".png";
 
     /**
      * Die Logo Bilddatei

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Lädt Bilder und cached diese, um unnötiges Laden von mehreren Images des selben Bildes zu verhindern.
@@ -56,7 +57,20 @@ public class ImageCache
             Image loadedImage = new Image(imageFile.toURI().toString(), true);
             cachedImages.put(imagePath, loadedImage);
         }
-
         return cachedImages.get(imagePath);
+    }
+
+    public boolean allImagesLoaded()
+    {
+        boolean loaded = true;
+
+        for (Map.Entry<String, Image> entry : cachedImages.entrySet())
+        {
+            if (entry.getValue().getProgress() != 1.0)
+            {
+                loaded = false;
+            }
+        }
+        return loaded;
     }
 }

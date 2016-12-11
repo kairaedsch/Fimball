@@ -3,12 +3,16 @@ package sep.fimball.model.blueprint.pinballmachine;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -140,8 +144,20 @@ public class PinballMachineManager
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
         JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+    }
 
-        // TODO Save image of pinballmachine
+    void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
+    {
+        Path pathToPreview = Paths.get(DataPath.pathToPinballMachineImagePreview(pinballMachine.getID()));
+        RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
+        try
+        {
+            ImageIO.write(renderedImage, "png", pathToPreview.toFile());
+        }
+        catch (IOException e)
+        {
+            System.err.println("Could not write preview image to file: " + pathToPreview.toString());
+        }
     }
 
     /**

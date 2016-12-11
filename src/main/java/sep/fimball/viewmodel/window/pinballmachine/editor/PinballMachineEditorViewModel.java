@@ -183,6 +183,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
+        pinballCanvasViewModel.notifyToGenerateImage();
+        pinballMachine.savePreviewImage(pinballCanvasViewModel.getGeneratedPreviewImage());
         gameSession.pauseAll();
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }

@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -37,6 +38,8 @@ public class PinballCanvasViewModel
      */
     private Observable redrawObservable;
 
+    private Observable generateImageObservable;
+
     /**
      * Gibt an, ob das Pinball-Canvas im Editor benutzt wird.
      */
@@ -46,6 +49,8 @@ public class PinballCanvasViewModel
      * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
      */
     private PinballMachineEditorViewModel editorViewModel;
+
+    private WritableImage generatedPreviewImage;
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
@@ -90,10 +95,10 @@ public class PinballCanvasViewModel
     {
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
-
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         redrawObservable = new Observable();
+        generateImageObservable = new Observable();
 
         Observer gameObserver = (o, args) -> redraw();
         gameSession.addGameLoopObserver(gameObserver);
@@ -167,6 +172,17 @@ public class PinballCanvasViewModel
         redrawObservable.addObserver(observer);
     }
 
+    public void addGenerateImageObserver(Observer observer)
+    {
+        generateImageObservable.addObserver(observer);
+    }
+
+    public void notifyToGenerateImage()
+    {
+        generateImageObservable.setChanged();
+        generateImageObservable.notifyObservers();
+    }
+
     /**
      * Benachrichtigt die Observer, dass sich etwas an den zu zeichnenden Objekten verändert hat.
      */
@@ -184,5 +200,15 @@ public class PinballCanvasViewModel
     public BooleanProperty editorModeProperty()
     {
         return editorMode;
+    }
+
+    public void setGeneratedPreviewImage(WritableImage image)
+    {
+        generatedPreviewImage = image;
+    }
+
+    public WritableImage getGeneratedPreviewImage()
+    {
+        return generatedPreviewImage;
     }
 }

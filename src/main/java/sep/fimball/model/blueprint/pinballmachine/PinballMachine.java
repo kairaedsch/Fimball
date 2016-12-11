@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.image.WritableImage;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Highscore;
@@ -109,6 +110,11 @@ public class PinballMachine
         checkElementsLoaded();
         pinballMachineManager.savePinballMachine(this);
         unloadElements();
+    }
+
+    public void savePreviewImage(WritableImage image)
+    {
+        pinballMachineManager.savePreviewImage(this, image);
     }
 
     /**
