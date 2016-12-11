@@ -93,7 +93,7 @@
     -fx-background-color: #DBAA5D;
 }
 
-.buttonEdit:hover {
+.buttonEdit:hover, .buttonEditContainer:hover .buttonEdit {
     -fx-background-image: url("../images/pencil.svg");
     -fx-background-color: #FFD593;
 }
@@ -253,9 +253,35 @@
     -fx-background-position: center;
     -fx-background-image: url("../images/spreadsheet_white.svg");
     -fx-background-color: #DBAA5D;
+    -fx-background-radius: 0%;
+    -fx-translate-y: 1px;
 }
 
-.buttonBackToMainMenu:hover {
+.buttonBackToMainMenuContainer:hover .buttonBackToMainMenu {
     -fx-background-image: url("../images/spreadsheet.svg");
     -fx-background-color: #FFD593;
+}
+
+.buttonBackToMainMenuArrow {
+    -fx-fill: #DBAA5D;
+    -fx-stroke: #DBAA5D;
+    -fx-cursor: hand;
+    -fx-translate-x: 2px;
+}
+
+.buttonEditArrow {
+    -fx-fill: #DBAA5D;
+    -fx-stroke: #DBAA5D;
+    -fx-cursor: hand;
+    -fx-translate-x: -2px;
+}
+
+.buttonBackToMainMenuContainer:hover .buttonBackToMainMenuArrow, .buttonEditContainer:hover .buttonEditArrow {
+    -fx-fill: #FFD593;
+    -fx-stroke: #FFD593;
+}
+
+.buttonEditContainer .buttonEdit {
+    -fx-background-radius: 0%;
+    -fx-translate-y: 1px;
 }
