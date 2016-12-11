@@ -36,6 +36,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private PinballMachine pinballMachine;
 
+    private PinballMachineEditor pinballMachineEditor;
+
     private ListProperty<AvailableElementSubViewModel> availableBasicElements;
 
     private ListProperty<AvailableElementSubViewModel> availableObstacleElements;
@@ -100,6 +102,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         super(WindowType.MACHINE_EDITOR);
         this.pinballMachine = pinballMachine;
+
+        this.pinballMachineEditor = new PinballMachineEditor(pinballMachine);
 
         this.selectedAvailableElement = Optional.empty();
         selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
