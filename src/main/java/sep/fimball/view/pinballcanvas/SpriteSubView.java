@@ -60,7 +60,7 @@ public class SpriteSubView
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, boolean drawOnlyElements)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
@@ -83,7 +83,7 @@ public class SpriteSubView
         {
             drawImage(graphicsContext, image, position, size);
         }
-        if (viewModel.isSelectedProperty().get())
+        if (viewModel.isSelectedProperty().get() && !drawOnlyElements)
         {
             drawBorder(graphicsContext, imageLayer, position, size);
         }

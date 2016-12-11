@@ -90,7 +90,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         cameraZoom.bind(pinballCanvasViewModel.cameraZoomProperty());
         softCameraZoom = cameraZoom.get();
 
-        Observer redrawObserver = (o, arg) -> redraw();
+        Observer redrawObserver = (o, arg) -> redraw(false);
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
 
         Observer generateImageObserver = (o, arg) -> drawToImage();
@@ -107,7 +107,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      */
-    private void redraw()
+    private void redraw(boolean drawOnlyElements)
     {
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
@@ -128,11 +128,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         graphicsContext.save();
         graphicsContext.translate(canvas.getWidth() / 2.0 - softCameraPosition.getX() * pixelsPerGridUnit * softCameraZoom, canvas.getHeight() / 2.0 - softCameraPosition.getY() * pixelsPerGridUnit * softCameraZoom);
         graphicsContext.scale(softCameraZoom, softCameraZoom);
-        if (pinballCanvasViewModel.editorModeProperty().get())
+        if (pinballCanvasViewModel.editorModeProperty().get() && !drawOnlyElements)
         {
             drawEditorGrid(graphicsContext);
         }
-        drawElements(graphicsContext);
+        drawElements(graphicsContext, drawOnlyElements);
         Debug.draw(graphicsContext);
         graphicsContext.restore();
         lastDraw = currentDraw;
@@ -140,6 +140,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private void drawToImage()
     {
+        redraw(true);
         WritableImage writeableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
@@ -207,15 +208,15 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      *
      * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
      */
-    private void drawElements(GraphicsContext graphicsContext)
+    private void drawElements(GraphicsContext graphicsContext, boolean drawOnlyElements)
     {
         for (SpriteSubView spriteTop : sprites)
         {
-            spriteTop.draw(graphicsContext, ImageLayer.BOTTOM);
+            spriteTop.draw(graphicsContext, ImageLayer.BOTTOM, drawOnlyElements);
         }
         for (SpriteSubView sprite : sprites)
         {
-            sprite.draw(graphicsContext, ImageLayer.TOP);
+            sprite.draw(graphicsContext, ImageLayer.TOP, drawOnlyElements);
         }
     }
 

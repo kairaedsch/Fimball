@@ -125,7 +125,7 @@ public class SpriteSubViewTest
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM);
+        spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, false);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);
@@ -216,7 +216,7 @@ public class SpriteSubViewTest
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.TOP);
+        spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, false);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);
