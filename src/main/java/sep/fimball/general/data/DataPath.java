@@ -231,7 +231,7 @@ public class DataPath
             {
                 if (entry.getName().contains(machinePreviewImageFile))
                 {
-                    return entry.toString();
+                    return entry.getAbsolutePath();
                 }
             }
             System.err.println("No preview image found for automat: " + pinballMachineId);
