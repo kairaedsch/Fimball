@@ -15,7 +15,8 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
- * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer, einen Flipperautomaten zu bearbeiten.
+ * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer, einen Flipperautomaten
+ * zu bearbeiten.
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
@@ -38,14 +39,20 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private TitledPane selectedElement;
 
     /**
-     * Die zur Platzierung auf dem Spielfeld verfügbaren Elemente.
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
      */
     @FXML
     private VBox availableElementsBasic;
 
+    /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente.
+     */
     @FXML
     private VBox availableElementsAdvanced;
 
+    /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse.
+     */
     @FXML
     private VBox availableElementsObstacles;
     /**
@@ -65,9 +72,12 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel
+                .availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel
+                .availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel
+                .availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
@@ -115,7 +125,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im ScrollEvent hinein- oder herauszoomen möchte.
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im
+     * ScrollEvent hinein- oder herauszoomen möchte.
      *
      * @param scrollEvent Das ScrollEvent, das verarbeitet werden soll.
      */
@@ -134,7 +145,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.dragged(mouseEvent.getX() - mouseDown.getX(), mouseEvent.getY() - mouseDown.getY(), mouseEvent.getButton());
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mouseEvent
+                .getButton
+                        ());
         mouseDown = mouseEvent;
     }
 
@@ -148,8 +161,4 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         mouseDown = mouseEvent;
     }
 
-    public void multiSelect(MouseEvent mouseEvent) {
-        pinballMachineEditorViewModel.multiSelect(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY());
-        mouseDown = mouseEvent;
-    }
 }

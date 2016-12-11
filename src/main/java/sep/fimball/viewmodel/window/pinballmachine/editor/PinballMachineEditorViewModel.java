@@ -190,13 +190,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Verarbeitet eine Drag-Bewegung.
      *
-     * @param x Die x-Position, an der sich die Drag-Bewegung befindet.
-     * @param y Die y-Position, an der sich die Drag-Bewegung befindet.
+     * @param endX Die x-Position, an der sich die Drag-Bewegung befindet.
+     * @param endY Die y-Position, an der sich die Drag-Bewegung befindet.
      */
-    public void dragged(double x, double y, MouseButton button)
+    public void dragged(double startX, double startY, double endX, double endY, MouseButton button)
     {
-        double divX = ((x / Config.pixelsPerGridUnit) / cameraZoom.get());
-        double divY = ((y / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divX = (((endX-startX) / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divY = (((endY-startY) / Config.pixelsPerGridUnit) / cameraZoom.get());
 
         if (button == MouseButton.MIDDLE || moveModifier)
         {
@@ -206,6 +206,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             selectedPlacedElementPosition.set(new Vector2(divX, divY).plus(selectedPlacedElementPosition.get()));
         }
+        //TODO implement multi select
     }
 
     /**
@@ -357,7 +358,4 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedPlacedElement;
     }
 
-    public void multiSelect(double topLeftX, double topLeftY, double bottomRightX, double bottomRightY)
-    {
-    }
 }
