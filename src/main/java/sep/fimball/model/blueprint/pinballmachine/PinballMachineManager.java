@@ -13,6 +13,7 @@ import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -148,15 +149,31 @@ public class PinballMachineManager
 
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
     {
-        Path pathToPreview = Paths.get(DataPath.pathToPinballMachineImagePreview(pinballMachine.getID()));
+        Path newPath = Paths.get(DataPath.generatePathToNewImagePreview(pinballMachine.getID(), System.currentTimeMillis()));
+        Path pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
+        File[] directoryContent = pathToMachine.toFile().listFiles();
+
+        if (directoryContent != null)
+        {
+            for (File entry : directoryContent)
+            {
+                if (entry.getAbsolutePath().contains(DataPath.machinePreviewImageFile))
+                {
+                    if (!entry.delete())
+                    {
+                        System.err.println("Could not delete file: " + entry.toString());
+                    }
+                }
+            }
+        }
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
         try
         {
-            ImageIO.write(renderedImage, "png", pathToPreview.toFile());
+            ImageIO.write(renderedImage, "png", newPath.toFile());
         }
         catch (IOException e)
         {
-            System.err.println("Could not write preview image to file: " + pathToPreview.toString());
+            System.err.println("Could not write preview image to file: " + newPath.toString());
         }
     }
 

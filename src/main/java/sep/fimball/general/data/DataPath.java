@@ -91,7 +91,7 @@ public class DataPath
     /**
      * Die Datei, in der das Vorschaubild eines Flipperautomaten gespeichert wird.
      */
-    private final static String machinePreviewImageFile = "/preview.png";
+    public final static String machinePreviewImageFile = "/preview";
 
     /**
      * Die Datei, in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden.
@@ -127,6 +127,8 @@ public class DataPath
      * Die Logo Bilddatei
      */
     private final static String logoFile = "/logo.png";
+
+    private final static String defaultPreview = "/defaultPreview.png";
 
     /**
      * Gibt den kombinierten Pfad zurück, der angibt, wo die BaseElements gespeichert werden.
@@ -216,7 +218,30 @@ public class DataPath
      */
     public static String pathToPinballMachineImagePreview(String pinballMachineId)
     {
-        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile;
+        File content[] = new File(pathToPinballMachine(pinballMachineId)).listFiles();
+
+        if (content == null || content.length < 1)
+        {
+            System.err.println("No preview image found for automat: " + pinballMachineId);
+            return dataPath + defaultPreview;
+        }
+        else
+        {
+            for (File entry : content)
+            {
+                if (entry.getAbsolutePath().contains(machinePreviewImageFile))
+                {
+                    return entry.toString();
+                }
+            }
+            System.err.println("No preview image found for automat: " + pinballMachineId);
+            return dataPath + defaultPreview;
+        }
+    }
+
+    public static String generatePathToNewImagePreview(String pinballMachineId, long timestamp)
+    {
+        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile + timestamp + imageFileEnding;
     }
 
     /**
