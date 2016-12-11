@@ -162,7 +162,7 @@ public class PinballMachineManager
             {
                 if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
                 {
-                    return entry.getAbsolutePath();
+                    return entry.getAbsolutePath().replace('\\','/');
                 }
             }
             System.err.println("No preview image found for automat: " + pinballMachine.getID());
