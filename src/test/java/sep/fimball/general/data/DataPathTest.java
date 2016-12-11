@@ -75,16 +75,6 @@ public class DataPathTest
     }
 
     /**
-     * Überprüft, ob das Ende des Pfades, auf dem sich das Vorschaubild des gespeicherten Flipperautomaten machineOne befindet, korrekt ist.
-     */
-    @Test
-    public void testPathToPinballMachinePreviewImage()
-    {
-        String path = DataPath.pathToPinballMachineImagePreview(testMachineId);
-        assertThat(path.endsWith("/machines/" + testMachineId + "/preview.png"), is(true));
-    }
-
-    /**
      * Überprüft, ob das Ende des Pfades, auf dem sich die generelle Beschreibung des gespeicherten Flipperautomaten machineOne befindet, korrekt ist.
      */
     @Test

@@ -261,7 +261,7 @@ public class PinballMachine
      */
     public String getImagePath()
     {
-        return DataPath.pathToPinballMachineImagePreview(id.get());
+        return pinballMachineManager.loadPreviewImage(this);
     }
 
     /**

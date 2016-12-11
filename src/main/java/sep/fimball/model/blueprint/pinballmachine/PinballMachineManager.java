@@ -147,6 +147,29 @@ public class PinballMachineManager
         JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
     }
 
+    String loadPreviewImage(PinballMachine pinballMachine)
+    {
+        File content[] = new File(DataPath.pathToPinballMachine(pinballMachine.getID())).listFiles();
+
+        if (content == null || content.length < 1)
+        {
+            System.err.println("No preview image found for automat: " + pinballMachine.getID());
+            return DataPath.pathToDefaultPreview();
+        }
+        else
+        {
+            for (File entry : content)
+            {
+                if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
+                {
+                    return entry.getAbsolutePath();
+                }
+            }
+            System.err.println("No preview image found for automat: " + pinballMachine.getID());
+            return DataPath.pathToDefaultPreview();
+        }
+    }
+
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
     {
         Path newPath = Paths.get(DataPath.generatePathToNewImagePreview(pinballMachine.getID(), System.currentTimeMillis()));
@@ -157,7 +180,7 @@ public class PinballMachineManager
         {
             for (File entry : directoryContent)
             {
-                if (entry.getName().contains(DataPath.machinePreviewImageFile))
+                if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
                 {
                     if (!entry.delete())
                     {
@@ -190,7 +213,7 @@ public class PinballMachineManager
             // Lösche Dateien
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineImagePreview(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(loadPreviewImage(pinballMachine)));
 
             // Lösche Ordner
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));

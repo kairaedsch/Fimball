@@ -91,7 +91,7 @@ public class DataPath
     /**
      * Die Datei, in der das Vorschaubild eines Flipperautomaten gespeichert wird.
      */
-    public final static String machinePreviewImageFile = "preview";
+    public final static String machinePreviewImageFile = "/preview";
 
     /**
      * Die Datei, in der allgemeine Infos zu einem serialisierten Flipperautomaten gespeichert werden.
@@ -121,7 +121,7 @@ public class DataPath
     /**
      * Die Dateiendung der Bild-Dateien.
      */
-    public final static String imageFileEnding = ".png";
+    private final static String imageFileEnding = ".png";
 
     /**
      * Die Logo Bilddatei
@@ -210,38 +210,9 @@ public class DataPath
         return pathToPinballMachines() + "/" + pinballMachineId;
     }
 
-    /**
-     * Gibt den Pfad zum Speicherort des Vorschaubildes eines gewissen Flipperautomaten zurück.
-     *
-     * @param pinballMachineId Id des Flipperautomaten.
-     * @return Pfad zum Vorschaubild des Flipperautomaten.
-     */
-    public static String pathToPinballMachineImagePreview(String pinballMachineId)
-    {
-        File content[] = new File(pathToPinballMachine(pinballMachineId)).listFiles();
-
-        if (content == null || content.length < 1)
-        {
-            System.err.println("No preview image found for automat: " + pinballMachineId);
-            return dataPath + defaultPreview;
-        }
-        else
-        {
-            for (File entry : content)
-            {
-                if (entry.getName().contains(machinePreviewImageFile))
-                {
-                    return entry.getAbsolutePath();
-                }
-            }
-            System.err.println("No preview image found for automat: " + pinballMachineId);
-            return dataPath + defaultPreview;
-        }
-    }
-
     public static String generatePathToNewImagePreview(String pinballMachineId, long timestamp)
     {
-        return pathToPinballMachine(pinballMachineId) + "/" + machinePreviewImageFile + timestamp + imageFileEnding;
+        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile + timestamp + imageFileEnding;
     }
 
     /**
@@ -317,5 +288,10 @@ public class DataPath
     public static String pathToTestData()
     {
         return dataPath + "/testdata/";
+    }
+
+    public static String pathToDefaultPreview()
+    {
+        return dataPath + defaultPreview;
     }
 }
