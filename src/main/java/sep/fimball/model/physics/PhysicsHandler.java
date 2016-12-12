@@ -203,37 +203,7 @@ public class PhysicsHandler<GameElementT>
                 // Check bufferedKeyEvents
                 synchronized (bufferedKeyEvents)
                 {
-                    for (KeyObserverEventArgs args : bufferedKeyEvents)
-                    {
-                        switch (args.getBinding())
-                        {
-                            case LEFT_FLIPPER:
-                                leftFlippers.forEach(flipper ->
-                                {
-                                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                        flipper.rotateDown();
-                                    else
-                                        flipper.rotateUp();
-                                });
-                                break;
-                            case RIGHT_FLIPPER:
-                                rightFlippers.forEach(flipper ->
-                                {
-                                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                                        flipper.rotateDown();
-                                    else
-                                        flipper.rotateUp();
-                                });
-                                break;
-                            case NUDGE_LEFT:
-                                nudge(true);
-                                break;
-                            case NUDGE_RIGHT:
-                                nudge(false);
-                                break;
-                        }
-                    }
-                    bufferedKeyEvents.clear();
+                    checkKeyEvents();
                 }
 
                 // Check all PhysicsElements for collisions with the ball
@@ -243,20 +213,7 @@ public class PhysicsHandler<GameElementT>
 
                 synchronized (monitor)
                 {
-                    for (PhysicsElement<GameElementT> element : physicsElements)
-                    {
-                        if (ballPhysicsElement != null && element != ballPhysicsElement)
-                        {
-                            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
-                        }
-
-                        if(element != null)
-                        {
-                            double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
-                            elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
-                        }
-
-                    }
+                    checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
                     if (ballPhysicsElement != null)
                     {
@@ -282,6 +239,68 @@ public class PhysicsHandler<GameElementT>
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };
+    }
+
+    /**
+     * Prüft alle PhysicsElements auf Kollisionen mit dem Ball und fügt gegebenenfalls Argumente zu den gegebenen
+     * Event-Argument-Listen hinzu.
+     * @param collisionEventArgsList Die Liste der CollisionEvents.
+     * @param elementEventArgsList Die Liste der ElementEvents.
+     */
+    private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
+    {
+        for (PhysicsElement<GameElementT> element : physicsElements)
+        {
+            if (ballPhysicsElement != null && element != ballPhysicsElement)
+            {
+                element.checkCollision(collisionEventArgsList, ballPhysicsElement);
+            }
+
+            if(element != null)
+            {
+                double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
+                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
+            }
+
+        }
+    }
+
+    /**
+     * Arbeitet die {@code bufferedKeyEvents} ab.
+     */
+    private void checkKeyEvents()
+    {
+        for (KeyObserverEventArgs args : bufferedKeyEvents)
+        {
+            switch (args.getBinding())
+            {
+                case LEFT_FLIPPER:
+                    leftFlippers.forEach(flipper ->
+                    {
+                        if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                            flipper.rotateDown();
+                        else
+                            flipper.rotateUp();
+                    });
+                    break;
+                case RIGHT_FLIPPER:
+                    rightFlippers.forEach(flipper ->
+                    {
+                        if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                            flipper.rotateDown();
+                        else
+                            flipper.rotateUp();
+                    });
+                    break;
+                case NUDGE_LEFT:
+                    nudge(true);
+                    break;
+                case NUDGE_RIGHT:
+                    nudge(false);
+                    break;
+            }
+        }
+        bufferedKeyEvents.clear();
     }
 
     /**
