@@ -9,23 +9,20 @@ import sep.fimball.general.debug.Debug;
  */
 public class NormalCollision implements CollisionType
 {
-    /**
-     * Gibt an, wie viel Prozent der Geschwindigkeit nach der Kollision erhalten bleiben sollen.
-     */
-    protected final double BOUNCE = 0.7;
 
     @Override
     public void applyCollision(CollisionInfo info)
     {
         info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
         Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
-        Debug.addDrawVector(info.getBall().getPosition().plus(new Vector2(info.getBall().getCollider().getRadius(), info.getBall().getCollider().getRadius())), info.getShortestIntersect().normalized(), Color.RED);
         Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm);
         info.getBall().setVelocity(newVel);
     }
 
-    protected Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
+    private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
     {
-        return ballVelocity.minus(normal.scale((1.0 + BOUNCE) * ballVelocity.dot(normal)));
+        //Bounce ist ein Wert der angibt wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 1 bedeutet das der Ball nach der Kollision langsamer wird.
+        double bounce = 0.7;
+        return ballVelocity.minus(normal.scale((1.0 + bounce) * ballVelocity.dot(normal)));
     }
 }

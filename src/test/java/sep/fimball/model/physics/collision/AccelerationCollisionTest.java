@@ -5,13 +5,12 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by alexcekay on 12/11/16.
+ * Tests für die Klasse AccelerationCollision
  */
 public class AccelerationCollisionTest
 {

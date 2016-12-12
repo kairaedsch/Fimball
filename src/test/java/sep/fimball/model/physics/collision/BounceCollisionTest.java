@@ -3,15 +3,13 @@ package sep.fimball.model.physics.collision;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
-import sep.fimball.model.physics.element.PhysicsElement;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by alexcekay on 12/11/16.
+ * Tests für die Klasse BounceCollision
  */
 public class BounceCollisionTest
 {
@@ -33,7 +31,7 @@ public class BounceCollisionTest
         ballPhysicsElement.setVelocity(new Vector2(-1.0, 0.0));
         BounceCollision bounceCollision = new BounceCollision(2.0);
         bounceCollision.applyCollision(collisionInfo);
-        Vector2 newVelocity = ballPhysicsElement.getVelocity();
-        assertThat("Neue Geschwindigkeit ist (3.0, 0.0)", newVelocity, is(new Vector2(3.0, 0.0)));
+        assertThat("Neue Position ist (3.0, 0.0)", ballPhysicsElement.getPosition(), is(new Vector2(3.0, 0.0)));
+        assertThat("Neue Geschwindigkeit ist (3.0, 0.0)", ballPhysicsElement.getVelocity(), is(new Vector2(3.0, 0.0)));
     }
 }
