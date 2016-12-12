@@ -7,7 +7,6 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -216,14 +215,23 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
+     * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler an einer bestimmten Stelle im Grid geklickt hat.
+     *
+     * @param mouseEvent Das Mouse-Event, das verarbeitet werden soll.
+     */
+    public void mouseClicked(MouseEvent mouseEvent)
+    {
+        pinballCanvasViewModel.mouseClickedOnGame(mousePosToGridPos(mouseEvent), mouseEvent.getButton());
+    }
+
+    /**
      * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler die Maustaste  einer bestimmten Stelle im Grid gedrückt hat.
      *
      * @param mouseEvent Das Mouse-Event, das verarbeitet werden soll.
      */
     public void mousePressed(MouseEvent mouseEvent)
     {
-        System.out.println("mouse pressed down on canvas");
-        pinballCanvasViewModel.mousePressedOnCanvas(mousePosToGridPos(mouseEvent), mouseEvent);
+        pinballCanvasViewModel.mousePressedOnGame(mousePosToGridPos(mouseEvent), mouseEvent.getButton());
     }
 
     /**

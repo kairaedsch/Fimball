@@ -4,52 +4,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
     <children>
-        <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" VBox.vgrow="ALWAYS"
-                   onMouseReleased="#mouseReleased">
+        <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane>
                     <children>
-                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                              AnchorPane.topAnchor="0.0">
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" onMouseClicked="#settingsClicked"
-                                                text="Settings"/>
-                                        <Label fx:id="nameLabel" text="Tills Automat"/>
+                                        <Button mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Settings" />
+                                        <Label fx:id="nameLabel" text="Tills Automat" />
                                     </children>
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </HBox>
                                 <Accordion VBox.vgrow="ALWAYS">
                                     <panes>
                                         <TitledPane animated="false" text="Basic Elements">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                                            prefWidth="200.0" style="-fx-padding: 0;">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
                                                     <children>
-                                                        <ScrollPane fitToHeight="true" fitToWidth="true"
-                                                                    hbarPolicy="NEVER"
-                                                                    styleClass="edge-to-edge, machineOverview"
-                                                                    vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0"
-                                                                    AnchorPane.leftAnchor="0.0"
-                                                                    AnchorPane.rightAnchor="0.0"
-                                                                    AnchorPane.topAnchor="0.0">
+                                                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <content>
                                                                 <AnchorPane>
                                                                     <children>
-                                                                        <VBox fx:id="availableElementsBasic"
-                                                                              AnchorPane.bottomAnchor="0.0"
-                                                                              AnchorPane.leftAnchor="0.0"
-                                                                              AnchorPane.rightAnchor="0.0"
-                                                                              AnchorPane.topAnchor="0.0">
+                                                                        <VBox fx:id="availableElementsBasic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <children>
                                                                             </children>
                                                                         </VBox>
@@ -57,7 +42,7 @@
                                                                 </AnchorPane>
                                                             </content>
                                                             <padding>
-                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                             </padding>
                                                         </ScrollPane>
                                                     </children>
@@ -66,24 +51,13 @@
                                         </TitledPane>
                                         <TitledPane animated="false" text="Obstacles">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                                            prefWidth="200.0" style="-fx-padding: 0;">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
                                                     <children>
-                                                        <ScrollPane fitToHeight="true" fitToWidth="true"
-                                                                    hbarPolicy="NEVER"
-                                                                    styleClass="edge-to-edge, machineOverview"
-                                                                    vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0"
-                                                                    AnchorPane.leftAnchor="0.0"
-                                                                    AnchorPane.rightAnchor="0.0"
-                                                                    AnchorPane.topAnchor="0.0">
+                                                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <content>
                                                                 <AnchorPane>
                                                                     <children>
-                                                                        <VBox fx:id="availableElementsObstacles"
-                                                                              AnchorPane.bottomAnchor="0.0"
-                                                                              AnchorPane.leftAnchor="0.0"
-                                                                              AnchorPane.rightAnchor="0.0"
-                                                                              AnchorPane.topAnchor="0.0">
+                                                                        <VBox fx:id="availableElementsObstacles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <children>
                                                                             </children>
                                                                         </VBox>
@@ -91,7 +65,7 @@
                                                                 </AnchorPane>
                                                             </content>
                                                             <padding>
-                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                             </padding>
                                                         </ScrollPane>
                                                     </children>
@@ -100,24 +74,13 @@
                                         </TitledPane>
                                         <TitledPane animated="false" text="Advanced Elements">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                                            prefWidth="200.0" style="-fx-padding: 0;">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
                                                     <children>
-                                                        <ScrollPane fitToHeight="true" fitToWidth="true"
-                                                                    hbarPolicy="NEVER"
-                                                                    styleClass="edge-to-edge, machineOverview"
-                                                                    vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0"
-                                                                    AnchorPane.leftAnchor="0.0"
-                                                                    AnchorPane.rightAnchor="0.0"
-                                                                    AnchorPane.topAnchor="0.0">
+                                                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <content>
                                                                 <AnchorPane>
                                                                     <children>
-                                                                        <VBox fx:id="availableElementsAdvanced"
-                                                                              AnchorPane.bottomAnchor="0.0"
-                                                                              AnchorPane.leftAnchor="0.0"
-                                                                              AnchorPane.rightAnchor="0.0"
-                                                                              AnchorPane.topAnchor="0.0">
+                                                                        <VBox fx:id="availableElementsAdvanced" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <children>
                                                                             </children>
                                                                         </VBox>
@@ -125,7 +88,7 @@
                                                                 </AnchorPane>
                                                             </content>
                                                             <padding>
-                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                             </padding>
                                                         </ScrollPane>
                                                     </children>
@@ -140,23 +103,15 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <StackPane fx:id="pinballCanvasContainer" onMouseDragged="#mouseDragged"
-                                   onMousePressed="#mousePressed" onScroll="#zoom" onMouseEntered="#mouseEntered"
-                                   onMouseExited="#mouseExited" AnchorPane.bottomAnchor="0.0"
-                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                        <Button mnemonicParsing="false" onMouseClicked="#playClicked" text="Play"
-                                AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0"/>
-                        <Button mnemonicParsing="false" onMouseClicked="#zoomInClicked" text="+"
-                                AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5"/>
-                        <Button mnemonicParsing="false" onMouseClicked="#zoomOutClicked" text="-"
-                                AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5"/>
+                        <StackPane fx:id="pinballCanvasContainer" onMouseDragged="#dragged" onMousePressed="#down" onScroll="#zoom" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#playClicked" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zoomInClicked" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zoomOutClicked" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minWidth="130.0">
                     <children>
-                        <TitledPane fx:id="selectedElement" animated="false" collapsible="false"
-                                    text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TitledPane fx:id="selectedElement" animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                             </content>
                         </TitledPane>

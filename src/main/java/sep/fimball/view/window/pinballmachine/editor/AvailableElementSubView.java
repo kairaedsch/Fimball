@@ -56,7 +56,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     /**
      * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler auf dieses Element geklickt hat.
      */
-    public void mousePressed()
+    public void mouseClicked()
     {
         availableElementSubViewModel.selected();
     }

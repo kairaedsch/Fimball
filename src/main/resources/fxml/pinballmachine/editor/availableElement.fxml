@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import java.lang.String?>
 
-<HBox onMousePressed="#mousePressed" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<HBox onMouseClicked="#mouseClicked" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView">
     <children>
         <Pane fx:id="previewImageBot" minHeight="40.0" minWidth="40.0">

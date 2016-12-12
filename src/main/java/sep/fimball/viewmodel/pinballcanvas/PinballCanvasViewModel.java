@@ -4,18 +4,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
 import java.util.Observer;
-import java.util.Optional;
 
 /**
  * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zur Verfügung und dient als Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
@@ -87,8 +83,7 @@ public class PinballCanvasViewModel
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
         editorMode = new SimpleBooleanProperty(true);
 
-        // TODO no more single selected element available but selection list
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, new SimpleObjectProperty<Optional<PlacedElement>>(Optional.empty())));
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
     }
 
     /**
@@ -110,32 +105,30 @@ public class PinballCanvasViewModel
     }
 
     /**
+     * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf das Spielfeld geklickt hat.
+     *
+     * @param gridPos Die Position im Grid, auf die der Nutzer geklickt hat.
+     * @param button  Die gedrückte Maustaste.
+     */
+    public void mouseClickedOnGame(Vector2 gridPos, MouseButton button)
+    {
+        if (editorMode.get())
+        {
+            editorViewModel.mouseClickedOnGame(gridPos, button, false);
+        }
+    }
+
+    /**
      * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf dem Spielfeld die Maustaste gedrückt hat.
      *
      * @param gridPos Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
      * @param button  Die gedrückte Maustaste.
      */
-    public void mousePressedOnCanvas(Vector2 gridPos, MouseEvent mouseEvent)
+    public void mousePressedOnGame(Vector2 gridPos, MouseButton button)
     {
         if (editorMode.get())
         {
-            editorViewModel.mousePressedOnCanvas(gridPos, mouseEvent);
-        }
-    }
-
-    public void mouseEntered(Vector2 gridPos)
-    {
-        if (editorMode.get())
-        {
-            editorViewModel.mouseEnteredCanvas(gridPos);
-        }
-    }
-
-    public void mouseExited()
-    {
-        if (editorMode.get())
-        {
-            editorViewModel.mouseExitedCanvas();
+            editorViewModel.mouseClickedOnGame(gridPos, button, true);
         }
     }
 

@@ -95,6 +95,7 @@ public class AvailableElementSubViewModel
      */
     public void selected()
     {
-        pinballMachineEditorViewModel.selectNewElement(baseElement);
+        pinballMachineEditorViewModel.setMouseMode(MouseMode.PLACING);
+        pinballMachineEditorViewModel.setSelectedAvailableElement(baseElement);
     }
 }
