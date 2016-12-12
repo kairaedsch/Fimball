@@ -44,6 +44,11 @@ public class RectangleDouble
         return origin;
     }
 
+    public Vector2 getMiddle()
+    {
+        return new Vector2(origin.getX() + (width / 2), origin.getY() + (height / 2));
+    }
+
     /**
      * Gibt die Länge des Rechtecks zurück.
      *

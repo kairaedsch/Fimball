@@ -5,6 +5,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,5 +74,16 @@ public class BasePhysicsElement
             }
         }
         return false;
+    }
+
+    public Vector2 getExtremePos(double rotation, boolean max)
+    {
+        List<ColliderShape> shapes = new ArrayList<>();
+
+        for (Collider collider : colliders)
+        {
+            shapes.addAll(collider.getShapes());
+        }
+        return Vector2.getExtremeVector(shapes, max, new Vector2(0, 0), (shape -> shape.getExtremePos(rotation, pivotPoint, max)));
     }
 }

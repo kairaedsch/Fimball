@@ -2,12 +2,15 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import sep.fimball.general.data.DrawMode;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
@@ -50,6 +53,10 @@ public class PinballCanvasViewModel
 
     private WritableImage generatedPreviewImage;
 
+    private SimpleObjectProperty<RectangleDouble> boundingBox;
+
+    private PinballMachine pinballMachine;
+
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
@@ -77,6 +84,7 @@ public class PinballCanvasViewModel
         init(gameSession);
 
         this.editorViewModel = pinballMachineEditorViewModel;
+        pinballMachine = gameSession.getPinballMachine();
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
         drawMode = DrawMode.EDITOR;
@@ -208,5 +216,10 @@ public class PinballCanvasViewModel
     public WritableImage getGeneratedPreviewImage()
     {
         return generatedPreviewImage;
+    }
+
+    public ReadOnlyObjectProperty<RectangleDouble> boundingBoxProperty()
+    {
+        return new SimpleObjectProperty<>(pinballMachine.getBoundingBox());
     }
 }

@@ -179,30 +179,8 @@ public class PolygonColliderShape implements ColliderShape
     @Override
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
-        List<Vector2> newVertices;
-
-        if (rotation != 0)
-        {
-            newVertices = rotate(rotation, pivotPoint);
-        }
-        else
-        {
-            newVertices = vertices;
-        }
-        Vector2 extreme = newVertices.get(0);
-
-        for (Vector2 vertex : newVertices)
-        {
-            if (max ? vertex.getY() > extreme.getY() : vertex.getY() < extreme.getY())
-            {
-                extreme = new Vector2(extreme.getX(), vertex.getY());
-            }
-            if (max ? vertex.getX() > extreme.getX() : vertex.getX() < extreme.getX())
-            {
-                extreme = new Vector2(vertex.getX(), extreme.getY());
-            }
-        }
-        return extreme;
+        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
+        return Vector2.getExtremeVector(rotatedVertices, max, rotatedVertices.get(0), t -> t);
     }
 
     /**

@@ -1,5 +1,8 @@
 package sep.fimball.general.data;
 
+import java.util.List;
+import java.util.function.Function;
+
 /**
  * Vector2 stellt einen Vektor mit zwei Komponenten dar.
  */
@@ -262,5 +265,23 @@ public class Vector2
     public Vector2 clone()
     {
         return new Vector2(x, y);
+    }
+
+    public static <T> Vector2 getExtremeVector(List<T> elements, boolean max, Vector2 defaultVec, Function<T, Vector2> getPos)
+    {
+        Vector2 extreme = defaultVec;
+
+        for (T t : elements)
+        {
+            if (max ? getPos.apply(t).getY() > extreme.getY() : getPos.apply(t).getY() < extreme.getY())
+            {
+                extreme = new Vector2(extreme.getX(), getPos.apply(t).getY());
+            }
+            if (max ? getPos.apply(t).getX() > extreme.getX() : getPos.apply(t).getX() < extreme.getX())
+            {
+                extreme = new Vector2(getPos.apply(t).getX(), extreme.getY());
+            }
+        }
+        return extreme;
     }
 }

@@ -10,10 +10,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.DrawMode;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.general.debug.Debug;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
@@ -122,10 +119,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private void drawToImage()
     {
+        RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         Canvas screenShotCanvas = new Canvas();
-        screenShotCanvas.setHeight(100);
-        screenShotCanvas.setWidth(100);
-        PinballCanvasDrawer.draw(screenShotCanvas, sprites, cameraPosition.getValue(), cameraZoom.getValue(), DrawMode.SCREENSHOT);
+        screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
+        screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
+        PinballCanvasDrawer.draw(screenShotCanvas, sprites, rectangleDouble.getMiddle(), 1.0, DrawMode.SCREENSHOT);
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);

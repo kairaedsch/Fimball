@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.image.WritableImage;
-import sep.fimball.general.data.Config;
-import sep.fimball.general.data.DataPath;
-import sep.fimball.general.data.Highscore;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.model.blueprint.base.BaseElement;
 
 import java.util.List;
@@ -53,6 +50,7 @@ public class PinballMachine
      * Gibt an, ob die Flipperautomatenelemente {@code elements} geladen wurde.
      */
     private boolean elementsLoaded;
+
 
     /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
@@ -100,6 +98,16 @@ public class PinballMachine
             }
         }
         return Optional.empty();
+    }
+
+    public RectangleDouble getBoundingBox()
+    {
+        Vector2 max = Vector2.getExtremeVector(elements, true, new Vector2(0, 0), placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), true)));
+        Vector2 origin = Vector2.getExtremeVector(elements, false, new Vector2(0, 0), placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), false)));
+
+        double width = Math.abs(max.getX() - origin.getX());
+        double height = Math.abs(max.getY() - origin.getY());
+        return new RectangleDouble(origin, width, height);
     }
 
     /**
