@@ -180,7 +180,7 @@ public class PolygonColliderShape implements ColliderShape
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        return Vector2.getExtremeVector(rotatedVertices, max, rotatedVertices.get(0), t -> t);
+        return Vector2.getExtremeVector(rotatedVertices, max, t -> t);
     }
 
     /**

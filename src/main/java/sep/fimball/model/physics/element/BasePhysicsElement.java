@@ -84,6 +84,6 @@ public class BasePhysicsElement
         {
             shapes.addAll(collider.getShapes());
         }
-        return Vector2.getExtremeVector(shapes, max, new Vector2(0, 0), (shape -> shape.getExtremePos(rotation, pivotPoint, max)));
+        return Vector2.getExtremeVector(shapes, max, (shape -> shape.getExtremePos(rotation, pivotPoint, max)));
     }
 }

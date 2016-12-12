@@ -102,8 +102,8 @@ public class PinballMachine
 
     public RectangleDouble getBoundingBox()
     {
-        Vector2 max = Vector2.getExtremeVector(elements, true, new Vector2(0, 0), placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), true)));
-        Vector2 origin = Vector2.getExtremeVector(elements, false, new Vector2(0, 0), placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), false)));
+        Vector2 max = Vector2.getExtremeVector(elements, true, placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), true)));
+        Vector2 origin = Vector2.getExtremeVector(elements, false, placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), false)));
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());

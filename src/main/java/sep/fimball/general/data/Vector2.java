@@ -267,9 +267,9 @@ public class Vector2
         return new Vector2(x, y);
     }
 
-    public static <T> Vector2 getExtremeVector(List<T> elements, boolean max, Vector2 defaultVec, Function<T, Vector2> getPos)
+    public static <T> Vector2 getExtremeVector(List<T> elements, boolean max, Function<T, Vector2> getPos)
     {
-        Vector2 extreme = defaultVec;
+        Vector2 extreme = max ? new Vector2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY) : new Vector2(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 
         for (T t : elements)
         {
