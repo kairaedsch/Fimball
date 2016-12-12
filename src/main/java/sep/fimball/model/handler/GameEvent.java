@@ -10,7 +10,13 @@ public enum GameEvent
      */
     BALL_LOST,
 
+    /**
+     * Spielereignis, das ausgelöst wird, wenn der Ball gespawnet wird.
+     */
     BALL_SPAWNED,
 
-    NUDGE;
+    /**
+     * Spielereignis, das ausgelöst wird, wenn am Automaten gestoßen wurde.
+     */
+    NUDGE
 }

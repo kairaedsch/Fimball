@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Der NudgeHandler reagiert auf das Rütteln am Automaten.
+ * Der TiltHandler reagiert auf das Rütteln am Automaten.
  */
-public class NudgeHandler implements GameHandler
+public class TiltHandler implements GameHandler
 {
     /**
      * Die zugehörige HandlerGameSession.
@@ -24,10 +24,10 @@ public class NudgeHandler implements GameHandler
     private static final int MAX_TILT_COUNTER = 5;
 
     /**
-     * Erzeugt einen neuen NudgeHandler.
+     * Erzeugt einen neuen TiltHandler.
      * @param handlerGameSession Die zugehörige HandlerGameSession.
      */
-    public NudgeHandler(HandlerGameSession handlerGameSession) {
+    public TiltHandler(HandlerGameSession handlerGameSession) {
         this.handlerGameSession = handlerGameSession;
         this.tiltCounters = new HashMap<>();
     }
