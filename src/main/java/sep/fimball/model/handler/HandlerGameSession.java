@@ -39,8 +39,7 @@ public interface HandlerGameSession
     ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty();
 
     /**
-     * Beendet die Steuerung der Spielelemente durch den Nutzer.
-     * TODO umbenennen.
+     * Aktiviert die Tilt-Funktion.
      */
-    void stopUserControllingElements();
+    void activateTilt();
 }

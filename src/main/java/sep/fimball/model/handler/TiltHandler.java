@@ -47,7 +47,7 @@ public class TiltHandler implements GameHandler
             }
             if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER)
             {
-                handlerGameSession.stopUserControllingElements();
+                handlerGameSession.activateTilt();
                 tiltCounters.put(currentPlayer, 0);
             }
         }

@@ -513,7 +513,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     @Override
-    public void stopUserControllingElements()
+    public void activateTilt()
     {
         physicsHandler.stopReactingToUserInput();
         Timeline timeline = new Timeline();
