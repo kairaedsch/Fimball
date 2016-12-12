@@ -27,7 +27,6 @@ public class PhysicsHandlerTest
     boolean leftFlipperRotated = false;
 
     int numberOfCalls = 0;
-
     boolean listsEmpty = true;
     private Object monitor = new Object();
 
@@ -82,11 +81,10 @@ public class PhysicsHandlerTest
         PhysicsElement mockedElement = mock(PhysicsElement.class);
         List<PhysicsElement> mockedElements = new ArrayList<>();
         mockedElements.add(mockedElement);
-
         GameSession mockedGameSession = mock(GameSession.class);
         doAnswer(invocationOnMock ->
         {
-            ++numberOfCalls;
+            //TODO
             return null;
         }).when(mockedGameSession).addEventArgs(anyList(), anyList());
 
