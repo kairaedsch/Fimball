@@ -76,7 +76,7 @@ public class SoundManagerView
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
-            Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
+            /*Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
 
             if (newMediaPlayer.isPresent())
             {
@@ -88,7 +88,7 @@ public class SoundManagerView
                 mediaPlayer.ifPresent(MediaPlayer::dispose);
 
                 mediaPlayer = newMediaPlayer;
-            }
+            }*/
         }
         // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
         else
