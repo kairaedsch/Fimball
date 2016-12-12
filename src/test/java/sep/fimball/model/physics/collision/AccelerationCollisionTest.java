@@ -26,7 +26,7 @@ public class AccelerationCollisionTest
         CollisionInfo collisionInfo = mock(CollisionInfo.class);
 
         when(ballPhysicsElement.getVelocity()).thenCallRealMethod();
-        doCallRealMethod().when(ballPhysicsElement).setVelocity(any());
+        doCallRealMethod().when(ballPhysicsElement).setVelocity(notNull());
         when(otherElement.getRotation()).thenReturn(90.0);
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(collisionInfo.getOtherPhysicsElement()).thenReturn(otherElement);
