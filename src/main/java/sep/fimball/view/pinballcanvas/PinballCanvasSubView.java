@@ -120,6 +120,15 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     private void drawToImage()
     {
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
+        if(rectangleDouble.getHeight() < (1080 / Config.pixelsPerGridUnit) && rectangleDouble.getWidth() < (1920 / Config.pixelsPerGridUnit))
+        {
+            double scale = (1920 / Config.pixelsPerGridUnit) / rectangleDouble.getWidth();
+            double newHeight = rectangleDouble.getHeight() * scale;
+            double newOriginY = rectangleDouble.getOrigin().getY() - (newHeight - rectangleDouble.getHeight()) / 2.0;
+            double newOriginX = rectangleDouble.getOrigin().getX() - ((1920 / Config.pixelsPerGridUnit) - rectangleDouble.getWidth()) / 2.0;
+            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), (1920 / Config.pixelsPerGridUnit), newHeight);
+        }
+
         Canvas screenShotCanvas = new Canvas();
         screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
         screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
