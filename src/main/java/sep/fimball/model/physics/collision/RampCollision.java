@@ -15,7 +15,7 @@ public class RampCollision implements CollisionType
     {
         if (info.getBall().getLayer() == WorldLayer.RAMP)
         {
-            info.getBall().setHeight(info.getBall().getHeight() + BallPhysicsElement.GRAVITY_HEIGHT * 1.5 * (PhysicsHandler.TICK_RATE / 1000.0));
+            info.getBall().setHeight(info.getBall().getHeight() + BallPhysicsElement.GRAVITY_HEIGHT * 1.5 * PhysicsHandler.TICK_RATE_MILLIS);
         }
     }
 }
