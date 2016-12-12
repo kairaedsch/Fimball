@@ -33,11 +33,18 @@ import java.util.*;
  */
 public class GameSession implements PhysicGameSession<GameElement>, HandlerGameSession
 {
+
+    /**
+     * Die Zeit, nach der der Ball automatisch als verloren gitl, wenn der Tilt aktiviert wurde.
+     */
+    private static final int TILT_DURATION_BEFORE_BALL_LOSS = 5;
+
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
      * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames    Die Namen der Spieler.
+     * @param startedFromEditor Gibt an, ob das Spiel vom Editor gestartet wurde.
      * @return Die generierte GameSession.
      */
     public static GameSession generateGameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
@@ -69,10 +76,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
-    protected final double GAMELOOP_TICK = 1 / 60D;
+    final double GAMELOOP_TICK = 1 / 60D;
 
     /**
-     * TODO
+     * Gibt an, ob das Spiel aus dem Editor gestartet wurde.
      */
     private boolean startedFromEditor;
 
@@ -85,12 +92,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Der Spieler, der aktuell den Flipperautomaten bedient.
      */
     private IntegerProperty playerIndex;
-
-
-    /**
-     * Beschreibt, ob das Spiel pausiert ist.
-     */
-    private boolean paused;
 
     /**
      * Referenz zum PhysicsHandler, der die Bewegung des Balls auf dem Spielfeld und andere physikalische Eigenschaften berechnet.
@@ -111,11 +112,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Die Schleife, die die Spielwelt aktualisiert.
      */
     private Timeline gameLoop;
-
-    /**
-     * Speichert welche Aktion bei jedem Schritt der Schleife ausgeführt wird.
-     */
-    private KeyFrame keyFrame;
 
     /**
      * Speichert die in dieser GameSession verwendeten Handler.
@@ -147,6 +143,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     private boolean isBallLost;
 
+    /**
+     * Gibt an, ob Ball-Verlust-Events ausgelöst wurden.
+     */
     private boolean wereBallLostEventsTriggered;
 
     /**
@@ -170,6 +169,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      *
      * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames    Die Namen der Spieler.
+     * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
      */
     public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
@@ -267,7 +267,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
         gameLoop.getKeyFrames().add(keyFrame);
     }
 
@@ -292,7 +293,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Wendet die Element- und CollisionEvents an und aktiviert ggf. Handler.
      */
-    protected void gameLoopUpdate()
+    void gameLoopUpdate()
     {
         LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
@@ -345,7 +346,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Startet die Berechnung der Physik.
      */
-    public void startPhysics()
+    private void startPhysics()
     {
         physicsHandler.startTicking();
     }
@@ -371,7 +372,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void pauseAll()
     {
-        paused = true;
         stopGameLoop();
         physicsHandler.stopTicking();
     }
@@ -383,7 +383,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         startGameLoop();
         startPhysics();
-        paused = false;
     }
 
     /**
@@ -499,16 +498,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Gibt an, ob das Spiel pausiert ist.
-     *
-     * @return {@code true}, wenn das Spiel pausiert ist, {@code false} sonst.
-     */
-    public boolean getPaused()
-    {
-        return this.paused;
-    }
-
-    /**
      * Gibt die zu dieser GameSession gehörende World zurück.
      *
      * @return Die zu dieser GameSession gehörende World.
@@ -528,7 +517,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     {
         physicsHandler.stopReactingToUserInput();
         Timeline timeline = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(5), (event -> setBallLost(true)));
+        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> setBallLost(true)));
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
         timeline.play();
@@ -553,10 +542,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return isOver;
     }
 
+
     /**
-     * TODO
-     *
-     * @return
+     * Gibt zurück. ob das Spiel aus dem Editor gestartet wurde.
+     * @return {@code true} falls das Spiel aus dem Editor gestartet wurde, {@code false} sonst.
      */
     public boolean isStartedFromEditor()
     {

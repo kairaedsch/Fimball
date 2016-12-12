@@ -20,7 +20,7 @@ public class RampCollision implements CollisionType
              * unten zieht, an Höhe verliert.
              */
             double multiplier = 1.5;
-            info.getBall().setHeight(info.getBall().getHeight() + BallPhysicsElement.GRAVITY_HEIGHT * multiplier * PhysicsHandler.TICK_RATE_MILLIS);
+            info.getBall().setHeight(info.getBall().getHeight() + BallPhysicsElement.GRAVITY_HEIGHT * multiplier * PhysicsHandler.TICK_RATE_SEC);
         }
     }
 }

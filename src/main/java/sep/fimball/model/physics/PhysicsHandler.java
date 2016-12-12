@@ -29,12 +29,19 @@ public class PhysicsHandler<GameElementT>
     private final static int TIMER_DELAY = 0;
 
     /**
-     * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
+     * Gibt an, nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    private final static int TICK_RATE = 1000 / 60;
+    private final static int TICK_RATE_MILISEC = 1000 / 60;
 
-    public final static double TICK_RATE_MILLIS = TICK_RATE / 1000d;
-    public static final int NUDGE_DISTANCE = 5;
+    /**
+     * Gibt an, nach wie vielen Sekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
+     */
+    public final static double TICK_RATE_SEC = TICK_RATE_MILISEC / 1000d;
+
+    /**
+     * Die Geschwindigkeit, die der Ball erfährt, wenn am Automaten gestoßen wird.
+     */
+    private static final int NUDGE_VELOCITY = 5;
 
     /**
      * Der aktuelle Spielball.
@@ -167,24 +174,28 @@ public class PhysicsHandler<GameElementT>
         }
     }
 
+
     /**
-     * TODO
-     *
-     * @param left
+     * Simuliert das Stoßen am Automaten.
+     * @param left Gibt an, ob von links gestoßen wurde.
      */
     private void nudge(boolean left)
     {
         gameSession.nudge();
         if (left)
         {
-            move(NUDGE_DISTANCE);
+            accelerateBallInX(NUDGE_VELOCITY);
         } else
         {
-            move(-NUDGE_DISTANCE);
+            accelerateBallInX(-NUDGE_VELOCITY);
         }
     }
 
-    private void move(int additionalVelocity)
+    /**
+     * Erhöht die Geschwindigkeit des Balls in x-Richtung.
+     * @param additionalVelocity Die Geschwindigkeit, die auf die x-Geschwindigkeit des Balls gerechnet wird.
+     */
+    private void accelerateBallInX(int additionalVelocity)
     {
         ballPhysicsElement.setVelocity(new Vector2(ballPhysicsElement.getVelocity().getX() + additionalVelocity, ballPhysicsElement.getVelocity().getY()));
     }
@@ -195,7 +206,7 @@ public class PhysicsHandler<GameElementT>
     public void startTicking()
     {
         physicTimer = new Timer(false);
-        physicTimer.scheduleAtFixedRate(createTask(), TIMER_DELAY, TICK_RATE);
+        physicTimer.scheduleAtFixedRate(createTask(), TIMER_DELAY, TICK_RATE_MILISEC);
     }
 
     /**
@@ -213,7 +224,7 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                double delta = TICK_RATE_MILLIS;
+                double delta = TICK_RATE_SEC;
 
                 // Check bufferedKeyEvents
                 synchronized (bufferedKeyEvents)
