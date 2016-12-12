@@ -23,4 +23,6 @@ public interface PhysicGameSession<GameElementT>
      * @param elementEventArgs   Liste aller ElementEvents.
      */
     void addEventArgs(List<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
+
+    void nudge();
 }

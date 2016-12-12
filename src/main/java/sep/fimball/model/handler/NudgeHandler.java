@@ -1,15 +1,12 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Der NudgeHandler reagiert auf das Rütteln am Automaten.
  */
-public class NudgeHandler implements UserHandler
+public class NudgeHandler implements GameHandler
 {
     /**
      * Die zugehörige HandlerGameSession.
@@ -36,7 +33,7 @@ public class NudgeHandler implements UserHandler
     }
 
     @Override
-    public void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType)
+    public void activateGameHandler(GameEvent gameEvent)
     {
         HandlerPlayer currentPlayer = handlerGameSession.getCurrentPlayer();
         if (tiltCounters.containsKey(currentPlayer)) {
@@ -47,6 +44,7 @@ public class NudgeHandler implements UserHandler
         if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER) {
             handlerGameSession.stopUserControllingElements();
             tiltCounters.put(currentPlayer, 0);
+            System.out.println("TIIIILT");
         }
     }
 }

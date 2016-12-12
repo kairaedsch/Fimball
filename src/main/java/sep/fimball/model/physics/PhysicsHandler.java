@@ -60,7 +60,7 @@ public class PhysicsHandler<GameElementT>
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
      */
-    private List<KeyObserverEventArgs> bufferedKeyEvents;
+    private final List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -120,7 +120,7 @@ public class PhysicsHandler<GameElementT>
     }
 
     /**
-     * Fügt die Listener für die benötigten Tasten zum InputManager hinzu.
+     * Meldet die Listener für die benötigten Tasten beim InputManager an.
      */
     private void addListenersToInputManager()
     {
@@ -294,9 +294,11 @@ public class PhysicsHandler<GameElementT>
                     break;
                 case NUDGE_LEFT:
                     nudge(true);
+                    gameSession.nudge();
                     break;
                 case NUDGE_RIGHT:
                     nudge(false);
+                    gameSession.nudge();
                     break;
             }
         }

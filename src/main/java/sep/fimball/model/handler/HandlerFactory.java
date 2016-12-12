@@ -45,7 +45,7 @@ public class HandlerFactory
         handlers.add(ballLostHandler);
 
         Handler nudgeHandler = new Handler();
-        nudgeHandler.setUserHandler(new NudgeHandler(gameSession));
+        nudgeHandler.setGameHandler(new NudgeHandler(gameSession));
         handlers.add(nudgeHandler);
 
         return handlers;

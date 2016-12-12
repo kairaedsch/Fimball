@@ -16,10 +16,6 @@ import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
 import sep.fimball.model.handler.HandlerGameSession;
-import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
-import sep.fimball.model.input.manager.InputManager;
-import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
 import sep.fimball.model.physics.PhysicsHandler;
@@ -270,26 +266,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
 
-        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_LEFT, args ->
-        {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-            {
-                for (Handler handler : handlers)
-                {
-                    handler.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-                }
-            }
-        });
-        InputManager.getSingletonInstance().addListener(KeyBinding.NUDGE_RIGHT, args ->
-        {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-            {
-                for (Handler handler : handlers)
-                {
-                    handler.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-                }
-            }
-        });
+
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -583,5 +560,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public boolean isStartedFromEditor()
     {
         return startedFromEditor;
+    }
+
+    public void nudge() {
+        for (Handler handler : handlers)
+        {
+            handler.activateGameHandler(GameEvent.NUDGE);
+        }
     }
 }

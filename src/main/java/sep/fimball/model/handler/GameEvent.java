@@ -10,5 +10,7 @@ public enum GameEvent
      */
     BALL_LOST,
 
-    BALL_SPAWNED
+    BALL_SPAWNED,
+
+    NUDGE;
 }
