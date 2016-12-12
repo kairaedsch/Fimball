@@ -98,7 +98,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
         previewTop.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getTopBackgroundPath()));
-        //previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
+        previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
         previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
     }
 
@@ -141,8 +141,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void mouseMoved(MouseEvent event)
     {
-        previewBot.setLayoutX(event.getX());
-        previewBot.setLayoutY(event.getY());
+        previewBot.setTranslateX(event.getX());
+        previewBot.setTranslateY(event.getY());
     }
 
     /**
