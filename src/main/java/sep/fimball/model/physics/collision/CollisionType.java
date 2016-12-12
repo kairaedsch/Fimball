@@ -8,7 +8,7 @@ public interface CollisionType
     /**
      * Wendet eine Interaktion einer Fläche, die den Ball berührt, auf diesen Ball an.
      *
-     * @param info Die CollisionInfo.
+     * @param info Die CollisionInfo welche Auskunft über eine eingetretene Kollision gibt.
      */
     void applyCollision(CollisionInfo info);
 }

@@ -30,6 +30,14 @@ public class CollisionInfo
      */
     private PhysicsElement otherPhysicsElement;
 
+    /**
+     * Erzeugt eine neue Instanz von CollisionInfo.
+     *
+     * @param ball Das physikalische Element des Balls.
+     * @param shortestIntersect Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
+     * @param otherPhysicsElement Das physikalische Element mit dem der Ball kollidiert ist.
+     * @param otherColliderShape Die Kollisionsform des Elements mit dem der Ball kollidiert ist.
+     */
     public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement otherPhysicsElement, ColliderShape otherColliderShape)
     {
         this.ball = ball;

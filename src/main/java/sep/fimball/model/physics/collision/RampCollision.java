@@ -6,7 +6,7 @@ import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Repräsentiert die Kollision des Balls mit einem Rampenelement. Bei jeder Kollision des Balls mit einer Rampe wird dessen
- * Höhe bis zu einem festgelegten Maximum erhöht.
+ * Höhe bis zu einem festgelegten Maximum erhöht. Ebenfalls wird der Ball von der Physik nach unten gezogen.
  */
 public class RampCollision implements CollisionType
 {

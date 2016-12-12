@@ -22,28 +22,34 @@ public class Settings
      * Stellt sicher, dass es nur eine Instanz von Settings gibt.
      */
     private static Settings singletonInstance;
+
     /**
      * Gibt an, ob der Vollbild- oder Fenstermodus eingestellt ist.
      */
     private BooleanProperty fullscreen;
+
     /**
      * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume sollten
      * mit diesem Wert multipliziert werden.
      */
     private IntegerProperty masterVolume;
+
     /**
      * Lautstärke der Musik.
      */
     private IntegerProperty musicVolume;
+
     /**
      * Lautstärke der Soundeffekte.
      */
     private IntegerProperty sfxVolume;
+
     /**
      * Aktuell ausgewählte Sprache, ein Teil der Aufzählung {@link
      * sep.fimball.general.data.Language}.
      */
     private ObjectProperty<Language> language;
+
     /**
      * Speichert, welche Taste welches Spielereignis auslöst.
      */
@@ -56,11 +62,8 @@ public class Settings
     private Settings()
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
-
         language = new SimpleObjectProperty<>();
-
         fullscreen = new SimpleBooleanProperty(false);
-
         masterVolume = new SimpleIntegerProperty();
         musicVolume = new SimpleIntegerProperty();
         sfxVolume = new SimpleIntegerProperty();
