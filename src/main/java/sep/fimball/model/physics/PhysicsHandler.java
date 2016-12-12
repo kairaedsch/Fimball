@@ -31,7 +31,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Gibt an nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    public final static int TICK_RATE = 1000 / 60;
+    private final static int TICK_RATE = 1000 / 60;
 
     public final static double TICK_RATE_MILLIS = TICK_RATE / 1000d;
 
@@ -60,7 +60,7 @@ public class PhysicsHandler<GameElementT>
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
      */
-    private List<KeyObserverEventArgs> bufferedKeyEvents;
+    private final List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -125,26 +125,11 @@ public class PhysicsHandler<GameElementT>
     private void addListenersToInputManager()
     {
         InputManager inputManager = InputManager.getSingletonInstance();
-        inputManager.addListener(KeyBinding.LEFT_FLIPPER, args ->
-        {
-            addToKeyEvents(args);
-        });
-        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, args ->
-        {
-            addToKeyEvents(args);
-        });
-        inputManager.addListener(KeyBinding.NUDGE_LEFT, args ->
-        {
-            addToKeyEvents(args);
-        });
-        inputManager.addListener(KeyBinding.NUDGE_RIGHT, args ->
-        {
-            addToKeyEvents(args);
-        });
-        inputManager.addListener(KeyBinding.PAUSE, args ->
-        {
-            addToKeyEvents(args);
-        });
+        inputManager.addListener(KeyBinding.LEFT_FLIPPER, this::addToKeyEvents);
+        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, this::addToKeyEvents);
+        inputManager.addListener(KeyBinding.NUDGE_LEFT, this::addToKeyEvents);
+        inputManager.addListener(KeyBinding.NUDGE_RIGHT, this::addToKeyEvents);
+        inputManager.addListener(KeyBinding.PAUSE, this::addToKeyEvents);
     }
 
     /**
@@ -264,8 +249,11 @@ public class PhysicsHandler<GameElementT>
                             element.checkCollision(collisionEventArgsList, ballPhysicsElement);
                         }
 
-                        double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
-                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
+                        if(element != null)
+                        {
+                            double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
+                            elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
+                        }
 
                     }
 
