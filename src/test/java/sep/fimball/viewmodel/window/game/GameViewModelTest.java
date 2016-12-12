@@ -95,7 +95,7 @@ public class GameViewModelTest
 
         KeyEvent keyEventMock = mock(KeyEvent.class);
         when(keyEventMock.getCode()).thenReturn(KeyCode.ESCAPE);
-        when(keyEventMock.getEventType()).thenReturn(KeyEvent.KEY_RELEASED);
+        when(keyEventMock.getEventType()).thenReturn(KeyEvent.KEY_PRESSED);
 
         // Anwenden des KeyEvents
         gameViewModel.handleKeyEvent(keyEventMock);

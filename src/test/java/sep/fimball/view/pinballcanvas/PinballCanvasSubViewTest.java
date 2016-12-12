@@ -128,9 +128,9 @@ public class PinballCanvasSubViewTest
         spritesField.setAccessible(true);
         spritesField.set(pinballCanvasSubView, new SimpleListProperty<>(FXCollections.observableArrayList(new ArrayList<SpriteSubView>() {{add(spriteSubViewMock);}})));
         pinballCanvasSubView.setViewModel(viewModelMock);
-        Method redraw = PinballCanvasSubView.class.getDeclaredMethod("redraw", new Class[] {});
+        Method redraw = PinballCanvasSubView.class.getDeclaredMethod("redraw", boolean.class);
         redraw.setAccessible(true);
-        redraw.invoke(pinballCanvasSubView);
+        redraw.invoke(pinballCanvasSubView, false);
 
         assertThat(DesignConfig.primaryColor, equalTo(backgroundColor));
         double edgeFirstComponent = fillRectArguments[0];
