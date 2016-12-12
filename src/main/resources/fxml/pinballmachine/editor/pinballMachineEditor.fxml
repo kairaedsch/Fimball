@@ -5,10 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
    <children>
-      <VBox>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
               <SplitPane dividerPositions="0.2036727879799666, 0.7462437395659433" focusTraversable="false" VBox.vgrow="ALWAYS">
                   <items>

@@ -1,5 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -96,8 +97,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
-        previewTop.backgroundProperty().bind(pinballMachineEditorViewModel.topBackgroundProperty());
-        previewBot.backgroundProperty().bind(pinballMachineEditorViewModel.botBackgroundProperty());
+        previewTop.backgroundProperty().bind(pinballMachineEditorViewModel.getTopBackground());
+        previewTop.disableProperty().bind(Bindings.isNotNull(pinballMachineEditorViewModel.getSelectedAvailableElement()));
+        previewBot.backgroundProperty().bind(pinballMachineEditorViewModel.getBotBackground());
     }
 
     /**

@@ -78,7 +78,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Das aktuell ausgewählte Element aus der Liste der platzierbaren Elemente.
      */
-    private Optional<BaseElement> selectedAvailableElement;
+    private ObjectProperty<Optional<BaseElement>> selectedAvailableElement;
 
     /**
      * Das aktuell auf dem Spielfeld ausgewählte Element.
@@ -108,9 +108,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         super(WindowType.MACHINE_EDITOR);
         this.pinballMachine = pinballMachine;
 
-        this.pinballMachineEditor = new PinballMachineEditor(pinballMachine);
+        pinballMachineEditor = new PinballMachineEditor(pinballMachine);
 
-        this.selectedAvailableElement = Optional.empty();
+        selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
         selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
 
         mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
@@ -132,6 +132,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+
+        topBackground = new SimpleObjectProperty<>();
+        botBackground = new SimpleObjectProperty<>();
     }
 
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
@@ -237,7 +240,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
     {
-        this.selectedAvailableElement = Optional.of(selectedAvailableElement);
+        this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
+        //topBackground = new BackgroundImage(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0));
     }
 
     /**
@@ -254,9 +258,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             {
                 setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
             }
-            else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.isPresent() && button == MouseButton.PRIMARY)
+            else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.get().isPresent() && button == MouseButton.PRIMARY)
             {
-                PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get(), gridPosition.round());
+                PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get().get(), gridPosition.round());
                 setMouseMode(MouseMode.SELECTING);
                 setSelectedPlacedElement(Optional.of(placedElement));
             }
@@ -369,13 +373,18 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedPlacedElement;
     }
 
-    public ObjectProperty<Background> topBackgroundProperty()
+    public ReadOnlyObjectProperty<Background> getTopBackground()
     {
         return topBackground;
     }
 
-    public ObjectProperty<Background> botBackgroundProperty()
+    public ReadOnlyObjectProperty<Background> getBotBackground()
     {
         return botBackground;
+    }
+
+    public ReadOnlyObjectProperty<Optional<BaseElement>> getSelectedAvailableElement()
+    {
+        return selectedAvailableElement;
     }
 }
