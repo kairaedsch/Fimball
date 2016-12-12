@@ -84,7 +84,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     public void setVelocity(Vector2 velocity)
     {
-        this.velocity = velocity.clamp(1 / (PhysicsHandler.TICK_RATE / 1000D));
+        this.velocity = velocity.clamp(1 / PhysicsHandler.TICK_RATE_MILLIS);
         //System.out.println("speed: " + velocity.magnitude() * (PhysicsHandler.TICK_RATE / 1000D));
     }
 

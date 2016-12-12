@@ -33,6 +33,8 @@ public class PhysicsHandler<GameElementT>
      */
     public final static int TICK_RATE = 1000 / 60;
 
+    public final static double TICK_RATE_MILLIS = TICK_RATE / 1000d;
+
     /**
      * Der aktuelle Spielball.
      */
@@ -211,7 +213,7 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                double delta = TICK_RATE / 1000.0;
+                double delta = TICK_RATE_MILLIS;
 
                 // Check bufferedKeyEvents
                 synchronized (bufferedKeyEvents)
