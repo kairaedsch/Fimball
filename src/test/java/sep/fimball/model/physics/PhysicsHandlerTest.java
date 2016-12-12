@@ -27,14 +27,13 @@ public class PhysicsHandlerTest
     boolean leftFlipperRotated = false;
 
     int numberOfCalls = 0;
-    boolean listsEmpty = true;
     private Object monitor = new Object();
 
     @Test
     public void stopReactingToUserInputTest () throws InterruptedException
     {
         init();
-        /*test.startTicking();
+        test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding
                 .LEFT_FLIPPER), false, false,
                 false, false));
@@ -46,15 +45,14 @@ public class PhysicsHandlerTest
             }
         }
         test.stopTicking();
-        assertThat(leftFlipperRotated, is(true));*/
+        assertThat(leftFlipperRotated, is(true));
 
         test.stopReactingToUserInput();
         leftFlipperRotated = false;
+        test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding
                 .LEFT_FLIPPER), false, false,
                 false, false));
-
-        test.startTicking();
         synchronized (monitor)
         {
             monitor.wait(MAX_TEST_DURATION);

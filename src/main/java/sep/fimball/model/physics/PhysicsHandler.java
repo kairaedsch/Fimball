@@ -233,6 +233,7 @@ public class PhysicsHandler<GameElementT>
                                 break;
                         }
                     }
+                    bufferedKeyEvents.clear();
                 }
 
                 // Check all PhysicsElements for collisions with the ball
