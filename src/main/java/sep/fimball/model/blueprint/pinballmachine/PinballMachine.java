@@ -107,7 +107,7 @@ public class PinballMachine
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());
-        return new RectangleDouble(origin, width, height);
+        return new RectangleDouble(origin.minus(new Vector2(2, 2)), width + 4, height + 4);
     }
 
     /**
