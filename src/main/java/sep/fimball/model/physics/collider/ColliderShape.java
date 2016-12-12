@@ -30,10 +30,11 @@ public interface ColliderShape
     RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
 
     /**
-     * Gibt die Maximale Position dieses Colliders bei der gegebenen Rotation zurück.
+     * Gibt den Vektor mit minimaler/maximaler X und Y Position dieser Form zurück je nachdem ob {@code max} true oder false ist.
      *
-     * @param rotation   Die rotation des Colliders
-     * @param pivotPoint Der Drehpunkt des Colliders
+     * @param rotation   Die rotation des Colliders.
+     * @param pivotPoint Der Drehpunkt des Colliders.
+     * @param max Gibt an ob die maximale oder minimale Position gesucht ist.
      * @return Die Maximale Position dieses Colliders bei der gegebenen Rotation.
      */
     Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max);
