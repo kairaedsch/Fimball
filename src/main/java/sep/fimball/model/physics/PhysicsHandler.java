@@ -60,7 +60,7 @@ public class PhysicsHandler<GameElementT>
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
      */
-    private final List<KeyObserverEventArgs> bufferedKeyEvents;
+    private List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -169,7 +169,7 @@ public class PhysicsHandler<GameElementT>
      *
      * @param left
      */
-    public void nudge(boolean left)
+    private void nudge(boolean left)
     {
         // TODO
     }

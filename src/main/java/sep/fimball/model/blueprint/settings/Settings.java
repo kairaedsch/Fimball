@@ -224,7 +224,7 @@ public class Settings
     {
         for (KeyBinding binding : keyBindingsMap.keySet())
         {
-            if (keyBindingsMap.get(binding).equals(code))
+            if (keyBindingsMap.get(binding) != null && keyBindingsMap.get(binding).equals(code))
             {
                 return binding;
             }
