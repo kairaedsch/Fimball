@@ -7,6 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Background;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -92,6 +93,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private GameSession gameSession;
 
     private boolean moveModifier = false;
+
+    private ObjectProperty<Background> topBackground;
+
+    private ObjectProperty<Background> botBackground;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -364,4 +369,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedPlacedElement;
     }
 
+    public ObjectProperty<Background> topBackgroundProperty()
+    {
+        return topBackground;
+    }
+
+    public ObjectProperty<Background> botBackgroundProperty()
+    {
+        return botBackground;
+    }
 }

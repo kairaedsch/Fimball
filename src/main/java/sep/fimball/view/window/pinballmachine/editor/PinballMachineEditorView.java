@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
@@ -59,6 +60,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     /**
      * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
      */
+
+    @FXML
+    private Pane previewTop;
+
+    @FXML
+    private Pane previewBot;
+
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     /**
@@ -87,6 +95,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
+
+        previewTop.backgroundProperty().bind(pinballMachineEditorViewModel.topBackgroundProperty());
+        previewBot.backgroundProperty().bind(pinballMachineEditorViewModel.botBackgroundProperty());
     }
 
     /**
@@ -159,5 +170,4 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     {
         mouseDown = mouseEvent;
     }
-
 }
