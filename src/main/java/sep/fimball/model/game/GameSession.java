@@ -26,10 +26,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicGameSession;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -529,9 +526,13 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     @Override
     public void stopUserControllingElements()
     {
-     physicsHandler.stopReactingToUserInput();
+        physicsHandler.stopReactingToUserInput();
+        Timeline timeline = new Timeline();
+        KeyFrame frame = new KeyFrame(Duration.seconds(5), (event -> setBallLost(true)));
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
-
     /**
      * Gibt den zur GameSession gehörenden Flipperautomaten zurück.
      *
