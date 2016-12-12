@@ -63,4 +63,11 @@ public class RectangleDouble
     {
         return height;
     }
+
+    public boolean contains(Vector2 vec)
+    {
+        double x = vec.minus(origin).getX();
+        double y = vec.minus(origin).getY();
+        return x >= 0 && x <= width && y >= 0 && y <= height;
+    }
 }
