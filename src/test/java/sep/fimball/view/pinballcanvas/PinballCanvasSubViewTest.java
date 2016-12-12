@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
+import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
@@ -76,7 +77,7 @@ public class PinballCanvasSubViewTest
         Mockito.when(viewModelMock.spriteSubViewModelsProperty()).thenReturn(new SimpleListProperty<>());
         Mockito.when(viewModelMock.cameraPositionProperty()).thenReturn(new SimpleObjectProperty(cameraPosition));
         Mockito.when(viewModelMock.cameraZoomProperty()).thenReturn(new SimpleDoubleProperty(cameraZoom));
-        Mockito.when(viewModelMock.editorModeProperty()).thenReturn(new SimpleBooleanProperty(editorMode));
+        Mockito.when(viewModelMock.getDrawMode()).thenReturn(DrawMode.EDITOR);
         Mockito.when(canvasMock.getParent()).thenReturn(parentMock);
         Mockito.when(canvasMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));
         Mockito.when(canvasMock.heightProperty()).thenReturn(new SimpleDoubleProperty(canvasHeight));

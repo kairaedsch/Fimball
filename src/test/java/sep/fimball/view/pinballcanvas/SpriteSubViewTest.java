@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.tools.ImageCache;
@@ -125,7 +126,7 @@ public class SpriteSubViewTest
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, false);
+        spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, DrawMode.EDITOR);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);
@@ -216,7 +217,7 @@ public class SpriteSubViewTest
         }).when(graphicsContextMock).strokeRect(anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, false);
+        spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, DrawMode.EDITOR);
 
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);

@@ -6,10 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import sep.fimball.general.data.Config;
-import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
@@ -60,7 +57,7 @@ public class SpriteSubView
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, boolean drawOnlyElements)
+    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
@@ -83,7 +80,7 @@ public class SpriteSubView
         {
             drawImage(graphicsContext, image, position, size);
         }
-        if (viewModel.isSelectedProperty().get() && !drawOnlyElements)
+        if (viewModel.isSelectedProperty().get() && drawMode == DrawMode.EDITOR)
         {
             drawBorder(graphicsContext, imageLayer, position, size);
         }

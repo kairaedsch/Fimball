@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
+import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
@@ -40,10 +41,7 @@ public class PinballCanvasViewModel
 
     private Observable generateImageObservable;
 
-    /**
-     * Gibt an, ob das Pinball-Canvas im Editor benutzt wird.
-     */
-    private BooleanProperty editorMode;
+    private DrawMode drawMode;
 
     /**
      * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
@@ -65,7 +63,7 @@ public class PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
-        editorMode = new SimpleBooleanProperty(false);
+        drawMode = DrawMode.GAME;
     }
 
     /**
@@ -81,7 +79,7 @@ public class PinballCanvasViewModel
         this.editorViewModel = pinballMachineEditorViewModel;
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
-        editorMode = new SimpleBooleanProperty(true);
+        drawMode = DrawMode.EDITOR;
 
         ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
     }
@@ -112,7 +110,7 @@ public class PinballCanvasViewModel
      */
     public void mouseClickedOnGame(Vector2 gridPos, MouseButton button)
     {
-        if (editorMode.get())
+        if (drawMode == DrawMode.EDITOR)
         {
             editorViewModel.mouseClickedOnGame(gridPos, button, false);
         }
@@ -126,7 +124,7 @@ public class PinballCanvasViewModel
      */
     public void mousePressedOnGame(Vector2 gridPos, MouseButton button)
     {
-        if (editorMode.get())
+        if (drawMode == DrawMode.EDITOR)
         {
             editorViewModel.mouseClickedOnGame(gridPos, button, true);
         }
@@ -197,9 +195,9 @@ public class PinballCanvasViewModel
      *
      * @return Ob das Pinball-Canvas im Editor benutzt wird.
      */
-    public BooleanProperty editorModeProperty()
+    public DrawMode getDrawMode()
     {
-        return editorMode;
+        return drawMode;
     }
 
     public void setGeneratedPreviewImage(WritableImage image)

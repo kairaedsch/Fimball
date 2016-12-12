@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
+import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
@@ -43,13 +44,14 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      * Die Position der Kamera, die den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
      */
     private SimpleObjectProperty<Vector2> cameraPosition;
+
     private Vector2 softCameraPosition;
-    private SimpleBooleanProperty softCamera;
 
     /**
      * Die Stärke des Zooms der Kamera, die die Größe der Flipperautomaten-Elemente bestimmt.
      */
     private SimpleDoubleProperty cameraZoom;
+
     private double softCameraZoom;
 
     /**
@@ -62,6 +64,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private long lastDraw;
 
+    private DrawMode drawMode;
 
     /**
      * Setzt das ViewModel dieses Objekts und bindet die Eigenschaften der View an die entsprechenden Eigenschaften des ViewModels.
@@ -84,7 +87,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         cameraZoom.bind(pinballCanvasViewModel.cameraZoomProperty());
         softCameraZoom = cameraZoom.get();
 
-        Observer redrawObserver = (o, arg) -> redraw(false);
+        drawMode = pinballCanvasViewModel.getDrawMode();
+
+        Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
 
         Observer generateImageObserver = (o, arg) -> drawToImage();
@@ -93,125 +98,39 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Region parent = (Region) canvas.getParent();
         canvas.widthProperty().bind(parent.widthProperty());
         canvas.heightProperty().bind(parent.heightProperty());
-
-        softCamera = new SimpleBooleanProperty();
-        softCamera.bind(pinballCanvasViewModel.editorModeProperty().not());
     }
 
-    /**
-     * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
-     */
-    private void redraw(boolean drawOnlyElements)
+    private void redraw()
     {
+        double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
+        double cameraZoomSpeed = 50;
+
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
-        double camFollowSpeed = softCamera.get() ? 500.0 : 50;
+
         double camFollowStep = delta / camFollowSpeed;
         camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
-        double cameraZoomSpeed = 50.0;
+
         double camZoomStep = delta / cameraZoomSpeed;
         camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
+
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
 
-        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-
-        graphicsContext.setFill(DesignConfig.primaryColor);
-        graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        graphicsContext.save();
-        graphicsContext.translate(canvas.getWidth() / 2.0 - softCameraPosition.getX() * pixelsPerGridUnit * softCameraZoom, canvas.getHeight() / 2.0 - softCameraPosition.getY() * pixelsPerGridUnit * softCameraZoom);
-        graphicsContext.scale(softCameraZoom, softCameraZoom);
-        if (pinballCanvasViewModel.editorModeProperty().get() && !drawOnlyElements)
-        {
-            drawEditorGrid(graphicsContext);
-        }
-        drawElements(graphicsContext, drawOnlyElements);
-        Debug.draw(graphicsContext);
-        graphicsContext.restore();
-        lastDraw = currentDraw;
+        PinballCanvasDrawer.draw(canvas, sprites, softCameraPosition, softCameraZoom, drawMode);
     }
 
     private void drawToImage()
     {
-        redraw(true);
-        WritableImage writeableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+        Canvas screenShotCanvas = new Canvas();
+        screenShotCanvas.setHeight(100);
+        screenShotCanvas.setWidth(100);
+        PinballCanvasDrawer.draw(screenShotCanvas, sprites, cameraPosition.getValue(), cameraZoom.getValue(), DrawMode.SCREENSHOT);
+        WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
-        canvas.snapshot(snapshotParameters, writeableImage);
+        screenShotCanvas.snapshot(snapshotParameters, writeableImage);
         pinballCanvasViewModel.setGeneratedPreviewImage(writeableImage);
-    }
-
-    /**
-     * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
-     *
-     * @param graphicsContext Der GraphicsContext, auf dem gezeichnet wird.
-     */
-    private void drawEditorGrid(GraphicsContext graphicsContext)
-    {
-        graphicsContext.save();
-        Vector2 gridStart = canvasPosToGridPos(0, 0).scale(pixelsPerGridUnit);
-        Vector2 gridEnd = canvasPosToGridPos(canvas.getWidth(), canvas.getHeight()).scale(pixelsPerGridUnit);
-        for (int gridX = (int) gridStart.getX() - (int) gridStart.getX() % pixelsPerGridUnit; gridX <= gridEnd.getX(); gridX += pixelsPerGridUnit)
-        {
-            Color lineColor;
-            int lineWidth;
-
-            // Make every second line bigger
-            if (Math.abs(gridX) % (pixelsPerGridUnit * 2) == 0)
-            {
-                lineColor = DesignConfig.primaryColorLightLight;
-                lineWidth = 2;
-            }
-            else
-            {
-                lineColor = DesignConfig.primaryColorLight;
-                lineWidth = 1;
-            }
-
-            graphicsContext.setStroke(lineColor);
-            graphicsContext.setLineWidth(lineWidth);
-            graphicsContext.strokeLine(gridX, gridStart.getY(), gridX, gridEnd.getY());
-        }
-        for (int gridY = (int) gridStart.getY() - (int) gridStart.getY() % pixelsPerGridUnit; gridY <= gridEnd.getY(); gridY += pixelsPerGridUnit)
-        {
-            Color lineColor;
-            int lineWidth;
-
-            // Make every second line bigger
-            if (Math.abs(gridY) % (pixelsPerGridUnit * 2) == pixelsPerGridUnit)
-            {
-                lineColor = DesignConfig.primaryColorLightLight;
-                lineWidth = 2;
-            }
-            else
-            {
-                lineColor = DesignConfig.primaryColorLight;
-                lineWidth = 1;
-            }
-
-            graphicsContext.setStroke(lineColor);
-            graphicsContext.setLineWidth(lineWidth);
-            graphicsContext.strokeLine(gridStart.getX(), gridY, gridEnd.getX(), gridY);
-        }
-        graphicsContext.restore();
-    }
-
-    /**
-     * Zeichnet jedes Spielelement auf den übergebenen GraphicsContext.
-     *
-     * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
-     */
-    private void drawElements(GraphicsContext graphicsContext, boolean drawOnlyElements)
-    {
-        for (SpriteSubView spriteTop : sprites)
-        {
-            spriteTop.draw(graphicsContext, ImageLayer.BOTTOM, drawOnlyElements);
-        }
-        for (SpriteSubView sprite : sprites)
-        {
-            sprite.draw(graphicsContext, ImageLayer.TOP, drawOnlyElements);
-        }
     }
 
     /**
@@ -242,21 +161,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return canvasPosToGridPos(mouseEvent.getX(), mouseEvent.getY());
-    }
-
-    /**
-     * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
-     *
-     * @param x Der x-Wert der Position auf dem Canvas.
-     * @param y Der y-Wert der Position auf dem Canvas.
-     * @return Die Position auf dem Grid.
-     */
-    private Vector2 canvasPosToGridPos(double x, double y)
-    {
-        Vector2 posToMiddle = new Vector2(x - canvas.getWidth() / 2.0, y - canvas.getHeight() / 2.0);
-        double vx = posToMiddle.getX() / (pixelsPerGridUnit * softCameraZoom) + softCameraPosition.getX();
-        double vy = posToMiddle.getY() / (pixelsPerGridUnit * softCameraZoom) + softCameraPosition.getY();
-        return new Vector2(vx, vy);
+        return PinballCanvasDrawer.canvasPosToGridPos(canvas, softCameraPosition, softCameraZoom, mouseEvent.getX(), mouseEvent.getY());
     }
 }
