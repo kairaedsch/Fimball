@@ -1,6 +1,5 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -9,6 +8,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
@@ -97,9 +97,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
-        previewTop.backgroundProperty().bind(pinballMachineEditorViewModel.getTopBackground());
-        previewTop.disableProperty().bind(Bindings.isNotNull(pinballMachineEditorViewModel.getSelectedAvailableElement()));
-        previewBot.backgroundProperty().bind(pinballMachineEditorViewModel.getBotBackground());
+        previewTop.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getTopBackgroundPath()));
+        //previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
+        previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
     }
 
     /**
@@ -136,6 +136,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private void zoomOutClicked()
     {
         pinballMachineEditorViewModel.zoomOut();
+    }
+
+    @FXML
+    private void mouseMoved(MouseEvent event)
+    {
+        previewBot.setLayoutX(event.getX());
+        previewBot.setLayoutY(event.getY());
     }
 
     /**

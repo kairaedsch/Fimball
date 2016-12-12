@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,8 +8,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Background;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -94,9 +95,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private boolean moveModifier = false;
 
-    private ObjectProperty<Background> topBackground;
+    private StringProperty topBackgroundPath;
 
-    private ObjectProperty<Background> botBackground;
+    private StringProperty botBackgroundPath;
+
+    private BooleanProperty availableElementSelected;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -133,8 +136,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
 
-        topBackground = new SimpleObjectProperty<>();
-        botBackground = new SimpleObjectProperty<>();
+        topBackgroundPath = new SimpleStringProperty();
+        botBackgroundPath = new SimpleStringProperty();
+        availableElementSelected = new SimpleBooleanProperty();
+        availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
     }
 
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
@@ -241,7 +246,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
     {
         this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
-        //topBackground = new BackgroundImage(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0));
+        topBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0));
+        botBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0));
     }
 
     /**
@@ -373,18 +379,18 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedPlacedElement;
     }
 
-    public ReadOnlyObjectProperty<Background> getTopBackground()
+    public ReadOnlyStringProperty getTopBackgroundPath()
     {
-        return topBackground;
+        return topBackgroundPath;
     }
 
-    public ReadOnlyObjectProperty<Background> getBotBackground()
+    public ReadOnlyStringProperty getBotBackgroundPath()
     {
-        return botBackground;
+        return botBackgroundPath;
     }
 
-    public ReadOnlyObjectProperty<Optional<BaseElement>> getSelectedAvailableElement()
+    public ReadOnlyBooleanProperty isAvailableElementSelected()
     {
-        return selectedAvailableElement;
+        return availableElementSelected;
     }
 }
