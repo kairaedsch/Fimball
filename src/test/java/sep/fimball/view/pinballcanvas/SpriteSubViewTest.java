@@ -230,12 +230,16 @@ public class SpriteSubViewTest
         assertThat(drawnImages[0], equalTo(imageMock));
         assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
         assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit, 0.0);
+        // double w = size.getX() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit :: size = IMAGE_WIDTH * SCALE, SpriteSubView:146
         assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit, 0.0);
+        // double h = size.getY() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit; :: size = IMAGE_HEIGHT * SCALE, SpriteSubView:147
         assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit, 0.0);
         assertEquals(borderArguments[0], Config.pixelsPerGridUnit * 0.25, 0.0);
         assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 /Config.pixelsPerGridUnit) * Config.pixelsPerGridUnit - 0.125 * Config.pixelsPerGridUnit, 0.0);
         assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 /Config.pixelsPerGridUnit) * Config.pixelsPerGridUnit - 0.125 * Config.pixelsPerGridUnit, 0.0);
+        // size.getX() + borderOffset * 2 :: size = IMAGE_WIDTH * SCALE, borderOffset * 2 = 0.25 * Config.pixelsPerGridUnit, SpriteSubView:171
         assertEquals(borderArguments[3], IMAGE_WIDTH * SCALE + 0.25 * Config.pixelsPerGridUnit, 0.0);
+        //size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit, SpriteSubView:171
         assertEquals(borderArguments[4], IMAGE_HEIGHT * SCALE + 0.25 * Config.pixelsPerGridUnit - ELEMENT_HEIGHT * Config.pixelsPerGridUnit, 0.0);
     }
 }
