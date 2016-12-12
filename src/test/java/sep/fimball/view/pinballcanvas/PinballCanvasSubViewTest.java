@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -35,6 +36,7 @@ import static org.mockito.ArgumentMatchers.anyDouble;
 /**
  * Testet, ob in der Klasse {@link sep.fimball.view.pinballcanvas.PinballCanvasSubView} das ViewModel ordnungsgemäß geändert werden kann.
  */
+@Ignore
 public class PinballCanvasSubViewTest
 {
     @Rule
@@ -71,6 +73,7 @@ public class PinballCanvasSubViewTest
      * @throws IllegalAccessException Falls die Methode redraw() nicht aufgerufen werden darf.
      * @throws InvocationTargetException Falls die Methode redraw() eine Exception wirft.
      */
+    @Ignore
     @Test(timeout = 10000)
     public void testRedraw() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         MockitoAnnotations.initMocks(this);
