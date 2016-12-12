@@ -83,11 +83,11 @@ public class CircleColliderShape implements ColliderShape
     {
         if (max)
         {
-            return position.plus(new Vector2(radius, radius).scale(2));
+            return position.plus(new Vector2(radius, radius));
         }
         else
         {
-            return position;
+            return position.minus(new Vector2(radius, radius));
         }
     }
 }

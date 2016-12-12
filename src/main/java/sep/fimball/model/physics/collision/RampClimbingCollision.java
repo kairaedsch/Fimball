@@ -53,7 +53,7 @@ public class RampClimbingCollision implements CollisionType
     }
 
     /**
-     * Berechnet den Schnittpunkt zwischen zwei geraden welche durch einen Aufpunkt und eine Richtung gegeben sind.
+     * Berechnet den Schnittpunkt zwischen zwei Geraden welche durch einen Aufpunkt und eine Richtung gegeben sind.
      *
      * @param basePointOne Aufpunkt der ersten Gerade.
      * @param directionOne Richtung der ersten Gerade.
