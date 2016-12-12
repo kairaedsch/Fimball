@@ -13,7 +13,8 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
- * Settings speichert die aktuellen Spieleinstellungen, welche vom Spieler in den Einstellungen geändert werden können.
+ * Settings speichert die aktuellen Spieleinstellungen, welche vom Spieler in
+ * den Einstellungen geändert werden können.
  */
 public class Settings
 {
@@ -21,52 +22,36 @@ public class Settings
      * Stellt sicher, dass es nur eine Instanz von Settings gibt.
      */
     private static Settings singletonInstance;
-
     /**
-     * Gibt die bereits existierenden Settings oder neu angelegte zurück, falls noch keine existieren.
-     *
-     * @return Die Instanz von Settings.
-     */
-    public static Settings getSingletonInstance()
-    {
-        if (singletonInstance == null)
-            singletonInstance = new Settings();
-
-        return singletonInstance;
-    }
-
-    /**
-     * Gibt an ob der Vollbild- oder Fenstermodus eingestellt ist.
+     * Gibt an, ob der Vollbild- oder Fenstermodus eingestellt ist.
      */
     private BooleanProperty fullscreen;
-
     /**
-     * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume werden mit diesem Wert multipliziert.
+     * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume sollten
+     * mit diesem Wert multipliziert werden.
      */
     private IntegerProperty masterVolume;
-
     /**
-     * Lautstärke der Musik
+     * Lautstärke der Musik.
      */
     private IntegerProperty musicVolume;
-
     /**
      * Lautstärke der Soundeffekte.
      */
     private IntegerProperty sfxVolume;
-
     /**
-     * Aktuell ausgewählte Sprache, ein Teil der Aufzählung <enum> Language.
+     * Aktuell ausgewählte Sprache, ein Teil der Aufzählung {@link
+     * sep.fimball.general.data.Language}.
      */
     private ObjectProperty<Language> language;
-
     /**
-     * Speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielereignis gebunden ist.
+     * Speichert, welche Taste welches Spielereignis auslöst.
      */
     private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
 
     /**
-     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der gespeicherten Settings-Datei geladen werden.
+     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der
+     * gespeicherten Settings-Datei geladen werden.
      */
     private Settings()
     {
@@ -84,9 +69,24 @@ public class Settings
     }
 
     /**
-     * Lädt die Einstellungen aus dem in {@code jsonPath} angegebenen Datei und setzt diese als die Attribute.
+     * Gibt die bereits existierenden Settings oder neu Angelegte zurück, falls
+     * noch keine existieren.
      *
-     * @param jsonPath Der Pfad, wo die gespeicherte Settings-Datei liegt.
+     * @return Die Instanz von Settings.
+     */
+    public static Settings getSingletonInstance()
+    {
+        if (singletonInstance == null)
+            singletonInstance = new Settings();
+
+        return singletonInstance;
+    }
+
+    /**
+     * Lädt die Einstellungen aus dem in {@code jsonPath} angegebenen Datei und
+     * setzt diese als die Attribute.
+     *
+     * @param jsonPath Der Pfad, der zur gespeicherten Settings-Datei führt.
      */
     private void loadSettings(Path jsonPath)
     {
@@ -151,7 +151,7 @@ public class Settings
     }
 
     /**
-     * Gibt die Master-Lautstärke zurück.
+     * Gibt die Master-Lautstärke als Property zurück.
      *
      * @return Die Master-Lautstärke.
      */
@@ -161,7 +161,7 @@ public class Settings
     }
 
     /**
-     * Gibt die Musik-Lautstärke zurück.
+     * Gibt die Musik-Lautstärke als Property zurück.
      *
      * @return Die Musik-Lautstärke.
      */
@@ -171,7 +171,7 @@ public class Settings
     }
 
     /**
-     * Gibt die Soundeffekt-Lautstärke zurück.
+     * Gibt die Soundeffekt-Lautstärke als Property zurück.
      *
      * @return Die Soundeffekt-Lautstärke.
      */
@@ -181,7 +181,7 @@ public class Settings
     }
 
     /**
-     * Gibt die eingestellte Sprache zurück.
+     * Gibt die eingestellte Sprache als Property zurück.
      *
      * @return Die eingestellte Sprache.
      */
@@ -191,9 +191,12 @@ public class Settings
     }
 
     /**
-     * Gibt die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist, zurück.
+     * Gibt die Map, die speichert, welche Taste auf welches durch Tastendruck
+     * ausgelöstes Spielereignis gebunden ist, als Property ohne Schreibzugriff
+     * zurück.
      *
-     * @return Die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden ist.
+     * @return Die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden
+     * ist.
      */
     public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
     {
@@ -201,10 +204,12 @@ public class Settings
     }
 
     /**
-     * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die durch {@code keyCode} beschriebene Taste nicht schon von einem anderen KeyBinding belegt ist.
+     * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur
+     * Liste der Tastenbelegungen hinzu, falls die durch {@code keyCode}
+     * beschriebene Taste nicht schon durch ein anderes KeyBinding belegt ist.
      *
      * @param keyBinding Das KeyBinding, das hinzugefügt werden soll.
-     * @param keyCode    Der KeyCode, der hinzugefügt werden soll.
+     * @param keyCode Der KeyCode, der hinzugefügt werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
@@ -215,10 +220,11 @@ public class Settings
     }
 
     /**
-     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück.
+     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück oder
+     * {@code null}, falls kein KeyBinding existiert.
      *
-     * @param code Der KeyCode für den das entsprechende KeyBinding gesucht werden soll
-     * @return Das KeyBinding welches zum übergebenen KeyCode passt
+     * @param code Der KeyCode der Taste.
+     * @return Das KeyBinding, das das auszulösende Spielereignis repräsentiert.
      */
     public KeyBinding getKeyBinding(KeyCode code)
     {
@@ -233,9 +239,9 @@ public class Settings
     }
 
     /**
-     * Gibt zurück, ob das Spiel im Vollbildmodus angezeigt werden soll.
+     * Gibt die Property zurück, die bestimmt, ob das Spiel im Vollbildmodus angezeigt werden soll.
      *
-     * @return {@code true}, falls das Spiel im Vollbildmodus angezeigt werden soll, {@code false} sonst.
+     * @return Die Propertyy, die {@code true} enthält, falls das Spiel im Vollbildmodus angezeigt werden soll oder {@code false} sonst.
      */
     public BooleanProperty fullscreenProperty()
     {
