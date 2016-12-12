@@ -21,13 +21,13 @@ public class TiltHandler implements GameHandler
     /**
      * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
      */
-    private static final int MAX_TILT_COUNTER = 5;
+    private static final int MAX_TILT_COUNTER = 3;
 
     /**
      * Erzeugt einen neuen TiltHandler.
      * @param handlerGameSession Die zugehörige HandlerGameSession.
      */
-    public TiltHandler(HandlerGameSession handlerGameSession) {
+    TiltHandler(HandlerGameSession handlerGameSession) {
         this.handlerGameSession = handlerGameSession;
         this.tiltCounters = new HashMap<>();
     }
@@ -35,16 +35,21 @@ public class TiltHandler implements GameHandler
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        HandlerPlayer currentPlayer = handlerGameSession.getCurrentPlayer();
-        if (tiltCounters.containsKey(currentPlayer)) {
-            tiltCounters.put(currentPlayer, tiltCounters.get(currentPlayer) + 1);
-        } else {
-            tiltCounters.put(currentPlayer, 1);
-        }
-        if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER) {
-            handlerGameSession.stopUserControllingElements();
-            tiltCounters.put(currentPlayer, 0);
-            System.out.println("TIIIILT");
+        if (gameEvent == GameEvent.NUDGE)
+        {
+            HandlerPlayer currentPlayer = handlerGameSession.getCurrentPlayer();
+            if (tiltCounters.containsKey(currentPlayer))
+            {
+                tiltCounters.put(currentPlayer, tiltCounters.get(currentPlayer) + 1);
+            } else
+            {
+                tiltCounters.put(currentPlayer, 1);
+            }
+            if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER)
+            {
+                handlerGameSession.stopUserControllingElements();
+                tiltCounters.put(currentPlayer, 0);
+            }
         }
     }
 }

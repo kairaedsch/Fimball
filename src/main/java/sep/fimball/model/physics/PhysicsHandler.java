@@ -34,6 +34,7 @@ public class PhysicsHandler<GameElementT>
     private final static int TICK_RATE = 1000 / 60;
 
     public final static double TICK_RATE_MILLIS = TICK_RATE / 1000d;
+    public static final int NUDGE_DISTANCE = 5;
 
     /**
      * Der aktuelle Spielball.
@@ -96,12 +97,12 @@ public class PhysicsHandler<GameElementT>
     /**
      * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
      *
-     * @param elements       Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
-     * @param gameSession    Die zugehörige GameSession.
-     * @param maxElementPosY Die maximale Y-Position aller PhysicElements.
+     * @param elements           Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
+     * @param gameSession        Die zugehörige GameSession.
+     * @param maxElementPosY     Die maximale Y-Position aller PhysicElements.
      * @param ballPhysicsElement Der physikalische Ball.
-     * @param leftFlippers Die linksseitigen Flipper.
-     * @param rightFlippers Die rechtsseitigen Flipper.
+     * @param leftFlippers       Die linksseitigen Flipper.
+     * @param rightFlippers      Die rechtsseitigen Flipper.
      */
     public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement, List<FlipperPhysicsElement<GameElementT>> leftFlippers, List<FlipperPhysicsElement<GameElementT>> rightFlippers)
     {
@@ -134,11 +135,12 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Fügt die {@code args} zu den gebufferten Key Events hinzu.
+     *
      * @param args Die Argumenete, die hinzugefügt werden sollen.
      */
     private void addToKeyEvents(KeyObserverEventArgs args)
     {
-        if(reactingToInput)
+        if (reactingToInput)
         {
             synchronized (bufferedKeyEvents)
             {
@@ -149,6 +151,7 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
+     *
      * @param position Die Position des Balls.
      * @param rotation Die Rotation des Balls.
      */
@@ -171,7 +174,19 @@ public class PhysicsHandler<GameElementT>
      */
     private void nudge(boolean left)
     {
-        // TODO
+        gameSession.nudge();
+        if (left)
+        {
+            move(NUDGE_DISTANCE);
+        } else
+        {
+            move(-NUDGE_DISTANCE);
+        }
+    }
+
+    private void move(int additionalVelocity)
+    {
+        ballPhysicsElement.setVelocity(new Vector2(ballPhysicsElement.getVelocity().getX() + additionalVelocity, ballPhysicsElement.getVelocity().getY()));
     }
 
     /**
@@ -244,8 +259,9 @@ public class PhysicsHandler<GameElementT>
     /**
      * Prüft alle PhysicsElements auf Kollisionen mit dem Ball und fügt gegebenenfalls Argumente zu den gegebenen
      * Event-Argument-Listen hinzu.
+     *
      * @param collisionEventArgsList Die Liste der CollisionEvents.
-     * @param elementEventArgsList Die Liste der ElementEvents.
+     * @param elementEventArgsList   Die Liste der ElementEvents.
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
@@ -256,7 +272,7 @@ public class PhysicsHandler<GameElementT>
                 element.checkCollision(collisionEventArgsList, ballPhysicsElement);
             }
 
-            if(element != null)
+            if (element != null)
             {
                 double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
                 elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
@@ -293,12 +309,16 @@ public class PhysicsHandler<GameElementT>
                     });
                     break;
                 case NUDGE_LEFT:
-                    nudge(true);
-                    gameSession.nudge();
+                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                    {
+                        nudge(true);
+                    }
                     break;
                 case NUDGE_RIGHT:
-                    nudge(false);
-                    gameSession.nudge();
+                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+                    {
+                        nudge(false);
+                    }
                     break;
             }
         }
@@ -328,7 +348,8 @@ public class PhysicsHandler<GameElementT>
     /**
      * Der PhysicsHandler soll wieder auf User Input reagieren.
      */
-    public void doReactToUserInput() {
+    public void doReactToUserInput()
+    {
         reactingToInput = true;
     }
 }
