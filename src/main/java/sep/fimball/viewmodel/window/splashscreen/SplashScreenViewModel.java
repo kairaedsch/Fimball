@@ -42,7 +42,7 @@ public class SplashScreenViewModel extends WindowViewModel
     private DoubleProperty loadProgress;
 
     /**
-     * Die Texte, die nacheinander beim Laden angzeigt werden sollen.
+     * Die Texte, die nacheinander beim Laden angezeigt werden sollen.
      */
     private Queue<String> texts;
 
@@ -83,7 +83,7 @@ public class SplashScreenViewModel extends WindowViewModel
 
 
     /**
-     * Benachrichtigt den ScemeManager, dass das Hauptmenü angezeigt werden soll.
+     * Benachrichtigt den SceneManager, dass das Hauptmenü angezeigt werden soll.
      */
     private void showMainMenu()
     {

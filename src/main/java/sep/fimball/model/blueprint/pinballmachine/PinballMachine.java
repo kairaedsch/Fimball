@@ -47,7 +47,7 @@ public class PinballMachine
     private ListProperty<PlacedElement> elements;
 
     /**
-     * Gibt an, ob die Flipperautomatenelemente {@code elements} geladen wurde.
+     * Gibt an, ob die Flipperautomaten-Elemente {@code elements} geladen wurde.
      */
     private boolean elementsLoaded;
 
@@ -70,7 +70,7 @@ public class PinballMachine
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementsLoaded = false;
 
-        // Fügt die Highscores zu highscoreliste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
+        // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
         highscoreListSorted = new SimpleListProperty<>(new SortedList<>(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get())));
         for (Highscore highscore : highscores)
@@ -142,7 +142,7 @@ public class PinballMachine
     }
 
     /**
-     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gutgenug ist.
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gut genug ist.
      *
      * @param highscore Der Highscore, der hinzugefügt werden soll.
      */
@@ -152,7 +152,7 @@ public class PinballMachine
     }
 
     /**
-     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gutgenug ist.
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gut genug ist.
      *
      * @param highscore Der Highscore, der hinzugefügt werden soll.
      * @param save      Ob gespeichert werden soll.
@@ -161,10 +161,10 @@ public class PinballMachine
     {
         if (highscoreList.size() >= Config.maxHighscores)
         {
-            Highscore worstHigscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
-            if (worstHigscore.scoreProperty().get() < highscore.scoreProperty().get())
+            Highscore worstHighscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
+            if (worstHighscore.scoreProperty().get() < highscore.scoreProperty().get())
             {
-                highscoreList.remove(worstHigscore);
+                highscoreList.remove(worstHighscore);
                 highscoreList.add(highscore);
                 if (save)
                     saveToDisk();

@@ -52,7 +52,7 @@ public class GameView extends WindowView<GameViewModel>
         playerName.textProperty().bind(playerNameText);
         score.textProperty().bind(scoreText);
 
-        ViewModelListToPaneBinder.bindAmountToViews(reserveBalls, gameViewModel.playerReserveBallsProperty(), WindowType.GAME_RESERVEBALL);
+        ViewModelListToPaneBinder.bindAmountToViews(reserveBalls, gameViewModel.playerReserveBallsProperty(), WindowType.GAME_RESERVE_BALL);
         ViewLoader<PinballCanvasSubView> viewLoader = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(gameViewModel.getPinballCanvasViewModel());

@@ -11,7 +11,7 @@ public enum GameEvent
     BALL_LOST,
 
     /**
-     * Spielereignis, das ausgelöst wird, wenn der Ball gespawnet wird.
+     * Spielereignis, das ausgelöst wird, wenn der Ball gespawned wird.
      */
     BALL_SPAWNED,
 

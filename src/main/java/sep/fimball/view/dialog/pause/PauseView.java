@@ -1,9 +1,6 @@
 package sep.fimball.view.dialog.pause;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
@@ -20,30 +17,6 @@ public class PauseView extends DialogView<PauseViewModel>
      */
     @FXML
     private VBox playerScores;
-
-    /**
-     * Das Dialogfenster.
-     */
-    @FXML
-    private TitledPane title;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label playerScoresLabel;
-
-    /**
-     * Button, der zurück zum Spielfenster wechselt.
-     */
-    @FXML
-    private Button continueButton;
-
-    /**
-     * Button, der zurück zum Hauptmenü wechselt.
-     */
-    @FXML
-    private Button abortButton;
 
     /**
      * Das zur PauseView gehörende PauseViewModel.

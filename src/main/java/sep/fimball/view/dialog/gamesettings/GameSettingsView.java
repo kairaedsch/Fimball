@@ -28,7 +28,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      * Der Behälter zur Einstellung der Tastenbelegungen.
      */
     @FXML
-    private VBox keybinding;
+    private VBox keyBinding;
 
     /**
      * Einstellung des Fullscreens.
@@ -73,106 +73,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     public Label sfxVolumePercent;
 
     /**
-     * Das Dialogfenster.
-     */
-    @FXML
-    private TitledPane title;
-
-    /**
-     * Button, der zurück zum Hauptmenü wechselt.
-     */
-    @FXML
-    private Button okButton;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tab general;
-
-    /**
-     * Das Label mit der Überschrift über der Sprachauswahl.
-     */
-    @FXML
-    private Label languageLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label select;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label keybindingLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label displayLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label fullscreenLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tab audio;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label volumeLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label sfxVolumeLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label masterVolumeLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Label musicVolumeLabel;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tooltip fullscreenTip;
-
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tooltip masterTip;
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tooltip sfxTip;
-    /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tooltip musicTip;
-
-    /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.
      */
     private GameSettingsViewModel gameSettingsViewModel;
@@ -182,7 +82,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     {
         this.gameSettingsViewModel = gameSettingsViewModel;
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(keybinding, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
+        ViewModelListToPaneBinder.bindViewModelsToViews(keyBinding, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
 
         masterVolumeSlider.setMax(Config.maxVolume);
         musicVolumeSlider.setMax(Config.maxVolume);

@@ -55,7 +55,7 @@
                                                                         <Insets top="10.0"/>
                                                                     </VBox.margin>
                                                                 </Label>
-                                                                <VBox fx:id="keybinding">
+                                                                <VBox fx:id="keyBinding">
                                                                     <children>
                                                                     </children>
                                                                 </VBox>

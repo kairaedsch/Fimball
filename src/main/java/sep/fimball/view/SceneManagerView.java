@@ -52,7 +52,7 @@ public class SceneManagerView
     {
         this.stage = stage;
 
-        // Blureffekt für das glass.
+        // Blur-Effekt für das glass.
         blurEffect = new GaussianBlur(DesignConfig.stageDividerLayerBlur);
 
         // Initialisiere den SoundManager
@@ -160,7 +160,7 @@ public class SceneManagerView
                 dialogType = DialogType.PAUSE;
                 break;
             case NONE:
-                // Entfernt Dialog und returnt falls DialogType.NONE
+                // Entfernt Dialog und returned falls DialogType.NONE
                 removeDialog();
                 return;
             default:

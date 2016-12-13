@@ -35,7 +35,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 {
 
     /**
-     * Die Zeit, nach der der Ball automatisch als verloren gitl, wenn der Tilt aktiviert wurde.
+     * Die Zeit, nach der der Ball automatisch als verloren gilt, wenn der Tilt aktiviert wurde.
      */
     private static final int TILT_DURATION_BEFORE_BALL_LOSS = 5;
 
@@ -159,7 +159,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private BooleanProperty isOver;
 
     /**
-     * Gibt nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
+     * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
      */
     private static final double BALL_LOST_TOLERANCE = 10;
 

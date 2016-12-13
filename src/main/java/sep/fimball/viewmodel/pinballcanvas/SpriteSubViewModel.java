@@ -46,7 +46,7 @@ public class SpriteSubViewModel
      */
     private ObjectProperty<Vector2> pivotPoint;
 
-    private Map<Integer, Vector2> localCoords;
+    private Map<Integer, Vector2> localCoordinates;
 
     private double elementHeight;
 
@@ -73,7 +73,7 @@ public class SpriteSubViewModel
 
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
-        localCoords = gameElement.getMediaElement().getLocalCoords();
+        localCoordinates = gameElement.getMediaElement().getLocalCoordinates();
 
         isSelected = new SimpleBooleanProperty(false);
 
@@ -162,9 +162,9 @@ public class SpriteSubViewModel
         return pivotPoint;
     }
 
-    public Map<Integer, Vector2> getLocalCoords()
+    public Map<Integer, Vector2> getLocalCoordinates()
     {
-        return localCoords;
+        return localCoordinates;
     }
 
     public double getElementHeight()

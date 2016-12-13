@@ -141,9 +141,9 @@ public class PhysicsHandler<GameElementT>
     }
 
     /**
-     * Fügt die {@code args} zu den gebufferten Key Events hinzu.
+     * Fügt die {@code args} zu den gebufferten KeyEvents hinzu.
      *
-     * @param args Die Argumenete, die hinzugefügt werden sollen.
+     * @param args Die Argumente, die hinzugefügt werden sollen.
      */
     private void addToKeyEvents(KeyObserverEventArgs args)
     {

@@ -102,8 +102,8 @@ public class ViewLoader<ViewT>
     {
         if (labeledText.matches("!.*!"))
         {
-            String keyvalue = labeledText.replace("!", "");
-            textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyvalue));
+            String keyValue = labeledText.replace("!", "");
+            textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyValue));
         }
     }
 

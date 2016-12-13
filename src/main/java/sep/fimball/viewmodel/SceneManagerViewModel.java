@@ -115,7 +115,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Stellt der View die Information zu Verfügung, ob das Programm im Vollbildmodus dargstellt werden soll.
+     * Stellt der View die Information zu Verfügung, ob das Programm im Vollbildmodus dargestellt werden soll.
      *
      * @return {@code true}, wenn das Programm im Vollbildmodus gestartet werden soll, {@code false} sonst.
      */

@@ -62,7 +62,7 @@ public class GameViewModel extends WindowViewModel
     private GameSession gameSession;
 
     /**
-     * Erzeut ein neues GameViewModel.
+     * Erzeugt ein neues GameViewModel.
      *
      * @param gameSession Die GameSession, die vom GameViewModel benutzt wird.
      */

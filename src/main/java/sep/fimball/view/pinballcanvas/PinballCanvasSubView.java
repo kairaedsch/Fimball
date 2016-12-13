@@ -1,25 +1,27 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.*;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.*;
-import sep.fimball.general.debug.Debug;
+import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DrawMode;
+import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 
 import java.util.Observer;
-
-import static sep.fimball.general.data.Config.pixelsPerGridUnit;
 
 /**
  * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
@@ -165,7 +167,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     /**
      * Berechnet die Position des MouseEvents auf dem Grid.
      *
-     * @param mouseEvent Das MoimageuseEvent, dessen Position berechnet werden soll.
+     * @param mouseEvent Das MouseEvent, dessen Position berechnet werden soll.
      * @return Die Position des MouseEvents auf dem Grid.
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)

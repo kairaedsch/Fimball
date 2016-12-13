@@ -31,7 +31,7 @@ public class BaseMediaElementFactoryTest
         event.soundName = TEST_STRING;
 
         BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoords = new BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson();
-        localCoords.localCoord = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
+        localCoords.localCoordinates = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
         localCoords.rotation = TEST_INT;
 
         BaseElementJson.MediaElementJson testJson = new BaseElementJson.MediaElementJson();
@@ -52,8 +52,8 @@ public class BaseMediaElementFactoryTest
             assertThat(ev.getAnimation().get().getName(), is(TEST_STRING));
             assertThat(ev.getSound(), notNullValue());
         });
-        assertThat(generatedElement.getLocalCoords().size(), is(1));
-        generatedElement.getLocalCoords().forEach((id, v2) ->
+        assertThat(generatedElement.getLocalCoordinates().size(), is(1));
+        generatedElement.getLocalCoordinates().forEach((id, v2) ->
         {
             assertThat(id, is(TEST_INT));
             assertThat(v2, equalTo(new Vector2(TEST_DOUBLE, TEST_DOUBLE)));

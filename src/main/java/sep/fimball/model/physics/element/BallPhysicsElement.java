@@ -34,7 +34,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     private double angularVelocity;
 
     /**
-     * Die Höhe des Balles.
+     * Die Höhe des Balls.
      */
     private double height;
 

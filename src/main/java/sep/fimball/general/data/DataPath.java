@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 /**
- * Created by alexcekay on 07.12.16.
+ * Diese Klasse stellt Methoden bereit, die Pfade zu Dateien liefern.
  */
 public class DataPath
 {
@@ -22,7 +22,7 @@ public class DataPath
         String mode = System.getProperty("mode");
         if (mode != null && mode.equalsIgnoreCase("dev"))
         {
-            // Aktivierbar durch hinzufügen folgender Startparameter:
+            // Aktivierbar durch hinzufügen folgender Start-Parameter:
             // VM options: -Dmode="dev"
             System.err.println("|--------------------------------------------------|");
             System.err.println("|------ WARNING: RUNNING IN DEVELOPMENT MODE ------|");

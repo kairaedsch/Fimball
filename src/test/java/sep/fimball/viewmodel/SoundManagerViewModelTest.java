@@ -85,7 +85,7 @@ public class SoundManagerViewModelTest
 
         //Die Observer werden über das Stoppen der Hintergrundmusik informiert.
         NotificationObserver stopObserver = new NotificationObserver();
-        SoundManagerViewModel.getInstance().addStopObvserver(stopObserver);
+        SoundManagerViewModel.getInstance().addStopObserver(stopObserver);
         SoundManagerViewModel.getInstance().stopBackgroundMusic();
         assertThat("Der Observer wurde über das Stoppen benachrichtigt", stopObserver.getNumberOfNotifications(), is(1));
     }

@@ -45,7 +45,7 @@ public enum WindowType implements ViewType
     /**
      * Das Fenster das die verbleibenden Bälle im Spiel anzeigt.
      */
-    GAME_RESERVEBALL("game/reserveBall.fxml"),
+    GAME_RESERVE_BALL("game/reserveBall.fxml"),
 
     /**
      * Das Spielfeld eines Automaten.

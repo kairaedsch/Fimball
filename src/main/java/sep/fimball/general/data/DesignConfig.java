@@ -21,7 +21,7 @@ public class DesignConfig
     public final static int defaultStageHeight = 720;
 
     /**
-     * Die Durchsichtigkeit der Zwischenebene.
+     * Die Transparenz der Zwischenebene.
      */
     public final static double stageDividerLayerOpacity = 0.6;
 

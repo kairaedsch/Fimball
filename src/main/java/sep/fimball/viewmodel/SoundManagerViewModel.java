@@ -114,7 +114,7 @@ public class SoundManagerViewModel
      *
      * @param stopObserver Das Objekt, das benachrichtigt werden soll, wenn die Hintergrundmusik gestoppt werden soll.
      */
-    public void addStopObvserver(Observer stopObserver)
+    public void addStopObserver(Observer stopObserver)
     {
         stopObservable.addObserver(stopObserver);
     }

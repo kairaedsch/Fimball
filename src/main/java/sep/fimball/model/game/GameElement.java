@@ -130,7 +130,7 @@ public class GameElement implements HandlerGameElement
     /**
      * Gibt zurück wie viele Punkte beim Treffer vergeben werden.
      *
-     * @return Die Anzahl der Punkte, die vergeben weden soll.
+     * @return Die Anzahl der Punkte, die vergeben werden soll.
      */
     public int getPointReward()
     {

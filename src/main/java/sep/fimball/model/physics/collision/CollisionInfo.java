@@ -21,7 +21,7 @@ public class CollisionInfo
     private Vector2 shortestIntersect;
 
     /**
-     * Die Kollisionsform des Elements mit dem der Ball kollidiert ist.
+     * Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
      */
     private ColliderShape otherColliderShape;
 
@@ -36,7 +36,7 @@ public class CollisionInfo
      * @param ball Das physikalische Element des Balls.
      * @param shortestIntersect Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
      * @param otherPhysicsElement Das physikalische Element mit dem der Ball kollidiert ist.
-     * @param otherColliderShape Die Kollisionsform des Elements mit dem der Ball kollidiert ist.
+     * @param otherColliderShape Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
      */
     public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement otherPhysicsElement, ColliderShape otherColliderShape)
     {
@@ -67,9 +67,9 @@ public class CollisionInfo
     }
 
     /**
-     * Gibt die Kollisionsform des Elements mit dem der Ball kollidiert ist zurück.
+     * Gibt die Form des Colliders des Elements mit dem der Ball kollidiert ist zurück.
      *
-     * @return Die Kollisionsform mit der der Ball kollidiert ist.
+     * @return Die Form des Colliders mit der der Ball kollidiert ist.
      */
     public ColliderShape getOtherColliderShape()
     {

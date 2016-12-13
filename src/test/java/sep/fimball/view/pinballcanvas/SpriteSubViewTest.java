@@ -77,7 +77,7 @@ public class SpriteSubViewTest
         Mockito.when(imageCacheMock.getImage(any())).thenReturn(imageMock);
         Mockito.when(spriteSubViewModelMock.pivotPointProperty()).thenReturn(new SimpleObjectProperty<>(pivot));
         Mockito.when(spriteSubViewModelMock.rotationProperty()).thenReturn(new SimpleDoubleProperty(ROTATION));
-        Mockito.when(spriteSubViewModelMock.getLocalCoords()).thenReturn(localCoords);
+        Mockito.when(spriteSubViewModelMock.getLocalCoordinates()).thenReturn(localCoords);
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
         Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
@@ -168,7 +168,7 @@ public class SpriteSubViewTest
         Mockito.when(imageCacheMock.getImage(any())).thenReturn(imageMock);
         Mockito.when(spriteSubViewModelMock.pivotPointProperty()).thenReturn(new SimpleObjectProperty<>(pivot));
         Mockito.when(spriteSubViewModelMock.rotationProperty()).thenReturn(new SimpleDoubleProperty(ROTATION));
-        Mockito.when(spriteSubViewModelMock.getLocalCoords()).thenReturn(localCoords);
+        Mockito.when(spriteSubViewModelMock.getLocalCoordinates()).thenReturn(localCoords);
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
         Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);

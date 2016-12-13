@@ -28,7 +28,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     private VBox playerScores;
 
     /**
-     * Das Dialogfenster.
+     * Das Dialog-Fenster.
      */
     @FXML
     private TitledPane title;
@@ -46,7 +46,7 @@ public class GameOverView extends DialogView<GameOverViewModel>
     private Label playerScoresLabel;
 
     /**
-     * Button, der beim Betätigen zum Haupmenü wechselt.
+     * Button, der beim Betätigen zum Hauptmenü wechselt.
      */
     @FXML
     private Button okButton;

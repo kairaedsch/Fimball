@@ -104,11 +104,11 @@ public class SpriteSubView
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
         int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
 
-        if (viewModel.getLocalCoords().containsKey(picRotate))
+        if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
-            Vector2 localCoords = viewModel.getLocalCoords().get(picRotate);
-            graphicsContext.translate(localCoords.getX() * Config.pixelsPerGridUnit, localCoords.getY() * Config.pixelsPerGridUnit);
-            pivot = pivot.plus(localCoords.scale(-1));
+            Vector2 localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
+            graphicsContext.translate(localCoordinates.getX() * Config.pixelsPerGridUnit, localCoordinates.getY() * Config.pixelsPerGridUnit);
+            pivot = pivot.plus(localCoordinates.scale(-1));
         }
 
         if (rotation != 0)

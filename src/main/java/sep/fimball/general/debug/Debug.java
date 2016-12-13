@@ -88,21 +88,21 @@ public class Debug
         drawCircle(context, rotatedPos, radius);
     }
 
-    private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset)
+    private static void drawPolygon(GraphicsContext context, List<Vector2> vertices, Vector2 offset)
     {
         if (offset == null)
             offset = new Vector2();
 
-        double[] xPoints = new double[verts.size()];
-        double[] yPoints = new double[verts.size()];
+        double[] xPoints = new double[vertices.size()];
+        double[] yPoints = new double[vertices.size()];
 
-        for (int i = 0; i < verts.size(); i++)
+        for (int i = 0; i < vertices.size(); i++)
         {
-            xPoints[i] = (verts.get(i).getX() + offset.getX()) * Config.pixelsPerGridUnit;
-            yPoints[i] = (verts.get(i).getY() + offset.getY()) * Config.pixelsPerGridUnit;
+            xPoints[i] = (vertices.get(i).getX() + offset.getX()) * Config.pixelsPerGridUnit;
+            yPoints[i] = (vertices.get(i).getY() + offset.getY()) * Config.pixelsPerGridUnit;
         }
 
-        context.strokePolygon(xPoints, yPoints, verts.size());
+        context.strokePolygon(xPoints, yPoints, vertices.size());
     }
 
     private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset, double rotation, Vector2 pivotPoint)

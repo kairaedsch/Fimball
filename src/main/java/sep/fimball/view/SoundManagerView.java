@@ -56,9 +56,9 @@ public class SoundManagerView
         sfxVolume = new SimpleDoubleProperty();
         sfxVolume.bind(soundManagerViewModel.sfxVolumeProperty());
 
-        // Erstelle Listener zum stoppen der backgroundmusic
+        // Erstelle Listener zum stoppen der Hintergrundmusik
         Observer stopObserver = (o, args) -> stopBackgroundMusic();
-        soundManagerViewModel.addStopObvserver(stopObserver);
+        soundManagerViewModel.addStopObserver(stopObserver);
 
         // Erstelle Listener zum abspielen der Sounds
         Observer playClipObserver = (o, clipPath) -> play((Sound) clipPath);
@@ -84,7 +84,7 @@ public class SoundManagerView
             }
             catch (MediaException e)
             {
-
+                System.err.println("MediaPlayer not loaded");
             }
 
             final Optional<MediaPlayer> newMediaPlayer = mediaPlayer;
@@ -125,19 +125,19 @@ public class SoundManagerView
     }
 
     /**
-     * Versucht den {@code creater} mit dem Parameter {@code input} auszuführen.
+     * Versucht den {@code creator} mit dem Parameter {@code input} auszuführen.
      *
-     * @param creater Der Creater, welcher ein Object vom Typ {@code R} erstellen soll.
-     * @param input   Der Input für den {@code creater}.
+     * @param creator Der Creator, welcher ein Object vom Typ {@code R} erstellen soll.
+     * @param input   Der Input für den {@code creator}.
      * @param <T>     Der Typ vom {@code input}.
-     * @param <R>     Der Typ vom Output von {@code creater}.
-     * @return Gibt entweder ein Optional mit dem vom {@code creater} zurück gegebenen Object zurück, oder ein Optional.emtpy, falls ein Fehler aufgetreten ist.
+     * @param <R>     Der Typ vom Output von {@code creator}.
+     * @return Gibt entweder ein Optional mit dem vom {@code creator} zurück gegebenen Object zurück, oder ein Optional.empty, falls ein Fehler aufgetreten ist.
      */
-    private <T, R> Optional<R> tryToLoad(Function<T, R> creater, T input)
+    private <T, R> Optional<R> tryToLoad(Function<T, R> creator, T input)
     {
         try
         {
-            return Optional.of(creater.apply(input));
+            return Optional.of(creator.apply(input));
         }
         /* Wir fangen hier Throwable, da es egal ist, wenn wir Sounds nicht abspielen können. Wir wollen aber auf gar keinen Fall,
          * dass das gesamte Spiel abstürzt, nur weil ein Sound nicht abgespielt werden kann. */

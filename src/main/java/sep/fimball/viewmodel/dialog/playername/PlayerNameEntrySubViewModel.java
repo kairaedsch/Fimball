@@ -51,7 +51,6 @@ public class PlayerNameEntrySubViewModel
      *
      * @return Der Name des Spielers.
      */
-    // TODO bind bidirekt
     public StringProperty playerNameProperty()
     {
         return playerName;

@@ -43,7 +43,7 @@ public class BaseMediaElement
      */
     private Map<Integer, BaseMediaElementEvent> eventMap;
 
-    private Map<Integer, Vector2> localCoords;
+    private Map<Integer, Vector2> localCoordinates;
 
     /**
      * Die Höhe des Elements.
@@ -55,13 +55,13 @@ public class BaseMediaElement
      *
      * @param name             Der Name des BaseElements im Editor.
      * @param description      Die Beschreibung des BaseElements im Editor.
-     * @param elementHeight    Die Höhe des Elements in Grideinheiten.
+     * @param elementHeight    Die Höhe des Elements in Grid-Einheiten.
      * @param canRotate        Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
      * @param rotationAccuracy Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
      * @param elementImage     Das Bild des BaseElements.
      * @param eventMap         Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
-    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoords)
+    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoordinates)
     {
         this.name = name;
         this.description = description;
@@ -69,7 +69,7 @@ public class BaseMediaElement
         this.rotationAccuracy = rotationAccuracy;
         this.elementImage = new SimpleObjectProperty<>(elementImage);
         this.eventMap = eventMap;
-        this.localCoords = localCoords;
+        this.localCoordinates = localCoordinates;
         this.elementHeight = elementHeight;
     }
 
@@ -133,9 +133,9 @@ public class BaseMediaElement
         return elementImage;
     }
 
-    public Map<Integer, Vector2> getLocalCoords()
+    public Map<Integer, Vector2> getLocalCoordinates()
     {
-        return Collections.unmodifiableMap(localCoords);
+        return Collections.unmodifiableMap(localCoordinates);
     }
 
     /**
