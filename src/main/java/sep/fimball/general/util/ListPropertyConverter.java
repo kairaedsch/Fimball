@@ -68,7 +68,6 @@ public class ListPropertyConverter
                             if(p != newPos)
                             {
                                 map.put(newPos, listPropertyConverted.get(newPos));
-                                ConvertedT temp = listPropertyConverted.get(p);
                                 if (map.containsKey(p)) listPropertyConverted.set(newPos, map.get(p));
                                 else listPropertyConverted.set(newPos, listPropertyConverted.get(p));
                             }
