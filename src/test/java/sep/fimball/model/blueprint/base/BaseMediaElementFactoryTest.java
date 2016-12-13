@@ -31,7 +31,7 @@ public class BaseMediaElementFactoryTest
         event.soundName = TEST_STRING;
 
         BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoords = new BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson();
-        localCoords.localCoordinates = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
+        localCoords.localCoord = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
         localCoords.rotation = TEST_INT;
 
         BaseElementJson.MediaElementJson testJson = new BaseElementJson.MediaElementJson();

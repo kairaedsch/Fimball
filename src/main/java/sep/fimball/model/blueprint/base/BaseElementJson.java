@@ -227,7 +227,7 @@ public class BaseElementJson
         {
             public int rotation;
 
-            public Vector2 localCoordinates;
+            public Vector2 localCoord;
         }
     }
 

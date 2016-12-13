@@ -53,14 +53,14 @@ public class BaseMediaElementFactory
             }
         }
 
-        Map<Integer, Vector2> localCoordinates = new HashMap<>();
+        Map<Integer, Vector2> localCoords = new HashMap<>();
 
         if (mediaElement.localCoordinates != null)
         {
-            for (BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoordinate : mediaElement.localCoordinates)
+            for (BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson localCoord : mediaElement.localCoordinates)
             {
-                nullCheck(localCoordinate.localCoordinates);
-                localCoordinates.put(localCoordinate.rotation, localCoordinate.localCoordinates);
+                nullCheck(localCoord.localCoord);
+                localCoords.put(localCoord.rotation, localCoord.localCoord);
             }
         }
 
@@ -74,6 +74,6 @@ public class BaseMediaElementFactory
             elementImage = new ElementImage(baseElementId);
         }
 
-        return new BaseMediaElement(name, description, mediaElement.general.elementHeight, canRotate, rotationAccuracy, elementImage, eventMap, localCoordinates);
+        return new BaseMediaElement(name, description, mediaElement.general.elementHeight, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
     }
 }
