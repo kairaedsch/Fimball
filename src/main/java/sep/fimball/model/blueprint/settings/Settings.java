@@ -57,7 +57,7 @@ public class Settings
      *
      * @param pathToSettings Der Pfad zur Datei, aus der die Einstellungen geladen werden sollen.
      */
-    private Settings(Path pathToSettings)
+    Settings(Path pathToSettings)
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
         language = new SimpleObjectProperty<>();
