@@ -19,6 +19,8 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
+import java.util.Optional;
+
 /**
  * Das MainMenuViewModel stellt der View Daten über alle Flipper-Automaten zur Verfügung und ermöglicht den Start eines Automaten, wobei zuvor noch die Spieler festgelegt werden müssen.
  */
@@ -121,19 +123,19 @@ public class MainMenuViewModel extends WindowViewModel
         {
             return;
         }
-        int index = findSelectedIndex();
+        Optional<Integer> index = findSelectedIndex();
         switch (keyEvent.getCode())
         {
             case UP:
-                if (index >= 1 && index >= 0)
+                if (index.isPresent() && index.get() >= 1 )
                 {
-                    pinballMachinePreviewSubViewModelList.get(index - 1).selectPinballMachine();
+                    pinballMachinePreviewSubViewModelList.get(index.get() - 1).selectPinballMachine();
                 }
                 break;
             case DOWN:
-                if (index < pinballMachinePreviewSubViewModelList.size() - 1 && index >= 0)
+                if (index.isPresent() && index.get() < pinballMachinePreviewSubViewModelList.size() - 1)
                 {
-                    pinballMachinePreviewSubViewModelList.get(index + 1).selectPinballMachine();
+                    pinballMachinePreviewSubViewModelList.get(index.get() + 1).selectPinballMachine();
                 }
                 break;
         }
@@ -144,17 +146,16 @@ public class MainMenuViewModel extends WindowViewModel
      *
      * @return Der Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
      */
-    private int findSelectedIndex()
+    private Optional<Integer> findSelectedIndex()
     {
         for (int i = 0; i < pinballMachinePreviewSubViewModelList.size(); ++i)
         {
             if (pinballMachinePreviewSubViewModelList.get(i).selectedProperty().get())
             {
-                return i;
+                return Optional.of(i);
             }
         }
-        //TODO - -1 seems like a hack
-        return -1;
+        return Optional.empty();
     }
 
     @Override
