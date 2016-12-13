@@ -10,11 +10,11 @@ public class RampClimbingCollision implements CollisionType
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        double BALL_RADIUS = info.getBall().getCollider().getRadius();
+        double ballRadius = info.getBall().getCollider().getRadius();
 
         ColliderShape rampColliderShape = info.getOtherColliderShape();
         PhysicsElement physicsElement = info.getOtherPhysicsElement();
-        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(BALL_RADIUS, BALL_RADIUS));
+        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(ballRadius, ballRadius));
 
         //Maximale x und y Position der Rampen ColliderShape.
         Vector2 maxPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
@@ -55,7 +55,7 @@ public class RampClimbingCollision implements CollisionType
         double ballPos = maxPos.minus(intersectionAtBallPos).magnitude();
 
         //Rechnet die Höhe des Balls basierend auf der Position des Balls und der Länge der gesamten Rampe aus.
-        double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - BALL_RADIUS)))) * PhysicsConfig.MAX_BALL_HEIGHT;
+        double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - ballRadius)))) * PhysicsConfig.MAX_BALL_HEIGHT;
         //Da der Ball an Höhe gewinnen soll setze die Höhe des Balls auf das Größere von ballHeight und der aktuellen Ball Höhe.
         info.getBall().setHeight(Math.max(ballHeight, info.getBall().getHeight()));
     }
