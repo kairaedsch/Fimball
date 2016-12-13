@@ -23,12 +23,12 @@ public class PinballMachineTest
         PinballMachine pinballMachine = new PinballMachine("test", "id", Collections.emptyList(), Mockito.mock(PinballMachineManager.class));
 
         // Füge PlacedElements in den Automaten ein
-        PlacedElement placedElementOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-2, -2));
-        PlacedElement placedElementTwo = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(2, 2));
+        PlacedElement placedElementOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("hinderniss_eckig_4"), new Vector2(-2, -2));
+        PlacedElement placedElementTwo = pinballMachine.addElement(BaseElementManager.getInstance().getElement("hinderniss_eckig_4"), new Vector2(2, 2));
         assertThat("Element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2()).get(), is(placedElementOne));
 
         // Füge PlacedElements in den Automaten ein
-        PlacedElement placedElementOverOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-1, -1));
+        PlacedElement placedElementOverOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("hinderniss_eckig_4"), new Vector2(-1, -1));
 
         // Point auf die Position von "Element eins" und "Element über Element eins"
         assertThat("Element über element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2()).get(), is(placedElementOverOne));

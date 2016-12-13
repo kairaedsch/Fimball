@@ -29,9 +29,7 @@ public class PinballMachineSaveTest
     {
         // Erstellt einen leeren Automaten, TODO dependency injection?
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-
         List<PlacedElement> pinballMachineElements = new ArrayList<>();
-        pinballMachineElements.addAll(pinballMachine.elementsProperty().get());
 
         // Lädt alle im Spiel verfügbaren BaseElements und fügt sie in den Automaten ein, TODO test custom element?
         int i = 0;

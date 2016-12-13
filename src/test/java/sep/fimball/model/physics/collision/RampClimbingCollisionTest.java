@@ -2,6 +2,7 @@ package sep.fimball.model.physics.collision;
 
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.collider.PolygonColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
@@ -26,9 +27,12 @@ public class RampClimbingCollisionTest
         ColliderShape rampCollisionShape = mock(PolygonColliderShape.class);
         PhysicsElement otherPhysicsElement = mock(PhysicsElement.class);
         BasePhysicsElement basePhysicsElement = mock(BasePhysicsElement.class);
+        CircleColliderShape ballCollider = mock(CircleColliderShape.class);
 
         when(ballPhysicsElement.getPosition()).thenCallRealMethod();
         when(ballPhysicsElement.getHeight()).thenCallRealMethod();
+        when(ballPhysicsElement.getCollider()).thenReturn(ballCollider);
+        when(ballCollider.getRadius()).thenReturn(2.0);
         doCallRealMethod().when(ballPhysicsElement).setPosition(notNull());
         doCallRealMethod().when(ballPhysicsElement).setHeight(anyDouble());
         when(rampCollisionShape.getExtremePos(anyDouble(), notNull(), eq(false))).thenReturn(new Vector2(0, 0));
