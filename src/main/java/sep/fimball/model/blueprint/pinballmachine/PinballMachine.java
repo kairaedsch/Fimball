@@ -80,7 +80,6 @@ public class PinballMachine
         {
             addHighscore(highscore, false);
         }
-        addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
     }
 
     /**
@@ -251,6 +250,7 @@ public class PinballMachine
         if (!elementsLoaded)
         {
             elementsLoaded = true;
+            addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
             pinballMachineManager.loadMachineElements(this);
         }
     }

@@ -5,7 +5,7 @@ package sep.fimball.general.data;
  */
 public class PhysicsConfig
 {
-    public static final double GRAVITY_HEIGHT = 5;
+    public static final double HEIGHT_GRAVITY = 5;
 
     public static final double MAX_BALL_HEIGHT = 2;
 

@@ -44,7 +44,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     {
         // Wende Schwerkraft auf den Ball an
         setVelocity(getVelocity().plus(new Vector2(0.0, PhysicsConfig.GRAVITY * deltaTime)));
-        setHeight(height - PhysicsConfig.GRAVITY_HEIGHT * deltaTime);
+        setHeight(height - PhysicsConfig.HEIGHT_GRAVITY * deltaTime);
 
         // Bewege den Ball
         setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
