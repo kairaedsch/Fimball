@@ -12,12 +12,12 @@ public class RampClimbingCollision implements CollisionType
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        ColliderShape shape = info.getOtherColliderShape();
+        ColliderShape rampColliderShape = info.getOtherColliderShape();
         PhysicsElement physicsElement = info.getOtherPhysicsElement();
         Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(RADIUS, RADIUS));
 
-        Vector2 maxPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
-        Vector2 minPos = shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
+        Vector2 maxPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
+        Vector2 minPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
 
         if (relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
         {
@@ -38,18 +38,20 @@ public class RampClimbingCollision implements CollisionType
             minPos = new Vector2(maxPosX, minPos.getY());
         }
 
-        Vector2 gerade_direction = new Vector2(0, -1).rotate(Math.toRadians(physicsElement.getRotation()));
-        Vector2 gerade_direction_normale = gerade_direction.normal();
+        //Eine Gerade die in Richtung der Rampe vom Beginn der Auffahrt zum höchsten Punkt der Auffahrt zeigt.
+        Vector2 line = new Vector2(0, -1).rotate(Math.toRadians(physicsElement.getRotation()));
+        //Die linksseitige Normale von line.
+        Vector2 lineNormal = line.normal();
 
-        Vector2 schnittpunkt = getIntersection(maxPos, gerade_direction, minPos, gerade_direction_normale);
-        double fieldLength = maxPos.minus(schnittpunkt).magnitude();
+        Vector2 intersectionAtRampTop = getIntersection(maxPos, line, minPos, lineNormal);
+        double rampLength = maxPos.minus(intersectionAtRampTop).magnitude();
 
-        Vector2 schnittpunkt2 = getIntersection(maxPos, gerade_direction, relativeBallPos, gerade_direction_normale);
-        double ballPos = maxPos.minus(schnittpunkt2).magnitude();
+        Vector2 intersectionAtBallPos = getIntersection(maxPos, line, relativeBallPos, lineNormal);
+        double ballPos = maxPos.minus(intersectionAtBallPos).magnitude();
 
-        double height = Math.max(0, Math.min(1, (ballPos / (fieldLength - RADIUS)))) * BallPhysicsElement.MAX_HEIGHT;
-        System.out.println(height);
-        info.getBall().setHeight(Math.max(height, info.getBall().getHeight()));
+        //Rechnet die Höhe des Balls basierend auf der Position des Balls und der Länge der gesamten Rampe aus.
+        double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - RADIUS)))) * BallPhysicsElement.MAX_HEIGHT;
+        info.getBall().setHeight(Math.max(ballHeight, info.getBall().getHeight()));
     }
 
     /**

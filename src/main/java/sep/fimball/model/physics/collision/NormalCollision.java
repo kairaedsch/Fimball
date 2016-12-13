@@ -1,9 +1,6 @@
 package sep.fimball.model.physics.collision;
 
-import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
-
 /**
  * Diese Klasse repräsentiert eine Kollision, bei der der Ball einfach abprallt und dadurch an Geschwindigkeit verliert, es wirken keine weiteren Kräfte.
  */
