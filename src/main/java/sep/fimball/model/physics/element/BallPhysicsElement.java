@@ -137,9 +137,4 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     {
         return height;
     }
-
-    public double getScale()
-    {
-        return 1 + height / 4;
-    }
 }

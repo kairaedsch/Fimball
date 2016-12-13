@@ -75,7 +75,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
 
-        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{ gameElement.scaleProperty()});
+        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{ gameElement.heightProperty()});
         SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
         gameSession.getWorld().gameElementsAidsAidsAidsAidsProperty().set(sortedList);
@@ -204,7 +204,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
 
-        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.scaleProperty()}));
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         double maxElementPos = 0;
         List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
@@ -319,7 +319,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             {
                 elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
                 elementEventArgs.getGameElement().setRotation(elementEventArgs.getRotation());
-                elementEventArgs.getGameElement().setScale(elementEventArgs.getScale());
+                elementEventArgs.getGameElement().setHeight(elementEventArgs.getHeight());
             }
         }
 

@@ -67,7 +67,7 @@ public class SpriteSubViewModel
         rotation.bind(gameElement.rotationProperty());
 
         scale = new SimpleDoubleProperty();
-        scale.bind(gameElement.scaleProperty());
+        scale.bind(Bindings.add(1, Bindings.divide(gameElement.heightProperty(), 4)));
 
         currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 

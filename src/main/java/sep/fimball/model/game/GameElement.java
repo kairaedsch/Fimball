@@ -1,11 +1,6 @@
 package sep.fimball.model.game;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
-import javafx.util.Callback;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -34,7 +29,7 @@ public class GameElement implements HandlerGameElement
     /**
      * Die Skalierung des Elements.
      */
-    private DoubleProperty scale;
+    private DoubleProperty height;
 
     /**
      * Diese Zahl zählt wie oft das GameElement in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
@@ -70,7 +65,7 @@ public class GameElement implements HandlerGameElement
         this.hitCount = new SimpleIntegerProperty();
         this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
-        this.scale = new SimpleDoubleProperty(1);
+        this.height = new SimpleDoubleProperty(0);
 
         if (bind)
         {
@@ -208,11 +203,11 @@ public class GameElement implements HandlerGameElement
     /**
      * Setzt die Skalierung des Elements.
      *
-     * @param scale Die neue Skalierung des Elements.
+     * @param height Die neue Skalierung des Elements.
      */
-    public void setScale(double scale)
+    public void setHeight(double height)
     {
-        this.scale.set(scale);
+        this.height.set(height);
     }
 
     /**
@@ -220,9 +215,9 @@ public class GameElement implements HandlerGameElement
      *
      * @return Die Skalierung des Elements.
      */
-    public DoubleProperty scaleProperty()
+    public DoubleProperty heightProperty()
     {
-        return scale;
+        return height;
     }
 
     public static int compare(GameElement g1, GameElement g2)
@@ -240,7 +235,7 @@ public class GameElement implements HandlerGameElement
             {
                 if (g2t == BaseElementType.RAMP)
                 {
-                    return g1.scaleProperty().get() > 1 ? 1 : -1;
+                    return g1.heightProperty().get() > 0 ? 1 : -1;
                 }
                 else
                 {

@@ -284,10 +284,9 @@ public class PhysicsHandler<GameElementT>
 
             if (element != null)
             {
-                double scale = element == ballPhysicsElement ? ballPhysicsElement.getScale() : 1;
-                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), scale));
+                double height = element == ballPhysicsElement ? ballPhysicsElement.getHeight() : 0;
+                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), height));
             }
-
         }
     }
 
