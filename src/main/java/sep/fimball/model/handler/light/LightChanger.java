@@ -2,23 +2,52 @@ package sep.fimball.model.handler.light;
 
 import sep.fimball.general.data.Vector2;
 
+/**
+ * LightChanger stellt fest, ob Lichter angeschaltet werden soll oder nicht.
+ */
 public abstract class LightChanger
 {
-    private boolean direction;
+    /**
+     * Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
+     */
+    private boolean revertedAnimation;
 
-    public LightChanger(boolean direction)
+    /**
+     * Erstellt einen neuen LightChanger.
+     * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
+     */
+    LightChanger(boolean revertedAnimation)
     {
-        this.direction = direction;
+        this.revertedAnimation = revertedAnimation;
     }
 
-    public final boolean determineStatus(Vector2 position, long delta)
+    /**
+     * Gibt zurück, ob das Licht an der gegebenen Position in Abhängigkeit davon, ob die Animation vorwärts oder
+     * rückwärts abgespielt wird, angeschaltet werden soll.
+     *
+     * @param position Die Position des Lichts.
+     * @param delta Die Zeit, die seit dem Starten des LightChangers vergangen ist.
+     * @return {@code true}, wenn das Licht an sein soll, {@code false} sonst.
+     */
+    final boolean determineLightStatusWithAnimation(Vector2 position, long delta)
     {
-        return determineStatusIntern(position, (direction ? (getDuration() - delta) : delta));
+        return determineLightStatus(position, (revertedAnimation ? (getDuration() - delta) : delta));
     }
 
-    protected abstract boolean determineStatusIntern(Vector2 position, long delta);
+    /**
+     * Gibt zurück. ob das Licht an der gegebenen Position angeschaltet werden soll.
+     *
+     * @param position Die Position des Lichts.
+     * @param delta Die vergangene Zeit.
+     * @return {@code true}, wenn das Licht an sein soll, {@code false} sonst.
+     */
+    protected abstract boolean determineLightStatus(Vector2 position, long delta);
 
-    public long getDuration()
+    /**
+     * Gibt die Dauer zurück, in der dieser LightChanger entscheidet, ob die Lichter angeschalten werden.
+     * @return Die Dauer.
+     */
+    long getDuration()
     {
         return 10000;
     }

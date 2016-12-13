@@ -4,9 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.transformation.FilteredList;
 import javafx.util.Duration;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.handler.*;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.GameHandler;
+import sep.fimball.model.handler.HandlerGameElement;
+import sep.fimball.model.handler.HandlerGameSession;
 import sep.fimball.model.media.Animation;
 
 import java.util.ArrayList;
@@ -24,29 +26,43 @@ public class LightHandler implements GameHandler
      */
     private FilteredList<? extends HandlerGameElement> lights;
 
-    private Timeline gameLoop;
+    /**
+     * Die Schleife, in der die Lichter gewechselt werden.
+     */
+    private Timeline lightChangeLoop;
 
+    /**
+     * Die LightChangers, die benutzt werden, um die Lichter zu wechseln.
+     */
     private List<LightChanger> lightChangers;
 
+    /**
+     * Der aktuelle LightChanger.
+     */
     private LightChanger currentLightChanger;
+
+    /**
+     * Die Zeit, zu der der aktuelle LightChanger gestartet wurde.
+     */
     private long currentLightChangerStart;
 
     /**
      * Erstellt einen neuen LightHandler.
+     * @param gameSession Die zugehörige GameSession.
      */
     public LightHandler(HandlerGameSession gameSession)
     {
         lights = new FilteredList<>(gameSession.getWorld().gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
-        gameLoop = new Timeline();
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        lightChangeLoop = new Timeline();
+        lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame keyFrame = new KeyFrame(Duration.millis(25), event -> changeLights());
-        gameLoop.getKeyFrames().add(keyFrame);
+        lightChangeLoop.getKeyFrames().add(keyFrame);
 
         lightChangers = new ArrayList<>();
         lightChangers.add(new RandomLightChanger());
-        lightChangers.add(new CircleLightChanger(true, gameSession.gameBallProperty().get().positionProperty(), false));
-        lightChangers.add(new CircleLightChanger(false, gameSession.gameBallProperty().get().positionProperty(), true));
+        lightChangers.add(new FormLightChanger(true, gameSession.gameBallProperty().get().positionProperty(), false));
+        lightChangers.add(new FormLightChanger(false, gameSession.gameBallProperty().get().positionProperty(), true));
         lightChangers.add(new LineLightChanger(true, true));
         lightChangers.add(new LineLightChanger(true, false));
         lightChangers.add(new LineLightChanger(false, true));
@@ -56,9 +72,9 @@ public class LightHandler implements GameHandler
     }
 
     /**
-     * Wechselt die Farbe der verwalteten Lichter zufällig auf andere verfügbaren Farben.
+     * Wechselt die Lichter.
      */
-    public void changeLights()
+    private void changeLights()
     {
         long now = System.currentTimeMillis();
         long delta = now - currentLightChangerStart;
@@ -73,7 +89,7 @@ public class LightHandler implements GameHandler
         for (HandlerGameElement light : lights)
         {
             Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
-            if (animation.isPresent() && currentLightChanger.determineStatus(light.positionProperty().get(), delta))
+            if (animation.isPresent() && currentLightChanger.determineLightStatusWithAnimation(light.positionProperty().get(), delta))
             {
                 light.setCurrentAnimation(animation);
             }
@@ -85,11 +101,11 @@ public class LightHandler implements GameHandler
     {
         if(gameEvent == GameEvent.BALL_LOST)
         {
-            gameLoop.stop();
+            lightChangeLoop.stop();
         }
         if(gameEvent == GameEvent.BALL_SPAWNED)
         {
-            gameLoop.play();
+            lightChangeLoop.play();
         }
     }
 }

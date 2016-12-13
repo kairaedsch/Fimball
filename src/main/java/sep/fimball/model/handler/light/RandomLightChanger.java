@@ -2,15 +2,21 @@ package sep.fimball.model.handler.light;
 
 import sep.fimball.general.data.Vector2;
 
+/**
+ * RandomLightChanger wechselt zufällig das Licht.
+ */
 public class RandomLightChanger extends LightChanger
 {
-    public RandomLightChanger()
+    /**
+     * Erstellt einen neuen RandomLightChanger.
+     */
+    RandomLightChanger()
     {
         super(true);
     }
 
     @Override
-    protected boolean determineStatusIntern(Vector2 position, long delta)
+    protected boolean determineLightStatus(Vector2 position, long delta)
     {
         return Math.random() > 0.5;
     }

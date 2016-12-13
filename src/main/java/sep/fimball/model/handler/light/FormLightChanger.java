@@ -3,20 +3,37 @@ package sep.fimball.model.handler.light;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 
-public class CircleLightChanger extends LightChanger
+/**
+ * FormLightChanger entscheidet in größer werdenden Kreisen oder Quadraten, ob Lichter angeschalten werden sollen.
+ */
+public class FormLightChanger extends LightChanger
 {
+    /**
+     * Die Mitte des Kreises, um den die Lichter angeschalten werden.
+     */
     private final ReadOnlyObjectProperty<Vector2> center;
-    private final boolean round;
 
-    public CircleLightChanger(boolean direction, ReadOnlyObjectProperty<Vector2> center, boolean round)
+    /**
+     * Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
+     */
+    private final boolean circle;
+
+    /**
+     * Erstellt einen neuen FormLightChanger.
+     *
+     * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
+     * @param center Die Mitte des Kreises, um den die Lichter angeschalten werden.
+     * @param circle Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
+     */
+    FormLightChanger(boolean revertedAnimation, ReadOnlyObjectProperty<Vector2> center, boolean circle)
     {
-        super(direction);
+        super(revertedAnimation);
         this.center = center;
-        this.round = round;
+        this.circle = circle;
     }
 
     @Override
-    public boolean determineStatusIntern(Vector2 position, long delta)
+    public boolean determineLightStatus(Vector2 position, long delta)
     {
         // units per second
         double speed = 40;
@@ -27,7 +44,7 @@ public class CircleLightChanger extends LightChanger
         Vector2 relativePosition = position.minus(center.get());
 
         double distance;
-        if(round)
+        if(circle)
         {
             width = 8;
             distance = Math.abs(radius - relativePosition.magnitude());
