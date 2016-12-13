@@ -5,13 +5,13 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static sep.fimball.general.data.PhysicsConfig.BALL_RADIUS;
-
 public class RampClimbingCollision implements CollisionType
 {
     @Override
     public void applyCollision(CollisionInfo info)
     {
+        double BALL_RADIUS = info.getBall().getCollider().getRadius();
+
         ColliderShape rampColliderShape = info.getOtherColliderShape();
         PhysicsElement physicsElement = info.getOtherPhysicsElement();
         Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(BALL_RADIUS, BALL_RADIUS));
