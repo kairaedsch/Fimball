@@ -14,6 +14,7 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.window.WindowType;
+import sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.ViewModel;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
@@ -37,6 +38,8 @@ public class SceneManagerView
      */
     private GaussianBlur blurEffect;
 
+    private Stage stage;
+
     /**
      * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welcher dann die Nodes der jeweils aktiven Views eingefügt werden.
      * Auch wird ein SceneManagerViewModel geholt, an das sich dieses SceneManagerView bindet, um bei Änderungen des ViewModels reagieren zu können,
@@ -47,6 +50,8 @@ public class SceneManagerView
      */
     public SceneManagerView(Stage stage, SceneManagerViewModel sceneManagerViewModel)
     {
+        this.stage = stage;
+
         // Blureffekt für das glass.
         blurEffect = new GaussianBlur(DesignConfig.stageDividerLayerBlur);
 
@@ -207,6 +212,9 @@ public class SceneManagerView
         try
         {
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
+            // TODO - cancer
+            if (viewType == WindowType.EDITOR_WINDOW)
+                ((PinballMachineEditorView)((Object)view)).setStage(stage);
             view.setViewModel(viewModel);
         }
         catch (ClassCastException e)

@@ -8,6 +8,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.tools.ViewLoader;
@@ -102,6 +103,15 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
     }
 
+    public void setStage(Stage stage)
+    {
+        stage.addEventFilter(MouseEvent.MOUSE_MOVED, event ->
+        {
+            previewBot.setTranslateX(event.getX());
+            previewBot.setTranslateY(event.getY());
+        });
+    }
+
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den bearbeiteten Automaten spielen möchte.
      */
@@ -136,13 +146,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private void zoomOutClicked()
     {
         pinballMachineEditorViewModel.zoomOut();
-    }
-
-    @FXML
-    private void mouseMoved(MouseEvent event)
-    {
-        previewBot.setTranslateX(event.getX());
-        previewBot.setTranslateY(event.getY());
     }
 
     /**

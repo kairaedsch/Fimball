@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane onMouseMoved="#mouseMoved" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
@@ -124,9 +124,9 @@
               </SplitPane>
           </children>
       </VBox>
-      <Pane fx:id="previewBot" prefHeight="100.0" prefWidth="100.0">
+      <Pane fx:id="previewBot" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0">
          <children>
-            <Pane fx:id="previewTop" prefHeight="100.0" prefWidth="100.0" />
+            <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0" />
          </children>
       </Pane>
    </children>
