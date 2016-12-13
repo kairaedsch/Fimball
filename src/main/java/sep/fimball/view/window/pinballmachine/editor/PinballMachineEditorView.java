@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
+import sep.fimball.view.tools.ImageCache;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
@@ -98,9 +99,28 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
-        previewTop.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getTopBackgroundPath()));
+        previewTop.styleProperty().bind(DesignConfig.fillBackgroundImageCss(pinballMachineEditorViewModel.getTopBackgroundPath()));
+        previewBot.styleProperty().bind(DesignConfig.fillBackgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
         previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
-        previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
+
+        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue != null)
+            {
+                ImageCache cache = ImageCache.getInstance();
+                previewTop.prefWidthProperty().set(cache.getImage(newValue).widthProperty().get());
+                previewTop.prefHeightProperty().set(cache.getImage(newValue).heightProperty().get());
+            }
+        });
+        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue != null)
+            {
+                ImageCache cache = ImageCache.getInstance();
+                previewBot.prefWidthProperty().set(cache.getImage(newValue).widthProperty().get());
+                previewBot.prefHeightProperty().set(cache.getImage(newValue).heightProperty().get());
+            }
+        });
     }
 
     public void setStage(Stage stage)

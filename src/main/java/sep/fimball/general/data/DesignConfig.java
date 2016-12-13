@@ -74,4 +74,9 @@ public class DesignConfig
     {
         return Bindings.concat("-fx-background-image: url(\"file:///", path, "\");");
     }
+
+    public static StringExpression fillBackgroundImageCss(ReadOnlyStringProperty path)
+    {
+        return Bindings.concat(DesignConfig.backgroundImageCss(path), "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;");
+    }
 }

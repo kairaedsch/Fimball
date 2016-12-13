@@ -22,7 +22,6 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
-import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -101,6 +100,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private BooleanProperty availableElementSelected;
 
+    private DoubleProperty previewWidth;
+    private DoubleProperty previewHeight;
+
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
      *
@@ -138,6 +140,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         botBackgroundPath = new SimpleStringProperty();
         availableElementSelected = new SimpleBooleanProperty();
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
+
+        previewWidth = new SimpleDoubleProperty(0.0);
+        previewHeight = new SimpleDoubleProperty(0.0);
     }
 
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
@@ -245,6 +250,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
         topBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0));
         botBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0));
+        previewWidth.set(selectedAvailableElement.getMedia().getElementHeight());
+        previewHeight.set(selectedAvailableElement.getMedia().getElementHeight());
     }
 
     /**
@@ -398,5 +405,15 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public ReadOnlyBooleanProperty isAvailableElementSelected()
     {
         return availableElementSelected;
+    }
+
+    public ReadOnlyDoubleProperty previewWidthProperty()
+    {
+        return previewWidth;
+    }
+
+    public ReadOnlyDoubleProperty previewHeightProperty()
+    {
+        return previewHeight;
     }
 }

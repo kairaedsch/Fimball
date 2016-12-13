@@ -124,9 +124,9 @@
               </SplitPane>
           </children>
       </VBox>
-      <Pane fx:id="previewBot" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0">
+      <Pane fx:id="previewBot" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0" />
+            <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
    </children>
