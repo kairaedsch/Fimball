@@ -210,8 +210,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void dragged(double startX, double startY, double endX, double endY, MouseButton button)
     {
-        double divX = (((endX-startX) / Config.pixelsPerGridUnit) / cameraZoom.get());
-        double divY = (((endY-startY) / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divX = (((endX - startX) / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divY = (((endY - startY) / Config.pixelsPerGridUnit) / cameraZoom.get());
 
         if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {
@@ -272,8 +272,18 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             }
             else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.get().isPresent() && button == MouseButton.PRIMARY)
             {
+                if (selectedAvailableElement.get().get().getType() == BaseElementType.BALL)
+                {
+                    for (PlacedElement placedElement : pinballMachine.elementsProperty())
+                    {
+                        if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
+                        {
+                            pinballMachine.removeElement(placedElement);
+                            break;
+                        }
+                    }
+                }
                 PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get().get(), gridPosition.round());
-                setMouseMode(MouseMode.SELECTING);
                 setSelectedPlacedElement(Optional.of(placedElement));
             }
         }
