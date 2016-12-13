@@ -23,8 +23,7 @@ public class Vector2
      */
     public Vector2()
     {
-        x = 0.0;
-        y = 0.0;
+        this(0, 0);
     }
 
     /**

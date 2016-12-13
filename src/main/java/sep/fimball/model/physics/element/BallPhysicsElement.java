@@ -1,5 +1,6 @@
 package sep.fimball.model.physics.element;
 
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.CircleColliderShape;
@@ -13,25 +14,9 @@ import sep.fimball.model.physics.collider.WorldLayer;
 public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
     /**
-     * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird. Dabei wurde die Neigung des Tisches schon mit eingerechnet: 9.81 m/s^2 * sin(7°), wobei 9.81 m/s^2 die Schwerkraftkonstante und 7° die angenommene Neigung ist.
-     */
-    private final double GRAVITY = 1.19554 * 20;
-
-    public static final double GRAVITY_HEIGHT = 5;
-
-    public static final double MAX_HEIGHT = 2;
-
-    public static final double RADIUS = 2;
-
-    /**
      * Die Geschwindigkeit des Balls.
      */
     private Vector2 velocity;
-
-    /**
-     * Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
-     */
-    private double angularVelocity;
 
     /**
      * Die Höhe des Balls.
@@ -51,7 +36,6 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         super(gameElement, position, rotation, basePhysicsElement);
 
         this.velocity = new Vector2();
-        this.angularVelocity = 0.0;
         this.height = 0;
     }
 
@@ -59,9 +43,8 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     public void update(double deltaTime)
     {
         // Wende Schwerkraft auf den Ball an
-        setVelocity(getVelocity().plus(new Vector2(0.0, GRAVITY * deltaTime)));
-
-        setHeight(Math.max(0, height - GRAVITY_HEIGHT * deltaTime));
+        setVelocity(getVelocity().plus(new Vector2(0.0, PhysicsConfig.GRAVITY * deltaTime)));
+        setHeight(height - PhysicsConfig.GRAVITY_HEIGHT * deltaTime);
 
         // Bewege den Ball
         setPosition(getPosition().plus(getVelocity().scale(deltaTime)));
@@ -89,26 +72,6 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     }
 
     /**
-     * Gibt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt", zurück.
-     *
-     * @return Die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
-     */
-    public double getAngularVelocity()
-    {
-        return angularVelocity;
-    }
-
-    /**
-     * Setzt die Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt" auf den übergebenen Wert.
-     *
-     * @param angularVelocity Die neue Geschwindigkeit der Rotation des Balls um die Achse, die aus dem Spielfeld "herausragt".
-     */
-    public void setAngularVelocity(double angularVelocity)
-    {
-        this.angularVelocity = angularVelocity;
-    }
-
-    /**
      * Gibt die Form des Colliders des Balls zurück.
      *
      * @return Die Form des Colliders des Balls.
@@ -125,14 +88,24 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     public WorldLayer getLayer()
     {
-        return height > 1 ? WorldLayer.RAMP : WorldLayer.GROUND;
+        return height > (PhysicsConfig.MAX_BALL_HEIGHT / 2.0) ? WorldLayer.RAMP : WorldLayer.GROUND;
     }
 
+    /**
+     * Setzt die Höhe des Balles. Diese muss zwischen PhysicsConfig.MAX_BALL_HEIGHT und 0 liegen und wird bei Bedarf angepasst.
+     *
+     * @param height Die neue Höhe des Balles.
+     */
     public void setHeight(double height)
     {
-        this.height = Math.min(2, Math.max(0, height));
+        this.height = Math.min(PhysicsConfig.MAX_BALL_HEIGHT, Math.max(0, height));
     }
 
+    /**
+     * Gibt die aktuelle Höhe des Balles zurück.
+     *
+     * @return Die aktuelle Höhe des Balles.
+     */
     public double getHeight()
     {
         return height;

@@ -32,7 +32,7 @@ public class GameViewModelTest
         GameElement ball = mock(GameElement.class);
 
         SimpleObjectProperty<GameElement> ballProperty = new SimpleObjectProperty<>(ball);
-        when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(0, 0)));
+        when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
         when(gameSessionMock.gameBallProperty()).thenReturn(ballProperty);
 
         Player player = new Player("TestPlayer");
@@ -74,7 +74,7 @@ public class GameViewModelTest
         GameElement ball = mock(GameElement.class);
 
         SimpleObjectProperty<GameElement> ballProperty = new SimpleObjectProperty<>(ball);
-        when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(0, 0)));
+        when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
         when(gameSessionMock.gameBallProperty()).thenReturn(ballProperty);
 
         Player player = new Player("TestPlayer");

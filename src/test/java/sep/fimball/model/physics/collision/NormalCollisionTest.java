@@ -27,7 +27,7 @@ public class NormalCollisionTest
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(collisionInfo.getShortestIntersect()).thenReturn(new Vector2(-1.0, 0));
 
-        ballPhysicsElement.setPosition(new Vector2(0, 0));
+        ballPhysicsElement.setPosition(new Vector2());
         ballPhysicsElement.setVelocity(new Vector2(1, 1));
         NormalCollision normalCollision = new NormalCollision();
         normalCollision.applyCollision(collisionInfo);

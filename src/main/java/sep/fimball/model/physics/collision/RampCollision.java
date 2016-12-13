@@ -1,8 +1,8 @@
 package sep.fimball.model.physics.collision;
 
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.WorldLayer;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Repräsentiert die Kollision des Balls mit einem Rampen-Element. Bei jeder Kollision des Balls mit einer Rampe wird dessen
@@ -20,7 +20,7 @@ public class RampCollision implements CollisionType
              * unten zieht, an Höhe verliert.
              */
             double multiplier = 1.5;
-            info.getBall().setHeight(info.getBall().getHeight() + BallPhysicsElement.GRAVITY_HEIGHT * multiplier * PhysicsHandler.TICK_RATE_SEC);
+            info.getBall().setHeight(info.getBall().getHeight() + PhysicsConfig.GRAVITY_HEIGHT * multiplier * PhysicsHandler.TICK_RATE_SEC);
         }
     }
 }

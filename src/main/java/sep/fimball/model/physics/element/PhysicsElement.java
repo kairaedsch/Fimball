@@ -18,7 +18,7 @@ public class PhysicsElement<GameElementT>
     public static List<WeakReference<PhysicsElement>> thisIsForDebug = new ArrayList<>();
 
     /**
-     * Die aktuelle Position des PhysikElements.
+     * Die aktuelle Position.
      */
     private Vector2 position;
 
@@ -41,7 +41,6 @@ public class PhysicsElement<GameElementT>
      * Das korrespondierende BasePhysicsElement.
      */
     private BasePhysicsElement basePhysicsElement;
-
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
@@ -132,6 +131,12 @@ public class PhysicsElement<GameElementT>
         return basePhysicsElement;
     }
 
+    /**
+     * Prüft alle Kollider auf Kollisionen mit dem Ball und fügt bei Kollision Argumente zu den gegebenen Event-Argument-Listen hinzu.
+     *
+     * @param eventArgsList Die Liste, welche alle auftretenden Kollisionen speichert.
+     * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kolliden kann.
+     */
     public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         for (Collider collider : colliders)

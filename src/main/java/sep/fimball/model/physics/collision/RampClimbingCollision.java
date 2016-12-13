@@ -1,11 +1,11 @@
 package sep.fimball.model.physics.collision;
 
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.ColliderShape;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static sep.fimball.model.physics.element.BallPhysicsElement.RADIUS;
+import static sep.fimball.general.data.PhysicsConfig.BALL_RADIUS;
 
 public class RampClimbingCollision implements CollisionType
 {
@@ -14,7 +14,7 @@ public class RampClimbingCollision implements CollisionType
     {
         ColliderShape rampColliderShape = info.getOtherColliderShape();
         PhysicsElement physicsElement = info.getOtherPhysicsElement();
-        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(RADIUS, RADIUS));
+        Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(BALL_RADIUS, BALL_RADIUS));
 
         //Maximale x und y Position der Rampen ColliderShape.
         Vector2 maxPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
@@ -55,7 +55,7 @@ public class RampClimbingCollision implements CollisionType
         double ballPos = maxPos.minus(intersectionAtBallPos).magnitude();
 
         //Rechnet die Höhe des Balls basierend auf der Position des Balls und der Länge der gesamten Rampe aus.
-        double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - RADIUS)))) * BallPhysicsElement.MAX_HEIGHT;
+        double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - BALL_RADIUS)))) * PhysicsConfig.MAX_BALL_HEIGHT;
         //Da der Ball an Höhe gewinnen soll setze die Höhe des Balls auf das Größere von ballHeight und der aktuellen Ball Höhe.
         info.getBall().setHeight(Math.max(ballHeight, info.getBall().getHeight()));
     }

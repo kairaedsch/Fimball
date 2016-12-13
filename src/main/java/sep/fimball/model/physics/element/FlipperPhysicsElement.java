@@ -99,18 +99,6 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         //Debug.addDrawVector(getPosition(), new Vector2(0, -1).rotate(Math.toRadians(getRotation())).scale(-angularVelocity).normalized(), Color.BLUE);
     }
 
-    @Override
-    public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
-    {
-        for (Collider collider : getColliders())
-        {
-            if (collider.checkCollision(ballPhysicsElement, this))
-            {
-                eventArgsList.add(new CollisionEventArgs<>(getGameElement(), collider.getId()));
-            }
-        }
-    }
-
     public double getAngularVelocity()
     {
         return angularVelocity;

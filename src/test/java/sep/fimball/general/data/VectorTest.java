@@ -45,7 +45,7 @@ public class VectorTest
 
         Vector2 vecThree = new Vector2(0.5, -0.5);
         Vector2 vecFour = new Vector2(0.5, -0.5);
-        assertThat("(0.5, -0.5) - (0.5, -0.5) = (0, 0)", vecThree.minus(vecFour), is(new Vector2(0, 0)));
+        assertThat("(0.5, -0.5) - (0.5, -0.5) = (0, 0)", vecThree.minus(vecFour), is(new Vector2()));
     }
 
     /**

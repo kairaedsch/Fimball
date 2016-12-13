@@ -96,7 +96,7 @@ public class PinballMachine
         {
             PlacedElement placedElement = elements.get(i);
 
-            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), point, placedElement.positionProperty().get()))
+            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), point.minus(placedElement.positionProperty().get())))
             {
                 return Optional.of(elements.get(i));
             }

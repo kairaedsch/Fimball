@@ -25,13 +25,13 @@ public class PinballMachineTest
         // Füge PlacedElements in den Automaten ein
         PlacedElement placedElementOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-2, -2));
         PlacedElement placedElementTwo = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(2, 2));
-        assertThat("Element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2(0, 0)).get(), is(placedElementOne));
+        assertThat("Element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2()).get(), is(placedElementOne));
 
         // Füge PlacedElements in den Automaten ein
         PlacedElement placedElementOverOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(-1, -1));
 
         // Point auf die Position von "Element eins" und "Element über Element eins"
-        assertThat("Element über element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2(0, 0)).get(), is(placedElementOverOne));
+        assertThat("Element über element eins wird ausgewählt", pinballMachine.getElementAt(new Vector2()).get(), is(placedElementOverOne));
 
         // Point auf die Position von Element zwei
         assertThat("Element zwei wird ausgewählt", pinballMachine.getElementAt(new Vector2(4, 4)).get(), is(placedElementTwo));

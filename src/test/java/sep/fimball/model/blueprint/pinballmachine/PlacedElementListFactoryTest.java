@@ -28,7 +28,7 @@ public class PlacedElementListFactoryTest
             placedElementListJson.elements[0].baseElementId = "ball";
             placedElementListJson.elements[0].multiplier = 0;
             placedElementListJson.elements[0].points = 0;
-            placedElementListJson.elements[0].position = new Vector2(0, 0);
+            placedElementListJson.elements[0].position = new Vector2();
             placedElementListJson.elements[0].rotation = 0;
 
             placedElementListJson.elements[1] = new PlacedElementListJson.PlacedElementJson();
@@ -49,7 +49,7 @@ public class PlacedElementListFactoryTest
             assertThat(placedElementList.get(0).getBaseElement().getId(), is(equalTo("ball")));
             assertThat(placedElementList.get(0).multiplierProperty().get(), is(0.0));
             assertThat(placedElementList.get(0).pointsProperty().get(), is(0));
-            assertThat(placedElementList.get(0).positionProperty().get(), is(equalTo(new Vector2(0, 0))));
+            assertThat(placedElementList.get(0).positionProperty().get(), is(equalTo(new Vector2())));
             assertThat(placedElementList.get(0).rotationProperty().get(), is(0.0));
 
             assertThat(placedElementList.get(1).getBaseElement().getId(), is(equalTo("ball")));

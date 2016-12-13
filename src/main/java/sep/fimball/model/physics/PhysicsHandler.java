@@ -167,8 +167,7 @@ public class PhysicsHandler<GameElementT>
         {
             ballPhysicsElement.setRotation(rotation);
             ballPhysicsElement.setPosition(position);
-            ballPhysicsElement.setVelocity(new Vector2(0, 0));
-            ballPhysicsElement.setAngularVelocity(0);
+            ballPhysicsElement.setVelocity(new Vector2());
             ballLost = false;
         }
     }

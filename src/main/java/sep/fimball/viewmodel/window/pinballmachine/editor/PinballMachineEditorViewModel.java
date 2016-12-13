@@ -118,7 +118,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         machineName = new SimpleStringProperty();
         machineName.bind(pinballMachine.nameProperty());
 
-        cameraPosition = new SimpleObjectProperty<>(new Vector2(0, 0));
+        cameraPosition = new SimpleObjectProperty<>(new Vector2());
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachine);
 

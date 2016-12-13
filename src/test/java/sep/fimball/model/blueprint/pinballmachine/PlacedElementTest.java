@@ -83,6 +83,6 @@ public class PlacedElementTest
         BaseElement baseElementMock = Mockito.mock(BaseElement.class);
         Mockito.when(baseElementMock.getMedia()).thenReturn(baseMediaElementMock);
 
-        return new PlacedElement(baseElementMock, new Vector2(0, 0), 0, 1, elementRotation);
+        return new PlacedElement(baseElementMock, new Vector2(), 0, 1, elementRotation);
     }
 }

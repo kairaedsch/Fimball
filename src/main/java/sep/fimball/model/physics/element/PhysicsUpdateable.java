@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.element;
 
 /**
- * Interface, das es PhysicsElements erlaubt, bei jedem Durchlauf der Physics-Loop aufgerufen zu werden.
+ * Interface, welches es PhysicsElements erlaubt, bei jedem Durchlauf der Physics-Loop aufgerufen zu werden.
  */
 public interface PhysicsUpdateable
 {

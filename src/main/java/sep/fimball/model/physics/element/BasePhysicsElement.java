@@ -1,9 +1,6 @@
 package sep.fimball.model.physics.element;
 
-import javafx.scene.paint.Color;
-import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
@@ -59,13 +56,20 @@ public class BasePhysicsElement
         return colliders;
     }
 
-    public boolean checkIfPointIsInElement(double rotation, Vector2 pointToSearch, Vector2 placedElementPosition)
+    /**
+     * Überprüft, ob das PhysicsElement eine Shape an der gegebenen Position hat.
+     *
+     * @param rotation      Die rotation des PhysicsElements.
+     * @param pointToSearch Die gegebene Position, wo eine Shape sein soll.
+     * @return Ob eine Shape an der gegebenen Position ist.
+     */
+    public boolean checkIfPointIsInElement(double rotation, Vector2 pointToSearch)
     {
         for (Collider collider : colliders)
         {
             for (ColliderShape shape : collider.getShapes())
             {
-                HitInfo hit = shape.calculateHitInfo(CircleColliderShape.generateSelectionCollider(), pointToSearch, placedElementPosition, rotation, pivotPoint);
+                HitInfo hit = shape.calculateHitInfo(CircleColliderShape.generateSelectionCollider(), pointToSearch, new Vector2(), rotation, pivotPoint);
 
                 if (hit.isHit())
                 {
@@ -76,14 +80,18 @@ public class BasePhysicsElement
         return false;
     }
 
+    /**
+     * Gibt den Vektor mit minimaler/maximaler X und Y Position dieses PhysicsElements zurück, je nachdem ob {@code max} true oder false ist.
+     *
+     * @param rotation Die rotation des PhysicsElements.
+     * @param max      Gibt an ob die maximale oder minimale Position gesucht ist.
+     * @return Die Maximale Position dieses PhysicsElements bei der gegebenen Rotation.
+     */
     public Vector2 getExtremePos(double rotation, boolean max)
     {
-        List<ColliderShape> shapes = new ArrayList<>();
+        // Fasse alle shapes in einer Liste zusammen
+        List<ColliderShape> shapes = colliders.stream().collect(ArrayList::new, (list, collider) -> list.addAll(collider.getShapes()), ArrayList::addAll);
 
-        for (Collider collider : colliders)
-        {
-            shapes.addAll(collider.getShapes());
-        }
-        return Vector2.getExtremeVector(shapes, max, (shape -> shape.getExtremePos(rotation, pivotPoint, max)));
+        return Vector2.getExtremeVector(shapes, max, shape -> shape.getExtremePos(rotation, pivotPoint, max));
     }
 }
