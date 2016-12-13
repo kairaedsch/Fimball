@@ -16,14 +16,18 @@ public class RampClimbingCollision implements CollisionType
         PhysicsElement physicsElement = info.getOtherPhysicsElement();
         Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(RADIUS, RADIUS));
 
+        //Maximale x und y Position der Rampen ColliderShape.
         Vector2 maxPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true);
+        //Minimale x und y Position der Rampen ColliderShape.
         Vector2 minPos = rampColliderShape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false);
 
+        //Wenn sich der Ball nicht auf der Rampe befindet kann abgebrochen werden.
         if (relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
         {
             return;
         }
 
+        //Anpassung der Extremwerte bei Rotationen zwischen > 90 und < 270
         if ((physicsElement.getRotation() % 360) > 90 && (physicsElement.getRotation() % 360) < 270)
         {
             double maxPosY = maxPos.getY();
@@ -31,6 +35,7 @@ public class RampClimbingCollision implements CollisionType
             minPos = new Vector2(minPos.getX(), maxPosY);
         }
 
+        //Anpassung der Extremwerte bei Rotationen zwischen > 0 und < 180
         if ((physicsElement.getRotation() % 360) > 0 && (physicsElement.getRotation() % 360) < 180)
         {
             double maxPosX = maxPos.getX();
@@ -51,6 +56,7 @@ public class RampClimbingCollision implements CollisionType
 
         //Rechnet die Höhe des Balls basierend auf der Position des Balls und der Länge der gesamten Rampe aus.
         double ballHeight = Math.max(0, Math.min(1, (ballPos / (rampLength - RADIUS)))) * BallPhysicsElement.MAX_HEIGHT;
+        //Da der Ball an Höhe gewinnen soll setze die Höhe des Balls auf das Größere von ballHeight und der aktuellen Ball Höhe.
         info.getBall().setHeight(Math.max(ballHeight, info.getBall().getHeight()));
     }
 
@@ -66,12 +72,14 @@ public class RampClimbingCollision implements CollisionType
      */
     private Vector2 getIntersection(Vector2 basePointOne, Vector2 directionOne, Vector2 basePointTwo, Vector2 directionTwo)
     {
+        //Berechne den zweiten Punkt der ersten Gerade durch Aufpunkt + Richtung.
         Vector2 lineOneSecondPoint = basePointOne.plus(directionOne);
+        //Berechne den zweiten Punkt der zweiten Gerade durch Aufpunkt + Richtung.
         Vector2 lineTwoSecondPoint = basePointTwo.plus(directionTwo);
 
+        //Berechne den Schnittpunkt zwischen den beiden Geraden mithilfe der Formel für den Schnittpunkt von zwei Geraden in der Zweipunkteform.
         double xT = (lineTwoSecondPoint.getX() - basePointTwo.getX()) * (lineOneSecondPoint.getX() * basePointOne.getY() - basePointOne.getX() * lineOneSecondPoint.getY()) - (lineOneSecondPoint.getX() - basePointOne.getX()) * (lineTwoSecondPoint.getX() * basePointTwo.getY() - basePointTwo.getX() * lineTwoSecondPoint.getY());
         double yT = (basePointOne.getY() - lineOneSecondPoint.getY()) * (lineTwoSecondPoint.getX() * basePointTwo.getY() - basePointTwo.getX() * lineTwoSecondPoint.getY()) - (basePointTwo.getY() - lineTwoSecondPoint.getY()) * (lineOneSecondPoint.getX() * basePointOne.getY() - basePointOne.getX() * lineOneSecondPoint.getY());
-
         double denominator = (lineTwoSecondPoint.getY() - basePointTwo.getY()) * (lineOneSecondPoint.getX() - basePointOne.getX()) - (lineOneSecondPoint.getY() - basePointOne.getY()) * (lineTwoSecondPoint.getX() - basePointTwo.getX());
 
         return new Vector2(xT / denominator, yT / denominator);
