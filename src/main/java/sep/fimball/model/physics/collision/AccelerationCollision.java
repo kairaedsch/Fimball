@@ -27,7 +27,12 @@ public class AccelerationCollision implements CollisionType
     @Override
     public void applyCollision(CollisionInfo info)
     {
+        /*
+         * Berechne die zusätzliche Geschwindigkeit des Balls. Zuerst Rotation des acceleration Vektors entsprechend der Rotation des PhysicsElement.
+         * Danach das Ganze mit der Delta Time skalieren.
+         */
         Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getOtherPhysicsElement().getRotation())).scale(PhysicsHandler.TICK_RATE_SEC);
+        //Addiere die zusätzliche Geschwindigkeit auf die Geschwindigkeit des Balls
         info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp));
     }
 }
