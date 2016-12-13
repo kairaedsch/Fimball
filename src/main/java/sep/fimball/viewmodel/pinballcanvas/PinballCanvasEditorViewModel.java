@@ -41,10 +41,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
      */
     public void mouseClickedOnGame(Vector2 gridPos, MouseButton button)
     {
-        if (drawMode == DrawMode.EDITOR)
-        {
-            editorViewModel.mouseClickedOnGame(gridPos, button, false);
-        }
+        editorViewModel.mouseClickedOnGame(gridPos, button, false);
     }
 
     /**
@@ -55,9 +52,6 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
      */
     public void mousePressedOnGame(Vector2 gridPos, MouseButton button)
     {
-        if (drawMode == DrawMode.EDITOR)
-        {
-            editorViewModel.mouseClickedOnGame(gridPos, button, true);
-        }
+        editorViewModel.mouseClickedOnGame(gridPos, button, true);
     }
 }

@@ -2,14 +2,15 @@ package sep.fimball.model.game;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.GameEvent;
@@ -26,7 +27,10 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicGameSession;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Observer;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -52,6 +56,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
+        gameSession.startGameLoop();
+
         gameSession.startAll();
         gameSession.spawnNewBall();
         return gameSession;
@@ -68,7 +74,11 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         String[] editorPlayers = {"Editor-Player"};
         GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
-        ListPropertyConverter.bindAndConvertList(gameSession.getWorld().gameElementsProperty(), pinballMachine.elementsProperty(), element -> new GameElement(element, true));
+
+        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.scaleProperty()});
+        SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
+        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
+        gameSession.getWorld().gameElementsAidsAidsAidsAidsProperty().set(sortedList);
         gameSession.startGameLoop();
         return gameSession;
     }
@@ -121,7 +131,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Das Observable, welches genutzt wird um Observer darüber zu benachrichtigen, dass der nächste Tick der Spielschleife ausgeführt wurde.
      */
-    private Observable gameLoopObservable;
+    private sep.fimball.general.util.Observable gameLoopObservable;
 
     /**
      * Der aktive Ball, falls vorhanden.
@@ -193,7 +203,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
-        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.scaleProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         double maxElementPos = 0;
         List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
@@ -257,11 +268,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         physicsElements.add(physElem);
         elements.add(gameBall.get());
 
-        gameLoopObservable = new Observable();
+        gameLoopObservable = new sep.fimball.general.util.Observable();
 
         physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
-
-
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);

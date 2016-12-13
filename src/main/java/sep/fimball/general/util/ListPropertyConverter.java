@@ -60,7 +60,7 @@ public class ListPropertyConverter
                     }
                     if (change.wasPermutated())
                     {
-                        for (int p = change.getFrom(); p <= change.getTo(); p++)
+                        for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
                             int newPos = change.getPermutation(p);
                             ConvertedT temp = listPropertyConverted.get(p);

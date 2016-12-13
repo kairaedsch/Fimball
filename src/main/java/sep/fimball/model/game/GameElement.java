@@ -1,6 +1,11 @@
 package sep.fimball.model.game;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
+import javafx.util.Callback;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -208,6 +213,7 @@ public class GameElement implements HandlerGameElement
 
     /**
      * Setzt die Skalierung des Elements.
+     *
      * @param scale Die neue Skalierung des Elements.
      */
     public void setScale(double scale)
@@ -217,10 +223,54 @@ public class GameElement implements HandlerGameElement
 
     /**
      * Gibt die Skalierung des Elements zurück.
+     *
      * @return Die Skalierung des Elements.
      */
     public DoubleProperty scaleProperty()
     {
         return scale;
+    }
+
+    public static int compare(GameElement g1, GameElement g2)
+    {
+        BaseElementType g1t = g1.getElementType();
+        BaseElementType g2t = g2.getElementType();
+
+        if (g1t == BaseElementType.BALL || g2t == BaseElementType.BALL)
+        {
+            if (g1t == g2t)
+            {
+                return compareNormal(g1, g2);
+            }
+            else if (g1t == BaseElementType.BALL)
+            {
+                if (g2t == BaseElementType.RAMP)
+                {
+                    return g1.scaleProperty().get() > 1 ? 1 : -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return -1 * compare(g2, g1);
+            }
+        }
+
+        if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
+        {
+            if (g1t == g2t) return compareNormal(g1, g2);
+            else if (g1t == BaseElementType.RAMP) return 1;
+            else return -1;
+        }
+
+        return compareNormal(g1, g2);
+    }
+
+    public static int compareNormal(GameElement g1, GameElement g2)
+    {
+        return 0;
     }
 }
