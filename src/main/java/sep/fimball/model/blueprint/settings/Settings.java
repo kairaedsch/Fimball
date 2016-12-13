@@ -13,8 +13,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
- * Settings speichert die aktuellen Spieleinstellungen, welche vom Spieler in
- * den Einstellungen geändert werden können.
+ * Settings speichert die aktuellen Spieleinstellungen, die vom Spieler im Einstellungsdialog geändert werden können.
  */
 public class Settings
 {
@@ -29,8 +28,7 @@ public class Settings
     private BooleanProperty fullscreen;
 
     /**
-     * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume sollten
-     * mit diesem Wert multipliziert werden.
+     * Allgemeine Lautstärke, die Werte von musicVolume und sfxVolume sollten mit diesem Wert multipliziert werden.
      */
     private IntegerProperty masterVolume;
 
@@ -45,8 +43,7 @@ public class Settings
     private IntegerProperty sfxVolume;
 
     /**
-     * Aktuell ausgewählte Sprache, ein Teil der Aufzählung {@link
-     * sep.fimball.general.data.Language}.
+     * Aktuell ausgewählte Sprache, ein Teil der Aufzählung {@link sep.fimball.general.data.Language}.
      */
     private ObjectProperty<Language> language;
 
@@ -56,10 +53,11 @@ public class Settings
     private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
 
     /**
-     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der
-     * gespeicherten Settings-Datei geladen werden.
+     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der  Settings-Datei geladen werden.
+     *
+     * @param pathToSettings Der Pfad zur Datei, aus der die Einstellungen geladen werden sollen.
      */
-    private Settings()
+    private Settings(Path pathToSettings)
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
         language = new SimpleObjectProperty<>();
@@ -68,7 +66,7 @@ public class Settings
         musicVolume = new SimpleIntegerProperty();
         sfxVolume = new SimpleIntegerProperty();
 
-        loadSettings(Paths.get(DataPath.pathToSettings()));
+        loadSettings(pathToSettings);
     }
 
     /**
@@ -80,8 +78,9 @@ public class Settings
     public static Settings getSingletonInstance()
     {
         if (singletonInstance == null)
-            singletonInstance = new Settings();
-
+        {
+            singletonInstance = new Settings(Paths.get(DataPath.pathToSettings()));
+        }
         return singletonInstance;
     }
 
@@ -116,7 +115,7 @@ public class Settings
                 if (layout.keyCode != null)
                 {
                     KeyCode keyCode = KeyCode.valueOf(layout.keyCode);
-                    if (layout.keyBinding != null && keyCode != null)
+                    if (layout.keyBinding != null)
                         keyBindingsMap.put(layout.keyBinding, keyCode);
                 }
             }
@@ -244,7 +243,8 @@ public class Settings
     /**
      * Gibt die Property zurück, die bestimmt, ob das Spiel im Vollbildmodus angezeigt werden soll.
      *
-     * @return Die Propertyy, die {@code true} enthält, falls das Spiel im Vollbildmodus angezeigt werden soll oder {@code false} sonst.
+     * @return Die Property, die {@code true} enthält, falls das Spiel im Vollbildmodus angezeigt werden soll oder
+     * {@code false} sonst.
      */
     public BooleanProperty fullscreenProperty()
     {

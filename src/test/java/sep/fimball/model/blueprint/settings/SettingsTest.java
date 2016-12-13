@@ -1,8 +1,11 @@
 package sep.fimball.model.blueprint.settings;
 
 /**
- * Created by marc on 12.12.16.
+ * This class holds tests to ensure that settings can be loaded from and saved to the disk.
  */
 public class SettingsTest
 {
+    public void loadingTest() {
+
+    }
 }
