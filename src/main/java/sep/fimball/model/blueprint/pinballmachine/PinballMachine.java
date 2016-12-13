@@ -91,8 +91,8 @@ public class PinballMachine
         for (int i = elements.size() - 1; i >= 0; i--)
         {
             PlacedElement placedElement = elements.get(i);
-            Vector2 relativPoint = point.minus(placedElement.positionProperty().get());
-            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), relativPoint))
+
+            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), point, placedElement.positionProperty().get()))
             {
                 return Optional.of(elements.get(i));
             }

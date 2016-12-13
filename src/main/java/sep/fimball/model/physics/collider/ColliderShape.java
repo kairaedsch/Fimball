@@ -18,7 +18,7 @@ public interface ColliderShape
      * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
      * @return Informationen, ob der Ball in der Fläche liegt.
      */
-    HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint);
+    HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint);
 
     /**
      * Gibt eine Box zurück, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind.

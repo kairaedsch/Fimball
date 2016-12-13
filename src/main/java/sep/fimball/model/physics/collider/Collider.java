@@ -63,7 +63,7 @@ public class Collider
         boolean hit = false;
         for (ColliderShape shape : shapes)
         {
-            HitInfo info = shape.calculateHitInfo(ball, element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
+            HitInfo info = shape.calculateHitInfo(ball.getCollider(), ball.getPosition(), element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
             if (info.isHit())
             {
                 type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element, shape));

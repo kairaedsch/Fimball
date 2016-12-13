@@ -53,16 +53,16 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
         // Collision check between two circles
-        Vector2 globalColliderPosition = position.plus(colliderObjectPosition).rotate(Math.toRadians(rotation), pivotPoint.plus(colliderObjectPosition));
-        Vector2 ballGlobalColliderPosition = ball.getPosition().plus(ball.getCollider().getPosition());
+        Vector2 globalColliderPosition = position.plus(currentColliderPosition).rotate(Math.toRadians(rotation), pivotPoint.plus(currentColliderPosition));
+        Vector2 ballGlobalColliderPosition = activeColliderPosition.plus(activeColliderShape.getPosition());
         Vector2 distance = ballGlobalColliderPosition.minus(globalColliderPosition);
 
-        if (distance.magnitude() < ball.getCollider().getRadius() + radius)
+        if (distance.magnitude() < activeColliderShape.getRadius() + radius)
         {
-            double overlapDistance = (ball.getCollider().getRadius() + radius) - distance.magnitude();
+            double overlapDistance = (activeColliderShape.getRadius() + radius) - distance.magnitude();
             return new HitInfo(true, distance.normalized().scale(overlapDistance));
         }
 
@@ -89,5 +89,10 @@ public class CircleColliderShape implements ColliderShape
         {
             return position.minus(new Vector2(radius, radius));
         }
+    }
+
+    public static CircleColliderShape generateSelectionCollider()
+    {
+        return new CircleColliderShape(new Vector2(0.1, 0.1), 0.1);
     }
 }

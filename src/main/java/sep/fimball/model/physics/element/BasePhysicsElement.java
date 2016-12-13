@@ -1,9 +1,13 @@
 package sep.fimball.model.physics.element;
 
+import javafx.scene.paint.Color;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.debug.Debug;
+import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
+import sep.fimball.model.physics.collider.HitInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,19 +59,15 @@ public class BasePhysicsElement
         return colliders;
     }
 
-    public boolean checkIfPointIsInElement(double rotation, Vector2 point)
+    public boolean checkIfPointIsInElement(double rotation, Vector2 pointToSearch, Vector2 placedElementPosition)
     {
         for (Collider collider : colliders)
         {
             for (ColliderShape shape : collider.getShapes())
             {
-                RectangleDouble boundingBox = shape.getBoundingBox(rotation, pivotPoint);
-                double minX = boundingBox.getOrigin().getX();
-                double minY = boundingBox.getOrigin().getY();
-                double maxX = minX + boundingBox.getWidth();
-                double maxY = minY + boundingBox.getHeight();
+                HitInfo hit = shape.calculateHitInfo(CircleColliderShape.generateSelectionCollider(), pointToSearch, placedElementPosition, rotation, pivotPoint);
 
-                if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY)
+                if (hit.isHit())
                 {
                     return true;
                 }

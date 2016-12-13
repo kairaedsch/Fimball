@@ -42,17 +42,17 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(BallPhysicsElement ball, Vector2 colliderObjectPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        Vector2 globalBallPosition = ball.getPosition().plus(ball.getCollider().getPosition());
+        Vector2 globalBallPosition = activeColliderPosition.plus(activeColliderShape.getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();
         Vector2 ballAxis;
 
         for (Vector2 vertex : rotatedVertices)
         {
-            Vector2 globalVertexPosition = vertex.plus(colliderObjectPosition);
+            Vector2 globalVertexPosition = vertex.plus(currentColliderPosition);
             ballAxisList.add(globalBallPosition.minus(globalVertexPosition));
         }
         ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
@@ -62,14 +62,14 @@ public class PolygonColliderShape implements ColliderShape
 
         for (Vector2 vertex : rotatedVertices)
         {
-            Vector2 globalVertex = vertex.plus(colliderObjectPosition);
+            Vector2 globalVertex = vertex.plus(currentColliderPosition);
             points.add(globalVertex.dot(ballAxis));
         }
         points.sort(Comparator.naturalOrder());
 
         double ballCenter = globalBallPosition.dot(ballAxis);
-        double ballMin = ballCenter - ball.getCollider().getRadius();
-        double ballMax = ballCenter + ball.getCollider().getRadius();
+        double ballMin = ballCenter - activeColliderShape.getRadius();
+        double ballMax = ballCenter + activeColliderShape.getRadius();
 
         double polyMin = points.get(0);
         double polyMax = points.get(points.size() - 1);
@@ -104,14 +104,14 @@ public class PolygonColliderShape implements ColliderShape
 
             for (Vector2 vertices : rotatedVertices)
             {
-                Vector2 globalVertices = vertices.plus(colliderObjectPosition);
+                Vector2 globalVertices = vertices.plus(currentColliderPosition);
                 newPoints.add(globalVertices.dot(currentAxis));
             }
             newPoints.sort(Comparator.naturalOrder());
 
             double circleCenter = globalBallPosition.dot(currentAxis);
-            double ballMinimum = circleCenter - ball.getCollider().getRadius();
-            double ballMaximum = circleCenter + ball.getCollider().getRadius();
+            double ballMinimum = circleCenter - activeColliderShape.getRadius();
+            double ballMaximum = circleCenter + activeColliderShape.getRadius();
 
             double polygonMin = newPoints.get(0);
             double polygonMax = newPoints.get(newPoints.size() - 1);
@@ -134,7 +134,6 @@ public class PolygonColliderShape implements ColliderShape
 
         detectedOverlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));
         Vector2 resultVector = detectedOverlaps.get(0).getAxis().scale(detectedOverlaps.get(0).getOverlap());
-
         return new HitInfo(true, resultVector);
     }
 
