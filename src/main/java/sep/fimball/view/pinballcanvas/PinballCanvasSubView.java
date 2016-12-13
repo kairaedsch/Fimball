@@ -117,6 +117,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
 
         PinballCanvasDrawer.draw(canvas, sprites, softCameraPosition, softCameraZoom, drawMode);
+
+        lastDraw = currentDraw;
     }
 
     public WritableImage drawToImage()
