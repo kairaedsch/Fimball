@@ -26,36 +26,6 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
      */
     private PlayerNameViewModel playerNameViewModel;
 
-    /**
-     * Der Titel des DialogFensters.
-     */
-    @FXML
-    private TitledPane title;
-
-    /**
-     * Das Label mit der Überschrift der Spielernamen-Liste.
-     */
-    @FXML
-    private Label playerNamesLabel;
-
-    /**
-     * Der Button, der einen neuen Spieler hinzufügt.
-     */
-    @FXML
-    private Button addPlayerButton;
-
-    /**
-     * Der Button, der den Dialog schließt und wieder zum Hauptmenü führt.
-     */
-    @FXML
-    private Button abortButton;
-
-    /**
-     * Der Button, der den Dialog schließt und zum Spielfenster wechselt.
-     */
-    @FXML
-    private Button okButton;
-
     @Override
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
     {

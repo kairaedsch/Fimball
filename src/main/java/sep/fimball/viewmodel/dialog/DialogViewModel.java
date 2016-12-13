@@ -10,7 +10,7 @@ public abstract class DialogViewModel extends ViewModel
     /**
      * Der Dialog-Typ des DialogViewModels.
      */
-    DialogType dialogType;
+    private DialogType dialogType;
 
     /**
      * Erstellt ein neues DialogViewModel.

@@ -25,7 +25,6 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class GameViewModel extends WindowViewModel
 {
-
     /**
      * Die aktuelle Punktzahl des aktiven Spielers.
      */

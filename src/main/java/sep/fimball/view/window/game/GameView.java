@@ -57,15 +57,4 @@ public class GameView extends WindowView<GameViewModel>
         pinballCanvasContainer.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(gameViewModel.getPinballCanvasViewModel());
     }
-
-    /**
-     * Gibt den Text des gegebenen textKey in der aktuell eingestellten Sprache formatiert zurück.
-     *
-     * @param textKey Der Key zu dem der Text gesucht werden soll.
-     * @return Der Text in der aktuell eingestellten Sprache.
-     */
-    private StringExpression getTranslation(String textKey)
-    {
-        return Bindings.concat(LanguageManagerViewModel.getInstance().textProperty(textKey), ": ");
-    }
 }

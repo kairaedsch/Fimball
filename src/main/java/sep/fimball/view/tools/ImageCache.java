@@ -59,18 +59,4 @@ public class ImageCache
         }
         return cachedImages.get(imagePath);
     }
-
-    public boolean allImagesLoaded()
-    {
-        boolean loaded = true;
-
-        for (Map.Entry<String, Image> entry : cachedImages.entrySet())
-        {
-            if (entry.getValue().getProgress() != 1.0)
-            {
-                loaded = false;
-            }
-        }
-        return loaded;
-    }
 }

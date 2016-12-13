@@ -25,12 +25,6 @@ public class PlayerNameEntrySubView implements ViewBoundToViewModel<PlayerNameEn
     private Button deleteButton;
 
     /**
-     * Teil der Beschreibung der UI.
-     */
-    @FXML
-    private Tooltip deleteButtonTip;
-
-    /**
      * Das zur PlayerNameEntrySubView gehörende PlayerNameEntrySubViewModel.
      */
     private PlayerNameEntrySubViewModel playerNameEntrySubViewModel;

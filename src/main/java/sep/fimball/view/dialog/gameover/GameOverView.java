@@ -28,37 +28,6 @@ public class GameOverView extends DialogView<GameOverViewModel>
     private VBox playerScores;
 
     /**
-     * Das Dialog-Fenster.
-     */
-    @FXML
-    private TitledPane title;
-
-    /**
-     * Beschreibung der UI.
-     */
-    @FXML
-    private Label highscoreLabel;
-
-    /**
-     * Beschreibung der UI.
-     */
-    @FXML
-    private Label playerScoresLabel;
-
-    /**
-     * Button, der beim Betätigen zum Hauptmenü wechselt.
-     */
-    @FXML
-    private Button okButton;
-
-    /**
-     * Button, der beim Betätigen das Spiel neu startet.
-     */
-    @FXML
-    private Button restartButton;
-
-
-    /**
      * Das zur GameOverView gehörende GameOverViewModel.
      */
     private GameOverViewModel gameOverViewModel;

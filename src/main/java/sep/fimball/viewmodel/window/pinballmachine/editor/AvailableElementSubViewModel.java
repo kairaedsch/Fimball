@@ -11,7 +11,6 @@ import sep.fimball.viewmodel.ElementImageViewModel;
  */
 public class AvailableElementSubViewModel
 {
-
     /**
      * Das Flipperautomaten-Element, dessen Informationen angezeigt werden.
      */

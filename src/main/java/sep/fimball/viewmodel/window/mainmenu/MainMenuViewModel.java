@@ -6,6 +6,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -121,15 +122,15 @@ public class MainMenuViewModel extends WindowViewModel
             return;
         }
         int index = findSelectedIndex();
-        switch (keyEvent.getCode().toString())
+        switch (keyEvent.getCode())
         {
-            case "UP":
+            case UP:
                 if (index >= 1 && index >= 0)
                 {
                     pinballMachinePreviewSubViewModelList.get(index - 1).selectPinballMachine();
                 }
                 break;
-            case "DOWN":
+            case DOWN:
                 if (index < pinballMachinePreviewSubViewModelList.size() - 1 && index >= 0)
                 {
                     pinballMachinePreviewSubViewModelList.get(index + 1).selectPinballMachine();
@@ -152,6 +153,7 @@ public class MainMenuViewModel extends WindowViewModel
                 return i;
             }
         }
+        //TODO - -1 seems like a hack
         return -1;
     }
 

@@ -137,7 +137,6 @@ public class PhysicsHandler<GameElementT>
         inputManager.addListener(KeyBinding.RIGHT_FLIPPER, this::addToKeyEvents);
         inputManager.addListener(KeyBinding.NUDGE_LEFT, this::addToKeyEvents);
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, this::addToKeyEvents);
-        inputManager.addListener(KeyBinding.PAUSE, this::addToKeyEvents);
     }
 
     /**
