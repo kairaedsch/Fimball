@@ -12,6 +12,12 @@ import java.util.Optional;
  */
 public class SoundHandler implements ElementHandler
 {
+    private SoundManager soundManager;
+
+    public SoundHandler(SoundManager soundManager) {
+        this.soundManager = soundManager;
+    }
+
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderID)
     {
@@ -21,7 +27,7 @@ public class SoundHandler implements ElementHandler
         {
             Optional<Sound> soundToPlay = eventMap.get(colliderID).getSound();
 
-            soundToPlay.ifPresent(sound -> SoundManager.getInstance().addSoundToPlay(sound));
+            soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
         }
     }
 }

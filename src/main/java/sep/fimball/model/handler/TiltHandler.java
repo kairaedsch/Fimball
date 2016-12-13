@@ -21,7 +21,7 @@ public class TiltHandler implements GameHandler
     /**
      * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
      */
-    private static final int MAX_TILT_COUNTER = 3;
+    private static final int MAX_TILT_COUNTER = 5;
 
     /**
      * Erzeugt einen neuen TiltHandler.

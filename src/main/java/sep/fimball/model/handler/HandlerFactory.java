@@ -1,6 +1,7 @@
 package sep.fimball.model.handler;
 
 import sep.fimball.model.handler.light.LightHandler;
+import sep.fimball.model.media.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class HandlerFactory
         handlers.add(scoreHandler);
 
         Handler soundHandler = new Handler();
-        soundHandler.setElementHandler(new SoundHandler());
+        soundHandler.setElementHandler(new SoundHandler(SoundManager.getInstance()));
         handlers.add(soundHandler);
 
         Handler animationHandler = new Handler();
