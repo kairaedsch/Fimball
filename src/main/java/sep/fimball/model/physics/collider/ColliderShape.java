@@ -10,13 +10,15 @@ import sep.fimball.model.physics.element.BallPhysicsElement;
 public interface ColliderShape
 {
     /**
-     * Gibt Informationen zurück, ob der Ball in der Fläche liegt.
+     * Überprüft ob ein gegebener CircleCollider sich mit dieser ColliderShape überschneidet.
      *
-     * @param ball                   Der Ball, der auf Überschneidung mit der Fläche geprüft werden soll.
-     * @param colliderObjectPosition Die Position des Elements, mit dem kollidiert wird.
-     * @param rotation               Die Drehung des Elements, mit dem kollidiert wird.
-     * @param pivotPoint             Der Pivot-Punkt des Elements, mit dem kollidiert wird.
-     * @return Informationen, ob der Ball in der Fläche liegt.
+     * @param activeColliderShape Die andere CircleColliderShape mit der auf Kollision überprüft werden soll.
+     * @param activeColliderPosition Die Position der anderen CircleColliderShape in der Spielwelt.
+     * @param currentColliderPosition Die Position dieser ColliderShape in der Spielwelt.
+     * @param rotation Die Rotation des Spielelements welches diese ColliderShape hat.
+     * @param pivotPoint Der Pivot Punkt des Spielelements welches diese ColliderShape hat.
+     *
+     * @return Gibt Informationen über die eventuelle Kollision zwischen den ColliderShapes zurück.
      */
     HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint);
 
@@ -26,6 +28,7 @@ public interface ColliderShape
      * @param rotation   Die rotation des Colliders.
      * @param pivotPoint Der Drehpunkt des Colliders.
      * @param max Gibt an ob die maximale oder minimale Position gesucht ist.
+     *
      * @return Die Maximale Position dieses Colliders bei der gegebenen Rotation.
      */
     Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max);

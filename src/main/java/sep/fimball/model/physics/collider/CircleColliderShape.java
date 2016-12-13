@@ -82,6 +82,11 @@ public class CircleColliderShape implements ColliderShape
         }
     }
 
+    /**
+     * Gibt eine CircleColliderShape mit sehr geringer Größe zurück welche zur Selektion der Elemente im Editor genutzt wird.
+     *
+     * @return Eine CircleColliderShape mit sehr geringer Größe.
+     */
     public static CircleColliderShape generateSelectionCollider()
     {
         return new CircleColliderShape(new Vector2(0.1, 0.1), 0.1);
