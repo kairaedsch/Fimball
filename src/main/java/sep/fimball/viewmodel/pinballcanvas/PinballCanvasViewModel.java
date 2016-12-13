@@ -2,140 +2,67 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.geometry.BoundingBox;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
-import sep.fimball.viewmodel.window.game.GameViewModel;
+import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Observer;
 
-/**
- * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zur Verfügung und dient als Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
- */
-public class PinballCanvasViewModel
+public abstract class PinballCanvasViewModel
 {
     /**
      * Liste aller SpriteSubViewModels, die Informationen zum Zeichnen enthalten.
      */
-    private ListProperty<SpriteSubViewModel> spriteSubViewModels;
+    protected ListProperty<SpriteSubViewModel> spriteSubViewModels;
 
     /**
      * Position der Kamera, die festlegt, von welchem Standpunkt aus die Automatenelemente gezeichnet werden sollen.
      */
-    private ObjectProperty<Vector2> cameraPosition;
+    protected ObjectProperty<Vector2> cameraPosition;
 
     /**
      * Legt fest, wie groß Elemente zu zeichnen sind und legt somit auch fest, wie viele BaseElement der Nutzer sehen kann.
      */
-    private DoubleProperty cameraZoom;
+    protected DoubleProperty cameraZoom;
+
+    protected DrawMode drawMode;
 
     /**
      * Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
      */
-    private Observable redrawObservable;
+    protected Observable redrawObservable;
 
-    private Observable generateImageObservable;
+    protected SimpleObjectProperty<RectangleDouble> boundingBox;
 
-    private DrawMode drawMode;
+    protected PinballMachine pinballMachine;
 
-    /**
-     * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
-     */
-    private PinballMachineEditorViewModel editorViewModel;
+    private ViewScreenshotCreater viewScreenshotCreater;
 
-    private WritableImage generatedPreviewImage;
-
-    private SimpleObjectProperty<RectangleDouble> boundingBox;
-
-    private PinballMachine pinballMachine;
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
      * @param gameSession   Die Spielsitzung.
-     * @param gameViewModel Das korrespondierende GameViewModel.
      */
-    public PinballCanvasViewModel(GameSession gameSession, GameViewModel gameViewModel)
-    {
-        init(gameSession);
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
-
-        cameraPosition.bind(gameViewModel.cameraPositionProperty());
-        cameraZoom.bind(gameViewModel.cameraZoomProperty());
-        drawMode = DrawMode.GAME;
-    }
-
-    /**
-     * Erstellt ein neues PinballCanvasViewModel.
-     *
-     * @param gameSession                   Die Spielsitzung.
-     * @param pinballMachineEditorViewModel Das korrespondierende PinballMachineEditorViewModel.
-     */
-    public PinballCanvasViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
-    {
-        init(gameSession);
-
-        this.editorViewModel = pinballMachineEditorViewModel;
-        pinballMachine = gameSession.getPinballMachine();
-        cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
-        cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
-        drawMode = DrawMode.EDITOR;
-
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
-    }
-
-    /**
-     * Initialisiert die Zeichnung des Canvas.
-     *
-     * @param gameSession Die zugehörige GameSession.
-     */
-    private void init(GameSession gameSession)
+    protected PinballCanvasViewModel(GameSession gameSession, DrawMode drawMode)
     {
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         redrawObservable = new Observable();
-        generateImageObservable = new Observable();
 
         Observer gameObserver = (o, args) -> redraw();
         gameSession.addGameLoopObserver(gameObserver);
-    }
 
-    /**
-     * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf das Spielfeld geklickt hat.
-     *
-     * @param gridPos Die Position im Grid, auf die der Nutzer geklickt hat.
-     * @param button  Die gedrückte Maustaste.
-     */
-    public void mouseClickedOnGame(Vector2 gridPos, MouseButton button)
-    {
-        if (drawMode == DrawMode.EDITOR)
-        {
-            editorViewModel.mouseClickedOnGame(gridPos, button, false);
-        }
-    }
-
-    /**
-     * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf dem Spielfeld die Maustaste gedrückt hat.
-     *
-     * @param gridPos Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
-     * @param button  Die gedrückte Maustaste.
-     */
-    public void mousePressedOnGame(Vector2 gridPos, MouseButton button)
-    {
-        if (drawMode == DrawMode.EDITOR)
-        {
-            editorViewModel.mouseClickedOnGame(gridPos, button, true);
-        }
+        this.drawMode = drawMode;
     }
 
     /**
@@ -178,17 +105,6 @@ public class PinballCanvasViewModel
         redrawObservable.addObserver(observer);
     }
 
-    public void addGenerateImageObserver(Observer observer)
-    {
-        generateImageObservable.addObserver(observer);
-    }
-
-    public void notifyToGenerateImage()
-    {
-        generateImageObservable.setChanged();
-        generateImageObservable.notifyObservers();
-    }
-
     /**
      * Benachrichtigt die Observer, dass sich etwas an den zu zeichnenden Objekten verändert hat.
      */
@@ -208,18 +124,28 @@ public class PinballCanvasViewModel
         return drawMode;
     }
 
-    public void setGeneratedPreviewImage(WritableImage image)
-    {
-        generatedPreviewImage = image;
-    }
-
-    public WritableImage getGeneratedPreviewImage()
-    {
-        return generatedPreviewImage;
-    }
-
     public ReadOnlyObjectProperty<RectangleDouble> boundingBoxProperty()
     {
         return new SimpleObjectProperty<>(pinballMachine.getBoundingBox());
+    }
+
+    public void mouseClickedOnGame(Vector2 vector2, MouseButton button)
+    {
+
+    }
+
+    public void mousePressedOnGame(Vector2 vector2, MouseButton button)
+    {
+
+    }
+
+    public void setViewScreenshotCreater(ViewScreenshotCreater viewScreenshotCreater)
+    {
+        this.viewScreenshotCreater = viewScreenshotCreater;
+    }
+
+    public WritableImage createScreenshot()
+    {
+        return viewScreenshotCreater.drawToImage();
     }
 }

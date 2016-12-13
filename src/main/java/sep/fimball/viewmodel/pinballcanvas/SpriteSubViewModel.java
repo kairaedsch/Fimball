@@ -84,6 +84,19 @@ public class SpriteSubViewModel
     }
 
     /**
+     * Erstellt ein neues SpriteSubViewModel.
+     *
+     * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     * @param selectedPlacedElement Das aktuell ausgewählte Element.
+     */
+    public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)
+    {
+        this(gameElement);
+
+        isSelected.bind(Bindings.createBooleanBinding(() -> selectedPlacedElement.get().isPresent() && selectedPlacedElement.get().get() == gameElement.getPlacedElement(), selectedPlacedElement));
+    }
+
+    /**
      * Aktualisiert abhängig vom GameElement das zu zeichnende Bild.
      */
     private void updateImage()
@@ -97,19 +110,6 @@ public class SpriteSubViewModel
         {
             currentImage.get().setElementImage(gameElement.getMediaElement().elementImageProperty().get());
         }
-    }
-
-    /**
-     * Erstellt ein neues SpriteSubViewModel.
-     *
-     * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
-     * @param selectedPlacedElement Das aktuell ausgewählte Element.
-     */
-    public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)
-    {
-        this(gameElement);
-
-        isSelected.bind(Bindings.createBooleanBinding(() -> selectedPlacedElement.get().isPresent() && selectedPlacedElement.get().get() == gameElement.getPlacedElement(), selectedPlacedElement));
     }
 
     /**

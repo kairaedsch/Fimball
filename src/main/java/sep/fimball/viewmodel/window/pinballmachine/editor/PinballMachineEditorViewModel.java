@@ -21,7 +21,8 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
+import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
+import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -68,7 +69,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Das PinballCanvasViewModel des angezeigten Spielfelds.
      */
-    private PinballCanvasViewModel pinballCanvasViewModel;
+    private PinballCanvasEditorViewModel pinballCanvasViewModel;
 
     /**
      * Der ausgewählte MouseMode.
@@ -131,7 +132,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
         gameSession = GameSession.generateEditorSession(pinballMachine);
-        pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+        pinballCanvasViewModel = new PinballCanvasEditorViewModel(gameSession, this);
 
         topBackgroundPath = new SimpleStringProperty();
         botBackgroundPath = new SimpleStringProperty();
@@ -197,8 +198,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
-        pinballCanvasViewModel.notifyToGenerateImage();
-        pinballMachine.savePreviewImage(pinballCanvasViewModel.getGeneratedPreviewImage());
+        pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         gameSession.pauseAll();
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
@@ -320,7 +320,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @return Das PinballCanvasViewModel des angezeigten Spielfelds.
      */
-    public PinballCanvasViewModel getPinballCanvasViewModel()
+    public PinballCanvasEditorViewModel getPinballCanvasViewModel()
     {
         return pinballCanvasViewModel;
     }

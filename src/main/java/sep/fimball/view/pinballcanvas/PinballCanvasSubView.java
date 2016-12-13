@@ -20,13 +20,14 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
+import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreater;
 
 import java.util.Observer;
 
 /**
  * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
  */
-public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasViewModel>
+public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasViewModel>, ViewScreenshotCreater
 {
     /**
      * Das Canvas, in dem die Sprites gezeichnet werden.
@@ -91,12 +92,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
 
-        Observer generateImageObserver = (o, arg) -> drawToImage();
-        pinballCanvasViewModel.addGenerateImageObserver(generateImageObserver);
-
         Region parent = (Region) canvas.getParent();
         canvas.widthProperty().bind(parent.widthProperty());
         canvas.heightProperty().bind(parent.heightProperty());
+
+        pinballCanvasViewModel.setViewScreenshotCreater(this);
     }
 
     private void redraw()
@@ -119,7 +119,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         PinballCanvasDrawer.draw(canvas, sprites, softCameraPosition, softCameraZoom, drawMode);
     }
 
-    private void drawToImage()
+    public WritableImage drawToImage()
     {
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / Config.pixelsPerGridUnit);
@@ -141,7 +141,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
         screenShotCanvas.snapshot(snapshotParameters, writeableImage);
-        pinballCanvasViewModel.setGeneratedPreviewImage(writeableImage);
+        return writeableImage;
     }
 
     /**

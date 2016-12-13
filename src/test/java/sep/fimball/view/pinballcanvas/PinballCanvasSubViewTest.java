@@ -18,7 +18,7 @@ import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
+import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -49,7 +49,7 @@ public class PinballCanvasSubViewTest
     private Vector2 cameraPosition = new Vector2(1, 1);
 
     @Mock
-    private PinballCanvasViewModel viewModelMock;
+    private PinballCanvasGameViewModel viewModelMock;
     @Mock
     private Canvas canvasMock;
     @Mock

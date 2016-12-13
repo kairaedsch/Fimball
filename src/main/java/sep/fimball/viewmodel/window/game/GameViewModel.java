@@ -15,7 +15,7 @@ import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
-import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
+import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
@@ -54,7 +54,7 @@ public class GameViewModel extends WindowViewModel
     /**
      * Das PinballCanvasViewModel, das vom GameViewModel initialisiert und gesteuert wird.
      */
-    private PinballCanvasViewModel pinballCanvasViewModel;
+    private PinballCanvasGameViewModel pinballCanvasViewModel;
 
     /**
      * Die zu diesem GameViewModel gehörende GameSession.
@@ -90,7 +90,7 @@ public class GameViewModel extends WindowViewModel
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
         playerReserveBalls.bind( gameSession.getCurrentPlayer().ballsProperty());
 
-        pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, this);
+        pinballCanvasViewModel = new PinballCanvasGameViewModel(gameSession, this);
 
         gameSession.isOverProperty().addListener((observable, oldIsGameOver, newIsGameOver) ->
         {
@@ -169,7 +169,7 @@ public class GameViewModel extends WindowViewModel
      *
      * @return Das PinballCanvasViewModel.
      */
-    public PinballCanvasViewModel getPinballCanvasViewModel()
+    public PinballCanvasGameViewModel getPinballCanvasViewModel()
     {
         return pinballCanvasViewModel;
     }
