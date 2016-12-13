@@ -24,6 +24,9 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     private StringProperty machineName;
 
+    /**
+     * Der Pfad zum Vorschaubild des Automaten.
+     */
     private StringProperty imagePathProperty;
 
     /**
@@ -41,6 +44,10 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         imagePathProperty = new SimpleStringProperty(pinballMachine.getImagePath());
     }
 
+    /**
+     * Gibt den Pfad zum Vorschaubild des Automaten zurück.
+     * @return Der Pfad zum Vorschaubild des Automaten.
+     */
     public ReadOnlyStringProperty imagePathProperty()
     {
         return imagePathProperty;

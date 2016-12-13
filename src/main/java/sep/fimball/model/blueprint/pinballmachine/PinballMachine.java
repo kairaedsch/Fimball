@@ -100,6 +100,10 @@ public class PinballMachine
         return Optional.empty();
     }
 
+    /**
+     * Gibt eine Box, die das Spielfeld umschließt, zurück.
+     * @return Eine Box, die das Spielfeld umschließt.
+     */
     public RectangleDouble getBoundingBox()
     {
         Vector2 max = Vector2.getExtremeVector(elements, true, placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), true)));
@@ -120,6 +124,10 @@ public class PinballMachine
         unloadElements();
     }
 
+    /**
+     * Speichert das gegebene Vorschaubild.
+     * @param image Das Vorschaubild, das gespeichert werden soll.
+     */
     public void savePreviewImage(WritableImage image)
     {
         pinballMachineManager.savePreviewImage(this, image);

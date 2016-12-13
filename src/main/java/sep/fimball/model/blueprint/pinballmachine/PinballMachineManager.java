@@ -147,6 +147,11 @@ public class PinballMachineManager
         JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
     }
 
+    /**
+     * Lädt das Vorschaubild des gegebenen Automaten.
+     * @param pinballMachine Der Automat, dessen Vorschaubild geladen werden soll.
+     * @return Der Pfad zum Vorschaubild des Automaten.
+     */
     String loadPreviewImage(PinballMachine pinballMachine)
     {
         File content[] = new File(DataPath.pathToPinballMachine(pinballMachine.getID())).listFiles();
@@ -170,6 +175,11 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Speichert das gegebene Vorschaubild zu dem gegebenen Automaten.
+     * @param pinballMachine Der Automat, dessen Vorschaubild gespeichert werden soll.
+     * @param image Das Vorschaubild, das gespeichert werden soll.
+     */
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
     {
         Path newPath = Paths.get(DataPath.generatePathToNewImagePreview(pinballMachine.getID(), System.currentTimeMillis()));

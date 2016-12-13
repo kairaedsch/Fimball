@@ -1,7 +1,7 @@
 package sep.fimball.model.blueprint.json;
 
 /**
- * Überprüft die aus den JSON Dateien erstellten Objekte
+ * Überprüft die aus den JSON Dateien erstellten Objekte.
  */
 public class JsonUtil
 {

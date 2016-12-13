@@ -71,6 +71,11 @@ public class SplashScreenViewModel extends WindowViewModel
         texts.offer(getTextByKey("splashscreen.sounds.key"));
     }
 
+    /**
+     * Gibt den zum Key gehörenden Text zurück.
+     * @param key Der Key, dessen zugehöriger Text zurückgegeben werden soll.
+     * @return Der zum Key gehörende Text.
+     */
     private String getTextByKey(String key)
     {
         return LanguageManagerViewModel.getInstance().textProperty(key).get();

@@ -15,7 +15,7 @@ public class ScoreHandler implements ElementHandler
      *
      * @param session Aktuelle GameSession.
      */
-    public ScoreHandler(HandlerGameSession session)
+    ScoreHandler(HandlerGameSession session)
     {
         this.session = session;
     }

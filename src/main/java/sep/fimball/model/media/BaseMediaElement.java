@@ -45,6 +45,9 @@ public class BaseMediaElement
 
     private Map<Integer, Vector2> localCoords;
 
+    /**
+     * Die Höhe des Elements.
+     */
     private double elementHeight;
 
     /**
@@ -135,6 +138,10 @@ public class BaseMediaElement
         return Collections.unmodifiableMap(localCoords);
     }
 
+    /**
+     * Gibt die Höhe des Elements zurück.
+     * @return Die Höhe des Elements.
+     */
     public double getElementHeight()
     {
         return elementHeight;

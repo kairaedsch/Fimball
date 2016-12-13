@@ -11,8 +11,11 @@ public class BaseElementJson
     /**
      * Speichert den Typ des BaseElements.
      */
-    public BaseElementType elementType;
+    BaseElementType elementType;
 
+    /**
+     * Die Kategorie, in die das BaseElement fällt.
+     */
     public BaseElementCategory elementCategory;
 
     /**
@@ -172,6 +175,9 @@ public class BaseElementJson
              */
             public int rotationAccuracy;
 
+            /**
+             * Die Höhe des Elements.
+             */
             public double elementHeight;
         }
 

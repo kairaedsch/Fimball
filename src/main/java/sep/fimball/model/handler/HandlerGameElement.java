@@ -13,7 +13,11 @@ import java.util.Optional;
  */
 public interface HandlerGameElement
 {
-    public ReadOnlyObjectProperty<Vector2> positionProperty();
+    /**
+     * Git die Position des Elements zurück.
+     * @return Die Position des Elements.
+     */
+    ReadOnlyObjectProperty<Vector2> positionProperty();
 
     /**
      * Setzt die aktuelle Animation des Elements.
@@ -57,5 +61,9 @@ public interface HandlerGameElement
      */
     BaseRuleElement getRuleElement();
 
+    /**
+     * Gibt den Typ des BaseElements zurück.
+     * @return Der Typ des BaseElements.
+     */
     BaseElementType getElementType();
 }

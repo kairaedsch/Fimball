@@ -21,10 +21,7 @@ public class SoundHandler implements ElementHandler
         {
             Optional<Sound> soundToPlay = eventMap.get(colliderID).getSound();
 
-            if (soundToPlay.isPresent())
-            {
-                SoundManager.getInstance().addSoundToPlay(soundToPlay.get());
-            }
+            soundToPlay.ifPresent(sound -> SoundManager.getInstance().addSoundToPlay(sound));
         }
     }
 }

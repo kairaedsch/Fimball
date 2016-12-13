@@ -47,6 +47,11 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
         previewImageBot.styleProperty().bind(generatePreviewCss(false));
     }
 
+    /**
+     * Generiert einen String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
+     * @param top Gibt an, ob die CSS-Beschreibung für das obere Bild generiert werden soll.
+     * @return Ein String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
+     */
     private StringExpression generatePreviewCss(boolean top)
     {
         ReadOnlyStringProperty imagePath = top ? availableElementSubViewModel.imagePathTopProperty() : availableElementSubViewModel.imagePathBotProperty();

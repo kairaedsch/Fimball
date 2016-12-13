@@ -15,7 +15,7 @@ public class BallLostHandler implements GameHandler
      *
      * @param handlerGameSession Die GameSession, welche von dem handler beeinflusst werden soll.
      */
-    public BallLostHandler(HandlerGameSession handlerGameSession)
+    BallLostHandler(HandlerGameSession handlerGameSession)
     {
         this.handlerGameSession = handlerGameSession;
     }

@@ -13,6 +13,9 @@ import sep.fimball.viewmodel.window.mainmenu.PinballMachinePreviewSubViewModel;
  */
 public class PinballMachinePreviewSubView implements ViewBoundToViewModel<PinballMachinePreviewSubViewModel>
 {
+    /**
+     * Der Container, der die Vorschau des Automaten enthält.
+     */
     @FXML
     private HBox machine;
 

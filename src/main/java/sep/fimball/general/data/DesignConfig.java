@@ -65,6 +65,11 @@ public class DesignConfig
      */
     public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
+    /**
+     * Gibt den URL-Pfad, der durch {@code path}spezifizierten CSS-Datei zurück.
+     * @param path Der Pfad, der die CSS-Datei spezifiziert.
+     * @return Der URL-Pfad.
+     */
     public static StringExpression backgroundImageCss(ReadOnlyStringProperty path)
     {
         return Bindings.concat("-fx-background-image: url(\"file:///", path, "\");");

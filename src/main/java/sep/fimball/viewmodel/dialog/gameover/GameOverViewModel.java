@@ -38,8 +38,11 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Erstellt ein neues GameOverViewModel.
+     * @param pinballMachine Der zugehörige Flipperautomat.
+     * @param playerScores Die Punktestände der Spieler.
+     * @param playerNames Die Namen der Spieler.
      */
-    public GameOverViewModel(PinballMachine pinballMachine, ReadOnlyListProperty<Highscore> playerHighscores, String[] playerNames)
+    public GameOverViewModel(PinballMachine pinballMachine, ReadOnlyListProperty<Highscore> playerScores, String[] playerNames)
     {
         super(DialogType.GAME_OVER);
         this.pinballMachine = pinballMachine;
@@ -49,7 +52,7 @@ public class GameOverViewModel extends DialogViewModel
         this.playerHighscores = new SimpleListProperty<>();
 
         this.machineHighscores.bind(pinballMachine.highscoreListProperty());
-        this.playerHighscores.set(playerHighscores);
+        this.playerHighscores.set(playerScores);
     }
 
     /**

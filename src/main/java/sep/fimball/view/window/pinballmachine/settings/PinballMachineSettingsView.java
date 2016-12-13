@@ -18,6 +18,9 @@ public class PinballMachineSettingsView extends WindowView<PinballMachineSetting
     @FXML
     private TextField tableName;
 
+    /**
+     * Das Vorschaubild des Automaten.
+     */
     @FXML
     private Pane previewImage;
 

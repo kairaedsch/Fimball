@@ -124,10 +124,13 @@ public class DataPath
     private final static String imageFileEnding = ".png";
 
     /**
-     * Die Logo Bilddatei
+     * Die Logo Bild-Datei.
      */
     private final static String logoFile = "/logo.png";
 
+    /**
+     * Das Default-Vorschaubild der Automaten.
+     */
     private final static String defaultPreview = "/defaultPreview.png";
 
     /**
@@ -290,6 +293,10 @@ public class DataPath
         return dataPath + "/testdata/";
     }
 
+    /**
+     * Gibt den Pfad zum Default-Vorschaubild der Automaten an.
+     * @return Der Pfad zum Default-Vorschaubild der Automaten.
+     */
     public static String pathToDefaultPreview()
     {
         return dataPath + defaultPreview;

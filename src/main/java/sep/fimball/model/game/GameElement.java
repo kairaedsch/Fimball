@@ -26,6 +26,9 @@ public class GameElement implements HandlerGameElement
      */
     private DoubleProperty rotation;
 
+    /**
+     * Die Skalierung des Elements.
+     */
     private DoubleProperty scale;
 
     /**
@@ -203,11 +206,19 @@ public class GameElement implements HandlerGameElement
         return currentAnimation;
     }
 
+    /**
+     * Setzt die Skalierung des Elements.
+     * @param scale Die neue Skalierung des Elements.
+     */
     public void setScale(double scale)
     {
         this.scale.set(scale);
     }
 
+    /**
+     * Gibt die Skalierung des Elements zurück.
+     * @return Die Skalierung des Elements.
+     */
     public DoubleProperty scaleProperty()
     {
         return scale;
