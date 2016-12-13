@@ -1,5 +1,6 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -103,24 +104,20 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         previewBot.styleProperty().bind(DesignConfig.fillBackgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
         previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
 
-        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) ->
+        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneSizeToImage(newValue, previewTop));
+        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneSizeToImage(newValue, previewBot));
+    }
+
+    private void bindPaneSizeToImage(String imagePath, Pane pane)
+    {
+        if (imagePath != null)
         {
-            if (newValue != null)
-            {
-                ImageCache cache = ImageCache.getInstance();
-                previewTop.prefWidthProperty().set(cache.getImage(newValue).widthProperty().get());
-                previewTop.prefHeightProperty().set(cache.getImage(newValue).heightProperty().get());
-            }
-        });
-        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) ->
-        {
-            if (newValue != null)
-            {
-                ImageCache cache = ImageCache.getInstance();
-                previewBot.prefWidthProperty().set(cache.getImage(newValue).widthProperty().get());
-                previewBot.prefHeightProperty().set(cache.getImage(newValue).heightProperty().get());
-            }
-        });
+            ImageCache cache = ImageCache.getInstance();
+            pane.prefWidthProperty().unbind();
+            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath).widthProperty()));
+            pane.prefHeightProperty().unbind();
+            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath).heightProperty()));
+        }
     }
 
     public void setStage(Stage stage)
