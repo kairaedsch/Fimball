@@ -15,6 +15,7 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.base.BaseElementManager;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -266,6 +267,14 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             }
             else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.get().isPresent() && button == MouseButton.PRIMARY)
             {
+                if (selectedAvailableElement.get().get().getType() == BaseElementType.BALL) {
+                    for (PlacedElement placedElement : pinballMachine.elementsProperty()) {
+                        if (placedElement.getBaseElement().getType() == BaseElementType.BALL) {
+                            pinballMachine.removeElement(placedElement);
+                            break;
+                        }
+                    }
+                }
                 PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get().get(), gridPosition.round());
                 setMouseMode(MouseMode.SELECTING);
                 setSelectedPlacedElement(Optional.of(placedElement));
@@ -300,7 +309,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED && selectedPlacedElement.get().isPresent())
         {
             if (binding == KeyBinding.EDITOR_DELETE)
-                pinballMachine.removeElement(selectedPlacedElement.get().get());
+                if(selectedPlacedElement.get().get().getBaseElement().getType() != BaseElementType.BALL)
+                    pinballMachine.removeElement(selectedPlacedElement.get().get());
 
             if (binding == KeyBinding.EDITOR_ROTATE)
                 selectedPlacedElement.get().get().rotateClockwise();

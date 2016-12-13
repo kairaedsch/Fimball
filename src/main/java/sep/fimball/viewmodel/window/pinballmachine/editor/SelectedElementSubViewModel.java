@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
@@ -152,7 +153,7 @@ public class SelectedElementSubViewModel
      */
     public void remove()
     {
-        if (placedElement.isPresent())
+        if (placedElement.isPresent() && placedElement.get().getBaseElement().getType() != BaseElementType.BALL)
             pinballMachine.removeElement(placedElement.get());
     }
 
