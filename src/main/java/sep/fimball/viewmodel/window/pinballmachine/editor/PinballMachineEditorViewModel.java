@@ -272,14 +272,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             }
             else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.get().isPresent() && button == MouseButton.PRIMARY)
             {
-                if (selectedAvailableElement.get().get().getType() == BaseElementType.BALL) {
-                    for (PlacedElement placedElement : pinballMachine.elementsProperty()) {
-                        if (placedElement.getBaseElement().getType() == BaseElementType.BALL) {
-                            pinballMachine.removeElement(placedElement);
-                            break;
-                        }
-                    }
-                }
                 PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get().get(), gridPosition.round());
                 setMouseMode(MouseMode.SELECTING);
                 setSelectedPlacedElement(Optional.of(placedElement));
@@ -314,8 +306,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED && selectedPlacedElement.get().isPresent())
         {
             if (binding == KeyBinding.EDITOR_DELETE)
-                if(selectedPlacedElement.get().get().getBaseElement().getType() != BaseElementType.BALL)
-                    pinballMachine.removeElement(selectedPlacedElement.get().get());
+                pinballMachine.removeElement(selectedPlacedElement.get().get());
 
             if (binding == KeyBinding.EDITOR_ROTATE)
                 selectedPlacedElement.get().get().rotateClockwise();

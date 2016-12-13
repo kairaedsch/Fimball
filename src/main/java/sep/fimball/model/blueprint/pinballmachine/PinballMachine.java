@@ -7,6 +7,8 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.image.WritableImage;
 import sep.fimball.general.data.*;
 import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementManager;
+import sep.fimball.model.blueprint.base.BaseElementType;
 
 import java.util.List;
 import java.util.Optional;
@@ -73,10 +75,12 @@ public class PinballMachine
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
         highscoreListSorted = new SimpleListProperty<>(new SortedList<>(highscoreList, (o1, o2) -> (int) (o2.scoreProperty().get() - o1.scoreProperty().get())));
+
         for (Highscore highscore : highscores)
         {
             addHighscore(highscore, false);
         }
+        addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
     }
 
     /**
@@ -186,6 +190,11 @@ public class PinballMachine
     public void addElement(PlacedElement placedElement)
     {
         checkElementsLoaded();
+
+        if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
+        {
+            elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
+        }
         elements.add(placedElement);
     }
 
@@ -199,6 +208,11 @@ public class PinballMachine
     public PlacedElement addElement(BaseElement baseElement, Vector2 position)
     {
         checkElementsLoaded();
+
+        if (baseElement.getType() == BaseElementType.BALL)
+        {
+            elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
+        }
         PlacedElement placedElement = new PlacedElement(baseElement, position, 0, 0, 0);
         addElement(placedElement);
         return placedElement;
@@ -212,7 +226,9 @@ public class PinballMachine
     public void removeElement(PlacedElement placedElement)
     {
         checkElementsLoaded();
-        elements.remove(placedElement);
+
+        if (placedElement.getBaseElement().getType() != BaseElementType.BALL)
+            elements.remove(placedElement);
     }
 
     /**

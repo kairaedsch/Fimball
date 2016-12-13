@@ -75,7 +75,6 @@ public class PinballMachineManager
     public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Collections.emptyList(), this);
-        pinballMachine.addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;

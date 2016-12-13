@@ -153,7 +153,7 @@ public class SelectedElementSubViewModel
      */
     public void remove()
     {
-        if (placedElement.isPresent() && placedElement.get().getBaseElement().getType() != BaseElementType.BALL)
+        if (placedElement.isPresent())
             pinballMachine.removeElement(placedElement.get());
     }
 
