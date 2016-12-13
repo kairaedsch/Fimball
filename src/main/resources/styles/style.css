@@ -151,8 +151,9 @@
 .machineOverviewInner .machinePic {
     -fx-background-image: url("../images/pinball-machine-test-v6.png");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+    -fx-background-size: contain;
     -fx-background-position: center;
+    -fx-background-color: #DB5D5D;
 }
 
 .machineOverviewInner .machineName {

@@ -22,7 +22,7 @@ public class Config
      */
     public final static int pixelsPerGridUnit = 15;
 
-    public final static double antiGraphicStripesExtraSize = 0.05;
+    public final static double antiGraphicStripesExtraSize = 0.02;
 
     /**
      * Der maximale Zoom im Editor.
