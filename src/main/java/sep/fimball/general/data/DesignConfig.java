@@ -65,6 +65,12 @@ public class DesignConfig
      */
     public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
+    public final static String cssNoImage = "-fx-background-image: none";
+
+    private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";
+    private final static String CSS_URL_POSTFIX = "\");";
+    private final static String CSS_IMAGE_CONTAIN = "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";
+
     /**
      * Gibt den URL-Pfad, der durch {@code path}spezifizierten CSS-Datei zurück.
      * @param path Der Pfad, der die CSS-Datei spezifiziert.
@@ -72,11 +78,21 @@ public class DesignConfig
      */
     public static StringExpression backgroundImageCss(ReadOnlyStringProperty path)
     {
-        return Bindings.concat("-fx-background-image: url(\"file:///", path, "\");");
+        return Bindings.concat(CSS_URL_PREFIX, path, CSS_URL_POSTFIX);
+    }
+
+    private static String backgroundImageCss(String path)
+    {
+        return CSS_URL_PREFIX + path + CSS_URL_POSTFIX;
     }
 
     public static StringExpression fillBackgroundImageCss(ReadOnlyStringProperty path)
     {
-        return Bindings.concat(DesignConfig.backgroundImageCss(path), "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;");
+        return Bindings.concat(DesignConfig.backgroundImageCss(path), CSS_IMAGE_CONTAIN);
+    }
+
+    public static String fillBackgroundImageCss(String path)
+    {
+        return DesignConfig.backgroundImageCss(path) + CSS_IMAGE_CONTAIN;
     }
 }

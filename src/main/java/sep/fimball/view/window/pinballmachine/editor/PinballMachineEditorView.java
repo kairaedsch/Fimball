@@ -19,6 +19,8 @@ import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 
 /**
  * Die PinballMachineEditorView ist für die Darstellung des Editors zuständig und ermöglicht dem Nutzer, einen Flipperautomaten
@@ -100,23 +102,27 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         selectedElement.setContent(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
-        previewTop.styleProperty().bind(DesignConfig.fillBackgroundImageCss(pinballMachineEditorViewModel.getTopBackgroundPath()));
-        previewBot.styleProperty().bind(DesignConfig.fillBackgroundImageCss(pinballMachineEditorViewModel.getBotBackgroundPath()));
         previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
 
-        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneSizeToImage(newValue, previewTop));
-        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneSizeToImage(newValue, previewBot));
+        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewTop));
+        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewBot));
     }
 
-    private void bindPaneSizeToImage(String imagePath, Pane pane)
+    private void bindPaneToImage(Optional<String> imagePath, Pane pane)
     {
-        if (imagePath != null)
+        if (imagePath.isPresent())
         {
+            pane.styleProperty().set(DesignConfig.fillBackgroundImageCss(imagePath.get()));
+
             ImageCache cache = ImageCache.getInstance();
             pane.prefWidthProperty().unbind();
-            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath).widthProperty()));
+            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).widthProperty()));
             pane.prefHeightProperty().unbind();
-            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath).heightProperty()));
+            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).heightProperty()));
+        }
+        else
+        {
+            pane.styleProperty().set(DesignConfig.cssNoImage);
         }
     }
 

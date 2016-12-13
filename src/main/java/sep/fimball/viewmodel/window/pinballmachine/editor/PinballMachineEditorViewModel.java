@@ -94,14 +94,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private boolean moveModifier = false;
 
-    private StringProperty topBackgroundPath;
+    private ObjectProperty<Optional<String>> topBackgroundPath;
 
-    private StringProperty botBackgroundPath;
+    private ObjectProperty<Optional<String>> botBackgroundPath;
 
     private BooleanProperty availableElementSelected;
-
-    private DoubleProperty previewWidth;
-    private DoubleProperty previewHeight;
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
@@ -136,13 +133,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         gameSession = GameSession.generateEditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasEditorViewModel(gameSession, this);
 
-        topBackgroundPath = new SimpleStringProperty();
-        botBackgroundPath = new SimpleStringProperty();
+        topBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
+        botBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
         availableElementSelected = new SimpleBooleanProperty();
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
-
-        previewWidth = new SimpleDoubleProperty(0.0);
-        previewHeight = new SimpleDoubleProperty(0.0);
     }
 
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
@@ -219,7 +213,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         double divX = (((endX-startX) / Config.pixelsPerGridUnit) / cameraZoom.get());
         double divY = (((endY-startY) / Config.pixelsPerGridUnit) / cameraZoom.get());
 
-        if (button == MouseButton.MIDDLE || moveModifier)
+        if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
         }
@@ -238,6 +232,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void setMouseMode(MouseMode mouseMode)
     {
         this.mouseMode.set(mouseMode);
+
+        if (mouseMode == MouseMode.SELECTING)
+        {
+            selectedAvailableElement.set(Optional.empty());
+            topBackgroundPath.set(Optional.empty());
+            botBackgroundPath.set(Optional.empty());
+        }
     }
 
     /**
@@ -248,10 +249,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void setSelectedAvailableElement(BaseElement selectedAvailableElement)
     {
         this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
-        topBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0));
-        botBackgroundPath.set(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0));
-        previewWidth.set(selectedAvailableElement.getMedia().getElementHeight());
-        previewHeight.set(selectedAvailableElement.getMedia().getElementHeight());
+        topBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0)));
+        botBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0)));
     }
 
     /**
@@ -264,6 +263,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (!moveModifier && onlyPressed)
         {
+            if (button == MouseButton.SECONDARY && mouseMode.get() == MouseMode.PLACING)
+                setMouseMode(MouseMode.SELECTING);
+
             if (mouseMode.get() == MouseMode.SELECTING && button == MouseButton.PRIMARY)
             {
                 setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
@@ -392,12 +394,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectedPlacedElement;
     }
 
-    public ReadOnlyStringProperty getTopBackgroundPath()
+    public ReadOnlyObjectProperty<Optional<String>> getTopBackgroundPath()
     {
         return topBackgroundPath;
     }
 
-    public ReadOnlyStringProperty getBotBackgroundPath()
+    public ReadOnlyObjectProperty<Optional<String>> getBotBackgroundPath()
     {
         return botBackgroundPath;
     }
@@ -405,15 +407,5 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public ReadOnlyBooleanProperty isAvailableElementSelected()
     {
         return availableElementSelected;
-    }
-
-    public ReadOnlyDoubleProperty previewWidthProperty()
-    {
-        return previewWidth;
-    }
-
-    public ReadOnlyDoubleProperty previewHeightProperty()
-    {
-        return previewHeight;
     }
 }
