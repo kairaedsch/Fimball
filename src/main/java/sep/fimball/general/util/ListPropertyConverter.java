@@ -5,6 +5,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -60,12 +61,17 @@ public class ListPropertyConverter
                     }
                     if (change.wasPermutated())
                     {
+                        HashMap<Integer, ConvertedT> map = new HashMap<>();
                         for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
                             int newPos = change.getPermutation(p);
-                            ConvertedT temp = listPropertyConverted.get(p);
-                            listPropertyConverted.set(p, listPropertyConverted.get(newPos));
-                            listPropertyConverted.set(newPos, temp);
+                            if(p != newPos)
+                            {
+                                map.put(newPos, listPropertyConverted.get(newPos));
+                                ConvertedT temp = listPropertyConverted.get(p);
+                                if (map.containsKey(p)) listPropertyConverted.set(newPos, map.get(p));
+                                else listPropertyConverted.set(newPos, listPropertyConverted.get(p));
+                            }
                         }
                     }
                 }

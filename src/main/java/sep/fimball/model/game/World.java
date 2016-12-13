@@ -24,19 +24,12 @@ public class World implements HandlerWorld
     private ListProperty<GameElement> sortedGameElements;
 
     /**
-     * Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
-     */
-    private PlacedElement ballTemplate;
-
-    /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
      * @param elements     Liste der Elemente in der Spielwelt.
      */
     public World(ObservableList<GameElement> elements)
     {
-        this.ballTemplate = ballTemplate;
-
         gameElements = new SimpleListProperty<>(elements);
         sortedGameElements =  new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
     }

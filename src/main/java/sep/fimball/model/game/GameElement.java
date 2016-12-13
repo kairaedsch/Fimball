@@ -103,10 +103,7 @@ public class GameElement implements HandlerGameElement
      */
     public void setPosition(Vector2 position)
     {
-        synchronized (this)
-        {
-            this.position.set(position);
-        }
+        if(position.getX() != this.position.get().getX() || position.getY() != this.position.get().getY()) this.position.set(position);
     }
 
     /**
@@ -126,10 +123,7 @@ public class GameElement implements HandlerGameElement
      */
     public void setRotation(double rotation)
     {
-        synchronized (this)
-        {
-            this.rotation.set(rotation);
-        }
+        this.rotation.set(rotation);
     }
 
     /**

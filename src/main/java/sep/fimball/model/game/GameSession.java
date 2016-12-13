@@ -75,7 +75,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
 
-        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.scaleProperty()});
+        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{ gameElement.scaleProperty()});
         SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
         gameSession.getWorld().gameElementsAidsAidsAidsAidsProperty().set(sortedList);
