@@ -5,7 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.DrawMode;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;

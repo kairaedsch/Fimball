@@ -1,7 +1,6 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.scene.input.MouseButton;
-import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;

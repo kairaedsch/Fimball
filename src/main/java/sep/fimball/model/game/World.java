@@ -20,73 +20,13 @@ public class World implements HandlerWorld
     private ListProperty<GameElement> gameElements;
 
     /**
-     * Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
-     */
-    private PlacedElement ballTemplate;
-
-    /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
      * @param elements     Liste der Elemente in der Spielwelt.
-     * @param ballTemplate Vorlage für den Ball.
      */
-    public World(ObservableList<GameElement> elements, PlacedElement ballTemplate)
+    public World(ObservableList<GameElement> elements)
     {
         this.gameElements = new SimpleListProperty<>(elements);
-        this.ballTemplate = ballTemplate;
-    }
-
-    /**
-     * Fügt das gegebene Element in die Spielwelt ein.
-     *
-     * @param element Element, welches in die Spielwelt eingefügt wird.
-     */
-    public void addGameElement(GameElement element)
-    {
-        gameElements.add(element);
-    }
-
-    /**
-     * Generiert das Rechteck, welches das Spielfeld umschließt und den Spielfeldrand darstellt, und gibt dieses zurück.
-     *
-     * @return Ein Rechteck, das den Spielfeldrand darstellt.
-     */
-    public RectangleDouble generateWalls()
-    {
-        double minX = gameElements.get(0).positionProperty().get().getX();
-        double maxX = gameElements.get(0).positionProperty().get().getX();
-        double minY = gameElements.get(0).positionProperty().get().getY();
-        double maxY = gameElements.get(0).positionProperty().get().getY();
-
-        for (GameElement gameElement : gameElements)
-        {
-            if (gameElement.getPlacedElement().getBaseElement().getId().equals(BaseElementType.BALL))
-                continue;
-
-            double currentX = gameElement.positionProperty().get().getX();
-            double currentY = gameElement.positionProperty().get().getY();
-
-            if (currentX < minX)
-            {
-                minX = currentX;
-            }
-            if (currentX > maxX)
-            {
-                maxX = currentX;
-            }
-            if (currentY < minY)
-            {
-                minY = currentY;
-            }
-            if (currentY > maxY)
-            {
-                maxY = currentY;
-            }
-        }
-        Vector2 rectOrigin = new Vector2(minX, minY);
-        double width = Math.abs(maxX - minX);
-        double height = Math.abs(maxY - minY);
-        return new RectangleDouble(rectOrigin, width, height);
     }
 
     /**
@@ -97,25 +37,5 @@ public class World implements HandlerWorld
     public ListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
-    }
-
-    /**
-     * Gibt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können, zurück.
-     *
-     * @return Die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
-     */
-    public PlacedElement getBallTemplate()
-    {
-        return ballTemplate;
-    }
-
-    /**
-     * Setzt die Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
-     *
-     * @param ballTemplate Die neue Vorlage, aus der bei Bedarf neue Bälle generiert werden können.
-     */
-    public void setBallTemplate(PlacedElement ballTemplate)
-    {
-        this.ballTemplate = ballTemplate;
     }
 }

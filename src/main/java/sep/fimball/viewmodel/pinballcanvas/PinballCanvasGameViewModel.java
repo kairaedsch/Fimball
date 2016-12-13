@@ -1,6 +1,5 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
-import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;

@@ -1,4 +1,4 @@
-package sep.fimball.general.data;
+package sep.fimball.viewmodel.pinballcanvas;
 
 public enum DrawMode
 {

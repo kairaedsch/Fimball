@@ -195,7 +195,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
-        PlacedElement ballTemplate = null;
         double maxElementPos = 0;
         List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
         List<FlipperPhysicsElement<GameElement>> rightFlippers = new ArrayList<>();
@@ -214,7 +213,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
-                    ballTemplate = element;
                     this.gameBall.set(gameElement);
                     break;
                 case PLUNGER:/*
@@ -250,10 +248,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             maxElementPos = Math.max(element.positionProperty().get().getY() + BALL_LOST_TOLERANCE, maxElementPos);
         }
 
-        if (ballTemplate == null)
+        if (gameBall.get() == null)
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
-        world = new World(elements, ballTemplate);
+        world = new World(elements);
         BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
 
         physicsElements.add(physElem);

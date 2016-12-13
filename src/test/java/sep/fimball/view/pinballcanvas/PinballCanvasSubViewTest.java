@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.DrawMode;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 

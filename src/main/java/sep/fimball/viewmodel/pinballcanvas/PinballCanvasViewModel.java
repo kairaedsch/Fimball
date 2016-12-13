@@ -4,14 +4,11 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
-import sep.fimball.general.data.DrawMode;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
-import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
-import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Observer;
 
