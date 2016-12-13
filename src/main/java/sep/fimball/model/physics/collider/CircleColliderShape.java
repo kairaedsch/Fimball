@@ -70,15 +70,6 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint)
-    {
-        // TODO rotate
-
-        Vector2 origin = new Vector2(position.getX() - radius, position.getY() - radius);
-        return new RectangleDouble(origin, 2 * radius, 2 * radius);
-    }
-
-    @Override
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
         if (max)

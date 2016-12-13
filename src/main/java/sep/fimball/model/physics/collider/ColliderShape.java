@@ -21,15 +21,6 @@ public interface ColliderShape
     HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint);
 
     /**
-     * Gibt eine Box zurück, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind.
-     *
-     * @param rotation   Rotation der Form.
-     * @param pivotPoint Punkt, um den die Form rotiert wird.
-     * @return Eine Box, welche die Form der Fläche enthält und deren Achsen nach den Koordinatenachsen ausgerichtet sind.
-     */
-    RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint);
-
-    /**
      * Gibt den Vektor mit minimaler/maximaler X und Y Position dieser Form zurück je nachdem ob {@code max} true oder false ist.
      *
      * @param rotation   Die rotation des Colliders.

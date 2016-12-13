@@ -138,44 +138,6 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public RectangleDouble getBoundingBox(double rotation, Vector2 pivotPoint)
-    {
-        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-
-        double minX = rotatedVertices.get(0).getX();
-        double minY = rotatedVertices.get(0).getY();
-        double maxX = rotatedVertices.get(0).getX();
-        double maxY = rotatedVertices.get(0).getY();
-
-        for (Vector2 vertex : rotatedVertices)
-        {
-            double vertexX = vertex.getX();
-            double vertexY = vertex.getY();
-
-            if (vertexX < minX)
-            {
-                minX = vertexX;
-            }
-            if (vertexX > maxX)
-            {
-                maxX = vertexX;
-            }
-            if (vertexY < minY)
-            {
-                minY = vertexY;
-            }
-            if (vertexY > maxY)
-            {
-                maxY = vertexY;
-            }
-        }
-        Vector2 origin = new Vector2(minX, minY);
-        Debug.addDrawVector(origin, new Vector2(maxX - minX, 0), Color.BROWN);
-        Debug.addDrawVector(origin, new Vector2(0, maxY - minY), Color.BROWN);
-        return new RectangleDouble(origin, maxX - minX, maxY - minY);
-    }
-
-    @Override
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
