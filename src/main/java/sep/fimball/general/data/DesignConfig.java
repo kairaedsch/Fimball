@@ -82,6 +82,8 @@ public class DesignConfig
      */
     public static final int LIGHT_CHANGE_TICK_RATE = 25;
 
+    public final static double BORDER_BLINK_RATE = 1000.0;
+
     private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";
     private final static String CSS_URL_POSTFIX = "\");";
     private final static String CSS_IMAGE_CONTAIN = "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";

@@ -2,6 +2,11 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 
+/**
+ * Ein PlungerPhysicsElement stellt einen Plunger in der Physik dar.
+ *
+ * @param <GameElementT>
+ */
 public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModifi>
 {
     /**

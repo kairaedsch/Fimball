@@ -33,6 +33,9 @@ public abstract class PinballCanvasViewModel
      */
     protected DoubleProperty cameraZoom;
 
+    /**
+     * Der Zeichenmodus.
+     */
     protected DrawMode drawMode;
 
     /**
@@ -40,23 +43,35 @@ public abstract class PinballCanvasViewModel
      */
     protected Observable redrawObservable;
 
+    /**
+     * Der Bereich des Automaten, in welchen sich Spielelemente befinden.
+     */
     protected SimpleObjectProperty<RectangleDouble> boundingBox;
 
+    /**
+     * Der zu zeichnende Flipperautomat.
+     */
     protected PinballMachine pinballMachine;
 
+    /**
+     * Element aus der View, welches ein Screenshot des Flipperautomaten erstellen kann.
+     */
     private ViewScreenshotCreater viewScreenshotCreater;
 
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
-     * @param gameSession   Die Spielsitzung.
+     * @param gameSession Die Spielsitzung.
+     * @param drawMode    Der Zeichenmodus.
      */
     protected PinballCanvasViewModel(GameSession gameSession, DrawMode drawMode)
     {
+        pinballMachine = gameSession.getPinballMachine();
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
+        boundingBox = new SimpleObjectProperty<>(pinballMachine.getBoundingBox());
 
         redrawObservable = new Observable();
 
@@ -125,26 +140,53 @@ public abstract class PinballCanvasViewModel
         return drawMode;
     }
 
+    /**
+     * Gibt den Bereich des Automaten zurück, in welchen sich Spielelemente befinden.
+     *
+     * @return Der Bereich des Automaten, in welchen sich Spielelemente befinden.
+     */
     public ReadOnlyObjectProperty<RectangleDouble> boundingBoxProperty()
     {
-        return new SimpleObjectProperty<>(pinballMachine.getBoundingBox());
+        return boundingBox;
     }
 
+    /**
+     * Es wurde auf das Canvas vom Nutzer geklickt.
+     *
+     * @param vector2 Position der Maus.
+     * @param button  Der benutzte Button.
+     */
     public void mouseClickedOnGame(Vector2 vector2, MouseButton button)
     {
 
     }
 
+    /**
+     * Es wurde auf das Canvas vom Nutzer gedrückt.
+     *
+     * @param vector2    Position der Maus.
+     * @param mouseEvent Das Ausgelöste MouseEvent.
+     */
     public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
     {
 
     }
 
+    /**
+     * Setzt den ViewScreenshotCreater, welcher ein Screenshot des Flipperautomaten erstellen kann.
+     *
+     * @param viewScreenshotCreater Der ViewScreenshotCreater.
+     */
     public void setViewScreenshotCreater(ViewScreenshotCreater viewScreenshotCreater)
     {
         this.viewScreenshotCreater = viewScreenshotCreater;
     }
 
+    /**
+     * Beauftragt den ViewScreenshotCreater ein Bild zu machen.
+     *
+     * @return Das gemachte Bild.
+     */
     public WritableImage createScreenshot()
     {
         return viewScreenshotCreater.drawToImage();

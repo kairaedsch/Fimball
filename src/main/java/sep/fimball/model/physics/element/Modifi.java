@@ -1,8 +1,9 @@
 package sep.fimball.model.physics.element;
 
 /**
- * Created by kaira on 14.12.2016.
+ * Ein Modifi dient als Oberklasse für alle Modifis, welche Daten für Änderungen an Physikelemente speichern.
  */
-public class Modifi
+public abstract class Modifi
 {
+
 }

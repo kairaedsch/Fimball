@@ -44,14 +44,23 @@ public class SpriteSubViewModel
     private GameElement gameElement;
 
     /**
-     * Der Pivot-Punkt des Sprites.
+     * Der Drehpunkt des Sprites.
      */
     private ObjectProperty<Vector2> pivotPoint;
 
+    /**
+     * Die Koordinaten der Bilder der verschiedenen Drehungen.
+     */
     private Map<Integer, Vector2> localCoordinates;
 
+    /**
+     * Die Höhe des Elements.
+     */
     private double elementHeight;
 
+    /**
+     * Die Größe des Elements.
+     */
     private DoubleProperty scale;
 
     /**
@@ -164,16 +173,31 @@ public class SpriteSubViewModel
         return pivotPoint;
     }
 
+    /**
+     * Gibt die Koordinaten der Bilder der verschiedenen Drehungen zurück.
+     *
+     * @return Die Koordinaten der Bilder der verschiedenen Drehungen.
+     */
     public Map<Integer, Vector2> getLocalCoordinates()
     {
         return localCoordinates;
     }
 
+    /**
+     * Gibt die Höhe des Elements zurück.
+     *
+     * @return Die Höhe des Elements.
+     */
     public double getElementHeight()
     {
         return elementHeight;
     }
 
+    /**
+     * Gibt die Größe des Elements zurück.
+     *
+     * @return Die Größe des Elements.
+     */
     public DoubleProperty scaleProperty()
     {
         return scale;

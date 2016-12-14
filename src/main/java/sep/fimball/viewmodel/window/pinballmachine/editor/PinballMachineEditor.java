@@ -29,7 +29,7 @@ public class PinballMachineEditor
     {
         for (PlacedElement placedElement : selection)
         {
-            pinballMachine.elementsProperty().get().add(placedElement);
+            pinballMachine.elementsProperty().add(placedElement);
         }
     }
 
@@ -61,7 +61,7 @@ public class PinballMachineEditor
     {
         for (PlacedElement placedElement : selection)
         {
-            pinballMachine.elementsProperty().get().remove(placedElement);
+            pinballMachine.elementsProperty().remove(placedElement);
         }
     }
 

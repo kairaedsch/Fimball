@@ -18,7 +18,6 @@ import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
  */
 public class SpriteSubView
 {
-    final double BORDER_BLINK_RATE = 1000.0;
     /**
      * Die Position des Sprites.
      */
@@ -157,7 +156,7 @@ public class SpriteSubView
     {
         double borderWidth = Config.pixelsPerGridUnit * 0.25;
         double borderOffset = 0.5 * borderWidth;
-        double effectTime = (System.currentTimeMillis() % BORDER_BLINK_RATE) / BORDER_BLINK_RATE;
+        double effectTime = (System.currentTimeMillis() % DesignConfig.BORDER_BLINK_RATE) / DesignConfig.BORDER_BLINK_RATE;
         double effectValue = -2 * effectTime * (effectTime - 1);
 
         graphicsContext.setLineWidth(borderWidth);

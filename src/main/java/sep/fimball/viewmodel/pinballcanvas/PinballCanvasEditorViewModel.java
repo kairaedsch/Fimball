@@ -29,7 +29,6 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
         ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
 
         this.editorViewModel = pinballMachineEditorViewModel;
-        pinballMachine = gameSession.getPinballMachine();
 
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
@@ -49,8 +48,8 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     /**
      * Benachrichtigt das {@code editorVIewModel}, dass der Nutzer auf dem Spielfeld die Maustaste gedrückt hat.
      *
-     * @param gridPos Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
-     * @param button  Die gedrückte Maustaste.
+     * @param gridPos    Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
+     * @param mouseEvent Das Ausgelöste MouseEvent.
      */
     public void mousePressedOnGame(Vector2 gridPos, MouseEvent mouseEvent)
     {
