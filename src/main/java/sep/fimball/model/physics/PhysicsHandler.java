@@ -1,5 +1,6 @@
 package sep.fimball.model.physics;
 
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
@@ -23,26 +24,6 @@ import java.util.TimerTask;
  */
 public class PhysicsHandler<GameElementT>
 {
-    /**
-     * Die Verzögerung des Startens des Physic Timers in Millisekunden.
-     */
-    private final static int TIMER_DELAY = 0;
-
-    /**
-     * Gibt an, nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
-     */
-    private final static int TICK_RATE_MILISEC = 1000 / 60;
-
-    /**
-     * Gibt an, nach wie vielen Sekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
-     */
-    public final static double TICK_RATE_SEC = TICK_RATE_MILISEC / 1000d;
-
-    /**
-     * Die Geschwindigkeit, die der Ball erfährt, wenn am Automaten gestoßen wird.
-     */
-    private static final int NUDGE_VELOCITY = 5;
-
     /**
      * Der aktuelle Spielball.
      */
@@ -182,10 +163,10 @@ public class PhysicsHandler<GameElementT>
         gameSession.nudge();
         if (left)
         {
-            accelerateBallInX(NUDGE_VELOCITY);
+            accelerateBallInX(PhysicsConfig.NUDGE_VELOCITY);
         } else
         {
-            accelerateBallInX(-NUDGE_VELOCITY);
+            accelerateBallInX(-PhysicsConfig.NUDGE_VELOCITY);
         }
     }
 
@@ -204,7 +185,7 @@ public class PhysicsHandler<GameElementT>
     public void startTicking()
     {
         physicTimer = new Timer(false);
-        physicTimer.scheduleAtFixedRate(createTask(), TIMER_DELAY, TICK_RATE_MILISEC);
+        physicTimer.scheduleAtFixedRate(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
     }
 
     /**
@@ -222,7 +203,7 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                double delta = TICK_RATE_SEC;
+                double delta = PhysicsConfig.TICK_RATE_SEC;
 
                 // Check bufferedKeyEvents
                 synchronized (bufferedKeyEvents)

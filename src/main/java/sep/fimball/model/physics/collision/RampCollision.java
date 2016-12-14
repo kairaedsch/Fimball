@@ -1,7 +1,6 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.PhysicsConfig;
-import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.WorldLayer;
 
 /**
@@ -20,7 +19,7 @@ public class RampCollision implements CollisionType
              * unten zieht, an Höhe verliert.
              */
             double multiplier = 1.5;
-            info.getBall().setHeight(info.getBall().getHeight() + PhysicsConfig.HEIGHT_GRAVITY * multiplier * PhysicsHandler.TICK_RATE_SEC);
+            info.getBall().setHeight(info.getBall().getHeight() + PhysicsConfig.HEIGHT_GRAVITY * multiplier * PhysicsConfig.TICK_RATE_SEC);
         }
     }
 }

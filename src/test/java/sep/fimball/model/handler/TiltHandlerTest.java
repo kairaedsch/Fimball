@@ -15,15 +15,27 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
  */
 public class TiltHandlerTest
 {
-    Map<HandlerPlayer, Boolean> tiltActivated;
-    HandlerPlayer player1 = getPlayer();
-    HandlerPlayer player2 = getPlayer();
+    /**
+     * Gibt an, ob für die jeweiligen Spieler der Tilt aktiviert wurde.
+     */
+    private Map<HandlerPlayer, Boolean> tiltActivated;
+
+    /**
+     * Ein Test-Spieler.
+     */
+    private HandlerPlayer player1 = getPlayer();
+
+    /**
+     * Ein Test-Spieler.
+     */
+    private HandlerPlayer player2 = getPlayer();
 
     /**
      * Testet, ob das Aktivieren des TiltHandlers funktioniert.
      */
     @Test
-    public void activateTiltHandlerTest() {
+    public void activateTiltHandlerTest()
+    {
         tiltActivated = new HashMap<>();
         tiltActivated.put(player1, false);
         tiltActivated.put(player2, false);
@@ -47,9 +59,11 @@ public class TiltHandlerTest
 
     /**
      * Gibt eine Test-HandlerGameSession zurück.
+     *
      * @return Eine Test-HandlerGameSession.
      */
-    private HandlerGameSession getTestHandlerGameSession() {
+    private HandlerGameSession getTestHandlerGameSession()
+    {
         return new HandlerGameSession()
         {
             /**
@@ -66,9 +80,11 @@ public class TiltHandlerTest
             @Override
             public void switchToNextPlayer()
             {
-                if (currentPlayer == player1) {
+                if (currentPlayer == player1)
+                {
                     currentPlayer = player2;
-                } else {
+                } else
+                {
                     currentPlayer = player1;
                 }
             }
@@ -101,9 +117,11 @@ public class TiltHandlerTest
 
     /**
      * Gibt einen Test-HandlerPlayer zurück.
+     *
      * @return Ein Test-HandlerPlayer.
      */
-    private HandlerPlayer getPlayer() {
+    private HandlerPlayer getPlayer()
+    {
         return new HandlerPlayer()
         {
             @Override

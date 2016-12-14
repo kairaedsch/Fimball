@@ -12,9 +12,16 @@ import java.util.Optional;
  */
 public class SoundHandler implements ElementHandler
 {
+    /**
+     * Der SoundManager, an den die Sounds weitergeben werden.
+     */
     private SoundManager soundManager;
 
-    public SoundHandler(SoundManager soundManager) {
+    /**
+     * Erstellt einen neuen SoundHandler.
+     * @param soundManager Der SoundManager, an den die Sounds weitergeben werden.
+     */
+    SoundHandler(SoundManager soundManager) {
         this.soundManager = soundManager;
     }
 
