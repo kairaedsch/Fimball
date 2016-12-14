@@ -17,12 +17,16 @@ import java.util.*;
 public class PinballMachineEditor
 {
     private ListProperty<PlacedElement> selection;
+
+    private Map<PlacedElement, Vector2> detailedPositions;
+
     private PinballMachine pinballMachine;
 
     public PinballMachineEditor(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
         selection = new SimpleListProperty<>(FXCollections.observableArrayList());
+        detailedPositions = new HashMap<>();
     }
 
     public void placeSelection()
@@ -33,11 +37,23 @@ public class PinballMachineEditor
         }
     }
 
+    private Vector2 getPosition(PlacedElement placedElement)
+    {
+        if(!detailedPositions.containsKey(placedElement)) detailedPositions.put(placedElement, placedElement.positionProperty().get());
+        return detailedPositions.get(placedElement);
+    }
+
+    private void setPosition(PlacedElement placedElement, Vector2 newPos)
+    {
+        detailedPositions.put(placedElement, newPos);
+        placedElement.setPosition(newPos.round());
+    }
+
     public void moveSelectionBy(Vector2 by)
     {
         for (PlacedElement placedElement : selection)
         {
-            placedElement.setPosition(placedElement.positionProperty().get().plus(by));
+            setPosition(placedElement, getPosition(placedElement).plus(by));
         }
     }
 
@@ -53,13 +69,13 @@ public class PinballMachineEditor
             {
                 for (int i = 1; i < selection.size(); i++)
                 {
-                    relativePos.put(selection.get(i), selection.get(i).positionProperty().get().minus(selection.get(0).positionProperty().get()));
+                    relativePos.put(selection.get(i), getPosition(selection.get(i)).minus(getPosition(selection.get(0))));
                 }
             }
 
             for (PlacedElement placedElement : selection)
             {
-                placedElement.setPosition(to.plus(relativePos.get(placedElement)));
+                setPosition(placedElement, to.plus(relativePos.get(placedElement)));
             }
         }
     }
