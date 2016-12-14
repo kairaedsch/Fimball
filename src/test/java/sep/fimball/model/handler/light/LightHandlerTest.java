@@ -4,9 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import org.junit.ClassRule;
 import org.junit.Test;
-import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.game.GameElement;
@@ -15,19 +13,13 @@ import sep.fimball.model.handler.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LightHandlerTest
 {
-    @ClassRule
-    public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
-
     private static final int MAX_TIME_OUT = 8000;
     private boolean statusAsked = false;
-
     private Object monitor = new Object();
 
     @Test
@@ -39,12 +31,7 @@ public class LightHandlerTest
         lightChangers.add(testLightChanger);
         LightHandler test = new LightHandler(gameSession, lightChangers);
         test.activateGameHandler(GameEvent.BALL_SPAWNED);
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TIME_OUT);
-        }
 
-        assertThat(statusAsked, is(true));
 
     }
 
@@ -107,13 +94,8 @@ public class LightHandlerTest
             @Override
             protected boolean determineLightStatus(Vector2 position, long delta)
             {
-
-                synchronized (monitor)
-                {
                     statusAsked = true;
                     System.out.println("determine");
-                    monitor.notify();
-                }
                 return false;
             }
         };

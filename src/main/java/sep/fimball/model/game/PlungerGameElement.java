@@ -15,6 +15,7 @@ import java.util.Optional;
  */
 public class PlungerGameElement extends GameElement
 {
+    public static final int TEN_MILI_SECS = 100000000;
     private Optional<Long> downSince;
 
     /**
@@ -50,8 +51,20 @@ public class PlungerGameElement extends GameElement
 
     private double calcForce()
     {
-        double force = 5;
-        // TODO do math
-        return force;
+        if(downSince.isPresent())
+        {
+            double force = 5;
+            double time = System.nanoTime() - downSince.get();
+            if(time< TEN_MILI_SECS) {
+                return force;
+            } else if (time < 2 * TEN_MILI_SECS)
+            {
+                return force * 2;
+            } else {
+                return force * 3;
+            }
+        }
+        return 0;
+
     }
 }

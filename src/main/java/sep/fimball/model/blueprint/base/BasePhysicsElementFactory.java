@@ -81,6 +81,9 @@ public class BasePhysicsElementFactory
                 case "rampClimbing":
                     collisionType = new RampClimbingCollision();
                     break;
+                case "plunger":
+                    collisionType = new PlungerCollision();
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown collision type '" + collider.collisionType.type + "' in PhysicsElement!");
             }

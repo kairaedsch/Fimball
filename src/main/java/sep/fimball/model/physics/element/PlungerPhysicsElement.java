@@ -9,6 +9,9 @@ import sep.fimball.general.data.Vector2;
  */
 public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModify>
 {
+
+    double strength = 0;
+
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.
      *
@@ -17,7 +20,8 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
      * @param rotation           Die Rotation des PhysicsElement.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public PlungerPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public PlungerPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement
+            basePhysicsElement)
     {
         super(gameElement, position, rotation, basePhysicsElement);
     }
@@ -31,7 +35,11 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     @Override
     public void applyModifi(PlungerModify modifi)
     {
-        // TODO
-        System.out.println("plunger");
+        strength = modifi.getForce();
+    }
+
+    public double getStrength()
+    {
+        return strength;
     }
 }

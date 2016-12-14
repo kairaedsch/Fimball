@@ -240,6 +240,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                             gameElement.rotationProperty().get(),
                             gameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(physicsHandler, plungerPhysicsElement);
+                    physicsElement = plungerPhysicsElement;
                     break;
                 case LEFT_FLIPPER:
                 case RIGHT_FLIPPER:
