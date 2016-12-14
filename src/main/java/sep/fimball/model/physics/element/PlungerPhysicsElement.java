@@ -35,7 +35,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     @Override
     public void applyModify(PlungerModify modify)
     {
-        strength = modifi.getForce();
+        strength = modify.getForce();
     }
 
     public double removeStrength()
