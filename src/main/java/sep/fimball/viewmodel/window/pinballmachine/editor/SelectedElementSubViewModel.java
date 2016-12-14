@@ -1,6 +1,9 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -12,11 +15,6 @@ import java.util.Optional;
  */
 public class SelectedElementSubViewModel
 {
-    /**
-     * Der Flipperautomat, zu dem das ausgewählte Element gehört.
-     */
-    private PinballMachine pinballMachine;
-
     /**
      * Das Flipperautomat-Element, das aktuell ausgewählt ist.
      */
@@ -52,10 +50,8 @@ public class SelectedElementSubViewModel
      *
      * @param pinballMachine Der Flipperautomat, der das ausgewählte Element enthält.
      */
-    public SelectedElementSubViewModel(PinballMachine pinballMachine)
+    public SelectedElementSubViewModel(ReadOnlyListProperty<PlacedElement> selection)
     {
-        this.pinballMachine = pinballMachine;
-
         isSomethingSelected = new SimpleBooleanProperty();
         name = new SimpleStringProperty();
         description = new SimpleStringProperty();
@@ -64,6 +60,16 @@ public class SelectedElementSubViewModel
         placedElement = Optional.empty();
 
         setPlacedElement(Optional.empty());
+
+        selection.addListener((observableValue, placedElements, t1) ->
+        {
+            if (selection.size() == 1)
+            {
+                setPlacedElement(Optional.of(selection.get(0)));
+            } else {
+                setPlacedElement(Optional.empty());
+            }
+        });
     }
 
     /**
@@ -91,21 +97,12 @@ public class SelectedElementSubViewModel
         }
         else
         {
-            name.set("Nothing selected");
+            name.set("");
             description.set("");
             isSomethingSelected.set(false);
         }
 
         this.placedElement = newPlacedElement;
-    }
-
-    /**
-     * Erteilt dem Model den Befehl, das Flipperautomat-Element rechtsherum zu drehen.
-     */
-    public void rotateClockwise()
-    {
-        if (placedElement.isPresent())
-            placedElement.get().rotateClockwise();
     }
 
     /**
@@ -146,15 +143,6 @@ public class SelectedElementSubViewModel
     public DoubleProperty multiplierProperty()
     {
         return multiplier;
-    }
-
-    /**
-     * Entfernt das ausgewählte Element vom Flipperautomaten.
-     */
-    public void remove()
-    {
-        if (placedElement.isPresent())
-            pinballMachine.removeElement(placedElement.get());
     }
 
     /**

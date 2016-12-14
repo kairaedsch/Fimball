@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;
@@ -51,8 +52,8 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
      * @param gridPos Die Position im Grid, auf dem der Nutzer die Maustaste gedrückt hat.
      * @param button  Die gedrückte Maustaste.
      */
-    public void mousePressedOnGame(Vector2 gridPos, MouseButton button)
+    public void mousePressedOnGame(Vector2 gridPos, MouseEvent mouseEvent)
     {
-        editorViewModel.mouseClickedOnGame(gridPos, button, true);
+        editorViewModel.mousePressedOnCanvas(mouseEvent, gridPos);
     }
 }

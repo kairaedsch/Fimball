@@ -10,7 +10,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DesignConfig;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.view.tools.ViewLoader;
@@ -20,6 +22,8 @@ import sep.fimball.view.window.WindowView;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Optional;
+
+import static sep.fimball.general.data.Config.pixelsPerGridUnit;
 
 
 /**
@@ -206,7 +210,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mouseEvent.getButton());
+
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())), mouseEvent.getButton());
         mouseDown = mouseEvent;
     }
 
@@ -218,5 +223,27 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void down(MouseEvent mouseEvent)
     {
         mouseDown = mouseEvent;
+    }
+
+    public void mouseEnteredCanvas(MouseEvent mouseEvent)
+    {
+        pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+    }
+
+    public void mouseExitedCanvas(MouseEvent mouseEvent)
+    {
+        pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+    }
+
+    public void mouseReleased(MouseEvent mouseEvent)
+    {
+        pinballMachineEditorViewModel.mouseReleased(mouseEvent);
+    }
+
+    private Vector2 mousePosToCanvasPos(Vector2 mousePos)
+    {
+        Vector2 posToMiddle = new Vector2(mousePos.getX(), mousePos.getY()).minus(new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).scale(0.5));
+        return posToMiddle.scale(1 / (pixelsPerGridUnit * pinballMachineEditorViewModel.cameraZoomProperty().get())).plus(pinballMachineEditorViewModel.cameraPositionProperty().get());
+
     }
 }

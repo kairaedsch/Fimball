@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
@@ -134,7 +135,7 @@ public abstract class PinballCanvasViewModel
 
     }
 
-    public void mousePressedOnGame(Vector2 vector2, MouseButton button)
+    public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
     {
 
     }

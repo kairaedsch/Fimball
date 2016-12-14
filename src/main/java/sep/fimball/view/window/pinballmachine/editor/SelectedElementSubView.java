@@ -80,7 +80,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     @FXML
     private void rotateClicked()
     {
-        selectedElementSubViewModel.rotateClockwise();
+
     }
 
     /**
@@ -89,6 +89,6 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     @FXML
     private void removeClicked()
     {
-        selectedElementSubViewModel.remove();
+
     }
 }
