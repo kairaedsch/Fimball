@@ -23,7 +23,7 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
-    private List<ModifiContainer> modifiContainers;
+    private List<ModifyContainer> modifiContainers;
 
     private final Object modifisMonitor = new Object();
 
@@ -92,11 +92,11 @@ public class PhysicsHandler<GameElementT>
         modifiContainers = new ArrayList<>();
     }
 
-    public <ModifiT extends Modify> void addModifi(PhysicsModifiable<ModifiT> physicsElement, ModifiT modifi)
+    public <ModifyT extends Modify> void addModifi(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
     {
         synchronized (modifisMonitor)
         {
-            modifiContainers.add(new ModifiContainer<>(physicsElement, modifi));
+            modifiContainers.add(new ModifyContainer<>(physicsElement, modify));
         }
     }
 
@@ -126,14 +126,14 @@ public class PhysicsHandler<GameElementT>
             {
                 double delta = PhysicsConfig.TICK_RATE_SEC;
 
-                List<ModifiContainer> localModifiContainers;
+                List<ModifyContainer> localModifiContainers;
                 synchronized (modifisMonitor)
                 {
                     localModifiContainers = modifiContainers;
                     modifiContainers = new ArrayList<>();
                 }
 
-                for (ModifiContainer modifiContainer : localModifiContainers)
+                for (ModifyContainer modifiContainer : localModifiContainers)
                 {
                     modifiContainer.apply();
                 }
@@ -149,9 +149,9 @@ public class PhysicsHandler<GameElementT>
 
                     for (PhysicsElement<GameElementT> element : physicsElements)
                     {
-                        if (element instanceof PhysicsUpdateable)
+                        if (element instanceof PhysicsUpdateAble)
                         {
-                            ((PhysicsUpdateable) element).update(delta);
+                            ((PhysicsUpdateAble) element).update(delta);
                         }
                     }
 

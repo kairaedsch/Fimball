@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.element;
 
 /**
- * Modifi zum zurücksetzten eines Balles.
+ * Modify zum zurücksetzten eines Balles.
  */
 public class FlipperModify extends Modify
 {

@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.element;
 
 /**
- * Modifi zum Tilteffekt bei einem Balles.
+ * Modify zum Tilteffekt bei einem Balles.
  */
 public class BallNudgeModify extends Modify
 {

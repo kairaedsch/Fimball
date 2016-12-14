@@ -12,7 +12,7 @@ import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<Modify>
+public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<Modify>
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -113,7 +113,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     }
 
     @Override
-    public void applyModifi(Modify modify)
+    public void applyModify(Modify modify)
     {
         if(modify instanceof BallNudgeModify)
         {

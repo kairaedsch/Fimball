@@ -3,7 +3,7 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Modifi zum zurücksetzten eines Balles.
+ * Modify zum zurücksetzten eines Balles.
  */
 public class BallResetModify extends Modify
 {

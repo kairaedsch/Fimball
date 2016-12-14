@@ -9,7 +9,7 @@ import static sep.fimball.general.data.PhysicsConfig.FLIPPER_MIN_ROTATION;
 /**
  * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.
  */
-public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<FlipperModify>
+public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<FlipperModify>
 {
     /**
      * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
@@ -136,9 +136,9 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     }
 
     @Override
-    public void applyModifi(FlipperModify modifi)
+    public void applyModify(FlipperModify modify)
     {
-        if(modifi.isUp())
+        if(modify.isUp())
             rotateUp();
         else
             rotateDown();

@@ -7,7 +7,7 @@ import sep.fimball.general.data.Vector2;
  *
  * @param <GameElementT>
  */
-public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModify>
+public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<PlungerModify>
 {
 
     double strength = 0;
@@ -33,7 +33,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     }
 
     @Override
-    public void applyModifi(PlungerModify modifi)
+    public void applyModify(PlungerModify modify)
     {
         strength = modifi.getForce();
     }
