@@ -133,10 +133,14 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     public void setStage(Stage stage)
     {
-        stage.addEventFilter(MouseEvent.MOUSE_MOVED, event ->
-        {
-            // TODO - mega cancer
-            //double pixelsPerUnit = Config.pixelsPerGridUnit * pinballMachineEditorViewModel.cameraZoomProperty().get();
+        stage.addEventFilter(MouseEvent.MOUSE_MOVED, this::updatePreviewPosition);
+        stage.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::updatePreviewPosition);
+    }
+
+    private void updatePreviewPosition(MouseEvent event)
+    {
+        // TODO - mega cancer
+        //double pixelsPerUnit = Config.pixelsPerGridUnit * pinballMachineEditorViewModel.cameraZoomProperty().get();
 
             previewBot.setTranslateX(event.getX());
             /*        + ((pinballCanvasContainer.widthProperty().get() / 2.0) % pinballMachineEditorViewModel.cameraZoomProperty().get())
@@ -150,7 +154,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
                             + (pinballMachineEditorViewModel.cameraPositionProperty().get().getY() / 2.0))
                         % pixelsPerUnit)
             );*/
-        });
     }
 
     /**
