@@ -228,9 +228,7 @@ public class Vector2
     {
         if (this.magnitude() > max)
         {
-            double v = max / this.magnitude();
-
-            return new Vector2(x * v, y * v);
+            return new Vector2(x, y).scale(max / this.magnitude());
         }
 
         return new Vector2(x, y);

@@ -104,6 +104,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
         double cameraZoomSpeed = 50;
 
+        camFollowSpeed = 500;
+
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
@@ -113,8 +115,16 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         double camZoomStep = delta / cameraZoomSpeed;
         camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
 
+        Vector2 oldP = softCameraPosition;
+
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
+        System.out.println("do " + (cameraPosition.get().getY() - softCameraPosition.getY()));
+
+        Vector2 newP = softCameraPosition;
+
+        softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
+        System.out.println("dn " + (cameraPosition.get().getY() - softCameraPosition.getY()));
 
         PinballCanvasDrawer.draw(canvas, sprites, softCameraPosition, softCameraZoom, drawMode);
 

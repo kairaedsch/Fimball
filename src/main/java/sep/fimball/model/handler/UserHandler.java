@@ -15,7 +15,4 @@ public interface UserHandler
      * @param keyEventType Der Status des Tastendrucks, der die Aktion ausgelöst hat.
      */
     void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType);
-
-
-
 }

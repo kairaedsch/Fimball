@@ -14,6 +14,13 @@ public class PhysicsConfig
      */
     public static final double GRAVITY = 1.19554 * 20;
 
+    public static final double FLIPPER_ANGULAR_VELOCITY = 500.0;
+
+    public static final double FLIPPER_MIN_ROTATION = -15.0;
+
+    public static final double FLIPPER_MAX_ROTATION = 15.0;
+
+
     /**
      * Die Verzögerung des Startens des Physic Timers in Millisekunden.
      */

@@ -7,17 +7,17 @@ import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
- * Created by kaira on 13.12.2016.
+ * Das PinballCanvasEditorViewModel dient der View als PinballCanvasViewModel und reagiert als Editor auch auf BenutzereIngaben.
  */
 public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
 {
     /**
-     * Das PinballMachineEditorViewModel, dass dieses PinballCanvasViewModel benutzt.
+     * Das PinballMachineEditorViewModel, welches dieses PinballCanvasEditorViewModel benutzt.
      */
     protected PinballMachineEditorViewModel editorViewModel;
 
     /**
-     * Erstellt ein neues PinballCanvasViewModel.
+     * Erstellt ein neues PinballCanvasEditorViewModel.
      *
      * @param gameSession                   Die Spielsitzung.
      * @param pinballMachineEditorViewModel Das korrespondierende PinballMachineEditorViewModel.
@@ -29,6 +29,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
 
         this.editorViewModel = pinballMachineEditorViewModel;
         pinballMachine = gameSession.getPinballMachine();
+
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
     }

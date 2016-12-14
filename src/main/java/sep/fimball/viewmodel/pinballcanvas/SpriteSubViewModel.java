@@ -2,6 +2,8 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
+import sep.fimball.general.data.DesignConfig;
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
@@ -67,7 +69,7 @@ public class SpriteSubViewModel
         rotation.bind(gameElement.rotationProperty());
 
         scale = new SimpleDoubleProperty();
-        scale.bind(Bindings.add(1, Bindings.divide(gameElement.heightProperty(), 4)));
+        scale.bind(gameElement.heightProperty().divide(PhysicsConfig.MAX_BALL_HEIGHT).multiply(DesignConfig.BALL_SIZE_SCALE_WHEN_LIFTED).add(1));
 
         currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 

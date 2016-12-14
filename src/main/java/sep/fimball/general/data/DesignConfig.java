@@ -13,6 +13,11 @@ public class DesignConfig
     /**
      * Die Standardbreite des Anwendungsfensters.
      */
+    public final static double BALL_SIZE_SCALE_WHEN_LIFTED = 0.25;
+
+    /**
+     * Die Standardbreite des Anwendungsfensters.
+     */
     public final static int defaultStageWidth = 1280;
 
     /**

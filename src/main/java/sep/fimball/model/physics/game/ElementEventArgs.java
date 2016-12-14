@@ -25,7 +25,7 @@ public class ElementEventArgs<GameElementT>
     private double rotation;
 
     /**
-     * Die Skalierung des Elements.
+     * Die Höhe des Elements.
      */
     private double height;
 
@@ -35,7 +35,7 @@ public class ElementEventArgs<GameElementT>
      * @param gameElement Das zu ändernde GameElement.
      * @param position    Die neue Position.
      * @param rotation    Die neue Rotation.
-     * @param height       Die Skalierung des Elements.
+     * @param height      Die Höhe des Elements.
      */
     public ElementEventArgs(GameElementT gameElement, Vector2 position, double rotation, double height)
     {
@@ -76,8 +76,9 @@ public class ElementEventArgs<GameElementT>
     }
 
     /**
-     * Gibt die Skalierung des Elements zurück.
-     * @return Die Skalierung des Elements.
+     * Gibt die Höhe des Elements zurück.
+     *
+     * @return Die Höhe des Elements.
      */
     public double getHeight()
     {

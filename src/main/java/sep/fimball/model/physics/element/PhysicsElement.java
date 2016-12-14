@@ -45,7 +45,7 @@ public class PhysicsElement<GameElementT>
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
      *
-     * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement bewegt werden soll.
+     * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param rotation           Die Rotation des PhysicsElement.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.

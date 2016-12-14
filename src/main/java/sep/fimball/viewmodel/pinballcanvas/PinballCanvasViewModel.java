@@ -12,6 +12,9 @@ import sep.fimball.model.game.GameSession;
 
 import java.util.Observer;
 
+/**
+ * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zur Verfügung und dient als Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
+ */
 public abstract class PinballCanvasViewModel
 {
     /**

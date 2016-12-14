@@ -1,30 +1,45 @@
 package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.collider.Collider;
-import sep.fimball.model.physics.game.CollisionEventArgs;
 
-import java.util.List;
+import static sep.fimball.general.data.PhysicsConfig.FLIPPER_ANGULAR_VELOCITY;
+import static sep.fimball.general.data.PhysicsConfig.FLIPPER_MAX_ROTATION;
+import static sep.fimball.general.data.PhysicsConfig.FLIPPER_MIN_ROTATION;
 
 /**
- * TODO
+ * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.
  */
 public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
-    private static final double movingAngularVelocity = 500.0;
-    private static final double minRotation = -15.0;
-    private static final double maxRotation = 15.0;
-
+    /**
+     * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
+     */
     private double angularVelocity = 0.0;
 
+    /**
+     * Gibt an, ob dieser Flipperarm der rechte oder linke ist.
+     */
     private boolean isLeft;
 
+    /**
+     * Erstellt ein neues FlipperPhysicsElement.
+     *
+     * @param gameElement        Das zugehörige GameElement, welches von diesem FlipperPhysicsElement beeinflusst werden soll.
+     * @param position           Die Position des PhysicsElements.
+     * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
+     * @param isLeft             Gibt an , ob er rechte oder linke Flipperarm gemeint ist.
+     */
     public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(gameElement, position, isLeft ? maxRotation : minRotation, basePhysicsElement);
+        super(gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : FLIPPER_MIN_ROTATION, basePhysicsElement);
         this.isLeft = isLeft;
     }
 
+    /**
+     * Gibt an, ob sich der Flipperarm nach oben bewegt.
+     *
+     * @return Ob sich der Flipperarm nach oben bewegt.
+     */
     public boolean rotatingUp()
     {
         if (isLeft)
@@ -33,6 +48,11 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
             return angularVelocity < 0;
     }
 
+    /**
+     * Gibt an, ob sich der Flipperarm nach unten bewegt.
+     *
+     * @return Ob sich der Flipperarm nach unten bewegt.
+     */
     public boolean rotatingDown()
     {
         if (isLeft)
@@ -41,37 +61,43 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
             return angularVelocity > 0;
     }
 
+    /**
+     * Lässt den Flipperarm nach oben drehen.
+     */
     public void rotateUp()
     {
         if (isLeft)
         {
-            if (getRotation() < maxRotation)
-                angularVelocity = movingAngularVelocity;
+            if (getRotation() < FLIPPER_MAX_ROTATION)
+                angularVelocity = FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
         }
         else
         {
-            if (getRotation() > minRotation)
-                angularVelocity = -movingAngularVelocity;
+            if (getRotation() > FLIPPER_MIN_ROTATION)
+                angularVelocity = -FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
         }
     }
 
+    /**
+     * Lässt den Flipperarm nach unten drehen.
+     */
     public void rotateDown()
     {
         if (isLeft)
         {
-            if (getRotation() > minRotation)
-                angularVelocity = -movingAngularVelocity;
+            if (getRotation() > FLIPPER_MIN_ROTATION)
+                angularVelocity = -FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
         }
         else
         {
-            if (getRotation() < maxRotation)
-                angularVelocity = movingAngularVelocity;
+            if (getRotation() < FLIPPER_MAX_ROTATION)
+                angularVelocity = FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
         }
@@ -82,14 +108,14 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     {
         // Rotate flipper
         double newRotation = getRotation() + angularVelocity * deltaTime;
-        if (newRotation >= maxRotation)
+        if (newRotation >= FLIPPER_MAX_ROTATION)
         {
-            setRotation(maxRotation);
+            setRotation(FLIPPER_MAX_ROTATION);
             angularVelocity = 0.0;
         }
-        else if (newRotation <= minRotation)
+        else if (newRotation <= FLIPPER_MIN_ROTATION)
         {
-            setRotation(minRotation);
+            setRotation(FLIPPER_MIN_ROTATION);
             angularVelocity = 0.0;
         }
         else
@@ -99,6 +125,11 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         //Debug.addDrawVector(getPosition(), new Vector2(0, -1).rotate(Math.toRadians(getRotation())).scale(-angularVelocity).normalized(), Color.BLUE);
     }
 
+    /**
+     * Gibt die aktuelle Winkelheschwindigkeit zurück.
+     *
+     * @return die aktuelle Winkelheschwindigkeit zurück.
+     */
     public double getAngularVelocity()
     {
         return angularVelocity;

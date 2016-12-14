@@ -189,6 +189,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void startPinballMachine()
     {
+        gameSession.pauseAll();
         sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{""}, true)));
     }
 
