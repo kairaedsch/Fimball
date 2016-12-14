@@ -235,7 +235,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
         {
-            pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
+            //pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
+            pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.get().isPresent())
         {

@@ -79,14 +79,17 @@ public class PinballMachineEditor
 
     public void addToSelection(PlacedElement placedElement)
     {
-        selection.add(placedElement);
+        if(!selection.contains(placedElement)) selection.add(placedElement);
     }
 
     public void addToSelection(ListProperty<PlacedElement> placedElementList)
     {
         if (placedElementList != null)
         {
-            selection.addAll(placedElementList);
+            for (PlacedElement placedElement : placedElementList)
+            {
+                addToSelection(placedElement);
+            }
         }
     }
 
@@ -94,7 +97,7 @@ public class PinballMachineEditor
     {
         // TODO correct points and multiplier in placedElement
         selection.clear();
-        selection.add(new PlacedElement(baseElement, new Vector2(0, 0), 0, 0, 0));
+        addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 0, 0, 0));
     }
 
     public void removeFromSelection(PlacedElement placedElement)
