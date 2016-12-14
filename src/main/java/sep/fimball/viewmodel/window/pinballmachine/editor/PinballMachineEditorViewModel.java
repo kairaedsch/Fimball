@@ -311,7 +311,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        System.out.println("released");
         if (mouseOnCanvas)
         {
             if (mouseMode.get() == MouseMode.PLACING)

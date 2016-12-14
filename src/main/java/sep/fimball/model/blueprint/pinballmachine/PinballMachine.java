@@ -105,6 +105,7 @@ public class PinballMachine
 
     public ListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
     {
+
         ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement element : elements)
         {

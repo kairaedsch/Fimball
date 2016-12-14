@@ -73,7 +73,7 @@ public class PinballMachineEditor
     {
         for (PlacedElement placedElement : selection)
         {
-            pinballMachine.elementsProperty().remove(placedElement);
+            pinballMachine.removeElement(placedElement);
         }
     }
 
