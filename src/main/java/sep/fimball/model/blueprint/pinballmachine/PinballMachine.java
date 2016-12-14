@@ -103,8 +103,25 @@ public class PinballMachine
         return Optional.empty();
     }
 
+    public ListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
+    {
+        ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        for (PlacedElement element : elements)
+        {
+            double x = element.positionProperty().get().getX();
+            double y = element.positionProperty().get().getY();
+
+            if (x > rect.getOrigin().getX() && x < rect.getWidth() && y > rect.getOrigin().getY() && y < rect.getHeight())
+            {
+                matchingElements.add(element);
+            }
+        }
+        return matchingElements;
+    }
+
     /**
      * Gibt eine Box, die das Spielfeld umschließt, zurück.
+     *
      * @return Eine Box, die das Spielfeld umschließt.
      */
     public RectangleDouble getBoundingBox()
@@ -129,6 +146,7 @@ public class PinballMachine
 
     /**
      * Speichert das gegebene Vorschaubild.
+     *
      * @param image Das Vorschaubild, das gespeichert werden soll.
      */
     public void savePreviewImage(WritableImage image)

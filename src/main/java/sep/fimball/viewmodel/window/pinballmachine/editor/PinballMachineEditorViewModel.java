@@ -11,6 +11,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -100,6 +101,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private boolean mouseOnCanvas = false;
 
+    private ObjectProperty<Optional<RectangleDouble>> selectionRect;
+
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
     private ObjectProperty<Optional<String>> botBackgroundPath;
@@ -131,6 +134,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         cameraPosition = new SimpleObjectProperty<>(new Vector2());
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachineEditor.getSelection());
+
+        selectionRect = new SimpleObjectProperty<>(Optional.empty());
 
         ObservableList<AvailableElementSubViewModel> availableElements = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
@@ -232,7 +237,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
         }
-        //TODO implement multi select
+        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.get().isPresent())
+        {
+            selectionRect.setValue(Optional.of(new RectangleDouble(selectionRect.get().get().getOrigin(), gridPos.getX(), gridPos.getY())));
+        }
     }
 
     /**
@@ -297,6 +305,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.clearSelection();
             mouseMode.setValue(MouseMode.SELECTING);
+            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, 0, 0)));
         }
     }
 
@@ -312,7 +321,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             }
             else if (mouseMode.get() == MouseMode.SELECTING)
             {
-                // TODO add selectionrect content to selection
+                if (!mouseEvent.isControlDown())
+                {
+                    pinballMachineEditor.clearSelection();
+                }
+                pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get()));
+                selectionRect.setValue(Optional.empty());
             }
         }
         else

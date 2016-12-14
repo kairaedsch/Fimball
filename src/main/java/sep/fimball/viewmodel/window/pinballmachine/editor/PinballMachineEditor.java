@@ -120,8 +120,7 @@ public class PinballMachineEditor
 
     public ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
     {
-        // TODO
-        return null;
+        return pinballMachine.getElementsAt(rect);
     }
 
     public ReadOnlyListProperty<PlacedElement> getSelection()
