@@ -19,15 +19,14 @@ public class PlungerCollision extends NormalCollision
         PlungerPhysicsElement plunger = (PlungerPhysicsElement) info.getOtherPhysicsElement();
 
         Vector2 plungerAxis = new Vector2(1, 0).rotate(Math.toRadians(plunger.getRotation())).normalized();
-        Vector2 plungerPivot = plunger.getPosition().plus(plunger.getBasePhysicsElement().getPivotPoint());
 
         Vector2 ballPos = info.getBall().getPosition().plus(info.getBall().getBasePhysicsElement().getPivotPoint());
 
-        double projectedPivotPosition = plungerPivot.dot(plungerAxis);
+        double projectedPivotPosition = plunger.getPosition().dot(plungerAxis);
         double projectedBallPosition = ballPos.dot(plungerAxis);
         double distance = projectedBallPosition - projectedPivotPosition;
 
-        Vector2 addForce = plungerAxis.normal().scale(plunger.getStrength()).scale(distance);
+        Vector2 addForce = plungerAxis.normal().scale(plunger.removeStrength()).scale(distance);
         Debug.addDrawVector(ballPos, addForce, Color.YELLOWGREEN);
         info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
     }

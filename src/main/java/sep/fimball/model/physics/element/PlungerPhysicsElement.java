@@ -38,8 +38,10 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         strength = modifi.getForce();
     }
 
-    public double getStrength()
+    public double removeStrength()
     {
-        return strength;
+        double currentStrength = strength;
+        strength = 0;
+        return currentStrength;
     }
 }

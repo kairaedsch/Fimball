@@ -39,14 +39,16 @@ public class PlungerGameElement extends GameElement
             }
             else
             {
-                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModify(calcForce()));
+                double force = calcForce();
+                System.out.println(force);
+                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModify(force));
             }
         });
     }
 
     private void pushDown()
     {
-        downSince = Optional.of(System.nanoTime());
+        downSince = Optional.of(System.currentTimeMillis());
     }
 
     private double calcForce()
@@ -54,7 +56,7 @@ public class PlungerGameElement extends GameElement
         if(downSince.isPresent())
         {
             double force = 5;
-            double time = System.nanoTime() - downSince.get();
+            long time = System.currentTimeMillis() - downSince.get();
             if(time< TEN_MILI_SECS) {
                 return force;
             } else if (time < 2 * TEN_MILI_SECS)
