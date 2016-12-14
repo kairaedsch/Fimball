@@ -57,12 +57,7 @@ public class World implements HandlerWorld
     {
         for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
         {
-            for (GameElement gameElement : gameElements)
-            {
-                if (gameElement == elementEventArgs.getGameElement()) {
-                    gameElement.synchronizeWithPhysics(elementEventArgs);
-                }
-            }
+            elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs);
         }
     }
 

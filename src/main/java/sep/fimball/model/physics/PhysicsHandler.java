@@ -157,8 +157,6 @@ public class PhysicsHandler<GameElementT>
 
                     if (ballPhysicsElement != null)
                     {
-                        ballPhysicsElement.update(delta);
-
                         if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
                         {
                             localBallLost = true;
