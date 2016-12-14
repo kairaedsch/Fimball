@@ -21,6 +21,7 @@ public class NormalCollision implements CollisionType
         info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
         Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
 
+        //Überprüfe ob der Ball in die Richtung dieses Colliders fliegt.
         if (info.getBall().getVelocity().normalized().dot(shortestIntersectNorm) <= 0)
         {
             Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm, this.getClass().equals(FlipperCollision.class));
