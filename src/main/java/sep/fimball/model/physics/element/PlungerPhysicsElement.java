@@ -4,8 +4,6 @@ import sep.fimball.general.data.Vector2;
 
 public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
 {
-    double
-
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.
      *
