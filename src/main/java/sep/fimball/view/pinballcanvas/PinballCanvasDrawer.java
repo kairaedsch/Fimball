@@ -1,14 +1,15 @@
 package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import static sep.fimball.general.data.Config.pixelsPerGridUnit;
 
@@ -24,22 +25,26 @@ public class PinballCanvasDrawer
      */
     private DrawMode drawMode;
 
+    private ReadOnlyListProperty<SpriteSubView> sprites;
+
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
      *
      * @param canvas   Die Canvas auf der gezeichnet wird.
      * @param drawMode Der Modus mit dem gezeichnet werden soll.
+     * @param sprites
      */
-    public PinballCanvasDrawer(Canvas canvas, DrawMode drawMode)
+    public PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
     {
         this.canvas = canvas;
         this.drawMode = drawMode;
+        this.sprites = sprites;
     }
 
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      */
-    public void draw(ListProperty<SpriteSubView> sprites, Vector2 cameraPosition, double cameraZoom)
+    public void draw(Vector2 cameraPosition, double cameraZoom)
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -53,10 +58,10 @@ public class PinballCanvasDrawer
 
         if (drawMode == DrawMode.EDITOR)
         {
-            drawEditorGrid(canvas, cameraPosition, cameraZoom);
+            drawEditorGrid(cameraPosition, cameraZoom);
         }
 
-        drawElements(graphicsContext, sprites);
+        drawElements(graphicsContext);
         Debug.draw(graphicsContext);
         graphicsContext.restore();
     }
@@ -66,7 +71,7 @@ public class PinballCanvasDrawer
      *
      * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
      */
-    private void drawElements(GraphicsContext graphicsContext, ListProperty<SpriteSubView> sprites)
+    private void drawElements(GraphicsContext graphicsContext)
     {
         for (SpriteSubView spriteTop : sprites)
         {
@@ -81,7 +86,7 @@ public class PinballCanvasDrawer
     /**
      * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
      */
-    private void drawEditorGrid(Canvas canvas, Vector2 cameraPosition, double cameraZoom)
+    private void drawEditorGrid(Vector2 cameraPosition, double cameraZoom)
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
