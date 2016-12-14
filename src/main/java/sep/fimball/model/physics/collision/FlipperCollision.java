@@ -30,14 +30,11 @@ public class FlipperCollision extends NormalCollision
         // Probably doesn't work >=90°, but is fine for flippers
         if ((ballPos.getY() > collisionPoint.getY() && flipper.rotatingUp()) || ballPos.getY() < collisionPoint.getY() && flipper.rotatingDown())
         {
-            if (distance <= 10.0)
-            {
-                double angle = flipperAxis.dot(info.getShortestIntersect().normalized());
-                Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.1).scale(distance).scale(1 - angle);
-                System.out.println("Distance: " + distance);
-                Debug.addDrawVector(ballPos, addForce.scale(0.01).scale(1 - angle), Color.YELLOWGREEN);
-                info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
-            }
+            double angle = flipperAxis.dot(info.getShortestIntersect().normalized());
+            Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.1).scale(distance).scale(1 - angle);
+            System.out.println("Distance: " + distance);
+            Debug.addDrawVector(ballPos, addForce.scale(0.01).scale(1 - angle), Color.YELLOWGREEN);
+            info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
         }
     }
 }

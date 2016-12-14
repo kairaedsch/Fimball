@@ -20,10 +20,14 @@ public class NormalCollision implements CollisionType
         //Schiebe den Ball auf dem kürzesten Weg aus dem Collider mit dem er zusammengestoßen ist heraus.
         info.getBall().setPosition(info.getBall().getPosition().plus(info.getShortestIntersect()));
         Vector2 shortestIntersectNorm = info.getShortestIntersect().normalized();
-        Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm, this.getClass().equals(FlipperCollision.class));
-        Debug.addDrawVector(info.getBall().getPosition(), newVel, Color.BLACK);
-        //Setze die berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
-        info.getBall().setVelocity(newVel);
+
+        if (info.getBall().getVelocity().normalized().dot(shortestIntersectNorm) <= 0)
+        {
+            Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm, this.getClass().equals(FlipperCollision.class));
+            Debug.addDrawVector(info.getBall().getPosition(), newVel, Color.BLACK);
+            //Setze die berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
+            info.getBall().setVelocity(newVel);
+        }
     }
 
     private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal, boolean doLog)
