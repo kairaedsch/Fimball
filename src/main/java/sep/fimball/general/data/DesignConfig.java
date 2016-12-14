@@ -67,6 +67,16 @@ public class DesignConfig
 
     public final static String cssNoImage = "-fx-background-image: none";
 
+    /**
+     * Die Zeitspanne, in der der LightChanger aktiv wird.
+     */
+    public static final int LIGHT_CHANGE_DURATION = 10000;
+
+    /**
+     * Die Rate, mit der sich die Light-Change-Loop wiederholt.
+     */
+    public static final int LIGHT_CHANGE_TICK_RATE = 25;
+
     private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";
     private final static String CSS_URL_POSTFIX = "\");";
     private final static String CSS_IMAGE_CONTAIN = "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";

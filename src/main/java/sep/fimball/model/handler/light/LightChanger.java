@@ -1,5 +1,6 @@
 package sep.fimball.model.handler.light;
 
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 
 /**
@@ -44,11 +45,11 @@ public abstract class LightChanger
     protected abstract boolean determineLightStatus(Vector2 position, long delta);
 
     /**
-     * Gibt die Dauer zurück, in der dieser LightChanger entscheidet, ob die Lichter angeschalten werden.
-     * @return Die Dauer.
+     * Gibt die Zeitspanne, in der der LightChanger aktiv wird, zurück.
+     * @return Die Zeitspanne, in der der LightChanger aktiv wird, zurück.
      */
     long getDuration()
     {
-        return 10000;
+        return DesignConfig.LIGHT_CHANGE_DURATION;
     }
 }

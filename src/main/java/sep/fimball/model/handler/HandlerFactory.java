@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.handler.light.LightChangerFactory;
 import sep.fimball.model.handler.light.LightHandler;
 import sep.fimball.model.media.SoundManager;
 
@@ -38,7 +39,7 @@ public class HandlerFactory
         handlers.add(animationHandler);
 
         Handler lightHandler = new Handler();
-        animationHandler.setGameHandler(new LightHandler(gameSession));
+        animationHandler.setGameHandler(new LightHandler(gameSession, LightChangerFactory.generateLightChangers(gameSession)));
         handlers.add(lightHandler);
 
         Handler ballLostHandler = new Handler();
