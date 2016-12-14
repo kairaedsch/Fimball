@@ -6,7 +6,7 @@ import sep.fimball.model.input.data.KeyEventType;
 /**
  * Wird bei verschiedenen Ereignissen im Spiel informiert und kann auf diese reagieren.
  */
-public class Handler implements ElementHandler, UserHandler, GameHandler
+public class Handler  extends UserHandler implements ElementHandler, GameHandler
 {
     /**
      * Reagiert auf Kollisionen zwischen Ball und Spielelementen.

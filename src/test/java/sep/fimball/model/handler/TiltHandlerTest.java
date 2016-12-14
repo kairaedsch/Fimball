@@ -3,6 +3,8 @@ package sep.fimball.model.handler;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import org.junit.Test;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,17 +43,17 @@ public class TiltHandlerTest
         tiltActivated.put(player2, false);
         HandlerGameSession gameSession = getTestHandlerGameSession();
         TiltHandler test = new TiltHandler(gameSession);
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(false));
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(false));
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(false));
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(false));
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(false));
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(tiltActivated.get(player1), is(true));
         gameSession.switchToNextPlayer();
         assertThat(tiltActivated.get(player2), is(false));
@@ -102,7 +104,7 @@ public class TiltHandlerTest
             }
 
             @Override
-            public ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty()
+            public ReadOnlyObjectProperty<? extends HandlerBallGameElement> gameBallProperty()
             {
                 return null;
             }

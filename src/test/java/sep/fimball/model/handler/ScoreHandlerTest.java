@@ -73,7 +73,7 @@ public class ScoreHandlerTest
             }
 
             @Override
-            public ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty()
+            public ReadOnlyObjectProperty<? extends HandlerBallGameElement> gameBallProperty()
             {
                 return null;
             }

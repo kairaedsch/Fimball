@@ -23,10 +23,4 @@ public interface PhysicGameSession<GameElementT>
      * @param elementEventArgs   Liste aller ElementEvents.
      */
     void addEventArgs(List<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
-
-
-    /**
-     * Reagiert auf das Stoßen am Automaten.
-     */
-    void nudge();
 }

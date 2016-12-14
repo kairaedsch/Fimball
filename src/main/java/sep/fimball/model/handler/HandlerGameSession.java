@@ -36,7 +36,7 @@ public interface HandlerGameSession
      *
      * @return Das Ball-Element.
      */
-    ReadOnlyObjectProperty<? extends HandlerGameElement> gameBallProperty();
+    ReadOnlyObjectProperty<? extends HandlerBallGameElement> gameBallProperty();
 
     /**
      * Aktiviert die Tilt-Funktion.

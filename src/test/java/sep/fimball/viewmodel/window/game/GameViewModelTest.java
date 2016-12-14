@@ -10,10 +10,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.game.GameElement;
-import sep.fimball.model.game.GameSession;
-import sep.fimball.model.game.Player;
-import sep.fimball.model.game.World;
+import sep.fimball.model.game.*;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
@@ -29,9 +26,9 @@ public class GameViewModelTest
     {
         // Initialisierung
         GameSession gameSessionMock = mock(GameSession.class);
-        GameElement ball = mock(GameElement.class);
+        BallGameElement ball = mock(BallGameElement.class);
 
-        SimpleObjectProperty<GameElement> ballProperty = new SimpleObjectProperty<>(ball);
+        SimpleObjectProperty<BallGameElement> ballProperty = new SimpleObjectProperty<>(ball);
         when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
         when(gameSessionMock.gameBallProperty()).thenReturn(ballProperty);
 
@@ -71,9 +68,9 @@ public class GameViewModelTest
     {
         // Initialisierung
         GameSession gameSessionMock = mock(GameSession.class);
-        GameElement ball = mock(GameElement.class);
+        BallGameElement ball = mock(BallGameElement.class);
 
-        SimpleObjectProperty<GameElement> ballProperty = new SimpleObjectProperty<>(ball);
+        SimpleObjectProperty<BallGameElement> ballProperty = new SimpleObjectProperty<>(ball);
         when(ball.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
         when(gameSessionMock.gameBallProperty()).thenReturn(ballProperty);
 

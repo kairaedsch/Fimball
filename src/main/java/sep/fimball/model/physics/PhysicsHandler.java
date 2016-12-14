@@ -30,19 +30,13 @@ public class PhysicsHandler<GameElementT>
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
     private List<Modifi> modifis;
+
     private final Object modifisMonitor = new Object();
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
      */
     private Timer physicTimer;
-
-    /**
-     * Hier werden alle Tastendrücke die vom InputManager an den PhysikHandler mithilfe des Observer Pattern gesendet
-     * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
-     * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
-     */
-    private List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -100,36 +94,7 @@ public class PhysicsHandler<GameElementT>
         this.ballLost = false;
         this.reactingToInput = true;
 
-        bufferedKeyEvents = new ArrayList<>();
         modifis = new ArrayList<>();
-
-        addListenersToInputManager();
-    }
-
-    /**
-     * Meldet die Listener für die benötigten Tasten beim InputManager an.
-     */
-    private void addListenersToInputManager()
-    {
-        InputManager inputManager = InputManager.getSingletonInstance();
-        inputManager.addListener(KeyBinding.NUDGE_LEFT, this::addToKeyEvents);
-        inputManager.addListener(KeyBinding.NUDGE_RIGHT, this::addToKeyEvents);
-    }
-
-    /**
-     * Fügt die {@code args} zu den gebufferten KeyEvents hinzu.
-     *
-     * @param args Die Argumente, die hinzugefügt werden sollen.
-     */
-    private void addToKeyEvents(KeyObserverEventArgs args)
-    {
-        if (reactingToInput)
-        {
-            synchronized (bufferedKeyEvents)
-            {
-                bufferedKeyEvents.add(args);
-            }
-        }
     }
 
     public void addModifi(Modifi modifi)
@@ -138,52 +103,6 @@ public class PhysicsHandler<GameElementT>
         {
             modifis.add(modifi);
         }
-    }
-
-    /**
-     * Fügt den {@code ball} zu den Elementen des PhysicsHandler hinzu.
-     *
-     * @param position Die Position des Balls.
-     * @param rotation Die Rotation des Balls.
-     */
-    public void setBall(Vector2 position, double rotation)
-    {
-        synchronized (monitor)
-        {
-            ballPhysicsElement.setRotation(rotation);
-            ballPhysicsElement.setPosition(position);
-            ballPhysicsElement.setVelocity(new Vector2());
-            ballLost = false;
-        }
-    }
-
-
-    /**
-     * Simuliert das Stoßen am Automaten.
-     *
-     * @param left Gibt an, ob von links gestoßen wurde.
-     */
-    private void nudge(boolean left)
-    {
-        gameSession.nudge();
-        if (left)
-        {
-            accelerateBallInX(PhysicsConfig.NUDGE_VELOCITY);
-        }
-        else
-        {
-            accelerateBallInX(-PhysicsConfig.NUDGE_VELOCITY);
-        }
-    }
-
-    /**
-     * Erhöht die Geschwindigkeit des Balls in x-Richtung.
-     *
-     * @param additionalVelocity Die Geschwindigkeit, die auf die x-Geschwindigkeit des Balls gerechnet wird.
-     */
-    private void accelerateBallInX(int additionalVelocity)
-    {
-        ballPhysicsElement.setVelocity(new Vector2(ballPhysicsElement.getVelocity().getX() + additionalVelocity, ballPhysicsElement.getVelocity().getY()));
     }
 
     /**
@@ -211,12 +130,6 @@ public class PhysicsHandler<GameElementT>
             public void run()
             {
                 double delta = PhysicsConfig.TICK_RATE_SEC;
-
-                // Check bufferedKeyEvents
-                synchronized (bufferedKeyEvents)
-                {
-                    checkKeyEvents();
-                }
 
                 List<Modifi> localModifis;
                 synchronized (modifisMonitor)
@@ -257,14 +170,11 @@ public class PhysicsHandler<GameElementT>
                         }
                     }
 
-                    if (ballLost)
-                        localBallLost = false;
-                    if (localBallLost)
-                        ballLost = true;
+                    if (ballLost) localBallLost = false;
+                    if (localBallLost) ballLost = true;
                 }
 
-                if (localBallLost)
-                    gameSession.setBallLost(true);
+                if (localBallLost) gameSession.setBallLost(true);
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };
@@ -295,32 +205,6 @@ public class PhysicsHandler<GameElementT>
                 elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), ballPhysicsElement.getHeight()));
             }
         }
-    }
-
-    /**
-     * Arbeitet die {@code bufferedKeyEvents} ab.
-     */
-    private void checkKeyEvents()
-    {
-        for (KeyObserverEventArgs args : bufferedKeyEvents)
-        {
-            switch (args.getBinding())
-            {
-                case NUDGE_LEFT:
-                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                    {
-                        nudge(true);
-                    }
-                    break;
-                case NUDGE_RIGHT:
-                    if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                    {
-                        nudge(false);
-                    }
-                    break;
-            }
-        }
-        bufferedKeyEvents.clear();
     }
 
     /**

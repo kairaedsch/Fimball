@@ -5,12 +5,14 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.WorldLayer;
 
+import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
+
 /**
  * Stellt einen Ball, der in der Berechnung der Physik genutzt wird, dar.
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
+public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -108,5 +110,22 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     public double getHeight()
     {
         return height;
+    }
+
+    @Override
+    public void applyModifi(Modifi modifi)
+    {
+        if(modifi instanceof BallTiltModifi)
+        {
+            if(((BallTiltModifi) modifi).isLeft())
+                setPosition(getPosition().minus(new Vector2(NUDGE_VELOCITY, 0)));
+            else
+                setPosition(getPosition().plus(new Vector2(NUDGE_VELOCITY, 0)));
+        }
+        else if(modifi instanceof BallResetModifi)
+        {
+            setPosition(((BallResetModifi) modifi).getNewPosition());
+            setVelocity(new Vector2());
+        }
     }
 }

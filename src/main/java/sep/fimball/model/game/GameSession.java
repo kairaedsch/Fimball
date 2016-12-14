@@ -138,7 +138,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Der aktive Ball, falls vorhanden.
      */
-    private ObjectProperty<GameElement> gameBall;
+    private ObjectProperty<BallGameElement> gameBall;
 
     /**
      * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
@@ -227,8 +227,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
-                    gameElement = new GameElement(element, false);
-                    this.gameBall.set(gameElement);
+                    BallGameElement ballGameElement = new BallGameElement(element, false);
+                    this.gameBall.set(ballGameElement);
+                    gameElement = ballGameElement;
                     break;
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
@@ -272,6 +273,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         world = new World(elements);
         BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        gameBall.get().setPhysicsElement(physicsHandler, physElem);
 
         physicsElements.add(physElem);
         elements.add(gameBall.get());
@@ -430,8 +432,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void spawnNewBall()
     {
-        PlacedElement originalBall = gameBall.get().getPlacedElement();
-        physicsHandler.setBall(originalBall.positionProperty().get(), originalBall.rotationProperty().get());
+        gameBall.get().reset();
         isBallLost = false;
         wereBallLostEventsTriggered = false;
 
@@ -517,7 +518,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return world;
     }
 
-    public ReadOnlyObjectProperty<GameElement> gameBallProperty()
+    public ReadOnlyObjectProperty<BallGameElement> gameBallProperty()
     {
         return gameBall;
     }
@@ -562,13 +563,5 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public boolean isStartedFromEditor()
     {
         return startedFromEditor;
-    }
-
-    public void nudge()
-    {
-        for (Handler handler : handlers)
-        {
-            handler.activateGameHandler(GameEvent.NUDGE);
-        }
     }
 }

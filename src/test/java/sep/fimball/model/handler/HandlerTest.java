@@ -1,6 +1,8 @@
 package sep.fimball.model.handler;
 
 import org.junit.Test;
+import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.data.KeyEventType;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -34,7 +36,7 @@ public class HandlerTest
         Handler test = new Handler();
         GameHandler gameHandler = gameEvent -> gameHandlerActivated = true;
         test.setGameHandler(gameHandler);
-        test.activateGameHandler(GameEvent.NUDGE);
+        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
         assertThat(gameHandlerActivated, is(true));
     }
 
@@ -58,7 +60,14 @@ public class HandlerTest
     public void activateUserHandlerTest()
     {
         Handler test = new Handler();
-        UserHandler userHandler = (keyBinding, keyEventType) -> userHandlerActivated = true;
+        UserHandler userHandler = new UserHandler()
+        {
+            @Override
+            void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType)
+            {
+                userHandlerActivated = true;
+            }
+        };
         test.setUserHandler(userHandler);
         test.activateUserHandler(null, null);
         assertThat(userHandlerActivated, is(true));
