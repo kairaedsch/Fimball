@@ -20,19 +20,46 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Testet die Klasse PhysicsHandler.
+ */
 public class PhysicsHandlerTest
 {
+    /**
+     * Die maximale Test-Dauer.
+     */
     private static final long MAX_TEST_DURATION = 1000;
-    PhysicsHandler test;
 
-    boolean leftFlipperRotated = false;
+    /**
+     * Der PhysicsHandler, der getestet wird.
+     */
+    private PhysicsHandler test;
 
-    int numberOfCalls = 0;
-    private Object monitor = new Object();
+    /**
+     * Gibt an, ob der linke Flipper gedreht wurde.
+     */
+    private boolean leftFlipperRotated = false;
+
+    /**
+     * Der Monitor, über den synchronisiert wird.
+     */
+    private final Object monitor = new Object();
+
+    /**
+     * Gibt an, ob die Kugel als verloren gilt.
+     */
     private boolean ballLost = false;
-    double yPosition = 0;
-    Vector2 mockedVector;
 
+    /**
+     * Die y-Position der Kugel.
+     */
+    private double ballPositionY = 0;
+
+    /**
+     * Testet, ob das An- und Ausschalten des Reagierens auf UserInput funktioniert.
+     *
+     * @throws InterruptedException wenn der Monitor unterbrochen wird.
+     */
     @Test
     public void stopReactingToUserInputTest() throws InterruptedException
     {
@@ -65,11 +92,16 @@ public class PhysicsHandlerTest
         assertThat(leftFlipperRotated, is(false));
     }
 
+    /**
+     * Testet, ob erkannt wird, dass die Kugel verloren ist.
+     *
+     * @throws InterruptedException wenn der Monitor unterbrochen wird.
+     */
     @Test
     public void ballLostTest() throws InterruptedException
     {
         init();
-        yPosition = 19;
+        ballPositionY = 19;
         test.startTicking();
         synchronized (monitor)
         {
@@ -79,10 +111,14 @@ public class PhysicsHandlerTest
             }
         }
         test.stopTicking();
-        assertThat(yPosition, greaterThanOrEqualTo(50.0));
+        assertThat(ballPositionY, greaterThanOrEqualTo(50.0));
         assertThat(ballLost, is(true));
     }
 
+    /**
+     * Initialisiert die Test-Werte.
+     * TODO comments.
+     */
     private void init()
     {
         PhysicsElement mockedElement = mock(PhysicsElement.class);
@@ -111,20 +147,20 @@ public class PhysicsHandlerTest
         BallPhysicsElement mockedBall = mock(BallPhysicsElement.class);
         doAnswer(invocationOnMock ->
         {
-            Vector2 t = (invocationOnMock.getArgument(0));
-            yPosition = t.getY();
+            Vector2 args = (invocationOnMock.getArgument(0));
+            ballPositionY = args.getY();
             return null;
         }).when(mockedBall).setPosition(any(Vector2.class));
 
         doAnswer(invocationOnMock ->
         {
-            yPosition++;
+            ballPositionY++;
             return null;
         }).when(mockedBall).update(anyDouble());
 
-        mockedVector = mock(Vector2.class);
-        when(mockedVector.getY()).thenAnswer(invocationOnMock -> yPosition);
-        when(mockedBall.getPosition()).thenReturn(mockedVector);
+        Vector2 ballPosition = mock(Vector2.class);
+        when(ballPosition.getY()).thenAnswer(invocationOnMock -> ballPositionY);
+        when(mockedBall.getPosition()).thenReturn(ballPosition);
 
         FlipperPhysicsElement mockedLeftFlipper = mock(FlipperPhysicsElement.class);
         FlipperPhysicsElement mockedRightFlipper = mock(FlipperPhysicsElement.class);

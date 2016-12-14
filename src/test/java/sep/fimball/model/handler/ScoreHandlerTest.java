@@ -14,30 +14,44 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse ScoreHandler.
+ */
 public class ScoreHandlerTest
 {
-
-
+    /**
+     * Testet, ob das Aktivieren des HitHandlers funktioniert.
+     */
     @Test
-    public void activateElementHandlerTest() {
-        HandlerGameSession gameSession = getTestHandlerGameSession();
+    public void activateScoreHandlerTest()
+    {
+        HandlerGameSession gameSession = getGameSession();
         ScoreHandler test = new ScoreHandler(gameSession);
-        test.activateElementHandler(getTestHandlerGameElement(), 0);
+        test.activateElementHandler(getElement(), 0);
         assertThat(gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
-        test.activateElementHandler(getTestHandlerGameElement(), 1);
+        test.activateElementHandler(getElement(), 1);
         assertThat(gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
 
     }
 
-    private HandlerGameSession getTestHandlerGameSession() {
+    /**
+     * Gibt eine Test-HandlerGameSession zurück.
+     *
+     * @return Eine Test-HandlerGameSession.
+     */
+    private HandlerGameSession getGameSession()
+    {
         return new HandlerGameSession()
         {
-            HandlerPlayer handlerPlayer = getTestHandlerPlayer();
+            /**
+             * Der aktuelle Spieler.
+             */
+            HandlerPlayer currentPlayer = getPlayer();
 
             @Override
             public HandlerPlayer getCurrentPlayer()
             {
-                return handlerPlayer;
+                return currentPlayer;
             }
 
             @Override
@@ -72,10 +86,19 @@ public class ScoreHandlerTest
         };
     }
 
-    private HandlerPlayer getTestHandlerPlayer() {
+    /**
+     * Gibt einen Test-HandlerPlayer zurück.
+     * @return Einen Test-HandlerPlayer.
+     */
+    private HandlerPlayer getPlayer()
+    {
         return new HandlerPlayer()
         {
+            /**
+             * Die Punkte des Spielers.
+             */
             int points;
+
             @Override
             public ReadOnlyIntegerProperty pointsProperty()
             {
@@ -102,7 +125,12 @@ public class ScoreHandlerTest
         };
     }
 
-    private HandlerGameElement getTestHandlerGameElement() {
+    /**
+     * Gibt ein Test-HandlerGameElement zurück.
+     * @return Ein Test-HandlerGameElement.
+     */
+    private HandlerGameElement getElement()
+    {
         return new HandlerGameElement()
         {
             @Override

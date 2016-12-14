@@ -5,14 +5,32 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse Handler.
+ */
 public class HandlerTest
 {
-    boolean gameHandlerActivated = false;
-    boolean elementHandlerActivated = false;
-    boolean userHandlerActivated = false;
+    /**
+     * Gibt an, ob der GameHandler aktiviert wurde.
+     */
+    private boolean gameHandlerActivated = false;
 
+    /**
+     * Gibt an, ob der ElementHandler aktiviert wurde.
+     */
+    private boolean elementHandlerActivated = false;
+
+    /**
+     * Gibt an, ob der UserHandler aktiviert wurde.
+     */
+    private boolean userHandlerActivated = false;
+
+    /**
+     * Testet, ob der GameHandler aktiviert wird.
+     */
     @Test
-    public void activateGameHandlerTest() {
+    public void activateGameHandlerTest()
+    {
         Handler test = new Handler();
         GameHandler gameHandler = gameEvent -> gameHandlerActivated = true;
         test.setGameHandler(gameHandler);
@@ -20,8 +38,12 @@ public class HandlerTest
         assertThat(gameHandlerActivated, is(true));
     }
 
+    /**
+     * Testet, ob der ElementHandler aktiviert wird.
+     */
     @Test
-    public void activateElementHandlerTest() {
+    public void activateElementHandlerTest()
+    {
         Handler test = new Handler();
         ElementHandler elementHandler = (element, colliderId) -> elementHandlerActivated = true;
         test.setElementHandler(elementHandler);
@@ -29,8 +51,12 @@ public class HandlerTest
         assertThat(elementHandlerActivated, is(true));
     }
 
+    /**
+     * Testet, ob der UserHandler aktiviert wird.
+     */
     @Test
-    public void activateUserHandlerTest() {
+    public void activateUserHandlerTest()
+    {
         Handler test = new Handler();
         UserHandler userHandler = (keyBinding, keyEventType) -> userHandlerActivated = true;
         test.setUserHandler(userHandler);

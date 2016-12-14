@@ -14,12 +14,22 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Testet die Klasse SoundHandler.
+ */
 public class SoundHandlerTest
 {
-    Sound playedSound;
+    /**
+     * Der abgespielte Sound.
+     */
+    private Sound playedSound;
 
+    /**
+     * Testet, ob das Aktivieren des SoundHandlers funktioniert.
+     */
     @Test
-    public void activateElementHandlerTest() {
+    public void activateSoundHandlerTest()
+    {
         SoundManager soundManager = mock(SoundManager.class);
         doAnswer(invocationOnMock ->
         {
@@ -27,12 +37,18 @@ public class SoundHandlerTest
             return null;
         }).when(soundManager).addSoundToPlay(any(Sound.class));
         SoundHandler test = new SoundHandler(soundManager);
-        HandlerGameElement gameElement = getTestHandlerGameElement();
+        HandlerGameElement gameElement = getElement();
         test.activateElementHandler(gameElement, 0);
         assertThat(playedSound.getSoundPath(), is("Test-Sound"));
     }
 
-    private HandlerGameElement getTestHandlerGameElement() {
+    /**
+     * Gibt ein Test-HandlerGameElement zurück.
+     *
+     * @return Ein Test-HandlerGameElement.
+     */
+    private HandlerGameElement getElement()
+    {
         return new HandlerGameElement()
         {
             @Override
@@ -73,7 +89,7 @@ public class SoundHandlerTest
                 BaseMediaElementEvent baseMediaElementEvent = mock(BaseMediaElementEvent.class);
                 Sound sound = mock(Sound.class);
                 when(sound.getSoundPath()).thenReturn("Test-Sound");
-                when(baseMediaElementEvent.getSound()).thenReturn(java.util.Optional.ofNullable(sound));
+                when(baseMediaElementEvent.getSound()).thenReturn(java.util.Optional.of(sound));
                 eventMap.put(0, baseMediaElementEvent);
                 when(baseMediaElement.getEventMap()).thenReturn(eventMap);
                 return baseMediaElement;

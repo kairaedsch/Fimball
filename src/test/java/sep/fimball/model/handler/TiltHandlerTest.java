@@ -10,14 +10,20 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse TiltHandler.
+ */
 public class TiltHandlerTest
 {
     Map<HandlerPlayer, Boolean> tiltActivated;
-    HandlerPlayer player1 = getTestHandlerPlayer();
-    HandlerPlayer player2 = getTestHandlerPlayer();
+    HandlerPlayer player1 = getPlayer();
+    HandlerPlayer player2 = getPlayer();
 
+    /**
+     * Testet, ob das Aktivieren des TiltHandlers funktioniert.
+     */
     @Test
-    public void activateGameHandlerTest() {
+    public void activateTiltHandlerTest() {
         tiltActivated = new HashMap<>();
         tiltActivated.put(player1, false);
         tiltActivated.put(player2, false);
@@ -39,10 +45,18 @@ public class TiltHandlerTest
         assertThat(tiltActivated.get(player2), is(false));
     }
 
+    /**
+     * Gibt eine Test-HandlerGameSession zurück.
+     * @return Eine Test-HandlerGameSession.
+     */
     private HandlerGameSession getTestHandlerGameSession() {
         return new HandlerGameSession()
         {
+            /**
+             * Der aktuelle Spieler.
+             */
             HandlerPlayer currentPlayer = player1;
+
             @Override
             public HandlerPlayer getCurrentPlayer()
             {
@@ -85,7 +99,11 @@ public class TiltHandlerTest
         };
     }
 
-    private HandlerPlayer getTestHandlerPlayer() {
+    /**
+     * Gibt einen Test-HandlerPlayer zurück.
+     * @return Ein Test-HandlerPlayer.
+     */
+    private HandlerPlayer getPlayer() {
         return new HandlerPlayer()
         {
             @Override

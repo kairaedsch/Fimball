@@ -12,23 +12,38 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse HitHandler.
+ */
 public class HitHandlerTest
 {
-
-
+    /**
+     * Testet, ob das Aktivieren des HitHandlers funktioniert.
+     */
     @Test
-    public void activateElementHandlerTest() {
+    public void activateHitHandlerTest()
+    {
         HitHandler test = new HitHandler();
-        HandlerGameElement gameElement = getTestHandlerGameElement();
-        test.activateElementHandler(gameElement,0);
-        assertThat(gameElement.getHitCount(),is(1));
+        HandlerGameElement gameElement = getTestElement();
+        test.activateElementHandler(gameElement, 0);
+        assertThat(gameElement.getHitCount(), is(1));
 
     }
 
-    private HandlerGameElement getTestHandlerGameElement() {
+    /**
+     * Gibt ein Test-HandlerGameElement zurück.
+     *
+     * @return Ein Test-HandlerGameElement
+     */
+    private HandlerGameElement getTestElement()
+    {
         return new HandlerGameElement()
         {
+            /**
+             * Gibt an, wie oft das Element getroffen wurde.
+             */
             int elementHitCount;
+
             @Override
             public ReadOnlyObjectProperty<Vector2> positionProperty()
             {

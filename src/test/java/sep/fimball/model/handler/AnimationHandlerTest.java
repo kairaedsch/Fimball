@@ -17,80 +17,92 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Testet die Klasse AnimationHandler.
+ */
 public class AnimationHandlerTest
 {
-    Animation testAnimation;
+    /**
+     * Eine Test-Animation.
+     */
+    private Animation testAnimation;
 
+    /**
+     * Testet, ob das Aktivieren des AnimationHandlers funktioniert.
+     */
     @Test
-    public void activateElementHandlerTest() {
+    public void activateAnimationHandlerTest()
+    {
         AnimationHandler test = new AnimationHandler();
-        HandlerGameElement testHandlerGameElement = getTestHandlerGameElement();
+        HandlerGameElement testHandlerGameElement = getTestElement();
         test.activateElementHandler(testHandlerGameElement, 0);
         assertThat(testAnimation.getName(), is("Test-Animation"));
     }
 
-    private HandlerGameElement getTestHandlerGameElement()
+    /**
+     * Gibt ein Test-HandlerGameElement zurück.
+     *
+     * @return Ein Test-HandlerGameElement.
+     */
+    private HandlerGameElement getTestElement()
     {
         return new HandlerGameElement()
+        {
+            @Override
+            public ReadOnlyObjectProperty<Vector2> positionProperty()
             {
-                @Override
-                public ReadOnlyObjectProperty<Vector2> positionProperty()
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                @Override
-                public void setCurrentAnimation(Optional<Animation> animation)
-                {
-                    if(animation.isPresent())
-                    {
-                        testAnimation = animation.get();
-                    }
-                }
+            @Override
+            public void setCurrentAnimation(Optional<Animation> animation)
+            {
+                animation.ifPresent(animation1 -> testAnimation = animation1);
+            }
 
-                @Override
-                public void setHitCount(int hitCount)
-                {
+            @Override
+            public void setHitCount(int hitCount)
+            {
 
-                }
+            }
 
-                @Override
-                public int getHitCount()
-                {
-                    return 0;
-                }
+            @Override
+            public int getHitCount()
+            {
+                return 0;
+            }
 
-                @Override
-                public int getPointReward()
-                {
-                    return 0;
-                }
+            @Override
+            public int getPointReward()
+            {
+                return 0;
+            }
 
-                @Override
-                public BaseMediaElement getMediaElement()
-                {
-                    BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
-                    Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                    BaseMediaElementEvent baseMediaElementEvent = mock(BaseMediaElementEvent.class);
-                    Animation animation = mock(Animation.class);
-                    when(animation.getName()).thenReturn("Test-Animation");
-                    when(baseMediaElementEvent.getAnimation()).thenReturn(java.util.Optional.ofNullable(animation));
-                    eventMap.put(0, baseMediaElementEvent);
-                    when(baseMediaElement.getEventMap()).thenReturn(eventMap);
-                    return baseMediaElement;
-                }
+            @Override
+            public BaseMediaElement getMediaElement()
+            {
+                BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
+                Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
+                BaseMediaElementEvent baseMediaElementEvent = mock(BaseMediaElementEvent.class);
+                Animation animation = mock(Animation.class);
+                when(animation.getName()).thenReturn("Test-Animation");
+                when(baseMediaElementEvent.getAnimation()).thenReturn(java.util.Optional.of(animation));
+                eventMap.put(0, baseMediaElementEvent);
+                when(baseMediaElement.getEventMap()).thenReturn(eventMap);
+                return baseMediaElement;
+            }
 
-                @Override
-                public BaseRuleElement getRuleElement()
-                {
-                    return null;
-                }
+            @Override
+            public BaseRuleElement getRuleElement()
+            {
+                return null;
+            }
 
-                @Override
-                public BaseElementType getElementType()
-                {
-                    return null;
-                }
-            };
+            @Override
+            public BaseElementType getElementType()
+            {
+                return null;
+            }
+        };
     }
 }

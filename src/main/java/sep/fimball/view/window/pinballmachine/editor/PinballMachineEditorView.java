@@ -63,15 +63,16 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     @FXML
     private VBox availableElementsObstacles;
-    /**
-     * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
-     */
 
     @FXML
     private Pane previewTop;
 
     @FXML
     private Pane previewBot;
+
+    /**
+     * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
+     */
 
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 

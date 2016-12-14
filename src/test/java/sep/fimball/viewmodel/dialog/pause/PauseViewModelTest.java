@@ -11,7 +11,7 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
 import static org.mockito.Mockito.*;
 
 /**
- * Test für die Klasse PauseViewModel
+ * Test für die Klasse PauseViewModel.
  */
 public class PauseViewModelTest
 {
@@ -42,7 +42,7 @@ public class PauseViewModelTest
     }
 
     /**
-     * Simuliert das Drücken einer Taste
+     * Simuliert das Drücken einer Taste.
      *
      * @param viewModel das ViewModel auf dem der Tastendruck simuliert werden soll.
      * @param code der Tastendruck der simuliert werden soll.

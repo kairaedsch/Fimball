@@ -1,41 +1,81 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Testet die Klasse BallLostHandler.
+ */
 public class BallLostHandlerTest
 {
-    int currentPlayer = 0;
-    boolean newBallSpawned = false;
-    boolean reserveBallRemoved = false;
+    /**
+     * Ein Test-Spieler.
+     */
+    private HandlerPlayer player1 = getTestPlayer();
 
+    /**
+     * Ein Test-Spieler.
+     */
+    private HandlerPlayer player2 = getTestPlayer();
+
+    /**
+     * Gibt an, ob ein neuer Ball gespawned wurde.
+     */
+    private boolean newBallSpawned = false;
+
+    /**
+     * Testet, ob das Aktivieren des BallLostHandlers funktioniert.
+     */
     @Test
-    public void activateGameHandlerTest() {
-        BallLostHandler test = new BallLostHandler(getTestHandlerGameSession());
+    public void activateBallLostHandlerTest()
+    {
+        HandlerGameSession gameSession = getTestGameSession();
+        BallLostHandler test = new BallLostHandler(gameSession);
         GameEvent event = GameEvent.BALL_LOST;
         test.activateGameHandler(event);
-        assertThat(currentPlayer, is(1));
+        assertThat(gameSession.getCurrentPlayer(), equalTo(player2));
         assertThat(newBallSpawned, is(true));
-        assertThat(reserveBallRemoved, is(true));
+        assertThat(player1.ballsProperty().get(), is(2));
+        assertThat(player2.ballsProperty().get(), is(3));
     }
 
-    private HandlerGameSession getTestHandlerGameSession() {
+    /**
+     * Gibt eine Test-HandlerGameSession zurück.
+     *
+     * @return Eine Test-HandlerGameSession.
+     */
+    private HandlerGameSession getTestGameSession()
+    {
         return new HandlerGameSession()
         {
+            /**
+             * Der aktuelle Spieler.
+             */
+            HandlerPlayer currentPlayer = player1;
+
             @Override
             public HandlerPlayer getCurrentPlayer()
             {
-                return getTestHandlerPlayer();
+                return currentPlayer;
             }
 
             @Override
             public void switchToNextPlayer()
             {
-                currentPlayer++;
+                if (currentPlayer == player1)
+                {
+                    currentPlayer = player2;
+                } else
+                {
+                    currentPlayer = player1;
+                }
             }
 
             @Override
@@ -64,9 +104,20 @@ public class BallLostHandlerTest
         };
     }
 
-    private HandlerPlayer getTestHandlerPlayer() {
+    /**
+     * Gibt einen Test-HandlerPlayer zurück.
+     *
+     * @return Ein Test-HandlerPlayer.
+     */
+    private HandlerPlayer getTestPlayer()
+    {
         return new HandlerPlayer()
         {
+            /**
+             * Die Reserve-Kugeln des Spielers.
+             */
+            IntegerProperty balls = new SimpleIntegerProperty(3);
+
             @Override
             public ReadOnlyIntegerProperty pointsProperty()
             {
@@ -76,7 +127,7 @@ public class BallLostHandlerTest
             @Override
             public ReadOnlyIntegerProperty ballsProperty()
             {
-                return null;
+                return balls;
             }
 
             @Override
@@ -88,8 +139,8 @@ public class BallLostHandlerTest
             @Override
             public boolean removeOneReserveBall()
             {
-                reserveBallRemoved = true;
-                return false;
+                balls.set(balls.get() - 1);
+                return balls.get() >= 0;
             }
         };
     }
