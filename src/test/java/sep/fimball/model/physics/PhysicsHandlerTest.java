@@ -50,10 +50,7 @@ public class PhysicsHandlerTest
      */
     private boolean ballLost = false;
 
-    /**
-     * Die y-Position der Kugel.
-     */
-    private double ballPositionY = 0;
+    Vector2 ballPosition = new Vector2(0,19);
 
     /**
      * Testet, ob das An- und Ausschalten des Reagierens auf UserInput funktioniert.
@@ -101,7 +98,6 @@ public class PhysicsHandlerTest
     public void ballLostTest() throws InterruptedException
     {
         init();
-        ballPositionY = 19;
         test.startTicking();
         synchronized (monitor)
         {
@@ -111,7 +107,7 @@ public class PhysicsHandlerTest
             }
         }
         test.stopTicking();
-        assertThat(ballPositionY, greaterThanOrEqualTo(50.0));
+        assertThat(ballPosition.getY(), greaterThanOrEqualTo(50.0));
         assertThat(ballLost, is(true));
     }
 
@@ -147,20 +143,18 @@ public class PhysicsHandlerTest
         BallPhysicsElement mockedBall = mock(BallPhysicsElement.class);
         doAnswer(invocationOnMock ->
         {
-            Vector2 args = (invocationOnMock.getArgument(0));
-            ballPositionY = args.getY();
+            ballPosition = invocationOnMock.getArgument(0);
             return null;
         }).when(mockedBall).setPosition(any(Vector2.class));
 
         doAnswer(invocationOnMock ->
         {
-            ballPositionY++;
+            mockedBall.setPosition(mockedBall.getPosition().plus(new Vector2(0,1)));
             return null;
         }).when(mockedBall).update(anyDouble());
 
-        Vector2 ballPosition = mock(Vector2.class);
-        when(ballPosition.getY()).thenAnswer(invocationOnMock -> ballPositionY);
-        when(mockedBall.getPosition()).thenReturn(ballPosition);
+        doAnswer(invocationOnMock ->
+                ballPosition).when(mockedBall).getPosition();
 
         FlipperPhysicsElement mockedLeftFlipper = mock(FlipperPhysicsElement.class);
         FlipperPhysicsElement mockedRightFlipper = mock(FlipperPhysicsElement.class);

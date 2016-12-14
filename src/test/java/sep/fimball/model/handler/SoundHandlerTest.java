@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -37,9 +37,9 @@ public class SoundHandlerTest
             return null;
         }).when(soundManager).addSoundToPlay(any(Sound.class));
         SoundHandler test = new SoundHandler(soundManager);
-        HandlerGameElement gameElement = getElement();
+        HandlerGameElement gameElement = getTestHandlerGameElement();
         test.activateElementHandler(gameElement, 0);
-        assertThat(playedSound.getSoundPath(), is("Test-Sound"));
+        assertThat(playedSound.getSoundPath(), endsWith("Test-Sound.mp3"));
     }
 
     /**
@@ -47,7 +47,7 @@ public class SoundHandlerTest
      *
      * @return Ein Test-HandlerGameElement.
      */
-    private HandlerGameElement getElement()
+    private HandlerGameElement getTestHandlerGameElement()
     {
         return new HandlerGameElement()
         {
@@ -84,14 +84,11 @@ public class SoundHandlerTest
             @Override
             public BaseMediaElement getMediaElement()
             {
-                BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = mock(BaseMediaElementEvent.class);
-                Sound sound = mock(Sound.class);
-                when(sound.getSoundPath()).thenReturn("Test-Sound");
-                when(baseMediaElementEvent.getSound()).thenReturn(java.util.Optional.of(sound));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0,0,
+                        "")),java.util.Optional.of("Test-Sound"));
                 eventMap.put(0, baseMediaElementEvent);
-                when(baseMediaElement.getEventMap()).thenReturn(eventMap);
+                BaseMediaElement baseMediaElement = new BaseMediaElement("", "", 0, false,0, null,eventMap,null);
                 return baseMediaElement;
             }
 

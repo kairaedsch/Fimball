@@ -14,8 +14,6 @@ import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Testet die Klasse AnimationHandler.
@@ -81,14 +79,11 @@ public class AnimationHandlerTest
             @Override
             public BaseMediaElement getMediaElement()
             {
-                BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = mock(BaseMediaElementEvent.class);
-                Animation animation = mock(Animation.class);
-                when(animation.getName()).thenReturn("Test-Animation");
-                when(baseMediaElementEvent.getAnimation()).thenReturn(java.util.Optional.of(animation));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0,0,
+                        "Test-Animation")),java.util.Optional.of(""));
                 eventMap.put(0, baseMediaElementEvent);
-                when(baseMediaElement.getEventMap()).thenReturn(eventMap);
+                BaseMediaElement baseMediaElement = new BaseMediaElement("", "", 0, false,0, null,eventMap,null);
                 return baseMediaElement;
             }
 
