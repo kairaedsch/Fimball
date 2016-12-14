@@ -61,12 +61,12 @@ public class LightHandler implements GameHandler
         lightChangeLoop.getKeyFrames().add(keyFrame);
 
         this.lightChangers = lightChangers;
-
         currentLightChanger = lightChangers.get(0);
     }
 
     /**
      * Wechselt die Lichter.
+     * TODO bessere Beschreibung
      */
     private void changeLights()
     {

@@ -71,10 +71,7 @@ public class PhysicsHandlerTest
                 false, false));
         synchronized (monitor)
         {
-            while (!leftFlipperRotated)
-            {
-                monitor.wait(MAX_TEST_DURATION);
-            }
+            monitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
         assertThat(leftFlipperRotated, is(true));
