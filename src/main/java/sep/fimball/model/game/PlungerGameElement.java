@@ -41,7 +41,7 @@ public class PlungerGameElement extends GameElement
             {
                 double force = calcForce();
                 System.out.println(force);
-                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModify(force));
+                physicsHandler.addModify(plungerPhysicsElement, new PlungerModify(force));
             }
         });
     }

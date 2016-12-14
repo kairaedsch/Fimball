@@ -25,7 +25,7 @@ public class PhysicsHandler<GameElementT>
 
     private List<ModifyContainer> modifiContainers;
 
-    private final Object modifisMonitor = new Object();
+    private final Object modifiysMonitor = new Object();
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -92,9 +92,9 @@ public class PhysicsHandler<GameElementT>
         modifiContainers = new ArrayList<>();
     }
 
-    public <ModifyT extends Modify> void addModifi(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
+    public <ModifyT extends Modify> void addModify(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
     {
-        synchronized (modifisMonitor)
+        synchronized (modifiysMonitor)
         {
             modifiContainers.add(new ModifyContainer<>(physicsElement, modify));
         }
@@ -127,7 +127,7 @@ public class PhysicsHandler<GameElementT>
                 double delta = PhysicsConfig.TICK_RATE_SEC;
 
                 List<ModifyContainer> localModifiContainers;
-                synchronized (modifisMonitor)
+                synchronized (modifiysMonitor)
                 {
                     localModifiContainers = modifiContainers;
                     modifiContainers = new ArrayList<>();

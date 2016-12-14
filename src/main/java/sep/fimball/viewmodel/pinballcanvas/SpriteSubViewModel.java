@@ -107,18 +107,7 @@ public class SpriteSubViewModel
     {
         this(gameElement);
 
-        selection.addListener((observableValue, placedElements, t1) ->
-        {
-            boolean selected = false;
-            for (PlacedElement placedElement : selection)
-            {
-                if (placedElement == gameElement.getPlacedElement())
-                {
-                    selected = true;
-                }
-            }
-            isSelected.setValue(selected);
-        });
+        isSelected.bind(Bindings.createBooleanBinding(() -> selection.stream().anyMatch(p -> p == gameElement.getPlacedElement()), selection));
     }
 
     /**
