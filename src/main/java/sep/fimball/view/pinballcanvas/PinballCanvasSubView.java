@@ -123,12 +123,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
-        System.out.println("do " + (cameraPosition.get().getY() - softCameraPosition.getY()));
 
         Vector2 newP = softCameraPosition;
 
         softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
-        System.out.println("dn " + (cameraPosition.get().getY() - softCameraPosition.getY()));
 
         pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom);
 

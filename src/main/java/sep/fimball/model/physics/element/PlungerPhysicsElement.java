@@ -2,7 +2,7 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 
-public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable
+public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModifi>
 {
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.
@@ -19,6 +19,12 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
 
     @Override
     public void update(double deltaTime)
+    {
+
+    }
+
+    @Override
+    public void applyModifi(PlungerModifi modifi)
     {
 
     }

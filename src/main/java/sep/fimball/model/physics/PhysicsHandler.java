@@ -7,9 +7,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
-import sep.fimball.model.physics.element.BallPhysicsElement;
-import sep.fimball.model.physics.element.FlipperPhysicsElement;
-import sep.fimball.model.physics.element.PhysicsElement;
+import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicGameSession;
@@ -31,15 +29,8 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
-    /**
-     * Die linksseitigen Flipper.
-     */
-    private List<FlipperPhysicsElement<GameElementT>> leftFlippers;
-
-    /**
-     * Die rechtsseitigen Flipper.
-     */
-    private List<FlipperPhysicsElement<GameElementT>> rightFlippers;
+    private List<Modifi> modifis;
+    private final Object modifisMonitor = new Object();
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -51,7 +42,7 @@ public class PhysicsHandler<GameElementT>
      * wurden gespeichert. Im nächsten Physik Schritt kann der PhysikHandler diese dann abarbeiten. Dies ist notwendig
      * da das Observer Pattern nicht zur Thread-übergreifenden Kommunikation gedacht ist.
      */
-    private final List<KeyObserverEventArgs> bufferedKeyEvents;
+    private List<KeyObserverEventArgs> bufferedKeyEvents;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -85,28 +76,32 @@ public class PhysicsHandler<GameElementT>
     private boolean reactingToInput;
 
     /**
-     * Erzeugt einen neuen PhysicsHandler mit den gegebenen Element.
+     * Erzeugt einen neuen leeren PhysicsHandler.
+     */
+    public PhysicsHandler()
+    {
+
+    }
+
+    /**
+     * Initialisiert diesen PhysicsHandler mit den gegebenen Elementen.
      *
      * @param elements           Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession        Die zugehörige GameSession.
      * @param maxElementPosY     Die maximale Y-Position aller PhysicElements.
      * @param ballPhysicsElement Der physikalische Ball.
-     * @param leftFlippers       Die linksseitigen Flipper.
-     * @param rightFlippers      Die rechtsseitigen Flipper.
      */
-    public PhysicsHandler(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement, List<FlipperPhysicsElement<GameElementT>> leftFlippers, List<FlipperPhysicsElement<GameElementT>> rightFlippers)
+    public void init(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
-        assert ballPhysicsElement != null;
-        this.leftFlippers = leftFlippers;
-        this.rightFlippers = rightFlippers;
         this.ballLost = false;
         this.reactingToInput = true;
 
         bufferedKeyEvents = new ArrayList<>();
+        modifis = new ArrayList<>();
 
         addListenersToInputManager();
     }
@@ -117,8 +112,6 @@ public class PhysicsHandler<GameElementT>
     private void addListenersToInputManager()
     {
         InputManager inputManager = InputManager.getSingletonInstance();
-        inputManager.addListener(KeyBinding.LEFT_FLIPPER, this::addToKeyEvents);
-        inputManager.addListener(KeyBinding.RIGHT_FLIPPER, this::addToKeyEvents);
         inputManager.addListener(KeyBinding.NUDGE_LEFT, this::addToKeyEvents);
         inputManager.addListener(KeyBinding.NUDGE_RIGHT, this::addToKeyEvents);
     }
@@ -136,6 +129,14 @@ public class PhysicsHandler<GameElementT>
             {
                 bufferedKeyEvents.add(args);
             }
+        }
+    }
+
+    public void addModifi(Modifi modifi)
+    {
+        synchronized (modifisMonitor)
+        {
+            modifis.add(modifi);
         }
     }
 
@@ -217,6 +218,18 @@ public class PhysicsHandler<GameElementT>
                     checkKeyEvents();
                 }
 
+                List<Modifi> localModifis;
+                synchronized (modifisMonitor)
+                {
+                    localModifis = modifis;
+                    modifis = new ArrayList<>();
+                }
+
+                for (Modifi modifi : localModifis)
+                {
+                    modifi.getPhysicsElement().applyModifi(modifi);
+                }
+
                 // Check all PhysicsElements for collisions with the ball
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
@@ -225,6 +238,14 @@ public class PhysicsHandler<GameElementT>
                 synchronized (monitor)
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
+
+                    for (PhysicsElement<GameElementT> element : physicsElements)
+                    {
+                        if (element instanceof PhysicsUpdateable)
+                        {
+                            ((PhysicsUpdateable) element).update(delta);
+                        }
+                    }
 
                     if (ballPhysicsElement != null)
                     {
@@ -241,9 +262,6 @@ public class PhysicsHandler<GameElementT>
                     if (localBallLost)
                         ballLost = true;
                 }
-
-                leftFlippers.forEach(flipper -> flipper.update(delta));
-                rightFlippers.forEach(flipper -> flipper.update(delta));
 
                 if (localBallLost)
                     gameSession.setBallLost(true);
@@ -288,24 +306,6 @@ public class PhysicsHandler<GameElementT>
         {
             switch (args.getBinding())
             {
-                case LEFT_FLIPPER:
-                    leftFlippers.forEach(flipper ->
-                    {
-                        if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                            flipper.rotateDown();
-                        else
-                            flipper.rotateUp();
-                    });
-                    break;
-                case RIGHT_FLIPPER:
-                    rightFlippers.forEach(flipper ->
-                    {
-                        if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
-                            flipper.rotateDown();
-                        else
-                            flipper.rotateUp();
-                    });
-                    break;
                 case NUDGE_LEFT:
                     if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
                     {

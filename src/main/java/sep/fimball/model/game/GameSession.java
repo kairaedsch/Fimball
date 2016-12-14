@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.GameEvent;
@@ -106,7 +107,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Referenz zum PhysicsHandler, der die Bewegung des Balls auf dem Spielfeld und andere physikalische Eigenschaften berechnet.
      */
-    private PhysicsHandler physicsHandler;
+    private PhysicsHandler<GameElement> physicsHandler;
 
     /**
      * Die Spielwelt des Flipperautomaten auf dem in der aktuellen Spielpartie gespielt wird.
@@ -193,6 +194,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         this.startedFromEditor = startedFromEditor;
         this.isBallLost = false;
         this.wereBallLostEventsTriggered = false;
+        this.physicsHandler = new PhysicsHandler<>();
 
         players = new Player[playerNames.length];
         for (int i = 0; i < playerNames.length; i++)
@@ -214,16 +216,17 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         {
 
             PhysicsElement<GameElement> physicsElement = null;
-            GameElement gameElement = new GameElement(element, false);
-
+            GameElement gameElement;
             switch (element.getBaseElement().getType())
             {
                 case RAMP:
                 case NORMAL:
+                    gameElement = new GameElement(element, false);
                     physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
+                    gameElement = new GameElement(element, false);
                     this.gameBall.set(gameElement);
                     break;
                 case PLUNGER:/*
@@ -231,18 +234,19 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                             gameElement,
                             gameElement.positionProperty().get(),
                             gameElement.getPlacedElement().getBaseElement().getPhysics());*/
+                    gameElement = new GameElement(element, false);
                     break;
                 case LEFT_FLIPPER:
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics(), true);
-                    leftFlippers.add(leftFlipperPhysicsElement);
+                case RIGHT_FLIPPER:
+                    boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
+                    FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                    flipperGameElement.setPhysicsElement(physicsHandler, leftFlipperPhysicsElement);
+                    gameElement = flipperGameElement;
                     physicsElement = leftFlipperPhysicsElement;
                     break;
-                case RIGHT_FLIPPER:
-                    FlipperPhysicsElement<GameElement> rightFlipperPhysicsElement = new FlipperPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics(), false);
-                    rightFlippers.add(rightFlipperPhysicsElement);
-                    physicsElement = rightFlipperPhysicsElement;
-                    break;
                 case LIGHT:
+                    gameElement = new GameElement(element, false);
                     break;
                 default:
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
@@ -270,7 +274,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         gameLoopObservable = new sep.fimball.general.util.Observable();
 
-        physicsHandler = new PhysicsHandler<>(physicsElements, this, maxElementPos, physElem, leftFlippers, rightFlippers);
+        physicsHandler.init(physicsElements, this, maxElementPos, physElem);
 
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);

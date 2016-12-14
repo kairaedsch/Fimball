@@ -219,7 +219,8 @@ public class PhysicsHandlerTest
         mockedLeftFlippers.add(mockedLeftFlipper);
         mockedRightFlippers.add(mockedRightFlipper);
 
-        test = new PhysicsHandler(mockedElements, mockedGameSession, 50, mockedBall, mockedLeftFlippers, mockedRightFlippers);
+        test = new PhysicsHandler();
+        test.init(mockedElements, mockedGameSession, 50, mockedBall);
     }
 
 }
