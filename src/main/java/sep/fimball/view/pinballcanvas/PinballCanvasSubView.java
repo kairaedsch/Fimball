@@ -66,6 +66,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     private DrawMode drawMode;
 
+    private PinballCanvasDrawer pinballCanvasDrawer;
+
     /**
      * Setzt das ViewModel dieses Objekts und bindet die Eigenschaften der View an die entsprechenden Eigenschaften des ViewModels.
      *
@@ -97,6 +99,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         canvas.heightProperty().bind(parent.heightProperty());
 
         pinballCanvasViewModel.setViewScreenshotCreater(this);
+
+        pinballCanvasDrawer = new PinballCanvasDrawer(canvas, drawMode);
     }
 
     private void redraw()
@@ -126,7 +130,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
         System.out.println("dn " + (cameraPosition.get().getY() - softCameraPosition.getY()));
 
-        PinballCanvasDrawer.draw(canvas, sprites, softCameraPosition, softCameraZoom, drawMode);
+        pinballCanvasDrawer.draw(sprites, softCameraPosition, softCameraZoom);
 
         lastDraw = currentDraw;
     }
@@ -136,7 +140,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / Config.pixelsPerGridUnit);
         double minHeight = (720 / Config.pixelsPerGridUnit);
-        if(rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
+        if (rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
         {
             double scale = (minHeight / rectangleDouble.getWidth());
             double newHeight = rectangleDouble.getHeight() * scale;
@@ -148,7 +152,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         Canvas screenShotCanvas = new Canvas();
         screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
         screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
-        PinballCanvasDrawer.draw(screenShotCanvas, sprites, rectangleDouble.getMiddle(), 1.0, DrawMode.SCREENSHOT);
+        PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT);
+        screenshotCanvasDrawer.draw(sprites, rectangleDouble.getMiddle(), 1.0);
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
@@ -184,6 +189,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return PinballCanvasDrawer.canvasPosToGridPos(canvas, softCameraPosition, softCameraZoom, mouseEvent.getX(), mouseEvent.getY());
+        return pinballCanvasDrawer.canvasPosToGridPos(softCameraPosition, softCameraZoom, mouseEvent.getX(), mouseEvent.getY());
     }
 }
