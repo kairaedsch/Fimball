@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
@@ -95,5 +96,10 @@ public class AvailableElementSubViewModel
     public void selected()
     {
         pinballMachineEditorViewModel.select(baseElement);
+    }
+
+    public void mouseReleased(MouseEvent mouseEvent)
+    {
+        pinballMachineEditorViewModel.mouseReleased(mouseEvent);
     }
 }

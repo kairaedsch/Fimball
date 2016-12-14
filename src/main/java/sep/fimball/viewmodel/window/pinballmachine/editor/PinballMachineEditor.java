@@ -29,7 +29,7 @@ public class PinballMachineEditor
     {
         for (PlacedElement placedElement : selection)
         {
-            pinballMachine.elementsProperty().add(placedElement);
+            pinballMachine.addElement(placedElement);
         }
     }
 
@@ -37,18 +37,30 @@ public class PinballMachineEditor
     {
         for (PlacedElement placedElement : selection)
         {
-            ObjectProperty<Vector2> positionProperty = (ObjectProperty<Vector2>) placedElement.positionProperty();
-            positionProperty.set(positionProperty.get().plus(by));
+            placedElement.setPosition(placedElement.positionProperty().get().plus(by));
         }
     }
 
     public void moveSelectionTo(Vector2 to)
     {
-        // TODO if selection size > 1 store localPos and apply after movement
-        for (PlacedElement placedElement : selection)
+        if (!selection.isEmpty())
         {
-            ObjectProperty<Vector2> positionProperty = (ObjectProperty<Vector2>) placedElement.positionProperty();
-            positionProperty.setValue(to);
+
+            Map<PlacedElement, Vector2> relativePos = new HashMap<>();
+            relativePos.put(selection.get(0), new Vector2(0, 0));
+
+            if (selection.size() > 1)
+            {
+                for (int i = 1; i < selection.size(); i++)
+                {
+                    relativePos.put(selection.get(i), selection.get(i).positionProperty().get().minus(selection.get(0).positionProperty().get()));
+                }
+            }
+
+            for (PlacedElement placedElement : selection)
+            {
+                placedElement.setPosition(to.plus(relativePos.get(placedElement)));
+            }
         }
     }
 

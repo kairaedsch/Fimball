@@ -26,23 +26,12 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     public PinballCanvasEditorViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         super(gameSession, DrawMode.EDITOR);
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelectedPlacedElement()));
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()));
 
         this.editorViewModel = pinballMachineEditorViewModel;
 
         cameraPosition.bind(pinballMachineEditorViewModel.cameraPositionProperty());
         cameraZoom.bind(pinballMachineEditorViewModel.cameraZoomProperty());
-    }
-
-    /**
-     * Benachrichtigt das {@code editorViewModel}, dass der Nutzer auf das Spielfeld geklickt hat.
-     *
-     * @param gridPos Die Position im Grid, auf die der Nutzer geklickt hat.
-     * @param button  Die gedrückte Maustaste.
-     */
-    public void mouseClickedOnGame(Vector2 gridPos, MouseButton button)
-    {
-        editorViewModel.mouseClickedOnGame(gridPos, button, false);
     }
 
     /**

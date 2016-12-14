@@ -2,6 +2,9 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
@@ -100,11 +103,22 @@ public class SpriteSubViewModel
      * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
      * @param selectedPlacedElement Das aktuell ausgewählte Element.
      */
-    public SpriteSubViewModel(GameElement gameElement, ReadOnlyObjectProperty<Optional<PlacedElement>> selectedPlacedElement)
+    public SpriteSubViewModel(GameElement gameElement, ReadOnlyListProperty<PlacedElement> selection)
     {
         this(gameElement);
 
-        isSelected.bind(Bindings.createBooleanBinding(() -> selectedPlacedElement.get().isPresent() && selectedPlacedElement.get().get() == gameElement.getPlacedElement(), selectedPlacedElement));
+        selection.addListener((observableValue, placedElements, t1) ->
+        {
+            boolean selected = false;
+            for (PlacedElement placedElement : selection)
+            {
+                if (placedElement == gameElement.getPlacedElement())
+                {
+                    selected = true;
+                }
+            }
+            isSelected.setValue(selected);
+        });
     }
 
     /**

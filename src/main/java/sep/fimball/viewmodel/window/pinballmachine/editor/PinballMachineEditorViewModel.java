@@ -230,7 +230,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
         {
-            System.out.println(gridPos.getX() + " " + gridPos.getY());
             pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
         }
         //TODO implement multi select
@@ -257,53 +256,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
-    /**
-     * Verarbeitet einen Mausklick auf das Spielfeld.
-     *
-     * @param gridPosition Die Position im Grid, auf die geklickt wurde.
-     * @param onlyPressed  Gibt an, ob die Maustaste nur gedrückt wurde.
-     */
-    public void mouseClickedOnGame(Vector2 gridPosition, MouseButton button, boolean onlyPressed)
-    {
-        /*
-        if (!moveModifier && onlyPressed)
-        {
-            if (button == MouseButton.SECONDARY && mouseMode.get() == MouseMode.PLACING)
-                setMouseMode(MouseMode.SELECTING);
-
-            if (mouseMode.get() == MouseMode.SELECTING && button == MouseButton.PRIMARY)
-            {
-                setSelectedPlacedElement(pinballMachine.getElementAt(gridPosition));
-            }
-            else if (mouseMode.get() == MouseMode.PLACING && selectedAvailableElement.get().isPresent() && button == MouseButton.PRIMARY)
-            {
-                if (selectedAvailableElement.get().get().getType() == BaseElementType.BALL)
-                {
-                    for (PlacedElement placedElement : pinballMachine.elementsProperty())
-                    {
-                        if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
-                        {
-                            pinballMachine.removeElement(placedElement);
-                            break;
-                        }
-                    }
-                }
-                PlacedElement placedElement = pinballMachine.addElement(selectedAvailableElement.get().get(), gridPosition.round());
-                setSelectedPlacedElement(Optional.of(placedElement));
-            }
-        }*/
-
-
-    }
-
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
         {
             return;
         }
-        System.out.println("mouse pressed on canvas");
-
 
         List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
         if (!elements.isEmpty())
@@ -316,7 +274,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 }
                 else
                 {
-                    pinballMachineEditor.clearSelection();
                     pinballMachineEditor.addToSelection(elements.get(0));
                     selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
                 }
@@ -345,7 +302,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        System.out.println("mouse released on canvas");
+        System.out.println("released");
         if (mouseOnCanvas)
         {
             if (mouseMode.get() == MouseMode.PLACING)
@@ -368,7 +325,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
-        System.out.println("mouse entered Canvas");
+        System.out.println("entered" + mouseMode.get());
         mouseOnCanvas = true;
         if (mouseMode.get() == MouseMode.PLACING)
         {
@@ -380,7 +337,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseExitedCanvas(Vector2 gridPos)
     {
-        System.out.println("mouse exited Canvas");
         mouseOnCanvas = false;
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)
         {
@@ -395,23 +351,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         mouseMode.setValue(MouseMode.PLACING);
         pinballMachineEditor.clearSelection();
         pinballMachineEditor.addToSelection(baseElement);
-    }
-
-    /**
-     * Setzt das aktuell ausgewählte Element auf dem Automaten auf das gegebene Element.
-     *
-     * @param placedElement Das neue ausgewählte Element.
-     */
-    private void setSelectedPlacedElement(Optional<PlacedElement> placedElement)
-    {
-        selectedPlacedElement.set(placedElement);
-        if (selectedPlacedElement.get().isPresent())
-        {
-            selectedPlacedElementPosition = new SimpleObjectProperty<>(new Vector2().plus(selectedPlacedElement.get().get().positionProperty().get()));
-            selectedPlacedElementPosition.addListener((observable, oldValue, newValue) -> selectedPlacedElement.get().get().setPosition(new Vector2().plus(newValue).round()));
-        }
-
-        selectedElementSubViewModel.setPlacedElement(selectedPlacedElement.get());
     }
 
     @Override
@@ -494,9 +433,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @return Das aktuell auf dem Spielfeld ausgewählte Element.
      */
-    public ReadOnlyObjectProperty<Optional<PlacedElement>> getSelectedPlacedElement()
+    public ReadOnlyListProperty<PlacedElement> getSelection()
     {
-        return selectedPlacedElement;
+        return pinballMachineEditor.getSelection();
     }
 
     public ReadOnlyObjectProperty<Optional<String>> getTopBackgroundPath()

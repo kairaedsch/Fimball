@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -142,13 +143,13 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         // TODO - mega cancer
         //double pixelsPerUnit = Config.pixelsPerGridUnit * pinballMachineEditorViewModel.cameraZoomProperty().get();
 
-            previewBot.setTranslateX(event.getX());
+        previewBot.setTranslateX(event.getX());
             /*        + ((pinballCanvasContainer.widthProperty().get() / 2.0) % pinballMachineEditorViewModel.cameraZoomProperty().get())
                     - ((event.getX()
                             + (pinballMachineEditorViewModel.cameraPositionProperty().get().getX() / 2.0))
                         % pixelsPerUnit)
             );*/
-            previewBot.setTranslateY(event.getY());
+        previewBot.setTranslateY(event.getY());
             /*        + ((pinballCanvasContainer.heightProperty().get() / 2.0) % pinballMachineEditorViewModel.cameraZoomProperty().get())
                     - ((event.getY()
                             + (pinballMachineEditorViewModel.cameraPositionProperty().get().getY() / 2.0))
@@ -236,6 +237,16 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void mouseExitedCanvas(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+    }
+
+    public void mouseDragEnteredCanvas(MouseDragEvent event)
+    {
+        pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
+    }
+
+    public void mouseDragExitedCanvas(MouseDragEvent event)
+    {
+        pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
     }
 
     public void mouseReleased(MouseEvent mouseEvent)

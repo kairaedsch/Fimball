@@ -148,7 +148,7 @@
                         <AnchorPane>
                             <children>
                                 <StackPane fx:id="pinballCanvasContainer" onMouseEntered="#mouseEnteredCanvas"
-                                           onMouseExited="#mouseExitedCanvas" onMouseDragged="#dragged"
+                                           onMouseExited="#mouseExitedCanvas" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas" onMouseDragged="#dragged"
                                            onMousePressed="#down" onMouseReleased="#mouseReleased" onScroll="#zoom"
                                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>

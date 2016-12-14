@@ -4,7 +4,9 @@ import javafx.beans.binding.StringExpression;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import org.jcp.xml.dsig.internal.MacOutputStream;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
@@ -48,6 +50,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     /**
      * Generiert einen String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
+     *
      * @param top Gibt an, ob die CSS-Beschreibung für das obere Bild generiert werden soll.
      * @return Ein String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
      */
@@ -63,5 +66,15 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     public void mousePressed()
     {
         availableElementSubViewModel.selected();
+    }
+
+    public void mouseReleased(MouseEvent mouseEvent)
+    {
+        availableElementSubViewModel.mouseReleased(mouseEvent);
+    }
+
+    public void dragDetected(MouseEvent mouseEvent) {
+        previewName.startFullDrag();
+        mouseEvent.consume();
     }
 }
