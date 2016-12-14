@@ -214,9 +214,14 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-
         pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())), mouseEvent.getButton());
         mouseDown = mouseEvent;
+    }
+
+    public void draggedOver(MouseDragEvent event)
+    {
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), event.getX(), event.getY(), mousePosToCanvasPos(new Vector2(event.getX(), event.getY())), event.getButton());
+        mouseDown = event;
     }
 
     /**
@@ -241,6 +246,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     public void mouseDragEnteredCanvas(MouseDragEvent event)
     {
+        mouseDown = event;
         pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
     }
 
