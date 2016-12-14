@@ -95,7 +95,11 @@ public class PinballMachineEditor
 
     public void addToSelection(PlacedElement placedElement)
     {
-        if(!selection.contains(placedElement)) selection.add(placedElement);
+        if(!selection.contains(placedElement))
+        {
+            setPosition(placedElement, getPosition(placedElement).round());
+            selection.add(placedElement);
+        }
     }
 
     public void addToSelection(ListProperty<PlacedElement> placedElementList)
