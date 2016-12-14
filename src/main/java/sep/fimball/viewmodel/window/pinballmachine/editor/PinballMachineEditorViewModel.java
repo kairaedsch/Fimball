@@ -231,7 +231,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
         {
             System.out.println(gridPos.getX() + " " + gridPos.getY());
-            pinballMachineEditor.moveSelectionTo(gridPos);
+            pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
         }
         //TODO implement multi select
     }
@@ -362,6 +362,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.clearSelection();
             mouseMode.setValue(MouseMode.SELECTING);
+            setSelectedAvailableElement(null);
         }
     }
 
