@@ -46,8 +46,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
-     * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
-     * @param playerNames    Die Namen der Spieler.
+     * @param pinballMachine    Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param playerNames       Die Namen der Spieler.
      * @param startedFromEditor Gibt an, ob das Spiel vom Editor gestartet wurde.
      * @return Die generierte GameSession.
      */
@@ -75,7 +75,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
 
-        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{ gameElement.heightProperty()});
+        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.heightProperty()});
         SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
         gameSession.getWorld().gameElementsAidsAidsAidsAidsProperty().set(sortedList);
@@ -177,8 +177,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten,
      * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
-     * @param pinballMachine Der Flipperautomat, der in der GameSession gespielt wird.
-     * @param playerNames    Die Namen der Spieler.
+     * @param pinballMachine    Der Flipperautomat, der in der GameSession gespielt wird.
+     * @param playerNames       Die Namen der Spieler.
      * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
      */
     public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
@@ -315,12 +315,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
         for (List<ElementEventArgs<GameElement>> elementEventArgsList : localElementEventArgsList)
         {
-            for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
-            {
-                elementEventArgs.getGameElement().setPosition(elementEventArgs.getPosition());
-                elementEventArgs.getGameElement().setRotation(elementEventArgs.getRotation());
-                elementEventArgs.getGameElement().setHeight(elementEventArgs.getHeight());
-            }
+            world.synchronizeWithPhysics(elementEventArgsList);
         }
 
         for (List<CollisionEventArgs<GameElement>> collisionEventArgsList : localCollisionEventArgsList)
@@ -529,6 +524,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         timeline.setCycleCount(1);
         timeline.play();
     }
+
     /**
      * Gibt den zur GameSession gehörenden Flipperautomaten zurück.
      *
@@ -552,6 +548,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
 
     /**
      * Gibt zurück. ob das Spiel aus dem Editor gestartet wurde.
+     *
      * @return {@code true} falls das Spiel aus dem Editor gestartet wurde, {@code false} sonst.
      */
     public boolean isStartedFromEditor()
@@ -559,7 +556,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return startedFromEditor;
     }
 
-    public void nudge() {
+    public void nudge()
+    {
         for (Handler handler : handlers)
         {
             handler.activateGameHandler(GameEvent.NUDGE);

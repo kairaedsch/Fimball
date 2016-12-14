@@ -8,6 +8,7 @@ import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
 
@@ -98,7 +99,25 @@ public class GameElement implements HandlerGameElement
      */
     public void setPosition(Vector2 position)
     {
-        if(position.getX() != this.position.get().getX() || position.getY() != this.position.get().getY()) this.position.set(position);
+        if (position.getX() != this.position.get().getX() || position.getY() != this.position.get().getY())
+            this.position.set(position);
+    }
+
+    /**
+     * Synchronisiert das GameElement mit seiner Repräsentation in der Physik.
+     *
+     * @param elementEventArgs Argumente die relevante Daten des Physikelements beinhalten.
+     */
+    public void synchronizeWithPhysics(ElementEventArgs<GameElement> elementEventArgs)
+    {
+        if (elementEventArgs.getGameElement() != this)
+        {
+            throw new IllegalArgumentException("Tried to synchronize a GameElement with another PhysicsElement");
+        }
+
+        position.setValue(elementEventArgs.getPosition());
+        rotation.setValue(elementEventArgs.getRotation());
+        height.setValue(elementEventArgs.getHeight());
     }
 
     /**

@@ -9,7 +9,11 @@ import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.ElementHandler;
 import sep.fimball.model.handler.HandlerWorld;
+import sep.fimball.model.physics.game.ElementEventArgs;
+
+import java.util.List;
 
 /**
  * Eine World stellt die Spielwelt eines Automaten dar.
@@ -26,12 +30,12 @@ public class World implements HandlerWorld
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
-     * @param elements     Liste der Elemente in der Spielwelt.
+     * @param elements Liste der Elemente in der Spielwelt.
      */
     public World(ObservableList<GameElement> elements)
     {
         gameElements = new SimpleListProperty<>(elements);
-        sortedGameElements =  new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
+        sortedGameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
     }
 
     /**
@@ -42,6 +46,24 @@ public class World implements HandlerWorld
     public void addGameElement(GameElement element)
     {
         gameElements.add(element);
+    }
+
+    /**
+     * Synchronisiert alle GameElements mit ihren Repräsentationen in der Physik.
+     *
+     * @param elementEventArgsList Liste der Änderungen für GameElements.
+     */
+    public void synchronizeWithPhysics(List<ElementEventArgs<GameElement>> elementEventArgsList)
+    {
+        for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
+        {
+            for (GameElement gameElement : gameElements)
+            {
+                if (gameElement == elementEventArgs.getGameElement()) {
+                    gameElement.synchronizeWithPhysics(elementEventArgs);
+                }
+            }
+        }
     }
 
     /**
