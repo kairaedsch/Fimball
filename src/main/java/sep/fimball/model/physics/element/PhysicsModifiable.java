@@ -5,7 +5,7 @@ package sep.fimball.model.physics.element;
  *
  * @param <ModifiT> Der Typ des Modifis, welches an das PhysicsElement angewandt werden kann.
  */
-public interface PhysicsModifiable<ModifiT extends Modifi>
+public interface PhysicsModifiable<ModifiT extends Modify>
 {
     /**
      * Wendet das Modifi an das PhysicsElement an.

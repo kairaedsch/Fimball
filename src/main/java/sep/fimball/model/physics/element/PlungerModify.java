@@ -3,7 +3,7 @@ package sep.fimball.model.physics.element;
 /**
  * Modifi zum Bedienen des Plungers.
  */
-public class PlungerModifi extends Modifi
+public class PlungerModify extends Modify
 {
     /**
      * Die vom Plunger anzuwendende Kraft.
@@ -15,7 +15,7 @@ public class PlungerModifi extends Modifi
      *
      * @param force Die vom Plunger anzuwendende Kraft.
      */
-    public PlungerModifi(double force)
+    public PlungerModify(double force)
     {
         this.force = force;
     }

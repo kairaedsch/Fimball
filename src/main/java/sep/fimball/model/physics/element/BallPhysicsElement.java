@@ -12,7 +12,7 @@ import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<Modifi>
+public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<Modify>
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -113,18 +113,18 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     }
 
     @Override
-    public void applyModifi(Modifi modifi)
+    public void applyModifi(Modify modify)
     {
-        if(modifi instanceof BallTiltModifi)
+        if(modify instanceof BallNudgeModify)
         {
-            if(((BallTiltModifi) modifi).isLeft())
+            if(((BallNudgeModify) modify).isLeft())
                 setPosition(getPosition().minus(new Vector2(NUDGE_VELOCITY, 0)));
             else
                 setPosition(getPosition().plus(new Vector2(NUDGE_VELOCITY, 0)));
         }
-        else if(modifi instanceof BallResetModifi)
+        else if(modify instanceof BallResetModify)
         {
-            setPosition(((BallResetModifi) modifi).getNewPosition());
+            setPosition(((BallResetModify) modify).getNewPosition());
             setVelocity(new Vector2());
         }
     }

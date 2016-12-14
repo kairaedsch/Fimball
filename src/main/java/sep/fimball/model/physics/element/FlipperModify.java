@@ -3,7 +3,7 @@ package sep.fimball.model.physics.element;
 /**
  * Modifi zum zurücksetzten eines Balles.
  */
-public class FlipperModifi extends Modifi
+public class FlipperModify extends Modify
 {
     /**
      * True, falls der Flipper nach oben gedreht werden soll.
@@ -11,11 +11,11 @@ public class FlipperModifi extends Modifi
     private boolean up;
 
     /**
-     * Erstellt ein neues FlipperModifi.
+     * Erstellt ein neues FlipperModify.
      *
      * @param up True, falls der Flipper nach oben gedreht werden soll.
      */
-    public FlipperModifi(boolean up)
+    public FlipperModify(boolean up)
     {
         this.up = up;
     }

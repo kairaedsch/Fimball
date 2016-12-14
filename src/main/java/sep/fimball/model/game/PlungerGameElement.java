@@ -5,7 +5,7 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
-import sep.fimball.model.physics.element.PlungerModifi;
+import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import java.util.Optional;
@@ -38,7 +38,7 @@ public class PlungerGameElement extends GameElement
             }
             else
             {
-                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModifi(calcForce()));
+                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModify(calcForce()));
             }
         });
     }

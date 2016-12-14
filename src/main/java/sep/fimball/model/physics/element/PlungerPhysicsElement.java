@@ -7,7 +7,7 @@ import sep.fimball.general.data.Vector2;
  *
  * @param <GameElementT>
  */
-public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModifi>
+public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateable, PhysicsModifiable<PlungerModify>
 {
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.
@@ -29,7 +29,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     }
 
     @Override
-    public void applyModifi(PlungerModifi modifi)
+    public void applyModifi(PlungerModify modifi)
     {
         // TODO
         System.out.println("plunger");

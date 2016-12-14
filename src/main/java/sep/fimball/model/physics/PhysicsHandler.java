@@ -92,7 +92,7 @@ public class PhysicsHandler<GameElementT>
         modifiContainers = new ArrayList<>();
     }
 
-    public <ModifiT extends Modifi> void addModifi(PhysicsModifiable<ModifiT> physicsElement, ModifiT modifi)
+    public <ModifiT extends Modify> void addModifi(PhysicsModifiable<ModifiT> physicsElement, ModifiT modifi)
     {
         synchronized (modifisMonitor)
         {
@@ -190,14 +190,11 @@ public class PhysicsHandler<GameElementT>
                 if (element.hasChanged())
                 {
                     elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
-                    element.setChanged(false);
+                    element.resetChanged();
                 }
             }
-            else
-            {
-                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), ballPhysicsElement.getHeight()));
-            }
         }
+        elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
     }
 
     /**

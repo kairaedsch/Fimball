@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 /**
  * Modifi zum zurücksetzten eines Balles.
  */
-public class BallResetModifi extends Modifi
+public class BallResetModify extends Modify
 {
     /**
      * Die neue Position des Balles.
@@ -13,11 +13,11 @@ public class BallResetModifi extends Modifi
     private Vector2 newPosition;
 
     /**
-     * Erstellt ein neues BallResetModifi.
+     * Erstellt ein neues BallResetModify.
      *
      * @param newPosition Die neue Position des Balles.
      */
-    public BallResetModifi(Vector2 newPosition)
+    public BallResetModify(Vector2 newPosition)
     {
         this.newPosition = newPosition;
     }

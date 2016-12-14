@@ -6,7 +6,7 @@ package sep.fimball.model.physics.element;
  * @param <ModifiT>
  * @param <PhysicsModifiableT>
  */
-public class ModifiContainer<ModifiT extends Modifi, PhysicsModifiableT extends PhysicsModifiable<ModifiT>>
+public class ModifiContainer<ModifiT extends Modify, PhysicsModifiableT extends PhysicsModifiable<ModifiT>>
 {
     /**
      * Das PhysicsElement, an welches das Modifi angewandt werden kann.

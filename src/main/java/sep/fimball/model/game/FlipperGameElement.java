@@ -5,7 +5,7 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
-import sep.fimball.model.physics.element.FlipperModifi;
+import sep.fimball.model.physics.element.FlipperModify;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 public class FlipperGameElement extends GameElement
@@ -27,7 +27,7 @@ public class FlipperGameElement extends GameElement
     public void setPhysicsElement(PhysicsHandler physicsHandler, FlipperPhysicsElement flipperPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(left ? KeyBinding.LEFT_FLIPPER : KeyBinding.RIGHT_FLIPPER, args -> {
-            physicsHandler.addModifi(flipperPhysicsElement, new FlipperModifi(args.getState() != KeyObserverEventArgs.KeyChangedToState.DOWN));
+            physicsHandler.addModifi(flipperPhysicsElement, new FlipperModify(args.getState() != KeyObserverEventArgs.KeyChangedToState.DOWN));
         });
     }
 }

@@ -158,8 +158,8 @@ public class PhysicsElement<GameElementT>
         return changed;
     }
 
-    public void setChanged(boolean to)
+    public void resetChanged()
     {
-        changed = to;
+        changed = false;
     }
 }
