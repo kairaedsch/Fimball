@@ -128,8 +128,10 @@ public class Settings
 
     /**
      * Serialisiert und speichert die Einstellungen in der Settings-Datei.
+     *
+     * @param filePath Der Pfad zur Datei, in der die Einstellungen gespeichert werden sollen.
      */
-    public void saveToDisk()
+    public void saveToDisk(String filePath)
     {
         SettingsJson settingsJson = new SettingsJson();
         settingsJson.language = language.get().toString();
@@ -149,7 +151,7 @@ public class Settings
             counter++;
         }
 
-        JsonFileManager.saveToJson(DataPath.pathToSettings(), settingsJson);
+        JsonFileManager.saveToJson(filePath, settingsJson);
     }
 
     /**

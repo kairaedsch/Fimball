@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -91,7 +92,7 @@ public class GameSettingsViewModel extends DialogViewModel
      */
     private void saveSettings()
     {
-        Settings.getSingletonInstance().saveToDisk();
+        Settings.getSingletonInstance().saveToDisk(DataPath.pathToSettings());
     }
 
     /**
