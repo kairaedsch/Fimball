@@ -24,6 +24,7 @@ import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
+import sep.fimball.model.physics.element.PlungerPhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicGameSession;
@@ -229,12 +230,15 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                     gameElement = new GameElement(element, false);
                     this.gameBall.set(gameElement);
                     break;
-                case PLUNGER:/*
+                case PLUNGER:
+                    PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
+                    gameElement = plungerGameElement;
                     PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(
                             gameElement,
                             gameElement.positionProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics());*/
-                    gameElement = new GameElement(element, false);
+                            gameElement.rotationProperty().get(),
+                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    plungerGameElement.setPhysicsElement(physicsHandler, plungerPhysicsElement);
                     break;
                 case LEFT_FLIPPER:
                 case RIGHT_FLIPPER:
