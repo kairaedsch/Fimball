@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -52,6 +54,8 @@ public class PhysicsHandlerTest
 
     Vector2 ballPosition = new Vector2(0,19);
 
+    Vector2 ballVelocity = new Vector2(0,0);
+
     /**
      * Testet, ob das An- und Ausschalten des Reagierens auf UserInput funktioniert.
      *
@@ -79,7 +83,7 @@ public class PhysicsHandlerTest
         leftFlipperRotated = false;
         test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.LEFT_FLIPPER), false, false,
+                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.RIGHT_FLIPPER), false, false,
                 false, false));
         synchronized (monitor)
         {
@@ -111,6 +115,33 @@ public class PhysicsHandlerTest
         assertThat(ballLost, is(true));
     }
 
+    @Test
+    public void nudgeTest() throws InterruptedException
+    {
+        init();
+        test.startTicking();
+        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
+                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.NUDGE_LEFT), false, false,
+                false, false));
+        synchronized (monitor) {
+            monitor.wait(MAX_TEST_DURATION);
+        }
+        test.stopTicking();
+        assertThat(ballVelocity.getX(), greaterThan(0.0));
+
+        ballVelocity = new Vector2(0,0);
+
+        test.startTicking();
+        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
+                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.NUDGE_RIGHT), false, false,
+                false, false));
+        synchronized (monitor) {
+            monitor.wait(MAX_TEST_DURATION);
+        }
+        test.stopTicking();
+        assertThat(ballVelocity.getX(), lessThan(0.0));
+    }
+
     /**
      * Initialisiert die Test-Werte.
      * TODO comments.
@@ -129,10 +160,10 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock ->
         {
-            synchronized (monitor)
+            ballLost = invocationOnMock.getArgument(0);
+            if(ballLost)
             {
-                ballLost = invocationOnMock.getArgument(0);
-                if (ballLost)
+                synchronized (monitor)
                 {
                     monitor.notify();
                 }
@@ -155,6 +186,19 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock ->
                 ballPosition).when(mockedBall).getPosition();
+
+        doAnswer(invocationOnMock ->
+        {
+            ballVelocity = invocationOnMock.getArgument(0);
+            synchronized (monitor)
+            {
+                monitor.notify();
+            }
+            return null;
+        }).when(mockedBall).setVelocity(any(Vector2.class));
+
+        doAnswer(invocationOnMock ->
+                ballVelocity).when(mockedBall).getVelocity();
 
         FlipperPhysicsElement mockedLeftFlipper = mock(FlipperPhysicsElement.class);
         FlipperPhysicsElement mockedRightFlipper = mock(FlipperPhysicsElement.class);
