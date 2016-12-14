@@ -27,6 +27,8 @@ public class PhysicsElement<GameElementT>
      */
     private double rotation;
 
+    private boolean changed = false;
+
     /**
      * Die Liste der Collider, welche die Kollisionsflächen dieses Elements darstellen.
      */
@@ -89,6 +91,7 @@ public class PhysicsElement<GameElementT>
     public void setPosition(Vector2 position)
     {
         this.position = position;
+        changed = true;
     }
 
     /**
@@ -109,6 +112,7 @@ public class PhysicsElement<GameElementT>
     public void setRotation(double rotation)
     {
         this.rotation = rotation;
+        changed = true;
     }
 
     /**
@@ -134,7 +138,7 @@ public class PhysicsElement<GameElementT>
     /**
      * Prüft alle Kollider auf Kollisionen mit dem Ball und fügt bei Kollision Argumente zu den gegebenen Event-Argument-Listen hinzu.
      *
-     * @param eventArgsList Die Liste, welche alle auftretenden Kollisionen speichert.
+     * @param eventArgsList      Die Liste, welche alle auftretenden Kollisionen speichert.
      * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kolliden kann.
      */
     public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
@@ -146,5 +150,15 @@ public class PhysicsElement<GameElementT>
                 eventArgsList.add(new CollisionEventArgs<>(getGameElement(), collider.getId()));
             }
         }
+    }
+
+    public boolean hasChanged()
+    {
+        return changed;
+    }
+
+    public void setChanged(boolean to)
+    {
+        changed = to;
     }
 }

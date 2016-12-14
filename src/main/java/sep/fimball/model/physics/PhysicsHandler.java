@@ -1,5 +1,7 @@
 package sep.fimball.model.physics;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.input.data.KeyBinding;
@@ -98,6 +100,7 @@ public class PhysicsHandler<GameElementT>
         this.gameSession = gameSession;
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
+        assert ballPhysicsElement != null;
         this.leftFlippers = leftFlippers;
         this.rightFlippers = rightFlippers;
         this.ballLost = false;
@@ -156,6 +159,7 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Simuliert das Stoßen am Automaten.
+     *
      * @param left Gibt an, ob von links gestoßen wurde.
      */
     private void nudge(boolean left)
@@ -164,7 +168,8 @@ public class PhysicsHandler<GameElementT>
         if (left)
         {
             accelerateBallInX(PhysicsConfig.NUDGE_VELOCITY);
-        } else
+        }
+        else
         {
             accelerateBallInX(-PhysicsConfig.NUDGE_VELOCITY);
         }
@@ -172,6 +177,7 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Erhöht die Geschwindigkeit des Balls in x-Richtung.
+     *
      * @param additionalVelocity Die Geschwindigkeit, die auf die x-Geschwindigkeit des Balls gerechnet wird.
      */
     private void accelerateBallInX(int additionalVelocity)
@@ -257,15 +263,18 @@ public class PhysicsHandler<GameElementT>
     {
         for (PhysicsElement<GameElementT> element : physicsElements)
         {
-            if (ballPhysicsElement != null && element != ballPhysicsElement)
+            if (element != ballPhysicsElement)
             {
                 element.checkCollision(collisionEventArgsList, ballPhysicsElement);
+                if (element.hasChanged())
+                {
+                    elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                    element.setChanged(false);
+                }
             }
-
-            if (element != null)
+            else
             {
-                double height = element == ballPhysicsElement ? ballPhysicsElement.getHeight() : 0;
-                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), height));
+                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), ballPhysicsElement.getHeight()));
             }
         }
     }
