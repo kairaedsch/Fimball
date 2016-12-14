@@ -1,12 +1,11 @@
 package sep.fimball.model.physics.element;
 
-public class PlungerModifi extends Modifi<PlungerPhysicsElement>
+public class PlungerModifi extends Modifi
 {
     private double force;
 
-    public PlungerModifi(PlungerPhysicsElement physicsElement, double force)
+    public PlungerModifi(double force)
     {
-        super(physicsElement);
         this.force = force;
     }
 

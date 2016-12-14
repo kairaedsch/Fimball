@@ -33,11 +33,11 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
 
     public void nudge(boolean left)
     {
-        physicsHandler.addModifi(new BallTiltModifi(ballPhysicsElement, left));
+        physicsHandler.addModifi(ballPhysicsElement, new BallTiltModifi(left));
     }
 
     public void reset()
     {
-        physicsHandler.addModifi(new BallResetModifi(ballPhysicsElement, getPlacedElement().positionProperty().get()));
+        physicsHandler.addModifi(ballPhysicsElement, new BallResetModifi(getPlacedElement().positionProperty().get()));
     }
 }

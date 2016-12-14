@@ -1,12 +1,6 @@
 package sep.fimball.model.physics;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.general.data.PhysicsConfig;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.manager.InputManager;
-import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -29,7 +23,7 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
-    private List<Modifi> modifis;
+    private List<ModifiContainer> modifiContainers;
 
     private final Object modifisMonitor = new Object();
 
@@ -93,15 +87,16 @@ public class PhysicsHandler<GameElementT>
         this.ballPhysicsElement = ballPhysicsElement;
         this.ballLost = false;
         this.reactingToInput = true;
+        this.physicTimer = new Timer(false);
 
-        modifis = new ArrayList<>();
+        modifiContainers = new ArrayList<>();
     }
 
-    public void addModifi(Modifi modifi)
+    public <ModifiT extends Modifi> void addModifi(PhysicsModifiable<ModifiT> physicsElement, ModifiT modifi)
     {
         synchronized (modifisMonitor)
         {
-            modifis.add(modifi);
+            modifiContainers.add(new ModifiContainer<>(physicsElement, modifi));
         }
     }
 
@@ -131,16 +126,16 @@ public class PhysicsHandler<GameElementT>
             {
                 double delta = PhysicsConfig.TICK_RATE_SEC;
 
-                List<Modifi> localModifis;
+                List<ModifiContainer> localModifiContainers;
                 synchronized (modifisMonitor)
                 {
-                    localModifis = modifis;
-                    modifis = new ArrayList<>();
+                    localModifiContainers = modifiContainers;
+                    modifiContainers = new ArrayList<>();
                 }
 
-                for (Modifi modifi : localModifis)
+                for (ModifiContainer modifiContainer : localModifiContainers)
                 {
-                    modifi.getPhysicsElement().applyModifi(modifi);
+                    modifiContainer.apply();
                 }
 
                 // Check all PhysicsElements for collisions with the ball
@@ -212,11 +207,8 @@ public class PhysicsHandler<GameElementT>
      */
     public void stopTicking()
     {
-        if (physicTimer != null)
-        {
-            physicTimer.cancel();
-            physicTimer.purge();
-        }
+        physicTimer.cancel();
+        physicTimer.purge();
     }
 
     /**

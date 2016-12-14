@@ -38,7 +38,7 @@ public class PlungerGameElement extends GameElement
             }
             else
             {
-                physicsHandler.addModifi(new PlungerModifi(plungerPhysicsElement, calcForce()));
+                physicsHandler.addModifi(plungerPhysicsElement, new PlungerModifi(calcForce()));
             }
         });
     }

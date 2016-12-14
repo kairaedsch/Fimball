@@ -1,12 +1,11 @@
 package sep.fimball.model.physics.element;
 
-public class FlipperModifi extends Modifi<FlipperPhysicsElement>
+public class FlipperModifi extends Modifi
 {
     private boolean up;
 
-    public FlipperModifi(FlipperPhysicsElement flipperPhysicsElement, boolean up)
+    public FlipperModifi(boolean up)
     {
-        super(flipperPhysicsElement);
         this.up = up;
     }
 

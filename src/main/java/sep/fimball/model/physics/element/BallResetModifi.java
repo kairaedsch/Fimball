@@ -2,13 +2,12 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 
-public class BallResetModifi extends Modifi<BallPhysicsElement>
+public class BallResetModifi extends Modifi
 {
     private Vector2 newPosition;
 
-    public BallResetModifi(BallPhysicsElement ballPhysicsElement, Vector2 newPosition)
+    public BallResetModifi(Vector2 newPosition)
     {
-        super(ballPhysicsElement);
         this.newPosition = newPosition;
     }
 

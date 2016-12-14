@@ -1,16 +1,8 @@
 package sep.fimball.model.physics.element;
 
-public class Modifi<PhysicsModifiableT extends PhysicsModifiable>
+/**
+ * Created by kaira on 14.12.2016.
+ */
+public class Modifi
 {
-    private PhysicsModifiableT physicsElement;
-
-    public Modifi(PhysicsModifiableT physicsElement)
-    {
-        this.physicsElement = physicsElement;
-    }
-
-    public PhysicsModifiableT getPhysicsElement()
-    {
-        return physicsElement;
-    }
 }

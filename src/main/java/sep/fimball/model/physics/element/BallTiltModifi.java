@@ -1,12 +1,11 @@
 package sep.fimball.model.physics.element;
 
-public class BallTiltModifi extends Modifi<BallPhysicsElement>
+public class BallTiltModifi extends Modifi
 {
     private boolean left;
 
-    public BallTiltModifi(BallPhysicsElement ballPhysicsElement, boolean left)
+    public BallTiltModifi(boolean left)
     {
-        super(ballPhysicsElement);
         this.left = left;
     }
 
