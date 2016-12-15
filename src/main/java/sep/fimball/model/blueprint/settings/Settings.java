@@ -77,7 +77,7 @@ public class Settings
         keyBindings.put(KeyCode.ALT, KeyBinding.EDITOR_MOVE);
         keyBindings.put(KeyCode.SPACE, KeyBinding.PLUNGER);
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
-        language = new SimpleObjectProperty<>(Language.GERMAN);
+        language = new SimpleObjectProperty<>(Language.ENGLISH);
         fullscreen = new SimpleBooleanProperty(false);
         masterVolume = new SimpleIntegerProperty(100);
         musicVolume = new SimpleIntegerProperty(100);
@@ -114,7 +114,6 @@ public class Settings
             }
             else
             {
-                System.err.println("Settings not loaded");
                 singletonInstance = new Settings();
             }
         }
@@ -186,12 +185,12 @@ public class Settings
     }
 
     /**
-     * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur
-     * Liste der Tastenbelegungen hinzu, falls die durch {@code keyCode}
-     * beschriebene Taste nicht schon durch ein anderes KeyBinding belegt ist.
+     * Fügt das gegebene KeyBinding zusammen mit dem zugehörigen KeyCode zur Liste der Tastenbelegungen hinzu, falls die
+     * durch {@code keyCode} beschriebene Taste nicht schon durch ein anderes KeyBinding belegt ist und löscht
+     * gegebenenfalls die vorhandene Belegung des übergebenen KeyBindings.
      *
-     * @param keyBinding Das KeyBinding, das hinzugefügt werden soll.
-     * @param keyCode Der KeyCode, der hinzugefügt werden soll.
+     * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
+     * @param keyCode Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
@@ -203,16 +202,20 @@ public class Settings
     }
 
     /**
-     * Gibt für das gegebene KeyBinding den entsprechenden KeyCode zurück oder {@code null}, falls kein KeyCode existiert.
+     * Gibt für das gegebene KeyBinding den entsprechenden KeyCode zurück oder {@code null}, falls kein KeyCode
+     * existiert.
      *
      * @param keyBinding Das gesuchte KeyBinding.
      * @return Der KeyCode, der das übergebene Spielereignis auslöst.
      */
-    public KeyCode getKeyCode(KeyBinding keyBinding) {
-        if(keyBindingsMap.containsValue(keyBinding))
+    public KeyCode getKeyCode(KeyBinding keyBinding)
+    {
+        if (keyBindingsMap.containsValue(keyBinding))
         {
-            for(KeyCode keyCode : keyBindingsMap.keySet()) {
-                if(keyBindingsMap.get(keyCode).equals(keyBinding)) {
+            for (KeyCode keyCode : keyBindingsMap.keySet())
+            {
+                if (keyBindingsMap.get(keyCode).equals(keyBinding))
+                {
                     return keyCode;
                 }
             }

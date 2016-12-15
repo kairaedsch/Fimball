@@ -19,9 +19,11 @@ class SettingsFactory
      * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
      * @return Das aus dem SettingsJson-Objekt geladene Settings-Objekt.
      */
-    static Settings createSettingsFromJson(SettingsJson settingsJson) {
+    static Settings createSettingsFromJson(SettingsJson settingsJson)
+    {
         HashMap<KeyCode, KeyBinding> keyBindings = new HashMap<>();
-        for(SettingsJson.KeyLayout layout : settingsJson.keyLayouts) {
+        for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
+        {
             keyBindings.put(KeyCode.valueOf(layout.keyCode), layout.keyBinding);
         }
         return new Settings(keyBindings, Language.valueOf(settingsJson.language), settingsJson.fullscreen, settingsJson.masterVolume, settingsJson.musicVolume, settingsJson.sfxVolume);
@@ -33,10 +35,12 @@ class SettingsFactory
      * @param settings Die zu übertragenden Einstellungen.
      * @return Ein SettingsJson-Objekt, das die übergebenen Einstellungen repräsentiert.
      */
-    static SettingsJson createJsonFromSettings(Settings settings) {
+    static SettingsJson createJsonFromSettings(Settings settings)
+    {
         SettingsJson settingsJson = new SettingsJson();
         List<SettingsJson.KeyLayout> keyLayouts = new ArrayList<>();
-        for(KeyCode keyCode : settings.keyBindingsMapProperty().keySet()) {
+        for (KeyCode keyCode : settings.keyBindingsMapProperty().keySet())
+        {
             SettingsJson.KeyLayout keyLayout = new SettingsJson.KeyLayout();
             keyLayout.keyCode = keyCode.name();
             keyLayout.keyBinding = settings.getKeyBinding(keyCode);
