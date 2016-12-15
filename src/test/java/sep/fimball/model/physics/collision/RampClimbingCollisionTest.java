@@ -9,7 +9,6 @@ import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static org.hamcrest.CoreMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

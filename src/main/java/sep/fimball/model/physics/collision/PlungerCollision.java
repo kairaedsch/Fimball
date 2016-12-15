@@ -13,8 +13,7 @@ public class PlungerCollision extends NormalCollision
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        super.applyCollision(info);
-
+        callNormalCollision(info);
         PlungerPhysicsElement plunger = (PlungerPhysicsElement) info.getOtherPhysicsElement();
         double plungerStrength = plunger.getStrength();
 
@@ -25,5 +24,15 @@ public class PlungerCollision extends NormalCollision
             info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
             plunger.resetStrength();
         }
+    }
+
+    /**
+     * Der Aufruf der super Methode wurde in diese Methode verlagert um bessere Testbarkeit zu erreichen.
+     *
+     * @param info Information über die aufgetretene Kollision.
+     */
+    protected void callNormalCollision(CollisionInfo info)
+    {
+        super.applyCollision(info);
     }
 }
