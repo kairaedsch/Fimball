@@ -22,17 +22,24 @@ public class NormalCollision implements CollisionType
         {
             Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm);
             Debug.addDrawVector(info.getBall().getPosition(), newVel, Color.BLACK);
-            //Setze die berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
+            //Setze die Berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
             info.getBall().setVelocity(newVel);
         }
     }
 
+    /**
+     * Berechnet die neue Geschwindigkeit des Balls duch Spiegelung an der übergebenen Normale.
+     *
+     * @param ballVelocity Die aktuelle Geschwindigkeit des Balls.
+     * @param normal Die Normale an der die Geschwindigkeit des Balls gespiegelt werden soll.
+     *
+     * @return Die neue Geschwindigkeit des Balls.
+     */
     private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
     {
         //Bounce ist ein Wert der angibt wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 1 bedeutet das der Ball nach der Kollision langsamer wird.
         final double bounce = 0.4;
         //Spiegle die Ball Geschwindigkeit am normierten shortestIntersect welcher eine Normale auf die Kollisionskante ist.
-
         double bounceVal = 1.0 + bounce;
         double velocityDotNormal = ballVelocity.dot(normal);
         double bounceTimesVelocityDotNormal = bounceVal * velocityDotNormal;
