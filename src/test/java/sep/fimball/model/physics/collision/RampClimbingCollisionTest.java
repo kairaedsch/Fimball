@@ -18,6 +18,9 @@ import static org.junit.Assert.assertThat;
  */
 public class RampClimbingCollisionTest
 {
+    /**
+     * Testet ob der Ball korrekt an Höhe gewinnt wenn er eine Rampe nach oben rollt.
+     */
     @Test
     public void testRampClimbingCollision()
     {

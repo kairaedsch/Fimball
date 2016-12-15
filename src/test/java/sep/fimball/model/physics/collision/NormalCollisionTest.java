@@ -14,6 +14,9 @@ import static org.junit.Assert.assertThat;
  */
 public class NormalCollisionTest
 {
+    /**
+     * Testet ob der Ball korrekt nach links unten abprallt wenn er von oben rechts schräg an eine virtuelle Wand geprallt ist.
+     */
     @Test
     public void testNormalCollision()
     {
@@ -33,6 +36,6 @@ public class NormalCollisionTest
         NormalCollision normalCollision = new NormalCollision();
         normalCollision.applyCollision(collisionInfo);
         assertThat("Neue Position ist: (-1.0, 0.0)", ballPhysicsElement.getPosition(), is(new Vector2(-1.0, 0.0)));
-        assertThat("Neue Geschwindigkeit ist: (-0.7, 1.0)", ballPhysicsElement.getVelocity(), new VectorMatcher(new Vector2(-0.4, 1.0)));
+        assertThat("Neue Geschwindigkeit ist: (-0.4, 1.0)", ballPhysicsElement.getVelocity(), new VectorMatcher(new Vector2(-0.4, 1.0)));
     }
 }

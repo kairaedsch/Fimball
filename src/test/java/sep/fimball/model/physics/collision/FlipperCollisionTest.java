@@ -16,6 +16,9 @@ import static org.mockito.Mockito.*;
  */
 public class FlipperCollisionTest
 {
+    /**
+     * Testet ob der Ball korrekt von einem Flipper der sich nach oben bewegt nach oben beschleunigt wird.
+     */
     @Test
     public void testFlipperCollision()
     {

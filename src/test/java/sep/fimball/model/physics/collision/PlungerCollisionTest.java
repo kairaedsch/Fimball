@@ -14,6 +14,9 @@ import static org.junit.Assert.assertThat;
  */
 public class PlungerCollisionTest
 {
+    /**
+     * Testet ob der Ball korrekt vom Plunger nach oben bzw. rechts beschleunigt wird.
+     */
     @Test
     public void testPlungerCollision()
     {
@@ -28,12 +31,14 @@ public class PlungerCollisionTest
         when(plungerPhysicsElement.getStrength()).thenReturn(8.0);
         when(plungerPhysicsElement.getRotation()).thenReturn(0.0);
 
+        //Überprüfe die Beschleunigung bei einem normalen Plunger ohne Rotation.
         ballPhysicsElement.setVelocity(new Vector2(0, 0));
         PlungerCollision plungerCollision = spy(new PlungerCollision());
         doNothing().when(plungerCollision).callNormalCollision(notNull());
         plungerCollision.applyCollision(collisionInfo);
         assertThat(ballPhysicsElement.getVelocity(), new VectorMatcher(0, -8));
 
+        //Überprüfe die Beschleunigung bei einem um 90 Grad nach rechts gedrehten Plunger.
         when(plungerPhysicsElement.getRotation()).thenReturn(90.0);
         ballPhysicsElement.setVelocity(new Vector2(0, 0));
         plungerCollision.applyCollision(collisionInfo);

@@ -16,6 +16,9 @@ public class RampCollisionTest
 {
     private final double EPSILON = 1e-15;
 
+    /**
+     * Testet ob sich der Ball korrekt auf und unter Rampen verhält.
+     */
     @Test
     public void testRampCollision()
     {

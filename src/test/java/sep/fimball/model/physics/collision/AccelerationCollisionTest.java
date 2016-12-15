@@ -16,6 +16,9 @@ public class AccelerationCollisionTest
 {
     private final double EPSILON = 1e-15;
 
+    /**
+     * Testet ob der Ball korrekt von der AccelerationCollision beschleunigt wird.
+     */
     @Test
     public void testAccelerationCollision()
     {

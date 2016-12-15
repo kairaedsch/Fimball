@@ -13,6 +13,9 @@ import static org.junit.Assert.assertThat;
  */
 public class BounceCollisionTest
 {
+    /**
+     * Testet ob der Ball korrekt nach rechts mit zusätzlicher Geschwindigkeit abprallt wenn er links gegen eine virtuelle Wand geprallt ist.
+     */
     @Test
     public void testBounceCollision()
     {
