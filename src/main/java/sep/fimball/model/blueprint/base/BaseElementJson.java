@@ -11,7 +11,7 @@ public class BaseElementJson
     /**
      * Speichert den Typ des BaseElements.
      */
-    BaseElementType elementType;
+    public BaseElementType elementType;
 
     /**
      * Die Kategorie, in die das BaseElement fällt.
