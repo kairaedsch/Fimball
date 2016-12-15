@@ -1,11 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.Optional;
@@ -45,12 +40,15 @@ public class SelectedElementSubViewModel
      */
     private BooleanProperty isSomethingSelected;
 
+    private ListProperty<PlacedElement> selection;
+
+    private PinballMachineEditor pinballMachineEditor;
+
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
      *
-     * @param pinballMachine Der Flipperautomat, der das ausgewählte Element enthält.
      */
-    public SelectedElementSubViewModel(ReadOnlyListProperty<PlacedElement> selection)
+    public SelectedElementSubViewModel(ReadOnlyListProperty<PlacedElement> selection, PinballMachineEditor pinballMachineEditor)
     {
         isSomethingSelected = new SimpleBooleanProperty();
         name = new SimpleStringProperty();
@@ -58,10 +56,14 @@ public class SelectedElementSubViewModel
         points = new SimpleIntegerProperty();
         multiplier = new SimpleDoubleProperty();
         placedElement = Optional.empty();
+        this.pinballMachineEditor = pinballMachineEditor;
 
         setPlacedElement(Optional.empty());
 
-        selection.addListener((observableValue, placedElements, t1) ->
+        this.selection = new SimpleListProperty<>();
+        this.selection.bind(selection);
+
+        this.selection.addListener((observableValue, placedElements, t1) ->
         {
             if (selection.size() == 1)
             {
@@ -153,5 +155,14 @@ public class SelectedElementSubViewModel
     public ReadOnlyBooleanProperty isSomethingSelectedProperty()
     {
         return isSomethingSelected;
+    }
+
+
+    public void remove() {
+        pinballMachineEditor.removeSelection();
+    }
+
+    public void rotate() {
+        pinballMachineEditor.rotateSelection();
     }
 }

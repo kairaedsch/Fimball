@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import org.jcp.xml.dsig.internal.MacOutputStream;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
@@ -68,11 +67,19 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
         availableElementSubViewModel.selected();
     }
 
+    /**
+     * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler die Maustaste losgelassen hat.
+     * @param mouseEvent Das MouseEvent, in dem der Spieler die Maustaste losgelassen hat.
+     */
     public void mouseReleased(MouseEvent mouseEvent)
     {
         availableElementSubViewModel.mouseReleased(mouseEvent);
     }
 
+    /**
+     * Reagiert auf eine Drag-Bewegung.
+     * @param mouseEvent Das MouseEvent der Drag-Bewegung.
+     */
     public void dragDetected(MouseEvent mouseEvent) {
         previewName.startFullDrag();
         mouseEvent.consume();

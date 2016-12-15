@@ -214,7 +214,7 @@ public class SceneManagerView
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
             // TODO - cancer
             if (viewType == WindowType.EDITOR_WINDOW)
-                ((PinballMachineEditorView)((Object)view)).setStage(stage);
+                ((PinballMachineEditorView)((Object)view)).addEventFilterToStage(stage);
             view.setViewModel(viewModel);
         }
         catch (ClassCastException e)

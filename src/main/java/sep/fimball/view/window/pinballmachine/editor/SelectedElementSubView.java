@@ -75,20 +75,20 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählte Element drehen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer die ausgewählten Elemente drehen möchte.
      */
     @FXML
     private void rotateClicked()
     {
-
+        selectedElementSubViewModel.rotate();
     }
 
     /**
-     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer das ausgewählt Element löschen möchte.
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer die ausgewählten Elemente löschen möchte.
      */
     @FXML
     private void removeClicked()
     {
-
+        selectedElementSubViewModel.remove();
     }
 }

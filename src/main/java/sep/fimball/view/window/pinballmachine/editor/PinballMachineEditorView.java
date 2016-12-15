@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
@@ -69,9 +68,15 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private VBox availableElementsObstacles;
 
+    /**
+     * Die obere Pane der Drag-Vorschau.
+     */
     @FXML
     private Pane previewTop;
 
+    /**
+     * Die untere Pane der Drag-Vorschau.
+     */
     @FXML
     private Pane previewBot;
 
@@ -114,6 +119,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewBot));
     }
 
+    /**
+     * Bindet die gegebene Pane an das gegeben Image.
+     * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
+     * @param pane Die Pane, die sich an das Image binden soll.
+     */
     private void bindPaneToImage(Optional<String> imagePath, Pane pane)
     {
         if (imagePath.isPresent())
@@ -132,12 +142,20 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         }
     }
 
-    public void setStage(Stage stage)
+    /**
+     * Fügt EventFilter zur Erkennung von Maus-Bewegungen zur {@code stage} hinzu.
+     * @param stage Die Stage.
+     */
+    public void addEventFilterToStage(Stage stage)
     {
         stage.addEventFilter(MouseEvent.MOUSE_MOVED, this::updatePreviewPosition);
         stage.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::updatePreviewPosition);
     }
 
+    /**
+     * Aktualisiert die Position der Drag-Vorschau.
+     * @param event Das Event, das die Position des Vorschaubildes bestimmt.
+     */
     private void updatePreviewPosition(MouseEvent event)
     {
         // TODO - mega cancer
@@ -218,6 +236,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         mouseDown = mouseEvent;
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer eine Drag-Bewegung mit der Maus beendet hat.
+     *
+     * @param event Das Event, das die "Drag"-Bewegung beendet hat.
+     */
     public void draggedOver(MouseDragEvent event)
     {
         pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), event.getX(), event.getY(), mousePosToCanvasPos(new Vector2(event.getX(), event.getY())), event.getButton());
@@ -234,32 +257,65 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         mouseDown = mouseEvent;
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus in den Pinball-Canvas gefahren ist.
+     *
+     * @param mouseEvent Das Event, in dem der Nutzer mit der Maus in den Pinball-Canvas gefahren ist.
+     */
     public void mouseEnteredCanvas(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus den Pinball-Canvas verlassen hat.
+     *
+     * @param mouseEvent Das Event, in dem der Nutzer mit der Maus aus dem Pinball-Canvas gefahren ist.
+     */
     public void mouseExitedCanvas(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus in einer Drag-Bewegung in den
+     * Pinball-Canvas
+     * gefahren ist.
+     *
+     * @param event Das Event, in dem der Nutzer mit der Maus in einer Drag-Bewegung in den Pinball-Canvas gefahren ist.
+     */
     public void mouseDragEnteredCanvas(MouseDragEvent event)
     {
         mouseDown = event;
         pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus in einer Drag-Bewegung den
+     * Pinball-Canvas verlassen hat.
+     *
+     * @param event Das Event, in dem der Nutzer mit der Maus in einer Drag-Bewegung aus dem Pinball-Canvas gefahren ist.
+     */
     public void mouseDragExitedCanvas(MouseDragEvent event)
     {
         pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer die Maustaste losgelassen hat.
+     *
+     * @param mouseEvent Das Event, in dem der Nutzer die Maustaste losgelassen hat.
+     */
     public void mouseReleased(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);
     }
 
+    /**
+     * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.
+     * @param mousePos Die Position der Maus.
+     * @return Die berechnete Position auf dem Canvas.
+     */
     private Vector2 mousePosToCanvasPos(Vector2 mousePos)
     {
         Vector2 posToMiddle = new Vector2(mousePos.getX(), mousePos.getY()).minus(new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).scale(0.5));
