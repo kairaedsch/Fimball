@@ -195,8 +195,9 @@ public class Settings
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
-        if (!keyBindingsMap.containsKey(keyCode))
+        if (keyBindingsMap.get(keyCode) == null)
         {
+            keyBindingsMap.remove(getKeyCode(keyBinding));
             keyBindingsMap.put(keyCode, keyBinding);
         }
     }
