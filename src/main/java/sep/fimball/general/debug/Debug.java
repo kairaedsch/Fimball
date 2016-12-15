@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Debug
 {
-    public static final boolean ENABLED = true;
+    public static final boolean ENABLED = false;
 
     private static List<DrawEntry> drawEntries = new ArrayList<>();
     private static final long LIFE_TIME_MS = 1000;

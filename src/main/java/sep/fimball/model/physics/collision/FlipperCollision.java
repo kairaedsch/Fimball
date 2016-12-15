@@ -1,8 +1,6 @@
 package sep.fimball.model.physics.collision;
 
-import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 /**
@@ -13,8 +11,7 @@ public class FlipperCollision extends NormalCollision
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        super.applyCollision(info);
-
+        callNormalCollision(info);
         FlipperPhysicsElement flipper = (FlipperPhysicsElement) info.getOtherPhysicsElement();
 
         Vector2 flipperAxis = new Vector2(1, 0).rotate(Math.toRadians(flipper.getRotation())).normalized();
@@ -27,14 +24,22 @@ public class FlipperCollision extends NormalCollision
         double distance = projectedBallPosition - projectedPivotPosition;
 
         Vector2 collisionPoint = flipperPivot.plus(flipperAxis.scale(distance));
-        // Probably doesn't work >=90°, but is fine for flippers
-        if ((ballPos.getY() > collisionPoint.getY() && flipper.rotatingUp()) || ballPos.getY() < collisionPoint.getY() && flipper.rotatingDown())
+
+        if (((ballPos.getY() > collisionPoint.getY()) && flipper.rotatingUp()) || ((ballPos.getY() < collisionPoint.getY()) && flipper.rotatingDown()))
         {
             double angle = flipperAxis.dot(info.getShortestIntersect().normalized());
             Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.1).scale(distance).scale(1 - angle);
-            System.out.println("Distance: " + distance);
-            Debug.addDrawVector(ballPos, addForce.scale(0.01).scale(1 - angle), Color.YELLOWGREEN);
             info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
         }
+    }
+
+    /**
+     * Der Aufruf der super Methode wurde in diese Methode verlagert um bessere Testbarkeit zu erreichen.
+     *
+     * @param info Information über die aufgetretene Kollision.
+     */
+    protected void callNormalCollision(CollisionInfo info)
+    {
+        super.applyCollision(info);
     }
 }
