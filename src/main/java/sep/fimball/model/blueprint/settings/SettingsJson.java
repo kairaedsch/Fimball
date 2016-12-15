@@ -43,14 +43,14 @@ public class SettingsJson
     public static class KeyLayout
     {
         /**
-         * Speichert den Namen der Funktion, die das Drücken der entsprechenden Taste auslösen soll.
-         */
-        public KeyBinding keyBinding;
-
-        /**
          * Speichert den KeyCode der Taste, die an eine Funktion gebunden ist.
          */
         public String keyCode;
+
+        /**
+         * Speichert den Namen der Funktion, die das Drücken der entsprechenden Taste auslösen soll.
+         */
+        public KeyBinding keyBinding;
     }
 
 }

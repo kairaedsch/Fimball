@@ -1,6 +1,14 @@
 package sep.fimball.model.blueprint.settings;
 
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.MapProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyMapProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.DataPath;
@@ -8,8 +16,9 @@ import sep.fimball.general.data.Language;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 import sep.fimball.model.input.data.KeyBinding;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -50,23 +59,42 @@ public class Settings
     /**
      * Speichert, welche Taste welches Spielereignis auslöst.
      */
-    private MapProperty<KeyBinding, KeyCode> keyBindingsMap;
+    private MapProperty<KeyCode, KeyBinding> keyBindingsMap;
 
     /**
-     * Erzeugt eine neue Instanz von Settings, deren Eigenschaften aus der  Settings-Datei geladen werden.
-     *
-     * @param pathToSettings Der Pfad zur Datei, aus der die Einstellungen geladen werden sollen.
+     * Erzeugt eine neue, leere Instanz von Settings.
      */
-    Settings(Path pathToSettings)
+    private Settings()
     {
-        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
-        language = new SimpleObjectProperty<>();
+        Map<KeyCode, KeyBinding> keyBindings = new HashMap<>();
+        keyBindings.put(KeyCode.A, KeyBinding.LEFT_FLIPPER);
+        keyBindings.put(KeyCode.R, KeyBinding.EDITOR_ROTATE);
+        keyBindings.put(KeyCode.E, KeyBinding.NUDGE_RIGHT);
+        keyBindings.put(KeyCode.Q, KeyBinding.NUDGE_LEFT);
+        keyBindings.put(KeyCode.ESCAPE, KeyBinding.PAUSE);
+        keyBindings.put(KeyCode.DELETE, KeyBinding.EDITOR_DELETE);
+        keyBindings.put(KeyCode.D, KeyBinding.RIGHT_FLIPPER);
+        keyBindings.put(KeyCode.ALT, KeyBinding.EDITOR_MOVE);
+        keyBindings.put(KeyCode.SPACE, KeyBinding.PLUNGER);
+        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
+        language = new SimpleObjectProperty<>(Language.GERMAN);
         fullscreen = new SimpleBooleanProperty(false);
-        masterVolume = new SimpleIntegerProperty();
-        musicVolume = new SimpleIntegerProperty();
-        sfxVolume = new SimpleIntegerProperty();
+        masterVolume = new SimpleIntegerProperty(100);
+        musicVolume = new SimpleIntegerProperty(100);
+        sfxVolume = new SimpleIntegerProperty(100);
+    }
 
-        loadSettings(pathToSettings);
+    /**
+     * Erzeugt eine neue Instanz von Settings mit den angegebenen Werten.
+     */
+    Settings(Map<KeyCode, KeyBinding> keyBindings, Language language, boolean fullscreen, int masterVolume, int musicVolume, int sfxVolume)
+    {
+        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
+        this.language = new SimpleObjectProperty<>(language);
+        this.fullscreen = new SimpleBooleanProperty(fullscreen);
+        this.masterVolume = new SimpleIntegerProperty(masterVolume);
+        this.musicVolume = new SimpleIntegerProperty(musicVolume);
+        this.sfxVolume = new SimpleIntegerProperty(sfxVolume);
     }
 
     /**
@@ -79,51 +107,18 @@ public class Settings
     {
         if (singletonInstance == null)
         {
-            singletonInstance = new Settings(Paths.get(DataPath.pathToSettings()));
+            Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToSettings()), SettingsJson.class);
+            if (settingsOptional.isPresent())
+            {
+                singletonInstance = SettingsFactory.createSettingsFromJson(settingsOptional.get());
+            }
+            else
+            {
+                System.err.println("Settings not loaded");
+                singletonInstance = new Settings();
+            }
         }
         return singletonInstance;
-    }
-
-    /**
-     * Lädt die Einstellungen aus dem in {@code jsonPath} angegebenen Datei und
-     * setzt diese als die Attribute.
-     *
-     * @param jsonPath Der Pfad, der zur gespeicherten Settings-Datei führt.
-     */
-    private void loadSettings(Path jsonPath)
-    {
-        Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(jsonPath, SettingsJson.class);
-
-        if (settingsOptional.isPresent())
-        {
-            System.out.println("Settings loaded");
-
-            SettingsJson settingsJson = settingsOptional.get();
-            language.setValue(Language.valueOf(settingsJson.language));
-            fullscreen.setValue(settingsJson.fullscreen);
-            masterVolume.set(settingsJson.masterVolume);
-            musicVolume.set(settingsJson.musicVolume);
-            sfxVolume.set(settingsJson.sfxVolume);
-
-            for (KeyBinding keyBinding : KeyBinding.values())
-            {
-                keyBindingsMap.put(keyBinding, null);
-            }
-
-            for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
-            {
-                if (layout.keyCode != null)
-                {
-                    KeyCode keyCode = KeyCode.valueOf(layout.keyCode);
-                    if (layout.keyBinding != null)
-                        keyBindingsMap.put(layout.keyBinding, keyCode);
-                }
-            }
-        }
-        else
-        {
-            System.err.println("Settings not loaded");
-        }
     }
 
     /**
@@ -133,24 +128,7 @@ public class Settings
      */
     public void saveToDisk(String filePath)
     {
-        SettingsJson settingsJson = new SettingsJson();
-        settingsJson.language = language.get().toString();
-        settingsJson.fullscreen = fullscreen.get();
-        settingsJson.masterVolume = masterVolume.get();
-        settingsJson.musicVolume = musicVolume.get();
-        settingsJson.sfxVolume = sfxVolume.get();
-        settingsJson.keyLayouts = new SettingsJson.KeyLayout[keyBindingsMap.size()];
-
-        int counter = 0;
-        for (KeyBinding binding : keyBindingsMap.keySet())
-        {
-            settingsJson.keyLayouts[counter] = new SettingsJson.KeyLayout();
-            settingsJson.keyLayouts[counter].keyBinding = binding;
-            KeyCode keyCode = keyBindingsMap.get(binding);
-            settingsJson.keyLayouts[counter].keyCode = keyCode != null ? keyCode.name() : null;
-            counter++;
-        }
-
+        SettingsJson settingsJson = SettingsFactory.createJsonFromSettings(this);
         JsonFileManager.saveToJson(filePath, settingsJson);
     }
 
@@ -202,7 +180,7 @@ public class Settings
      * @return Die Map, die speichert, welche Taste auf welches durch Tastendruck ausgelöstes Spielergebnis gebunden
      * ist.
      */
-    public ReadOnlyMapProperty<KeyBinding, KeyCode> keyBindingsMapProperty()
+    public ReadOnlyMapProperty<KeyCode, KeyBinding> keyBindingsMapProperty()
     {
         return keyBindingsMap;
     }
@@ -217,9 +195,9 @@ public class Settings
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
-        if (!keyBindingsMap.containsValue(keyCode))
+        if (!keyBindingsMap.containsKey(keyCode))
         {
-            keyBindingsMap.put(keyBinding, keyCode);
+            keyBindingsMap.put(keyCode, keyBinding);
         }
     }
 
@@ -232,14 +210,7 @@ public class Settings
      */
     public KeyBinding getKeyBinding(KeyCode code)
     {
-        for (KeyBinding binding : keyBindingsMap.keySet())
-        {
-            if (keyBindingsMap.get(binding) != null && keyBindingsMap.get(binding).equals(code))
-            {
-                return binding;
-            }
-        }
-        return null;
+        return keyBindingsMap.get(code);
     }
 
     /**
