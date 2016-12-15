@@ -1,35 +1,52 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
-import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 
 public class PinballMachineEditor
 {
+    /**
+     * Die aktuelle Auswahl.
+     */
     private ListProperty<PlacedElement> selection;
 
+    /**
+     * Die genauen Positionen von Elementen.
+     */
     private Map<PlacedElement, Vector2> detailedPositions;
 
+    /**
+     * Der zugehörige Flipper-Automat.
+     */
     private PinballMachine pinballMachine;
 
-    public PinballMachineEditor(PinballMachine pinballMachine)
+    /**
+     * Erstellt einen neuen PinballMachineEditor.
+     * @param pinballMachine Der zugehörige Flipper-Automat.
+     */
+    PinballMachineEditor(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
         selection = new SimpleListProperty<>(FXCollections.observableArrayList());
         detailedPositions = new HashMap<>();
     }
 
-    public void placeSelection()
+    /**
+     * Fügt die Auswahl dem Automaten hinzu und platziert diese.
+     */
+    void placeSelection()
     {
         for (PlacedElement placedElement : selection)
         {
@@ -37,19 +54,33 @@ public class PinballMachineEditor
         }
     }
 
+    /**
+     * Gibt die Position des gegebenen Elements zurück.
+     * @param placedElement Das Element, dessen Position zurückgegeben werden soll.
+     * @return Die Position des gegebenen Elements.
+     */
     private Vector2 getPosition(PlacedElement placedElement)
     {
         if(!detailedPositions.containsKey(placedElement)) detailedPositions.put(placedElement, placedElement.positionProperty().get());
         return detailedPositions.get(placedElement);
     }
 
+    /**
+     * Setzt die Position des Elements.
+     * @param placedElement Das Element, dessen Position gesetzt werden soll.
+     * @param newPos Die neue Position des Elements.
+     */
     private void setPosition(PlacedElement placedElement, Vector2 newPos)
     {
         detailedPositions.put(placedElement, newPos);
         placedElement.setPosition(newPos.round());
     }
 
-    public void moveSelectionBy(Vector2 by)
+    /**
+     * Verschiebt die Elemente in der Auswahl um den gegebenen Vector.
+     * @param by Der Vektor, um den verschoben werden soll.
+     */
+    void moveSelectionBy(Vector2 by)
     {
         for (PlacedElement placedElement : selection)
         {
@@ -57,7 +88,11 @@ public class PinballMachineEditor
         }
     }
 
-    public void moveSelectionTo(Vector2 to)
+    /**
+     * Verschiebt die Elemente in der Auswahl an die gegebene Position.
+     * @param to Die Position, an der die Elemente in der Auswahl verschoben werden sollen.
+     */
+    void moveSelectionTo(Vector2 to)
     {
         if (!selection.isEmpty())
         {
@@ -80,12 +115,18 @@ public class PinballMachineEditor
         }
     }
 
-    public void rotateSelection()
+    /**
+     * Dreht die Elemente in der Auswahl.
+     */
+    void rotateSelection()
     {
         //TODO
     }
 
-    public void removeSelection()
+    /**
+     * Löscht die Elemente in der Auswahl.
+     */
+    void removeSelection()
     {
         for (PlacedElement placedElement : selection)
         {
@@ -93,7 +134,11 @@ public class PinballMachineEditor
         }
     }
 
-    public void addToSelection(PlacedElement placedElement)
+    /**
+     * Fügt ein Element zur Auswahl hinzu.
+     * @param placedElement Das Element, das hinzugefügt werden soll.
+     */
+    void addToSelection(PlacedElement placedElement)
     {
         if(!selection.contains(placedElement))
         {
@@ -102,7 +147,11 @@ public class PinballMachineEditor
         }
     }
 
-    public void addToSelection(ListProperty<PlacedElement> placedElementList)
+    /**
+     * Fügt die Elemente zur Auswahl hinzu.
+     * @param placedElementList Die Elemente, die hinzugefügt werden sollen.
+     */
+    void addToSelection(ListProperty<PlacedElement> placedElementList)
     {
         if (placedElementList != null)
         {
@@ -113,24 +162,40 @@ public class PinballMachineEditor
         }
     }
 
-    public void addToSelection(BaseElement baseElement)
+    /**
+     * Fügt ein zum Platzieren verfügbares Element der Auswahl hinzu.
+     * @param baseElement Das zum Platzieren verfügbares Element, das hinzugefügt werden soll.
+     */
+    void addToSelection(BaseElement baseElement)
     {
         // TODO correct points and multiplier in placedElement
         selection.clear();
         addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 0, 0, 0));
     }
 
-    public void removeFromSelection(PlacedElement placedElement)
+    /**
+     * Entfernt das Element aus der Auswahl.
+     * @param placedElement Das Element, das entfernt werden soll.
+     */
+    void removeFromSelection(PlacedElement placedElement)
     {
         selection.remove(placedElement);
     }
 
-    public void clearSelection()
+    /**
+     * Löscht die Auswahl.
+     */
+    void clearSelection()
     {
         selection.clear();
     }
 
-    public ReadOnlyListProperty<PlacedElement> getElementsAt(Vector2 pos)
+    /**
+     * Gibt die Elemente an der gegebenen Position zurück.
+     * @param pos Die Position.
+     * @return Die Elemente an der gegebenen Position.
+     */
+    ReadOnlyListProperty<PlacedElement> getElementsAt(Vector2 pos)
     {
         ListProperty<PlacedElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         Optional<PlacedElement> element = pinballMachine.getElementAt(pos);
@@ -141,12 +206,20 @@ public class PinballMachineEditor
         return elements;
     }
 
-    public ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
+    /** Gibt die Elemente, die in dem Rechteck liegen, zurück.
+     * @param rect Das Rechteck.
+     * @return Die Elemente, die in dem Rechteck liegen.
+     */
+    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
     {
         return pinballMachine.getElementsAt(rect);
     }
 
-    public ReadOnlyListProperty<PlacedElement> getSelection()
+    /**
+     * Gibt die aktuelle Auswahl zurück.
+     * @return Die aktuelle Auswahl.
+     */
+    ReadOnlyListProperty<PlacedElement> getSelection()
     {
         return selection;
     }

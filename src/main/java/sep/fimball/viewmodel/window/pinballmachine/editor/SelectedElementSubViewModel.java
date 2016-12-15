@@ -40,15 +40,17 @@ public class SelectedElementSubViewModel
      */
     private BooleanProperty isSomethingSelected;
 
-    private ListProperty<PlacedElement> selection;
-
+    /**
+     * Der zugehörige PinballMachineEditor.
+     */
     private PinballMachineEditor pinballMachineEditor;
 
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
      *
+     * @param pinballMachineEditor Der zugehörige PinballMachineEditor
      */
-    public SelectedElementSubViewModel(ReadOnlyListProperty<PlacedElement> selection, PinballMachineEditor pinballMachineEditor)
+    SelectedElementSubViewModel(PinballMachineEditor pinballMachineEditor)
     {
         isSomethingSelected = new SimpleBooleanProperty();
         name = new SimpleStringProperty();
@@ -60,10 +62,9 @@ public class SelectedElementSubViewModel
 
         setPlacedElement(Optional.empty());
 
-        this.selection = new SimpleListProperty<>();
-        this.selection.bind(selection);
+        ListProperty<PlacedElement> selection = new SimpleListProperty<>(pinballMachineEditor.getSelection());
 
-        this.selection.addListener((observableValue, placedElements, t1) ->
+        selection.addListener((observableValue, placedElements, t1) ->
         {
             if (selection.size() == 1)
             {
@@ -79,7 +80,7 @@ public class SelectedElementSubViewModel
      *
      * @param newPlacedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
      */
-    public void setPlacedElement(Optional<PlacedElement> newPlacedElement)
+    void setPlacedElement(Optional<PlacedElement> newPlacedElement)
     {
         if (placedElement.isPresent())
         {
@@ -148,20 +149,15 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Gibt an, ob aktuell ein Element auf dem Spielfeld ausgewählt ist.
-     *
-     * @return {@code true} falls ein Element ausgewählt ist, {@code false} sonst.
+     * Entfernt die ausgewählten Elemente aus dem Flipper-Automaten.
      */
-    public ReadOnlyBooleanProperty isSomethingSelectedProperty()
-    {
-        return isSomethingSelected;
-    }
-
-
     public void remove() {
         pinballMachineEditor.removeSelection();
     }
 
+    /**
+     * Entfernt die ausgewählten Flipper-Automaten.
+     */
     public void rotate() {
         pinballMachineEditor.rotateSelection();
     }

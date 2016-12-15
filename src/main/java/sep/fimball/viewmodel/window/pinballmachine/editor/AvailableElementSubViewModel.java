@@ -37,6 +37,9 @@ public class AvailableElementSubViewModel
      */
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
+    /**
+     * Die Kategorie des Elements.
+     */
     private ObjectProperty<BaseElementCategory> elementCategory;
 
     /**
@@ -45,7 +48,7 @@ public class AvailableElementSubViewModel
      * @param pinballMachineEditorViewModel Das zugehörige PinballMachineEditorViewModel.
      * @param baseElement                   Das zugehörige BaseElement, dessen Informationen dargestellt werden sollen.
      */
-    public AvailableElementSubViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel, BaseElement baseElement)
+    AvailableElementSubViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel, BaseElement baseElement)
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
         this.baseElement = baseElement;
@@ -85,7 +88,11 @@ public class AvailableElementSubViewModel
         return imagePathBot;
     }
 
-    public ReadOnlyObjectProperty<BaseElementCategory> getElementCategory()
+    /**
+     * Gibt die Kategorie des Elements zurück.
+     * @return Die Kategorie des Elements.
+     */
+    ReadOnlyObjectProperty<BaseElementCategory> getElementCategory()
     {
         return elementCategory;
     }

@@ -17,7 +17,6 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.base.BaseElementManager;
-import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -42,12 +41,24 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private PinballMachine pinballMachine;
 
+    /**
+     * Der zugehörige PinballMachineEditor.
+     */
     private PinballMachineEditor pinballMachineEditor;
 
+    /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
+     */
     private ListProperty<AvailableElementSubViewModel> availableBasicElements;
 
+    /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse.
+     */
     private ListProperty<AvailableElementSubViewModel> availableObstacleElements;
 
+    /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente.
+     */
     private ListProperty<AvailableElementSubViewModel> availableAdvancedElements;
 
     /**
@@ -95,18 +106,30 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
+    /**
+     * Die zugehörige GameSession.
+     */
     private GameSession gameSession;
 
     private boolean moveModifier = false;
 
+    /**
+     * Gibt an, ob sich die Maus auf dem Canvas befindet.
+     */
     private boolean mouseOnCanvas = false;
 
+    /**
+     * Das Auswahl-Rechteck.
+     */
     private ObjectProperty<Optional<RectangleDouble>> selectionRect;
 
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
     private ObjectProperty<Optional<String>> botBackgroundPath;
 
+    /**
+     * Gibt an, ob ein zum Platzieren verfügbaren Element ausgewählt ist.
+     */
     private BooleanProperty availableElementSelected;
 
     /**
@@ -133,7 +156,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2());
         cameraZoom = new SimpleDoubleProperty(0.75);
-        selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachineEditor.getSelection(), pinballMachineEditor);
+        selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachineEditor);
 
         selectionRect = new SimpleObjectProperty<>(Optional.empty());
 
@@ -154,16 +177,28 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
     }
 
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente zurück.
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
+     */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
     {
         return availableBasicElements;
     }
 
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse zurück.
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse.
+     */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableObstacleElementsProperty()
     {
         return availableObstacleElements;
     }
 
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente zurück.
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
+     */
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableAdvancedElementsProperty()
     {
         return availableAdvancedElements;
@@ -221,8 +256,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Verarbeitet eine Drag-Bewegung.
      *
+     * @param startX Die x-Position, an der die Drag-Bewegung angefangen hat.
+     * @param startY Die y-Position, an der die Drag-Bewegung angefangen hat.
      * @param endX Die x-Position, an der sich die Drag-Bewegung befindet.
      * @param endY Die y-Position, an der sich die Drag-Bewegung befindet.
+     * @param gridPos TODO
+     * @param button Die gedrückte Maustaste
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
@@ -265,6 +304,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Behandelt das Drücken der Maustaste auf dem Canvas.
+     * @param mouseEvent Das Event, in dem die Maustaste gedrückt wurde.
+     * @param gridPos Die Position im Grid, an der die Maustaste gedrückt wurde.
+     */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
@@ -310,6 +354,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
+    /** Behandelt das Loslassend der Maustaste.
+     * @param mouseEvent Das Event, in dem die Maustaste losgelassen wurde.
+     */
     public void mouseReleased(MouseEvent mouseEvent)
     {
         if (mouseOnCanvas)
@@ -325,8 +372,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 {
                     pinballMachineEditor.clearSelection();
                 }
-                pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get()));
-                selectionRect.setValue(Optional.empty());
+                if(selectionRect.get().isPresent())
+                {
+                    pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get()));
+                    selectionRect.setValue(Optional.empty());
+                }
             }
         }
         else
@@ -337,6 +387,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Reagiert auf das Fahren der Maus in den Canvas.
+     * @param gridPos Die Position, an der die Maus in den Canvas gefahren ist.
+     */
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
         System.out.println("entered" + mouseMode.get());
@@ -349,6 +403,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Reagiert darauf, dass die Maus den Canvas verlassen hat.
+     * @param gridPos Die Position, an der die Maus den Canvas verlassen hat.
+     */
     public void mouseExitedCanvas(Vector2 gridPos)
     {
         mouseOnCanvas = false;
@@ -359,7 +417,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
-    public void select(BaseElement baseElement)
+    /**
+     * Wählt eines der verfügbaren Basis-Elemente aus.
+     * @param baseElement Das Basis-Element, das ausgewählt werden soll.
+     */
+    void select(BaseElement baseElement)
     {
         setSelectedAvailableElement(baseElement);
         mouseMode.setValue(MouseMode.PLACING);
@@ -462,6 +524,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return botBackgroundPath;
     }
 
+    /**
+     * Gibt zurück, ob ein zur Platzierung verfügbares Element ausgewählt ist.
+     * @return {@code true}, falls ein Element ausgewählt ist, {@code false} sonst.
+     */
     public ReadOnlyBooleanProperty isAvailableElementSelected()
     {
         return availableElementSelected;
