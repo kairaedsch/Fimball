@@ -120,7 +120,9 @@ public class PinballMachineEditor
      */
     void rotateSelection()
     {
-        //TODO
+        for(PlacedElement placedElement : selection) {
+            placedElement.rotateClockwise();
+        }
     }
 
     /**
