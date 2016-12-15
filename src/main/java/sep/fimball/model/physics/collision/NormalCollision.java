@@ -30,7 +30,7 @@ public class NormalCollision implements CollisionType
     private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
     {
         //Bounce ist ein Wert der angibt wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 1 bedeutet das der Ball nach der Kollision langsamer wird.
-        double bounce = 0.7;
+        final double bounce = 0.4;
         //Spiegle die Ball Geschwindigkeit am normierten shortestIntersect welcher eine Normale auf die Kollisionskante ist.
 
         double bounceVal = 1.0 + bounce;
