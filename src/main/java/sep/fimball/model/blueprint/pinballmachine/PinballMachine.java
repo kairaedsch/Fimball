@@ -10,7 +10,6 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.base.BaseElementType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,9 +103,14 @@ public class PinballMachine
         return Optional.empty();
     }
 
+    /**
+     * Gibt die Elemente zurück, die sich innerhalb der Vierecks befinden.
+     *
+     * @param rect Das Viereck.
+     * @return Die Elemente.
+     */
     public ListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
     {
-
         ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement element : elements)
         {
@@ -215,7 +219,7 @@ public class PinballMachine
             elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
         }
 
-        if(!elements.contains(placedElement))
+        if (!elements.contains(placedElement))
         {
             elements.add(placedElement);
         }
