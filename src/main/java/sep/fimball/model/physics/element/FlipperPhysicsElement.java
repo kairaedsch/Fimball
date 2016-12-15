@@ -75,7 +75,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         }
         else
         {
-            if (getRotation() > FLIPPER_MIN_ROTATION)
+            if (getRotation() > -FLIPPER_MAX_ROTATION)
                 angularVelocity = -FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
@@ -96,7 +96,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
         }
         else
         {
-            if (getRotation() < FLIPPER_MAX_ROTATION)
+            if (getRotation() < -FLIPPER_MIN_ROTATION)
                 angularVelocity = FLIPPER_ANGULAR_VELOCITY;
             else
                 angularVelocity = 0.0;
@@ -108,19 +108,39 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     {
         // Rotate flipper
         double newRotation = getRotation() + angularVelocity * deltaTime;
-        if (newRotation >= FLIPPER_MAX_ROTATION)
+        if(isLeft)
         {
-            setRotation(FLIPPER_MAX_ROTATION);
-            angularVelocity = 0.0;
-        }
-        else if (newRotation <= FLIPPER_MIN_ROTATION)
-        {
-            setRotation(FLIPPER_MIN_ROTATION);
-            angularVelocity = 0.0;
+            if (newRotation >= FLIPPER_MAX_ROTATION)
+            {
+                setRotation(FLIPPER_MAX_ROTATION);
+                angularVelocity = 0.0;
+            }
+            else if (newRotation <= FLIPPER_MIN_ROTATION)
+            {
+                setRotation(FLIPPER_MIN_ROTATION);
+                angularVelocity = 0.0;
+            }
+            else
+            {
+                setRotation(newRotation);
+            }
         }
         else
         {
-            setRotation(newRotation);
+            if (newRotation <= -FLIPPER_MAX_ROTATION)
+            {
+                setRotation(-FLIPPER_MAX_ROTATION);
+                angularVelocity = 0.0;
+            }
+            else if (newRotation >= -FLIPPER_MIN_ROTATION)
+            {
+                setRotation(-FLIPPER_MIN_ROTATION);
+                angularVelocity = 0.0;
+            }
+            else
+            {
+                setRotation(newRotation);
+            }
         }
         //Debug.addDrawVector(getPosition(), new Vector2(0, -1).rotate(Math.toRadians(getRotation())).scale(-angularVelocity).normalized(), Color.BLUE);
     }

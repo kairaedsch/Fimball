@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
@@ -35,7 +36,7 @@ public class SpriteSubViewModel
     /**
      * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
      */
-    private BooleanProperty isSelected;
+    private BooleanProperty selected;
 
     /**
      * Das zugehörige GameElement.
@@ -63,6 +64,11 @@ public class SpriteSubViewModel
     private DoubleProperty scale;
 
     /**
+     * Die Sichtbarkeit des Elements.
+     */
+    private DoubleProperty visibility;
+
+    /**
      * Erstellt ein neues SpriteSubViewModel.
      *
      * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
@@ -79,13 +85,15 @@ public class SpriteSubViewModel
         scale = new SimpleDoubleProperty();
         scale.bind(gameElement.heightProperty().divide(PhysicsConfig.MAX_BALL_HEIGHT).multiply(DesignConfig.BALL_SIZE_SCALE_WHEN_LIFTED).add(1));
 
+        visibility = new SimpleDoubleProperty(1);
+
         currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
 
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
         localCoordinates = gameElement.getMediaElement().getLocalCoordinates();
 
-        isSelected = new SimpleBooleanProperty(false);
+        selected = new SimpleBooleanProperty(false);
 
         elementHeight = gameElement.getMediaElement().getElementHeight();
 
@@ -103,7 +111,12 @@ public class SpriteSubViewModel
     {
         this(gameElement);
 
-        isSelected.bind(Bindings.createBooleanBinding(() -> selection.stream().anyMatch(p -> p == gameElement.getPlacedElement()), selection));
+        selected.bind(Bindings.createBooleanBinding(() -> selection.stream().anyMatch(p -> p == gameElement.getPlacedElement()), selection));
+
+        if(gameElement.getElementType() == BaseElementType.RAMP)
+        {
+            visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selection));
+        }
     }
 
     /**
@@ -157,9 +170,9 @@ public class SpriteSubViewModel
      *
      * @return {@code true}, wenn das Sprite ausgewählt ist, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty isSelectedProperty()
+    public ReadOnlyBooleanProperty selectedProperty()
     {
-        return isSelected;
+        return selected;
     }
 
     /**
@@ -200,5 +213,15 @@ public class SpriteSubViewModel
     public DoubleProperty scaleProperty()
     {
         return scale;
+    }
+
+    /**
+     * Gibt die Sichtbarkeits des Elements zurück.
+     *
+     * @return Die Sichtbarkeit des Elements.
+     */
+    public DoubleProperty visibilityProperty()
+    {
+        return visibility;
     }
 }

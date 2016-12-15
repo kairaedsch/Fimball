@@ -81,7 +81,7 @@ public class SpriteSubViewTest
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
         Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
-        Mockito.when(spriteSubViewModelMock.isSelectedProperty()).thenReturn(new SimpleBooleanProperty(true));
+        Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
@@ -172,7 +172,7 @@ public class SpriteSubViewTest
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
         Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
-        Mockito.when(spriteSubViewModelMock.isSelectedProperty()).thenReturn(new SimpleBooleanProperty(true));
+        Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
 
         Mockito.doAnswer((InvocationOnMock invocation) ->

@@ -80,7 +80,7 @@ public class SpriteSubView
         {
             drawImage(graphicsContext, image, position, size);
         }
-        if (viewModel.isSelectedProperty().get() && drawMode == DrawMode.EDITOR)
+        if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
         {
             drawBorder(graphicsContext, imageLayer, position, size);
         }
@@ -138,12 +138,16 @@ public class SpriteSubView
      */
     private void drawImage(GraphicsContext graphicsContext, Image image, Vector2 position, Vector2 size)
     {
+        graphicsContext.save();
+        graphicsContext.setGlobalAlpha(viewModel.visibilityProperty().get());
+
         double x = (position.getX() - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double y = (position.getY() - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double w = size.getX() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit;
         double h = size.getY() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit;
 
         graphicsContext.drawImage(image, x, y, w, h);
+        graphicsContext.restore();
     }
 
     /**
