@@ -1,6 +1,7 @@
 package sep.fimball.model.physics.collision;
 
 import org.junit.Test;
+import sep.fimball.VectorMatcher;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 
@@ -32,6 +33,6 @@ public class NormalCollisionTest
         NormalCollision normalCollision = new NormalCollision();
         normalCollision.applyCollision(collisionInfo);
         assertThat("Neue Position ist: (-1.0, 0.0)", ballPhysicsElement.getPosition(), is(new Vector2(-1.0, 0.0)));
-        assertThat("Neue Geschwindigkeit ist: (-0.7, 1.0)", ballPhysicsElement.getVelocity(), is(new Vector2(-0.7, 1.0)));
+        assertThat("Neue Geschwindigkeit ist: (-0.7, 1.0)", ballPhysicsElement.getVelocity(), new VectorMatcher(new Vector2(-0.4, 1.0)));
     }
 }

@@ -25,7 +25,7 @@ public class PlungerCollisionTest
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(ballPhysicsElement.getVelocity()).thenCallRealMethod();
         doCallRealMethod().when(ballPhysicsElement).setVelocity(notNull());
-        when(plungerPhysicsElement.getStrength()).thenReturn(500.0);
+        when(plungerPhysicsElement.getStrength()).thenReturn(8.0);
         when(plungerPhysicsElement.getRotation()).thenReturn(0.0);
 
         ballPhysicsElement.setVelocity(new Vector2(0, 0));
