@@ -10,6 +10,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.base.BaseElementType;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -213,7 +214,11 @@ public class PinballMachine
         {
             elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
         }
-        elements.add(placedElement);
+
+        if(!elements.contains(placedElement))
+        {
+            elements.add(placedElement);
+        }
     }
 
     /**
@@ -227,10 +232,6 @@ public class PinballMachine
     {
         checkElementsLoaded();
 
-        if (baseElement.getType() == BaseElementType.BALL)
-        {
-            elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
-        }
         PlacedElement placedElement = new PlacedElement(baseElement, position, 0, 0, 0);
         addElement(placedElement);
         return placedElement;
@@ -246,7 +247,9 @@ public class PinballMachine
         checkElementsLoaded();
 
         if (placedElement.getBaseElement().getType() != BaseElementType.BALL)
+        {
             elements.remove(placedElement);
+        }
     }
 
     /**
