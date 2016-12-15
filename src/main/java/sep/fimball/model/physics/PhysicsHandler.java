@@ -59,6 +59,11 @@ public class PhysicsHandler<GameElementT>
     private final Object monitor = new Object();
 
     /**
+     * Gibt an, ob die Physik auf auf User Input reagiert.
+     */
+    private boolean reactingToInput;
+
+    /**
      * Erzeugt einen neuen leeren PhysicsHandler.
      */
     public PhysicsHandler()
@@ -81,6 +86,7 @@ public class PhysicsHandler<GameElementT>
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
         this.ballLost = false;
+        this.reactingToInput = true;
         this.physicTimer = new Timer(false);
 
         modifyContainers = new ArrayList<>();
@@ -198,5 +204,21 @@ public class PhysicsHandler<GameElementT>
     {
         physicTimer.cancel();
         physicTimer.purge();
+    }
+
+    /**
+     * Stoppt das Reagieren auf User Input.
+     */
+    public void stopReactingToUserInput()
+    {
+        reactingToInput = false;
+    }
+
+    /**
+     * Der PhysicsHandler soll wieder auf User Input reagieren.
+     */
+    public void doReactToUserInput()
+    {
+        reactingToInput = true;
     }
 }
