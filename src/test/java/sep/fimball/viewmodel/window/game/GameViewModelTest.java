@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.*;
@@ -80,10 +81,15 @@ public class GameViewModelTest
         World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()));
         when(gameSessionMock.getWorld()).thenReturn(world);
 
+        PinballMachine pinballMachineMock = mock(PinballMachine.class);
+        when(pinballMachineMock.highscoreListProperty()).thenReturn(new SimpleListProperty<>(FXCollections.observableArrayList()));
+        when(pinballMachineMock.getBoundingBox()).thenReturn(new RectangleDouble(new Vector2(0, 0), 5, 5));
+
         when(gameSessionMock.getPlayers()).thenReturn(new Player[]{});
         when(gameSessionMock.getCurrentPlayer()).thenReturn(player);
         when(gameSessionMock.isOverProperty()).thenReturn(new SimpleBooleanProperty(false));
         when(gameSessionMock.isStartedFromEditor()).thenReturn(false);
+        when(gameSessionMock.getPinballMachine()).thenReturn(pinballMachineMock);
 
         SceneManagerViewModel sceneManagerViewModelMock = mock(SceneManagerViewModel.class);
 
