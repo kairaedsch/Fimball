@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 public class GameTest
 {
     private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
-    private static final long HOLD_KEY_DURATION = 1000;     // Die Zeit, die der Plunger gespannt wird.
+    private static final long HOLD_KEY_DURATION = 1350;     // Die Zeit, die der Plunger gespannt wird.
     private boolean ballIsLost = false;
 
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
@@ -57,7 +57,7 @@ public class GameTest
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 0, 0));
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, -5), 0, 0, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 16), 0, 0, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 0, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 0, 0));
 
@@ -94,7 +94,6 @@ public class GameTest
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
         assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), PLUNGER_ID);
-        assertTrue(collidedGameElements.isEmpty());
     }
 
     /**

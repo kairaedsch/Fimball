@@ -34,7 +34,6 @@ public class FlipperCollision extends NormalCollision
         {
             //Berechne den Winkel zwischen dem Polygon des Flippers und der Achse des Flippers.
             double angle = flipperAxis.dot(info.getShortestIntersect().normalized());
-            System.out.println(angle);
             //Berechne die Kraft die der Flipper auf den Ball überträgt mithilfe der linksseitigen Normale der Achse des Flippers.
             Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.01).scale(distance).scale(1 - angle);
             //Addiere die berechnete Kraft auf die Geschwindigkeit des Balls.
