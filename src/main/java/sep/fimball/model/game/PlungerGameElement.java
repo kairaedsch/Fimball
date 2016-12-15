@@ -7,6 +7,7 @@ import sep.fimball.model.input.manager.KeyObserverEventArgs;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
+import sep.fimball.model.input.manager.KeyObserverEventArgs.KeyChangedToState;
 
 import java.util.Optional;
 
@@ -15,8 +16,9 @@ import java.util.Optional;
  */
 public class PlungerGameElement extends GameElement
 {
-    public static final int TEN_MILI_SECS = 100000000;
-    private Optional<Long> downSince;
+    private final int TEN_MILI_SECS = 10 * 1000;
+    private long pressStart;
+    private KeyChangedToState oldState = KeyChangedToState.UP;
 
     /**
      * Erstellt ein neues PlungerGameElement aus dem gegebenen PlacedElement.
@@ -33,40 +35,26 @@ public class PlungerGameElement extends GameElement
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN)
+            //TODO - Hässliche oldState Logik auslagern
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN && oldState == KeyChangedToState.UP)
             {
-                pushDown();
+                oldState = KeyChangedToState.DOWN;
+                pressStart = System.currentTimeMillis();
             }
-            else
+            else if (args.getState() == KeyChangedToState.UP && oldState == KeyChangedToState.DOWN)
             {
+                oldState = KeyChangedToState.UP;
                 double force = calcForce();
-                System.out.println(force);
+                System.out.println("Force: " + force);
                 physicsHandler.addModify(plungerPhysicsElement, new PlungerModify(force));
             }
         });
     }
 
-    private void pushDown()
-    {
-        downSince = Optional.of(System.currentTimeMillis());
-    }
-
     private double calcForce()
     {
-        if(downSince.isPresent())
-        {
-            double force = 5;
-            long time = System.currentTimeMillis() - downSince.get();
-            if(time< TEN_MILI_SECS) {
-                return force;
-            } else if (time < 2 * TEN_MILI_SECS)
-            {
-                return force * 2;
-            } else {
-                return force * 3;
-            }
-        }
-        return 0;
-
+        double force = 2000;
+        double secondsPressed = (System.currentTimeMillis() - pressStart) / 1000d;
+        return Math.min(force * 3, force * secondsPressed);
     }
 }
