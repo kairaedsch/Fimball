@@ -61,7 +61,7 @@ public class PhysicsHandlerTest
      *
      * @throws InterruptedException wenn der Monitor unterbrochen wird.
      */
-    @Test
+    @Test(timeout = MAX_TEST_DURATION)
     public void stopReactingToUserInputTest() throws InterruptedException
     {
         init();
@@ -95,7 +95,7 @@ public class PhysicsHandlerTest
      *
      * @throws InterruptedException wenn der Monitor unterbrochen wird.
      */
-    @Test
+    @Test(timeout = MAX_TEST_DURATION)
     public void ballLostTest() throws InterruptedException
     {
         init();
@@ -112,7 +112,7 @@ public class PhysicsHandlerTest
         assertThat(ballLost, is(true));
     }
 
-    @Test
+    @Test(timeout = MAX_TEST_DURATION)
     public void nudgeTest() throws InterruptedException
     {
         init();
