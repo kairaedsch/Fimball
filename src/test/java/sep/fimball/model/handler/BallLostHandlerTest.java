@@ -40,10 +40,10 @@ public class BallLostHandlerTest
         BallLostHandler test = new BallLostHandler(gameSession);
         GameEvent event = GameEvent.BALL_LOST;
         test.activateGameHandler(event);
-        assertThat(gameSession.getCurrentPlayer(), equalTo(player2));
-        assertThat(newBallSpawned, is(true));
-        assertThat(player1.ballsProperty().get(), is(2));
-        assertThat(player2.ballsProperty().get(), is(3));
+        assertThat("Es wurde der Spieler gewechselt", gameSession.getCurrentPlayer(), equalTo(player2));
+        assertThat("Es wurde eine neue Kugel gespawned", newBallSpawned, is(true));
+        assertThat("Der erste Spieler hat eine Reserve-Kugel weniger", player1.ballsProperty().get(), is(2));
+        assertThat("Der zweite Spieler hat noch alle Kugeln", player2.ballsProperty().get(), is(3));
     }
 
     /**

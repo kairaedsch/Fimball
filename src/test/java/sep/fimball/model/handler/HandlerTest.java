@@ -37,7 +37,7 @@ public class HandlerTest
         GameHandler gameHandler = gameEvent -> gameHandlerActivated = true;
         test.setGameHandler(gameHandler);
         test.activateGameHandler(GameEvent.BALL_SPAWNED);
-        assertThat(gameHandlerActivated, is(true));
+        assertThat("Der GameHandler wurde aktiviert.", gameHandlerActivated, is(true));
     }
 
     /**
@@ -50,7 +50,7 @@ public class HandlerTest
         ElementHandler elementHandler = (element, colliderId) -> elementHandlerActivated = true;
         test.setElementHandler(elementHandler);
         test.activateElementHandler(null, 0);
-        assertThat(elementHandlerActivated, is(true));
+        assertThat("Der ElementHandler wurde aktiviert.", elementHandlerActivated, is(true));
     }
 
     /**
@@ -70,7 +70,7 @@ public class HandlerTest
         };
         test.setUserHandler(userHandler);
         test.activateUserHandler(null, null);
-        assertThat(userHandlerActivated, is(true));
+        assertThat("Der GameHandler wurde aktiviert.", userHandlerActivated, is(true));
     }
 
 }

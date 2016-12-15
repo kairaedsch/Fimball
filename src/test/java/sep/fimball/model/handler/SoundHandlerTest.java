@@ -38,8 +38,10 @@ public class SoundHandlerTest
         }).when(soundManager).addSoundToPlay(any(Sound.class));
         SoundHandler test = new SoundHandler(soundManager);
         HandlerGameElement gameElement = getTestHandlerGameElement();
+
         test.activateElementHandler(gameElement, 0);
-        assertThat(playedSound.getSoundPath(), endsWith("Test-Sound.mp3"));
+        assertThat("Es wurde der richtige Sound an den SoundManager weitergeleitet", playedSound.getSoundPath(), endsWith
+                ("Test-Sound.mp3"));
     }
 
     /**
@@ -85,11 +87,10 @@ public class SoundHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0,0,
-                        "")),java.util.Optional.of("Test-Sound"));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0,
+                        "")), java.util.Optional.of("Test-Sound"));
                 eventMap.put(0, baseMediaElementEvent);
-                BaseMediaElement baseMediaElement = new BaseMediaElement("", "", 0, false,0, null,eventMap,null);
-                return baseMediaElement;
+                return new BaseMediaElement("", "", 0, false, 0, null, eventMap, null);
             }
 
             @Override

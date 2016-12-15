@@ -27,11 +27,11 @@ public class ScoreHandlerTest
     {
         HandlerGameSession gameSession = getGameSession();
         ScoreHandler test = new ScoreHandler(gameSession);
-        test.activateElementHandler(getElement(), 0);
-        assertThat(gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
-        test.activateElementHandler(getElement(), 1);
-        assertThat(gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
 
+        test.activateElementHandler(getElement(), 0);
+        assertThat("Der Spieler hat einmal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
+        test.activateElementHandler(getElement(), 1);
+        assertThat("Der Spieler hat zweimal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
     }
 
     /**
@@ -88,6 +88,7 @@ public class ScoreHandlerTest
 
     /**
      * Gibt einen Test-HandlerPlayer zurück.
+     *
      * @return Einen Test-HandlerPlayer.
      */
     private HandlerPlayer getPlayer()
@@ -127,6 +128,7 @@ public class ScoreHandlerTest
 
     /**
      * Gibt ein Test-HandlerGameElement zurück.
+     *
      * @return Ein Test-HandlerGameElement.
      */
     private HandlerGameElement getElement()

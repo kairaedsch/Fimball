@@ -49,20 +49,21 @@ public class TiltHandlerTest
         tiltActivated.put(player2, false);
         HandlerGameSession gameSession = getTestHandlerGameSession();
         TiltHandler test = new TiltHandler(gameSession);
+
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
         test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
-        assertThat(tiltActivated.get(player1), is(true));
+        assertThat("Der Tilt wurde für Spieler 1 aktiviert", tiltActivated.get(player1), is(true));
         gameSession.switchToNextPlayer();
-        assertThat(tiltActivated.get(player2), is(false));
+        assertThat("Der Tilt wurde nicht für Spieler 2 aktiviert", tiltActivated.get(player2), is(false));
     }
 
     /**
@@ -124,7 +125,13 @@ public class TiltHandlerTest
     }
 
 
-    private HandlerBallGameElement getBall() {
+    /**
+     * Gibt ein Test-HandlerBallGameElement zurück.
+     *
+     * @return Ein Test-HandlerBallGameElement.
+     */
+    private HandlerBallGameElement getBall()
+    {
         return new HandlerBallGameElement()
         {
             @Override
