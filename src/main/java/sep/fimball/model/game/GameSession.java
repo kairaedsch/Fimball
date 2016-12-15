@@ -434,6 +434,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     public void spawnNewBall()
     {
         gameBall.get().reset();
+        physicsHandler.resetBall();
         isBallLost = false;
         wereBallLostEventsTriggered = false;
 

@@ -120,6 +120,14 @@ public class PhysicsHandler<GameElementT>
         physicTimer.scheduleAtFixedRate(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
     }
 
+    public void resetBall()
+    {
+        synchronized (monitor)
+        {
+            ballLost = false;
+        }
+    }
+
     /**
      * Erstellt einen neuen TimerTask, welcher die Berechnung der Physik ausführt.
      *
