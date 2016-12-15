@@ -115,14 +115,14 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     @Override
     public void applyModify(Modify modify)
     {
-        if(modify instanceof BallNudgeModify)
+        if (modify instanceof BallNudgeModify)
         {
-            if(((BallNudgeModify) modify).isLeft())
+            if (((BallNudgeModify) modify).isLeft())
                 setPosition(getPosition().minus(new Vector2(NUDGE_VELOCITY, 0)));
             else
                 setPosition(getPosition().plus(new Vector2(NUDGE_VELOCITY, 0)));
         }
-        else if(modify instanceof BallResetModify)
+        else if (modify instanceof BallResetModify)
         {
             setPosition(((BallResetModify) modify).getNewPosition());
             setVelocity(new Vector2());

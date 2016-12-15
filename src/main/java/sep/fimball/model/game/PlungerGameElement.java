@@ -11,9 +11,6 @@ import sep.fimball.model.input.manager.KeyObserverEventArgs.KeyChangedToState;
 
 import java.util.Optional;
 
-/**
- * Created by kaira on 14.12.2016.
- */
 public class PlungerGameElement extends GameElement
 {
     private long pressStart;

@@ -1,8 +1,5 @@
 package sep.fimball.general.data;
 
-/**
- * Created by kaira on 13.12.2016.
- */
 public class PhysicsConfig
 {
     public static final double HEIGHT_GRAVITY = 5;

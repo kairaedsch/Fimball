@@ -58,7 +58,6 @@ public abstract class PinballCanvasViewModel
      */
     private ViewScreenshotCreater viewScreenshotCreater;
 
-
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *

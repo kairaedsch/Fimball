@@ -2,9 +2,6 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
@@ -14,7 +11,6 @@ import sep.fimball.model.media.Animation;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -100,8 +96,8 @@ public class SpriteSubViewModel
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
-     * @param gameElement           Das GameElement, das zu diesem SpriteSubViewModel gehört.
-     * @param selectedPlacedElement Das aktuell ausgewählte Element.
+     * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     * @param selection   Die aktuell ausgewählten Elemente.
      */
     public SpriteSubViewModel(GameElement gameElement, ReadOnlyListProperty<PlacedElement> selection)
     {
