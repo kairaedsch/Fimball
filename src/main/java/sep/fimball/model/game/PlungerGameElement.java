@@ -51,7 +51,7 @@ public class PlungerGameElement extends GameElement
 
     private double calcForce()
     {
-        double force = 2000;
+        double force = 32;
         double secondsPressed = (System.currentTimeMillis() - pressStart) / 1000d;
         return Math.min(force * 3, force * secondsPressed);
     }

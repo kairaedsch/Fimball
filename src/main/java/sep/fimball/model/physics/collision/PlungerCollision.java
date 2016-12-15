@@ -20,7 +20,7 @@ public class PlungerCollision extends NormalCollision
         if (plungerStrength > 0)
         {
             Vector2 plungerAxis = new Vector2(0, -1).rotate(Math.toRadians(plunger.getRotation())).normalized();
-            Vector2 addForce = plungerAxis.scale(plunger.getStrength()).scale(PhysicsConfig.TICK_RATE_SEC);
+            Vector2 addForce = plungerAxis.scale(plunger.getStrength());
             info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
             plunger.resetStrength();
         }

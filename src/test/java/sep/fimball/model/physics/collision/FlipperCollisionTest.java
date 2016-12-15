@@ -47,6 +47,6 @@ public class FlipperCollisionTest
         FlipperCollision flipperCollisionSpy = spy(new FlipperCollision());
         doNothing().when(flipperCollisionSpy).callNormalCollision(notNull());
         flipperCollisionSpy.applyCollision(collisionInfo);
-        assertThat("Der Ball hat nach der Kollision mit dem Flipper die Geschwindigkeit (0.0, -62.5", ballPhysicsElement.getVelocity(), is(new Vector2(0.0, -50.0)));
+        assertThat("Der Ball hat nach der Kollision mit dem Flipper die Geschwindigkeit (0.0, -50.0", ballPhysicsElement.getVelocity(), is(new Vector2(0.0, -50.0)));
     }
 }
