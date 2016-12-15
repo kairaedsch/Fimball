@@ -1,13 +1,12 @@
 package sep.fimball;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
+import org.hamcrest.CustomTypeSafeMatcher;
 import sep.fimball.general.data.Vector2;
 
 /**
  * Vergleicht zwei Vektoren auf gleichheit, mit einem kleinen Toleranzbereich.
  */
-public class VectorMatcher extends BaseMatcher<Vector2>
+public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
 {
     /**
      * Der Vektor, der mit anderen Vektoren verglichen werden soll.
@@ -30,26 +29,19 @@ public class VectorMatcher extends BaseMatcher<Vector2>
      */
     public VectorMatcher(Vector2 val)
     {
-        super();
+        super(val.toString());
         myVector = val;
     }
 
     @Override
-    public boolean matches(Object o)
+    public boolean matchesSafely(Vector2 v2)
     {
-        final Vector2 vector = (Vector2)o;
-        return vectorAboutEquals(vector, myVector);
+        return vectorAboutEquals(v2, myVector);
     }
 
     private boolean vectorAboutEquals(Vector2 a, Vector2 b)
     {
         final double EPSILON = 1e-15;
         return Math.abs(a.getX() - b.getX()) < EPSILON && Math.abs(a.getY() - b.getY()) < EPSILON;
-    }
-
-    @Override
-    public void describeTo(Description description)
-    {
-        description.appendText(myVector.toString());
     }
 }
