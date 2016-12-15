@@ -16,7 +16,6 @@ import java.util.Optional;
  */
 public class PlungerGameElement extends GameElement
 {
-    private final int TEN_MILI_SECS = 10 * 1000;
     private long pressStart;
     private KeyChangedToState oldState = KeyChangedToState.UP;
 
