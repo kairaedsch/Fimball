@@ -340,7 +340,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.clearSelection();
             mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, 0, 0)));
+            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, gridPos)));
         }
     }
 

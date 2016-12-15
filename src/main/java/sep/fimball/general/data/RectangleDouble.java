@@ -1,5 +1,9 @@
 package sep.fimball.general.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * RectangleDouble stellt ein Rechteck dar, wobei seine Daten mit Double-Werten gespeichert werden.
  */
@@ -13,12 +17,19 @@ public class RectangleDouble
     /**
      * Die Breite des Rechtecks.
      */
-    private final double width;
+    private final Vector2 size;
 
     /**
-     * Die Höhe des Rechtecks.
+     * Erzeugt ein RectangleDouble mit den gegebenen Werten.
+     *
+     * @param origin Linke obere Ecke des Rechtecks.
+     * @param size  Größe des Rechtecks.
      */
-    private final double height;
+    public RectangleDouble(Vector2 origin, Vector2 size)
+    {
+        this.origin = origin;
+        this.size = size;
+    }
 
     /**
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.
@@ -29,9 +40,7 @@ public class RectangleDouble
      */
     public RectangleDouble(Vector2 origin, double width, double height)
     {
-        this.origin = origin;
-        this.width = width;
-        this.height = height;
+        this(origin, new Vector2(width, height));
     }
 
     /**
@@ -50,7 +59,7 @@ public class RectangleDouble
      */
     public Vector2 getMiddle()
     {
-        return new Vector2(origin.getX() + (width / 2), origin.getY() + (height / 2));
+        return new Vector2(origin.getX() + (size.getX() / 2), origin.getY() + (size.getY() / 2));
     }
 
     /**
@@ -60,7 +69,7 @@ public class RectangleDouble
      */
     public double getWidth()
     {
-        return width;
+        return size.getX();
     }
 
     /**
@@ -70,6 +79,20 @@ public class RectangleDouble
      */
     public double getHeight()
     {
-        return height;
+        return size.getY();
+    }
+
+    public Vector2 getSize()
+    {
+        return size;
+    }
+
+    public RectangleDouble normalize()
+    {
+        List<Vector2> list = Arrays.asList(origin, size);
+        Vector2 origin = Vector2.getExtremeVector(list, false, v -> v);
+        Vector2 size = Vector2.getExtremeVector(list, true, v -> v);
+
+        return new RectangleDouble(origin, size);
     }
 }
