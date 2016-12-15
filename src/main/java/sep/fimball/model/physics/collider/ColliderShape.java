@@ -1,8 +1,6 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Beschreibt die Form einer Fläche die mit dem Ball interagieren kann.
@@ -25,7 +23,7 @@ public interface ColliderShape
     /**
      * Gibt den Vektor mit minimaler/maximaler X und Y Position dieser Form zurück je nachdem ob {@code max} true oder false ist.
      *
-     * @param rotation   Die rotation des Colliders.
+     * @param rotation   Die Rotation des Colliders.
      * @param pivotPoint Der Drehpunkt des Colliders.
      * @param max Gibt an ob die maximale oder minimale Position gesucht ist.
      *
