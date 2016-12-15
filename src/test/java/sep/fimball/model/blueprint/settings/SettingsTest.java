@@ -1,6 +1,7 @@
 package sep.fimball.model.blueprint.settings;
 
 import javafx.scene.input.KeyCode;
+import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,7 @@ public class SettingsTest
         lines.add("{\"language\":\"ENGLISH\",\"fullscreen\":false,\"masterVolume\":30,\"musicVolume\":0,\"sfxVolume\":50,\"keyLayouts\":[{\"keyBinding\":\"LEFT_FLIPPER\",\"keyCode\":\"A\"},{\"keyBinding\":\"EDITOR_ROTATE\",\"keyCode\":\"R\"},{\"keyBinding\":\"NUDGE_RIGHT\",\"keyCode\":\"E\"},{\"keyBinding\":\"PAUSE\",\"keyCode\":\"ESCAPE\"},{\"keyBinding\":\"EDITOR_DELETE\",\"keyCode\":\"DELETE\"},{\"keyBinding\":\"RIGHT_FLIPPER\",\"keyCode\":\"D\"},{\"keyBinding\":\"EDITOR_MOVE\",\"keyCode\":\"ALT\"},{\"keyBinding\":\"PLUNGER\",\"keyCode\":\"SPACE\"},{\"keyBinding\":\"NUDGE_LEFT\",\"keyCode\":\"Q\"}]}");
         Files.deleteIfExists(pathToSettings);
         Files.write(pathToSettings, lines, Charset.forName("UTF-8"));
-        Settings testSettings = new Settings(pathToSettings);
+        Settings testSettings = new Settings(new HashMap<>(), Language.ENGLISH, false, 0, 0, 0);
         assertThat(testSettings.languageProperty().get(), equalTo(Language.ENGLISH));
         assertThat(testSettings.fullscreenProperty().get(), is(false));
         assertThat(testSettings.masterVolumeProperty().get(), is(30));

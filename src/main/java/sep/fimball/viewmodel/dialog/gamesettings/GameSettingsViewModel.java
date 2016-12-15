@@ -62,7 +62,7 @@ public class GameSettingsViewModel extends DialogViewModel
         language.bindBidirectional(settings.languageProperty());
 
         keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyBinding, keyCode) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
+        ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyCode, keyBinding) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
 
         fullscreen = new SimpleBooleanProperty();
         fullscreen.bindBidirectional(settings.fullscreenProperty());

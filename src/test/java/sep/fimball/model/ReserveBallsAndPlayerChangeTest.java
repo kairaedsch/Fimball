@@ -104,7 +104,7 @@ public class ReserveBallsAndPlayerChangeTest
      */
     private void usePlunger() throws InterruptedException
     {
-        KeyCode plungerKey = Settings.getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.PLUNGER);
+        KeyCode plungerKey = Settings.getSingletonInstance().getKeyCode(KeyBinding.PLUNGER);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
         Thread.sleep(KEY_HOLDING_DURATION);
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));

@@ -67,7 +67,7 @@ public class PhysicsHandlerTest
         init();
         test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.LEFT_FLIPPER), false, false,
+                .getSingletonInstance().getKeyCode(KeyBinding.LEFT_FLIPPER), false, false,
                 false, false));
         synchronized (monitor)
         {
@@ -80,7 +80,7 @@ public class PhysicsHandlerTest
         leftFlipperRotated = false;
         test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.RIGHT_FLIPPER), false, false,
+                .getSingletonInstance().getKeyCode(KeyBinding.RIGHT_FLIPPER), false, false,
                 false, false));
         synchronized (monitor)
         {
@@ -118,7 +118,7 @@ public class PhysicsHandlerTest
         init();
         test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.NUDGE_LEFT), false, false,
+                .getSingletonInstance().getKeyCode(KeyBinding.NUDGE_LEFT), false, false,
                 false, false));
         synchronized (monitor) {
             monitor.wait(MAX_TEST_DURATION);
@@ -130,7 +130,7 @@ public class PhysicsHandlerTest
 
         test.startTicking();
         InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().keyBindingsMapProperty().get(KeyBinding.NUDGE_RIGHT), false, false,
+                .getSingletonInstance().getKeyCode(KeyBinding.NUDGE_RIGHT), false, false,
                 false, false));
         synchronized (monitor) {
             monitor.wait(MAX_TEST_DURATION);

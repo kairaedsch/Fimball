@@ -202,6 +202,24 @@ public class Settings
     }
 
     /**
+     * Gibt für das gegebene KeyBinding den entsprechenden KeyCode zurück oder {@code null}, falls kein KeyCode existiert.
+     *
+     * @param keyBinding Das gesuchte KeyBinding.
+     * @return Der KeyCode, der das übergebene Spielereignis auslöst.
+     */
+    public KeyCode getKeyCode(KeyBinding keyBinding) {
+        if(keyBindingsMap.containsValue(keyBinding))
+        {
+            for(KeyCode keyCode : keyBindingsMap.keySet()) {
+                if(keyBindingsMap.get(keyCode).equals(keyBinding)) {
+                    return keyCode;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück oder
      * {@code null}, falls kein KeyBinding existiert.
      *
