@@ -2,7 +2,6 @@ package sep.fimball.model.physics.collider;
 
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.VectorMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static sep.fimball.VectorMatcher.matchesVector;
 
 /**
  * Created by TheAsuro on 15.12.2016.
@@ -35,6 +35,6 @@ public class PolygonColliderShapeTest
         HitInfo info = poly.calculateHitInfo(otherShape, new Vector2(), new Vector2(), 0.0, new Vector2(0.0, 0.0));
 
         assertThat(info.isHit(), is(true));
-        assertThat(info.getShortestIntersect(), new VectorMatcher(0.0, 0.2));
+        assertThat(info.getShortestIntersect(), matchesVector(0.0, 0.2));
     }
 }

@@ -1,12 +1,12 @@
 package sep.fimball.model.physics.collider;
 
 import org.junit.Test;
-import sep.fimball.VectorMatcher;
 import sep.fimball.general.data.Vector2;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static sep.fimball.VectorMatcher.matchesVector;
 
 /**
  * Created by TheAsuro on 15.12.2016.
@@ -29,7 +29,7 @@ public class CircleColliderShapeTest
     {
         CircleColliderShape testShape = new CircleColliderShape(new Vector2(0.0, 0.0), 1.0);
 
-        assertThat(testShape.getExtremePos(-270.0, new Vector2(1.0, 1.0), true), new VectorMatcher(1.0, 3.0));
-        assertThat(testShape.getExtremePos(90.0, new Vector2(1.0, 1.0), false), new VectorMatcher(-1.0, 1.0));
+        assertThat(testShape.getExtremePos(-270.0, new Vector2(1.0, 1.0), true), matchesVector(1.0, 3.0));
+        assertThat(testShape.getExtremePos(90.0, new Vector2(1.0, 1.0), false), matchesVector(-1.0, 1.0));
     }
 }

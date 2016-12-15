@@ -8,6 +8,16 @@ import sep.fimball.general.data.Vector2;
  */
 public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
 {
+    public static VectorMatcher matchesVector(double x, double y)
+    {
+        return new VectorMatcher(x, y);
+    }
+
+    public static VectorMatcher matchesVector(Vector2 vector)
+    {
+        return new VectorMatcher(vector);
+    }
+
     /**
      * Der Vektor, der mit anderen Vektoren verglichen werden soll.
      */
