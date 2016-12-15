@@ -5,13 +5,14 @@ import sep.fimball.model.input.data.KeyEventType;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
 
-import javax.net.ssl.KeyManager;
-
 /**
  * Handler, der bei User-Aktionen ausgelöst wird.
  */
 public abstract class UserHandler
 {
+    /** Erstellt einen neuen UserHandler
+     * @param keyBindings Die KeyBindings, auf der der UserHandler reagieren soll.
+     */
     public UserHandler(KeyBinding... keyBindings)
     {
         for (KeyBinding keyBinding : keyBindings)
