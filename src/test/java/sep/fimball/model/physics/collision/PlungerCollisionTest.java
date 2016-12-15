@@ -36,12 +36,12 @@ public class PlungerCollisionTest
         PlungerCollision plungerCollision = spy(new PlungerCollision());
         doNothing().when(plungerCollision).callNormalCollision(notNull());
         plungerCollision.applyCollision(collisionInfo);
-        assertThat(ballPhysicsElement.getVelocity(), new VectorMatcher(0, -8));
+        assertThat("Die Geschwindigkeit des Balls nach Beschleunigung durch den Plunger ist (0, -8)", ballPhysicsElement.getVelocity(), new VectorMatcher(0, -8));
 
         //Überprüfe die Beschleunigung bei einem um 90 Grad nach rechts gedrehten Plunger.
         when(plungerPhysicsElement.getRotation()).thenReturn(90.0);
         ballPhysicsElement.setVelocity(new Vector2(0, 0));
         plungerCollision.applyCollision(collisionInfo);
-        assertThat(ballPhysicsElement.getVelocity(), new VectorMatcher(8, 0));
+        assertThat("Die Geschwindigkeit des Balls nach Beschleunigung durch den Plunger ist (8, 0)", ballPhysicsElement.getVelocity(), new VectorMatcher(8, 0));
     }
 }
