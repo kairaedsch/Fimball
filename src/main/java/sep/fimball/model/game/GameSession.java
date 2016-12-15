@@ -80,7 +80,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.heightProperty()});
         SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
-        gameSession.getWorld().gameElementsAidsAidsAidsAidsProperty().set(sortedList);
+        gameSession.getWorld().gameElementsOpenProperty().set(sortedList);
         gameSession.startGameLoop();
         return gameSession;
     }

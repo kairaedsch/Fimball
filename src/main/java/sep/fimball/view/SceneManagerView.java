@@ -212,7 +212,7 @@ public class SceneManagerView
         try
         {
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
-            // TODO - cancer
+            // TODO - unschön
             if (viewType == WindowType.EDITOR_WINDOW)
                 ((PinballMachineEditorView)((Object)view)).addEventFilterToStage(stage);
             view.setViewModel(viewModel);

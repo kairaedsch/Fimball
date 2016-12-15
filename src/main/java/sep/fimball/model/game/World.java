@@ -76,7 +76,7 @@ public class World implements HandlerWorld
      *
      * @return Die Liste der GameElements.
      */
-    public ListProperty<GameElement> gameElementsAidsAidsAidsAidsProperty()
+    public ListProperty<GameElement> gameElementsOpenProperty()
     {
         return gameElements;
     }

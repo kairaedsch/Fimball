@@ -31,7 +31,7 @@ public class PlungerGameElement extends GameElement
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
-            //TODO - Hässliche oldState Logik auslagern
+            //TODO - Unschön oldState Logik auslagern
             if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN && oldState == KeyChangedToState.UP)
             {
                 oldState = KeyChangedToState.DOWN;
