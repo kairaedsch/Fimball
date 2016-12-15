@@ -36,7 +36,7 @@ public class HandlerTest
         Handler test = new Handler();
         GameHandler gameHandler = gameEvent -> gameHandlerActivated = true;
         test.setGameHandler(gameHandler);
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateGameHandler(GameEvent.BALL_SPAWNED);
         assertThat(gameHandlerActivated, is(true));
     }
 

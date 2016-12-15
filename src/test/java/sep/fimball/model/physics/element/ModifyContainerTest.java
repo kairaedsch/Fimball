@@ -9,7 +9,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 
-public class ModifiContainerTest
+public class ModifyContainerTest
 {
     @Test
     public void apply() throws Exception
@@ -17,7 +17,7 @@ public class ModifiContainerTest
         PhysicsModifyAble<Modify> physicsElement = Mockito.mock(PhysicsModifyAble.class);
         Modify modify = mock(Modify.class);
 
-        ModifyContainer modifiContainer = new ModifyContainer<>(physicsElement, modify);
+        ModifyContainer modifyContainer = new ModifyContainer<>(physicsElement, modify);
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
@@ -25,6 +25,6 @@ public class ModifiContainerTest
             return null;
         }).when(physicsElement).applyModify(any());
 
-        modifiContainer.apply();
+        modifyContainer.apply();
     }
 }

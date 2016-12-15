@@ -23,9 +23,9 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
-    private List<ModifyContainer> modifiContainers;
+    private List<ModifyContainer> modifyContainers;
 
-    private final Object modifiysMonitor = new Object();
+    private final Object modifiesMonitor = new Object();
 
     /**
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
@@ -59,11 +59,6 @@ public class PhysicsHandler<GameElementT>
     private final Object monitor = new Object();
 
     /**
-     * Gibt an, ob die Physik auf auf User Input reagiert.
-     */
-    private boolean reactingToInput;
-
-    /**
      * Erzeugt einen neuen leeren PhysicsHandler.
      */
     public PhysicsHandler()
@@ -86,17 +81,16 @@ public class PhysicsHandler<GameElementT>
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
         this.ballLost = false;
-        this.reactingToInput = true;
         this.physicTimer = new Timer(false);
 
-        modifiContainers = new ArrayList<>();
+        modifyContainers = new ArrayList<>();
     }
 
     public <ModifyT extends Modify> void addModify(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
     {
-        synchronized (modifiysMonitor)
+        synchronized (modifiesMonitor)
         {
-            modifiContainers.add(new ModifyContainer<>(physicsElement, modify));
+            modifyContainers.add(new ModifyContainer<>(physicsElement, modify));
         }
     }
 
@@ -126,16 +120,16 @@ public class PhysicsHandler<GameElementT>
             {
                 double delta = PhysicsConfig.TICK_RATE_SEC;
 
-                List<ModifyContainer> localModifiContainers;
-                synchronized (modifiysMonitor)
+                List<ModifyContainer> localModifyContainers;
+                synchronized (modifiesMonitor)
                 {
-                    localModifiContainers = modifiContainers;
-                    modifiContainers = new ArrayList<>();
+                    localModifyContainers = modifyContainers;
+                    modifyContainers = new ArrayList<>();
                 }
 
-                for (ModifyContainer modifiContainer : localModifiContainers)
+                for (ModifyContainer modifyContainer : localModifyContainers)
                 {
-                    modifiContainer.apply();
+                    modifyContainer.apply();
                 }
 
                 // Check all PhysicsElements for collisions with the ball
@@ -204,21 +198,5 @@ public class PhysicsHandler<GameElementT>
     {
         physicTimer.cancel();
         physicTimer.purge();
-    }
-
-    /**
-     * Stoppt das Reagieren auf User Input.
-     */
-    public void stopReactingToUserInput()
-    {
-        reactingToInput = false;
-    }
-
-    /**
-     * Der PhysicsHandler soll wieder auf User Input reagieren.
-     */
-    public void doReactToUserInput()
-    {
-        reactingToInput = true;
     }
 }
