@@ -28,7 +28,8 @@ public class FlipperCollision extends NormalCollision
         if (((ballPos.getY() > collisionPoint.getY()) && flipper.rotatingUp()) || ((ballPos.getY() < collisionPoint.getY()) && flipper.rotatingDown()))
         {
             double angle = flipperAxis.dot(info.getShortestIntersect().normalized());
-            Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.1).scale(distance).scale(1 - angle);
+            System.out.println(angle);
+            Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.01).scale(distance).scale(1 - angle);
             info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
         }
     }
