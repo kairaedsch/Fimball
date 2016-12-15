@@ -1,24 +1,16 @@
 package sep.fimball.model.physics;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
-import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.physics.element.BallPhysicsElement;
-import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -38,136 +30,153 @@ public class PhysicsHandlerTest
     private PhysicsHandler test;
 
     /**
-     * Gibt an, ob der linke Flipper gedreht wurde.
+     * Der Monitor, über den Informationen über Kollisionen synchronisiert werden.
      */
-    private boolean leftFlipperRotated = false;
+    private final Object collisionMonitor = new Object();
 
     /**
-     * Der Monitor, über den synchronisiert wird.
+     * Der Monitor, über den Informationen über den Verlust der Kugel synchronisiert werden.
      */
-    private final Object monitor = new Object();
+    private final Object ballLostMonitor = new Object();
 
     /**
      * Gibt an, ob die Kugel als verloren gilt.
      */
     private boolean ballLost = false;
 
-    Vector2 ballPosition = new Vector2(0,19);
-
-    Vector2 ballVelocity = new Vector2(0,0);
+    /**
+     * Die Kugel-Position.
+     */
+    private Vector2 ballPosition = new Vector2(0, 19);
 
     /**
-     * Testet, ob das An- und Ausschalten des Reagierens auf UserInput funktioniert.
-     *
-     * @throws InterruptedException wenn der Monitor unterbrochen wird.
+     * Gibt an, ob ein Element die Collision mit dem Ball geprüft hat.
      */
-    @Test(timeout = MAX_TEST_DURATION)
-    public void stopReactingToUserInputTest() throws InterruptedException
-    {
-        init();
-        test.startTicking();
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().getKeyCode(KeyBinding.LEFT_FLIPPER), false, false,
-                false, false));
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TEST_DURATION);
-        }
-        test.stopTicking();
-        assertThat(leftFlipperRotated, is(true));
+    private boolean collisionCheckWithBall = false;
 
-        test.stopReactingToUserInput();
-        leftFlipperRotated = false;
-        test.startTicking();
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().getKeyCode(KeyBinding.RIGHT_FLIPPER), false, false,
-                false, false));
-        synchronized (monitor)
-        {
-            monitor.wait(MAX_TEST_DURATION);
-        }
-        test.stopTicking();
-        assertThat(leftFlipperRotated, is(false));
-    }
+    /**
+     * Gibt an, ob sich an der Kugel etwas verändert hat.
+     */
+    private boolean ballChanged = false;
+
+    /**
+     * Gibt an, ob die ElementEventArgs-Liste, die an die Game-Session übergeben wird, leer ist.
+     */
+    private boolean elementEventArgsEmpty = true;
 
     /**
      * Testet, ob erkannt wird, dass die Kugel verloren ist.
      *
      * @throws InterruptedException wenn der Monitor unterbrochen wird.
      */
-    @Test(timeout = MAX_TEST_DURATION)
+    @Test
     public void ballLostTest() throws InterruptedException
     {
         init();
         test.startTicking();
-        synchronized (monitor)
+        synchronized (ballLostMonitor)
         {
-            while (!ballLost)
-            {
-                monitor.wait(MAX_TEST_DURATION);
-            }
+            ballLostMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
-        assertThat(ballPosition.getY(), greaterThanOrEqualTo(50.0));
-        assertThat(ballLost, is(true));
+        assertThat("Die Kugel ist am unteren Rand des Spielfelds",ballPosition.getY(), greaterThanOrEqualTo(50.0));
+        assertThat("Die Kugel wird als verloren angesehen",ballLost, is(true));
     }
 
-    @Test(timeout = MAX_TEST_DURATION)
-    public void nudgeTest() throws InterruptedException
+    /**
+     * Testet, ob Kollisionen überprüft werden.
+     *
+     * @throws InterruptedException wenn der Monitor unterbrochen wird.
+     */
+    @Test
+    public void checkCollisionTest() throws InterruptedException
     {
         init();
         test.startTicking();
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().getKeyCode(KeyBinding.NUDGE_LEFT), false, false,
-                false, false));
-        synchronized (monitor) {
-            monitor.wait(MAX_TEST_DURATION);
+        synchronized (collisionMonitor)
+        {
+            collisionMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
-        assertThat(ballVelocity.getX(), greaterThan(0.0));
-
-        ballVelocity = new Vector2(0,0);
-
-        test.startTicking();
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), Settings
-                .getSingletonInstance().getKeyCode(KeyBinding.NUDGE_RIGHT), false, false,
-                false, false));
-        synchronized (monitor) {
-            monitor.wait(MAX_TEST_DURATION);
-        }
-        test.stopTicking();
-        assertThat(ballVelocity.getX(), lessThan(0.0));
+        assertThat("Das Element im Spiel hat auf eine Kollision mit der Kugel geprüft",collisionCheckWithBall, is(true));
+        assertThat("Die ElementEventArgs wurden an die GameSession übergeben",elementEventArgsEmpty, is(false));
     }
 
     /**
      * Initialisiert die Test-Werte.
-     * TODO comments.
      */
     private void init()
     {
-        PhysicsElement mockedElement = mock(PhysicsElement.class);
+        GameSession mockedGameSession = getGameSession();
+        BallPhysicsElement mockedBall = getBall();
+        PhysicsElement mockedElement = getElement(mockedBall);
+
         List<PhysicsElement> mockedElements = new ArrayList<>();
+        mockedElements.add(mockedBall);
         mockedElements.add(mockedElement);
+
+        test = new PhysicsHandler();
+        test.init(mockedElements, mockedGameSession, 50, mockedBall);
+    }
+
+    /**
+     * Gibt ein Test-PhysicsElement zurück.
+     * @param mockedBall Ein Test-BallPhysicsElement.
+     * @return Ein Test-PhysicsElement.
+     */
+    private PhysicsElement getElement(BallPhysicsElement mockedBall)
+    {
+        PhysicsElement mockedElement = mock(PhysicsElement.class);
+
+        doAnswer(invocationOnMock ->
+        {
+            if (invocationOnMock.getArgument(1) == mockedBall)
+            {
+                synchronized (collisionMonitor) {
+                    collisionMonitor.notify();
+                }
+                collisionCheckWithBall = true;
+            }
+            return null;
+        }).when(mockedElement).checkCollision(anyList(), any(BallPhysicsElement.class));
+        return mockedElement;
+    }
+
+    /**
+     * Gibt eine Test-GameSession zurück.
+     * @return Eine Test-GameSession.
+     */
+    private GameSession getGameSession()
+    {
         GameSession mockedGameSession = mock(GameSession.class);
         doAnswer(invocationOnMock ->
         {
-            //TODO
+            List eventArgs = invocationOnMock.getArgument(1);
+            elementEventArgsEmpty = eventArgs.isEmpty();
             return null;
         }).when(mockedGameSession).addEventArgs(anyList(), anyList());
 
         doAnswer(invocationOnMock ->
         {
             ballLost = invocationOnMock.getArgument(0);
-            if(ballLost)
+            if (ballLost)
             {
-                synchronized (monitor)
+                synchronized (ballLostMonitor)
                 {
-                    monitor.notify();
+                    ballLostMonitor.notify();
                 }
             }
             return null;
         }).when(mockedGameSession).setBallLost(anyBoolean());
+        return mockedGameSession;
+    }
 
+    /**
+     * Gibt ein Test-BallPhysicsElement zurück.
+     * @return Ein Test-BallPhysicsElement.
+     */
+    private BallPhysicsElement getBall()
+    {
         BallPhysicsElement mockedBall = mock(BallPhysicsElement.class);
         doAnswer(invocationOnMock ->
         {
@@ -177,47 +186,16 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock ->
         {
-            mockedBall.setPosition(mockedBall.getPosition().plus(new Vector2(0,1)));
+            mockedBall.setPosition(mockedBall.getPosition().plus(new Vector2(0, 1)));
+            ballChanged = true;
             return null;
         }).when(mockedBall).update(anyDouble());
 
+        doAnswer(invocationOnMock -> ballChanged).when(mockedBall).hasChanged();
+
         doAnswer(invocationOnMock ->
                 ballPosition).when(mockedBall).getPosition();
-
-        doAnswer(invocationOnMock ->
-        {
-            ballVelocity = invocationOnMock.getArgument(0);
-            synchronized (monitor)
-            {
-                monitor.notify();
-            }
-            return null;
-        }).when(mockedBall).setVelocity(any(Vector2.class));
-
-        doAnswer(invocationOnMock ->
-                ballVelocity).when(mockedBall).getVelocity();
-
-        FlipperPhysicsElement mockedLeftFlipper = mock(FlipperPhysicsElement.class);
-        FlipperPhysicsElement mockedRightFlipper = mock(FlipperPhysicsElement.class);
-
-        doAnswer(invocationOnMock ->
-        {
-            leftFlipperRotated = true;
-            synchronized (monitor)
-            {
-                monitor.notify();
-            }
-            return null;
-        }).when(mockedLeftFlipper).rotateDown();
-
-        List<FlipperPhysicsElement> mockedLeftFlippers = new ArrayList<>();
-        List<FlipperPhysicsElement> mockedRightFlippers = new ArrayList<>();
-
-        mockedLeftFlippers.add(mockedLeftFlipper);
-        mockedRightFlippers.add(mockedRightFlipper);
-
-        test = new PhysicsHandler();
-        test.init(mockedElements, mockedGameSession, 50, mockedBall);
+        return mockedBall;
     }
 
 }
