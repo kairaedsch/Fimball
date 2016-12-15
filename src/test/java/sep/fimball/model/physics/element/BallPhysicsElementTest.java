@@ -87,7 +87,7 @@ public class BallPhysicsElementTest
             ballPhysicsElement.setHeight(2);
             ballPhysicsElement.setVelocity(new Vector2(0.001, 0));
 
-            ballPhysicsElement.applyModify(new BallResetModify(new Vector2(5, 5)));
+            ballPhysicsElement.applyModify((BallResetModify) () -> new Vector2(5, 5));
 
             assertThat("Der Ball wurde versetzt", ballPhysicsElement.getPosition().getX(), is(5.0));
             assertThat("Der Ball wurde versetzt", ballPhysicsElement.getPosition().getY(), is(5.0));
@@ -99,7 +99,7 @@ public class BallPhysicsElementTest
             BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
             ballPhysicsElement.setHeight(2);
 
-            ballPhysicsElement.applyModify(new BallNudgeModify(true));
+            ballPhysicsElement.applyModify((BallNudgeModify) () -> true);
 
             assertThat("Der Ball wurde bei der X-Position versetzt", ballPhysicsElement.getPosition().getX(), is(lessThan(0.0)));
             assertThat("Der Ball wurde bei der Y-Positio nicht versetzt", ballPhysicsElement.getPosition().getY(), is(0.0));

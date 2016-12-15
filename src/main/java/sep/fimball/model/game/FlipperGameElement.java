@@ -27,7 +27,7 @@ public class FlipperGameElement extends GameElement
     public void setPhysicsElement(PhysicsHandler physicsHandler, FlipperPhysicsElement flipperPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(left ? KeyBinding.LEFT_FLIPPER : KeyBinding.RIGHT_FLIPPER, args -> {
-            physicsHandler.addModify(flipperPhysicsElement, new FlipperModify(args.getState() != KeyObserverEventArgs.KeyChangedToState.DOWN));
+            physicsHandler.addModify(flipperPhysicsElement, (FlipperModify) () -> args.getState() != KeyObserverEventArgs.KeyChangedToState.DOWN);
         });
     }
 }

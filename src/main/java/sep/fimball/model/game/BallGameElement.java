@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.HandlerBallGameElement;
 import sep.fimball.model.physics.PhysicsHandler;
@@ -32,11 +33,12 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
 
     public void nudge(boolean left)
     {
-        physicsHandler.addModify(ballPhysicsElement, new BallNudgeModify(left));
+        physicsHandler.addModify(ballPhysicsElement, (BallNudgeModify) () -> left);
     }
 
     public void reset()
     {
-        physicsHandler.addModify(ballPhysicsElement, new BallResetModify(getPlacedElement().positionProperty().get()));
+        Vector2 newPos = getPlacedElement().positionProperty().get();
+        physicsHandler.addModify(ballPhysicsElement, (BallResetModify) () -> newPos);
     }
 }

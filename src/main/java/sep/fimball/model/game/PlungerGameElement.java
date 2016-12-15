@@ -41,7 +41,7 @@ public class PlungerGameElement extends GameElement
             {
                 oldState = KeyChangedToState.UP;
                 double force = calcForce();
-                physicsHandler.addModify(plungerPhysicsElement, new PlungerModify(force));
+                physicsHandler.addModify(plungerPhysicsElement, (PlungerModify) () -> force);
             }
         });
     }
