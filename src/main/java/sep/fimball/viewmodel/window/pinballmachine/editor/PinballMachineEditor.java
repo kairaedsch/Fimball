@@ -134,7 +134,6 @@ public class PinballMachineEditor
         {
             pinballMachine.removeElement(placedElement);
         }
-        selection.clear();
     }
 
     /**
