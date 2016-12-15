@@ -23,8 +23,14 @@ public class PhysicsHandler<GameElementT>
      */
     private BallPhysicsElement<GameElementT> ballPhysicsElement;
 
+    /**
+     * Enthält die ModifyContainer.
+     */
     private List<ModifyContainer> modifyContainers;
 
+    /**
+     * Der Monitor, über den die Modifies synchronisiert.
+     */
     private final Object modifiesMonitor = new Object();
 
     /**
@@ -53,10 +59,9 @@ public class PhysicsHandler<GameElementT>
     private boolean ballLost;
 
     /**
-     * Ein Monitor, über den synchronisiert wird.
-     * TODO
+     * Ein Monitor, über den die Physik synchronisiert wird.
      */
-    private final Object monitor = new Object();
+    private final Object physicsMonitor = new Object();
 
     /**
      * Gibt an, ob die Physik auf auf User Input reagiert.
@@ -92,6 +97,12 @@ public class PhysicsHandler<GameElementT>
         modifyContainers = new ArrayList<>();
     }
 
+    /**
+     * Fügt das PhysicsElement zusammen mit dem Modify zum {@code modifiesMonitor} hinzu.
+     * @param physicsElement Das PhysicsElement, das mit dem Modify hinzugefügt werden soll.
+     * @param modify Der Modify, der hinzugefügt werden soll.
+     * @param <ModifyT> Der Typ des Modify.
+     */
     public <ModifyT extends Modify> void addModify(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
     {
         synchronized (modifiesMonitor)
@@ -143,7 +154,7 @@ public class PhysicsHandler<GameElementT>
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
                 boolean localBallLost = false;
 
-                synchronized (monitor)
+                synchronized (physicsMonitor)
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 

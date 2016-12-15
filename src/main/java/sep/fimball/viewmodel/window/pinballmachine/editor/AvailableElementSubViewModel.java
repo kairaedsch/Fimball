@@ -105,6 +105,10 @@ public class AvailableElementSubViewModel
         pinballMachineEditorViewModel.select(baseElement);
     }
 
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass die Maustaste losgelassen wurde.
+     * @param mouseEvent Das Event, in dem die Maustaste losgelassen wurde.
+     */
     public void mouseReleased(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);

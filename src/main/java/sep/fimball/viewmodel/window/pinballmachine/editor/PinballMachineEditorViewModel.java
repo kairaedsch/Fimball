@@ -96,15 +96,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Optional<BaseElement>> selectedAvailableElement;
 
-    /**
-     * Das aktuell auf dem Spielfeld ausgewählte Element.
-     */
-    private ObjectProperty<Optional<PlacedElement>> selectedPlacedElement;
-
-    /**
-     * Die Position des aktuell auf dem Spielfeld ausgewählten Elements.
-     */
-    private ObjectProperty<Vector2> selectedPlacedElementPosition;
 
     /**
      * Die zugehörige GameSession.
@@ -147,7 +138,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         pinballMachineEditor = new PinballMachineEditor(pinballMachine);
 
         selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
-        selectedPlacedElement = new SimpleObjectProperty<>(Optional.empty());
 
         mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
 
