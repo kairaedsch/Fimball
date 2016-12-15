@@ -1,8 +1,6 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 
 /**
  * Implementierung eines Colliders, der die Form eines Kreises hat.
@@ -53,16 +51,16 @@ public class CircleColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(CircleColliderShape otherColliderShape, Vector2 otherColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
         // Collision check between two circles
         Vector2 globalColliderPosition = position.plus(currentColliderPosition).rotate(Math.toRadians(rotation), pivotPoint.plus(currentColliderPosition));
-        Vector2 ballGlobalColliderPosition = activeColliderPosition.plus(activeColliderShape.getPosition());
+        Vector2 ballGlobalColliderPosition = otherColliderPosition.plus(otherColliderShape.getPosition());
         Vector2 distance = ballGlobalColliderPosition.minus(globalColliderPosition);
 
-        if (distance.magnitude() < activeColliderShape.getRadius() + radius)
+        if (distance.magnitude() < otherColliderShape.getRadius() + radius)
         {
-            double overlapDistance = (activeColliderShape.getRadius() + radius) - distance.magnitude();
+            double overlapDistance = (otherColliderShape.getRadius() + radius) - distance.magnitude();
             return new HitInfo(true, distance.normalized().scale(overlapDistance));
         }
 
@@ -74,11 +72,11 @@ public class CircleColliderShape implements ColliderShape
     {
         if (max)
         {
-            return position.plus(new Vector2(radius, radius));
+            return position.rotate(Math.toRadians(-rotation), pivotPoint).plus(new Vector2(radius, radius));
         }
         else
         {
-            return position.minus(new Vector2(radius, radius));
+            return position.rotate(Math.toRadians(-rotation), pivotPoint).minus(new Vector2(radius, radius));
         }
     }
 
