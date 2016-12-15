@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
@@ -90,5 +91,10 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     private void removeClicked()
     {
         selectedElementSubViewModel.remove();
+    }
+
+    public void dublicateClicked(MouseEvent mouseEvent)
+    {
+        selectedElementSubViewModel.dublicate();
     }
 }

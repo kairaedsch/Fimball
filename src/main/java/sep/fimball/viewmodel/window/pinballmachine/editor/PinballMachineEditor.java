@@ -10,9 +10,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 public class PinballMachineEditor
@@ -224,5 +222,22 @@ public class PinballMachineEditor
     ReadOnlyListProperty<PlacedElement> getSelection()
     {
         return selection;
+    }
+
+    public void dublicateSelection()
+    {
+        List<PlacedElement> newSelection = new ArrayList<>();
+        for (PlacedElement placedElement : selection)
+        {
+            PlacedElement placedElementCopy = placedElement.dublicate();
+            placedElementCopy.setPosition(placedElementCopy.positionProperty().get().plus(new Vector2(2, -2)));
+            pinballMachine.addElement(placedElementCopy);
+            newSelection.add(placedElementCopy);
+        }
+        clearSelection();
+        for (PlacedElement placedElement : newSelection)
+        {
+            addToSelection(placedElement);
+        }
     }
 }

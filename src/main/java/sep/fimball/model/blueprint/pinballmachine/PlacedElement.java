@@ -161,4 +161,9 @@ public class PlacedElement
     {
         return (int) (element1.positionProperty().get().getY() - element2.positionProperty().get().getY());
     }
+
+    public PlacedElement dublicate()
+    {
+        return new PlacedElement(baseElement, position.get(), points.get(), multiplier.get(), rotation.get());
+    }
 }

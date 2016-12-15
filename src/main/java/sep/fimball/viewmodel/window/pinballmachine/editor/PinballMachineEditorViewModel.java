@@ -345,7 +345,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.clearSelection();
             mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, gridPos)));
+            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, 0, 0)));
         }
     }
 
@@ -372,14 +372,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
                 if (selectionRect.get().isPresent())
                 {
-                    if (selectionRect.get().get().getHeight() > 0 || selectionRect.get().get().getWidth() > 0)
+                    if (selectionRect.get().get().normalize().getHeight() > 0 || selectionRect.get().get().normalize().getWidth() > 0)
                     {
                         pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get()));
                         selectionRect.setValue(Optional.empty());
-                    }
-                    else
-                    {
-                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get().getOrigin()));
                     }
                 }
             }
