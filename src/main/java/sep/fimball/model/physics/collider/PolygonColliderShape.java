@@ -1,10 +1,6 @@
 package sep.fimball.model.physics.collider;
 
-import javafx.scene.paint.Color;
-import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
-import sep.fimball.model.physics.element.BallPhysicsElement;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -42,10 +38,10 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
-    public HitInfo calculateHitInfo(CircleColliderShape activeColliderShape, Vector2 activeColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
+    public HitInfo calculateHitInfo(CircleColliderShape otherColliderShape, Vector2 otherColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        Vector2 globalBallPosition = activeColliderPosition.plus(activeColliderShape.getPosition());
+        Vector2 globalBallPosition = otherColliderPosition.plus(otherColliderShape.getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
         List<Vector2> ballAxisList = new ArrayList<>();
         Vector2 ballAxis;
@@ -68,8 +64,8 @@ public class PolygonColliderShape implements ColliderShape
         points.sort(Comparator.naturalOrder());
 
         double ballCenter = globalBallPosition.dot(ballAxis);
-        double ballMin = ballCenter - activeColliderShape.getRadius();
-        double ballMax = ballCenter + activeColliderShape.getRadius();
+        double ballMin = ballCenter - otherColliderShape.getRadius();
+        double ballMax = ballCenter + otherColliderShape.getRadius();
 
         double polyMin = points.get(0);
         double polyMax = points.get(points.size() - 1);
@@ -110,8 +106,8 @@ public class PolygonColliderShape implements ColliderShape
             newPoints.sort(Comparator.naturalOrder());
 
             double circleCenter = globalBallPosition.dot(currentAxis);
-            double ballMinimum = circleCenter - activeColliderShape.getRadius();
-            double ballMaximum = circleCenter + activeColliderShape.getRadius();
+            double ballMinimum = circleCenter - otherColliderShape.getRadius();
+            double ballMaximum = circleCenter + otherColliderShape.getRadius();
 
             double polygonMin = newPoints.get(0);
             double polygonMax = newPoints.get(newPoints.size() - 1);

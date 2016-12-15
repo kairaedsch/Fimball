@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class ColliderTest
 {
     @Test
-    public void CollisionTest()
+    public void collisionTest()
     {
         BallPhysicsElement ball = mock(BallPhysicsElement.class);
         when(ball.getLayer()).thenReturn(WorldLayer.GROUND);
