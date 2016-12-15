@@ -85,16 +85,23 @@ public class Settings
     }
 
     /**
-     * Erzeugt eine neue Instanz von Settings mit den angegebenen Werten.
+     * Erzeugt eine neue Instanz von Settings mit den Parametern aus {@code settingsJson}.
+     *
+     * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
      */
-    Settings(Map<KeyCode, KeyBinding> keyBindings, Language language, boolean fullscreen, int masterVolume, int musicVolume, int sfxVolume)
+    Settings(SettingsJson settingsJson)
     {
+        language = new SimpleObjectProperty<>(Language.valueOf(settingsJson.language));
+        fullscreen = new SimpleBooleanProperty(settingsJson.fullscreen);
+        masterVolume = new SimpleIntegerProperty(settingsJson.masterVolume);
+        musicVolume = new SimpleIntegerProperty(settingsJson.musicVolume);
+        sfxVolume = new SimpleIntegerProperty(settingsJson.sfxVolume);
+        HashMap<KeyCode, KeyBinding> keyBindings = new HashMap<>();
+        for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
+        {
+            keyBindings.put(KeyCode.valueOf(layout.keyCode), layout.keyBinding);
+        }
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
-        this.language = new SimpleObjectProperty<>(language);
-        this.fullscreen = new SimpleBooleanProperty(fullscreen);
-        this.masterVolume = new SimpleIntegerProperty(masterVolume);
-        this.musicVolume = new SimpleIntegerProperty(musicVolume);
-        this.sfxVolume = new SimpleIntegerProperty(sfxVolume);
     }
 
     /**
@@ -110,7 +117,7 @@ public class Settings
             Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToSettings()), SettingsJson.class);
             if (settingsOptional.isPresent())
             {
-                singletonInstance = SettingsFactory.createSettingsFromJson(settingsOptional.get());
+                singletonInstance = new Settings(settingsOptional.get());
             }
             else
             {
@@ -127,7 +134,7 @@ public class Settings
      */
     public void saveToDisk(String filePath)
     {
-        SettingsJson settingsJson = SettingsFactory.createJsonFromSettings(this);
+        SettingsJson settingsJson = SettingsJsonFactory.createJsonFromSettings(this);
         JsonFileManager.saveToJson(filePath, settingsJson);
     }
 

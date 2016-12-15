@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sep.fimball.general.data.Language;
@@ -15,54 +14,18 @@ import sep.fimball.model.input.data.KeyBinding;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
 /**
- * Diese Klasse enthält Tests, die prüfen, ob die Serialisierung der Einstellungen ordentlich funktioniert.
+ * Diese Klasse enthält Tests, die prüfen, ob die Serialisierung der Einstellungen funktioniert.
  */
-public class SettingsFactoryTest
+public class SettingsJsonFactoryTest
 {
-    private final boolean IS_IN_FULLSCREEN = false;
-    private final int MASTER_VOLUME = 50;
-    private final int MUSIC_VOLUME = 75;
-    private final int SFX_VOLUME = 80;
-    private final Language LANGUAGE = Language.GERMAN;
     private SettingsJson.KeyLayout[] keyLayouts;
-
-    /**
-     * Dieser Test prüft, ob die Einstellungen richtig aus einer SettingsJson geladen werden.
-     */
-    @Test (timeout = 2000)
-    public void testCreateSettings()
-    {
-        SettingsJson testSettingsJson = new SettingsJson();
-        testSettingsJson.keyLayouts = keyLayouts;
-        testSettingsJson.language = LANGUAGE.name();
-        testSettingsJson.fullscreen = IS_IN_FULLSCREEN;
-        testSettingsJson.masterVolume = MASTER_VOLUME;
-        testSettingsJson.musicVolume = MUSIC_VOLUME;
-        testSettingsJson.sfxVolume = SFX_VOLUME;
-        Settings testSettings = SettingsFactory.createSettingsFromJson(testSettingsJson);
-
-        assertThat(testSettings.languageProperty().get(), equalTo(LANGUAGE));
-        assertThat(testSettings.fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
-        assertThat(testSettings.masterVolumeProperty().get(), is(MASTER_VOLUME));
-        assertThat(testSettings.musicVolumeProperty().get(), is(MUSIC_VOLUME));
-        assertThat(testSettings.sfxVolumeProperty().get(), is(SFX_VOLUME));
-        assertThat(testSettings.keyBindingsMapProperty(), not(equalTo(null)));
-        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> testSettings.getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).equals(keyLayout.keyBinding)), is(true));
-        Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !KeyCode.valueOf(keyLayout.keyCode).equals(keyCode)))).findFirst();
-        if (unusedKeyCode.isPresent())
-        {
-            assertThat(testSettings.getKeyBinding(unusedKeyCode.get()), equalTo(null));
-        }
-    }
 
     /**
      * Testet, ob aus bestehenden Settings eine korrekte SettingsJson Datei erzeugt wird.
@@ -70,6 +33,12 @@ public class SettingsFactoryTest
     @Test (timeout = 2000)
     public void testCreateJson()
     {
+        final boolean IS_IN_FULLSCREEN = false;
+        final int MASTER_VOLUME = 50;
+        final int MUSIC_VOLUME = 75;
+        final int SFX_VOLUME = 80;
+        final Language LANGUAGE = Language.GERMAN;
+        initKeyLayouts();
         Settings mockedSettings = Mockito.mock(Settings.class);
         Mockito.when(mockedSettings.languageProperty()).thenReturn(new SimpleObjectProperty<>(LANGUAGE));
         Mockito.when(mockedSettings.fullscreenProperty()).thenReturn(new SimpleBooleanProperty(IS_IN_FULLSCREEN));
@@ -84,7 +53,7 @@ public class SettingsFactoryTest
         Mockito.when(mockedSettings.keyBindingsMapProperty()).thenReturn(new SimpleMapProperty<>(FXCollections.observableMap(keyBindings)));
         Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> keyBindings.get(invocation.getArgument(0)));
 
-        SettingsJson createdJson = SettingsFactory.createJsonFromSettings(mockedSettings);
+        SettingsJson createdJson = SettingsJsonFactory.createJsonFromSettings(mockedSettings);
 
         assertThat(createdJson.language, equalTo(LANGUAGE.name()));
         assertThat(createdJson.fullscreen, is(IS_IN_FULLSCREEN));
@@ -97,8 +66,7 @@ public class SettingsFactoryTest
     /**
      * Weist den Einträgen von {@code keyLayouts} Werte zu.
      */
-    @Before
-    public void initKeyLayouts()
+    private void initKeyLayouts()
     {
         keyLayouts = new SettingsJson.KeyLayout[9];
         for (int i = 0; i < 9; i++)
