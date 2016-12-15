@@ -122,7 +122,7 @@ public class PhysicsHandler<GameElementT>
 
     public void resetBall()
     {
-        synchronized (monitor)
+        synchronized (physicsMonitor)
         {
             ballLost = false;
         }
