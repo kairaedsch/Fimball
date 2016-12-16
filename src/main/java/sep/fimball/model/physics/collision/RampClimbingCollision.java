@@ -4,7 +4,6 @@ import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.PhysicsElement;
-import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,7 @@ public class RampClimbingCollision implements CollisionType
                 .map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true))
                 .reduce(Vector2::max);
         if (!maxPosOptional.isPresent())
-            throw new InvalidStateException("Shape didn't have any positions.");
+            throw new IllegalStateException("Shape didn't have any positions.");
         Vector2 maxPos = maxPosOptional.get();
 
         //Minimale x und y Position der Rampen ColliderShape.
@@ -33,7 +32,7 @@ public class RampClimbingCollision implements CollisionType
                 .map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false))
                 .reduce(Vector2::min);
         if (!minPosOptinal.isPresent())
-            throw new InvalidStateException("Shape didn't have any positions.");
+            throw new IllegalStateException("Shape didn't have any positions.");
         Vector2 minPos = minPosOptinal.get();
 
         //Wenn sich der Ball nicht auf der Rampe befindet kann abgebrochen werden.

@@ -1,7 +1,6 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
-import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -143,7 +142,7 @@ public class PolygonColliderShape implements ColliderShape
         if (extremeVal.isPresent())
             return extremeVal.get();
         else
-            throw new InvalidStateException("No vectors found.");
+            throw new IllegalStateException("No vectors found.");
     }
 
     /**
