@@ -341,7 +341,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else
         {
-            pinballMachineEditor.clearSelection();
+            if (!mouseEvent.isControlDown())
+            {
+                pinballMachineEditor.clearSelection();
+            }
             mouseMode.setValue(MouseMode.SELECTING);
             selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, 0, 0)));
         }
@@ -354,7 +357,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        if (mouseOnCanvas)
+        if (mouseOnCanvas && mouseEvent.getButton() == MouseButton.PRIMARY)
         {
             if (mouseMode.get() == MouseMode.PLACING)
             {
