@@ -135,8 +135,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         pinballMachineEditor = new PinballMachineEditor(pinballMachine);
 
-        pinballMachineEditor = new PinballMachineEditor(pinballMachine);
-
         selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
 
         mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
