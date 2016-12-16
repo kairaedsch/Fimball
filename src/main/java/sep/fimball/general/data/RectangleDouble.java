@@ -1,9 +1,5 @@
 package sep.fimball.general.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * RectangleDouble stellt ein Rechteck dar, wobei seine Daten mit Double-Werten gespeichert werden.
  */
@@ -29,6 +25,12 @@ public class RectangleDouble
     {
         this.origin = origin;
         this.size = size;
+    }
+
+    public static RectangleDouble rectangleFromPoints(Vector2 a, Vector2 b)
+    {
+        Vector2 minPoint = Vector2.min(a, b);
+        return new RectangleDouble(minPoint, Vector2.max(a, b).minus(minPoint));
     }
 
     /**
@@ -85,14 +87,5 @@ public class RectangleDouble
     public Vector2 getSize()
     {
         return size;
-    }
-
-    public RectangleDouble normalize()
-    {
-        List<Vector2> list = Arrays.asList(origin, size);
-        Vector2 origin = Vector2.getExtremeVector(list, false, v -> v);
-        Vector2 size = Vector2.getExtremeVector(list, true, v -> v);
-
-        return new RectangleDouble(origin, size);
     }
 }

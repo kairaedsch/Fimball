@@ -6,8 +6,8 @@ import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.collider.HitInfo;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
@@ -89,9 +89,18 @@ public class BasePhysicsElement
      */
     public Vector2 getExtremePos(double rotation, boolean max)
     {
-        // Fasse alle shapes in einer Liste zusammen
-        List<ColliderShape> shapes = colliders.stream().collect(ArrayList::new, (list, collider) -> list.addAll(collider.getShapes()), ArrayList::addAll);
-
-        return Vector2.getExtremeVector(shapes, max, shape -> shape.getExtremePos(rotation, pivotPoint, max));
+        Optional<Vector2> result = colliders
+                .stream()
+                .map(collider -> collider.getShapes()
+                        .stream()
+                        .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))
+                        .reduce(Vector2::max))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .reduce(max ? Vector2::max : Vector2::min);
+        if (result.isPresent())
+            return result.get();
+        else
+            throw new IllegalStateException("Recieved invalid shapes");
     }
 }

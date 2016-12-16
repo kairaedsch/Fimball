@@ -111,8 +111,6 @@ public class PinballMachine
      */
     public ListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
     {
-        rect = rect.normalize();
-
         ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement element : elements)
         {
@@ -134,8 +132,18 @@ public class PinballMachine
      */
     public RectangleDouble getBoundingBox()
     {
-        Vector2 max = Vector2.getExtremeVector(elements, true, placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), true)));
-        Vector2 origin = Vector2.getExtremeVector(elements, false, placedElement -> placedElement.positionProperty().get().plus(placedElement.getBaseElement().getPhysics().getExtremePos(placedElement.rotationProperty().get(), false)));
+        Vector2 max = elements
+                .stream()
+                .map(element -> element.positionProperty().get()
+                        .plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)))
+                .reduce(Vector2::max)
+                .get();
+        Vector2 origin = elements
+                .stream()
+                .map(element -> element.positionProperty().get()
+                        .plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false)))
+                .reduce(Vector2::min)
+                .get();
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());

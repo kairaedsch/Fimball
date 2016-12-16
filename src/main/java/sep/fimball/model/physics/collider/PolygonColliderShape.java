@@ -1,10 +1,12 @@
 package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
+import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -137,7 +139,11 @@ public class PolygonColliderShape implements ColliderShape
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        return Vector2.getExtremeVector(rotatedVertices, max, t -> t);
+        Optional<Vector2> extremeVal = rotatedVertices.stream().reduce(max ? Vector2::max : Vector2::min);
+        if (extremeVal.isPresent())
+            return extremeVal.get();
+        else
+            throw new InvalidStateException("No vectors found.");
     }
 
     /**

@@ -1,10 +1,12 @@
 package sep.fimball.model.physics.collider;
 
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collision.CollisionInfo;
 import sep.fimball.model.physics.collision.CollisionType;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,17 +62,32 @@ public class Collider
         if (ball.getLayer() != layer && layer != WorldLayer.BOTH)
             return false;
 
-        boolean hit = false;
+        List<HitInfo> hits = new ArrayList<>();
+        List<ColliderShape> collidedShapes = new ArrayList<>();
         for (ColliderShape shape : shapes)
         {
             HitInfo info = shape.calculateHitInfo(ball.getCollider(), ball.getPosition(), element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
             if (info.isHit())
             {
-                type.applyCollision(new CollisionInfo(ball, info.getShortestIntersect(), element, shape));
-                hit = true;
+                hits.add(info);
+                collidedShapes.add(shape);
             }
         }
-        return hit;
+
+        if (hits.size() > 0)
+        {
+            Vector2 shortestCombinedIntersect = new Vector2();
+            for (HitInfo hit : hits)
+            {
+                shortestCombinedIntersect = shortestCombinedIntersect.plus(hit.getShortestIntersect());
+            }
+            shortestCombinedIntersect.scale(1 / hits.size());
+            type.applyCollision(new CollisionInfo(ball, shortestCombinedIntersect, element, collidedShapes));
+
+            return true;
+        }
+
+        return false;
     }
 
     /**

@@ -5,6 +5,8 @@ import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
+import java.util.List;
+
 /**
  * CollisionInfo gibt Auskunft über eine aufgetretene Kollision.
  */
@@ -23,7 +25,7 @@ public class CollisionInfo
     /**
      * Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
      */
-    private ColliderShape otherColliderShape;
+    private List<ColliderShape> otherColliderShapes;
 
     /**
      * Das physikalische Element mit dem der Ball kollidiert ist.
@@ -36,14 +38,14 @@ public class CollisionInfo
      * @param ball Das physikalische Element des Balls.
      * @param shortestIntersect Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
      * @param otherPhysicsElement Das physikalische Element mit dem der Ball kollidiert ist.
-     * @param otherColliderShape Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
+     * @param otherColliderShapes Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
      */
-    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement otherPhysicsElement, ColliderShape otherColliderShape)
+    public CollisionInfo(BallPhysicsElement ball, Vector2 shortestIntersect, PhysicsElement otherPhysicsElement, List<ColliderShape> otherColliderShapes)
     {
         this.ball = ball;
         this.shortestIntersect = shortestIntersect;
         this.otherPhysicsElement = otherPhysicsElement;
-        this.otherColliderShape = otherColliderShape;
+        this.otherColliderShapes = otherColliderShapes;
     }
 
     /**
@@ -71,9 +73,9 @@ public class CollisionInfo
      *
      * @return Die Form des Colliders mit der der Ball kollidiert ist.
      */
-    public ColliderShape getOtherColliderShape()
+    public List<ColliderShape> getOtherColliderShapes()
     {
-        return otherColliderShape;
+        return otherColliderShapes;
     }
 
     /**

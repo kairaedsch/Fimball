@@ -9,9 +9,12 @@ import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static org.mockito.Mockito.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests für die Klasse RampClimbingCollision
@@ -27,6 +30,8 @@ public class RampClimbingCollisionTest
         BallPhysicsElement ballPhysicsElement = mock(BallPhysicsElement.class);
         CollisionInfo collisionInfo = mock(CollisionInfo.class);
         ColliderShape rampCollisionShape = mock(PolygonColliderShape.class);
+        List<ColliderShape> rampCollisionShapes = new ArrayList<>();
+        rampCollisionShapes.add(rampCollisionShape);
         PhysicsElement otherPhysicsElement = mock(PhysicsElement.class);
         BasePhysicsElement basePhysicsElement = mock(BasePhysicsElement.class);
         CircleColliderShape ballCollider = mock(CircleColliderShape.class);
@@ -45,7 +50,7 @@ public class RampClimbingCollisionTest
         when(basePhysicsElement.getPivotPoint()).thenReturn(new Vector2(3, 3));
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(collisionInfo.getOtherPhysicsElement()).thenReturn(otherPhysicsElement);
-        when(collisionInfo.getOtherColliderShape()).thenReturn(rampCollisionShape);
+        when(collisionInfo.getOtherColliderShapes()).thenReturn(rampCollisionShapes);
 
         ballPhysicsElement.setPosition(new Vector2(8, 8));
         ballPhysicsElement.setHeight(0.0);
