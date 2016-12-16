@@ -32,6 +32,7 @@ public class PinballMachineEditor
 
     /**
      * Erstellt einen neuen PinballMachineEditor.
+     *
      * @param pinballMachine Der zugehörige Flipper-Automat.
      */
     PinballMachineEditor(PinballMachine pinballMachine)
@@ -54,19 +55,22 @@ public class PinballMachineEditor
 
     /**
      * Gibt die Position des gegebenen Elements zurück.
+     *
      * @param placedElement Das Element, dessen Position zurückgegeben werden soll.
      * @return Die Position des gegebenen Elements.
      */
     private Vector2 getPosition(PlacedElement placedElement)
     {
-        if(!detailedPositions.containsKey(placedElement)) detailedPositions.put(placedElement, placedElement.positionProperty().get());
+        if (!detailedPositions.containsKey(placedElement))
+            detailedPositions.put(placedElement, placedElement.positionProperty().get());
         return detailedPositions.get(placedElement);
     }
 
     /**
      * Setzt die Position des Elements.
+     *
      * @param placedElement Das Element, dessen Position gesetzt werden soll.
-     * @param newPos Die neue Position des Elements.
+     * @param newPos        Die neue Position des Elements.
      */
     private void setPosition(PlacedElement placedElement, Vector2 newPos)
     {
@@ -76,6 +80,7 @@ public class PinballMachineEditor
 
     /**
      * Verschiebt die Elemente in der Auswahl um den gegebenen Vector.
+     *
      * @param by Der Vektor, um den verschoben werden soll.
      */
     void moveSelectionBy(Vector2 by)
@@ -88,6 +93,7 @@ public class PinballMachineEditor
 
     /**
      * Verschiebt die Elemente in der Auswahl an die gegebene Position.
+     *
      * @param to Die Position, an der die Elemente in der Auswahl verschoben werden sollen.
      */
     void moveSelectionTo(Vector2 to)
@@ -118,8 +124,14 @@ public class PinballMachineEditor
      */
     void rotateSelection()
     {
-        for(PlacedElement placedElement : selection) {
-            placedElement.rotateClockwise();
+        if (!selection.isEmpty())
+        {
+            for (PlacedElement placedElement : selection)
+            {
+                placedElement.rotateClockwise();
+                placedElement.setPosition(placedElement.positionProperty().get().rotate(Math.toRadians(placedElement.getBaseElement().getMedia().getRotationAccuracy()), selection.get(0).positionProperty().get()));
+
+            }
         }
     }
 
@@ -136,11 +148,12 @@ public class PinballMachineEditor
 
     /**
      * Fügt ein Element zur Auswahl hinzu.
+     *
      * @param placedElement Das Element, das hinzugefügt werden soll.
      */
     void addToSelection(PlacedElement placedElement)
     {
-        if(!selection.contains(placedElement))
+        if (!selection.contains(placedElement))
         {
             setPosition(placedElement, getPosition(placedElement).round());
             selection.add(placedElement);
@@ -149,6 +162,7 @@ public class PinballMachineEditor
 
     /**
      * Fügt die Elemente zur Auswahl hinzu.
+     *
      * @param placedElementList Die Elemente, die hinzugefügt werden sollen.
      */
     void addToSelection(ListProperty<PlacedElement> placedElementList)
@@ -164,6 +178,7 @@ public class PinballMachineEditor
 
     /**
      * Fügt ein zum Platzieren verfügbares Element der Auswahl hinzu.
+     *
      * @param baseElement Das zum Platzieren verfügbares Element, das hinzugefügt werden soll.
      */
     void addToSelection(BaseElement baseElement)
@@ -175,6 +190,7 @@ public class PinballMachineEditor
 
     /**
      * Entfernt das Element aus der Auswahl.
+     *
      * @param placedElement Das Element, das entfernt werden soll.
      */
     void removeFromSelection(PlacedElement placedElement)
@@ -192,6 +208,7 @@ public class PinballMachineEditor
 
     /**
      * Gibt die Elemente an der gegebenen Position zurück.
+     *
      * @param pos Die Position.
      * @return Die Elemente an der gegebenen Position.
      */
@@ -206,7 +223,9 @@ public class PinballMachineEditor
         return elements;
     }
 
-    /** Gibt die Elemente, die in dem Rechteck liegen, zurück.
+    /**
+     * Gibt die Elemente, die in dem Rechteck liegen, zurück.
+     *
      * @param rect Das Rechteck.
      * @return Die Elemente, die in dem Rechteck liegen.
      */
@@ -217,6 +236,7 @@ public class PinballMachineEditor
 
     /**
      * Gibt die aktuelle Auswahl zurück.
+     *
      * @return Die aktuelle Auswahl.
      */
     ReadOnlyListProperty<PlacedElement> getSelection()

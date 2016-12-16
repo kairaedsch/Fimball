@@ -395,7 +395,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
-        System.out.println("entered" + mouseMode.get());
         mouseOnCanvas = true;
         if (mouseMode.get() == MouseMode.PLACING)
         {
@@ -444,11 +443,17 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         switch (binding)
         {
             case EDITOR_ROTATE:
-                pinballMachineEditor.rotateSelection();
+                if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+                {
+                    pinballMachineEditor.rotateSelection();
+                }
                 break;
             case EDITOR_DELETE:
-                pinballMachineEditor.removeSelection();
-                pinballMachineEditor.clearSelection();
+                if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+                {
+                    pinballMachineEditor.removeSelection();
+                    pinballMachineEditor.clearSelection();
+                }
                 break;
             case EDITOR_MOVE:
                 moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
