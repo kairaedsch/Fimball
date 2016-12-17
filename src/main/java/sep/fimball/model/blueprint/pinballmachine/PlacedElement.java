@@ -4,8 +4,6 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other;
-
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Ein PlacedElement hat dabei immer genau ein BaseElement. Dabei gilt:
  * <br/>PlacedElement hat z.B.
