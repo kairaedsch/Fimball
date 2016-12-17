@@ -73,6 +73,7 @@ public class SplashScreenViewModel extends WindowViewModel
 
     /**
      * Gibt den zum Key gehörenden Text zurück.
+     *
      * @param key Der Key, dessen zugehöriger Text zurückgegeben werden soll.
      * @return Der zum Key gehörende Text.
      */

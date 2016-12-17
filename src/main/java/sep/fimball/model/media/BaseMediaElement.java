@@ -140,6 +140,7 @@ public class BaseMediaElement
 
     /**
      * Gibt die Höhe des Elements zurück.
+     *
      * @return Die Höhe des Elements.
      */
     public double getElementHeight()

@@ -156,7 +156,8 @@ public class PinballMachineEditorTest
     }
 
     @Test
-    public void getElementsAtTest(){
+    public void getElementsAtTest()
+    {
         elementsInMachine = new ArrayList<>();
         PinballMachine mockedMachine = mock(PinballMachine.class);
         doAnswer(invocationOnMock ->
@@ -166,8 +167,10 @@ public class PinballMachineEditorTest
         }).when(mockedMachine).addElement(any(PlacedElement.class));
         doAnswer(invocationOnMock ->
         {
-            for (PlacedElement element : elementsInMachine) {
-                if (element.positionProperty().get().equals(invocationOnMock.getArgument(0))) {
+            for (PlacedElement element : elementsInMachine)
+            {
+                if (element.positionProperty().get().equals(invocationOnMock.getArgument(0)))
+                {
                     return Optional.of(element);
                 }
 
@@ -181,13 +184,14 @@ public class PinballMachineEditorTest
         test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(1, 1), 0, 0, 0));
         test.placeSelection();
 
-        ListProperty elements = new SimpleListProperty(test.getElementsAt(new Vector2(1,1)));
+        ListProperty elements = new SimpleListProperty(test.getElementsAt(new Vector2(1, 1)));
         assertThat(elements.size(), is(1));
     }
 
 
     /**
      * Gibt ein Test-BaseElement zurück.
+     *
      * @param id Die ID des BaseElements.
      * @return Ein Test-BaseElement.
      */

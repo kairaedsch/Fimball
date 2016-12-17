@@ -48,8 +48,7 @@ public class LanguageManagerViewModelTest
             // sind.
             for (Object key : properties.keySet())
             {
-                assertThat("LanguageManagerViewModel lädt den richtigen Text zum gegebenen Key in der richtigen Sprache",
-                        properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
+                assertThat("LanguageManagerViewModel lädt den richtigen Text zum gegebenen Key in der richtigen Sprache", properties.get(key), equalTo(LanguageManagerViewModel.getInstance().textProperty((String) key).get()));
             }
         }
 
@@ -69,7 +68,8 @@ public class LanguageManagerViewModelTest
             Reader reader = new InputStreamReader(inputStream, "UTF-8");
             properties.load(reader);
             inputStream.close();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.err.println("property file '" + path + "' not loaded");
             System.out.println("Exception: " + e);

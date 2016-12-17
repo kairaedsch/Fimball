@@ -99,9 +99,10 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Fügt das PhysicsElement zusammen mit dem Modify zum {@code modifiesMonitor} hinzu.
+     *
      * @param physicsElement Das PhysicsElement, das mit dem Modify hinzugefügt werden soll.
-     * @param modify Der Modify, der hinzugefügt werden soll.
-     * @param <ModifyT> Der Typ des Modify.
+     * @param modify         Der Modify, der hinzugefügt werden soll.
+     * @param <ModifyT>      Der Typ des Modify.
      */
     public <ModifyT extends Modify> void addModify(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
     {
@@ -182,11 +183,14 @@ public class PhysicsHandler<GameElementT>
                         }
                     }
 
-                    if (ballLost) localBallLost = false;
-                    if (localBallLost) ballLost = true;
+                    if (ballLost)
+                        localBallLost = false;
+                    if (localBallLost)
+                        ballLost = true;
                 }
 
-                if (localBallLost) gameSession.setBallLost(true);
+                if (localBallLost)
+                    gameSession.setBallLost(true);
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };

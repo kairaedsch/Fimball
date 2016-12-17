@@ -14,8 +14,9 @@ public class LineLightChanger extends LightChanger
 
     /**
      * Erstellt einen neuen LineLightChanger.
+     *
      * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
-     * @param vertical Gibt an, ob die Linie vertikal oder horizontal verläuft.
+     * @param vertical          Gibt an, ob die Linie vertikal oder horizontal verläuft.
      */
     LineLightChanger(boolean revertedAnimation, boolean vertical)
     {

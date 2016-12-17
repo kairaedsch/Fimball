@@ -25,6 +25,7 @@ public class SoundManagerViewModelTest
     /**
      * Gibt ein SoundManagerViewModel zurück, das mit gemockten Setttings erzeugt wird, um die eigentlichen Settings nicht zu
      * ändern.
+     *
      * @return Ein SoundManagerViewModel mit den gemockten Settings.
      */
     private SoundManagerViewModel init()
@@ -80,8 +81,7 @@ public class SoundManagerViewModelTest
         //Die Observer werden über das Abspielen des richtigen SoundClips informiert.
         Sound testSound = mock(Sound.class);
         SoundManager.getInstance().addSoundToPlay(testSound);
-        assertThat("Der Observer wurde über das Abspielen des richtigen Sounds informiert", playObserver.getSound(), equalTo
-                (testSound));
+        assertThat("Der Observer wurde über das Abspielen des richtigen Sounds informiert", playObserver.getSound(), equalTo(testSound));
 
         //Die Observer werden über das Stoppen der Hintergrundmusik informiert.
         NotificationObserver stopObserver = new NotificationObserver();
@@ -123,6 +123,7 @@ public class SoundManagerViewModelTest
 
         /**
          * Gibt die Anzahl der Notifikationen, die der Observer erhalten hat, zurück.
+         *
          * @return Die Anzahl der Notifikationen, die der Observer erhalten hat,
          */
         int getNumberOfNotifications()
@@ -132,6 +133,7 @@ public class SoundManagerViewModelTest
 
         /**
          * Gibt den Sound, der bei der letzten Notifikation übergeben wurde, zurück.
+         *
          * @return Der Sound, der bei der letzten Notifikation übergeben wurde.
          */
         Sound getSound()

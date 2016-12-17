@@ -28,9 +28,11 @@ public class TiltHandler extends UserHandler
 
     /**
      * Erzeugt einen neuen TiltHandler.
+     *
      * @param handlerGameSession Die zugehörige HandlerGameSession.
      */
-    TiltHandler(HandlerGameSession handlerGameSession) {
+    TiltHandler(HandlerGameSession handlerGameSession)
+    {
         super(KeyBinding.NUDGE_RIGHT, KeyBinding.NUDGE_LEFT);
         this.handlerGameSession = handlerGameSession;
         this.tiltCounters = new HashMap<>();
@@ -42,7 +44,8 @@ public class TiltHandler extends UserHandler
         if (keyEventType.getState() == KeyEventArgs.KeyChangedToState.DOWN && (keyEventType.getBinding() == KeyBinding.NUDGE_RIGHT || keyEventType.getBinding() == KeyBinding.NUDGE_LEFT) && keyEventType.isStateSwitched())
         {
             HandlerPlayer currentPlayer = handlerGameSession.getCurrentPlayer();
-            if (!tiltCounters.containsKey(currentPlayer)) tiltCounters.put(currentPlayer, 0);
+            if (!tiltCounters.containsKey(currentPlayer))
+                tiltCounters.put(currentPlayer, 0);
             tiltCounters.put(currentPlayer, tiltCounters.get(currentPlayer) + 1);
 
             if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER)

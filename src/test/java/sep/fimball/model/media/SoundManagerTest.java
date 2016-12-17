@@ -25,8 +25,7 @@ public class SoundManagerTest
     {
 
         // Legt einen neuen Test-Observer an
-        Observer testObserver = (o, sound) ->
-                testSound = (Sound) sound;
+        Observer testObserver = (o, sound) -> testSound = (Sound) sound;
 
         SoundManager.getInstance().addObserver(testObserver);
 

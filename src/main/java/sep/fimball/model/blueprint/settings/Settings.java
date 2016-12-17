@@ -189,7 +189,7 @@ public class Settings
      * gegebenenfalls die vorhandene Belegung des übergebenen KeyBindings.
      *
      * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
-     * @param keyCode Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
+     * @param keyCode    Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {

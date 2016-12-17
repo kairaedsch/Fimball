@@ -26,8 +26,10 @@ public class BaseMediaElementEvent
     public BaseMediaElementEvent(Optional<Animation> animation, Optional<String> soundName)
     {
         this.animation = animation;
-        if(soundName.isPresent()) this.sound = Optional.of(new Sound(soundName.get(), false));
-        else this.sound = Optional.empty();
+        if (soundName.isPresent())
+            this.sound = Optional.of(new Sound(soundName.get(), false));
+        else
+            this.sound = Optional.empty();
     }
 
     /**

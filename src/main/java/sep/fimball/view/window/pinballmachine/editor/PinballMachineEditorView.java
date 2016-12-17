@@ -98,12 +98,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel
-                .availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel
-                .availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel
-                .availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
@@ -121,8 +118,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Bindet die gegebene Pane an das gegeben Image.
+     *
      * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
-     * @param pane Die Pane, die sich an das Image binden soll.
+     * @param pane      Die Pane, die sich an das Image binden soll.
      */
     private void bindPaneToImage(Optional<String> imagePath, Pane pane)
     {
@@ -144,6 +142,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Fügt EventFilter zur Erkennung von Maus-Bewegungen zur {@code stage} hinzu.
+     *
      * @param stage Die Stage.
      */
     public void addEventFilterToStage(Stage stage)
@@ -154,6 +153,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Aktualisiert die Position der Drag-Vorschau.
+     *
      * @param event Das Event, das die Position des Vorschaubildes bestimmt.
      */
     private void updatePreviewPosition(MouseEvent event)
@@ -301,6 +301,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.
+     *
      * @param mousePos Die Position der Maus.
      * @return Die berechnete Position auf dem Canvas.
      */

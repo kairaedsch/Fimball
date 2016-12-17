@@ -113,7 +113,7 @@ public class SpriteSubViewModel
 
         selected.bind(Bindings.createBooleanBinding(() -> selection.stream().anyMatch(p -> p == gameElement.getPlacedElement()), selection));
 
-        if(gameElement.getElementType() == BaseElementType.RAMP)
+        if (gameElement.getElementType() == BaseElementType.RAMP)
         {
             visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selection));
         }

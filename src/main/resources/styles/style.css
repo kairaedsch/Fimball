@@ -288,13 +288,13 @@
     -fx-border-radius: 0 0 15px 15px;
 }
 
-.gameInfoPlayer, .gameInfoScore  {
+.gameInfoPlayer, .gameInfoScore {
     -fx-text-fill: #FFF;
     -fx-font-size: 24px;
     -fx-padding: 5px 10px;
 }
 
-.gameInfoPlayerContainer, .gameInfoScoreContainer  {
+.gameInfoPlayerContainer, .gameInfoScoreContainer {
     -fx-border-color: #FF9393;
     -fx-border-width: 0 0 1px 0;
 }

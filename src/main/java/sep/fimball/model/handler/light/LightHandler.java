@@ -48,7 +48,8 @@ public class LightHandler implements GameHandler
 
     /**
      * Erstellt einen neuen LightHandler.
-     * @param gameSession Die zugehörige GameSession.
+     *
+     * @param gameSession   Die zugehörige GameSession.
      * @param lightChangers Die LightChangers, die entscheiden, ob sich Lichter ändern.
      */
     public LightHandler(HandlerGameSession gameSession, List<LightChanger> lightChangers)
@@ -73,7 +74,7 @@ public class LightHandler implements GameHandler
         long now = System.currentTimeMillis();
         long delta = now - currentLightChangerStart;
 
-        if(delta > currentLightChanger.getDuration())
+        if (delta > currentLightChanger.getDuration())
         {
             currentLightChanger = lightChangers.get(new Random().nextInt(lightChangers.size()));
             currentLightChangerStart = now;
@@ -93,11 +94,11 @@ public class LightHandler implements GameHandler
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        if(gameEvent == GameEvent.BALL_LOST)
+        if (gameEvent == GameEvent.BALL_LOST)
         {
             lightChangeLoop.stop();
         }
-        if(gameEvent == GameEvent.BALL_SPAWNED)
+        if (gameEvent == GameEvent.BALL_SPAWNED)
         {
             lightChangeLoop.play();
         }

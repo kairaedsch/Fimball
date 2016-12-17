@@ -74,6 +74,7 @@ public class BaseElement
 
     /**
      * Gibt die BaseElementCategory des BaseElements zurück.
+     *
      * @return Die BaseElementCategory des BaseElements.
      */
     public BaseElementCategory getElementCategory()

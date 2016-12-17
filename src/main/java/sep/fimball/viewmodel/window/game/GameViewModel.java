@@ -87,7 +87,7 @@ public class GameViewModel extends WindowViewModel
 
         playerPoints.bind(gameSession.getCurrentPlayer().pointsProperty());
         playerName.bind(gameSession.getCurrentPlayer().nameProperty());
-        playerReserveBalls.bind( gameSession.getCurrentPlayer().ballsProperty());
+        playerReserveBalls.bind(gameSession.getCurrentPlayer().ballsProperty());
 
         pinballCanvasViewModel = new PinballCanvasGameViewModel(gameSession, this);
 

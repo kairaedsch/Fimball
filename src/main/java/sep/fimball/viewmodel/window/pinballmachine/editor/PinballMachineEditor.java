@@ -127,7 +127,8 @@ public class PinballMachineEditor
         if (!selection.isEmpty() && selection.stream().allMatch(p -> p.getBaseElement().getMedia().canRotate()))
         {
             double rotation = selection.stream().map(p -> p.getBaseElement().getMedia().getRotationAccuracy()).reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
-            if(rotation == 0) rotation = 90;
+            if (rotation == 0)
+                rotation = 90;
             Vector2 mainPivotPoint = selection.get(0).positionProperty().get().plus(selection.get(0).getBaseElement().getPhysics().getPivotPoint());
             for (PlacedElement placedElement : selection)
             {

@@ -30,7 +30,9 @@ public class PinballCanvasViewModelTest
             return null;
         }).when(gameSession).addGameLoopObserver(any());
 
-        PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME) {};
+        PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME)
+        {
+        };
 
         drawUpdateRecieved = false;
         pinballCanvasViewModel.addRedrawObserver((o, arg) -> drawUpdateRecieved = true);

@@ -66,6 +66,7 @@ public class MainMenuViewModelTest
 
     /**
      * Erstellt eine gemockten Automaten und gibt diesen zurück.
+     *
      * @return Einen gemockten Automaten.
      */
     private PinballMachine getMockedPinballMachine()
@@ -88,8 +89,9 @@ public class MainMenuViewModelTest
 
         doAnswer(invocationOnMock ->
         {
-            WindowViewModel windowViewModel= invocationOnMock.getArgument(0);
-            if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS) {
+            WindowViewModel windowViewModel = invocationOnMock.getArgument(0);
+            if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS)
+            {
                 editorSettingsShown = true;
                 pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
             }
@@ -98,10 +100,13 @@ public class MainMenuViewModelTest
 
         doAnswer(invocationOnMock ->
         {
-            DialogViewModel dialogViewModel= invocationOnMock.getArgument(0);
-            if (dialogViewModel.getDialogType() == DialogType.GAME_SETTINGS) {
+            DialogViewModel dialogViewModel = invocationOnMock.getArgument(0);
+            if (dialogViewModel.getDialogType() == DialogType.GAME_SETTINGS)
+            {
                 settingsShown = true;
-            } else if (dialogViewModel.getDialogType() == DialogType.PLAYER_NAMES) {
+            }
+            else if (dialogViewModel.getDialogType() == DialogType.PLAYER_NAMES)
+            {
                 namesShown = true;
             }
             return null;
@@ -117,7 +122,8 @@ public class MainMenuViewModelTest
      * Testet, ob der Settings-Dialog angezeigt wird.
      */
     @Test
-    public void settingsTest() {
+    public void settingsTest()
+    {
         init();
         test.showSettingsDialog();
         assertThat(settingsShown, is(true));
@@ -139,10 +145,11 @@ public class MainMenuViewModelTest
      * Testet, ob das Hinzufügen eines neuen Automaten funktioniert.
      */
     @Test
-    public void addTest() {
+    public void addTest()
+    {
         init();
         test.addNewPinballMachine();
-        assertThat(editorSettingsShown, is (true));
+        assertThat(editorSettingsShown, is(true));
         assertThat(newMachineAdded, is(true));
     }
 
@@ -162,10 +169,12 @@ public class MainMenuViewModelTest
     /**
      * Ein MainMenuViewModel, das zum Testen verwendet wird.
      */
-    public class TestMainMenuViewModel extends MainMenuViewModel {
+    public class TestMainMenuViewModel extends MainMenuViewModel
+    {
 
         @Override
-        public void addNewPinballMachine() {
+        public void addNewPinballMachine()
+        {
             sceneManager.setWindow(new PinballMachineSettingsViewModel(getMockedPinballMachine()));
             newMachineAdded = true;
         }

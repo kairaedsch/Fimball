@@ -38,9 +38,10 @@ public class GameOverViewModel extends DialogViewModel
 
     /**
      * Erstellt ein neues GameOverViewModel.
+     *
      * @param pinballMachine Der zugehörige Flipperautomat.
-     * @param playerScores Die Punktestände der Spieler.
-     * @param playerNames Die Namen der Spieler.
+     * @param playerScores   Die Punktestände der Spieler.
+     * @param playerNames    Die Namen der Spieler.
      */
     public GameOverViewModel(PinballMachine pinballMachine, ReadOnlyListProperty<Highscore> playerScores, String[] playerNames)
     {

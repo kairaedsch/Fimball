@@ -9,7 +9,9 @@ import sep.fimball.model.input.manager.KeyEventArgs;
  */
 public abstract class UserHandler
 {
-    /** Erstellt einen neuen UserHandler.
+    /**
+     * Erstellt einen neuen UserHandler.
+     *
      * @param keyBindings Die KeyBindings, auf der der UserHandler reagieren soll.
      */
     public UserHandler(KeyBinding... keyBindings)

@@ -15,6 +15,7 @@ public abstract class LightChanger
 
     /**
      * Erstellt einen neuen LightChanger.
+     *
      * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
      */
     LightChanger(boolean revertedAnimation)
@@ -27,7 +28,7 @@ public abstract class LightChanger
      * rückwärts abgespielt wird, angeschaltet werden soll.
      *
      * @param position Die Position des Lichts.
-     * @param delta Die Zeit, die seit dem Starten des LightChangers vergangen ist.
+     * @param delta    Die Zeit, die seit dem Starten des LightChangers vergangen ist.
      * @return {@code true}, wenn das Licht an sein soll, {@code false} sonst.
      */
     final boolean determineLightStatusWithAnimation(Vector2 position, long delta)
@@ -39,13 +40,14 @@ public abstract class LightChanger
      * Gibt zurück. ob das Licht an der gegebenen Position angeschaltet werden soll.
      *
      * @param position Die Position des Lichts.
-     * @param delta Die vergangene Zeit.
+     * @param delta    Die vergangene Zeit.
      * @return {@code true}, wenn das Licht an sein soll, {@code false} sonst.
      */
     protected abstract boolean determineLightStatus(Vector2 position, long delta);
 
     /**
      * Gibt die Zeitspanne, in der der LightChanger aktiv wird, zurück.
+     *
      * @return Die Zeitspanne, in der der LightChanger aktiv wird, zurück.
      */
     long getDuration()

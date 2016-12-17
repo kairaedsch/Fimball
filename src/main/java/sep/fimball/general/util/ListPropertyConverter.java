@@ -65,11 +65,13 @@ public class ListPropertyConverter
                         for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
                             int newPos = change.getPermutation(p);
-                            if(p != newPos)
+                            if (p != newPos)
                             {
                                 map.put(newPos, listPropertyConverted.get(newPos));
-                                if (map.containsKey(p)) listPropertyConverted.set(newPos, map.get(p));
-                                else listPropertyConverted.set(newPos, listPropertyConverted.get(p));
+                                if (map.containsKey(p))
+                                    listPropertyConverted.set(newPos, map.get(p));
+                                else
+                                    listPropertyConverted.set(newPos, listPropertyConverted.get(p));
                             }
                         }
                     }

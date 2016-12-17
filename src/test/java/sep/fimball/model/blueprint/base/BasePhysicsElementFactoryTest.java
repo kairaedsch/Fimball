@@ -27,7 +27,7 @@ public class BasePhysicsElementFactoryTest
         collider.collisionType.strength = TEST_DOUBLE;
 
         BaseElementJson.PhysicElementJson json = new BaseElementJson.PhysicElementJson();
-        json.colliders = new BaseElementJson.PhysicElementJson.PhysicColliderJson[] { collider };
+        json.colliders = new BaseElementJson.PhysicElementJson.PhysicColliderJson[]{collider};
         json.pivotPoint = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
 
         BasePhysicsElement generateElement = BasePhysicsElementFactory.create(json);

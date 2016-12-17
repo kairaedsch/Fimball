@@ -4,46 +4,60 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" text="!gamesettings.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" text="!gamesettings.key!" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-padding: 0;">
             <children>
-                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
+                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                          AnchorPane.topAnchor="0.0">
                     <tabs>
                         <Tab fx:id="general" closable="false" text="!gamesettings.general.key!">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                        <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS"
+                                                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane>
                                                     <children>
-                                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                                                        <VBox prefHeight="200.0" prefWidth="100.0"
+                                                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                                                               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                                             <children>
-                                                                <Label fx:id="languageLabel" text="!gamesettings.general.language.key!">
+                                                                <Label fx:id="languageLabel"
+                                                                       text="!gamesettings.general.language.key!">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
                                                                 </Label>
                                                                 <GridPane>
                                                                     <columnConstraints>
-                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
-                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                                        <ColumnConstraints minWidth="10.0"
+                                                                                           prefWidth="100.0"/>
+                                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                                           minWidth="10.0"
+                                                                                           prefWidth="100.0"/>
                                                                     </columnConstraints>
                                                                     <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                                        <RowConstraints minHeight="10.0"
+                                                                                        prefHeight="30.0"
+                                                                                        vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label fx:id="select" text="!gamesettings.general.language.select.key!"/>
-                                                                        <ComboBox fx:id="language" prefWidth="150.0" GridPane.columnIndex="1"/>
+                                                                        <Label fx:id="select"
+                                                                               text="!gamesettings.general.language.select.key!"/>
+                                                                        <ComboBox fx:id="language" prefWidth="150.0"
+                                                                                  GridPane.columnIndex="1"/>
                                                                     </children>
                                                                 </GridPane>
-                                                                <Label fx:id="keybindingLabel" text="!gamesettings.general.keybinding.key!">
+                                                                <Label fx:id="keybindingLabel"
+                                                                       text="!gamesettings.general.keybinding.key!">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
@@ -55,7 +69,8 @@
                                                                     <children>
                                                                     </children>
                                                                 </VBox>
-                                                                <Label fx:id="displayLabel" text="!gamesettings.general.display.key!">
+                                                                <Label fx:id="displayLabel"
+                                                                       text="!gamesettings.general.display.key!">
                                                                     <font>
                                                                         <Font name="System Bold" size="14.0"/>
                                                                     </font>
@@ -65,18 +80,28 @@
                                                                 </Label>
                                                                 <GridPane>
                                                                     <columnConstraints>
-                                                                        <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
-                                                                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                                                        <ColumnConstraints minWidth="10.0"
+                                                                                           prefWidth="100.0"/>
+                                                                        <ColumnConstraints fillWidth="false"
+                                                                                           hgrow="SOMETIMES"
+                                                                                           minWidth="10.0"
+                                                                                           prefWidth="100.0"/>
                                                                     </columnConstraints>
                                                                     <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                                        <RowConstraints minHeight="10.0"
+                                                                                        prefHeight="30.0"
+                                                                                        vgrow="SOMETIMES"/>
                                                                     </rowConstraints>
                                                                     <children>
-                                                                        <Label fx:id="fullscreenLabel" text="!gamesettings.general.display.fullscreen.key!"/>
-                                                                        <CheckBox fx:id="fullscreen" mnemonicParsing="false" GridPane.columnIndex="1"
+                                                                        <Label fx:id="fullscreenLabel"
+                                                                               text="!gamesettings.general.display.fullscreen.key!"/>
+                                                                        <CheckBox fx:id="fullscreen"
+                                                                                  mnemonicParsing="false"
+                                                                                  GridPane.columnIndex="1"
                                                                                   text="§gamesettings.general.display.fullscreen.tip.key§">
                                                                             <tooltip>
-                                                                                <Tooltip fx:id="fullscreenTip" text="!gamesettings.general.display.fullscreen.tip.key!"/>
+                                                                                <Tooltip fx:id="fullscreenTip"
+                                                                                         text="!gamesettings.general.display.fullscreen.tip.key!"/>
                                                                             </tooltip>
                                                                         </CheckBox>
                                                                     </children>
@@ -95,7 +120,8 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0"
+                                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                                               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                             <children>
                                                 <Label fx:id="volumeLabel" text="!gamesettings.audio.volume.key!">
@@ -106,36 +132,56 @@
                                                 <GridPane>
                                                     <columnConstraints>
                                                         <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
-                                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
                                                         <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
                                                     </rowConstraints>
                                                     <children>
-                                                        <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1">
+                                                        <Slider fx:id="masterVolumeSlider" blockIncrement="1.0"
+                                                                value="50.0" GridPane.columnIndex="1">
                                                             <tooltip>
-                                                                <Tooltip fx:id="masterTip" text="!gamesettings.audio.volume.master.tip.key!"/>
+                                                                <Tooltip fx:id="masterTip"
+                                                                         text="!gamesettings.audio.volume.master.tip.key!"/>
                                                             </tooltip>
                                                         </Slider>
-                                                        <Label fx:id="sfxVolumeLabel" text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="2"/>
-                                                        <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                                        <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                        <Label fx:id="sfxVolumeLabel"
+                                                               text="!gamesettings.audio.volume.sfx.key!"
+                                                               GridPane.rowIndex="2"/>
+                                                        <Label fx:id="musicVolumePercent" text="50%"
+                                                               GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                        <Slider fx:id="musicVolumeSlider" blockIncrement="1.0"
+                                                                value="50.0" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="1">
                                                             <tooltip>
-                                                                <Tooltip fx:id="musicTip" text="!gamesettings.audio.volume.music.tip.key!"/>
+                                                                <Tooltip fx:id="musicTip"
+                                                                         text="!gamesettings.audio.volume.music.tip.key!"/>
                                                             </tooltip>
                                                         </Slider>
-                                                        <Label fx:id="musicVolumeLabel" text="!gamesettings.audio.volume.music.key!" GridPane.rowIndex="1"/>
-                                                        <Label fx:id="masterVolumeLabel" text="!gamesettings.audio.volume.master.key!"/>
-                                                        <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                        <Label fx:id="musicVolumeLabel"
+                                                               text="!gamesettings.audio.volume.music.key!"
+                                                               GridPane.rowIndex="1"/>
+                                                        <Label fx:id="masterVolumeLabel"
+                                                               text="!gamesettings.audio.volume.master.key!"/>
+                                                        <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0"
+                                                                value="50.0" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="2">
                                                             <tooltip>
-                                                                <Tooltip fx:id="sfxTip" text="!gamesettings.audio.volume.sfx.tip.key!"/>
+                                                                <Tooltip fx:id="sfxTip"
+                                                                         text="!gamesettings.audio.volume.sfx.tip.key!"/>
                                                             </tooltip>
                                                         </Slider>
-                                                        <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                                                        <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2"/>
+                                                        <Label fx:id="sfxVolumePercent" text="50%"
+                                                               GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                        <Label fx:id="masterVolumePercent" text="50%"
+                                                               GridPane.columnIndex="2"/>
                                                     </children>
                                                 </GridPane>
                                             </children>
@@ -146,7 +192,8 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!gamesettings.continue.key!" AnchorPane.bottomAnchor="10.0"
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
+                        text="!gamesettings.continue.key!" AnchorPane.bottomAnchor="10.0"
                         AnchorPane.rightAnchor="25.0"/>
             </children>
         </AnchorPane>

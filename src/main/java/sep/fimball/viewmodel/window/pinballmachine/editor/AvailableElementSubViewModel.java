@@ -90,6 +90,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Gibt die Kategorie des Elements zurück.
+     *
      * @return Die Kategorie des Elements.
      */
     ReadOnlyObjectProperty<BaseElementCategory> getElementCategory()
@@ -107,6 +108,7 @@ public class AvailableElementSubViewModel
 
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass die Maustaste losgelassen wurde.
+     *
      * @param mouseEvent Das Event, in dem die Maustaste losgelassen wurde.
      */
     public void mouseReleased(MouseEvent mouseEvent)

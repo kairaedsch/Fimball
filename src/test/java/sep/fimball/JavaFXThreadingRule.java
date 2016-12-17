@@ -13,16 +13,16 @@ import java.util.concurrent.CountDownLatch;
 /**
  * A JUnit {@link Rule} for running tests on the JavaFX thread and performing
  * JavaFX initialisation.  To include in your test case, add the following code:
- *
+ * <p>
  * <pre>
  * {@literal @}Rule
  * public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
  * </pre>
  *
  * @author Andy Till
- *
  */
-public class JavaFXThreadingRule implements TestRule {
+public class JavaFXThreadingRule implements TestRule
+{
 
     /**
      * Flag for setting up the JavaFX, we only need to do this once for all tests.
@@ -30,25 +30,30 @@ public class JavaFXThreadingRule implements TestRule {
     private static boolean jfxIsSetup;
 
     @Override
-    public Statement apply(Statement statement, Description description) {
+    public Statement apply(Statement statement, Description description)
+    {
 
         return new OnJFXThreadStatement(statement);
     }
 
-    private static class OnJFXThreadStatement extends Statement {
+    private static class OnJFXThreadStatement extends Statement
+    {
 
         private final Statement statement;
 
-        public OnJFXThreadStatement(Statement aStatement) {
+        public OnJFXThreadStatement(Statement aStatement)
+        {
             statement = aStatement;
         }
 
         private Throwable rethrownException = null;
 
         @Override
-        public void evaluate() throws Throwable {
+        public void evaluate() throws Throwable
+        {
 
-            if(!jfxIsSetup) {
+            if (!jfxIsSetup)
+            {
                 setupJavaFX();
 
                 jfxIsSetup = true;
@@ -58,9 +63,12 @@ public class JavaFXThreadingRule implements TestRule {
 
             Platform.runLater(() ->
             {
-                try {
+                try
+                {
                     statement.evaluate();
-                } catch (Throwable e) {
+                }
+                catch (Throwable e)
+                {
                     rethrownException = e;
                 }
                 countDownLatch.countDown();
@@ -70,12 +78,14 @@ public class JavaFXThreadingRule implements TestRule {
 
             // if an exception was thrown by the statement during evaluation,
             // then re-throw it to fail the test
-            if(rethrownException != null) {
+            if (rethrownException != null)
+            {
                 throw rethrownException;
             }
         }
 
-        protected void setupJavaFX() throws InterruptedException {
+        protected void setupJavaFX() throws InterruptedException
+        {
 
             long timeMillis = System.currentTimeMillis();
 

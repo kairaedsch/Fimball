@@ -90,6 +90,7 @@ public class DesignConfig
 
     /**
      * Gibt den URL-Pfad, der durch {@code path}spezifizierten CSS-Datei zurück.
+     *
      * @param path Der Pfad, der die CSS-Datei spezifiziert.
      * @return Der URL-Pfad.
      */

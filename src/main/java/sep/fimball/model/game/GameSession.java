@@ -234,11 +234,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
                     gameElement = plungerGameElement;
-                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(
-                            gameElement,
-                            gameElement.positionProperty().get(),
-                            gameElement.rotationProperty().get(),
-                            gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(physicsHandler, plungerPhysicsElement);
                     physicsElement = plungerPhysicsElement;
                     break;

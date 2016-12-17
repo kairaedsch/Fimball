@@ -20,17 +20,13 @@ public class RampClimbingCollision implements CollisionType
         Vector2 relativeBallPos = info.getBall().getPosition().minus(info.getOtherPhysicsElement().getPosition()).plus(new Vector2(ballRadius, ballRadius));
 
         //Maximale x und y Position der Rampen ColliderShape.
-        Optional<Vector2> maxPosOptional = rampColliderShapes.stream()
-                .map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true))
-                .reduce(Vector2::max);
+        Optional<Vector2> maxPosOptional = rampColliderShapes.stream().map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), true)).reduce(Vector2::max);
         if (!maxPosOptional.isPresent())
             throw new IllegalStateException("Shape didn't have any positions.");
         Vector2 maxPos = maxPosOptional.get();
 
         //Minimale x und y Position der Rampen ColliderShape.
-        Optional<Vector2> minPosOptinal = rampColliderShapes.stream()
-                .map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false))
-                .reduce(Vector2::min);
+        Optional<Vector2> minPosOptinal = rampColliderShapes.stream().map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false)).reduce(Vector2::min);
         if (!minPosOptinal.isPresent())
             throw new IllegalStateException("Shape didn't have any positions.");
         Vector2 minPos = minPosOptinal.get();
@@ -81,7 +77,6 @@ public class RampClimbingCollision implements CollisionType
      * @param directionOne Richtung der ersten Gerade.
      * @param basePointTwo Aufpunkt der zweiten Gerade.
      * @param directionTwo Richtung der zweiten Gerade.
-     *
      * @return Der Schnittpunkt zwischen den zwei Geraden.
      */
     private Vector2 getIntersection(Vector2 basePointOne, Vector2 directionOne, Vector2 basePointTwo, Vector2 directionTwo)

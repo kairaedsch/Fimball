@@ -22,8 +22,8 @@ public class FormLightChanger extends LightChanger
      * Erstellt einen neuen FormLightChanger.
      *
      * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
-     * @param center Die Mitte des Kreises, um den die Lichter angeschalten werden.
-     * @param circle Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
+     * @param center            Die Mitte des Kreises, um den die Lichter angeschalten werden.
+     * @param circle            Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
      */
     FormLightChanger(boolean revertedAnimation, ReadOnlyObjectProperty<Vector2> center, boolean circle)
     {
@@ -44,7 +44,7 @@ public class FormLightChanger extends LightChanger
         Vector2 relativePosition = position.minus(center.get());
 
         double distance;
-        if(circle)
+        if (circle)
         {
             width = 8;
             distance = Math.abs(radius - relativePosition.magnitude());
@@ -52,10 +52,10 @@ public class FormLightChanger extends LightChanger
         else
         {
             width = 6;
-            double d1 =  Math.abs(radius - relativePosition.getX());
-            double d2 =  Math.abs(radius - relativePosition.getY());
-            double d3 =  Math.abs(-radius - relativePosition.getX());
-            double d4 =  Math.abs(-radius - relativePosition.getY());
+            double d1 = Math.abs(radius - relativePosition.getX());
+            double d2 = Math.abs(radius - relativePosition.getY());
+            double d3 = Math.abs(-radius - relativePosition.getX());
+            double d4 = Math.abs(-radius - relativePosition.getY());
 
             distance = Math.min(Math.min(d1, d2), Math.min(d3, d4));
         }

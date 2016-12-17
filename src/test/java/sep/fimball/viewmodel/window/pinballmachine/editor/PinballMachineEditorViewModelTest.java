@@ -23,9 +23,7 @@ public class PinballMachineEditorViewModelTest
     public void draggedTest()
     {
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
-        PlacedElement ball = new PlacedElement(
-                BaseElementManager.getInstance().getElement("ball"),
-                new Vector2(), 0, 0, 0);
+        PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 0, 0);
 
         ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementList.add(ball);

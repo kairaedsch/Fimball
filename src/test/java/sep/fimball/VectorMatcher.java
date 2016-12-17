@@ -25,6 +25,7 @@ public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
 
     /**
      * Erstellt einen neuen VektorMatcher, der Vektoren mit den gegebenen x/y-Werten vergleicht.
+     *
      * @param x X-Wert zum vergleichen.
      * @param y Y-Wert zum vergleichen.
      */
@@ -35,6 +36,7 @@ public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
 
     /**
      * Erstellt einen neuen VektorMatcher, der Vektoren mit dem gegebenen Vektor vergleicht.
+     *
      * @param val Vektor, mit dem verglichen wird.
      */
     public VectorMatcher(Vector2 val)

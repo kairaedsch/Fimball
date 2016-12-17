@@ -12,10 +12,12 @@ public class LightChangerFactory
 {
     /**
      * Generiert eine Liste von LightChangern für die gegebene GameSession und gibt diese zurück.
+     *
      * @param gameSession Die zugehörige GameSession.
      * @return Eine Liste von LightChangern.
      */
-    public static List<LightChanger> generateLightChangers(HandlerGameSession gameSession) {
+    public static List<LightChanger> generateLightChangers(HandlerGameSession gameSession)
+    {
         List<LightChanger> lightChangers = new ArrayList<>();
         lightChangers.add(new RandomLightChanger());
         lightChangers.add(new FormLightChanger(true, gameSession.gameBallProperty().get().positionProperty(), false));

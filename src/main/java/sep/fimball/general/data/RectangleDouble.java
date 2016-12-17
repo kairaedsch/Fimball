@@ -19,7 +19,7 @@ public class RectangleDouble
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.
      *
      * @param origin Linke obere Ecke des Rechtecks.
-     * @param size  Größe des Rechtecks.
+     * @param size   Größe des Rechtecks.
      */
     public RectangleDouble(Vector2 origin, Vector2 size)
     {
@@ -51,6 +51,7 @@ public class RectangleDouble
 
     /**
      * Gibt den Mittelpunkt des Rechtecks zurück.
+     *
      * @return Der Mittelpunkt des Rechtecks.
      */
     public Vector2 getMiddle()

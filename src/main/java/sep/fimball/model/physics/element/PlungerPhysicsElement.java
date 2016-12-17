@@ -20,8 +20,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElem
      * @param rotation           Die Rotation des PhysicsElement.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public PlungerPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement
-            basePhysicsElement)
+    public PlungerPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         super(gameElement, position, rotation, basePhysicsElement);
     }

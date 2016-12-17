@@ -46,6 +46,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
 
     /**
      * Gibt den Pfad zum Vorschaubild des Automaten zurück.
+     *
      * @return Der Pfad zum Vorschaubild des Automaten.
      */
     public ReadOnlyStringProperty imagePathProperty()

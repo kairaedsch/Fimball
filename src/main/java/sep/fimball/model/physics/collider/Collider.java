@@ -78,12 +78,7 @@ public class Collider
         }
 
         // Join shapes if they share vertices
-        List<PolygonColliderShape> polys = collidedShapes
-                .stream()
-                .filter(shape -> shape.getClass().equals(PolygonColliderShape.class))
-                .map(shape -> (PolygonColliderShape)shape)
-                .filter(shape -> shape.getVertices().size() == 4)
-                .collect(Collectors.toList());
+        List<PolygonColliderShape> polys = collidedShapes.stream().filter(shape -> shape.getClass().equals(PolygonColliderShape.class)).map(shape -> (PolygonColliderShape) shape).filter(shape -> shape.getVertices().size() == 4).collect(Collectors.toList());
         List<PolygonColliderShape> markedForRemoveShapes = new ArrayList<>();
         List<PolygonColliderShape> combinedShapes = new ArrayList<>();
         for (PolygonColliderShape hitShape : polys)

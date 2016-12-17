@@ -55,15 +55,15 @@ public class BallPhysicsElementTest
 
         ballPhysicsElement.setHeight(-1);
         assertThat("Der Ball ist am Boden", ballPhysicsElement.getHeight(), is(0.0));
-        assertThat("Der Ball ist am Boden",ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
+        assertThat("Der Ball ist am Boden", ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
 
         ballPhysicsElement.setHeight(0);
-        assertThat("Der Ball ist am Boden",ballPhysicsElement.getHeight(), is(0.0));
-        assertThat("Der Ball ist am Boden",ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
+        assertThat("Der Ball ist am Boden", ballPhysicsElement.getHeight(), is(0.0));
+        assertThat("Der Ball ist am Boden", ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
 
         ballPhysicsElement.setHeight(0.5);
         assertThat("Der Ball ist auf der gesetzten Höhe", ballPhysicsElement.getHeight(), is(0.5));
-        assertThat("Der Ball ist am Boden",ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
+        assertThat("Der Ball ist am Boden", ballPhysicsElement.getLayer(), is(WorldLayer.GROUND));
 
         ballPhysicsElement.setHeight(1.5);
         assertThat("Der Ball ist auf der gesetzten Höhe", ballPhysicsElement.getHeight(), is(1.5));

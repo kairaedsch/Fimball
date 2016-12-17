@@ -34,7 +34,7 @@ public class SettingsTest
     /**
      * Stellt sicher, dass die Methode getInstance nicht {@code null} zurück gibt.
      */
-    @Test (timeout = 500)
+    @Test(timeout = 500)
     public void testGetInstance()
     {
         assertThat(Settings.getSingletonInstance(), not(equalTo(null)));
@@ -43,7 +43,7 @@ public class SettingsTest
     /**
      * Dieser Test prüft, ob die Einstellungen richtig aus einer SettingsJson geladen werden.
      */
-    @Test (timeout = 2000)
+    @Test(timeout = 2000)
     public void testCreateSettings()
     {
         initKeyLayouts();
@@ -67,7 +67,7 @@ public class SettingsTest
     /**
      * Stellt sicher, dass neue Tastenbelegungen wie beschrieben eingefügt werden.
      */
-    @Test (timeout = 1000)
+    @Test(timeout = 1000)
     public void testSetKeyBinding()
     {
         initTestJson();
@@ -94,7 +94,8 @@ public class SettingsTest
     /**
      * Weist den Attributen von testSettingsJson die benötigten Werte zu.
      */
-    private void initTestJson() {
+    private void initTestJson()
+    {
         testSettingsJson.keyLayouts = keyLayouts;
         testSettingsJson.language = LANGUAGE.name();
         testSettingsJson.fullscreen = IS_IN_FULLSCREEN;

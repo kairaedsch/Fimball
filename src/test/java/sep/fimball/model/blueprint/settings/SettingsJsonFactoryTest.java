@@ -30,7 +30,7 @@ public class SettingsJsonFactoryTest
     /**
      * Testet, ob aus bestehenden Settings eine korrekte SettingsJson Datei erzeugt wird.
      */
-    @Test (timeout = 2000)
+    @Test(timeout = 2000)
     public void testCreateJson()
     {
         final boolean IS_IN_FULLSCREEN = false;

@@ -269,9 +269,12 @@ public class GameElement implements HandlerGameElement
 
         if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
         {
-            if (g1t == g2t) return compareNormal();
-            else if (g1t == BaseElementType.RAMP) return 1;
-            else return -1;
+            if (g1t == g2t)
+                return compareNormal();
+            else if (g1t == BaseElementType.RAMP)
+                return 1;
+            else
+                return -1;
         }
 
         return compareNormal();

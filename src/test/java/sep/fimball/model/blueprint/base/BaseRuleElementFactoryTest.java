@@ -2,6 +2,7 @@ package sep.fimball.model.blueprint.base;
 
 import org.junit.Test;
 import sep.fimball.model.handler.BaseRuleElement;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,7 +21,7 @@ public class BaseRuleElementFactoryTest
         event.colliderId = TEST_INT;
 
         BaseElementJson.RuleElementJson json = new BaseElementJson.RuleElementJson();
-        json.events = new BaseElementJson.RuleElementJson.RuleElementEventJson[] { event };
+        json.events = new BaseElementJson.RuleElementJson.RuleElementEventJson[]{event};
         json.general = new BaseElementJson.RuleElementJson.RuleElementGeneralJson();
         json.general.givesPoints = TEST_BOOL;
 

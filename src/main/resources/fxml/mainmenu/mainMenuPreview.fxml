@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.Pane?>
 
 <HBox styleClass="machine" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sep.fimball.view.window.mainmenu.PinballMachinePreviewSubView" onMouseClicked="#mouseClicked" fx:id="machine">
+      fx:controller="sep.fimball.view.window.mainmenu.PinballMachinePreviewSubView" onMouseClicked="#mouseClicked"
+      fx:id="machine">
     <Pane minHeight="80.0" minWidth="80.0" styleClass="machinePic" fx:id="previewImage"/>
     <Label maxHeight="9999" text="Marcs Automat" styleClass="machineName" fx:id="previewName"/>
 </HBox>

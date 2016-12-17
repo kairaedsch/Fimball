@@ -5,8 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Polyline?>
 <?import java.lang.*?>
-<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView" styleClass="pinballMachineSettings">
+<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView"
+      styleClass="pinballMachineSettings">
     <stylesheets>
         <String fx:value="styles/style.css"/>
     </stylesheets>
@@ -24,7 +26,8 @@
             <Insets top="10.0"/>
         </padding>
         <Pane GridPane.columnIndex="0"/>
-        <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1" styleClass="pinballMachineSettingsTextField"/>
+        <TextField fx:id="tableName" text="Tills Automat" GridPane.columnIndex="1"
+                   styleClass="pinballMachineSettingsTextField"/>
         <Pane GridPane.columnIndex="2"/>
     </GridPane>
     <Pane minHeight="10"/>
@@ -68,20 +71,23 @@
         </HBox>
         <HBox GridPane.columnIndex="2">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked" prefHeight="60.0" prefWidth="60.0"
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked"
+                  prefHeight="60.0" prefWidth="60.0"
                   styleClass="button, buttonSave"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="3">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked" prefHeight="60.0" prefWidth="60.0"
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked"
+                  prefHeight="60.0" prefWidth="60.0"
                   styleClass="button, buttonDelete"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="4">
             <Pane HBox.hgrow="ALWAYS"/>
             <HBox styleClass="buttonEditContainer">
-                <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
+                <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked"
+                      prefHeight="60.0" prefWidth="60.0"
                       styleClass="button, buttonEdit"/>
                 <Polyline styleClass="buttonEditArrow">
                     <points>

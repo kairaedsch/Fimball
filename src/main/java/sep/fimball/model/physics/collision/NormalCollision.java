@@ -28,8 +28,7 @@ public class NormalCollision implements CollisionType
      * Berechnet die neue Geschwindigkeit des Balls duch Spiegelung an der übergebenen Normale.
      *
      * @param ballVelocity Die aktuelle Geschwindigkeit des Balls.
-     * @param normal Die Normale an der die Geschwindigkeit des Balls gespiegelt werden soll.
-     *
+     * @param normal       Die Normale an der die Geschwindigkeit des Balls gespiegelt werden soll.
      * @return Die neue Geschwindigkeit des Balls.
      */
     private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)

@@ -43,13 +43,18 @@ public class PinballMachinePreviewSubView implements ViewBoundToViewModel<Pinbal
         previewName.textProperty().bind(pinballMachinePreviewSubViewModel.nameProperty());
         previewImage.styleProperty().bind(DesignConfig.backgroundImageCss(pinballMachinePreviewSubViewModel.imagePathProperty()));
 
-        pinballMachinePreviewSubViewModel.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) machine.getStyleClass().add("selected");
-            else machine.getStyleClass().remove("selected");
+        pinballMachinePreviewSubViewModel.selectedProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue)
+                machine.getStyleClass().add("selected");
+            else
+                machine.getStyleClass().remove("selected");
         });
 
-        if(pinballMachinePreviewSubViewModel.selectedProperty().get()) machine.getStyleClass().add("selected");
-        else machine.getStyleClass().remove("selected");
+        if (pinballMachinePreviewSubViewModel.selectedProperty().get())
+            machine.getStyleClass().add("selected");
+        else
+            machine.getStyleClass().remove("selected");
     }
 
     /**

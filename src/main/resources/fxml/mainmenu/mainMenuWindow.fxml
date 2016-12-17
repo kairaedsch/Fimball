@@ -5,7 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<SplitPane dividerPositions="0.3" styleClass="splitPane" xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="sep.fimball.view.window.mainmenu.MainMenuView">
     <stylesheets>
         <String fx:value="styles/style.css"/>
@@ -17,16 +18,20 @@
         </HBox>
         <StackPane>
             <AnchorPane minWidth="150.0" VBox.vgrow="ALWAYS">
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS"
-                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
+                            styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
                     <AnchorPane>
-                        <VBox fx:id="machineOverview" styleClass="machineOverviewInner" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                        <VBox fx:id="machineOverview" styleClass="machineOverviewInner" AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.leftAnchor="0.0"
                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         </VBox>
                     </AnchorPane>
                 </ScrollPane>
             </AnchorPane>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" StackPane.alignment="BOTTOM_RIGHT" onMouseClicked="#addClicked" styleClass="button, buttonMachineAdd">
+            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" StackPane.alignment="BOTTOM_RIGHT"
+                  onMouseClicked="#addClicked" styleClass="button, buttonMachineAdd">
                 <StackPane.margin>
                     <Insets right="40" bottom="25"/>
                 </StackPane.margin>
@@ -34,8 +39,10 @@
         </StackPane>
     </VBox>
     <AnchorPane minWidth="300.0">
-        <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" styleClass="machineName" text="Marcs Automat" VBox.vgrow="ALWAYS"/>
+        <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" styleClass="machineName"
+                   text="Marcs Automat" VBox.vgrow="ALWAYS"/>
 
             <GridPane prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                 <columnConstraints>
@@ -50,7 +57,8 @@
                     <padding>
                         <Insets right="10" left="10"/>
                     </padding>
-                    <Label alignment="BASELINE_LEFT" maxWidth="Infinity" styleClass="highscoreTitle" text="Highscores" VBox.vgrow="ALWAYS"/>
+                    <Label alignment="BASELINE_LEFT" maxWidth="Infinity" styleClass="highscoreTitle" text="Highscores"
+                           VBox.vgrow="ALWAYS"/>
                     <VBox fx:id="highscoreTable" styleClass="highscoreList"/>
                 </VBox>
             </GridPane>
@@ -68,13 +76,15 @@
                 </padding>
                 <HBox GridPane.columnIndex="0">
                     <Pane HBox.hgrow="ALWAYS"/>
-                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#playClicked"
+                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
+                          onMouseClicked="#playClicked"
                           styleClass="button, buttonPlaySinglePlayer"/>
                     <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>
                 <HBox GridPane.columnIndex="1">
                     <Pane HBox.hgrow="ALWAYS"/>
-                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
+                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
+                          onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
                           styleClass="button, buttonEdit"/>
                     <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>

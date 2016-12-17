@@ -69,7 +69,9 @@ public class SelectedElementSubViewModel
             if (selection.size() == 1)
             {
                 setPlacedElement(Optional.of(selection.get(0)));
-            } else {
+            }
+            else
+            {
                 setPlacedElement(Optional.empty());
             }
         });
@@ -151,14 +153,16 @@ public class SelectedElementSubViewModel
     /**
      * Entfernt die ausgewählten Elemente aus dem Flipper-Automaten.
      */
-    public void remove() {
+    public void remove()
+    {
         pinballMachineEditor.removeSelection();
     }
 
     /**
      * Dubliziert die ausgewählten Elemente in dem Flipper-Automaten.
      */
-    public void dublicate() {
+    public void dublicate()
+    {
         pinballMachineEditor.dublicateSelection();
     }
 
@@ -166,7 +170,8 @@ public class SelectedElementSubViewModel
     /**
      * Entfernt die ausgewählten Flipper-Automaten.
      */
-    public void rotate() {
+    public void rotate()
+    {
         pinballMachineEditor.rotateSelection();
     }
 }

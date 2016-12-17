@@ -64,14 +64,15 @@ public class PinballCanvasSubViewTest
     /**
      * Testet, ob das Neuzeichnen der View nach Änderungen am ViewModel funktioniert.
      *
-     * @throws NoSuchFieldException Falls das Attribut canvas in PinballCanvasSubView nicht existiert.
-     * @throws NoSuchMethodException Falls die Methode redraw() nicht in PinballCanvasSubView existiert.
-     * @throws IllegalAccessException Falls die Methode redraw() nicht aufgerufen werden darf.
+     * @throws NoSuchFieldException      Falls das Attribut canvas in PinballCanvasSubView nicht existiert.
+     * @throws NoSuchMethodException     Falls die Methode redraw() nicht in PinballCanvasSubView existiert.
+     * @throws IllegalAccessException    Falls die Methode redraw() nicht aufgerufen werden darf.
      * @throws InvocationTargetException Falls die Methode redraw() eine Exception wirft.
      */
     @Ignore
     @Test(timeout = 10000)
-    public void testRedraw() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public void testRedraw() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
+    {
         MockitoAnnotations.initMocks(this);
         Mockito.when(viewModelMock.spriteSubViewModelsProperty()).thenReturn(new SimpleListProperty<>());
         Mockito.when(viewModelMock.cameraPositionProperty()).thenReturn(new SimpleObjectProperty(cameraPosition));
@@ -97,7 +98,8 @@ public class PinballCanvasSubViewTest
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 fillRectArguments[i] = invocation.getArgument(i);
             }
             return null;
@@ -111,7 +113,8 @@ public class PinballCanvasSubViewTest
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 strokeLineArguments.add(invocation.getArgument(i));
             }
             return null;
@@ -129,7 +132,10 @@ public class PinballCanvasSubViewTest
         canvasField.set(pinballCanvasSubView, canvasMock);
         Field spritesField = PinballCanvasSubView.class.getDeclaredField("sprites");
         spritesField.setAccessible(true);
-        spritesField.set(pinballCanvasSubView, new SimpleListProperty<>(FXCollections.observableArrayList(new ArrayList<SpriteSubView>() {{add(spriteSubViewMock);}})));
+        spritesField.set(pinballCanvasSubView, new SimpleListProperty<>(FXCollections.observableArrayList(new ArrayList<SpriteSubView>()
+        {{
+            add(spriteSubViewMock);
+        }})));
         pinballCanvasSubView.setViewModel(viewModelMock);
         Method redraw = PinballCanvasSubView.class.getDeclaredMethod("redraw", boolean.class);
         redraw.setAccessible(true);
@@ -163,7 +169,8 @@ public class PinballCanvasSubViewTest
      * Leert die Zwischenspeicher der Parameter.
      */
     @After
-    public void resetAttributes() {
+    public void resetAttributes()
+    {
         backgroundColor = null;
         fillRectArguments = new double[4];
         gridLineColors = new ArrayList<>();

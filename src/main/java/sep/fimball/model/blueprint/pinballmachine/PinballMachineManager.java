@@ -146,6 +146,7 @@ public class PinballMachineManager
 
     /**
      * Lädt das Vorschaubild des gegebenen Automaten.
+     *
      * @param pinballMachine Der Automat, dessen Vorschaubild geladen werden soll.
      * @return Der Pfad zum Vorschaubild des Automaten.
      */
@@ -164,7 +165,7 @@ public class PinballMachineManager
             {
                 if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
                 {
-                    return entry.getAbsolutePath().replace('\\','/');
+                    return entry.getAbsolutePath().replace('\\', '/');
                 }
             }
             System.err.println("No preview image found for automat: " + pinballMachine.getID());
@@ -174,8 +175,9 @@ public class PinballMachineManager
 
     /**
      * Speichert das gegebene Vorschaubild zu dem gegebenen Automaten.
+     *
      * @param pinballMachine Der Automat, dessen Vorschaubild gespeichert werden soll.
-     * @param image Das Vorschaubild, das gespeichert werden soll.
+     * @param image          Das Vorschaubild, das gespeichert werden soll.
      */
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
     {

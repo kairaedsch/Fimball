@@ -106,7 +106,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     {
         // Rotate flipper
         double newRotation = getRotation() + angularVelocity * deltaTime;
-        if(isLeft)
+        if (isLeft)
         {
             if (newRotation >= FLIPPER_MAX_ROTATION)
             {
@@ -156,7 +156,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     @Override
     public void applyModify(FlipperModify modify)
     {
-        if(modify.isUp())
+        if (modify.isUp())
             rotateUp();
         else
             rotateDown();

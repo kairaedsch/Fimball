@@ -57,7 +57,7 @@ public class PinballMachineInfoSubViewModelTest
 
         doAnswer(invocationOnMock ->
         {
-            Highscore highscore= invocationOnMock.getArgument(0);
+            Highscore highscore = invocationOnMock.getArgument(0);
             highscores.add(highscore);
             return null;
         }).when(pinballMachine).addHighscore(any());

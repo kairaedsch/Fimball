@@ -59,8 +59,10 @@ public class PlacedElementTest
         // Rotiere das PlacedElement in jedem Durchgang in die verlangte Richtung und prüfe, ob der Rotationsverlauf mit dem erwarteten übereinstimmt
         for (int expectedRotation : expectedRotations)
         {
-            if (counterClockwise) placedElement.rotateCounterclockwise();
-            else placedElement.rotateClockwise();
+            if (counterClockwise)
+                placedElement.rotateCounterclockwise();
+            else
+                placedElement.rotateClockwise();
 
             String commentReason = "Teste rotation bei Rotationsgenauigkeit von " + rotationAccurancy + " der Liste: " + Arrays.toString(expectedRotations);
             assertThat(commentReason, placedElement.rotationProperty().get(), is(expectedRotation * 1.0));

@@ -295,6 +295,7 @@ public class DataPath
 
     /**
      * Gibt den Pfad zum Default-Vorschaubild der Automaten an.
+     *
      * @return Der Pfad zum Default-Vorschaubild der Automaten.
      */
     public static String pathToDefaultPreview()

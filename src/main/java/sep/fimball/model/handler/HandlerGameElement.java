@@ -15,6 +15,7 @@ public interface HandlerGameElement
 {
     /**
      * Git die Position des Elements zurück.
+     *
      * @return Die Position des Elements.
      */
     ReadOnlyObjectProperty<Vector2> positionProperty();
@@ -63,6 +64,7 @@ public interface HandlerGameElement
 
     /**
      * Gibt den Typ des BaseElements zurück.
+     *
      * @return Der Typ des BaseElements.
      */
     BaseElementType getElementType();

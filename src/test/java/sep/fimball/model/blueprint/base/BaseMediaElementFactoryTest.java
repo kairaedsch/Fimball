@@ -35,8 +35,8 @@ public class BaseMediaElementFactoryTest
         localCoords.rotation = TEST_INT;
 
         BaseElementJson.MediaElementJson testJson = new BaseElementJson.MediaElementJson();
-        testJson.events = new BaseElementJson.MediaElementJson.MediaElementEventJson[] { event };
-        testJson.localCoordinates = new BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson[] { localCoords };
+        testJson.events = new BaseElementJson.MediaElementJson.MediaElementEventJson[]{event};
+        testJson.localCoordinates = new BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson[]{localCoords};
         testJson.general = new BaseElementJson.MediaElementJson.MediaElementGeneralJson();
         testJson.general.canRotate = TEST_BOOL;
         testJson.general.editorDescription = TEST_STRING;

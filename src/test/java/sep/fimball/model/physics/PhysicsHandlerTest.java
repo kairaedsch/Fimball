@@ -79,8 +79,8 @@ public class PhysicsHandlerTest
             ballLostMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
-        assertThat("Die Kugel ist am unteren Rand des Spielfelds",ballPosition.getY(), greaterThanOrEqualTo(50.0));
-        assertThat("Die Kugel wird als verloren angesehen",ballLost, is(true));
+        assertThat("Die Kugel ist am unteren Rand des Spielfelds", ballPosition.getY(), greaterThanOrEqualTo(50.0));
+        assertThat("Die Kugel wird als verloren angesehen", ballLost, is(true));
     }
 
     /**
@@ -98,8 +98,8 @@ public class PhysicsHandlerTest
             collisionMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
-        assertThat("Das Element im Spiel hat auf eine Kollision mit der Kugel geprüft",collisionCheckWithBall, is(true));
-        assertThat("Die ElementEventArgs wurden an die GameSession übergeben",elementEventArgsEmpty, is(false));
+        assertThat("Das Element im Spiel hat auf eine Kollision mit der Kugel geprüft", collisionCheckWithBall, is(true));
+        assertThat("Die ElementEventArgs wurden an die GameSession übergeben", elementEventArgsEmpty, is(false));
     }
 
     /**
@@ -121,6 +121,7 @@ public class PhysicsHandlerTest
 
     /**
      * Gibt ein Test-PhysicsElement zurück.
+     *
      * @param mockedBall Ein Test-BallPhysicsElement.
      * @return Ein Test-PhysicsElement.
      */
@@ -132,7 +133,8 @@ public class PhysicsHandlerTest
         {
             if (invocationOnMock.getArgument(1) == mockedBall)
             {
-                synchronized (collisionMonitor) {
+                synchronized (collisionMonitor)
+                {
                     collisionMonitor.notify();
                 }
                 collisionCheckWithBall = true;
@@ -144,6 +146,7 @@ public class PhysicsHandlerTest
 
     /**
      * Gibt eine Test-GameSession zurück.
+     *
      * @return Eine Test-GameSession.
      */
     private GameSession getGameSession()
@@ -173,6 +176,7 @@ public class PhysicsHandlerTest
 
     /**
      * Gibt ein Test-BallPhysicsElement zurück.
+     *
      * @return Ein Test-BallPhysicsElement.
      */
     private BallPhysicsElement getBall()
@@ -193,8 +197,7 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock -> ballChanged).when(mockedBall).hasChanged();
 
-        doAnswer(invocationOnMock ->
-                ballPosition).when(mockedBall).getPosition();
+        doAnswer(invocationOnMock -> ballPosition).when(mockedBall).getPosition();
         return mockedBall;
     }
 

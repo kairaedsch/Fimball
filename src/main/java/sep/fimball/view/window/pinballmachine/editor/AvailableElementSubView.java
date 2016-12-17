@@ -69,6 +69,7 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     /**
      * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler die Maustaste losgelassen hat.
+     *
      * @param mouseEvent Das MouseEvent, in dem der Spieler die Maustaste losgelassen hat.
      */
     public void mouseReleased(MouseEvent mouseEvent)
@@ -78,9 +79,11 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
 
     /**
      * Reagiert auf eine Drag-Bewegung.
+     *
      * @param mouseEvent Das MouseEvent der Drag-Bewegung.
      */
-    public void dragDetected(MouseEvent mouseEvent) {
+    public void dragDetected(MouseEvent mouseEvent)
+    {
         previewName.startFullDrag();
         mouseEvent.consume();
     }

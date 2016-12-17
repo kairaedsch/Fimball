@@ -72,7 +72,8 @@ public class BallLostHandlerTest
                 if (currentPlayer == player1)
                 {
                     currentPlayer = player2;
-                } else
+                }
+                else
                 {
                     currentPlayer = player1;
                 }

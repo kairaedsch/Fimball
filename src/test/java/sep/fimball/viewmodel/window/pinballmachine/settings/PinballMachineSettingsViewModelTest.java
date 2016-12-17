@@ -99,7 +99,8 @@ public class PinballMachineSettingsViewModelTest
             if (windowViewModel.getWindowType() == WindowType.MAIN_MENU)
             {
                 mainmenuShown = true;
-            } else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
+            }
+            else if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
             {
                 editorShown = true;
                 nameInEditor = ((PinballMachineEditorViewModel) (windowViewModel)).machineNameProperty().get();

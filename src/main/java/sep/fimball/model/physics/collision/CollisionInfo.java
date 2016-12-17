@@ -35,8 +35,8 @@ public class CollisionInfo
     /**
      * Erzeugt eine neue Instanz von CollisionInfo.
      *
-     * @param ball Das physikalische Element des Balls.
-     * @param shortestIntersect Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
+     * @param ball                Das physikalische Element des Balls.
+     * @param shortestIntersect   Der kürzeste Weg um den Ball aus dem anderen Element "hinauszuschieben".
      * @param otherPhysicsElement Das physikalische Element mit dem der Ball kollidiert ist.
      * @param otherColliderShapes Die Form des Colliders des Elements mit dem der Ball kollidiert ist.
      */

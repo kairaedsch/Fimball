@@ -126,7 +126,7 @@ public class MainMenuViewModel extends WindowViewModel
         switch (keyEvent.getCode())
         {
             case UP:
-                if (index.isPresent() && index.get() >= 1 )
+                if (index.isPresent() && index.get() >= 1)
                 {
                     pinballMachinePreviewSubViewModelList.get(index.get() - 1).selectPinballMachine();
                 }

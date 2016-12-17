@@ -19,9 +19,11 @@ public class SoundHandler implements ElementHandler
 
     /**
      * Erstellt einen neuen SoundHandler.
+     *
      * @param soundManager Der SoundManager, an den die Sounds weitergeben werden.
      */
-    SoundHandler(SoundManager soundManager) {
+    SoundHandler(SoundManager soundManager)
+    {
         this.soundManager = soundManager;
     }
 

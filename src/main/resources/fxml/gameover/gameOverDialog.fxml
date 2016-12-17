@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="!gameover.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
@@ -32,9 +33,11 @@
                         <VBox fx:id="playerScores" prefHeight="200.0" prefWidth="100.0"/>
                     </children>
                 </VBox>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!gameover.continue.key!"
+                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
+                        text="!gameover.continue.key!"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked" text="!gameover.restart.key!"
+                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked"
+                        text="!gameover.restart.key!"
                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
             </children>
         </AnchorPane>

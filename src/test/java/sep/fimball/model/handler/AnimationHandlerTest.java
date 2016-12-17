@@ -80,8 +80,7 @@ public class AnimationHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0,
-                        "Test-Animation")), java.util.Optional.of(""));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "Test-Animation")), java.util.Optional.of(""));
                 eventMap.put(0, baseMediaElementEvent);
                 return new BaseMediaElement("", "", 0, false, 0, null, eventMap, null);
             }

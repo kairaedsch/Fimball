@@ -16,11 +16,11 @@ public class TestGameSession extends GameSession
      * Erstellt ein neues Spiel sowie die dazugehörige Physik im durch {@code pinballMachine} angegebenen Automaten und mit den durch {@code playerNames} angegebenen Spielern.
      *
      * @param pinballMachine Der Bauplan des Automaten.
-     * @param playerNames Die Namen der Spieler.
+     * @param playerNames    Die Namen der Spieler.
      */
     public TestGameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        super(pinballMachine, playerNames,false);
+        super(pinballMachine, playerNames, false);
     }
 
     /**
@@ -38,7 +38,7 @@ public class TestGameSession extends GameSession
                 gameLoopUpdate();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, (long)(GAMELOOP_TICK * 1000.0));
+        timer.scheduleAtFixedRate(task, 0, (long) (GAMELOOP_TICK * 1000.0));
     }
 
     /**
