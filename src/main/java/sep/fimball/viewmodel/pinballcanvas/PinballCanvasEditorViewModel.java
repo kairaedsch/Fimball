@@ -1,11 +1,13 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
+
+import java.util.Optional;
 
 /**
  * Das PinballCanvasEditorViewModel dient der View als PinballCanvasViewModel und reagiert als Editor auch auf BenutzereIngaben.
@@ -43,5 +45,10 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     public void mousePressedOnGame(Vector2 gridPos, MouseEvent mouseEvent)
     {
         editorViewModel.mousePressedOnCanvas(mouseEvent, gridPos);
+    }
+
+    public Optional<RectangleDoubleOfPoints> selectingRectangleProperty()
+    {
+        return editorViewModel.selectionRectProperty();
     }
 }

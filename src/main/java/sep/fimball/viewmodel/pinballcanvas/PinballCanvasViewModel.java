@@ -6,12 +6,14 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 
 import java.util.Observer;
+import java.util.Optional;
 
 /**
  * Das PinballCanvasViewModel stellt der View Daten für die Anzeige des Flipperautomaten mit all seinen Elementen zur Verfügung und dient als Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
@@ -150,17 +152,6 @@ public abstract class PinballCanvasViewModel
     }
 
     /**
-     * Es wurde auf das Canvas vom Nutzer geklickt.
-     *
-     * @param vector2 Position der Maus.
-     * @param button  Der benutzte Button.
-     */
-    public void mouseClickedOnGame(Vector2 vector2, MouseButton button)
-    {
-
-    }
-
-    /**
      * Es wurde auf das Canvas vom Nutzer gedrückt.
      *
      * @param vector2    Position der Maus.
@@ -189,5 +180,10 @@ public abstract class PinballCanvasViewModel
     public WritableImage createScreenshot()
     {
         return viewScreenshotCreater.drawToImage();
+    }
+
+    public Optional<RectangleDoubleOfPoints> selectingRectangleProperty()
+    {
+        return Optional.empty();
     }
 }

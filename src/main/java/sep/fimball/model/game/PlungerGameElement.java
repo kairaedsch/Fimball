@@ -1,13 +1,17 @@
 package sep.fimball.model.game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyObserverEventArgs;
+import sep.fimball.model.input.manager.KeyObserverEventArgs.KeyChangedToState;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
-import sep.fimball.model.input.manager.KeyObserverEventArgs.KeyChangedToState;
 
 import java.util.Optional;
 
@@ -25,6 +29,22 @@ public class PlungerGameElement extends GameElement
     public PlungerGameElement(PlacedElement element, boolean bind)
     {
         super(element, bind);
+
+        Timeline lightChangeLoop = new Timeline();
+        lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(25), event ->
+        {
+            if(oldState == KeyChangedToState.DOWN)
+            {
+                setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
+            }
+            else
+            {
+                setCurrentAnimation(Optional.empty());
+            }
+        });
+        lightChangeLoop.getKeyFrames().add(keyFrame);
+        lightChangeLoop.play();
     }
 
     public void setPhysicsElement(PhysicsHandler physicsHandler, PlungerPhysicsElement<GameElement> plungerPhysicsElement)
@@ -36,6 +56,7 @@ public class PlungerGameElement extends GameElement
             {
                 oldState = KeyChangedToState.DOWN;
                 pressStart = System.currentTimeMillis();
+
             }
             else if (args.getState() == KeyChangedToState.UP && oldState == KeyChangedToState.DOWN)
             {

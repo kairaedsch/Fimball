@@ -109,7 +109,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Das Auswahl-Rechteck.
      */
-    private ObjectProperty<Optional<RectangleDoubleOfPoints>> selectionRect;
+    private Optional<RectangleDoubleOfPoints> selectionRect;
 
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
@@ -143,7 +143,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachineEditor);
 
-        selectionRect = new SimpleObjectProperty<>(Optional.empty());
+        selectionRect = Optional.empty();
 
         ObservableList<AvailableElementSubViewModel> availableElements = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
@@ -266,9 +266,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             //pinballMachineEditor.moveSelectionTo(new Vector2(Math.round(gridPos.getX()), Math.round(gridPos.getY())));
             pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
         }
-        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.get().isPresent())
+        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
         {
-            selectionRect.setValue(Optional.of(new RectangleDoubleOfPoints(selectionRect.get().get().getPointA(), gridPos)));
+            selectionRect = Optional.of(new RectangleDoubleOfPoints(selectionRect.get().getPointA(), gridPos));
         }
     }
 
@@ -343,7 +343,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 pinballMachineEditor.clearSelection();
             }
             mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect.setValue(Optional.of(new RectangleDoubleOfPoints(gridPos, gridPos)));
+            selectionRect = Optional.of(new RectangleDoubleOfPoints(gridPos, gridPos));
         }
     }
 
@@ -368,13 +368,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                     pinballMachineEditor.clearSelection();
                 }
 
-                if (selectionRect.get().isPresent())
+                if (selectionRect.isPresent())
                 {
-                    RectangleDoubleOfPoints rectangle = selectionRect.get().get();
+                    RectangleDoubleOfPoints rectangle = selectionRect.get();
                     if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                     {
                         pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
-                        selectionRect.setValue(Optional.empty());
+                        selectionRect = Optional.empty();
                     }
                 }
             }
@@ -542,5 +542,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public ReadOnlyBooleanProperty isAvailableElementSelected()
     {
         return availableElementSelected;
+    }
+
+    public Optional<RectangleDoubleOfPoints> selectionRectProperty()
+    {
+        return selectionRect;
     }
 }

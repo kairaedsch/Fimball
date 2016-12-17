@@ -78,7 +78,7 @@ public class SpriteSubView
 
         if (imageLayer == ImageLayer.TOP)
         {
-            drawImage(graphicsContext, image, position, size);
+            drawImage(graphicsContext, image, drawMode, position, size);
         }
         if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
         {
@@ -86,7 +86,7 @@ public class SpriteSubView
         }
         if (imageLayer == ImageLayer.BOTTOM)
         {
-            drawImage(graphicsContext, image, position, size);
+            drawImage(graphicsContext, image, drawMode, position, size);
         }
         graphicsContext.restore();
     }
@@ -136,10 +136,10 @@ public class SpriteSubView
      * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
      * @param image           Das zu zeichnende Bild.
      */
-    private void drawImage(GraphicsContext graphicsContext, Image image, Vector2 position, Vector2 size)
+    private void drawImage(GraphicsContext graphicsContext, Image image, DrawMode drawMode, Vector2 position, Vector2 size)
     {
         graphicsContext.save();
-        graphicsContext.setGlobalAlpha(viewModel.visibilityProperty().get());
+        graphicsContext.setGlobalAlpha(drawMode == DrawMode.SCREENSHOT ? 1 : viewModel.visibilityProperty().get());
 
         double x = (position.getX() - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
         double y = (position.getY() - Config.antiGraphicStripesExtraSize) * Config.pixelsPerGridUnit;
