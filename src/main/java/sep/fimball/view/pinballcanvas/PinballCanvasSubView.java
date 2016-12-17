@@ -136,6 +136,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / Config.pixelsPerGridUnit);
         double minHeight = (720 / Config.pixelsPerGridUnit);
+        double maxWidth = (3840 / Config.pixelsPerGridUnit);
+        double maxHeight = (2160 / Config.pixelsPerGridUnit);
+        double cameraScale = 1.0;
+
         if (rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
         {
             double scale = (minHeight / rectangleDouble.getWidth());
@@ -144,12 +148,22 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             double newOriginX = rectangleDouble.getOrigin().getX() - (minHeight - rectangleDouble.getWidth()) / 2.0;
             rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), minHeight, newHeight);
         }
+        if (rectangleDouble.getWidth() > maxWidth || rectangleDouble.getHeight() > maxHeight)
+        {
+            double scaleX = (maxWidth / rectangleDouble.getWidth());
+            double scaleY = (maxHeight / rectangleDouble.getHeight());
+            cameraScale = Math.min(scaleX, scaleY);
+            double newBorder = Math.max(rectangleDouble.getWidth() * cameraScale, rectangleDouble.getHeight() * cameraScale);
+            double newOriginX = rectangleDouble.getOrigin().getX() + (rectangleDouble.getWidth() - newBorder) / 2.0;
+            double newOriginY = rectangleDouble.getOrigin().getY() + (rectangleDouble.getHeight() - newBorder) / 2.0;
+            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), newBorder, newBorder);
+        }
 
         Canvas screenShotCanvas = new Canvas();
         screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
         screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
         PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT, sprites);
-        screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), 1.0);
+        screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale);
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
