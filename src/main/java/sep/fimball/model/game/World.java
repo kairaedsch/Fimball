@@ -20,6 +20,9 @@ public class World implements HandlerWorld
      */
     private ListProperty<GameElement> gameElements;
 
+    /**
+     * Die Elemente der Spielwelt sortiert. Sie werden so sortiert dass sie in der korrekten Reihenfolge gezeichnet werden können.
+     */
     private ListProperty<GameElement> sortedGameElements;
 
     /**

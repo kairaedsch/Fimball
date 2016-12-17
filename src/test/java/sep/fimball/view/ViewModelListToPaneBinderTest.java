@@ -13,6 +13,9 @@ import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse ViewModelListToPaneBinder
+ */
 public class ViewModelListToPaneBinderTest
 {
     @ClassRule

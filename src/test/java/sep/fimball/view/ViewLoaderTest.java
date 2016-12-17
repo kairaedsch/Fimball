@@ -10,6 +10,9 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse ViewLoader.
+ */
 public class ViewLoaderTest
 {
     @ClassRule
@@ -18,7 +21,7 @@ public class ViewLoaderTest
     /**
      * Stellt sicher, dass fxml-Dateien vom ViewLoader geladen werden können und die View sowie das RootNode nicht null sind.
      *
-     * @throws Exception
+     * @throws Exception Exceptions die beim Laden von fxml Dateien auftreten können.
      */
     @Test
     public void testAll() throws Exception

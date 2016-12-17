@@ -128,7 +128,7 @@ public class DesignConfig
     }
 
     /**
-     * Bietet gleiche Funktionalität wie @see{fillBackgroundImageCss} gibt es allerdings als StringExpression zurück um das Ganze in Bindings zu nutzen.
+     * Bietet gleiche Funktionalität wie {@see fillBackgroundImageCss} gibt es allerdings als StringExpression zurück um das Ganze in Bindings zu nutzen.
      *
      * @param path Der Pfad zur Bilddatei.
      * @return Der CSS Befehl welcher das Hintergrundbild setzt und für Bindings genutzt werden kann.

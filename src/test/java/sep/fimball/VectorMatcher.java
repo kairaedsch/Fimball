@@ -4,15 +4,28 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Vergleicht zwei Vektoren auf gleichheit, mit einem kleinen Toleranzbereich.
+ * Vergleicht zwei Vektoren auf Gleichheit, mit einem kleinem Toleranzbereich.
  */
 public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
 {
+    /**
+     * Überprüft ob dieser Vektor bis auf einen kleinen Toleranzbereich mit den Komponenten des Gegebenen Vektors gleich ist.
+     *
+     * @param x Die x-Komponente des anderen Vektors.
+     * @param y Die y-Komponente des anderen Vektors.
+     * @return Ob die beiden double Werte bis auf einen kleinen Toleranzbereich gleich sind.
+     */
     public static VectorMatcher matchesVector(double x, double y)
     {
         return new VectorMatcher(x, y);
     }
 
+    /**
+     * Überprüft ob dieser Vektor bis auf einen kleinen Toleranzbereich mit einem Gegebenen gleich ist.
+     *
+     * @param vector Der andere Vektor.
+     * @return Ob die beiden Vektoren bis auf einen kleinen Toleranzbereich gleich sind.
+     */
     public static VectorMatcher matchesVector(Vector2 vector)
     {
         return new VectorMatcher(vector);
@@ -24,7 +37,7 @@ public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
     private Vector2 myVector;
 
     /**
-     * Erstellt einen neuen VektorMatcher, der Vektoren mit den gegebenen x/y-Werten vergleicht.
+     * Erstellt einen neuen VektorMatcher, der Vektoren mit den Gegebenen x/y-Werten vergleicht.
      *
      * @param x X-Wert zum vergleichen.
      * @param y Y-Wert zum vergleichen.
@@ -35,7 +48,7 @@ public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
     }
 
     /**
-     * Erstellt einen neuen VektorMatcher, der Vektoren mit dem gegebenen Vektor vergleicht.
+     * Erstellt einen neuen VektorMatcher, der Vektoren mit dem Gegebenen Vektor vergleicht.
      *
      * @param val Vektor, mit dem verglichen wird.
      */
@@ -51,6 +64,13 @@ public class VectorMatcher extends CustomTypeSafeMatcher<Vector2>
         return vectorAboutEquals(v2, myVector);
     }
 
+    /**
+     * Vergleicht ob Vektoren bis auf den kleinen Toleranzbereich {@code EPSILON} gleich sind.
+     *
+     * @param a Der erste Vektor.
+     * @param b Der zweite Vektor.
+     * @return Gibt zurück ob die Vektoren bis auf den kleinen Toleranzbereich gleich sind.
+     */
     private boolean vectorAboutEquals(Vector2 a, Vector2 b)
     {
         final double EPSILON = 1e-15;

@@ -26,6 +26,14 @@ public class ViewModelListToPaneBinder
         ViewModelListToPaneBinder.<ViewBoundToViewModel<ViewModelT>, ViewModelT>bindViewModelsToViews(parentNode, viewModelList, viewType, ViewBoundToViewModel::setViewModel);
     }
 
+    /**
+     * Bindet eine View vom Typ {@code viewType} {@code amount} mal an einen {@code parentNode}
+     *
+     * @param parentNode Der Node, an der die Views gehängt werden sollen.
+     * @param amount     Wie oft die View an den Node gehängt werden sollen.
+     * @param viewType   Der Typ der View welche an den Node gehängt werden soll.
+     * @param <ViewT>    Die generische View, die vom Typ {@code viewType} ist.
+     */
     public static <ViewT> void bindAmountToViews(Pane parentNode, ReadOnlyIntegerProperty amount, ViewType viewType)
     {
         ChangeListener<? super Number> changeListener = ((observable, oldValue, newValue) ->
