@@ -8,8 +8,14 @@ import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.FlipperModify;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
+/**
+ * Das Spielelement des Flippers.
+ */
 public class FlipperGameElement extends GameElement
 {
+    /**
+     * Gibt an ob dies ein linker Flipper ist.
+     */
     private boolean left;
 
     /**
@@ -17,6 +23,7 @@ public class FlipperGameElement extends GameElement
      *
      * @param element Das PlacedElement, das zu diesem FlipperGameElement gehört und dessen Eigenschaften übernommen werden sollen.
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
+     * @param left    Gibt an, ob dies ein linker Flipper ist.
      */
     public FlipperGameElement(PlacedElement element, boolean bind, boolean left)
     {

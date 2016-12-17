@@ -161,7 +161,9 @@ public class SpriteSubView
      * Zeichnet einen Rahmen um {@code image}.
      *
      * @param graphicsContext Der GraphicsContext, in dem der Rahmen gezeichnet werden soll.
-     * @param imageLayer      Bestimmt, ob der Rahmen auf der oberen oder unteren Bildebene gezeichnet wird.
+     * @param imageLayer      Bestimmt, ob der Rahmen für ein Bild der oberen/unteren Bildebene gezeichnet werden soll.
+     * @param position        Die Position des Bildes.
+     * @param size            Die Größe des Bildes.
      */
     private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Vector2 position, Vector2 size)
     {

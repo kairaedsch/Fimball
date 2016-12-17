@@ -23,8 +23,14 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse SceneManagerView.
+ */
 public class SceneManagerViewTest
 {
+    /**
+     * Wird benötigt um eine korrekte Ausführung auf dem JavaFX Thread zu garantieren.
+     */
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 

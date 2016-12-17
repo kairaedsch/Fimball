@@ -93,6 +93,7 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         selectedElementSubViewModel.remove();
     }
 
+    // TODO - Warum wird hier mouseEvent übergeben, die anderen Methoden benötigten dies nicht. Warum hat diese Methode im Gegensatz zu den anderen keine FXML Annotation.
     public void duplicateClicked(MouseEvent mouseEvent)
     {
         selectedElementSubViewModel.duplicate();

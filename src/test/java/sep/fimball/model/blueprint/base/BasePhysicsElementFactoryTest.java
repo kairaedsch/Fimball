@@ -14,6 +14,9 @@ import static org.junit.Assert.assertThat;
  */
 public class BasePhysicsElementFactoryTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode create() von PhysicsElementFactory.
+     */
     @Test
     public void testFactory()
     {

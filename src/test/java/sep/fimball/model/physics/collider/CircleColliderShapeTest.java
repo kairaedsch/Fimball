@@ -13,6 +13,9 @@ import static sep.fimball.VectorMatcher.matchesVector;
  */
 public class CircleColliderShapeTest
 {
+    /**
+     * Überprüft ob die Kollision zwischen zwei Kreisen korrekt erkannt wird.
+     */
     @Test
     public void hitInfoTest()
     {
@@ -24,6 +27,9 @@ public class CircleColliderShapeTest
         assertThat(info.isHit(), is(true));
     }
 
+    /**
+     * Überprüft ob die Vektoren mit den maximalen/minimalen x- und y-Komponenten eines Kreises korrekt berechnet wird.
+     */
     @Test
     public void extremePosTest()
     {

@@ -6,10 +6,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Diese Klasse abstrahiert von View-spezifischen Eigenschaften einer GameSession wie zum Beispiel Animationen, sodass .
+ * Diese Klasse abstrahiert von View-spezifischen Eigenschaften einer GameSession wie zum Beispiel Animationen, sodass Tests keine JavaFX spezifische Eigenschaften beachten müssen.
  */
 public class TestGameSession extends GameSession
 {
+    /**
+     * Der Timer welcher zur Erzeugung der Test Spielschleife genutzt wird.
+     */
     private Timer timer;
 
     /**

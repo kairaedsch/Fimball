@@ -22,6 +22,9 @@ public class Config
      */
     public final static int pixelsPerGridUnit = 15;
 
+    /**
+     * Sehr kleiner Wert welcher beim Zeichnen von Bildern genutzt wird um Artefakte zu vermeiden.
+     */
     public final static double antiGraphicStripesExtraSize = 0.02;
 
     /**

@@ -14,6 +14,9 @@ import static org.junit.Assert.assertThat;
  */
 public class BaseMediaElementFactoryTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode create() von BaseMediaElementFactory.
+     */
     @Test
     public void testFactory()
     {

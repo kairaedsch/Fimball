@@ -11,6 +11,9 @@ import static org.junit.Assert.assertThat;
  */
 public class BaseRuleElementFactoryTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode create() von BaseRuleElementFactory.
+     */
     @Test
     public void factoryTest()
     {

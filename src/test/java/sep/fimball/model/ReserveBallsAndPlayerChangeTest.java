@@ -23,12 +23,34 @@ import static org.junit.Assert.assertEquals;
  */
 public class ReserveBallsAndPlayerChangeTest
 {
+    /**
+     * Die Namen der Testspieler.
+     */
     private static String[] players = new String[]{"tester", "test"};
-    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
-    private static final long KEY_HOLDING_DURATION = 1000;     // Die Zeit, die der Plunger gespannt wird.
+
+    /**
+     * Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
+     */
+    private static final long MAX_TEST_DURATION = 20000;
+
+    /**
+     * Die Zeit, die der Plunger gespannt wird.
+     */
+    private static final long KEY_HOLDING_DURATION = 1000;
+
+    /**
+     * Der Monitor welcher für die wait/notify Logik genutzt wird.
+     */
     private static final Object monitor = new Object();
+
+    /**
+     * Gibt an ob der Ball verloren wurde.
+     */
     private volatile boolean ballIsLost = false;
 
+    /**
+     * Eine TestGameSession um von der View zu abstrahieren siehe {@see TestGameSession}.
+     */
     private TestGameSession session;
 
     /**
