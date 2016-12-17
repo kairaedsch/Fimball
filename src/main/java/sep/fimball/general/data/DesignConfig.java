@@ -70,6 +70,9 @@ public class DesignConfig
      */
     public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
+    /**
+     * Der konstante String der CSS anweist das Hintergrundbild auf nichts zu setzen.
+     */
     public final static String cssNoImage = "-fx-background-image: none";
 
     /**
@@ -82,10 +85,24 @@ public class DesignConfig
      */
     public static final int LIGHT_CHANGE_TICK_RATE = 25;
 
+    /**
+     * Die Blinkrate des Rechtecks der aktuellen Auswahl im Editor.
+     */
     public final static double BORDER_BLINK_RATE = 1000.0;
 
+    /**
+     * Der Präfix für CSS um das Hintergrundbild auf eine Datei zu setzen.
+     */
     private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";
+
+    /**
+     * Der Postfix für CSS um eine Pfadangabe abzuschließen.
+     */
     private final static String CSS_URL_POSTFIX = "\");";
+
+    /**
+     * Weist CSS an, dass das Bild genau in den übergeordneten Container passen soll. Es wird zentriert und soll sich nicht wiederholen.
+     */
     private final static String CSS_IMAGE_CONTAIN = "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";
 
     /**
@@ -99,16 +116,34 @@ public class DesignConfig
         return Bindings.concat(CSS_URL_PREFIX, path, CSS_URL_POSTFIX);
     }
 
+    /**
+     * Erzeugt den CSS Befehl um ein Hintergrundbild welches in einer Datei gespeichert ist zu setzen.
+     *
+     * @param path Der Pfad zur Bilddatei.
+     * @return Der CSS Befehl welcher das Hintergrundbild setzt.
+     */
     private static String backgroundImageCss(String path)
     {
         return CSS_URL_PREFIX + path + CSS_URL_POSTFIX;
     }
 
+    /**
+     * Bietet gleiche Funktionalität wie @see{fillBackgroundImageCss} gibt es allerdings als StringExpression zurück um das Ganze in Bindings zu nutzen.
+     *
+     * @param path Der Pfad zur Bilddatei.
+     * @return Der CSS Befehl welcher das Hintergrundbild setzt und für Bindings genutzt werden kann.
+     */
     public static StringExpression fillBackgroundImageCss(ReadOnlyStringProperty path)
     {
         return Bindings.concat(DesignConfig.backgroundImageCss(path), CSS_IMAGE_CONTAIN);
     }
 
+    /**
+     * Erzeugt den CSS Befehl um ein Hintergrundbild welches in einer Datei gespeichert ist zentriert und ohne Wiederholung so zu setzen dass es in den übergeordneten Container passt.
+     *
+     * @param path Der Pfad zur Bilddatei.
+     * @return Der CSS Befehl welcher das Hintergrundbild setzt.
+     */
     public static String fillBackgroundImageCss(String path)
     {
         return DesignConfig.backgroundImageCss(path) + CSS_IMAGE_CONTAIN;
