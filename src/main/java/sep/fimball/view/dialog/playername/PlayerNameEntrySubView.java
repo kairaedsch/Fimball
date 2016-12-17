@@ -3,7 +3,6 @@ package sep.fimball.view.dialog.playername;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameEntrySubViewModel;
 

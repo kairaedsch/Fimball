@@ -1,8 +1,6 @@
 package sep.fimball.model.physics.collision;
 
-import javafx.scene.paint.Color;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 
 
 /**
@@ -21,7 +19,6 @@ public class NormalCollision implements CollisionType
         if (info.getBall().getVelocity().normalized().dot(shortestIntersectNorm) <= 0)
         {
             Vector2 newVel = calculateNewSpeed(info.getBall().getVelocity(), shortestIntersectNorm);
-            Debug.addDrawVector(info.getBall().getPosition(), newVel, Color.BLACK);
             //Setze die Berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
             info.getBall().setVelocity(newVel);
         }

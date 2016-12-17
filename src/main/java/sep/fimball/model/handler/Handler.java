@@ -1,6 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
 /**

@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Lädt Bilder und cached diese, um unnötiges Laden von mehreren Images des selben Bildes zu verhindern.

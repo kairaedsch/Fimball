@@ -2,9 +2,7 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 
-import static sep.fimball.general.data.PhysicsConfig.FLIPPER_ANGULAR_VELOCITY;
-import static sep.fimball.general.data.PhysicsConfig.FLIPPER_MAX_ROTATION;
-import static sep.fimball.general.data.PhysicsConfig.FLIPPER_MIN_ROTATION;
+import static sep.fimball.general.data.PhysicsConfig.*;
 
 /**
  * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.

@@ -9,8 +9,8 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
-import sep.fimball.viewmodel.window.splashscreen.SplashScreenViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
+import sep.fimball.viewmodel.window.splashscreen.SplashScreenViewModel;
 
 /**
  * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und

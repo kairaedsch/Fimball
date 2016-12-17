@@ -4,9 +4,9 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.HandlerBallGameElement;
 import sep.fimball.model.physics.PhysicsHandler;
-import sep.fimball.model.physics.element.BallResetModify;
 import sep.fimball.model.physics.element.BallNudgeModify;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.BallResetModify;
 
 public class BallGameElement extends GameElement implements HandlerBallGameElement
 {

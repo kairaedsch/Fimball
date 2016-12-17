@@ -1,7 +1,6 @@
 package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 

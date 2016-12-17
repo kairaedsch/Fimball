@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.media.BaseMediaElementEvent;
 import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.BaseMediaElementEvent;
 
 import java.util.Map;
 import java.util.Optional;

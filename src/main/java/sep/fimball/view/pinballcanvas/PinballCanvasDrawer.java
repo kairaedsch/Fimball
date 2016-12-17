@@ -1,6 +1,5 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

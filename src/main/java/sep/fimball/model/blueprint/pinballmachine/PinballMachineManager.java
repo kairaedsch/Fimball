@@ -7,8 +7,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.WritableImage;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DataPath;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import javax.imageio.ImageIO;

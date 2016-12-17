@@ -1,6 +1,5 @@
 package sep.fimball.model.physics.collision;
 
-import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 

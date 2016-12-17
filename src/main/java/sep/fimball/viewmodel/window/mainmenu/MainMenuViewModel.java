@@ -6,7 +6,6 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;

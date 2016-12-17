@@ -13,12 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.Config;
-import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreater;
 

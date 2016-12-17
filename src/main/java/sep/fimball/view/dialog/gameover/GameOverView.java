@@ -1,9 +1,6 @@
 package sep.fimball.view.dialog.gameover;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;

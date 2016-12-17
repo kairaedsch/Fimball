@@ -11,7 +11,6 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
-import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**

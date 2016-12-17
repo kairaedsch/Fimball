@@ -5,11 +5,6 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.ElementHandler;
 import sep.fimball.model.handler.HandlerWorld;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
