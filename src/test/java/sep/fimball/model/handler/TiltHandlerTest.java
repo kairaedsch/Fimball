@@ -7,7 +7,7 @@ import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
+import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 
@@ -50,17 +50,17 @@ public class TiltHandlerTest
         HandlerGameSession gameSession = getTestHandlerGameSession();
         TiltHandler test = new TiltHandler(gameSession);
 
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
-        test.activateUserHandler(KeyBinding.NUDGE_LEFT, KeyEventType.DOWN);
+        test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Der Tilt wurde für Spieler 1 aktiviert", tiltActivated.get(player1), is(true));
         gameSession.switchToNextPlayer();
         assertThat("Der Tilt wurde nicht für Spieler 2 aktiviert", tiltActivated.get(player2), is(false));

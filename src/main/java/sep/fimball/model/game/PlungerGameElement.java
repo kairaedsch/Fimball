@@ -3,12 +3,11 @@ package sep.fimball.model.game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import sep.fimball.general.data.DesignConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
-import sep.fimball.model.input.manager.KeyObserverEventArgs;
-import sep.fimball.model.input.manager.KeyObserverEventArgs.KeyChangedToState;
+import sep.fimball.model.input.manager.KeyEventArgs;
+import sep.fimball.model.input.manager.KeyEventArgs.KeyChangedToState;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
@@ -52,7 +51,7 @@ public class PlungerGameElement extends GameElement
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN && args.isStateSwitched())
+            if (args.getState() == KeyEventArgs.KeyChangedToState.DOWN && args.isStateSwitched())
             {
                 plungerPressed = true;
                 pressStart = System.currentTimeMillis();

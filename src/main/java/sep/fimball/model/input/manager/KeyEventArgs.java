@@ -6,7 +6,7 @@ import sep.fimball.model.input.data.KeyBinding;
 /**
  * Die Argumente, die beim Auslösen eines Tastendruck-Events im InputManager übergeben werden.
  */
-public class KeyObserverEventArgs
+public class KeyEventArgs
 {
     /**
      * Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
@@ -41,7 +41,7 @@ public class KeyObserverEventArgs
      * @param binding Die Funktion, die ausgeführt werden soll.
      * @param state   Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
      */
-    public KeyObserverEventArgs(KeyBinding binding, KeyChangedToState state, boolean stateSwitched)
+    public KeyEventArgs(KeyBinding binding, KeyChangedToState state, boolean stateSwitched)
     {
         this.binding = binding;
         this.state = state;

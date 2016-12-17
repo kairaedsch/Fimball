@@ -63,15 +63,15 @@ public class InputManager
         {
             if (mapEntry.getKey().equals(binding))
             {
-                KeyObserverEventArgs.KeyChangedToState state;
+                KeyEventArgs.KeyChangedToState state;
 
                 if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
                 {
-                    state = KeyObserverEventArgs.KeyChangedToState.DOWN;
+                    state = KeyEventArgs.KeyChangedToState.DOWN;
                 }
                 else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
                 {
-                    state = KeyObserverEventArgs.KeyChangedToState.UP;
+                    state = KeyEventArgs.KeyChangedToState.UP;
                 }
                 else
                 {
@@ -82,7 +82,7 @@ public class InputManager
                 if (stateSwitched)
                     oldKeyState.put(keyEvent.getCode(), keyEvent.getEventType());
 
-                mapEntry.getValue().forEach((observer) -> observer.keyEvent(new KeyObserverEventArgs(binding, state, stateSwitched)));
+                mapEntry.getValue().forEach((observer) -> observer.keyEvent(new KeyEventArgs(binding, state, stateSwitched)));
             }
         }
     }

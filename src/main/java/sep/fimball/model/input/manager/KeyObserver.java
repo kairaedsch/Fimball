@@ -10,5 +10,5 @@ public interface KeyObserver
      *
      * @param args Die Argumente, die beim Benachrichtigen der Observer übergeben werden.
      */
-    void keyEvent(KeyObserverEventArgs args);
+    void keyEvent(KeyEventArgs args);
 }

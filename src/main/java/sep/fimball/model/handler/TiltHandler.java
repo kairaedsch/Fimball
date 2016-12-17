@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.data.KeyEventType;
+import sep.fimball.model.input.manager.KeyEventArgs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +37,9 @@ public class TiltHandler extends UserHandler
     }
 
     @Override
-    public void activateUserHandler(KeyBinding keyBinding, KeyEventType keyEventType)
+    public void activateUserHandler(KeyEventArgs keyEventType)
     {
-        if (keyEventType == KeyEventType.DOWN && (keyBinding == KeyBinding.NUDGE_RIGHT || keyBinding == KeyBinding.NUDGE_LEFT))
+        if (keyEventType.getState() == KeyEventArgs.KeyChangedToState.DOWN && (keyEventType.getBinding() == KeyBinding.NUDGE_RIGHT || keyEventType.getBinding() == KeyBinding.NUDGE_LEFT) && keyEventType.isStateSwitched())
         {
             HandlerPlayer currentPlayer = handlerGameSession.getCurrentPlayer();
             if (!tiltCounters.containsKey(currentPlayer)) tiltCounters.put(currentPlayer, 0);
@@ -51,7 +51,7 @@ public class TiltHandler extends UserHandler
                 tiltCounters.put(currentPlayer, 0);
             }
 
-            handlerGameSession.gameBallProperty().get().nudge(keyBinding == KeyBinding.NUDGE_LEFT);
+            handlerGameSession.gameBallProperty().get().nudge(keyEventType.getBinding() == KeyBinding.NUDGE_LEFT);
         }
     }
 }
