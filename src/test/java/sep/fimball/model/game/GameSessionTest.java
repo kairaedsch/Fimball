@@ -103,17 +103,17 @@ public class GameSessionTest
         assertThat(gameLoopObserverNotified, is(true));
     }
 
-    public void setCollidedGameElement(GameElement element)
+    private void setCollidedGameElement(GameElement element)
     {
         collidedGameElement = element;
     }
 
-    public void setBallLost(boolean isBallLost)
+    private void setBallLost(boolean isBallLost)
     {
         this.isBallLost = isBallLost;
     }
 
-    public void setGameLoopObserverNotified(boolean gameLoopObserverNotified)
+    private void setGameLoopObserverNotified(boolean gameLoopObserverNotified)
     {
         this.gameLoopObserverNotified = gameLoopObserverNotified;
     }

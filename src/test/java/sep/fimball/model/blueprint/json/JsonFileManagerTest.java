@@ -2,7 +2,6 @@ package sep.fimball.model.blueprint.json;
 
 import org.junit.After;
 import org.junit.Test;
-import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DataPath;
 
 import java.io.IOException;

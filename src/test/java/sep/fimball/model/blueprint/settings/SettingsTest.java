@@ -108,6 +108,7 @@ public class SettingsTest
      */
     private void initKeyLayouts()
     {
+        //TODO - Fix duplicated code
         keyLayouts = new SettingsJson.KeyLayout[9];
         for (int i = 0; i < 9; i++)
         {

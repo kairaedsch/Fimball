@@ -6,7 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by TheAsuro on 03.12.2016.
+ * Tests für die Klasse BaseRuleElementFactory.
  */
 public class BaseRuleElementFactoryTest
 {

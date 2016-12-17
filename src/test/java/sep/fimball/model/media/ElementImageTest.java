@@ -16,7 +16,7 @@ public class ElementImageTest
     /**
      * Das ElementImage, das getestet wird.
      */
-    ElementImage testElementImage;
+    private ElementImage testElementImage;
 
     /**
      * Initialisiert das {@code testElementImage}.

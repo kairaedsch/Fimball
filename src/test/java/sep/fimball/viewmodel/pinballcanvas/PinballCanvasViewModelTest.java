@@ -14,8 +14,8 @@ import static org.mockito.ArgumentMatchers.any;
 
 public class PinballCanvasViewModelTest
 {
-    Observer redrawObserver;
-    boolean drawUpdateRecieved;
+    private Observer redrawObserver;
+    private boolean drawUpdateRecieved;
 
     @Test
     public void addRedrawObserver() throws Exception
@@ -33,14 +33,7 @@ public class PinballCanvasViewModelTest
         PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME) {};
 
         drawUpdateRecieved = false;
-        pinballCanvasViewModel.addRedrawObserver(new Observer()
-        {
-            @Override
-            public void update(Observable o, Object arg)
-            {
-                drawUpdateRecieved = true;
-            }
-        });
+        pinballCanvasViewModel.addRedrawObserver((o, arg) -> drawUpdateRecieved = true);
 
         redrawObserver.update(null, null);
         assertThat(drawUpdateRecieved, is(true));

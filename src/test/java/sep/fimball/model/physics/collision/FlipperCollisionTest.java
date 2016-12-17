@@ -8,7 +8,6 @@ import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.*;
 
 /**

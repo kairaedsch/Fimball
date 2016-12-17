@@ -30,7 +30,7 @@ public class JsonFileManager
             return Optional.empty();
         }
 
-        String json = "";
+        String json;
         try
         {
             json = new String(Files.readAllBytes(path));

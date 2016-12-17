@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 import static sep.fimball.VectorMatcher.matchesVector;
 
 /**
- * Created by TheAsuro on 15.12.2016.
+ * Tests für die Klasse CircleColliderShape.
  */
 public class CircleColliderShapeTest
 {

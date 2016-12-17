@@ -34,7 +34,7 @@ public class PlungerGameElement extends GameElement
         lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame keyFrame = new KeyFrame(Duration.millis(25), event ->
         {
-            if(isPlungerPressed())
+            if (plungerPressed)
             {
                 setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
             }
@@ -64,11 +64,6 @@ public class PlungerGameElement extends GameElement
                 physicsHandler.addModify(plungerPhysicsElement, (PlungerModify) () -> force);
             }
         });
-    }
-
-    public boolean isPlungerPressed()
-    {
-        return plungerPressed;
     }
 
     private double calcForce()

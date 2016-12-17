@@ -56,16 +56,15 @@ public class JavaFXThreadingRule implements TestRule {
 
             final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        statement.evaluate();
-                    } catch (Throwable e) {
-                        rethrownException = e;
-                    }
-                    countDownLatch.countDown();
-                }});
+            Platform.runLater(() ->
+            {
+                try {
+                    statement.evaluate();
+                } catch (Throwable e) {
+                    rethrownException = e;
+                }
+                countDownLatch.countDown();
+            });
 
             countDownLatch.await();
 
@@ -82,13 +81,12 @@ public class JavaFXThreadingRule implements TestRule {
 
             final CountDownLatch latch = new CountDownLatch(1);
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    // initializes JavaFX environment
-                    new JFXPanel();
+            SwingUtilities.invokeLater(() ->
+            {
+                // initializes JavaFX environment
+                new JFXPanel();
 
-                    latch.countDown();
-                }
+                latch.countDown();
             });
 
             System.out.println("javafx initialising...");

@@ -61,19 +61,19 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
      * Zeigt die Prozentzahl der Master-Lautstärke.
      */
     @FXML
-    public Label masterVolumePercent;
+    private Label masterVolumePercent;
 
     /**
      * Zeigt die Prozentzahl der Musik-Lautstärke.
      */
     @FXML
-    public Label musicVolumePercent;
+    private Label musicVolumePercent;
 
     /**
      * Zeigt die Prozentzahl der Soundeffekt-Lautstärke.
      */
     @FXML
-    public Label sfxVolumePercent;
+    private Label sfxVolumePercent;
 
     /**
      * Das zur GameSettingsView gehörende GameSettingsViewModel.

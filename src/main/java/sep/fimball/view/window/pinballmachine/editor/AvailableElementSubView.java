@@ -19,19 +19,19 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
      * Das Pane, welches den oberen Teil des Vorschau-Bilds des Elements anzeigt.
      */
     @FXML
-    public Pane previewImageTop;
+    private Pane previewImageTop;
 
     /**
      * Das Pane, welches den unteren Teil des Vorschau-Bilds des Elements anzeigt.
      */
     @FXML
-    public Pane previewImageBot;
+    private Pane previewImageBot;
 
     /**
      * Zeigt den Namen des Elements an.
      */
     @FXML
-    public Label previewName;
+    private Label previewName;
 
     /**
      * Das zur AvailableElementSubView gehörende AvailableElementSubViewModel.

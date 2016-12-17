@@ -22,7 +22,7 @@ public class GameView extends WindowView<GameViewModel>
      * Die StackPane, die den Pinball-Canvas enthält.
      */
     @FXML
-    public StackPane pinballCanvasContainer;
+    private StackPane pinballCanvasContainer;
 
     /**
      * Zeigt den Namen des aktuellen Spielers an.

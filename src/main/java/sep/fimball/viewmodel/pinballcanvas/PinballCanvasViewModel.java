@@ -37,22 +37,22 @@ public abstract class PinballCanvasViewModel
     /**
      * Der Zeichenmodus.
      */
-    protected DrawMode drawMode;
+    private DrawMode drawMode;
 
     /**
      * Observable, um die View bei Änderungen zum erneuten Zeichnen auffordern zu können.
      */
-    protected Observable redrawObservable;
+    private Observable redrawObservable;
 
     /**
      * Der Bereich des Automaten, in welchen sich Spielelemente befinden.
      */
-    protected SimpleObjectProperty<RectangleDouble> boundingBox;
+    private SimpleObjectProperty<RectangleDouble> boundingBox;
 
     /**
      * Der zu zeichnende Flipperautomat.
      */
-    protected PinballMachine pinballMachine;
+    private PinballMachine pinballMachine;
 
     /**
      * Element aus der View, welches ein Screenshot des Flipperautomaten erstellen kann.

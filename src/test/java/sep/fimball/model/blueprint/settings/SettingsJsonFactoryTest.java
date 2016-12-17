@@ -68,6 +68,7 @@ public class SettingsJsonFactoryTest
      */
     private void initKeyLayouts()
     {
+        //TODO - Fix duplicated Code
         keyLayouts = new SettingsJson.KeyLayout[9];
         for (int i = 0; i < 9; i++)
         {

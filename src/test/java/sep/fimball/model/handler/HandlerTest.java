@@ -1,7 +1,6 @@
 package sep.fimball.model.handler;
 
 import org.junit.Test;
-import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
 import static org.hamcrest.CoreMatchers.is;

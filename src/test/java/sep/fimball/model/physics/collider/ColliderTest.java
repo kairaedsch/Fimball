@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by TheAsuro on 15.12.2016.
+ * Tests für die Klasse Collider.
  */
 public class ColliderTest
 {

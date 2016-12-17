@@ -1,7 +1,6 @@
 package sep.fimball.model.physics.collision;
 
 import org.junit.Test;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.WorldLayer;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 
@@ -14,7 +13,6 @@ import static org.junit.Assert.assertThat;
  */
 public class RampCollisionTest
 {
-    private final double EPSILON = 1e-15;
 
     /**
      * Testet ob sich der Ball korrekt auf und unter Rampen verhält.
@@ -38,6 +36,7 @@ public class RampCollisionTest
         ballPhysicsElement.setHeight(1.0);
         when(ballPhysicsElement.getLayer()).thenReturn(WorldLayer.RAMP);
         rampCollision.applyCollision(collisionInfo);
+        double EPSILON = 1e-15;
         assertThat("Wenn erste Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.12", Math.abs(1.12 - ballPhysicsElement.getHeight()) < EPSILON, is(true));
         rampCollision.applyCollision(collisionInfo);
         assertThat("Wenn zweite Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.24", Math.abs(1.24 - ballPhysicsElement.getHeight()) < EPSILON, is(true));

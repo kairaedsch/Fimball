@@ -14,7 +14,6 @@ import static org.junit.Assert.assertThat;
  */
 public class AccelerationCollisionTest
 {
-    private final double EPSILON = 1e-15;
 
     /**
      * Testet ob der Ball korrekt von der AccelerationCollision beschleunigt wird.
@@ -37,6 +36,7 @@ public class AccelerationCollisionTest
         AccelerationCollision accelerationCollision = new AccelerationCollision(acceleration);
         accelerationCollision.applyCollision(collisionInfo);
         Vector2 newVelocity = ballPhysicsElement.getVelocity();
+        double EPSILON = 1e-15;
         assertThat("Ball velocity x is ~ 0.0", Math.abs(0.0 - newVelocity.getX()) < EPSILON, is(true));
         assertThat("Ball velocity y is ~ 10.016", Math.abs(10.016 - newVelocity.getY()) < EPSILON, is(true));
     }

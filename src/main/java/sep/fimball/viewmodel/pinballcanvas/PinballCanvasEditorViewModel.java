@@ -17,7 +17,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     /**
      * Das PinballMachineEditorViewModel, welches dieses PinballCanvasEditorViewModel benutzt.
      */
-    protected PinballMachineEditorViewModel editorViewModel;
+    private PinballMachineEditorViewModel editorViewModel;
 
     /**
      * Erstellt ein neues PinballCanvasEditorViewModel.

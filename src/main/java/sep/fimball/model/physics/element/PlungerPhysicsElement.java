@@ -10,7 +10,7 @@ import sep.fimball.general.data.Vector2;
 public class PlungerPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<PlungerModify>
 {
 
-    double strength = 0;
+    private double strength = 0;
 
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.

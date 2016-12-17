@@ -7,9 +7,7 @@ import sep.fimball.model.physics.collider.WorldLayer;
 
 import java.util.Collections;
 
-import static com.sun.javafx.fxml.expression.Expression.greaterThanOrEqualTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.*;
@@ -21,9 +19,7 @@ public class BallPhysicsElementTest
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         Mockito.when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
 
-        BallPhysicsElement ballPhysicsElement = new BallPhysicsElement<>(null, new Vector2(), 0, basePhysicsElement);
-
-        return ballPhysicsElement;
+        return new BallPhysicsElement<>(null, new Vector2(), 0, basePhysicsElement);
     }
 
     @Test

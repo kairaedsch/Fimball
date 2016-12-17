@@ -42,10 +42,6 @@ public class PinballCanvasSubViewTest
     @Rule
     public JavaFXThreadingRule javaFXThreadingRule = new JavaFXThreadingRule();
 
-    private final boolean editorMode = true;
-    private final double cameraZoom = 2;
-    private final double canvasHeight = 200;
-    private final double canvasWidth = 300;
     private Vector2 cameraPosition = new Vector2(1, 1);
 
     @Mock
@@ -59,11 +55,11 @@ public class PinballCanvasSubViewTest
     @Mock
     private SpriteSubView spriteSubViewMock;
 
-    public Color backgroundColor;
-    public double[] fillRectArguments = new double[4];
-    public ArrayList<Color> gridLineColors = new ArrayList<>();
-    public ArrayList<Double> lineWidths = new ArrayList<>();
-    public ArrayList<Double> strokeLineArguments = new ArrayList<>();
+    private Color backgroundColor;
+    private double[] fillRectArguments = new double[4];
+    private ArrayList<Color> gridLineColors = new ArrayList<>();
+    private ArrayList<Double> lineWidths = new ArrayList<>();
+    private ArrayList<Double> strokeLineArguments = new ArrayList<>();
 
     /**
      * Testet, ob das Neuzeichnen der View nach Änderungen am ViewModel funktioniert.
@@ -79,10 +75,13 @@ public class PinballCanvasSubViewTest
         MockitoAnnotations.initMocks(this);
         Mockito.when(viewModelMock.spriteSubViewModelsProperty()).thenReturn(new SimpleListProperty<>());
         Mockito.when(viewModelMock.cameraPositionProperty()).thenReturn(new SimpleObjectProperty(cameraPosition));
+        double cameraZoom = 2;
         Mockito.when(viewModelMock.cameraZoomProperty()).thenReturn(new SimpleDoubleProperty(cameraZoom));
         Mockito.when(viewModelMock.getDrawMode()).thenReturn(DrawMode.EDITOR);
         Mockito.when(canvasMock.getParent()).thenReturn(parentMock);
+        double canvasWidth = 300;
         Mockito.when(canvasMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));
+        double canvasHeight = 200;
         Mockito.when(canvasMock.heightProperty()).thenReturn(new SimpleDoubleProperty(canvasHeight));
         Mockito.when(parentMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));
         Mockito.when(parentMock.heightProperty()).thenReturn(new SimpleDoubleProperty(canvasHeight));
@@ -145,24 +144,19 @@ public class PinballCanvasSubViewTest
         assertEquals(edgeSecondComponent, 0, 0);
         assertEquals(width, canvasWidth, 0);
         assertEquals(height, canvasHeight, 0);
-        if (editorMode)
+        boolean editorMode = true;
+        assertThat("The colors of two adjacent lines should not match!", gridLineColors.get(0), not(equalTo(gridLineColors.get(1))));
+        if (gridLineColors.get(2) != null)
         {
-            assertThat("The colors of two adjacent lines should not match!", gridLineColors.get(0), not(equalTo(gridLineColors.get(1))));
-            if (gridLineColors.get(2) != null)
-            {
-                assertThat("The colors should alternate every two steps!", gridLineColors.get(0), equalTo(gridLineColors.get(2)));
-            }
-            assertThat("The width of two adjacent lines should not match!", lineWidths.get(0), not(equalTo(lineWidths.get(1))));
-            if (lineWidths.get(2) != null)
-            {
-                assertThat("The width of the lines should alternate every two steps!", lineWidths.get(0), equalTo(lineWidths.get(2)));
-            }
-            assertEquals(strokeLineArguments.get(0), strokeLineArguments.get(2), 0);
-            if (canvasHeight != 0)
-            {
-                assertNotEquals(strokeLineArguments.get(1), strokeLineArguments.get(3), 0);
-            }
+            assertThat("The colors should alternate every two steps!", gridLineColors.get(0), equalTo(gridLineColors.get(2)));
         }
+        assertThat("The width of two adjacent lines should not match!", lineWidths.get(0), not(equalTo(lineWidths.get(1))));
+        if (lineWidths.get(2) != null)
+        {
+            assertThat("The width of the lines should alternate every two steps!", lineWidths.get(0), equalTo(lineWidths.get(2)));
+        }
+        assertEquals(strokeLineArguments.get(0), strokeLineArguments.get(2), 0);
+        assertNotEquals(strokeLineArguments.get(1), strokeLineArguments.get(3), 0);
     }
 
     /**

@@ -62,7 +62,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     /**
      * Lässt den Flipperarm nach oben drehen.
      */
-    public void rotateUp()
+    private void rotateUp()
     {
         if (isLeft)
         {
@@ -83,7 +83,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     /**
      * Lässt den Flipperarm nach unten drehen.
      */
-    public void rotateDown()
+    private void rotateDown()
     {
         if (isLeft)
         {

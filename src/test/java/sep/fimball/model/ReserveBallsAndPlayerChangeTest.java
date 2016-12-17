@@ -26,7 +26,7 @@ public class ReserveBallsAndPlayerChangeTest
     private static String[] players = new String[]{"tester", "test"};
     private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
     private static final long KEY_HOLDING_DURATION = 1000;     // Die Zeit, die der Plunger gespannt wird.
-    private static Object monitor = new Object();
+    private static final Object monitor = new Object();
     private volatile boolean ballIsLost = false;
 
     private TestGameSession session;

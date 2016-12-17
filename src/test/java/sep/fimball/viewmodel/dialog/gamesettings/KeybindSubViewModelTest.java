@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 /**
- * Created by TheAsuro on 07.12.2016.
+ * Tests für die Klasse KeybindSubViewModel.
  */
 public class KeybindSubViewModelTest
 {

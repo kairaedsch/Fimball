@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 import static sep.fimball.VectorMatcher.matchesVector;
 
 /**
- * Created by TheAsuro on 15.12.2016.
+ * Tests für die Klasse PolygonColliderShape.
  */
 public class PolygonColliderShapeTest
 {

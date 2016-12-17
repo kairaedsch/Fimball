@@ -22,7 +22,6 @@ import java.util.Deque;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Diese Klasse repräsentiert einen Test, der prüft, ob ein Ball den erwarteten Verlauf im angegebenen Automaten nimmt.
@@ -37,11 +36,10 @@ public class GameTest
     private static final String BUMPER_ID = "bumper_blue";
     private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
-    private static Object monitor = new Object();
+    private static final Object monitor = new Object();
 
     private Deque<GameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
     private TestGameSession session;
-    private PinballMachine pinballMachine;
 
     /**
      * Baut einen Testautomaten und testet, ob die Kugel mit der wand kollidiert, mit dem Bumper kollidiert und anschließend verloren geht.
@@ -52,7 +50,7 @@ public class GameTest
     public void gameCollisionTest() throws InterruptedException, IOException
     {
         // Aufbau des Automaten.
-        pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         pinballMachine.nameProperty().setValue("GameTest PinballMachine");
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
@@ -119,7 +117,7 @@ public class GameTest
     /**
      * Benachrichtigt den Test, dass der Ball nun aus dem Spiel ist.
      */
-    public void ballLost()
+    private void ballLost()
     {
         ballIsLost = true;
         synchronized (monitor)

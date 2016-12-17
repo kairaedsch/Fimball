@@ -100,6 +100,7 @@ public class SpriteSubViewTest
             return null;
         }).when(graphicsContextMock).transform(anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
+        //TODO - Fix duplicated code
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
             drawnImages[0] = invocation.getArgument(0);
@@ -191,6 +192,7 @@ public class SpriteSubViewTest
             return null;
         }).when(graphicsContextMock).transform(anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
 
+        //TODO - Fix duplicated code
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
             drawnImages[0] = invocation.getArgument(0);

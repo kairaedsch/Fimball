@@ -53,7 +53,7 @@ public class ViewModelListToPaneBinder
      * @param <ViewT>       Die View der Listeneinträge, die vom Typ {@code viewType} ist.
      * @param <ViewModelT>  Das ViewModel der Einträge in {@code viewModelList}.
      */
-    public static <ViewT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
+    private static <ViewT, ViewModelT> void bindViewModelsToViews(Pane parentNode, ObservableList<ViewModelT> viewModelList, ViewType viewType, ViewAndViewModelCaller<ViewT, ViewModelT> caller)
     {
         ListPropertyConverter.bindAndConvertList(parentNode.getChildren(), viewModelList, (viewModel) ->
         {

@@ -248,7 +248,7 @@ public class GameElement implements HandlerGameElement
         {
             if (g1t == g2t)
             {
-                return compareNormal(g1, g2);
+                return compareNormal();
             }
             else if (g1t == BaseElementType.BALL)
             {
@@ -269,15 +269,15 @@ public class GameElement implements HandlerGameElement
 
         if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
         {
-            if (g1t == g2t) return compareNormal(g1, g2);
+            if (g1t == g2t) return compareNormal();
             else if (g1t == BaseElementType.RAMP) return 1;
             else return -1;
         }
 
-        return compareNormal(g1, g2);
+        return compareNormal();
     }
 
-    public static int compareNormal(GameElement g1, GameElement g2)
+    private static int compareNormal()
     {
         return 0;
     }

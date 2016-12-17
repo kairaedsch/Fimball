@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Tests für die Klasse ListPropertyConverter
@@ -27,11 +26,6 @@ public class ListPropertyConverterTest
      * Original Map auf der die Mapoperationen ausgeführt werden.
      */
     private MapProperty<Integer, DummyOne> originalMap;
-
-    /**
-     * Liste die mit der originalList synchronisiert wird und nur gefilterte Werte enthält.
-     */
-    private ListProperty<DummyOne> filteredList;
 
     /**
      * Liste die mit der originalList/originalMap synchronisiert wird, vorher werden die Werte konvertiert.
@@ -51,7 +45,6 @@ public class ListPropertyConverterTest
     {
         originalList = new SimpleListProperty<>(FXCollections.observableArrayList());
         originalMap = new SimpleMapProperty<>(FXCollections.observableHashMap());
-        filteredList = new SimpleListProperty<>(FXCollections.observableArrayList());
         convertedList = new SimpleListProperty<>(FXCollections.observableArrayList());
 
         //Die Liste und Map mit werten von 0-99 füllen.
@@ -124,7 +117,7 @@ public class ListPropertyConverterTest
     /**
      * Dummy Datentyp welcher Integer Werte nutzt.
      */
-    public static class DummyOne
+    private static class DummyOne
     {
         private int data;
 
@@ -142,7 +135,7 @@ public class ListPropertyConverterTest
     /**
      * Dummy Datentyp welcher Double Werte nutzt.
      */
-    public static class DummyTwo
+    private static class DummyTwo
     {
         private double data;
 

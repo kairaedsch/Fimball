@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Debug
 {
-    public static final boolean ENABLED = false;
+    private static final boolean ENABLED = false;
 
     private static List<DrawEntry> drawEntries = new ArrayList<>();
     private static final long LIFE_TIME_MS = 1000;
@@ -127,22 +127,19 @@ public class Debug
             PhysicsElement.thisIsForDebug.forEach((WeakReference<PhysicsElement> wpe) ->
             {
                 PhysicsElement<GameElement> pe = wpe.get();
-                pe.getColliders().forEach((Collider col) ->
+                pe.getColliders().forEach((Collider col) -> col.getShapes().forEach((ColliderShape shape) ->
                 {
-                    col.getShapes().forEach((ColliderShape shape) ->
+                    if (shape.getClass() == CircleColliderShape.class)
                     {
-                        if (shape.getClass() == CircleColliderShape.class)
-                        {
-                            CircleColliderShape circle = (CircleColliderShape) shape;
-                            drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint().plus(pe.getPosition()));
-                        }
-                        else if (shape.getClass() == PolygonColliderShape.class)
-                        {
-                            PolygonColliderShape poly = (PolygonColliderShape) shape;
-                            drawPolygon(context, poly.getVertices(), pe.getPosition(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint());
-                        }
-                    });
-                });
+                        CircleColliderShape circle = (CircleColliderShape) shape;
+                        drawCircle(context, circle.getPosition().plus(pe.getPosition()), circle.getRadius(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint().plus(pe.getPosition()));
+                    }
+                    else if (shape.getClass() == PolygonColliderShape.class)
+                    {
+                        PolygonColliderShape poly = (PolygonColliderShape) shape;
+                        drawPolygon(context, poly.getVertices(), pe.getPosition(), Math.toRadians(pe.getRotation()), pe.getBasePhysicsElement().getPivotPoint());
+                    }
+                }));
             });
 
             for (DrawEntry entry : drawEntries)
