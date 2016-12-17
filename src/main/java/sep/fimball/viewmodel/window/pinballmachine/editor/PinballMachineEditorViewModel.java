@@ -357,37 +357,48 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        if (mouseOnCanvas && mouseEvent.getButton() == MouseButton.PRIMARY)
+        if (mouseEvent.getButton() == MouseButton.PRIMARY)
         {
-            if (mouseMode.get() == MouseMode.PLACING)
+            if(mouseOnCanvas)
             {
-                pinballMachineEditor.placeSelection();
-                mouseMode.setValue(MouseMode.SELECTING);
-            }
-            else if (mouseMode.get() == MouseMode.SELECTING)
-            {
-                if (!mouseEvent.isControlDown())
+                if (mouseMode.get() == MouseMode.PLACING)
+                {
+                    pinballMachineEditor.placeSelection();
+                    mouseMode.setValue(MouseMode.SELECTING);
+                }
+                else if (mouseMode.get() == MouseMode.SELECTING)
+                {
+                    if (!mouseEvent.isControlDown())
+                    {
+                        pinballMachineEditor.clearSelection();
+                    }
+
+                    if (selectionRect.isPresent())
+                    {
+                        RectangleDoubleOfPoints rectangle = selectionRect.get();
+                        if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
+                        {
+                            pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
+                            selectionRect = Optional.empty();
+                        }
+                    }
+                }
+                else
                 {
                     pinballMachineEditor.clearSelection();
-                }
-
-                if (selectionRect.isPresent())
-                {
-                    RectangleDoubleOfPoints rectangle = selectionRect.get();
-                    if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
-                    {
-                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
-                        selectionRect = Optional.empty();
-                    }
+                    mouseMode.setValue(MouseMode.SELECTING);
+                    setSelectedAvailableElement(null);
                 }
             }
             else
             {
-                pinballMachineEditor.clearSelection();
-                mouseMode.setValue(MouseMode.SELECTING);
-                setSelectedAvailableElement(null);
+                if (mouseMode.get() == MouseMode.PLACING)
+                {
+                    pinballMachineEditor.clearSelection();
+                    mouseMode.setValue(MouseMode.SELECTING);
+                    setSelectedAvailableElement(null);
+                }
             }
-
         }
     }
 
