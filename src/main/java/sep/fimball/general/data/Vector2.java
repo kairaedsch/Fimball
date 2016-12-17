@@ -261,11 +261,25 @@ public class Vector2
         return new Vector2(x, y);
     }
 
+    /**
+     * Gibt einen Vektor zurück der aus der maximalen x-Komponente von {@code a} und {@code b} und der maximalen y-Komponente von {@code a} und {@code b} besteht.
+     *
+     * @param a Der erste Vektor.
+     * @param b Der zweite Vektor.
+     * @return Der Vektor mit der maximalen x- und y-Komponente.
+     */
     public static Vector2 max(Vector2 a, Vector2 b)
     {
         return new Vector2(Math.max(a.x, b.x), Math.max(a.y, b.y));
     }
 
+    /**
+     * Gibt einen Vektor zurück der aus der minimalen x-Komponente von {@code a} und {@code b} und der minimalen y-Komponente von {@code a} und {@code b} besteht.
+     *
+     * @param a Der erste Vektor.
+     * @param b Der zweite Vektor.
+     * @return Der Vektor mit der minimalen x- und y-Komponente.
+     */
     public static Vector2 min(Vector2 a, Vector2 b)
     {
         return new Vector2(Math.min(a.x, b.x), Math.min(a.y, b.y));

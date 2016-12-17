@@ -38,6 +38,9 @@ public class SceneManagerView
      */
     private GaussianBlur blurEffect;
 
+    /**
+     * Die von JavaFX erstellte Stage, auf der gearbeitet wird
+     */
     private Stage stage;
 
     /**

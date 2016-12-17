@@ -121,6 +121,9 @@ public class PhysicsHandler<GameElementT>
         physicTimer.scheduleAtFixedRate(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
     }
 
+    /**
+     * Setzt das Feld welches angibt dass der Ball verloren gegangen ist zurück.
+     */
     public void resetBall()
     {
         synchronized (physicsMonitor)

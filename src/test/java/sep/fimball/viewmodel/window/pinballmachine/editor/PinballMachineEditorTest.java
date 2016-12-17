@@ -155,6 +155,9 @@ public class PinballMachineEditorTest
         assertThat(elementsInMachine.size(), is(1));
     }
 
+    /**
+     * Prüft die Korrektheit von {@code getElementAt()}.
+     */
     @Test
     public void getElementsAtTest()
     {

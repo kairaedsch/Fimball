@@ -33,6 +33,9 @@ public class KeyEventArgs
      */
     private KeyChangedToState state;
 
+    /**
+     * Gibt an ob die Taste losgelassen wurde wenn sie vorher gedrückt war oder gedrückt wurde wenn sie vorher nicht gedrückt war.
+     */
     private boolean stateSwitched;
 
     /**
@@ -40,6 +43,7 @@ public class KeyEventArgs
      *
      * @param binding Die Funktion, die ausgeführt werden soll.
      * @param state   Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
+     * @param stateSwitched Gibt an ob die Taste losgelassen wurde wenn sie vorher gedrückt war oder gedrückt wurde wenn sie vorher nicht gedrückt war.
      */
     public KeyEventArgs(KeyBinding binding, KeyChangedToState state, boolean stateSwitched)
     {
@@ -68,6 +72,11 @@ public class KeyEventArgs
         return state;
     }
 
+    /**
+     * Gibt zurück ob die Taste losgelassen wurde wenn sie vorher gedrückt war oder gedrückt wurde wenn sie vorher nicht gedrückt war.
+     *
+     * @return Ob die Taste losgelassen wurde wenn sie vorher gedrückt war oder gedrückt wurde wenn sie vorher nicht gedrückt war.
+     */
     public boolean isStateSwitched()
     {
         return stateSwitched;

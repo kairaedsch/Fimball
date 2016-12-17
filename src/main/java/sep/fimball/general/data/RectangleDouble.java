@@ -11,7 +11,7 @@ public class RectangleDouble
     private final Vector2 origin;
 
     /**
-     * Die Breite des Rechtecks.
+     * Die Breite und Höhe des Rechtecks.
      */
     private final Vector2 size;
 
@@ -79,6 +79,11 @@ public class RectangleDouble
         return size.getY();
     }
 
+    /**
+     * Gibt die Größe des Rechtecks zurück.
+     *
+     * @return Die Größe des Rechtecks.
+     */
     public Vector2 getSize()
     {
         return size;
