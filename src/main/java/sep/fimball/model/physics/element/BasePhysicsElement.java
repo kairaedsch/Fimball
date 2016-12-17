@@ -90,7 +90,7 @@ public class BasePhysicsElement
     public Vector2 getExtremePos(double rotation, boolean max)
     {
         Optional<Vector2> result = colliders
-                .stream()
+                .parallelStream()
                 .map(collider -> collider.getShapes()
                         .stream()
                         .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))

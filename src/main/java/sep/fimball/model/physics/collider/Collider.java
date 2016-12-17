@@ -8,6 +8,7 @@ import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Repräsentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken.
@@ -64,6 +65,8 @@ public class Collider
 
         List<HitInfo> hits = new ArrayList<>();
         List<ColliderShape> collidedShapes = new ArrayList<>();
+
+        // Find all shapes the ball collides with
         for (ColliderShape shape : shapes)
         {
             HitInfo info = shape.calculateHitInfo(ball.getCollider(), ball.getPosition(), element.getPosition(), element.getRotation(), element.getBasePhysicsElement().getPivotPoint());
@@ -72,6 +75,73 @@ public class Collider
                 hits.add(info);
                 collidedShapes.add(shape);
             }
+        }
+
+        // Join shapes if they share vertices
+        List<PolygonColliderShape> polys = collidedShapes
+                .stream()
+                .filter(shape -> shape.getClass().equals(PolygonColliderShape.class))
+                .map(shape -> (PolygonColliderShape)shape)
+                .filter(shape -> shape.getVertices().size() == 4)
+                .collect(Collectors.toList());
+        List<PolygonColliderShape> markedForRemoveShapes = new ArrayList<>();
+        List<PolygonColliderShape> combinedShapes = new ArrayList<>();
+        for (PolygonColliderShape hitShape : polys)
+        {
+            for (PolygonColliderShape otherHitShape : polys)
+            {
+                List<Integer> contactPoints = new ArrayList<>();
+                List<Integer> otherContactPoints = new ArrayList<>();
+
+                for (int i = 0; i < hitShape.getVertices().size(); i++)
+                {
+                    for (int j = 0; j < otherHitShape.getVertices().size(); j++)
+                    {
+                        if (hitShape.getVertices().get(i).equals(otherHitShape.getVertices().get(j)))
+                        {
+                            contactPoints.add(i);
+                            otherContactPoints.add(j);
+                        }
+                    }
+                }
+
+                if (contactPoints.size() == 2)
+                {
+                    List<Vector2> newVertices = new ArrayList<>();
+
+                    int firstShapeIndex = 0;
+                    while (!contactPoints.contains(firstShapeIndex))
+                    {
+                        newVertices.add(hitShape.getVertices().get(firstShapeIndex));
+                        firstShapeIndex++;
+                    }
+
+                    firstShapeIndex++;
+                    newVertices.add(hitShape.getVertices().get(firstShapeIndex));
+
+                    int otherShapeIndex = 0;
+                    do
+                    {
+                        newVertices.add(otherHitShape.getVertices().get(otherShapeIndex));
+                        otherShapeIndex++;
+                    } while (!otherContactPoints.contains(otherShapeIndex));
+
+                    for (int i = firstShapeIndex; i < hitShape.getVertices().size(); i++)
+                    {
+                        newVertices.add(hitShape.getVertices().get(i));
+                    }
+
+                    combinedShapes.add(new PolygonColliderShape(newVertices));
+                    markedForRemoveShapes.add(hitShape);
+                    markedForRemoveShapes.add(otherHitShape);
+                }
+            }
+        }
+
+        if (collidedShapes.size() > 1)
+        {
+            collidedShapes.removeAll(markedForRemoveShapes);
+            collidedShapes.addAll(combinedShapes);
         }
 
         if (hits.size() > 0)
