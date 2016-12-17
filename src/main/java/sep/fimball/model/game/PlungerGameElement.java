@@ -18,7 +18,8 @@ import java.util.Optional;
 public class PlungerGameElement extends GameElement
 {
     private long pressStart;
-    private KeyChangedToState oldState = KeyChangedToState.UP;
+
+    private boolean plungerPressed;
 
     /**
      * Erstellt ein neues PlungerGameElement aus dem gegebenen PlacedElement.
@@ -34,7 +35,7 @@ public class PlungerGameElement extends GameElement
         lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame keyFrame = new KeyFrame(Duration.millis(25), event ->
         {
-            if(oldState == KeyChangedToState.DOWN)
+            if(isPlungerPressed())
             {
                 setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
             }
@@ -51,20 +52,24 @@ public class PlungerGameElement extends GameElement
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
-            //TODO - Unschön oldState Logik auslagern
-            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN && oldState == KeyChangedToState.UP)
+            if (args.getState() == KeyObserverEventArgs.KeyChangedToState.DOWN && args.isStateSwitched())
             {
-                oldState = KeyChangedToState.DOWN;
+                plungerPressed = true;
                 pressStart = System.currentTimeMillis();
 
             }
-            else if (args.getState() == KeyChangedToState.UP && oldState == KeyChangedToState.DOWN)
+            else if (args.getState() == KeyChangedToState.UP && args.isStateSwitched())
             {
-                oldState = KeyChangedToState.UP;
+                plungerPressed = false;
                 double force = calcForce();
                 physicsHandler.addModify(plungerPhysicsElement, (PlungerModify) () -> force);
             }
         });
+    }
+
+    public boolean isPlungerPressed()
+    {
+        return plungerPressed;
     }
 
     private double calcForce()
