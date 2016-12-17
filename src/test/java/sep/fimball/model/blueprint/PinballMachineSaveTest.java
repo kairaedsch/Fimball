@@ -46,7 +46,7 @@ public class PinballMachineSaveTest
         List<PlacedElement> loadedElements = pinballMachine.elementsProperty().get();
 
         // Überprüft, ob beide Listen die gleichen Elemente enthalten
-        assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch(original::equals)));
+        assertTrue(pinballMachineElements.stream().allMatch((PlacedElement original)->loadedElements.stream().anyMatch(original::identicalTo)));
 
         pinballMachine.deleteFromDisk();
     }

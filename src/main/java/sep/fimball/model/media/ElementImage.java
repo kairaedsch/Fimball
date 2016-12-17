@@ -67,7 +67,7 @@ public class ElementImage
     private ElementImage(String baseElementId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
     {
         this.baseElementId = baseElementId;
-        this.canRotate = canRotate;
+        this.canRotate = canRotate && rotationAccuracy != 0;
         this.rotationAccuracy = rotationAccuracy <= 0 ? 360 : rotationAccuracy;
         this.isAnimation = isAnimation;
         this.animation = animation;

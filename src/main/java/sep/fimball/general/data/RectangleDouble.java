@@ -27,12 +27,6 @@ public class RectangleDouble
         this.size = size;
     }
 
-    public static RectangleDouble rectangleFromPoints(Vector2 a, Vector2 b)
-    {
-        Vector2 minPoint = Vector2.min(a, b);
-        return new RectangleDouble(minPoint, Vector2.max(a, b).minus(minPoint));
-    }
-
     /**
      * Erzeugt ein RectangleDouble mit den gegebenen Werten.
      *

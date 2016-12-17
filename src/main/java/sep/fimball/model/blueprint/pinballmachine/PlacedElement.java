@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
+import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other;
+
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Ein PlacedElement hat dabei immer genau ein BaseElement. Dabei gilt:
  * <br/>PlacedElement hat z.B.
@@ -136,18 +138,10 @@ public class PlacedElement
             rotation.setValue((360 + rotation.get() - baseElement.getMedia().getRotationAccuracy()) % 360);
     }
 
-    @Override
-    public boolean equals(Object other)
+    public boolean identicalTo(PlacedElement p)
     {
-        if (other != null && other instanceof PlacedElement)
-        {
-            PlacedElement p = (PlacedElement) other;
-            return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get() && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
-        }
-        else
-        {
-            return false;
-        }
+        return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get() && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
+
     }
 
     /**

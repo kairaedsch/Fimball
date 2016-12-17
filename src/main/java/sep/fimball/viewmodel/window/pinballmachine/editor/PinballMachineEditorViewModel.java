@@ -9,10 +9,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import sep.fimball.general.data.Config;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
@@ -112,7 +109,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Das Auswahl-Rechteck.
      */
-    private ObjectProperty<Optional<RectangleDouble>> selectionRect;
+    private ObjectProperty<Optional<RectangleDoubleOfPoints>> selectionRect;
 
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
@@ -271,7 +268,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.get().isPresent())
         {
-            selectionRect.setValue(Optional.of(new RectangleDouble(selectionRect.get().get().getOrigin(), gridPos.getX(), gridPos.getY())));
+            selectionRect.setValue(Optional.of(new RectangleDoubleOfPoints(selectionRect.get().get().getPointA(), gridPos)));
         }
     }
 
@@ -346,7 +343,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 pinballMachineEditor.clearSelection();
             }
             mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect.setValue(Optional.of(new RectangleDouble(gridPos, 0, 0)));
+            selectionRect.setValue(Optional.of(new RectangleDoubleOfPoints(gridPos, gridPos)));
         }
     }
 
@@ -373,9 +370,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
                 if (selectionRect.get().isPresent())
                 {
-                    if (selectionRect.get().get().getHeight() > 0 || selectionRect.get().get().getWidth() > 0)
+                    RectangleDoubleOfPoints rectangle = selectionRect.get().get();
+                    if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                     {
-                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(selectionRect.get().get()));
+                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
                         selectionRect.setValue(Optional.empty());
                     }
                 }

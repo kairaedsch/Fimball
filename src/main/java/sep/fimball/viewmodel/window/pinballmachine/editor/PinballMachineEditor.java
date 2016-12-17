@@ -4,7 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -124,13 +124,17 @@ public class PinballMachineEditor
      */
     void rotateSelection()
     {
-        if (!selection.isEmpty())
+        if (!selection.isEmpty() && selection.stream().allMatch(p -> p.getBaseElement().getMedia().canRotate()))
         {
+            double rotation = selection.stream().map(p -> p.getBaseElement().getMedia().getRotationAccuracy()).reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
+            if(rotation == 0) rotation = 90;
+            Vector2 mainPivotPoint = selection.get(0).positionProperty().get().plus(selection.get(0).getBaseElement().getPhysics().getPivotPoint());
             for (PlacedElement placedElement : selection)
             {
+                Vector2 pivotPoint = placedElement.getBaseElement().getPhysics().getPivotPoint();
+                Vector2 newPos = placedElement.positionProperty().get().plus(pivotPoint).rotate(Math.toRadians(rotation), mainPivotPoint).minus(pivotPoint);
+                setPosition(placedElement, newPos);
                 placedElement.rotateClockwise();
-                placedElement.setPosition(placedElement.positionProperty().get().rotate(Math.toRadians(placedElement.getBaseElement().getMedia().getRotationAccuracy()), selection.get(0).positionProperty().get()));
-
             }
         }
     }
@@ -229,7 +233,7 @@ public class PinballMachineEditor
      * @param rect Das Rechteck.
      * @return Die Elemente, die in dem Rechteck liegen.
      */
-    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
+    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDoubleOfPoints rect)
     {
         return pinballMachine.getElementsAt(rect);
     }

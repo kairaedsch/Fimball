@@ -109,15 +109,17 @@ public class PinballMachine
      * @param rect Das Viereck.
      * @return Die Elemente.
      */
-    public ListProperty<PlacedElement> getElementsAt(RectangleDouble rect)
+    public ListProperty<PlacedElement> getElementsAt(RectangleDoubleOfPoints rect)
     {
         ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement element : elements)
         {
-            double x = element.positionProperty().get().getX();
-            double y = element.positionProperty().get().getY();
+            Vector2 elemPos = element.positionProperty().get();
 
-            if (x > rect.getOrigin().getX() && x < rect.getWidth() && y > rect.getOrigin().getY() && y < rect.getHeight())
+            Vector2 relToOrigin = elemPos.minus(rect.getOrigin());
+            Vector2 relToEnd = elemPos.minus(rect.getEnd());
+
+            if (relToOrigin.getX() > 0 && relToOrigin.getY() > 0 && relToEnd.getX() < 0 && relToEnd.getY() < 0)
             {
                 matchingElements.add(element);
             }
