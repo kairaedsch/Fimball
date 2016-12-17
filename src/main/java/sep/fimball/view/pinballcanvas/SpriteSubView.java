@@ -59,6 +59,7 @@ public class SpriteSubView
      *                        zeichnen soll.
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
+     * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
     void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
@@ -138,6 +139,9 @@ public class SpriteSubView
      *
      * @param graphicsContext Der GraphicsContext, auf den das Bild gezeichnet werden soll.
      * @param image           Das zu zeichnende Bild.
+     * @param drawMode        Der Modus in dem gezeichnet werden soll.
+     * @param position        Die Position an die das Bild gezeichnet werden soll.
+     * @param size            Die Größe in der die Bilder gezeichnet werden sollen.
      */
     private void drawImage(GraphicsContext graphicsContext, Image image, DrawMode drawMode, Vector2 position, Vector2 size)
     {

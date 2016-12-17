@@ -6,6 +6,9 @@ import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse Player.
+ */
 public class PlayerTest
 {
 

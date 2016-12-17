@@ -11,8 +11,14 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * Tests für die Klasse PlacedElement
+ */
 public class PlacedElementTest
 {
+    /**
+     * Überprüft ob das Rotieren im Uhrzeigersinn mit den erwarteten Werten übereinstimmt.
+     */
     @Test
     public void rotateClockwise()
     {
@@ -29,8 +35,11 @@ public class PlacedElementTest
         checkRotation(expectedRotations180, 180, false);
     }
 
+    /**
+     * Überprüft ob das Rotieren gegen den Uhrzeigersinn mit den erwarteten Werten übereinstimmt.
+     */
     @Test
-    public void rotateCounterclockwise()
+    public void rotateCounterClockwise()
     {
         int[] expectedRotations45 = new int[]{315, 270, 225, 180, 135, 90, 45, 0};
         checkRotation(expectedRotations45, 45, true);

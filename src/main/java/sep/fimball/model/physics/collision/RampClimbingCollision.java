@@ -8,6 +8,9 @@ import sep.fimball.model.physics.element.PhysicsElement;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * RampClimbingCollision tritt ein wenn der Ball auf der Rampenauffahrt nach oben fährt und kümmert sich um die korrekte Anpassung der Höhe des Balls.
+ */
 public class RampClimbingCollision implements CollisionType
 {
     @Override

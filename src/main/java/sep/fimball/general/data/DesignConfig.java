@@ -6,7 +6,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.scene.paint.Color;
 
 /**
- * Die Config für das Designs.
+ * Die Config für das Design.
  */
 public class DesignConfig
 {

@@ -17,6 +17,9 @@ import static sep.fimball.VectorMatcher.matchesVector;
  */
 public class PolygonColliderShapeTest
 {
+    /**
+     * Überprüft ob die Erkennung der Kollision zwischen einem Kreis und einem Polygon korrekt funktioniert.
+     */
     @Test
     public void calculateHitInfoTest()
     {

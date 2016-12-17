@@ -14,10 +14,19 @@ import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import java.util.Optional;
 
+/**
+ * Das Spielelement des Plungers.
+ */
 public class PlungerGameElement extends GameElement
 {
+    /**
+     * Der Zeitpunkt zu dem das Aufladen des Plungers begonnen wurde.
+     */
     private long pressStart;
 
+    /**
+     * Gibt an ob der Plunger aktuell aufgeladen wird.
+     */
     private boolean plungerPressed;
 
     /**
@@ -66,6 +75,11 @@ public class PlungerGameElement extends GameElement
         });
     }
 
+    /**
+     * Berechnet die Kraft mit der der Plunger den Ball wegschießen soll abhängig davon wie lange er aufgeladen wurde.
+     *
+     * @return Die Kraft mit der der Plunger den Ball wegschießen soll.
+     */
     private double calcForce()
     {
         double force = 32;

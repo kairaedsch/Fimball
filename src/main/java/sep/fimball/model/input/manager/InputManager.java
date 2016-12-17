@@ -38,6 +38,10 @@ public class InputManager
      * Weist jedem KeyBinding, welches bei einem in den Settings ausgewählten Tastendruck ausgelöst wird, eine Liste von Observern zu, welche bei diesem Tastendruck benachrichtigt werden.
      */
     private Map<KeyBinding, List<KeyObserver>> keyObserversMap = new HashMap<>();
+
+    /**
+     * Speichert für die Tasten welchen Status (Losgelassen/Gedrückt) sie zuletzt hatten.
+     */
     private Map<KeyCode, EventType<KeyEvent>> oldKeyState = new HashMap<>();
 
     /**
