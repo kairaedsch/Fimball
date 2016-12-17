@@ -239,6 +239,13 @@ public class GameElement implements HandlerGameElement
         return height;
     }
 
+    /**
+     * Vergleicht zwei Spielelemente so, dass sie von der Höhe her richtig gezeichnet werden.
+     *
+     * @param g1 Das erste Spielelement.
+     * @param g2 Das zweite Spielelement.
+     * @return Welches der Spielelemente kleiner/größer/gleich ist.
+     */
     public static int compare(GameElement g1, GameElement g2)
     {
         BaseElementType g1t = g1.getElementType();
@@ -248,7 +255,7 @@ public class GameElement implements HandlerGameElement
         {
             if (g1t == g2t)
             {
-                return compareNormal();
+                return compareEqual();
             }
             else if (g1t == BaseElementType.BALL)
             {
@@ -270,17 +277,22 @@ public class GameElement implements HandlerGameElement
         if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
         {
             if (g1t == g2t)
-                return compareNormal();
+                return compareEqual();
             else if (g1t == BaseElementType.RAMP)
                 return 1;
             else
                 return -1;
         }
 
-        return compareNormal();
+        return compareEqual();
     }
 
-    private static int compareNormal()
+    /**
+     * Gibt zurück das die Spielelemente gleich sind.
+     *
+     * @return Gibt an das die Spielelemente gleich sind.
+     */
+    private static int compareEqual()
     {
         return 0;
     }

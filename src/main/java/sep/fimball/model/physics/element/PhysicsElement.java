@@ -27,6 +27,9 @@ public class PhysicsElement<GameElementT>
      */
     private double rotation;
 
+    /**
+     * Gibt an ob sich Position oder Rotation des physikalischen Elements geändert haben.
+     */
     private boolean changed = false;
 
     /**
@@ -152,11 +155,19 @@ public class PhysicsElement<GameElementT>
         }
     }
 
+    /**
+     * Gibt zurück ob sich Position oder Rotation des physikalischen Elements geändert haben.
+     *
+     * @return Ob sich Position oder Rotation des physikalischen Elements geändert haben.
+     */
     public boolean hasChanged()
     {
         return changed;
     }
 
+    /**
+     * Setzt das Feld welches angibt ob sich Position oder Rotation des physikalischen Elements geändert haben auf {@code false} zurück.
+     */
     public void resetChanged()
     {
         changed = false;

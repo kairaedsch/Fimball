@@ -12,6 +12,9 @@ import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.*;
 
+/**
+ * Tests für die Klasse BallPhysicsElement
+ */
 public class BallPhysicsElementTest
 {
     private BallPhysicsElement getBallPhysicsElementWithMock()

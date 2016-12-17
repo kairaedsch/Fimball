@@ -17,16 +17,20 @@ import static org.junit.Assert.assertThat;
  */
 public class BaseElementManagerTest
 {
-
+    /**
+     * Überprüft ob der BaseElementManager die BaseElements korrekt lädt.
+     *
+     * @throws IOException Exceptions die beim I/O auftreten können.
+     */
     @Test
     public void loadBaseElementsTest() throws IOException
     {
-        // Check that a certain element will be loaded with the correct ID
+        // Überprüfe ob ein gewisses BaseElement mit der korrekten ID geladen wird.
         String TEST_ELEMENT_ID = "bumper_blue";
         BaseElement testElement = BaseElementManager.getInstance().getElement(TEST_ELEMENT_ID);
         assertThat(testElement.getId(), is(TEST_ELEMENT_ID));
 
-        // Check that all directories in Config.pathToElements are valid BaseElements that get loaded into the game
+        // Überprüfe ob alle Verzeichnisse in Config.pathToElements valide BaseElements sind und korrekt ins Spiel geladen werden.
         Stream<String> directoryList = Files.list(Paths.get(DataPath.pathToElements())).filter((e) -> e.toFile().isDirectory()).map((path) -> path.getFileName().toString());
         directoryList.forEach((directory) -> assertThat(BaseElementManager.getInstance().getElement(directory), notNullValue()));
     }

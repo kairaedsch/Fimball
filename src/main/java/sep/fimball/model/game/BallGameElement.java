@@ -8,10 +8,19 @@ import sep.fimball.model.physics.element.BallNudgeModify;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BallResetModify;
 
+/**
+ * Das Spielelement des Balls.
+ */
 public class BallGameElement extends GameElement implements HandlerBallGameElement
 {
+    /**
+     * Der PhysicHandler welcher sich um die Simulation der Physik kümmert. Wird benötigt um zu diesem Modifiers hinzuzufügen.
+     */
     private PhysicsHandler physicsHandler;
 
+    /**
+     * Das physikalische Element des Balls.
+     */
     private BallPhysicsElement ballPhysicsElement;
 
     /**

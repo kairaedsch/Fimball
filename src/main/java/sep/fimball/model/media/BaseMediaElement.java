@@ -43,6 +43,9 @@ public class BaseMediaElement
      */
     private Map<Integer, BaseMediaElementEvent> eventMap;
 
+    /**
+     * Gibt eine konstante Verschiebung des BaseElements beim Zeichnen an. Diese Verschiebung wird für verschiedenen Rotationen gegeben.
+     */
     private Map<Integer, Vector2> localCoordinates;
 
     /**
@@ -60,6 +63,7 @@ public class BaseMediaElement
      * @param rotationAccuracy Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
      * @param elementImage     Das Bild des BaseElements.
      * @param eventMap         Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
+     * @param localCoordinates Die konstante Verschiebung des BaseElements beim Zeichnen.
      */
     public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoordinates)
     {
@@ -133,6 +137,11 @@ public class BaseMediaElement
         return elementImage;
     }
 
+    /**
+     * Gibt die konstante Verschiebung beim Zeichnen des BaseElements an.
+     *
+     * @return Die konstante Verschiebung des BaseElements beim Zeichnen.
+     */
     public Map<Integer, Vector2> getLocalCoordinates()
     {
         return Collections.unmodifiableMap(localCoordinates);

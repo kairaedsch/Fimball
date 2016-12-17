@@ -136,10 +136,15 @@ public class PlacedElement
             rotation.setValue((360 + rotation.get() - baseElement.getMedia().getRotationAccuracy()) % 360);
     }
 
+    /**
+     * Gibt an ob dieses PlacedElement gleich einem gegebenen ist.
+     *
+     * @param p Das PlacedElement mit dem verglichen werden soll.
+     * @return Ob die zwei PlacedElements gleich sind.
+     */
     public boolean identicalTo(PlacedElement p)
     {
         return this.baseElement == p.getBaseElement() && this.position.get().equals(p.positionProperty().get()) && this.rotation.get() == p.rotationProperty().get() && this.multiplier.get() == p.multiplierProperty().get() && this.points.get() == p.pointsProperty().get();
-
     }
 
     /**
@@ -154,6 +159,11 @@ public class PlacedElement
         return (int) (element1.positionProperty().get().getY() - element2.positionProperty().get().getY());
     }
 
+    /**
+     * Dupliziert dieses PlacedElement.
+     *
+     * @return Ein PlacedElement welches diesem Element gleicht.
+     */
     public PlacedElement dublicate()
     {
         return new PlacedElement(baseElement, position.get(), points.get(), multiplier.get(), rotation.get());
