@@ -93,8 +93,8 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         selectedElementSubViewModel.remove();
     }
 
-    public void dublicateClicked(MouseEvent mouseEvent)
+    public void duplicateClicked(MouseEvent mouseEvent)
     {
-        selectedElementSubViewModel.dublicate();
+        selectedElementSubViewModel.duplicate();
     }
 }

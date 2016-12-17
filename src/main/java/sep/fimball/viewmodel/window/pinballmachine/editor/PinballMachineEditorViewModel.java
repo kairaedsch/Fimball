@@ -398,6 +398,15 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                     mouseMode.setValue(MouseMode.SELECTING);
                     setSelectedAvailableElement(null);
                 }
+                if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
+                {
+                    RectangleDoubleOfPoints rectangle = selectionRect.get();
+                    if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
+                    {
+                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
+                        selectionRect = Optional.empty();
+                    }
+                }
             }
         }
     }

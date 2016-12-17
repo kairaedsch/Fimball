@@ -249,12 +249,12 @@ public class PinballMachineEditor
         return selection;
     }
 
-    public void dublicateSelection()
+    public void duplicateSelection()
     {
         List<PlacedElement> newSelection = new ArrayList<>();
         for (PlacedElement placedElement : selection)
         {
-            PlacedElement placedElementCopy = placedElement.dublicate();
+            PlacedElement placedElementCopy = placedElement.duplicate();
             placedElementCopy.setPosition(placedElementCopy.positionProperty().get().plus(new Vector2(2, -2)));
             pinballMachine.addElement(placedElementCopy);
             newSelection.add(placedElementCopy);

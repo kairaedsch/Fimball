@@ -164,7 +164,7 @@ public class PlacedElement
      *
      * @return Ein PlacedElement welches diesem Element gleicht.
      */
-    public PlacedElement dublicate()
+    public PlacedElement duplicate()
     {
         return new PlacedElement(baseElement, position.get(), points.get(), multiplier.get(), rotation.get());
     }

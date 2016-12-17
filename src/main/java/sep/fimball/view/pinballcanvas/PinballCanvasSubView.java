@@ -23,6 +23,7 @@ import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
 import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreater;
 
 import java.util.Observer;
+import java.util.Optional;
 
 /**
  * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
@@ -126,7 +127,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         //softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
 
-        pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom);
+        pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom, pinballCanvasViewModel.selectingRectangleProperty());
 
         lastDraw = currentDraw;
     }
@@ -163,7 +164,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
         screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
         PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT, sprites);
-        screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale);
+        screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale, Optional.empty());
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);

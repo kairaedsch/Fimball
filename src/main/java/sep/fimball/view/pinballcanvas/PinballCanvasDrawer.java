@@ -6,9 +6,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.debug.Debug;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
+
+import java.util.Optional;
 
 import static sep.fimball.general.data.Config.pixelsPerGridUnit;
 
@@ -43,7 +46,7 @@ public class PinballCanvasDrawer
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      */
-    public void draw(Vector2 cameraPosition, double cameraZoom)
+    public void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleOfPoints> rect)
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -62,7 +65,26 @@ public class PinballCanvasDrawer
 
         drawElements(graphicsContext);
         Debug.draw(graphicsContext);
+
+        if(rect.isPresent())
+        {
+            graphicsContext.setFill(DesignConfig.secondaryColor);
+            graphicsContext.setStroke(DesignConfig.secondaryColorDark);
+            graphicsContext.setLineWidth(0.25 * pixelsPerGridUnit);
+
+            Vector2 ori = rect.get().getOrigin().scale(pixelsPerGridUnit);
+            Vector2 end = rect.get().getSize().scale(pixelsPerGridUnit);
+
+            graphicsContext.setGlobalAlpha(0.5);
+            graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX(), end.getY());
+
+            graphicsContext.setGlobalAlpha(1);
+            graphicsContext.strokeRect(ori.getX(), ori.getY(), end.getX(), end.getY());
+        }
+
         graphicsContext.restore();
+
+
     }
 
     /**

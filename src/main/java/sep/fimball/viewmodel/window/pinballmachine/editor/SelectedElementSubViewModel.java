@@ -161,9 +161,9 @@ public class SelectedElementSubViewModel
     /**
      * Dubliziert die ausgewählten Elemente in dem Flipper-Automaten.
      */
-    public void dublicate()
+    public void duplicate()
     {
-        pinballMachineEditor.dublicateSelection();
+        pinballMachineEditor.duplicateSelection();
     }
 
 
