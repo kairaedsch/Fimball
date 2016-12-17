@@ -3,6 +3,7 @@ package sep.fimball.model.game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
@@ -13,6 +14,9 @@ import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import java.util.Optional;
+
+import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE;
+import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 
 /**
  * Das Spielelement des Plungers.
@@ -45,7 +49,12 @@ public class PlungerGameElement extends GameElement
         {
             if (plungerPressed)
             {
-                setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
+                double power = Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY);
+                double intervalSize = 200;
+                double intervalValue = System.currentTimeMillis() % intervalSize;
+
+                if ((intervalValue / intervalSize) < power) setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
+                else setCurrentAnimation(Optional.empty());
             }
             else
             {
@@ -82,8 +91,11 @@ public class PlungerGameElement extends GameElement
      */
     private double calcForce()
     {
-        double force = 32;
-        double secondsPressed = (System.currentTimeMillis() - pressStart) / 1000d;
-        return Math.min(force * 3, force * secondsPressed);
+        return Math.min(MAX_PLUNGER_FORCE * MAX_PLUNGER_FORCE_MULTIPLY, MAX_PLUNGER_FORCE * getSecondsPressed());
+    }
+
+    private double getSecondsPressed()
+    {
+        return (System.currentTimeMillis() - pressStart) / 1000d;
     }
 }

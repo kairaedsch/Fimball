@@ -56,4 +56,7 @@ public class PhysicsConfig
      */
     public static final double NUDGE_VELOCITY = 5;
 
+    public static double MAX_PLUNGER_FORCE = 150;
+
+    public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
 }
