@@ -36,6 +36,6 @@ public class PhysicsConfig
     /**
      * Die Geschwindigkeit, die der Ball erfährt, wenn am Automaten gestoßen wird.
      */
-    public static final int NUDGE_VELOCITY = 5;
+    public static final double NUDGE_VELOCITY = 5;
 
 }

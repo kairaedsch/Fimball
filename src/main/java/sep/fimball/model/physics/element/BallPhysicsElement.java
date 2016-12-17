@@ -118,9 +118,9 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
         if (modify instanceof BallNudgeModify)
         {
             if (((BallNudgeModify) modify).isLeft())
-                setPosition(getPosition().minus(new Vector2(NUDGE_VELOCITY, 0)));
+                setVelocity(getVelocity().minus(new Vector2(NUDGE_VELOCITY, 0)));
             else
-                setPosition(getPosition().plus(new Vector2(NUDGE_VELOCITY, 0)));
+                setVelocity(getVelocity().plus(new Vector2(NUDGE_VELOCITY, 0)));
         }
         else if (modify instanceof BallResetModify)
         {
