@@ -93,6 +93,6 @@ public class BasePhysicsElement
         if (result.isPresent())
             return result.get();
         else
-            throw new IllegalStateException("Recieved invalid shapes");
+            throw new IllegalStateException("Received invalid shapes");
     }
 }

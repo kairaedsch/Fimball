@@ -48,7 +48,7 @@ public class BallPhysicsElementTest
         BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
         ballPhysicsElement.setVelocity(tooFast);
 
-        assertThat("Ball wird gebremst da zuschnell", ballPhysicsElement.getVelocity().magnitude(), is(lessThan(tooFast.magnitude())));
+        assertThat("Ball wird gebremst da er zu schnell ist", ballPhysicsElement.getVelocity().magnitude(), is(lessThan(tooFast.magnitude())));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class BallPhysicsElementTest
             ballPhysicsElement.applyModify((BallNudgeModify) () -> true);
 
             assertThat("Der Ball wurde bei der X-Position versetzt", ballPhysicsElement.getPosition().getX(), is(lessThan(0.0)));
-            assertThat("Der Ball wurde bei der Y-Positio nicht versetzt", ballPhysicsElement.getPosition().getY(), is(0.0));
+            assertThat("Der Ball wurde bei der Y-Position nicht versetzt", ballPhysicsElement.getPosition().getY(), is(0.0));
         }
     }
 }

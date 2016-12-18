@@ -172,7 +172,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case RAMP:
                 case NORMAL:
                     gameElement = new GameElement(element, false);
-                    physicsElement = new PhysicsElement<GameElement>(gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    physicsElement = new PhysicsElement<>(gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.

@@ -150,7 +150,6 @@ public class PinballCanvasSubViewTest
         assertEquals(edgeSecondComponent, 0, 0);
         assertEquals(width, canvasWidth, 0);
         assertEquals(height, canvasHeight, 0);
-        boolean editorMode = true;
         assertThat("The colors of two adjacent lines should not match!", gridLineColors.get(0), not(equalTo(gridLineColors.get(1))));
         if (gridLineColors.get(2) != null)
         {

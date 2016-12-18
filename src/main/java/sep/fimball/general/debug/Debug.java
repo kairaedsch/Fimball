@@ -24,12 +24,17 @@ public class Debug
     /**
      * Debug stuff.
      */
-    private static final boolean ENABLED = false;
+    private static final boolean ENABLED = true;
 
     /**
      * Debug stuff.
      */
     private static List<DrawEntry> drawEntries = new ArrayList<>();
+
+    /**
+     * Debug stuff.
+     */
+    private static final Object monitor = new Object();
 
     /**
      * Debug stuff.
@@ -45,7 +50,7 @@ public class Debug
      */
     public static void addDrawVector(Vector2 position, Vector2 direction, Color color)
     {
-        synchronized (drawEntries)
+        synchronized (monitor)
         {
             DrawEntry de = new DrawEntry();
             de.type = "vector";
@@ -66,7 +71,7 @@ public class Debug
      */
     public static void addDrawCircle(Vector2 position, double radius, Color color)
     {
-        synchronized (drawEntries)
+        synchronized (monitor)
         {
             DrawEntry de = new DrawEntry();
             de.type = "circle";
@@ -86,7 +91,7 @@ public class Debug
      */
     public static void addDrawPoly(List<Vector2> positions, Color color)
     {
-        synchronized (drawEntries)
+        synchronized (monitor)
         {
             DrawEntry de = new DrawEntry();
             de.type = "poly";
@@ -192,7 +197,7 @@ public class Debug
 
         context.setStroke(Color.BLACK);
 
-        synchronized (drawEntries)
+        synchronized (monitor)
         {
             long time = System.currentTimeMillis();
             drawEntries.removeIf(drawEntry -> drawEntry.creationTime != -1 && (drawEntry.creationTime + LIFE_TIME_MS <= time));

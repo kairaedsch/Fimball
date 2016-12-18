@@ -99,7 +99,7 @@ public class LanguageManagerViewModel
     {
         for (Object key : properties.keySet())
         {
-            if (texts.containsKey((String) key))
+            if (texts.containsKey(key))
             {
                 texts.get(key).setValue((String) properties.get(key));
             }

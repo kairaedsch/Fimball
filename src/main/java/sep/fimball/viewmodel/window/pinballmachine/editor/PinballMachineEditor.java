@@ -176,10 +176,7 @@ public class PinballMachineEditor
     {
         if (placedElementList != null)
         {
-            for (PlacedElement placedElement : placedElementList)
-            {
-                addToSelection(placedElement);
-            }
+            placedElementList.forEach(this::addToSelection);
         }
     }
 

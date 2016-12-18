@@ -5,7 +5,6 @@ import org.mockito.Mockito;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 
-import java.util.Observable;
 import java.util.Observer;
 
 import static org.hamcrest.CoreMatchers.is;

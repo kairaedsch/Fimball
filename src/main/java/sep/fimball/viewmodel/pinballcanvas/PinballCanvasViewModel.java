@@ -50,11 +50,6 @@ public abstract class PinballCanvasViewModel
     private SimpleObjectProperty<RectangleDouble> boundingBox;
 
     /**
-     * Der zu zeichnende Flipperautomat.
-     */
-    private PinballMachine pinballMachine;
-
-    /**
      * Element aus der View, welches ein Screenshot des Flipperautomaten erstellen kann.
      */
     private ViewScreenshotCreater viewScreenshotCreater;
@@ -67,7 +62,7 @@ public abstract class PinballCanvasViewModel
      */
     protected PinballCanvasViewModel(Session session, DrawMode drawMode)
     {
-        pinballMachine = session.getPinballMachine();
+        PinballMachine pinballMachine = session.getPinballMachine();
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());

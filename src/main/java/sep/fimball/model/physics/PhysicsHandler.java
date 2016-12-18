@@ -156,10 +156,7 @@ public class PhysicsHandler<GameElementT>
                     modifyContainers = new ArrayList<>();
                 }
 
-                for (ModifyContainer modifyContainer : localModifyContainers)
-                {
-                    modifyContainer.apply();
-                }
+                localModifyContainers.forEach(ModifyContainer::apply);
 
                 // Check all PhysicsElements for collisions with the ball
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
@@ -170,13 +167,7 @@ public class PhysicsHandler<GameElementT>
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
-                    for (PhysicsElement<GameElementT> element : physicsElements)
-                    {
-                        if (element instanceof PhysicsUpdateAble)
-                        {
-                            ((PhysicsUpdateAble) element).update(delta);
-                        }
-                    }
+                    physicsElements.stream().filter(element -> element instanceof PhysicsUpdateAble).forEach(element -> ((PhysicsUpdateAble) element).update(delta));
 
                     if (ballPhysicsElement != null)
                     {
@@ -208,18 +199,15 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
-        for (PhysicsElement<GameElementT> element : physicsElements)
+        physicsElements.stream().filter(element -> element != ballPhysicsElement).forEach(element ->
         {
-            if (element != ballPhysicsElement)
+            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
+            if (element.hasChanged())
             {
-                element.checkCollision(collisionEventArgsList, ballPhysicsElement);
-                if (element.hasChanged())
-                {
-                    elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
-                    element.resetChanged();
-                }
+                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                element.resetChanged();
             }
-        }
+        });
         elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
     }
 
