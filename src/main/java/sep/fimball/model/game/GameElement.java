@@ -99,6 +99,7 @@ public class GameElement implements HandlerGameElement
      */
     public void setPosition(Vector2 position)
     {
+        //TODO - Woot is dis
         if (position.getX() != this.position.get().getX() || position.getY() != this.position.get().getY())
             this.position.set(position);
     }
@@ -112,7 +113,7 @@ public class GameElement implements HandlerGameElement
     {
         if (elementEventArgs.getGameElement() != this)
         {
-            throw new IllegalArgumentException("Tried to synchronize a GameElement with another PhysicsElement");
+            throw new IllegalArgumentException("Tried to synchronize a GameElement with a wrong GameElement");
         }
 
         position.setValue(elementEventArgs.getPosition());

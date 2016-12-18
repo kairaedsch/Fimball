@@ -160,8 +160,10 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
+        // TODO - Wird an anderer Stelle bereits berechnet.
         double maxElementPos = 0;
 
+        // TODO - In Factory auslagern.
         for (PlacedElement element : pinballMachine.elementsProperty())
         {
             PhysicsElement<GameElement> physicsElement = null;
@@ -242,6 +244,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     @Override
     protected void loopUpdate()
     {
+        // TODO - Zu viel unterschiedliche Logik in der gleichen Methode. Hier wird n bisschen was von allem gemacht.
         List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
@@ -281,7 +284,6 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 }
             }
         }
-
         super.loopUpdate();
     }
 

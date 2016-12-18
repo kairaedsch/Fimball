@@ -31,7 +31,7 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
     /**
      * Setzt das zu diesem GameElement gehörige PhysicsElement.
      *
-     * @param physicsElement Sas zu diesem GameElement gehörige PhysicsElement.
+     * @param physicsElement Das zu diesem GameElement gehörige PhysicsElement.
      */
     public void setPhysicsElement(BallPhysicsElement physicsElement)
     {
