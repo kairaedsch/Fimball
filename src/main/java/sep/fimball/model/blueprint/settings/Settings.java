@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Settings speichert die aktuellen Spieleinstellungen, die vom Spieler im Einstellungsdialog geändert werden können.
@@ -58,22 +61,32 @@ public class Settings
      */
     private Settings()
     {
-        Map<KeyCode, KeyBinding> keyBindings = new HashMap<>();
-        keyBindings.put(KeyCode.A, KeyBinding.LEFT_FLIPPER);
-        keyBindings.put(KeyCode.R, KeyBinding.EDITOR_ROTATE);
-        keyBindings.put(KeyCode.E, KeyBinding.NUDGE_RIGHT);
-        keyBindings.put(KeyCode.Q, KeyBinding.NUDGE_LEFT);
-        keyBindings.put(KeyCode.ESCAPE, KeyBinding.PAUSE);
-        keyBindings.put(KeyCode.DELETE, KeyBinding.EDITOR_DELETE);
-        keyBindings.put(KeyCode.D, KeyBinding.RIGHT_FLIPPER);
-        keyBindings.put(KeyCode.ALT, KeyBinding.EDITOR_MOVE);
-        keyBindings.put(KeyCode.SPACE, KeyBinding.PLUNGER);
-        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
+        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(getDefaultBindings()));
         language = new SimpleObjectProperty<>(Language.ENGLISH);
         fullscreen = new SimpleBooleanProperty(false);
         masterVolume = new SimpleIntegerProperty(100);
         musicVolume = new SimpleIntegerProperty(100);
         sfxVolume = new SimpleIntegerProperty(100);
+    }
+
+    /**
+     * Erzeugt die Standardeinstellung für Tastendrücke.
+     *
+     * @return Die Standardbelegung der Tastatur.
+     */
+    private Map<KeyCode, KeyBinding> getDefaultBindings()
+    {
+        return Stream.of(
+                new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER),
+                new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE),
+                new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT),
+                new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT),
+                new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE),
+                new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE),
+                new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER),
+                new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE),
+                new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER))
+                .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 
     /**

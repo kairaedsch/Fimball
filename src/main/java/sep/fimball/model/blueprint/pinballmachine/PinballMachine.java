@@ -19,7 +19,7 @@ import java.util.Optional;
 public class PinballMachine
 {
     /**
-     * Der zu dieser PinballMachine gehörige PinballMachineManager.
+     * Der PinballMachineManager welcher die PinballMachines verwaltet.
      */
     private final PinballMachineManager pinballMachineManager;
 
@@ -83,7 +83,7 @@ public class PinballMachine
     }
 
     /**
-     * Überprüft, ob sich ein Bahnelement an der gegebenen Position befindet.
+     * Überprüft, ob sich ein Bahnelement an der gegebenen Position befindet. Falls dies der Fall ist wird es zurückgegeben.
      *
      * @param point Die Position.
      * @return Das Bahnelement an der gegebenen Position.
@@ -208,7 +208,7 @@ public class PinballMachine
     }
 
     /**
-     * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu.
+     * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
      *
      * @param placedElement Das einzufügende Element.
      */
@@ -228,7 +228,7 @@ public class PinballMachine
     }
 
     /**
-     * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente {@code elements} hinzu.
+     * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
      *
      * @param baseElement Der Bauplan des einzufügenden Elements.
      * @param position    Die Position des einzufügenden Elements.
@@ -244,7 +244,7 @@ public class PinballMachine
     }
 
     /**
-     * Entfernt das gegebene Element von dem Automaten.
+     * Entfernt das gegebene Element von dem Automaten. Der Ball kann nicht gelöscht werden.
      *
      * @param placedElement Das zu entfernende Element.
      */

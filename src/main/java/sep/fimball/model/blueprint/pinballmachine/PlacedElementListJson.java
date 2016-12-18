@@ -3,7 +3,7 @@ package sep.fimball.model.blueprint.pinballmachine;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platzierten Elementen.
+ * Diese Klasse repräsentiert die JSON-Beschreibung einer Liste von platzierten Elementen welche zu einem Flipperautomaten gehört.
  */
 public class PlacedElementListJson
 {

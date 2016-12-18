@@ -31,7 +31,7 @@ public class PinballMachineManager
     private static PinballMachineManager singletonInstance;
 
     /**
-     * Gibt den bereits existierenden ElementManager oder einen neu angelegten zurück, falls noch keiner existiert.
+     * Gibt den bereits existierenden PinballMachineManager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
      * @return Instanz des PinballMachineManager
      */
