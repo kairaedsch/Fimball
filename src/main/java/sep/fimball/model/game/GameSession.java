@@ -183,7 +183,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
                     gameElement = plungerGameElement;
-                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<GameElement>(physicsHandler, gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(plungerPhysicsElement);
                     physicsElement = plungerPhysicsElement;
                     break;
@@ -191,7 +191,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case RIGHT_FLIPPER:
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
                     FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<GameElement>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
                     flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElement = flipperGameElement;
                     physicsElement = leftFlipperPhysicsElement;

@@ -8,7 +8,6 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.input.manager.KeyEventArgs.KeyChangedToState;
-import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import java.util.Optional;
@@ -64,7 +63,7 @@ public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameEl
     }
 
     @Override
-    public void setPhysicsElement(PlungerPhysicsElement plungerPhysicsElement)
+    public void setPhysicsElement(PlungerPhysicsElement<GameElement> plungerPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
@@ -78,7 +77,7 @@ public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameEl
             {
                 plungerPressed = false;
                 double force = calcForce();
-                plungerPhysicsElement.addModify((PlungerModify) () -> force);
+                plungerPhysicsElement.addModify(() -> force);
             }
         });
     }

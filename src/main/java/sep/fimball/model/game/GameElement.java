@@ -8,6 +8,7 @@ import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
@@ -15,7 +16,7 @@ import java.util.Optional;
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
-public class GameElement<PhysicsElementT> implements HandlerGameElement
+public class GameElement<PhysicsElementT extends PhysicsElement<GameElement>> implements HandlerGameElement
 {
     /**
      * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
