@@ -19,6 +19,9 @@ import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
+/**
+ * Tests für die Klasse GameViewModel.
+ */
 public class GameViewModelTest
 {
 

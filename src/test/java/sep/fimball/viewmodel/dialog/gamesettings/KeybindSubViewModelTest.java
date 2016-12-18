@@ -16,6 +16,9 @@ import static org.mockito.Mockito.mock;
  */
 public class KeybindSubViewModelTest
 {
+    /**
+     * Überprüft ob das Ändern der Keybindings korrekt funktioniert.
+     */
     @Test
     public void testKeyCodes()
     {
@@ -24,12 +27,12 @@ public class KeybindSubViewModelTest
         KeyBinding binding = mock(KeyBinding.class);
         Mockito.when(binding.getName()).thenReturn(bindingName);
 
-        // Test if code can handle null value
+        // Teste ob der Code direkt mit null umgehen kann.
         KeybindSubViewModel dialog1 = new KeybindSubViewModel(settings, binding, null);
         dialog1.keyNameProperty();
         assertThat(dialog1.keyNameProperty().get(), is("No Key set"));
 
-        // Test default behaviour
+        // Überprüfe das Standardverhalten.
         KeyCode testCode = KeyCode.A;
         KeybindSubViewModel dialog2 = new KeybindSubViewModel(settings, binding, testCode);
         dialog2.keyNameProperty();

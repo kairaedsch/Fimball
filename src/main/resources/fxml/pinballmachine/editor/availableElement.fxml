@@ -7,15 +7,11 @@
 <HBox onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" onDragDetected="#dragDetected"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView">
-    <children>
-        <Pane fx:id="previewImageBot" minHeight="40.0" minWidth="40.0">
-            <children>
-                <Pane fx:id="previewImageTop" minHeight="40.0" minWidth="40.0"/>
-            </children>
-        </Pane>
-        <Label fx:id="previewName" maxHeight="9999" text="Marcs Automat"/>
-    </children>
     <stylesheets>
         <String fx:value="styles/style.css"/>
     </stylesheets>
+    <Pane fx:id="previewImageBot" minHeight="40.0" minWidth="40.0">
+        <Pane fx:id="previewImageTop" minHeight="40.0" minWidth="40.0"/>
+    </Pane>
+    <Label fx:id="previewName" maxHeight="9999" text="Marcs Automat"/>
 </HBox>

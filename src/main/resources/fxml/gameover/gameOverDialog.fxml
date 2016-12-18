@@ -9,37 +9,31 @@
             minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="!gameover.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
-    <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <children>
-                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
-                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0">
-                    <children>
-                        <Label fx:id="highscoreLabel" text="!gameover.highscores.key!">
-                            <font>
-                                <Font name="System Bold" size="18.0"/>
-                            </font>
-                        </Label>
-                        <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0"/>
-                        <Label fx:id="playerScoresLabel" text="!gameover.playerscores.key!">
-                            <font>
-                                <Font name="System Bold" size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets top="20.0"/>
-                            </VBox.margin>
-                        </Label>
-                        <VBox fx:id="playerScores" prefHeight="200.0" prefWidth="100.0"/>
-                    </children>
-                </VBox>
-                <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
-                        text="!gameover.continue.key!"
-                        AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked"
-                        text="!gameover.restart.key!"
-                        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
-            </children>
-        </AnchorPane>
-    </content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <Label fx:id="highscoreLabel" text="!gameover.highscores.key!">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0"/>
+            <Label fx:id="playerScoresLabel" text="!gameover.playerscores.key!">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="20.0"/>
+                </VBox.margin>
+            </Label>
+            <VBox fx:id="playerScores" prefHeight="200.0" prefWidth="100.0"/>
+        </VBox>
+        <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
+                text="!gameover.continue.key!"
+                AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartClicked"
+                text="!gameover.restart.key!"
+                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
+    </AnchorPane>
 </TitledPane>

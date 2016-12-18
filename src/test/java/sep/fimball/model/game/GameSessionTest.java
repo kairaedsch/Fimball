@@ -23,6 +23,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Tests für die Klasse GameSession.
+ */
 public class GameSessionTest
 {
     /**

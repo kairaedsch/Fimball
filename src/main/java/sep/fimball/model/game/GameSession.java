@@ -346,7 +346,6 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
         else
         {
             playerIndex.setValue(newPlayerIndex);
-            physicsHandler.doReactToUserInput();
         }
     }
 
@@ -430,7 +429,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     @Override
     public void activateTilt()
     {
-        physicsHandler.stopReactingToUserInput();
+        // TODO - Stop react to input
         Timeline timeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> setBallLost(true)));
         timeline.getKeyFrames().add(frame);
