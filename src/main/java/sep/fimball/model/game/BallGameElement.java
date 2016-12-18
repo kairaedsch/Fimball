@@ -10,8 +10,13 @@ import sep.fimball.model.physics.element.BallResetModify;
 /**
  * Das Spielelement des Balls.
  */
-public class BallGameElement extends GameElement<BallPhysicsElement<GameElement<?>>> implements HandlerBallGameElement
+public class BallGameElement extends GameElement implements HandlerBallGameElement
 {
+    /**
+     * Das physikalische Element des Balls.
+     */
+    protected BallPhysicsElement physicsElement;
+
     /**
      * Erstellt ein neues BallGameElement aus dem gegebenen PlacedElement.
      *
@@ -21,6 +26,16 @@ public class BallGameElement extends GameElement<BallPhysicsElement<GameElement<
     public BallGameElement(PlacedElement element, boolean bind)
     {
         super(element, bind);
+    }
+
+    /**
+     * Setzt das zu diesem GameElement gehörige PhysicsElement.
+     *
+     * @param physicsElement Sas zu diesem GameElement gehörige PhysicsElement.
+     */
+    public void setPhysicsElement(BallPhysicsElement physicsElement)
+    {
+        this.physicsElement = physicsElement;
     }
 
     public void nudge(boolean left)

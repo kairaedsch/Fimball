@@ -9,7 +9,7 @@ import sep.fimball.model.physics.element.FlipperPhysicsElement;
 /**
  * Das Spielelement des Flippers.
  */
-public class FlipperGameElement extends GameElement<FlipperPhysicsElement<GameElement<?>>>
+public class FlipperGameElement extends GameElement
 {
     /**
      * Gibt an ob dies ein linker Flipper ist.
@@ -29,8 +29,7 @@ public class FlipperGameElement extends GameElement<FlipperPhysicsElement<GameEl
         this.left = left;
     }
 
-    @Override
-    public void setPhysicsElement(FlipperPhysicsElement<GameElement<?>> flipperPhysicsElement)
+    public void setPhysicsElement(FlipperPhysicsElement<GameElement> flipperPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(left ? KeyBinding.LEFT_FLIPPER : KeyBinding.RIGHT_FLIPPER, args -> flipperPhysicsElement.addModify(() -> args.getState() != KeyEventArgs.KeyChangedToState.DOWN));
     }

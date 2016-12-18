@@ -18,19 +18,19 @@ public class World implements HandlerWorld
     /**
      * Liste der Elemente in der Spielwelt.
      */
-    private ListProperty<GameElement<?>> gameElements;
+    private ListProperty<GameElement> gameElements;
 
     /**
      * Die Elemente der Spielwelt sortiert. Sie werden so sortiert dass sie in der korrekten Reihenfolge gezeichnet werden können.
      */
-    private ListProperty<GameElement<?>> sortedGameElements;
+    private ListProperty<GameElement> sortedGameElements;
 
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
      * @param elements Liste der Elemente in der Spielwelt.
      */
-    public World(ObservableList<GameElement<?>> elements)
+    public World(ObservableList<GameElement> elements)
     {
         gameElements = new SimpleListProperty<>(elements);
         sortedGameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
@@ -51,9 +51,9 @@ public class World implements HandlerWorld
      *
      * @param elementEventArgsList Liste der Änderungen für GameElements.
      */
-    public void synchronizeWithPhysics(List<ElementEventArgs<GameElement<?>>> elementEventArgsList)
+    public void synchronizeWithPhysics(List<ElementEventArgs<GameElement>> elementEventArgsList)
     {
-        for (ElementEventArgs<GameElement<?>> elementEventArgs : elementEventArgsList)
+        for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
         {
             elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs);
         }
@@ -64,7 +64,7 @@ public class World implements HandlerWorld
      *
      * @return Die Liste der GameElements.
      */
-    public ReadOnlyListProperty<GameElement<?>> gameElementsProperty()
+    public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
         return sortedGameElements;
     }
@@ -74,7 +74,7 @@ public class World implements HandlerWorld
      *
      * @return Die Liste der GameElements.
      */
-    public ListProperty<GameElement<?>> gameElementsOpenProperty()
+    public ListProperty<GameElement> gameElementsOpenProperty()
     {
         return gameElements;
     }

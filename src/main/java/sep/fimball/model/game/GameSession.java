@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -35,7 +34,7 @@ import java.util.List;
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession extends Session implements PhysicGameSession<GameElement<?>>, HandlerGameSession
+public class GameSession extends Session implements PhysicGameSession<GameElement>, HandlerGameSession
 {
 
     /**
@@ -81,7 +80,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     /**
      * Referenz zum PhysicsHandler, der die Bewegung des Balls auf dem Spielfeld und andere physikalische Eigenschaften berechnet.
      */
-    private PhysicsHandler<GameElement<?>> physicsHandler;
+    private PhysicsHandler<GameElement> physicsHandler;
 
     /**
      * Speichert die in dieser GameSession verwendeten Handler.
@@ -96,12 +95,12 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     /**
      * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
      */
-    private LinkedList<List<CollisionEventArgs<GameElement<?>>>> collisionEventArgsList;
+    private List<List<CollisionEventArgs<GameElement>>> collisionEventArgsList;
 
     /**
      * Die Liste der von der Physik-Loop übertragenen ElementEvent-Argumente.
      */
-    private LinkedList<List<ElementEventArgs<GameElement<?>>>> elementEventArgsList;
+    private List<List<ElementEventArgs<GameElement>>> elementEventArgsList;
 
     /**
      * Gibt an, ob die Kugel verloren wurde.
@@ -159,20 +158,20 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
 
-        ObservableList<GameElement<?>> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
-        List<PhysicsElement<GameElement<?>>> physicsElements = new ArrayList<>();
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
+        List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         double maxElementPos = 0;
 
         for (PlacedElement element : pinballMachine.elementsProperty())
         {
-            PhysicsElement<GameElement<?>> physicsElement = null;
+            PhysicsElement<GameElement> physicsElement = null;
             GameElement gameElement;
             switch (element.getBaseElement().getType())
             {
                 case RAMP:
                 case NORMAL:
                     gameElement = new GameElement(element, false);
-                    physicsElement = new PhysicsElement<GameElement<?>>(gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
@@ -183,7 +182,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
                     gameElement = plungerGameElement;
-                    PlungerPhysicsElement<GameElement<?>> plungerPhysicsElement = new PlungerPhysicsElement<GameElement<?>>(physicsHandler, plungerGameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(plungerPhysicsElement);
                     physicsElement = plungerPhysicsElement;
                     break;
@@ -191,7 +190,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case RIGHT_FLIPPER:
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
                     FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
-                    FlipperPhysicsElement<GameElement<?>> leftFlipperPhysicsElement = new FlipperPhysicsElement<GameElement<?>>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
                     flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElement = flipperGameElement;
                     physicsElement = leftFlipperPhysicsElement;
@@ -218,7 +217,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements);
-        BallPhysicsElement<GameElement<?>> physElem = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
         gameBall.get().setPhysicsElement(physElem);
 
         physicsElements.add(physElem);
@@ -243,8 +242,8 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     @Override
     protected void loopUpdate()
     {
-        LinkedList<List<CollisionEventArgs<GameElement<?>>>> localCollisionEventArgsList;
-        LinkedList<List<ElementEventArgs<GameElement<?>>>> localElementEventArgsList;
+        List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
+        List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
         {
             localCollisionEventArgsList = this.collisionEventArgsList;
@@ -254,14 +253,14 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
             this.elementEventArgsList = new LinkedList<>();
         }
 
-        for (List<ElementEventArgs<GameElement<?>>> elementEventArgsList : localElementEventArgsList)
+        for (List<ElementEventArgs<GameElement>> elementEventArgsList : localElementEventArgsList)
         {
             world.synchronizeWithPhysics(elementEventArgsList);
         }
 
-        for (List<CollisionEventArgs<GameElement<?>>> collisionEventArgsList : localCollisionEventArgsList)
+        for (List<CollisionEventArgs<GameElement>> collisionEventArgsList : localCollisionEventArgsList)
         {
-            for (CollisionEventArgs<GameElement<?>> collisionEventArgs : collisionEventArgsList)
+            for (CollisionEventArgs<GameElement> collisionEventArgs : collisionEventArgsList)
             {
                 for (Handler handler : handlers)
                 {
@@ -371,7 +370,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
      * @param collisionEventArgs Liste aller CollisionsEvents.
      * @param elementEventArgs   Liste aller ElementEvents.
      */
-    public void addEventArgs(List<CollisionEventArgs<GameElement<?>>> collisionEventArgs, List<ElementEventArgs<GameElement<?>>> elementEventArgs)
+    public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
         synchronized (physicMonitor)
         {

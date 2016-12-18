@@ -74,19 +74,19 @@ public class GameSessionTest
 
         gameSession.addHandlers(handlerList);
 
-        GameElement<?> gameElement = gameSession.gameBallProperty().get();
+        GameElement gameElement = gameSession.gameBallProperty().get();
 
         // künstliches Erstellen einer Kollision.
-        CollisionEventArgs<GameElement<?>> collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
-        List<CollisionEventArgs<GameElement<?>>> collisionEventArgsList = new ArrayList<>();
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
+        List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
         // künstliches Erstellen einer Bewegung des Balls.
         final Vector2 newPos = new Vector2(1, 1);
         final double newRot = 1;
 
-        ElementEventArgs<GameElement<?>> elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot, 1);
-        List<ElementEventArgs<GameElement<?>>> elementEventArgsList = new ArrayList<>();
+        ElementEventArgs<GameElement> elementEventArgs = new ElementEventArgs<>(gameElement, newPos, newRot, 1);
+        List<ElementEventArgs<GameElement>> elementEventArgsList = new ArrayList<>();
         elementEventArgsList.add(elementEventArgs);
 
         // künstliche Änderungen am Spielfluss hinzufügen

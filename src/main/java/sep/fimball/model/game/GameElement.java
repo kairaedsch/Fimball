@@ -8,7 +8,6 @@ import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
-import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ import java.util.Optional;
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
-public class GameElement<PhysicsElementT extends PhysicsElement<GameElement<?>>> implements HandlerGameElement
+public class GameElement implements HandlerGameElement
 {
     /**
      * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
@@ -54,11 +53,6 @@ public class GameElement<PhysicsElementT extends PhysicsElement<GameElement<?>>>
     private PlacedElement placedElement;
 
     /**
-     * Das physikalische Element des Balls.
-     */
-    protected PhysicsElementT physicsElement;
-
-    /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
@@ -89,16 +83,6 @@ public class GameElement<PhysicsElementT extends PhysicsElement<GameElement<?>>>
     }
 
     /**
-     * Setzt das zu diesem GameElement gehörige PhysicsElement.
-     *
-     * @param physicsElement Sas zu diesem GameElement gehörige PhysicsElement.
-     */
-    public void setPhysicsElement(PhysicsElementT physicsElement)
-    {
-        this.physicsElement = physicsElement;
-    }
-
-    /**
      * Gibt die Position des GameElements zurück.
      *
      * @return Die Position des GameElements.
@@ -124,7 +108,7 @@ public class GameElement<PhysicsElementT extends PhysicsElement<GameElement<?>>>
      *
      * @param elementEventArgs Argumente die relevante Daten des Physikelements beinhalten.
      */
-    public void synchronizeWithPhysics(ElementEventArgs<GameElement<?>> elementEventArgs)
+    public void synchronizeWithPhysics(ElementEventArgs<GameElement> elementEventArgs)
     {
         if (elementEventArgs.getGameElement() != this)
         {
