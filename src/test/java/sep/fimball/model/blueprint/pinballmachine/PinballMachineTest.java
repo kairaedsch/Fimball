@@ -54,7 +54,7 @@ public class PinballMachineTest
     {
         // Erstelle einen PinballMachine mit voller Highscorelist
         ArrayList<Highscore> highscores = new ArrayList<>();
-        for (int i = 0; i < Config.maxHighscores; i++)
+        for (int i = 0; i < Config.MAX_HIGHSCORES; i++)
         {
             highscores.add(new Highscore(25, "any"));
         }

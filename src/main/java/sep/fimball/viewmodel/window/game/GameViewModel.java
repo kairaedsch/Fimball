@@ -76,7 +76,7 @@ public class GameViewModel extends WindowViewModel
 
         cameraPosition = new SimpleObjectProperty<>();
         cameraPosition.bind(gameSession.gameBallProperty().get().positionProperty());
-        cameraZoom = new SimpleDoubleProperty(Config.defaultZoom);
+        cameraZoom = new SimpleDoubleProperty(Config.DEFAULT_ZOOM);
 
         gameSession.currentPlayer().addListener((observable, oldValue, newValue) ->
         {

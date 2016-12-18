@@ -42,7 +42,7 @@ public class TestGameSession extends GameSession
                 loopUpdate();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, (long) (Config.UPDATE_LOOP_TICK * 1000.0));
+        timer.scheduleAtFixedRate(task, 0, (long) (Config.UPDATE_LOOP_TICKRATE * 1000.0));
     }
 
     /**

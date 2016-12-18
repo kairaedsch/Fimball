@@ -13,7 +13,7 @@ public class PhysicsConfig
     /**
      * Die Kraft mit der der Ball von den Rampen zurück auf die Spielfläche beschleunigt wird.
      */
-    public static final double HEIGHT_GRAVITY = 5;
+    public static final double RAMP_TO_FLOOR_GRAVITY = 5;
 
     /**
      * Die maximale Höhe des Balls.

@@ -15,11 +15,11 @@ public class RampCollision implements CollisionType
         if (info.getBall().getLayer() == WorldLayer.RAMP)
         {
             /*
-             * Multiplier ist ein Wert > 1 damit der Ball auf der Rampe gehalten wird solange er auf dieser ist und nicht durch die Physik, welche mit 1 * HEIGHT_GRAVITY den Ball nach
+             * Multiplier ist ein Wert > 1 damit der Ball auf der Rampe gehalten wird solange er auf dieser ist und nicht durch die Physik, welche mit 1 * RAMP_TO_FLOOR_GRAVITY den Ball nach
              * unten zieht, an Höhe verliert.
              */
             double multiplier = 1.5;
-            info.getBall().setHeight(info.getBall().getHeight() + PhysicsConfig.HEIGHT_GRAVITY * multiplier * PhysicsConfig.TICK_RATE_SEC);
+            info.getBall().setHeight(info.getBall().getHeight() + PhysicsConfig.RAMP_TO_FLOOR_GRAVITY * multiplier * PhysicsConfig.TICK_RATE_SEC);
         }
     }
 }

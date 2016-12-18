@@ -110,7 +110,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Das Auswahl-Rechteck.
      */
-    private Optional<RectangleDoubleOfPoints> selectionRect;
+    private Optional<RectangleDoubleByPoints> selectionRect;
 
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
@@ -200,11 +200,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.125));
+            cameraZoom.set(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.125));
         }
         else
         {
-            cameraZoom.set(Math.max(Config.minZoom, cameraZoom.get() - 0.1));
+            cameraZoom.set(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.1));
         }
     }
 
@@ -215,11 +215,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (cameraZoom.get() >= 1)
         {
-            cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.125));
+            cameraZoom.set(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.125));
         }
         else
         {
-            cameraZoom.set(Math.min(Config.maxZoom, cameraZoom.get() + 0.1));
+            cameraZoom.set(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.1));
         }
     }
 
@@ -255,8 +255,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
-        double divX = (((endX - startX) / DesignConfig.pixelsPerGridUnit) / cameraZoom.get());
-        double divY = (((endY - startY) / DesignConfig.pixelsPerGridUnit) / cameraZoom.get());
+        double divX = (((endX - startX) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+        double divY = (((endY - startY) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
 
         if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {
@@ -269,7 +269,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
         {
-            selectionRect = Optional.of(new RectangleDoubleOfPoints(selectionRect.get().getPointA(), gridPos));
+            selectionRect = Optional.of(new RectangleDoubleByPoints(selectionRect.get().getPointA(), gridPos));
         }
     }
 
@@ -344,7 +344,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 pinballMachineEditor.clearSelection();
             }
             mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect = Optional.of(new RectangleDoubleOfPoints(gridPos, gridPos));
+            selectionRect = Optional.of(new RectangleDoubleByPoints(gridPos, gridPos));
         }
     }
 
@@ -373,7 +373,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
                     if (selectionRect.isPresent())
                     {
-                        RectangleDoubleOfPoints rectangle = selectionRect.get();
+                        RectangleDoubleByPoints rectangle = selectionRect.get();
                         if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                         {
                             pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
@@ -398,7 +398,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 }
                 if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
                 {
-                    RectangleDoubleOfPoints rectangle = selectionRect.get();
+                    RectangleDoubleByPoints rectangle = selectionRect.get();
                     if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                     {
                         pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
@@ -565,7 +565,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return availableElementSelected;
     }
 
-    public Optional<RectangleDoubleOfPoints> selectionRectProperty()
+    public Optional<RectangleDoubleByPoints> selectionRectProperty()
     {
         return selectionRect;
     }

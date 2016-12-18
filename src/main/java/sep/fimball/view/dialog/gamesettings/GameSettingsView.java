@@ -87,9 +87,9 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
 
         ViewModelListToPaneBinder.bindViewModelsToViews(keyBinding, gameSettingsViewModel.keybindsProperty(), DialogType.KEY_BINDING_ENTRY);
 
-        masterVolumeSlider.setMax(Config.maxVolume);
-        musicVolumeSlider.setMax(Config.maxVolume);
-        sfxVolumeSlider.setMax(Config.maxVolume);
+        masterVolumeSlider.setMax(Config.MAX_VOLUME);
+        musicVolumeSlider.setMax(Config.MAX_VOLUME);
+        sfxVolumeSlider.setMax(Config.MAX_VOLUME);
 
         language.setItems(gameSettingsViewModel.getLanguages());
         language.valueProperty().bindBidirectional(gameSettingsViewModel.languageProperty());

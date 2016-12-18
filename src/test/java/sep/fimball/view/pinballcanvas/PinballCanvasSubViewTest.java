@@ -141,7 +141,7 @@ public class PinballCanvasSubViewTest
         redraw.setAccessible(true);
         redraw.invoke(pinballCanvasSubView, false);
 
-        assertThat(DesignConfig.primaryColor, equalTo(backgroundColor));
+        assertThat(DesignConfig.PRIMARY_COLOR, equalTo(backgroundColor));
         double edgeFirstComponent = fillRectArguments[0];
         double edgeSecondComponent = fillRectArguments[1];
         double width = fillRectArguments[2];

@@ -46,12 +46,12 @@ public abstract class LightChanger
     protected abstract boolean determineLightStatus(Vector2 position, long delta);
 
     /**
-     * Gibt die Zeitspanne, in der der LightChanger aktiv wird, zurück.
+     * Gibt die Zeitspanne, in der der LightChanger aktiv ist, zurück.
      *
-     * @return Die Zeitspanne, in der der LightChanger aktiv wird, zurück.
+     * @return Die Zeitspanne, in der der LightChanger aktiv ist, zurück.
      */
     long getDuration()
     {
-        return DesignConfig.LIGHT_CHANGE_DURATION;
+        return DesignConfig.LIGHT_CHANGE_DEFAULT_DURATION;
     }
 }

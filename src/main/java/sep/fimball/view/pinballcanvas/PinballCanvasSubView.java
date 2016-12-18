@@ -150,10 +150,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     public WritableImage drawToImage()
     {
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
-        double minWidth = (1280 / DesignConfig.pixelsPerGridUnit);
-        double minHeight = (720 / DesignConfig.pixelsPerGridUnit);
-        double maxWidth = (3840 / DesignConfig.pixelsPerGridUnit);
-        double maxHeight = (2160 / DesignConfig.pixelsPerGridUnit);
+        double minWidth = (1280 / DesignConfig.PIXELS_PER_GRID_UNIT);
+        double minHeight = (720 / DesignConfig.PIXELS_PER_GRID_UNIT);
+        double maxWidth = (3840 / DesignConfig.PIXELS_PER_GRID_UNIT);
+        double maxHeight = (2160 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double cameraScale = 1.0;
 
         if (rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
@@ -176,8 +176,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         }
 
         Canvas screenShotCanvas = new Canvas();
-        screenShotCanvas.setHeight(rectangleDouble.getHeight() * DesignConfig.pixelsPerGridUnit);
-        screenShotCanvas.setWidth(rectangleDouble.getWidth() * DesignConfig.pixelsPerGridUnit);
+        screenShotCanvas.setHeight(rectangleDouble.getHeight() * DesignConfig.PIXELS_PER_GRID_UNIT);
+        screenShotCanvas.setWidth(rectangleDouble.getWidth() * DesignConfig.PIXELS_PER_GRID_UNIT);
         PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT, sprites);
         screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale, Optional.empty());
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());

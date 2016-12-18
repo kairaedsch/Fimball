@@ -56,14 +56,14 @@ public class SceneManagerView
         this.stage = stage;
 
         // Blur-Effekt für das glass.
-        blurEffect = new GaussianBlur(DesignConfig.stageDividerLayerBlur);
+        blurEffect = new GaussianBlur(DesignConfig.STAGE_DIVIDER_LAYER_BLUR);
 
         // Initialisiere den SoundManager
         new SoundManagerView();
 
         // Setzt die Anfangsgröße des gesamten Spiels
-        stage.setWidth(DesignConfig.defaultStageWidth);
-        stage.setHeight(DesignConfig.defaultStageHeight);
+        stage.setWidth(DesignConfig.DEFAULT_STAGE_WIDTH);
+        stage.setHeight(DesignConfig.DEFAULT_STAGE_HEIGHT);
 
         root = new StackPane();
 
@@ -71,8 +71,8 @@ public class SceneManagerView
         Rectangle glass = new Rectangle();
         glass.widthProperty().bind(root.widthProperty());
         glass.heightProperty().bind(root.heightProperty());
-        glass.setFill(DesignConfig.primaryColor);
-        glass.setOpacity(DesignConfig.stageDividerLayerOpacity);
+        glass.setFill(DesignConfig.PRIMARY_COLOR);
+        glass.setOpacity(DesignConfig.STAGE_DIVIDER_LAYER_OPACITY);
 
         // Fügt die verschiedenen Schichten zum rootNode hinzu
         root.getChildren().add(new Group());

@@ -60,7 +60,7 @@ public class RectangleDouble
     }
 
     /**
-     * Gibt die Länge des Rechtecks zurück.
+     * Gibt die Breite des Rechtecks zurück.
      *
      * @return Die Länge des Rechtecks.
      */

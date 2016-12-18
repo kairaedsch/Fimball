@@ -138,7 +138,7 @@ public class PolygonColliderShape implements ColliderShape
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {
         List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        Optional<Vector2> extremeVal = rotatedVertices.stream().reduce(max ? Vector2::max : Vector2::min);
+        Optional<Vector2> extremeVal = rotatedVertices.stream().reduce(max ? Vector2::maxComponents : Vector2::minComponents);
         if (extremeVal.isPresent())
             return extremeVal.get();
         else

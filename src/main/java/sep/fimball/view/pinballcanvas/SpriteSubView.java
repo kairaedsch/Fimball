@@ -76,7 +76,7 @@ public class SpriteSubView
             double scale = viewModel.scaleProperty().get();
             Vector2 oldSize = size;
             size = size.scale(scale);
-            position = position.plus(oldSize.minus(size).scale(0.5).scale(1.0 / DesignConfig.pixelsPerGridUnit));
+            position = position.plus(oldSize.minus(size).scale(0.5).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
         }
 
         if (imageLayer == ImageLayer.TOP)
@@ -110,13 +110,13 @@ public class SpriteSubView
         if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
             Vector2 localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
-            graphicsContext.translate(localCoordinates.getX() * DesignConfig.pixelsPerGridUnit, localCoordinates.getY() * DesignConfig.pixelsPerGridUnit);
+            graphicsContext.translate(localCoordinates.getX() * DesignConfig.PIXELS_PER_GRID_UNIT, localCoordinates.getY() * DesignConfig.PIXELS_PER_GRID_UNIT);
             pivot = pivot.plus(localCoordinates.scale(-1));
         }
 
         if (rotation != 0)
         {
-            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(DesignConfig.pixelsPerGridUnit));
+            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(DesignConfig.PIXELS_PER_GRID_UNIT));
         }
     }
 
@@ -147,10 +147,10 @@ public class SpriteSubView
         graphicsContext.save();
         graphicsContext.setGlobalAlpha(drawMode == DrawMode.SCREENSHOT ? 1 : viewModel.visibilityProperty().get());
 
-        double x = (position.getX() - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit;
-        double y = (position.getY() - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit;
-        double w = size.getX() + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit;
-        double h = size.getY() + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit;
+        double x = (position.getX() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT;
+        double y = (position.getY() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT;
+        double w = size.getX() + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT;
+        double h = size.getY() + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT;
 
         graphicsContext.drawImage(image, x, y, w, h);
         graphicsContext.restore();
@@ -166,7 +166,7 @@ public class SpriteSubView
      */
     private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Vector2 position, Vector2 size)
     {
-        double borderWidth = DesignConfig.pixelsPerGridUnit * 0.25;
+        double borderWidth = DesignConfig.PIXELS_PER_GRID_UNIT * 0.25;
         double borderOffset = 0.5 * borderWidth;
         double effectTime = (System.currentTimeMillis() % DesignConfig.BORDER_BLINK_RATE) / DesignConfig.BORDER_BLINK_RATE;
         double effectValue = -2 * effectTime * (effectTime - 1);
@@ -175,15 +175,15 @@ public class SpriteSubView
 
         if (imageLayer == ImageLayer.TOP)
         {
-            Color color = DesignConfig.complementColor.interpolate(DesignConfig.secondaryColor, effectValue);
+            Color color = DesignConfig.COMPLEMENT_COLOR.interpolate(DesignConfig.SECONDARY_COLOR, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(position.getX() * DesignConfig.pixelsPerGridUnit - borderOffset, position.getY() * DesignConfig.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.pixelsPerGridUnit));
+            graphicsContext.strokeRect(position.getX() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, position.getY() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
         else
         {
-            Color color = DesignConfig.complementColorDark.interpolate(DesignConfig.secondaryColorDark, effectValue);
+            Color color = DesignConfig.COMPLEMENT_COLOR_DARK.interpolate(DesignConfig.SECONDARY_COLOR_DARK, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(position.getX() * DesignConfig.pixelsPerGridUnit - borderOffset, (position.getY() + viewModel.getElementHeight()) * DesignConfig.pixelsPerGridUnit - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.pixelsPerGridUnit));
+            graphicsContext.strokeRect(position.getX() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, (position.getY() + viewModel.getElementHeight()) * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
     }
 }

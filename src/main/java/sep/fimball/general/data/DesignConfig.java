@@ -11,74 +11,69 @@ import javafx.scene.paint.Color;
 public class DesignConfig
 {
     /**
-     * Die Standardbreite des Anwendungsfensters.
+     * Die maximale zusätzliche Größe des Balls wenn er die maximale Höhe hat.
      */
     public final static double BALL_SIZE_SCALE_WHEN_LIFTED = 0.25;
 
     /**
      * Die Standardbreite des Anwendungsfensters.
      */
-    public final static int defaultStageWidth = 1280;
+    public final static int DEFAULT_STAGE_WIDTH = 1280;
 
     /**
      * Die Standardhöhe des Anwendungsfensters.
      */
-    public final static int defaultStageHeight = 720;
+    public final static int DEFAULT_STAGE_HEIGHT = 720;
 
     /**
      * Die Transparenz der Zwischenebene.
      */
-    public final static double stageDividerLayerOpacity = 0.6;
+    public final static double STAGE_DIVIDER_LAYER_OPACITY = 0.6;
 
     /**
      * Der Parameter des Blur Effekts welcher auf die Zwischenebene angewandt wird.
      */
-    public final static int stageDividerLayerBlur = 13;
+    public final static int STAGE_DIVIDER_LAYER_BLUR = 13;
 
     /**
      * Die Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color primaryColor = new Color(219 / 255.0, 93 / 255.0, 93 / 255.0, 1);
+    public final static Color PRIMARY_COLOR = new Color(219 / 255.0, 93 / 255.0, 93 / 255.0, 1);
 
     /**
      * Die hellere Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color primaryColorLight = new Color(255 / 255.0, 147 / 255.0, 147 / 255.0, 1);
+    public final static Color PRIMARY_COLOR_LIGHT = new Color(255 / 255.0, 147 / 255.0, 147 / 255.0, 1);
 
     /**
      * Die hellere Hintergrundfarbe des Flipperautomaten.
      */
-    public final static Color primaryColorLightLight = new Color(255 / 255.0, 187 / 255.0, 187 / 255.0, 1);
+    public final static Color PRIMARY_COLOR_LIGHT_LIGHT = new Color(255 / 255.0, 187 / 255.0, 187 / 255.0, 1);
 
     /**
      * Die Komplementfarbe des Flipperautomaten.
      */
-    public final static Color complementColor = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);
+    public final static Color COMPLEMENT_COLOR = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);
 
     /**
      * Die dunklere Komplementfarbe des Flipperautomaten.
      */
-    public final static Color complementColorDark = new Color(165 / 255.0, 119 / 255.0, 47 / 255.0, 1);
+    public final static Color COMPLEMENT_COLOR_DARK = new Color(165 / 255.0, 119 / 255.0, 47 / 255.0, 1);
 
     /**
      * Die Sekundärfarbe.
      */
-    public final static Color secondaryColor = new Color(68 / 255.0, 102 / 255.0, 143 / 255.0, 1);
+    public final static Color SECONDARY_COLOR = new Color(68 / 255.0, 102 / 255.0, 143 / 255.0, 1);
 
     /**
      * Die dunklere Sekundärfarbe.
      */
-    public final static Color secondaryColorDark = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
+    public final static Color SECONDARY_COLOR_DARK = new Color(37 / 255.0, 69 / 255.0, 108 / 255.0, 1);
 
     /**
-     * Der konstante String der CSS anweist das Hintergrundbild auf nichts zu setzen.
+     * Die Zeitspanne, in der der LightChanger aktiv ist.
      */
-    public final static String cssNoImage = "-fx-background-image: none";
-
-    /**
-     * Die Zeitspanne, in der der LightChanger aktiv wird.
-     */
-    public static final int LIGHT_CHANGE_DURATION = 10000;
+    public static final int LIGHT_CHANGE_DEFAULT_DURATION = 10000;
 
     /**
      * Die Rate, mit der sich die Light-Change-Loop wiederholt.
@@ -93,12 +88,17 @@ public class DesignConfig
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
      */
-    public final static int pixelsPerGridUnit = 15;
+    public final static int PIXELS_PER_GRID_UNIT = 15;
 
     /**
      * Sehr kleiner Wert welcher beim Zeichnen von Bildern genutzt wird um Artefakte zu vermeiden.
      */
-    public final static double antiGraphicStripesExtraSize = 0.02;
+    public final static double ANTI_GRAPHIC_STRIPES_EXTRA_SIZE = 0.02;
+
+    /**
+     * Der konstante String der CSS anweist das Hintergrundbild auf nichts zu setzen.
+     */
+    public final static String CSS_NO_IMAGE = "-fx-background-image: none";
 
     /**
      * Der Präfix für CSS um das Hintergrundbild auf eine Datei zu setzen.
@@ -116,7 +116,7 @@ public class DesignConfig
     private final static String CSS_IMAGE_CONTAIN = "-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";
 
     /**
-     * Gibt den URL-Pfad, der durch {@code path}spezifizierten CSS-Datei zurück.
+     * Gibt den URL-Pfad, der durch {@code path} spezifizierten CSS-Datei zurück.
      *
      * @param path Der Pfad, der die CSS-Datei spezifiziert.
      * @return Der URL-Pfad.

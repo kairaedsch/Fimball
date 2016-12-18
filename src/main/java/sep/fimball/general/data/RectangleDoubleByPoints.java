@@ -3,7 +3,7 @@ package sep.fimball.general.data;
 /**
  * RectangleDouble stellt ein Rechteck dar, wobei seine Daten mit Double-Werten gespeichert werden und es durch zwei Punkte dargestellt wird.
  */
-public class RectangleDoubleOfPoints
+public class RectangleDoubleByPoints
 {
     /**
      * Der erste Punkt durch den dieses Rechteck dargestellt wird.
@@ -21,7 +21,7 @@ public class RectangleDoubleOfPoints
      * @param pointA Der erste Punkt durch den das Rechteck dargestellt wird.
      * @param pointB Der zweite Punkt durch den das Rechteck dargestellt wird.
      */
-    public RectangleDoubleOfPoints(Vector2 pointA, Vector2 pointB)
+    public RectangleDoubleByPoints(Vector2 pointA, Vector2 pointB)
     {
         this.pointA = pointA;
         this.pointB = pointB;
@@ -64,7 +64,7 @@ public class RectangleDoubleOfPoints
      */
     public Vector2 getOrigin()
     {
-        return Vector2.min(pointA, pointB);
+        return Vector2.minComponents(pointA, pointB);
     }
 
     /**
@@ -74,7 +74,7 @@ public class RectangleDoubleOfPoints
      */
     public Vector2 getEnd()
     {
-        return Vector2.max(pointA, pointB);
+        return Vector2.maxComponents(pointA, pointB);
     }
 
     /**

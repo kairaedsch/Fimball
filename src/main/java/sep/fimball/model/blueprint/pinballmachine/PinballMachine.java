@@ -109,7 +109,7 @@ public class PinballMachine
      * @param rect Das Viereck.
      * @return Die Elemente.
      */
-    public ListProperty<PlacedElement> getElementsAt(RectangleDoubleOfPoints rect)
+    public ListProperty<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
     {
         ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
         for (PlacedElement element : elements)
@@ -134,8 +134,8 @@ public class PinballMachine
      */
     public RectangleDouble getBoundingBox()
     {
-        Vector2 max = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true))).reduce(Vector2::max).get();
-        Vector2 origin = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false))).reduce(Vector2::min).get();
+        Vector2 max = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true))).reduce(Vector2::maxComponents).get();
+        Vector2 origin = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false))).reduce(Vector2::minComponents).get();
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());
@@ -188,7 +188,7 @@ public class PinballMachine
      */
     private void addHighscore(Highscore highscore, boolean save)
     {
-        if (highscoreList.size() >= Config.maxHighscores)
+        if (highscoreList.size() >= Config.MAX_HIGHSCORES)
         {
             Highscore worstHighscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
             if (worstHighscore.scoreProperty().get() < highscore.scoreProperty().get())

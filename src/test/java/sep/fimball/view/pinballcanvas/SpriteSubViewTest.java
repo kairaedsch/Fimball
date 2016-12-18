@@ -136,9 +136,9 @@ public class SpriteSubViewTest
         spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, DrawMode.EDITOR);
 
         // TODO - Duplizierten Code aus der Klasse welche getestet werden soll entfernen.
-        assertEquals(DesignConfig.pixelsPerGridUnit, translationArguments[0], 0.0);
-        assertEquals(DesignConfig.pixelsPerGridUnit, translationArguments[1], 0.0);
-        Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * DesignConfig.pixelsPerGridUnit, (pivot.getY() - localCoordinates.getY() + position.getY()) * DesignConfig.pixelsPerGridUnit);
+        assertEquals(DesignConfig.PIXELS_PER_GRID_UNIT, translationArguments[0], 0.0);
+        assertEquals(DesignConfig.PIXELS_PER_GRID_UNIT, translationArguments[1], 0.0);
+        Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * DesignConfig.PIXELS_PER_GRID_UNIT, (pivot.getY() - localCoordinates.getY() + position.getY()) * DesignConfig.PIXELS_PER_GRID_UNIT);
         assertEquals(r.getMxx(), transformationArguments[0], 0.0);
         assertEquals(r.getMyx(), transformationArguments[1], 0.0);
         assertEquals(r.getMxy(), transformationArguments[2], 0.0);
@@ -146,15 +146,15 @@ public class SpriteSubViewTest
         assertEquals(r.getTx(), transformationArguments[4], 0.0);
         assertEquals(r.getTy(), transformationArguments[5], 0.0);
         assertThat(drawnImages[0], equalTo(imageMock));
-        assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[0], DesignConfig.pixelsPerGridUnit * 0.25, 0.0);
-        assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit) * DesignConfig.pixelsPerGridUnit - 0.125 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit + ELEMENT_HEIGHT) * DesignConfig.pixelsPerGridUnit - 0.125 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[3], IMAGE_WIDTH * SCALE + 0.25 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[4], IMAGE_HEIGHT * SCALE + 0.25 * DesignConfig.pixelsPerGridUnit - ELEMENT_HEIGHT * DesignConfig.pixelsPerGridUnit, 0.0);
+        assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[0], DesignConfig.PIXELS_PER_GRID_UNIT * 0.25, 0.0);
+        assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT) * DesignConfig.PIXELS_PER_GRID_UNIT - 0.125 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT + ELEMENT_HEIGHT) * DesignConfig.PIXELS_PER_GRID_UNIT - 0.125 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[3], IMAGE_WIDTH * SCALE + 0.25 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[4], IMAGE_HEIGHT * SCALE + 0.25 * DesignConfig.PIXELS_PER_GRID_UNIT - ELEMENT_HEIGHT * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
     }
 
     /**
@@ -230,9 +230,9 @@ public class SpriteSubViewTest
         spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, DrawMode.EDITOR);
 
         // TODO - Duplizierten Code aus der Klasse welche getestet werden soll entfernen.
-        assertEquals(DesignConfig.pixelsPerGridUnit, translationArguments[0], 0.0);
-        assertEquals(DesignConfig.pixelsPerGridUnit, translationArguments[1], 0.0);
-        Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * DesignConfig.pixelsPerGridUnit, (pivot.getY() - localCoordinates.getY() + position.getY()) * DesignConfig.pixelsPerGridUnit);
+        assertEquals(DesignConfig.PIXELS_PER_GRID_UNIT, translationArguments[0], 0.0);
+        assertEquals(DesignConfig.PIXELS_PER_GRID_UNIT, translationArguments[1], 0.0);
+        Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * DesignConfig.PIXELS_PER_GRID_UNIT, (pivot.getY() - localCoordinates.getY() + position.getY()) * DesignConfig.PIXELS_PER_GRID_UNIT);
         assertEquals(r.getMxx(), transformationArguments[0], 0.0);
         assertEquals(r.getMyx(), transformationArguments[1], 0.0);
         assertEquals(r.getMxy(), transformationArguments[2], 0.0);
@@ -240,18 +240,18 @@ public class SpriteSubViewTest
         assertEquals(r.getTx(), transformationArguments[4], 0.0);
         assertEquals(r.getTy(), transformationArguments[5], 0.0);
         assertThat(drawnImages[0], equalTo(imageMock));
-        assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit - DesignConfig.antiGraphicStripesExtraSize) * DesignConfig.pixelsPerGridUnit, 0.0);
-        // double w = size.getX() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit :: size = IMAGE_WIDTH * SCALE, SpriteSubView:146
-        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit, 0.0);
-        // double h = size.getY() + Config.antiGraphicStripesExtraSize * 2 * Config.pixelsPerGridUnit; :: size = IMAGE_HEIGHT * SCALE, SpriteSubView:147
-        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + DesignConfig.antiGraphicStripesExtraSize * 2 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[0], DesignConfig.pixelsPerGridUnit * 0.25, 0.0);
-        assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit) * DesignConfig.pixelsPerGridUnit - 0.125 * DesignConfig.pixelsPerGridUnit, 0.0);
-        assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.pixelsPerGridUnit) * DesignConfig.pixelsPerGridUnit - 0.125 * DesignConfig.pixelsPerGridUnit, 0.0);
-        // size.getX() + borderOffset * 2 :: size = IMAGE_WIDTH * SCALE, borderOffset * 2 = 0.25 * Config.pixelsPerGridUnit, SpriteSubView:171
-        assertEquals(borderArguments[3], IMAGE_WIDTH * SCALE + 0.25 * DesignConfig.pixelsPerGridUnit, 0.0);
-        //size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.pixelsPerGridUnit, SpriteSubView:171
-        assertEquals(borderArguments[4], IMAGE_HEIGHT * SCALE + 0.25 * DesignConfig.pixelsPerGridUnit - ELEMENT_HEIGHT * DesignConfig.pixelsPerGridUnit, 0.0);
+        assertEquals(drawImageDoubleArguments[0], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(drawImageDoubleArguments[1], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        // double w = size.getX() + Config.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * Config.PIXELS_PER_GRID_UNIT :: size = IMAGE_WIDTH * SCALE, SpriteSubView:146
+        assertEquals(drawImageDoubleArguments[2], IMAGE_WIDTH * SCALE + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        // double h = size.getY() + Config.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * Config.PIXELS_PER_GRID_UNIT; :: size = IMAGE_HEIGHT * SCALE, SpriteSubView:147
+        assertEquals(drawImageDoubleArguments[3], IMAGE_HEIGHT * SCALE + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[0], DesignConfig.PIXELS_PER_GRID_UNIT * 0.25, 0.0);
+        assertEquals(borderArguments[1], (position.getX() + (IMAGE_WIDTH - IMAGE_WIDTH * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT) * DesignConfig.PIXELS_PER_GRID_UNIT - 0.125 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        assertEquals(borderArguments[2], (position.getY() + (IMAGE_HEIGHT - IMAGE_HEIGHT * SCALE) * 0.5 / DesignConfig.PIXELS_PER_GRID_UNIT) * DesignConfig.PIXELS_PER_GRID_UNIT - 0.125 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        // size.getX() + borderOffset * 2 :: size = IMAGE_WIDTH * SCALE, borderOffset * 2 = 0.25 * Config.PIXELS_PER_GRID_UNIT, SpriteSubView:171
+        assertEquals(borderArguments[3], IMAGE_WIDTH * SCALE + 0.25 * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
+        //size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * Config.PIXELS_PER_GRID_UNIT, SpriteSubView:171
+        assertEquals(borderArguments[4], IMAGE_HEIGHT * SCALE + 0.25 * DesignConfig.PIXELS_PER_GRID_UNIT - ELEMENT_HEIGHT * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
     }
 }

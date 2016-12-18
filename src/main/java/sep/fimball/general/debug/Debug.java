@@ -113,10 +113,10 @@ public class Debug
     {
         double width = 6.0;
         double length = 3.0;
-        context.strokeLine(pos.getX() * DesignConfig.pixelsPerGridUnit, pos.getY() * DesignConfig.pixelsPerGridUnit, (pos.getX() + dir.getX() * length) * DesignConfig.pixelsPerGridUnit, (pos.getY() + dir.getY() * length) * DesignConfig.pixelsPerGridUnit);
-        context.fillOval((pos.getX() + dir.getX() * length) * DesignConfig.pixelsPerGridUnit - width * 0.5, (pos.getY() + dir.getY() * length) * DesignConfig.pixelsPerGridUnit - width * 0.5, width, width);
+        context.strokeLine(pos.getX() * DesignConfig.PIXELS_PER_GRID_UNIT, pos.getY() * DesignConfig.PIXELS_PER_GRID_UNIT, (pos.getX() + dir.getX() * length) * DesignConfig.PIXELS_PER_GRID_UNIT, (pos.getY() + dir.getY() * length) * DesignConfig.PIXELS_PER_GRID_UNIT);
+        context.fillOval((pos.getX() + dir.getX() * length) * DesignConfig.PIXELS_PER_GRID_UNIT - width * 0.5, (pos.getY() + dir.getY() * length) * DesignConfig.PIXELS_PER_GRID_UNIT - width * 0.5, width, width);
         context.setFill(Color.BLACK);
-        context.fillOval(pos.getX() * DesignConfig.pixelsPerGridUnit - width * 0.5, pos.getY() * DesignConfig.pixelsPerGridUnit - width * 0.5, width, width);
+        context.fillOval(pos.getX() * DesignConfig.PIXELS_PER_GRID_UNIT - width * 0.5, pos.getY() * DesignConfig.PIXELS_PER_GRID_UNIT - width * 0.5, width, width);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Debug
      */
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
     {
-        context.strokeOval((pos.getX() - radius) * DesignConfig.pixelsPerGridUnit, (pos.getY() - radius) * DesignConfig.pixelsPerGridUnit, radius * 2.0 * DesignConfig.pixelsPerGridUnit, radius * 2.0 * DesignConfig.pixelsPerGridUnit);
+        context.strokeOval((pos.getX() - radius) * DesignConfig.PIXELS_PER_GRID_UNIT, (pos.getY() - radius) * DesignConfig.PIXELS_PER_GRID_UNIT, radius * 2.0 * DesignConfig.PIXELS_PER_GRID_UNIT, radius * 2.0 * DesignConfig.PIXELS_PER_GRID_UNIT);
     }
 
     /**
@@ -163,8 +163,8 @@ public class Debug
 
         for (int i = 0; i < vertices.size(); i++)
         {
-            xPoints[i] = (vertices.get(i).getX() + offset.getX()) * DesignConfig.pixelsPerGridUnit;
-            yPoints[i] = (vertices.get(i).getY() + offset.getY()) * DesignConfig.pixelsPerGridUnit;
+            xPoints[i] = (vertices.get(i).getX() + offset.getX()) * DesignConfig.PIXELS_PER_GRID_UNIT;
+            yPoints[i] = (vertices.get(i).getY() + offset.getY()) * DesignConfig.PIXELS_PER_GRID_UNIT;
         }
 
         context.strokePolygon(xPoints, yPoints, vertices.size());

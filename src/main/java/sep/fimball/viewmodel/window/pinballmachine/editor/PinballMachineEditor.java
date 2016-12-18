@@ -4,7 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
-import sep.fimball.general.data.RectangleDoubleOfPoints;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -233,7 +233,7 @@ public class PinballMachineEditor
      * @param rect Das Rechteck.
      * @return Die Elemente, die in dem Rechteck liegen.
      */
-    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDoubleOfPoints rect)
+    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
     {
         return pinballMachine.getElementsAt(rect);
     }

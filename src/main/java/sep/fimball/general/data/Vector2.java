@@ -225,7 +225,7 @@ public class Vector2
     {
         if (this.magnitude() > max)
         {
-            System.out.println("ball exited max speed");
+            System.out.println("ball exited maxComponents speed");
             return new Vector2(x, y).scale(max / this.magnitude());
         }
 
@@ -269,7 +269,7 @@ public class Vector2
      * @param b Der zweite Vektor.
      * @return Der Vektor mit der maximalen x- und y-Komponente.
      */
-    public static Vector2 max(Vector2 a, Vector2 b)
+    public static Vector2 maxComponents(Vector2 a, Vector2 b)
     {
         return new Vector2(Math.max(a.x, b.x), Math.max(a.y, b.y));
     }
@@ -281,7 +281,7 @@ public class Vector2
      * @param b Der zweite Vektor.
      * @return Der Vektor mit der minimalen x- und y-Komponente.
      */
-    public static Vector2 min(Vector2 a, Vector2 b)
+    public static Vector2 minComponents(Vector2 a, Vector2 b)
     {
         return new Vector2(Math.min(a.x, b.x), Math.min(a.y, b.y));
     }

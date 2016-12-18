@@ -44,7 +44,7 @@ public abstract class Session
         this.pinballMachine = pinballMachine;
         updateLoop = new Timeline();
         updateLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(Config.UPDATE_LOOP_TICK), (event -> loopUpdate()));
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(Config.UPDATE_LOOP_TICKRATE), (event -> loopUpdate()));
         updateLoop.getKeyFrames().add(keyFrame);
         startUpdateLoop();
     }

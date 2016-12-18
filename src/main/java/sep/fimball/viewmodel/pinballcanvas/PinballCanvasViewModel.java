@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.general.data.RectangleDoubleOfPoints;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -177,7 +177,7 @@ public abstract class PinballCanvasViewModel
     }
 
     // TODO - Sollte das wirklich einen empty zurückgeben? Wenn ja ist es unerwartetes Verhalten.
-    public Optional<RectangleDoubleOfPoints> selectingRectangleProperty()
+    public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
     {
         return Optional.empty();
     }

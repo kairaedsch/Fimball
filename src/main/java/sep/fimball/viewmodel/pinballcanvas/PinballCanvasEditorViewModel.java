@@ -1,7 +1,7 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.scene.input.MouseEvent;
-import sep.fimball.general.data.RectangleDoubleOfPoints;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.EditorSession;
@@ -47,7 +47,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
         editorViewModel.mousePressedOnCanvas(mouseEvent, gridPos);
     }
 
-    public Optional<RectangleDoubleOfPoints> selectingRectangleProperty()
+    public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
     {
         return editorViewModel.selectionRectProperty();
     }

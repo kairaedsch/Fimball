@@ -23,7 +23,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 
 import java.util.Optional;
 
-import static sep.fimball.general.data.DesignConfig.pixelsPerGridUnit;
+import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 
 
 /**
@@ -136,7 +136,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         }
         else
         {
-            pane.styleProperty().set(DesignConfig.cssNoImage);
+            pane.styleProperty().set(DesignConfig.CSS_NO_IMAGE);
         }
     }
 
@@ -308,7 +308,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private Vector2 mousePosToCanvasPos(Vector2 mousePos)
     {
         Vector2 posToMiddle = new Vector2(mousePos.getX(), mousePos.getY()).minus(new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).scale(0.5));
-        return posToMiddle.scale(1 / (pixelsPerGridUnit * pinballMachineEditorViewModel.cameraZoomProperty().get())).plus(pinballMachineEditorViewModel.cameraPositionProperty().get());
+        return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * pinballMachineEditorViewModel.cameraZoomProperty().get())).plus(pinballMachineEditorViewModel.cameraPositionProperty().get());
 
     }
 }
