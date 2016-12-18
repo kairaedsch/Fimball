@@ -51,8 +51,12 @@ public class PinballCanvasDrawer
 
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
+     *
+     * @param cameraPosition die Position der Kamera.
+     * @param cameraZoom der Zoom der Kamera.
+     * @param dragSelectionRect das eventuell vorhandene Auswahlfenster welches es durch "ziehen" erlaubt Elemente auszuwählen.
      */
-    public void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleOfPoints> rect)
+    public void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleOfPoints> dragSelectionRect)
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -72,14 +76,14 @@ public class PinballCanvasDrawer
         drawElements(graphicsContext);
         Debug.draw(graphicsContext);
 
-        if(rect.isPresent())
+        if(dragSelectionRect.isPresent())
         {
             graphicsContext.setFill(DesignConfig.secondaryColor);
             graphicsContext.setStroke(DesignConfig.secondaryColorDark);
             graphicsContext.setLineWidth(0.25 * pixelsPerGridUnit);
 
-            Vector2 ori = rect.get().getOrigin().scale(pixelsPerGridUnit);
-            Vector2 end = rect.get().getSize().scale(pixelsPerGridUnit);
+            Vector2 ori = dragSelectionRect.get().getOrigin().scale(pixelsPerGridUnit);
+            Vector2 end = dragSelectionRect.get().getSize().scale(pixelsPerGridUnit);
 
             graphicsContext.setGlobalAlpha(0.5);
             graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX(), end.getY());

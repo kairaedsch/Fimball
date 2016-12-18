@@ -46,6 +46,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private SimpleObjectProperty<Vector2> cameraPosition;
 
+    /**
+     * Die Position der Kamera welche der eigentlichen Kamera etwas langsamer folgt um ein angenehmeres Spielgefühl zu erzeugen.
+     */
     private Vector2 softCameraPosition;
 
     /**
@@ -53,6 +56,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private SimpleDoubleProperty cameraZoom;
 
+    /**
+     * Der Zoom der Kamera welcher den eigentlichen Zoom etwas langsamer folgt.
+     */
     private double softCameraZoom;
 
     /**
@@ -65,8 +71,14 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private long lastDraw;
 
+    /**
+     * Der Modus in dem gezeichnet werden soll.
+     */
     private DrawMode drawMode;
 
+    /**
+     * Die Hilfsklasse welche die Operationen auf dem GraphicsContext des Canvas ausführt.
+     */
     private PinballCanvasDrawer pinballCanvasDrawer;
 
     /**
@@ -104,6 +116,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         pinballCanvasDrawer = new PinballCanvasDrawer(canvas, drawMode, sprites);
     }
 
+    /**
+     * Aktualisiert das Canvas durch Erneutes zeichnen.
+     */
     private void redraw()
     {
         double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
