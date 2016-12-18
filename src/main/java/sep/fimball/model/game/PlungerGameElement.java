@@ -18,7 +18,7 @@ import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 /**
  * Das Spielelement des Plungers.
  */
-public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameElement>>
+public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameElement<?>>>
 {
     /**
      * Der Zeitpunkt zu dem das Aufladen des Plungers begonnen wurde.
@@ -68,7 +68,7 @@ public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameEl
      * @param plungerPhysicsElement Das zum Plunger gehörende physikalische Element.
      */
     @Override
-    public void setPhysicsElement(PlungerPhysicsElement<GameElement> plungerPhysicsElement)
+    public void setPhysicsElement(PlungerPhysicsElement<GameElement<?>> plungerPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {

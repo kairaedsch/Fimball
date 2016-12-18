@@ -10,7 +10,7 @@ import sep.fimball.model.physics.element.BallResetModify;
 /**
  * Das Spielelement des Balls.
  */
-public class BallGameElement extends GameElement<BallPhysicsElement<GameElement>> implements HandlerBallGameElement
+public class BallGameElement extends GameElement<BallPhysicsElement<GameElement<?>>> implements HandlerBallGameElement
 {
     /**
      * Erstellt ein neues BallGameElement aus dem gegebenen PlacedElement.

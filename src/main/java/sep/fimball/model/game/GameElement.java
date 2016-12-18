@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
-public class GameElement<PhysicsElementT extends PhysicsElement<GameElement>> implements HandlerGameElement
+public class GameElement<PhysicsElementT extends PhysicsElement<GameElement<?>>> implements HandlerGameElement
 {
     /**
      * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
@@ -124,7 +124,7 @@ public class GameElement<PhysicsElementT extends PhysicsElement<GameElement>> im
      *
      * @param elementEventArgs Argumente die relevante Daten des Physikelements beinhalten.
      */
-    public void synchronizeWithPhysics(ElementEventArgs<GameElement> elementEventArgs)
+    public void synchronizeWithPhysics(ElementEventArgs<GameElement<?>> elementEventArgs)
     {
         if (elementEventArgs.getGameElement() != this)
         {

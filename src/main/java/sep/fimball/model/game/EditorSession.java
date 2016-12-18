@@ -21,8 +21,8 @@ public class EditorSession extends Session
     {
         super(pinballMachine);
 
-        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.heightProperty()});
-        SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
+        ObservableList<GameElement<?>> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.heightProperty()});
+        SortedList<GameElement<?>> sortedList = new SortedList<>(list, GameElement::compare);
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
 
         world = new World(sortedList);
