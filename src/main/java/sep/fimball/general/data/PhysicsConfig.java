@@ -56,7 +56,13 @@ public class PhysicsConfig
      */
     public static final double NUDGE_VELOCITY = 5;
 
-    public static double MAX_PLUNGER_FORCE = 150;
+    /**
+     * Gibt die Standardkraft des Plungers zurück welche bei 1 Sekunde aufladen gilt.
+     */
+    public static double DEFAULT_PLUNGER_FORCE = 150;
 
+    /**
+     * Gibt den maximalen Multiplier der Kraft des Plungers zurück, auch bei längeren Laden des Plungers kann dieser nicht überschritten werden.
+     */
     public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
 }

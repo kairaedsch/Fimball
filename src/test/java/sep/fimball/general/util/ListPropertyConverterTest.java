@@ -119,13 +119,26 @@ public class ListPropertyConverterTest
      */
     private static class DummyOne
     {
+        /**
+         * Dummy Feld vom Typ int.
+         */
         private int data;
 
+        /**
+         * Erzeugt eine Dummy Klasse welche Integer Werte nutzt.
+         *
+         * @param data Der Dummy Wert welcher gespeichert werden soll.
+         */
         public DummyOne(int data)
         {
             this.data = data;
         }
 
+        /**
+         * Gibt den Dummy Wert vom Typ Integer zurück.
+         *
+         * @return Der Dummy Wert.
+         */
         public int getData()
         {
             return data;
@@ -137,13 +150,26 @@ public class ListPropertyConverterTest
      */
     private static class DummyTwo
     {
+        /**
+         * Dummy Feld vom Typ data.
+         */
         private double data;
 
+        /**
+         * Erzeugt eine Dummy Klasse welche Double Werte nutzt.
+         *
+         * @param dummy Der Dummy Wert welcher gespeichert werden soll.
+         */
         public DummyTwo(DummyOne dummy)
         {
             this.data = dummy.getData();
         }
 
+        /**
+         * Gibt den Dummy Wert vom Typ Double zurück.
+         *
+         * @return Der Dummy Wert.
+         */
         public double getData()
         {
             return data;

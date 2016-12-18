@@ -19,10 +19,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class PinballMachineSaveTest
 {
-    private static final int MAX_ELEMENT_SIZE = 20;
+    /**
+     * Gibt an um wie viel GridEinheiten verschoben die Elemente auf der Y-Achse platziert werden sollen.
+     */
+    private static final int ELEMENT_POSITION_OFFSET = 20;
 
     /**
      * Erstellt einen neuen Automaten, platziert jedes verfügbare Spielelement darin, speichert den erstellten Automaten und lädt ihn von der Festplatte. Anschließend wird sichergestellt, dass der geladene Automat mit dem erstellten Automat übereinstimmt.
+     *
+     * @throws IOException Exception die beim I/O der Serialisierung auftreten können.
      */
     @Test
     public void pinballMachineShouldSave() throws IOException
@@ -35,7 +40,7 @@ public class PinballMachineSaveTest
         int i = 0;
         for (BaseElement b : BaseElementManager.getInstance().elementsProperty().values())
         {
-            PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(b.getId()), new Vector2(0, MAX_ELEMENT_SIZE * i), 0, 1, 0);
+            PlacedElement p = new PlacedElement(BaseElementManager.getInstance().getElement(b.getId()), new Vector2(0, ELEMENT_POSITION_OFFSET * i), 0, 1, 0);
             pinballMachine.addElement(p);
             pinballMachineElements.add(p);
             i++;

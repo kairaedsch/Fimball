@@ -35,6 +35,9 @@ import java.util.HashMap;
  */
 public class SpriteSubViewTest
 {
+    /**
+     * Wird benötigt um eine korrekte Ausführung auf dem JavaFX Thread zu garantieren.
+     */
     @Rule
     public JavaFXThreadingRule javaFXThreadingRule = new JavaFXThreadingRule();
 
@@ -105,6 +108,7 @@ public class SpriteSubViewTest
         //TODO - Fix duplicated code
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
+            //TODO - Aufteilung in mehrere Arrays und i - 1 machen den Code unnötig kompliziert.
             drawnImages[0] = invocation.getArgument(0);
             for (int i = 1; i < 5; i++)
             {
@@ -131,6 +135,7 @@ public class SpriteSubViewTest
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
         spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, DrawMode.EDITOR);
 
+        // TODO - Duplizierten Code aus der Klasse welche getestet werden soll entfernen.
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);
         Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * Config.pixelsPerGridUnit, (pivot.getY() - localCoordinates.getY() + position.getY()) * Config.pixelsPerGridUnit);
@@ -224,6 +229,7 @@ public class SpriteSubViewTest
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
         spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, DrawMode.EDITOR);
 
+        // TODO - Duplizierten Code aus der Klasse welche getestet werden soll entfernen.
         assertEquals(Config.pixelsPerGridUnit, translationArguments[0], 0.0);
         assertEquals(Config.pixelsPerGridUnit, translationArguments[1], 0.0);
         Rotate r = new Rotate(ROTATION, (pivot.getX() - localCoordinates.getX() + position.getX()) * Config.pixelsPerGridUnit, (pivot.getY() - localCoordinates.getY() + position.getY()) * Config.pixelsPerGridUnit);

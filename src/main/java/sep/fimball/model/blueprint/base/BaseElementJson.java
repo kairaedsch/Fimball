@@ -148,6 +148,9 @@ public class BaseElementJson
          */
         public MediaElementEventJson[] events;
 
+        /**
+         * Die konstante Verschiebung des BaseElements beim Zeichnen.
+         */
         public MediaElementLocalCoordinateJson[] localCoordinates;
 
         /**
@@ -223,10 +226,19 @@ public class BaseElementJson
             }
         }
 
+        /**
+         * Repräsentiert die konstante Verschiebung des BaseElements beim Zeichnen. Diese konstante Verschiebung kann für unterschiedliche Rotationen angegeben werden.
+         */
         public static class MediaElementLocalCoordinateJson
         {
+            /**
+             * Die Rotation für welche diese Verschiebung gilt.
+             */
             public int rotation;
 
+            /**
+             * Die Verschiebung des BaseElements bei der gegebenen Rotation
+             */
             public Vector2 localCoord;
         }
     }

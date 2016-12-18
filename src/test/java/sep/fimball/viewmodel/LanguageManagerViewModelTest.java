@@ -21,6 +21,9 @@ import static org.junit.Assert.assertThat;
  */
 public class LanguageManagerViewModelTest
 {
+    /**
+     * Wird benötigt um eine korrekte Ausführun auf dem JavaFX Thread zu garantieren.
+     */
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 

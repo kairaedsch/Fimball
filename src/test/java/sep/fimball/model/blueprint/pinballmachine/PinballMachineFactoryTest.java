@@ -11,6 +11,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse PinballMachineFactory.
+ */
 public class PinballMachineFactoryTest
 {
     @Test

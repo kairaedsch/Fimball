@@ -27,13 +27,24 @@ public class JsonFileManagerTest
      */
     private static class JsonTest
     {
+        /**
+         * Ein Testwert vom Typ int.
+         */
         private int testInt;
+
+        /**
+         * Ein Testwert vom Typ double.
+         */
         private double testDouble;
+
+        /**
+         * Ein Testwert vom Typ String.
+         */
         private String testString;
     }
 
     /**
-     * Lädt
+     * Lädt eine vorher gespeicherte JSON Datei und überprüft ob die geladenen Werte korrekt sind.
      */
     @Test
     public void jsonLoadTest()
@@ -45,6 +56,9 @@ public class JsonFileManagerTest
         assertThat(test.get().testString, is("test-string-\uD83D\uDC09"));
     }
 
+    /**
+     * Speichert eine JSON Datei und lädt sie danach. Dann kann überprüft werden ob die gespeicherten Werte gleich den geladenen sind.
+     */
     @Test
     public void jsonSaveTest()
     {
@@ -60,6 +74,9 @@ public class JsonFileManagerTest
         assertThat(test.testString, is(loaded.get().testString));
     }
 
+    /**
+     * Löscht die Test JSON Datei.
+     */
     @After
     public void cleanup()
     {

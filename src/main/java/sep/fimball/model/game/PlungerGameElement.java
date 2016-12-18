@@ -3,7 +3,6 @@ package sep.fimball.model.game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
@@ -15,7 +14,7 @@ import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import java.util.Optional;
 
-import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE;
+import static sep.fimball.general.data.PhysicsConfig.DEFAULT_PLUNGER_FORCE;
 import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 
 /**
@@ -91,9 +90,14 @@ public class PlungerGameElement extends GameElement
      */
     private double calcForce()
     {
-        return Math.min(MAX_PLUNGER_FORCE * MAX_PLUNGER_FORCE_MULTIPLY, MAX_PLUNGER_FORCE * getSecondsPressed());
+        return Math.min(DEFAULT_PLUNGER_FORCE * MAX_PLUNGER_FORCE_MULTIPLY, DEFAULT_PLUNGER_FORCE * getSecondsPressed());
     }
 
+    /**
+     * Gibt zurück wie lange der Plunger bereits geladen wurde.
+     *
+     * @return Wie lange der Plunger bereits geladen wurde.
+     */
     private double getSecondsPressed()
     {
         return (System.currentTimeMillis() - pressStart) / 1000d;

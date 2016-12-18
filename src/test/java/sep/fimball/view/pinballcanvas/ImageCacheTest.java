@@ -12,8 +12,14 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse ImageCache
+ */
 public class ImageCacheTest
 {
+    /**
+     * Wird benötigt um eine korrekte Ausführung auf dem JavaFX Thread zu garantieren.
+     */
     @ClassRule
     public static JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 

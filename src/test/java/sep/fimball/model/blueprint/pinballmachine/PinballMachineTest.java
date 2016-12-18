@@ -14,8 +14,14 @@ import java.util.Collections;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests für die Klasse PinballMachine.
+ */
 public class PinballMachineTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode {@code getElementAt()}
+     */
     @Test
     public void getElementAt()
     {
@@ -40,6 +46,9 @@ public class PinballMachineTest
         assertThat("Kein Element wird ausgewählt", pinballMachine.getElementAt(new Vector2(8, 8)).isPresent(), is(false));
     }
 
+    /**
+     * Überprüft Korrektheit der Methode {@code addHighscore()}
+     */
     @Test
     public void addHighscore()
     {
