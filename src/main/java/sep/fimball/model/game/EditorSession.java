@@ -8,10 +8,15 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 /**
- * Enthält Informationen über einen Flipperautomat während des Editieren.
+ * Die Session des Editors.
  */
 public class EditorSession extends Session
 {
+    /**
+     * Erzeugt eine neue Editor Sitzung.
+     *
+     * @param pinballMachine Der zu bearbeitende Flipperautomat.
+     */
     public EditorSession(PinballMachine pinballMachine)
     {
         super(pinballMachine);

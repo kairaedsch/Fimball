@@ -18,6 +18,9 @@ import static org.mockito.Mockito.when;
  */
 public class ColliderTest
 {
+    /**
+     * Testet die Korrektheit der Methode {@code checkCollision()} von Collider
+     */
     @Test
     public void collisionTest()
     {

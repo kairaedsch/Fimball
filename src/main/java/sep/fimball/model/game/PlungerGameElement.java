@@ -62,6 +62,11 @@ public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameEl
         lightChangeLoop.play();
     }
 
+    /**
+     * Wird benutzt um dem GameElement mitzuteilen welches das zugehörige physikalische Element ist.
+     *
+     * @param plungerPhysicsElement Das zum Plunger gehörende physikalische Element.
+     */
     @Override
     public void setPhysicsElement(PlungerPhysicsElement<GameElement> plungerPhysicsElement)
     {
