@@ -12,7 +12,7 @@ import java.util.List;
 import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
 
 /**
- * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
+ * Diese Klasse ist für die Erstellung des BasePhysicsElement eines BaseElement zuständig.
  */
 public class BasePhysicsElementFactory
 {
@@ -90,14 +90,12 @@ public class BasePhysicsElementFactory
 
             Collider newCollider;
             WorldLayer layer = collider.layer;
-            if (!"empty".equals(collider.collisionType.type))
+            if (!(collider.collisionType.type).equals("empty"))
                 nullCheck(layer);
 
             newCollider = new Collider(layer, shapes, collisionType, collider.colliderId);
-
             colliders.add(newCollider);
         }
-
         return new BasePhysicsElement(pivotPoint, colliders);
     }
 }

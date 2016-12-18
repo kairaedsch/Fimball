@@ -6,7 +6,7 @@ package sep.fimball.model.blueprint.base;
 public enum BaseElementType
 {
     /**
-     * Kennzeichnet alle Arten von Elementen, die der Spieler nicht steuern kann.
+     * Kennzeichnet alle Arten von Elementen, die keine gesonderte Logik benötigen.
      */
     NORMAL,
 

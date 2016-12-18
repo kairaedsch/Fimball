@@ -156,21 +156,4 @@ public class ListPropertyConverter
          */
         ConvertedT convert(OriginalKeyT originalKey, OriginalValueT originalValueT);
     }
-
-    /**
-     * Das Interface stellt einen allgemeinen Filter dar, der angibt, ob Elemente aus einer Liste behalten werden sollen.
-     *
-     * @param <ElementT> Der Typ der Elemente der Liste, die gefiltert werden soll.
-     */
-    @FunctionalInterface
-    public interface ListFilter<ElementT>
-    {
-        /**
-         * Gibt an, ob das Element behalten werden soll oder nicht.
-         *
-         * @param original Das Element, das überprüft werden soll.
-         * @return {@code true}, wenn das Element behalten werden soll, {@code false} sonst.
-         */
-        boolean shouldKeep(ElementT original);
-    }
 }

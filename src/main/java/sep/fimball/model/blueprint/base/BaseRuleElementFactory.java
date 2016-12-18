@@ -9,7 +9,7 @@ import java.util.Map;
 import static sep.fimball.model.blueprint.json.JsonUtil.nullCheck;
 
 /**
- * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
+ * Diese Klasse ist für die Erstellung des BaseRuleElement eines BaseElement zuständig.
  */
 public class BaseRuleElementFactory
 {
