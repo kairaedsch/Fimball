@@ -12,6 +12,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
+/**
+ * Tests für die Klasse PinballCanvasViewModel.
+ */
 public class PinballCanvasViewModelTest
 {
     private Observer redrawObserver;

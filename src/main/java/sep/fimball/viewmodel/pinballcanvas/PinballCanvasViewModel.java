@@ -181,6 +181,7 @@ public abstract class PinballCanvasViewModel
         return viewScreenshotCreater.drawToImage();
     }
 
+    // TODO - Sollte das wirklich einen empty zurückgeben? Wenn ja ist es unerwartetes Verhalten.
     public Optional<RectangleDoubleOfPoints> selectingRectangleProperty()
     {
         return Optional.empty();

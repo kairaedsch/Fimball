@@ -72,6 +72,12 @@ public class ViewLoader<ViewT>
         }
     }
 
+    /**
+     * Ersetzt alle Texte in der Anwendung die Language Keys als Text haben mit dem Text der entsprechenden Sprache. Ebenfalls werden
+     * eventuell vorhandene Tooltips gesetzt.
+     *
+     * @param fxmlProperties Der Namespace der FXML Datei.
+     */
     private void replaceLanguages(ObservableMap<String, Object> fxmlProperties)
     {
         fxmlProperties.forEach(((s, o) ->
@@ -98,6 +104,12 @@ public class ViewLoader<ViewT>
         }));
     }
 
+    /**
+     * Bindet den Text eines Nodes welcher Text haben kann an die ausgewählte Sprache.
+     *
+     * @param textProperty die Property die bestimmt welcher Text beim Node angezeigt wird.
+     * @param labeledText der Text der ersetzt werden soll.
+     */
     private void bind(StringProperty textProperty, String labeledText)
     {
         if (labeledText.matches("!.*!"))
@@ -107,6 +119,12 @@ public class ViewLoader<ViewT>
         }
     }
 
+    /**
+     * Installiert einen Tooltip beim Node. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
+     *
+     * @param labeledText der Text der ersetzt werden soll.
+     * @param node der Node bei dem der Tooltip installiert werden soll.
+     */
     private void installTooltip(StringProperty labeledText, Node node)
     {
         String regexPattern = "§.*§";

@@ -4,7 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
@@ -93,8 +92,11 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         selectedElementSubViewModel.remove();
     }
 
-    // TODO - Warum wird hier mouseEvent übergeben, die anderen Methoden benötigten dies nicht. Warum hat diese Methode im Gegensatz zu den anderen keine FXML Annotation.
-    public void duplicateClicked(MouseEvent mouseEvent)
+    /**
+     * Benachrichtigt das {@code selectedElementSubViewModel}, dass der Nutzer die ausgewählten Elemente duplizieren möchte.
+     */
+    @FXML
+    public void duplicateClicked()
     {
         selectedElementSubViewModel.duplicate();
     }

@@ -15,6 +15,9 @@ import java.util.Optional;
 
 import static sep.fimball.general.data.DesignConfig.pixelsPerGridUnit;
 
+/**
+ * Der PinballCanvasDrawer ist eine Hilfsklasse welche die Operationen auf dem GraphicsContext des Canvas ausführt.
+ */
 public class PinballCanvasDrawer
 {
     /**
@@ -27,6 +30,9 @@ public class PinballCanvasDrawer
      */
     private DrawMode drawMode;
 
+    /**
+     * Die zu zeichnenden Sprites.
+     */
     private ReadOnlyListProperty<SpriteSubView> sprites;
 
     /**
@@ -34,7 +40,7 @@ public class PinballCanvasDrawer
      *
      * @param canvas   Die Canvas auf der gezeichnet wird.
      * @param drawMode Der Modus mit dem gezeichnet werden soll.
-     * @param sprites
+     * @param sprites Die zu zeichnenden Sprites.
      */
     public PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
     {
@@ -106,6 +112,9 @@ public class PinballCanvasDrawer
 
     /**
      * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
+     *
+     * @param cameraPosition die Position der Kamera.
+     * @param cameraZoom der Zoom der Kamera.
      */
     private void drawEditorGrid(Vector2 cameraPosition, double cameraZoom)
     {
@@ -162,6 +171,8 @@ public class PinballCanvasDrawer
     /**
      * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
      *
+     * @param cameraPosition die Position der Kamera.
+     * @param cameraZoom der Zoom der Kamera.
      * @param x Der x-Wert der Position auf dem Canvas.
      * @param y Der y-Wert der Position auf dem Canvas.
      * @return Die Position auf dem Grid.

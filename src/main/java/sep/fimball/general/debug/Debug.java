@@ -38,6 +38,10 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param position Debug stuff.
+     * @param direction Debug stuff.
+     * @param color Debug stuff.
      */
     public static void addDrawVector(Vector2 position, Vector2 direction, Color color)
     {
@@ -55,6 +59,10 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param position Debug stuff.
+     * @param radius Debug stuff.
+     * @param color Debug stuff.
      */
     public static void addDrawCircle(Vector2 position, double radius, Color color)
     {
@@ -72,6 +80,9 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param positions Debug stuff.
+     * @param color Debug stuff.
      */
     public static void addDrawPoly(List<Vector2> positions, Color color)
     {
@@ -88,6 +99,10 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
+     * @param pos Debug stuff.
+     * @param dir Debug stuff.
      */
     private static void drawVector(GraphicsContext context, Vector2 pos, Vector2 dir)
     {
@@ -101,6 +116,10 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
+     * @param pos Debug stuff.
+     * @param radius Debug stuff.
      */
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
     {
@@ -109,6 +128,12 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
+     * @param pos Debug stuff.
+     * @param radius Debug stuff.
+     * @param rotation Debug stuff.
+     * @param pivotPoint Debug stuff.
      */
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius, double rotation, Vector2 pivotPoint)
     {
@@ -118,6 +143,10 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
+     * @param vertices Debug stuff.
+     * @param offset Debug stuff.
      */
     private static void drawPolygon(GraphicsContext context, List<Vector2> vertices, Vector2 offset)
     {
@@ -138,6 +167,12 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
+     * @param verts Debug stuff.
+     * @param offset Debug stuff.
+     * @param rotation Debug stuff.
+     * @param pivotPoint Debug stuff.
      */
     private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset, double rotation, Vector2 pivotPoint)
     {
@@ -147,6 +182,8 @@ public class Debug
 
     /**
      * Debug stuff.
+     *
+     * @param context Debug stuff.
      */
     public static void draw(GraphicsContext context)
     {

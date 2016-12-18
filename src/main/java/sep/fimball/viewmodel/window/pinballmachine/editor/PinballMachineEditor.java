@@ -12,7 +12,9 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.*;
 
-
+/**
+ * Das Model des Editors.
+ */
 public class PinballMachineEditor
 {
     /**
@@ -249,6 +251,9 @@ public class PinballMachineEditor
         return selection;
     }
 
+    /**
+     * Dupliziert die aktuelle Auswahl.
+     */
     public void duplicateSelection()
     {
         List<PlacedElement> newSelection = new ArrayList<>();
@@ -260,9 +265,6 @@ public class PinballMachineEditor
             newSelection.add(placedElementCopy);
         }
         clearSelection();
-        for (PlacedElement placedElement : newSelection)
-        {
-            addToSelection(placedElement);
-        }
+        newSelection.forEach(this::addToSelection);
     }
 }
