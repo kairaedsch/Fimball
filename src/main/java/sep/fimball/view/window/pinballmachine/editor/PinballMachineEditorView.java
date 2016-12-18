@@ -23,7 +23,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 
 import java.util.Optional;
 
-import static sep.fimball.general.data.Config.pixelsPerGridUnit;
+import static sep.fimball.general.data.DesignConfig.pixelsPerGridUnit;
 
 
 /**

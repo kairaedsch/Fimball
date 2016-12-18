@@ -101,7 +101,7 @@ public class GameTest
     public void cleanup()
     {
         session.stopPhysics();
-        session.stopGameLoop();
+        session.stopUpdateLoop();
     }
 
     /**

@@ -12,7 +12,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -135,10 +135,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     public WritableImage drawToImage()
     {
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
-        double minWidth = (1280 / Config.pixelsPerGridUnit);
-        double minHeight = (720 / Config.pixelsPerGridUnit);
-        double maxWidth = (3840 / Config.pixelsPerGridUnit);
-        double maxHeight = (2160 / Config.pixelsPerGridUnit);
+        double minWidth = (1280 / DesignConfig.pixelsPerGridUnit);
+        double minHeight = (720 / DesignConfig.pixelsPerGridUnit);
+        double maxWidth = (3840 / DesignConfig.pixelsPerGridUnit);
+        double maxHeight = (2160 / DesignConfig.pixelsPerGridUnit);
         double cameraScale = 1.0;
 
         if (rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
@@ -161,8 +161,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         }
 
         Canvas screenShotCanvas = new Canvas();
-        screenShotCanvas.setHeight(rectangleDouble.getHeight() * Config.pixelsPerGridUnit);
-        screenShotCanvas.setWidth(rectangleDouble.getWidth() * Config.pixelsPerGridUnit);
+        screenShotCanvas.setHeight(rectangleDouble.getHeight() * DesignConfig.pixelsPerGridUnit);
+        screenShotCanvas.setWidth(rectangleDouble.getWidth() * DesignConfig.pixelsPerGridUnit);
         PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT, sprites);
         screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale, Optional.empty());
         WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());

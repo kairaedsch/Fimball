@@ -91,7 +91,7 @@ public class ReserveBallsAndPlayerChangeTest
     public void stopThreads()
     {
         session.stopPhysics();
-        session.stopGameLoop();
+        session.stopUpdateLoop();
     }
 
     /**

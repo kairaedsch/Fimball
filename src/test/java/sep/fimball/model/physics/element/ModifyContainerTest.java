@@ -17,7 +17,7 @@ public class ModifyContainerTest
     @Test
     public void apply() throws Exception
     {
-        PhysicsModifyAble<Modify> physicsElement = Mockito.mock(PhysicsModifyAble.class);
+        PhysicsElementModifyAble<?, Modify> physicsElement = Mockito.mock(PhysicsElementModifyAble.class);
         Modify modify = mock(Modify.class);
 
         ModifyContainer modifyContainer = new ModifyContainer<>(physicsElement, modify);

@@ -4,14 +4,13 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyEventArgs;
-import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.FlipperModify;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 /**
  * Das Spielelement des Flippers.
  */
-public class FlipperGameElement extends GameElement
+public class FlipperGameElement extends GameElement<FlipperPhysicsElement<GameElement>>
 {
     /**
      * Gibt an ob dies ein linker Flipper ist.
@@ -31,8 +30,8 @@ public class FlipperGameElement extends GameElement
         this.left = left;
     }
 
-    public void setPhysicsElement(PhysicsHandler physicsHandler, FlipperPhysicsElement flipperPhysicsElement)
+    public void setPhysicsElement(FlipperPhysicsElement flipperPhysicsElement)
     {
-        InputManager.getSingletonInstance().addListener(left ? KeyBinding.LEFT_FLIPPER : KeyBinding.RIGHT_FLIPPER, args -> physicsHandler.addModify(flipperPhysicsElement, (FlipperModify) () -> args.getState() != KeyEventArgs.KeyChangedToState.DOWN));
+        InputManager.getSingletonInstance().addListener(left ? KeyBinding.LEFT_FLIPPER : KeyBinding.RIGHT_FLIPPER, args -> flipperPhysicsElement.addModify((FlipperModify) () -> args.getState() != KeyEventArgs.KeyChangedToState.DOWN));
     }
 }

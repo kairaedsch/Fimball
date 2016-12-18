@@ -8,7 +8,6 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.input.manager.KeyEventArgs.KeyChangedToState;
-import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
@@ -20,7 +19,7 @@ import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 /**
  * Das Spielelement des Plungers.
  */
-public class PlungerGameElement extends GameElement
+public class PlungerGameElement extends GameElement<PlungerPhysicsElement<GameElement>>
 {
     /**
      * Der Zeitpunkt zu dem das Aufladen des Plungers begonnen wurde.
@@ -64,7 +63,8 @@ public class PlungerGameElement extends GameElement
         lightChangeLoop.play();
     }
 
-    public void setPhysicsElement(PhysicsHandler physicsHandler, PlungerPhysicsElement<GameElement> plungerPhysicsElement)
+    @Override
+    public void setPhysicsElement(PlungerPhysicsElement plungerPhysicsElement)
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
@@ -78,7 +78,7 @@ public class PlungerGameElement extends GameElement
             {
                 plungerPressed = false;
                 double force = calcForce();
-                physicsHandler.addModify(plungerPhysicsElement, (PlungerModify) () -> force);
+                plungerPhysicsElement.addModify((PlungerModify) () -> force);
             }
         });
     }

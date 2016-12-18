@@ -9,7 +9,7 @@ import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.game.GameSession;
+import sep.fimball.model.game.Session;
 
 import java.util.Observer;
 import java.util.Optional;
@@ -62,12 +62,12 @@ public abstract class PinballCanvasViewModel
     /**
      * Erstellt ein neues PinballCanvasViewModel.
      *
-     * @param gameSession Die Spielsitzung.
-     * @param drawMode    Der Zeichenmodus.
+     * @param session  Die Spielsitzung.
+     * @param drawMode Der Zeichenmodus.
      */
-    protected PinballCanvasViewModel(GameSession gameSession, DrawMode drawMode)
+    protected PinballCanvasViewModel(Session session, DrawMode drawMode)
     {
-        pinballMachine = gameSession.getPinballMachine();
+        pinballMachine = session.getPinballMachine();
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -76,7 +76,7 @@ public abstract class PinballCanvasViewModel
         redrawObservable = new Observable();
 
         Observer gameObserver = (o, args) -> redraw();
-        gameSession.addGameLoopObserver(gameObserver);
+        session.addGameLoopObserver(gameObserver);
 
         this.drawMode = drawMode;
     }

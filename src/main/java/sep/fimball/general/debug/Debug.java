@@ -2,7 +2,7 @@ package sep.fimball.general.debug;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.Config;
+import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.collider.CircleColliderShape;
@@ -21,11 +21,24 @@ import java.util.stream.Collectors;
  */
 public class Debug
 {
+    /**
+     * Debug stuff.
+     */
     private static final boolean ENABLED = false;
 
+    /**
+     * Debug stuff.
+     */
     private static List<DrawEntry> drawEntries = new ArrayList<>();
+
+    /**
+     * Debug stuff.
+     */
     private static final long LIFE_TIME_MS = 1000;
 
+    /**
+     * Debug stuff.
+     */
     public static void addDrawVector(Vector2 position, Vector2 direction, Color color)
     {
         synchronized (drawEntries)
@@ -40,6 +53,9 @@ public class Debug
         }
     }
 
+    /**
+     * Debug stuff.
+     */
     public static void addDrawCircle(Vector2 position, double radius, Color color)
     {
         synchronized (drawEntries)
@@ -54,6 +70,9 @@ public class Debug
         }
     }
 
+    /**
+     * Debug stuff.
+     */
     public static void addDrawPoly(List<Vector2> positions, Color color)
     {
         synchronized (drawEntries)
@@ -67,27 +86,39 @@ public class Debug
         }
     }
 
+    /**
+     * Debug stuff.
+     */
     private static void drawVector(GraphicsContext context, Vector2 pos, Vector2 dir)
     {
         double width = 6.0;
         double length = 3.0;
-        context.strokeLine(pos.getX() * Config.pixelsPerGridUnit, pos.getY() * Config.pixelsPerGridUnit, (pos.getX() + dir.getX() * length) * Config.pixelsPerGridUnit, (pos.getY() + dir.getY() * length) * Config.pixelsPerGridUnit);
-        context.fillOval((pos.getX() + dir.getX() * length) * Config.pixelsPerGridUnit - width * 0.5, (pos.getY() + dir.getY() * length) * Config.pixelsPerGridUnit - width * 0.5, width, width);
+        context.strokeLine(pos.getX() * DesignConfig.pixelsPerGridUnit, pos.getY() * DesignConfig.pixelsPerGridUnit, (pos.getX() + dir.getX() * length) * DesignConfig.pixelsPerGridUnit, (pos.getY() + dir.getY() * length) * DesignConfig.pixelsPerGridUnit);
+        context.fillOval((pos.getX() + dir.getX() * length) * DesignConfig.pixelsPerGridUnit - width * 0.5, (pos.getY() + dir.getY() * length) * DesignConfig.pixelsPerGridUnit - width * 0.5, width, width);
         context.setFill(Color.BLACK);
-        context.fillOval(pos.getX() * Config.pixelsPerGridUnit - width * 0.5, pos.getY() * Config.pixelsPerGridUnit - width * 0.5, width, width);
+        context.fillOval(pos.getX() * DesignConfig.pixelsPerGridUnit - width * 0.5, pos.getY() * DesignConfig.pixelsPerGridUnit - width * 0.5, width, width);
     }
 
+    /**
+     * Debug stuff.
+     */
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius)
     {
-        context.strokeOval((pos.getX() - radius) * Config.pixelsPerGridUnit, (pos.getY() - radius) * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit, radius * 2.0 * Config.pixelsPerGridUnit);
+        context.strokeOval((pos.getX() - radius) * DesignConfig.pixelsPerGridUnit, (pos.getY() - radius) * DesignConfig.pixelsPerGridUnit, radius * 2.0 * DesignConfig.pixelsPerGridUnit, radius * 2.0 * DesignConfig.pixelsPerGridUnit);
     }
 
+    /**
+     * Debug stuff.
+     */
     private static void drawCircle(GraphicsContext context, Vector2 pos, double radius, double rotation, Vector2 pivotPoint)
     {
         Vector2 rotatedPos = pos.rotate(rotation, pivotPoint);
         drawCircle(context, rotatedPos, radius);
     }
 
+    /**
+     * Debug stuff.
+     */
     private static void drawPolygon(GraphicsContext context, List<Vector2> vertices, Vector2 offset)
     {
         if (offset == null)
@@ -98,19 +129,25 @@ public class Debug
 
         for (int i = 0; i < vertices.size(); i++)
         {
-            xPoints[i] = (vertices.get(i).getX() + offset.getX()) * Config.pixelsPerGridUnit;
-            yPoints[i] = (vertices.get(i).getY() + offset.getY()) * Config.pixelsPerGridUnit;
+            xPoints[i] = (vertices.get(i).getX() + offset.getX()) * DesignConfig.pixelsPerGridUnit;
+            yPoints[i] = (vertices.get(i).getY() + offset.getY()) * DesignConfig.pixelsPerGridUnit;
         }
 
         context.strokePolygon(xPoints, yPoints, vertices.size());
     }
 
+    /**
+     * Debug stuff.
+     */
     private static void drawPolygon(GraphicsContext context, List<Vector2> verts, Vector2 offset, double rotation, Vector2 pivotPoint)
     {
         List<Vector2> rotatedVerts = verts.stream().map(v2 -> v2.rotate(rotation, pivotPoint)).collect(Collectors.toList());
         drawPolygon(context, rotatedVerts, offset);
     }
 
+    /**
+     * Debug stuff.
+     */
     public static void draw(GraphicsContext context)
     {
         if (!ENABLED)
@@ -126,7 +163,7 @@ public class Debug
             context.save();
             PhysicsElement.thisIsForDebug.forEach((WeakReference<PhysicsElement> wpe) ->
             {
-                PhysicsElement<GameElement> pe = wpe.get();
+                PhysicsElement<GameElement> pe = (PhysicsElement<GameElement>) wpe.get();
                 pe.getColliders().forEach((Collider col) -> col.getShapes().forEach((ColliderShape shape) ->
                 {
                     if (shape.getClass() == CircleColliderShape.class)

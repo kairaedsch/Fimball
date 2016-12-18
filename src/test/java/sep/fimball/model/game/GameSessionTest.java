@@ -91,7 +91,7 @@ public class GameSessionTest
         gameSession.setBallLost(true);
 
         // Anwenden der Änderungen
-        gameSession.gameLoopUpdate();
+        gameSession.loopUpdate();
 
         // Auswertung
         assertThat(collidedGameElement, equalTo(gameElement));

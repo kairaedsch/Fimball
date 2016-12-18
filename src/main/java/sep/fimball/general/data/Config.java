@@ -18,16 +18,6 @@ public class Config
     public final static double maxVolume = 100;
 
     /**
-     * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
-     */
-    public final static int pixelsPerGridUnit = 15;
-
-    /**
-     * Sehr kleiner Wert welcher beim Zeichnen von Bildern genutzt wird um Artefakte zu vermeiden.
-     */
-    public final static double antiGraphicStripesExtraSize = 0.02;
-
-    /**
      * Der maximale Zoom im Editor.
      */
     public final static double minZoom = 0.1;
@@ -41,6 +31,11 @@ public class Config
      * Der Standard-Zoom der Kamera.
      */
     public final static double defaultZoom = 0.75;
+
+    /**
+     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
+     */
+    public static final double UPDATE_LOOP_TICK = 1 / 60D;
 
     /**
      * Gibt eine eindeutige ID für Automaten zurück.

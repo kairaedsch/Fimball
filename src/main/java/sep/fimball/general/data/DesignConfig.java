@@ -91,6 +91,16 @@ public class DesignConfig
     public final static double BORDER_BLINK_RATE = 1000.0;
 
     /**
+     * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.
+     */
+    public final static int pixelsPerGridUnit = 15;
+
+    /**
+     * Sehr kleiner Wert welcher beim Zeichnen von Bildern genutzt wird um Artefakte zu vermeiden.
+     */
+    public final static double antiGraphicStripesExtraSize = 0.02;
+
+    /**
      * Der Präfix für CSS um das Hintergrundbild auf eine Datei zu setzen.
      */
     private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";

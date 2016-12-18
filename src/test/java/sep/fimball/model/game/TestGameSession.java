@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import sep.fimball.general.data.Config;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 import java.util.Timer;
@@ -30,7 +31,7 @@ public class TestGameSession extends GameSession
      * Startet einen {@link Timer}, der regelmäßig die Ergebnisse des Physik-Threads ausliest und sie anwendet.
      */
     @Override
-    public void startGameLoop()
+    public void startUpdateLoop()
     {
         timer = new Timer();
         TimerTask task = new TimerTask()
@@ -38,17 +39,17 @@ public class TestGameSession extends GameSession
             @Override
             public void run()
             {
-                gameLoopUpdate();
+                loopUpdate();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, (long) (GAMELOOP_TICK * 1000.0));
+        timer.scheduleAtFixedRate(task, 0, (long) (Config.UPDATE_LOOP_TICK * 1000.0));
     }
 
     /**
      * Stoppt den Timer, der die Ergebnisse der Physik auf die Spielelemente anwendet.
      */
     @Override
-    public void stopGameLoop()
+    public void stopUpdateLoop()
     {
         timer.cancel();
         timer.purge();

@@ -35,7 +35,6 @@ public class PhysicsConfig
      */
     public static final double FLIPPER_MAX_ROTATION = 20.0;
 
-
     /**
      * Die Verzögerung des Startens des Physic Timers in Millisekunden.
      */
@@ -54,7 +53,7 @@ public class PhysicsConfig
     /**
      * Die Geschwindigkeit, die der Ball erfährt, wenn am Automaten gestoßen wird.
      */
-    public static final double NUDGE_VELOCITY = 5;
+    public static final double NUDGE_VELOCITY = 15;
 
     /**
      * Gibt die Standardkraft des Plungers zurück welche bei 1 Sekunde aufladen gilt.

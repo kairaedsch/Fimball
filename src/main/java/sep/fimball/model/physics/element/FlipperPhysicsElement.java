@@ -1,13 +1,14 @@
 package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.PhysicsHandler;
 
 import static sep.fimball.general.data.PhysicsConfig.*;
 
 /**
  * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.
  */
-public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<FlipperModify>
+public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdateAble
 {
     /**
      * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
@@ -22,14 +23,15 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElement<GameElem
     /**
      * Erstellt ein neues FlipperPhysicsElement.
      *
+     * @param physicsHandler     Der PhysicsHandler des PhysicsElements.
      * @param gameElement        Das zugehörige GameElement, welches von diesem FlipperPhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      * @param isLeft             Gibt an , ob er rechte oder linke Flipperarm gemeint ist.
      */
-    public FlipperPhysicsElement(GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
+    public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : FLIPPER_MIN_ROTATION, basePhysicsElement);
+        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : FLIPPER_MIN_ROTATION, basePhysicsElement);
         this.isLeft = isLeft;
     }
 

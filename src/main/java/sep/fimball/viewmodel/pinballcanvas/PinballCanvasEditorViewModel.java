@@ -4,7 +4,7 @@ import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDoubleOfPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
-import sep.fimball.model.game.GameSession;
+import sep.fimball.model.game.EditorSession;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Optional;
@@ -22,13 +22,13 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     /**
      * Erstellt ein neues PinballCanvasEditorViewModel.
      *
-     * @param gameSession                   Die Spielsitzung.
+     * @param editorSession                   Die Spielsitzung.
      * @param pinballMachineEditorViewModel Das korrespondierende PinballMachineEditorViewModel.
      */
-    public PinballCanvasEditorViewModel(GameSession gameSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
+    public PinballCanvasEditorViewModel(EditorSession editorSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
-        super(gameSession, DrawMode.EDITOR);
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()));
+        super(editorSession, DrawMode.EDITOR);
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, editorSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()));
 
         this.editorViewModel = pinballMachineEditorViewModel;
 

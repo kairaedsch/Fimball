@@ -6,11 +6,10 @@ import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
-import sep.fimball.general.util.ListPropertyConverter;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -32,12 +31,11 @@ import sep.fimball.model.physics.game.PhysicGameSession;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observer;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
-public class GameSession implements PhysicGameSession<GameElement>, HandlerGameSession
+public class GameSession extends Session implements PhysicGameSession<GameElement>, HandlerGameSession
 {
 
     /**
@@ -58,37 +56,12 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
         gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
         SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
-        gameSession.startGameLoop();
+        gameSession.startUpdateLoop();
 
         gameSession.startAll();
         gameSession.spawnNewBall();
         return gameSession;
     }
-
-    /**
-     * Generiert eine neue GameSession für den Editor, und initialisiert alle nötigen Handler.
-     *
-     * @param pinballMachine Der Flipperautomat, der im Editor geladen ist.
-     * @return Die generierte GameSession.
-     */
-    public static GameSession generateEditorSession(PinballMachine pinballMachine)
-    {
-        String[] editorPlayers = {"Editor-Player"};
-        GameSession gameSession = new GameSession(pinballMachine, editorPlayers, true);
-        gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
-
-        ObservableList<GameElement> list = FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.heightProperty()});
-        SortedList<GameElement> sortedList = new SortedList<>(list, GameElement::compare);
-        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
-        gameSession.getWorld().gameElementsOpenProperty().set(sortedList);
-        gameSession.startGameLoop();
-        return gameSession;
-    }
-
-    /**
-     * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
-     */
-    final double GAMELOOP_TICK = 1 / 60D;
 
     /**
      * Gibt an, ob das Spiel aus dem Editor gestartet wurde.
@@ -111,29 +84,9 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private PhysicsHandler<GameElement> physicsHandler;
 
     /**
-     * Die Spielwelt des Flipperautomaten auf dem in der aktuellen Spielpartie gespielt wird.
-     */
-    private World world;
-
-    /**
-     * Der aktuelle Flipperautomat.
-     */
-    private PinballMachine pinballMachine;
-
-    /**
-     * Die Schleife, die die Spielwelt aktualisiert.
-     */
-    private Timeline gameLoop;
-
-    /**
      * Speichert die in dieser GameSession verwendeten Handler.
      */
     private List<Handler> handlers;
-
-    /**
-     * Das Observable, welches genutzt wird um Observer darüber zu benachrichtigen, dass der nächste Tick der Spielschleife ausgeführt wurde.
-     */
-    private sep.fimball.general.util.Observable gameLoopObservable;
 
     /**
      * Der aktive Ball, falls vorhanden.
@@ -185,7 +138,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
-        this.pinballMachine = pinballMachine;
+        super(pinballMachine);
         this.handlers = new ArrayList<>();
         this.physicMonitor = new Object();
         this.collisionEventArgsList = new LinkedList<>();
@@ -204,18 +157,14 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         }
         playerIndex = new SimpleIntegerProperty(0);
 
-
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
 
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
         double maxElementPos = 0;
-        List<FlipperPhysicsElement<GameElement>> leftFlippers = new ArrayList<>();
-        List<FlipperPhysicsElement<GameElement>> rightFlippers = new ArrayList<>();
 
         for (PlacedElement element : pinballMachine.elementsProperty())
         {
-
             PhysicsElement<GameElement> physicsElement = null;
             GameElement gameElement;
             switch (element.getBaseElement().getType())
@@ -223,7 +172,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 case RAMP:
                 case NORMAL:
                     gameElement = new GameElement(element, false);
-                    physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    physicsElement = new PhysicsElement<GameElement>(gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     break;
                 case BALL:
                     // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
@@ -234,16 +183,16 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
                     gameElement = plungerGameElement;
-                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-                    plungerGameElement.setPhysicsElement(physicsHandler, plungerPhysicsElement);
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<GameElement>(physicsHandler, gameElement, (Vector2) gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+                    plungerGameElement.setPhysicsElement(plungerPhysicsElement);
                     physicsElement = plungerPhysicsElement;
                     break;
                 case LEFT_FLIPPER:
                 case RIGHT_FLIPPER:
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
                     FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
-                    flipperGameElement.setPhysicsElement(physicsHandler, leftFlipperPhysicsElement);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<GameElement>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                    flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElement = flipperGameElement;
                     physicsElement = leftFlipperPhysicsElement;
                     break;
@@ -269,21 +218,13 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
             throw new IllegalArgumentException("No ball found in PlacedElements!");
 
         world = new World(elements);
-        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
-        gameBall.get().setPhysicsElement(physicsHandler, physElem);
+        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        gameBall.get().setPhysicsElement(physElem);
 
         physicsElements.add(physElem);
         elements.add(gameBall.get());
 
-        gameLoopObservable = new sep.fimball.general.util.Observable();
-
         physicsHandler.init(physicsElements, this, maxElementPos, physElem);
-
-        gameLoop = new Timeline();
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(GAMELOOP_TICK), (event -> gameLoopUpdate()));
-        gameLoop.getKeyFrames().add(keyFrame);
     }
 
     /**
@@ -297,17 +238,10 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     }
 
     /**
-     * Startet die Gameloop.
-     */
-    public void startGameLoop()
-    {
-        gameLoop.play();
-    }
-
-    /**
      * Wendet die Element- und CollisionEvents an und aktiviert ggf. Handler.
      */
-    void gameLoopUpdate()
+    @Override
+    protected void loopUpdate()
     {
         LinkedList<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         LinkedList<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
@@ -348,8 +282,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
                 }
             }
         }
-        gameLoopObservable.setChanged();
-        gameLoopObservable.notifyObservers();
+
+        super.loopUpdate();
     }
 
     /**
@@ -358,14 +292,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
     private void startPhysics()
     {
         physicsHandler.startTicking();
-    }
-
-    /**
-     * Stoppt die Gameloop.
-     */
-    public void stopGameLoop()
-    {
-        gameLoop.stop();
     }
 
     /**
@@ -381,8 +307,8 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void pauseAll()
     {
-        stopGameLoop();
         physicsHandler.stopTicking();
+        stopUpdateLoop();
     }
 
     /**
@@ -390,7 +316,7 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
      */
     public void startAll()
     {
-        startGameLoop();
+        startUpdateLoop();
         startPhysics();
     }
 
@@ -468,16 +394,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         }
     }
 
-    /**
-     * Fügt den gegebenen Observer zu dem {@code gameLoopObservable} hinzu, der benachrichtigt wird, wenn das Update der GameLoop fertig ist.
-     *
-     * @param gameLoopObserver Der Observer, der hinzugefügt werden soll.
-     */
-    public void addGameLoopObserver(Observer gameLoopObserver)
-    {
-        gameLoopObservable.addObserver(gameLoopObserver);
-    }
-
     @Override
     public Player getCurrentPlayer()
     {
@@ -506,16 +422,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         return players;
     }
 
-    /**
-     * Gibt die zu dieser GameSession gehörende World zurück.
-     *
-     * @return Die zu dieser GameSession gehörende World.
-     */
-    public World getWorld()
-    {
-        return world;
-    }
-
     public ReadOnlyObjectProperty<BallGameElement> gameBallProperty()
     {
         return gameBall;
@@ -530,16 +436,6 @@ public class GameSession implements PhysicGameSession<GameElement>, HandlerGameS
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
         timeline.play();
-    }
-
-    /**
-     * Gibt den zur GameSession gehörenden Flipperautomaten zurück.
-     *
-     * @return Der zur GameSession gehörende Flipperautomat.
-     */
-    public PinballMachine getPinballMachine()
-    {
-        return pinballMachine;
     }
 
     /**

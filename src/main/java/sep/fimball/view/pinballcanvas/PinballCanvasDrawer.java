@@ -13,7 +13,7 @@ import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import java.util.Optional;
 
-import static sep.fimball.general.data.Config.pixelsPerGridUnit;
+import static sep.fimball.general.data.DesignConfig.pixelsPerGridUnit;
 
 public class PinballCanvasDrawer
 {

@@ -9,10 +9,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import sep.fimball.general.data.Config;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.RectangleDoubleOfPoints;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
@@ -20,6 +17,7 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.game.EditorSession;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
@@ -100,7 +98,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Die zugehörige GameSession.
      */
-    private GameSession gameSession;
+    private EditorSession editorSession;
 
     private boolean moveModifier = false;
 
@@ -156,8 +154,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableObstacleElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
-        gameSession = GameSession.generateEditorSession(pinballMachine);
-        pinballCanvasViewModel = new PinballCanvasEditorViewModel(gameSession, this);
+        editorSession = new EditorSession(pinballMachine);
+        pinballCanvasViewModel = new PinballCanvasEditorViewModel(editorSession, this);
 
         topBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
         botBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
@@ -230,7 +228,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void startPinballMachine()
     {
-        gameSession.pauseAll();
+        editorSession.stopUpdateLoop();
         sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{""}, true)));
     }
 
@@ -239,7 +237,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
-        gameSession.pauseAll();
+        editorSession.stopUpdateLoop();
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         pinballMachine.saveToDisk();
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
@@ -257,8 +255,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
-        double divX = (((endX - startX) / Config.pixelsPerGridUnit) / cameraZoom.get());
-        double divY = (((endY - startY) / Config.pixelsPerGridUnit) / cameraZoom.get());
+        double divX = (((endX - startX) / DesignConfig.pixelsPerGridUnit) / cameraZoom.get());
+        double divY = (((endY - startY) / DesignConfig.pixelsPerGridUnit) / cameraZoom.get());
 
         if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {

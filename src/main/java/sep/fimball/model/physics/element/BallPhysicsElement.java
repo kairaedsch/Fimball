@@ -2,6 +2,7 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.WorldLayer;
 
@@ -12,7 +13,7 @@ import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdateAble, PhysicsModifyAble<Modify>
+public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, Modify> implements PhysicsUpdateAble
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -27,14 +28,15 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
     /**
      * Erzeugt einen neuen Ball.
      *
+     * @param physicsHandler     Der PhysicsHandler des PhysicsElements.
      * @param gameElement        Das GameElement, dessen Eigenschaften kopiert werden.
      * @param position           Die Position, auf der sich der Ball befinden soll.
      * @param rotation           Die Rotation, um die der Ball gedreht sein soll.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public BallPhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public BallPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
-        super(gameElement, position, rotation, basePhysicsElement);
+        super(physicsHandler, gameElement, position, rotation, basePhysicsElement);
 
         this.velocity = new Vector2();
         this.height = 0;
@@ -127,5 +129,6 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElement<GameElement
             setPosition(((BallResetModify) modify).getNewPosition());
             setVelocity(new Vector2());
         }
+        else System.err.println("BallPhysicsElement got incompatible Modify Type");
     }
 }

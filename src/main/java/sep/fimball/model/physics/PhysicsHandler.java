@@ -104,7 +104,7 @@ public class PhysicsHandler<GameElementT>
      * @param modify         Der Modify, der hinzugefügt werden soll.
      * @param <ModifyT>      Der Typ des Modify.
      */
-    public <ModifyT extends Modify> void addModify(PhysicsModifyAble<ModifyT> physicsElement, ModifyT modify)
+    public <ModifyT extends Modify> void addModify(PhysicsElementModifyAble<GameElementT, ModifyT> physicsElement, ModifyT modify)
     {
         synchronized (modifiesMonitor)
         {

@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
-public class GameElement implements HandlerGameElement
+public class GameElement<PhysicsElementT> implements HandlerGameElement
 {
     /**
      * Die Position in Grid-Einheiten, an der sich das Spielelement aktuell befindet.
@@ -53,6 +53,11 @@ public class GameElement implements HandlerGameElement
     private PlacedElement placedElement;
 
     /**
+     * Das physikalische Element des Balls.
+     */
+    protected PhysicsElementT physicsElement;
+
+    /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
@@ -80,6 +85,16 @@ public class GameElement implements HandlerGameElement
             rotation.set(element.rotationProperty().get());
             pointReward.set(element.pointsProperty().get());
         }
+    }
+
+    /**
+     * Setzt das zu diesem GameElement gehörige PhysicsElement.
+     *
+     * @param physicsElement Sas zu diesem GameElement gehörige PhysicsElement.
+     */
+    public void setPhysicsElement(PhysicsElementT physicsElement)
+    {
+        this.physicsElement = physicsElement;
     }
 
     /**
