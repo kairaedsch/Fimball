@@ -89,7 +89,16 @@ public class BasePhysicsElement
      */
     public Vector2 getExtremePos(double rotation, boolean max)
     {
-        Optional<Vector2> result = colliders.parallelStream().map(collider -> collider.getShapes().stream().map(shape -> shape.getExtremePos(rotation, pivotPoint, max)).reduce(Vector2::maxComponents)).filter(Optional::isPresent).map(Optional::get).reduce(max ? Vector2::maxComponents : Vector2::minComponents);
+        Optional<Vector2> result = colliders
+                .stream()
+                .map(collider -> collider.getShapes()
+                        .stream()
+                        .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))
+                        .reduce(max ? Vector2::maxComponents : Vector2::minComponents))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .reduce(max ? Vector2::maxComponents : Vector2::minComponents);
+
         if (result.isPresent())
             return result.get();
         else
