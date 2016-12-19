@@ -2,10 +2,7 @@ package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +32,7 @@ public class PolygonColliderShape implements ColliderShape
      */
     public List<Vector2> getVertices()
     {
-        return vertices;
+        return Collections.unmodifiableList(vertices);
     }
 
     @Override

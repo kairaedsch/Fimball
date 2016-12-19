@@ -3,7 +3,7 @@ package sep.fimball.model.physics.collider;
 import sep.fimball.general.data.Vector2;
 
 /**
- * Speichert Achse und Entfernung einer in PhysicsHandler berechneten Überschneidung.
+ * Speichert Achse und Entfernung einer Überschneidung. Wird für die Anwendung des Separating Axis Theorem bei der Kollisionsüberprüfung zwischen Polygon und Kreis benötigt.
  */
 public class OverlapAxis
 {

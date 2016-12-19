@@ -7,6 +7,7 @@ import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -99,7 +100,7 @@ public class Collider
      */
     public List<ColliderShape> getShapes()
     {
-        return shapes;
+        return Collections.unmodifiableList(shapes);
     }
 
     /**

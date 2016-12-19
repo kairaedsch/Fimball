@@ -16,7 +16,7 @@ public enum WorldLayer
     RAMP,
 
     /**
-     * Beide Ebenen.
+     * Wird benötigt wenn ein Element auf beiden Ebenen gleichzeitig ist (z.B. die Rampenauffahrt hat den Anfang auf GROUND und das Ende auf RAMP)
      */
     BOTH
 }
