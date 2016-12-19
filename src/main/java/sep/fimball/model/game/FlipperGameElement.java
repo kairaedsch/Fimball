@@ -49,7 +49,6 @@ public class FlipperGameElement extends GameElement
             {
                 flipperPhysicsElement.addModify(() -> args.getState() != KeyEventArgs.KeyChangedToState.DOWN);
             }
-            System.out.println("Stop Reacting: " + stopReacting.get());
         });
     }
 }
