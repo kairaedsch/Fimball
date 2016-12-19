@@ -15,7 +15,7 @@ public class BaseMediaElementEvent
     /**
      * Der Soundeffekt des jeweiligen Bahnelements.
      */
-    private Optional<Sound> sound = null;
+    private Optional<Sound> sound;
 
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.

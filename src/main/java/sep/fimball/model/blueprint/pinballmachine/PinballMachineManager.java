@@ -1,6 +1,7 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -240,7 +241,7 @@ public class PinballMachineManager
      *
      * @return Die Liste der gespeicherten Flipperautomaten.
      */
-    public ListProperty<PinballMachine> pinballMachinesProperty()
+    public ReadOnlyListProperty<PinballMachine> pinballMachinesProperty()
     {
         return pinballMachines;
     }

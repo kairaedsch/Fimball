@@ -28,6 +28,7 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicGameSession;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     /**
      * Array der Spieler, die am aktuellen Spiel teilnehmen.
      */
-    private Player[] players;
+    private List<Player> players;
 
     /**
      * Der Spieler, der aktuell den Flipperautomaten bedient.
@@ -148,11 +149,11 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
         this.isBallLost = false;
         this.wereBallLostEventsTriggered = false;
         this.physicsHandler = new PhysicsHandler<>();
+        this.players = new ArrayList<>();
 
-        players = new Player[playerNames.length];
-        for (int i = 0; i < playerNames.length; i++)
+        for (String playerName : playerNames)
         {
-            players[i] = new Player(playerNames[i]);
+            players.add(new Player(playerName));
         }
         playerIndex = new SimpleIntegerProperty(0);
 
@@ -326,16 +327,16 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
      */
     public void switchToNextPlayer()
     {
-        int newPlayerIndex = (playerIndex.get() + 1) % players.length;
+        int newPlayerIndex = (playerIndex.get() + 1) % players.size();
 
         int rounds = 0;
-        while (players[newPlayerIndex].ballsProperty().get() == 0 && rounds < players.length)
+        while (players.get(newPlayerIndex).ballsProperty().get() == 0 && rounds < players.size())
         {
-            newPlayerIndex = (newPlayerIndex + 1) % players.length;
+            newPlayerIndex = (newPlayerIndex + 1) % players.size();
             rounds++;
         }
 
-        if (rounds >= players.length)
+        if (rounds >= players.size())
         {
             for (Player player : players)
             {
@@ -397,7 +398,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     @Override
     public Player getCurrentPlayer()
     {
-        return players[playerIndex.get()];
+        return players.get(playerIndex.get());
     }
 
     /**
@@ -407,8 +408,8 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
      */
     public ReadOnlyObjectProperty<Player> currentPlayer()
     {
-        ObjectProperty<Player> currentPlayer = new SimpleObjectProperty<>(players[playerIndex.get()]);
-        playerIndex.addListener((observable, oldValue, newValue) -> currentPlayer.set(players[playerIndex.get()]));
+        ObjectProperty<Player> currentPlayer = new SimpleObjectProperty<>(players.get(playerIndex.get()));
+        playerIndex.addListener((observable, oldValue, newValue) -> currentPlayer.set(players.get(playerIndex.get())));
         return currentPlayer;
     }
 
@@ -417,9 +418,9 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
      *
      * @return Die an dieser Game Session beteiligten Spieler.
      */
-    public Player[] getPlayers()
+    public List<Player> getPlayers()
     {
-        return players;
+        return Collections.unmodifiableList(players);
     }
 
     public ReadOnlyObjectProperty<BallGameElement> gameBallProperty()

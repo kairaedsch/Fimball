@@ -1,7 +1,7 @@
 package sep.fimball.model.media;
 
 /**
- * Enthält Informationen über die Anzeige einer Animation.
+ * Enthält Informationen über eine Animation.
  */
 public class Animation
 {

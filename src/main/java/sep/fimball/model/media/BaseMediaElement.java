@@ -14,12 +14,12 @@ import java.util.Map;
 public class BaseMediaElement
 {
     /**
-     * Der Name des BaseElements im Editor.
+     * Der Name des Elements im Editor.
      */
     private String name;
 
     /**
-     * Die Beschreibung des BaseElements im Editor.
+     * Die Beschreibung des Elements im Editor.
      */
     private String description;
 
@@ -124,7 +124,7 @@ public class BaseMediaElement
      */
     public Map<Integer, BaseMediaElementEvent> getEventMap()
     {
-        return eventMap;
+        return Collections.unmodifiableMap(eventMap);
     }
 
     /**

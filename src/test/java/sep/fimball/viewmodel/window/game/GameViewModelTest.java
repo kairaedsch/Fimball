@@ -16,6 +16,8 @@ import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
@@ -49,7 +51,7 @@ public class GameViewModelTest
         when(pinballMachineMock.highscoreListProperty()).thenReturn(new SimpleListProperty<>(FXCollections.observableArrayList()));
         when(gameSessionMock.getPinballMachine()).thenReturn(pinballMachineMock);
 
-        when(gameSessionMock.getPlayers()).thenReturn(new Player[]{});
+        when(gameSessionMock.getPlayers()).thenReturn(new ArrayList<>());
         when(gameSessionMock.isStartedFromEditor()).thenReturn(false);
         when(gameSessionMock.getCurrentPlayer()).thenReturn(player);
 
@@ -88,7 +90,7 @@ public class GameViewModelTest
         when(pinballMachineMock.highscoreListProperty()).thenReturn(new SimpleListProperty<>(FXCollections.observableArrayList()));
         when(pinballMachineMock.getBoundingBox()).thenReturn(new RectangleDouble(new Vector2(0, 0), 5, 5));
 
-        when(gameSessionMock.getPlayers()).thenReturn(new Player[]{});
+        when(gameSessionMock.getPlayers()).thenReturn(new ArrayList<>());
         when(gameSessionMock.getCurrentPlayer()).thenReturn(player);
         when(gameSessionMock.isOverProperty()).thenReturn(new SimpleBooleanProperty(false));
         when(gameSessionMock.isStartedFromEditor()).thenReturn(false);

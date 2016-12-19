@@ -20,6 +20,8 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.List;
+
 /**
  * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven Spieler.
  */
@@ -95,11 +97,11 @@ public class GameViewModel extends WindowViewModel
         {
             if (newIsGameOver)
             {
-                Player[] players = this.gameSession.getPlayers();
-                String[] playerNames = new String[players.length];
+                List<Player> players = this.gameSession.getPlayers();
+                String[] playerNames = new String[players.size()];
                 for (int i = 0; i < playerNames.length; i++)
                 {
-                    playerNames[i] = players[i].nameProperty().get();
+                    playerNames[i] = players.get(i).nameProperty().get();
                 }
                 if (this.gameSession.isStartedFromEditor())
                 {

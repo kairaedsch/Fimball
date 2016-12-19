@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -46,6 +47,6 @@ public class BaseRuleElement
      */
     public Map<Integer, BaseRuleElementEvent> getEventMap()
     {
-        return eventMap;
+        return Collections.unmodifiableMap(eventMap);
     }
 }

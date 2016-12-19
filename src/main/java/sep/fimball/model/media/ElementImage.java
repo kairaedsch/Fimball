@@ -19,7 +19,7 @@ public class ElementImage
     private String baseElementId;
 
     /**
-     * Gibt an, ob Bilder in Grad-Schritten vorliegen.
+     * Gibt an, ob Bilder in Grad-Schritten vorliegen also ob es vorgesehen ist das zugehörige Element zu drehen.
      */
     private boolean canRotate;
 
