@@ -37,9 +37,8 @@ public class RampCollisionTest
         when(ballPhysicsElement.getLayer()).thenReturn(WorldLayer.RAMP);
         rampCollision.applyCollision(collisionInfo);
         double EPSILON = 1e-15;
-        assertThat("Wenn erste Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.12", Math.abs(1.12 - ballPhysicsElement.getHeight()) < EPSILON, is(true));
+        assertThat("Wenn erste Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.03", (1.03 - ballPhysicsElement.getHeight()) < EPSILON, is(true));
         rampCollision.applyCollision(collisionInfo);
-        assertThat("Wenn zweite Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.24", Math.abs(1.24 - ballPhysicsElement.getHeight()) < EPSILON, is(true));
-
+        assertThat("Wenn zweite Rampen Kollision mit Ball auf Rampe ist Höhe des Balls ~1.06", (1.06 - ballPhysicsElement.getHeight()) < EPSILON, is(true));
     }
 }
