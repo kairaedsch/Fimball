@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.Observable;
@@ -129,6 +130,11 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     private static final double BALL_LOST_TOLERANCE = 10;
 
     /**
+     * Gibt an, ob der Tilt aktiviert wurde.
+     */
+    private BooleanProperty tiltActivated;
+
+    /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten,
      * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
@@ -144,6 +150,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
         this.collisionEventArgsList = new LinkedList<>();
         this.elementEventArgsList = new LinkedList<>();
         this.isOver = new SimpleBooleanProperty(false);
+        this.tiltActivated = new SimpleBooleanProperty(false);
         this.gameBall = new SimpleObjectProperty<>();
         this.startedFromEditor = startedFromEditor;
         this.isBallLost = false;
@@ -183,7 +190,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                     gameElement = ballGameElement;
                     break;
                 case PLUNGER:
-                    PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
+                    PlungerGameElement plungerGameElement = new PlungerGameElement(element, false, tiltActivated);
                     gameElement = plungerGameElement;
                     PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(plungerPhysicsElement);
@@ -192,7 +199,7 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
                 case LEFT_FLIPPER:
                 case RIGHT_FLIPPER:
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
-                    FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
+                    FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left, tiltActivated);
                     FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
                     flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElement = flipperGameElement;
@@ -431,14 +438,20 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     @Override
     public void activateTilt()
     {
-        // TODO - Stop react to input
+        tiltActivated.set(true);
         Timeline timeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> setBallLost(true)));
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
-
+        timeline.statusProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if(newValue == Animation.Status.STOPPED) {
+                tiltActivated.set(false);
+            }
+        });
         getCurrentPlayer().ballsProperty().addListener((observable, oldValue, newValue) -> timeline.stop());
         timeline.play();
+
     }
 
     /**

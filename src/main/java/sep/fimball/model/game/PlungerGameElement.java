@@ -2,6 +2,9 @@ package sep.fimball.model.game;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Duration;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.input.data.KeyBinding;
@@ -31,14 +34,23 @@ public class PlungerGameElement extends GameElement
     private boolean plungerPressed;
 
     /**
+     * Gibt an, ob nicht auf User-Input reagiert wird.
+     * TODO umbenennen
+     */
+    private BooleanProperty stopReacting;
+
+    /**
      * Erstellt ein neues PlungerGameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
      */
-    public PlungerGameElement(PlacedElement element, boolean bind)
+    public PlungerGameElement(PlacedElement element, boolean bind, ReadOnlyBooleanProperty stopReacting)
     {
         super(element, bind);
+
+        this.stopReacting = new SimpleBooleanProperty();
+        this.stopReacting.bind(stopReacting);
 
         Timeline lightChangeLoop = new Timeline();
         lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
@@ -71,17 +83,19 @@ public class PlungerGameElement extends GameElement
     {
         InputManager.getSingletonInstance().addListener(KeyBinding.PLUNGER, args ->
         {
-            if (args.getState() == KeyEventArgs.KeyChangedToState.DOWN && args.isStateSwitched())
+            if (!stopReacting.get())
             {
-                plungerPressed = true;
-                pressStart = System.currentTimeMillis();
+                if (args.getState() == KeyEventArgs.KeyChangedToState.DOWN && args.isStateSwitched())
+                {
+                    plungerPressed = true;
+                    pressStart = System.currentTimeMillis();
 
-            }
-            else if (args.getState() == KeyChangedToState.UP && args.isStateSwitched())
-            {
-                plungerPressed = false;
-                double force = calcForce();
-                plungerPhysicsElement.addModify(() -> force);
+                } else if (args.getState() == KeyChangedToState.UP && args.isStateSwitched())
+                {
+                    plungerPressed = false;
+                    double force = calcForce();
+                    plungerPhysicsElement.addModify(() -> force);
+                }
             }
         });
     }
