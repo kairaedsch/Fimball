@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
@@ -22,6 +23,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Testet die Klasse PinballMachineEditor.
@@ -144,15 +146,16 @@ public class PinballMachineEditorTest
             return null;
         }).when(mockedMachine).removeElement(any(PlacedElement.class));
 
+        PlacedElement mockElement = mock(PlacedElement.class);
+        when(mockElement.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(0, 0)));
 
         PinballMachineEditor test = new PinballMachineEditor(mockedMachine);
-        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 0, 0));
-        mockedMachine.addElement(new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 0, 0));
-        test.placeSelection();
 
+        mockedMachine.addElement(mockElement);
+        test.addToSelection(mockElement);
         test.removeSelection();
-        assertThat(test.getSelection().isEmpty(), is(true));
-        assertThat(elementsInMachine.size(), is(1));
+        
+        assertThat(elementsInMachine.size(), is(0));
     }
 
     /**
