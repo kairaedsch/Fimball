@@ -4,7 +4,7 @@ package sep.fimball.model.input.manager;
 import sep.fimball.model.input.data.KeyBinding;
 
 /**
- * Die Argumente, die beim Auslösen eines Tastendruck-Events im InputManager übergeben werden.
+ * Die Argumente, die beim Auslösen eines Tastendruck-Events vom InputManager an die Observer übergeben werden.
  */
 public class KeyEventArgs
 {

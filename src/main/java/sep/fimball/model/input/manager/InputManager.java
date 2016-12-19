@@ -6,10 +6,7 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Kontrolliert die Eingaben, die der Spieler über die Tastatur auslöst.
@@ -45,10 +42,11 @@ public class InputManager
     private Map<KeyCode, EventType<KeyEvent>> oldKeyState = new HashMap<>();
 
     /**
-     * Erzeugt einen neuen InputManager.
+     * Erzeugt einen neuen InputManager dabei wird der Status aller Tasten auf die Default Value RELEASED gesetzt.
      */
     private InputManager()
     {
+        // TODO - Könnte Probleme geben wenn der Nutzer genau in dem Moment wenn dieser Code aufgerufen wird die Taste drückt und somit eigentlich PRESSED gilt.
         for (KeyCode keyCode : KeyCode.values())
         {
             oldKeyState.put(keyCode, KeyEvent.KEY_RELEASED);
