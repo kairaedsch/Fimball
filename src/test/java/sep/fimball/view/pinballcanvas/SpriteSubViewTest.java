@@ -14,21 +14,19 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
+
+import java.util.HashMap;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyInt;
-
-import java.util.HashMap;
+import static org.mockito.ArgumentMatchers.*;
 
 /**
  * Testet, ob in {@link sep.fimball.view.pinballcanvas.SpriteSubView} wie erwartet gezeichnet wird.
@@ -88,6 +86,7 @@ public class SpriteSubViewTest
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
         Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
+        Mockito.when(spriteSubViewModelMock.visibilityProperty()).thenReturn(new SimpleDoubleProperty(1.0));
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
@@ -183,6 +182,7 @@ public class SpriteSubViewTest
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
         Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
+        Mockito.when(spriteSubViewModelMock.visibilityProperty()).thenReturn(new SimpleDoubleProperty(1.0));
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
