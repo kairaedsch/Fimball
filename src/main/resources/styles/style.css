@@ -1,35 +1,30 @@
 /** CSS **/
-
 /* The main scrollbar CSS class of ListView */
-.machineOverview .scroll-bar:horizontal,
-.machineOverview .scroll-bar:vertical {
+.scroll-bar {
     -fx-background-color: #708BAC;
     -fx-unit-increment: 100px;
     -fx-block-increment: 100px;
 }
 
 /* The increment and decrement button CSS class of scrollbar */
-.machineOverview .increment-button, .machineOverview .decrement-button {
+.increment-button, .decrement-button {
     -fx-background-color: #345883;
     -fx-border-color: #345883;
     -fx-opacity: 0;
 }
 
 /* The main scrollbar **track** CSS class  */
-.machineOverview .scroll-bar:horizontal .track,
-.machineOverview .scroll-bar:vertical .track {
+.scroll-bar .track {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
 }
 
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
-.machineOverview .scroll-bar:horizontal .thumb,
-.machineOverview .scroll-bar:vertical .thumb {
+.scroll-bar .thumb {
     -fx-background-color: #345883;
     -fx-background-insets: 0, 0, 0;
     -fx-background-radius: 0em;
-
 }
 
 /* ------------------------------------------------------------------------------------- */
@@ -308,4 +303,33 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: contain;
+}
+
+.dialogTitle {
+    -fx-text-fill: white;
+}
+
+.dialogButton, .slider .thumb {
+    -fx-background-color: #DBAA5D;
+    -fx-background-radius: 3px;
+}
+
+.tab {
+    -fx-background-color: #809ebf;
+    -fx-background-radius: 3px 3px 0px 0px;
+}
+
+.tab:selected, .dialogBackground {
+	-fx-background-color: #7090B7;
+}
+
+.titled-pane > .title, .tab-header-background {
+	-fx-alignment: center;
+    -fx-font-size: 24px;
+	-fx-background-color: #44668F;
+    -fx-background-radius: 0px;
+}
+
+.titled-pane .content AnchorPane, .paddingFix {
+	-fx-padding: -1;
 }
