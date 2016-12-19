@@ -435,6 +435,8 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
         KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> setBallLost(true)));
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
+
+        players[playerIndex.get()].ballsProperty().addListener((observable, oldValue, newValue) -> timeline.stop());
         timeline.play();
     }
 
