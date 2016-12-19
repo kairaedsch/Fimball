@@ -1,13 +1,13 @@
 package sep.fimball.model.physics.collision;
 
 import org.junit.Test;
+import sep.fimball.VectorMatcher;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import static org.mockito.Mockito.*;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests für die Klasse AccelerationCollision
@@ -36,9 +36,8 @@ public class AccelerationCollisionTest
         AccelerationCollision accelerationCollision = new AccelerationCollision(acceleration);
         accelerationCollision.applyCollision(collisionInfo);
         Vector2 newVelocity = ballPhysicsElement.getVelocity();
-        double EPSILON = 1e-15;
-        assertThat("Ball velocity x is ~ 0.0", Math.abs(0.0 - newVelocity.getX()) < EPSILON, is(true));
-        assertThat("Ball velocity y is ~ 10.016", Math.abs(10.016 - newVelocity.getY()) < EPSILON, is(true));
+
+        assertThat(newVelocity, new VectorMatcher(0.0, 10.004));
     }
 
 }
