@@ -8,7 +8,6 @@ import sep.fimball.model.physics.element.PlungerPhysicsElement;
  */
 public class PlungerCollision extends NormalCollision
 {
-
     @Override
     public void applyCollision(CollisionInfo info)
     {

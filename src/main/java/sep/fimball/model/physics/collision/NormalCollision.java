@@ -1,5 +1,6 @@
 package sep.fimball.model.physics.collision;
 
+import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 
 
@@ -33,13 +34,8 @@ public class NormalCollision implements CollisionType
      */
     private Vector2 calculateNewSpeed(Vector2 ballVelocity, Vector2 normal)
     {
-        //Bounce ist ein Wert der angibt wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 1 bedeutet das der Ball nach der Kollision langsamer wird.
-        final double bounce = 0.4;
-        //Spiegle die Ball Geschwindigkeit am normierten shortestIntersect welcher eine Normale auf die Kollisionskante ist.
-        double bounceVal = 1.0 + bounce;
-        double velocityDotNormal = ballVelocity.dot(normal);
-        double bounceTimesVelocityDotNormal = bounceVal * velocityDotNormal;
-        Vector2 scaledNormal = normal.scale(bounceTimesVelocityDotNormal);
+        double velocityProjectedOnNormal = ballVelocity.dot(normal);
+        Vector2 scaledNormal = normal.scale(PhysicsConfig.BOUNCE_NORMAL_COLLISION * velocityProjectedOnNormal);
         return ballVelocity.minus(scaledNormal);
     }
 }

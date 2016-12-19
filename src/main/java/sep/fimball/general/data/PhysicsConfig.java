@@ -64,4 +64,9 @@ public class PhysicsConfig
      * Gibt den maximalen Multiplier der Kraft des Plungers zurück, auch bei längeren Laden des Plungers kann dieser nicht überschritten werden.
      */
     public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
+
+    /**
+     * Gibt an wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 2 bedeutet das der Ball nach der Kollision langsamer wird.
+     */
+    public static double BOUNCE_NORMAL_COLLISION = 1.4;
 }

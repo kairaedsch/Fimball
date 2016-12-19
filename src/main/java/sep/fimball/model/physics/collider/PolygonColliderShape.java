@@ -35,6 +35,7 @@ public class PolygonColliderShape implements ColliderShape
         return Collections.unmodifiableList(vertices);
     }
 
+    // TODO - Zu viel in einer Methode. Es wird zweimal fast das gleiche gemacht.
     @Override
     public HitInfo calculateHitInfo(CircleColliderShape otherColliderShape, Vector2 otherColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
