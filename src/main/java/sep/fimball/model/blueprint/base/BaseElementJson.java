@@ -237,7 +237,7 @@ public class BaseElementJson
             public int rotation;
 
             /**
-             * Die Verschiebung des BaseElements bei der gegebenen Rotation
+             * Die Verschiebung des BaseElements bei der gegebenen Rotation.
              */
             public Vector2 localCoord;
         }

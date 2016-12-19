@@ -27,7 +27,7 @@ public class ViewModelListToPaneBinder
     }
 
     /**
-     * Bindet eine View vom Typ {@code viewType} {@code amount} mal an einen {@code parentNode}
+     * Bindet eine View vom Typ {@code viewType} {@code amount} mal an einen {@code parentNode}.
      *
      * @param parentNode Der Node, an der die Views gehängt werden sollen.
      * @param amount     Wie oft die View an den Node gehängt werden sollen.
