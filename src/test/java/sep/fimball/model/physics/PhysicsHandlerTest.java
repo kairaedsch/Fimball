@@ -98,6 +98,7 @@ public class PhysicsHandlerTest
             collisionMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
+        Thread.sleep(100); // TODO HACK hack hack
         assertThat("Das Element im Spiel hat auf eine Kollision mit der Kugel geprüft", collisionCheckWithBall, is(true));
         assertThat("Die ElementEventArgs wurden an die GameSession übergeben", elementEventArgsEmpty, is(false));
     }
@@ -131,16 +132,13 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock ->
         {
-            if (invocationOnMock.getArgument(1) == mockedBall)
+            collisionCheckWithBall = true;
+            synchronized (collisionMonitor)
             {
-                synchronized (collisionMonitor)
-                {
-                    collisionMonitor.notify();
-                }
-                collisionCheckWithBall = true;
+                collisionMonitor.notify();
             }
             return null;
-        }).when(mockedElement).checkCollision(anyList(), any(BallPhysicsElement.class));
+        }).when(mockedElement).checkCollision(anyList(), eq(mockedBall));
         return mockedElement;
     }
 
