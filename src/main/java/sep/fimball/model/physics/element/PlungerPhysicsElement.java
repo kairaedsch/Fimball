@@ -8,7 +8,7 @@ import sep.fimball.model.physics.PhysicsHandler;
  *
  * @param <GameElementT>
  */
-public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, PlungerModify> implements PhysicsUpdateAble
+public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, PlungerModify> implements PhysicsUpdatable
 {
     /**
      * Gibt die Stärke an mit der der Plunger den Ball wegschießen soll.

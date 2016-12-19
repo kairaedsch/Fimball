@@ -13,7 +13,7 @@ import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, Modify> implements PhysicsUpdateAble
+public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, Modify> implements PhysicsUpdatable
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -64,7 +64,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
     }
 
     /**
-     * Setzt die Geschwindigkeit des Balls auf den übergebenen Wert.
+     * Setzt die Geschwindigkeit des Balls auf den übergebenen Wert. Falls der Wert die maximale Geschwindigkeit des Balls überschreitet wird die Geschwindigkeit darauf begrenzt.
      *
      * @param velocity Die neue Geschwindigkeit des Balls.
      */

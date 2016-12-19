@@ -6,6 +6,7 @@ import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.collider.ColliderShape;
 import sep.fimball.model.physics.collider.HitInfo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public class BasePhysicsElement
      */
     public List<Collider> getColliders()
     {
-        return colliders;
+        return Collections.unmodifiableList(colliders);
     }
 
     /**

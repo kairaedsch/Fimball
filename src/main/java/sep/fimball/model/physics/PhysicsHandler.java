@@ -64,11 +64,6 @@ public class PhysicsHandler<GameElementT>
     private final Object physicsMonitor = new Object();
 
     /**
-     * Gibt an, ob die Physik auf auf User Input reagiert.
-     */
-    private boolean reactingToInput;
-
-    /**
      * Erzeugt einen neuen leeren PhysicsHandler.
      */
     public PhysicsHandler()
@@ -91,7 +86,6 @@ public class PhysicsHandler<GameElementT>
         this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
         this.ballLost = false;
-        this.reactingToInput = true;
         this.physicTimer = new Timer(false);
 
         modifyContainers = new ArrayList<>();
@@ -141,6 +135,7 @@ public class PhysicsHandler<GameElementT>
     {
         return new TimerTask()
         {
+            // TODO - Gleich der Update Loop der GameSession sehr viel untereschiedliche Logik.
             /**
              * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig.
              */
@@ -167,7 +162,7 @@ public class PhysicsHandler<GameElementT>
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
-                    physicsElements.stream().filter(element -> element instanceof PhysicsUpdateAble).forEach(element -> ((PhysicsUpdateAble) element).update(delta));
+                    physicsElements.stream().filter(element -> element instanceof PhysicsUpdatable).forEach(element -> ((PhysicsUpdatable) element).update(delta));
 
                     if (ballPhysicsElement != null)
                     {
@@ -218,21 +213,5 @@ public class PhysicsHandler<GameElementT>
     {
         physicTimer.cancel();
         physicTimer.purge();
-    }
-
-    /**
-     * Stoppt das Reagieren auf User Input.
-     */
-    public void stopReactingToUserInput()
-    {
-        reactingToInput = false;
-    }
-
-    /**
-     * Der PhysicsHandler soll wieder auf User Input reagieren.
-     */
-    public void doReactToUserInput()
-    {
-        reactingToInput = true;
     }
 }

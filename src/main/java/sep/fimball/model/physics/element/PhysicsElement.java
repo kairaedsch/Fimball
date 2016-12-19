@@ -6,6 +6,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -128,7 +129,7 @@ public class PhysicsElement<GameElementT>
      */
     public List<Collider> getColliders()
     {
-        return colliders;
+        return Collections.unmodifiableList(colliders);
     }
 
     /**

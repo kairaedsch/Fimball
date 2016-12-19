@@ -9,7 +9,7 @@ import static sep.fimball.general.data.PhysicsConfig.*;
  * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdateAble
+public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdatable
 {
     /**
      * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
