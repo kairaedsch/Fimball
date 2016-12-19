@@ -3,7 +3,7 @@ package sep.fimball.model.handler.light;
 import sep.fimball.general.data.Vector2;
 
 /**
- * LineLightChanger entscheidet anhand einer Richtung, wann die Lichter angeschalten werden.
+ * LineLightChanger erzeugt einen Lichteffekt welcher aus horizontalen oder vertikalen Linien besteht.
  */
 public class LineLightChanger extends LightChanger
 {

@@ -19,6 +19,7 @@ public class AnimationHandler implements ElementHandler
         if (eventMap.containsKey(colliderId))
         {
             Optional<Animation> animation = eventMap.get(colliderId).getAnimation();
+
             if (animation.isPresent())
                 element.setCurrentAnimation(animation);
         }

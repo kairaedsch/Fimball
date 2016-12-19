@@ -6,14 +6,14 @@ package sep.fimball.model.handler;
 public class BallLostHandler implements GameHandler
 {
     /**
-     * Die GameSession, welche von dem handler beeinflusst wird.
+     * Die GameSession, welche von dem Handler beeinflusst wird.
      */
     private HandlerGameSession handlerGameSession;
 
     /**
      * Erstellt ein neuen BallLostHandler.
      *
-     * @param handlerGameSession Die GameSession, welche von dem handler beeinflusst werden soll.
+     * @param handlerGameSession Die GameSession, welche von dem Handler beeinflusst werden soll.
      */
     BallLostHandler(HandlerGameSession handlerGameSession)
     {
@@ -25,7 +25,6 @@ public class BallLostHandler implements GameHandler
     {
         if (gameEvent.equals(GameEvent.BALL_LOST))
         {
-            //TODO Check if no balls left
             handlerGameSession.getCurrentPlayer().removeOneReserveBall();
             handlerGameSession.switchToNextPlayer();
             handlerGameSession.spawnNewBall();

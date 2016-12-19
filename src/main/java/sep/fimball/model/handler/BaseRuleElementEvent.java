@@ -10,6 +10,6 @@ public class BaseRuleElementEvent
      */
     public BaseRuleElementEvent()
     {
-
+        // TODO - Sollte dieser Konstruktor leer sein? Wenn ja ist die Klasse sinnlos.
     }
 }

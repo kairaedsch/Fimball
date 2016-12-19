@@ -4,9 +4,9 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 
 /**
- * FormLightChanger entscheidet in größer werdenden Kreisen oder Quadraten, ob Lichter angeschalten werden sollen.
+ * ShapeLightChanger erzeugt einen Lichteffekt welcher größer werdenden Kreise oder Quadrate darstellt.
  */
-public class FormLightChanger extends LightChanger
+public class ShapeLightChanger extends LightChanger
 {
     /**
      * Die Mitte des Kreises, um den die Lichter angeschalten werden.
@@ -19,13 +19,13 @@ public class FormLightChanger extends LightChanger
     private final boolean circle;
 
     /**
-     * Erstellt einen neuen FormLightChanger.
+     * Erstellt einen neuen ShapeLightChanger.
      *
      * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
      * @param center            Die Mitte des Kreises, um den die Lichter angeschalten werden.
      * @param circle            Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
      */
-    FormLightChanger(boolean revertedAnimation, ReadOnlyObjectProperty<Vector2> center, boolean circle)
+    ShapeLightChanger(boolean revertedAnimation, ReadOnlyObjectProperty<Vector2> center, boolean circle)
     {
         super(revertedAnimation);
         this.center = center;

@@ -138,10 +138,9 @@ public class BallLostHandlerTest
             }
 
             @Override
-            public boolean removeOneReserveBall()
+            public void removeOneReserveBall()
             {
                 balls.set(balls.get() - 1);
-                return balls.get() >= 0;
             }
         };
     }

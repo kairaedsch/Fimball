@@ -3,7 +3,7 @@ package sep.fimball.model.handler.light;
 import sep.fimball.general.data.Vector2;
 
 /**
- * RandomLightChanger wechselt zufällig das Licht.
+ * RandomLightChanger wechselt zufällig die Lichter.
  */
 public class RandomLightChanger extends LightChanger
 {

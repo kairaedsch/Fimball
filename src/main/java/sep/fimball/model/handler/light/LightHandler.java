@@ -32,7 +32,7 @@ public class LightHandler implements GameHandler
     private Timeline lightChangeLoop;
 
     /**
-     * Die LightChangers, die benutzt werden, um die Lichter zu wechseln.
+     * Die LightChangers, die benutzt werden, um die Lichter zu wechseln und verschiedene Effekte erzeugen.
      */
     private List<LightChanger> lightChangers;
 
@@ -50,7 +50,7 @@ public class LightHandler implements GameHandler
      * Erstellt einen neuen LightHandler.
      *
      * @param gameSession   Die zugehörige GameSession.
-     * @param lightChangers Die LightChangers, die entscheiden, ob sich Lichter ändern.
+     * @param lightChangers Die LightChangers, die entscheiden, wie sich Lichter ändern.
      */
     public LightHandler(HandlerGameSession gameSession, List<LightChanger> lightChangers)
     {
@@ -66,8 +66,7 @@ public class LightHandler implements GameHandler
     }
 
     /**
-     * Wechselt die Lichter.
-     * TODO bessere Beschreibung
+     * Ruft den aktuell aktiven LightChanger auf solange dieser aktiv ist. Wenn der aktuelle fertig ist wird zufällig ein anderer LightChanger gewählt.
      */
     private void changeLights()
     {

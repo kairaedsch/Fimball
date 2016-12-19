@@ -9,14 +9,14 @@ import sep.fimball.general.data.Vector2;
 public abstract class LightChanger
 {
     /**
-     * Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
+     * Gibt an, ob die Animation der Lichter rückwärts abgespielt werden soll.
      */
     private boolean revertedAnimation;
 
     /**
      * Erstellt einen neuen LightChanger.
      *
-     * @param revertedAnimation Gibt an, ob die Animation des Lichts rückwärts abgespielt werden soll.
+     * @param revertedAnimation Gibt an, ob die Animation der Lichter rückwärts abgespielt werden soll.
      */
     LightChanger(boolean revertedAnimation)
     {

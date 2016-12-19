@@ -219,9 +219,9 @@ public class TiltHandlerTest
             }
 
             @Override
-            public boolean removeOneReserveBall()
+            public void removeOneReserveBall()
             {
-                return false;
+
             }
         };
     }

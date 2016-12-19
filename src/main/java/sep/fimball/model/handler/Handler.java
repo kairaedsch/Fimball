@@ -55,6 +55,7 @@ public class Handler extends UserHandler implements ElementHandler, GameHandler
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
+        // TODO - Evtl mit Optionals statt null.
         if (elementHandler != null)
             elementHandler.activateElementHandler(element, colliderId);
     }

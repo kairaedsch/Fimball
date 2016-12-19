@@ -119,9 +119,9 @@ public class ScoreHandlerTest
             }
 
             @Override
-            public boolean removeOneReserveBall()
+            public void removeOneReserveBall()
             {
-                return false;
+
             }
         };
     }

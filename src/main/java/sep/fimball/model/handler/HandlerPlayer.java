@@ -29,9 +29,7 @@ public interface HandlerPlayer
     void addPoints(int pointReward);
 
     /**
-     * Reduziert die Reservekugeln des Spielers um eins.
-     *
-     * @return Gibt zurück ob der Spieler vor dem Entfernen einer Kugel noch mindestens eine Reservekugel hatte
+     * Reduziert die Reservekugeln des Spielers um eins falls er noch Bälle hat.
      */
-    boolean removeOneReserveBall();
+    void removeOneReserveBall();
 }
