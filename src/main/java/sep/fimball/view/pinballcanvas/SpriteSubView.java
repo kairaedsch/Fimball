@@ -85,7 +85,7 @@ public class SpriteSubView
         }
         if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
         {
-            drawBorder(graphicsContext, imageLayer, position, size);
+            drawImageBorder(graphicsContext, imageLayer, position, size);
         }
         if (imageLayer == ImageLayer.BOTTOM)
         {
@@ -164,7 +164,7 @@ public class SpriteSubView
      * @param position        Die Position des Bildes.
      * @param size            Die Größe des Bildes.
      */
-    private void drawBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Vector2 position, Vector2 size)
+    private void drawImageBorder(GraphicsContext graphicsContext, ImageLayer imageLayer, Vector2 position, Vector2 size)
     {
         double borderWidth = DesignConfig.PIXELS_PER_GRID_UNIT * 0.25;
         double borderOffset = 0.5 * borderWidth;

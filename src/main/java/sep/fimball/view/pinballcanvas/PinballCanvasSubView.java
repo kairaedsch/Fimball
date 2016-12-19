@@ -149,6 +149,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
     public WritableImage drawToImage()
     {
+        // TODO - Anpassung des Rectangles in Methode auslagern.
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double minHeight = (720 / DesignConfig.PIXELS_PER_GRID_UNIT);

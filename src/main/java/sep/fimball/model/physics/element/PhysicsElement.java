@@ -154,7 +154,7 @@ public class PhysicsElement<GameElementT>
         {
             if (collider.checkCollision(ballPhysicsElement, this))
             {
-                eventArgsList.add(new CollisionEventArgs<>(getGameElement(), collider.getId()));
+                eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId()));
             }
         }
     }

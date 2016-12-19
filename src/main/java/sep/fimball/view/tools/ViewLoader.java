@@ -87,18 +87,18 @@ public class ViewLoader<ViewT>
                 if (o instanceof Labeled)
                 {
                     Labeled labeled = (Labeled) o;
-                    bind(labeled.textProperty(), labeled.getText());
+                    bindToLanguage(labeled.textProperty(), labeled.getText());
                     installTooltip(labeled.textProperty(), labeled);
                 }
                 if (o instanceof Tab)
                 {
                     Tab tab = (Tab) o;
-                    bind(tab.textProperty(), tab.getText());
+                    bindToLanguage(tab.textProperty(), tab.getText());
                 }
                 if (o instanceof Tooltip)
                 {
                     Tooltip labeled = (Tooltip) o;
-                    bind(labeled.textProperty(), labeled.getText());
+                    bindToLanguage(labeled.textProperty(), labeled.getText());
                 }
             }
         }));
@@ -110,7 +110,7 @@ public class ViewLoader<ViewT>
      * @param textProperty die Property die bestimmt welcher Text beim Node angezeigt wird.
      * @param labeledText der Text der ersetzt werden soll.
      */
-    private void bind(StringProperty textProperty, String labeledText)
+    private void bindToLanguage(StringProperty textProperty, String labeledText)
     {
         if (labeledText.matches("!.*!"))
         {
