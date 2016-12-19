@@ -84,16 +84,6 @@ public class Player implements HandlerPlayer
      *
      * @return Der Name des Spielers.
      */
-    public String getName()
-    {
-        return name.get();
-    }
-
-    /**
-     * Gibt den Namen des Spielers zurück.
-     *
-     * @return Der Name des Spielers.
-     */
     public ReadOnlyStringProperty nameProperty()
     {
         return name;

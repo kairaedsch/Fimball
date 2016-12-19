@@ -9,7 +9,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import java.util.Observer;
 
 /**
- * Eine Session für einen Flipperautomaten.
+ * Eine Session für einen Flipperautomaten. Wird von der GameSession und EditorSession erweitert.
  */
 public abstract class Session
 {

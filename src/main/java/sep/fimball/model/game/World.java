@@ -37,16 +37,6 @@ public class World implements HandlerWorld
     }
 
     /**
-     * Fügt das gegebene Element in die Spielwelt ein.
-     *
-     * @param element Element, welches in die Spielwelt eingefügt wird.
-     */
-    public void addGameElement(GameElement element)
-    {
-        gameElements.add(element);
-    }
-
-    /**
      * Synchronisiert alle GameElements mit ihren Repräsentationen in der Physik.
      *
      * @param elementEventArgsList Liste der Änderungen für GameElements.
@@ -67,15 +57,5 @@ public class World implements HandlerWorld
     public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
         return sortedGameElements;
-    }
-
-    /**
-     * Gibt die Liste der GameElements zurück.
-     *
-     * @return Die Liste der GameElements.
-     */
-    public ListProperty<GameElement> gameElementsOpenProperty()
-    {
-        return gameElements;
     }
 }

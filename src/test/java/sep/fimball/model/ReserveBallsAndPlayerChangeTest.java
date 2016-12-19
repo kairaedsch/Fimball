@@ -67,21 +67,21 @@ public class ReserveBallsAndPlayerChangeTest
 
         // Hat der zweite Spieler noch alle Bälle und ist er am Zug?
         assertEquals(3, session.getCurrentPlayer().ballsProperty().get());
-        assertEquals("test", session.getCurrentPlayer().getName());
+        assertEquals("test", session.getCurrentPlayer().nameProperty().get());
 
         usePlunger();
         waitTillBallIsLost();
 
         // Hat der erste Spieler einen Ball verloren und ist der erste Spieler am Zug?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
-        assertEquals("tester", session.getCurrentPlayer().getName());
+        assertEquals("tester", session.getCurrentPlayer().nameProperty().get());
 
         usePlunger();
         waitTillBallIsLost();
 
         // Hat auch der zweite Spieler einen Ball verloren und ist der zweite Spieler am Zug?
         assertEquals(2, session.getCurrentPlayer().ballsProperty().get());
-        assertEquals("test", session.getCurrentPlayer().getName());
+        assertEquals("test", session.getCurrentPlayer().nameProperty().get());
     }
 
     /**

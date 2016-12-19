@@ -28,7 +28,7 @@ public class GameElement implements HandlerGameElement
     private DoubleProperty rotation;
 
     /**
-     * Die Skalierung des Elements.
+     * Die Höhe des Spielelements über dem Flipper.
      */
     private DoubleProperty height;
 
@@ -99,9 +99,7 @@ public class GameElement implements HandlerGameElement
      */
     public void setPosition(Vector2 position)
     {
-        //TODO - Woot is dis
-        if (position.getX() != this.position.get().getX() || position.getY() != this.position.get().getY())
-            this.position.set(position);
+        this.position.set(position);
     }
 
     /**

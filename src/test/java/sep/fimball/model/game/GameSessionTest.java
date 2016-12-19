@@ -188,7 +188,7 @@ public class GameSessionTest
         // Auswertung
         for (String playerName : playerNames)
         {
-            assertThat(gameSession.getCurrentPlayer().getName(), is(playerName));
+            assertThat(gameSession.getCurrentPlayer().nameProperty().get(), is(playerName));
             gameSession.switchToNextPlayer();
         }
     }

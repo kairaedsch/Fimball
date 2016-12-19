@@ -214,7 +214,7 @@ public class GameViewModel extends WindowViewModel
         scores.set(FXCollections.observableArrayList());
         for (Player player : gameSession.getPlayers())
         {
-            Highscore score = new Highscore(player.pointsProperty().get(), player.getName());
+            Highscore score = new Highscore(player.pointsProperty().get(), player.nameProperty().get());
             scores.add(score);
         }
         return scores;
