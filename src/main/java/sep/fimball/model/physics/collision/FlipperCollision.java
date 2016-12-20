@@ -30,7 +30,7 @@ public class FlipperCollision extends NormalCollision
         //Berechne den Punkt auf der die Kollision auf der Achse stattgefunden hat.
         Vector2 collisionPoint = flipperPivot.plus(flipperAxis.scale(distance));
 
-        if (((ballPos.getY() > collisionPoint.getY()) && flipper.rotatingUp()) || ((ballPos.getY() < collisionPoint.getY()) && flipper.rotatingDown()))
+        if (((ballPos.getY() > collisionPoint.getY()) && flipper.isRotatingUp()) || ((ballPos.getY() < collisionPoint.getY()) && flipper.isRotatingDown()))
         {
             //Berechne den Winkel zwischen dem Polygon des Flippers und der Achse des Flippers.
             double angle = flipperAxis.dot(info.getShortestIntersect().normalized());

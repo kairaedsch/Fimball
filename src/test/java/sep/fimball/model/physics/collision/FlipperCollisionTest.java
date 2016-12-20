@@ -33,7 +33,7 @@ public class FlipperCollisionTest
         when(flipperPhysicsElement.getPosition()).thenReturn(new Vector2(0, 0));
         when(flipperPhysicsElement.getRotation()).thenReturn(0.0);
         when(flipperPhysicsElement.getAngularVelocity()).thenReturn(-500.0);
-        when(flipperPhysicsElement.rotatingDown()).thenReturn(true);
+        when(flipperPhysicsElement.isRotatingDown()).thenReturn(true);
         when(flipperPhysicsElement.getBasePhysicsElement()).thenReturn(flipperBasePhysics);
         when(ballPhysicsElement.getBasePhysicsElement()).thenReturn(ballBasePhysics);
         when(ballPhysicsElement.getPosition()).thenCallRealMethod();
