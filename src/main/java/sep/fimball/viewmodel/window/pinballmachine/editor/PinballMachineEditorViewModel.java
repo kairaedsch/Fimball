@@ -443,10 +443,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Reagiert darauf, dass die Maus den Canvas verlassen hat.
-     *
-     * @param gridPos Die Position, an der die Maus den Canvas verlassen hat.
      */
-    public void mouseExitedCanvas(Vector2 gridPos)
+    public void mouseExitedCanvas()
     {
         mouseOnCanvas = false;
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)

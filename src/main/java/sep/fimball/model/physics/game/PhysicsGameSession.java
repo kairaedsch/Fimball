@@ -3,11 +3,11 @@ package sep.fimball.model.physics.game;
 import java.util.List;
 
 /**
- * Die PhysicGameSession stellt die GameSession aus der Sichtweise der Physic da.
+ * Die PhysicsGameSession stellt die GameSession aus der Sichtweise der Physic da.
  *
  * @param <GameElementT> Generisches GameElement.
  */
-public interface PhysicGameSession<GameElementT>
+public interface PhysicsGameSession<GameElementT>
 {
     /**
      * Setzt den aktuellen Ball Zustand.

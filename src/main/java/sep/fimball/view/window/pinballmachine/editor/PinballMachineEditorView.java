@@ -264,12 +264,10 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus den Pinball-Canvas verlassen hat.
-     *
-     * @param mouseEvent Das Event, in dem der Nutzer mit der Maus aus dem Pinball-Canvas gefahren ist.
      */
-    public void mouseExitedCanvas(MouseEvent mouseEvent)
+    public void mouseExitedCanvas()
     {
-        pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+        pinballMachineEditorViewModel.mouseExitedCanvas();
     }
 
     /**
@@ -288,12 +286,10 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer mit der Maus in einer Drag-Bewegung den
      * Pinball-Canvas verlassen hat.
-     *
-     * @param event Das Event, in dem der Nutzer mit der Maus in einer Drag-Bewegung aus dem Pinball-Canvas gefahren ist.
      */
-    public void mouseDragExitedCanvas(MouseDragEvent event)
+    public void mouseDragExitedCanvas()
     {
-        pinballMachineEditorViewModel.mouseExitedCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
+        pinballMachineEditorViewModel.mouseExitedCanvas();
     }
 
     /**

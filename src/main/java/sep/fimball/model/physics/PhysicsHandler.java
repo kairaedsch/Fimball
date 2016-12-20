@@ -4,7 +4,7 @@ import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
-import sep.fimball.model.physics.game.PhysicGameSession;
+import sep.fimball.model.physics.game.PhysicsGameSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
      */
-    private PhysicGameSession<GameElementT> gameSession;
+    private PhysicsGameSession<GameElementT> gameSession;
 
     /**
      * Die maximale Y-Position aller PhysicElements.
@@ -79,7 +79,7 @@ public class PhysicsHandler<GameElementT>
      * @param maxElementPosY     Die maximale Y-Position aller PhysicElements.
      * @param ballPhysicsElement Der physikalische Ball.
      */
-    public void init(List<PhysicsElement<GameElementT>> elements, PhysicGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public void init(List<PhysicsElement<GameElementT>> elements, PhysicsGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
