@@ -4,6 +4,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.UserHandler;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
+import sep.fimball.model.physics.element.AngularDirection;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
 /**
@@ -44,7 +45,8 @@ public class FlipperGameElement extends GameElement implements UserHandler
     {
         if((left && keyEventArgs.getBinding() == KeyBinding.LEFT_FLIPPER) || (!left && keyEventArgs.getBinding() == KeyBinding.RIGHT_FLIPPER))
         {
-            flipperPhysicsElement.addModify(() -> keyEventArgs.getState() != KeyEventArgs.KeyChangedToState.DOWN);
+            boolean rotateUp = keyEventArgs.getState() != KeyEventArgs.KeyChangedToState.DOWN;
+            flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.UP : AngularDirection.DOWN );
         }
     }
 }

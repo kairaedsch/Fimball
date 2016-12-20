@@ -4,6 +4,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.PhysicsHandler;
 
 import static sep.fimball.general.data.PhysicsConfig.*;
+import static sep.fimball.model.physics.element.AngularDirection.*;
 
 /**
  * Das FlipperPhysicsElement stellt einen Flipperarm in der Physic da.
@@ -15,7 +16,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     /**
      * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
      */
-    private AngularDirection angularDirection = AngularDirection.NONE;
+    private AngularDirection angularDirection = NONE;
 
     /**
      * Gibt an, ob dieser Flipperarm der rechte oder linke ist.
@@ -43,17 +44,17 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : FLIPPER_MIN_ROTATION, basePhysicsElement);
+        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : -FLIPPER_MAX_ROTATION, basePhysicsElement);
         this.isLeft = isLeft;
 
-        if(isLeft)
+        if (isLeft)
         {
             maxRotation = FLIPPER_MAX_ROTATION;
             minRotation = FLIPPER_MIN_ROTATION;
         }
         else
         {
-            // Bei dem Rechten Flipperarm werden die Werte vertauscht, damit beide Arme gleich weit nach oben gedreht werden können.
+            // Bei dem Rechten Flipperarm werden die Werte vertauscht, damit beide Arme gleich weit nach oben bzw. unten gedreht werden können.
             maxRotation = -FLIPPER_MIN_ROTATION;
             minRotation = -FLIPPER_MAX_ROTATION;
         }
@@ -66,7 +67,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public boolean isRotatingUp()
     {
-        return angularDirection == AngularDirection.UP;
+        return angularDirection == UP;
     }
 
     /**
@@ -76,26 +77,26 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public boolean isRotatingDown()
     {
-        return angularDirection == AngularDirection.DOWN;
+        return angularDirection == DOWN;
     }
 
     /**
-     * Lässt den Flipperarm nach oben drehen.
+     * Lässt den Flipperarm drehen, falls möglich.
+     *
+     * @param newAngularDirection Die neue Drehrichtung
      */
-    private void rotateUp()
+    private void rotate(AngularDirection newAngularDirection)
     {
-        if (isLeft && getRotation() < maxRotation) angularDirection = AngularDirection.UP;
-        if (!isLeft && getRotation() > minRotation) angularDirection = AngularDirection.UP;
-
-    }
-
-    /**
-     * Lässt den Flipperarm nach unten drehen.
-     */
-    private void rotateDown()
-    {
-        if (isLeft && getRotation() > minRotation) angularDirection = AngularDirection.DOWN;
-        if (!isLeft && getRotation() < maxRotation) angularDirection = AngularDirection.DOWN;
+        if (newAngularDirection == UP)
+        {
+            if (isLeft && getRotation() < maxRotation) angularDirection = UP;
+            if (!isLeft && getRotation() > minRotation) angularDirection = UP;
+        }
+        else if (newAngularDirection == DOWN)
+        {
+            if (isLeft && getRotation() > minRotation) angularDirection = DOWN;
+            if (!isLeft && getRotation() < maxRotation) angularDirection = DOWN;
+        }
     }
 
     @Override
@@ -107,12 +108,12 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         if (newRotation >= maxRotation)
         {
             setRotation(maxRotation);
-            angularDirection = AngularDirection.NONE;
+            angularDirection = NONE;
         }
         else if (newRotation <= minRotation)
         {
             setRotation(minRotation);
-            angularDirection = AngularDirection.NONE;
+            angularDirection = NONE;
         }
         else
         {
@@ -127,40 +128,16 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public double getAngularVelocity()
     {
-        if (isLeft && angularDirection == AngularDirection.UP) return FLIPPER_ANGULAR_VELOCITY;
-        if (isLeft && angularDirection == AngularDirection.DOWN) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == AngularDirection.UP) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == AngularDirection.DOWN) return FLIPPER_ANGULAR_VELOCITY;
+        if (isLeft && angularDirection == UP) return FLIPPER_ANGULAR_VELOCITY;
+        if (isLeft && angularDirection == DOWN) return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == UP) return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == DOWN) return FLIPPER_ANGULAR_VELOCITY;
         return 0;
     }
 
     @Override
     public void applyModify(FlipperModify modify)
     {
-        if (modify.isUp())
-            rotateUp();
-        else
-            rotateDown();
-    }
-
-    /**
-     * Die Drehrichtung eines Flipperarmes.
-     */
-    public enum AngularDirection
-    {
-        /**
-         * Bewegung nach Hoch.
-         */
-        UP,
-
-        /**
-         * Bewegung nach Runter.
-         */
-        DOWN,
-
-        /**
-         * Keine Bewegung.
-         */
-        NONE
+        rotate(modify.newAngulatDirection());
     }
 }
