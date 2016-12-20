@@ -26,7 +26,7 @@ public enum WindowType
     MACHINE_EDITOR,
 
     /**
-     * Das Fenster, in dem die Einstellungen von Fimball verwaltet werden.
+     * Das Fenster, in dem allgemeine Änderungen am Automaten vorgenommen werden.
      */
     MACHINE_SETTINGS
 }
