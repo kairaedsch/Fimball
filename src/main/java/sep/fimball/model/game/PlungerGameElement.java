@@ -3,7 +3,6 @@ package sep.fimball.model.game;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.scene.Cursor;
 import javafx.util.Duration;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -33,8 +32,14 @@ public class PlungerGameElement extends GameElement implements UserHandler
      */
     private boolean plungerPressed;
 
+    /**
+     * Das PlungerPhysicsElement des PlungerGameElement.
+     */
     private PlungerPhysicsElement<GameElement> plungerPhysicsElement;
 
+    /**
+     * Zum Zurücksetzten der Plungerstärke vom PlungerPhysicsElement.
+     */
     private PauseTransition resetTransition;
 
     /**

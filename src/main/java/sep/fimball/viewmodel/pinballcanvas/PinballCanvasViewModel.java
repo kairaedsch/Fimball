@@ -176,9 +176,10 @@ public abstract class PinballCanvasViewModel
         return viewScreenshotCreater.drawToImage();
     }
 
-    // TODO - Sollte das wirklich einen empty zurückgeben? Wenn ja ist es unerwartetes Verhalten.
-    public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
-    {
-        return Optional.empty();
-    }
+    /**
+     * Gibt den Bereich zurück, welchen der Nutzer gerade auswählt.
+     *
+     * @return Der Bereich, welchen der Nutzer gerade auswählt.
+     */
+    public abstract Optional<RectangleDoubleByPoints> selectingRectangleProperty();
 }

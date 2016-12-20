@@ -99,7 +99,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Optional<BaseElement>> selectedAvailableElement;
 
-
     /**
      * Die zugehörige GameSession.
      */

@@ -279,6 +279,11 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
         handlerManager.addHandlers(handlers);
     }
 
+    /**
+     * Benachrichtigt die Handler über eine Benutzeraktion.
+     *
+     * @param keyEventArgs Der Status des Tastendrucks, der die Aktion ausgelöst hat.
+     */
     public void activateUserHandler(KeyEventArgs keyEventArgs)
     {
         handlerManager.activateUserHandler(keyEventArgs);

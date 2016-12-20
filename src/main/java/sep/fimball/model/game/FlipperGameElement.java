@@ -16,6 +16,9 @@ public class FlipperGameElement extends GameElement implements UserHandler
      */
     private boolean left;
 
+    /**
+     * Das FlipperPhysicsElement des FlipperGameElements.
+     */
     private FlipperPhysicsElement<GameElement> flipperPhysicsElement;
 
     /**

@@ -17,7 +17,7 @@ import java.util.List;
 public class PhysicsElement<GameElementT>
 {
     /**
-     * Debug
+     * Debug.
      */
     public static List<WeakReference<PhysicsElement>> thisIsForDebug = new ArrayList<>();
 

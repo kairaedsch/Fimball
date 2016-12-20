@@ -1,8 +1,11 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;
+
+import java.util.Optional;
 
 /**
  * Das PinballCanvasGameViewModel dient der View als PinballCanvasViewModel und wird speziell für das Spielen eines Flipperautomaten eingesetzt.
@@ -22,5 +25,12 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());
+    }
+
+    @Override
+    public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
+    {
+        // Im Spiel kann der Nutzer nichts auswählen.
+        return Optional.empty();
     }
 }

@@ -1,13 +1,14 @@
 package sep.fimball.model.handler;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Der HandlerManager kümmert sich um eine Liste von Handlern und leitet Aktionen an diese weiter.
+ */
 public class HandlerManager
 {
     /**
@@ -56,7 +57,7 @@ public class HandlerManager
      */
     public void activateUserHandler(KeyEventArgs keyEventArgs)
     {
-        if(keyEventsActivated)
+        if (keyEventsActivated)
         {
             for (Handler handler : handlers)
             {
@@ -92,6 +93,11 @@ public class HandlerManager
         }
     }
 
+    /**
+     * Setzt den KeyEventsActivated Status, welcher angibt, ob UserEvent weiter geleitet werden sollten.
+     *
+     * @param keyEventsActivated Der neue Status das keyEventsActivated
+     */
     public void setKeyEventsActivated(boolean keyEventsActivated)
     {
         this.keyEventsActivated = keyEventsActivated;

@@ -24,6 +24,11 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
      */
     private Optional<UserHandler> userHandler = Optional.empty();
 
+    /**
+     * Erstellt einen neuen Handler aus einem someHandler.
+     *
+     * @param someHandler Den zu wrappenden someHandler.
+     */
     public Handler(SomeHandler someHandler)
     {
         if(someHandler instanceof ElementHandler) setElementHandler((ElementHandler) someHandler);

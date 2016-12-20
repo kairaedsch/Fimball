@@ -65,6 +65,9 @@ public class PhysicsConfig
      */
     public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
 
+    /**
+     * Gibt die Dauer an, in welcher der Plunger den Ball mit der aufgeladenen Stärke abstößt.
+     */
     public static double PLUNGER_FORCE_DURATION = 0.25;
 
     /**
