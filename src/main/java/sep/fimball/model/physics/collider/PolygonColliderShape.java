@@ -79,15 +79,15 @@ public class PolygonColliderShape implements ColliderShape
 
     private Vector2 shortestPathVertexToCircleCollider(List<Vector2> rotatedVertices, Vector2 colliderPosition, Vector2 circleColliderPosition)
     {
-        List<Vector2> ballAxisList = new ArrayList<>();
+        List<Vector2> circleAxisList = new ArrayList<>();
 
         for (Vector2 vertex : rotatedVertices)
         {
             Vector2 globalVertexPosition = vertex.plus(colliderPosition);
-            ballAxisList.add(circleColliderPosition.minus(globalVertexPosition));
+            circleAxisList.add(circleColliderPosition.minus(globalVertexPosition));
         }
-        ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
-        return ballAxisList.get(0).normalized();
+        circleAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
+        return circleAxisList.get(0).normalized();
     }
 
     private List<Double> projectVerticesOnAxis(List<Vector2> vertices, Vector2 colliderPosition, Vector2 axis)
@@ -105,17 +105,17 @@ public class PolygonColliderShape implements ColliderShape
 
     private Optional<OverlapAxis> checkIfProjectionsIntersect(List<Double> projectedVertices, Vector2 axis, Vector2 circleColliderPosition, double circleColliderRadius)
     {
-        double ballCenter = circleColliderPosition.dot(axis);
-        double ballMin = ballCenter - circleColliderRadius;
-        double ballMax = ballCenter + circleColliderRadius;
+        double circleCenter = circleColliderPosition.dot(axis);
+        double circleMin = circleCenter - circleColliderRadius;
+        double circleMax = circleCenter + circleColliderRadius;
 
         double polyMin = projectedVertices.get(0);
         double polyMax = projectedVertices.get(projectedVertices.size() - 1);
 
         // Do the projected areas intersect?
-        if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
+        if (circleMax > polyMin && circleMin < polyMax || polyMax > circleMin && polyMin < circleMax)
         {
-            double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
+            double overlapDistance = Math.min(circleMax, polyMax) - Math.max(circleMin, polyMin);
             return Optional.of(new OverlapAxis(axis, overlapDistance));
         }
         else
