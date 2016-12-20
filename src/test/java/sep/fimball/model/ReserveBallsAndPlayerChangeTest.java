@@ -94,7 +94,7 @@ public class ReserveBallsAndPlayerChangeTest
     {
         PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
         session = new TestGameSession(automat, players);
-        List<Handler> handlers = HandlerFactory.generateAllHandlers(session);
+        List<Handler> handlers = HandlerFactory.generateAllHandlers(session, null);
         Handler ballLostChecker = new Handler((GameHandler)(GameEvent gameEvent) ->
         {
             if (gameEvent == GameEvent.BALL_LOST)

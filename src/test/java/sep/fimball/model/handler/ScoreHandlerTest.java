@@ -79,7 +79,7 @@ public class ScoreHandlerTest
             }
 
             @Override
-            public void activateTilt()
+            public void setBallLost(boolean isBallLost)
             {
 
             }

@@ -67,7 +67,7 @@ public class GameTest
         Handler ballLostHandler = new Handler(new BallLostHandler());
 
         // Registrierung der Handler.
-        List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
+        List<Handler> handlerList = HandlerFactory.generateAllHandlers(session, null);
         handlerList.add(collisionHandler);
         handlerList.add(ballLostHandler);
         session.addHandlers(handlerList);

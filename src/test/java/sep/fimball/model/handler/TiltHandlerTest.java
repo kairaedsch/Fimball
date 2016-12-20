@@ -18,6 +18,7 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+//TODO - Muss an den neuen TiltHandler angepasst werden.
 /**
  * Testet die Klasse TiltHandler.
  */
@@ -48,7 +49,7 @@ public class TiltHandlerTest
         tiltActivated.put(player1, false);
         tiltActivated.put(player2, false);
         HandlerGameSession gameSession = getTestHandlerGameSession();
-        TiltHandler test = new TiltHandler(gameSession);
+        TiltHandler test = new TiltHandler(gameSession, null);
 
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
@@ -118,9 +119,9 @@ public class TiltHandlerTest
             }
 
             @Override
-            public void activateTilt()
+            public void setBallLost(boolean isBallLost)
             {
-                tiltActivated.put(currentPlayer, true);
+
             }
         };
     }

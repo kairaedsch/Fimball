@@ -2,6 +2,7 @@ package sep.fimball.model.game;
 
 import sep.fimball.general.data.Config;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.handler.HandlerManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +25,7 @@ public class TestGameSession extends GameSession
      */
     public TestGameSession(PinballMachine pinballMachine, String[] playerNames)
     {
-        super(pinballMachine, playerNames, false);
+        super(pinballMachine, playerNames, false, new HandlerManager());
     }
 
     /**

@@ -1,5 +1,9 @@
 package sep.fimball.model.handler;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
@@ -16,6 +20,8 @@ public class TiltHandler implements UserHandler
      */
     private HandlerGameSession handlerGameSession;
 
+    private InputModifier inputModifier;
+
     /**
      * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
      */
@@ -27,14 +33,20 @@ public class TiltHandler implements UserHandler
     private static final int MAX_TILT_COUNTER = 5;
 
     /**
+     * Die Zeit, nach der der Ball automatisch als verloren gilt, wenn der Tilt aktiviert wurde.
+     */
+    private static final int TILT_DURATION_BEFORE_BALL_LOSS = 5;
+
+    /**
      * Erzeugt einen neuen TiltHandler.
      *
      * @param handlerGameSession Die zugehörige HandlerGameSession.
      */
-    TiltHandler(HandlerGameSession handlerGameSession)
+    TiltHandler(HandlerGameSession handlerGameSession, InputModifier inputModifier)
     {
         super();
         this.handlerGameSession = handlerGameSession;
+        this.inputModifier = inputModifier;
         this.tiltCounters = new HashMap<>();
     }
 
@@ -50,11 +62,29 @@ public class TiltHandler implements UserHandler
 
             if (tiltCounters.get(currentPlayer) > MAX_TILT_COUNTER)
             {
-                handlerGameSession.activateTilt();
+                activateTilt();
                 tiltCounters.put(currentPlayer, 0);
             }
 
             handlerGameSession.gameBallProperty().get().nudge(keyEventType.getBinding() == KeyBinding.NUDGE_LEFT);
         }
+    }
+
+    private void activateTilt()
+    {
+        inputModifier.setKeyEventsActivated(false);
+        Timeline timeline = new Timeline();
+        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.setBallLost(true)));
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(1);
+        timeline.statusProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue == Animation.Status.STOPPED)
+            {
+                inputModifier.setKeyEventsActivated(true);
+            }
+        });
+        handlerGameSession.getCurrentPlayer().ballsProperty().addListener((observable, oldValue, newValue) -> timeline.stop());
+        timeline.play();
     }
 }

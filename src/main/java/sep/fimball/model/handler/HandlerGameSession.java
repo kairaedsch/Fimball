@@ -41,5 +41,5 @@ public interface HandlerGameSession
     /**
      * Aktiviert die Tilt-Funktion.
      */
-    void activateTilt();
+    void setBallLost(boolean isBallLost);
 }

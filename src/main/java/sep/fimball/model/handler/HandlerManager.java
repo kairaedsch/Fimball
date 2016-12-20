@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Der HandlerManager kümmert sich um eine Liste von Handlern und leitet Aktionen an diese weiter.
  */
-public class HandlerManager
+public class HandlerManager implements InputModifier
 {
     /**
      * Speichert die verwendeten Handler.

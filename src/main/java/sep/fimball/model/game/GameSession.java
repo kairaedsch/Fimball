@@ -36,12 +36,6 @@ import java.util.List;
  */
 public class GameSession extends Session implements PhysicsGameSession<GameElement>, HandlerGameSession
 {
-
-    /**
-     * Die Zeit, nach der der Ball automatisch als verloren gilt, wenn der Tilt aktiviert wurde.
-     */
-    private static final int TILT_DURATION_BEFORE_BALL_LOSS = 5;
-
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
@@ -52,8 +46,9 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      */
     public static GameSession generateGameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
-        GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor);
-        gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession));
+        HandlerManager handlerManager = new HandlerManager();
+        GameSession gameSession = new GameSession(pinballMachine, playerNames, startedFromEditor, handlerManager);
+        gameSession.addHandlers(HandlerFactory.generateAllHandlers(gameSession, handlerManager));
         SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
         gameSession.startUpdateLoop();
 
@@ -135,10 +130,10 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      * @param playerNames       Die Namen der Spieler.
      * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
      */
-    public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
+    public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor, HandlerManager handlerManager)
     {
         super(pinballMachine);
-        this.handlerManager = new HandlerManager();
+        this.handlerManager = handlerManager;
         this.physicMonitor = new Object();
         this.collisionEventArgsList = new LinkedList<>();
         this.elementEventArgsList = new LinkedList<>();
@@ -347,24 +342,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         }
     }
 
-    @Override
-    public void activateTilt()
-    {
-        handlerManager.setKeyEventsActivated(false);
-        Timeline timeline = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> setBallLost(true)));
-        timeline.getKeyFrames().add(frame);
-        timeline.setCycleCount(1);
-        timeline.statusProperty().addListener((observable, oldValue, newValue) ->
-        {
-            if (newValue == Animation.Status.STOPPED)
-            {
-                handlerManager.setKeyEventsActivated(true);
-            }
-        });
-        getCurrentPlayer().ballsProperty().addListener((observable, oldValue, newValue) -> timeline.stop());
-        timeline.play();
-    }
 
     /**
      * Gibt den Spieler zurück, der gerade spielt.

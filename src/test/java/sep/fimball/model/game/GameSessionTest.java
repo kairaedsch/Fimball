@@ -39,7 +39,7 @@ public class GameSessionTest
         ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
 
-        new GameSession(pinballMachineMock, new String[]{"TestPlayer"}, false);
+        new GameSession(pinballMachineMock, new String[]{"TestPlayer"}, false, null);
     }
 
     private GameElement collidedGameElement;
@@ -63,7 +63,8 @@ public class GameSessionTest
         elementList.add(ball);
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
 
-        GameSession gameSession = new GameSession(pinballMachineMock, playerNames, false);
+        // TODO - Mock HandlerManager
+        GameSession gameSession = new GameSession(pinballMachineMock, playerNames, false, new HandlerManager());
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
 
         Handler collisionHandler = new Handler(new CollisionHandler(this));
@@ -183,7 +184,7 @@ public class GameSessionTest
         list.add(ball);
         when(pinballMachine.elementsProperty()).thenReturn(list);
 
-        GameSession gameSession = new GameSession(pinballMachine, playerNames, false);
+        GameSession gameSession = new GameSession(pinballMachine, playerNames, false, null);
 
         // Auswertung
         for (String playerName : playerNames)

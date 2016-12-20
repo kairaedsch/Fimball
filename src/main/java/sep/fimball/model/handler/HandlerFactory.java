@@ -18,7 +18,7 @@ public class HandlerFactory
      * @param gameSession Die GameSession, für die die Handler generiert werden sollen.
      * @return Eine Liste aller Handler.
      */
-    public static List<Handler> generateAllHandlers(HandlerGameSession gameSession)
+    public static List<Handler> generateAllHandlers(HandlerGameSession gameSession, HandlerManager handlerManager)
     {
         List<Handler> handlers = new ArrayList<>();
         handlers.add(new Handler(new HitHandler()));
@@ -27,7 +27,7 @@ public class HandlerFactory
         handlers.add(new Handler(new AnimationHandler()));
         handlers.add(new Handler(new LightHandler(gameSession, LightChangerFactory.generateLightChangers(gameSession))));
         handlers.add(new Handler(new BallLostHandler(gameSession)));
-        handlers.add(new Handler(new TiltHandler(gameSession)));
+        handlers.add(new Handler(new TiltHandler(gameSession, handlerManager)));
 
         return handlers;
     }
