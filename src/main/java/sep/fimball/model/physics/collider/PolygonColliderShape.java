@@ -35,101 +35,113 @@ public class PolygonColliderShape implements ColliderShape
         return Collections.unmodifiableList(vertices);
     }
 
-    // TODO - Zu viel in einer Methode. Es wird zweimal fast das gleiche gemacht.
     @Override
     public HitInfo calculateHitInfo(CircleColliderShape otherColliderShape, Vector2 otherColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
-        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        Vector2 globalBallPosition = otherColliderPosition.plus(otherColliderShape.getPosition());
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
+        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
+
+        Vector2 otherColliderGlobalPosition = otherColliderPosition.plus(otherColliderShape.getPosition());
+        Vector2 otherColliderAxis = shortestPathVertexToCircleCollider(rotatedVertices, currentColliderPosition, otherColliderGlobalPosition);
+        List<Double> projectedVertices = projectVerticesOnAxis(rotatedVertices, currentColliderPosition, otherColliderAxis);
+        Optional<OverlapAxis> edgeOverlap = checkIfProjectionsIntersect(projectedVertices, otherColliderAxis, otherColliderGlobalPosition, otherColliderShape.getRadius());
+
+        if (!edgeOverlap.isPresent())
+        {
+            return new HitInfo(false, null);
+        }
+        else
+        {
+            detectedOverlaps.add(edgeOverlap.get());
+        }
+
+        for (int i = 0; i < rotatedVertices.size(); i++)
+        {
+            Vector2 currentAxis = getVertexNormal(rotatedVertices, i);
+            List<Double> projectedVerts = projectVerticesOnAxis(rotatedVertices, currentColliderPosition, currentAxis);
+            Optional<OverlapAxis> vertexOverlap = checkIfProjectionsIntersect(projectedVerts, currentAxis, otherColliderGlobalPosition, otherColliderShape.getRadius());
+
+            if (!vertexOverlap.isPresent())
+            {
+                return new HitInfo(false, null);
+            }
+            else
+            {
+                if (currentAxis.dot(otherColliderAxis) >= 0)
+                {
+                    detectedOverlaps.add(vertexOverlap.get());
+                }
+            }
+        }
+        Vector2 minimumOverlap = getMinimumOverlap(detectedOverlaps);
+        return new HitInfo(true, minimumOverlap);
+    }
+
+    private Vector2 shortestPathVertexToCircleCollider(List<Vector2> rotatedVertices, Vector2 colliderPosition, Vector2 circleColliderPosition)
+    {
         List<Vector2> ballAxisList = new ArrayList<>();
-        Vector2 ballAxis;
 
         for (Vector2 vertex : rotatedVertices)
         {
-            Vector2 globalVertexPosition = vertex.plus(currentColliderPosition);
-            ballAxisList.add(globalBallPosition.minus(globalVertexPosition));
+            Vector2 globalVertexPosition = vertex.plus(colliderPosition);
+            ballAxisList.add(circleColliderPosition.minus(globalVertexPosition));
         }
         ballAxisList.sort(((o1, o2) -> o1.magnitude() <= o2.magnitude() ? -1 : 1));
-        ballAxis = ballAxisList.get(0).normalized();
+        return ballAxisList.get(0).normalized();
+    }
 
+    private List<Double> projectVerticesOnAxis(List<Vector2> vertices, Vector2 colliderPosition, Vector2 axis)
+    {
         List<Double> points = new ArrayList<>();
 
-        for (Vector2 vertex : rotatedVertices)
+        for (Vector2 vertex : vertices)
         {
-            Vector2 globalVertex = vertex.plus(currentColliderPosition);
-            points.add(globalVertex.dot(ballAxis));
+            Vector2 globalVertex = vertex.plus(colliderPosition);
+            points.add(globalVertex.dot(axis));
         }
         points.sort(Comparator.naturalOrder());
+        return points;
+    }
 
-        double ballCenter = globalBallPosition.dot(ballAxis);
-        double ballMin = ballCenter - otherColliderShape.getRadius();
-        double ballMax = ballCenter + otherColliderShape.getRadius();
+    private Optional<OverlapAxis> checkIfProjectionsIntersect(List<Double> projectedVertices, Vector2 axis, Vector2 circleColliderPosition, double circleColliderRadius)
+    {
+        double ballCenter = circleColliderPosition.dot(axis);
+        double ballMin = ballCenter - circleColliderRadius;
+        double ballMax = ballCenter + circleColliderRadius;
 
-        double polyMin = points.get(0);
-        double polyMax = points.get(points.size() - 1);
+        double polyMin = projectedVertices.get(0);
+        double polyMax = projectedVertices.get(projectedVertices.size() - 1);
 
         // Do the projected areas intersect?
         if (ballMax > polyMin && ballMin < polyMax || polyMax > ballMin && polyMin < ballMax)
         {
             double overlapDistance = Math.min(ballMax, polyMax) - Math.max(ballMin, polyMin);
-            detectedOverlaps.add(new OverlapAxis(ballAxis, overlapDistance));
+            return Optional.of(new OverlapAxis(axis, overlapDistance));
         }
         else
         {
-            return new HitInfo(false, null);
+            return Optional.empty();
         }
+    }
 
-        for (int i = 0; i < rotatedVertices.size(); i++)
+    private Vector2 getVertexNormal(List<Vector2> rotatedVertices, int vertexIndex)
+    {
+        if (vertexIndex == rotatedVertices.size() - 1)
         {
-            Vector2 currentAxis;
-
-            if (i == rotatedVertices.size() - 1)
-            {
-                Vector2 vec = rotatedVertices.get(0).minus(rotatedVertices.get(i));
-                currentAxis = vec.normal().normalized();
-            }
-            else
-            {
-                Vector2 vec = rotatedVertices.get(i + 1).minus(rotatedVertices.get(i));
-                currentAxis = vec.normal().normalized();
-            }
-            //Debug.addDrawVector(rotatedVertices.get(i).plus(colliderObjectPosition), currentAxis, Color.YELLOW);
-            List<Double> newPoints = new ArrayList<>();
-
-            for (Vector2 vertices : rotatedVertices)
-            {
-                Vector2 globalVertices = vertices.plus(currentColliderPosition);
-                newPoints.add(globalVertices.dot(currentAxis));
-            }
-            newPoints.sort(Comparator.naturalOrder());
-
-            double circleCenter = globalBallPosition.dot(currentAxis);
-            double ballMinimum = circleCenter - otherColliderShape.getRadius();
-            double ballMaximum = circleCenter + otherColliderShape.getRadius();
-
-            double polygonMin = newPoints.get(0);
-            double polygonMax = newPoints.get(newPoints.size() - 1);
-
-            // Do the projected areas intersect?
-            if (ballMaximum > polygonMin && ballMinimum < polygonMax || polygonMax > ballMinimum && polygonMin < ballMaximum)
-            {
-                double overlapDistance = Math.min(ballMaximum, polygonMax) - Math.max(ballMinimum, polygonMin);
-
-                if (currentAxis.dot(ballAxis) >= 0)
-                {
-                    detectedOverlaps.add(new OverlapAxis(currentAxis, overlapDistance));
-                }
-            }
-            else
-            {
-                return new HitInfo(false, null);
-            }
+            Vector2 vec = rotatedVertices.get(0).minus(rotatedVertices.get(vertexIndex));
+            return vec.normal().normalized();
         }
+        else
+        {
+            Vector2 vec = rotatedVertices.get(vertexIndex + 1).minus(rotatedVertices.get(vertexIndex));
+            return vec.normal().normalized();
+        }
+    }
 
-        detectedOverlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));
-        Vector2 resultVector = detectedOverlaps.get(0).getAxis().scale(detectedOverlaps.get(0).getOverlap());
-        return new HitInfo(true, resultVector);
+    private Vector2 getMinimumOverlap(List<OverlapAxis> overlaps)
+    {
+        overlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));
+        return overlaps.get(0).getAxis().scale(overlaps.get(0).getOverlap());
     }
 
     @Override

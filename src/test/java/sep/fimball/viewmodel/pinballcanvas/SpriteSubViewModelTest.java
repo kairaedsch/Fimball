@@ -23,7 +23,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by kaira on 19.12.2016.
+ * Tests für die Klasse SpriteSubViewModel.
  */
 public class SpriteSubViewModelTest
 {

@@ -460,6 +460,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         return startedFromEditor;
     }
 
+
     // TODO hack to fix test (wtf mockito)
     @Override
     public World getWorld()
