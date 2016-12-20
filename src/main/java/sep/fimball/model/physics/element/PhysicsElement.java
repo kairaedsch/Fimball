@@ -18,6 +18,7 @@ public class PhysicsElement<GameElementT>
 {
     /**
      * Debug.
+     * TODO entfernen
      */
     public static List<WeakReference<PhysicsElement>> thisIsForDebug = new ArrayList<>();
 

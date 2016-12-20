@@ -47,6 +47,7 @@ public class PlungerGameElement extends GameElement implements UserHandler
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
+     * @param stopReacting Gibt an, ob nicht auf User-Input reagiert wird.
      */
     public PlungerGameElement(PlacedElement element, boolean bind)
     {
