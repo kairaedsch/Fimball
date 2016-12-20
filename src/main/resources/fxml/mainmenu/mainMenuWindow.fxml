@@ -15,7 +15,8 @@
               <HBox styleClass="machineOverviewHeader">
                  <children>
                      <Pane minWidth="50" onMouseClicked="#settingsClicked" styleClass="menuButton" />
-                     <Label alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle" text="!mainmenu.machines.key!" />
+                     <Label fx:id="machinesOverviewLabel" alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle"
+                             text="!mainmenu.machines.key!" />
                  </children>
               </HBox>
               <StackPane>
@@ -50,7 +51,7 @@
                   <HBox>
                      <children>
                          <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" prefHeight="17.0" prefWidth="800.0" styleClass="machineName" text="Marcs Automat" />
-                         <Button mnemonicParsing="false" onMouseClicked="#exitGame" text="!mainmenu.exit.key!"/>
+                         <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#exitGame" text="!mainmenu.exit.key!"/>
                      </children>
                   </HBox>
 

@@ -100,5 +100,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     private void exitGame()
     {
         Platform.exit();
+        System.exit(0);
     }
 }
