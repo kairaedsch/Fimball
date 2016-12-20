@@ -16,11 +16,6 @@ import java.util.List;
 public class World implements HandlerWorld
 {
     /**
-     * Liste der Elemente in der Spielwelt.
-     */
-    private ListProperty<GameElement> gameElements;
-
-    /**
      * Die Elemente der Spielwelt sortiert. Sie werden so sortiert dass sie in der korrekten Reihenfolge gezeichnet werden können.
      */
     private ListProperty<GameElement> sortedGameElements;
@@ -32,7 +27,7 @@ public class World implements HandlerWorld
      */
     public World(ObservableList<GameElement> elements)
     {
-        gameElements = new SimpleListProperty<>(elements);
+        ListProperty<GameElement> gameElements = new SimpleListProperty<>(elements);
         sortedGameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
     }
 
