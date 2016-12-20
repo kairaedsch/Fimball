@@ -1,5 +1,6 @@
 package sep.fimball.view.window.mainmenu;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -92,5 +93,12 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         mainMenuViewModel.addNewPinballMachine();
     }
 
-
+    /**
+     * Schließt das Programm.
+     */
+    @FXML
+    private void exitGame()
+    {
+        Platform.exit();
+    }
 }
