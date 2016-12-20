@@ -149,85 +149,38 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         this.wereBallLostEventsTriggered = false;
         this.physicsHandler = new PhysicsHandler<>();
         this.players = new ArrayList<>();
+        playerIndex = new SimpleIntegerProperty(0);
 
         for (String playerName : playerNames)
         {
             players.add(new Player(playerName));
         }
-        playerIndex = new SimpleIntegerProperty(0);
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
-
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
-        // TODO - Wird an anderer Stelle bereits berechnet.
-        double maxElementPos = 0;
 
-        // TODO - In Factory auslagern.
-        for (PlacedElement element : pinballMachine.elementsProperty())
+        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);
+        elements.addAll(generatedElements.getGameElements());
+        physicsElements.addAll(generatedElements.getPhysicsElements());
+
+        if (generatedElements.getBallGameElement().isPresent())
         {
-            PhysicsElement<GameElement> physicsElement = null;
-            GameElement gameElement;
-            switch (element.getBaseElement().getType())
-            {
-                case RAMP:
-                case NORMAL:
-                    gameElement = new GameElement(element, false);
-                    physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-                    break;
-                case BALL:
-                    // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
-                    BallGameElement ballGameElement = new BallGameElement(element, false);
-                    this.gameBall.set(ballGameElement);
-                    gameElement = ballGameElement;
-                    break;
-                case PLUNGER:
-                    PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
-                    gameElement = plungerGameElement;
-                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-                    plungerGameElement.setPhysicsElement(plungerPhysicsElement);
-                    physicsElement = plungerPhysicsElement;
-                    handlerManager.addHandler(new Handler(plungerGameElement));
-                    break;
-                case LEFT_FLIPPER:
-                case RIGHT_FLIPPER:
-                    boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
-                    FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
-                    flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
-                    gameElement = flipperGameElement;
-                    physicsElement = leftFlipperPhysicsElement;
-                    handlerManager.addHandler(new Handler(flipperGameElement));
-                    break;
-                case LIGHT:
-                    gameElement = new GameElement(element, false);
-                    break;
-                default:
-                    throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
-            }
-
-            elements.add(gameElement);
-
-            if (physicsElement != null)
-            {
-                physicsElements.add(physicsElement);
-            }
-
-            // Setze die y-Position des aktuell untersten Elements
-            maxElementPos = Math.max(element.positionProperty().get().getY() + BALL_LOST_TOLERANCE, maxElementPos);
+            gameBall.set(generatedElements.getBallGameElement().get());
+        }
+        else
+        {
+            throw new IllegalArgumentException("No ball found in PlacedElements!");
         }
 
-        if (gameBall.get() == null)
-            throw new IllegalArgumentException("No ball found in PlacedElements!");
-
         world = new World(elements);
-        BallPhysicsElement<GameElement> physElem = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
-        gameBall.get().setPhysicsElement(physElem);
+        BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        gameBall.get().setPhysicsElement(ballPhysicsElement);
 
-        physicsElements.add(physElem);
+        physicsElements.add(ballPhysicsElement);
         elements.add(gameBall.get());
 
-        physicsHandler.init(physicsElements, this, maxElementPos, physElem);
+        physicsHandler.init(physicsElements, this, pinballMachine.getMaximumYPosition() + BALL_LOST_TOLERANCE, ballPhysicsElement);
     }
 
     /**

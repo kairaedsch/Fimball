@@ -142,6 +142,12 @@ public class PinballMachine
         return new RectangleDouble(origin.minus(new Vector2(2, 2)), width + 4, height + 4);
     }
 
+    public double getMaximumYPosition()
+    {
+        RectangleDouble machineBox = getBoundingBox();
+        return machineBox.getOrigin().getY() + machineBox.getHeight();
+    }
+
     /**
      * Serialisiert und speichert diesen Automaten.
      */
