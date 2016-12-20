@@ -2,10 +2,12 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 
 import java.util.Observer;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,6 +36,11 @@ public class PinballCanvasViewModelTest
 
         PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME)
         {
+            @Override
+            public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
+            {
+                return Optional.empty();
+            }
         };
 
         drawUpdateRecieved = false;
