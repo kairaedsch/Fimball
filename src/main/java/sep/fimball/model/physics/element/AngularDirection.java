@@ -8,12 +8,12 @@ public enum AngularDirection
     /**
      * Bewegung nach Hoch.
      */
-    UP,
+    DOWN,
 
     /**
      * Bewegung nach Runter.
      */
-    DOWN,
+    UP,
 
     /**
      * Keine Bewegung.

@@ -46,7 +46,7 @@ public class FlipperGameElement extends GameElement implements UserHandler
         if((left && keyEventArgs.getBinding() == KeyBinding.LEFT_FLIPPER) || (!left && keyEventArgs.getBinding() == KeyBinding.RIGHT_FLIPPER))
         {
             boolean rotateUp = keyEventArgs.getState() != KeyEventArgs.KeyChangedToState.DOWN;
-            flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.UP : AngularDirection.DOWN );
+            flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.DOWN : AngularDirection.UP);
         }
     }
 }

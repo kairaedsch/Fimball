@@ -26,12 +26,12 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     /**
      * Die Maximale Rotation des Flipperarmes.
      */
-    private double maxRotation;
+    private double minRotation;
 
     /**
      * Die Minimale Rotation des Flipperarmes.
      */
-    private double minRotation;
+    private double maxRotation;
 
     /**
      * Erstellt ein neues FlipperPhysicsElement.
@@ -49,14 +49,14 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
 
         if (isLeft)
         {
-            maxRotation = FLIPPER_MAX_ROTATION;
-            minRotation = FLIPPER_MIN_ROTATION;
+            minRotation = FLIPPER_MAX_ROTATION;
+            maxRotation = FLIPPER_MIN_ROTATION;
         }
         else
         {
             // Bei dem Rechten Flipperarm werden die Werte vertauscht, damit beide Arme gleich weit nach oben bzw. unten gedreht werden können.
-            maxRotation = -FLIPPER_MIN_ROTATION;
-            minRotation = -FLIPPER_MAX_ROTATION;
+            minRotation = -FLIPPER_MIN_ROTATION;
+            maxRotation = -FLIPPER_MAX_ROTATION;
         }
     }
 
@@ -87,16 +87,9 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     private void rotate(AngularDirection newAngularDirection)
     {
-        if (newAngularDirection == UP)
-        {
-            if (isLeft && getRotation() < maxRotation) angularDirection = UP;
-            if (!isLeft && getRotation() > minRotation) angularDirection = UP;
-        }
-        else if (newAngularDirection == DOWN)
-        {
-            if (isLeft && getRotation() > minRotation) angularDirection = DOWN;
-            if (!isLeft && getRotation() < maxRotation) angularDirection = DOWN;
-        }
+        double newAngularVelocity = getAngularVelocity(newAngularDirection);
+        if(newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
+        if(newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
     }
 
     @Override
@@ -105,14 +98,14 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         // Rotate flipper
         double newRotation = getRotation() + getAngularVelocity() * deltaTime;
 
-        if (newRotation >= maxRotation)
-        {
-            setRotation(maxRotation);
-            angularDirection = NONE;
-        }
-        else if (newRotation <= minRotation)
+        if (newRotation <= minRotation)
         {
             setRotation(minRotation);
+            angularDirection = NONE;
+        }
+        else if (newRotation >= maxRotation)
+        {
+            setRotation(maxRotation);
             angularDirection = NONE;
         }
         else
@@ -124,14 +117,25 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     /**
      * Gibt die aktuelle Winkelgeschwindigkeit zurück.
      *
-     * @return die aktuelle Winkelgeschwindigkeit zurück.
+     * @return die aktuelle Winkelgeschwindigkeit.
      */
     public double getAngularVelocity()
     {
-        if (isLeft && angularDirection == UP) return FLIPPER_ANGULAR_VELOCITY;
-        if (isLeft && angularDirection == DOWN) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == UP) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == DOWN) return FLIPPER_ANGULAR_VELOCITY;
+        return getAngularVelocity(angularDirection);
+    }
+
+    /**
+     * Gibt die Winkelgeschwindigkeit abhängig vom der übergebenen AngularDirection zurück.
+     *
+     * @param angularDirection Die Bewegrichtung des Flippers.
+     * @return Die Winkelgeschwindigkeit.
+     */
+    private double getAngularVelocity(AngularDirection angularDirection)
+    {
+        if (isLeft && angularDirection == DOWN) return FLIPPER_ANGULAR_VELOCITY;
+        if (isLeft && angularDirection == UP) return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == DOWN) return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == UP) return FLIPPER_ANGULAR_VELOCITY;
         return 0;
     }
 

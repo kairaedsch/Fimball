@@ -28,12 +28,12 @@ public class PhysicsConfig
     /**
      * Die minimale Rotation der Flipper.
      */
-    public static final double FLIPPER_MIN_ROTATION = -25.0;
+    public static final double FLIPPER_MAX_ROTATION = -25.0;
 
     /**
      * Die maximale Rotation der Flipper.
      */
-    public static final double FLIPPER_MAX_ROTATION = 20.0;
+    public static final double FLIPPER_MIN_ROTATION = 20.0;
 
     /**
      * Die Verzögerung des Startens des Physic Timers in Millisekunden.
