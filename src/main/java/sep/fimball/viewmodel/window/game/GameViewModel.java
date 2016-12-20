@@ -11,7 +11,7 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.manager.KeyEventConverter;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
@@ -63,6 +63,11 @@ public class GameViewModel extends WindowViewModel
     private GameSession gameSession;
 
     /**
+     * Der KeyEventConverter des GameViewModels.
+     */
+    private KeyEventConverter keyEventConverter;
+
+    /**
      * Erzeugt ein neues GameViewModel.
      *
      * @param gameSession Die GameSession, die vom GameViewModel benutzt wird.
@@ -70,6 +75,8 @@ public class GameViewModel extends WindowViewModel
     public GameViewModel(GameSession gameSession)
     {
         super(WindowType.GAME);
+
+        keyEventConverter = new KeyEventConverter();
 
         this.gameSession = gameSession;
         playerPoints = new SimpleIntegerProperty();
@@ -193,7 +200,7 @@ public class GameViewModel extends WindowViewModel
         }
         else if (binding != null)
         {
-            InputManager.getSingletonInstance().addKeyEvent(keyEvent);
+            keyEventConverter.triggerKeyEvent(keyEvent).ifPresent(gameSession::activateUserHandler);
         }
     }
 

@@ -28,7 +28,7 @@ public class LineLightChanger extends LightChanger
     public boolean determineLightStatus(Vector2 position, long delta)
     {
         // units per second
-        double speed = 40;
+        double speed = 30;
         double width = 6;
         double space = 16;
 

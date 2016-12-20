@@ -66,11 +66,11 @@ public class GameSessionTest
         GameSession gameSession = new GameSession(pinballMachineMock, playerNames, false);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
 
-        Handler handler = new Handler();
-        handler.setElementHandler(new CollisionHandler(this));
-        handler.setGameHandler(new BallLostHandler(this));
+        Handler collisionHandler = new Handler(new CollisionHandler(this));
+        Handler ballLostHandler = new Handler(new BallLostHandler(this));
         List<Handler> handlerList = new ArrayList<>();
-        handlerList.add(handler);
+        handlerList.add(collisionHandler);
+        handlerList.add(ballLostHandler);
 
         gameSession.addHandlers(handlerList);
 

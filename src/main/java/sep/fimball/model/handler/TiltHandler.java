@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Der TiltHandler reagiert auf das Rütteln am Automaten.
  */
-public class TiltHandler extends UserHandler
+public class TiltHandler implements UserHandler
 {
     /**
      * Die zugehörige HandlerGameSession.
@@ -33,7 +33,7 @@ public class TiltHandler extends UserHandler
      */
     TiltHandler(HandlerGameSession handlerGameSession)
     {
-        super(KeyBinding.NUDGE_RIGHT, KeyBinding.NUDGE_LEFT);
+        super();
         this.handlerGameSession = handlerGameSession;
         this.tiltCounters = new HashMap<>();
     }

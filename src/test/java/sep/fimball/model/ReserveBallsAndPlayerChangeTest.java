@@ -1,18 +1,16 @@
 package sep.fimball.model;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import org.junit.After;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
-import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerFactory;
-import sep.fimball.model.input.manager.InputManager;
 import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.model.input.manager.KeyEventArgs;
 
 import java.util.List;
 
@@ -32,11 +30,6 @@ public class ReserveBallsAndPlayerChangeTest
      * Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
      */
     private static final long MAX_TEST_DURATION = 20000;
-
-    /**
-     * Die Zeit, die der Plunger gespannt wird.
-     */
-    private static final long KEY_HOLDING_DURATION = 1000;
 
     /**
      * Der Monitor welcher für die wait/notify Logik genutzt wird.
@@ -102,8 +95,7 @@ public class ReserveBallsAndPlayerChangeTest
         PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
         session = new TestGameSession(automat, players);
         List<Handler> handlers = HandlerFactory.generateAllHandlers(session);
-        Handler ballLostChecker = new Handler();
-        ballLostChecker.setGameHandler((GameEvent gameEvent) ->
+        Handler ballLostChecker = new Handler((GameHandler)(GameEvent gameEvent) ->
         {
             if (gameEvent == GameEvent.BALL_LOST)
             {
@@ -126,10 +118,9 @@ public class ReserveBallsAndPlayerChangeTest
      */
     private void usePlunger() throws InterruptedException
     {
-        KeyCode plungerKey = Settings.getSingletonInstance().getKeyCode(KeyBinding.PLUNGER);
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        Thread.sleep(KEY_HOLDING_DURATION);
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
+        session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.DOWN, true));
+        Thread.sleep(1000);
+        session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.UP, true));
     }
 
     /**

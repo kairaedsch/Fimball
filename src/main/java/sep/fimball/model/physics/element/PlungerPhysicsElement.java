@@ -8,12 +8,12 @@ import sep.fimball.model.physics.PhysicsHandler;
  *
  * @param <GameElementT>
  */
-public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, PlungerModify> implements PhysicsUpdatable
+public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, PlungerModify>
 {
     /**
      * Gibt die Stärke an mit der der Plunger den Ball wegschießen soll.
      */
-    private double strength = 0;
+    private double strength;
 
     /**
      * Erstellt eine Instanz von PlungerPhysicsElement mit dem zugehörigen GameElement.
@@ -27,12 +27,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     public PlungerPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         super(physicsHandler, gameElement, position, rotation, basePhysicsElement);
-    }
-
-    @Override
-    public void update(double deltaTime)
-    {
-
+        strength = 0;
     }
 
     /**
@@ -43,14 +38,6 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     public double getStrength()
     {
         return strength;
-    }
-
-    /**
-     * Setzt die Stärke mit der der Plunger den Ball wegschießen soll auf null zurück.
-     */
-    public void resetStrength()
-    {
-        strength = 0;
     }
 
     @Override

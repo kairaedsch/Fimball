@@ -23,8 +23,6 @@ public class PlungerCollision extends NormalCollision
             Vector2 addForce = plungerAxis.scale(plunger.getStrength());
             //Addiere die berechnete Geschwindigkeit auf die Geschwindigkeit des Balls.
             info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
-            // TODO - Problem wenn Plunger geladen wird und die Taste dann losgelassen wird wenn keine Kollision stattgefunden hat. Dann speichert der Plunger weiterhin die Stärke.
-            plunger.resetStrength();
         }
     }
 

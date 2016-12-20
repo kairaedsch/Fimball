@@ -3,7 +3,7 @@ package sep.fimball.model.handler;
 /**
  * Handler, der bei der Kollision von Spielelement und Ball ausgelöst wird.
  */
-public interface ElementHandler
+public interface ElementHandler extends SomeHandler
 {
     /**
      * Ist eine Kollision passiert, wird der Handler aktiviert.

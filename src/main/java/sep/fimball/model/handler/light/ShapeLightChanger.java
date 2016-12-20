@@ -36,7 +36,7 @@ public class ShapeLightChanger extends LightChanger
     public boolean determineLightStatus(Vector2 position, long delta)
     {
         // units per second
-        double speed = 40;
+        double speed = 30;
         double space = 16;
         double width;
 

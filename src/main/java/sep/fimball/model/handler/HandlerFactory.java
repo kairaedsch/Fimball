@@ -21,34 +21,13 @@ public class HandlerFactory
     public static List<Handler> generateAllHandlers(HandlerGameSession gameSession)
     {
         List<Handler> handlers = new ArrayList<>();
-
-        Handler hitHandler = new Handler();
-        hitHandler.setElementHandler(new HitHandler());
-        handlers.add(hitHandler);
-
-        Handler scoreHandler = new Handler();
-        scoreHandler.setElementHandler(new ScoreHandler(gameSession));
-        handlers.add(scoreHandler);
-
-        Handler soundHandler = new Handler();
-        soundHandler.setElementHandler(new SoundHandler(SoundManager.getInstance()));
-        handlers.add(soundHandler);
-
-        Handler animationHandler = new Handler();
-        animationHandler.setElementHandler(new AnimationHandler());
-        handlers.add(animationHandler);
-
-        Handler lightHandler = new Handler();
-        animationHandler.setGameHandler(new LightHandler(gameSession, LightChangerFactory.generateLightChangers(gameSession)));
-        handlers.add(lightHandler);
-
-        Handler ballLostHandler = new Handler();
-        ballLostHandler.setGameHandler(new BallLostHandler(gameSession));
-        handlers.add(ballLostHandler);
-
-        Handler nudgeHandler = new Handler();
-        nudgeHandler.setUserHandler(new TiltHandler(gameSession));
-        handlers.add(nudgeHandler);
+        handlers.add(new Handler(new HitHandler()));
+        handlers.add(new Handler(new ScoreHandler(gameSession)));
+        handlers.add(new Handler(new SoundHandler(SoundManager.getInstance())));
+        handlers.add(new Handler(new AnimationHandler()));
+        handlers.add(new Handler(new LightHandler(gameSession, LightChangerFactory.generateLightChangers(gameSession))));
+        handlers.add(new Handler(new BallLostHandler(gameSession)));
+        handlers.add(new Handler(new TiltHandler(gameSession)));
 
         return handlers;
     }

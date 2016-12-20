@@ -12,6 +12,7 @@ import sep.fimball.model.media.Animation;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -124,10 +125,10 @@ public class SpriteSubViewModel
      */
     private void updateImage()
     {
-        if ((gameElement.currentAnimationProperty().get()).isPresent())
+        Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
+        if (currentAnimation.isPresent())
         {
-            Animation animation = gameElement.currentAnimationProperty().get().get();
-            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), animation);
+            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get());
         }
         else
         {

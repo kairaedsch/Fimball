@@ -65,6 +65,8 @@ public class PhysicsConfig
      */
     public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
 
+    public static double PLUNGER_FORCE_DURATION = 0.25;
+
     /**
      * Gibt an wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 2 bedeutet das der Ball nach der Kollision langsamer wird.
      */

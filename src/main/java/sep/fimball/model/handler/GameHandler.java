@@ -3,7 +3,7 @@ package sep.fimball.model.handler;
 /**
  * Der GameHandler nimmt GameEvents entgegen und reagiert auf diese.
  */
-public interface GameHandler
+public interface GameHandler extends SomeHandler
 {
     /**
      * Benachrichtigt den Handler über ein eingetretenes GameEvent.

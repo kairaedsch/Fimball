@@ -1,7 +1,5 @@
 package sep.fimball.model;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -10,12 +8,11 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.model.input.manager.InputManager;
+import sep.fimball.model.input.manager.KeyEventArgs;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -64,12 +61,10 @@ public class GameTest
         session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});        // Start des Spiels
 
         // Erstellung des Handler, der Kollisionen aufzeichnet.
-        Handler collisionHandler = new Handler();
-        collisionHandler.setElementHandler(new CollisionHandler());
+        Handler collisionHandler = new Handler(new CollisionHandler());
 
         // Erstellung des Handler, der bei Ballverlust ballLost() aufruft.
-        Handler ballLostHandler = new Handler();
-        ballLostHandler.setGameHandler(new BallLostHandler());
+        Handler ballLostHandler = new Handler(new BallLostHandler());
 
         // Registrierung der Handler.
         List<Handler> handlerList = HandlerFactory.generateAllHandlers(session);
@@ -135,10 +130,9 @@ public class GameTest
      */
     private void usePlunger() throws InterruptedException
     {
-        KeyCode plungerKey = Settings.getSingletonInstance().getKeyCode(KeyBinding.PLUNGER);
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, " ", plungerKey.name(), plungerKey, false, false, false, false));
-        Thread.sleep(HOLD_KEY_DURATION);
-        InputManager.getSingletonInstance().addKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, " ", plungerKey.name(), plungerKey, false, false, false, false));
+        session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.DOWN, true));
+        Thread.sleep(1000);
+        session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.UP, true));
     }
 
     /**

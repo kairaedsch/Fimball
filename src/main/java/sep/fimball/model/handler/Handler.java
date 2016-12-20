@@ -2,25 +2,34 @@ package sep.fimball.model.handler;
 
 import sep.fimball.model.input.manager.KeyEventArgs;
 
+import java.util.Optional;
+
 /**
  * Wird bei verschiedenen Ereignissen im Spiel informiert und kann auf diese reagieren.
  */
-public class Handler extends UserHandler implements ElementHandler, GameHandler
+public class Handler implements ElementHandler, GameHandler, UserHandler
 {
     /**
      * Reagiert auf Kollisionen zwischen Ball und Spielelementen.
      */
-    private ElementHandler elementHandler = null;
+    private Optional<ElementHandler> elementHandler = Optional.empty();
 
     /**
      * Reagiert auf gewisse Spielereignisse.
      */
-    private GameHandler gameHandler = null;
+    private Optional<GameHandler> gameHandler = Optional.empty();
 
     /**
      * Reagiert auf Aktionen des Spielers.
      */
-    private UserHandler userHandler = null;
+    private Optional<UserHandler> userHandler = Optional.empty();
+
+    public Handler(SomeHandler someHandler)
+    {
+        if(someHandler instanceof ElementHandler) setElementHandler((ElementHandler) someHandler);
+        if(someHandler instanceof GameHandler) setGameHandler((GameHandler) someHandler);
+        if(someHandler instanceof UserHandler) setUserHandler((UserHandler) someHandler);
+    }
 
     /**
      * Setzt den ElementHandler, der auf Kollisionen zwischen Ball und Spielelementen reagiert.
@@ -29,7 +38,7 @@ public class Handler extends UserHandler implements ElementHandler, GameHandler
      */
     public void setElementHandler(ElementHandler elementHandler)
     {
-        this.elementHandler = elementHandler;
+        this.elementHandler = Optional.of(elementHandler);
     }
 
     /**
@@ -39,7 +48,7 @@ public class Handler extends UserHandler implements ElementHandler, GameHandler
      */
     public void setGameHandler(GameHandler gameHandler)
     {
-        this.gameHandler = gameHandler;
+        this.gameHandler = Optional.of(gameHandler);
     }
 
     /**
@@ -49,28 +58,24 @@ public class Handler extends UserHandler implements ElementHandler, GameHandler
      */
     public void setUserHandler(UserHandler userHandler)
     {
-        this.userHandler = userHandler;
+        this.userHandler = Optional.of(userHandler);
     }
 
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
-        // TODO - Evtl mit Optionals statt null.
-        if (elementHandler != null)
-            elementHandler.activateElementHandler(element, colliderId);
+        elementHandler.ifPresent(elementHandler -> elementHandler.activateElementHandler(element, colliderId));
     }
 
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        if (gameHandler != null)
-            gameHandler.activateGameHandler(gameEvent);
+        gameHandler.ifPresent(gameHandler -> gameHandler.activateGameHandler(gameEvent));
     }
 
     @Override
     public void activateUserHandler(KeyEventArgs keyEventType)
     {
-        if (userHandler != null)
-            userHandler.activateUserHandler(keyEventType);
+        userHandler.ifPresent(userHandler -> userHandler.activateUserHandler(keyEventType));
     }
 }

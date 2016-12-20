@@ -1,7 +1,6 @@
 package sep.fimball.model.handler;
 
 import org.junit.Test;
-import sep.fimball.model.input.manager.KeyEventArgs;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -32,9 +31,7 @@ public class HandlerTest
     @Test
     public void activateGameHandlerTest()
     {
-        Handler test = new Handler();
-        GameHandler gameHandler = gameEvent -> gameHandlerActivated = true;
-        test.setGameHandler(gameHandler);
+        Handler test = new Handler((GameHandler) gameEvent -> gameHandlerActivated = true);
         test.activateGameHandler(GameEvent.BALL_SPAWNED);
         assertThat("Der GameHandler wurde aktiviert.", gameHandlerActivated, is(true));
     }
@@ -45,9 +42,7 @@ public class HandlerTest
     @Test
     public void activateElementHandlerTest()
     {
-        Handler test = new Handler();
-        ElementHandler elementHandler = (element, colliderId) -> elementHandlerActivated = true;
-        test.setElementHandler(elementHandler);
+        Handler test = new Handler((ElementHandler) (element, colliderId) -> elementHandlerActivated = true);
         test.activateElementHandler(null, 0);
         assertThat("Der ElementHandler wurde aktiviert.", elementHandlerActivated, is(true));
     }
@@ -58,16 +53,7 @@ public class HandlerTest
     @Test
     public void activateUserHandlerTest()
     {
-        Handler test = new Handler();
-        UserHandler userHandler = new UserHandler()
-        {
-            @Override
-            void activateUserHandler(KeyEventArgs keyEventType)
-            {
-                userHandlerActivated = true;
-            }
-        };
-        test.setUserHandler(userHandler);
+        Handler test = new Handler((UserHandler) keyEventArgs -> userHandlerActivated = true);
         test.activateUserHandler(null);
         assertThat("Der GameHandler wurde aktiviert.", userHandlerActivated, is(true));
     }
