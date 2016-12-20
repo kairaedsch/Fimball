@@ -100,8 +100,8 @@ public class BallPhysicsElementTest
 
             ballPhysicsElement.applyModify((BallNudgeModify) () -> true);
 
-            assertThat("Der Ball wurde bei der X-Position versetzt", ballPhysicsElement.getPosition().getX(), is(lessThan(0.0)));
-            assertThat("Der Ball wurde bei der Y-Position nicht versetzt", ballPhysicsElement.getPosition().getY(), is(0.0));
+            assertThat("Der Ball wurde auf der X-Achse beschleunigt", ballPhysicsElement.getVelocity().getX(), is(lessThan(0.0)));
+            assertThat("Der Ball wurde auf der Y-Achse nicht beschleunigt", ballPhysicsElement.getVelocity().getY(), is(0.0));
         }
     }
 }
