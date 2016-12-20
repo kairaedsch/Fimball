@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Debug Klasse welche nur für das Debugging der Physik relevant ist und deshalb kein JavaDoc enthält.
+ * TODO entfernen
  */
 public class DrawEntry
 {

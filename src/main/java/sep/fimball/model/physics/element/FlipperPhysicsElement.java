@@ -44,7 +44,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : -FLIPPER_MAX_ROTATION, basePhysicsElement);
+        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MIN_ROTATION : -FLIPPER_MIN_ROTATION, basePhysicsElement);
         this.isLeft = isLeft;
 
         if (isLeft)

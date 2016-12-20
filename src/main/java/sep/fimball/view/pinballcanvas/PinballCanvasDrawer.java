@@ -74,6 +74,7 @@ public class PinballCanvasDrawer
         }
 
         drawElements(graphicsContext);
+        // TODO entfernen
         Debug.draw(graphicsContext);
 
         if(dragSelectionRect.isPresent())

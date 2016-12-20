@@ -62,6 +62,7 @@ public class PhysicsElement<GameElementT>
      */
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
+        // TODO entfernen
         thisIsForDebug.add(new WeakReference<>(this));
 
         this.position = position;
