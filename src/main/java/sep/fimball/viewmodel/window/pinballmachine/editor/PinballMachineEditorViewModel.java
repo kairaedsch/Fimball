@@ -55,6 +55,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ListProperty<AvailableElementSubViewModel> availableObstacleElements;
 
     /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Rampen.
+     */
+    private ListProperty<AvailableElementSubViewModel> availableRampElements;
+
+    /**
      * Die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente.
      */
     private ListProperty<AvailableElementSubViewModel> availableAdvancedElements;
@@ -152,6 +157,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         availableBasicElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC))));
         availableObstacleElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE))));
+        availableRampElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.RAMP))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
         editorSession = new EditorSession(pinballMachine);
@@ -181,6 +187,16 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public ReadOnlyListProperty<AvailableElementSubViewModel> availableObstacleElementsProperty()
     {
         return availableObstacleElements;
+    }
+
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Rampen zurück.
+     *
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Rampen.
+     */
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableRampElementsProperty()
+    {
+        return availableRampElements;
     }
 
     /**

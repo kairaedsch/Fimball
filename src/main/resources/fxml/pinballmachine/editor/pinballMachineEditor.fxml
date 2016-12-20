@@ -76,6 +76,32 @@
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
+                            <TitledPane animated="false" text="Ramps">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                        prefWidth="200.0" style="-fx-padding: 0;">
+                                <ScrollPane fitToHeight="true" fitToWidth="true"
+                                            hbarPolicy="NEVER"
+                                            styleClass="edge-to-edge, machineOverview"
+                                            vbarPolicy="ALWAYS"
+                                            AnchorPane.bottomAnchor="0.0"
+                                            AnchorPane.leftAnchor="0.0"
+                                            AnchorPane.rightAnchor="0.0"
+                                            AnchorPane.topAnchor="0.0">
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0"
+                                                top="5.0"/>
+                                    </padding>
+                                    <AnchorPane>
+                                        <VBox fx:id="availableElementsRamp"
+                                              AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0"
+                                              AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                        </VBox>
+                                    </AnchorPane>
+                                </ScrollPane>
+                            </AnchorPane>
+                        </TitledPane>
                             <TitledPane animated="false" text="Advanced Elements">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
                                             prefWidth="200.0" style="-fx-padding: 0;">

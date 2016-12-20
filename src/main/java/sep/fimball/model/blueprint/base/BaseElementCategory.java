@@ -18,5 +18,10 @@ public enum BaseElementCategory
     /**
      * Elemente dieser Kategorie gehören zu den Hindernis-Elementen.
      */
-    OBSTACLE
+    OBSTACLE,
+
+    /**
+     * Elemente dieser Kategorie gehören zu dne Rampen-Elementen.
+     */
+    RAMP
 }

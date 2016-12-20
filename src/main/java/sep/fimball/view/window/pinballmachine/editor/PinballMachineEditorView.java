@@ -69,6 +69,12 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private VBox availableElementsObstacles;
 
     /**
+     * Die zur Platzierung auf dem Spielfeld verfügbaren Rampen.
+     */
+    @FXML
+    private VBox availableElementsRamp;
+
+    /**
      * Die obere Pane der Drag-Vorschau.
      */
     @FXML
@@ -100,6 +106,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsRamp, pinballMachineEditorViewModel.availableRampElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
