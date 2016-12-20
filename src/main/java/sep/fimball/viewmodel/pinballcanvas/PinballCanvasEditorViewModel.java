@@ -10,7 +10,7 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 import java.util.Optional;
 
 /**
- * Das PinballCanvasEditorViewModel dient der View als PinballCanvasViewModel und reagiert als Editor auch auf BenutzereIngaben.
+ * Das PinballCanvasEditorViewModel dient der View als PinballCanvasViewModel und reagiert als Editor auch auf Benutzereingaben.
  */
 public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
 {

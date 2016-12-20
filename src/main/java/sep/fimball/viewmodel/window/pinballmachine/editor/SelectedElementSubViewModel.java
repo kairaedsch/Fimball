@@ -159,7 +159,7 @@ public class SelectedElementSubViewModel
     }
 
     /**
-     * Dubliziert die ausgewählten Elemente in dem Flipper-Automaten.
+     * Dupliziert die ausgewählten Elemente in dem Flipper-Automaten.
      */
     public void duplicate()
     {

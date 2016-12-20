@@ -122,9 +122,9 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     }
 
     /**
-     * Gibt die aktuelle Winkelheschwindigkeit zurück.
+     * Gibt die aktuelle Winkelgeschwindigkeit zurück.
      *
-     * @return die aktuelle Winkelheschwindigkeit zurück.
+     * @return die aktuelle Winkelgeschwindigkeit zurück.
      */
     public double getAngularVelocity()
     {
