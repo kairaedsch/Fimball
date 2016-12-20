@@ -474,4 +474,11 @@ public class GameSession extends Session implements PhysicGameSession<GameElemen
     {
         return startedFromEditor;
     }
+
+    // TODO hack to fix test (wtf mockito)
+    @Override
+    public World getWorld()
+    {
+        return super.getWorld();
+    }
 }
