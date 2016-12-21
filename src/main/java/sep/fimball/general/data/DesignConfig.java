@@ -123,7 +123,7 @@ public class DesignConfig
      */
     public static StringExpression backgroundImageCss(ReadOnlyStringProperty path)
     {
-        return Bindings.concat(CSS_URL_PREFIX, DataPath.escapePathToUrl(path.get()), CSS_URL_POSTFIX);
+        return Bindings.concat(CSS_URL_PREFIX, Bindings.createStringBinding(() -> DataPath.escapePathToUrl(path.get()), path), CSS_URL_POSTFIX);
     }
 
     /**

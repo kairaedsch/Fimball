@@ -22,6 +22,7 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param rotation           Die Rotation des PhysicsElement.
+     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public PlungerPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)

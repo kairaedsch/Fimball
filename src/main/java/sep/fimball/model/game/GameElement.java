@@ -12,6 +12,9 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
 
+import static sep.fimball.general.data.PhysicsConfig.MAX_BALL_HEIGHT;
+import static sep.fimball.model.blueprint.base.BaseElementType.*;
+
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
@@ -220,17 +223,17 @@ public class GameElement implements HandlerGameElement
         BaseElementType g1t = g1.getElementType();
         BaseElementType g2t = g2.getElementType();
 
-        if (g1t == BaseElementType.BALL || g2t == BaseElementType.BALL)
+        if (g1t == BALL || g2t == BALL)
         {
             if (g1t == g2t)
             {
                 return 0;
             }
-            else if (g1t == BaseElementType.BALL)
+            else if (g1t == BALL)
             {
-                if (g2t == BaseElementType.RAMP)
+                if (g2t == RAMP)
                 {
-                    return g1.heightProperty().get() > 0 ? 1 : -1;
+                    return g1.heightProperty().get() > (MAX_BALL_HEIGHT / 2.0) ? 1 : -1;
                 }
                 else
                 {
@@ -243,21 +246,21 @@ public class GameElement implements HandlerGameElement
             }
         }
 
-        if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
+        if (g1t == RAMP || g2t == RAMP)
         {
             if (g1t == g2t)
                 return 0;
-            else if (g1t == BaseElementType.RAMP)
+            else if (g1t == RAMP)
                 return 1;
             else
                 return -1;
         }
 
-        if (g1t == BaseElementType.LEFT_FLIPPER || g1t == BaseElementType.RIGHT_FLIPPER || g2t == BaseElementType.LEFT_FLIPPER || g2t == BaseElementType.RIGHT_FLIPPER)
+        if (g1t == LEFT_FLIPPER || g1t == RIGHT_FLIPPER || g2t == LEFT_FLIPPER || g2t == RIGHT_FLIPPER)
         {
-            if (g1t == g2t)
+            if ((g1t == LEFT_FLIPPER || g1t == RIGHT_FLIPPER) && (g2t == LEFT_FLIPPER || g2t == RIGHT_FLIPPER))
                 return 0;
-            else if (g2t == BaseElementType.NORMAL)
+            else if (g2t == NORMAL)
                 return 1;
             else
                 return -1;

@@ -53,9 +53,9 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getPinballMachineInfoSubViewModel().nameProperty());
 
         // TODO - Cancer da die StringExpression kein ordentliches Binding zurück gibt. In dieser wird eine Methode aufgerufen, somit wird nicht mehr die eigentliche observedValue genutzt und das Binding nicht updated.
-        mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty().addListener(((observableValue, s, t1) ->
-                detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()))
-        ));
+        detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()));
+
+
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachinePreviewSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
