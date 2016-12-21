@@ -143,6 +143,7 @@ public class DataPath
      */
     public static String escapePathToUrl(String path)
     {
+        if(path == null) return null;
         try
         {
             URL url = new File(path).toURI().toURL();
