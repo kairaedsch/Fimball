@@ -44,7 +44,7 @@ public class GameViewModelTest
         SimpleBooleanProperty isOverProperty = new SimpleBooleanProperty(false);
         when(gameSessionMock.isOverProperty()).thenReturn(isOverProperty);
 
-        World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()));
+        World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()), true);
         when(gameSessionMock.getWorld()).thenReturn(world);
 
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
@@ -83,7 +83,7 @@ public class GameViewModelTest
         Player player = new Player("TestPlayer");
         when(gameSessionMock.currentPlayer()).thenReturn(new SimpleObjectProperty<>(player));
 
-        World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()));
+        World world = new World(new SimpleListProperty<>(FXCollections.observableArrayList()), true);
         when(gameSessionMock.getWorld()).thenReturn(world);
 
         PinballMachine pinballMachineMock = mock(PinballMachine.class);

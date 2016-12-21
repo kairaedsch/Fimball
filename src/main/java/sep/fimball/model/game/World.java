@@ -18,17 +18,25 @@ public class World implements HandlerWorld
     /**
      * Die Elemente der Spielwelt sortiert. Sie werden so sortiert dass sie in der korrekten Reihenfolge gezeichnet werden können.
      */
-    private ListProperty<GameElement> sortedGameElements;
+    private ListProperty<GameElement> gameElements;
 
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
      * @param elements Liste der Elemente in der Spielwelt.
      */
-    public World(ObservableList<GameElement> elements)
+    public World(ObservableList<GameElement> elements, boolean startedFromEditor)
     {
         ListProperty<GameElement> gameElements = new SimpleListProperty<>(elements);
-        sortedGameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
+
+        if (startedFromEditor)
+        {
+            this.gameElements = gameElements;
+        }
+        else
+        {
+            this.gameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
+        }
     }
 
     /**
@@ -50,6 +58,6 @@ public class World implements HandlerWorld
      */
     public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
-        return sortedGameElements;
+        return gameElements;
     }
 }

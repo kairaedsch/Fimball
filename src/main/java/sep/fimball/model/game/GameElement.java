@@ -245,26 +245,6 @@ public class GameElement implements HandlerGameElement
                 return -1 * compare(g2, g1);
             }
         }
-
-        if (g1t == RAMP || g2t == RAMP)
-        {
-            if (g1t == g2t)
-                return 0;
-            else if (g1t == RAMP)
-                return 1;
-            else
-                return -1;
-        }
-
-        if (g1t == LEFT_FLIPPER || g1t == RIGHT_FLIPPER || g2t == LEFT_FLIPPER || g2t == RIGHT_FLIPPER)
-        {
-            if ((g1t == LEFT_FLIPPER || g1t == RIGHT_FLIPPER) && (g2t == LEFT_FLIPPER || g2t == RIGHT_FLIPPER))
-                return 0;
-            else if (g2t == NORMAL)
-                return 1;
-            else
-                return -1;
-        }
-        return 0;
+        return g1t.getDrawOrder() - g2t.getDrawOrder();
     }
 }

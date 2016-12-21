@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 
+import java.util.function.Function;
+
 /**
  * Ein PlacedElement stellt ein auf einem Automaten platziertes Element mit den zugehörigen Eigenschaften dar. Ein PlacedElement hat dabei immer genau ein BaseElement. Dabei gilt:
  * <br/>PlacedElement hat z.B.
@@ -156,7 +158,7 @@ public class PlacedElement
      */
     public static int compare(PlacedElement element1, PlacedElement element2)
     {
-        return (int) (element1.positionProperty().get().getY() - element2.positionProperty().get().getY());
+        return element1.getBaseElement().getType().getDrawOrder() - element2.getBaseElement().getType().getDrawOrder();
     }
 
     /**

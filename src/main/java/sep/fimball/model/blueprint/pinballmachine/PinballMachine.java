@@ -53,6 +53,8 @@ public class PinballMachine
      */
     private ListProperty<PlacedElement> elements;
 
+    private ListProperty<PlacedElement> sortedElements;
+
     /**
      * Gibt an, ob die Flipperautomaten-Elemente {@code elements} geladen wurde.
      */
@@ -76,6 +78,7 @@ public class PinballMachine
 
         // Set up element list
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
         elementsLoaded = false;
 
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
@@ -330,7 +333,7 @@ public class PinballMachine
     public ReadOnlyListProperty<PlacedElement> elementsProperty()
     {
         checkElementsLoaded();
-        return elements;
+        return sortedElements;
     }
 
     /**

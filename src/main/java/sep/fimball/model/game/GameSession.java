@@ -160,7 +160,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
             throw new IllegalArgumentException("No ball found in PlacedElements!");
         }
 
-        world = new World(elements);
+        world = new World(elements, false);
         BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(),
                 gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().multiplierProperty().get(),
                 gameBall.get().getPlacedElement().getBaseElement().getPhysics());
