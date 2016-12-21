@@ -16,9 +16,9 @@ import java.util.Optional;
 import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 
 /**
- * Der PinballCanvasDrawer ist eine Hilfsklasse welche die Operationen auf dem GraphicsContext des Canvas ausführt.
+ * Der PinballCanvasDrawer ist eine Hilfsklasse, die die zum Zeichnen notwendigen Operationen auf dem GraphicsContext des Canvas ausführt.
  */
-public class PinballCanvasDrawer
+class PinballCanvasDrawer
 {
     /**
      * Die Canvas auf der gezeichnet wird.
