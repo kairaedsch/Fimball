@@ -139,6 +139,9 @@ public class PinballMachineSettingsViewModelTest
             isPinballMachineDeleted = true;
             return null;
         }).when(pinballMachine).deleteFromDisk();
+
+        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+
         return pinballMachine;
     }
 
