@@ -29,6 +29,11 @@ public class PinballMachine
     private StringProperty name;
 
     /**
+     * Pfad zum Vorschaubilde des Flipperautomaten.
+     */
+    private StringProperty previewImagePath;
+
+    /**
      * ID zur Identifizierung des Automaten.
      */
     private StringProperty id;
@@ -58,13 +63,15 @@ public class PinballMachine
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *
      * @param name                  Name des Automaten.
+     * @param previewImagePath      Namen der Vorschaubildes des Automaten.
      * @param pinballMachineId      Id des Automaten.
      * @param highscores            Die auf diesem Automaten bisher erreichten Highscores.
      * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
      */
-    PinballMachine(String name, String pinballMachineId, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
+    PinballMachine(String name, String previewImagePath, String pinballMachineId, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
     {
         this.name = new SimpleStringProperty(name);
+        this.previewImagePath = new SimpleStringProperty(previewImagePath);
         this.id = new SimpleStringProperty(pinballMachineId);
         this.pinballMachineManager = pinballMachineManager;
 
@@ -170,7 +177,9 @@ public class PinballMachine
      */
     public void savePreviewImage(WritableImage image)
     {
-        pinballMachineManager.savePreviewImage(this, image);
+        String newPreviewImagePath = DataPath.generatePathToNewImagePreview(getID(), System.currentTimeMillis());
+        pinballMachineManager.savePreviewImage(this, image, newPreviewImagePath);
+        previewImagePath.set(newPreviewImagePath);
     }
 
     /**
@@ -326,16 +335,6 @@ public class PinballMachine
     }
 
     /**
-     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
-     *
-     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
-     */
-    public String getImagePath()
-    {
-        return pinballMachineManager.loadPreviewImage(this);
-    }
-
-    /**
      * Gibt die ID zur Identifizierung des Automaten zurück.
      *
      * @return Die ID zur Identifizierung des Automaten.
@@ -343,5 +342,15 @@ public class PinballMachine
     public String getID()
     {
         return id.getValue();
+    }
+
+    /**
+     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     *
+     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
+     */
+    public ReadOnlyStringProperty previewImagePathProperty()
+    {
+        return previewImagePath;
     }
 }

@@ -50,7 +50,7 @@ public class PinballMachineInfoSubViewModelTest
         PinballMachine pinballMachine = mock(PinballMachine.class);
         when(pinballMachine.elementsProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
-        when(pinballMachine.getImagePath()).thenReturn("");
+        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleStringProperty());
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
         ListProperty<Highscore> highscores = new SimpleListProperty<>(FXCollections.observableArrayList());
         when(pinballMachine.highscoreListProperty()).thenReturn(highscores);

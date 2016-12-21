@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
+import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Highscore;
 
 import java.util.ArrayList;
@@ -37,7 +38,10 @@ class PinballMachineFactory
                 highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
             }
 
-            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, highscores, pinballMachineManager);
+            String previewImagePath = pinballMachineJson.previewImagePath;
+            if(previewImagePath == null) previewImagePath = DataPath.pathToDefaultPreview();
+
+            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, previewImagePath, pinballMachineId, highscores, pinballMachineManager);
 
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
             return Optional.of(pinballMachine);
@@ -60,6 +64,7 @@ class PinballMachineFactory
     {
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
         pinballMachineJson.name = pinballMachine.nameProperty().getValue();
+        pinballMachineJson.previewImagePath = pinballMachine.previewImagePathProperty().getValue();
 
         // Wandelt alle Highscores um
         pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[pinballMachine.highscoreListProperty().size()];

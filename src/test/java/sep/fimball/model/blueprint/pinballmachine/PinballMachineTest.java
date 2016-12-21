@@ -26,7 +26,7 @@ public class PinballMachineTest
     public void getElementAt()
     {
         // Erstelle PinballMachine mit Mock
-        PinballMachine pinballMachine = new PinballMachine("test", "id", Collections.emptyList(), Mockito.mock(PinballMachineManager.class));
+        PinballMachine pinballMachine = new PinballMachine("test", "id", "", Collections.emptyList(), Mockito.mock(PinballMachineManager.class));
 
         // Füge PlacedElements in den Automaten ein
         PlacedElement placedElementOne = pinballMachine.addElement(BaseElementManager.getInstance().getElement("hinderniss_eckig_4"), new Vector2(-2, -2));
@@ -58,7 +58,7 @@ public class PinballMachineTest
         {
             highscores.add(new Highscore(25, "any"));
         }
-        PinballMachine pinballMachine = new PinballMachine("test", "id", highscores, Mockito.mock(PinballMachineManager.class));
+        PinballMachine pinballMachine = new PinballMachine("test", "id", "", highscores, Mockito.mock(PinballMachineManager.class));
         ReadOnlyListProperty<Highscore> realHighscores = pinballMachine.highscoreListProperty();
 
         // Füge einen schlechten Highscore hinzu

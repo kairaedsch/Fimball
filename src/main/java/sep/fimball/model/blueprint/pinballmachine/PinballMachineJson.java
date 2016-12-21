@@ -11,6 +11,11 @@ public class PinballMachineJson
     public String name;
 
     /**
+     * Speichert den Pfad zum Vorschaubilde des Flipperautomaten.
+     */
+    public String previewImagePath;
+
+    /**
      * Speichert die Liste der Highscores des Automaten.
      */
     public HighscoreJson[] highscores;

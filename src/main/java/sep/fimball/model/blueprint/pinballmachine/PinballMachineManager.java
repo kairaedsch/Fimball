@@ -12,7 +12,6 @@ import sep.fimball.model.blueprint.json.JsonFileManager;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -73,7 +72,7 @@ public class PinballMachineManager
      */
     public PinballMachine createNewMachine()
     {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Collections.emptyList(), this);
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", DataPath.pathToDefaultPreview(), Config.uniqueId(), Collections.emptyList(), this);
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;
@@ -143,62 +142,29 @@ public class PinballMachineManager
     }
 
     /**
-     * Lädt das Vorschaubild des gegebenen Automaten.
-     *
-     * @param pinballMachine Der Automat, dessen Vorschaubild geladen werden soll.
-     * @return Der Pfad zum Vorschaubild des Automaten.
-     */
-    String loadPreviewImage(PinballMachine pinballMachine)
-    {
-        File content[] = new File(DataPath.pathToPinballMachine(pinballMachine.getID())).listFiles();
-
-        if (content == null || content.length < 1)
-        {
-            System.err.println("No preview image found for automat: " + pinballMachine.getID());
-            return DataPath.pathToDefaultPreview();
-        }
-        else
-        {
-            for (File entry : content)
-            {
-                if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
-                {
-                    return entry.getAbsolutePath().replace('\\', '/');
-                }
-            }
-            System.err.println("No preview image found for automat: " + pinballMachine.getID());
-            return DataPath.pathToDefaultPreview();
-        }
-    }
-
-    /**
      * Speichert das gegebene Vorschaubild zu dem gegebenen Automaten.
      *
      * @param pinballMachine Der Automat, dessen Vorschaubild gespeichert werden soll.
      * @param image          Das Vorschaubild, das gespeichert werden soll.
      */
-    void savePreviewImage(PinballMachine pinballMachine, WritableImage image)
+    void savePreviewImage(PinballMachine pinballMachine, WritableImage image, String newPreviewImagePath)
     {
-        Path newPath = Paths.get(DataPath.generatePathToNewImagePreview(pinballMachine.getID(), System.currentTimeMillis()));
-        Path pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
-        File[] directoryContent = pathToMachine.toFile().listFiles();
-
-        if (directoryContent != null)
-        {
-            for (File entry : directoryContent)
-            {
-                if (entry.getName().contains(DataPath.machinePreviewImageFile.replace("/", "")))
-                {
-                    if (!entry.delete())
-                    {
-                        System.err.println("Could not delete file: " + entry.toString());
-                    }
-                }
-            }
-        }
+        Path newPath = Paths.get(newPreviewImagePath);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
         try
         {
+            // Lösche das alte Vorschaubild
+            String oldPreviewImagePath = pinballMachine.previewImagePathProperty().get();
+            if(!oldPreviewImagePath.equals(DataPath.pathToDefaultPreview())) Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
+        }
+        catch (IOException e)
+        {
+            System.err.println("Could not delete old preview image: " + pinballMachine.previewImagePathProperty().get());
+        }
+
+        try
+        {
+            // Speichere das neue
             ImageIO.write(renderedImage, "png", newPath.toFile());
         }
         catch (IOException e)
@@ -220,7 +186,7 @@ public class PinballMachineManager
             // Lösche Dateien
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(loadPreviewImage(pinballMachine)));
+            Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
 
             // Lösche Ordner
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));
