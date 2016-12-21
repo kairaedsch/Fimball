@@ -178,7 +178,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     @Override
     protected void loopUpdate()
     {
-        // TODO - Zu viel unterschiedliche Logik in der gleichen Methode. Hier wird n bisschen was von allem gemacht.
         List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
