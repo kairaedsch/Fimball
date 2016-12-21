@@ -41,7 +41,7 @@ class PinballCanvasDrawer
      * @param drawMode Der Modus mit dem gezeichnet werden soll.
      * @param sprites Die zu zeichnenden Sprites.
      */
-    public PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
+    PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
     {
         this.canvas = canvas;
         this.drawMode = drawMode;
@@ -55,7 +55,7 @@ class PinballCanvasDrawer
      * @param cameraZoom der Zoom der Kamera.
      * @param dragSelectionRect das eventuell vorhandene Auswahlfenster welches es durch "ziehen" erlaubt Elemente auszuwählen.
      */
-    public void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleByPoints> dragSelectionRect)
+    void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleByPoints> dragSelectionRect)
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -179,7 +179,7 @@ class PinballCanvasDrawer
      * @param y Der y-Wert der Position auf dem Canvas.
      * @return Die Position auf dem Grid.
      */
-    public Vector2 canvasPosToGridPos(Vector2 cameraPosition, double cameraZoom, double x, double y)
+    Vector2 canvasPosToGridPos(Vector2 cameraPosition, double cameraZoom, double x, double y)
     {
         Vector2 posToMiddle = new Vector2(x, y).minus(new Vector2(canvas.getWidth(), canvas.getHeight()).scale(0.5));
         return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * cameraZoom)).plus(cameraPosition);

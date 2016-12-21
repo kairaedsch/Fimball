@@ -117,7 +117,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
-     * Aktualisiert das Canvas durch Erneutes zeichnen.
+     * Aktualisiert das Canvas durch erneutes Zeichnen.
      */
     private void redraw()
     {
