@@ -15,6 +15,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.EditorSession;
@@ -278,6 +279,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void goToMainMenu()
     {
+        pinballMachine.unloadElements();
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
