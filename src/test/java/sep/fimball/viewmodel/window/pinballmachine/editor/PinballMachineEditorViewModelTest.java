@@ -30,7 +30,6 @@ import static org.mockito.Mockito.when;
 /**
  * Tests für die Klasse PinballMachineEditorViewModel.
  */
-@Ignore
 public class PinballMachineEditorViewModelTest
 {
     private PinballMachine pinballMachineMock;
