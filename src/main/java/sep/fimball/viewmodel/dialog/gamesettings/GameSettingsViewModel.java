@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.dialog.gamesettings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -23,6 +24,8 @@ public class GameSettingsViewModel extends DialogViewModel
      * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.game.GameElement} zu bedienen, z.B. den rechten Flipperarm.
      */
     private ListProperty<KeybindSubViewModel> keybinds;
+
+    private ListProperty<KeybindSubViewModel> sortedKeybinds;
 
     /**
      * Die aktuell eingestellte Sprache.
@@ -63,6 +66,7 @@ public class GameSettingsViewModel extends DialogViewModel
 
         keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyCode, keyBinding) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
+        sortedKeybinds = new SimpleListProperty<>(new SortedList<>(keybinds, KeybindSubViewModel::compare));
 
         fullscreen = new SimpleBooleanProperty();
         fullscreen.bindBidirectional(settings.fullscreenProperty());
@@ -102,7 +106,7 @@ public class GameSettingsViewModel extends DialogViewModel
      */
     public ReadOnlyListProperty<KeybindSubViewModel> keybindsProperty()
     {
-        return keybinds;
+        return sortedKeybinds;
     }
 
     /**

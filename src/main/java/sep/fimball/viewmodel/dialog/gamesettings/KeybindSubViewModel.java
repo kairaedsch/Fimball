@@ -81,4 +81,9 @@ public class KeybindSubViewModel
     {
         return keyName;
     }
+
+    public static int compare(KeybindSubViewModel subViewModelOne, KeybindSubViewModel subViewModelTwo)
+    {
+        return subViewModelOne.elementNameProperty().get().compareTo(subViewModelTwo.elementNameProperty().get());
+    }
 }
