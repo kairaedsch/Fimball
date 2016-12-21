@@ -56,8 +56,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
         mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty().addListener(((observableValue, s, t1) ->
                 detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()))
         ));
-
-
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachinePreviewSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }

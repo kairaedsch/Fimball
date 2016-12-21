@@ -134,7 +134,7 @@ public class DesignConfig
      */
     private static String backgroundImageCss(String path)
     {
-        return CSS_URL_PREFIX + path + CSS_URL_POSTFIX;
+        return CSS_URL_PREFIX + DataPath.escapePathToUrl(path) + CSS_URL_POSTFIX;
     }
 
     /**
