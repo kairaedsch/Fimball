@@ -20,7 +20,6 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 
-//TODO - Muss an den neuen TiltHandler angepasst werden.
 /**
  * Testet die Klasse TiltHandler.
  */
