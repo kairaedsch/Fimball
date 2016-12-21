@@ -13,7 +13,7 @@
     <VBox styleClass="machineOverviewVBox">
         <HBox styleClass="machineOverviewHeader">
             <Pane minWidth="50" onMouseClicked="#settingsClicked" styleClass="menuButton"/>
-            <Label alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle"
+            <Label fx:id="key_1" alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle"
                    text="!mainmenu.machines.key!"/>
         </HBox>
         <StackPane>
@@ -39,8 +39,8 @@
         <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <HBox>
                 <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" prefHeight="17.0" prefWidth="800.0" styleClass="machineName"
-                       text="Marcs Automat"/>
-                <Button mnemonicParsing="false" onMouseClicked="#exitGame" text="!mainmenu.exit.key!"/>
+                       text="Automat"/>
+                <Button fx:id="key_2" mnemonicParsing="false" onMouseClicked="#exitGame" text="!mainmenu.exit.key!"/>
             </HBox>
 
             <GridPane prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -56,7 +56,7 @@
                     <padding>
                         <Insets left="10" right="10"/>
                     </padding>
-                    <Label alignment="BASELINE_LEFT" maxWidth="Infinity" styleClass="highscoreTitle" text="Highscores" VBox.vgrow="ALWAYS"/>
+                    <Label fx:id="key_3" alignment="BASELINE_LEFT" maxWidth="Infinity" styleClass="highscoreTitle" text="Highscores" VBox.vgrow="ALWAYS"/>
                     <VBox fx:id="highscoreTable" styleClass="highscoreList"/>
                 </VBox>
             </GridPane>

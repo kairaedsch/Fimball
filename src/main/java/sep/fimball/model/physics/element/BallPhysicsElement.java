@@ -34,9 +34,9 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
      * @param rotation           Die Rotation, um die der Ball gedreht sein soll.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public BallPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public BallPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
     {
-        super(physicsHandler, gameElement, position, rotation, basePhysicsElement);
+        super(physicsHandler, gameElement, position, rotation, strengthMultiplier, basePhysicsElement);
 
         this.velocity = new Vector2();
         this.height = 0;

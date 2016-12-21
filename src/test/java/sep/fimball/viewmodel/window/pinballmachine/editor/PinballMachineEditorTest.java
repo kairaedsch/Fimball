@@ -53,13 +53,13 @@ public class PinballMachineEditorTest
         test.addToSelection(baseElement);
         assertThat(test.getSelection().size(), is(1));
 
-        PlacedElement element = new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 0, 0);
+        PlacedElement element = new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 1, 0);
         test.addToSelection(element);
         assertThat(test.getSelection().size(), is(2));
 
         ListProperty<PlacedElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        elements.add(new PlacedElement(getBaseElement("Test 3"), new Vector2(0, 0), 0, 0, 0));
-        elements.add(new PlacedElement(getBaseElement("Test 4"), new Vector2(0, 0), 0, 0, 0));
+        elements.add(new PlacedElement(getBaseElement("Test 3"), new Vector2(0, 0), 0, 1, 0));
+        elements.add(new PlacedElement(getBaseElement("Test 4"), new Vector2(0, 0), 0, 1, 0));
 
         test.addToSelection(elements);
         assertThat(test.getSelection().size(), is(4));
@@ -113,8 +113,8 @@ public class PinballMachineEditorTest
         PinballMachine mockedMachine = mock(PinballMachine.class);
         PinballMachineEditor test = new PinballMachineEditor(mockedMachine);
 
-        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 0, 0));
-        test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 0, 0));
+        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 1, 0));
+        test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 1, 0));
         Vector2 moveVector = new Vector2(1, 1);
         test.moveSelectionBy(moveVector);
         test.moveSelectionBy(moveVector);
@@ -186,8 +186,8 @@ public class PinballMachineEditorTest
 
         PinballMachineEditor test = new PinballMachineEditor(mockedMachine);
 
-        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 0, 0));
-        test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(1, 1), 0, 0, 0));
+        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 1, 0));
+        test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(1, 1), 0, 1, 0));
         test.placeSelection();
 
         ListProperty elements = new SimpleListProperty(test.getElementsAt(new Vector2(1, 1)));

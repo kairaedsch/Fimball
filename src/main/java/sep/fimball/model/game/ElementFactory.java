@@ -41,7 +41,7 @@ public class ElementFactory
                 case NORMAL:
                     GameElement normalGameElement = new GameElement(element, false);
                     PhysicsElement<GameElement> normalPhysicsElement = new PhysicsElement<>(normalGameElement, normalGameElement.positionProperty().get(),
-                            normalGameElement.rotationProperty().get(), normalGameElement.getPlacedElement().getBaseElement().getPhysics());
+                            normalGameElement.rotationProperty().get(), element.multiplierProperty().get(), normalGameElement.getPlacedElement().getBaseElement().getPhysics());
                     gameElements.add(normalGameElement);
                     physicsElements.add(normalPhysicsElement);
                     break;
@@ -53,7 +53,8 @@ public class ElementFactory
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
                     PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement,
-                            plungerGameElement.positionProperty().get(), plungerGameElement.rotationProperty().get(), plungerGameElement.getPlacedElement().getBaseElement().getPhysics());
+                            plungerGameElement.positionProperty().get(), plungerGameElement.rotationProperty().get(), element.multiplierProperty().get(),
+                            plungerGameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(plungerPhysicsElement);
                     gameElements.add(plungerGameElement);
                     physicsElements.add(plungerPhysicsElement);
@@ -64,7 +65,8 @@ public class ElementFactory
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
                     FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
                     FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement,
-                            flipperGameElement.positionProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                            flipperGameElement.positionProperty().get(), element.multiplierProperty().get(),
+                            flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
                     flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElements.add(flipperGameElement);
                     physicsElements.add(leftFlipperPhysicsElement);

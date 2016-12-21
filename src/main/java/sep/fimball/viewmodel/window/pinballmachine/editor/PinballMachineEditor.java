@@ -189,7 +189,7 @@ public class PinballMachineEditor
     {
         // TODO correct points and multiplier in placedElement
         selection.clear();
-        addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 0, 0, 0));
+        addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 0, 1, 0));
     }
 
     /**

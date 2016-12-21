@@ -32,6 +32,6 @@ public class BounceCollision implements CollisionType
         //Berechne die neuen Geschwindigkeit mithilfe von Spiegelung am shortestIntersect Vektor.
         Vector2 newVel = info.getBall().getVelocity().minus(shortestIntersectNorm.scale(2.0 * info.getBall().getVelocity().dot(shortestIntersectNorm)));
         //Skaliere den shortestIntersect welcher eine Normale der Kollisionskante ist mit der strength, addiere dies auf newVel und setze dies als neue Ball Geschwindigkeit.
-        info.getBall().setVelocity(newVel.plus(info.getShortestIntersect().normalized().scale(strength)));
+        info.getBall().setVelocity(newVel.plus(info.getShortestIntersect().normalized().scale(strength * info.getOtherPhysicsElement().getStrengthMultiplier())));
     }
 }

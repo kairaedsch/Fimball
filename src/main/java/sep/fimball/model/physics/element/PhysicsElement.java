@@ -33,6 +33,11 @@ public class PhysicsElement<GameElementT>
     private double rotation;
 
     /**
+     * Der Muliplier für die Stärke der Collider.
+     */
+    private double strengthMultiplier;
+
+    /**
      * Gibt an ob sich Position oder Rotation des physikalischen Elements geändert haben.
      */
     private boolean changed = false;
@@ -58,10 +63,12 @@ public class PhysicsElement<GameElementT>
      * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param rotation           Die Rotation des PhysicsElement.
+     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
     {
+        this.strengthMultiplier = strengthMultiplier;
         // TODO entfernen
         thisIsForDebug.add(new WeakReference<>(this));
 
@@ -70,26 +77,6 @@ public class PhysicsElement<GameElementT>
         this.gameElement = gameElement;
         this.colliders = basePhysicsElement.getColliders();
         this.basePhysicsElement = basePhysicsElement;
-    }
-
-    /**
-     * Gibt das zu diesem PhysicElement gehörende GameElement zurück.
-     *
-     * @return Das zu diesem PhysicElement gehörende GameElement.
-     */
-    public GameElementT getGameElement()
-    {
-        return gameElement;
-    }
-
-    /**
-     * Gibt die Position des PhysicsElements zurück.
-     *
-     * @return Die Position des PhysicsElements.
-     */
-    public Vector2 getPosition()
-    {
-        return position;
     }
 
     /**
@@ -104,16 +91,6 @@ public class PhysicsElement<GameElementT>
     }
 
     /**
-     * Gibt die Rotation des PhysicsElements zurück.
-     *
-     * @return Gibt die Rotation des PhysicsElements zurück.
-     */
-    public double getRotation()
-    {
-        return rotation;
-    }
-
-    /**
      * Setzt die Rotation.
      *
      * @param rotation Die Rotation des PhysicsElements zurück.
@@ -122,16 +99,6 @@ public class PhysicsElement<GameElementT>
     {
         this.rotation = rotation;
         changed = true;
-    }
-
-    /**
-     * Gibt eine Liste der Collider des PhysicsElements zurück.
-     *
-     * @return Eine Liste der Collider des PhysicsElements.
-     */
-    public List<Collider> getColliders()
-    {
-        return Collections.unmodifiableList(colliders);
     }
 
     /**
@@ -162,6 +129,54 @@ public class PhysicsElement<GameElementT>
     }
 
     /**
+     * Setzt das Feld welches angibt ob sich Position oder Rotation des physikalischen Elements geändert haben auf {@code false} zurück.
+     */
+    public void resetChanged()
+    {
+        changed = false;
+    }
+
+    /**
+     * Gibt die Rotation des PhysicsElements zurück.
+     *
+     * @return Gibt die Rotation des PhysicsElements zurück.
+     */
+    public double getRotation()
+    {
+        return rotation;
+    }
+
+    /**
+     * Gibt eine Liste der Collider des PhysicsElements zurück.
+     *
+     * @return Eine Liste der Collider des PhysicsElements.
+     */
+    public List<Collider> getColliders()
+    {
+        return Collections.unmodifiableList(colliders);
+    }
+
+    /**
+     * Gibt das zu diesem PhysicElement gehörende GameElement zurück.
+     *
+     * @return Das zu diesem PhysicElement gehörende GameElement.
+     */
+    public GameElementT getGameElement()
+    {
+        return gameElement;
+    }
+
+    /**
+     * Gibt die Position des PhysicsElements zurück.
+     *
+     * @return Die Position des PhysicsElements.
+     */
+    public Vector2 getPosition()
+    {
+        return position;
+    }
+
+    /**
      * Gibt zurück ob sich Position oder Rotation des physikalischen Elements geändert haben.
      *
      * @return Ob sich Position oder Rotation des physikalischen Elements geändert haben.
@@ -172,10 +187,12 @@ public class PhysicsElement<GameElementT>
     }
 
     /**
-     * Setzt das Feld welches angibt ob sich Position oder Rotation des physikalischen Elements geändert haben auf {@code false} zurück.
+     * Gibt den Muliplier für die Stärke der Collider zurück.
+     *
+     * @return Den Muliplier für die Stärke der Collider.
      */
-    public void resetChanged()
+    public double getStrengthMultiplier()
     {
-        changed = false;
+        return strengthMultiplier;
     }
 }

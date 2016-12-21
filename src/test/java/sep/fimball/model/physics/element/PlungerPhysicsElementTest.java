@@ -16,7 +16,7 @@ public class PlungerPhysicsElementTest
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
-        PlungerPhysicsElement plungerPhysicsElement = new PlungerPhysicsElement<>(null, null, null, 0, basePhysicsElement);
+        PlungerPhysicsElement plungerPhysicsElement = new PlungerPhysicsElement<>(null, null, null, 0, 1, basePhysicsElement);
 
         plungerPhysicsElement.applyModify(() -> 100.0);
         assertThat(plungerPhysicsElement.getStrength(), is(100.0));

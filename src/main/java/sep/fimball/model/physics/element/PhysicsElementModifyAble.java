@@ -23,11 +23,12 @@ public abstract class PhysicsElementModifyAble<GameElementT, ModifyT extends Mod
      * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param rotation           Die Rotation des PhysicsElement.
+     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public PhysicsElementModifyAble(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public PhysicsElementModifyAble(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
     {
-        super(gameElement, position, rotation, basePhysicsElement);
+        super(gameElement, position, rotation, strengthMultiplier, basePhysicsElement);
         this.physicsHandler = physicsHandler;
     }
 

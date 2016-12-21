@@ -22,7 +22,7 @@ public class BallPhysicsElementTest
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         Mockito.when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
 
-        return new BallPhysicsElement<>(null, null, new Vector2(), 0, basePhysicsElement);
+        return new BallPhysicsElement<>(null, null, new Vector2(), 0, 1, basePhysicsElement);
     }
 
     @Test

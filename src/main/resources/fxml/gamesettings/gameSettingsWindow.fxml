@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" styleClass="dialogTitle" stylesheets="@../../styles/style.css" text="!gamesettings.key!" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <opaqueInsets>
@@ -14,14 +14,14 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                  AnchorPane.topAnchor="0.0">
-            <Tab closable="false" text="!gamesettings.general.key!">
+            <Tab  fx:id="key_1" closable="false" text="!gamesettings.general.key!">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <ScrollPane fitToHeight="true" fitToWidth="true" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <AnchorPane styleClass="dialogBackground">
                             <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                <Label text="!gamesettings.general.language.key!">
+                                <Label fx:id="key_2" text="!gamesettings.general.language.key!">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
@@ -34,10 +34,10 @@
                                     <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                     </rowConstraints>
-                                    <Label text="!gamesettings.general.language.select.key!"/>
+                                    <Label fx:id="key_3" text="!gamesettings.general.language.select.key!"/>
                                     <ComboBox fx:id="language" prefWidth="150.0" styleClass="dialogButton" GridPane.columnIndex="1"/>
                                 </GridPane>
-                                <Label text="!gamesettings.general.keybinding.key!">
+                                <Label fx:id="key_4" text="!gamesettings.general.keybinding.key!">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
@@ -47,7 +47,7 @@
                                 </Label>
                                 <VBox fx:id="keyBinding">
                                 </VBox>
-                                <Label text="!gamesettings.general.display.key!">
+                                <Label fx:id="key_5" text="!gamesettings.general.display.key!">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
@@ -63,11 +63,11 @@
                                     <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                     </rowConstraints>
-                                    <Label text="!gamesettings.general.display.fullscreen.key!"/>
+                                    <Label fx:id="key_6" text="!gamesettings.general.display.fullscreen.key!"/>
                                     <CheckBox fx:id="fullscreen" mnemonicParsing="false"
                                               text="§gamesettings.general.display.fullscreen.tip.key§" GridPane.columnIndex="1">
                                         <tooltip>
-                                            <Tooltip text="!gamesettings.general.display.fullscreen.tip.key!"/>
+                                            <Tooltip fx:id="key_7" text="!gamesettings.general.display.fullscreen.tip.key!"/>
                                         </tooltip>
                                     </CheckBox>
                                 </GridPane>
@@ -76,11 +76,11 @@
                     </ScrollPane>
                 </AnchorPane>
             </Tab>
-            <Tab closable="false" text="!gamesettings.audio.key!">
+            <Tab fx:id="key_8" closable="false" text="!gamesettings.audio.key!">
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dialogBackground">
                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
                           AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                        <Label text="!gamesettings.audio.volume.key!">
+                        <Label fx:id="key_9" text="!gamesettings.audio.volume.key!">
                             <font>
                                 <Font name="System Bold" size="14.0"/>
                             </font>
@@ -98,18 +98,18 @@
                             </rowConstraints>
                             <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1">
                                 <tooltip>
-                                    <Tooltip text="!gamesettings.audio.volume.master.tip.key!"/>
+                                    <Tooltip fx:id="key_10" text="!gamesettings.audio.volume.master.tip.key!"/>
                                 </tooltip>
                             </Slider>
-                            <Label text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="2"/>
+                            <Label fx:id="key_11" text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="2"/>
                             <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
                             <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                 <tooltip>
-                                    <Tooltip text="!gamesettings.audio.volume.music.tip.key!"/>
+                                    <Tooltip fx:id="key_13" text="!gamesettings.audio.volume.music.tip.key!"/>
                                 </tooltip>
                             </Slider>
-                            <Label text="!gamesettings.audio.volume.music.key!" GridPane.rowIndex="1"/>
-                            <Label text="!gamesettings.audio.volume.master.key!"/>
+                            <Label fx:id="key_14" text="!gamesettings.audio.volume.music.key!" GridPane.rowIndex="1"/>
+                            <Label fx:id="key_15" text="!gamesettings.audio.volume.master.key!"/>
                             <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                 <tooltip>
                                     <Tooltip text="!gamesettings.audio.volume.sfx.tip.key!"/>
@@ -122,7 +122,7 @@
                 </AnchorPane>
             </Tab>
         </TabPane>
-        <Button defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gamesettings.continue.key!"
+        <Button fx:id="key_16" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gamesettings.continue.key!"
                 AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0"/>
     </AnchorPane>
 </TitledPane>

@@ -33,6 +33,6 @@ public class AccelerationCollision implements CollisionType
          */
         Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getOtherPhysicsElement().getRotation())).scale(PhysicsConfig.TICK_RATE_SEC);
         //Addiere die zusätzliche Geschwindigkeit auf die Geschwindigkeit des Balls
-        info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp));
+        info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp.scale(info.getOtherPhysicsElement().getStrengthMultiplier())));
     }
 }

@@ -28,7 +28,7 @@ public class PhysicsElementTest
         colliders.add(colliderA);
         colliders.add(colliderB);
         when(basePhysicsElement.getColliders()).thenReturn(colliders);
-        PhysicsElement<Object> physicsElement = new PhysicsElement<>(null, null, 0, basePhysicsElement);
+        PhysicsElement<Object> physicsElement = new PhysicsElement<>(null, null, 0, 1, basePhysicsElement);
 
         List<CollisionEventArgs<Object>> eventArgsList = new ArrayList<>();
         BallPhysicsElement<Object> ballPhysicsElement = Mockito.mock(BallPhysicsElement.class);
@@ -55,7 +55,7 @@ public class PhysicsElementTest
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
-        PhysicsElement physicsElement = new PhysicsElement<>(null, null, 0, basePhysicsElement);
+        PhysicsElement physicsElement = new PhysicsElement<>(null, null, 0, 1, basePhysicsElement);
 
         physicsElement.setPosition(new Vector2(1, 1));
         assertThat(physicsElement.hasChanged(), is(true));

@@ -57,7 +57,7 @@ public class GameSessionTest
         // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
-        PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 0, 0);
+        PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0);
 
         ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementList.add(ball);
@@ -178,7 +178,7 @@ public class GameSessionTest
         // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
         PinballMachine pinballMachine = mock(PinballMachine.class);
-        PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 0, 0);
+        PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0);
 
         ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);

@@ -16,7 +16,7 @@ public class FlipperPhysicsElementTest
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
-        return new FlipperPhysicsElement<>(null, null, null, basePhysicsElement, isLeft);
+        return new FlipperPhysicsElement<>(null, null, null, 1, basePhysicsElement, isLeft);
     }
 
     @Test

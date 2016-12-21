@@ -125,7 +125,7 @@ public class PinballMachineSettingsViewModelTest
         StringProperty machineName = new SimpleStringProperty("Test");
         ListProperty<PlacedElement> elements = new SimpleListProperty<>();
         elements.set(FXCollections.observableArrayList());
-        elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 0, 0));
+        elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0));
         when(pinballMachine.elementsProperty()).thenReturn(elements);
         when(pinballMachine.nameProperty()).thenReturn(machineName);
         doAnswer(invocationOnMock ->

@@ -5,19 +5,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+<TitledPane fx:id="key_0"  animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" styleClass="dialogTitle" stylesheets="@../../styles/style.css" text="!gameover.key!" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dialogBackground">
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Label text="!gameover.highscores.key!">
+            <Label fx:id="key_1"  text="!gameover.highscores.key!">
                 <font>
                     <Font name="System Bold" size="18.0"/>
                 </font>
             </Label>
             <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0"/>
-            <Label text="!gameover.playerscores.key!">
+            <Label fx:id="key_2" text="!gameover.playerscores.key!">
                 <font>
                     <Font name="System Bold" size="18.0"/>
                 </font>
@@ -27,9 +27,9 @@
             </Label>
             <VBox fx:id="playerScores" prefHeight="200.0" prefWidth="100.0"/>
         </VBox>
-        <Button defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!"
+        <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!"
                 AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
-        <Button mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!"
+        <Button fx:id="key_4" mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!"
                 AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
     </AnchorPane>
 </TitledPane>

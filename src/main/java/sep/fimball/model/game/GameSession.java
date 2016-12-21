@@ -142,7 +142,8 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         }
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
-        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(),
+                gameElement.rotationProperty(), gameElement.heightProperty()}));
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
 
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);
@@ -160,7 +161,9 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         }
 
         world = new World(elements);
-        BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
+        BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(),
+                gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().multiplierProperty().get(),
+                gameBall.get().getPlacedElement().getBaseElement().getPhysics());
         gameBall.get().setPhysicsElement(ballPhysicsElement);
 
         physicsElements.add(ballPhysicsElement);

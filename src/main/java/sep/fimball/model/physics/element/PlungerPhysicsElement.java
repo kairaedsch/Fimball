@@ -24,9 +24,9 @@ public class PlungerPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      * @param rotation           Die Rotation des PhysicsElement.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
-    public PlungerPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
+    public PlungerPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
     {
-        super(physicsHandler, gameElement, position, rotation, basePhysicsElement);
+        super(physicsHandler, gameElement, position, rotation, strengthMultiplier, basePhysicsElement);
         strength = 0;
     }
 

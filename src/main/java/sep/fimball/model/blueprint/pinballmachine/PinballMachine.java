@@ -249,7 +249,7 @@ public class PinballMachine
     {
         checkElementsLoaded();
 
-        PlacedElement placedElement = new PlacedElement(baseElement, position, 0, 0, 0);
+        PlacedElement placedElement = new PlacedElement(baseElement, position, 0, 1, 0);
         addElement(placedElement);
         return placedElement;
     }

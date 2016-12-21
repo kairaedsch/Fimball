@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<TitledPane collapsible="false" maxWidth="300.0" text="!playername.title.key!"
+<TitledPane fx:id="key_0" collapsible="false" maxWidth="300.0" text="!playername.title.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.playername.PlayerNameView">
     <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -12,7 +12,7 @@
               prefHeight="400.0" prefWidth="600.0" spacing="10.0"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
               AnchorPane.topAnchor="0.0">
-            <Label text="!playername.names.key!">
+            <Label fx:id="key_1" text="!playername.names.key!">
                 <font>
                     <Font name="System Bold" size="14.0"/>
                 </font>
@@ -24,13 +24,13 @@
                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             </VBox>
-            <Button mnemonicParsing="false" onAction="#addPlayerClicked"
+            <Button fx:id="key_2" mnemonicParsing="false" onAction="#addPlayerClicked"
                     text="!playername.add.key!"/>
         </VBox>
-        <Button defaultButton="true" mnemonicParsing="false" onMouseClicked="#okClicked"
+        <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onMouseClicked="#okClicked"
                 text="!playername.continue.key!" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.rightAnchor="0.0"/>
-        <Button cancelButton="true" mnemonicParsing="false" onAction="#abortClicked"
+        <Button fx:id="key_4" cancelButton="true" mnemonicParsing="false" onAction="#abortClicked"
                 text="!playername.exit.key!" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0"/>
     </AnchorPane>

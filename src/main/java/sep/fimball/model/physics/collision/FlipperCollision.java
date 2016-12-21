@@ -37,7 +37,7 @@ public class FlipperCollision extends NormalCollision
             //Berechne die Kraft die der Flipper auf den Ball überträgt mithilfe der linksseitigen Normale der Achse des Flippers.
             Vector2 addForce = flipperAxis.normal().scale(flipper.getAngularVelocity() * -0.01).scale(distance).scale(1 - angle);
             //Addiere die berechnete Kraft auf die Geschwindigkeit des Balls.
-            info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
+            info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce.scale(info.getOtherPhysicsElement().getStrengthMultiplier())));
         }
     }
 

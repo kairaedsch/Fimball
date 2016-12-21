@@ -42,9 +42,9 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      * @param isLeft             Gibt an , ob er rechte oder linke Flipperarm gemeint ist.
      */
-    public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, BasePhysicsElement basePhysicsElement, boolean isLeft)
+    public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double strengthMultiplier, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MIN_ROTATION : -FLIPPER_MIN_ROTATION, basePhysicsElement);
+        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MIN_ROTATION : -FLIPPER_MIN_ROTATION, strengthMultiplier, basePhysicsElement);
         this.isLeft = isLeft;
 
         if (isLeft)
@@ -88,8 +88,8 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     private void rotate(AngularDirection newAngularDirection)
     {
         double newAngularVelocity = getAngularVelocity(newAngularDirection);
-        if(newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
-        if(newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
+        if (newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
+        if (newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
     }
 
     @Override

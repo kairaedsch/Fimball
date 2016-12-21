@@ -22,7 +22,7 @@ public class PlungerCollision extends NormalCollision
             //Skaliere diese Achse mit dem Stärke Wert des Plungers welcher je nachdem wie lange der Nutzer ihn geladen hat größer ist.
             Vector2 addForce = plungerAxis.scale(plunger.getStrength());
             //Addiere die berechnete Geschwindigkeit auf die Geschwindigkeit des Balls.
-            info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce));
+            info.getBall().setVelocity(info.getBall().getVelocity().plus(addForce.scale(info.getOtherPhysicsElement().getStrengthMultiplier())));
         }
     }
 
