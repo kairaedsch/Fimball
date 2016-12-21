@@ -20,11 +20,10 @@ import java.util.Collections;
  */
 public class GameSettingsViewModel extends DialogViewModel
 {
+
     /**
      * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.game.GameElement} zu bedienen, z.B. den rechten Flipperarm.
      */
-    private ListProperty<KeybindSubViewModel> keybinds;
-
     private ListProperty<KeybindSubViewModel> sortedKeybinds;
 
     /**
@@ -64,7 +63,7 @@ public class GameSettingsViewModel extends DialogViewModel
         language = new SimpleObjectProperty<>();
         language.bindBidirectional(settings.languageProperty());
 
-        keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListProperty<KeybindSubViewModel> keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyCode, keyBinding) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
         sortedKeybinds = new SimpleListProperty<>(new SortedList<>(keybinds, KeybindSubViewModel::compare));
 
