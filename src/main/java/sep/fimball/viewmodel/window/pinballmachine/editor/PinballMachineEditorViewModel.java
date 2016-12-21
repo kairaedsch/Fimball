@@ -331,49 +331,47 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
-        if (mouseEvent.getButton() != MouseButton.PRIMARY)
+        if (mouseEvent.getButton() == MouseButton.PRIMARY)
         {
-            return;
-        }
-
-        List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
-        if (!elements.isEmpty())
-        {
-            if (mouseEvent.isControlDown())
+            List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
+            if (!elements.isEmpty())
             {
-                if (pinballMachineEditor.getSelection().contains(elements.get(0)))
+                if (mouseEvent.isControlDown())
                 {
-                    pinballMachineEditor.removeFromSelection(elements.get(0));
+                    if (pinballMachineEditor.getSelection().contains(elements.get(0)))
+                    {
+                        pinballMachineEditor.removeFromSelection(elements.get(0));
+                    }
+                    else
+                    {
+                        pinballMachineEditor.addToSelection(elements.get(0));
+                        selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
+                    }
                 }
                 else
                 {
-                    pinballMachineEditor.addToSelection(elements.get(0));
-                    selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
+                    if (pinballMachineEditor.getSelection().contains(elements.get(0)))
+                    {
+                        mouseMode.setValue(MouseMode.PLACING);
+                    }
+                    else
+                    {
+                        mouseMode.setValue(MouseMode.PLACING);
+                        pinballMachineEditor.clearSelection();
+                        pinballMachineEditor.addToSelection(elements.get(0));
+                        selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
+                    }
                 }
             }
             else
             {
-                if (pinballMachineEditor.getSelection().contains(elements.get(0)))
+                if (!mouseEvent.isControlDown())
                 {
-                    mouseMode.setValue(MouseMode.PLACING);
-                }
-                else
-                {
-                    mouseMode.setValue(MouseMode.PLACING);
                     pinballMachineEditor.clearSelection();
-                    pinballMachineEditor.addToSelection(elements.get(0));
-                    selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
                 }
+                mouseMode.setValue(MouseMode.SELECTING);
+                selectionRect = Optional.of(new RectangleDoubleByPoints(gridPos, gridPos));
             }
-        }
-        else
-        {
-            if (!mouseEvent.isControlDown())
-            {
-                pinballMachineEditor.clearSelection();
-            }
-            mouseMode.setValue(MouseMode.SELECTING);
-            selectionRect = Optional.of(new RectangleDoubleByPoints(gridPos, gridPos));
         }
     }
 
