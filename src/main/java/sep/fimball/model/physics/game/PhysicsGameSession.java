@@ -10,11 +10,9 @@ import java.util.List;
 public interface PhysicsGameSession<GameElementT>
 {
     /**
-     * Setzt den aktuellen Ball Zustand.
-     *
-     * @param isBallLost Gibt an, ob der Ball verloren ist.
+     * Lässt den Ball als verloren gelten.
      */
-    void setBallLost(boolean isBallLost);
+    void setBallLost();
 
     /**
      * Überreicht die verschiedenen Events, die in der Physik passiert sind, an die GameSession weiter.

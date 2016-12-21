@@ -32,16 +32,16 @@ public class World implements HandlerWorld
     }
 
     /**
-     * Synchronisiert alle GameElements mit ihren Repräsentationen in der Physik.
+     * Synchronisiert GameElements mit ihren Repräsentationen in der Physik.
      *
-     * @param elementEventArgsList Liste der Änderungen für GameElements.
+     * @param elementEventArgsLists Listen der Änderungen für GameElements.
      */
-    public void synchronizeWithPhysics(List<ElementEventArgs<GameElement>> elementEventArgsList)
+    public void synchronizeWithPhysics(List<List<ElementEventArgs<GameElement>>> elementEventArgsLists)
     {
-        for (ElementEventArgs<GameElement> elementEventArgs : elementEventArgsList)
-        {
-            elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs);
-        }
+        elementEventArgsLists.forEach(elementEventArgsList ->
+                elementEventArgsList.forEach(elementEventArgs ->
+                        elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs)));
+
     }
 
     /**

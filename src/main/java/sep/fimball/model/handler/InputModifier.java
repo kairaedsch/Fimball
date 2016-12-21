@@ -1,9 +1,14 @@
 package sep.fimball.model.handler;
 
 /**
- * Created by alexcekay on 12/20/16.
+ * Ein InputModifier steuert den UserInput.
  */
 public interface InputModifier
 {
+    /**
+     * Aktiviert oder deaktiviert UserInput.
+     *
+     * @param keyEventsActivated Falls false, wird kein UserInput mehr weitergegeben.
+     */
     void setKeyEventsActivated(boolean keyEventsActivated);
 }

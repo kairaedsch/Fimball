@@ -39,7 +39,7 @@ public interface HandlerGameSession
     ReadOnlyObjectProperty<? extends HandlerBallGameElement> gameBallProperty();
 
     /**
-     * Aktiviert die Tilt-Funktion.
+     * Lässt den Ball als verloren gelten.
      */
-    void setBallLost(boolean isBallLost);
+    void setBallLost();
 }

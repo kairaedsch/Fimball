@@ -1,27 +1,19 @@
 package sep.fimball.model.game;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.Duration;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
-import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.BallPhysicsElement;
-import sep.fimball.model.physics.element.FlipperPhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
-import sep.fimball.model.physics.element.PlungerPhysicsElement;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
@@ -129,6 +121,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      * @param pinballMachine    Der Flipperautomat, der in der GameSession gespielt wird.
      * @param playerNames       Die Namen der Spieler.
      * @param startedFromEditor Gibt an, ob das Spiel aus dem Editor gestartet wurde.
+     * @param handlerManager    HandlerManager aller Handler dieser gameSession.
      */
     public GameSession(PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor, HandlerManager handlerManager)
     {
@@ -196,10 +189,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
             this.elementEventArgsList = new LinkedList<>();
         }
 
-        for (List<ElementEventArgs<GameElement>> elementEventArgsList : localElementEventArgsList)
-        {
-            world.synchronizeWithPhysics(elementEventArgsList);
-        }
+        world.synchronizeWithPhysics(localElementEventArgsList);
 
         localCollisionEventArgsList.forEach(collisionEventArgsList ->
                 collisionEventArgsList.forEach(collisionEventArgs ->
@@ -329,16 +319,11 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         }
     }
 
-    /**
-     * Lässt den Ball als verloren gelten.
-     *
-     * @param isBallLost Gibt an, ob der Ball verloren ist.
-     */
-    public void setBallLost(boolean isBallLost)
+    public void setBallLost()
     {
         synchronized (physicMonitor)
         {
-            this.isBallLost = isBallLost;
+            this.isBallLost = true;
         }
     }
 
@@ -389,7 +374,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         return startedFromEditor;
     }
-
 
     // TODO hack to fix test (wtf mockito)
     @Override

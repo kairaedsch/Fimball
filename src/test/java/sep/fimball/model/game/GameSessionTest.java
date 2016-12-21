@@ -92,7 +92,7 @@ public class GameSessionTest
 
         // künstliche Änderungen am Spielfluss hinzufügen
         gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
-        gameSession.setBallLost(true);
+        gameSession.setBallLost();
 
         // Anwenden der Änderungen
         gameSession.loopUpdate();

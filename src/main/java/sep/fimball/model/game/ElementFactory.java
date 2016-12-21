@@ -1,6 +1,5 @@
 package sep.fimball.model.game;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -16,10 +15,18 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by alexcekay on 12/20/16.
+ * Die ElementFactory Kümmerst sich um die Erstellung von GameElements und deren PhysicElements.
  */
 public class ElementFactory
 {
+    /**
+     * Erstellt GameElements und deren PhysicElements aus einer Liste von PlacedElements.
+     *
+     * @param placedElements Die Elemente aus deren GameElemente und PhysicsElemente erstellt werden.
+     * @param physicsHandler Der PhysicsHandler für die neu erstellten PhysicsElementen.
+     * @param handlerManager Der handlerManager der GameSession von den neu erstellten GameElementen.
+     * @return Ein GeneratedElements, welches alle neu erstellten Game- und PhysicsElemente enthält.
+     */
     public static GeneratedElements generateElements(ReadOnlyListProperty<PlacedElement> placedElements, PhysicsHandler<GameElement> physicsHandler, HandlerManager handlerManager)
     {
         BallGameElement ballGameElement = null;
@@ -73,12 +80,33 @@ public class ElementFactory
         return new GeneratedElements(gameElements, physicsElements, Optional.ofNullable(ballGameElement));
     }
 
+    /**
+     * Speichert GameElemente und PhysicsElemente sowie ein Optionales BallGameElement.
+     */
     public static class GeneratedElements
     {
+        /**
+         * Die Liste der GameElemente.
+         */
         private List<GameElement> gameElements;
+
+        /**
+         * Die Liste der PhysicsElemente.
+         */
         private List<PhysicsElement<GameElement>> physicsElements;
+
+        /**
+         * Das Optionale BallGameElement.
+         */
         private Optional<BallGameElement> ballGameElement;
 
+        /**
+         * Erstellt ein neues GeneratedElements.
+         *
+         * @param gameElement     Die Liste der GameElemente.
+         * @param physicsElement  Die Liste der PhysicsElemente.
+         * @param ballGameElement Das Optionale BallGameElement.
+         */
         public GeneratedElements(List<GameElement> gameElement, List<PhysicsElement<GameElement>> physicsElement, Optional<BallGameElement> ballGameElement)
         {
             this.gameElements = gameElement;
@@ -86,16 +114,31 @@ public class ElementFactory
             this.ballGameElement = ballGameElement;
         }
 
+        /**
+         * Gibt die Liste der GameElemente zurück.
+         *
+         * @return Die Liste der GameElemente.
+         */
         public List<GameElement> getGameElements()
         {
             return gameElements;
         }
 
+        /**
+         * Gibt die Liste der PhysicsElemente zurück.
+         *
+         * @return Die Liste der PhysicsElemente.
+         */
         public List<PhysicsElement<GameElement>> getPhysicsElements()
         {
             return physicsElements;
         }
 
+        /**
+         * Gibt das Optionale BallGameElement zurück.
+         *
+         * @return Das Optionale BallGameElement.
+         */
         public Optional<BallGameElement> getBallGameElement()
         {
             return ballGameElement;

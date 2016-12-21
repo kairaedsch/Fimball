@@ -20,6 +20,9 @@ public class TiltHandler implements UserHandler
      */
     private HandlerGameSession handlerGameSession;
 
+    /**
+     * Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
+     */
     private InputModifier inputModifier;
 
     /**
@@ -41,6 +44,7 @@ public class TiltHandler implements UserHandler
      * Erzeugt einen neuen TiltHandler.
      *
      * @param handlerGameSession Die zugehörige HandlerGameSession.
+     * @param inputModifier Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
      */
     TiltHandler(HandlerGameSession handlerGameSession, InputModifier inputModifier)
     {
@@ -70,11 +74,14 @@ public class TiltHandler implements UserHandler
         }
     }
 
+    /**
+     * Löst den Tilt aus.
+     */
     private void activateTilt()
     {
         inputModifier.setKeyEventsActivated(false);
         Timeline timeline = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.setBallLost(true)));
+        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.setBallLost()));
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
         timeline.statusProperty().addListener((observable, oldValue, newValue) ->

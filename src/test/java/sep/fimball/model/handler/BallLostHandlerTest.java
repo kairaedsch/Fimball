@@ -98,7 +98,7 @@ public class BallLostHandlerTest
             }
 
             @Override
-            public void setBallLost(boolean isBallLost)
+            public void setBallLost()
             {
 
             }

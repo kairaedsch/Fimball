@@ -119,7 +119,7 @@ public class TiltHandlerTest
             }
 
             @Override
-            public void setBallLost(boolean isBallLost)
+            public void setBallLost()
             {
 
             }

@@ -135,6 +135,12 @@ public class DataPath
      */
     private final static String defaultPreview = "/defaultPreview.png";
 
+    /**
+     * Wandelt den Pfad in ein URL Format um, welcher von javaFX gebraucht wird.
+     *
+     * @param path Der ursprüngliche Pfad.
+     * @return Der umgewandelte Pfad.
+     */
     public static String escapePathToUrl(String path)
     {
         try
@@ -233,7 +239,7 @@ public class DataPath
      * Gibt den Pfad zum neuen Preview Bild des Flipperautomaten zurück.
      *
      * @param pinballMachineId Id des Flipperautomaten.
-     * @param timestamp Ein Timestamp der angibt wann der Flipperautomaten erstellt wurde.
+     * @param timestamp        Ein Timestamp der angibt wann der Flipperautomaten erstellt wurde.
      * @return Der Pfad zum neuen Preview Bild des Flipperautomaten.
      */
     public static String generatePathToNewImagePreview(String pinballMachineId, long timestamp)

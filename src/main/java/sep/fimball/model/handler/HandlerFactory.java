@@ -15,7 +15,8 @@ public class HandlerFactory
     /**
      * Generiert eine Liste aller Handler für die gegebene GameSession und gibt diese zurück.
      *
-     * @param gameSession Die GameSession, für die die Handler generiert werden sollen.
+     * @param gameSession    Die GameSession, für die die Handler generiert werden sollen.
+     * @param handlerManager Der HandlerManager der übergebenen GameSession.
      * @return Eine Liste aller Handler.
      */
     public static List<Handler> generateAllHandlers(HandlerGameSession gameSession, HandlerManager handlerManager)

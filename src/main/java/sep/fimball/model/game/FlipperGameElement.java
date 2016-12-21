@@ -35,6 +35,11 @@ public class FlipperGameElement extends GameElement implements UserHandler
         this.left = left;
     }
 
+    /**
+     * Setzt das FlipperPhysicsElement dieses FlipperGameElements.
+     *
+     * @param flipperPhysicsElement Das FlipperPhysicsElement dieses FlipperGameElements.
+     */
     public void setPhysicsElement(FlipperPhysicsElement<GameElement> flipperPhysicsElement)
     {
         this.flipperPhysicsElement = flipperPhysicsElement;
@@ -43,7 +48,7 @@ public class FlipperGameElement extends GameElement implements UserHandler
     @Override
     public void activateUserHandler(KeyEventArgs keyEventArgs)
     {
-        if((left && keyEventArgs.getBinding() == KeyBinding.LEFT_FLIPPER) || (!left && keyEventArgs.getBinding() == KeyBinding.RIGHT_FLIPPER))
+        if ((left && keyEventArgs.getBinding() == KeyBinding.LEFT_FLIPPER) || (!left && keyEventArgs.getBinding() == KeyBinding.RIGHT_FLIPPER))
         {
             boolean rotateUp = keyEventArgs.getState() != KeyEventArgs.KeyChangedToState.DOWN;
             flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.DOWN : AngularDirection.UP);

@@ -142,6 +142,11 @@ public class PinballMachine
         return new RectangleDouble(origin.minus(new Vector2(2, 2)), width + 4, height + 4);
     }
 
+    /**
+     * Gibt die unterste Position das Automaten zurück.
+     *
+     * @return Die unterste Position das Automaten.
+     */
     public double getMaximumYPosition()
     {
         RectangleDouble machineBox = getBoundingBox();

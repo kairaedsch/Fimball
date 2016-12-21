@@ -179,7 +179,7 @@ public class PhysicsHandler<GameElementT>
                 }
 
                 if (localBallLost)
-                    gameSession.setBallLost(true);
+                    gameSession.setBallLost();
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };

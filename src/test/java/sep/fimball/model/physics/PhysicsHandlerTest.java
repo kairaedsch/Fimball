@@ -168,7 +168,7 @@ public class PhysicsHandlerTest
                 }
             }
             return null;
-        }).when(mockedGameSession).setBallLost(anyBoolean());
+        }).when(mockedGameSession).setBallLost();
         return mockedGameSession;
     }
 

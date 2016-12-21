@@ -104,6 +104,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private EditorSession editorSession;
 
+    /**
+     * Gibt an, ob aktuell die Umschautaste gedrückt wird.
+     */
     private boolean moveModifier = false;
 
     /**
@@ -112,12 +115,18 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private boolean mouseOnCanvas = false;
 
     /**
-     * Das Auswahl-Rechteck.
+     * Das Auswahl-Rechteck, falls vorhanden.
      */
     private Optional<RectangleDoubleByPoints> selectionRect;
 
+    /**
+     * Der obere Bildpfad des aktuell ausgewählten Elements.
+     */
     private ObjectProperty<Optional<String>> topBackgroundPath;
 
+    /**
+     * Der untere Bildpfad des aktuell ausgewählten Elements.
+     */
     private ObjectProperty<Optional<String>> botBackgroundPath;
 
     /**
@@ -244,7 +253,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void startPinballMachine()
     {
         editorSession.stopUpdateLoop();
-        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{""}, true)));
+        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
     }
 
     /**
@@ -372,7 +381,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         if (mouseEvent.getButton() == MouseButton.PRIMARY)
         {
-            if(mouseOnCanvas)
+            if (mouseOnCanvas)
             {
                 if (mouseMode.get() == MouseMode.PLACING)
                 {
@@ -558,11 +567,21 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return pinballMachineEditor.getSelection();
     }
 
+    /**
+     * Gibt den oberen Bildpfad des aktuell ausgewählten Elements zurück.
+     *
+     * @return Der obere Bildpfad des aktuell ausgewählten Elements.
+     */
     public ReadOnlyObjectProperty<Optional<String>> getTopBackgroundPath()
     {
         return topBackgroundPath;
     }
 
+    /**
+     * Gibt den unteren Bildpfad des aktuell ausgewählten Elements zurück.
+     *
+     * @return Der untere Bildpfad des aktuell ausgewählten Elements.
+     */
     public ReadOnlyObjectProperty<Optional<String>> getBotBackgroundPath()
     {
         return botBackgroundPath;
@@ -578,6 +597,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return availableElementSelected;
     }
 
+    /**
+     * Gibt das Auswahl-Rechteck, falls vorhanden, zurück.
+     *
+     * @return Das Auswahl-Rechteck, falls vorhanden.
+     */
     public Optional<RectangleDoubleByPoints> selectionRectProperty()
     {
         return selectionRect;
