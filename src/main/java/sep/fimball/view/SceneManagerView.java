@@ -102,6 +102,7 @@ public class SceneManagerView
         File imageFile = new File(DataPath.pathToLogo());
         Image loadedImage = new Image(imageFile.toURI().toString(), false);
         stage.getIcons().add(loadedImage);
+        stage.titleProperty().set("FIMBall");
 
         // Zeigt die Stage dem Benutzer
         stage.show();
