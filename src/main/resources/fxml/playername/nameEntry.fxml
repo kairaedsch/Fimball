@@ -17,7 +17,7 @@
     <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClicked" text="X" GridPane.columnIndex="1"
             GridPane.rowIndex="0">
         <tooltip>
-            <Tooltip fx:id="deleteButtonTip" text="!playername.remove.tip.key!"/>
+            <Tooltip text="!playername.remove.tip.key!"/>
         </tooltip>
     </Button>
 </GridPane>

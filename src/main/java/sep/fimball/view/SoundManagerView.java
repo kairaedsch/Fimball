@@ -4,7 +4,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import sep.fimball.model.media.Sound;
@@ -77,17 +76,7 @@ public class SoundManagerView
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
-            Optional<MediaPlayer> mediaPlayer = Optional.empty();
-            try
-            {
-                mediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
-            }
-            catch (MediaException e)
-            {
-                System.err.println("MediaPlayer not loaded");
-            }
-
-            final Optional<MediaPlayer> newMediaPlayer = mediaPlayer;
+            Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
 
             if (newMediaPlayer.isPresent())
             {

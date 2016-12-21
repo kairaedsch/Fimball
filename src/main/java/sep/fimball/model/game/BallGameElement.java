@@ -15,7 +15,7 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
     /**
      * Das physikalische Element des Balls.
      */
-    protected BallPhysicsElement<GameElement>  physicsElement;
+    protected BallPhysicsElement<GameElement> physicsElement;
 
     /**
      * Erstellt ein neues BallGameElement aus dem gegebenen PlacedElement.
@@ -33,7 +33,7 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
      *
      * @param physicsElement Das zu diesem GameElement gehörige PhysicsElement.
      */
-    public void setPhysicsElement(BallPhysicsElement<GameElement>  physicsElement)
+    public void setPhysicsElement(BallPhysicsElement<GameElement> physicsElement)
     {
         this.physicsElement = physicsElement;
     }

@@ -28,16 +28,6 @@ public class RectangleDoubleByPoints
     }
 
     /**
-     * Erzeugt ein RectangleDouble aus diesem welches durch die linke obere Ecke sowie Breite und Höhe dargestellt wird.
-     *
-     * @return Ein aus diesem Rechteck erzeugtes Rechteck welches durch die linke obere Ecke sowie Breite und Höhe dargestellt wird.
-     */
-    public RectangleDouble toRectangleDouble()
-    {
-        return new RectangleDouble(getOrigin(), getSize());
-    }
-
-    /**
      * Gibt den ersten Punkt durch den dieses Rechteck dargestellt wird zurück.
      *
      * @return Der erste Punkt durch den dieses Rechteck dargestellt wird.

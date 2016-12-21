@@ -4,16 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" text="!pause.key!"
-            xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sep.fimball.view.dialog.pause.PauseView">
+
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0"
+            text="!pause.key!" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.pause.PauseView">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
               AnchorPane.topAnchor="0.0">
-            <Label fx:id="playerScoresLabel" text="!pause.playerscores.key!">
+            <Label text="!pause.playerscores.key!">
                 <font>
                     <Font name="System Bold" size="18.0"/>
                 </font>
@@ -24,9 +22,9 @@
             <VBox fx:id="playerScores">
             </VBox>
         </VBox>
-        <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
+        <Button defaultButton="true" mnemonicParsing="false" onAction="#okClicked"
                 text="!pause.continue.key!" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-        <Button fx:id="abortButton" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
                 onAction="#abortClicked" text="!pause.abort.key!" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0"/>
     </AnchorPane>

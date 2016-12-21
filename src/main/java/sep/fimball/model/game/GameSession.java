@@ -18,10 +18,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -152,9 +149,10 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         elements.addAll(generatedElements.getGameElements());
         physicsElements.addAll(generatedElements.getPhysicsElements());
 
-        if (generatedElements.getBallGameElement().isPresent())
+        Optional<BallGameElement> ballGameElement = generatedElements.getBallGameElement();
+        if (ballGameElement.isPresent())
         {
-            gameBall.set(generatedElements.getBallGameElement().get());
+            gameBall.set(ballGameElement.get());
         }
         else
         {

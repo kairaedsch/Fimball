@@ -93,16 +93,6 @@ public class GameElement implements HandlerGameElement
     }
 
     /**
-     * Setzt die Position des GameElements auf den gegebenen Vektor.
-     *
-     * @param position Die neue Position des GameElements.
-     */
-    public void setPosition(Vector2 position)
-    {
-        this.position.set(position);
-    }
-
-    /**
      * Synchronisiert das GameElement mit seiner Repräsentation in der Physik.
      *
      * @param elementEventArgs Argumente die relevante Daten des Physikelements beinhalten.
@@ -127,16 +117,6 @@ public class GameElement implements HandlerGameElement
     public ReadOnlyDoubleProperty rotationProperty()
     {
         return rotation;
-    }
-
-    /**
-     * Setzt die Rotation des GameElements auf den gegebenen Wert.
-     *
-     * @param rotation Die neue Rotation des GameElements
-     */
-    public void setRotation(double rotation)
-    {
-        this.rotation.set(rotation);
     }
 
     /**
@@ -219,16 +199,6 @@ public class GameElement implements HandlerGameElement
     }
 
     /**
-     * Setzt die Skalierung des Elements.
-     *
-     * @param height Die neue Skalierung des Elements.
-     */
-    public void setHeight(double height)
-    {
-        this.height.set(height);
-    }
-
-    /**
      * Gibt die Skalierung des Elements zurück.
      *
      * @return Die Skalierung des Elements.
@@ -254,7 +224,7 @@ public class GameElement implements HandlerGameElement
         {
             if (g1t == g2t)
             {
-                return compareEqual();
+                return 0;
             }
             else if (g1t == BaseElementType.BALL)
             {
@@ -276,23 +246,13 @@ public class GameElement implements HandlerGameElement
         if (g1t == BaseElementType.RAMP || g2t == BaseElementType.RAMP)
         {
             if (g1t == g2t)
-                return compareEqual();
+                return 0;
             else if (g1t == BaseElementType.RAMP)
                 return 1;
             else
                 return -1;
         }
 
-        return compareEqual();
-    }
-
-    /**
-     * Gibt zurück das die Spielelemente gleich sind.
-     *
-     * @return Gibt an das die Spielelemente gleich sind.
-     */
-    private static int compareEqual()
-    {
         return 0;
     }
 }

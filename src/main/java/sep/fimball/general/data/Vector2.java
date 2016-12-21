@@ -6,6 +6,16 @@ package sep.fimball.general.data;
 public class Vector2
 {
     /**
+     * Vector2 mit dem Wert positiv unendlich.
+     */
+    public static final Vector2 POSITIVE_INFINITY = new Vector2(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+
+    /**
+     * Vector2 mit dem Wert negativ unendlich.
+     */
+    public static final Vector2 NEGATIVE_INFINITY = new Vector2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+
+    /**
      * Erste Komponente des Vektors.
      */
     private final double x;

@@ -133,12 +133,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         double camZoomStep = delta / cameraZoomSpeed;
         camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
 
-        Vector2 oldP = softCameraPosition;
+        // TODO optimise camera speed
 
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
-
-        Vector2 newP = softCameraPosition;
 
         //softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
 
@@ -157,13 +155,13 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         double maxHeight = (2160 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double cameraScale = 1.0;
 
-        if (rectangleDouble.getWidth() < minWidth && rectangleDouble.getHeight() < minHeight)
+        if (rectangleDouble.getWidth() < minWidth || rectangleDouble.getHeight() < minHeight)
         {
-            double scale = (minHeight / rectangleDouble.getWidth());
+            double scale = (minWidth / rectangleDouble.getWidth());
             double newHeight = rectangleDouble.getHeight() * scale;
             double newOriginY = rectangleDouble.getOrigin().getY() - (newHeight - rectangleDouble.getHeight()) / 2.0;
             double newOriginX = rectangleDouble.getOrigin().getX() - (minHeight - rectangleDouble.getWidth()) / 2.0;
-            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), minHeight, newHeight);
+            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), minWidth, newHeight);
         }
         if (rectangleDouble.getWidth() > maxWidth || rectangleDouble.getHeight() > maxHeight)
         {
