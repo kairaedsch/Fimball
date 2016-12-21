@@ -14,7 +14,7 @@ public abstract class PhysicsElementModifyAble<GameElementT, ModifyT extends Mod
     /**
      * Der PhysicsHandler des PhysicsElements.
      */
-    protected PhysicsHandler<GameElementT> physicsHandler;
+    private PhysicsHandler<GameElementT> physicsHandler;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.

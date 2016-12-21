@@ -10,69 +10,108 @@ import static org.junit.Assert.*;
 
 import static org.mockito.Mockito.when;
 
+/**
+ * Tests für die Klasse FlipperPhysicsElement.
+ */
 public class FlipperPhysicsElementTest
 {
-    public FlipperPhysicsElement getFlipperPhysicsElementwithMock(boolean isLeft)
+    /**
+     * Erstellt ein FlipperPhysicsElement mit Mock.
+     *
+     * @param isLeft Ob es ein linker Flipperarm werden soll.
+     * @return Ein FlipperPhysicsElement mit Mock.
+     */
+    private FlipperPhysicsElement getFlipperPhysicsElementwithMock(boolean isLeft)
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
         return new FlipperPhysicsElement<>(null, null, null, 1, basePhysicsElement, isLeft);
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link FlipperPhysicsElement#applyModify}.
+     */
     @Test
-    public void applyModify() throws Exception
+    public void applyModify()
     {
-        FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
+        // Teste den linke Flipperarm
+        {
+            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
 
-        flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
-        assertThat(flipperPhysicsElementLeft.getAngularVelocity(), is(-1000.0));
+            // Versuche den Flipperarm nach oben zu drehen
+            flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
+            assertThat("Das Flipperarm bewegt sich nach oben", flipperPhysicsElementLeft.getAngularVelocity(), is(-1000.0));
 
-        flipperPhysicsElementLeft.update(0.05);
+            // Drehe den Flipperarm um ein kleines Stück.
+            flipperPhysicsElementLeft.update(0.05);
 
-        flipperPhysicsElementLeft.applyModify(() -> AngularDirection.DOWN);
-        assertThat(flipperPhysicsElementLeft.getAngularVelocity(), is(1000.0));
+            // Versuche den Flipperarm nach unten zu drehen
+            flipperPhysicsElementLeft.applyModify(() -> AngularDirection.DOWN);
+            assertThat("Das Flipperarm bewegt sich nach unten", flipperPhysicsElementLeft.getAngularVelocity(), is(1000.0));
+        }
 
+        // Teste den rechten Flipperarm
+        {
+            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
 
-        FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
+            // Versuche den Flipperarm nach oben zu drehen
+            flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
+            assertThat("Das Flipperarm bewegt sich nach oben", flipperPhysicsElementRight.getAngularVelocity(), is(1000.0));
 
-        flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
-        assertThat(flipperPhysicsElementRight.getAngularVelocity(), is(1000.0));
+            // Drehe den Flipperarm um ein kleines Stück.
+            flipperPhysicsElementRight.update(0.05);
 
-        flipperPhysicsElementRight.update(0.05);
+            // Versuche den Flipperarm nach unten zu drehen
+            flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
+            assertThat("Das Flipperarm bewegt sich nach unten", flipperPhysicsElementRight.getAngularVelocity(), is(-1000.0));
 
-        flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
-        assertThat(flipperPhysicsElementRight.getAngularVelocity(), is(-1000.0));
+            // Drehe den Flipperarm um ein kleines Stück.
+            flipperPhysicsElementRight.update(0.05);
 
-        flipperPhysicsElementRight.update(0.05);
-
-        flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
-        assertThat(flipperPhysicsElementRight.getAngularVelocity(), is(0.0));
+            // Versuche den Flipperarm nach unten zu drehen
+            flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
+            assertThat("Das Flipperarm bewegt sich nicht", flipperPhysicsElementRight.getAngularVelocity(), is(0.0));
+        }
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link FlipperPhysicsElement#update}.
+     */
     @Test
-    public void update() throws Exception
+    public void update()
     {
-        FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
-        assertThat(flipperPhysicsElementLeft.getRotation(), is(20.0));
+        // Teste den linke Flipperarm
+        {
+            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
 
-        flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
-        flipperPhysicsElementLeft.update(0.01);
-        assertThat(flipperPhysicsElementLeft.getRotation(), is(10.0));
+            assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementLeft.getRotation(), is(20.0));
 
-        flipperPhysicsElementLeft.applyModify(() -> AngularDirection.DOWN);
-        flipperPhysicsElementLeft.update(0.01);
-        assertThat(flipperPhysicsElementLeft.getRotation(), is(20.0));
+            // Versuche den Flipperarm nach oben zu drehen
+            flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
+            flipperPhysicsElementLeft.update(0.01);
+            assertThat("Der Flipperarm hat sich nach oben gedreht", flipperPhysicsElementLeft.getRotation(), is(10.0));
 
+            // Versuche den Flipperarm nach unten zu drehen
+            flipperPhysicsElementLeft.applyModify(() -> AngularDirection.DOWN);
+            flipperPhysicsElementLeft.update(0.01);
+            assertThat("Der Flipperarm hat sich zurück gedreht", flipperPhysicsElementLeft.getRotation(), is(20.0));
+        }
 
-        FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
-        assertThat(flipperPhysicsElementRight.getRotation(), is(-20.0));
+        // Teste den rechten Flipperarm
+        {
+            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
 
-        flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
-        flipperPhysicsElementRight.update(0.01);
-        assertThat(flipperPhysicsElementRight.getRotation(), is(-10.0));
+            assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementRight.getRotation(), is(-20.0));
 
-        flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
-        flipperPhysicsElementRight.update(0.01);
-        assertThat(flipperPhysicsElementRight.getRotation(), is(-20.0));
+            // Versuche den Flipperarm nach oben zu drehen
+            flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
+            flipperPhysicsElementRight.update(0.01);
+            assertThat("Der Flipperarm hat sich nach oben gedreht", flipperPhysicsElementRight.getRotation(), is(-10.0));
+
+            // Versuche den Flipperarm nach unten zu drehen
+            flipperPhysicsElementRight.applyModify(() -> AngularDirection.DOWN);
+            flipperPhysicsElementRight.update(0.01);
+            assertThat("Der Flipperarm hat sich zurück gedreht", flipperPhysicsElementRight.getRotation(), is(-20.0));
+        }
     }
 }

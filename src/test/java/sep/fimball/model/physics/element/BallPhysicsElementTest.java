@@ -13,7 +13,7 @@ import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.*;
 
 /**
- * Tests für die Klasse BallPhysicsElement
+ * Tests für die Klasse BallPhysicsElement.
  */
 public class BallPhysicsElementTest
 {
@@ -25,8 +25,11 @@ public class BallPhysicsElementTest
         return new BallPhysicsElement<>(null, null, new Vector2(), 0, 1, basePhysicsElement);
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code update()}.
+     */
     @Test
-    public void update() throws Exception
+    public void update()
     {
         BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
 
@@ -40,8 +43,11 @@ public class BallPhysicsElementTest
         assertThat("Die Geschwindigkeit in Y-Richtung hat durch die Schwerkraft zugenommen", ballPhysicsElement.getVelocity().getY(), is(greaterThan(0.0)));
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code setVelocity()}.
+     */
     @Test
-    public void setVelocity() throws Exception
+    public void setVelocity()
     {
         Vector2 tooFast = new Vector2(10000, 1000);
 
@@ -51,8 +57,11 @@ public class BallPhysicsElementTest
         assertThat("Ball wird gebremst da er zu schnell ist", ballPhysicsElement.getVelocity().magnitude(), is(lessThan(tooFast.magnitude())));
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code setHeight()}.
+     */
     @Test
-    public void setHeight() throws Exception
+    public void setHeight()
     {
         BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
 
@@ -77,8 +86,11 @@ public class BallPhysicsElementTest
         assertThat("Der Ball ist auf der Rampe", ballPhysicsElement.getLayer(), is(WorldLayer.RAMP));
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code applyModify()}.
+     */
     @Test
-    public void applyModify() throws Exception
+    public void applyModify()
     {
         // ResetModify
         {

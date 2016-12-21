@@ -56,8 +56,11 @@ public class BasePhysicsElementTest
         basePhysicsElement = new BasePhysicsElement(new Vector2(), colliders);
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code checkIfPointIsInElement()}.
+     */
     @Test
-    public void checkIfPointIsInElement() throws Exception
+    public void checkIfPointIsInElement()
     {
         Mockito.when(colliderShapeA1.calculateHitInfo(any(), any(), any(), anyDouble(), any())).thenReturn(new HitInfo(false, new Vector2()));
         Mockito.when(colliderShapeA2.calculateHitInfo(any(), any(), any(), anyDouble(), any())).thenReturn(new HitInfo(false, new Vector2()));
@@ -69,8 +72,11 @@ public class BasePhysicsElementTest
         assertThat(basePhysicsElement.checkIfPointIsInElement(0, new Vector2(0, 0)), is(true));
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code getExtremePos()}.
+     */
     @Test
-    public void getExtremePos() throws Exception
+    public void getExtremePos()
     {
         Mockito.when(colliderShapeA1.getExtremePos(anyDouble(), any(), anyBoolean())).thenReturn(new Vector2(-2, -20));
         Mockito.when(colliderShapeA2.getExtremePos(anyDouble(), any(), anyBoolean())).thenReturn(new Vector2(2, 20));

@@ -14,20 +14,27 @@ import static org.mockito.Mockito.mock;
  */
 public class ModifyContainerTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode {@link ModifyContainer#apply}.
+     */
     @Test
-    public void apply() throws Exception
+    public void apply()
     {
+        // Erstelle ModifyContainer mit Mock
         PhysicsElementModifyAble<?, Modify> physicsElement = Mockito.mock(PhysicsElementModifyAble.class);
         Modify modify = mock(Modify.class);
-
         ModifyContainer modifyContainer = new ModifyContainer<>(physicsElement, modify);
 
+        // fange die applyModify Methode ab
+        Modify[] modifyReturned = {null};
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
-            assertThat(invocation.getArgument(0), is(modify));
+            modifyReturned[0] = invocation.getArgument(0);
             return null;
         }).when(physicsElement).applyModify(any());
 
+        // Führe Modify aus
         modifyContainer.apply();
+        assertThat("Es wurde das Modify Object übergeben", modifyReturned[0], is(modify));
     }
 }
