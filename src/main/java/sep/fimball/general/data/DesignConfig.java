@@ -103,7 +103,7 @@ public class DesignConfig
     /**
      * Der Präfix für CSS um das Hintergrundbild auf eine Datei zu setzen.
      */
-    private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"file:///";
+    private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"";
 
     /**
      * Der Postfix für CSS um eine Pfadangabe abzuschließen.
@@ -123,7 +123,7 @@ public class DesignConfig
      */
     public static StringExpression backgroundImageCss(ReadOnlyStringProperty path)
     {
-        return Bindings.concat(CSS_URL_PREFIX, path, CSS_URL_POSTFIX);
+        return Bindings.concat(CSS_URL_PREFIX, DataPath.escapePathToUrl(path.get()), CSS_URL_POSTFIX);
     }
 
     /**

@@ -1,7 +1,9 @@
 package sep.fimball.general.data;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * Diese Klasse stellt Methoden bereit, die Pfade zu Dateien liefern.
@@ -132,6 +134,20 @@ public class DataPath
      * Das Default-Vorschaubild der Automaten.
      */
     private final static String defaultPreview = "/defaultPreview.png";
+
+    public static String escapePathToUrl(String path)
+    {
+        try
+        {
+            URL url = new File(path).toURI().toURL();
+            return url.toExternalForm();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+            return path;
+        }
+    }
 
     /**
      * Gibt den kombinierten Pfad zurück, der angibt, wo die BaseElements gespeichert werden.
@@ -266,7 +282,8 @@ public class DataPath
      */
     public static String pathToSound(String clipName)
     {
-        return "file:///" + dataPath + soundsPath + "/" + clipName + soundFileEnding;
+        String path = dataPath + soundsPath + "/" + clipName + soundFileEnding;
+        return escapePathToUrl(path);
     }
 
     /**
