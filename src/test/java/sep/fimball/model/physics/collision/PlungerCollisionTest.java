@@ -30,6 +30,7 @@ public class PlungerCollisionTest
         doCallRealMethod().when(ballPhysicsElement).setVelocity(notNull());
         when(plungerPhysicsElement.getStrength()).thenReturn(8.0);
         when(plungerPhysicsElement.getRotation()).thenReturn(0.0);
+        when(plungerPhysicsElement.getStrengthMultiplier()).thenReturn(1.0);
 
         //Überprüfe die Beschleunigung bei einem normalen Plunger ohne Rotation.
         ballPhysicsElement.setVelocity(new Vector2(0, 0));

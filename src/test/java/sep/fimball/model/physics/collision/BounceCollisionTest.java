@@ -3,6 +3,7 @@ package sep.fimball.model.physics.collision;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.PhysicsElement;
 
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -21,14 +22,18 @@ public class BounceCollisionTest
     {
         BallPhysicsElement ballPhysicsElement = mock(BallPhysicsElement.class);
         CollisionInfo collisionInfo = mock(CollisionInfo.class);
+        PhysicsElement otherPhysicsElement = mock(PhysicsElement.class);
 
         when(ballPhysicsElement.getPosition()).thenCallRealMethod();
         when(ballPhysicsElement.getVelocity()).thenCallRealMethod();
         doCallRealMethod().when(ballPhysicsElement).setPosition(notNull());
         doCallRealMethod().when(ballPhysicsElement).setVelocity(notNull());
 
+        when(otherPhysicsElement.getStrengthMultiplier()).thenReturn(1.0);
+
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(collisionInfo.getShortestIntersect()).thenReturn(new Vector2(1.0, 0));
+        when(collisionInfo.getOtherPhysicsElement()).thenReturn(otherPhysicsElement);
 
         ballPhysicsElement.setPosition(new Vector2(2.0, 0.0));
         ballPhysicsElement.setVelocity(new Vector2(-1.0, 0.0));

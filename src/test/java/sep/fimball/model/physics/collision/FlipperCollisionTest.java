@@ -5,6 +5,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
+import sep.fimball.model.physics.element.PhysicsElement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -33,8 +34,9 @@ public class FlipperCollisionTest
         when(flipperPhysicsElement.getPosition()).thenReturn(new Vector2(0, 0));
         when(flipperPhysicsElement.getRotation()).thenReturn(0.0);
         when(flipperPhysicsElement.getAngularVelocity()).thenReturn(-500.0);
-        when(flipperPhysicsElement.isRotatingDown()).thenReturn(true);
+        when(flipperPhysicsElement.isRotatingUp()).thenReturn(true);
         when(flipperPhysicsElement.getBasePhysicsElement()).thenReturn(flipperBasePhysics);
+        when(flipperPhysicsElement.getStrengthMultiplier()).thenReturn(1.0);
         when(ballPhysicsElement.getBasePhysicsElement()).thenReturn(ballBasePhysics);
         when(ballPhysicsElement.getPosition()).thenCallRealMethod();
         when(ballPhysicsElement.getVelocity()).thenCallRealMethod();

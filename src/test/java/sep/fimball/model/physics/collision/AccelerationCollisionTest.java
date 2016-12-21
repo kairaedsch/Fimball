@@ -29,6 +29,7 @@ public class AccelerationCollisionTest
         when(ballPhysicsElement.getVelocity()).thenCallRealMethod();
         doCallRealMethod().when(ballPhysicsElement).setVelocity(notNull());
         when(otherElement.getRotation()).thenReturn(90.0);
+        when(otherElement.getStrengthMultiplier()).thenReturn(1.0);
         when(collisionInfo.getBall()).thenReturn(ballPhysicsElement);
         when(collisionInfo.getOtherPhysicsElement()).thenReturn(otherElement);
 
