@@ -45,6 +45,8 @@ public class SelectedElementSubViewModel
      */
     private PinballMachineEditor pinballMachineEditor;
 
+    private BooleanProperty pointsCanBeChanged;
+
     /**
      * Erstellt ein neues SelectedElementSubViewModel.
      *
@@ -59,6 +61,7 @@ public class SelectedElementSubViewModel
         multiplier = new SimpleDoubleProperty();
         placedElement = Optional.empty();
         this.pinballMachineEditor = pinballMachineEditor;
+        pointsCanBeChanged = new SimpleBooleanProperty(false);
 
         setPlacedElement(Optional.empty());
 
@@ -99,6 +102,7 @@ public class SelectedElementSubViewModel
 
             multiplier.bindBidirectional(newPlacedElement.get().multiplierProperty());
             isSomethingSelected.set(true);
+            pointsCanBeChanged.set(newPlacedElement.get().getBaseElement().getRule().givesPoints());
         }
         else
         {
@@ -173,5 +177,10 @@ public class SelectedElementSubViewModel
     public void rotate()
     {
         pinballMachineEditor.rotateSelection();
+    }
+
+
+    public ReadOnlyBooleanProperty pointsCanBeChanged() {
+        return pointsCanBeChanged;
     }
 }
