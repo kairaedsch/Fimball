@@ -64,14 +64,22 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         pointsSlider.visibleProperty().bind(selectedElementSubViewModel.pointsCanBeChanged());
         pointsLabel.visibleProperty().bind(selectedElementSubViewModel.pointsCanBeChanged());
 
+        strengthSlider.setMajorTickUnit(0.1);
+        strengthSlider.setMinorTickCount(0);
+        strengthSlider.setSnapToTicks(true);
+
+        pointsSlider.setMajorTickUnit(1);
+        pointsSlider.setMinorTickCount(0);
+        pointsSlider.setSnapToTicks(true);
+
         strengthSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.multiplierProperty());
         pointsSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.pointsProperty());
 
         System.out.println(strengthSlider.valueProperty().get());
         System.out.println(pointsSlider.valueProperty().get());
 
-        strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString()));
-        pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString()));
+        strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString("%.1f")));
+        pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString("%.0f")));
 
         nameLabel.textProperty().bind(selectedElementSubViewModel.nameProperty());
         descriptionLabel.textProperty().bind(selectedElementSubViewModel.descriptionProperty());
