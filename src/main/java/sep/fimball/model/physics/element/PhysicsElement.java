@@ -17,12 +17,6 @@ import java.util.List;
 public class PhysicsElement<GameElementT>
 {
     /**
-     * Debug.
-     * TODO entfernen
-     */
-    public static List<WeakReference<PhysicsElement>> thisIsForDebug = new ArrayList<>();
-
-    /**
      * Die aktuelle Position.
      */
     private Vector2 position;
@@ -69,9 +63,6 @@ public class PhysicsElement<GameElementT>
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
     {
         this.strengthMultiplier = strengthMultiplier;
-        // TODO entfernen
-        thisIsForDebug.add(new WeakReference<>(this));
-
         this.position = position;
         this.rotation = rotation;
         this.gameElement = gameElement;

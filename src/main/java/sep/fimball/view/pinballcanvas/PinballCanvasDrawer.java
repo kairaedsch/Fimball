@@ -8,7 +8,6 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.general.debug.Debug;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import java.util.Optional;
@@ -74,8 +73,6 @@ class PinballCanvasDrawer
         }
 
         drawElements(graphicsContext);
-        // TODO entfernen
-        Debug.draw(graphicsContext);
 
         if(dragSelectionRect.isPresent())
         {
