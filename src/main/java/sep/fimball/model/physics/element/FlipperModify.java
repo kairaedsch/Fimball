@@ -10,5 +10,5 @@ public interface FlipperModify extends Modify
      *
      * @return Falls der Flipper nach oben gedreht werden soll.
      */
-    AngularDirection newAngulatDirection();
+    AngularDirection newAngularDirection();
 }

@@ -39,7 +39,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      * @param physicsHandler     Der PhysicsHandler des PhysicsElements.
      * @param gameElement        Das zugehörige GameElement, welches von diesem FlipperPhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
-     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
+     * @param strengthMultiplier Der Multiplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      * @param isLeft             Gibt an , ob er rechte oder linke Flipperarm gemeint ist.
      */
@@ -148,6 +148,6 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     @Override
     public void applyModify(FlipperModify modify)
     {
-        rotate(modify.newAngulatDirection());
+        rotate(modify.newAngularDirection());
     }
 }

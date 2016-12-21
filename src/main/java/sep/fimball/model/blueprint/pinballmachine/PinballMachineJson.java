@@ -11,7 +11,7 @@ public class PinballMachineJson
     public String name;
 
     /**
-     * Speichert den Pfad zum Vorschaubilde des Flipperautomaten.
+     * Speichert den Pfad zum Vorschaubild des Flipperautomaten.
      */
     public String previewImagePath;
 

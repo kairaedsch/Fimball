@@ -29,7 +29,7 @@ public class PinballMachine
     private StringProperty name;
 
     /**
-     * Pfad zum Vorschaubilde des Flipperautomaten.
+     * Pfad zum Vorschaubild des Flipperautomaten.
      */
     private StringProperty previewImagePath;
 

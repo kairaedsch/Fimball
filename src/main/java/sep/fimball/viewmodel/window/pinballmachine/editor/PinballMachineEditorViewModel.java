@@ -109,7 +109,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private EditorSession editorSession;
 
     /**
-     * Gibt an, ob aktuell die Umschau-Zaste gedrückt wird.
+     * Gibt an, ob aktuell die Umschau-Taste gedrückt wird.
      */
     private boolean moveModifier = false;
 
@@ -274,7 +274,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Schließt den Editor ohne zu speichern, und öffnet das Hauptmenü
+     * Schließt den Editor ohne zu speichern, und öffnet das Hauptmenü.
      */
     public void goToMainMenu()
     {

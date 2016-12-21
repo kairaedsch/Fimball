@@ -4,8 +4,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class PhysicsElement<GameElementT>
     private double rotation;
 
     /**
-     * Der Muliplier für die Stärke der Collider.
+     * Der Multiplier für die Stärke der Collider.
      */
     private double strengthMultiplier;
 
@@ -57,7 +55,7 @@ public class PhysicsElement<GameElementT>
      * @param gameElement        Das zugehörige GameElement, welches von diesem PhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
      * @param rotation           Die Rotation des PhysicsElement.
-     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
+     * @param strengthMultiplier Der Multiplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public PhysicsElement(GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
@@ -178,9 +176,9 @@ public class PhysicsElement<GameElementT>
     }
 
     /**
-     * Gibt den Muliplier für die Stärke der Collider zurück.
+     * Gibt den Multiplier für die Stärke der Collider zurück.
      *
-     * @return Den Muliplier für die Stärke der Collider.
+     * @return Den Multiplier für die Stärke der Collider.
      */
     public double getStrengthMultiplier()
     {
