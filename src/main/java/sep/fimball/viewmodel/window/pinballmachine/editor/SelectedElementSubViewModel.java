@@ -45,6 +45,9 @@ public class SelectedElementSubViewModel
      */
     private PinballMachineEditor pinballMachineEditor;
 
+    /**
+     * Gibt an, ob die Punkte, die dieses Element vergibt, verändert werden dürfen.
+     */
     private BooleanProperty pointsCanBeChanged;
 
     /**
@@ -179,7 +182,10 @@ public class SelectedElementSubViewModel
         pinballMachineEditor.rotateSelection();
     }
 
-
+    /**
+     * Gibt zurück, ob die Punkte, die dieses Element vergibt, verändert werden dürfen.
+     * @return {@code true}, falls die Punkte verändert werden dürfen, {@code false} sonst.
+     */
     public ReadOnlyBooleanProperty pointsCanBeChanged() {
         return pointsCanBeChanged;
     }
