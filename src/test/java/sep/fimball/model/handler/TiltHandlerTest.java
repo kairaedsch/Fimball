@@ -2,6 +2,7 @@ package sep.fimball.model.handler;
 
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
@@ -11,12 +12,13 @@ import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 
 //TODO - Muss an den neuen TiltHandler angepasst werden.
 /**
@@ -25,19 +27,11 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class TiltHandlerTest
 {
     /**
-     * Gibt an, ob für die jeweiligen Spieler der Tilt aktiviert wurde.
-     */
-    private Map<HandlerPlayer, Boolean> tiltActivated;
-
-    /**
      * Ein Test-Spieler.
      */
     private HandlerPlayer player1 = getPlayer();
 
-    /**
-     * Ein Test-Spieler.
-     */
-    private HandlerPlayer player2 = getPlayer();
+    private boolean tiltActivated;
 
     /**
      * Testet, ob das Aktivieren des TiltHandlers funktioniert.
@@ -45,26 +39,29 @@ public class TiltHandlerTest
     @Test
     public void activateTiltHandlerTest()
     {
-        tiltActivated = new HashMap<>();
-        tiltActivated.put(player1, false);
-        tiltActivated.put(player2, false);
         HandlerGameSession gameSession = getTestHandlerGameSession();
-        TiltHandler test = new TiltHandler(gameSession, null);
+        InputModifier inputModifier = mock(InputModifier.class);
+        doAnswer(invocationOnMock -> {
+            tiltActivated = true;
+            return null;
+        }).when(inputModifier).setKeyEventsActivated(anyBoolean());
+
+        TiltHandler test = new TiltHandler(gameSession, inputModifier);
 
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated.get(player1), is(false));
+        assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
-        assertThat("Der Tilt wurde für Spieler 1 aktiviert", tiltActivated.get(player1), is(true));
-        gameSession.switchToNextPlayer();
-        assertThat("Der Tilt wurde nicht für Spieler 2 aktiviert", tiltActivated.get(player2), is(false));
+        assertThat("Der Tilt wurde für Spieler 1 aktiviert", tiltActivated, is(true));
+        tiltActivated = false;
+        assertThat("Das Zählen des Anstoßens wurde zurückgesetzt", tiltActivated, is(false));
     }
 
     /**
@@ -90,14 +87,6 @@ public class TiltHandlerTest
             @Override
             public void switchToNextPlayer()
             {
-                if (currentPlayer == player1)
-                {
-                    currentPlayer = player2;
-                }
-                else
-                {
-                    currentPlayer = player1;
-                }
             }
 
             @Override
@@ -210,7 +199,7 @@ public class TiltHandlerTest
             @Override
             public ReadOnlyIntegerProperty ballsProperty()
             {
-                return null;
+                return new SimpleIntegerProperty(0);
             }
 
             @Override

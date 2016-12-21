@@ -159,14 +159,12 @@ public class PhysicsHandlerTest
 
         doAnswer(invocationOnMock ->
         {
-            ballLost = invocationOnMock.getArgument(0);
-            if (ballLost)
-            {
+            ballLost = true;
                 synchronized (ballLostMonitor)
                 {
                     ballLostMonitor.notify();
                 }
-            }
+
             return null;
         }).when(mockedGameSession).setBallLost();
         return mockedGameSession;
