@@ -16,6 +16,9 @@ import static org.junit.Assert.assertThat;
  */
 public class PinballMachineFactoryTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode {@code createPinballMachine()}.
+     */
     @Test
     public void createPinballMachine()
     {
@@ -24,6 +27,7 @@ public class PinballMachineFactoryTest
             // Erstelle eine valide pinballMachineJson
             PinballMachineJson pinballMachineJson = new PinballMachineJson();
             pinballMachineJson.name = "testautomat";
+            pinballMachineJson.previewImagePath = "previewimage";
             pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
             pinballMachineJson.highscores[0] = new PinballMachineJson.HighscoreJson();
             pinballMachineJson.highscores[0].playerName = "Player 1";
@@ -40,6 +44,7 @@ public class PinballMachineFactoryTest
 
             // Prüfe ob die generierte PinballMachine valide ist
             assertThat(pinballMachine.nameProperty().get(), is("testautomat"));
+            assertThat(pinballMachine.previewImagePathProperty().get(), is("previewimage"));
             assertThat(pinballMachine.getID(), is("testid"));
             assertThat(pinballMachine.highscoreListProperty().get(0).playerNameProperty().get(), is(equalTo("Player 1")));
             assertThat(pinballMachine.highscoreListProperty().get(0).scoreProperty().get(), is(100L));
@@ -78,6 +83,9 @@ public class PinballMachineFactoryTest
         }
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@code createPinballMachineJson()}.
+     */
     @Test
     public void createPinballMachineJson()
     {
@@ -86,13 +94,14 @@ public class PinballMachineFactoryTest
         highscoreList.add(new Highscore(100, "Player 1"));
         highscoreList.add(new Highscore(10, "Player 2"));
         highscoreList.add(new Highscore(1, "Player 3"));
-        PinballMachine pinballMachine = new PinballMachine("testautomat", "testid", "",highscoreList, null);
+        PinballMachine pinballMachine = new PinballMachine("testautomat", "testid", "previewimage", highscoreList, null);
 
         // Lasse eine pinballMachineJson aus der PinballMachine generieren
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
 
         // Prüfe ob die generierte pinballMachineJson valide ist
         assertThat(pinballMachineJson.name, is(equalTo("testautomat")));
+        assertThat(pinballMachineJson.previewImagePath, is(equalTo("previewimage")));
         assertThat(pinballMachineJson.highscores[0].playerName, is(equalTo("Player 1")));
         assertThat(pinballMachineJson.highscores[0].score, is(100L));
         assertThat(pinballMachineJson.highscores[1].playerName, is(equalTo("Player 2")));

@@ -72,7 +72,7 @@ public class PinballMachineManager
      */
     public PinballMachine createNewMachine()
     {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", DataPath.pathToDefaultPreview(), Config.uniqueId(), Collections.emptyList(), this);
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), DataPath.pathToDefaultPreview(), Collections.emptyList(), this);
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;

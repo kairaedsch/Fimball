@@ -52,7 +52,7 @@
         <HBox GridPane.columnIndex="1">
             <Pane HBox.hgrow="ALWAYS"/>
             <HBox styleClass="buttonBackToMainMenuContainer">
-                <Polyline styleClass="buttonBackToMainMenuArrow">
+                <Polyline styleClass="buttonBackToMainMenuArrow" onMouseClicked="#menuClicked">
                     <points>
                         <Double fx:value="0.0"/>
                         <Double fx:value="30.0"/>
@@ -89,7 +89,7 @@
                 <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked"
                       prefHeight="60.0" prefWidth="60.0"
                       styleClass="button, buttonEdit"/>
-                <Polyline styleClass="buttonEditArrow">
+                <Polyline styleClass="buttonEditArrow" onMouseClicked="#editClicked">
                     <points>
                         <Double fx:value="0.0"/>
                         <Double fx:value="0.0"/>

@@ -61,14 +61,13 @@ public class PinballMachine
 
     /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
-     *
-     * @param name                  Name des Automaten.
-     * @param previewImagePath      Namen der Vorschaubildes des Automaten.
+     *  @param name                  Name des Automaten.
      * @param pinballMachineId      Id des Automaten.
+     * @param previewImagePath      Namen der Vorschaubildes des Automaten.
      * @param highscores            Die auf diesem Automaten bisher erreichten Highscores.
      * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
      */
-    PinballMachine(String name, String previewImagePath, String pinballMachineId, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
+    PinballMachine(String name, String pinballMachineId, String previewImagePath, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
     {
         this.name = new SimpleStringProperty(name);
         this.previewImagePath = new SimpleStringProperty(previewImagePath);

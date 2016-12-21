@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
 public class PinballMachineTest
 {
     /**
-     * Überprüft die Korrektheit der Methode {@code getElementAt()}
+     * Überprüft die Korrektheit der Methode {@code getElementAt()}.
      */
     @Test
     public void getElementAt()
@@ -47,7 +47,7 @@ public class PinballMachineTest
     }
 
     /**
-     * Überprüft Korrektheit der Methode {@code addHighscore()}
+     * Überprüft Korrektheit der Methode {@code addHighscore()}.
      */
     @Test
     public void addHighscore()

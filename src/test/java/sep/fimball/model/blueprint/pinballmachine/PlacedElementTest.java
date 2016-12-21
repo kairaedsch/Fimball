@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
- * Tests für die Klasse PlacedElement
+ * Tests für die Klasse PlacedElement.
  */
 public class PlacedElementTest
 {

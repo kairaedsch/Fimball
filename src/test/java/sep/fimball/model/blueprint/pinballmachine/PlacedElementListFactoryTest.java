@@ -13,9 +13,15 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
+/**
+ * Tests für die Klasse PlacedElementListFactory.
+ */
 public class PlacedElementListFactoryTest
 {
     @Test
+    /**
+     * Überprüft die Korrektheit der Methode {@code createPlacedElementListJson()}.
+     */
     public void createPlacedElementList()
     {
         // Test mit valider placedElementListJson
@@ -84,6 +90,9 @@ public class PlacedElementListFactoryTest
     }
 
     @Test
+    /**
+     * Überprüft die Korrektheit der Methode {@code createPlacedElementListJson()}.
+     */
     public void createPlacedElementListJson()
     {
         // Erstelle Mocks

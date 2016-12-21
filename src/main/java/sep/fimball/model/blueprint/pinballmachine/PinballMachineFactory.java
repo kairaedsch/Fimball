@@ -41,7 +41,7 @@ class PinballMachineFactory
             String previewImagePath = pinballMachineJson.previewImagePath;
             if(previewImagePath == null) previewImagePath = DataPath.pathToDefaultPreview();
 
-            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, previewImagePath, pinballMachineId, highscores, pinballMachineManager);
+            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, previewImagePath, highscores, pinballMachineManager);
 
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
             return Optional.of(pinballMachine);
