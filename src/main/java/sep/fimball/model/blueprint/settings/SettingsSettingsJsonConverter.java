@@ -1,15 +1,16 @@
 package sep.fimball.model.blueprint.settings;
 
 import javafx.scene.input.KeyCode;
+import sep.fimball.general.data.Language;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Diese Klasse erzeugt aus Settings-Objekten SettingsJson-Objekte, um die Serialisierung der Einstellungen zu
- * ermöglichen.
+ * Diese Klasse erzeugt aus Settings-Objekten SettingsJson-Objekte und lädt Settings-Objekte aus SettingsJson-Objekten,
+ * um die Serialisierung der Einstellungen zu ermöglichen.
  */
-class SettingsJsonFactory
+class SettingsSettingsJsonConverter
 {
     /**
      * Erstellt ein SettingsJson-Objekt, das das übergebene Settings-Objekt repräsentiert.
@@ -38,5 +39,26 @@ class SettingsJsonFactory
         settingsJson.musicVolume = settings.musicVolumeProperty().get();
         settingsJson.sfxVolume = settings.sfxVolumeProperty().get();
         return settingsJson;
+    }
+
+
+    /**
+     * Lädt die in {@code settingsJson} gespeicherten Einstellungen in die aktuellen Einstellungen.
+     *
+     * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
+     * @param settings Das Settings-Objekt, in die die serialisierten Einstellungen geladen werden sollen.
+     */
+    static void loadSettingsFromJson(SettingsJson settingsJson, Settings settings)
+    {
+        settings.languageProperty().setValue(Language.valueOf(settingsJson.language));
+        settings.fullscreenProperty().setValue(settingsJson.fullscreen);
+        settings.masterVolumeProperty().setValue(settingsJson.masterVolume);
+        settings.musicVolumeProperty().setValue(settingsJson.musicVolume);
+        settings.sfxVolumeProperty().setValue(settingsJson.sfxVolume);
+        settings.keyBindingsMapProperty().clear();
+        for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
+        {
+            settings.setKeyBinding(KeyCode.valueOf(layout.keyCode), layout.keyBinding);
+        }
     }
 }

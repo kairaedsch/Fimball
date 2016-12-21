@@ -1,15 +1,26 @@
 package sep.fimball.model.blueprint.settings;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import org.junit.Test;
+import org.mockito.Mockito;
 import sep.fimball.general.data.Language;
 import sep.fimball.model.input.data.KeyBinding;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 
 /**
  * Diese Klasse enthält Tests, die sicherstellen, dass die Einstellungsobjekte ordnungsgemäß erzeugt werden und neue
@@ -46,20 +57,56 @@ public class SettingsTest
     {
         initKeyLayouts();
         initTestJson();
-        Settings testSettings = new Settings(testSettingsJson);
+        SettingsSettingsJsonConverter.loadSettingsFromJson(testSettingsJson, Settings.getSingletonInstance());
 
-        assertThat(testSettings.languageProperty().get(), equalTo(LANGUAGE));
-        assertThat(testSettings.fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
-        assertThat(testSettings.masterVolumeProperty().get(), is(MASTER_VOLUME));
-        assertThat(testSettings.musicVolumeProperty().get(), is(MUSIC_VOLUME));
-        assertThat(testSettings.sfxVolumeProperty().get(), is(SFX_VOLUME));
-        assertThat(testSettings.keyBindingsMapProperty(), not(equalTo(null)));
-        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> testSettings.getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).get().equals(keyLayout.keyBinding)), is(true));
+        assertThat(Settings.getSingletonInstance().languageProperty().get(), equalTo(LANGUAGE));
+        assertThat(Settings.getSingletonInstance().fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
+        assertThat(Settings.getSingletonInstance().masterVolumeProperty().get(), is(MASTER_VOLUME));
+        assertThat(Settings.getSingletonInstance().musicVolumeProperty().get(), is(MUSIC_VOLUME));
+        assertThat(Settings.getSingletonInstance().sfxVolumeProperty().get(), is(SFX_VOLUME));
+        assertThat(Settings.getSingletonInstance().keyBindingsMapProperty(), not(equalTo(null)));
+        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> Settings.getSingletonInstance().getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).get().equals(keyLayout.keyBinding)), is(true));
         Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !KeyCode.valueOf(keyLayout.keyCode).equals(keyCode)))).findFirst();
         if (unusedKeyCode.isPresent())
         {
-            assertThat(testSettings.getKeyBinding(unusedKeyCode.get()), equalTo(Optional.empty()));
+            assertThat(Settings.getSingletonInstance().getKeyBinding(unusedKeyCode.get()), equalTo(Optional.empty()));
         }
+    }
+
+    /**
+     * Testet, ob aus bestehenden Settings eine korrekte SettingsJson Datei erzeugt wird.
+     */
+    @Test (timeout = 2000)
+    public void testCreateJson()
+    {
+        final boolean IS_IN_FULLSCREEN = false;
+        final int MASTER_VOLUME = 50;
+        final int MUSIC_VOLUME = 75;
+        final int SFX_VOLUME = 80;
+        final Language LANGUAGE = Language.GERMAN;
+        initKeyLayouts();
+        Settings mockedSettings = Mockito.mock(Settings.class);
+        Mockito.when(mockedSettings.languageProperty()).thenReturn(new SimpleObjectProperty<>(LANGUAGE));
+        Mockito.when(mockedSettings.fullscreenProperty()).thenReturn(new SimpleBooleanProperty(IS_IN_FULLSCREEN));
+        Mockito.when(mockedSettings.masterVolumeProperty()).thenReturn(new SimpleIntegerProperty(MASTER_VOLUME));
+        Mockito.when(mockedSettings.musicVolumeProperty()).thenReturn(new SimpleIntegerProperty(MUSIC_VOLUME));
+        Mockito.when(mockedSettings.sfxVolumeProperty()).thenReturn(new SimpleIntegerProperty(SFX_VOLUME));
+        Map<KeyCode, KeyBinding> keyBindings = new HashMap<>();
+        for (SettingsJson.KeyLayout keyLayout : keyLayouts)
+        {
+            keyBindings.put(KeyCode.valueOf(keyLayout.keyCode), keyLayout.keyBinding);
+        }
+        Mockito.when(mockedSettings.keyBindingsMapProperty()).thenReturn(new SimpleMapProperty<>(FXCollections.observableMap(keyBindings)));
+        Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> Optional.of(keyBindings.get(invocation.getArgument(0))));
+
+        SettingsJson createdJson = SettingsSettingsJsonConverter.createJsonFromSettings(mockedSettings);
+
+        assertThat(createdJson.language, equalTo(LANGUAGE.name()));
+        assertThat(createdJson.fullscreen, is(IS_IN_FULLSCREEN));
+        assertThat(createdJson.masterVolume, is(MASTER_VOLUME));
+        assertThat(createdJson.musicVolume, is(MUSIC_VOLUME));
+        assertThat(createdJson.sfxVolume, is(SFX_VOLUME));
+        assertThat(Arrays.stream(createdJson.keyLayouts).allMatch(keyLayout -> Arrays.stream(keyLayouts).anyMatch(otherKeyLayout -> keyLayout.keyCode.equals(otherKeyLayout.keyCode) && keyLayout.keyBinding.equals(otherKeyLayout.keyBinding))), is(true));
     }
 
     /**
@@ -69,24 +116,24 @@ public class SettingsTest
     public void testSetKeyBinding()
     {
         initTestJson();
-        Settings testSettings = new Settings(testSettingsJson);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(Optional.empty()));
-        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(Optional.empty()));
-        testSettings.setKeyBinding(keyBinding1, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeA));
-        testSettings.setKeyBinding(keyBinding1, keyCodeB);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(Optional.empty()));
-        assertThat(testSettings.getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
-        testSettings.setKeyBinding(keyBinding2, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
-        assertThat(testSettings.getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
-        testSettings.setKeyBinding(keyBinding1, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
-        assertThat(testSettings.getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
-        assertThat(testSettings.getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
+        SettingsSettingsJsonConverter.loadSettingsFromJson(testSettingsJson, Settings.getSingletonInstance());
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA), equalTo(Optional.empty()));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1), equalTo(Optional.empty()));
+        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding1);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding1));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeA));
+        Settings.getSingletonInstance().setKeyBinding(keyCodeB, keyBinding1);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA), equalTo(Optional.empty()));
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
+        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding2);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
+        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding1);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
     }
 
     /**
@@ -107,7 +154,6 @@ public class SettingsTest
      */
     private void initKeyLayouts()
     {
-        //TODO - Fix duplicated code
         keyLayouts = new SettingsJson.KeyLayout[9];
         for (int i = 0; i < 9; i++)
         {

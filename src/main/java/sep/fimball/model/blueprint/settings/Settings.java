@@ -10,7 +10,6 @@ import sep.fimball.model.input.data.KeyBinding;
 
 import java.nio.file.Paths;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,26 +69,6 @@ public class Settings
     }
 
     /**
-     * Erzeugt eine neue Instanz von Settings mit den Parametern aus {@code settingsJson}.
-     *
-     * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
-     */
-    Settings(SettingsJson settingsJson)
-    {
-        language = new SimpleObjectProperty<>(Language.valueOf(settingsJson.language));
-        fullscreen = new SimpleBooleanProperty(settingsJson.fullscreen);
-        masterVolume = new SimpleIntegerProperty(settingsJson.masterVolume);
-        musicVolume = new SimpleIntegerProperty(settingsJson.musicVolume);
-        sfxVolume = new SimpleIntegerProperty(settingsJson.sfxVolume);
-        HashMap<KeyCode, KeyBinding> keyBindings = new HashMap<>();
-        for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
-        {
-            keyBindings.put(KeyCode.valueOf(layout.keyCode), layout.keyBinding);
-        }
-        keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(keyBindings));
-    }
-
-    /**
      * Gibt die bereits existierenden Settings oder neu Angelegte zurück, falls
      * noch keine existieren.
      *
@@ -102,7 +81,8 @@ public class Settings
             Optional<SettingsJson> settingsOptional = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToSettings()), SettingsJson.class);
             if (settingsOptional.isPresent())
             {
-                singletonInstance = new Settings(settingsOptional.get());
+                singletonInstance = new Settings();
+                SettingsSettingsJsonConverter.loadSettingsFromJson(settingsOptional.get(), singletonInstance);
             }
             else
             {
@@ -129,7 +109,7 @@ public class Settings
      */
     public void saveToDisk(String filePath)
     {
-        SettingsJson settingsJson = SettingsJsonFactory.createJsonFromSettings(this);
+        SettingsJson settingsJson = SettingsSettingsJsonConverter.createJsonFromSettings(this);
         JsonFileManager.saveToJson(filePath, settingsJson);
     }
 
@@ -191,10 +171,10 @@ public class Settings
      * durch {@code keyCode} beschriebene Taste nicht schon durch ein anderes KeyBinding belegt ist und löscht
      * gegebenenfalls die vorhandene Belegung des übergebenen KeyBindings.
      *
-     * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
      * @param keyCode Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
+     * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
      */
-    public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
+    public void setKeyBinding(KeyCode keyCode, KeyBinding keyBinding)
     {
         if (keyBindingsMap.get(keyCode) == null)
         {

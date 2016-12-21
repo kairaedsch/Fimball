@@ -59,7 +59,7 @@ public class KeybindSubViewModel
      */
     public void changeKeyBinding(KeyCode keyCode)
     {
-        settings.setKeyBinding(keyBinding, keyCode);
+        settings.setKeyBinding(keyCode, keyBinding);
     }
 
     /**
