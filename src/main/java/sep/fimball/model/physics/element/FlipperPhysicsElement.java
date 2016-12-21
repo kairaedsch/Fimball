@@ -39,6 +39,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      * @param physicsHandler     Der PhysicsHandler des PhysicsElements.
      * @param gameElement        Das zugehörige GameElement, welches von diesem FlipperPhysicsElement beeinflusst werden soll.
      * @param position           Die Position des PhysicsElements.
+     * @param strengthMultiplier Der Muliplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      * @param isLeft             Gibt an , ob er rechte oder linke Flipperarm gemeint ist.
      */
@@ -87,6 +88,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     private void rotate(AngularDirection newAngularDirection)
     {
+        // Setzt die neue Rotationsrichtung, falls sich der Flipper noch in diese Richtung drehen kann.
         double newAngularVelocity = getAngularVelocity(newAngularDirection);
         if (newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
         if (newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
@@ -95,9 +97,13 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     @Override
     public void update(double deltaTime)
     {
-        // Rotate flipper
+        // Rechnet die neue Rotation des Flippers aus
         double newRotation = getRotation() + getAngularVelocity() * deltaTime;
 
+        /*
+        Wenn sich der Flipper zu weit gedreht hat, wird seine Position und Geschwindigkeit zurückgesetzt.
+        Anderenfalls wird die ausgerechnete Rotation gesetzt.
+         */
         if (newRotation <= minRotation)
         {
             setRotation(minRotation);
@@ -117,7 +123,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     /**
      * Gibt die aktuelle Winkelgeschwindigkeit zurück.
      *
-     * @return die aktuelle Winkelgeschwindigkeit.
+     * @return Die aktuelle Winkelgeschwindigkeit.
      */
     public double getAngularVelocity()
     {

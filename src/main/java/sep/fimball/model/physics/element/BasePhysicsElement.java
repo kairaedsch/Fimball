@@ -8,7 +8,7 @@ import sep.fimball.model.physics.collider.HitInfo;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.function.BinaryOperator;
 
 /**
  * Diese Klasse enthält alle Informationen zu den Physik-Eigenschaften eines BaseElements.
@@ -66,6 +66,7 @@ public class BasePhysicsElement
      */
     public boolean checkIfPointIsInElement(double rotation, Vector2 pointToSearch)
     {
+        // Gehe durch alle Shapes aller Collider durch und prüfe ob der gegebene Punkt kollidiert.
         for (Collider collider : colliders)
         {
             for (ColliderShape shape : collider.getShapes())
@@ -90,19 +91,16 @@ public class BasePhysicsElement
      */
     public Vector2 getExtremePos(double rotation, boolean max)
     {
-        Optional<Vector2> result = colliders
-                .stream()
-                .map(collider -> collider.getShapes()
-                        .stream()
-                        .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))
-                        .reduce(max ? Vector2::maxComponents : Vector2::minComponents))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .reduce(max ? Vector2::maxComponents : Vector2::minComponents);
+        Vector2 defaultVector = max ? Vector2.NEGATIVE_INFINITY : Vector2.POSITIVE_INFINITY;
+        BinaryOperator<Vector2> VectorReducer = max ? Vector2::maxComponents : Vector2::minComponents;
 
-        if (result.isPresent())
-            return result.get();
-        else
-            throw new IllegalStateException("Received invalid shapes");
+        // Gehe durch alle Shapes aller Collider durch und holt sich den extremsten X- bzw. Y-Wert.
+        Vector2 result = colliders.stream()
+                .map(collider -> collider.getShapes().stream()
+                        .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))
+                        .reduce(defaultVector, VectorReducer))
+                .reduce(defaultVector, VectorReducer);
+
+        return result;
     }
 }
