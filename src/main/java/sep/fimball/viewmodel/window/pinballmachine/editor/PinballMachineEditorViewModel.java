@@ -290,8 +290,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param startY Die y-Position, an der die Drag-Bewegung angefangen hat.
      * @param endX Die x-Position, an der sich die Drag-Bewegung befindet.
      * @param endY Die y-Position, an der sich die Drag-Bewegung befindet.
-     * @param gridPos TODO
-     * @param button Die gedrückte Maustaste
+     * @param gridPos Die neue Position auf dem Canvas.
+     * @param button Die gedrückte Maustaste.
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {

@@ -135,7 +135,6 @@ public class PhysicsHandler<GameElementT>
     {
         return new TimerTask()
         {
-            // TODO - Gleich der Update Loop der GameSession sehr viel untereschiedliche Logik.
             /**
              * Diese Methode wird 60 mal pro Sekunde ausgeführt und ist für die physikalischen Berechnungen zuständig.
              */
@@ -153,7 +152,7 @@ public class PhysicsHandler<GameElementT>
 
                 localModifyContainers.forEach(ModifyContainer::apply);
 
-                // Check all PhysicsElements for collisions with the ball
+                // PhysicsElements auf Kollisionen mit dem Ball prüfen
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
                 boolean localBallLost = false;
