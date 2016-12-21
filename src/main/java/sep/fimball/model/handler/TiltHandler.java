@@ -16,29 +16,25 @@ import java.util.Map;
 public class TiltHandler implements UserHandler
 {
     /**
-     * Die zugehörige HandlerGameSession.
-     */
-    private HandlerGameSession handlerGameSession;
-
-    /**
-     * Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
-     */
-    private InputModifier inputModifier;
-
-    /**
-     * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
-     */
-    private Map<HandlerPlayer, Integer> tiltCounters;
-
-    /**
      * Gibt an wie oft die "Nudge-Funktion" verwendet werden kann bevor der Tilt einsetzt.
      */
     private static final int MAX_TILT_COUNTER = 5;
-
     /**
      * Die Zeit, nach der der Ball automatisch als verloren gilt, wenn der Tilt aktiviert wurde.
      */
     private static final int TILT_DURATION_BEFORE_BALL_LOSS = 5;
+    /**
+     * Die zugehörige HandlerGameSession.
+     */
+    private HandlerGameSession handlerGameSession;
+    /**
+     * Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
+     */
+    private InputModifier inputModifier;
+    /**
+     * Wie oft der aktuelle Spieler beim aktuellen Ball den Spieltisch angestoßen hat.
+     */
+    private Map<HandlerPlayer, Integer> tiltCounters;
 
     /**
      * Erzeugt einen neuen TiltHandler.
