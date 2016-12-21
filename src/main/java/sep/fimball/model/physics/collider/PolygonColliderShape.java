@@ -77,6 +77,15 @@ public class PolygonColliderShape implements ColliderShape
         return new HitInfo(true, minimumOverlap);
     }
 
+    /**
+     * Berechnet den kürzesten Weg von den Vertices zum CircleCollider.
+     *
+     * @param rotatedVertices Die rotierten Vertices dieses Polygons.
+     * @param colliderPosition Die globale Position dieses Colliders.
+     * @param circleColliderPosition Die globale Position des anderen Colliders.
+     *
+     * @return Der kürzeste Weg von den Vertices zum CircleCollider.
+     */
     private Vector2 shortestPathVertexToCircleCollider(List<Vector2> rotatedVertices, Vector2 colliderPosition, Vector2 circleColliderPosition)
     {
         List<Vector2> circleAxisList = new ArrayList<>();
@@ -90,6 +99,15 @@ public class PolygonColliderShape implements ColliderShape
         return circleAxisList.get(0).normalized();
     }
 
+    /**
+     * Projiziert Vertices auf eine Achse.
+     *
+     * @param vertices Die zu projizierenden Vertices.
+     * @param colliderPosition Die globale Position dieses Colliders.
+     * @param axis Die Achse auf die projiziert werden soll.
+     *
+     * @return Die Position der Punkte auf der projizierten Achse.
+     */
     private List<Double> projectVerticesOnAxis(List<Vector2> vertices, Vector2 colliderPosition, Vector2 axis)
     {
         List<Double> points = new ArrayList<>();
@@ -103,6 +121,16 @@ public class PolygonColliderShape implements ColliderShape
         return points;
     }
 
+    /**
+     * Überprüft ob sich das auf die Achse projizierte Polygon und Kreis überschneiden.
+     *
+     * @param projectedVertices Die projizierten Vertices.
+     * @param axis Die Achse auf die projiziert wurde.
+     * @param circleColliderPosition Die globale Position des anderen Colliders.
+     * @param circleColliderRadius Der Radius des anderen Colliders.
+     *
+     * @return Wenn sich die Projektionen überschneiden die Achse und die größe des Schnitts.
+     */
     private Optional<OverlapAxis> checkIfProjectionsIntersect(List<Double> projectedVertices, Vector2 axis, Vector2 circleColliderPosition, double circleColliderRadius)
     {
         double circleCenter = circleColliderPosition.dot(axis);
@@ -124,6 +152,13 @@ public class PolygonColliderShape implements ColliderShape
         }
     }
 
+    /**
+     * Berechnet die linksseitige Normale einer Gerade zwischen jeweils zwei Vertices.
+     *
+     * @param rotatedVertices Die rotierten Vertices.
+     * @param vertexIndex Der Index des Vertex.
+     * @return Die linksseitige Normale.
+     */
     private Vector2 getVertexNormal(List<Vector2> rotatedVertices, int vertexIndex)
     {
         if (vertexIndex == rotatedVertices.size() - 1)
@@ -138,6 +173,12 @@ public class PolygonColliderShape implements ColliderShape
         }
     }
 
+    /**
+     * Berechnet die kleinste Überschneidung.
+     *
+     * @param overlaps Die Liste der Überschneidungen.
+     * @return Die kleinste Überschneidung.
+     */
     private Vector2 getMinimumOverlap(List<OverlapAxis> overlaps)
     {
         overlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));

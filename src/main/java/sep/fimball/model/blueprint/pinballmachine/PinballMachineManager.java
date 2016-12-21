@@ -144,8 +144,9 @@ public class PinballMachineManager
     /**
      * Speichert das gegebene Vorschaubild zu dem gegebenen Automaten.
      *
-     * @param pinballMachine Der Automat, dessen Vorschaubild gespeichert werden soll.
-     * @param image          Das Vorschaubild, das gespeichert werden soll.
+     * @param pinballMachine      Der Automat, dessen Vorschaubild gespeichert werden soll.
+     * @param image               Das Vorschaubild, das gespeichert werden soll.
+     * @param newPreviewImagePath Der Pfad an dem das neue Vorschaubild gespeichert werden soll.
      */
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image, String newPreviewImagePath)
     {
@@ -155,7 +156,8 @@ public class PinballMachineManager
         {
             // Lösche das alte Vorschaubild
             String oldPreviewImagePath = pinballMachine.previewImagePathProperty().get();
-            if(!oldPreviewImagePath.equals(DataPath.pathToDefaultPreview())) Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
+            if (!oldPreviewImagePath.equals(DataPath.pathToDefaultPreview()))
+                Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
         }
         catch (IOException e)
         {

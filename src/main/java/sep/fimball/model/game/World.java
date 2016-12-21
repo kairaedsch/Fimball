@@ -24,6 +24,7 @@ public class World implements HandlerWorld
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
      * @param elements Liste der Elemente in der Spielwelt.
+     * @param startedFromEditor Gibt an ob die Welt im Editor oder dem Hauptspiel genutzt wird.
      */
     public World(ObservableList<GameElement> elements, boolean startedFromEditor)
     {

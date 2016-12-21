@@ -53,6 +53,9 @@ public class PinballMachine
      */
     private ListProperty<PlacedElement> elements;
 
+    /**
+     * Die sortierte Liste der platzierten Elemente. Diese werden sortiert um in der korrekten Reihenfolge gezeichnet zu werden.
+     */
     private ListProperty<PlacedElement> sortedElements;
 
     /**

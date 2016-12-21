@@ -40,13 +40,26 @@ public enum BaseElementType
      */
     RAMP(2);
 
+    /**
+     * Gibt die Reihenfolge beim Zeichnen an. Dabei bedeutet ein kleinerer Wert, dass zuerst gezeichnet wird. z.B. wird 0 vor 1 gezeichnet.
+     */
     private final int drawOrder;
 
+    /**
+     * Erzeugt ein neues Objekt zur Kennzeichnung des ElementTyps.
+     *
+     * @param drawOrder Gibt die Reihenfolge beim Zeichnen an.
+     */
     BaseElementType(int drawOrder)
     {
         this.drawOrder = drawOrder;
     }
 
+    /**
+     * Gibt die Reihenfolge beim Zeichnen dieses Typs zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
     public int getDrawOrder()
     {
         return drawOrder;
