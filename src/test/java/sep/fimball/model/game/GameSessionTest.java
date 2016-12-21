@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -63,22 +64,16 @@ public class GameSessionTest
         elementList.add(ball);
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
 
-        // TODO - Mock HandlerManager
-        GameSession gameSession = new GameSession(pinballMachineMock, playerNames, false, new HandlerManager());
+        HandlerManager handlerManagerMock = mock(HandlerManager.class);
+
+        GameSession gameSession = new GameSession(pinballMachineMock, playerNames, false, handlerManagerMock);
         gameSession.addGameLoopObserver(new GameLoopObserver(this));
-
-        Handler collisionHandler = new Handler(new CollisionHandler(this));
-        Handler ballLostHandler = new Handler(new BallLostHandler(this));
-        List<Handler> handlerList = new ArrayList<>();
-        handlerList.add(collisionHandler);
-        handlerList.add(ballLostHandler);
-
-        gameSession.addHandlers(handlerList);
 
         GameElement gameElement = gameSession.gameBallProperty().get();
 
         // künstliches Erstellen einer Kollision.
-        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, 0);
+        final int colliderId = 0;
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
@@ -98,58 +93,16 @@ public class GameSessionTest
         gameSession.loopUpdate();
 
         // Auswertung
-        assertThat(collidedGameElement, equalTo(gameElement));
+        verify(handlerManagerMock).activateElementHandler(gameElement, colliderId);
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
-        assertThat(isBallLost, is(true));
+        verify(handlerManagerMock).activateGameHandler(GameEvent.BALL_LOST);
         assertThat(gameLoopObserverNotified, is(true));
-    }
-
-    private void setCollidedGameElement(GameElement element)
-    {
-        collidedGameElement = element;
-    }
-
-    private void setBallLost(boolean isBallLost)
-    {
-        this.isBallLost = isBallLost;
     }
 
     private void setGameLoopObserverNotified(boolean gameLoopObserverNotified)
     {
         this.gameLoopObserverNotified = gameLoopObserverNotified;
-    }
-
-    private class CollisionHandler implements ElementHandler
-    {
-        private GameSessionTest test;
-
-        public CollisionHandler(GameSessionTest test)
-        {
-            this.test = test;
-        }
-
-        @Override
-        public void activateElementHandler(HandlerGameElement element, int colliderId)
-        {
-            test.setCollidedGameElement((GameElement) element);
-        }
-    }
-
-    private class BallLostHandler implements GameHandler
-    {
-        private GameSessionTest test;
-
-        public BallLostHandler(GameSessionTest test)
-        {
-            this.test = test;
-        }
-
-        @Override
-        public void activateGameHandler(GameEvent gameEvent)
-        {
-            test.setBallLost(true);
-        }
     }
 
     private class GameLoopObserver implements Observer
