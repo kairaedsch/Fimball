@@ -30,9 +30,9 @@ public class PhysicsHandlerTest
     private PhysicsHandler test;
 
     /**
-     * Der Monitor, über den Informationen über Kollisionen synchronisiert werden.
+     * Der Monitor, über den die Events an die GameSession synchronisiert werden..
      */
-    private final Object collisionMonitor = new Object();
+    private final Object eventMonitor = new Object();
 
     /**
      * Der Monitor, über den Informationen über den Verlust der Kugel synchronisiert werden.
@@ -93,12 +93,11 @@ public class PhysicsHandlerTest
     {
         init();
         test.startTicking();
-        synchronized (collisionMonitor)
+        synchronized (eventMonitor)
         {
-            collisionMonitor.wait(MAX_TEST_DURATION);
+            eventMonitor.wait(MAX_TEST_DURATION);
         }
         test.stopTicking();
-        Thread.sleep(100); // TODO HACK hack hack
         assertThat("Das Element im Spiel hat auf eine Kollision mit der Kugel geprüft", collisionCheckWithBall, is(true));
         assertThat("Die ElementEventArgs wurden an die GameSession übergeben", elementEventArgsEmpty, is(false));
     }
@@ -133,10 +132,6 @@ public class PhysicsHandlerTest
         doAnswer(invocationOnMock ->
         {
             collisionCheckWithBall = true;
-            synchronized (collisionMonitor)
-            {
-                collisionMonitor.notify();
-            }
             return null;
         }).when(mockedElement).checkCollision(anyList(), eq(mockedBall));
         return mockedElement;
@@ -154,6 +149,10 @@ public class PhysicsHandlerTest
         {
             List eventArgs = invocationOnMock.getArgument(1);
             elementEventArgsEmpty = eventArgs.isEmpty();
+            synchronized (eventMonitor)
+            {
+                eventMonitor.notify();
+            }
             return null;
         }).when(mockedGameSession).addEventArgs(anyList(), anyList());
 
@@ -164,7 +163,6 @@ public class PhysicsHandlerTest
                 {
                     ballLostMonitor.notify();
                 }
-
             return null;
         }).when(mockedGameSession).setBallLost();
         return mockedGameSession;

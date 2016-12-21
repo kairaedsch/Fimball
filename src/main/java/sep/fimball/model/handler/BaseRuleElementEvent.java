@@ -5,11 +5,5 @@ package sep.fimball.model.handler;
  */
 public class BaseRuleElementEvent
 {
-    /**
-     * Erzeugt ein neues BaseRuleElementEvent.
-     */
-    public BaseRuleElementEvent()
-    {
-        // TODO - Sollte dieser Konstruktor leer sein? Wenn ja ist die Klasse sinnlos.
-    }
+
 }
