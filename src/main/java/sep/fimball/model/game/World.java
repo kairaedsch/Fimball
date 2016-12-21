@@ -41,7 +41,6 @@ public class World implements HandlerWorld
         elementEventArgsLists.forEach(elementEventArgsList ->
                 elementEventArgsList.forEach(elementEventArgs ->
                         elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs)));
-
     }
 
     /**

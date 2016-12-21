@@ -253,6 +253,15 @@ public class GameElement implements HandlerGameElement
                 return -1;
         }
 
+        if (g1t == BaseElementType.LEFT_FLIPPER || g1t == BaseElementType.RIGHT_FLIPPER || g2t == BaseElementType.LEFT_FLIPPER || g2t == BaseElementType.RIGHT_FLIPPER)
+        {
+            if (g1t == g2t)
+                return 0;
+            else if (g2t == BaseElementType.NORMAL)
+                return 1;
+            else
+                return -1;
+        }
         return 0;
     }
 }
