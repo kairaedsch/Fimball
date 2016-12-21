@@ -163,6 +163,7 @@ public class SelectedElementSubViewModel
     public void remove()
     {
         pinballMachineEditor.removeSelection();
+        pinballMachineEditor.clearSelection();
     }
 
     /**
