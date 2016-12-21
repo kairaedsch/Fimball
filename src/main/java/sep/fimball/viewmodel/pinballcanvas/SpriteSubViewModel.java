@@ -217,7 +217,7 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Gibt die Sichtbarkeits des Elements zurück.
+     * Gibt die Sichtbarkeit des Elements zurück.
      *
      * @return Die Sichtbarkeit des Elements.
      */

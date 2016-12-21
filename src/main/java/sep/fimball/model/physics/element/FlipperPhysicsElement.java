@@ -127,7 +127,7 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     /**
      * Gibt die Winkelgeschwindigkeit abhängig vom der übergebenen AngularDirection zurück.
      *
-     * @param angularDirection Die Bewegrichtung des Flippers.
+     * @param angularDirection Die Bewegungsrichtung des Flippers.
      * @return Die Winkelgeschwindigkeit.
      */
     private double getAngularVelocity(AngularDirection angularDirection)

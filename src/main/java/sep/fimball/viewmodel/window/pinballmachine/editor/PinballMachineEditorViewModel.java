@@ -108,7 +108,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private EditorSession editorSession;
 
     /**
-     * Gibt an, ob aktuell die Umschautaste gedrückt wird.
+     * Gibt an, ob aktuell die Umschau-Zaste gedrückt wird.
      */
     private boolean moveModifier = false;
 

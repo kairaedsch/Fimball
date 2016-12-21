@@ -148,7 +148,7 @@ public class PhysicsElement<GameElementT>
      * Prüft alle Kollider auf Kollisionen mit dem Ball und fügt bei Kollision Argumente zu den gegebenen Event-Argument-Listen hinzu.
      *
      * @param eventArgsList      Die Liste, welche alle auftretenden Kollisionen speichert.
-     * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kolliden kann.
+     * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kollidieren kann.
      */
     public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
