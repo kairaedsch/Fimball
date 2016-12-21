@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Diese Klasse erzeugt aus Settings-Objekten SettingsJson-Objekte, um die Serialisierung der Einstellungen zu ermöglichen.
+ * Diese Klasse erzeugt aus Settings-Objekten SettingsJson-Objekte, um die Serialisierung der Einstellungen zu
+ * ermöglichen.
  */
 class SettingsJsonFactory
 {
@@ -24,7 +25,10 @@ class SettingsJsonFactory
         {
             SettingsJson.KeyLayout keyLayout = new SettingsJson.KeyLayout();
             keyLayout.keyCode = keyCode.name();
-            keyLayout.keyBinding = settings.getKeyBinding(keyCode);
+            if (settings.getKeyBinding(keyCode).isPresent())
+            {
+                keyLayout.keyBinding = settings.getKeyBinding(keyCode).get();
+            }
             keyLayouts.add(keyLayout);
         }
         settingsJson.keyLayouts = keyLayouts.toArray(new SettingsJson.KeyLayout[keyLayouts.size()]);

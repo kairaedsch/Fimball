@@ -23,7 +23,8 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 import java.util.List;
 
 /**
- * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven Spieler.
+ * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven
+ * Spieler.
  */
 public class GameViewModel extends WindowViewModel
 {
@@ -43,12 +44,14 @@ public class GameViewModel extends WindowViewModel
     private IntegerProperty playerReserveBalls;
 
     /**
-     * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet.
+     * Dies geschieht durch Property-Binding.
      */
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in
+     * PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private DoubleProperty cameraZoom;
 
@@ -173,7 +176,8 @@ public class GameViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt der View das PinballCanvasViewModel zur Verfügung, damit die View den Automaten mit all seinen Sprites zeichnen kann.
+     * Stellt der View das PinballCanvasViewModel zur Verfügung, damit die View den Automaten mit all seinen Sprites
+     * zeichnen kann.
      *
      * @return Das PinballCanvasViewModel.
      */
@@ -185,22 +189,25 @@ public class GameViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        if (binding != null && binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).isPresent())
         {
-            gameSession.pauseAll();
-            if (gameSession.isStartedFromEditor())
+            KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).get();
+            if (binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
             {
-                sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
+                gameSession.pauseAll();
+                if (gameSession.isStartedFromEditor())
+                {
+                    sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
+                }
+                else
+                {
+                    sceneManager.setDialog(new PauseViewModel(this));
+                }
             }
-            else
+            else if (binding != null)
             {
-                sceneManager.setDialog(new PauseViewModel(this));
+                keyEventConverter.triggerKeyEvent(keyEvent).ifPresent(gameSession::activateUserHandler);
             }
-        }
-        else if (binding != null)
-        {
-            keyEventConverter.triggerKeyEvent(keyEvent).ifPresent(gameSession::activateUserHandler);
         }
     }
 

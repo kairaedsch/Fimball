@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es, diesen zu bearbeiten.
+ * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es,
+ * diesen zu bearbeiten.
  */
 public class PinballMachineEditorViewModel extends WindowViewModel
 {
@@ -65,12 +66,14 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ListProperty<AvailableElementSubViewModel> availableAdvancedElements;
 
     /**
-     * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Position der Kamera, die ihren Wert immer an die Kamera-Position im PinballCanvasViewModel sendet.
+     * Dies geschieht durch Property-Binding.
      */
     private ObjectProperty<Vector2> cameraPosition;
 
     /**
-     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
+     * Die aktuelle Stärke des Zooms der Kamera, die ihren Wert immer an die Kamera Stärke des Zooms in
+     * PinballCanvasViewModel sendet. Dies geschieht durch Property-Binding.
      */
     private DoubleProperty cameraZoom;
 
@@ -248,7 +251,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu dem Spielfenster, wo der gerade vom Nutzer bearbeitete Flipper-Automat getestet werden kann.
+     * Führt den Benutzer zu dem Spielfenster, wo der gerade vom Nutzer bearbeitete Flipper-Automat getestet werden
+     * kann.
      */
     public void startPinballMachine()
     {
@@ -257,7 +261,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu dem Automateneinstellungsfenster, wo der gerade vom Nutzer bearbeitete Flipperautomat u.a. gespeichert werden kann.
+     * Führt den Benutzer zu dem Automateneinstellungsfenster, wo der gerade vom Nutzer bearbeitete Flipperautomat u.a.
+     * gespeichert werden kann.
      */
     public void showSettingsDialog()
     {
@@ -270,12 +275,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Verarbeitet eine Drag-Bewegung.
      *
-     * @param startX  Die x-Position, an der die Drag-Bewegung angefangen hat.
-     * @param startY  Die y-Position, an der die Drag-Bewegung angefangen hat.
-     * @param endX    Die x-Position, an der sich die Drag-Bewegung befindet.
-     * @param endY    Die y-Position, an der sich die Drag-Bewegung befindet.
+     * @param startX Die x-Position, an der die Drag-Bewegung angefangen hat.
+     * @param startY Die y-Position, an der die Drag-Bewegung angefangen hat.
+     * @param endX Die x-Position, an der sich die Drag-Bewegung befindet.
+     * @param endY Die y-Position, an der sich die Drag-Bewegung befindet.
      * @param gridPos TODO
-     * @param button  Die gedrückte Maustaste
+     * @param button Die gedrückte Maustaste
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
@@ -322,7 +327,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Behandelt das Drücken der Maustaste auf dem Canvas.
      *
      * @param mouseEvent Das Event, in dem die Maustaste gedrückt wurde.
-     * @param gridPos    Die Position im Grid, an der die Maustaste gedrückt wurde.
+     * @param gridPos Die Position im Grid, an der die Maustaste gedrückt wurde.
      */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
@@ -479,32 +484,32 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        if (binding == null)
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).isPresent())
         {
-            return;
-        }
-        switch (binding)
-        {
-            case EDITOR_ROTATE:
-                if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
-                {
-                    pinballMachineEditor.rotateSelection();
-                }
-                break;
-            case EDITOR_DELETE:
-                if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
-                {
-                    pinballMachineEditor.removeSelection();
-                    pinballMachineEditor.clearSelection();
-                }
-                break;
-            case EDITOR_MOVE:
-                moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
-                break;
-        }
+            KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).get();
 
-        super.handleKeyEvent(keyEvent);
+            switch (binding)
+            {
+                case EDITOR_ROTATE:
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+                    {
+                        pinballMachineEditor.rotateSelection();
+                    }
+                    break;
+                case EDITOR_DELETE:
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+                    {
+                        pinballMachineEditor.removeSelection();
+                        pinballMachineEditor.clearSelection();
+                    }
+                    break;
+                case EDITOR_MOVE:
+                    moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
+                    break;
+            }
+
+            super.handleKeyEvent(keyEvent);
+        }
     }
 
     /**
@@ -538,7 +543,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt der View das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld zur Verfügung.
+     * Stellt der View das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld zur
+     * Verfügung.
      *
      * @return Das SelectedElementSubViewModel des aktuell ausgewählten Elements auf dem Spielfeld
      */

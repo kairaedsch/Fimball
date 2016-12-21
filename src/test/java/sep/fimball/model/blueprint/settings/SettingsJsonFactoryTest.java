@@ -14,6 +14,7 @@ import sep.fimball.model.input.data.KeyBinding;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +31,7 @@ public class SettingsJsonFactoryTest
     /**
      * Testet, ob aus bestehenden Settings eine korrekte SettingsJson Datei erzeugt wird.
      */
-    @Test(timeout = 2000)
+    @Test (timeout = 2000)
     public void testCreateJson()
     {
         final boolean IS_IN_FULLSCREEN = false;
@@ -51,7 +52,7 @@ public class SettingsJsonFactoryTest
             keyBindings.put(KeyCode.valueOf(keyLayout.keyCode), keyLayout.keyBinding);
         }
         Mockito.when(mockedSettings.keyBindingsMapProperty()).thenReturn(new SimpleMapProperty<>(FXCollections.observableMap(keyBindings)));
-        Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> keyBindings.get(invocation.getArgument(0)));
+        Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> Optional.of(keyBindings.get(invocation.getArgument(0))));
 
         SettingsJson createdJson = SettingsJsonFactory.createJsonFromSettings(mockedSettings);
 

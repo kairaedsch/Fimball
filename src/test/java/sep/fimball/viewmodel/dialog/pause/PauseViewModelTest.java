@@ -8,6 +8,8 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -27,7 +29,7 @@ public class PauseViewModelTest
         GameViewModel gameViewModel = mock(GameViewModel.class);
         SceneManagerViewModel sceneManagerViewModel = mock(SceneManagerViewModel.class);
         Settings settings = mock(Settings.class);
-        when(settings.getKeyBinding(pauseKeyCode)).thenReturn(KeyBinding.PAUSE);
+        when(settings.getKeyBinding(pauseKeyCode)).thenReturn(Optional.of(KeyBinding.PAUSE));
 
         PauseViewModel pauseViewModel = new PauseViewModel(gameViewModel, settings);
         pauseViewModel.setSceneManager(sceneManagerViewModel);
@@ -45,7 +47,7 @@ public class PauseViewModelTest
      * Simuliert das Drücken einer Taste.
      *
      * @param viewModel das ViewModel auf dem der Tastendruck simuliert werden soll.
-     * @param code      der Tastendruck der simuliert werden soll.
+     * @param code der Tastendruck der simuliert werden soll.
      */
     private void simulateKeyPressed(PauseViewModel viewModel, KeyCode code)
     {

@@ -14,24 +14,23 @@ import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
- * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinball zur Verfügung und ermöglicht deren Fortsetzung oder Abbrechen.
+ * Das PauseViewModel stellt der View Daten über die aktuell gespielte Partie Pinball zur Verfügung und ermöglicht deren
+ * Fortsetzung oder Abbrechen.
  */
 public class PauseViewModel extends DialogViewModel
 {
     /**
+     * Eine Referenz auf die Singleton Instanz von settings.
+     */
+    private final Settings settings;
+    /**
      * Eine Highscore-Liste, die alle Highscores der aktuellen Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
-
     /**
      * Das GameViewModel, aus dem heraus das PauseViewModel erstellt wurde.
      */
     private GameViewModel gameViewModel;
-
-    /**
-     * Eine Referenz auf die Singleton Instanz von settings.
-     */
-    private final Settings settings;
 
     /**
      * Erstellt ein neues PauseViewModel.
@@ -47,7 +46,7 @@ public class PauseViewModel extends DialogViewModel
      * Erstellt ein neues PauseViewModel.
      *
      * @param gameViewModel Das zugehörige GameViewModel.
-     * @param settings      Eine Instanz des Singleton Settings
+     * @param settings Eine Instanz des Singleton Settings
      */
     PauseViewModel(GameViewModel gameViewModel, Settings settings)
     {
@@ -87,7 +86,7 @@ public class PauseViewModel extends DialogViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (settings.getKeyBinding(keyEvent.getCode()) == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+        if (settings.getKeyBinding(keyEvent.getCode()).isPresent() && settings.getKeyBinding(keyEvent.getCode()).get() == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
         {
             resumeGame();
         }

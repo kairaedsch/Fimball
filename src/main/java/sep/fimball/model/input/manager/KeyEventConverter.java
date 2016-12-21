@@ -6,7 +6,9 @@ import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Kontrolliert die Eingaben, die der Spieler über die Tastatur auslöst.
@@ -38,30 +40,34 @@ public class KeyEventConverter
      */
     public Optional<KeyEventArgs> triggerKeyEvent(KeyEvent keyEvent)
     {
-        KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
-        KeyEventArgs.KeyChangedToState state;
-
-        if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).isPresent())
         {
-            state = KeyEventArgs.KeyChangedToState.DOWN;
-        }
-        else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
-        {
-            state = KeyEventArgs.KeyChangedToState.UP;
-        }
-        else
-        {
-            new IllegalArgumentException("Invalid keyEvent: " + keyEvent.getEventType()).printStackTrace();
-            return Optional.empty();
-        }
+            KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).get();
+            KeyEventArgs.KeyChangedToState state;
 
-        boolean stateSwitched = oldKeyState.get(keyEvent.getCode()) != keyEvent.getEventType();
+            if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+            {
+                state = KeyEventArgs.KeyChangedToState.DOWN;
+            }
+            else if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+            {
+                state = KeyEventArgs.KeyChangedToState.UP;
+            }
+            else
+            {
+                new IllegalArgumentException("Invalid keyEvent: " + keyEvent.getEventType()).printStackTrace();
+                return Optional.empty();
+            }
 
-        if (stateSwitched)
-        {
-            oldKeyState.put(keyEvent.getCode(), keyEvent.getEventType());
+            boolean stateSwitched = oldKeyState.get(keyEvent.getCode()) != keyEvent.getEventType();
+
+            if (stateSwitched)
+            {
+                oldKeyState.put(keyEvent.getCode(), keyEvent.getEventType());
+            }
+
+            return Optional.of(new KeyEventArgs(binding, state, stateSwitched));
         }
-
-        return Optional.of(new KeyEventArgs(binding, state, stateSwitched));
+        return Optional.empty();
     }
 }

@@ -8,14 +8,12 @@ import sep.fimball.model.input.data.KeyBinding;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
- * Diese Klasse enthält Tests, die sicherstellen, dass die Einstellungsobjekte ordnungsgemäß erzeugt werden und neue KeyBindings
- * richtig gesetzt werden können.
+ * Diese Klasse enthält Tests, die sicherstellen, dass die Einstellungsobjekte ordnungsgemäß erzeugt werden und neue
+ * KeyBindings richtig gesetzt werden können.
  */
 public class SettingsTest
 {
@@ -24,17 +22,17 @@ public class SettingsTest
     private final int MUSIC_VOLUME = 75;
     private final int SFX_VOLUME = 80;
     private final Language LANGUAGE = Language.GERMAN;
-    private SettingsJson.KeyLayout[] keyLayouts = new SettingsJson.KeyLayout[0];
     private final KeyCode keyCodeA = KeyCode.A;
     private final KeyCode keyCodeB = KeyCode.B;
     private final KeyBinding keyBinding1 = KeyBinding.EDITOR_DELETE;
     private final KeyBinding keyBinding2 = KeyBinding.EDITOR_MOVE;
+    private SettingsJson.KeyLayout[] keyLayouts = new SettingsJson.KeyLayout[0];
     private SettingsJson testSettingsJson = new SettingsJson();
 
     /**
      * Stellt sicher, dass die Methode getInstance nicht {@code null} zurück gibt.
      */
-    @Test(timeout = 500)
+    @Test (timeout = 500)
     public void testGetInstance()
     {
         assertThat(Settings.getSingletonInstance(), not(equalTo(null)));
@@ -43,7 +41,7 @@ public class SettingsTest
     /**
      * Dieser Test prüft, ob die Einstellungen richtig aus einer SettingsJson geladen werden.
      */
-    @Test(timeout = 2000)
+    @Test (timeout = 2000)
     public void testCreateSettings()
     {
         initKeyLayouts();
@@ -56,39 +54,39 @@ public class SettingsTest
         assertThat(testSettings.musicVolumeProperty().get(), is(MUSIC_VOLUME));
         assertThat(testSettings.sfxVolumeProperty().get(), is(SFX_VOLUME));
         assertThat(testSettings.keyBindingsMapProperty(), not(equalTo(null)));
-        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> testSettings.getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).equals(keyLayout.keyBinding)), is(true));
+        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> testSettings.getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).get().equals(keyLayout.keyBinding)), is(true));
         Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !KeyCode.valueOf(keyLayout.keyCode).equals(keyCode)))).findFirst();
         if (unusedKeyCode.isPresent())
         {
-            assertThat(testSettings.getKeyBinding(unusedKeyCode.get()), equalTo(null));
+            assertThat(testSettings.getKeyBinding(unusedKeyCode.get()), equalTo(Optional.empty()));
         }
     }
 
     /**
      * Stellt sicher, dass neue Tastenbelegungen wie beschrieben eingefügt werden.
      */
-    @Test(timeout = 1000)
+    @Test (timeout = 1000)
     public void testSetKeyBinding()
     {
         initTestJson();
         Settings testSettings = new Settings(testSettingsJson);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(null));
-        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(null));
+        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(Optional.empty()));
+        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(Optional.empty()));
         testSettings.setKeyBinding(keyBinding1, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(keyCodeA));
+        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding1));
+        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeA));
         testSettings.setKeyBinding(keyBinding1, keyCodeB);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(null));
-        assertThat(testSettings.getKeyBinding(keyCodeB), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(keyCodeB));
+        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(Optional.empty()));
+        assertThat(testSettings.getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
+        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
         testSettings.setKeyBinding(keyBinding2, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(keyBinding2));
-        assertThat(testSettings.getKeyCode(keyBinding2), equalTo(keyCodeA));
+        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
+        assertThat(testSettings.getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
         testSettings.setKeyBinding(keyBinding1, keyCodeA);
-        assertThat(testSettings.getKeyBinding(keyCodeA), equalTo(keyBinding2));
-        assertThat(testSettings.getKeyBinding(keyCodeB), equalTo(keyBinding1));
-        assertThat(testSettings.getKeyCode(keyBinding1), equalTo(keyCodeB));
-        assertThat(testSettings.getKeyCode(keyBinding2), equalTo(keyCodeA));
+        assertThat(testSettings.getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
+        assertThat(testSettings.getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
+        assertThat(testSettings.getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
+        assertThat(testSettings.getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
     }
 
     /**

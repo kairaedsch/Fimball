@@ -9,10 +9,10 @@ import sep.fimball.model.blueprint.json.JsonFileManager;
 import sep.fimball.model.input.data.KeyBinding;
 
 import java.nio.file.Paths;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,26 +70,6 @@ public class Settings
     }
 
     /**
-     * Erzeugt die Standardeinstellung für Tastendrücke.
-     *
-     * @return Die Standardbelegung der Tastatur.
-     */
-    private Map<KeyCode, KeyBinding> getDefaultBindings()
-    {
-        return Stream.of(
-                new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER),
-                new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE),
-                new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT),
-                new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT),
-                new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE),
-                new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE),
-                new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER),
-                new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE),
-                new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER))
-                .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
-    }
-
-    /**
      * Erzeugt eine neue Instanz von Settings mit den Parametern aus {@code settingsJson}.
      *
      * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
@@ -130,6 +110,16 @@ public class Settings
             }
         }
         return singletonInstance;
+    }
+
+    /**
+     * Erzeugt die Standardeinstellung für Tastendrücke.
+     *
+     * @return Die Standardbelegung der Tastatur.
+     */
+    private Map<KeyCode, KeyBinding> getDefaultBindings()
+    {
+        return Stream.of(new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER), new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE), new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT), new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT), new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE), new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE), new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER), new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE), new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER)).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 
     /**
@@ -202,25 +192,27 @@ public class Settings
      * gegebenenfalls die vorhandene Belegung des übergebenen KeyBindings.
      *
      * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
-     * @param keyCode    Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
+     * @param keyCode Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
      */
     public void setKeyBinding(KeyBinding keyBinding, KeyCode keyCode)
     {
         if (keyBindingsMap.get(keyCode) == null)
         {
-            keyBindingsMap.remove(getKeyCode(keyBinding));
+            if (getKeyCode(keyBinding).isPresent())
+            {
+                keyBindingsMap.remove(getKeyCode(keyBinding).get());
+            }
             keyBindingsMap.put(keyCode, keyBinding);
         }
     }
 
     /**
-     * Gibt für das gegebene KeyBinding den entsprechenden KeyCode zurück oder {@code null}, falls kein KeyCode
-     * existiert.
+     * Gibt für das gegebene KeyBinding den entsprechenden KeyCode zurück, falls er existiert.
      *
      * @param keyBinding Das gesuchte KeyBinding.
      * @return Der KeyCode, der das übergebene Spielereignis auslöst.
      */
-    public KeyCode getKeyCode(KeyBinding keyBinding)
+    public Optional<KeyCode> getKeyCode(KeyBinding keyBinding)
     {
         if (keyBindingsMap.containsValue(keyBinding))
         {
@@ -228,23 +220,22 @@ public class Settings
             {
                 if (keyBindingsMap.get(keyCode).equals(keyBinding))
                 {
-                    return keyCode;
+                    return Optional.of(keyCode);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
-     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück oder
-     * {@code null}, falls kein KeyBinding existiert.
+     * Gibt für den gegebenen KeyCode das entsprechende KeyBinding zurück, falls es existiert.
      *
      * @param code Der KeyCode der Taste.
      * @return Das KeyBinding, das das auszulösende Spielereignis repräsentiert.
      */
-    public KeyBinding getKeyBinding(KeyCode code)
+    public Optional<KeyBinding> getKeyBinding(KeyCode code)
     {
-        return keyBindingsMap.get(code);
+        return keyBindingsMap.get(code) == null ? Optional.empty() : Optional.of(keyBindingsMap.get(code));
     }
 
     /**
