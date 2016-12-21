@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.viewmodel.dialog.gamesettings.KeybindSubViewModel;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -37,6 +36,6 @@ public class KeybindSubViewModelTest
         KeybindSubViewModel dialog2 = new KeybindSubViewModel(settings, binding, testCode);
         dialog2.keyNameProperty();
         assertThat(dialog2.keyNameProperty().get(), is(testCode.getName()));
-        assertThat(dialog2.elementNameProperty().get(), is(bindingName));
+        assertThat(dialog2.bindingNameProperty().get(), is(bindingName));
     }
 }

@@ -14,9 +14,9 @@ import sep.fimball.model.input.data.KeyBinding;
 public class KeybindSubViewModel
 {
     /**
-     * Der Name des {@link sep.fimball.model.game.GameElement}, das durch die Taste bedient wird.
+     * Der Name der Aktion, die durch die Taste ausgeführt wird.
      */
-    private StringProperty elementName;
+    private StringProperty bindingName;
 
     /**
      * Der Name der Taste, die das {@link sep.fimball.model.game.GameElement} bedient.
@@ -48,8 +48,8 @@ public class KeybindSubViewModel
         keyName = new SimpleStringProperty();
         keyName.setValue(keyCode != null ? keyCode.getName() : "No Key set");
 
-        elementName = new SimpleStringProperty();
-        elementName.bind(Bindings.concat(keyBinding.getName()));
+        bindingName = new SimpleStringProperty();
+        bindingName.bind(Bindings.concat(keyBinding.getName()));
     }
 
     /**
@@ -63,13 +63,13 @@ public class KeybindSubViewModel
     }
 
     /**
-     * Stellt der View den Namen des Flipperautomat-Elements, das bedient werden soll, zur Verfügung.
+     * Stellt der View den Namen der Aktion, die bedient werden soll, zur Verfügung.
      *
      * @return Der Name des bedienbaren Flipperautomaten-Elements.
      */
-    public ReadOnlyStringProperty elementNameProperty()
+    public ReadOnlyStringProperty bindingNameProperty()
     {
-        return elementName;
+        return bindingName;
     }
 
     /**
@@ -82,8 +82,14 @@ public class KeybindSubViewModel
         return keyName;
     }
 
+    /**
+     * Vergleicht zwei KeyBindSubViewModels nach den Namen der Aktionen, die sie auslösen sollen.
+     * @param subViewModelOne Ein KeyBindSubViewModel, mit dem das {@code subViewModelTwo} verglichen werden soll.
+     * @param subViewModelTwo Ein KeyBindSubViewModel, mit dem das {@code subViewModelOne} verglichen werden soll.
+     * @return {@code 0}, falls die Namen gleich sind; ein Wert kleiner 0, falls {@code subViewModelOne} lexikographisch kleiner ist als {@code subViewModelTwo}; und ein Wert größer 0, falls {@code subViewModelOne} lexikographisch größer ist als {@code subViewModelTwo}
+     */
     public static int compare(KeybindSubViewModel subViewModelOne, KeybindSubViewModel subViewModelTwo)
     {
-        return subViewModelOne.elementNameProperty().get().compareTo(subViewModelTwo.elementNameProperty().get());
+        return subViewModelOne.bindingNameProperty().get().compareTo(subViewModelTwo.bindingNameProperty().get());
     }
 }
