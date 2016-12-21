@@ -189,6 +189,15 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
+     */
+    @FXML
+    private void abortClicked()
+    {
+        pinballMachineEditorViewModel.goToMainMenu();
+    }
+
+    /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten hineinzoomen möchte.
      */
     @FXML

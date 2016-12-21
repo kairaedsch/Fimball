@@ -24,6 +24,7 @@ import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
+import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 import java.util.List;
@@ -270,6 +271,14 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         pinballMachine.saveToDisk();
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+    }
+
+    /**
+     * Schließt den Editor ohne zu speichern, und öffnet das Hauptmenü
+     */
+    public void goToMainMenu()
+    {
+        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     /**
