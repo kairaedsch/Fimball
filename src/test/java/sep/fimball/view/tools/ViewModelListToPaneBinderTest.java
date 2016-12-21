@@ -1,4 +1,4 @@
-package sep.fimball.view;
+package sep.fimball.view.tools;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -26,6 +26,7 @@ public class ViewModelListToPaneBinderTest
 
     /**
      * Stellt sicher, dass das Binden eines Panes an eine Liste funktioniert, auch wenn sich die Liste nach dem Binden ändert.
+     * Überprüft die Korrektheit der Methode {@link ViewModelListToPaneBinder#bindViewModelsToViews}.
      */
     @Test
     public void bindViewModelsToViews()

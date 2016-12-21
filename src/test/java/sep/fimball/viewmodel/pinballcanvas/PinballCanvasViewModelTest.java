@@ -18,22 +18,26 @@ import static org.mockito.ArgumentMatchers.any;
  */
 public class PinballCanvasViewModelTest
 {
-    private Observer redrawObserver;
-    private boolean drawUpdateRecieved;
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link PinballCanvasViewModel#addRedrawObserver}.
+     */
     @Test
-    public void addRedrawObserver() throws Exception
+    public void addRedrawObserver()
     {
-        PinballMachine pinballMachine = Mockito.mock(PinballMachine.class);
-
+        // Erstelle GameSession Mock mit PinballMachine Mock
         GameSession gameSession = Mockito.mock(GameSession.class);
-        Mockito.when(gameSession.getPinballMachine()).thenReturn(pinballMachine);
+        Mockito.when(gameSession.getPinballMachine()).thenReturn(Mockito.mock(PinballMachine.class));
+
+        // Fange redrawObserver vom PinballCanvasViewModel ab
+        final Observer[] redrawObserver = new Observer[1];
         Mockito.doAnswer(invocationOnMock ->
         {
-            redrawObserver = invocationOnMock.getArgument(0);
+            redrawObserver[0] = invocationOnMock.getArgument(0);
             return null;
         }).when(gameSession).addGameLoopObserver(any());
 
+        // Erstelle PinballCanvasViewModel mit Mock
         PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME)
         {
             @Override
@@ -43,10 +47,14 @@ public class PinballCanvasViewModelTest
             }
         };
 
-        drawUpdateRecieved = false;
-        pinballCanvasViewModel.addRedrawObserver((o, arg) -> drawUpdateRecieved = true);
+        // Fange draw Update ab
+        final boolean[] drawUpdateRecieved = {false};
+        pinballCanvasViewModel.addRedrawObserver((o, arg) -> drawUpdateRecieved[0] = true);
 
-        redrawObserver.update(null, null);
-        assertThat(drawUpdateRecieved, is(true));
+        // Für Draw update aus
+        redrawObserver[0].update(null, null);
+
+        // Prüfe ob das draw Update abgefangen werden konnte
+        assertThat(drawUpdateRecieved[0], is(true));
     }
 }

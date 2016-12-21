@@ -1,9 +1,8 @@
-package sep.fimball.view;
+package sep.fimball.view.tools;
 
 import org.junit.ClassRule;
 import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
-import sep.fimball.view.tools.ViewLoader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -23,6 +22,7 @@ public class ViewLoaderTest
 
     /**
      * Stellt sicher, dass fxml-Dateien vom ViewLoader geladen werden können und die View sowie das RootNode nicht null sind.
+     * Überprüft die Korrektheit der Methoden {@link ViewLoader#getRootNode} und {@link ViewLoader#getView} sowie den Konstruktor.
      *
      * @throws Exception Exceptions die beim Laden von fxml Dateien auftreten können.
      */

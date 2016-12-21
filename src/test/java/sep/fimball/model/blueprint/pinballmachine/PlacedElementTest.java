@@ -18,6 +18,7 @@ public class PlacedElementTest
 {
     /**
      * Überprüft ob das Rotieren im Uhrzeigersinn mit den erwarteten Werten übereinstimmt.
+     * Überprüft die Korrektheit der Methode {@link PlacedElement#rotateClockwise}.
      */
     @Test
     public void rotateClockwise()
@@ -37,9 +38,10 @@ public class PlacedElementTest
 
     /**
      * Überprüft ob das Rotieren gegen den Uhrzeigersinn mit den erwarteten Werten übereinstimmt.
+     * Überprüft die Korrektheit der Methode {@link PlacedElement#rotateCounterclockwise}.
      */
     @Test
-    public void rotateCounterClockwise()
+    public void rotateCounterclockwise()
     {
         int[] expectedRotations45 = new int[]{315, 270, 225, 180, 135, 90, 45, 0};
         checkRotation(expectedRotations45, 45, true);

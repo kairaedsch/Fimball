@@ -17,6 +17,11 @@ import static org.junit.Assert.*;
  */
 public class BallPhysicsElementTest
 {
+    /**
+     * Erstellt ein BallPhysicsElement mit Mocks.
+     *
+     * @return Ein BallPhysicsElement mit Mocks
+     */
     private BallPhysicsElement getBallPhysicsElementWithMock()
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
@@ -26,16 +31,18 @@ public class BallPhysicsElementTest
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code update()}.
+     * Überprüft die Korrektheit der Methode {@link BallPhysicsElement#update}.
      */
     @Test
     public void update()
     {
         BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
 
+        // Setzte Höhe und Geschwindigkeit
         ballPhysicsElement.setHeight(2);
         ballPhysicsElement.setVelocity(new Vector2(0.001, 0));
 
+        // Wende die Zeit an
         ballPhysicsElement.update(0.016);
 
         assertThat("Der Ball ist nach unten gefallen", ballPhysicsElement.getHeight(), is(lessThan(2.0)));
@@ -44,21 +51,22 @@ public class BallPhysicsElementTest
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code setVelocity()}.
+     * Überprüft die Korrektheit der Methode {@link BallPhysicsElement#setVelocity}.
      */
     @Test
     public void setVelocity()
     {
         Vector2 tooFast = new Vector2(10000, 1000);
-
         BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
+
+        // Setzte die Geschwindigkeit des Balles auf eine zu schnelle
         ballPhysicsElement.setVelocity(tooFast);
 
         assertThat("Ball wird gebremst da er zu schnell ist", ballPhysicsElement.getVelocity().magnitude(), is(lessThan(tooFast.magnitude())));
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code setHeight()}.
+     * Überprüft die Korrektheit der Methode {@link BallPhysicsElement#setHeight}.
      */
     @Test
     public void setHeight()
@@ -87,7 +95,7 @@ public class BallPhysicsElementTest
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code applyModify()}.
+     * Überprüft die Korrektheit der Methode {@link BallPhysicsElement#applyModify}.
      */
     @Test
     public void applyModify()
@@ -95,9 +103,12 @@ public class BallPhysicsElementTest
         // ResetModify
         {
             BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
+
+            // Setzte Höhe und Geschwindigkeit
             ballPhysicsElement.setHeight(2);
             ballPhysicsElement.setVelocity(new Vector2(0.001, 0));
 
+            // Setzte den Ball zurück
             ballPhysicsElement.applyModify((BallResetModify) () -> new Vector2(5, 5));
 
             assertThat("Der Ball wurde versetzt", ballPhysicsElement.getPosition().getX(), is(5.0));
@@ -108,11 +119,15 @@ public class BallPhysicsElementTest
         // NudgeModify
         {
             BallPhysicsElement ballPhysicsElement = getBallPhysicsElementWithMock();
-            ballPhysicsElement.setHeight(2);
 
+            // Setzte Höhe und Geschwindigkeit
+            ballPhysicsElement.setHeight(2);
+            ballPhysicsElement.setVelocity(new Vector2(0, 0));
+
+            // Rüttle
             ballPhysicsElement.applyModify((BallNudgeModify) () -> true);
 
-            assertThat("Der Ball wurde auf der X-Achse beschleunigt", ballPhysicsElement.getVelocity().getX(), is(lessThan(0.0)));
+            assertThat("Der Ball wurde auf der X-Achse negativ beschleunigt", ballPhysicsElement.getVelocity().getX(), is(lessThan(0.0)));
             assertThat("Der Ball wurde auf der Y-Achse nicht beschleunigt", ballPhysicsElement.getVelocity().getY(), is(0.0));
         }
     }

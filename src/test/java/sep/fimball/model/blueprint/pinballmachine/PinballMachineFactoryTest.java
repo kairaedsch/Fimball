@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class PinballMachineFactoryTest
 {
     /**
-     * Überprüft die Korrektheit der Methode {@code createPinballMachine()}.
+     * Überprüft die Korrektheit der Methode {@link PinballMachineFactory#createPinballMachine}.
      */
     @Test
     public void createPinballMachine()
@@ -84,7 +84,7 @@ public class PinballMachineFactoryTest
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code createPinballMachineJson()}.
+     * Überprüft die Korrektheit der Methode {@link PinballMachineFactory#createPinballMachineJson}.
      */
     @Test
     public void createPinballMachineJson()

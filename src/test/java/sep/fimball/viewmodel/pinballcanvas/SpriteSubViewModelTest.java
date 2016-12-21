@@ -27,91 +27,131 @@ import static org.mockito.Mockito.when;
  */
 public class SpriteSubViewModelTest
 {
+    /**
+     * Das GameElement Mock.
+     */
     @Mock
     private GameElement gameElement;
 
+    /**
+     * Das PlacedElement Mock des GameElement Mocks.
+     */
     @Mock
     private PlacedElement placedElementOfGameElement;
 
+    /**
+     * Die Höhe des GameElement Mocks.
+     */
     private DoubleProperty heightOfGameElement;
 
+    /**
+     * Erstelle GameElement Mock mit Mocks.
+     */
     @Before
     public void setupGameElement()
     {
-        gameElement = Mockito.mock(GameElement.class);
-
-        ObjectProperty<Vector2> position = new SimpleObjectProperty<>(new Vector2());
-        when(gameElement.positionProperty()).thenReturn(position);
-
-        heightOfGameElement = new SimpleDoubleProperty(0);
-        when(gameElement.heightProperty()).thenReturn(heightOfGameElement);
-
-        DoubleProperty rotation = new SimpleDoubleProperty(0);
-        when(gameElement.rotationProperty()).thenReturn(rotation);
-
+        // Erstelle das PlacedElement Mock
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getPivotPoint()).thenReturn(new Vector2());
         BaseElement baseElement = Mockito.mock(BaseElement.class);
         when(baseElement.getPhysics()).thenReturn(basePhysicsElement);
         placedElementOfGameElement = Mockito.mock(PlacedElement.class);
         when(placedElementOfGameElement.getBaseElement()).thenReturn(baseElement);
-        when(gameElement.getPlacedElement()).thenReturn(placedElementOfGameElement);
 
+        // Erstelle das BaseMediaElement Mock
         BaseMediaElement baseMediaElement = Mockito.mock(BaseMediaElement.class);
         when(baseMediaElement.getElementHeight()).thenReturn(1.0);
         ObjectProperty<ElementImage> elementImageProperty = new SimpleObjectProperty<>(null);
         when(baseMediaElement.elementImageProperty()).thenReturn(elementImageProperty);
-        when(gameElement.getMediaElement()).thenReturn(baseMediaElement);
 
+        // Erstelle das GameElement Mock
+        gameElement = Mockito.mock(GameElement.class);
+        when(gameElement.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
+        when(gameElement.rotationProperty()).thenReturn(new SimpleDoubleProperty(0));
+        heightOfGameElement = new SimpleDoubleProperty(0);
+        when(gameElement.heightProperty()).thenReturn(heightOfGameElement);
         ObjectProperty<Optional<Animation>> currentAnimationProperty = new SimpleObjectProperty<>(Optional.empty());
         when(gameElement.currentAnimationProperty()).thenReturn(currentAnimationProperty);
+
+        // Gebe das PlacedElement Mock in das GameElement Mock
+        when(gameElement.getPlacedElement()).thenReturn(placedElementOfGameElement);
+
+        // Gebe das BaseMediaElement Mock in das GameElement Mock
+        when(gameElement.getMediaElement()).thenReturn(baseMediaElement);
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link SpriteSubViewModel#selectedProperty}.
+     */
     @Test
-    public void selectedProperty() throws Exception
+    public void selectedProperty()
     {
-        SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
-        assertThat(spriteSubViewModelGame.selectedProperty().get(), is(false));
+        // SpriteSubViewModel von einer Spielsitzung
+        {
+            SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
+            assertThat("Ein SpriteSubViewModel von einer Spielsitzung ist niemals ausgewählt", spriteSubViewModelGame.selectedProperty().get(), is(false));
+        }
 
-        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, list);
-        assertThat(spriteSubViewModelEditor.selectedProperty().get(), is(false));
+        // SpriteSubViewModel von einer Editorsitzung
+        {
+            ListProperty<PlacedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
 
-        list.add(Mockito.mock(PlacedElement.class));
-        assertThat(spriteSubViewModelEditor.selectedProperty().get(), is(false));
+            // Füge irgendein Element zur Liste hinzu
+            listOfSelecedElements.add(Mockito.mock(PlacedElement.class));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
 
-        list.add(placedElementOfGameElement);
-        assertThat(spriteSubViewModelEditor.selectedProperty().get(), is(true));
+            // Füge das PlacedElement des SpriteSubViewModels zur Liste hinzu
+            listOfSelecedElements.add(placedElementOfGameElement);
+            assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(true));
+        }
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link SpriteSubViewModel#scaleProperty}.
+     */
     @Test
-    public void scaleProperty() throws Exception
+    public void scaleProperty()
     {
         SpriteSubViewModel spriteSubViewModel = new SpriteSubViewModel(gameElement);
-        assertThat(spriteSubViewModel.scaleProperty().get(), is(1.0));
+
+        assertThat("Die Standardskalierung", spriteSubViewModel.scaleProperty().get(), is(1.0));
 
         heightOfGameElement.set(1.0);
-        assertThat(spriteSubViewModel.scaleProperty().get(), is(1.125));
+        assertThat("Die Skalierung wächst ist linear", spriteSubViewModel.scaleProperty().get(), is(1.125));
 
         heightOfGameElement.set(2.0);
-        assertThat(spriteSubViewModel.scaleProperty().get(), is(1.25));
+        assertThat("Die Skalierung wächst ist linear", spriteSubViewModel.scaleProperty().get(), is(1.25));
 
         heightOfGameElement.set(4.0);
-        assertThat(spriteSubViewModel.scaleProperty().get(), is(1.5));
+        assertThat("Die Skalierung wächst ist linear", spriteSubViewModel.scaleProperty().get(), is(1.5));
     }
 
+    /**
+     * Überprüft die Korrektheit der Methode {@link SpriteSubViewModel#visibilityProperty}.
+     */
     @Test
-    public void visibilityProperty() throws Exception
+    public void visibilityProperty()
     {
-        SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
-        assertThat(spriteSubViewModelGame.visibilityProperty().get(), is(1.0));
+        // SpriteSubViewModel von einer Spielsitzung
+        {
+            SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
+            assertThat("Die Standardsichtbarkeit", spriteSubViewModelGame.visibilityProperty().get(), is(1.0));
+        }
 
-        when(gameElement.getElementType()).thenReturn(BaseElementType.RAMP);
-        ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
-        SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, list);
-        assertThat(spriteSubViewModelEditor.visibilityProperty().get(), is(1.0));
+        // SpriteSubViewModel von einer Editorsitzung
+        {
+            // Erstelle ein SpriteSubViewModel von einem Rampenelement
+            when(gameElement.getElementType()).thenReturn(BaseElementType.RAMP);
+            ListProperty<PlacedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
 
-        list.add(Mockito.mock(PlacedElement.class));
-        assertThat(spriteSubViewModelEditor.visibilityProperty().get(), is(0.5));
+            assertThat("Die Standardsichtbarkeit", spriteSubViewModelEditor.visibilityProperty().get(), is(1.0));
+
+            // Füge ein Element zur Liste hinzu
+            listOfSelecedElements.add(Mockito.mock(PlacedElement.class));
+            assertThat("Die Sichtbarkeit von Rampenelementen ist bei einer nicht leeren Liste reduziert", spriteSubViewModelEditor.visibilityProperty().get(), is(0.5));
+        }
     }
 }

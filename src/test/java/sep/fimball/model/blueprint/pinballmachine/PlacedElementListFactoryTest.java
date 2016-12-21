@@ -19,7 +19,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class PlacedElementListFactoryTest
 {
     /**
-     * Überprüft die Korrektheit der Methode {@code createPlacedElementListJson()}.
+     * Überprüft die Korrektheit der Methode {@link PlacedElementListFactory#createPlacedElementListJson}.
      */
     @Test
     public void createPlacedElementList()
@@ -90,7 +90,7 @@ public class PlacedElementListFactoryTest
     }
 
     /**
-     * Überprüft die Korrektheit der Methode {@code createPlacedElementListJson()}.
+     * Überprüft die Korrektheit der Methode {@link PlacedElementListFactory#createPlacedElementListJson}.
      */
     @Test
     public void createPlacedElementListJson()
