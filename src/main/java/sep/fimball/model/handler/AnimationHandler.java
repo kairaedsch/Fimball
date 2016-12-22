@@ -16,6 +16,7 @@ public class AnimationHandler implements ElementHandler
     {
         Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
 
+        // Falls eine Animation für diesen Collider vorliegt, wird diese aktiviert
         if (eventMap.containsKey(colliderId))
         {
             Optional<Animation> animation = eventMap.get(colliderId).getAnimation();

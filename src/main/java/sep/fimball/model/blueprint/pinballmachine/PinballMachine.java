@@ -71,8 +71,9 @@ public class PinballMachine
      * @param previewImagePath      Namen der Vorschaubildes des Automaten.
      * @param highscores            Die auf diesem Automaten bisher erreichten Highscores.
      * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
+     * @param loaded                Gibt an ob die Elemente schon geladen sind.
      */
-    PinballMachine(String name, String pinballMachineId, String previewImagePath, List<Highscore> highscores, PinballMachineManager pinballMachineManager)
+    PinballMachine(String name, String pinballMachineId, String previewImagePath, List<Highscore> highscores, PinballMachineManager pinballMachineManager, boolean loaded)
     {
         this.name = new SimpleStringProperty(name);
         this.previewImagePath = new SimpleStringProperty(previewImagePath);
@@ -82,7 +83,7 @@ public class PinballMachine
         // Set up element list
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
-        elementsLoaded = false;
+        elementsLoaded = loaded;
 
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();

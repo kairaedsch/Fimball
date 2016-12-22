@@ -94,7 +94,7 @@ public class PinballMachineFactoryTest
         highscoreList.add(new Highscore(100, "Player 1"));
         highscoreList.add(new Highscore(10, "Player 2"));
         highscoreList.add(new Highscore(1, "Player 3"));
-        PinballMachine pinballMachine = new PinballMachine("testautomat", "testid", "previewimage", highscoreList, null);
+        PinballMachine pinballMachine = new PinballMachine("testautomat", "testid", "previewimage", highscoreList, null, true);
 
         // Lasse eine pinballMachineJson aus der PinballMachine generieren
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
