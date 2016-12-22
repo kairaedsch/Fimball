@@ -210,6 +210,7 @@ public class PinballMachineManager
      */
     private void deletePreviewImage(PinballMachine pinballMachine) throws IOException
     {
+        // Lösche nicht das default preview image
         Path previewImagePath = Paths.get(pinballMachine.previewImagePathProperty().get());
         Path defaultPreviewImagePath = Paths.get(DataPath.pathToDefaultPreview());
         if(!previewImagePath.toAbsolutePath().equals(defaultPreviewImagePath.toAbsolutePath()))
