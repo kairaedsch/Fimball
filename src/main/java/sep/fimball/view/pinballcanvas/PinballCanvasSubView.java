@@ -133,12 +133,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         double camZoomStep = delta / cameraZoomSpeed;
         camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
 
-        // TODO optimise camera speed
-
         softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
-
-        //softCameraPosition = oldP.plus(newP.minus(oldP).clamp(0.25));
 
         pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom, pinballCanvasViewModel.selectingRectangleProperty());
 
@@ -150,7 +146,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     public WritableImage drawToImage()
     {
-        // TODO - Anpassung des Rectangles in Methode auslagern.
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double minHeight = (720 / DesignConfig.PIXELS_PER_GRID_UNIT);
