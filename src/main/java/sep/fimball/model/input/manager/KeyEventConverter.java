@@ -16,12 +16,12 @@ import java.util.Optional;
 public class KeyEventConverter
 {
     /**
-     * Speichert für die Tasten welchen Status (Losgelassen/Gedrückt) sie zuletzt hatten.
+     * Speichert für die Tasten, welchen Zustand (Losgelassen/Gedrückt) sie zuletzt hatten.
      */
     private Map<KeyCode, EventType<KeyEvent>> oldKeyState;
 
     /**
-     * Erzeugt einen neuen InputManager dabei wird der Status aller Tasten auf die Default Value RELEASED gesetzt.
+     * Erzeugt einen neuen InputManager, dabei wird der Status aller Tasten auf RELEASED gesetzt.
      */
     public KeyEventConverter()
     {
@@ -38,7 +38,7 @@ public class KeyEventConverter
      * @param keyEvent Das KeyEvent, welches umgewandelt wird.
      * @return Das umgewandelte KeyEvent.
      */
-    public Optional<KeyEventArgs> triggerKeyEvent(KeyEvent keyEvent)
+    public Optional<KeyEventArgs> createKeyEventArgs(KeyEvent keyEvent)
     {
         if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).isPresent())
         {

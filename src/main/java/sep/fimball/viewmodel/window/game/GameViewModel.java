@@ -206,7 +206,7 @@ public class GameViewModel extends WindowViewModel
             }
             else if (binding != null)
             {
-                keyEventConverter.triggerKeyEvent(keyEvent).ifPresent(gameSession::activateUserHandler);
+                keyEventConverter.createKeyEventArgs(keyEvent).ifPresent(gameSession::activateUserHandler);
             }
         }
     }
