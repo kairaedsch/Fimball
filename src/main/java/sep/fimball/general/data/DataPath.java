@@ -245,7 +245,7 @@ public class DataPath
      */
     public static String generatePathToNewImagePreview(String pinballMachineId, String imageName)
     {
-        return pathToPinballMachine(pinballMachineId) + imageName + imageFileEnding;
+        return pathToPinballMachine(pinballMachineId) + "/preview" + imageName + imageFileEnding;
     }
 
     /**

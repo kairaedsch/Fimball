@@ -307,7 +307,6 @@ public class PinballMachine
         if (!elementsLoaded)
         {
             elementsLoaded = true;
-            addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
             pinballMachineManager.loadMachineElements(this);
         }
     }
