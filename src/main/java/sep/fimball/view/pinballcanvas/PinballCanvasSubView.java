@@ -20,7 +20,7 @@ import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
-import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreater;
+import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreator;
 
 import java.util.Observer;
 import java.util.Optional;
@@ -28,7 +28,7 @@ import java.util.Optional;
 /**
  * Die PinballCanvasSubView ist für das Zeichnen eines Flipperautomaten mit all seinen Elementen zuständig.
  */
-public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasViewModel>, ViewScreenshotCreater
+public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasViewModel>, ViewScreenshotCreator
 {
     /**
      * Das Canvas, in dem die Sprites gezeichnet werden.
@@ -111,7 +111,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         canvas.widthProperty().bind(parent.widthProperty());
         canvas.heightProperty().bind(parent.heightProperty());
 
-        pinballCanvasViewModel.setViewScreenshotCreater(this);
+        pinballCanvasViewModel.setViewScreenshotCreator(this);
 
         pinballCanvasDrawer = new PinballCanvasDrawer(canvas, drawMode, sprites);
     }

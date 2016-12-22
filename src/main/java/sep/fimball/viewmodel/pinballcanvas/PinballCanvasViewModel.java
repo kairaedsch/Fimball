@@ -52,7 +52,7 @@ public abstract class PinballCanvasViewModel
     /**
      * Element aus der View, welches ein Screenshot des Flipperautomaten erstellen kann.
      */
-    private ViewScreenshotCreater viewScreenshotCreater;
+    private ViewScreenshotCreator viewScreenshotCreator;
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
@@ -157,23 +157,23 @@ public abstract class PinballCanvasViewModel
     }
 
     /**
-     * Setzt den ViewScreenshotCreater, welcher ein Screenshot des Flipperautomaten erstellen kann.
+     * Setzt den ViewScreenshotCreator, welcher ein Screenshot des Flipperautomaten erstellen kann.
      *
-     * @param viewScreenshotCreater Der ViewScreenshotCreater.
+     * @param viewScreenshotCreator Der ViewScreenshotCreator.
      */
-    public void setViewScreenshotCreater(ViewScreenshotCreater viewScreenshotCreater)
+    public void setViewScreenshotCreator(ViewScreenshotCreator viewScreenshotCreator)
     {
-        this.viewScreenshotCreater = viewScreenshotCreater;
+        this.viewScreenshotCreator = viewScreenshotCreator;
     }
 
     /**
-     * Beauftragt den ViewScreenshotCreater ein Bild zu machen.
+     * Beauftragt den ViewScreenshotCreator ein Bild zu machen.
      *
      * @return Das gemachte Bild.
      */
     public WritableImage createScreenshot()
     {
-        return viewScreenshotCreater.drawToImage();
+        return viewScreenshotCreator.drawToImage();
     }
 
     /**

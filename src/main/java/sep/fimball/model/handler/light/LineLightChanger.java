@@ -30,10 +30,10 @@ public class LineLightChanger extends LightChanger
         // Die Geschwindigkeit des Effekts in Grideinheiten pro Sekunde
         double speed = 30;
 
-        // Die Breite einer Lichterlinie
+        // Die Breite einer Lichter-Linie
         double width = 6;
 
-        // Der Abstand zwischen zwei Lichterlinien
+        // Der Abstand zwischen zwei Lichter-Linien
         double space = 16;
 
         double line = (delta / 1000.0) * speed;

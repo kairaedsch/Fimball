@@ -3,9 +3,9 @@ package sep.fimball.viewmodel.pinballcanvas;
 import javafx.scene.image.WritableImage;
 
 /**
- * Der ViewScreenshotCreater kann ein Bild von der View erstellen.
+ * Der ViewScreenshotCreator kann ein Bild von der View erstellen.
  */
-public interface ViewScreenshotCreater
+public interface ViewScreenshotCreator
 {
     /**
      * Erstellt ein Bild von der View.

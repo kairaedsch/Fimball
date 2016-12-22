@@ -29,10 +29,10 @@ public class RampClimbingCollision implements CollisionType
         Vector2 maxPos = maxPosOptional.get();
 
         //Minimale x und y Position der Rampen ColliderShape.
-        Optional<Vector2> minPosOptinal = rampColliderShapes.stream().map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false)).reduce(Vector2::minComponents);
-        if (!minPosOptinal.isPresent())
+        Optional<Vector2> minPosOptional = rampColliderShapes.stream().map(shape -> shape.getExtremePos(physicsElement.getRotation(), physicsElement.getBasePhysicsElement().getPivotPoint(), false)).reduce(Vector2::minComponents);
+        if (!minPosOptional.isPresent())
             throw new IllegalStateException("Shape didn't have any positions.");
-        Vector2 minPos = minPosOptinal.get();
+        Vector2 minPos = minPosOptional.get();
 
         //Wenn sich der Ball nicht auf der Rampe befindet kann abgebrochen werden.
         if (relativeBallPos.getX() < minPos.getX() || relativeBallPos.getY() < minPos.getY() || relativeBallPos.getX() > maxPos.getX() || relativeBallPos.getY() > maxPos.getY())
