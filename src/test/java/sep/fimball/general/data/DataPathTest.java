@@ -149,6 +149,26 @@ public class DataPathTest
     }
 
     /**
+     * Überprüft, ob der Pfad zum Preview Bild korrekt ist.
+     */
+    @Test
+    public void testPathToDefaultImage()
+    {
+        String path = DataPath.pathToDefaultPreview();
+        assertThat(path.endsWith("defaultPreview.png"), is(true));
+    }
+
+    /**
+     * Überprüft ob der Pfad zu einem neu generierten Preview Bild korrekt ist.
+     */
+    @Test
+    public void testPathToGeneratedImage()
+    {
+        String path = DataPath.generatePathToNewImagePreview(testMachineId, 12345);
+        assertThat(path.endsWith("/machines/" + testMachineId + "/preview12345.png"), is(true));
+    }
+
+    /**
      * Überprüft, ob die Pfade zu verschiedenen Bildern von Spielelementen gleich den erwarteten Pfaden ist.
      */
     @Test
