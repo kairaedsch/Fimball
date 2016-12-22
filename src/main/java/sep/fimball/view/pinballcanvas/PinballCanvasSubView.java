@@ -145,6 +145,9 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         lastDraw = currentDraw;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public WritableImage drawToImage()
     {
         // TODO - Anpassung des Rectangles in Methode auslagern.

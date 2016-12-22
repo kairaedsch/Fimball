@@ -51,9 +51,9 @@ class PinballCanvasDrawer
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      *
-     * @param cameraPosition die Position der Kamera.
-     * @param cameraZoom der Zoom der Kamera.
-     * @param dragSelectionRect das eventuell vorhandene Auswahlfenster welches es durch "ziehen" erlaubt Elemente auszuwählen.
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom Der Zoom der Kamera.
+     * @param dragSelectionRect Das eventuell vorhandene Auswahlfenster welches es durch "ziehen" erlaubt Elemente auszuwählen.
      */
     void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleByPoints> dragSelectionRect)
     {
@@ -115,8 +115,8 @@ class PinballCanvasDrawer
     /**
      * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
      *
-     * @param cameraPosition die Position der Kamera.
-     * @param cameraZoom der Zoom der Kamera.
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom Der Zoom der Kamera.
      */
     private void drawEditorGrid(Vector2 cameraPosition, double cameraZoom)
     {
@@ -173,8 +173,8 @@ class PinballCanvasDrawer
     /**
      * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
      *
-     * @param cameraPosition die Position der Kamera.
-     * @param cameraZoom der Zoom der Kamera.
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom Der Zoom der Kamera.
      * @param x Der x-Wert der Position auf dem Canvas.
      * @param y Der y-Wert der Position auf dem Canvas.
      * @return Die Position auf dem Grid.
