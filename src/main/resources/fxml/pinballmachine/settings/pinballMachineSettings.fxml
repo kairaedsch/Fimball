@@ -50,7 +50,7 @@
         </padding>
         <Pane GridPane.columnIndex="0"/>
         <HBox GridPane.columnIndex="1">
-            <Pane HBox.hgrow="ALWAYS"/>
+            <Pane HBox.hgrow="ALWAYS" />
             <HBox styleClass="buttonBackToMainMenuContainer">
                 <Polyline styleClass="buttonBackToMainMenuArrow" onMouseClicked="#menuClicked">
                     <points>
@@ -64,31 +64,31 @@
                         <Double fx:value="60.0"/>
                     </points>
                 </Polyline>
-                <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#menuClicked"
-                      styleClass="button, buttonBackToMainMenu"/>
+                <Pane fx:id="menu" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#menuClicked"
+                      styleClass="button, buttonBackToMainMenu" accessibleHelp="§editor.settings.menuButton.key§"/>
             </HBox>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="2">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked"
+            <Pane fx:id="save" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked"
                   prefHeight="60.0" prefWidth="60.0"
-                  styleClass="button, buttonSave"/>
+                  styleClass="button, buttonSave" accessibleHelp="§editor.settings.saveButton.key§"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="3">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked"
+            <Pane fx:id="delete" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked"
                   prefHeight="60.0" prefWidth="60.0"
-                  styleClass="button, buttonDelete"/>
+                  styleClass="button, buttonDelete" accessibleHelp="§editor.settings.deleteButton.key§"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="4">
             <Pane HBox.hgrow="ALWAYS"/>
             <HBox styleClass="buttonEditContainer">
-                <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked"
+                <Pane fx:id="edit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked"
                       prefHeight="60.0" prefWidth="60.0"
-                      styleClass="button, buttonEdit"/>
+                      styleClass="button, buttonEdit" accessibleHelp="§editor.settings.editButton.key§"/>
                 <Polyline styleClass="buttonEditArrow" onMouseClicked="#editClicked">
                     <points>
                         <Double fx:value="0.0"/>

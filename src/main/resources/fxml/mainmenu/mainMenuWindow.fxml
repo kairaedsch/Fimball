@@ -12,7 +12,7 @@
     </stylesheets>
     <VBox styleClass="machineOverviewVBox">
         <HBox styleClass="machineOverviewHeader">
-            <Pane minWidth="50" onMouseClicked="#settingsClicked" styleClass="menuButton"/>
+            <Pane fx:id="settings" minWidth="50" onMouseClicked="#settingsClicked" styleClass="menuButton" accessibleHelp="§mainmenu.settingstip.key§"/>
             <Label fx:id="key_1" alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle"
                    text="!mainmenu.machines.key!"/>
         </HBox>
@@ -27,8 +27,9 @@
                     </AnchorPane>
                 </ScrollPane>
             </AnchorPane>
-            <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#addClicked" styleClass="button, buttonMachineAdd"
-                  StackPane.alignment="BOTTOM_RIGHT">
+            <Pane fx:id="add" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#addClicked"
+                  styleClass="button, buttonMachineAdd" StackPane.alignment="BOTTOM_RIGHT"
+                  accessibleHelp="§mainmenu.add.tip.key§">
                 <StackPane.margin>
                     <Insets bottom="25" right="40"/>
                 </StackPane.margin>
@@ -74,13 +75,16 @@
                 </padding>
                 <HBox GridPane.columnIndex="0">
                     <Pane HBox.hgrow="ALWAYS"/>
-                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#playClicked" styleClass="button, buttonPlaySinglePlayer"/>
+                    <Pane fx:id="play" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
+                          onMouseClicked="#playClicked" styleClass="button, buttonPlaySinglePlayer"
+                          accessibleHelp="§mainmenu.play.tip.key§"/>
                     <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>
                 <HBox GridPane.columnIndex="1">
                     <Pane HBox.hgrow="ALWAYS"/>
-                    <Pane maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
-                          styleClass="button, buttonEdit"/>
+                    <Pane fx:id="edit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
+                          onMouseClicked="#editClicked"  prefHeight="60.0" prefWidth="60.0"  styleClass="button, buttonEdit"
+                    accessibleHelp="§mainmenu.edit.tip.key§"/>
                     <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>
             </GridPane>

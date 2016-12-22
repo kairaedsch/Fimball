@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Pane;
 import sep.fimball.view.ViewType;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 
@@ -100,8 +101,36 @@ public class ViewLoader<ViewT>
                     Tooltip labeled = (Tooltip) o;
                     bindToLanguage(labeled.textProperty(), labeled.getText());
                 }
+                if(o instanceof Pane){
+                    Pane pane = (Pane) o;
+                    installToolTip(pane);
+                }
+
             }
         }));
+    }
+
+    /**
+     * Installiert einen Tooltip bei der Pane. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
+     * @param pane Die Pane, bei der der Tooltip installiert werden soll.
+     */
+    private void installToolTip(Pane pane)
+    {
+        if(pane.accessibleHelpProperty().get() != null) {
+            Tooltip tooltip = new Tooltip();
+            if (pane.getAccessibleHelp().matches("§.*§"))
+            {
+                String keyValue = pane.getAccessibleHelp().replace("§", "");
+                tooltip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty(keyValue));
+
+                pane.setOnMouseEntered(t ->
+                {
+                    Node node =(Node)t.getSource();
+                    Tooltip.install(node, tooltip);
+                });
+            }
+
+        }
     }
 
     /**
