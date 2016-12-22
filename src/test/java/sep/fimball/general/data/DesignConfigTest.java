@@ -13,17 +13,18 @@ import static org.junit.Assert.assertThat;
 public class DesignConfigTest
 {
     /**
-     * Testet ob die CSS Befehle korrekt von der DesignConfig erstellt werden.
+     * Testet ob die CSS Befehle korrekt von der DesignConfig erstellt werden. Gleich wie bei DataPath wird nur auf Ending und Start getestet um Probleme
+     * auf verschiedenen Plattformen zu vermeiden.
      */
     @Test
     public void testDesignConfig()
     {
-        String expectedBackgroundCss = "-fx-background-image: url(\"file:/home/alex/test.png\");";
-        String expectedContainCss = "-fx-background-image: url(\"file:/home/alex/test.png\");-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";
+        String expectedBackgroundCssBeginning = "-fx-background-image: url(";
+        String expectedContainCssEnding = ";-fx-background-size: contain; -fx-background-repeat: no-repeat; -fx-background-position: center;";
         ReadOnlyStringProperty testPath = new SimpleStringProperty("/home/alex/test.png");
 
-        assertThat(DesignConfig.backgroundImageCss(testPath).get(), is(expectedBackgroundCss));
-        assertThat(DesignConfig.fillBackgroundImageCss(testPath).get(), is(expectedContainCss));
-        assertThat(DesignConfig.fillBackgroundImageCss(testPath.get()), is(expectedContainCss));
+        assertThat(DesignConfig.backgroundImageCss(testPath).get().startsWith(expectedBackgroundCssBeginning), is(true));
+        assertThat(DesignConfig.fillBackgroundImageCss(testPath).get().endsWith(expectedContainCssEnding), is(true));
+        assertThat(DesignConfig.fillBackgroundImageCss(testPath.get()).endsWith(expectedContainCssEnding), is(true));
     }
 }
