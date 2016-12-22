@@ -19,8 +19,6 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
-import java.util.Optional;
-
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
@@ -55,7 +53,7 @@ public class SceneManagerViewTest
         // Erstelle Mocks - Erstelle fake PinballMachine
         PinballMachine pinballMachineMock = Mockito.mock(PinballMachine.class);
         Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty("any Name"));
-        Mockito.when(pinballMachineMock.previewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>(Optional.of("")));
+        Mockito.when(pinballMachineMock.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
 
         // Teste - Setzte die aktuellen ViewModels

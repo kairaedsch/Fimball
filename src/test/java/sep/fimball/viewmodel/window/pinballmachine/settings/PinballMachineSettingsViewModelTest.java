@@ -139,7 +139,7 @@ public class PinballMachineSettingsViewModelTest
             return null;
         }).when(pinballMachine).deleteFromDisk();
 
-        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>(Optional.of("")));
+        when(pinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
         return pinballMachine;
     }

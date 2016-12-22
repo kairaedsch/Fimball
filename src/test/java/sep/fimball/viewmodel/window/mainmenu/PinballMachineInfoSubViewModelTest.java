@@ -33,6 +33,8 @@ public class PinballMachineInfoSubViewModelTest
         mockedMainMenuViewModel.setSceneManager(mockedSceneManager);
         PinballMachine pinballMachine = getMockedPinballMachine();
         PinballMachine newPinballMachine = getMockedPinballMachine();
+        when(pinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        when(newPinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
         PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, pinballMachine);
         test.update(newPinballMachine);
