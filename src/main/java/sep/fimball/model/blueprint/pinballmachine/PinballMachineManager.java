@@ -155,9 +155,7 @@ public class PinballMachineManager
         try
         {
             // Lösche das alte Vorschaubild
-            String oldPreviewImagePath = pinballMachine.previewImagePathProperty().get();
-            if (!oldPreviewImagePath.equals(DataPath.pathToDefaultPreview()))
-                Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
+            deletePreviewImage(pinballMachine);
         }
         catch (IOException e)
         {
@@ -188,7 +186,7 @@ public class PinballMachineManager
             // Lösche Dateien
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(pinballMachine.previewImagePathProperty().get()));
+            deletePreviewImage(pinballMachine);
 
             // Lösche Ordner
             Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));
@@ -201,6 +199,22 @@ public class PinballMachineManager
             System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not deleted");
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * Löscht das PreviewImage das übergebenen Automaten.
+     *
+     * @param pinballMachine Der Automat, dessen PreviewImage gelöscht werden soll.
+     * @throws IOException Wenn das PreviewImage nicht gelöscht werden konnte.
+     */
+    private void deletePreviewImage(PinballMachine pinballMachine) throws IOException
+    {
+        Path previewImagePath = Paths.get(pinballMachine.previewImagePathProperty().get());
+        Path defaultPreviewImagePath = Paths.get(DataPath.pathToDefaultPreview());
+        if(!previewImagePath.toAbsolutePath().equals(defaultPreviewImagePath.toAbsolutePath()))
+        {
+            Files.deleteIfExists(previewImagePath);
         }
     }
 

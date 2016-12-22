@@ -94,8 +94,8 @@
             <AnchorPane>
                 <StackPane fx:id="pinballCanvasContainer" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas" onMouseDragOver="#draggedOver" onMouseDragged="#dragged" onMouseEntered="#mouseEnteredCanvas" onMouseExited="#mouseExitedCanvas" onMousePressed="#down" onMouseReleased="#mouseReleased" onScroll="#zoom" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                 <Button mnemonicParsing="false" onMouseClicked="#playClicked" text="Play" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="5.0" />
-                <Button mnemonicParsing="false" onMouseClicked="#zoomInClicked" text="+" AnchorPane.leftAnchor="25" AnchorPane.topAnchor="5" />
-                <Button mnemonicParsing="false" onMouseClicked="#zoomOutClicked" text="-" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="5" />
+                <Button mnemonicParsing="false" onMouseClicked="#zoomInClicked" text="+" AnchorPane.leftAnchor="55" AnchorPane.topAnchor="5" />
+                <Button mnemonicParsing="false" onMouseClicked="#zoomOutClicked" text="-" AnchorPane.leftAnchor="100" AnchorPane.topAnchor="5" />
             </AnchorPane>
             <AnchorPane minWidth="130.0">
                 <TitledPane fx:id="selectedElement" animated="false" collapsible="false" text="Bumper Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
