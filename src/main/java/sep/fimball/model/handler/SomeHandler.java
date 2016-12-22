@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
 /**
- * Main handler interface for all Handlers.
+ * Haupt handler interface für alle Handlers.
  */
 public interface SomeHandler
 {
