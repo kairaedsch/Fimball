@@ -164,7 +164,7 @@ public class DataPathTest
     @Test
     public void testPathToGeneratedImage()
     {
-        String path = DataPath.generatePathToNewImagePreview(testMachineId, 12345);
+        String path = DataPath.generatePathToNewImagePreview(testMachineId, "12345");
         assertThat(path.endsWith("/machines/" + testMachineId + "/preview12345.png"), is(true));
     }
 

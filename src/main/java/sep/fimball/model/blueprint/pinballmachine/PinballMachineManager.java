@@ -72,7 +72,7 @@ public class PinballMachineManager
      */
     public PinballMachine createNewMachine()
     {
-        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), DataPath.pathToDefaultPreview(), Collections.emptyList(), this, true);
+        PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Optional.empty(), Collections.emptyList(), this, true);
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;
@@ -150,7 +150,7 @@ public class PinballMachineManager
      */
     void savePreviewImage(PinballMachine pinballMachine, WritableImage image, String newPreviewImagePath)
     {
-        Path newPath = Paths.get(newPreviewImagePath);
+        Path newPath = Paths.get(DataPath.generatePathToNewImagePreview(pinballMachine.getID(), newPreviewImagePath));
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
         try
         {
@@ -159,7 +159,7 @@ public class PinballMachineManager
         }
         catch (IOException e)
         {
-            System.err.println("Could not delete old preview image: " + pinballMachine.previewImagePathProperty().get());
+            System.err.println("Could not delete old preview image: " + pinballMachine.fullPreviewImagePathProperty().get());
         }
 
         try
@@ -210,12 +210,9 @@ public class PinballMachineManager
      */
     private void deletePreviewImage(PinballMachine pinballMachine) throws IOException
     {
-        // Lösche nicht das default preview image
-        Path previewImagePath = Paths.get(pinballMachine.previewImagePathProperty().get());
-        Path defaultPreviewImagePath = Paths.get(DataPath.pathToDefaultPreview());
-        if(!previewImagePath.toAbsolutePath().equals(defaultPreviewImagePath.toAbsolutePath()))
+        if(pinballMachine.previewImagePathProperty().get().isPresent())
         {
-            Files.deleteIfExists(previewImagePath);
+            Files.deleteIfExists(Paths.get(pinballMachine.fullPreviewImagePathProperty().get()));
         }
     }
 

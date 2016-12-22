@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.junit.Test;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -10,6 +11,8 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -74,7 +77,7 @@ public class MainMenuViewModelTest
         PinballMachine pinballMachine = mock(PinballMachine.class);
         when(pinballMachine.elementsProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
-        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleStringProperty());
+        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>());
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
         return pinballMachine;
     }

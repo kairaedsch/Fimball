@@ -1,9 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.settings;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
@@ -14,6 +11,8 @@ import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -140,7 +139,7 @@ public class PinballMachineSettingsViewModelTest
             return null;
         }).when(pinballMachine).deleteFromDisk();
 
-        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>(Optional.of("")));
 
         return pinballMachine;
     }

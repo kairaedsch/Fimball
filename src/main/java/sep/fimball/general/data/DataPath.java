@@ -240,12 +240,12 @@ public class DataPath
      * Gibt den Pfad zum neuen Preview Bild des Flipperautomaten zurück.
      *
      * @param pinballMachineId Id des Flipperautomaten.
-     * @param timestamp        Ein Timestamp der angibt wann der Flipperautomaten erstellt wurde.
+     * @param imageName        Der Name des Bildes.
      * @return Der Pfad zum neuen Preview Bild des Flipperautomaten.
      */
-    public static String generatePathToNewImagePreview(String pinballMachineId, long timestamp)
+    public static String generatePathToNewImagePreview(String pinballMachineId, String imageName)
     {
-        return pathToPinballMachine(pinballMachineId) + machinePreviewImageFile + timestamp + imageFileEnding;
+        return pathToPinballMachine(pinballMachineId) + imageName + imageFileEnding;
     }
 
     /**

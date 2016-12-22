@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,7 @@ public class PinballMachine
     /**
      * Pfad zum Vorschaubild des Flipperautomaten.
      */
-    private StringProperty previewImagePath;
+    private ObjectProperty<Optional<String>> previewImagePath;
 
     /**
      * ID zur Identifizierung des Automaten.
@@ -73,10 +74,11 @@ public class PinballMachine
      * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
      * @param loaded                Gibt an ob die Elemente schon geladen sind.
      */
-    PinballMachine(String name, String pinballMachineId, String previewImagePath, List<Highscore> highscores, PinballMachineManager pinballMachineManager, boolean loaded)
+    PinballMachine(String name, String pinballMachineId, Optional<String> previewImagePath, List<Highscore> highscores, PinballMachineManager pinballMachineManager, boolean loaded)
     {
         this.name = new SimpleStringProperty(name);
-        this.previewImagePath = new SimpleStringProperty(previewImagePath);
+        this.previewImagePath = new SimpleObjectProperty<>();
+        this.previewImagePath.set(previewImagePath);
         this.id = new SimpleStringProperty(pinballMachineId);
         this.pinballMachineManager = pinballMachineManager;
 
@@ -84,6 +86,7 @@ public class PinballMachine
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
         elementsLoaded = loaded;
+        if(loaded) addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
 
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
@@ -183,9 +186,9 @@ public class PinballMachine
      */
     public void savePreviewImage(WritableImage image)
     {
-        String newPreviewImagePath = DataPath.generatePathToNewImagePreview(getID(), System.currentTimeMillis());
+        String newPreviewImagePath = getID() + System.currentTimeMillis();
         pinballMachineManager.savePreviewImage(this, image, newPreviewImagePath);
-        previewImagePath.set(newPreviewImagePath);
+        previewImagePath.set(Optional.of(newPreviewImagePath));
     }
 
     /**
@@ -355,7 +358,19 @@ public class PinballMachine
      *
      * @return Der Speicherpfad des Hintergrundbildes des Automaten.
      */
-    public ReadOnlyStringProperty previewImagePathProperty()
+    public ReadOnlyStringProperty fullPreviewImagePathProperty()
+    {
+        StringProperty stringProperty = new SimpleStringProperty();
+        stringProperty.bind(Bindings.createStringBinding(() -> previewImagePath.get().isPresent() ? DataPath.generatePathToNewImagePreview(getID(), previewImagePath.get().get()) : DataPath.pathToDefaultPreview(), previewImagePath));
+        return stringProperty;
+    }
+
+    /**
+     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     *
+     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
+     */
+    public ReadOnlyObjectProperty<Optional<String>> previewImagePathProperty()
     {
         return previewImagePath;
     }
