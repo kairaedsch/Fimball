@@ -32,6 +32,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
      * @param gameElement        Das GameElement, dessen Eigenschaften kopiert werden.
      * @param position           Die Position, auf der sich der Ball befinden soll.
      * @param rotation           Die Rotation, um die der Ball gedreht sein soll.
+     * @param strengthMultiplier Der Multiplier für die Stärke der Collider.
      * @param basePhysicsElement Das korrespondierende BasePhysicsElement.
      */
     public BallPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double rotation, double strengthMultiplier, BasePhysicsElement basePhysicsElement)
