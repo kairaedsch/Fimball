@@ -105,7 +105,7 @@ public class Settings
      *
      * @return Die Standardbelegung der Tastatur.
      */
-    private Map<KeyCode, KeyBinding> getDefaultBindings()
+    private static Map<KeyCode, KeyBinding> getDefaultBindings()
     {
         return Stream.of(new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER), new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE), new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT), new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT), new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE), new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE), new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER), new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE), new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER)).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
