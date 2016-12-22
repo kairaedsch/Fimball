@@ -33,7 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 
 /**
- * Testet, ob in der Klasse {@link sep.fimball.view.pinballcanvas.PinballCanvasSubView} das ViewModel ordnungsgemäß geändert werden kann.
+ * Testet, ob die Klassen {@link sep.fimball.view.pinballcanvas.PinballCanvasSubView} und {@link sep.fimball.view.pinballcanvas.PinballCanvasDrawer} ordnungsgemäß zeichen.
  */
 public class PinballCanvasSubViewTest
 {

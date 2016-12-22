@@ -190,7 +190,10 @@ public class Settings
             {
                 keyBindingsMap.remove(getKeyCode(keyBinding).get());
             }
-            keyBindingsMap.put(keyCode, keyBinding);
+            if (keyBinding != null)
+            {
+                keyBindingsMap.put(keyCode, keyBinding);
+            }
         }
     }
 

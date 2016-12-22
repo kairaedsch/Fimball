@@ -25,16 +25,22 @@ public class KeyEventConverterTest
     /**
      * Testet, ob die Erstellung von KeyEventArgs aus KeyEvents funktioniert.
      */
-    @Test
+    @Test(timeout = 5000)
     public void testCreateKeyEventArgs() {
         MockitoAnnotations.initMocks(this);
-        Settings.getSingletonInstance().setKeyBinding(KeyCode.S, KeyBinding.PLUNGER);
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.S, KeyBinding.LEFT_FLIPPER);
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.B, null);
         KeyEventConverter converter = new KeyEventConverter();
 
         Mockito.when(mockedKeyEvent.getCode()).thenReturn(KeyCode.S);
         Mockito.when(mockedKeyEvent.getEventType()).thenReturn(KeyEvent.KEY_PRESSED);
         Optional<KeyEventArgs> keyEventArgs = converter.createKeyEventArgs(mockedKeyEvent);
         assertThat(keyEventArgs.isPresent(), is(true));
-        assertThat(keyEventArgs.get().getBinding(), is(KeyBinding.PLUNGER));
+        assertThat(keyEventArgs.get().getBinding(), is(KeyBinding.LEFT_FLIPPER));
+
+        Mockito.when(mockedKeyEvent.getCode()).thenReturn(KeyCode.B);
+        keyEventArgs = converter.createKeyEventArgs(mockedKeyEvent);
+        assertThat(keyEventArgs.isPresent(), is(false));
     }
 }
+
