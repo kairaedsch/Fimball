@@ -52,7 +52,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
 
         detailedPreviewName.textProperty().bind(mainMenuViewModel.getPinballMachineInfoSubViewModel().nameProperty());
 
-        // TODO - Cancer da die StringExpression kein ordentliches Binding zurück gibt. In dieser wird eine Methode aufgerufen, somit wird nicht mehr die eigentliche observedValue genutzt und das Binding nicht updated.
         detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()));
 
 
