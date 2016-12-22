@@ -27,8 +27,9 @@
                         </padding>
                   <VBox>
                      <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#settingsClicked" text="Save+Settings" />
-                        <Button mnemonicParsing="false" onMouseClicked="#abortClicked" text="Abort" />
+                              <Button fx:id="settings" mnemonicParsing="false" onMouseClicked="#settingsClicked"
+                                      text="!editor.exit.key!" />
+                        <Button fx:id="abort" mnemonicParsing="false" onMouseClicked="#abortClicked" text="!editor.abort.key!" />
                      </children>
                   </VBox>
                         <Label fx:id="nameLabel" text="Tills Automat" />
