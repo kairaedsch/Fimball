@@ -24,11 +24,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Diese Klasse repräsentiert einen Test, der prüft, ob ein Ball den erwarteten Verlauf im angegebenen Automaten nimmt.
  */
-@Ignore
 public class GameTest
 {
     private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
-    private static final long HOLD_KEY_DURATION = 1350;     // Die Zeit, die der Plunger gespannt wird.
+    private static final long HOLD_KEY_DURATION = 300;     // Die Zeit, die der Plunger gespannt wird.
     private boolean ballIsLost = false;
 
     private static final String WALL_ID = "hinderniss_linie_schraeg_2";
@@ -50,11 +49,11 @@ public class GameTest
     {
         // Aufbau des Automaten.
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        pinballMachine.nameProperty().setValue("GameTest PinballMachine");
+        pinballMachine.nameProperty().setValue("GameTest Machine");
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 20), 0, 1, 0));
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 16), 0, 1, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 18), 0, 1, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 12), 0, 1, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 1, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 1, 0));
 
@@ -131,7 +130,7 @@ public class GameTest
     private void usePlunger() throws InterruptedException
     {
         session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.DOWN, true));
-        Thread.sleep(1000);
+        Thread.sleep(HOLD_KEY_DURATION);
         session.activateUserHandler(new KeyEventArgs(KeyBinding.PLUNGER, KeyEventArgs.KeyChangedToState.UP, true));
     }
 
