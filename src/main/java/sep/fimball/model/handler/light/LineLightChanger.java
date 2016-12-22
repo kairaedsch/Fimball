@@ -27,13 +27,21 @@ public class LineLightChanger extends LightChanger
     @Override
     public boolean determineLightStatus(Vector2 position, long delta)
     {
-        // units per second
+        // Die Geschwindigkeit des Effekts in Grideinheiten pro Sekunde
         double speed = 30;
+
+        // Die Breite einer Lichterlinie
         double width = 6;
+
+        // Der Abstand zwischen zwei Lichterlinien
         double space = 16;
 
-        double distance = (delta / 1000.0) * speed;
+        double line = (delta / 1000.0) * speed;
 
-        return Math.abs(distance - (vertical ? position.getX() : position.getY())) % (space + width) <= width;
+        // Berechne den Abstand zur line
+        double distanceToPoint = Math.abs(line - (vertical ? position.getX() : position.getY()));
+
+        // Rechne mit Modulo, um den Effekt zu duplizieren
+        return distanceToPoint % (space + width) <= width;
     }
 }

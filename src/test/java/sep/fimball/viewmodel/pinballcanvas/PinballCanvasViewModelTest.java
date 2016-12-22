@@ -18,7 +18,6 @@ import static org.mockito.ArgumentMatchers.any;
  */
 public class PinballCanvasViewModelTest
 {
-
     /**
      * Überprüft die Korrektheit der Methode {@link PinballCanvasViewModel#addRedrawObserver}.
      */

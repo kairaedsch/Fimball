@@ -11,12 +11,12 @@ public class ShapeLightChanger extends LightChanger
     /**
      * Die Mitte des Kreises, um den die Lichter angeschalten werden.
      */
-    private final ReadOnlyObjectProperty<Vector2> center;
+    private ReadOnlyObjectProperty<Vector2> center;
 
     /**
      * Gibt an, ob die Form ein Kreis ist oder ein Quadrat.
      */
-    private final boolean circle;
+    private boolean circle;
 
     /**
      * Erstellt einen neuen ShapeLightChanger.
@@ -35,9 +35,13 @@ public class ShapeLightChanger extends LightChanger
     @Override
     public boolean determineLightStatus(Vector2 position, long delta)
     {
-        // units per second
+        // Die Geschwindigkeit des Effekts in Grideinheiten pro Sekunde
         double speed = 30;
+
+        // Der Abstand zwischen zwei Formen
         double space = 16;
+
+        // Die Breite eines Form
         double width;
 
         double radius = (delta / 1000.0) * speed;
@@ -47,18 +51,25 @@ public class ShapeLightChanger extends LightChanger
         if (circle)
         {
             width = 8;
+
+            // Berechne Abstand zum Kreismittelpunkt
             distance = Math.abs(radius - relativePosition.magnitude());
         }
         else
         {
             width = 6;
+
+            // Berechne die Abstände zu den 4 Ecken des Quadrats
             double d1 = Math.abs(radius - relativePosition.getX());
             double d2 = Math.abs(radius - relativePosition.getY());
             double d3 = Math.abs(-radius - relativePosition.getX());
             double d4 = Math.abs(-radius - relativePosition.getY());
 
+            // Nehme den kleinsten Abstand
             distance = Math.min(Math.min(d1, d2), Math.min(d3, d4));
         }
+
+        // Rechne mit Modulo, um den Effekt zu duplizieren
         return distance % (space + width) <= width;
     }
 }
