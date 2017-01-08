@@ -76,23 +76,34 @@ class PinballCanvasDrawer
 
         if(dragSelectionRect.isPresent())
         {
-            graphicsContext.setFill(DesignConfig.SECONDARY_COLOR);
-            graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR_DARK);
-            graphicsContext.setLineWidth(0.25 * PIXELS_PER_GRID_UNIT);
-
-            Vector2 ori = dragSelectionRect.get().getOrigin().scale(PIXELS_PER_GRID_UNIT);
-            Vector2 end = dragSelectionRect.get().getSize().scale(PIXELS_PER_GRID_UNIT);
-
-            graphicsContext.setGlobalAlpha(0.5);
-            graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX(), end.getY());
-
-            graphicsContext.setGlobalAlpha(1);
-            graphicsContext.strokeRect(ori.getX(), ori.getY(), end.getX(), end.getY());
+            drawSelectionRect(dragSelectionRect.get(), graphicsContext);
         }
 
         graphicsContext.restore();
 
 
+    }
+
+    /**
+     * Zeichnet die Markierung, die ein im Editor ausgewähltes Objekt umgibt.
+     *
+     * @param dragSelectionRect Bestimmt die Position und Größe der Markierung.
+     * @param graphicsContext Der GraphicsContext, auf dem gezeichnet werden soll.
+     */
+    private void drawSelectionRect(RectangleDoubleByPoints dragSelectionRect, GraphicsContext graphicsContext)
+    {
+        graphicsContext.setFill(DesignConfig.SECONDARY_COLOR);
+        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR_DARK);
+        graphicsContext.setLineWidth(0.25 * PIXELS_PER_GRID_UNIT);
+
+        Vector2 ori = dragSelectionRect.getOrigin().scale(PIXELS_PER_GRID_UNIT);
+        Vector2 end = dragSelectionRect.getSize().scale(PIXELS_PER_GRID_UNIT);
+
+        graphicsContext.setGlobalAlpha(0.5);
+        graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX(), end.getY());
+
+        graphicsContext.setGlobalAlpha(1);
+        graphicsContext.strokeRect(ori.getX(), ori.getY(), end.getX(), end.getY());
     }
 
     /**
@@ -125,48 +136,29 @@ class PinballCanvasDrawer
         graphicsContext.save();
         Vector2 gridStart = canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0).scale(PIXELS_PER_GRID_UNIT);
         Vector2 gridEnd = canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight()).scale(PIXELS_PER_GRID_UNIT);
+
         for (int gridX = (int) gridStart.getX() - (int) gridStart.getX() % PIXELS_PER_GRID_UNIT; gridX <= gridEnd.getX(); gridX += PIXELS_PER_GRID_UNIT)
         {
-            Color lineColor;
-            int lineWidth;
-
-            // Make every second line bigger
-            if (Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0)
-            {
-                lineColor = DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT;
-                lineWidth = 2;
-            }
-            else
-            {
-                lineColor = DesignConfig.PRIMARY_COLOR_LIGHT;
-                lineWidth = 1;
-            }
+            // Wähle die Linienfarbe und -stärke so, dass jede zweite Linie eine dünnere Linie ist.
+            Color lineColor = Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0 ? DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT : DesignConfig.PRIMARY_COLOR_LIGHT;
+            int lineWidth = Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0 ? 2 : 1;
 
             graphicsContext.setStroke(lineColor);
             graphicsContext.setLineWidth(lineWidth);
             graphicsContext.strokeLine(gridX, gridStart.getY(), gridX, gridEnd.getY());
         }
+
         for (int gridY = (int) gridStart.getY() - (int) gridStart.getY() % PIXELS_PER_GRID_UNIT; gridY <= gridEnd.getY(); gridY += PIXELS_PER_GRID_UNIT)
         {
-            Color lineColor;
-            int lineWidth;
-
-            // Make every second line bigger
-            if (Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT)
-            {
-                lineColor = DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT;
-                lineWidth = 2;
-            }
-            else
-            {
-                lineColor = DesignConfig.PRIMARY_COLOR_LIGHT;
-                lineWidth = 1;
-            }
+            // Wähle die Linienfarbe und -stärke so, dass jede zweite Linie eine dickere Linie ist.
+            Color lineColor = Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT ? DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT : DesignConfig.PRIMARY_COLOR_LIGHT;
+            int lineWidth = Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT ? 2 : 1;
 
             graphicsContext.setStroke(lineColor);
             graphicsContext.setLineWidth(lineWidth);
             graphicsContext.strokeLine(gridStart.getX(), gridY, gridEnd.getX(), gridY);
         }
+
         graphicsContext.restore();
     }
 

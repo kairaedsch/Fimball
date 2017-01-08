@@ -144,15 +144,15 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     /**
      * {@inheritDoc}
      */
-    public WritableImage drawToImage()
+    public WritableImage getScreenshot()
     {
-        RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         double minWidth = (1280 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double minHeight = (720 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double maxWidth = (3840 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double maxHeight = (2160 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double cameraScale = 1.0;
 
+        RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         if (rectangleDouble.getWidth() < minWidth || rectangleDouble.getHeight() < minHeight)
         {
             double scale = (minWidth / rectangleDouble.getWidth());
@@ -172,16 +172,29 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
             rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), newBorder, newBorder);
         }
 
+        return createScreenshot(cameraScale, rectangleDouble);
+    }
+
+    /**
+     * Erstellt ein Bild des aktuellen Automaten und gibt dieses zurück.
+     *
+     * @param TODO
+     * @return Ein Bild des aktuellen Automaten.
+     */
+    private WritableImage createScreenshot(double cameraScale, RectangleDouble rectangleDouble)
+    {
         Canvas screenShotCanvas = new Canvas();
         screenShotCanvas.setHeight(rectangleDouble.getHeight() * DesignConfig.PIXELS_PER_GRID_UNIT);
         screenShotCanvas.setWidth(rectangleDouble.getWidth() * DesignConfig.PIXELS_PER_GRID_UNIT);
+
         PinballCanvasDrawer screenshotCanvasDrawer = new PinballCanvasDrawer(screenShotCanvas, DrawMode.SCREENSHOT, sprites);
         screenshotCanvasDrawer.draw(rectangleDouble.getMiddle(), cameraScale, Optional.empty());
-        WritableImage writeableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
+        WritableImage writableImage = new WritableImage((int) screenShotCanvas.getWidth(), (int) screenShotCanvas.getHeight());
+
         SnapshotParameters snapshotParameters = new SnapshotParameters();
         snapshotParameters.setFill(Color.TRANSPARENT);
-        screenShotCanvas.snapshot(snapshotParameters, writeableImage);
-        return writeableImage;
+        screenShotCanvas.snapshot(snapshotParameters, writableImage);
+        return writableImage;
     }
 
     /**

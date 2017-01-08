@@ -173,7 +173,7 @@ public abstract class PinballCanvasViewModel
      */
     public WritableImage createScreenshot()
     {
-        return viewScreenshotCreator.drawToImage();
+        return viewScreenshotCreator.getScreenshot();
     }
 
     /**

@@ -8,9 +8,9 @@ import javafx.scene.image.WritableImage;
 public interface ViewScreenshotCreator
 {
     /**
-     * Erstellt ein Bild von der View.
+     * Gibt ein Bild des aktuellen Zustands der View zurück.
      *
-     * @return Ein Bild von der View.
+     * @return Ein Bild der View.
      */
-    WritableImage drawToImage();
+    WritableImage getScreenshot();
 }
