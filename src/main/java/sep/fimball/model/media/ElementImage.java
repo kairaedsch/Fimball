@@ -33,7 +33,6 @@ public class ElementImage
      */
     private Animation animation;
 
-
     /**
      * Erzeugt ein neues ElementImage.
      *

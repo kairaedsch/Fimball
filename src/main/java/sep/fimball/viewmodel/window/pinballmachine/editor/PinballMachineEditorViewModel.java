@@ -312,27 +312,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Setzt das aktuell ausgewählte Element aus der Liste der möglichen Elemente auf das gegebene Element.
-     *
-     * @param selectedAvailableElement Das neue ausgewählte Element.
-     */
-    private void setSelectedAvailableElement(BaseElement selectedAvailableElement)
-    {
-        if (selectedAvailableElement != null)
-        {
-            this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
-            topBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0)));
-            botBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0)));
-        }
-        else
-        {
-            this.selectedAvailableElement.set(Optional.empty());
-            topBackgroundPath.set(Optional.empty());
-            botBackgroundPath.set(Optional.empty());
-        }
-    }
-
-    /**
      * Behandelt das Drücken der Maustaste auf dem Canvas.
      *
      * @param mouseEvent Das Event, in dem die Maustaste gedrückt wurde.
@@ -617,5 +596,26 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public Optional<RectangleDoubleByPoints> selectionRectProperty()
     {
         return selectionRect;
+    }
+
+    /**
+     * Setzt das aktuell ausgewählte Element aus der Liste der möglichen Elemente auf das gegebene Element.
+     *
+     * @param selectedAvailableElement Das neue ausgewählte Element.
+     */
+    private void setSelectedAvailableElement(BaseElement selectedAvailableElement)
+    {
+        if (selectedAvailableElement != null)
+        {
+            this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
+            topBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0)));
+            botBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0)));
+        }
+        else
+        {
+            this.selectedAvailableElement.set(Optional.empty());
+            topBackgroundPath.set(Optional.empty());
+            botBackgroundPath.set(Optional.empty());
+        }
     }
 }

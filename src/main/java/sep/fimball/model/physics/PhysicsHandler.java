@@ -116,6 +116,15 @@ public class PhysicsHandler<GameElementT>
     }
 
     /**
+     * Stoppt die Physik-Schleife.
+     */
+    public void stopTicking()
+    {
+        physicTimer.cancel();
+        physicTimer.purge();
+    }
+
+    /**
      * Setzt das Feld welches angibt dass der Ball verloren gegangen ist zurück.
      */
     public void resetBall()
@@ -203,14 +212,5 @@ public class PhysicsHandler<GameElementT>
             }
         });
         elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
-    }
-
-    /**
-     * Stoppt die Physik-Schleife.
-     */
-    public void stopTicking()
-    {
-        physicTimer.cancel();
-        physicTimer.purge();
     }
 }

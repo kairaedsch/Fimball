@@ -33,20 +33,6 @@ public class LanguageManagerViewModel
     private static LanguageManagerViewModel instance;
 
     /**
-     * Gibt den bereits existierenden LanguageManagerViewModel oder einen neu angelegten zurück, falls noch keiner existiert.
-     *
-     * @return Die Instanz von LanguageManagerViewModel.
-     */
-    public static LanguageManagerViewModel getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new LanguageManagerViewModel();
-        }
-        return instance;
-    }
-
-    /**
      * Erstellt ein neues LanguageManagerViewModel.
      */
     private LanguageManagerViewModel()
@@ -61,6 +47,39 @@ public class LanguageManagerViewModel
 
         loadTextsFromProperties(properties.get(Settings.getSingletonInstance().languageProperty().get()));
         Settings.getSingletonInstance().languageProperty().addListener((observable, oldValue, newValue) -> loadTextsFromProperties(properties.get(newValue)));
+    }
+
+    /**
+     * Gibt den bereits existierenden LanguageManagerViewModel oder einen neu angelegten zurück, falls noch keiner existiert.
+     *
+     * @return Die Instanz von LanguageManagerViewModel.
+     */
+    public static LanguageManagerViewModel getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new LanguageManagerViewModel();
+        }
+        return instance;
+    }
+
+    /**
+     * Stellt der View den Text, der durch den {@code key} spezifiziert ist, in der aktuell ausgewählten Sprache zur Verfügung.
+     *
+     * @param key Der Key, der den Text spezifiziert.
+     * @return Der gewünschte Text.
+     */
+    public StringProperty textProperty(String key)
+    {
+        if (texts.containsKey(key))
+        {
+            return texts.get(key);
+        }
+        else
+        {
+            System.err.println(key + "could not be found.");
+            return new SimpleStringProperty(key);
+        }
     }
 
     /**
@@ -107,25 +126,6 @@ public class LanguageManagerViewModel
             {
                 texts.put((String) key, new SimpleStringProperty((String) properties.get(key)));
             }
-        }
-    }
-
-    /**
-     * Stellt der View den Text, der durch den {@code key} spezifiziert ist, in der aktuell ausgewählten Sprache zur Verfügung.
-     *
-     * @param key Der Key, der den Text spezifiziert.
-     * @return Der gewünschte Text.
-     */
-    public StringProperty textProperty(String key)
-    {
-        if (texts.containsKey(key))
-        {
-            return texts.get(key);
-        }
-        else
-        {
-            System.err.println(key + "could not be found.");
-            return new SimpleStringProperty(key);
         }
     }
 }

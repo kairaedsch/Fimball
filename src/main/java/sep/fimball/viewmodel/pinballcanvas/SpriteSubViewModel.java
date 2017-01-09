@@ -121,22 +121,6 @@ public class SpriteSubViewModel
     }
 
     /**
-     * Aktualisiert abhängig vom GameElement das zu zeichnende Bild.
-     */
-    private void updateImage()
-    {
-        Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
-        if (currentAnimation.isPresent())
-        {
-            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get());
-        }
-        else
-        {
-            currentImage.get().setElementImage(gameElement.getMediaElement().elementImageProperty().get());
-        }
-    }
-
-    /**
      * Stellt der View die Position des Sprites zur Verfügung.
      *
      * @return Die Position des Sprites.
@@ -224,5 +208,21 @@ public class SpriteSubViewModel
     public DoubleProperty visibilityProperty()
     {
         return visibility;
+    }
+
+    /**
+     * Aktualisiert abhängig vom GameElement das zu zeichnende Bild.
+     */
+    private void updateImage()
+    {
+        Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
+        if (currentAnimation.isPresent())
+        {
+            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get());
+        }
+        else
+        {
+            currentImage.get().setElementImage(gameElement.getMediaElement().elementImageProperty().get());
+        }
     }
 }

@@ -21,6 +21,14 @@ public class ImageCache
     private HashMap<String, Image> cachedImages;
 
     /**
+     * Erzeugt einen neuen ImageCache.
+     */
+    private ImageCache()
+    {
+        cachedImages = new HashMap<>();
+    }
+
+    /**
      * Gibt den bereits existierenden ImageCache oder einen neu angelegten zurück, falls noch keiner existieren.
      *
      * @return Die Instanz von ImageCache.
@@ -31,14 +39,6 @@ public class ImageCache
             instance = new ImageCache();
 
         return instance;
-    }
-
-    /**
-     * Erzeugt einen neuen ImageCache.
-     */
-    private ImageCache()
-    {
-        cachedImages = new HashMap<>();
     }
 
     /**

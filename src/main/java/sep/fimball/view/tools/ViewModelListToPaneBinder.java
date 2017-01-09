@@ -77,6 +77,7 @@ public class ViewModelListToPaneBinder
      * @param <ViewT>      Die zu manipulierende View.
      * @param <ViewModelT> Das zu manipulierende ViewModel.
      */
+    @FunctionalInterface
     public interface ViewAndViewModelCaller<ViewT, ViewModelT>
     {
         /**

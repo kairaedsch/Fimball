@@ -140,6 +140,12 @@ public class MainMenuViewModel extends WindowViewModel
         }
     }
 
+    @Override
+    public void changeBackgroundMusic()
+    {
+        SoundManagerViewModel.getInstance().playMusic(Sounds.MAIN_MENU);
+    }
+
     /**
      * Findet den Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
      *
@@ -156,11 +162,4 @@ public class MainMenuViewModel extends WindowViewModel
         }
         return Optional.empty();
     }
-
-    @Override
-    public void changeBackgroundMusic()
-    {
-        SoundManagerViewModel.getInstance().playMusic(Sounds.MAIN_MENU);
-    }
-
 }

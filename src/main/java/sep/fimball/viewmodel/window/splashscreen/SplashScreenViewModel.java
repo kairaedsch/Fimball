@@ -61,6 +61,26 @@ public class SplashScreenViewModel extends WindowViewModel
     }
 
     /**
+     * Gibt den Fortschritt des Ladens zurück.
+     *
+     * @return Der Fortschritt des Ladens.
+     */
+    public DoubleProperty getLoadProgress()
+    {
+        return loadProgress;
+    }
+
+    /**
+     * Gibt den Text, der das Laden beschreibt, zurück.
+     *
+     * @return Der Text, der das Laden beschreibt.
+     */
+    public StringProperty getProgressText()
+    {
+        return progressText;
+    }
+
+    /**
      * Fügt Texte in die Text-Queue ein.
      */
     private void offerTexts()
@@ -81,7 +101,6 @@ public class SplashScreenViewModel extends WindowViewModel
     {
         return LanguageManagerViewModel.getInstance().textProperty(key).get();
     }
-
 
     /**
      * Benachrichtigt den SceneManager, dass das Hauptmenü angezeigt werden soll.
@@ -118,25 +137,4 @@ public class SplashScreenViewModel extends WindowViewModel
         progressText.set(texts.poll());
         loadProgress.set(loadProgress.get() + (1.0 / numberOfTexts));
     }
-
-    /**
-     * Gibt den Fortschritt des Ladens zurück.
-     *
-     * @return Der Fortschritt des Ladens.
-     */
-    public DoubleProperty getLoadProgress()
-    {
-        return loadProgress;
-    }
-
-    /**
-     * Gibt den Text, der das Laden beschreibt, zurück.
-     *
-     * @return Der Text, der das Laden beschreibt.
-     */
-    public StringProperty getProgressText()
-    {
-        return progressText;
-    }
-
 }

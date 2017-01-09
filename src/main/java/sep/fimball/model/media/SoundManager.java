@@ -20,6 +20,14 @@ public class SoundManager
     private Observable observable;
 
     /**
+     * Erstellt einen neuen SoundManager.
+     */
+    private SoundManager()
+    {
+        observable = new Observable();
+    }
+
+    /**
      * Gibt den bereits existierenden SoundManager oder einen neu angelegten zurück, falls noch keiner existiert.
      *
      * @return Eine Instanz von SoundManager.
@@ -31,14 +39,6 @@ public class SoundManager
             instance = new SoundManager();
         }
         return instance;
-    }
-
-    /**
-     * Erstellt einen neuen SoundManager.
-     */
-    private SoundManager()
-    {
-        observable = new Observable();
     }
 
     /**

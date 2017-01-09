@@ -36,6 +36,17 @@ public class PolygonColliderShape implements ColliderShape
     }
 
     @Override
+    public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
+    {
+        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
+        Optional<Vector2> extremeVal = rotatedVertices.stream().reduce(max ? Vector2::maxComponents : Vector2::minComponents);
+        if (extremeVal.isPresent())
+            return extremeVal.get();
+        else
+            throw new IllegalStateException("No vectors found.");
+    }
+
+    @Override
     public HitInfo calculateHitInfo(CircleColliderShape otherColliderShape, Vector2 otherColliderPosition, Vector2 currentColliderPosition, double rotation, Vector2 pivotPoint)
     {
         List<OverlapAxis> detectedOverlaps = new ArrayList<>();
@@ -183,17 +194,6 @@ public class PolygonColliderShape implements ColliderShape
     {
         overlaps.sort(((o1, o2) -> o1.getOverlap() <= o2.getOverlap() ? -1 : 1));
         return overlaps.get(0).getAxis().scale(overlaps.get(0).getOverlap());
-    }
-
-    @Override
-    public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
-    {
-        List<Vector2> rotatedVertices = rotate(rotation, pivotPoint);
-        Optional<Vector2> extremeVal = rotatedVertices.stream().reduce(max ? Vector2::maxComponents : Vector2::minComponents);
-        if (extremeVal.isPresent())
-            return extremeVal.get();
-        else
-            throw new IllegalStateException("No vectors found.");
     }
 
     /**

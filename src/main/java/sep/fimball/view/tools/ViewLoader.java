@@ -44,6 +44,26 @@ public class ViewLoader<ViewT>
     }
 
     /**
+     * Gibt die RootNode der geladenen FXML-Datei zurück.
+     *
+     * @return Die RootNode.
+     */
+    public Node getRootNode()
+    {
+        return rootNode;
+    }
+
+    /**
+     * Gibt die View (FxController) der geladenen FXML-Datei zurück.
+     *
+     * @return Die View.
+     */
+    public ViewT getView()
+    {
+        return view;
+    }
+
+    /**
      * Lädt aus der gegebenen FXML-Datei, setzt die RootNode als {@code rootNode}, lädt die eingestellte Sprache und lädt und setzt die zur {@code rootNode} gehörende View.
      *
      * @param fxmlPath Der Pfad zur FXML-Datei, aus der geladen werden soll.
@@ -172,25 +192,5 @@ public class ViewLoader<ViewT>
                 labeledText.set(labeledText.get().replaceAll(regexPattern, ""));
             }
         }
-    }
-
-    /**
-     * Gibt die RootNode der geladenen FXML-Datei zurück.
-     *
-     * @return Die RootNode.
-     */
-    public Node getRootNode()
-    {
-        return rootNode;
-    }
-
-    /**
-     * Gibt die View (FxController) der geladenen FXML-Datei zurück.
-     *
-     * @return Die View.
-     */
-    public ViewT getView()
-    {
-        return view;
     }
 }

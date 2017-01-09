@@ -48,18 +48,6 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     }
 
     /**
-     * Generiert einen String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
-     *
-     * @param top Gibt an, ob die CSS-Beschreibung für das obere Bild generiert werden soll.
-     * @return Ein String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
-     */
-    private StringExpression generatePreviewCss(boolean top)
-    {
-        ReadOnlyStringProperty imagePath = top ? availableElementSubViewModel.imagePathTopProperty() : availableElementSubViewModel.imagePathBotProperty();
-        return DesignConfig.fillBackgroundImageCss(imagePath);
-    }
-
-    /**
      * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler auf dieses Element geklickt hat.
      */
     public void mousePressed()
@@ -86,5 +74,17 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     {
         previewName.startFullDrag();
         mouseEvent.consume();
+    }
+
+    /**
+     * Generiert einen String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
+     *
+     * @param top Gibt an, ob die CSS-Beschreibung für das obere Bild generiert werden soll.
+     * @return Ein String, der eine CSS-Beschreibung des Styles des Vorschaubildes ist.
+     */
+    private StringExpression generatePreviewCss(boolean top)
+    {
+        ReadOnlyStringProperty imagePath = top ? availableElementSubViewModel.imagePathTopProperty() : availableElementSubViewModel.imagePathBotProperty();
+        return DesignConfig.fillBackgroundImageCss(imagePath);
     }
 }

@@ -65,6 +65,19 @@ public class LightHandler implements GameHandler
         currentLightChanger = lightChangers.get(0);
     }
 
+    @Override
+    public void activateGameHandler(GameEvent gameEvent)
+    {
+        if (gameEvent == GameEvent.BALL_LOST)
+        {
+            lightChangeLoop.stop();
+        }
+        if (gameEvent == GameEvent.BALL_SPAWNED)
+        {
+            lightChangeLoop.play();
+        }
+    }
+
     /**
      * Ruft den aktuell aktiven LightChanger auf solange dieser aktiv ist. Wenn der aktuelle fertig ist wird zufällig ein anderer LightChanger gewählt.
      */
@@ -87,19 +100,6 @@ public class LightHandler implements GameHandler
             {
                 light.setCurrentAnimation(animation);
             }
-        }
-    }
-
-    @Override
-    public void activateGameHandler(GameEvent gameEvent)
-    {
-        if (gameEvent == GameEvent.BALL_LOST)
-        {
-            lightChangeLoop.stop();
-        }
-        if (gameEvent == GameEvent.BALL_SPAWNED)
-        {
-            lightChangeLoop.play();
         }
     }
 }

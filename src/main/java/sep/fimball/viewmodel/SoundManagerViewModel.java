@@ -60,23 +60,17 @@ public class SoundManagerViewModel
     }
 
     /**
-     * Benachrichtigt die eingetragenen Observer darüber, dass ein Sound abgespielt werden soll.
+     * Gibt das bereits existierende SoundManagerViewModel oder ein neu angelegtes zurück, falls noch keines existiert.
      *
-     * @param sound Der Pfad zur Datei des neuen Sounds.
+     * @return Eine Instanz von SoundManagerViewModel.
      */
-    private void playClip(Sound sound)
+    public static SoundManagerViewModel getInstance()
     {
-        playObservable.setChanged();
-        playObservable.notifyObservers(sound);
-    }
-
-    /**
-     * Benachrichtigt die eingetragenen Observer darüber, dass die Hintergrundmusik gestoppt werden soll.
-     */
-    void stopBackgroundMusic()
-    {
-        stopObservable.setChanged();
-        stopObservable.notifyObservers();
+        if (instance == null)
+        {
+            instance = new SoundManagerViewModel(Settings.getSingletonInstance());
+        }
+        return instance;
     }
 
     /**
@@ -120,20 +114,6 @@ public class SoundManagerViewModel
     }
 
     /**
-     * Gibt das bereits existierende SoundManagerViewModel oder ein neu angelegtes zurück, falls noch keines existiert.
-     *
-     * @return Eine Instanz von SoundManagerViewModel.
-     */
-    public static SoundManagerViewModel getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new SoundManagerViewModel(Settings.getSingletonInstance());
-        }
-        return instance;
-    }
-
-    /**
      * Benachrichtigt die Observer, dass die gegebene Hintergrundmusik abgespielt werden soll.
      *
      * @param music Die Hintergrundmusik, die abgespielt werden soll.
@@ -141,5 +121,25 @@ public class SoundManagerViewModel
     public void playMusic(Sounds music)
     {
         playClip(new Sound(music.getSoundName(), true));
+    }
+
+    /**
+     * Benachrichtigt die eingetragenen Observer darüber, dass die Hintergrundmusik gestoppt werden soll.
+     */
+    void stopBackgroundMusic()
+    {
+        stopObservable.setChanged();
+        stopObservable.notifyObservers();
+    }
+
+    /**
+     * Benachrichtigt die eingetragenen Observer darüber, dass ein Sound abgespielt werden soll.
+     *
+     * @param sound Der Pfad zur Datei des neuen Sounds.
+     */
+    private void playClip(Sound sound)
+    {
+        playObservable.setChanged();
+        playObservable.notifyObservers(sound);
     }
 }

@@ -124,98 +124,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Bindet die gegebene Pane an das gegeben Image.
-     *
-     * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
-     * @param pane      Die Pane, die sich an das Image binden soll.
-     */
-    private void bindPaneToImage(Optional<String> imagePath, Pane pane)
-    {
-        if (imagePath.isPresent())
-        {
-            pane.styleProperty().set(DesignConfig.fillBackgroundImageCss(imagePath.get()));
-
-            ImageCache cache = ImageCache.getInstance();
-            pane.prefWidthProperty().unbind();
-            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).widthProperty()));
-            pane.prefHeightProperty().unbind();
-            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).heightProperty()));
-        }
-        else
-        {
-            pane.styleProperty().set(DesignConfig.CSS_NO_IMAGE);
-        }
-    }
-
-    /**
-     * Fügt EventFilter zur Erkennung von Maus-Bewegungen zur {@code stage} hinzu.
-     *
-     * @param stage Die Stage.
-     */
-    public void addEventFilterToStage(Stage stage)
-    {
-        stage.addEventFilter(MouseEvent.MOUSE_MOVED, this::updatePreviewPosition);
-        stage.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::updatePreviewPosition);
-    }
-
-    /**
-     * Aktualisiert die Position der Drag-Vorschau.
-     *
-     * @param event Das Event, das die Position des Vorschaubildes bestimmt.
-     */
-    private void updatePreviewPosition(MouseEvent event)
-    {
-        previewBot.setTranslateX(event.getX());
-        previewBot.setTranslateY(event.getY());
-
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den bearbeiteten Automaten spielen möchte.
-     */
-    @FXML
-    private void playClicked()
-    {
-        pinballMachineEditorViewModel.startPinballMachine();
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
-     */
-    @FXML
-    private void settingsClicked()
-    {
-        pinballMachineEditorViewModel.showSettingsDialog();
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
-     */
-    @FXML
-    private void abortClicked()
-    {
-        pinballMachineEditorViewModel.goToMainMenu();
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten hineinzoomen möchte.
-     */
-    @FXML
-    private void zoomInClicked()
-    {
-        pinballMachineEditorViewModel.zoomIn();
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem geöffneten Automaten herauszoomen möchte.
-     */
-    @FXML
-    private void zoomOutClicked()
-    {
-        pinballMachineEditorViewModel.zoomOut();
-    }
-
-    /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im
      * ScrollEvent hinein- oder herauszoomen möchte.
      *
@@ -309,6 +217,97 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void mouseReleased(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);
+    }
+
+    /**
+     * Fügt EventFilter zur Erkennung von Maus-Bewegungen zur {@code stage} hinzu.
+     *
+     * @param stage Die Stage.
+     */
+    public void addEventFilterToStage(Stage stage)
+    {
+        stage.addEventFilter(MouseEvent.MOUSE_MOVED, this::updatePreviewPosition);
+        stage.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::updatePreviewPosition);
+    }
+
+    /**
+     * Bindet die gegebene Pane an das gegeben Image.
+     *
+     * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
+     * @param pane      Die Pane, die sich an das Image binden soll.
+     */
+    private void bindPaneToImage(Optional<String> imagePath, Pane pane)
+    {
+        if (imagePath.isPresent())
+        {
+            pane.styleProperty().set(DesignConfig.fillBackgroundImageCss(imagePath.get()));
+
+            ImageCache cache = ImageCache.getInstance();
+            pane.prefWidthProperty().unbind();
+            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).widthProperty()));
+            pane.prefHeightProperty().unbind();
+            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).heightProperty()));
+        }
+        else
+        {
+            pane.styleProperty().set(DesignConfig.CSS_NO_IMAGE);
+        }
+    }
+
+    /**
+     * Aktualisiert die Position der Drag-Vorschau.
+     *
+     * @param event Das Event, das die Position des Vorschaubildes bestimmt.
+     */
+    private void updatePreviewPosition(MouseEvent event)
+    {
+        previewBot.setTranslateX(event.getX());
+        previewBot.setTranslateY(event.getY());
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den bearbeiteten Automaten spielen möchte.
+     */
+    @FXML
+    private void playClicked()
+    {
+        pinballMachineEditorViewModel.startPinballMachine();
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
+     */
+    @FXML
+    private void settingsClicked()
+    {
+        pinballMachineEditorViewModel.showSettingsDialog();
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
+     */
+    @FXML
+    private void abortClicked()
+    {
+        pinballMachineEditorViewModel.goToMainMenu();
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten hineinzoomen möchte.
+     */
+    @FXML
+    private void zoomInClicked()
+    {
+        pinballMachineEditorViewModel.zoomIn();
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem geöffneten Automaten herauszoomen möchte.
+     */
+    @FXML
+    private void zoomOutClicked()
+    {
+        pinballMachineEditorViewModel.zoomOut();
     }
 
     /**

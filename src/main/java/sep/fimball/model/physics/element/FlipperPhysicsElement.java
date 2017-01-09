@@ -81,19 +81,6 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         return angularDirection == DOWN;
     }
 
-    /**
-     * Lässt den Flipperarm drehen, falls möglich.
-     *
-     * @param newAngularDirection Die neue Drehrichtung
-     */
-    private void rotate(AngularDirection newAngularDirection)
-    {
-        // Setzt die neue Rotationsrichtung, falls sich der Flipper noch in diese Richtung drehen kann.
-        double newAngularVelocity = getAngularVelocity(newAngularDirection);
-        if (newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
-        if (newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
-    }
-
     @Override
     public void update(double deltaTime)
     {
@@ -118,6 +105,12 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         {
             setRotation(newRotation);
         }
+    }
+
+    @Override
+    public void applyModify(FlipperModify modify)
+    {
+        rotate(modify.newAngularDirection());
     }
 
     /**
@@ -145,9 +138,16 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         return 0;
     }
 
-    @Override
-    public void applyModify(FlipperModify modify)
+    /**
+     * Lässt den Flipperarm drehen, falls möglich.
+     *
+     * @param newAngularDirection Die neue Drehrichtung
+     */
+    private void rotate(AngularDirection newAngularDirection)
     {
-        rotate(modify.newAngularDirection());
+        // Setzt die neue Rotationsrichtung, falls sich der Flipper noch in diese Richtung drehen kann.
+        double newAngularVelocity = getAngularVelocity(newAngularDirection);
+        if (newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
+        if (newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
     }
 }

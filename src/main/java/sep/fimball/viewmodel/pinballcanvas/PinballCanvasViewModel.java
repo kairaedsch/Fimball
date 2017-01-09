@@ -117,15 +117,6 @@ public abstract class PinballCanvasViewModel
     }
 
     /**
-     * Benachrichtigt die Observer, dass sich etwas an den zu zeichnenden Objekten verändert hat.
-     */
-    private void redraw()
-    {
-        redrawObservable.setChanged();
-        redrawObservable.notifyObservers();
-    }
-
-    /**
      * Stellt der View die Information, ob der Flipperautomat im Editor benutzt wird, zur Verfügung.
      *
      * @return Ob das Pinball-Canvas im Editor benutzt wird.
@@ -153,7 +144,7 @@ public abstract class PinballCanvasViewModel
      */
     public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
     {
-
+        //TODO: Absichtlich leer?
     }
 
     /**
@@ -182,4 +173,13 @@ public abstract class PinballCanvasViewModel
      * @return Der Bereich, welchen der Nutzer gerade auswählt.
      */
     public abstract Optional<RectangleDoubleByPoints> selectingRectangleProperty();
+
+    /**
+     * Benachrichtigt die Observer, dass sich etwas an den zu zeichnenden Objekten verändert hat.
+     */
+    private void redraw()
+    {
+        redrawObservable.setChanged();
+        redrawObservable.notifyObservers();
+    }
 }

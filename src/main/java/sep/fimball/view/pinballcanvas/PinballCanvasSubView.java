@@ -117,31 +117,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
-     * Aktualisiert das Canvas durch erneutes Zeichnen.
-     */
-    private void redraw()
-    {
-        double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
-        double cameraZoomSpeed = 50;
-
-        long currentDraw = System.currentTimeMillis();
-        int delta = (int) (currentDraw - lastDraw);
-
-        double camFollowStep = delta / camFollowSpeed;
-        camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
-
-        double camZoomStep = delta / cameraZoomSpeed;
-        camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
-
-        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
-        softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
-
-        pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom, pinballCanvasViewModel.selectingRectangleProperty());
-
-        lastDraw = currentDraw;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public WritableImage getScreenshot()
@@ -176,6 +151,41 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     }
 
     /**
+     * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler die Maustaste  einer bestimmten Stelle im Grid gedrückt hat.
+     *
+     * @param mouseEvent Das Mouse-Event, das verarbeitet werden soll.
+     */
+    public void mousePressed(MouseEvent mouseEvent)
+    {
+        pinballCanvasViewModel.mousePressedOnGame(mousePosToGridPos(mouseEvent), mouseEvent);
+    }
+
+    /**
+     * Aktualisiert das Canvas durch erneutes Zeichnen.
+     */
+    private void redraw()
+    {
+        double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
+        double cameraZoomSpeed = 50;
+
+        long currentDraw = System.currentTimeMillis();
+        int delta = (int) (currentDraw - lastDraw);
+
+        double camFollowStep = delta / camFollowSpeed;
+        camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
+
+        double camZoomStep = delta / cameraZoomSpeed;
+        camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
+
+        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
+        softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
+
+        pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom, pinballCanvasViewModel.selectingRectangleProperty());
+
+        lastDraw = currentDraw;
+    }
+
+    /**
      * Erstellt ein Bild des aktuellen Automaten und gibt dieses zurück.
      *
      * @param TODO
@@ -195,16 +205,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         snapshotParameters.setFill(Color.TRANSPARENT);
         screenShotCanvas.snapshot(snapshotParameters, writableImage);
         return writableImage;
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballCanvasViewModel}, dass der Spieler die Maustaste  einer bestimmten Stelle im Grid gedrückt hat.
-     *
-     * @param mouseEvent Das Mouse-Event, das verarbeitet werden soll.
-     */
-    public void mousePressed(MouseEvent mouseEvent)
-    {
-        pinballCanvasViewModel.mousePressedOnGame(mousePosToGridPos(mouseEvent), mouseEvent);
     }
 
     /**

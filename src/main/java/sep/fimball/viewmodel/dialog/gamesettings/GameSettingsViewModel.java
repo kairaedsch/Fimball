@@ -20,7 +20,6 @@ import java.util.Collections;
  */
 public class GameSettingsViewModel extends DialogViewModel
 {
-
     /**
      * Die aktuell eingestellten Tasten, um den Automaten und diverse {@link sep.fimball.model.game.GameElement} zu bedienen, z.B. den rechten Flipperarm.
      */
@@ -88,14 +87,6 @@ public class GameSettingsViewModel extends DialogViewModel
         saveSettings();
         sceneManager.setDialog(new EmptyViewModel());
         sceneManager.setWindow(new MainMenuViewModel());
-    }
-
-    /**
-     * Speichert die Einstellungen persistent.
-     */
-    private void saveSettings()
-    {
-        Settings.getSingletonInstance().saveToDisk(DataPath.pathToSettings());
     }
 
     /**
@@ -168,5 +159,13 @@ public class GameSettingsViewModel extends DialogViewModel
         ObservableList<Language> languages = FXCollections.observableArrayList();
         Collections.addAll(languages, Language.values());
         return languages;
+    }
+
+    /**
+     * Speichert die Einstellungen persistent.
+     */
+    private void saveSettings()
+    {
+        Settings.getSingletonInstance().saveToDisk(DataPath.pathToSettings());
     }
 }

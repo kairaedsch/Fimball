@@ -45,6 +45,23 @@ public class PinballMachineEditor
     }
 
     /**
+     * Dupliziert die aktuelle Auswahl.
+     */
+    public void duplicateSelection()
+    {
+        List<PlacedElement> newSelection = new ArrayList<>();
+        for (PlacedElement placedElement : selection)
+        {
+            PlacedElement placedElementCopy = placedElement.duplicate();
+            placedElementCopy.setPosition(placedElementCopy.positionProperty().get().plus(new Vector2(2, -2)));
+            pinballMachine.addElement(placedElementCopy);
+            newSelection.add(placedElementCopy);
+        }
+        clearSelection();
+        newSelection.forEach(this::addToSelection);
+    }
+
+    /**
      * Fügt die Auswahl dem Automaten hinzu und platziert diese.
      */
     void placeSelection()
@@ -53,31 +70,6 @@ public class PinballMachineEditor
         {
             pinballMachine.addElement(placedElement);
         }
-    }
-
-    /**
-     * Gibt die Position des gegebenen Elements zurück.
-     *
-     * @param placedElement Das Element, dessen Position zurückgegeben werden soll.
-     * @return Die Position des gegebenen Elements.
-     */
-    private Vector2 getPosition(PlacedElement placedElement)
-    {
-        if (!detailedPositions.containsKey(placedElement))
-            detailedPositions.put(placedElement, placedElement.positionProperty().get());
-        return detailedPositions.get(placedElement);
-    }
-
-    /**
-     * Setzt die Position des Elements.
-     *
-     * @param placedElement Das Element, dessen Position gesetzt werden soll.
-     * @param newPos        Die neue Position des Elements.
-     */
-    private void setPosition(PlacedElement placedElement, Vector2 newPos)
-    {
-        detailedPositions.put(placedElement, newPos);
-        placedElement.setPosition(newPos.round());
     }
 
     /**
@@ -248,19 +240,27 @@ public class PinballMachineEditor
     }
 
     /**
-     * Dupliziert die aktuelle Auswahl.
+     * Gibt die Position des gegebenen Elements zurück.
+     *
+     * @param placedElement Das Element, dessen Position zurückgegeben werden soll.
+     * @return Die Position des gegebenen Elements.
      */
-    public void duplicateSelection()
+    private Vector2 getPosition(PlacedElement placedElement)
     {
-        List<PlacedElement> newSelection = new ArrayList<>();
-        for (PlacedElement placedElement : selection)
-        {
-            PlacedElement placedElementCopy = placedElement.duplicate();
-            placedElementCopy.setPosition(placedElementCopy.positionProperty().get().plus(new Vector2(2, -2)));
-            pinballMachine.addElement(placedElementCopy);
-            newSelection.add(placedElementCopy);
-        }
-        clearSelection();
-        newSelection.forEach(this::addToSelection);
+        if (!detailedPositions.containsKey(placedElement))
+            detailedPositions.put(placedElement, placedElement.positionProperty().get());
+        return detailedPositions.get(placedElement);
+    }
+
+    /**
+     * Setzt die Position des Elements.
+     *
+     * @param placedElement Das Element, dessen Position gesetzt werden soll.
+     * @param newPos        Die neue Position des Elements.
+     */
+    private void setPosition(PlacedElement placedElement, Vector2 newPos)
+    {
+        detailedPositions.put(placedElement, newPos);
+        placedElement.setPosition(newPos.round());
     }
 }
