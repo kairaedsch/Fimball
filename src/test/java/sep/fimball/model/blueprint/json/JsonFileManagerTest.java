@@ -49,11 +49,26 @@ public class JsonFileManagerTest
     @Test
     public void jsonLoadTest()
     {
-        Optional<JsonTest> test = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToTestData() + "JsonTestFile.json"), JsonTest.class);
-        assertThat(test.isPresent(), is(true));
-        assertThat(test.get().testInt, is(42));
-        assertThat(test.get().testDouble, is(13.37));
-        assertThat(test.get().testString, is("test-string-\uD83D\uDC09"));
+        // Load valid Test file
+        {
+            Optional<JsonTest> jsonTest = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToTestData() + "ValidJsonTestFile.json"), JsonTest.class);
+            assertThat(jsonTest.isPresent(), is(true));
+            assertThat(jsonTest.get().testInt, is(42));
+            assertThat(jsonTest.get().testDouble, is(13.37));
+            assertThat(jsonTest.get().testString, is("test-string-\uD83D\uDC09"));
+        }
+
+        // Try to load non existing file
+        {
+            Optional<JsonTest> jsonTest = JsonFileManager.loadFromJson(Paths.get("C:/pathToNoWhere"), JsonTest.class);
+            assertThat("Die Json-Datei konnte nicht gelesen werden", jsonTest.isPresent(), is(false));
+        }
+
+        // Try to load invalid Test file
+        {
+            Optional<JsonTest> jsonTest = JsonFileManager.loadFromJson(Paths.get(DataPath.pathToTestData() + "InvalidJsonTestFile.json"), JsonTest.class);
+            assertThat("Die Json-Datei konnte nicht gelesen werden", jsonTest.isPresent(), is(false));
+        }
     }
 
     /**
