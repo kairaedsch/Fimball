@@ -15,7 +15,7 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
     /**
      * Das physikalische Element des Balls.
      */
-    protected BallPhysicsElement<GameElement> physicsElement;
+    private BallPhysicsElement<GameElement> physicsElement;
 
     /**
      * Erstellt ein neues BallGameElement aus dem gegebenen PlacedElement.

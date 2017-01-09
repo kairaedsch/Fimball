@@ -10,66 +10,6 @@ import java.net.URL;
  */
 public class DataPath
 {
-    static
-    {
-        //Die Methode config() wird automatisch aufgerufen um die Config zu initialisieren
-        init();
-    }
-
-    /**
-     * Initialisiert die Konfiguration. Dabei wird die Unterscheidung zwischen den Pfaden auf Windows und Linux durchgeführt. Ebenfalls wird zwischen Development und Production Modus unterschieden.
-     */
-    private static void init()
-    {
-        String mode = System.getProperty("mode");
-        if (mode != null && mode.equalsIgnoreCase("dev"))
-        {
-            // Aktivierbar durch hinzufügen folgender Start-Parameter:
-            // VM options: -Dmode="dev"
-            System.err.println("|--------------------------------------------------|");
-            System.err.println("|------ WARNING: RUNNING IN DEVELOPMENT MODE ------|");
-            System.err.println("|--------------------------------------------------|");
-
-            if (System.getProperty("os.name").startsWith("Windows"))
-            {
-                dataPath = "A:/data";
-            }
-            else
-            {
-                String home = System.getProperty("user.home");
-                dataPath = home + "/link/SEP/data";
-            }
-        }
-        else
-        {
-            System.out.println("|-----------------------------------------|");
-            System.out.println("|------ RUNNING IN PRODUCTION MODE -------|");
-            System.out.println("|-----------------------------------------|");
-            try
-            {
-                dataPath = getFolderContainingJar().replace('\\', '/') + "/data";
-                System.out.println(dataPath);
-            }
-            catch (URISyntaxException e)
-            {
-                System.err.println("Could not determine jar Folder: ");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Gibt den absoluten Pfad zurück in dem sich die JAR Datei, welche ausgeführt wird, befindet.
-     *
-     * @return Der Pfad an dem sich die JAR befindet.
-     * @throws URISyntaxException Wird geworfen falls der Pfad nicht korrekt in eine URI verwandelt werden kann.
-     */
-    private static String getFolderContainingJar() throws URISyntaxException
-    {
-        File jarFile = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        return jarFile.getParentFile().getAbsolutePath();
-    }
-
     /**
      * Der Pfad, an dem sowohl die Automaten, die BaseElements als auch die Einstellungen gespeichert werden.
      */
@@ -134,6 +74,12 @@ public class DataPath
      * Das Default-Vorschaubild der Automaten.
      */
     private final static String defaultPreview = "/defaultPreview.png";
+
+    static
+    {
+        //Die Methode config() wird automatisch aufgerufen um die Config zu initialisieren
+        init();
+    }
 
     /**
      * Wandelt den Pfad in ein URL Format um, welcher von javaFX gebraucht wird.
@@ -332,5 +278,59 @@ public class DataPath
     public static String pathToDefaultPreview()
     {
         return dataPath + defaultPreview;
+    }
+
+    /**
+     * Initialisiert die Konfiguration. Dabei wird die Unterscheidung zwischen den Pfaden auf Windows und Linux durchgeführt. Ebenfalls wird zwischen Development und Production Modus unterschieden.
+     */
+    private static void init()
+    {
+        String mode = System.getProperty("mode");
+        if (mode != null && mode.equalsIgnoreCase("dev"))
+        {
+            // Aktivierbar durch hinzufügen folgender Start-Parameter:
+            // VM options: -Dmode="dev"
+            System.err.println("|--------------------------------------------------|");
+            System.err.println("|------ WARNING: RUNNING IN DEVELOPMENT MODE ------|");
+            System.err.println("|--------------------------------------------------|");
+
+            if (System.getProperty("os.name").startsWith("Windows"))
+            {
+                dataPath = "A:/data";
+            }
+            else
+            {
+                String home = System.getProperty("user.home");
+                dataPath = home + "/link/SEP/data";
+            }
+        }
+        else
+        {
+            System.out.println("|-----------------------------------------|");
+            System.out.println("|------ RUNNING IN PRODUCTION MODE -------|");
+            System.out.println("|-----------------------------------------|");
+            try
+            {
+                dataPath = getFolderContainingJar().replace('\\', '/') + "/data";
+                System.out.println(dataPath);
+            }
+            catch (URISyntaxException e)
+            {
+                System.err.println("Could not determine jar Folder: ");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Gibt den absoluten Pfad zurück in dem sich die JAR Datei, welche ausgeführt wird, befindet.
+     *
+     * @return Der Pfad an dem sich die JAR befindet.
+     * @throws URISyntaxException Wird geworfen falls der Pfad nicht korrekt in eine URI verwandelt werden kann.
+     */
+    private static String getFolderContainingJar() throws URISyntaxException
+    {
+        File jarFile = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        return jarFile.getParentFile().getAbsolutePath();
     }
 }

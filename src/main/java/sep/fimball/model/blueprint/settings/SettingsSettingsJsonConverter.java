@@ -10,6 +10,7 @@ import java.util.List;
  * Diese Klasse erzeugt aus Settings-Objekten SettingsJson-Objekte und lädt Settings-Objekte aus SettingsJson-Objekten,
  * um die Serialisierung der Einstellungen zu ermöglichen.
  */
+//TODO: Name etwas verwirrend
 class SettingsSettingsJsonConverter
 {
     /**

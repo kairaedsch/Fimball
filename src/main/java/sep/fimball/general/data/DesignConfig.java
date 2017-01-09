@@ -127,17 +127,6 @@ public class DesignConfig
     }
 
     /**
-     * Erzeugt den CSS Befehl um ein Hintergrundbild welches in einer Datei gespeichert ist zu setzen.
-     *
-     * @param path Der Pfad zur Bilddatei.
-     * @return Der CSS Befehl welcher das Hintergrundbild setzt.
-     */
-    private static String backgroundImageCss(String path)
-    {
-        return CSS_URL_PREFIX + DataPath.escapePathToUrl(path) + CSS_URL_POSTFIX;
-    }
-
-    /**
      * Bietet gleiche Funktionalität wie {@see fillBackgroundImageCss} gibt es allerdings als StringExpression zurück um das Ganze in Bindings zu nutzen.
      *
      * @param path Der Pfad zur Bilddatei.
@@ -157,5 +146,16 @@ public class DesignConfig
     public static String fillBackgroundImageCss(String path)
     {
         return DesignConfig.backgroundImageCss(path) + CSS_IMAGE_CONTAIN;
+    }
+
+    /**
+     * Erzeugt den CSS Befehl um ein Hintergrundbild welches in einer Datei gespeichert ist zu setzen.
+     *
+     * @param path Der Pfad zur Bilddatei.
+     * @return Der CSS Befehl welcher das Hintergrundbild setzt.
+     */
+    private static String backgroundImageCss(String path)
+    {
+        return CSS_URL_PREFIX + DataPath.escapePathToUrl(path) + CSS_URL_POSTFIX;
     }
 }

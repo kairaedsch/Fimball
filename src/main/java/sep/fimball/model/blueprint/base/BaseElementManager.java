@@ -19,9 +19,32 @@ import java.util.Optional;
 public class BaseElementManager
 {
     /**
+     * Eine Map von IDs auf BaseElemente.
+     */
+    private MapProperty<String, BaseElement> elements;
+
+    /**
      * Stellt sicher, dass es nur einen ElementManager gibt, der alle Elemente verwalten soll, um Duplikate zu vermeiden.
      */
     private static BaseElementManager singletonInstance;
+
+    /**
+     * Konstruiert einen BaseElementManager, dabei werden die Baupläne aller Spielelemente geladen.
+     */
+    private BaseElementManager()
+    {
+        elements = new SimpleMapProperty<>(FXCollections.observableHashMap());
+
+        try
+        {
+            // Loads all elements in the element directory
+            Files.list(Paths.get(DataPath.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Gibt den bereits existierenden ElementManager oder einen neu angelegten zurück, falls noch keiner existiert.
@@ -36,26 +59,24 @@ public class BaseElementManager
     }
 
     /**
-     * Eine Map von IDs auf BaseElemente.
+     * Gibt die Map, die IDs auf die durch sie identifizierten Elementbaupläne abbildet, zurück.
+     *
+     * @return Die Map, die Elementbaupläne und deren ID enthält.
      */
-    private MapProperty<String, BaseElement> elements;
+    public ReadOnlyMapProperty<String, BaseElement> elementsProperty()
+    {
+        return elements;
+    }
 
     /**
-     * Konstruiert einen BaseElementManager, dabei werden die Baupläne aller Spielelemente geladen.
+     * Gibt den Bauplan für ein Element zurück, der durch baseElementId identifiziert wird oder null, falls kein solcher Bauplan existiert.
+     *
+     * @param baseElementId Die ID des gesuchten Bauplans.
+     * @return Der Bauplan mit der gegebenen ID.
      */
-    private BaseElementManager()
+    public BaseElement getElement(String baseElementId)
     {
-        elements = new SimpleMapProperty<>(FXCollections.observableHashMap());
-
-        try
-        {
-            // Loads all directories
-            Files.list(Paths.get(DataPath.pathToElements())).filter((e) -> e.toFile().isDirectory()).forEach(this::loadElement);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        return elements.get(baseElementId);
     }
 
     /**
@@ -90,26 +111,5 @@ public class BaseElementManager
         {
             System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
         }
-    }
-
-    /**
-     * Gibt die Map, die IDs auf die durch sie identifizierten Elementbaupläne abbildet, zurück.
-     *
-     * @return Die Map, die Elementbaupläne und deren ID enthält.
-     */
-    public ReadOnlyMapProperty<String, BaseElement> elementsProperty()
-    {
-        return elements;
-    }
-
-    /**
-     * Gibt den Bauplan für ein Element zurück, der durch baseElementId identifiziert wird oder null, falls kein solcher Bauplan existiert.
-     *
-     * @param baseElementId Die ID des gesuchten Bauplans.
-     * @return Der Bauplan mit der gegebenen ID.
-     */
-    public BaseElement getElement(String baseElementId)
-    {
-        return elements.get(baseElementId);
     }
 }

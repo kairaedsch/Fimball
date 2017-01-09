@@ -210,33 +210,6 @@ public class PinballMachine
     }
 
     /**
-     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gut genug ist.
-     *
-     * @param highscore Der Highscore, der hinzugefügt werden soll.
-     * @param save      Ob gespeichert werden soll.
-     */
-    private void addHighscore(Highscore highscore, boolean save)
-    {
-        if (highscoreList.size() >= Config.MAX_HIGHSCORES)
-        {
-            Highscore worstHighscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
-            if (worstHighscore.scoreProperty().get() < highscore.scoreProperty().get())
-            {
-                highscoreList.remove(worstHighscore);
-                highscoreList.add(highscore);
-                if (save)
-                    saveToDisk();
-            }
-        }
-        else
-        {
-            highscoreList.add(highscore);
-            if (save)
-                saveToDisk();
-        }
-    }
-
-    /**
      * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
      *
      * @param placedElement Das einzufügende Element.
@@ -296,18 +269,6 @@ public class PinballMachine
         {
             elementsLoaded = false;
             elements.clear();
-        }
-    }
-
-    /**
-     * Lädt, falls noch nicht geladen, die Elemente aus der gespeicherten Form des Automaten.
-     */
-    private void checkElementsLoaded()
-    {
-        if (!elementsLoaded)
-        {
-            elementsLoaded = true;
-            pinballMachineManager.loadMachineElements(this);
         }
     }
 
@@ -372,5 +333,44 @@ public class PinballMachine
     public ReadOnlyObjectProperty<Optional<String>> previewImagePathProperty()
     {
         return previewImagePath;
+    }
+
+    /**
+     * Fügt den gegebenen Highscore zur Liste der Highscores des Automaten hinzu, falls der Highscore gut genug ist.
+     *
+     * @param highscore Der Highscore, der hinzugefügt werden soll.
+     * @param save      Ob gespeichert werden soll.
+     */
+    private void addHighscore(Highscore highscore, boolean save)
+    {
+        if (highscoreList.size() >= Config.MAX_HIGHSCORES)
+        {
+            Highscore worstHighscore = highscoreListSorted.get(highscoreListSorted.size() - 1);
+            if (worstHighscore.scoreProperty().get() < highscore.scoreProperty().get())
+            {
+                highscoreList.remove(worstHighscore);
+                highscoreList.add(highscore);
+                if (save)
+                    saveToDisk();
+            }
+        }
+        else
+        {
+            highscoreList.add(highscore);
+            if (save)
+                saveToDisk();
+        }
+    }
+
+    /**
+     * Lädt, falls noch nicht geladen, die Elemente aus der gespeicherten Form des Automaten.
+     */
+    private void checkElementsLoaded()
+    {
+        if (!elementsLoaded)
+        {
+            elementsLoaded = true;
+            pinballMachineManager.loadMachineElements(this);
+        }
     }
 }

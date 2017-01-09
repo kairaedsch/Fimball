@@ -31,18 +31,6 @@ public class PinballMachineManager
     private static PinballMachineManager singletonInstance;
 
     /**
-     * Gibt den bereits existierenden PinballMachineManager oder einen neu angelegten zurück, falls noch keiner existiert.
-     *
-     * @return Instanz des PinballMachineManager
-     */
-    public static PinballMachineManager getInstance()
-    {
-        if (singletonInstance == null)
-            singletonInstance = new PinballMachineManager();
-        return singletonInstance;
-    }
-
-    /**
      * Die Liste der Flipperautomaten.
      */
     private ListProperty<PinballMachine> pinballMachines;
@@ -66,6 +54,18 @@ public class PinballMachineManager
     }
 
     /**
+     * Gibt den bereits existierenden PinballMachineManager oder einen neu angelegten zurück, falls noch keiner existiert.
+     *
+     * @return Instanz des PinballMachineManager
+     */
+    public static PinballMachineManager getInstance()
+    {
+        if (singletonInstance == null)
+            singletonInstance = new PinballMachineManager();
+        return singletonInstance;
+    }
+
+    /**
      * Erstellt eine neue PinballMachine, speichert diese und fügt sie zur Liste der Flipperautomaten hinzu.
      *
      * @return Die neu erstellte PinballMachine.
@@ -76,6 +76,16 @@ public class PinballMachineManager
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
         return pinballMachine;
+    }
+
+    /**
+     * Gibt die Liste der gespeicherten Flipperautomaten zurück.
+     *
+     * @return Die Liste der gespeicherten Flipperautomaten.
+     */
+    public ReadOnlyListProperty<PinballMachine> pinballMachinesProperty()
+    {
+        return pinballMachines;
     }
 
     /**
@@ -210,19 +220,9 @@ public class PinballMachineManager
      */
     private void deletePreviewImage(PinballMachine pinballMachine) throws IOException
     {
-        if(pinballMachine.previewImagePathProperty().get().isPresent())
+        if (pinballMachine.previewImagePathProperty().get().isPresent())
         {
             Files.deleteIfExists(Paths.get(pinballMachine.fullPreviewImagePathProperty().get()));
         }
-    }
-
-    /**
-     * Gibt die Liste der gespeicherten Flipperautomaten zurück.
-     *
-     * @return Die Liste der gespeicherten Flipperautomaten.
-     */
-    public ReadOnlyListProperty<PinballMachine> pinballMachinesProperty()
-    {
-        return pinballMachines;
     }
 }

@@ -87,26 +87,6 @@ public class PlungerGameElement extends GameElement implements UserHandler
         this.plungerPhysicsElement = plungerPhysicsElement;
     }
 
-    /**
-     * Berechnet die Kraft mit der der Plunger den Ball wegschießen soll abhängig davon wie lange er aufgeladen wurde.
-     *
-     * @return Die Kraft mit der der Plunger den Ball wegschießen soll.
-     */
-    private double calcForce()
-    {
-        return Math.min(DEFAULT_PLUNGER_FORCE * MAX_PLUNGER_FORCE_MULTIPLY, DEFAULT_PLUNGER_FORCE * getSecondsPressed());
-    }
-
-    /**
-     * Gibt zurück wie lange der Plunger bereits geladen wurde.
-     *
-     * @return Wie lange der Plunger bereits geladen wurde.
-     */
-    private double getSecondsPressed()
-    {
-        return (System.currentTimeMillis() - pressStart) / 1000d;
-    }
-
     @Override
     public void activateUserHandler(KeyEventArgs keyEventArgs)
     {
@@ -128,5 +108,25 @@ public class PlungerGameElement extends GameElement implements UserHandler
                 resetTransition.play();
             }
         }
+    }
+
+    /**
+     * Berechnet die Kraft mit der der Plunger den Ball wegschießen soll abhängig davon wie lange er aufgeladen wurde.
+     *
+     * @return Die Kraft mit der der Plunger den Ball wegschießen soll.
+     */
+    private double calcForce()
+    {
+        return Math.min(DEFAULT_PLUNGER_FORCE * MAX_PLUNGER_FORCE_MULTIPLY, DEFAULT_PLUNGER_FORCE * getSecondsPressed());
+    }
+
+    /**
+     * Gibt zurück wie lange der Plunger bereits geladen wurde.
+     *
+     * @return Wie lange der Plunger bereits geladen wurde.
+     */
+    private double getSecondsPressed()
+    {
+        return (System.currentTimeMillis() - pressStart) / 1000d;
     }
 }

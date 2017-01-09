@@ -1,14 +1,6 @@
 package sep.fimball.model.blueprint.settings;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyMapProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleMapProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyCode;
 import sep.fimball.general.data.DataPath;
@@ -98,16 +90,6 @@ public class Settings
             }
         }
         return singletonInstance;
-    }
-
-    /**
-     * Erzeugt die Standardeinstellung für Tastendrücke.
-     *
-     * @return Die Standardbelegung der Tastatur.
-     */
-    private static Map<KeyCode, KeyBinding> getDefaultBindings()
-    {
-        return Stream.of(new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER), new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE), new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT), new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT), new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE), new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE), new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER), new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE), new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER)).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 
     /**
@@ -238,5 +220,15 @@ public class Settings
     public BooleanProperty fullscreenProperty()
     {
         return fullscreen;
+    }
+
+    /**
+     * Erzeugt die Standardeinstellung für Tastendrücke.
+     *
+     * @return Die Standardbelegung der Tastatur.
+     */
+    private Map<KeyCode, KeyBinding> getDefaultBindings()
+    {
+        return Stream.of(new SimpleEntry<>(KeyCode.A, KeyBinding.LEFT_FLIPPER), new SimpleEntry<>(KeyCode.R, KeyBinding.EDITOR_ROTATE), new SimpleEntry<>(KeyCode.E, KeyBinding.NUDGE_RIGHT), new SimpleEntry<>(KeyCode.Q, KeyBinding.NUDGE_LEFT), new SimpleEntry<>(KeyCode.ESCAPE, KeyBinding.PAUSE), new SimpleEntry<>(KeyCode.DELETE, KeyBinding.EDITOR_DELETE), new SimpleEntry<>(KeyCode.D, KeyBinding.RIGHT_FLIPPER), new SimpleEntry<>(KeyCode.ALT, KeyBinding.EDITOR_MOVE), new SimpleEntry<>(KeyCode.SPACE, KeyBinding.PLUNGER)).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 }

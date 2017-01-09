@@ -13,7 +13,8 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 import java.util.Optional;
 
 import static sep.fimball.general.data.PhysicsConfig.MAX_BALL_HEIGHT;
-import static sep.fimball.model.blueprint.base.BaseElementType.*;
+import static sep.fimball.model.blueprint.base.BaseElementType.BALL;
+import static sep.fimball.model.blueprint.base.BaseElementType.RAMP;
 
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
