@@ -84,6 +84,9 @@ public class BasePhysicsElementFactory
                 case "plunger":
                     collisionType = new PlungerCollision();
                     break;
+                case "hole":
+                    collisionType = new HoleCollision();
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown collision type '" + collider.collisionType.type + "' in PhysicsElement!");
             }
