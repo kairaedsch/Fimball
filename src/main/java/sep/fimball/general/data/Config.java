@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Stellt die allgemeine Konfiguration dar. Hier sind bestimmte Standardwerte gesetzt welche nicht über die Einstellungen geändert werden können.
  */
-public class Config
+public abstract class Config
 {
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.

@@ -3,7 +3,7 @@ package sep.fimball.general.data;
 /**
  * Die Config für die Physik.
  */
-public class PhysicsConfig
+public abstract class PhysicsConfig
 {
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird.
