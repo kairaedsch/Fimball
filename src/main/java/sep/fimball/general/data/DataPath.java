@@ -77,7 +77,7 @@ public abstract class DataPath
 
     static
     {
-        //Die Methode config() wird automatisch aufgerufen um die Config zu initialisieren
+        //Die Methode init() wird automatisch aufgerufen um die Config zu initialisieren
         init();
     }
 

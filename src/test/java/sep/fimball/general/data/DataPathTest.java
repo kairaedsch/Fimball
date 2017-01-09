@@ -2,6 +2,8 @@ package sep.fimball.general.data;
 
 import org.junit.Test;
 
+import java.net.MalformedURLException;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,6 +25,15 @@ public class DataPathTest
      * ID einer Test Pinballmachine.
      */
     private final String testMachineId = "machineOne";
+
+    @Test
+    public void testPathToUrlEscaping()
+    {
+        String path = "/home/te st/test.png";
+        String expectedPath = "file:/home/te%20st/test.png";
+        String escapedPath = DataPath.escapePathToUrl(path);
+        assertThat(path + " wird escaped zu: " + expectedPath, escapedPath,is(expectedPath));
+    }
 
     /**
      * Überprüft, ob das Ende des Pfades, auf dem sich die Spielelemente befinden korrekt ist.

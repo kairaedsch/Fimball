@@ -18,6 +18,8 @@ public class RectangleDoubleByPointsTest
     public void testRectangleDoubleByPoints()
     {
         RectangleDoubleByPoints rectangleDoubleByPoints = new RectangleDoubleByPoints(new Vector2(0, 0), new Vector2(6, 6));
+        assertThat("Der erste Punkt des Rechtecks ist (0, 0)", rectangleDoubleByPoints.getPointA(), is(new Vector2(0, 0)));
+        assertThat("Der zweite Punkt des Rechtecks ist (6, 6)", rectangleDoubleByPoints.getPointB(), is(new Vector2(6, 6)));
         assertThat("Die Breite des Rechtecks ist 6", rectangleDoubleByPoints.getWidth(), is(6.0));
         assertThat("Die Höhe des Rechtecks ist 6", rectangleDoubleByPoints.getHeight(), is(6.0));
         assertThat("Die rechte untere Ecke ist (6, 6)", rectangleDoubleByPoints.getEnd(), is(new VectorMatcher(6, 6)));
