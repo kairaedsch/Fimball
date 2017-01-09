@@ -1,9 +1,8 @@
 package sep.fimball.viewmodel.dialog.playername;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
@@ -28,6 +27,10 @@ public class PlayerNameViewModel extends DialogViewModel
     private ListProperty<PlayerNameEntrySubViewModel> playerNameEntries;
 
     /**
+     * Gibt am, ob das Spiel gestartet werden darf.
+     */
+    private BooleanProperty gameCanBeStarted;
+    /**
      * Erstellt ein neues PlayerNameViewModel.
      *
      * @param pinballMachine Der zum Spielen ausgewählte Flipperautomat.
@@ -37,8 +40,37 @@ public class PlayerNameViewModel extends DialogViewModel
         super(DialogType.PLAYER_NAMES);
         this.pinballMachine = pinballMachine;
 
+        gameCanBeStarted = new SimpleBooleanProperty(true);
+
         playerNameEntries = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+        playerNameEntries.get().addListener((ListChangeListener<PlayerNameEntrySubViewModel>) change ->
+        {
+            while(change.next())
+            {
+                if (change.wasAdded())
+                {
+                    for (PlayerNameEntrySubViewModel playerNameEntrySubViewModel : change.getAddedSubList())
+                    {
+                        playerNameEntrySubViewModel.playerNameProperty().addListener((observable, oldValue, newValue) -> checkNames());
+                    }
+                }
+                checkNames();
+            }
+        });
         playerNameEntries.add(new PlayerNameEntrySubViewModel(this, LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " 1"));
+
+    }
+
+    /**
+     * Überprüft, ob die Namen der Spieler gültig sind.
+     */
+    private void checkNames()
+    {
+        gameCanBeStarted.set(true);
+        for(PlayerNameEntrySubViewModel playerNameEntrySubViewModel : playerNameEntries) {
+            gameCanBeStarted.set(gameCanBeStarted.get() && !playerNameEntrySubViewModel.playerNameProperty().get().isEmpty());
+        }
     }
 
     /**
@@ -89,5 +121,13 @@ public class PlayerNameViewModel extends DialogViewModel
     public ReadOnlyListProperty<PlayerNameEntrySubViewModel> playerNameEntriesProperty()
     {
         return playerNameEntries;
+    }
+
+    /**
+     * Gibt zurück, ob das Spiel gestartet werden darf.
+     * @return {@code true} falls das Spiel gestartet werden darf, {@code false} sonst.
+     */
+    public ReadOnlyBooleanProperty getGameCanBeStarted() {
+        return gameCanBeStarted;
     }
 }

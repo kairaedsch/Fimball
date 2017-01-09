@@ -1,6 +1,8 @@
 package sep.fimball.view.dialog.playername;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.dialog.DialogView;
@@ -19,6 +21,12 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     private VBox nameEntryList;
 
     /**
+     * Der Button, mit dem man das Spiel startet.
+     */
+    @FXML
+    private Button startButton;
+
+    /**
      * Das zur PlayerNameView gehörende PlayerNameViewModel.
      */
     private PlayerNameViewModel playerNameViewModel;
@@ -27,7 +35,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
     {
         this.playerNameViewModel = playerNameViewModel;
-
+        startButton.disableProperty().bind(Bindings.not(playerNameViewModel.getGameCanBeStarted()));
         ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntriesProperty(), DialogType.PLAYER_NAME_ENTRY);
     }
 
