@@ -138,10 +138,10 @@ public class PinballMachine
             Vector2 relToOrigin = elemPos.minus(rect.getOrigin());
             Vector2 relToEnd = elemPos.minus(rect.getEnd());
 
-            double elementWidth = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getX();
-            double elementHeight = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getY();
+            Vector2 maxExtremePos = element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true);
+            Vector2 minExtremePos = element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false);
 
-            if (relToOrigin.getX() > elementWidth && relToOrigin.getY() > elementHeight && relToEnd.getX() < 0 && relToEnd.getY() < 0)
+            if (relToOrigin.plus(maxExtremePos).getX() > 0 && relToOrigin.plus(maxExtremePos).getY() > 0 && relToEnd.plus(minExtremePos).getX() < 0 && relToEnd.plus(minExtremePos).getY() < 0)
             {
                 matchingElements.add(element);
             }
