@@ -67,7 +67,8 @@ public class PinballMachine
 
     /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
-     *  @param name                  Name des Automaten.
+     *
+     * @param name                  Name des Automaten.
      * @param pinballMachineId      Id des Automaten.
      * @param previewImagePath      Namen der Vorschaubildes des Automaten.
      * @param highscores            Die auf diesem Automaten bisher erreichten Highscores.
@@ -86,7 +87,7 @@ public class PinballMachine
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
         elementsLoaded = loaded;
-        if(loaded) addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
+        if (loaded) addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
 
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
@@ -135,7 +136,11 @@ public class PinballMachine
             Vector2 relToOrigin = elemPos.minus(rect.getOrigin());
             Vector2 relToEnd = elemPos.minus(rect.getEnd());
 
-            if (relToOrigin.getX() > 0 && relToOrigin.getY() > 0 && relToEnd.getX() < 0 && relToEnd.getY() < 0)
+            double elementWidth = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getX();
+            double elementHeight = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getY();
+
+
+            if (relToOrigin.getX() > elementWidth && relToOrigin.getY() > elementHeight && relToEnd.getX() < 0 && relToEnd.getY() < 0)
             {
                 matchingElements.add(element);
             }
