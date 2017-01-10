@@ -29,10 +29,8 @@ public class DataPathTest
     @Test
     public void testPathToUrlEscaping()
     {
-        String path = "/home/te st/test.png";
-        String expectedPath = "file:/home/te%20st/test.png";
-        String escapedPath = DataPath.escapePathToUrl(path);
-        assertThat(path + " wird escaped zu: " + expectedPath, escapedPath,is(expectedPath));
+        String escapedPath = DataPath.escapePathToUrl("/home/te st/test.png");
+        assertThat("'/home/te st/test.png' wird escaped zu: '/home/te%20st/test.png'", escapedPath.endsWith("/home/te%20st/test.png"), is(true));
     }
 
     /**
