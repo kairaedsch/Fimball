@@ -118,25 +118,24 @@ public class MainMenuViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+        if (!(keyEvent.getEventType() == KeyEvent.KEY_RELEASED))
         {
-            return;
-        }
-        Optional<Integer> index = findSelectedIndex();
-        switch (keyEvent.getCode())
-        {
-            case UP:
-                if (index.isPresent() && index.get() >= 1)
-                {
-                    pinballMachinePreviewSubViewModelList.get(index.get() - 1).selectPinballMachine();
-                }
-                break;
-            case DOWN:
-                if (index.isPresent() && index.get() < pinballMachinePreviewSubViewModelList.size() - 1)
-                {
-                    pinballMachinePreviewSubViewModelList.get(index.get() + 1).selectPinballMachine();
-                }
-                break;
+            Optional<Integer> index = findSelectedIndex();
+            switch (keyEvent.getCode())
+            {
+                case UP:
+                    if (index.isPresent() && index.get() >= 1)
+                    {
+                        pinballMachinePreviewSubViewModelList.get(index.get() - 1).selectPinballMachine();
+                    }
+                    break;
+                case DOWN:
+                    if (index.isPresent() && index.get() < pinballMachinePreviewSubViewModelList.size() - 1)
+                    {
+                        pinballMachinePreviewSubViewModelList.get(index.get() + 1).selectPinballMachine();
+                    }
+                    break;
+            }
         }
     }
 
