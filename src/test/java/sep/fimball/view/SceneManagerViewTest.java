@@ -53,7 +53,7 @@ public class SceneManagerViewTest
         // Erstelle Mocks - Erstelle fake PinballMachine
         PinballMachine pinballMachineMock = Mockito.mock(PinballMachine.class);
         Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty("any Name"));
-        Mockito.when(pinballMachineMock.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        Mockito.when(pinballMachineMock.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
 
         // Teste - Setzte die aktuellen ViewModels

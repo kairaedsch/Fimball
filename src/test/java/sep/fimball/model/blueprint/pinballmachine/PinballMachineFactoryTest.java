@@ -44,7 +44,7 @@ public class PinballMachineFactoryTest
 
             // Prüfe ob die generierte PinballMachine valide ist
             assertThat(pinballMachine.nameProperty().get(), is("testautomat"));
-            assertThat(pinballMachine.previewImagePathProperty().get().get(), is("previewimage"));
+            assertThat(pinballMachine.relativePreviewImagePathProperty().get().get(), is("previewimage"));
             assertThat(pinballMachine.getID(), is("testid"));
             assertThat(pinballMachine.highscoreListProperty().get(0).playerNameProperty().get(), is(equalTo("Player 1")));
             assertThat(pinballMachine.highscoreListProperty().get(0).scoreProperty().get(), is(100L));

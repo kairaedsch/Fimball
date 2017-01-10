@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 /**
  * Die Config für das Design.
  */
-public abstract class DesignConfig
+public class DesignConfig
 {
     /**
      * Die maximale zusätzliche Größe des Balls wenn er die maximale Höhe hat.

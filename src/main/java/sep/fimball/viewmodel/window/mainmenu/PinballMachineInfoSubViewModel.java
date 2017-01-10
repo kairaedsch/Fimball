@@ -62,7 +62,7 @@ public class PinballMachineInfoSubViewModel
         this.pinballMachine.set(pinballMachine);
 
         name.bind(pinballMachine.nameProperty());
-        imagePath.bind(pinballMachine.fullPreviewImagePathProperty());
+        imagePath.bind(pinballMachine.absolutePreviewImagePathProperty());
         highscoreList.unbind();
         highscoreList.set(FXCollections.observableArrayList());
         highscoreList.bind(pinballMachine.highscoreListProperty());

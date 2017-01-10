@@ -33,8 +33,8 @@ public class PinballMachineInfoSubViewModelTest
         mockedMainMenuViewModel.setSceneManager(mockedSceneManager);
         PinballMachine pinballMachine = getMockedPinballMachine();
         PinballMachine newPinballMachine = getMockedPinballMachine();
-        when(pinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
-        when(newPinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        when(pinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        when(newPinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
         PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, pinballMachine);
         test.update(newPinballMachine);
@@ -55,7 +55,7 @@ public class PinballMachineInfoSubViewModelTest
         PinballMachine pinballMachine = mock(PinballMachine.class);
         when(pinballMachine.elementsProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
-        when(pinballMachine.previewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>());
+        when(pinballMachine.relativePreviewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>());
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
         ListProperty<Highscore> highscores = new SimpleListProperty<>(FXCollections.observableArrayList());
         when(pinballMachine.highscoreListProperty()).thenReturn(highscores);

@@ -14,6 +14,8 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import java.util.List;
 import java.util.Optional;
 
+import static sep.fimball.general.data.Config.MACHINE_BOX_MARGIN;
+
 /**
  * Eine PinballMachine stellt einen Flipperautomaten dar und enthält allgemeine Informationen über den Automaten sowie über die im Automaten platzierten Elemente.
  */
@@ -139,7 +141,6 @@ public class PinballMachine
             double elementWidth = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getX();
             double elementHeight = elemPos.minus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true)).getY();
 
-
             if (relToOrigin.getX() > elementWidth && relToOrigin.getY() > elementHeight && relToEnd.getX() < 0 && relToEnd.getY() < 0)
             {
                 matchingElements.add(element);
@@ -160,7 +161,7 @@ public class PinballMachine
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());
-        return new RectangleDouble(origin.minus(new Vector2(2, 2)), width + 4, height + 4);
+        return new RectangleDouble(origin.minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN)), width + MACHINE_BOX_MARGIN * 2, height + MACHINE_BOX_MARGIN * 2);
     }
 
     /**
@@ -319,11 +320,12 @@ public class PinballMachine
     }
 
     /**
-     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     * Gibt den Speicherpfad zum Hintergrundbildes des Automaten zurück.
+     * Falls kein Bild vorliegt wird der Pfad zum default-Hintergrundbild zurückgegeben.
      *
-     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
+     * @return Der Speicherpfad zu einem Hintergrundbilde.
      */
-    public ReadOnlyStringProperty fullPreviewImagePathProperty()
+    public ReadOnlyStringProperty absolutePreviewImagePathProperty()
     {
         StringProperty stringProperty = new SimpleStringProperty();
         stringProperty.bind(Bindings.createStringBinding(() -> previewImagePath.get().isPresent() ? DataPath.generatePathToNewImagePreview(getID(), previewImagePath.get().get()) : DataPath.pathToDefaultPreview(), previewImagePath));
@@ -331,11 +333,13 @@ public class PinballMachine
     }
 
     /**
-     * Gibt den Speicherpfad des Hintergrundbildes des Automaten zurück.
+     * Gibt den relativen Speicherpfad des Hintergrundbildes des Automaten zurück.
+     * Der Pfad ist relativ zu dem Ordner des Automaten.
+     * Falls kein Bild vorliegt ist das Optional leer.
      *
-     * @return Der Speicherpfad des Hintergrundbildes des Automaten.
+     * @return Der relativen Speicherpfad des Hintergrundbildes des Automaten oder ein leeres Optional.
      */
-    public ReadOnlyObjectProperty<Optional<String>> previewImagePathProperty()
+    public ReadOnlyObjectProperty<Optional<String>> relativePreviewImagePathProperty()
     {
         return previewImagePath;
     }

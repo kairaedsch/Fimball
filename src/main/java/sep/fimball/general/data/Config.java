@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Stellt die allgemeine Konfiguration dar. Hier sind bestimmte Standardwerte gesetzt welche nicht über die Einstellungen geändert werden können.
  */
-public abstract class Config
+public class Config
 {
     /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
@@ -36,6 +36,11 @@ public abstract class Config
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
      */
     public static final double UPDATE_LOOP_TICKRATE = 1 / 60D;
+
+    /**
+     * Der minimale Abstand zwischen Teilen eines Automaten und dem Rand des Automaten.
+     */
+    public final static int MACHINE_BOX_MARGIN = 2;
 
     /**
      * Gibt eine eindeutige ID zurück.

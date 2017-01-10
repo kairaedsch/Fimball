@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * Diese Klasse stellt Methoden bereit, die Pfade zu Dateien liefern.
  */
-public abstract class DataPath
+public class DataPath
 {
     /**
      * Der Pfad, an dem sowohl die Automaten, die BaseElements als auch die Einstellungen gespeichert werden.

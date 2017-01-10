@@ -42,7 +42,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         machineName = new SimpleStringProperty();
         machineName.bindBidirectional(pinballMachine.nameProperty());
         imagePathProperty = new SimpleStringProperty();
-        imagePathProperty.bind(pinballMachine.fullPreviewImagePathProperty());
+        imagePathProperty.bind(pinballMachine.absolutePreviewImagePathProperty());
     }
 
     /**

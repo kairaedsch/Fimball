@@ -51,7 +51,7 @@ public class PinballMachinePreviewSubViewModel
         imagePath = new SimpleStringProperty();
 
         name.bind(pinballMachine.nameProperty());
-        imagePath.bind(pinballMachine.fullPreviewImagePathProperty());
+        imagePath.bind(pinballMachine.absolutePreviewImagePathProperty());
 
         selected.bind(Bindings.equal(pinballMachine, pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
     }

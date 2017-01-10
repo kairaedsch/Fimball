@@ -12,8 +12,6 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
-import java.util.Optional;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
@@ -139,7 +137,7 @@ public class PinballMachineSettingsViewModelTest
             return null;
         }).when(pinballMachine).deleteFromDisk();
 
-        when(pinballMachine.fullPreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        when(pinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
         return pinballMachine;
     }

@@ -61,7 +61,7 @@ class PinballMachineFactory
     {
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
         pinballMachineJson.name = pinballMachine.nameProperty().getValue();
-        pinballMachineJson.previewImagePath = pinballMachine.previewImagePathProperty().get().isPresent() ? pinballMachine.previewImagePathProperty().get().get() : null;
+        pinballMachineJson.previewImagePath = pinballMachine.relativePreviewImagePathProperty().get().isPresent() ? pinballMachine.relativePreviewImagePathProperty().get().get() : null;
 
         // Wandelt alle Highscores um
         pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[pinballMachine.highscoreListProperty().size()];

@@ -169,7 +169,7 @@ public class PinballMachineManager
         }
         catch (IOException e)
         {
-            System.err.println("Could not delete old preview image: " + pinballMachine.fullPreviewImagePathProperty().get());
+            System.err.println("Could not delete old preview image: " + pinballMachine.absolutePreviewImagePathProperty().get());
         }
 
         try
@@ -220,9 +220,9 @@ public class PinballMachineManager
      */
     private void deletePreviewImage(PinballMachine pinballMachine) throws IOException
     {
-        if (pinballMachine.previewImagePathProperty().get().isPresent())
+        if (pinballMachine.relativePreviewImagePathProperty().get().isPresent())
         {
-            Files.deleteIfExists(Paths.get(pinballMachine.fullPreviewImagePathProperty().get()));
+            Files.deleteIfExists(Paths.get(pinballMachine.absolutePreviewImagePathProperty().get()));
         }
     }
 }
