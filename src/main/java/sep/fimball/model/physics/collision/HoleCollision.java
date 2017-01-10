@@ -8,6 +8,13 @@ import sep.fimball.model.physics.collider.CircleColliderShape;
  */
 public class HoleCollision extends NormalCollision
 {
+    /**
+     * If the ball is this close to the center of the hole, it will ~do stuff~
+     */
+    private final double CENTER_AREA_RADIUS = 0.6;
+    private final double MIN_HOLE_SPEED = 3.0;
+    private final double HOLE_DIRECTION_CHANGE_RATE = 0.25;
+
     @Override
     public void applyCollision(CollisionInfo info)
     {
@@ -16,11 +23,22 @@ public class HoleCollision extends NormalCollision
         double holeRadius = ((CircleColliderShape)info.getOtherColliderShapes().get(0)).getRadius();
         Vector2 holeCenterOffset = new Vector2(holeRadius, holeRadius);
         Vector2 holeCenterPosition = info.getOtherPhysicsElement().getPosition().plus(holeCenterOffset);
+        double distanceToCenter = ballCenterPosition.minus(holeCenterPosition).magnitude();
 
-        if (ballCenterPosition.minus(holeCenterPosition).magnitude() < holeRadius)
+        if (distanceToCenter <= CENTER_AREA_RADIUS)
         {
-            Vector2 ballToHoleVector = holeCenterPosition.minus(ballCenterPosition);
-            info.getBall().setVelocity(info.getBall().getVelocity().plus(ballToHoleVector.scale(10.0)));
+            // TODO freeze ball for a while, then release it
+            info.getBall().setVelocity(new Vector2(0.0, 0.0));
+            info.getBall().setPosition(holeCenterPosition.minus(ballCenterOffset));
+        }
+        else if (distanceToCenter < holeRadius)
+        {
+            // Ball is over the edge of the hole, it will start rolling towards the center
+            Vector2 oldVel = info.getBall().getVelocity();
+            Vector2 combinedVel = holeCenterPosition.minus(ballCenterPosition).plus(oldVel);
+            double ballSpeed = Math.max(oldVel.magnitude(), MIN_HOLE_SPEED);
+            Vector2 newVel = combinedVel.normalized().scale(ballSpeed);
+            info.getBall().setVelocity(oldVel.lerp(newVel, HOLE_DIRECTION_CHANGE_RATE));
         }
     }
 }
