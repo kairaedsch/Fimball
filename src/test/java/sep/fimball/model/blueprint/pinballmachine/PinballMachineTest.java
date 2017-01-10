@@ -98,20 +98,23 @@ public class PinballMachineTest
         pinballMachine.addElement(placedElementTop);
         pinballMachine.addElement(placedElementBottom);
 
+        // Wähle links oben aus
         {
             ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-10, -10), new Vector2(-4, -4)));
             assertThat("ElementTop wurde ausgewählt", elementsAt.contains(placedElementTop), is(true));
             assertThat("ElementBottom wurde nicht ausgewählt", elementsAt.contains(placedElementBottom), is(false));
         }
 
+        // Wähle rechts unten aus
         {
             ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(4, 4), new Vector2(10, 10)));
             assertThat("ElementTop wurde nicht ausgewählt", elementsAt.contains(placedElementTop), is(false));
             assertThat("ElementBottom wurde ausgewählt", elementsAt.contains(placedElementBottom), is(true));
         }
 
+        // Wähle in der Mitte aus
         {
-            ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-4, -4), new Vector2(4, 4)));
+            ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-3, -3), new Vector2(3, 3)));
             assertThat("ElementTop wurde nicht ausgewählt", elementsAt.contains(placedElementTop), is(false));
             assertThat("ElementBottom wurde nicht ausgewählt", elementsAt.contains(placedElementBottom), is(false));
         }
