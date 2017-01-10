@@ -39,8 +39,8 @@ public class ElementFactoryTest
 
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(generateAllPlacedElementTypes(), physicsHandler, handlerManager);
 
-        assertThat("Es wurden 7 GameElemente generiert", generatedElements.getGameElements().size(), is(7));
-        assertThat("Es wurden 5 PhysicsElemente generiert", generatedElements.getPhysicsElements().size(), is(5));
+        assertThat("Es wurden 8 GameElemente generiert", generatedElements.getGameElements().size(), is(8));
+        assertThat("Es wurden 6 PhysicsElemente generiert", generatedElements.getPhysicsElements().size(), is(6));
         assertThat("Es wurde ein BallGameElement generiert", generatedElements.getBallGameElement().isPresent(), is(true));
 
         for (GameElement gameElement : generatedElements.getGameElements())
