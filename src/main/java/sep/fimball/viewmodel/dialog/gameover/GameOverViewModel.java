@@ -61,6 +61,7 @@ public class GameOverViewModel extends DialogViewModel
      */
     public void restartGame()
     {
+        sceneManager.popDialog();
         sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, false)));
     }
 
