@@ -27,7 +27,7 @@ public class PlungerGameElementTest
     private boolean plungerForceActivated = false;
 
     /**
-     * Testet, ob nach dem Aufladen und Loslaassen des Plungers eine Kraft an das PlungerPhysicsElement weitergegeben wird.
+     * Testet, ob nach dem Aufladen und Loslassen des Plungers eine Kraft an das PlungerPhysicsElement weitergegeben wird.
      */
     @Test
     public void activateUserHandlerTest() {
