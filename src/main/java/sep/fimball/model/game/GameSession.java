@@ -177,8 +177,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         localCollisionEventArgsList.forEach(collisionEventArgsList ->
                 collisionEventArgsList.forEach(collisionEventArgs ->
                         handlerManager.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId())));
-
-        super.loopUpdate();
     }
 
     /**

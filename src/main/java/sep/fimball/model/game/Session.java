@@ -1,7 +1,6 @@
 package sep.fimball.model.game;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import sep.fimball.general.data.Config;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -26,7 +25,9 @@ public abstract class Session
     /**
      * Die Schleife, die die Spielwelt aktualisiert.
      */
-    private Timeline updateLoop;
+    PauseTransition resetTransition;
+
+    boolean looping;
 
     /**
      * Das Observable, welches genutzt wird um Observer darüber zu benachrichtigen, dass der nächste Tick der Spielschleife ausgeführt wurde.
@@ -42,10 +43,11 @@ public abstract class Session
     {
         updateLoopObservable = new sep.fimball.general.util.Observable();
         this.pinballMachine = pinballMachine;
-        updateLoop = new Timeline();
-        updateLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(Config.UPDATE_LOOP_TICKRATE), (event -> loopUpdate()));
-        updateLoop.getKeyFrames().add(keyFrame);
+
+        resetTransition = new PauseTransition(Duration.seconds(Config.UPDATE_LOOP_TICKRATE));
+        resetTransition.setOnFinished(e -> beforeloopUpdate());
+
+        looping = false;
         startUpdateLoop();
     }
 
@@ -54,7 +56,11 @@ public abstract class Session
      */
     public void startUpdateLoop()
     {
-        updateLoop.play();
+        if (!looping)
+        {
+            looping = true;
+            resetTransition.play();
+        }
     }
 
     /**
@@ -62,7 +68,29 @@ public abstract class Session
      */
     public void stopUpdateLoop()
     {
-        updateLoop.stop();
+        looping = false;
+        resetTransition.stop();
+    }
+
+    /**
+     * Wird immer vor dem Updateloop der Session aufgerufen.
+     */
+    private void beforeloopUpdate()
+    {
+        long start = System.currentTimeMillis();
+
+        loopUpdate();
+
+        updateLoopObservable.setChanged();
+        updateLoopObservable.notifyObservers();
+
+        if (looping)
+        {
+            long dif = System.currentTimeMillis() - start;
+            double delay = Math.max(1, Config.UPDATE_LOOP_TICKRATE * 1000 - dif);
+            resetTransition.setDelay(Duration.millis(delay));
+            resetTransition.play();
+        }
     }
 
     /**
@@ -70,8 +98,7 @@ public abstract class Session
      */
     protected void loopUpdate()
     {
-        updateLoopObservable.setChanged();
-        updateLoopObservable.notifyObservers();
+
     }
 
     /**

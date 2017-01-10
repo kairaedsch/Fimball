@@ -80,8 +80,6 @@ class PinballCanvasDrawer
         }
 
         graphicsContext.restore();
-
-
     }
 
     /**
