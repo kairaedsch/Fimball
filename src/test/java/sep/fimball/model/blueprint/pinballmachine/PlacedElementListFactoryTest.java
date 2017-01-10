@@ -87,6 +87,13 @@ public class PlacedElementListFactoryTest
             Optional<List<PlacedElement>> placedElementList = PlacedElementListFactory.createPlacedElementList(Optional.of(placedElementListJson));
             assertThat("Generierung der placedElementList sollte Fehlgeschlagen sein", placedElementList.isPresent(), is(false));
         }
+
+        // Test mit ungültiger placedElementListJson
+        {
+            // Lasse eine PlacedElementList aus einer ungültigen PlacedElementListJson generieren
+            Optional<List<PlacedElement>> placedElementList = PlacedElementListFactory.createPlacedElementList(Optional.empty());
+            assertThat("Generierung der placedElementList sollte Fehlgeschlagen sein", placedElementList.isPresent(), is(false));
+        }
     }
 
     /**

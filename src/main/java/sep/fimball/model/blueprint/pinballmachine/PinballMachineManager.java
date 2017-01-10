@@ -177,7 +177,7 @@ public class PinballMachineManager
             // Speichere das neue
             ImageIO.write(renderedImage, "png", newPath.toFile());
         }
-        catch (IOException e)
+        catch (IOException | IllegalArgumentException e)
         {
             System.err.println("Could not write preview image to file: " + newPath.toString());
         }

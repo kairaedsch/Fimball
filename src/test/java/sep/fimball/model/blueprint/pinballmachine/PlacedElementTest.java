@@ -8,14 +8,33 @@ import sep.fimball.model.media.BaseMediaElement;
 
 import java.util.Arrays;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static sep.fimball.VectorMatcher.matchesVector;
 
 /**
  * Tests für die Klasse PlacedElement.
  */
 public class PlacedElementTest
 {
+    /**
+     * Überprüft die Korrektheit der Methode {@link PlacedElement#duplicate()}.
+     */
+    @Test
+    public void duplicate()
+    {
+        // Erstelle ein PlacedElement und dupliziere es
+        PlacedElement originalPlacedElement =  new PlacedElement(null, new Vector2(5, 5), 1000, 2, 45);
+        PlacedElement duplicatedPlacedElement = originalPlacedElement.duplicate();
+
+        assertThat("Die Kopie ist ein anderes Object", originalPlacedElement, is(not(duplicatedPlacedElement)));
+        assertThat("Die Kopie hat die selbe Position", duplicatedPlacedElement.positionProperty().get(), matchesVector(5, 5));
+        assertThat("Die Kopie hat die selbe Rotation", duplicatedPlacedElement.rotationProperty().get(), is(45.0));
+        assertThat("Die Kopie hat die selbe Punkteanzahl", duplicatedPlacedElement.pointsProperty().get(), is(1000));
+        assertThat("Die Kopie hat den selben Multiplier", duplicatedPlacedElement.multiplierProperty().get(), is(2.0));
+    }
+
     /**
      * Überprüft ob das Rotieren im Uhrzeigersinn mit den erwarteten Werten übereinstimmt.
      * Überprüft die Korrektheit der Methode {@link PlacedElement#rotateClockwise}.
