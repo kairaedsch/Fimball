@@ -33,12 +33,15 @@ public class SceneManagerViewModel
      */
     private BooleanProperty fullscreen;
 
+    private ObjectProperty<DialogViewModel> dialogViewModel;
+
     /**
      * Erstellt ein neues SceneManagerViewModel, das ein MainMenuViewModel
      * verwaltet.
      */
     public SceneManagerViewModel()
     {
+        dialogViewModel = new SimpleObjectProperty<>();
         windowViewModel = new SimpleObjectProperty<>();
         dialogViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
         fullscreen = new SimpleBooleanProperty();
@@ -112,7 +115,6 @@ public class SceneManagerViewModel
      */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
-        ObjectProperty<DialogViewModel> dialogViewModel = new SimpleObjectProperty<>();
         dialogViewModel.bind(Bindings.createObjectBinding(
                 () -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0),
                 dialogViewModels));

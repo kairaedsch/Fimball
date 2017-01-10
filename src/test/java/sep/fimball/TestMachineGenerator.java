@@ -19,7 +19,7 @@ public class TestMachineGenerator
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
 
         final int distance = 20;
-        final int size = 32;
+        final int size = 128;
 
         pinballMachine.nameProperty().setValue("Test - Scalability " + size + "*" + size);
 
@@ -39,6 +39,26 @@ public class TestMachineGenerator
             }
         }
 
+        pinballMachine.saveToDisk();
+    }
+
+    @Test
+    public void generateScalabilityLightMachine()
+    {
+        final int size = 60;
+        final int distance = 5;
+
+        PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        pinballMachine.nameProperty().set("Test - Light Show " + size);
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_2"), new Vector2(1, 30), 0, 0, 0));
+
+        for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
+            }
+        }
         pinballMachine.saveToDisk();
     }
 
