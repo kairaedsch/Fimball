@@ -40,4 +40,18 @@ public class PolygonColliderShapeTest
         assertThat(info.isHit(), is(true));
         assertThat(info.getShortestIntersect(), matchesVector(0.0, 0.2));
     }
+
+    /**
+     * Überprüft ob die GetExtremePos Methode bei einer leeren Liste von Vertices eine erwartete Exception wirft.
+     */
+    @Test (expected = IllegalStateException.class)
+    public void testExtremePosWithEmptyVertices()
+    {
+        Vector2 testPivot = new Vector2(0, 0);
+        double testRotation = 0;
+        List<Vector2> emptyVertices = new ArrayList<>();
+
+        PolygonColliderShape poly = new PolygonColliderShape(emptyVertices);
+        poly.getExtremePos(testRotation, testPivot, true);
+    }
 }

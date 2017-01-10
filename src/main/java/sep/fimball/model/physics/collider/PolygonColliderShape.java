@@ -25,16 +25,6 @@ public class PolygonColliderShape implements ColliderShape
         this.vertices = vertices;
     }
 
-    /**
-     * Gibt die Eckpunkte des Polygons, die den Collider formen, zurück.
-     *
-     * @return Die Eckpunkte des Polygons, die den Collider formen.
-     */
-    public List<Vector2> getVertices()
-    {
-        return Collections.unmodifiableList(vertices);
-    }
-
     @Override
     public Vector2 getExtremePos(double rotation, Vector2 pivotPoint, boolean max)
     {

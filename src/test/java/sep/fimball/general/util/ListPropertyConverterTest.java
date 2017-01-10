@@ -79,7 +79,7 @@ public class ListPropertyConverterTest
         originalList.remove(originalSize);
         assertThat("Die Größe der convertedList ist 100", convertedList.size(), is(originalSize));
 
-        //Zwei Elemente vertauschen, überprüfen ob Größe der convertedList nach der Permutation ebenfalls gleich geblieben ist.
+        //Zwei Elemente vertauschen, überprüfen ob Größe gleich geblieben ist.
         DummyOne temp = originalList.get(0);
         originalList.set(0, originalList.get(originalSize - 1));
         originalList.set(originalSize - 1, temp);
