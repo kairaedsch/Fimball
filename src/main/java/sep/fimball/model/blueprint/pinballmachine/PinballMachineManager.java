@@ -122,7 +122,7 @@ public class PinballMachineManager
 
         if (PlacedElementList.isPresent())
         {
-            PlacedElementList.get().forEach(pinballMachine::addElement);
+            pinballMachine.addElement(PlacedElementList.get().toArray(new PlacedElement[0]));
         }
     }
 

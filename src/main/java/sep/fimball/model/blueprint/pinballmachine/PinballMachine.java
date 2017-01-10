@@ -11,8 +11,7 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.base.BaseElementType;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static sep.fimball.general.data.Config.MACHINE_BOX_MARGIN;
 
@@ -216,23 +215,34 @@ public class PinballMachine
     }
 
     /**
-     * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
+     * Fügt die gegebenen PlacedElements zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
      *
-     * @param placedElement Das einzufügende Element.
+     * @param placedElements Die einzufügenden Elemente.
      */
-    public void addElement(PlacedElement placedElement)
+    public void addElement(PlacedElement... placedElements)
     {
         checkElementsLoaded();
 
-        if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
+        List<PlacedElement> placedElementList = new ArrayList<>();
+        placedElementList.addAll(Arrays.asList(placedElements));
+
+        for (Iterator<PlacedElement> iterator = placedElementList.iterator(); iterator.hasNext();)
         {
-            elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
+            PlacedElement placedElement = iterator.next();
+
+            if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
+            {
+                elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
+                elements.add(placedElement);
+                iterator.remove();
+            }
+            else if (elements.contains(placedElement))
+            {
+                iterator.remove();
+            }
         }
 
-        if (!elements.contains(placedElement))
-        {
-            elements.add(placedElement);
-        }
+        elements.addAll(placedElements);
     }
 
     /**
