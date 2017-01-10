@@ -1,8 +1,10 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.scene.input.MouseEvent;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sep.fimball.general.data.RectangleDoubleByPoints;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.GameSession;
 
@@ -39,6 +41,12 @@ public class PinballCanvasViewModelTest
         // Erstelle PinballCanvasViewModel mit Mock
         PinballCanvasViewModel pinballCanvasViewModel = new PinballCanvasViewModel(gameSession, DrawMode.GAME)
         {
+            @Override
+            public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
+            {
+
+            }
+
             @Override
             public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
             {

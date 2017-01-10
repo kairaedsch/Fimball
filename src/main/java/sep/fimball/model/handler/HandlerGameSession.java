@@ -41,5 +41,5 @@ public interface HandlerGameSession
     /**
      * Lässt den Ball als verloren gelten.
      */
-    void setBallLost();
+    void ballLost();
 }

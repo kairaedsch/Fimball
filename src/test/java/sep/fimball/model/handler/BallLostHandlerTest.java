@@ -1,10 +1,13 @@
 package sep.fimball.model.handler;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import org.junit.Test;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.BaseMediaElement;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -94,11 +97,66 @@ public class BallLostHandlerTest
             @Override
             public ReadOnlyObjectProperty<? extends HandlerBallGameElement> gameBallProperty()
             {
-                return null;
+                return new SimpleObjectProperty<>(new HandlerBallGameElement()
+                {
+                    @Override
+                    public void nudge(boolean left)
+                    {
+
+                    }
+
+                    @Override
+                    public ReadOnlyObjectProperty<Vector2> positionProperty()
+                    {
+                        return new SimpleObjectProperty<>();
+                    }
+
+                    @Override
+                    public void setCurrentAnimation(Optional<Animation> animation)
+                    {
+
+                    }
+
+                    @Override
+                    public void setHitCount(int hitCount)
+                    {
+
+                    }
+
+                    @Override
+                    public int getHitCount()
+                    {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getPointReward()
+                    {
+                        return 0;
+                    }
+
+                    @Override
+                    public BaseMediaElement getMediaElement()
+                    {
+                        return null;
+                    }
+
+                    @Override
+                    public BaseRuleElement getRuleElement()
+                    {
+                        return null;
+                    }
+
+                    @Override
+                    public BaseElementType getElementType()
+                    {
+                        return null;
+                    }
+                });
             }
 
             @Override
-            public void setBallLost()
+            public void ballLost()
             {
 
             }

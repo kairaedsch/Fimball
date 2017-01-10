@@ -13,4 +13,11 @@ public interface HandlerWorld
      * @return Die Liste der in der World enthaltenen GameElements
      */
     ReadOnlyListProperty<? extends HandlerGameElement> gameElementsProperty();
+
+    /**
+     * Gibt die unterste Position das Automaten zurück.
+     *
+     * @return Die unterste Position das Automaten.
+     */
+    double getMaximumYPosition();
 }

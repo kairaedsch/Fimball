@@ -22,6 +22,6 @@ public class EditorSession extends Session
         ObservableList<GameElement> list = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
 
-        world = new World(list, true);
+        world = new World(list, true, pinballMachine.getMaximumYPosition());
     }
 }

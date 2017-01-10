@@ -77,7 +77,7 @@ public class TiltHandler implements UserHandler
     {
         inputModifier.setKeyEventsActivated(false);
         Timeline timeline = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.setBallLost()));
+        KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.ballLost()));
         timeline.getKeyFrames().add(frame);
         timeline.setCycleCount(1);
         timeline.statusProperty().addListener((observable, oldValue, newValue) ->

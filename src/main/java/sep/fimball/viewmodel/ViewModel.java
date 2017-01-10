@@ -23,7 +23,6 @@ public abstract class ViewModel
         this.sceneManager = sceneManager;
     }
 
-
     /**
      * Verarbeitet das gegebene KeyEvent. Standardmäßig erfolgt keine Reaktion.
      *

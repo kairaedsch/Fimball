@@ -82,7 +82,7 @@ public class Settings
             if (settingsOptional.isPresent())
             {
                 singletonInstance = new Settings();
-                SettingsSettingsJsonConverter.loadSettingsFromJson(settingsOptional.get(), singletonInstance);
+                SettingsFactory.fillSettingsFromSettingsJson(settingsOptional.get(), singletonInstance);
             }
             else
             {
@@ -99,7 +99,7 @@ public class Settings
      */
     public void saveToDisk(String filePath)
     {
-        SettingsJson settingsJson = SettingsSettingsJsonConverter.createJsonFromSettings(this);
+        SettingsJson settingsJson = SettingsFactory.createSettingsJson(this);
         JsonFileManager.saveToJson(filePath, settingsJson);
     }
 

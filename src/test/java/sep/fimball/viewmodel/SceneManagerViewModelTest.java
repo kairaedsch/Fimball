@@ -5,7 +5,6 @@ import javafx.scene.input.KeyEvent;
 import org.junit.Test;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
@@ -57,7 +56,7 @@ public class SceneManagerViewModelTest
         assertThat(sceneManagerViewModel.windowViewModelProperty().get(), equalTo(window));
         assertThat(sceneManagerViewModel.dialogViewModelProperty().get().getDialogType(), is(DialogType.NONE));
 
-        sceneManagerViewModel.setDialog(dialog);
+        sceneManagerViewModel.pushDialog(dialog);
         assertThat(sceneManagerViewModel.dialogViewModelProperty().get(), equalTo(dialog));
     }
 
@@ -77,14 +76,14 @@ public class SceneManagerViewModelTest
         assertThat(numberOfWindowHandledKeyEvents, is(1));
 
         //Setzt den Dialog.
-        sceneManagerViewModel.setDialog(dialog);
+        sceneManagerViewModel.pushDialog(dialog);
 
         //Testet, dass das KeyEvent an das DialogViewModel weitergeleitet wird.
         sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));
         assertThat(numberOfDialogHandledKeyEvents, is(1));
 
         //Setzt einen leeren Dialog.
-        sceneManagerViewModel.setDialog(new EmptyViewModel());
+        sceneManagerViewModel.popDialog();
 
         //Testet, ob das KeyEvent wieder an das WindowViewModel weitergeleitet wird.
         sceneManagerViewModel.onKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "A", KeyCode.A.name(), KeyCode.A, false, false, false, false));

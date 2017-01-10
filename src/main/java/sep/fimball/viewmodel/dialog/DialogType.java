@@ -28,5 +28,10 @@ public enum DialogType
     /**
      * Der Pause-Dialog.
      */
-    PAUSE
+    PAUSE,
+
+    /**
+     * Der Message-Dialog.
+     */
+    MESSAGE
 }

@@ -54,7 +54,8 @@ public class ReserveBallsAndPlayerChangeTest
     @Test(timeout = MAX_TEST_DURATION)
     public void testReserveBalls() throws InterruptedException
     {
-        initGameSession();      // Start des Spiels
+        // Start des Spiels
+        initGameSession();
         usePlunger();
         waitTillBallIsLost();
 

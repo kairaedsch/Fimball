@@ -1,6 +1,8 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDoubleByPoints;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -32,5 +34,11 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
     {
         // Im Spiel kann der Nutzer nichts auswählen.
         return Optional.empty();
+    }
+
+    @Override
+    public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
+    {
+        // Da wir im Spiel sind, wird das ignoriert
     }
 }

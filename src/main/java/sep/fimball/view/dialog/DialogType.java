@@ -35,7 +35,12 @@ public enum DialogType implements ViewType
     /**
      * Der Pause-Dialog.
      */
-    PAUSE("pause/pauseDialog.fxml");
+    PAUSE("pause/pauseDialog.fxml"),
+
+    /**
+     * Der Message-Dialog.
+     */
+    MESSAGE("message/messageDialog.fxml");
 
     /**
      * Der Pfad zu der zum Fenster-Typ gehörende FXML-Datei.

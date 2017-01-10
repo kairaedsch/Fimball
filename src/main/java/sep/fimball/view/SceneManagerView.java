@@ -163,6 +163,9 @@ public class SceneManagerView
             case PAUSE:
                 dialogType = DialogType.PAUSE;
                 break;
+            case MESSAGE:
+                dialogType = DialogType.MESSAGE;
+                break;
             case NONE:
                 // Entfernt Dialog und returned falls DialogType.NONE
                 removeDialog();

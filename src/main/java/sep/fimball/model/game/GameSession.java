@@ -82,16 +82,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     private List<List<ElementEventArgs<GameElement>>> elementEventArgsList;
 
     /**
-     * Gibt an, ob die Kugel verloren wurde.
-     */
-    private boolean isBallLost;
-
-    /**
-     * Gibt an, ob Ball-Verlust-Events ausgelöst wurden.
-     */
-    private boolean wereBallLostEventsTriggered;
-
-    /**
      * Monitor, welcher für die Synchronisierung zwischen Physik und Spiel genutzt wird {@see collisionEventArgsList}.
      */
     private final Object physicMonitor;
@@ -100,11 +90,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      * Gibt an ob das Spiel vorbei ist.
      */
     private BooleanProperty isOver;
-
-    /**
-     * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
-     */
-    private static final double BALL_LOST_TOLERANCE = 10;
 
     /**
      * Der HandlerManager aller Handler dieser gameSession.
@@ -130,8 +115,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         this.isOver = new SimpleBooleanProperty(false);
         this.gameBall = new SimpleObjectProperty<>();
         this.startedFromEditor = startedFromEditor;
-        this.isBallLost = false;
-        this.wereBallLostEventsTriggered = false;
         this.physicsHandler = new PhysicsHandler<>();
         this.players = new ArrayList<>();
         playerIndex = new SimpleIntegerProperty(0);
@@ -160,7 +143,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
             throw new IllegalArgumentException("No ball found in PlacedElements!");
         }
 
-        world = new World(elements, false);
+        world = new World(elements, false, pinballMachine.getMaximumYPosition());
         BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(),
                 gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().multiplierProperty().get(),
                 gameBall.get().getPlacedElement().getBaseElement().getPhysics());
@@ -169,7 +152,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         physicsElements.add(ballPhysicsElement);
         elements.add(gameBall.get());
 
-        physicsHandler.init(physicsElements, this, pinballMachine.getMaximumYPosition() + BALL_LOST_TOLERANCE, ballPhysicsElement);
+        physicsHandler.init(physicsElements, this, ballPhysicsElement);
     }
 
     /**
@@ -195,15 +178,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
                 collisionEventArgsList.forEach(collisionEventArgs ->
                         handlerManager.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId())));
 
-        synchronized (physicMonitor)
-        {
-            if (isBallLost && !wereBallLostEventsTriggered)
-            {
-                wereBallLostEventsTriggered = true;
-
-                handlerManager.activateGameHandler(GameEvent.BALL_LOST);
-            }
-        }
         super.loopUpdate();
     }
 
@@ -244,21 +218,21 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     }
 
     /**
-     * Pausiert das Spiel, in dem die Berechnung der Physik sowie die Spielschleife gestoppt wird.
-     */
-    public void pauseAll()
-    {
-        physicsHandler.stopTicking();
-        stopUpdateLoop();
-    }
-
-    /**
      * Startet das Spiel oder setzt es fort, nachdem dieses pausiert wurde.
      */
     public void startAll()
     {
         startUpdateLoop();
         startPhysics();
+    }
+
+    /**
+     * Pausiert das Spiel, in dem die Berechnung der Physik sowie die Spielschleife gestoppt wird.
+     */
+    public void pauseAll()
+    {
+        physicsHandler.stopTicking();
+        stopUpdateLoop();
     }
 
     /**
@@ -297,11 +271,12 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     public void spawnNewBall()
     {
         gameBall.get().reset();
-        physicsHandler.resetBall();
-        isBallLost = false;
-        wereBallLostEventsTriggered = false;
-
         handlerManager.activateGameHandler(GameEvent.BALL_SPAWNED);
+    }
+
+    public void ballLost()
+    {
+        handlerManager.activateGameHandler(GameEvent.BALL_LOST);
     }
 
     /**
@@ -318,15 +293,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
             this.elementEventArgsList.add(elementEventArgs);
         }
     }
-
-    public void setBallLost()
-    {
-        synchronized (physicMonitor)
-        {
-            this.isBallLost = true;
-        }
-    }
-
 
     /**
      * Gibt den Spieler zurück, der gerade spielt.

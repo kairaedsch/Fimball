@@ -119,7 +119,7 @@ public class GameViewModel extends WindowViewModel
                 }
                 else
                 {
-                    sceneManager.setDialog(new GameOverViewModel(this.gameSession.getPinballMachine(), getScores(), playerNames));
+                    sceneManager.pushDialog(new GameOverViewModel(this.gameSession.getPinballMachine(), getScores(), playerNames));
                 }
             }
         });
@@ -201,7 +201,7 @@ public class GameViewModel extends WindowViewModel
                 }
                 else
                 {
-                    sceneManager.setDialog(new PauseViewModel(this));
+                    sceneManager.pushDialog(new PauseViewModel(this));
                 }
             }
             else if (binding != null)

@@ -9,7 +9,6 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
@@ -61,6 +60,7 @@ public class PauseViewModel extends DialogViewModel
      */
     public void exitDialog()
     {
+        sceneManager.popDialog();
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
@@ -69,7 +69,7 @@ public class PauseViewModel extends DialogViewModel
      */
     public void resumeGame()
     {
-        sceneManager.setDialog(new EmptyViewModel());
+        sceneManager.popDialog();
         gameViewModel.resume();
     }
 

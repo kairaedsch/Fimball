@@ -12,7 +12,7 @@ public interface PhysicsGameSession<GameElementT>
     /**
      * Lässt den Ball als verloren gelten.
      */
-    void setBallLost();
+    void ballLost();
 
     /**
      * Überreicht die verschiedenen Events, die in der Physik passiert sind, an die GameSession weiter.

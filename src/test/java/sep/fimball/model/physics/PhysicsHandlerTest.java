@@ -40,11 +40,6 @@ public class PhysicsHandlerTest
     private final Object ballLostMonitor = new Object();
 
     /**
-     * Gibt an, ob die Kugel als verloren gilt.
-     */
-    private boolean ballLost = false;
-
-    /**
      * Die Kugel-Position.
      */
     private Vector2 ballPosition = new Vector2(0, 19);
@@ -63,25 +58,6 @@ public class PhysicsHandlerTest
      * Gibt an, ob die ElementEventArgs-Liste, die an die Game-Session übergeben wird, leer ist.
      */
     private boolean elementEventArgsEmpty = true;
-
-    /**
-     * Testet, ob erkannt wird, dass die Kugel verloren ist.
-     *
-     * @throws InterruptedException wenn der Monitor unterbrochen wird.
-     */
-    @Test
-    public void ballLostTest() throws InterruptedException
-    {
-        init();
-        test.startTicking();
-        synchronized (ballLostMonitor)
-        {
-            ballLostMonitor.wait(MAX_TEST_DURATION);
-        }
-        test.stopTicking();
-        assertThat("Die Kugel ist am unteren Rand des Spielfelds", ballPosition.getY(), greaterThanOrEqualTo(50.0));
-        assertThat("Die Kugel wird als verloren angesehen", ballLost, is(true));
-    }
 
     /**
      * Testet, ob Kollisionen überprüft werden.
@@ -116,7 +92,7 @@ public class PhysicsHandlerTest
         mockedElements.add(mockedElement);
 
         test = new PhysicsHandler();
-        test.init(mockedElements, mockedGameSession, 50, mockedBall);
+        test.init(mockedElements, mockedGameSession, mockedBall);
     }
 
     /**
@@ -156,15 +132,6 @@ public class PhysicsHandlerTest
             return null;
         }).when(mockedGameSession).addEventArgs(anyList(), anyList());
 
-        doAnswer(invocationOnMock ->
-        {
-            ballLost = true;
-                synchronized (ballLostMonitor)
-                {
-                    ballLostMonitor.notify();
-                }
-            return null;
-        }).when(mockedGameSession).setBallLost();
         return mockedGameSession;
     }
 

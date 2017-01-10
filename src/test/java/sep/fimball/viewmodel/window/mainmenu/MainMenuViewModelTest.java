@@ -110,7 +110,7 @@ public class MainMenuViewModelTest
                 namesShown = true;
             }
             return null;
-        }).when(mockedSceneManager).setDialog(any());
+        }).when(mockedSceneManager).pushDialog(any());
 
         test.setSceneManager(mockedSceneManager);
         settingsShown = false;

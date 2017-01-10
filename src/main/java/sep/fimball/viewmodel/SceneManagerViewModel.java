@@ -1,12 +1,10 @@
 package sep.fimball.viewmodel;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
@@ -26,9 +24,9 @@ public class SceneManagerViewModel
     private ObjectProperty<WindowViewModel> windowViewModel;
 
     /**
-     * Das aktuelle DialogViewModel.
+     * Die aktuellen DialogViewModels.
      */
-    private ObjectProperty<DialogViewModel> dialogViewModel;
+    private ListProperty<DialogViewModel> dialogViewModels;
 
     /**
      * Gibt an, ob das Fenster im Vollbildmodus dargestellt werden soll.
@@ -42,10 +40,9 @@ public class SceneManagerViewModel
     public SceneManagerViewModel()
     {
         windowViewModel = new SimpleObjectProperty<>();
-        dialogViewModel = new SimpleObjectProperty<>();
+        dialogViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
         fullscreen = new SimpleBooleanProperty();
         setWindow(new SplashScreenViewModel());
-        setDialog(new EmptyViewModel());
         fullscreen.bind(Settings.getSingletonInstance().fullscreenProperty());
     }
 
@@ -57,13 +54,13 @@ public class SceneManagerViewModel
      */
     public void onKeyEvent(KeyEvent event)
     {
-        if (dialogViewModel.get().getDialogType() == DialogType.NONE)
+        if (dialogViewModels.isEmpty())
         {
             windowViewModel.get().handleKeyEvent(event);
         }
         else
         {
-            dialogViewModel.get().handleKeyEvent(event);
+            dialogViewModels.get(0).handleKeyEvent(event);
         }
     }
 
@@ -78,20 +75,24 @@ public class SceneManagerViewModel
         windowViewModel.setSceneManager(this);
         this.windowViewModel.set(windowViewModel);
         this.windowViewModel.get().changeBackgroundMusic();
-        this.dialogViewModel.set(new EmptyViewModel());
     }
 
     /**
-     * Ändert das aktuelle DialogViewModel auf das, das der Methode übergeben
-     * wird.
-     *
      * @param dialogViewModel Das neue DialogViewModel.
      */
-    public void setDialog(DialogViewModel dialogViewModel)
+    public void pushDialog(DialogViewModel dialogViewModel)
     {
         dialogViewModel.setSceneManager(this);
-        this.dialogViewModel.set(dialogViewModel);
-        this.dialogViewModel.get().changeBackgroundMusic();
+        dialogViewModels.add(0, dialogViewModel);
+        dialogViewModels.get(0).changeBackgroundMusic();
+    }
+
+    /**
+     *
+     */
+    public void popDialog()
+    {
+        dialogViewModels.remove(0);
     }
 
     /**
@@ -111,6 +112,10 @@ public class SceneManagerViewModel
      */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
+        ObjectProperty<DialogViewModel> dialogViewModel = new SimpleObjectProperty<>();
+        dialogViewModel.bind(Bindings.createObjectBinding(
+                () -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0),
+                dialogViewModels));
         return dialogViewModel;
     }
 

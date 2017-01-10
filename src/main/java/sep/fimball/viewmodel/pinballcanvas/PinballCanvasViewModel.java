@@ -142,10 +142,7 @@ public abstract class PinballCanvasViewModel
      * @param vector2    Position der Maus.
      * @param mouseEvent Das Ausgelöste MouseEvent.
      */
-    public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
-    {
-        //TODO: Absichtlich leer?
-    }
+    public abstract void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent);
 
     /**
      * Setzt den ViewScreenshotCreator, welcher ein Screenshot des Flipperautomaten erstellen kann.

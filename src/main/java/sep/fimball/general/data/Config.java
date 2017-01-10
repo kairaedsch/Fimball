@@ -43,6 +43,11 @@ public class Config
     public final static int MACHINE_BOX_MARGIN = 2;
 
     /**
+     * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
+     */
+    public static final double BALL_LOST_TOLERANCE = 10;
+
+    /**
      * Gibt eine eindeutige ID zurück.
      *
      * @return Eine eindeutige ID.

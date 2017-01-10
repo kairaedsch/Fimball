@@ -79,7 +79,7 @@ public class ScoreHandlerTest
             }
 
             @Override
-            public void setBallLost()
+            public void ballLost()
             {
 
             }

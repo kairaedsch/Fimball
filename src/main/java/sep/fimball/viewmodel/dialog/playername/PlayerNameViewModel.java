@@ -8,7 +8,6 @@ import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
 /**
@@ -101,7 +100,7 @@ public class PlayerNameViewModel extends DialogViewModel
         {
             names[i] = playerNameEntries.get(i).playerNameProperty().get();
         }
-
+        sceneManager.popDialog();
         sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names, false)));
     }
 
@@ -110,7 +109,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void exitDialogToMainMenu()
     {
-        sceneManager.setDialog(new EmptyViewModel());
+        sceneManager.popDialog();
     }
 
     /**

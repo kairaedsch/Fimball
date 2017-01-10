@@ -62,7 +62,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
-        sceneManager.setDialog(new GameSettingsViewModel());
+        sceneManager.pushDialog(new GameSettingsViewModel());
     }
 
     /**
@@ -72,7 +72,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     void showPlayerNameDialog(PinballMachine pinballMachine)
     {
-        sceneManager.setDialog(new PlayerNameViewModel(pinballMachine));
+        sceneManager.pushDialog(new PlayerNameViewModel(pinballMachine));
     }
 
     /**

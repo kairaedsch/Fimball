@@ -16,6 +16,11 @@ import java.util.List;
 public class World implements HandlerWorld
 {
     /**
+     * Die unterste Position das Automaten.
+     */
+    private final double maximumYPosition;
+
+    /**
      * Die Elemente der Spielwelt sortiert. Sie werden so sortiert dass sie in der korrekten Reihenfolge gezeichnet werden können.
      */
     private ListProperty<GameElement> gameElements;
@@ -25,9 +30,11 @@ public class World implements HandlerWorld
      *
      * @param elements Liste der Elemente in der Spielwelt.
      * @param startedFromEditor Gibt an ob die Welt im Editor oder dem Hauptspiel genutzt wird.
+     * @param maximumYPosition Die unterste Position das Automaten.
      */
-    public World(ObservableList<GameElement> elements, boolean startedFromEditor)
+    public World(ObservableList<GameElement> elements, boolean startedFromEditor, double maximumYPosition)
     {
+        this.maximumYPosition = maximumYPosition;
         ListProperty<GameElement> gameElements = new SimpleListProperty<>(elements);
 
         if (startedFromEditor)
@@ -60,5 +67,11 @@ public class World implements HandlerWorld
     public ReadOnlyListProperty<GameElement> gameElementsProperty()
     {
         return gameElements;
+    }
+
+    @Override
+    public double getMaximumYPosition()
+    {
+        return maximumYPosition;
     }
 }

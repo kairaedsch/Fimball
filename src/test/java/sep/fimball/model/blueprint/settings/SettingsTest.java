@@ -57,7 +57,7 @@ public class SettingsTest
     {
         initKeyLayouts();
         initTestJson();
-        SettingsSettingsJsonConverter.loadSettingsFromJson(testSettingsJson, Settings.getSingletonInstance());
+        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, Settings.getSingletonInstance());
 
         assertThat(Settings.getSingletonInstance().languageProperty().get(), equalTo(LANGUAGE));
         assertThat(Settings.getSingletonInstance().fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
@@ -99,7 +99,7 @@ public class SettingsTest
         Mockito.when(mockedSettings.keyBindingsMapProperty()).thenReturn(new SimpleMapProperty<>(FXCollections.observableMap(keyBindings)));
         Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> Optional.of(keyBindings.get(invocation.getArgument(0))));
 
-        SettingsJson createdJson = SettingsSettingsJsonConverter.createJsonFromSettings(mockedSettings);
+        SettingsJson createdJson = SettingsFactory.createSettingsJson(mockedSettings);
 
         assertThat(createdJson.language, equalTo(LANGUAGE.name()));
         assertThat(createdJson.fullscreen, is(IS_IN_FULLSCREEN));
@@ -116,7 +116,7 @@ public class SettingsTest
     public void testSetKeyBinding()
     {
         initTestJson();
-        SettingsSettingsJsonConverter.loadSettingsFromJson(testSettingsJson, Settings.getSingletonInstance());
+        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, Settings.getSingletonInstance());
         assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA), equalTo(Optional.empty()));
         assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1), equalTo(Optional.empty()));
         Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding1);

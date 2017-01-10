@@ -49,16 +49,6 @@ public class PhysicsHandler<GameElementT>
     private PhysicsGameSession<GameElementT> gameSession;
 
     /**
-     * Die maximale Y-Position aller PhysicElements.
-     */
-    private double maxElementPosY;
-
-    /**
-     * Gibt an, ob die Kugel verloren ist.
-     */
-    private boolean ballLost;
-
-    /**
      * Ein Monitor, über den die Physik synchronisiert wird.
      */
     private final Object physicsMonitor = new Object();
@@ -76,16 +66,13 @@ public class PhysicsHandler<GameElementT>
      *
      * @param elements           Die Elemente, die der PhysicsHandler zur Berechnung der Physik nutzen soll.
      * @param gameSession        Die zugehörige GameSession.
-     * @param maxElementPosY     Die maximale Y-Position aller PhysicElements.
      * @param ballPhysicsElement Der physikalische Ball.
      */
-    public void init(List<PhysicsElement<GameElementT>> elements, PhysicsGameSession<GameElementT> gameSession, double maxElementPosY, BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public void init(List<PhysicsElement<GameElementT>> elements, PhysicsGameSession<GameElementT> gameSession, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         this.physicsElements = elements;
         this.gameSession = gameSession;
-        this.maxElementPosY = maxElementPosY;
         this.ballPhysicsElement = ballPhysicsElement;
-        this.ballLost = false;
         this.physicTimer = new Timer(false);
 
         modifyContainers = new ArrayList<>();
@@ -125,17 +112,6 @@ public class PhysicsHandler<GameElementT>
     }
 
     /**
-     * Setzt das Feld welches angibt dass der Ball verloren gegangen ist zurück.
-     */
-    public void resetBall()
-    {
-        synchronized (physicsMonitor)
-        {
-            ballLost = false;
-        }
-    }
-
-    /**
      * Erstellt einen neuen TimerTask, welcher die Berechnung der Physik ausführt.
      *
      * @return Den TimerTask.
@@ -164,30 +140,13 @@ public class PhysicsHandler<GameElementT>
                 // PhysicsElements auf Kollisionen mit dem Ball prüfen
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
-                boolean localBallLost = false;
 
                 synchronized (physicsMonitor)
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
                     physicsElements.stream().filter(element -> element instanceof PhysicsUpdatable).forEach(element -> ((PhysicsUpdatable) element).update(delta));
-
-                    if (ballPhysicsElement != null)
-                    {
-                        if (ballPhysicsElement.getPosition().getY() >= maxElementPosY)
-                        {
-                            localBallLost = true;
-                        }
-                    }
-
-                    if (ballLost)
-                        localBallLost = false;
-                    if (localBallLost)
-                        ballLost = true;
                 }
-
-                if (localBallLost)
-                    gameSession.setBallLost();
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };

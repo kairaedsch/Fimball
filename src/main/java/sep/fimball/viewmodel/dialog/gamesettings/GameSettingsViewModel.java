@@ -10,7 +10,6 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 import java.util.Collections;
@@ -85,7 +84,7 @@ public class GameSettingsViewModel extends DialogViewModel
     public void exitDialogToMainMenu()
     {
         saveSettings();
-        sceneManager.setDialog(new EmptyViewModel());
+        sceneManager.popDialog();
         sceneManager.setWindow(new MainMenuViewModel());
     }
 

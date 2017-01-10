@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -61,6 +62,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     public void savePinballMachine()
     {
         pinballMachine.saveToDisk();
+        sceneManager.pushDialog(new MessageViewModel("Wir speichern dann mal", "na wenn sie insistieren"));
         sceneManager.setWindow(new MainMenuViewModel());
     }
 
