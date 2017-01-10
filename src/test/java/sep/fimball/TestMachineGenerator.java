@@ -8,6 +8,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 @Ignore
@@ -52,13 +53,16 @@ public class TestMachineGenerator
         pinballMachine.nameProperty().set("Test - Light Show " + size);
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_2"), new Vector2(1, 30), 0, 0, 0));
 
+        ArrayList<PlacedElement> list = new ArrayList<>();
+
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
+                list.add(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
             }
         }
+        pinballMachine.addElement(list.toArray(new PlacedElement[0]));
         pinballMachine.saveToDisk();
     }
 
