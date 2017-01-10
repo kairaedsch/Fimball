@@ -1,7 +1,9 @@
 package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.collider.CircleColliderShape;
+import sep.fimball.model.physics.element.HolePhysicsElement;
 
 /**
  * Created by TheAsuro on 09.01.2017.
@@ -9,7 +11,7 @@ import sep.fimball.model.physics.collider.CircleColliderShape;
 public class HoleCollision extends NormalCollision
 {
     /**
-     * If the ball is this close to the center of the hole, it will ~do stuff~
+     * If the ball is this close to the center of the hole, it will be held for a few seconds, then released
      */
     private final double CENTER_AREA_RADIUS = 0.6;
     private final double MIN_HOLE_SPEED = 3.0;
@@ -25,20 +27,24 @@ public class HoleCollision extends NormalCollision
         Vector2 holeCenterPosition = info.getOtherPhysicsElement().getPosition().plus(holeCenterOffset);
         double distanceToCenter = ballCenterPosition.minus(holeCenterPosition).magnitude();
 
-        if (distanceToCenter <= CENTER_AREA_RADIUS)
+        HolePhysicsElement<GameElement> physicsElement = (HolePhysicsElement<GameElement>) info.getOtherPhysicsElement();
+
+        if (physicsElement.canAffectBall())
         {
-            // TODO freeze ball for a while, then release it
-            info.getBall().setVelocity(new Vector2(0.0, 0.0));
-            info.getBall().setPosition(holeCenterPosition.minus(ballCenterOffset));
-        }
-        else if (distanceToCenter < holeRadius)
-        {
-            // Ball is over the edge of the hole, it will start rolling towards the center
-            Vector2 oldVel = info.getBall().getVelocity();
-            Vector2 combinedVel = holeCenterPosition.minus(ballCenterPosition).plus(oldVel);
-            double ballSpeed = Math.max(oldVel.magnitude(), MIN_HOLE_SPEED);
-            Vector2 newVel = combinedVel.normalized().scale(ballSpeed);
-            info.getBall().setVelocity(oldVel.lerp(newVel, HOLE_DIRECTION_CHANGE_RATE));
+            if (distanceToCenter <= CENTER_AREA_RADIUS)
+            {
+                physicsElement.tryFreezeBall(info.getBall());
+                info.getBall().setPosition(holeCenterPosition.minus(ballCenterOffset));
+            }
+            else if (distanceToCenter < holeRadius)
+            {
+                // Ball is over the edge of the hole, it will start rolling towards the center
+                Vector2 oldVel = info.getBall().getVelocity();
+                Vector2 combinedVel = holeCenterPosition.minus(ballCenterPosition).plus(oldVel);
+                double ballSpeed = Math.max(oldVel.magnitude(), MIN_HOLE_SPEED);
+                Vector2 newVel = combinedVel.normalized().scale(ballSpeed);
+                info.getBall().setVelocity(oldVel.lerp(newVel, HOLE_DIRECTION_CHANGE_RATE));
+            }
         }
     }
 }

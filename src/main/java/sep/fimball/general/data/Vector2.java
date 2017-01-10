@@ -295,4 +295,9 @@ public class Vector2
     {
         return new Vector2(Math.min(a.x, b.x), Math.min(a.y, b.y));
     }
+
+    public static Vector2 randomUnitVector()
+    {
+        return new Vector2(Math.random(), Math.random()).normalized();
+    }
 }

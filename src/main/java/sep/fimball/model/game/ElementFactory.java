@@ -7,6 +7,7 @@ import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
+import sep.fimball.model.physics.element.HolePhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Die ElementFactory Kümmerst sich um die Erstellung von GameElements und deren PhysicElements.
+ * Die ElementFactory kümmert sich um die Erstellung von GameElements und deren PhysicElements.
  */
 public class ElementFactory
 {
@@ -74,6 +75,13 @@ public class ElementFactory
                     break;
                 case LIGHT:
                     gameElements.add(new GameElement(element, false));
+                    break;
+                case HOLE:
+                    GameElement gameElement = new GameElement(element, false);
+                    HolePhysicsElement<GameElement> physicsElement = new HolePhysicsElement<>(gameElement, gameElement.positionProperty().get(),
+                            gameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
+                    gameElements.add(gameElement);
+                    physicsElements.add(physicsElement);
                     break;
                 default:
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
