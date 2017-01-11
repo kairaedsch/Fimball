@@ -92,13 +92,4 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     {
         mainMenuViewModel.addNewPinballMachine();
     }
-
-    /**
-     * Schließt das Programm.
-     */
-    @FXML
-    private void exitGame()
-    {
-        mainMenuViewModel.exitGame();
-    }
 }

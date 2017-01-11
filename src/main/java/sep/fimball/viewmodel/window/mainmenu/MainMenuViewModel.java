@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -131,7 +132,6 @@ public class MainMenuViewModel extends WindowViewModel
         return pinballMachineInfoSubViewModel;
     }
 
-
     /**
      * Führt den Benutzer zu den Fimball-Einstellungen eines neuen Automaten.
      */
@@ -139,7 +139,6 @@ public class MainMenuViewModel extends WindowViewModel
     {
         sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
     }
-
 
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
@@ -162,6 +161,10 @@ public class MainMenuViewModel extends WindowViewModel
                     }
                     break;
             }
+        }
+        if (keyEvent.getCode() == KeyCode.ESCAPE)
+        {
+            exitGame();
         }
     }
 
@@ -191,7 +194,7 @@ public class MainMenuViewModel extends WindowViewModel
     /**
      * Wird beim Klick auf den Exit Button aufgerufen. Beendet das Programm falls der Nutzer dies bestätigt.
      */
-    public void exitGame()
+    private void exitGame()
     {
         sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion", () ->
         {

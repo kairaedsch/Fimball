@@ -16,7 +16,7 @@
             <Label fx:id="key_1" alignment="CENTER" maxWidth="Infinity" styleClass="machineOverviewTitle"
                    text="!mainmenu.machines.key!"/>
         </HBox>
-        <StackPane>
+        <StackPane VBox.vgrow="ALWAYS">
             <AnchorPane minWidth="150.0" VBox.vgrow="ALWAYS">
                 <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge, machineOverview" vbarPolicy="ALWAYS"
                             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,9 +27,8 @@
                     </AnchorPane>
                 </ScrollPane>
             </AnchorPane>
-            <Pane fx:id="add" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#addClicked"
-                  styleClass="button, buttonMachineAdd" StackPane.alignment="BOTTOM_RIGHT"
-                  accessibleHelp="§mainmenu.add.tip.key§">
+            <Pane fx:id="add" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#addClicked" styleClass="button, buttonMachineAdd"
+                  StackPane.alignment="BOTTOM_RIGHT" accessibleHelp="§mainmenu.add.tip.key§">
                 <StackPane.margin>
                     <Insets bottom="25" right="40"/>
                 </StackPane.margin>
@@ -38,12 +37,8 @@
     </VBox>
     <AnchorPane minWidth="300.0">
         <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <HBox>
-                <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" prefHeight="17.0" prefWidth="800.0" styleClass="machineName"
+            <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" prefHeight="17.0" styleClass="machineName"
                        text="Automat"/>
-                <Button fx:id="key_2" mnemonicParsing="false" onMouseClicked="#exitGame" text="!mainmenu.exit.key!"/>
-            </HBox>
-
             <GridPane prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
