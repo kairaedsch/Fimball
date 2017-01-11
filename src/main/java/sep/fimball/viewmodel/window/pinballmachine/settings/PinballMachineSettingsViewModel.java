@@ -63,7 +63,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     public void savePinballMachine()
     {
         pinballMachine.saveToDisk();
-        sceneManager.pushDialog(new MessageViewModel("Speichern", "Ist gespeichert"));
+        sceneManager.pushDialog(new MessageViewModel("editor.settings.saveTitle.key", "editor.settings.saveMessage.key"));
     }
 
     /**
@@ -71,7 +71,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void deletePinballMachine()
     {
-        sceneManager.pushDialog(new QuestionViewModel("Löschen", "Wirklich löschen?", () ->
+        sceneManager.pushDialog(new QuestionViewModel("editor.settings.deleteTitle.key", "editor.settings.deleteMessage.key", () ->
         {
             pinballMachine.deleteFromDisk();
             sceneManager.setWindow(new MainMenuViewModel());
