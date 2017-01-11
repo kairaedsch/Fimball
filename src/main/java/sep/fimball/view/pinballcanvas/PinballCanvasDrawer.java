@@ -74,10 +74,7 @@ class PinballCanvasDrawer
 
         drawElements(graphicsContext);
 
-        if(dragSelectionRect.isPresent())
-        {
-            drawSelectionRect(dragSelectionRect.get(), graphicsContext);
-        }
+        dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 
         graphicsContext.restore();
     }

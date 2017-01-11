@@ -211,10 +211,7 @@ public class PinballMachineEditor
     {
         ListProperty<PlacedElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         Optional<PlacedElement> element = pinballMachine.getElementAt(pos);
-        if (element.isPresent())
-        {
-            elements.add(element.get());
-        }
+        element.ifPresent(elements::add);
         return elements;
     }
 

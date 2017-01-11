@@ -67,10 +67,7 @@ public class SettingsTest
         assertThat(Settings.getSingletonInstance().keyBindingsMapProperty(), not(equalTo(null)));
         assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> Settings.getSingletonInstance().getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).get().equals(keyLayout.keyBinding)), is(true));
         Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !KeyCode.valueOf(keyLayout.keyCode).equals(keyCode)))).findFirst();
-        if (unusedKeyCode.isPresent())
-        {
-            assertThat(Settings.getSingletonInstance().getKeyBinding(unusedKeyCode.get()), equalTo(Optional.empty()));
-        }
+        unusedKeyCode.ifPresent(keyCode -> assertThat(Settings.getSingletonInstance().getKeyBinding(keyCode), equalTo(Optional.empty())));
     }
 
     /**
