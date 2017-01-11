@@ -45,7 +45,8 @@ public abstract class Session
             @Override
             public void handle(long now)
             {
-                beforeloopUpdate();
+                loopUpdate();
+                updateLoopFinished();
             }
         };
         startUpdateLoop();
@@ -68,12 +69,10 @@ public abstract class Session
     }
 
     /**
-     * Wird immer vor dem Updateloop der Session aufgerufen.
+     * Wird aufgerufen sobald die Update Loop der Session abgeschlossen ist.
      */
-    private void beforeloopUpdate()
+    private void updateLoopFinished()
     {
-        loopUpdate();
-
         updateLoopObservable.setChanged();
         updateLoopObservable.notifyObservers();
     }
