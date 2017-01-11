@@ -39,6 +39,9 @@ public class ElementFactoryTest
     @Mock
     private HandlerManager handlerManager;
 
+    /**
+     * Überprüft ob die ElementFactory korrekte GameElemente und PhysicsElemente erstellt.
+     */
     @Test
     public void testGenerateElements()
     {
@@ -61,6 +64,11 @@ public class ElementFactoryTest
         }
     }
 
+    /**
+     * Generiert PlacedElemente für jeden verfügbaren BaseElementTyp.
+     *
+     * @return eine Liste von PlacedElements.
+     */
     private ReadOnlyListProperty<PlacedElement> generateAllPlacedElementTypes()
     {
         ListProperty<PlacedElement> placedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -72,6 +80,12 @@ public class ElementFactoryTest
         return placedElements;
     }
 
+    /**
+     * Generiert einen Mock für ein PlacedElement
+     *
+     * @param type Der Typ den das BaseElement welches dieses PlacedElement hat haben soll.
+     * @return Ein Mock für ein PlacedElement.
+     */
     private PlacedElement generatePlacedElementMock(BaseElementType type)
     {
         double dummyMultiplier = 0.0;
@@ -88,6 +102,12 @@ public class ElementFactoryTest
         return placedElement;
     }
 
+    /**
+     * Generiert einen Mock für ein BaseElement.
+     *
+     * @param type Der Typ des BaseElement.
+     * @return Ein Mock für ein BaseElement vom gegebenen Typ.
+     */
     private BaseElement generateBaseElementMock(BaseElementType type)
     {
         BaseElement placedElementBaseElement = mock(BaseElement.class);

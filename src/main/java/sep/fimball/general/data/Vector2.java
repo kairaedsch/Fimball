@@ -296,6 +296,11 @@ public class Vector2
         return new Vector2(Math.min(a.x, b.x), Math.min(a.y, b.y));
     }
 
+    /**
+     * Generiert einen zufälligen Vektor mit Länge 1.
+     *
+     * @return Ein zufälliger Vektor mit Länge 1.
+     */
     public static Vector2 randomUnitVector()
     {
         return new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalized();

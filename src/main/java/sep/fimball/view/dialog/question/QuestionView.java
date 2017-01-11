@@ -26,6 +26,7 @@ public class QuestionView extends DialogView<QuestionViewModel>
     }
 
     /**
+     * TODO
      * Benachrichtigt das {@code ????}, dass ????? möchte.
      */
     @FXML
@@ -35,6 +36,7 @@ public class QuestionView extends DialogView<QuestionViewModel>
     }
 
     /**
+     * TODO
      * Benachrichtigt das {@code ????}, dass ????? möchte.
      */
     @FXML

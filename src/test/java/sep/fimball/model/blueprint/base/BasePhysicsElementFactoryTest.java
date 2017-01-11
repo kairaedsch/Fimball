@@ -29,6 +29,9 @@ public class BasePhysicsElementFactoryTest
         assertThat(generateElement.getPivotPoint(), equalTo(new Vector2(TEST_COLLIDER_STRENGTH, TEST_COLLIDER_STRENGTH)));
     }
 
+    /**
+     * Überprüft ob sich die Factory bei einem unbekannten Kollisionstyp korrekt verhält.
+     */
     @Test (expected = IllegalArgumentException.class)
     public void testUnknownCollisionType()
     {
@@ -36,6 +39,12 @@ public class BasePhysicsElementFactoryTest
         generateBasePhysicsElement(TEST_COLLISION_TYPE);
     }
 
+    /**
+     * Ruft die create() Methode der Factory auf um ein BasePhysicsElement zu generieren.
+     *
+     * @param collisionType Der Typ der Kollision.
+     * @return Das generierte BasePhysicsElement.
+     */
     private BasePhysicsElement generateBasePhysicsElement(String collisionType)
     {
         BaseElementJson.PhysicElementJson.PhysicColliderJson collider = new BaseElementJson.PhysicElementJson.PhysicColliderJson();

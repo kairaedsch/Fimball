@@ -13,7 +13,6 @@ import sep.fimball.model.handler.*;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
@@ -44,7 +43,7 @@ public class GameTest
      * @throws InterruptedException Bricht den Test ab, falls im Test unvorhergesehenerweise ein Interrupt aufgetreten ist.
      */
     @Test(timeout = MAX_TEST_DURATION)
-    public void gameCollisionTest() throws InterruptedException, IOException
+    public void gameCollisionTest() throws InterruptedException
     {
         // Aufbau des Automaten.
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();

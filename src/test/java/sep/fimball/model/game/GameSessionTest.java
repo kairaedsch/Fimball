@@ -43,17 +43,13 @@ public class GameSessionTest
         new GameSession(pinballMachineMock, new String[]{"TestPlayer"}, false, null);
     }
 
-    private GameElement collidedGameElement;
     private boolean gameLoopObserverNotified = false;
-    private boolean isBallLost = false;
 
     /**
      * Testet, ob Events richtig verarbeitet, Handler aktiviert und der GameLoopObserver benachrichtigt wird.
-     *
-     * @throws IOException
      */
     @Test
-    public void gameLoopUpdateTest() throws IOException
+    public void gameLoopUpdateTest()
     {
         // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};

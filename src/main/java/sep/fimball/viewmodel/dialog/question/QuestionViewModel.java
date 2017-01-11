@@ -10,11 +10,14 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 public class QuestionViewModel extends DialogViewModel
 {
     private StringProperty title;
-
     private StringProperty message;
-
     private Action action;
 
+    /**
+     * Erzeugt ein neues QuestionViewModel.
+     *
+     * @param action Die Aktion die beim Klicken des OK Button des Dialogs ausgeführt werden soll.
+     */
     public QuestionViewModel(String dialogKey, Action action)
     {
         super(DialogType.QUESTION);
@@ -28,22 +31,38 @@ public class QuestionViewModel extends DialogViewModel
         this.action = action;
     }
 
+    /**
+     * Führt die Aktion die ausgeführt werden soll aus und schließt den Dialog.
+     */
     public void performAction()
     {
         sceneManager.popDialog();
         action.perform();
     }
 
+    /**
+     * Beendet den Dialog.
+     */
     public void abort()
     {
         sceneManager.popDialog();
     }
 
+    /**
+     * Gibt den Titel des QuestionDialog in der aktuell ausgewählten Sprache zurück.
+     *
+     * @return Der Titel des QuestionDialog in der aktuell ausgewählten Sprache.
+     */
     public ReadOnlyStringProperty titleProperty()
     {
         return title;
     }
 
+    /**
+     * Gibt die Nachricht des QuestionDialog in der aktuell ausgewählten Sprache zurück.
+     *
+     * @return Die Nachricht des QuestionDialog in der aktuell ausgewählten Sprache.
+     */
     public ReadOnlyStringProperty messageProperty()
     {
         return message;

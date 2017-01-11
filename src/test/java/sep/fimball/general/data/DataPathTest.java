@@ -24,6 +24,9 @@ public class DataPathTest
      */
     private final String testMachineId = "machineOne";
 
+    /**
+     * Testet ob das Konvertieren eines Pfads in eine URL korrekt funktioniert.
+     */
     @Test
     public void testPathToUrlEscaping()
     {

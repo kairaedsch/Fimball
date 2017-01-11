@@ -10,9 +10,11 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 public class MessageViewModel extends DialogViewModel
 {
     private StringProperty title;
-
     private StringProperty message;
 
+    /**
+     * Erzeugt ein MessageViewModel.
+     */
     public MessageViewModel(String dialogKey)
     {
         super(DialogType.MESSAGE);
@@ -24,16 +26,29 @@ public class MessageViewModel extends DialogViewModel
         this.message.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".message.key"));
     }
 
+    /**
+     * Schließt diesen Dialog.
+     */
     public void close()
     {
         sceneManager.popDialog();
     }
 
+    /**
+     * Gibt den Titel der MessageBox in der aktuellen Sprache zurück.
+     *
+     * @return Der Titel der MessageBox in der aktuellen Sprache.
+     */
     public ReadOnlyStringProperty titleProperty()
     {
         return title;
     }
 
+    /**
+     * Gibt die Nachricht der MessageBox in der aktuellen Sprache zurück.
+     *
+     * @return Die Nachricht der MessageBox in der aktuellen Sprache.
+     */
     public ReadOnlyStringProperty messageProperty()
     {
         return message;

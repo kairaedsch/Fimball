@@ -188,6 +188,9 @@ public class MainMenuViewModel extends WindowViewModel
         return Optional.empty();
     }
 
+    /**
+     * Wird beim Klick auf den Exit Button aufgerufen. Beendet das Programm falls der Nutzer dies bestätigt.
+     */
     public void exitGame()
     {
         sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion", () ->
