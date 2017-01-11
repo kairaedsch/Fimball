@@ -74,4 +74,34 @@ public class PhysicsConfig
      * Gibt an wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 2 bedeutet das der Ball nach der Kollision langsamer wird.
      */
     public static double BOUNCE_NORMAL_COLLISION = 1.4;
+
+    /**
+     * Wenn der Ball so nah an den Mittelpunkt eines Lochs kommt, wird das Loch aktiviert
+     */
+    public static double CENTER_AREA_RADIUS = 0.6;
+
+    /**
+     * Die Mindestgeschwindigkeit, mit der ein Ball zum Mittelpunkt eines Lochs gezogen wird.
+     */
+    public static double MIN_HOLE_SPEED = 3.0;
+
+    /**
+     * Die Rate der Richtungsänderung, mit der der Ball am Rand des Loches entlang rollt.
+     */
+    public static double HOLE_DIRECTION_CHANGE_RATE = 0.25;
+
+    /**
+     * Wie lange der Ball vom Loch festgehalten wird.
+     */
+    public static double HOLE_FREEZE_TIME_MS = 2000.0;
+
+    /**
+     * Wie lange das Loch inaktiv ist, nachdem es einen Ball geschossen hat.
+     */
+    public static double HOLE_WAIT_AFTER_FREEZE_TIME_MS = 1000.0;
+
+    /**
+     * Die Geschwindigkeit, mit der ein Loch den Ball wegschießt.
+     */
+    public static double HOLE_BALL_KICK_SPEED = 30.0;
 }
