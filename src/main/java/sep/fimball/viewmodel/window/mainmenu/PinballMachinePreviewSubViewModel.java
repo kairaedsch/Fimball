@@ -64,6 +64,11 @@ public class PinballMachinePreviewSubViewModel
         mainMenu.switchPinballMachineInfo(pinballMachine);
     }
 
+    public String getMachineID()
+    {
+        return pinballMachine.getID();
+    }
+
     /**
      * Stellt der View den Namen des Flipperautomaten zur Verfügung.
      *

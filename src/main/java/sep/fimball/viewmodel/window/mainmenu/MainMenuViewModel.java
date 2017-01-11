@@ -44,6 +44,29 @@ public class MainMenuViewModel extends WindowViewModel
     public MainMenuViewModel()
     {
         super(WindowType.MAIN_MENU);
+        initialize();
+    }
+
+    /**
+     * Erstellt ein neues MainMenuViewModel und wählt die übergebene PinballMachine aus.
+     * @param selectedMachine Das Element, welches diese PinballMachine darstellt, wird ausgewählt.
+     */
+    public MainMenuViewModel(PinballMachine selectedMachine)
+    {
+        super(WindowType.MAIN_MENU);
+        initialize();
+
+        for (PinballMachinePreviewSubViewModel preview : pinballMachinePreviewSubViewModelListProperty().get())
+        {
+            if (preview.getMachineID().equals(selectedMachine.getID()))
+            {
+                preview.selectPinballMachine();
+            }
+        }
+    }
+
+    private void initialize()
+    {
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
             pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
         pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());

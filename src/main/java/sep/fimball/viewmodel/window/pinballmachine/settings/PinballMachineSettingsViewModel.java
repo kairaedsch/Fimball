@@ -99,7 +99,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         } else
         {
             pinballMachine.unloadElements();
-            sceneManager.setWindow(new MainMenuViewModel());
+            sceneManager.setWindow(new MainMenuViewModel(pinballMachine));
         }
     }
 
