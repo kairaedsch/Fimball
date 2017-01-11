@@ -202,10 +202,11 @@ public class PinballMachine
 
     /**
      * Löscht die gespeicherte und geladene Version dieses Automaten.
+     * @return Gibt zurück ob diese erfolgreich gelöscht wurde.
      */
-    public void deleteFromDisk()
+    public boolean deleteFromDisk()
     {
-        pinballMachineManager.deleteMachine(this);
+        return pinballMachineManager.deleteMachine(this);
     }
 
     /**

@@ -63,18 +63,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     public void savePinballMachine()
     {
         boolean success = pinballMachine.saveToDisk();
-        String titleKey, messageKey;
-        if(success)
-        {
-            titleKey = "editor.settings.saveMessage.success.title.key";
-            messageKey = "editor.settings.saveMessage.success.message.key";
-        }
-        else
-        {
-            titleKey = "editor.settings.saveMessage.fail.title.key";
-            messageKey = "editor.settings.saveMessage.fail.message.key";
-        }
-        sceneManager.pushDialog(new MessageViewModel(titleKey, messageKey));
+        sceneManager.pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
     }
 
     /**
@@ -82,10 +71,11 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void deletePinballMachine()
     {
-        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion.title.key", "mainmenu.exitQuestion.message.key", () ->
+        sceneManager.pushDialog(new QuestionViewModel("editor.settings.deleteQuestion", () ->
         {
-            pinballMachine.deleteFromDisk();
-            sceneManager.setWindow(new MainMenuViewModel());
+            boolean success = pinballMachine.deleteFromDisk();
+            sceneManager.pushDialog(new MessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
+            if(success) sceneManager.setWindow(new MainMenuViewModel());
         }));
     }
 
@@ -94,9 +84,11 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void exitWindowToMainMenu()
     {
-        if(machineName.get().isEmpty()) {
-            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyNameTitle.key", "editor.settings.emptyNameMessage.key"));
-        } else
+        if (machineName.get().isEmpty())
+        {
+            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyName"));
+        }
+        else
         {
             pinballMachine.unloadElements();
             sceneManager.setWindow(new MainMenuViewModel(pinballMachine));
@@ -108,9 +100,11 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void exitWindowToEditor()
     {
-        if(machineName.get().isEmpty()) {
-            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyNameTitle.key", "editor.settings.emptyNameMessage.key"));
-        } else
+        if (machineName.get().isEmpty())
+        {
+            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyName"));
+        }
+        else
         {
             sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
         }

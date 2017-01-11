@@ -271,18 +271,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         editorSession.stopUpdateLoop();
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         boolean success = pinballMachine.saveToDisk();
-        String titleKey, messageKey;
-        if(success)
-        {
-            titleKey = "editor.settings.saveMessage.success.title.key";
-            messageKey = "editor.settings.saveMessage.success.message.key";
-        }
-        else
-        {
-            titleKey = "editor.settings.saveMessage.fail.title.key";
-            messageKey = "editor.settings.saveMessage.fail.message.key";
-        }
-        sceneManager.pushDialog(new MessageViewModel(titleKey, messageKey));
+        sceneManager.pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
@@ -291,7 +280,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void showSettingsDialog()
     {
-        sceneManager.pushDialog(new QuestionViewModel("editor.editor.deleteQuestion.title.key", "editor.editor.deleteQuestion.message.key", () ->
+        sceneManager.pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
         {
             editorSession.stopUpdateLoop();
             pinballMachine.unloadElements();

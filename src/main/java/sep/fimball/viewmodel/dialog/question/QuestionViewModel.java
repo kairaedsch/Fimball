@@ -15,23 +15,23 @@ public class QuestionViewModel extends DialogViewModel
 
     private Action action;
 
-    public QuestionViewModel(String titleKey, String messageKey, Action action)
+    public QuestionViewModel(String dialogKey, Action action)
     {
         super(DialogType.QUESTION);
 
         this.title = new SimpleStringProperty();
-        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(titleKey));
+        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".title.key"));
 
         this.message = new SimpleStringProperty();
-        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(messageKey));
+        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".message.key"));
 
         this.action = action;
     }
 
     public void performAction()
     {
-        action.perform();
         sceneManager.popDialog();
+        action.perform();
     }
 
     public void abort()

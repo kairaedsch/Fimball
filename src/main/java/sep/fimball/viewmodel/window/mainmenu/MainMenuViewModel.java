@@ -190,7 +190,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     public void exitGame()
     {
-        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion.title.key", "mainmenu.exitQuestion.message.key", () ->
+        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion", () ->
         {
             Platform.exit();
             System.exit(0);
