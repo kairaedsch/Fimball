@@ -34,7 +34,6 @@ public class PinballMachineEditorViewModelTest
 {
     private PinballMachine pinballMachineMock;
     private PlacedElement ball;
-    private ListProperty<PlacedElement> elementList;
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     @Before
@@ -43,7 +42,7 @@ public class PinballMachineEditorViewModelTest
         pinballMachineMock = mock(PinballMachine.class);
         ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0);
 
-        elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementList.add(ball);
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
         when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty(""));

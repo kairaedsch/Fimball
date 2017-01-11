@@ -3,6 +3,9 @@ package sep.fimball.model.game;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import sep.fimball.VectorMatcher;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -26,17 +29,20 @@ import static org.mockito.Mockito.when;
 /**
  * Tests für die Klasse ElementFactory.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ElementFactoryTest
 {
     private final double TEST_ROTATION = 0.0;
     private final Vector2 TEST_POSITION = new Vector2(0, 0);
 
+    @Mock
+    private PhysicsHandler<GameElement> physicsHandler;
+    @Mock
+    private HandlerManager handlerManager;
+
     @Test
     public void testGenerateElements()
     {
-        PhysicsHandler physicsHandler = mock(PhysicsHandler.class);
-        HandlerManager handlerManager = mock(HandlerManager.class);
-
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(generateAllPlacedElementTypes(), physicsHandler, handlerManager);
 
         assertThat("Es wurden 8 GameElemente generiert", generatedElements.getGameElements().size(), is(8));
