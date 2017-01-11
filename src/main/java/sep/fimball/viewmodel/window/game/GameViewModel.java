@@ -21,6 +21,7 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Das GameViewModel stellt der View Daten über die aktuelle Partie Pinball zu Verfügung, besonders über den aktiven
@@ -189,9 +190,10 @@ public class GameViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).isPresent())
+        Optional<KeyBinding> bindingOptional = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
+        if (bindingOptional.isPresent())
         {
-            KeyBinding binding = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode()).get();
+            KeyBinding binding = bindingOptional.get();
             if (binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
             {
                 gameSession.pauseAll();
@@ -204,7 +206,7 @@ public class GameViewModel extends WindowViewModel
                     sceneManager.pushDialog(new PauseViewModel(this));
                 }
             }
-            else if (binding != null)
+            else
             {
                 keyEventConverter.createKeyEventArgs(keyEvent).ifPresent(gameSession::activateUserHandler);
             }
