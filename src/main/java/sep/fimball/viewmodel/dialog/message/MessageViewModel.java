@@ -1,20 +1,27 @@
 package sep.fimball.viewmodel.dialog.message;
 
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
 public class MessageViewModel extends DialogViewModel
 {
-    private String title;
+    private StringProperty title;
 
-    private String message;
+    private StringProperty message;
 
-    public MessageViewModel(String titleKey, String messageKey)
+    public MessageViewModel(String title, String message)
     {
         super(DialogType.MESSAGE);
-        this.title = LanguageManagerViewModel.getInstance().textProperty(titleKey).get();
-        this.message = LanguageManagerViewModel.getInstance().textProperty(messageKey).get();
+
+        this.title = new SimpleStringProperty();
+        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(title));
+
+        this.message = new SimpleStringProperty();
+        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(message));
     }
 
     public void close()
@@ -22,12 +29,12 @@ public class MessageViewModel extends DialogViewModel
         sceneManager.popDialog();
     }
 
-    public String getTitle()
+    public ReadOnlyStringProperty titleProperty()
     {
         return title;
     }
 
-    public String getMessage()
+    public ReadOnlyStringProperty messageProperty()
     {
         return message;
     }

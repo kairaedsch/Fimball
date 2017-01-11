@@ -1,6 +1,5 @@
 package sep.fimball.view.window.mainmenu;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -54,7 +53,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
 
         detailedPreviewImage.styleProperty().bind(DesignConfig.backgroundImageCss(mainMenuViewModel.getPinballMachineInfoSubViewModel().imagePathProperty()));
 
-
         ViewModelListToPaneBinder.bindViewModelsToViews(machineOverview, mainMenuViewModel.pinballMachinePreviewSubViewModelListProperty(), WindowType.MAIN_MENU_PREVIEW);
         ViewModelListToPaneBinder.bindViewModelsToViews(highscoreTable, mainMenuViewModel.getPinballMachineInfoSubViewModel().highscoreListProperty(), WindowType.MAIN_MENU_HIGHSCORE_ENTRY);
     }
@@ -101,7 +99,6 @@ public class MainMenuView extends WindowView<MainMenuViewModel>
     @FXML
     private void exitGame()
     {
-        Platform.exit();
-        System.exit(0);
+        mainMenuViewModel.exitGame();
     }
 }

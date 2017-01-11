@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
 
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -14,6 +15,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
+import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
@@ -160,5 +162,14 @@ public class MainMenuViewModel extends WindowViewModel
             }
         }
         return Optional.empty();
+    }
+
+    public void exitGame()
+    {
+        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion.title.key", "mainmenu.exitQuestion.message.key", () ->
+        {
+            Platform.exit();
+            System.exit(0);
+        }));
     }
 }

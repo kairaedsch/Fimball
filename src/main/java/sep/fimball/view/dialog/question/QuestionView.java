@@ -23,8 +23,8 @@ public class QuestionView extends DialogView<QuestionViewModel>
     public void setViewModel(QuestionViewModel questionViewModel)
     {
         this.questionViewModel = questionViewModel;
-        title.setText(questionViewModel.getTitle());
-        message.setText(questionViewModel.getMessage());
+        title.textProperty().bind(questionViewModel.titleProperty());
+        message.textProperty().bind(questionViewModel.messageProperty());
     }
 
     /**

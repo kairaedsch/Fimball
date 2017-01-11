@@ -23,8 +23,8 @@ public class MessageView extends DialogView<MessageViewModel>
     public void setViewModel(MessageViewModel messageViewModel)
     {
         this.messageViewModel = messageViewModel;
-        title.setText(messageViewModel.getTitle());
-        message.setText(messageViewModel.getMessage());
+        title.textProperty().bind(messageViewModel.titleProperty());
+        message.textProperty().bind(messageViewModel.messageProperty());
     }
 
     /**

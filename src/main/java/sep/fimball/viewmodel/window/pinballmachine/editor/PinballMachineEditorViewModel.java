@@ -20,11 +20,12 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.EditorSession;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.viewmodel.dialog.message.MessageViewModel;
+import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
-import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 import java.util.List;
@@ -262,36 +263,50 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Führt den Benutzer zu dem Automateneinstellungsfenster, wo der gerade vom Nutzer bearbeitete Flipperautomat u.a.
-     * gespeichert werden kann.
+     * Führt den Benutzer zu dem Automateneinstellungsfenster und speichert den Automaten.
      */
-    public void showSettingsDialog()
+    public void saveAndShowSettingsDialog()
     {
         editorSession.stopUpdateLoop();
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
-        pinballMachine.saveToDisk();
+        boolean success = pinballMachine.saveToDisk();
+        String titleKey, messageKey;
+        if(success)
+        {
+            titleKey = "editor.settings.saveMessage.success.title.key";
+            messageKey = "editor.settings.saveMessage.success.message.key";
+        }
+        else
+        {
+            titleKey = "editor.settings.saveMessage.fail.title.key";
+            messageKey = "editor.settings.saveMessage.fail.message.key";
+        }
+        sceneManager.pushDialog(new MessageViewModel(titleKey, messageKey));
         sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
     /**
-     * Schließt den Editor ohne zu speichern, und öffnet das Hauptmenü.
+     * Führt den Benutzer zu dem Automateneinstellungsfenster, falls er das QuestionViewModel annimmt.
      */
-    public void goToMainMenu()
+    public void showSettingsDialog()
     {
-        editorSession.stopUpdateLoop();
-        pinballMachine.unloadElements();
-        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.pushDialog(new QuestionViewModel("editor.editor.deleteQuestion.title.key", "editor.editor.deleteQuestion.message.key", () ->
+        {
+            editorSession.stopUpdateLoop();
+            pinballMachine.unloadElements();
+            sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+        }));
     }
 
     /**
      * Verarbeitet eine Drag-Bewegung.
      *
-     * @param startX Die x-Position, an der die Drag-Bewegung angefangen hat.
-     * @param startY Die y-Position, an der die Drag-Bewegung angefangen hat.
-     * @param endX Die x-Position, an der sich die Drag-Bewegung befindet.
-     * @param endY Die y-Position, an der sich die Drag-Bewegung befindet.
+     * @param startX  Die x-Position, an der die Drag-Bewegung angefangen hat.
+     * @param startY  Die y-Position, an der die Drag-Bewegung angefangen hat.
+     * @param endX    Die x-Position, an der sich die Drag-Bewegung befindet.
+     * @param endY    Die y-Position, an der sich die Drag-Bewegung befindet.
      * @param gridPos Die neue Position auf dem Canvas.
-     * @param button Die gedrückte Maustaste.
+     * @param button  Die gedrückte Maustaste.
      */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
@@ -316,7 +331,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Behandelt das Drücken der Maustaste auf dem Canvas.
      *
      * @param mouseEvent Das Event, in dem die Maustaste gedrückt wurde.
-     * @param gridPos Die Position im Grid, an der die Maustaste gedrückt wurde.
+     * @param gridPos    Die Position im Grid, an der die Maustaste gedrückt wurde.
      */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {

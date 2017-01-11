@@ -176,12 +176,16 @@ public class PinballMachine
 
     /**
      * Serialisiert und speichert diesen Automaten.
+     * Falls erfolgreich, werden die Elemente der PinballMachine wieder aus dem Ram entladen.
+     *
+     * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    public void saveToDisk()
+    public boolean saveToDisk()
     {
         checkElementsLoaded();
-        pinballMachineManager.savePinballMachine(this);
-        unloadElements();
+        boolean success = pinballMachineManager.savePinballMachine(this);
+        if (success) unloadElements();
+        return success;
     }
 
     /**
@@ -226,7 +230,7 @@ public class PinballMachine
         List<PlacedElement> placedElementList = new ArrayList<>();
         placedElementList.addAll(Arrays.asList(placedElements));
 
-        for (Iterator<PlacedElement> iterator = placedElementList.iterator(); iterator.hasNext();)
+        for (Iterator<PlacedElement> iterator = placedElementList.iterator(); iterator.hasNext(); )
         {
             PlacedElement placedElement = iterator.next();
 

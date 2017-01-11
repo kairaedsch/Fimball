@@ -62,16 +62,27 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void savePinballMachine()
     {
-        pinballMachine.saveToDisk();
-        sceneManager.pushDialog(new MessageViewModel("editor.settings.saveTitle.key", "editor.settings.saveMessage.key"));
+        boolean success = pinballMachine.saveToDisk();
+        String titleKey, messageKey;
+        if(success)
+        {
+            titleKey = "editor.settings.saveMessage.success.title.key";
+            messageKey = "editor.settings.saveMessage.success.message.key";
+        }
+        else
+        {
+            titleKey = "editor.settings.saveMessage.fail.title.key";
+            messageKey = "editor.settings.saveMessage.fail.message.key";
+        }
+        sceneManager.pushDialog(new MessageViewModel(titleKey, messageKey));
     }
 
     /**
-     * Erteilt dem Model den Befehl, den Flipperautomat zu löschen.
+     * Erteilt dem Model den Befehl, den Flipperautomat zu löschen, falls der Nutzer den Dialog annimmt.
      */
     public void deletePinballMachine()
     {
-        sceneManager.pushDialog(new QuestionViewModel("editor.settings.deleteTitle.key", "editor.settings.deleteMessage.key", () ->
+        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion.title.key", "mainmenu.exitQuestion.message.key", () ->
         {
             pinballMachine.deleteFromDisk();
             sceneManager.setWindow(new MainMenuViewModel());

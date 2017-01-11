@@ -280,7 +280,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void settingsClicked()
     {
-        pinballMachineEditorViewModel.showSettingsDialog();
+        pinballMachineEditorViewModel.saveAndShowSettingsDialog();
     }
 
     /**
@@ -289,7 +289,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void abortClicked()
     {
-        pinballMachineEditorViewModel.goToMainMenu();
+        pinballMachineEditorViewModel.showSettingsDialog();
     }
 
     /**

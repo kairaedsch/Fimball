@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static sep.fimball.model.blueprint.json.JsonFileManager.saveToJson;
+
 /**
  * Verwaltet die mitgelieferten und neu erstellten Flipperautomaten.
  */
@@ -130,8 +132,9 @@ public class PinballMachineManager
      * Speichert die gegebene PinballMachine und ihre Elemente.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
+     * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    void savePinballMachine(PinballMachine pinballMachine)
+    boolean savePinballMachine(PinballMachine pinballMachine)
     {
         Path pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
         if (!pathToMachine.toFile().exists())
@@ -140,15 +143,17 @@ public class PinballMachineManager
             if (!couldCreateFolder)
             {
                 System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
-                return;
+                return false;
             }
         }
 
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
-        JsonFileManager.saveToJson(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
+        boolean successMachine = JsonFileManager.saveToJson(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
-        JsonFileManager.saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+        boolean successElements = saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+
+        return successMachine && successElements;
     }
 
     /**
