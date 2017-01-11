@@ -11,7 +11,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
 {
     private boolean ballFrozen = false;
     private double freezeStart;
-    private BallPhysicsElement<GameElementT> frozenBall;
+    private BallPhysicsElement frozenBall;
 
     /**
      * Erstellt ein neues Loch.
@@ -29,7 +29,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      * Versucht einen Ball festzuhalten, falls das Loch nicht bereits einen Ball hat oder vor kurzem einen Ball abgeschossen hat.
      * @param ball Der Ball, welcher festgehalten werden soll.
      */
-    public void tryFreezeBall(BallPhysicsElement<GameElementT> ball)
+    public void tryFreezeBall(BallPhysicsElement ball)
     {
         if (canAffectBall())
         {

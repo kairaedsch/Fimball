@@ -2,7 +2,6 @@ package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.element.HolePhysicsElement;
 
@@ -21,7 +20,7 @@ public class HoleCollision extends NormalCollision
         Vector2 holeCenterPosition = info.getOtherPhysicsElement().getPosition().plus(holeCenterOffset);
         double distanceToCenter = ballCenterPosition.minus(holeCenterPosition).magnitude();
 
-        HolePhysicsElement<GameElement> physicsElement = (HolePhysicsElement<GameElement>) info.getOtherPhysicsElement();
+        HolePhysicsElement physicsElement = (HolePhysicsElement) info.getOtherPhysicsElement();
 
         if (physicsElement.canAffectBall())
         {
