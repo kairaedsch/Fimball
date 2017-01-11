@@ -1,8 +1,6 @@
 package sep.fimball.model.game;
 
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
-import sep.fimball.general.data.Config;
+import javafx.animation.AnimationTimer;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
 import java.util.Observer;
@@ -25,9 +23,7 @@ public abstract class Session
     /**
      * Die Schleife, die die Spielwelt aktualisiert.
      */
-    PauseTransition resetTransition;
-
-    boolean looping;
+    private AnimationTimer animationTimer;
 
     /**
      * Das Observable, welches genutzt wird um Observer darüber zu benachrichtigen, dass der nächste Tick der Spielschleife ausgeführt wurde.
@@ -44,10 +40,14 @@ public abstract class Session
         updateLoopObservable = new sep.fimball.general.util.Observable();
         this.pinballMachine = pinballMachine;
 
-        resetTransition = new PauseTransition(Duration.seconds(Config.UPDATE_LOOP_TICKRATE));
-        resetTransition.setOnFinished(e -> beforeloopUpdate());
-
-        looping = false;
+        animationTimer = new AnimationTimer()
+        {
+            @Override
+            public void handle(long now)
+            {
+                beforeloopUpdate();
+            }
+        };
         startUpdateLoop();
     }
 
@@ -56,11 +56,7 @@ public abstract class Session
      */
     public void startUpdateLoop()
     {
-        if (!looping)
-        {
-            looping = true;
-            resetTransition.play();
-        }
+        animationTimer.start();
     }
 
     /**
@@ -68,8 +64,7 @@ public abstract class Session
      */
     public void stopUpdateLoop()
     {
-        looping = false;
-        resetTransition.stop();
+        animationTimer.stop();
     }
 
     /**
@@ -77,20 +72,10 @@ public abstract class Session
      */
     private void beforeloopUpdate()
     {
-        long start = System.currentTimeMillis();
-
         loopUpdate();
 
         updateLoopObservable.setChanged();
         updateLoopObservable.notifyObservers();
-
-        if (looping)
-        {
-            long dif = System.currentTimeMillis() - start;
-            double delay = Math.max(1, Config.UPDATE_LOOP_TICKRATE * 1000 - dif);
-            resetTransition.setDelay(Duration.millis(delay));
-            resetTransition.play();
-        }
     }
 
     /**

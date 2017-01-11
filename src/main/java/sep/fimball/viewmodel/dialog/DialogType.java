@@ -33,5 +33,10 @@ public enum DialogType
     /**
      * Der Message-Dialog.
      */
-    MESSAGE
+    MESSAGE,
+
+    /**
+     * Der Question-Dialog.
+     */
+    QUESTION
 }

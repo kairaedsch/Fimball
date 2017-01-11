@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.dialog.message.MessageViewModel;
+import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -62,8 +63,7 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
     public void savePinballMachine()
     {
         pinballMachine.saveToDisk();
-        sceneManager.pushDialog(new MessageViewModel("Wir speichern dann mal", "na wenn sie insistieren"));
-        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.pushDialog(new MessageViewModel("Speichern", "Ist gespeichert"));
     }
 
     /**
@@ -71,8 +71,11 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void deletePinballMachine()
     {
-        pinballMachine.deleteFromDisk();
-        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.pushDialog(new QuestionViewModel("Löschen", "Wirklich löschen?", () ->
+        {
+            pinballMachine.deleteFromDisk();
+            sceneManager.setWindow(new MainMenuViewModel());
+        }));
     }
 
     /**
