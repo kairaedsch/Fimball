@@ -13,7 +13,6 @@ import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**

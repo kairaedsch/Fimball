@@ -104,7 +104,7 @@ public class PinballMachineManager
         Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
         Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineId, this);
 
-        pinballMachine.ifPresent(pinballMachine1 -> pinballMachines.add(pinballMachine1));
+        pinballMachine.ifPresent(machine -> pinballMachines.add(machine));
     }
 
     /**

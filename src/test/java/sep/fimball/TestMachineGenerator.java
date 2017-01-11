@@ -9,7 +9,6 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 @Ignore
 public class TestMachineGenerator

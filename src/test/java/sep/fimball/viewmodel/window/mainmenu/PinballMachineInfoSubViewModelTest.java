@@ -10,8 +10,6 @@ import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 
-import java.util.Optional;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -55,7 +53,7 @@ public class PinballMachineInfoSubViewModelTest
         PinballMachine pinballMachine = mock(PinballMachine.class);
         when(pinballMachine.elementsProperty()).thenReturn(new SimpleListProperty<>());
         when(pinballMachine.highscoreListProperty()).thenReturn(new SimpleListProperty<>());
-        when(pinballMachine.relativePreviewImagePathProperty()).thenReturn(new SimpleObjectProperty<Optional<String>>());
+        when(pinballMachine.relativePreviewImagePathProperty()).thenReturn(new SimpleObjectProperty<>());
         when(pinballMachine.nameProperty()).thenReturn(new SimpleStringProperty());
         ListProperty<Highscore> highscores = new SimpleListProperty<>(FXCollections.observableArrayList());
         when(pinballMachine.highscoreListProperty()).thenReturn(highscores);

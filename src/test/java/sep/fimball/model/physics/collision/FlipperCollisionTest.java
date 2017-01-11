@@ -5,7 +5,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
-import sep.fimball.model.physics.element.PhysicsElement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

@@ -17,7 +17,6 @@ import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

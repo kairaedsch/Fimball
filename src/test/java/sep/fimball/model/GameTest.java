@@ -1,7 +1,6 @@
 package sep.fimball.model;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;

@@ -2,8 +2,6 @@ package sep.fimball.general.data;
 
 import org.junit.Test;
 
-import java.net.MalformedURLException;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

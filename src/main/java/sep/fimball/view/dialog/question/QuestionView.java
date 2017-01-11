@@ -1,11 +1,9 @@
 package sep.fimball.view.dialog.question;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import sep.fimball.view.dialog.DialogView;
-import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 
 

@@ -27,10 +27,7 @@ public class BallLostHandler implements GameHandler
         this.handlerGameSession = handlerGameSession;
         ballLostTriggered = false;
 
-        handlerGameSession.gameBallProperty().addListener((x, xx, newBall) ->
-        {
-            setupBallListener(handlerGameSession);
-        });
+        handlerGameSession.gameBallProperty().addListener((x, xx, newBall) -> setupBallListener(handlerGameSession));
 
         setupBallListener(handlerGameSession);
     }
