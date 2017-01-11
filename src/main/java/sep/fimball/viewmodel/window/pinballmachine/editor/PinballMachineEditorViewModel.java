@@ -278,6 +278,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void goToMainMenu()
     {
+        editorSession.stopUpdateLoop();
         pinballMachine.unloadElements();
         sceneManager.setWindow(new MainMenuViewModel());
     }
