@@ -298,6 +298,6 @@ public class Vector2
 
     public static Vector2 randomUnitVector()
     {
-        return new Vector2(Math.random(), Math.random()).normalized();
+        return new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalized();
     }
 }
