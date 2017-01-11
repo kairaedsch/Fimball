@@ -15,15 +15,15 @@ public class QuestionViewModel extends DialogViewModel
 
     private Action action;
 
-    public QuestionViewModel(String title, String message, Action action)
+    public QuestionViewModel(String titleKey, String messageKey, Action action)
     {
         super(DialogType.QUESTION);
 
         this.title = new SimpleStringProperty();
-        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(title));
+        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(titleKey));
 
         this.message = new SimpleStringProperty();
-        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(message));
+        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(messageKey));
 
         this.action = action;
     }

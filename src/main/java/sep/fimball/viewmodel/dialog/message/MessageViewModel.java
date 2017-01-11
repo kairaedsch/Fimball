@@ -13,15 +13,15 @@ public class MessageViewModel extends DialogViewModel
 
     private StringProperty message;
 
-    public MessageViewModel(String title, String message)
+    public MessageViewModel(String titleKey, String messageKey)
     {
         super(DialogType.MESSAGE);
 
         this.title = new SimpleStringProperty();
-        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(title));
+        this.title.bind(LanguageManagerViewModel.getInstance().textProperty(titleKey));
 
         this.message = new SimpleStringProperty();
-        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(message));
+        this.message.bind(LanguageManagerViewModel.getInstance().textProperty(messageKey));
     }
 
     public void close()
