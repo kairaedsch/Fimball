@@ -246,7 +246,7 @@ public class PinballMachine
             }
         }
 
-        elements.addAll(placedElements);
+        elements.addAll(placedElementList);
     }
 
     /**

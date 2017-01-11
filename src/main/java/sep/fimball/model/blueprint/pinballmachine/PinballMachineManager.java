@@ -124,7 +124,8 @@ public class PinballMachineManager
 
         if (PlacedElementList.isPresent())
         {
-            pinballMachine.addElement(PlacedElementList.get().toArray(new PlacedElement[0]));
+            PlacedElement[] tempElements = new PlacedElement[0];
+            pinballMachine.addElement(PlacedElementList.get().toArray(tempElements));
         }
     }
 
