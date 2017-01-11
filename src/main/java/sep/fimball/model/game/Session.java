@@ -35,7 +35,7 @@ public abstract class Session
      *
      * @param pinballMachine Die PinballMachine der Session.
      */
-    public Session(PinballMachine pinballMachine)
+    protected Session(PinballMachine pinballMachine)
     {
         updateLoopObservable = new sep.fimball.general.util.Observable();
         this.pinballMachine = pinballMachine;
@@ -55,7 +55,7 @@ public abstract class Session
     /**
      * Startet die Gameloop.
      */
-    public void startUpdateLoop()
+    protected void startUpdateLoop()
     {
         animationTimer.start();
     }

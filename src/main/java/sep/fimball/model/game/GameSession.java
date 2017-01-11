@@ -339,6 +339,10 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         return startedFromEditor;
     }
 
+    /**
+     * Diese Methode existiert nur um das Testen der Klasse zu vereinfachen.
+     * @return Die zur GameSession gehörende World.
+     */
     @Override
     public World getWorld()
     {

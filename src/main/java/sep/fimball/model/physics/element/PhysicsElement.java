@@ -140,7 +140,7 @@ public class PhysicsElement<GameElementT>
      *
      * @return Eine Liste der Collider des PhysicsElements.
      */
-    public List<Collider> getColliders()
+    protected List<Collider> getColliders()
     {
         return Collections.unmodifiableList(colliders);
     }
