@@ -95,12 +95,11 @@ public class BasePhysicsElement
         BinaryOperator<Vector2> VectorReducer = max ? Vector2::maxComponents : Vector2::minComponents;
 
         // Gehe durch alle Shapes aller Collider durch und holt sich den extremsten X- bzw. Y-Wert.
-        Vector2 result = colliders.stream()
+
+        return colliders.stream()
                 .map(collider -> collider.getShapes().stream()
                         .map(shape -> shape.getExtremePos(rotation, pivotPoint, max))
                         .reduce(defaultVector, VectorReducer))
                 .reduce(defaultVector, VectorReducer);
-
-        return result;
     }
 }

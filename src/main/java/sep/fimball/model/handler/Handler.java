@@ -41,7 +41,7 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
      *
      * @param elementHandler Der neue ElementHandler.
      */
-    public void setElementHandler(ElementHandler elementHandler)
+    private void setElementHandler(ElementHandler elementHandler)
     {
         this.elementHandler = Optional.of(elementHandler);
     }
@@ -51,7 +51,7 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
      *
      * @param gameHandler Der neue GameHandler.
      */
-    public void setGameHandler(GameHandler gameHandler)
+    private void setGameHandler(GameHandler gameHandler)
     {
         this.gameHandler = Optional.of(gameHandler);
     }
@@ -61,7 +61,7 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
      *
      * @param userHandler Der neue UserHandler.
      */
-    public void setUserHandler(UserHandler userHandler)
+    private void setUserHandler(UserHandler userHandler)
     {
         this.userHandler = Optional.of(userHandler);
     }
