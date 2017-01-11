@@ -47,11 +47,6 @@ public class PinballMachineSettingsViewModelTest
     private boolean pinballMachineSaved = false;
 
     /**
-     * Gibt an, ob der Automat gelöscht wurde.
-     */
-    private boolean isPinballMachineDeleted = false;
-
-    /**
      * Das PinballMachineSettingsViewModel. das getestet werden soll.
      */
     private PinballMachineSettingsViewModel test;
@@ -65,18 +60,6 @@ public class PinballMachineSettingsViewModelTest
         init();
         test.savePinballMachine();
         assertThat(pinballMachineSaved, is(true));
-    }
-
-    /**
-     * Testet, ob das Entfernen funktioniert.
-     */
-    @Test
-    public void deleteTest()
-    {
-        init();
-        test.deletePinballMachine();
-        assertThat(isPinballMachineDeleted, is(true));
-        assertThat(mainmenuShown, is(true));
     }
 
     /**
@@ -124,17 +107,12 @@ public class PinballMachineSettingsViewModelTest
         elements.add(new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0));
         when(pinballMachine.elementsProperty()).thenReturn(elements);
         when(pinballMachine.nameProperty()).thenReturn(machineName);
+
         doAnswer(invocationOnMock ->
         {
             pinballMachineSaved = true;
             return null;
         }).when(pinballMachine).saveToDisk();
-
-        doAnswer(invocationOnMock ->
-        {
-            isPinballMachineDeleted = true;
-            return null;
-        }).when(pinballMachine).deleteFromDisk();
 
         when(pinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
