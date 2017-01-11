@@ -94,8 +94,13 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void exitWindowToMainMenu()
     {
-        pinballMachine.unloadElements();
-        sceneManager.setWindow(new MainMenuViewModel());
+        if(machineName.get().isEmpty()) {
+            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyNameTitle.key", "editor.settings.emptyNameMessage.key"));
+        } else
+        {
+            pinballMachine.unloadElements();
+            sceneManager.setWindow(new MainMenuViewModel());
+        }
     }
 
     /**
@@ -103,7 +108,12 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
      */
     public void exitWindowToEditor()
     {
-        sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+        if(machineName.get().isEmpty()) {
+            sceneManager.pushDialog(new MessageViewModel("editor.settings.emptyNameTitle.key", "editor.settings.emptyNameMessage.key"));
+        } else
+        {
+            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+        }
     }
 
     /**
