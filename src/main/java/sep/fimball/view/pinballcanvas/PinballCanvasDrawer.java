@@ -1,17 +1,15 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.ReadOnlyListProperty;
+import javafx.beans.property.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.RectangleDoubleByPoints;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import java.util.Optional;
 
+import static sep.fimball.general.data.DesignConfig.AUTOMATE_BORDER_WIDTH;
 import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 
 /**
@@ -34,18 +32,22 @@ class PinballCanvasDrawer
      */
     private ReadOnlyListProperty<SpriteSubView> sprites;
 
+    private ObjectProperty<RectangleDouble> boundingBox;
+
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
-     *
-     * @param canvas   Die Canvas auf der gezeichnet wird.
+     *  @param canvas   Die Canvas auf der gezeichnet wird.
      * @param drawMode Der Modus mit dem gezeichnet werden soll.
      * @param sprites Die zu zeichnenden Sprites.
+     * @param boundingBox Der Rand des Automaten
      */
-    PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
+    PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites, ReadOnlyObjectProperty<RectangleDouble> boundingBox)
     {
         this.canvas = canvas;
         this.drawMode = drawMode;
-        this.sprites = sprites;
+        this.sprites = new SimpleListProperty<>(sprites);
+        this.boundingBox = new SimpleObjectProperty<>();
+        this.boundingBox.bind(boundingBox);
     }
 
     /**
@@ -76,7 +78,43 @@ class PinballCanvasDrawer
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 
+        if (drawMode == DrawMode.GAME)
+        {
+            drawBoundingBox(cameraPosition, cameraZoom, graphicsContext);
+        }
+
         graphicsContext.restore();
+    }
+
+    /**
+     * Zeichnet den Rahmen des Automaten.
+     *
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom Der Zoom der Kamera.
+     * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
+     */
+    private void drawBoundingBox(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
+    {
+        Vector2 canvasTopLeft = canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 canvasBottomRight = canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight()).scale(PIXELS_PER_GRID_UNIT);
+
+        Vector2 ori = boundingBox.get().getOrigin().scale(PIXELS_PER_GRID_UNIT);
+        Vector2 end = boundingBox.get().getSize().plus(boundingBox.get().getOrigin()).scale(PIXELS_PER_GRID_UNIT);
+
+        graphicsContext.setFill(DesignConfig.PRIMARY_COLOR_LIGHT);
+        graphicsContext.fillRect(canvasTopLeft.getX(), canvasTopLeft.getY(), canvasBottomRight.getX() - canvasTopLeft.getX(), ori.getY() - canvasTopLeft.getY());
+        graphicsContext.fillRect(canvasTopLeft.getX(), canvasTopLeft.getY(), ori.getX() - canvasTopLeft.getX(), canvasBottomRight.getY() - canvasTopLeft.getY());
+        graphicsContext.fillRect(canvasTopLeft.getX(), end.getY(), canvasBottomRight.getX() - canvasTopLeft.getX(), canvasBottomRight.getY() - end.getY());
+        graphicsContext.fillRect(end.getX(), canvasTopLeft.getY(), canvasBottomRight.getX() - end.getX(), canvasBottomRight.getY() - canvasTopLeft.getY());
+
+        double borderWidth = PIXELS_PER_GRID_UNIT * AUTOMATE_BORDER_WIDTH;
+        graphicsContext.setLineWidth(borderWidth);
+
+        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR);
+        graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D + PIXELS_PER_GRID_UNIT, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
+
+        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR_DARK);
+        graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
     }
 
     /**

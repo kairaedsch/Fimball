@@ -40,7 +40,7 @@ public class Config
     /**
      * Der minimale Abstand zwischen Teilen eines Automaten und dem Rand des Automaten.
      */
-    public final static int MACHINE_BOX_MARGIN = 2;
+    public final static int MACHINE_BOX_MARGIN = 6;
 
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
