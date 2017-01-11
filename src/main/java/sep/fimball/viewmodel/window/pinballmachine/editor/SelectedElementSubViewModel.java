@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.blueprint.settings.Settings;
 
 import java.util.Optional;
 
@@ -98,8 +99,8 @@ public class SelectedElementSubViewModel
 
         if (newPlacedElement.isPresent())
         {
-            name.set(newPlacedElement.get().getBaseElement().getMedia().getName());
-            description.set(newPlacedElement.get().getBaseElement().getMedia().getDescription());
+            name.set(newPlacedElement.get().getBaseElement().getMedia().getName(Settings.getSingletonInstance().languageProperty().get()));
+            description.set(newPlacedElement.get().getBaseElement().getMedia().getDescription(Settings.getSingletonInstance().languageProperty().get()));
 
             points.bindBidirectional(newPlacedElement.get().pointsProperty());
 

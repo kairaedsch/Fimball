@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.general.data.Language;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.WorldLayer;
 
@@ -154,20 +155,15 @@ public class BaseElementJson
         public MediaElementLocalCoordinateJson[] localCoordinates;
 
         /**
+         * Enthält die Beschreibung des Elements im Editor.
+         */
+        public MediaElementDescriptionJson[] descriptions;
+
+        /**
          * Diese Klasse repräsentiert die Eigenschaften des Objekts im Editor.
          */
         public static class MediaElementGeneralJson
         {
-            /**
-             * Bezeichnung des Element-Typs im Editor.
-             */
-            public String editorName;
-
-            /**
-             * Text, der den Element-Typ im Editor beschreibt.
-             */
-            public String editorDescription;
-
             /**
              * Speichert, ob das Element rotiert werden kann.
              */
@@ -240,6 +236,27 @@ public class BaseElementJson
              * Die Verschiebung des BaseElements bei der gegebenen Rotation.
              */
             public Vector2 localCoord;
+        }
+
+        /**
+         * Diese Klasse enthält Information zum Namen und der Beschreibung des Elements im Editor in einer bestimmten Sprache.
+         */
+        public static class MediaElementDescriptionJson {
+
+            /**
+             * Die Sprache der Beschreibung und des Namens.
+             */
+            public Language language;
+
+            /**
+             * Bezeichnung des Element-Typs im Editor.
+             */
+            public String editorName;
+
+            /**
+             * Text, der den Element-Typ im Editor beschreibt.
+             */
+            public String editorDescription;
         }
     }
 

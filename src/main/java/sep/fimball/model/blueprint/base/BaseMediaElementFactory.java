@@ -1,5 +1,6 @@
 package sep.fimball.model.blueprint.base;
 
+import sep.fimball.general.data.Language;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
@@ -28,12 +29,18 @@ public class BaseMediaElementFactory
     {
         nullCheck(mediaElement);
         nullCheck(mediaElement.general);
-        nullCheck(mediaElement.general.editorName);
-        nullCheck(mediaElement.general.editorDescription);
         nullCheck(baseElementId);
+        nullCheck(mediaElement.descriptions);
 
-        String name = mediaElement.general.editorName;
-        String description = mediaElement.general.editorDescription;
+        Map<Language, String> names = new HashMap<>();
+        Map<Language, String> descriptions = new HashMap<>();
+
+        for (BaseElementJson.MediaElementJson.MediaElementDescriptionJson descriptionJson : mediaElement.descriptions)
+        {
+            names.put(descriptionJson.language, descriptionJson.editorName);
+            descriptions.put(descriptionJson.language, descriptionJson.editorDescription);
+        }
+
         boolean canRotate = mediaElement.general.canRotate;
         int rotationAccuracy = mediaElement.general.rotationAccuracy;
 
@@ -74,6 +81,6 @@ public class BaseMediaElementFactory
             elementImage = new ElementImage(baseElementId);
         }
 
-        return new BaseMediaElement(name, description, mediaElement.general.elementHeight, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
+        return new BaseMediaElement(names, descriptions, mediaElement.general.elementHeight, canRotate, rotationAccuracy, elementImage, eventMap, localCoords);
     }
 }

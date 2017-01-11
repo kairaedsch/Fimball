@@ -3,6 +3,7 @@ package sep.fimball.model.media;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import sep.fimball.general.data.Language;
 import sep.fimball.general.data.Vector2;
 
 import java.util.Collections;
@@ -14,14 +15,14 @@ import java.util.Map;
 public class BaseMediaElement
 {
     /**
-     * Der Name des Elements im Editor.
+     * Der Name des Elements im Editor in verschiedenen Sprachen.
      */
-    private String name;
+    private Map<Language,String > names;
 
     /**
-     * Die Beschreibung des Elements im Editor.
+     * Die Beschreibung des Elements im Editor in verschiedenen Sprachen.
      */
-    private String description;
+    private Map<Language, String> descriptions;
 
     /**
      * Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
@@ -56,8 +57,8 @@ public class BaseMediaElement
     /**
      * Erstellt ein neues BaseMediaElement.
      *
-     * @param name             Der Name des BaseElements im Editor.
-     * @param description      Die Beschreibung des BaseElements im Editor.
+     * @param names            Der Name des BaseElements im Editor in verschiedenen Sprachen.
+     * @param descriptions     Die Beschreibung des BaseElements im Editor in verschiedenen Sprachen.
      * @param elementHeight    Die Höhe des Elements in Grid-Einheiten.
      * @param canRotate        Gibt an, ob Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor gedreht werden können.
      * @param rotationAccuracy Gibt an, um wie viel Grad Elemente, die das zu diesem BaseMediaElement zugehörigen BaseElement haben, im Editor pro Schritt gedreht werden können.
@@ -65,10 +66,10 @@ public class BaseMediaElement
      * @param eventMap         Enthält die MediaElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      * @param localCoordinates Die konstante Verschiebung des BaseElements beim Zeichnen.
      */
-    public BaseMediaElement(String name, String description, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoordinates)
+    public BaseMediaElement(Map<Language, String> names, Map<Language, String> descriptions, double elementHeight, boolean canRotate, int rotationAccuracy, ElementImage elementImage, Map<Integer, BaseMediaElementEvent> eventMap, Map<Integer, Vector2> localCoordinates)
     {
-        this.name = name;
-        this.description = description;
+        this.names = names;
+        this.descriptions = descriptions;
         this.canRotate = canRotate;
         this.rotationAccuracy = rotationAccuracy;
         this.elementImage = new SimpleObjectProperty<>(elementImage);
@@ -80,21 +81,23 @@ public class BaseMediaElement
     /**
      * Gibt den Namen des BaseElements im Editor zurück.
      *
+     * @param language Die Sprache, in der der Name zurückgegeben werden soll.
      * @return Der Name des BaseElements im Editor.
      */
-    public String getName()
+    public String getName(Language language)
     {
-        return name;
+        return names.get(language);
     }
 
     /**
      * Gibt die Beschreibung des BaseElements im Editor zurück.
      *
+     * @param language Die Sprache, in der die Beschreibung zurückgegeben werden soll.
      * @return Die Beschreibung des BaseElements im Editor.
      */
-    public String getDescription()
+    public String getDescription(Language language)
     {
-        return description;
+        return descriptions.get(language);
     }
 
     /**

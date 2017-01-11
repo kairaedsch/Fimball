@@ -65,7 +65,6 @@ public class PinballMachineSettingsViewModelTest
         init();
         test.savePinballMachine();
         assertThat(pinballMachineSaved, is(true));
-        assertThat(mainmenuShown, is(true));
     }
 
     /**

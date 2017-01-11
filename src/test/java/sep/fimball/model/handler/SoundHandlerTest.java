@@ -88,7 +88,7 @@ public class SoundHandlerTest
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
                 BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "")), java.util.Optional.of("Test-Sound"));
                 eventMap.put(0, baseMediaElementEvent);
-                return new BaseMediaElement("", "", 0, false, 0, null, eventMap, null);
+                return new BaseMediaElement(null, null, 0, false, 0, null, eventMap, null);
             }
 
             @Override

@@ -212,8 +212,7 @@ public class PinballMachineEditorTest
 
         baseElementJson.mediaElement = new BaseElementJson.MediaElementJson();
         baseElementJson.mediaElement.general = new BaseElementJson.MediaElementJson.MediaElementGeneralJson();
-        baseElementJson.mediaElement.general.editorName = "";
-        baseElementJson.mediaElement.general.editorDescription = "";
+        baseElementJson.mediaElement.descriptions = new BaseElementJson.MediaElementJson.MediaElementDescriptionJson[0];
 
         baseElementJson.ruleElement = new BaseElementJson.RuleElementJson();
         baseElementJson.ruleElement.general = new BaseElementJson.RuleElementJson.RuleElementGeneralJson();

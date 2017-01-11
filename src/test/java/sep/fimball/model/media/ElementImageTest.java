@@ -4,6 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.Language;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -24,7 +28,11 @@ public class ElementImageTest
     @Before
     public void init()
     {
-        BaseMediaElement testMediaElement = new BaseMediaElement("testMedia", "testMediaDesc", 1, true, 40, null, null, null);
+        //TODO
+        Map<Language, String> names = new HashMap<>();
+        names.put(Language.GERMAN, "testMedia");
+
+        BaseMediaElement testMediaElement = new BaseMediaElement(null, null, 1, true, 40, null, null, null);
         Animation testAnimation = new Animation(2, 3, "testAnimation");
         testElementImage = new ElementImage("testElement", testMediaElement, testAnimation);
     }

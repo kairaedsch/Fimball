@@ -1,6 +1,7 @@
 package sep.fimball.model.blueprint.base;
 
 import org.junit.Test;
+import sep.fimball.general.data.Language;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.media.BaseMediaElement;
 
@@ -37,13 +38,17 @@ public class BaseMediaElementFactoryTest
         localCoords.localCoord = new Vector2(TEST_DOUBLE, TEST_DOUBLE);
         localCoords.rotation = TEST_INT;
 
+        BaseElementJson.MediaElementJson.MediaElementDescriptionJson description = new BaseElementJson.MediaElementJson.MediaElementDescriptionJson();
+        description.language= Language.GERMAN;
+        description.editorName=TEST_STRING;
+        description.editorDescription=TEST_STRING;
+
         BaseElementJson.MediaElementJson testJson = new BaseElementJson.MediaElementJson();
         testJson.events = new BaseElementJson.MediaElementJson.MediaElementEventJson[]{event};
         testJson.localCoordinates = new BaseElementJson.MediaElementJson.MediaElementLocalCoordinateJson[]{localCoords};
         testJson.general = new BaseElementJson.MediaElementJson.MediaElementGeneralJson();
         testJson.general.canRotate = TEST_BOOL;
-        testJson.general.editorDescription = TEST_STRING;
-        testJson.general.editorName = TEST_STRING;
+        testJson.descriptions = new BaseElementJson.MediaElementJson.MediaElementDescriptionJson[]{description};
         testJson.general.rotationAccuracy = TEST_INT;
 
         BaseMediaElement generatedElement = BaseMediaElementFactory.create(testJson, TEST_STRING);
@@ -62,8 +67,8 @@ public class BaseMediaElementFactoryTest
             assertThat(v2, equalTo(new Vector2(TEST_DOUBLE, TEST_DOUBLE)));
         });
         assertThat(generatedElement.canRotate(), is(TEST_BOOL));
-        assertThat(generatedElement.getDescription(), is(TEST_STRING));
-        assertThat(generatedElement.getName(), is(TEST_STRING));
+        assertThat(generatedElement.getDescription(Language.GERMAN), is(TEST_STRING));
+        assertThat(generatedElement.getName(Language.GERMAN), is(TEST_STRING));
         assertThat(generatedElement.getRotationAccuracy(), is(TEST_INT));
     }
 }

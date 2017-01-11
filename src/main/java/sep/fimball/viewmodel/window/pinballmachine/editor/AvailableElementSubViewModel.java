@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 /**
@@ -55,7 +56,7 @@ public class AvailableElementSubViewModel
         imagePathTop = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.TOP, 0));
         imagePathBot = new SimpleStringProperty(new ElementImageViewModel(baseElement.getMedia().elementImageProperty().get()).getImagePath(ImageLayer.BOTTOM, 0));
         elementCategory = new SimpleObjectProperty<>(baseElement.getElementCategory());
-        name = new SimpleStringProperty(baseElement.getMedia().getName());
+        name = new SimpleStringProperty(baseElement.getMedia().getName(Settings.getSingletonInstance().languageProperty().get()));
     }
 
     /**
