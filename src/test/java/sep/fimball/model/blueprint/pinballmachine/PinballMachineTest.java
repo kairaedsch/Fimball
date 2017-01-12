@@ -137,8 +137,8 @@ public class PinballMachineTest
         RectangleDouble boundingBox = pinballMachine.getBoundingBox();
 
         // Prüfe ob die BoundingBox richtig ist
-        assertThat(boundingBox.getOrigin(), matchesVector(-8, -8));
-        assertThat(boundingBox.getSize(), matchesVector(16, 16));
+        assertThat(boundingBox.getOrigin(), matchesVector(-12, -12));
+        assertThat(boundingBox.getSize(), matchesVector(24, 24));
     }
 
     /**
