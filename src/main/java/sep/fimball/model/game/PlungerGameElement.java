@@ -12,8 +12,6 @@ import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.input.manager.KeyEventArgs.KeyChangedToState;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
-import java.util.Optional;
-
 import static sep.fimball.general.data.PhysicsConfig.DEFAULT_PLUNGER_FORCE;
 import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 
@@ -58,16 +56,9 @@ public class PlungerGameElement extends GameElement implements UserHandler
         {
             if (plungerPressed)
             {
-                double power = Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY);
-                double intervalSize = 200;
-                double intervalValue = System.currentTimeMillis() % intervalSize;
-
-                if ((intervalValue / intervalSize) < power) setCurrentAnimation(getMediaElement().getEventMap().values().iterator().next().getAnimation());
-                else setCurrentAnimation(Optional.empty());
-            }
-            else
-            {
-                setCurrentAnimation(Optional.empty());
+                int power = (int) Math.ceil(Math.max(1, Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY) * 4));
+                System.out.println(power);
+                setCurrentAnimation(getMediaElement().getEventMap().get(-power).getAnimation());
             }
         });
         lightChangeLoop.getKeyFrames().add(keyFrame);
@@ -103,6 +94,7 @@ public class PlungerGameElement extends GameElement implements UserHandler
                 plungerPressed = false;
                 double force = calcForce();
                 plungerPhysicsElement.addModify(() -> force);
+                setCurrentAnimation(getMediaElement().getEventMap().get(-5).getAnimation());
 
                 resetTransition.stop();
                 resetTransition.play();
