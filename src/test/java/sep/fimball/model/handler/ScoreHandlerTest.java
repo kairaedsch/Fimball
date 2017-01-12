@@ -5,10 +5,13 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementJson;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -28,7 +31,7 @@ public class ScoreHandlerTest
         HandlerGameSession gameSession = getGameSession();
         ScoreHandler test = new ScoreHandler(gameSession);
 
-        test.activateElementHandler(getElement(), 0);
+        test.activateElementHandler(getElement(), 1);
         assertThat("Der Spieler hat einmal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
         test.activateElementHandler(getElement(), 1);
         assertThat("Der Spieler hat zweimal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
@@ -174,7 +177,9 @@ public class ScoreHandlerTest
             @Override
             public BaseRuleElement getRuleElement()
             {
-                return new BaseRuleElement(null);
+                Map<Integer, BaseRuleElementEvent> eventMap = new HashMap<>();
+                eventMap.put(1, new BaseRuleElementEvent(true));
+                return new BaseRuleElement(eventMap);
             }
 
             @Override
