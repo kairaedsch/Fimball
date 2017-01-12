@@ -8,17 +8,17 @@ public enum Sounds
     /**
      * Der Sound, der im Spiel abgespielt wird.
      */
-    GAME("game"),
+    GAME("game.mp3"),
 
     /**
      * Der Sound, der im Hauptmenü abgespielt wird.
      */
-    MAIN_MENU("mainmenu"),
+    MAIN_MENU("mainmenu.mp3"),
 
     /**
-     * Der Sound, der beim Starten eines Automaten abspielt wird.
+     * Der Sound, der beim Starten eines Automaten abgespielt wird.
      */
-    GAME_START("kai");
+    GAME_START("kai.mp3");
 
     /**
      * Der Name der Sound-Datei.

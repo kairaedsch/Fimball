@@ -56,11 +56,6 @@ public class DataPath
     private final static String soundsPath = "/sounds";
 
     /**
-     * Die Dateiendung der Sound-Dateien.
-     */
-    private final static String soundFileEnding = ".mp3";
-
-    /**
      * Die Dateiendung der Bild-Dateien.
      */
     private final static String imageFileEnding = ".png";
@@ -235,7 +230,7 @@ public class DataPath
      */
     public static String pathToSound(String clipName)
     {
-        String path = dataPath + soundsPath + "/" + clipName + soundFileEnding;
+        String path = dataPath + soundsPath + "/" + clipName;
         return escapePathToUrl(path);
     }
 

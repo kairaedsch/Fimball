@@ -4,6 +4,8 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.UserHandler;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 import sep.fimball.model.physics.element.AngularDirection;
 import sep.fimball.model.physics.element.FlipperPhysicsElement;
 
@@ -52,6 +54,9 @@ public class FlipperGameElement extends GameElement implements UserHandler
         {
             boolean rotateUp = keyEventArgs.getState() != KeyEventArgs.KeyChangedToState.DOWN;
             flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.DOWN : AngularDirection.UP);
+
+            if (keyEventArgs.isStateSwitched())
+                SoundManager.getInstance().addSoundToPlay(new Sound("flipper.wav", false));
         }
     }
 }
