@@ -152,7 +152,7 @@ public class DataPathTest
     @Test
     public void testPathToSound()
     {
-        String path = DataPath.pathToSound("game");
+        String path = DataPath.pathToSound("game.mp3");
         // Das erwartete Pfadende einer Sounddatei.
         String expectedSoundPathEnding = "/sounds/game.mp3";
         assertThat(path.endsWith(expectedSoundPathEnding), is(true));

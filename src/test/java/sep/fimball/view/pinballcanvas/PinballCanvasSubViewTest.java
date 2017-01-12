@@ -1,6 +1,8 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,8 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 
 import java.lang.reflect.Field;
@@ -26,9 +28,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 
@@ -76,6 +76,7 @@ public class PinballCanvasSubViewTest
         double cameraZoom = 2;
         Mockito.when(viewModelMock.cameraZoomProperty()).thenReturn(new SimpleDoubleProperty(cameraZoom));
         Mockito.when(viewModelMock.getDrawMode()).thenReturn(DrawMode.EDITOR);
+        Mockito.when(viewModelMock.boundingBoxProperty()).thenReturn(new SimpleObjectProperty<>());
         Mockito.when(canvasMock.getParent()).thenReturn(parentMock);
         double canvasWidth = 300;
         Mockito.when(canvasMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));

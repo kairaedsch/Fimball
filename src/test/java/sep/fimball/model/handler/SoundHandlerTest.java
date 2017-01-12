@@ -86,7 +86,7 @@ public class SoundHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "")), java.util.Optional.of("Test-Sound"));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "")), java.util.Optional.of("Test-Sound.mp3"));
                 eventMap.put(0, baseMediaElementEvent);
                 return new BaseMediaElement(null, null, 0, false, 0, null, eventMap, null);
             }
