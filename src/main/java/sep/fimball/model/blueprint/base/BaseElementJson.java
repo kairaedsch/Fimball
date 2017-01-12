@@ -280,10 +280,7 @@ public class BaseElementJson
          */
         public static class RuleElementGeneralJson
         {
-            /**
-             * Speichert, ob ein Treffer durch die Kugel Punkte bringt.
-             */
-            public boolean givesPoints;
+
         }
 
         /**
@@ -295,6 +292,11 @@ public class BaseElementJson
              * Speichert die Identifikationsnummer des Colliders, zu dem dieses Regelwerk gehört.
              */
             public int colliderId;
+
+            /**
+             * Speichert, ob ein Treffer durch die Kugel mit dem Collider Punkte bringt.
+             */
+            public boolean givesPoints;
         }
     }
 }

@@ -22,16 +22,16 @@ public class BaseRuleElementFactoryTest
 
         BaseElementJson.RuleElementJson.RuleElementEventJson event = new BaseElementJson.RuleElementJson.RuleElementEventJson();
         event.colliderId = TEST_INT;
+        event.givesPoints = true;
 
         BaseElementJson.RuleElementJson json = new BaseElementJson.RuleElementJson();
         json.events = new BaseElementJson.RuleElementJson.RuleElementEventJson[]{event};
         json.general = new BaseElementJson.RuleElementJson.RuleElementGeneralJson();
-        json.general.givesPoints = TEST_BOOL;
 
         BaseRuleElement generatedElement = BaseRuleElementFactory.create(json);
 
         assertThat(generatedElement.getEventMap().size(), is(1));
         generatedElement.getEventMap().forEach((id, ev) -> assertThat(id, is(TEST_INT)));
-        assertThat(generatedElement.givesPoints(), is(TEST_BOOL));
+        generatedElement.getEventMap().forEach((id, ev) -> assertThat(ev.givesPoints(), is(true)));
     }
 }

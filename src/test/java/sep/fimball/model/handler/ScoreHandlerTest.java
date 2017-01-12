@@ -174,7 +174,7 @@ public class ScoreHandlerTest
             @Override
             public BaseRuleElement getRuleElement()
             {
-                return new BaseRuleElement(true,null);
+                return new BaseRuleElement(null);
             }
 
             @Override

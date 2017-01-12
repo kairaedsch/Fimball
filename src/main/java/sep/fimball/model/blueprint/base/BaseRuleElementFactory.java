@@ -29,9 +29,9 @@ public class BaseRuleElementFactory
         {
             for (BaseElementJson.RuleElementJson.RuleElementEventJson event : ruleElement.events)
             {
-                eventMap.put(event.colliderId, new BaseRuleElementEvent());
+                eventMap.put(event.colliderId, new BaseRuleElementEvent(event.givesPoints));
             }
         }
-        return new BaseRuleElement(ruleElement.general.givesPoints, eventMap);
+        return new BaseRuleElement(eventMap);
     }
 }

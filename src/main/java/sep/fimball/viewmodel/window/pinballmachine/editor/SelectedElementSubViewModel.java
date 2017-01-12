@@ -106,7 +106,7 @@ public class SelectedElementSubViewModel
 
             multiplier.bindBidirectional(newPlacedElement.get().multiplierProperty());
             isSomethingSelected.set(true);
-            pointsCanBeChanged.set(newPlacedElement.get().getBaseElement().getRule().givesPoints());
+            pointsCanBeChanged.set(newPlacedElement.get().getBaseElement().getRule().getEventMap().entrySet().stream().anyMatch((r) -> r.getValue().givesPoints()));
         }
         else
         {
