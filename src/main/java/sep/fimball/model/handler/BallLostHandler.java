@@ -41,10 +41,16 @@ public class BallLostHandler implements GameHandler
     {
         handlerGameSession.gameBallProperty().get().positionProperty().addListener((x, xx, newPosition) ->
         {
-            if (!ballLostTriggered && newPosition.getY() > handlerGameSession.getWorld().getMaximumYPosition() + BALL_LOST_TOLERANCE)
+            boolean ballLeftField = newPosition.getY() > handlerGameSession.getWorld().getMaximumYPosition() + BALL_LOST_TOLERANCE;
+
+            if (!ballLostTriggered && ballLeftField)
             {
                 ballLostTriggered = true;
                 handlerGameSession.ballLost();
+            }
+            if (!ballLeftField)
+            {
+                ballLostTriggered = false;
             }
         });
     }
@@ -57,7 +63,6 @@ public class BallLostHandler implements GameHandler
             handlerGameSession.getCurrentPlayer().removeOneReserveBall();
             handlerGameSession.switchToNextPlayer();
             handlerGameSession.spawnNewBall();
-            ballLostTriggered = false;
         }
     }
 }
