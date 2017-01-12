@@ -46,7 +46,6 @@ public abstract class Session
             public void handle(long now)
             {
                 loopUpdate();
-                updateLoopFinished();
             }
         };
         startUpdateLoop();
@@ -69,20 +68,12 @@ public abstract class Session
     }
 
     /**
-     * Wird aufgerufen sobald die Update Loop der Session abgeschlossen ist.
-     */
-    private void updateLoopFinished()
-    {
-        updateLoopObservable.setChanged();
-        updateLoopObservable.notifyObservers();
-    }
-
-    /**
      * Der Updateloop der Session. Benachrichtigt am Ende den updateLoopObservable.
      */
     protected void loopUpdate()
     {
-
+        updateLoopObservable.setChanged();
+        updateLoopObservable.notifyObservers();
     }
 
     /**
