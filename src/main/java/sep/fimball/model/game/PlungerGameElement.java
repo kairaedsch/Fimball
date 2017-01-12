@@ -57,7 +57,6 @@ public class PlungerGameElement extends GameElement implements UserHandler
             if (plungerPressed)
             {
                 int power = (int) Math.ceil(Math.max(1, Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY) * 4));
-                System.out.println(power);
                 setCurrentAnimation(getMediaElement().getEventMap().get(-power).getAnimation());
             }
         });

@@ -235,7 +235,6 @@ public class Vector2
     {
         if (this.magnitude() > max)
         {
-            System.out.println("ball exited maxComponents speed");
             return new Vector2(x, y).scale(max / this.magnitude());
         }
 
