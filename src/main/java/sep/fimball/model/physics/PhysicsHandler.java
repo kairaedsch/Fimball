@@ -1,15 +1,14 @@
 package sep.fimball.model.physics;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
@@ -47,6 +46,16 @@ public class PhysicsHandler<GameElementT>
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
      */
     private PhysicsGameSession<GameElementT> gameSession;
+
+    /**
+     * Wie viele Physik-Updates in der letzten Sekunde durchgeführt wurden.
+     */
+    private int framecount;
+
+    /**
+     * Der Zeitpunkt, seit dem die Physik-Updates gezählt wurden.
+     */
+    private long lastTime;
 
     /**
      * Ein Monitor, über den die Physik synchronisiert wird.
@@ -98,6 +107,7 @@ public class PhysicsHandler<GameElementT>
      */
     public void startTicking()
     {
+        lastTime = System.currentTimeMillis();
         physicTimer = new Timer(false);
         physicTimer.scheduleAtFixedRate(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
     }
@@ -126,6 +136,15 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
+                framecount++;
+                long currentTime = System.currentTimeMillis();
+                if (((double) currentTime - (double) lastTime) > 1000)
+                {
+                    System.out.println("Physics FPS: " + framecount);
+                    framecount = 0;
+                    lastTime = currentTime;
+                }
+
                 double delta = PhysicsConfig.TICK_RATE_SEC;
 
                 List<ModifyContainer> localModifyContainers;
