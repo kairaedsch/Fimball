@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="dialogTitle" stylesheets="@../../styles/style.css" text="!gamesettings.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
+<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" styleClass="dialogTitle" stylesheets="@../../styles/style.css" text="!gamesettings.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <opaqueInsets>
         <Insets />
     </opaqueInsets>
@@ -32,7 +32,7 @@
                                                         </Label>
                                                         <GridPane>
                                                             <columnConstraints>
-                                                                <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
                                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                             </columnConstraints>
                                                             <rowConstraints>
@@ -40,7 +40,7 @@
                                                             </rowConstraints>
                                                            <children>
                                                                <Label fx:id="key_3" text="!gamesettings.general.language.select.key!" />
-                                                               <ComboBox fx:id="language" prefWidth="150.0" styleClass="dialogButton" GridPane.columnIndex="1" />
+                                                               <ComboBox fx:id="language" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" styleClass="dialogButton" GridPane.columnIndex="1" />
                                                            </children>
                                                         </GridPane>
                                                         <Label fx:id="key_4" text="!gamesettings.general.keybinding.key!">
@@ -52,7 +52,9 @@
                                                             </VBox.margin>
                                                         </Label>
                                                         <VBox fx:id="keyBinding">
-                                </VBox>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin></VBox>
                                                         <Label fx:id="key_5" text="!gamesettings.general.display.key!">
                                                             <font>
                                                                 <Font name="System Bold" size="14.0" />
@@ -63,7 +65,7 @@
                                                         </Label>
                                                         <GridPane>
                                                             <columnConstraints>
-                                                                <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
                                                                 <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                             </columnConstraints>
                                                             <rowConstraints>
