@@ -8,10 +8,7 @@
 <VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView"
-      styleClass="pinballMachineSettings">
-    <stylesheets>
-        <String fx:value="styles/style.css"/>
-    </stylesheets>
+      styleClass="pinballMachineSettings" stylesheets="@../../../styles/style.css">
     <Pane minHeight="25" VBox.vgrow="ALWAYS"/>
     <GridPane minHeight="80.0" styleClass="machineAktions">
         <columnConstraints>

@@ -25,6 +25,11 @@ public class SoundManagerView
     private Optional<MediaPlayer> mediaPlayer;
 
     /**
+     * Sound-Object der Hintergrundmusik.
+     */
+    private Optional<Sound> mediaPlayerSound;
+
+    /**
      * Cashed geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
      */
     private HashMap<String, AudioClip> loadedAudioClips;
@@ -47,6 +52,7 @@ public class SoundManagerView
         SoundManagerViewModel soundManagerViewModel = SoundManagerViewModel.getInstance();
 
         mediaPlayer = Optional.empty();
+        mediaPlayerSound = Optional.empty();
         loadedAudioClips = new HashMap<>();
 
         // Holen der Lautstärke aus dem ViewModel
@@ -76,18 +82,22 @@ public class SoundManagerView
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
-            Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
-
-            if (newMediaPlayer.isPresent())
+            if (!mediaPlayerSound.isPresent() || !mediaPlayerSound.get().getSoundPath().equals(sound.getSoundPath()))
             {
-                newMediaPlayer.get().setOnEndOfMedia(() -> newMediaPlayer.get().seek(Duration.ZERO));
-                newMediaPlayer.get().volumeProperty().bind(musicVolume);
-                newMediaPlayer.get().play();
+                Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
 
-                // Es kann sich immer nur ein Sound wiederholen
-                mediaPlayer.ifPresent(MediaPlayer::dispose);
+                if (newMediaPlayer.isPresent())
+                {
+                    newMediaPlayer.get().setOnEndOfMedia(() -> newMediaPlayer.get().seek(Duration.ZERO));
+                    newMediaPlayer.get().volumeProperty().bind(musicVolume);
+                    newMediaPlayer.get().play();
 
-                mediaPlayer = newMediaPlayer;
+                    // Es kann sich immer nur ein Sound wiederholen
+                    mediaPlayer.ifPresent(MediaPlayer::dispose);
+
+                    mediaPlayer = newMediaPlayer;
+                    mediaPlayerSound = Optional.of(sound);
+                }
             }
         }
         // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
