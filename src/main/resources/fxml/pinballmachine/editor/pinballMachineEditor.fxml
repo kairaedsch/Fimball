@@ -47,7 +47,7 @@
                                         </HBox>
                                         <Accordion VBox.vgrow="ALWAYS">
                                             <panes>
-                                                <TitledPane animated="false" text="Basic Elements">
+                                                <TitledPane animated="false" text="Basic Elements" styleClass="availableElementsTitle">
                                                     <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                             <children>
@@ -68,7 +68,7 @@
                                                         </AnchorPane>
                                                     </content>
                                                 </TitledPane>
-                                                <TitledPane animated="false" text="Obstacles">
+                                                <TitledPane animated="false" text="Obstacles" styleClass="availableElementsTitle">
                                                     <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                             <children>
@@ -89,7 +89,7 @@
                                                         </AnchorPane>
                                                     </content>
                                                 </TitledPane>
-                                                <TitledPane animated="false" text="Ramps">
+                                                <TitledPane animated="false" text="Ramps" styleClass="availableElementsTitle">
                                                     <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                             <children>
@@ -110,7 +110,7 @@
                                                         </AnchorPane>
                                                     </content>
                                                 </TitledPane>
-                                                <TitledPane animated="false" text="Advanced Elements">
+                                                <TitledPane animated="false" text="Advanced Elements" styleClass="availableElementsTitle">
                                                     <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                             <children>

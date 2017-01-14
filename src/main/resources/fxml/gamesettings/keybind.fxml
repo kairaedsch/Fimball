@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
 
-<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.KeybindSubView">
+<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.KeybindSubView" styleClass="keybinding">
    <children>
-       <Label fx:id="keybindName" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Left Flipper" HBox.hgrow="ALWAYS" />
-       <TextField fx:id="keybindKey" maxWidth="120.0" minWidth="120.0" onKeyPressed="#changeKey" prefHeight="25.0" prefWidth="120.0" text="Left Shift" HBox.hgrow="ALWAYS">
-         <HBox.margin>
-            <Insets left="-10.0" />
-         </HBox.margin>
-      </TextField>
+       <Label fx:id="keybindName" maxWidth="140.0" minWidth="140.0" text="Left Flipper" HBox.hgrow="ALWAYS" styleClass="keybindingName"/>
+       <TextField fx:id="keybindKey" maxWidth="140.0" minWidth="140.0" onKeyPressed="#changeKey" prefHeight="25.0" text="Left Shift" HBox.hgrow="ALWAYS"/>
    </children>
 </HBox>

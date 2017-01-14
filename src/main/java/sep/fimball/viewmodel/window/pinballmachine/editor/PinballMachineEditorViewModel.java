@@ -316,7 +316,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
-            cursorProperty.set(Cursor.MOVE);
+            cursorProperty.set(Cursor.CLOSED_HAND);
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
         {
