@@ -111,6 +111,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         canvas.widthProperty().bind(parent.widthProperty());
         canvas.heightProperty().bind(parent.heightProperty());
 
+        canvas.cursorProperty().bind(pinballCanvasViewModel.cursorProperty());
+
         pinballCanvasViewModel.setViewScreenshotCreator(this);
 
         pinballCanvasDrawer = new PinballCanvasDrawer(canvas, drawMode, sprites, pinballCanvasViewModel.boundingBoxProperty());

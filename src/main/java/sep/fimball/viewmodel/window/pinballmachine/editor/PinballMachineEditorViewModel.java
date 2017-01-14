@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.Cursor;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -140,6 +141,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private BooleanProperty availableElementSelected;
 
+    private ObjectProperty<Cursor> cursorProperty;
+
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
      *
@@ -181,6 +184,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         botBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
         availableElementSelected = new SimpleBooleanProperty();
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
+
+        cursorProperty = new SimpleObjectProperty<>();
     }
 
     /**
@@ -306,10 +311,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {
             cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
+            cursorProperty.set(Cursor.MOVE);
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
+            cursorProperty.set(Cursor.MOVE);
         }
         else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
         {
@@ -427,6 +434,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                 }
             }
         }
+        cursorProperty.set(Cursor.DEFAULT);
     }
 
     /**
@@ -602,6 +610,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public Optional<RectangleDoubleByPoints> selectionRectProperty()
     {
         return selectionRect;
+    }
+
+    public ReadOnlyObjectProperty<Cursor> cursorProperty()
+    {
+        return cursorProperty;
     }
 
     /**

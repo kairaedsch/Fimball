@@ -1,5 +1,7 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
@@ -51,5 +53,11 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     public Optional<RectangleDoubleByPoints> selectingRectangleProperty()
     {
         return editorViewModel.selectionRectProperty();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Cursor> cursorProperty()
+    {
+        return editorViewModel.cursorProperty();
     }
 }

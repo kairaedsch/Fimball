@@ -2,6 +2,7 @@ package sep.fimball.viewmodel.pinballcanvas;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.scene.Cursor;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDouble;
@@ -143,6 +144,8 @@ public abstract class PinballCanvasViewModel
      * @param mouseEvent Das Ausgelöste MouseEvent.
      */
     public abstract void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent);
+
+    public abstract ReadOnlyObjectProperty<Cursor> cursorProperty();
 
     /**
      * Setzt den ViewScreenshotCreator, welcher ein Screenshot des Flipperautomaten erstellen kann.

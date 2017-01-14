@@ -1,5 +1,8 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -45,6 +48,12 @@ public class PinballCanvasViewModelTest
             public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
             {
 
+            }
+
+            @Override
+            public ReadOnlyObjectProperty<Cursor> cursorProperty()
+            {
+                return new SimpleObjectProperty<>(Cursor.DEFAULT);
             }
 
             @Override

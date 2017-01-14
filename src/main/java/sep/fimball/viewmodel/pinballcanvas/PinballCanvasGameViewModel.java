@@ -1,5 +1,8 @@
 package sep.fimball.viewmodel.pinballcanvas;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
@@ -40,5 +43,11 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
     public void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent)
     {
         // Da wir im Spiel sind, wird das ignoriert
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Cursor> cursorProperty()
+    {
+        return new SimpleObjectProperty<>(Cursor.DEFAULT);
     }
 }
