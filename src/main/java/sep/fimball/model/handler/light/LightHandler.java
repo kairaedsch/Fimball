@@ -1,10 +1,7 @@
 package sep.fimball.model.handler.light;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.AnimationTimer;
 import javafx.collections.transformation.FilteredList;
-import javafx.util.Duration;
-import sep.fimball.general.data.DesignConfig;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.GameHandler;
@@ -29,7 +26,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Schleife, in der die Lichter gewechselt werden.
      */
-    private Timeline lightChangeLoop;
+    private AnimationTimer lightChangeLoop;
 
     /**
      * Die LightChangers, die benutzt werden, um die Lichter zu wechseln und verschiedene Effekte erzeugen.
@@ -56,10 +53,14 @@ public class LightHandler implements GameHandler
     {
         lights = new FilteredList<>(gameSession.getWorld().gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
-        lightChangeLoop = new Timeline();
-        lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(DesignConfig.LIGHT_CHANGE_TICK_RATE), event -> changeLights());
-        lightChangeLoop.getKeyFrames().add(keyFrame);
+        lightChangeLoop = new AnimationTimer()
+        {
+            @Override
+            public void handle(long now)
+            {
+                changeLights();
+            }
+        };
 
         this.lightChangers = lightChangers;
         currentLightChanger = lightChangers.get(0);
@@ -74,7 +75,7 @@ public class LightHandler implements GameHandler
         }
         if (gameEvent == GameEvent.BALL_SPAWNED)
         {
-            lightChangeLoop.play();
+            lightChangeLoop.start();
         }
     }
 
