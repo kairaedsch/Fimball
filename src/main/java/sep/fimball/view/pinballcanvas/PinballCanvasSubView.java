@@ -130,11 +130,25 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         RectangleDouble rectangleDouble = pinballCanvasViewModel.boundingBoxProperty().get();
         if (rectangleDouble.getWidth() < minWidth || rectangleDouble.getHeight() < minHeight)
         {
-            double scale = (minWidth / rectangleDouble.getWidth());
-            double newHeight = rectangleDouble.getHeight() * scale;
-            double newOriginY = rectangleDouble.getOrigin().getY() - (newHeight - rectangleDouble.getHeight()) / 2.0;
-            double newOriginX = rectangleDouble.getOrigin().getX() - (minHeight - rectangleDouble.getWidth()) / 2.0;
-            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), minWidth, newHeight);
+            double newOriginX = rectangleDouble.getOrigin().getX();
+            double newOriginY = rectangleDouble.getOrigin().getY();
+            double newWidth = rectangleDouble.getWidth();
+            double newHeight = rectangleDouble.getHeight();
+
+            if (rectangleDouble.getWidth() < minWidth)
+            {
+                double scaleX = (minWidth / rectangleDouble.getWidth());
+                newWidth = rectangleDouble.getWidth() * scaleX;
+                newOriginX = rectangleDouble.getOrigin().getX() - (newWidth - rectangleDouble.getWidth()) / 2.0;
+            }
+
+            if (rectangleDouble.getHeight() < minHeight)
+            {
+                double scaleY = (minHeight / rectangleDouble.getHeight());
+                newHeight = rectangleDouble.getHeight() * scaleY;
+                newOriginY = rectangleDouble.getOrigin().getY() - (newHeight - rectangleDouble.getHeight()) / 2.0;
+            }
+            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), newWidth, newHeight);
         }
         if (rectangleDouble.getWidth() > maxWidth || rectangleDouble.getHeight() > maxHeight)
         {
