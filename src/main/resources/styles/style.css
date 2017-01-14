@@ -336,3 +336,10 @@
 .titled-pane .content AnchorPane, .paddingFix {
 	-fx-padding: -1;
 }
+
+.titled-pane-editor-props > .title, .tab-header-background {
+    -fx-alignment: center;
+    -fx-font-size: 24px;
+    -fx-background-color:  #163860;
+    -fx-background-radius: 0px;
+}
