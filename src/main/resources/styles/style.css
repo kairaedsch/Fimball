@@ -308,13 +308,14 @@
     -fx-background-size: contain;
 }
 
-.dialogTitle {
-    -fx-text-fill: white;
-}
-
 .dialogButton, .slider .thumb {
     -fx-background-color: #DBAA5D;
     -fx-background-radius: 3px;
+    -fx-text-fill: white;
+}
+
+.dialogButton:hover, .slider:hover .thumb {
+    -fx-background-color: #FFD593;
 }
 
 .tab {
@@ -323,23 +324,53 @@
 }
 
 .tab:selected, .dialogBackground {
-	-fx-background-color: #7090B7;
+    -fx-background-color: #7090B7;
+}
+
+
+.titled-pane {
+    -fx-text-fill: white;
 }
 
 .titled-pane > .title, .tab-header-background {
-	-fx-alignment: center;
-    -fx-font-size: 24px;
-	-fx-background-color: #44668F;
-    -fx-background-radius: 0px;
-}
-
-.titled-pane .content AnchorPane, .paddingFix {
-	-fx-padding: -1;
-}
-
-.titled-pane-editor-props > .title, .tab-header-background {
     -fx-alignment: center;
     -fx-font-size: 24px;
-    -fx-background-color:  #163860;
+    -fx-background-color: #44668F;
     -fx-background-radius: 0px;
+}
+
+.titled-pane > *.content {
+    -fx-border-width: 0;
+    -fx-background-insets: 0, 0;
+    -fx-padding: 0;
+}
+
+AnchorPane {
+    -fx-padding: 0px;
+}
+
+.titled-pane-editor-props > .title, .darkBackground {
+    -fx-background-color: #163860;
+}
+
+.titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.availableElement {
+    -fx-padding: 5px 0 5px 10px;
+    -fx-background-color: #7090B7;
+}
+
+.availableElement:hover {
+    -fx-background-color: #ABC5E3;
+}
+
+.availableElementText {
+    -fx-padding: 0 0 0 10px;
+}
+
+.availableElementsList {
+    -fx-background-color: #7090B7;
+    -fx-padding: 5px 0 5px 0;
 }
