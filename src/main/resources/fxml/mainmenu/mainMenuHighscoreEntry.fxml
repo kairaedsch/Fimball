@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 
-<GridPane styleClass="highscoreEntry" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="sep.fimball.view.general.HighscoreSubView">
+<GridPane minHeight="20.0" styleClass="highscoreEntry" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.general.HighscoreSubView">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="playerName" maxHeight="9999"
-           styleClass="highscoreEntryName" text="Till"/>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="score" minWidth="80.0" styleClass="highscoreEntryScore"
-           text="10000"/>
-    <Pane GridPane.columnIndex="0" GridPane.rowIndex="1" minHeight="1.0" minWidth="80.0"
-          styleClass="highscoreEntryLine"/>
-    <Pane GridPane.columnIndex="1" GridPane.rowIndex="1" minHeight="1.0" minWidth="80.0"
-          styleClass="highscoreEntryLine"/>
+   <children>
+       <Label fx:id="playerName" maxHeight="9999" styleClass="highscoreEntryName" text="Till" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+       <Label fx:id="score" minWidth="80.0" styleClass="highscoreEntryScore" text="10000" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+       <Pane minHeight="1.0" minWidth="80.0" styleClass="highscoreEntryLine" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+       <Pane minHeight="1.0" minWidth="80.0" styleClass="highscoreEntryLine" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   </children>
+   <padding>
+      <Insets left="50.0" right="50.0" />
+   </padding>
 </GridPane>
