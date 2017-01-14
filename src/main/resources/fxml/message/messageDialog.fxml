@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0"
-            prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.message.MessageView">
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-        <Label fx:id="message"/>
-        <Button fx:id="key_2" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" text="!general.ok.key!" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-    </AnchorPane>
+<TitledPane fx:id="title" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" styleClass="dialogTitle" stylesheets="@../../styles/style.css" text="asdf" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.message.MessageView">
+   <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dialogBackground">
+          <children>
+              <Label fx:id="message" text="Sequi impedit minus autem modi iure ex quia modi. Ipsam quasi veritatis officiis. Maiores earum velit vel aut quia repellat vitae.Pariatur officia optio quisquam qui totam tempore adipisci. Earum ullam tempora inventore illum incidunt natus. In earum voluptatem et pariatur assumenda rerum. Reiciendis veritatis tenetur non sed non." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+              <Button fx:id="key_2" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!general.ok.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+          </children>
+       </AnchorPane>
+   </content>
 </TitledPane>
