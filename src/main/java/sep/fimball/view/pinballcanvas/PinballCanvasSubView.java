@@ -165,13 +165,25 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private void redraw()
     {
-        double camFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
+        double defaultCamFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
+        double maximumCamFollowSpeed = 1;
+        double cameraFollowSpeed = defaultCamFollowSpeed;
         double cameraZoomSpeed = 50;
 
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
-        double camFollowStep = delta / camFollowSpeed;
+        if (canvas.getWidth() > 0 && canvas.getHeight() > 0)
+        {
+            Vector2 cameraOffset = cameraPosition.get().minus(softCameraPosition);
+            double maxmimumBallOffsetX = canvas.getWidth() / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
+            double maxmimumBallOffsetY = canvas.getHeight() / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
+            double xOffsetPercentage = Math.min(Math.abs(cameraOffset.getX()) / maxmimumBallOffsetX, 1);
+            double yOffsetPercentage = Math.min(Math.abs(cameraOffset.getY()) / maxmimumBallOffsetY, 1);
+            cameraFollowSpeed = defaultCamFollowSpeed - ((defaultCamFollowSpeed - maximumCamFollowSpeed) * Math.max(xOffsetPercentage, yOffsetPercentage));
+        }
+
+        double camFollowStep = delta / cameraFollowSpeed;
         camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
 
         double camZoomStep = delta / cameraZoomSpeed;
