@@ -1,8 +1,7 @@
 package sep.fimball.model.game;
 
-import javafx.animation.KeyFrame;
+import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.util.Duration;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
@@ -50,18 +49,19 @@ public class PlungerGameElement extends GameElement implements UserHandler
     {
         super(element, bind);
 
-        Timeline lightChangeLoop = new Timeline();
-        lightChangeLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(25), event ->
+        AnimationTimer plungerUpdate = new AnimationTimer()
         {
-            if (plungerPressed)
+            @Override
+            public void handle(long now)
             {
-                int power = (int) Math.ceil(Math.max(1, Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY) * 4));
-                setCurrentAnimation(getMediaElement().getEventMap().get(-power).getAnimation());
+                if (plungerPressed)
+                {
+                    int power = (int) Math.ceil(Math.max(1, Math.min(1, getSecondsPressed() / MAX_PLUNGER_FORCE_MULTIPLY) * 4));
+                    setCurrentAnimation(getMediaElement().getEventMap().get(-power).getAnimation());
+                }
             }
-        });
-        lightChangeLoop.getKeyFrames().add(keyFrame);
-        lightChangeLoop.play();
+        };
+        plungerUpdate.start();
 
         resetTransition = new PauseTransition(Duration.seconds(PhysicsConfig.PLUNGER_FORCE_DURATION));
         resetTransition.setOnFinished(e -> plungerPhysicsElement.addModify(() -> 0));
