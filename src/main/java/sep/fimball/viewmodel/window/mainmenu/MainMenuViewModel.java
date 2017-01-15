@@ -19,6 +19,7 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 import java.util.Comparator;
@@ -110,7 +111,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     void startEditor(PinballMachine pinballMachine)
     {
-        sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+        sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
     }
 
     /**
