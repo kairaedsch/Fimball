@@ -18,6 +18,7 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.window.pinballmachine.editor.EditorSessionSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Optional;
@@ -93,6 +94,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
     /**
+     * Das zur PinballMachineEditorView gehörende EditorSessionSubViewModel.
+     */
+    private EditorSessionSubViewModel editorSessionSubViewModel;
+
+    /**
      * Das letzte MouseEvent, bei dem die Maus auf dem Spielfeld gedrückt worden ist.
      */
     private MouseEvent mouseDown;
@@ -101,6 +107,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void setViewModel(PinballMachineEditorViewModel pinballMachineEditorViewModel)
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
+        this.editorSessionSubViewModel = pinballMachineEditorViewModel.getEditorSessionSubViewModel();
 
         tableName.textProperty().bindBidirectional(pinballMachineEditorViewModel.machineNameProperty());
 
@@ -111,7 +118,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
-        viewLoaderCanvas.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
+        viewLoaderCanvas.getView().setViewModel(editorSessionSubViewModel.getPinballCanvasViewModel());
 
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
@@ -271,7 +278,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void playClicked()
     {
-        pinballMachineEditorViewModel.startPinballMachine();
+        editorSessionSubViewModel.startPinballMachine();
     }
 
     /**
@@ -280,7 +287,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void settingsClicked()
     {
-        pinballMachineEditorViewModel.saveAndShowSettingsDialog();
+        editorSessionSubViewModel.saveAndShowSettingsDialog();
     }
 
     /**
@@ -289,7 +296,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     @FXML
     private void abortClicked()
     {
-        pinballMachineEditorViewModel.showSettingsDialog();
+        editorSessionSubViewModel.showSettingsDialog();
     }
 
     /**

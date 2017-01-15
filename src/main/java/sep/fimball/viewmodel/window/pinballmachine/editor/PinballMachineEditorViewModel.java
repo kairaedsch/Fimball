@@ -18,16 +18,9 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.model.game.EditorSession;
-import sep.fimball.model.game.GameSession;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.viewmodel.dialog.message.MessageViewModel;
-import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
-import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
-import sep.fimball.viewmodel.window.game.GameViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 import java.util.Comparator;
 import java.util.List;
@@ -40,14 +33,11 @@ import java.util.Optional;
 public class PinballMachineEditorViewModel extends WindowViewModel
 {
     /**
-     * Der Flipperautomat, welcher editiert wird.
-     */
-    private PinballMachine pinballMachine;
-
-    /**
      * Der zugehörige PinballMachineEditor.
      */
     private PinballMachineEditor pinballMachineEditor;
+
+    private EditorSessionSubViewModel editorSessionSubViewModel;
 
     /**
      * Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
@@ -92,11 +82,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private SelectedElementSubViewModel selectedElementSubViewModel;
 
     /**
-     * Das PinballCanvasViewModel des angezeigten Spielfelds.
-     */
-    private PinballCanvasEditorViewModel pinballCanvasViewModel;
-
-    /**
      * Der ausgewählte MouseMode.
      */
     private ObjectProperty<MouseMode> mouseMode;
@@ -105,11 +90,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Das aktuell ausgewählte Element aus der Liste der platzierbaren Elemente.
      */
     private ObjectProperty<Optional<BaseElement>> selectedAvailableElement;
-
-    /**
-     * Die zugehörige GameSession.
-     */
-    private EditorSession editorSession;
 
     /**
      * Gibt an, ob aktuell die Umschau-Taste gedrückt wird.
@@ -151,9 +131,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public PinballMachineEditorViewModel(PinballMachine pinballMachine)
     {
         super(WindowType.MACHINE_EDITOR);
-        this.pinballMachine = pinballMachine;
 
         pinballMachineEditor = new PinballMachineEditor(pinballMachine);
+        editorSessionSubViewModel = new EditorSessionSubViewModel(this, sceneManager, pinballMachine);
 
         selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
 
@@ -177,8 +157,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableRampElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.RAMP))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
-        editorSession = new EditorSession(pinballMachine);
-        pinballCanvasViewModel = new PinballCanvasEditorViewModel(editorSession, this);
+
 
         topBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
         botBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
@@ -256,43 +235,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             cameraZoom.set(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.1));
         }
-    }
-
-    /**
-     * Führt den Benutzer zu dem Spielfenster, wo der gerade vom Nutzer bearbeitete Flipper-Automat getestet werden
-     * kann.
-     */
-    public void startPinballMachine()
-    {
-        editorSession.stopUpdateLoop();
-        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
-    }
-
-    /**
-     * Führt den Benutzer zu dem Automateneinstellungsfenster und speichert den Automaten.
-     */
-    public void saveAndShowSettingsDialog()
-    {
-        editorSession.stopUpdateLoop();
-        editorSession.stopAutoSaveLoop();
-        pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
-        boolean success = pinballMachine.saveToDisk();
-        sceneManager.pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
-        sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
-    }
-
-    /**
-     * Führt den Benutzer zu dem Automateneinstellungsfenster, falls er das QuestionViewModel annimmt.
-     */
-    public void showSettingsDialog()
-    {
-        sceneManager.pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
-        {
-            editorSession.stopUpdateLoop();
-            editorSession.stopAutoSaveLoop();
-            pinballMachine.unloadElements();
-            sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
-        }));
     }
 
     /**
@@ -513,16 +455,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Stellt der View das PinballCanvasViewModel des angezeigten Spielfelds zur Verfügung.
-     *
-     * @return Das PinballCanvasViewModel des angezeigten Spielfelds.
-     */
-    public PinballCanvasEditorViewModel getPinballCanvasViewModel()
-    {
-        return pinballCanvasViewModel;
-    }
-
-    /**
      * Stellt der View die Position der Kamera zur Verfügung.
      *
      * @return Die Position der Kamera
@@ -637,5 +569,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             topBackgroundPath.set(Optional.empty());
             botBackgroundPath.set(Optional.empty());
         }
+    }
+
+    public EditorSessionSubViewModel getEditorSessionSubViewModel()
+    {
+        return editorSessionSubViewModel;
     }
 }
