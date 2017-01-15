@@ -15,6 +15,12 @@ import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
 public class PlayerNameView extends DialogView<PlayerNameViewModel>
 {
     /**
+     * Der Button, mit dem ein Spieler hinzugefügt werde kann.
+     */
+    @FXML
+    public Button addPlayerButton;
+
+    /**
      * Der Behälter zur Einstellung der Spielernamen.
      */
     @FXML
@@ -35,7 +41,8 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
     public void setViewModel(PlayerNameViewModel playerNameViewModel)
     {
         this.playerNameViewModel = playerNameViewModel;
-        startButton.disableProperty().bind(Bindings.not(playerNameViewModel.getGameCanBeStarted()));
+        startButton.disableProperty().bind(Bindings.not(playerNameViewModel.gameCanBeStartedProperty()));
+        addPlayerButton.disableProperty().bind(Bindings.not(playerNameViewModel.canAddPlayerProperty()));
         ViewModelListToPaneBinder.bindViewModelsToViews(nameEntryList, playerNameViewModel.playerNameEntriesProperty(), DialogType.PLAYER_NAME_ENTRY);
     }
 

@@ -72,11 +72,11 @@ public class PinballCanvasSubViewTest
     {
         MockitoAnnotations.initMocks(this);
         Mockito.when(viewModelMock.spriteSubViewModelsProperty()).thenReturn(new SimpleListProperty<>());
-        Mockito.when(viewModelMock.cameraPositionProperty()).thenReturn(new SimpleObjectProperty(cameraPosition));
+        Mockito.when(viewModelMock.cameraPositionProperty()).thenReturn(new SimpleObjectProperty<>(cameraPosition));
         double cameraZoom = 2;
         Mockito.when(viewModelMock.cameraZoomProperty()).thenReturn(new SimpleDoubleProperty(cameraZoom));
         Mockito.when(viewModelMock.getDrawMode()).thenReturn(DrawMode.EDITOR);
-        Mockito.when(viewModelMock.boundingBoxProperty()).thenReturn(new SimpleObjectProperty<>());
+        Mockito.when(viewModelMock.getBoundingBox()).thenReturn(null);
         Mockito.when(canvasMock.getParent()).thenReturn(parentMock);
         double canvasWidth = 300;
         Mockito.when(canvasMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));

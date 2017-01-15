@@ -10,6 +10,8 @@ import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 
+import static sep.fimball.general.data.Config.MAX_MULTIPLAYER_PLAYERCOUNT;
+
 /**
  * Das PlayerNameViewModel stellt der View Daten über die möglichen Spieler für die nächste Partie zur Verfügung und ermöglicht deren Anpassung.
  */
@@ -29,6 +31,11 @@ public class PlayerNameViewModel extends DialogViewModel
      * Gibt am, ob das Spiel gestartet werden darf.
      */
     private BooleanProperty gameCanBeStarted;
+
+    /**
+     * Gibt am, ob ein Spieler hinzugefügt werden darf.
+     */
+    private BooleanProperty canAddPlayer;
 
     /**
      * Erstellt ein neues PlayerNameViewModel.
@@ -60,6 +67,8 @@ public class PlayerNameViewModel extends DialogViewModel
         });
         playerNameEntries.add(new PlayerNameEntrySubViewModel(this, LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " 1"));
 
+        canAddPlayer = new SimpleBooleanProperty();
+        canAddPlayer.bind(playerNameEntries.sizeProperty().lessThan(MAX_MULTIPLAYER_PLAYERCOUNT));
     }
 
     /**
@@ -67,11 +76,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     private void checkNames()
     {
-        gameCanBeStarted.set(true);
-        for (PlayerNameEntrySubViewModel playerNameEntrySubViewModel : playerNameEntries)
-        {
-            gameCanBeStarted.set(gameCanBeStarted.get() && !playerNameEntrySubViewModel.playerNameProperty().get().isEmpty());
-        }
+        gameCanBeStarted.set(playerNameEntries.stream().allMatch(playerNameEntrySubViewModel -> !playerNameEntrySubViewModel.playerNameProperty().get().isEmpty()));
     }
 
     /**
@@ -89,7 +94,11 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void addPlayer()
     {
-        playerNameEntries.add(new PlayerNameEntrySubViewModel(this, LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " " + (playerNameEntries.size() + 1)));
+        if (playerNameEntries.size() < MAX_MULTIPLAYER_PLAYERCOUNT)
+        {
+            String playerName = LanguageManagerViewModel.getInstance().textProperty("playername.default.key").get() + " " + (playerNameEntries.size() + 1);
+            playerNameEntries.add(new PlayerNameEntrySubViewModel(this, playerName));
+        }
     }
 
     /**
@@ -129,8 +138,18 @@ public class PlayerNameViewModel extends DialogViewModel
      *
      * @return {@code true} falls das Spiel gestartet werden darf, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty getGameCanBeStarted()
+    public ReadOnlyBooleanProperty gameCanBeStartedProperty()
     {
         return gameCanBeStarted;
+    }
+
+    /**
+     * Gibt zurück, ob ein Spieler hinzugefügt werden darf.
+     *
+     * @return {@code true} falls ein Spieler hinzugefügt werden darf, {@code false} sonst.
+     */
+    public ReadOnlyBooleanProperty canAddPlayerProperty()
+    {
+        return canAddPlayer;
     }
 }

@@ -24,7 +24,7 @@
                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             </VBox>
-            <Button fx:id="key_2" mnemonicParsing="false" onAction="#addPlayerClicked"
+            <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#addPlayerClicked"
                     text="!playername.add.key!"/>
         </VBox>
         <Button fx:id="startButton" defaultButton="true" mnemonicParsing="false" onMouseClicked="#okClicked"

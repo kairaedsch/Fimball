@@ -46,14 +46,14 @@ public abstract class PinballCanvasViewModel
     private Observable redrawObservable;
 
     /**
-     * Der Bereich des Automaten, in welchen sich Spielelemente befinden.
-     */
-    private SimpleObjectProperty<RectangleDouble> boundingBox;
-
-    /**
      * Element aus der View, welches ein Screenshot des Flipperautomaten erstellen kann.
      */
     private ViewScreenshotCreator viewScreenshotCreator;
+
+    /**
+     * Die angezeigte PinballMachine.
+     */
+    private PinballMachine pinballMachine;
 
     /**
      * Erstellt ein neues PinballCanvasViewModel.
@@ -63,11 +63,10 @@ public abstract class PinballCanvasViewModel
      */
     protected PinballCanvasViewModel(Session session, DrawMode drawMode)
     {
-        PinballMachine pinballMachine = session.getPinballMachine();
+        pinballMachine = session.getPinballMachine();
         cameraPosition = new SimpleObjectProperty<>();
         cameraZoom = new SimpleDoubleProperty();
         spriteSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
-        boundingBox = new SimpleObjectProperty<>(pinballMachine.getBoundingBox());
 
         redrawObservable = new Observable();
 
@@ -132,9 +131,9 @@ public abstract class PinballCanvasViewModel
      *
      * @return Der Bereich des Automaten, in welchen sich Spielelemente befinden.
      */
-    public ReadOnlyObjectProperty<RectangleDouble> boundingBoxProperty()
+    public RectangleDouble getBoundingBox()
     {
-        return boundingBox;
+        return pinballMachine.getBoundingBox();
     }
 
     /**

@@ -22,10 +22,12 @@ public class PauseViewModel extends DialogViewModel
      * Eine Referenz auf die Singleton Instanz von settings.
      */
     private final Settings settings;
+
     /**
      * Eine Highscore-Liste, die alle Highscores der aktuellen Partie enthält.
      */
     private ListProperty<Highscore> playerHighscores;
+
     /**
      * Das GameViewModel, aus dem heraus das PauseViewModel erstellt wurde.
      */

@@ -32,7 +32,10 @@ class PinballCanvasDrawer
      */
     private ReadOnlyListProperty<SpriteSubView> sprites;
 
-    private ObjectProperty<RectangleDouble> boundingBox;
+    /**
+     * Der Rand des Automaten.
+     */
+    private RectangleDouble boundingBox;
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
@@ -42,13 +45,12 @@ class PinballCanvasDrawer
      * @param sprites     Die zu zeichnenden Sprites.
      * @param boundingBox Der Rand des Automaten
      */
-    PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites, ReadOnlyObjectProperty<RectangleDouble> boundingBox)
+    PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites, RectangleDouble boundingBox)
     {
         this.canvas = canvas;
         this.drawMode = drawMode;
+        this.boundingBox = boundingBox;
         this.sprites = new SimpleListProperty<>(sprites);
-        this.boundingBox = new SimpleObjectProperty<>();
-        this.boundingBox.bind(boundingBox);
     }
 
     /**
@@ -99,8 +101,8 @@ class PinballCanvasDrawer
         Vector2 canvasTopLeft = canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0).scale(PIXELS_PER_GRID_UNIT);
         Vector2 canvasBottomRight = canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight()).scale(PIXELS_PER_GRID_UNIT);
 
-        Vector2 ori = boundingBox.get().getOrigin().scale(PIXELS_PER_GRID_UNIT);
-        Vector2 end = boundingBox.get().getSize().plus(boundingBox.get().getOrigin()).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 ori = boundingBox.getOrigin().scale(PIXELS_PER_GRID_UNIT);
+        Vector2 end = boundingBox.getSize().plus(boundingBox.getOrigin()).scale(PIXELS_PER_GRID_UNIT);
 
         graphicsContext.setFill(DesignConfig.PRIMARY_COLOR_LIGHT);
         graphicsContext.fillRect(canvasTopLeft.getX(), canvasTopLeft.getY(), canvasBottomRight.getX() - canvasTopLeft.getX(), ori.getY() - canvasTopLeft.getY());

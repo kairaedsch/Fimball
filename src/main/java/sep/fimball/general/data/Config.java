@@ -8,6 +8,11 @@ import java.util.UUID;
 public class Config
 {
     /**
+     * Die Maximal Anzahl an Spielern in einer Partie.
+     */
+    public final static int MAX_MULTIPLAYER_PLAYERCOUNT = 8;
+
+    /**
      * Die maximale Anzahl von Highscores, die bei einem Flipperautomaten gespeichert werden.
      */
     public final static int MAX_HIGHSCORES = 10;

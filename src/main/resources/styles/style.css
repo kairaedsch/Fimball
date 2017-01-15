@@ -1,3 +1,15 @@
+Label, TextField, * {
+    -fx-font-family: Roboto Medium;
+}
+
+Label, TextField {
+    -fx-font-size: 16px;
+}
+
+Label {
+    -fx-text-fill: #FFF;
+}
+
 /** CSS **/
 /* The main scrollbar CSS class of ListView */
 .scroll-bar {
@@ -94,7 +106,6 @@
 }
 
 .machineOverviewTitle {
-    -fx-font-family: Roboto Medium;
     -fx-font-size: 22px;
     -fx-text-fill: #FFF;
     -fx-padding: 10px 0px 10px 55px;
@@ -166,7 +177,6 @@
 }
 
 .machinePreview .machineName {
-    -fx-font-family: Roboto Medium;
     -fx-font-size: 28px;
     -fx-text-fill: #FFF;
     -fx-padding: 25px 15px 25px 15px;
@@ -187,7 +197,6 @@
 }
 
 .highscoreTitle {
-    -fx-font-family: Roboto Medium;
     -fx-font-size: 22px;
     -fx-text-fill: #FFF;
     -fx-padding: 10px 0px 10px 0px;
@@ -213,6 +222,14 @@
 
 .highscoreEntryLine {
     -fx-background-color: #C84444;
+}
+
+.dialogScores .highscoreTitle {
+    -fx-padding: 10px 0px 0px 0px;
+}
+
+.dialogScores .highscoreEntryLine {
+    -fx-background-color: #44668F;
 }
 
 .pinballMachineSettingsTextField {
@@ -318,7 +335,7 @@
 }
 
 .dialogBackground {
-    -fx-background-color: #ABC5E3;
+    -fx-background-color: #7090B7;
 }
 
 .titled-pane {
@@ -375,10 +392,6 @@ AnchorPane {
 .availableElementsList {
     -fx-background-color: #ABC5E3;
     -fx-padding: 5px 0 5px 0;
-}
-
-Label, TextField {
-    -fx-font-size: 16px;
 }
 
 .settingsMenuTitle {
