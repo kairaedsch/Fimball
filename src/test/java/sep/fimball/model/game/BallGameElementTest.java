@@ -70,7 +70,7 @@ public class BallGameElementTest
         when(element.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(2, 2)));
         when(element.rotationProperty()).thenReturn(new SimpleDoubleProperty());
         when(element.pointsProperty()).thenReturn(new SimpleIntegerProperty());
-        BallPhysicsElement ballPhysicsElement = mock(BallPhysicsElement.class);
+        BallPhysicsElement<GameElement> ballPhysicsElement = mock(BallPhysicsElement.class);
         doAnswer(invocationOnMock ->
         {
             Modify modify = invocationOnMock.getArgument(0);

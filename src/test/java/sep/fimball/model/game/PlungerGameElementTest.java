@@ -46,7 +46,7 @@ public class PlungerGameElementTest
         BaseElement baseElement = getTestBaseElement();
         when(placedElement.getBaseElement()).thenReturn(baseElement);
 
-        PlungerPhysicsElement plungerPhysicsElement = mock(PlungerPhysicsElement.class);
+        PlungerPhysicsElement<GameElement> plungerPhysicsElement = mock(PlungerPhysicsElement.class);
         doAnswer(invocationOnMock ->
         {
             Modify modify = invocationOnMock.getArgument(0);

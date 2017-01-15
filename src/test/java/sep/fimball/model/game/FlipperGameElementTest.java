@@ -38,7 +38,7 @@ public class FlipperGameElementTest
         when(element.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(2, 2)));
         when(element.rotationProperty()).thenReturn(new SimpleDoubleProperty());
         when(element.pointsProperty()).thenReturn(new SimpleIntegerProperty());
-        FlipperPhysicsElement flipperPhysicsElement = mock(FlipperPhysicsElement.class);
+        FlipperPhysicsElement<GameElement> flipperPhysicsElement = mock(FlipperPhysicsElement.class);
 
         doAnswer(invocationOnMock ->
         {
@@ -48,7 +48,7 @@ public class FlipperGameElementTest
                 flipperAngularDirection = ((FlipperModify) modify).newAngularDirection();
             }
             return null;
-        }).when(flipperPhysicsElement).addModify(any(Modify.class));
+        }).when(flipperPhysicsElement).addModify(any(FlipperModify.class));
 
         FlipperGameElement testLeftFlipperGameElement = new FlipperGameElement(element, false, true);
         testLeftFlipperGameElement.setPhysicsElement(flipperPhysicsElement);
