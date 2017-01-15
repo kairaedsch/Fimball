@@ -2,6 +2,7 @@ package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import sep.fimball.view.ViewBoundToViewModel;
@@ -49,6 +50,24 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
     private Label pointsLabel;
 
     /**
+     * Rotiert die Auswahl.
+     */
+    @FXML
+    private Button rotateButton;
+
+    /**
+     * Dupliziert die Auswahl.
+     */
+    @FXML
+    private Button duplicateButton;
+
+    /**
+     * Löscht die Auswahl.
+     */
+    @FXML
+    private Button removeButton;
+
+    /**
      * Das zur SelectedElementSubView gehörende SelectedElementSubViewModel.
      */
     private SelectedElementSubViewModel selectedElementSubViewModel;
@@ -84,6 +103,10 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
 
         nameLabel.textProperty().bind(selectedElementSubViewModel.nameProperty());
         descriptionLabel.textProperty().bind(selectedElementSubViewModel.descriptionProperty());
+
+        rotateButton.disableProperty().bind(selectedElementSubViewModel.isRotateAvailable().not());
+        duplicateButton.disableProperty().bind(selectedElementSubViewModel.isDuplicateAvailable().not());
+        removeButton.disableProperty().bind(selectedElementSubViewModel.isRemoveAvailable().not());
     }
 
     /**

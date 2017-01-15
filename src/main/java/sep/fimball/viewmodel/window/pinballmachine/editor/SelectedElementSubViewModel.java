@@ -1,5 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -52,6 +54,21 @@ public class SelectedElementSubViewModel
     private BooleanProperty pointsCanBeChanged;
 
     /**
+     * Gibt an ob die Auswahl rotiert werden kann.
+     */
+    private BooleanProperty rotateAvailable;
+
+    /**
+     * Gibt an ob die Auswahl dupliziert werden kann.
+     */
+    private BooleanProperty duplicateAvailable;
+
+    /**
+     * Gibt an ob die Auswahl gelöscht werden kann.
+     */
+    private BooleanProperty removeAvailable;
+
+    /**
      * Erstellt ein neues SelectedElementSubViewModel.
      *
      * @param pinballMachineEditor Der zugehörige PinballMachineEditor
@@ -66,6 +83,9 @@ public class SelectedElementSubViewModel
         placedElement = Optional.empty();
         this.pinballMachineEditor = pinballMachineEditor;
         pointsCanBeChanged = new SimpleBooleanProperty(false);
+        rotateAvailable = new SimpleBooleanProperty();
+        duplicateAvailable = new SimpleBooleanProperty();
+        removeAvailable = new SimpleBooleanProperty();
 
         setPlacedElement(Optional.empty());
 
@@ -81,7 +101,12 @@ public class SelectedElementSubViewModel
             {
                 setPlacedElement(Optional.empty());
             }
+
+            rotateAvailable.set((selection.size() == 1 && selection.get(0).getBaseElement().getMedia().canRotate()) || selection.size() > 1);
+            duplicateAvailable.set(selection.stream().anyMatch(placedElement1 -> !placedElement1.getBaseElement().getId().equals("ball")));
+            removeAvailable.set(!selection.stream().allMatch(placedElement1 -> placedElement1.getBaseElement().getId().equals("ball")));
         });
+
     }
 
     /**
@@ -202,5 +227,35 @@ public class SelectedElementSubViewModel
     public ReadOnlyBooleanProperty isSomethingSelected()
     {
         return isSomethingSelected;
+    }
+
+    /**
+     * Gibt zurück, ob die Auswahl rotiert werden kann.
+     *
+     * @return Ob die Auswahl rotiert werden kann.
+     */
+    public ReadOnlyBooleanProperty isRotateAvailable()
+    {
+        return rotateAvailable;
+    }
+
+    /**
+     * Gibt zurück, ob die Auswahl dupliziert werden kann.
+     *
+     * @return Ob die Auswahl dupliziert werden kann.
+     */
+    public ReadOnlyBooleanProperty isDuplicateAvailable()
+    {
+        return duplicateAvailable;
+    }
+
+    /**
+     * Gibt zurück, ob die Auswahl gelöscht werden kann.
+     *
+     * @return Ob die Auswahl gelöscht werden kann.
+     */
+    public ReadOnlyBooleanProperty isRemoveAvailable()
+    {
+        return removeAvailable;
     }
 }

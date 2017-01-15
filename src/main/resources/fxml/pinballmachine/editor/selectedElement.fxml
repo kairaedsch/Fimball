@@ -31,8 +31,8 @@
                 <Insets right="5.0" />
             </VBox.margin>
         </GridPane>
-        <Button mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-        <Button mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="Duplicate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" />
-        <Button mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
+        <Button fx:id="rotateButton" mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+        <Button fx:id="duplicateButton" mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="Duplicate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" />
+        <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
     </children>
 </VBox>
