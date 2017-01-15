@@ -77,6 +77,7 @@ public class PinballCanvasSubViewTest
         Mockito.when(viewModelMock.cameraZoomProperty()).thenReturn(new SimpleDoubleProperty(cameraZoom));
         Mockito.when(viewModelMock.getDrawMode()).thenReturn(DrawMode.EDITOR);
         Mockito.when(viewModelMock.getBoundingBox()).thenReturn(null);
+        Mockito.when(viewModelMock.cursorProperty()).thenReturn(new SimpleObjectProperty<>());
         Mockito.when(canvasMock.getParent()).thenReturn(parentMock);
         double canvasWidth = 300;
         Mockito.when(canvasMock.widthProperty()).thenReturn(new SimpleDoubleProperty(canvasWidth));
@@ -87,6 +88,7 @@ public class PinballCanvasSubViewTest
         Mockito.when(canvasMock.getHeight()).thenReturn(canvasHeight);
         Mockito.when(canvasMock.getWidth()).thenReturn(canvasWidth);
         Mockito.when(canvasMock.getGraphicsContext2D()).thenReturn(graphicsContextMock);
+        Mockito.when(canvasMock.cursorProperty()).thenReturn(new SimpleObjectProperty<>());
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {
