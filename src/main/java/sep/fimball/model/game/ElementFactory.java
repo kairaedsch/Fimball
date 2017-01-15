@@ -75,11 +75,11 @@ public class ElementFactory
                     physicsElements.add(physicsElement);
                     break;
                 case SPINNER:
-                    SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false);
-                    SpinnerPhysicsElement spinnerPhysicsElement = new SpinnerPhysicsElement(spinnerGameElement, spinnerGameElement.positionProperty().get(), spinnerGameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
-                    spinnerGameElement.setPhysicsElement(spinnerPhysicsElement);
+                    SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false, ballGameElement);
+                    PhysicsElement<GameElement> spinnerPhysicsElement = new PhysicsElement<>(spinnerGameElement, spinnerGameElement.positionProperty().get(), spinnerGameElement.rotationProperty().get(), element.multiplierProperty().get(), spinnerGameElement.getPlacedElement().getBaseElement().getPhysics());
                     gameElements.add(spinnerGameElement);
                     physicsElements.add(spinnerPhysicsElement);
+                    handlerManager.addHandler(new Handler(spinnerGameElement));
                     break;
                 default:
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
