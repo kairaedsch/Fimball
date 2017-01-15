@@ -1,90 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.Double?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polyline?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <SplitPane dividerPositions="0.21517996870109546, 0.8176838810641628" VBox.vgrow="ALWAYS" styleClass="splitPane">
+        <SplitPane dividerPositions="0.2, 0.8" styleClass="splitPane" VBox.vgrow="ALWAYS">
             <AnchorPane minWidth="290.0">
-                <VBox styleClass="dialogBackground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="darkBackground">
-                        <VBox.margin>
-                            <Insets/>
-                        </VBox.margin>
-                        <padding>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                        </padding>
-                        <VBox>
-                            <Button fx:id="settings" maxWidth="120.0" minWidth="120.0" mnemonicParsing="false" onMouseClicked="#settingsClicked"
-                                    styleClass="dialogButton" text="!editor.exit.key!">
-                                <VBox.margin>
-                                    <Insets bottom="5.0"/>
-                                </VBox.margin>
-                            </Button>
-                            <Button fx:id="abort" maxWidth="120.0" minWidth="120.0" mnemonicParsing="false" onMouseClicked="#abortClicked"
-                                    styleClass="dialogButton" text="!editor.abort.key!"/>
-                        </VBox>
-                        <Label fx:id="nameLabel" text="Tills Automat" textFill="WHITE">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Label>
+                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <HBox HBox.hgrow="ALWAYS" styleClass="editorMenuBar" prefHeight="65">
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="Dinge" styleClass="editorMenuBarTitle"/>
+                        <Pane HBox.hgrow="ALWAYS" />
                     </HBox>
-                    <Accordion VBox.vgrow="ALWAYS">
+                    <Accordion styleClass="availableElements" VBox.vgrow="ALWAYS">
                         <panes>
-                            <TitledPane animated="false" text="Basic Elements" styleClass="availableElementsTitle">
+                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Basic Elements">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane styleClass="edge-to-edge" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
-                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsBasic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsBasic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" text="Obstacles" styleClass="availableElementsTitle">
+                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Obstacles">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane styleClass="edge-to-edge" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
-                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsObstacles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsObstacles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" text="Ramps" styleClass="availableElementsTitle">
+                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Ramps">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane styleClass="edge-to-edge" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
-                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsRamp" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsRamp" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" text="Advanced Elements" styleClass="availableElementsTitle">
+                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Advanced Elements">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane styleClass="edge-to-edge" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
-                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsAdvanced" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsAdvanced" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
@@ -94,45 +70,60 @@
                     </Accordion>
                 </VBox>
             </AnchorPane>
-            <AnchorPane>
-                <StackPane fx:id="pinballCanvasContainer" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas"
-                           onMouseDragOver="#draggedOver" onMouseDragged="#dragged" onMouseEntered="#mouseEnteredCanvas" onMouseExited="#mouseExitedCanvas"
-                           onMousePressed="#down" onMouseReleased="#mouseReleased" onScroll="#zoom" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <padding>
-                        <Insets left="5.0" top="5.0"/>
-                    </padding>
-                    <Button mnemonicParsing="false" onMouseClicked="#playClicked" styleClass="dialogButton" text="Play">
-                        <HBox.margin>
-                            <Insets right="10.0"/>
-                        </HBox.margin>
-                    </Button>
-                    <Button maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onMouseClicked="#zoomInClicked"
-                            styleClass="dialogButton" text="+"/>
-                    <Button maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onMouseClicked="#zoomOutClicked"
-                            styleClass="dialogButton" text="-">
-                        <HBox.margin>
-                            <Insets left="3.0"/>
-                        </HBox.margin>
-                    </Button>
+            <VBox>
+                <HBox styleClass="editorMenuBar">
+                    <HBox HBox.hgrow="ALWAYS">
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <HBox styleClass="buttonBackToMainMenuContainer">
+                            <Polyline onMouseClicked="#settingsClicked" styleClass="buttonBackToMainMenuArrow">
+                                <points>
+                                    <Double fx:value="0.0" />
+                                    <Double fx:value="20.0" />
+
+                                    <Double fx:value="20.0" />
+                                    <Double fx:value="0.0" />
+
+                                    <Double fx:value="20.0" />
+                                    <Double fx:value="40.0" />
+                                </points>
+                            </Polyline>
+                            <Pane fx:id="menu" accessibleHelp="§editor.settings.menuButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#settingsClicked" styleClass="button, button_small, buttonBackToMainMenu" />
+                        </HBox>
+                        <Pane HBox.hgrow="ALWAYS" />
+                    </HBox>
+                    <TextField fx:id="tableName" styleClass="pinballMachineSettingsTextField" text="Tills Automat" HBox.hgrow="ALWAYS" />
+                    <HBox HBox.hgrow="ALWAYS">
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="play" accessibleHelp="§mainmenu.play.tip.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#playClicked" styleClass="button, button_small, buttonPlaySinglePlayer" />
+                        <Pane HBox.hgrow="ALWAYS" />
+                    </HBox>
+                    <HBox HBox.hgrow="ALWAYS">
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="save" accessibleHelp="§editor.settings.saveButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonSave" />
+                        <Pane HBox.hgrow="ALWAYS" />
+                    </HBox>
+                    <HBox HBox.hgrow="ALWAYS">
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="delete" accessibleHelp="§editor.settings.deleteButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonDelete" />
+                        <Pane HBox.hgrow="ALWAYS" />
+                    </HBox>
                 </HBox>
-            </AnchorPane>
-            <AnchorPane minWidth="290.0">
-                <TitledPane fx:id="selectedElement" animated="false" collapsible="false" text="Bumper Properties" textFill="WHITE" AnchorPane.bottomAnchor="0.0"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <opaqueInsets>
-                        <Insets/>
-                    </opaqueInsets>
-                    <styleClass>
-                        <String fx:value="titled-pane-editor-props"/>
-                        <String fx:value="dialogBackground"/>
-                    </styleClass>
-                </TitledPane>
-            </AnchorPane>
+                <AnchorPane VBox.vgrow="ALWAYS">
+                    <StackPane fx:id="pinballCanvasContainer" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas" onMouseDragOver="#draggedOver" onMouseDragged="#dragged" onMouseEntered="#mouseEnteredCanvas"
+                               onMouseExited="#mouseExitedCanvas" onMousePressed="#down" onMouseReleased="#mouseReleased" onScroll="#zoom" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                </AnchorPane>
+            </VBox>
+            <VBox>
+                <HBox styleClass="editorMenuBar" prefHeight="65">
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <Label text="Properties" styleClass="editorMenuBarTitle"/>
+                    <Pane HBox.hgrow="ALWAYS" />
+                </HBox>
+                <VBox VBox.vgrow="ALWAYS" fx:id="selectedElement"/>
+            </VBox>
         </SplitPane>
     </VBox>
     <Pane fx:id="previewBot" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0">
-        <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0"/>
+        <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0" />
     </Pane>
 </AnchorPane>

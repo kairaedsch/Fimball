@@ -2,8 +2,7 @@ package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -34,9 +33,10 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 {
     /**
      * Zeigt den Namen des editierten Automaten an.
+     * // TODO asdasd
      */
     @FXML
-    private Label nameLabel;
+    private TextField tableName;
 
     /**
      * Enthält das Pinball-Canvas des Automaten.
@@ -48,7 +48,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Das zur Zeit auf dem Spielfeld vom Nutzer ausgewählte Element.
      */
     @FXML
-    private TitledPane selectedElement;
+    private VBox selectedElement;
 
     /**
      * Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
@@ -102,7 +102,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     {
         this.pinballMachineEditorViewModel = pinballMachineEditorViewModel;
 
-        nameLabel.textProperty().bind(pinballMachineEditorViewModel.machineNameProperty());
+        tableName.textProperty().bindBidirectional(pinballMachineEditorViewModel.machineNameProperty());
 
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
@@ -114,7 +114,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         viewLoaderCanvas.getView().setViewModel(pinballMachineEditorViewModel.getPinballCanvasViewModel());
 
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
-        selectedElement.setContent(viewLoader.getRootNode());
+        selectedElement.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
         previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());

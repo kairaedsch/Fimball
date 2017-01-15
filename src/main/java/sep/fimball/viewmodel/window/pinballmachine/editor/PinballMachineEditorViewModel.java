@@ -160,7 +160,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
 
         machineName = new SimpleStringProperty();
-        machineName.bind(pinballMachine.nameProperty());
+        machineName.bindBidirectional(pinballMachine.nameProperty());
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2());
         cameraZoom = new SimpleDoubleProperty(0.75);
@@ -558,7 +558,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @return Der Name des Automaten.
      */
-    public ReadOnlyStringProperty machineNameProperty()
+    public StringProperty machineNameProperty()
     {
         return machineName;
     }

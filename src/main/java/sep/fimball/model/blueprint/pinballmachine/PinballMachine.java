@@ -65,7 +65,6 @@ public class PinballMachine
      */
     private boolean elementsLoaded;
 
-
     /**
      * Erstellt einen leeren Automaten mit gegebenen Namen, ID und bisher erreichten Highscores.
      *

@@ -85,6 +85,15 @@ Label {
     -fx-cursor: hand;
 }
 
+.button_small {
+    -fx-background-position: 11px 10px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20px;
+    -fx-background-radius: 100%;
+    -fx-background-color: #FFF;
+    -fx-cursor: hand;
+}
+
 .buttonPlaySinglePlayer {
     -fx-background-image: url("../images/media-play_white.svg");
     -fx-background-color: #DBAA5D;
@@ -232,12 +241,6 @@ Label {
     -fx-background-color: #44668F;
 }
 
-.pinballMachineSettingsTextField {
-    -fx-font-family: Roboto Medium;
-    -fx-font-size: 24px;
-    -fx-text-alignment: center;
-}
-
 .buttonSave {
     -fx-background-image: url("../images/book_white.svg");
     -fx-background-color: #DBAA5D;
@@ -349,10 +352,6 @@ Label {
     -fx-background-radius: 0px;
 }
 
-.availableElementsTitle > .title {
-    -fx-background-color: #7090B7;
-}
-
 .titled-pane > *.content {
     -fx-border-width: 0;
     -fx-background-insets: 0, 0;
@@ -371,9 +370,17 @@ AnchorPane {
     -fx-background-color: white;
 }
 
+.availableElementsTitle > .title {
+    -fx-background-color: #DB5D5D;
+}
+
+.availableElements {
+    -fx-background-color: #DB5D5D;
+}
+
 .availableElement {
     -fx-padding: 5px 0 5px 10px;
-    -fx-background-color: #ABC5E3;
+    -fx-background-color: #DB5D5D;
     -fx-cursor: open_hand;
 }
 
@@ -382,7 +389,7 @@ AnchorPane {
 }
 
 .availableElement:hover {
-    -fx-background-color: #7090B7;
+    -fx-background-color: #FF9393;
 }
 
 .availableElementText {
@@ -390,8 +397,23 @@ AnchorPane {
 }
 
 .availableElementsList {
-    -fx-background-color: #ABC5E3;
+    -fx-background-color: #DB5D5D;
     -fx-padding: 5px 0 5px 0;
+}
+
+.availableElements .scroll-bar {
+    -fx-background-color: #FF9393;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.availableElements .increment-button, .decrement-button {
+    -fx-background-color: #A52F2F;
+    -fx-border-color: #A52F2F;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.availableElements .scroll-bar .thumb {
+    -fx-background-color: #A52F2F;
 }
 
 .settingsMenuTitle {
@@ -417,4 +439,27 @@ AnchorPane {
 
 .keybindingName {
     -fx-padding: 6px 10px 0 0;
+}
+
+.editorMenuBar {
+    -fx-background-color: #C84444;
+    -fx-padding: 10px;
+}
+
+.pinballMachineSettingsTextField {
+    -fx-font-size: 21px;
+}
+
+.editorMenuBarTitle {
+    -fx-font-size: 22px;
+    -fx-padding: 8px 0 0 0;
+}
+
+.selectedElement {
+    -fx-background-color: #DB5D5D;
+    -fx-padding: 10px;
+}
+
+.selectedElementButtonContainer {
+    -fx-padding: 10px 0 0 0;
 }
