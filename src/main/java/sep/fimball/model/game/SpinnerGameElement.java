@@ -14,9 +14,10 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
 {
     private double leftSpins;
     private double currentSpin;
-    private int currentFrame = 1;
+    private int currentFrame;
     private double spinnerAcceleration;
-    private BallGameElement ballGameElement;
+    private Vector2 ballDelta;
+    private boolean accelerationUpdated;
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
@@ -27,17 +28,23 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
     public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall)
     {
         super(element, bind);
-        this.ballGameElement = gameBall;
+        ballDelta = new Vector2();
+
+        gameBall.positionProperty().addListener(((observable, oldValue, newValue) -> {
+            double deltaX = newValue.getX() - oldValue.getX();
+            double deltaY = newValue.getY() - oldValue.getY();
+            ballDelta = new Vector2(deltaX, deltaY);
+        }));
 
         AnimationTimer spinnerUpdate = new AnimationTimer()
         {
             @Override
             public void handle(long now)
             {
-                if (spinnerAcceleration > 0)
+                if (accelerationUpdated)
                 {
-                    leftSpins = spinnerAcceleration * Config.SPINS_PER_DIRECT_HIT;
-                    spinnerAcceleration = 0;
+                    leftSpins = Math.abs(spinnerAcceleration) * Config.SPINS_PER_DIRECT_HIT;
+                    accelerationUpdated = false;
                 }
                 double spinSpeed = Math.max(0.1, leftSpins / Config.SPINS_PER_DIRECT_HIT);
                 currentSpin += spinSpeed;
@@ -48,18 +55,27 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
                     {
                         currentSpin = 0;
                         leftSpins = leftSpins - Config.SPINNER_SLOWDOWN_SPEED;
-                        currentFrame = ((currentFrame + 1) % 7) + 1;
+                        switchToNextFrame();
                     }
                     else
                     {
                         currentSpin = 0;
                     }
                 }
-                setCurrentAnimation(getMediaElement().getEventMap().get(-1 * currentFrame).getAnimation());
-
+                setCurrentAnimation(getMediaElement().getEventMap().get(-1 * (currentFrame + 1)).getAnimation());
             }
         };
         spinnerUpdate.start();
+    }
+
+    private void switchToNextFrame()
+    {
+        currentFrame = (currentFrame + (int)Math.signum(spinnerAcceleration)) % 7;
+
+        if (currentFrame < 0)
+        {
+            currentFrame += 7;
+        }
     }
 
     @Override
@@ -68,7 +84,8 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
         if (element == this)
         {
             Vector2 direction = new Vector2(0, -1).rotate(Math.toRadians(rotationProperty().get()));
-            spinnerAcceleration = 1;
+            spinnerAcceleration = direction.normalized().dot(ballDelta.normalized());
+            accelerationUpdated = true;
         }
     }
 }

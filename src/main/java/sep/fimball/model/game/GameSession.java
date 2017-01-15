@@ -141,16 +141,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);
         elements.addAll(generatedElements.getGameElements());
         physicsElements.addAll(generatedElements.getPhysicsElements());
-
-        Optional<BallGameElement> ballGameElement = generatedElements.getBallGameElement();
-        if (ballGameElement.isPresent())
-        {
-            gameBall.set(ballGameElement.get());
-        }
-        else
-        {
-            throw new IllegalArgumentException("No ball found in PlacedElements!");
-        }
+        gameBall.set(generatedElements.getBallGameElement());
 
         world = new World(elements, false, pinballMachine.getMaximumYPosition());
         BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().multiplierProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());

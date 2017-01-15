@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -49,7 +50,7 @@ public class ElementFactoryTest
 
         assertThat("Es wurden 9 GameElemente generiert", generatedElements.getGameElements().size(), is(9));
         assertThat("Es wurden 7 PhysicsElemente generiert", generatedElements.getPhysicsElements().size(), is(7));
-        assertThat("Es wurde ein BallGameElement generiert", generatedElements.getBallGameElement().isPresent(), is(true));
+        assertThat("Es wurde ein BallGameElement generiert", generatedElements.getBallGameElement(), is(not(null)));
 
         for (GameElement gameElement : generatedElements.getGameElements())
         {

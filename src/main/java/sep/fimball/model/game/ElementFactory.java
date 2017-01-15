@@ -27,25 +27,35 @@ public class ElementFactory
      */
     public static GeneratedElements generateElements(ReadOnlyListProperty<PlacedElement> placedElements, PhysicsHandler<GameElement> physicsHandler, HandlerManager handlerManager)
     {
-        BallGameElement ballGameElement = null;
+        BallGameElement ballGameElement;
         List<GameElement> gameElements = new ArrayList<>();
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
+
+        Optional<PlacedElement> ball = placedElements.stream().filter((placedElement -> placedElement.getBaseElement().getType() == BaseElementType.BALL)).findFirst();
+
+        if (ball.isPresent())
+        {
+            // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
+            ballGameElement = new BallGameElement(ball.get(), false);
+            gameElements.add(ballGameElement);
+        }
+        else
+        {
+            throw new IllegalArgumentException("No ball found in PlacedElements!");
+        }
 
         for (PlacedElement element : placedElements)
         {
             switch (element.getBaseElement().getType())
             {
+                case BALL:
+                    break;
                 case RAMP:
                 case NORMAL:
                     GameElement normalGameElement = new GameElement(element, false);
                     PhysicsElement<GameElement> normalPhysicsElement = new PhysicsElement<>(normalGameElement, normalGameElement.positionProperty().get(), normalGameElement.rotationProperty().get(), element.multiplierProperty().get(), normalGameElement.getPlacedElement().getBaseElement().getPhysics());
                     gameElements.add(normalGameElement);
                     physicsElements.add(normalPhysicsElement);
-                    break;
-                case BALL:
-                    // PhysicsElement der Kugel wird später hinzugefügt, da nur eine Kugel im Spielfeld existieren darf.
-                    ballGameElement = new BallGameElement(element, false);
-                    gameElements.add(ballGameElement);
                     break;
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
@@ -85,7 +95,7 @@ public class ElementFactory
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
             }
         }
-        return new GeneratedElements(gameElements, physicsElements, Optional.ofNullable(ballGameElement));
+        return new GeneratedElements(gameElements, physicsElements, ballGameElement);
     }
 
     /**
@@ -106,16 +116,15 @@ public class ElementFactory
         /**
          * Das Optionale BallGameElement.
          */
-        private Optional<BallGameElement> ballGameElement;
+        private BallGameElement ballGameElement;
 
         /**
          * Erstellt ein neues GeneratedElements.
          *
          * @param gameElement     Die Liste der GameElemente.
          * @param physicsElement  Die Liste der PhysicsElemente.
-         * @param ballGameElement Das Optionale BallGameElement.
          */
-        public GeneratedElements(List<GameElement> gameElement, List<PhysicsElement<GameElement>> physicsElement, Optional<BallGameElement> ballGameElement)
+        public GeneratedElements(List<GameElement> gameElement, List<PhysicsElement<GameElement>> physicsElement, BallGameElement ballGameElement)
         {
             this.gameElements = gameElement;
             this.physicsElements = physicsElement;
@@ -147,7 +156,7 @@ public class ElementFactory
          *
          * @return Das Optionale BallGameElement.
          */
-        public Optional<BallGameElement> getBallGameElement()
+        public BallGameElement getBallGameElement()
         {
             return ballGameElement;
         }
