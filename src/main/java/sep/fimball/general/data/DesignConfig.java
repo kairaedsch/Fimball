@@ -100,6 +100,14 @@ public class DesignConfig
      */
     public final static double ANTI_GRAPHIC_STRIPES_EXTRA_SIZE = 0.02;
 
+    public final static double MINIMUM_PREVIEW_WIDTH = (1280 / PIXELS_PER_GRID_UNIT);
+
+    public final static double MINIMUM_PREVIEW_HEIGHT = (720 / PIXELS_PER_GRID_UNIT);
+
+    public final static double MAXIMUM_PREVIEW_WIDTH = (3840 / PIXELS_PER_GRID_UNIT);
+
+    public final static double MAXIMUM_PREVIEW_HEIGHT = (2160 / PIXELS_PER_GRID_UNIT);
+
     /**
      * Der konstante String der CSS anweist das Hintergrundbild auf nichts zu setzen.
      */

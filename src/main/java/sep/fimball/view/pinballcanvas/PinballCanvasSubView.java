@@ -87,47 +87,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     public WritableImage getScreenshot()
     {
-        double minWidth = (1280 / DesignConfig.PIXELS_PER_GRID_UNIT);
-        double minHeight = (720 / DesignConfig.PIXELS_PER_GRID_UNIT);
-        double maxWidth = (3840 / DesignConfig.PIXELS_PER_GRID_UNIT);
-        double maxHeight = (2160 / DesignConfig.PIXELS_PER_GRID_UNIT);
         double cameraScale = 1.0;
-
         RectangleDouble rectangleDouble = pinballCanvasViewModel.getBoundingBox();
-        if (rectangleDouble.getWidth() < minWidth || rectangleDouble.getHeight() < minHeight)
-        {
-            double newOriginX = rectangleDouble.getOrigin().getX();
-            double newOriginY = rectangleDouble.getOrigin().getY();
-            double newWidth = rectangleDouble.getWidth();
-            double newHeight = rectangleDouble.getHeight();
-
-            if (rectangleDouble.getWidth() < minWidth)
-            {
-                double scaleX = (minWidth / rectangleDouble.getWidth());
-                newWidth = rectangleDouble.getWidth() * scaleX;
-                newOriginX = rectangleDouble.getOrigin().getX() - (newWidth - rectangleDouble.getWidth()) / 2.0;
-            }
-
-            if (rectangleDouble.getHeight() < minHeight)
-            {
-                double scaleY = (minHeight / rectangleDouble.getHeight());
-                newHeight = rectangleDouble.getHeight() * scaleY;
-                newOriginY = rectangleDouble.getOrigin().getY() - (newHeight - rectangleDouble.getHeight()) / 2.0;
-            }
-            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), newWidth, newHeight);
-        }
-        if (rectangleDouble.getWidth() > maxWidth || rectangleDouble.getHeight() > maxHeight)
-        {
-            double scaleX = (maxWidth / rectangleDouble.getWidth());
-            double scaleY = (maxHeight / rectangleDouble.getHeight());
-            cameraScale = Math.min(scaleX, scaleY);
-            double newBorder = Math.max(rectangleDouble.getWidth() * cameraScale, rectangleDouble.getHeight() * cameraScale);
-            double newOriginX = rectangleDouble.getOrigin().getX() + (rectangleDouble.getWidth() - newBorder) / 2.0;
-            double newOriginY = rectangleDouble.getOrigin().getY() + (rectangleDouble.getHeight() - newBorder) / 2.0;
-            rectangleDouble = new RectangleDouble(new Vector2(newOriginX, newOriginY), newBorder, newBorder);
-        }
-
-        return createScreenshot(cameraScale, rectangleDouble);
+        ViewportRestrictor viewportRestrictor = new ViewportRestrictor(cameraScale);
+        ViewportRestrictor.RestrictedViewport restrictedViewport = viewportRestrictor.restrictRectangle(rectangleDouble);
+        return createScreenshot(restrictedViewport.getRestrictedCameraScale(), restrictedViewport.getRestrictedRectangle());
     }
 
     /**
