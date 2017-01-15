@@ -1,9 +1,7 @@
 package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
@@ -42,44 +40,19 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     private ListProperty<SpriteSubView> sprites;
 
     /**
-     * Die Position der Kamera, die den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
-     */
-    private SimpleObjectProperty<Vector2> cameraPosition;
-
-    /**
-     * Die Position der Kamera welche der eigentlichen Kamera etwas langsamer folgt um ein angenehmeres Spielgefühl zu erzeugen.
-     */
-    private Vector2 softCameraPosition;
-
-    /**
-     * Die Stärke des Zooms der Kamera, die die Größe der Flipperautomaten-Elemente bestimmt.
-     */
-    private SimpleDoubleProperty cameraZoom;
-
-    /**
-     * Der Zoom der Kamera welcher den eigentlichen Zoom etwas langsamer folgt.
-     */
-    private double softCameraZoom;
-
-    /**
      * Das zum PinballCanvasSubView gehörende PinballCanvasViewModel.
      */
     private PinballCanvasViewModel pinballCanvasViewModel;
 
     /**
-     * Die Zeit, zu der sich dieses Objekt zuletzt neu gezeichnet hat.
-     */
-    private long lastDraw;
-
-    /**
-     * Der Modus in dem gezeichnet werden soll.
-     */
-    private DrawMode drawMode;
-
-    /**
      * Die Hilfsklasse welche die Operationen auf dem GraphicsContext des Canvas ausführt.
      */
     private PinballCanvasDrawer pinballCanvasDrawer;
+
+    /**
+     * Die Kamera, welche den Bereich des Spielfelds ausrechnet der angezeigt wird.
+     */
+    private Camera camera;
 
     /**
      * Setzt das ViewModel dieses Objekts und bindet die Eigenschaften der View an die entsprechenden Eigenschaften des ViewModels.
@@ -90,19 +63,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     public void setViewModel(PinballCanvasViewModel pinballCanvasViewModel)
     {
         this.pinballCanvasViewModel = pinballCanvasViewModel;
-        lastDraw = System.currentTimeMillis();
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), (viewModel) -> new SpriteSubView(viewModel, ImageCache.getInstance()));
 
-        cameraPosition = new SimpleObjectProperty<>();
-        cameraPosition.bind(pinballCanvasViewModel.cameraPositionProperty());
-        softCameraPosition = cameraPosition.get();
-
-        cameraZoom = new SimpleDoubleProperty();
-        cameraZoom.bind(pinballCanvasViewModel.cameraZoomProperty());
-        softCameraZoom = cameraZoom.get();
-
-        drawMode = pinballCanvasViewModel.getDrawMode();
+        camera = new Camera(pinballCanvasViewModel.getDrawMode(), pinballCanvasViewModel.cameraPositionProperty(), pinballCanvasViewModel.cameraZoomProperty());
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
@@ -115,7 +79,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         pinballCanvasViewModel.setViewScreenshotCreator(this);
 
-        pinballCanvasDrawer = new PinballCanvasDrawer(canvas, drawMode, sprites, pinballCanvasViewModel.getBoundingBox());
+        pinballCanvasDrawer = new PinballCanvasDrawer(canvas, pinballCanvasViewModel.getDrawMode(), sprites, pinballCanvasViewModel.getBoundingBox());
     }
 
     /**
@@ -181,36 +145,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private void redraw()
     {
-        double defaultCamFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
-        double maximumCamFollowSpeed = 1;
-        double cameraFollowSpeed = defaultCamFollowSpeed;
-        double cameraZoomSpeed = 50;
-
-        long currentDraw = System.currentTimeMillis();
-        int delta = (int) (currentDraw - lastDraw);
-
-        if (canvas.getWidth() > 0 && canvas.getHeight() > 0)
-        {
-            Vector2 cameraOffset = cameraPosition.get().minus(softCameraPosition);
-            double maxmimumBallOffsetX = canvas.getWidth() / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
-            double maxmimumBallOffsetY = canvas.getHeight() / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
-            double xOffsetPercentage = Math.min(Math.abs(cameraOffset.getX()) / maxmimumBallOffsetX, 1);
-            double yOffsetPercentage = Math.min(Math.abs(cameraOffset.getY()) / maxmimumBallOffsetY, 1);
-            cameraFollowSpeed = defaultCamFollowSpeed - ((defaultCamFollowSpeed - maximumCamFollowSpeed) * Math.max(xOffsetPercentage, yOffsetPercentage));
-        }
-
-        double camFollowStep = delta / cameraFollowSpeed;
-        camFollowStep = Math.max(Math.min(camFollowStep, 1), 0);
-
-        double camZoomStep = delta / cameraZoomSpeed;
-        camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
-
-        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
-        softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
-
-        pinballCanvasDrawer.draw(softCameraPosition, softCameraZoom, pinballCanvasViewModel.selectingRectangleProperty());
-
-        lastDraw = currentDraw;
+        camera.updatePosition(canvas.getWidth(), canvas.getHeight());
+        pinballCanvasDrawer.draw(camera.getSoftCameraPosition(), camera.getSoftCameraZoom(), pinballCanvasViewModel.selectingRectangleProperty());
     }
 
     /**
@@ -244,6 +180,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return pinballCanvasDrawer.canvasPosToGridPos(softCameraPosition, softCameraZoom, mouseEvent.getX(), mouseEvent.getY());
+        return pinballCanvasDrawer.canvasPosToGridPos(camera.getSoftCameraPosition(), camera.getSoftCameraZoom(), mouseEvent.getX(), mouseEvent.getY());
     }
 }
