@@ -361,7 +361,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                         mouseMode.setValue(MouseMode.PLACING);
                         pinballMachineEditor.clearSelection();
                         pinballMachineEditor.addToSelection(elements.get(0));
-                        selectedElementSubViewModel.setPlacedElement(Optional.of(elements.get(0)));
                     }
                 }
             }

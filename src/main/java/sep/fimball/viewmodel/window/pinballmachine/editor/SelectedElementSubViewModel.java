@@ -114,7 +114,7 @@ public class SelectedElementSubViewModel
      *
      * @param newPlacedElement Das neue Flipperautomat-Element, das aktuell ausgewählt ist.
      */
-    void setPlacedElement(Optional<PlacedElement> newPlacedElement)
+    private void setPlacedElement(Optional<PlacedElement> newPlacedElement)
     {
         if (placedElement.isPresent())
         {
