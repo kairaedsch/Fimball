@@ -409,22 +409,4 @@ public class PinballMachine
         this.pinballMachineManager = pinballMachineManager;
     }
 
-    /**
-     * Gibt eine PinballMachine zurück, deren Werte die gleiche wie die von dieser PinballMachine sind.
-     * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
-     * @return Die kopierte PinballMachine.
-     */
-    public PinballMachine getCopy(PinballMachineManager pinballMachineManager)
-    {
-        PinballMachine copy = new PinballMachine(pinballMachineManager);
-        copy.name = new SimpleStringProperty(name.get());
-        copy.previewImagePath = new SimpleObjectProperty<>(previewImagePath.get());
-        copy.id = new SimpleStringProperty(id.get());
-        copy.highscoreList = new SimpleListProperty<>(highscoreList);
-        copy.highscoreListSorted = new SimpleListProperty<>(highscoreListSorted.get());
-        copy.elements = new SimpleListProperty<>();
-        copy.sortedElements =  new SimpleListProperty<>();
-        copy.elementsLoaded = elementsLoaded;
-        return copy;
-    }
 }
