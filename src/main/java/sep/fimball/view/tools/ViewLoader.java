@@ -124,7 +124,7 @@ public class ViewLoader<ViewT>
                 if (o instanceof Pane)
                 {
                     Pane pane = (Pane) o;
-                    installToolTip(pane);
+                    installTooltip(pane);
                 }
 
             }
@@ -132,11 +132,37 @@ public class ViewLoader<ViewT>
     }
 
     /**
+     * Installiert einen Tooltip beim Node. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
+     *
+     * @param labeledText der Text der ersetzt werden soll.
+     * @param node        der Node bei dem der Tooltip installiert werden soll.
+     */
+    private void installTooltip(StringProperty labeledText, Node node)
+    {
+        String regexPattern = "§.*§";
+        Pattern pattern = Pattern.compile(regexPattern);
+        Matcher matcher = pattern.matcher(labeledText.get());
+
+        if (matcher.matches())
+        {
+            String tooltipKey = matcher.group().replace("§", "");
+            Tooltip tooltip = new Tooltip();
+            tooltip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty(tooltipKey));
+            Tooltip.install(node, tooltip);
+
+            if (!labeledText.isBound())
+            {
+                labeledText.set(labeledText.get().replaceAll(regexPattern, ""));
+            }
+        }
+    }
+
+    /**
      * Installiert einen Tooltip bei der Pane. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
      *
      * @param pane Die Pane, bei der der Tooltip installiert werden soll.
      */
-    private void installToolTip(Pane pane)
+    private void installTooltip(Pane pane)
     {
         if (pane.accessibleHelpProperty().get() != null)
         {
@@ -168,32 +194,6 @@ public class ViewLoader<ViewT>
         {
             String keyValue = labeledText.replace("!", "");
             textProperty.bind(LanguageManagerViewModel.getInstance().textProperty(keyValue));
-        }
-    }
-
-    /**
-     * Installiert einen Tooltip beim Node. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
-     *
-     * @param labeledText der Text der ersetzt werden soll.
-     * @param node        der Node bei dem der Tooltip installiert werden soll.
-     */
-    private void installTooltip(StringProperty labeledText, Node node)
-    {
-        String regexPattern = "§.*§";
-        Pattern pattern = Pattern.compile(regexPattern);
-        Matcher matcher = pattern.matcher(labeledText.get());
-
-        if (matcher.matches())
-        {
-            String tooltipKey = matcher.group().replace("§", "");
-            Tooltip tooltip = new Tooltip();
-            tooltip.textProperty().bind(LanguageManagerViewModel.getInstance().textProperty(tooltipKey));
-            Tooltip.install(node, tooltip);
-
-            if (!labeledText.isBound())
-            {
-                labeledText.set(labeledText.get().replaceAll(regexPattern, ""));
-            }
         }
     }
 }
