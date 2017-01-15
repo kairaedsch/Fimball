@@ -463,3 +463,20 @@ AnchorPane {
 .selectedElementButtonContainer {
     -fx-padding: 10px 0 0 0;
 }
+
+.playerName {
+    -fx-padding: 10px;
+}
+
+.playerNameEntry {
+    -fx-padding: 0 0 10px 0;
+}
+
+.playerNameEntryDelete {
+    -fx-background-color: #DB5D5D;
+    -fx-text-fill: #FFF;
+}
+
+.playerNameEntryDelete:hover {
+    -fx-background-color: #A52F2F;
+}
