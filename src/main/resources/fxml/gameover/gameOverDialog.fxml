@@ -16,10 +16,7 @@
               <children>
                 <AnchorPane>
                   <children>
-                    <Label fx:id="key_2" text="!gameover.playerscores.key!" styleClass="topOffset" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER">
-                      <font>
-                        <Font name="System Bold" size="18.0" />
-                      </font>
+                    <Label fx:id="key_2" text="!gameover.playerscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER" styleClass="highscoreTitle">
                     </Label>
                   </children>
                 </AnchorPane>
@@ -30,10 +27,7 @@
               <children>
                 <AnchorPane>
                   <children>
-                    <Label fx:id="key_1" text="!gameover.highscores.key!" styleClass="topOffset" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER">
-                      <font>
-                        <Font name="System Bold" size="18.0" />
-                      </font>
+                    <Label fx:id="key_1" text="!gameover.highscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER" styleClass="highscoreTitle">
                     </Label>
                   </children>
                 </AnchorPane>
