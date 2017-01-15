@@ -283,21 +283,40 @@ public class PinballMachineManager
 
     }
 
-
     /**
      * Lädt den AutoSave-Automaten.
      * @return Der geladene Automat.
      */
     public Optional<PinballMachine> loadAutoSavedMachine()
     {
-        Path jsonPath = Paths.get(DataPath.pathToAutoSave());
+        Path jsonPath = Paths.get(DataPath.pathToAutoSaveGeneralJson());
 
         Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
-        if(pinballMachineJson.isPresent())
+        Optional<PinballMachine> autoSaveMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, "autosave", this);
+
+        if(autoSaveMachine.isPresent()) {
+            for(PinballMachine pinballMachine : pinballMachines) {
+                if(pinballMachine.getID().equals(autoSaveMachine.get().nameProperty().get())) {
+                    pinballMachine.unloadElements();
+                    loadAutoSaveElements(pinballMachine);
+                    return Optional.of(pinballMachine);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+
+    private void loadAutoSaveElements(PinballMachine pinballMachine) {
+        Path jsonPath = Paths.get(DataPath.pathToAutoSavePlacedElementsJson());
+
+        Optional<PlacedElementListJson> placedElementListJson = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
+        Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListJson);
+
+        if (PlacedElementList.isPresent())
         {
-            return PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineJson.get().name, this);
-        } else {
-            return Optional.empty();
+            PlacedElement[] tempElements = new PlacedElement[0];
+            pinballMachine.addElement(PlacedElementList.get().toArray(tempElements));
         }
     }
 }

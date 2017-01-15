@@ -41,6 +41,7 @@ public class EditorSession extends Session
         super(pinballMachine);
 
         autoSaveMachine = pinballMachine.getCopy(PinballMachineManager.getInstance());
+        autoSaveMachine.nameProperty().set(pinballMachine.getID());
         ObservableList<GameElement> list = FXCollections.observableArrayList();
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
 

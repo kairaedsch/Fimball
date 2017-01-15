@@ -4,11 +4,18 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.input.KeyEvent;
+import sep.fimball.general.data.DataPath;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 import sep.fimball.viewmodel.window.splashscreen.SplashScreenViewModel;
+
+import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Das SceneManagerViewModel steuert die View und bestimmt, welches Fenster und
@@ -45,7 +52,18 @@ public class SceneManagerViewModel
         windowViewModel = new SimpleObjectProperty<>();
         dialogViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
         fullscreen = new SimpleBooleanProperty();
-        setWindow(new SplashScreenViewModel());
+        if (Paths.get(DataPath.pathToAutoSave()).toFile().exists()) {
+            Optional<PinballMachine> autoSavedMachine = PinballMachineManager.getInstance().loadAutoSavedMachine();
+            if(autoSavedMachine.isPresent())
+            {
+                setWindow(new PinballMachineEditorViewModel(autoSavedMachine.get()));
+            } else {
+                setWindow(new SplashScreenViewModel());
+            }
+        } else
+        {
+            setWindow(new SplashScreenViewModel());
+        }
         fullscreen.bind(Settings.getSingletonInstance().fullscreenProperty());
     }
 
