@@ -6,6 +6,11 @@ package sep.fimball.model.blueprint.pinballmachine;
 public class PinballMachineJson
 {
     /**
+     * ID zur Identifizierung des Automaten.
+     */
+    public String id;
+
+    /**
      * Speichert den Namen des Flipperautomaten.
      */
     public String name;

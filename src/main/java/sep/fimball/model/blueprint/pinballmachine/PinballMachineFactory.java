@@ -37,7 +37,13 @@ class PinballMachineFactory
                 highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
             }
 
-            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
+            PinballMachine pinballMachine;
+            if(pinballMachineJson.id !=null)
+            {
+                pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineJson.id, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
+            } else {
+                pinballMachine  = new PinballMachine(pinballMachineJson.name, pinballMachineId, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
+            }
 
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
             return Optional.of(pinballMachine);
@@ -59,6 +65,7 @@ class PinballMachineFactory
     static PinballMachineJson createPinballMachineJson(PinballMachine pinballMachine)
     {
         PinballMachineJson pinballMachineJson = new PinballMachineJson();
+        pinballMachineJson.id = pinballMachine.getID();
         pinballMachineJson.name = pinballMachine.nameProperty().getValue();
         pinballMachineJson.previewImagePath = pinballMachine.relativePreviewImagePathProperty().get().isPresent() ? pinballMachine.relativePreviewImagePathProperty().get().get() : null;
 

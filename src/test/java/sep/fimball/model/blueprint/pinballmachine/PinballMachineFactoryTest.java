@@ -27,6 +27,7 @@ public class PinballMachineFactoryTest
             // Erstelle eine valide pinballMachineJson
             PinballMachineJson pinballMachineJson = new PinballMachineJson();
             pinballMachineJson.name = "testautomat";
+            pinballMachineJson.id = "testid";
             pinballMachineJson.previewImagePath = "previewimage";
             pinballMachineJson.highscores = new PinballMachineJson.HighscoreJson[3];
             pinballMachineJson.highscores[0] = new PinballMachineJson.HighscoreJson();
