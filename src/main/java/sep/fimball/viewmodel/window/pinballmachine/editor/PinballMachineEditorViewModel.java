@@ -274,6 +274,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void saveAndShowSettingsDialog()
     {
         editorSession.stopUpdateLoop();
+        editorSession.stopAutoSaveLoop();
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         boolean success = pinballMachine.saveToDisk();
         sceneManager.pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
@@ -288,6 +289,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         sceneManager.pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
         {
             editorSession.stopUpdateLoop();
+            editorSession.stopAutoSaveLoop();
             pinballMachine.unloadElements();
             sceneManager.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
         }));

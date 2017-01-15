@@ -155,6 +155,34 @@ public class PinballMachineManager
     }
 
     /**
+     * Speichert die gegebene PinballMachine und ihre Elemente.
+     *
+     * @param pinballMachine Die zu speichernde PinballMachine.
+     * @return Ob die PinballMachine gespeichert werden konnte.
+     */
+    public boolean saveAutoSaveMachine(PinballMachine pinballMachine)
+    {
+        Path pathToMachine = Paths.get(DataPath.pathToAutoSave());
+        if (!pathToMachine.toFile().exists())
+        {
+            boolean couldCreateFolder = pathToMachine.toFile().mkdir();
+            if (!couldCreateFolder)
+            {
+                System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
+                return false;
+            }
+        }
+
+        PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
+        boolean successMachine = JsonFileManager.saveToJson(DataPath.pathToAutoSaveGeneralJson(), pinballMachineJson);
+
+        PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
+        boolean successElements = saveToJson(DataPath.pathToAutoSavePlacedElementsJson(), placedElementListJson);
+
+        return successMachine && successElements;
+    }
+
+    /**
      * Speichert das gegebene Vorschaubild zu dem gegebenen Automaten.
      *
      * @param pinballMachine      Der Automat, dessen Vorschaubild gespeichert werden soll.
@@ -227,5 +255,37 @@ public class PinballMachineManager
         {
             Files.deleteIfExists(Paths.get(pinballMachine.absolutePreviewImagePathProperty().get()));
         }
+    }
+
+    public boolean deleteAutoSave()
+    {
+            try
+            {
+                // Lösche Dateien
+                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSaveGeneralJson()));
+                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSavePlacedElementsJson()));
+
+                // Lösche Ordner
+                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSave()));
+
+                return true;
+            }
+            catch (IOException e)
+            {
+                System.err.println("AutoSave not deleted");
+                e.printStackTrace();
+                return false;
+            }
+
+    }
+
+
+    public Optional<PinballMachine> getAutoSavedMachine()
+    {
+        Path jsonPath = Paths.get(DataPath.pathToAutoSave());
+
+        Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
+        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineJson.get().name, this);
+        return pinballMachine;
     }
 }

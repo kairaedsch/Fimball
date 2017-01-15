@@ -56,6 +56,11 @@ public class DataPath
     private final static String soundsPath = "/sounds";
 
     /**
+     * Der Unterpfad, an dem die AutoSave-Dateien eines Automaten gespeichert werden.
+     */
+    private final static String autoSavePath = "/autosave";
+
+    /**
      * Die Dateiendung der Bild-Dateien.
      */
     private final static String imageFileEnding = ".png";
@@ -275,6 +280,26 @@ public class DataPath
     {
         return dataPath + defaultPreview;
     }
+
+    /**
+     * Gibt den Pfad zur Ordner zurück, in dem sich die AutoSave-Dateien befinden.
+     * @return Der Pfad zur Ordner zurück, in dem sich die AutoSave-Dateien befinden.
+     */
+    public static String pathToAutoSave() {
+        return dataPath  + autoSavePath;
+    }
+
+    /**
+     * Gibt den Pfad zur GeneralJson-Datei des AutoSave-Automaten zurück.
+     * @return Der Pfad zur GeneralJson-Datei des AutoSave-Automaten zurück.
+     */
+    public static String pathToAutoSaveGeneralJson(){ return pathToAutoSave() + machineGeneralDescriptionFile; }
+
+    /**
+     * Gibt den Pfad zur PlacedElementJson-Datei des AutoSave-Automaten zurück.
+     * @return Der Pfad zur PlacedElementJson-Datei des AutoSave-Automaten zurück.
+     */
+    public static String pathToAutoSavePlacedElementsJson() { return pathToAutoSave() + machinePlacedElementsFile; }
 
     /**
      * Initialisiert die Konfiguration. Dabei wird die Unterscheidung zwischen den Pfaden auf Windows und Linux durchgeführt. Ebenfalls wird zwischen Development und Production Modus unterschieden.

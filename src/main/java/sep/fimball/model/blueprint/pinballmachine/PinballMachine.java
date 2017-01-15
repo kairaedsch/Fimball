@@ -400,4 +400,31 @@ public class PinballMachine
             pinballMachineManager.loadMachineElements(this);
         }
     }
+
+    /**
+     * Erstellt einen neue, leere PinballMachine.
+     * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
+     */
+    private PinballMachine(PinballMachineManager pinballMachineManager) {
+        this.pinballMachineManager = pinballMachineManager;
+    }
+
+    /**
+     * Gibt eine PinballMachine zurück, deren Werte die gleiche wie die von dieser PinballMachine sind.
+     * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
+     * @return Die kopierte PinballMachine.
+     */
+    public PinballMachine getCopy(PinballMachineManager pinballMachineManager)
+    {
+        PinballMachine copy = new PinballMachine(pinballMachineManager);
+        copy.name = name;
+        copy.previewImagePath = previewImagePath;
+        copy.id = id;
+        copy.highscoreList = highscoreList;
+        copy.highscoreListSorted = highscoreListSorted;
+        copy.elements = elements;
+        copy.sortedElements = sortedElements;
+        copy.elementsLoaded = elementsLoaded;
+        return copy;
+    }
 }
