@@ -1,8 +1,8 @@
-Label, TextField, * {
+Label, TextField, ComboBox, * {
     -fx-font-family: Roboto Medium;
 }
 
-Label, TextField {
+Label, TextField, ComboBox {
     -fx-font-size: 16px;
 }
 
@@ -395,8 +395,20 @@ AnchorPane {
 }
 
 .settingsMenuTitle {
-    -fx-font-size: 18px;
-    -fx-padding: 10px 0 0 0;
+    -fx-font-size: 20px;
+    -fx-padding: 9px 0 7px 0;
+}
+
+.settingsMenuTitleFirst {
+    -fx-padding: 0;
+}
+
+.settingsMenuPoint {
+    -fx-padding: 5px 0 5px 0;
+}
+
+.settingsMenuPointText {
+    -fx-padding: 6px 0 0 0;
 }
 
 .keybinding {
@@ -404,5 +416,5 @@ AnchorPane {
 }
 
 .keybindingName {
-    -fx-padding: 5px 10px 0 0;
+    -fx-padding: 6px 10px 0 0;
 }
