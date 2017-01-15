@@ -155,7 +155,7 @@ public class PinballMachineManager
     }
 
     /**
-     * Speichert die gegebene PinballMachine und ihre Elemente.
+     * Speichert die gegebene PinballMachine und ihre Elemente als AutoSave-Automaten.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
      * @return Ob die PinballMachine gespeichert werden konnte.
@@ -257,7 +257,11 @@ public class PinballMachineManager
         }
     }
 
-    public boolean deleteAutoSave()
+    /**
+     * Löscht den AutoSave-Automaten.
+     * @return Gibt zurück, ob das Löschen erfolgreich war.
+     */
+    public boolean deleteAutoSaveMachine()
     {
             try
             {
@@ -280,12 +284,20 @@ public class PinballMachineManager
     }
 
 
-    public Optional<PinballMachine> getAutoSavedMachine()
+    /**
+     * Lädt den AutoSave-Automaten.
+     * @return Der geladene Automat.
+     */
+    public Optional<PinballMachine> loadAutoSavedMachine()
     {
         Path jsonPath = Paths.get(DataPath.pathToAutoSave());
 
         Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
-        Optional<PinballMachine> pinballMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineJson.get().name, this);
-        return pinballMachine;
+        if(pinballMachineJson.isPresent())
+        {
+            return PinballMachineFactory.createPinballMachine(pinballMachineJson, pinballMachineJson.get().name, this);
+        } else {
+            return Optional.empty();
+        }
     }
 }

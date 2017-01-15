@@ -59,7 +59,7 @@ public class EditorSession extends Session
      */
     public void stopAutoSaveLoop(){
         autoSaveLoop.stop();
-        PinballMachineManager.getInstance().deleteAutoSave();
+        PinballMachineManager.getInstance().deleteAutoSaveMachine();
     }
 
 
