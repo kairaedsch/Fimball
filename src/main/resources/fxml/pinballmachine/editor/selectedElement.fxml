@@ -4,35 +4,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.SelectedElementSubView">
-    <children>
-        <GridPane>
-            <columnConstraints>
-                <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints />
-            </rowConstraints>
-            <children>
-                <Label text="Name: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label fx:id="nameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label text="Description: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="strengthLabel" text="Strength: 3" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Slider fx:id="strengthSlider" blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="pointsLabel" text="Points: 500" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Slider fx:id="pointsSlider" blockIncrement="1" max="50" min="1" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            </children>
-            <VBox.margin>
-                <Insets right="5.0" />
-            </VBox.margin>
-        </GridPane>
-        <Button fx:id="rotateButton" mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="Rotate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-        <Button fx:id="duplicateButton" mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="Duplicate" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" />
-        <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="Remove" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
-    </children>
+<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" stylesheets="@../../../styles/style.css"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.SelectedElementSubView">
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints/>
+        </rowConstraints>
+        <VBox.margin>
+            <Insets right="5.0"/>
+        </VBox.margin>
+        <Label text="Name: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="nameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label text="Description: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="strengthLabel" text="Strength: 3" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Slider fx:id="strengthSlider" blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label fx:id="pointsLabel" text="Points: 500" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Slider fx:id="pointsSlider" blockIncrement="1" max="50" min="1" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+    <Button fx:id="rotateButton" mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="Rotate" AnchorPane.bottomAnchor="10.0"
+            AnchorPane.leftAnchor="10.0"/>
+    <Button fx:id="duplicateButton" mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="Duplicate" AnchorPane.bottomAnchor="10.0"
+            AnchorPane.leftAnchor="100.0"/>
+    <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="Remove" AnchorPane.bottomAnchor="10.0"
+            AnchorPane.rightAnchor="25.0"/>
 </VBox>

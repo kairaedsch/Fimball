@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Polyline?>
 <?import java.lang.*?>
-<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView"
-      styleClass="pinballMachineSettings" stylesheets="@../../../styles/style.css">
+
+<VBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sep.fimball.view.window.pinballmachine.settings.PinballMachineSettingsView" styleClass="pinballMachineSettings" stylesheets="@../../../styles/style.css">
     <Pane minHeight="25" VBox.vgrow="ALWAYS"/>
     <GridPane minHeight="80.0" styleClass="machineAktions">
         <columnConstraints>
@@ -47,7 +46,7 @@
         </padding>
         <Pane GridPane.columnIndex="0"/>
         <HBox GridPane.columnIndex="1">
-            <Pane HBox.hgrow="ALWAYS" />
+            <Pane HBox.hgrow="ALWAYS"/>
             <HBox styleClass="buttonBackToMainMenuContainer">
                 <Polyline styleClass="buttonBackToMainMenuArrow" onMouseClicked="#menuClicked">
                     <points>
@@ -68,23 +67,20 @@
         </HBox>
         <HBox GridPane.columnIndex="2">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane fx:id="save" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked"
-                  prefHeight="60.0" prefWidth="60.0"
+            <Pane fx:id="save" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#saveClicked" prefHeight="60.0" prefWidth="60.0"
                   styleClass="button, buttonSave" accessibleHelp="§editor.settings.saveButton.key§"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="3">
             <Pane HBox.hgrow="ALWAYS"/>
-            <Pane fx:id="delete" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked"
-                  prefHeight="60.0" prefWidth="60.0"
+            <Pane fx:id="delete" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#deleteClicked" prefHeight="60.0" prefWidth="60.0"
                   styleClass="button, buttonDelete" accessibleHelp="§editor.settings.deleteButton.key§"/>
             <Pane HBox.hgrow="ALWAYS"/>
         </HBox>
         <HBox GridPane.columnIndex="4">
             <Pane HBox.hgrow="ALWAYS"/>
             <HBox styleClass="buttonEditContainer">
-                <Pane fx:id="edit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked"
-                      prefHeight="60.0" prefWidth="60.0"
+                <Pane fx:id="edit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0"
                       styleClass="button, buttonEdit" accessibleHelp="§editor.settings.editButton.key§"/>
                 <Polyline styleClass="buttonEditArrow" onMouseClicked="#editClicked">
                     <points>

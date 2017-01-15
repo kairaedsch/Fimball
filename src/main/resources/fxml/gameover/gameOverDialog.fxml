@@ -3,37 +3,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../styles/style.css" text="!gameover.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
-  <content>
+<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="700.0" stylesheets="@../../styles/style.css" text="!gameover.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
     <AnchorPane styleClass="dialogBackground">
-      <children>
         <HBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <children>
-            <VBox HBox.hgrow="ALWAYS"  styleClass="dialogScores">
-              <children>
+            <VBox HBox.hgrow="ALWAYS" styleClass="dialogScores">
                 <AnchorPane>
-                  <children>
-                    <Label fx:id="key_2" text="!gameover.playerscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER" styleClass="highscoreTitle"/>
-                  </children>
+                    <Label fx:id="key_2" text="!gameover.playerscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER"
+                           styleClass="highscoreTitle"/>
                 </AnchorPane>
-                <VBox fx:id="playerScores" />
-              </children>
+                <VBox fx:id="playerScores"/>
             </VBox>
-            <VBox HBox.hgrow="ALWAYS"  styleClass="dialogScores">
-              <children>
+            <VBox HBox.hgrow="ALWAYS" styleClass="dialogScores">
                 <AnchorPane>
-                  <children>
-                    <Label fx:id="key_1" text="!gameover.highscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER" styleClass="highscoreTitle"/>
-                  </children>
+                    <Label fx:id="key_1" text="!gameover.highscores.key!" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER"
+                           styleClass="highscoreTitle"/>
                 </AnchorPane>
-                <VBox fx:id="highscores" />
-              </children>
+                <VBox fx:id="highscores"/>
             </VBox>
-          </children>
         </HBox>
-        <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-        <Button fx:id="key_4" mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      </children>
+        <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!"
+                AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+        <Button fx:id="key_4" mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!" AnchorPane.bottomAnchor="10.0"
+                AnchorPane.leftAnchor="10.0"/>
     </AnchorPane>
-  </content>
 </TitledPane>

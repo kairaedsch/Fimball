@@ -3,19 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" stylesheets="@../../styles/style.css" text="!pause.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.pause.PauseView">
-   <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dialogBackground">
-          <children>
-              <VBox styleClass="dialogScores" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <children>
-                     <Label fx:id="key_1" text="!pause.playerscores.key!" styleClass="highscoreTitle"/>
-                     <VBox fx:id="playerScores"/>
-                 </children>
-              </VBox>
-              <Button fx:id="key_2" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!pause.continue.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-              <Button fx:id="key_3" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#abortClicked" styleClass="dialogButton" text="!pause.abort.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-          </children>
-       </AnchorPane>
-   </content>
+<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0"
+            prefWidth="600.0" stylesheets="@../../styles/style.css" text="!pause.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sep.fimball.view.dialog.pause.PauseView">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="dialogBackground">
+        <VBox styleClass="dialogScores" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="key_1" text="!pause.playerscores.key!" styleClass="highscoreTitle"/>
+            <VBox fx:id="playerScores"/>
+        </VBox>
+        <Button fx:id="key_2" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!pause.continue.key!"
+                AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+        <Button fx:id="key_3" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#abortClicked" styleClass="dialogButton"
+                text="!pause.abort.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
+    </AnchorPane>
 </TitledPane>

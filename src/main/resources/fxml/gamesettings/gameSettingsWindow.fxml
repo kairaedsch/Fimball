@@ -1,91 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <TitledPane fx:id="key_0" animated="false" collapsible="false" prefHeight="550.0" maxWidth="800.0" stylesheets="@../../styles/style.css" text="!gamesettings.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
-    <content>
-        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="dialogBackground">
-            <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="10"/>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="10"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints vgrow="ALWAYS"/>
-                <RowConstraints vgrow="NEVER"/>
-            </rowConstraints>
-            <children>
-                <VBox GridPane.columnIndex="1">
-                    <children>
-                        <Label fx:id="key_2" text="!gamesettings.general.language.key!" styleClass="settingsMenuTitle, settingsMenuTitleFirst"/>
-                        <HBox styleClass="settingsMenuPoint" minHeight="44">
-                            <Label fx:id="key_3" text="!gamesettings.general.language.select.key!" minWidth="120" styleClass="settingsMenuPointText"/>
-                            <ComboBox fx:id="language" minWidth="150.0" styleClass="dialogButton"/>
-                        </HBox>
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="dialogBackground">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"/>
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="NEVER"/>
+        </rowConstraints>
+        <VBox GridPane.columnIndex="1">
+            <Label fx:id="key_2" text="!gamesettings.general.language.key!" styleClass="settingsMenuTitle, settingsMenuTitleFirst"/>
+            <HBox styleClass="settingsMenuPoint" minHeight="44">
+                <Label fx:id="key_3" text="!gamesettings.general.language.select.key!" minWidth="120" styleClass="settingsMenuPointText"/>
+                <ComboBox fx:id="language" minWidth="150.0" styleClass="dialogButton"/>
+            </HBox>
 
-                        <Label fx:id="key_5" text="!gamesettings.general.display.key!" styleClass="settingsMenuTitle, "/>
-                        <HBox styleClass="settingsMenuPoint" minHeight="44">
-                            <Label fx:id="key_6" text="!gamesettings.general.display.fullscreen.key!" minWidth="120" styleClass="settingsMenuPointText"/>
-                            <CheckBox fx:id="fullscreen" mnemonicParsing="false" text="§gamesettings.general.display.fullscreen.tip.key§" minHeight="33">
-                                <tooltip>
-                                    <Tooltip fx:id="key_7" text="!gamesettings.general.display.fullscreen.tip.key!"/>
-                                </tooltip>
-                            </CheckBox>
-                        </HBox>
+            <Label fx:id="key_5" text="!gamesettings.general.display.key!" styleClass="settingsMenuTitle, "/>
+            <HBox styleClass="settingsMenuPoint" minHeight="44">
+                <Label fx:id="key_6" text="!gamesettings.general.display.fullscreen.key!" minWidth="120" styleClass="settingsMenuPointText"/>
+                <CheckBox fx:id="fullscreen" mnemonicParsing="false" text="§gamesettings.general.display.fullscreen.tip.key§" minHeight="33">
+                    <tooltip>
+                        <Tooltip fx:id="key_7" text="!gamesettings.general.display.fullscreen.tip.key!"/>
+                    </tooltip>
+                </CheckBox>
+            </HBox>
 
-                        <GridPane>
-                            <columnConstraints>
-                                <ColumnConstraints prefWidth="120.0"/>
-                                <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0"/>
-                                <ColumnConstraints prefWidth="120.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                            <children>
-                                <Label fx:id="key_9" text="!gamesettings.audio.volume.key!" styleClass="settingsMenuTitle"/>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="120.0"/>
+                    <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0"/>
+                    <ColumnConstraints prefWidth="120.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <Label fx:id="key_9" text="!gamesettings.audio.volume.key!" styleClass="settingsMenuTitle"/>
 
-                                <Label fx:id="key_15" text="!gamesettings.audio.volume.master.key!" GridPane.rowIndex="1"/>
-                                <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <tooltip>
-                                        <Tooltip fx:id="key_10" text="!gamesettings.audio.volume.master.tip.key!"/>
-                                    </tooltip>
-                                </Slider>
-                                <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Label fx:id="key_15" text="!gamesettings.audio.volume.master.key!" GridPane.rowIndex="1"/>
+                <Slider fx:id="masterVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <tooltip>
+                        <Tooltip fx:id="key_10" text="!gamesettings.audio.volume.master.tip.key!"/>
+                    </tooltip>
+                </Slider>
+                <Label fx:id="masterVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 
-                                <Label fx:id="key_14" text="!gamesettings.audio.volume.music.key!" GridPane.rowIndex="2"/>
-                                <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <tooltip>
-                                        <Tooltip fx:id="key_13" text="!gamesettings.audio.volume.music.tip.key!"/>
-                                    </tooltip>
-                                </Slider>
-                                <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <Label fx:id="key_14" text="!gamesettings.audio.volume.music.key!" GridPane.rowIndex="2"/>
+                <Slider fx:id="musicVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <tooltip>
+                        <Tooltip fx:id="key_13" text="!gamesettings.audio.volume.music.tip.key!"/>
+                    </tooltip>
+                </Slider>
+                <Label fx:id="musicVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
 
-                                <Label fx:id="key_11" text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="3"/>
-                                <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <tooltip>
-                                        <Tooltip text="!gamesettings.audio.volume.sfx.tip.key!"/>
-                                    </tooltip>
-                                </Slider>
-                                <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                            </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-                <VBox>
-                    <children>
-                        <Label fx:id="key_4" text="!gamesettings.general.keybinding.key!" styleClass="settingsMenuTitle, settingsMenuTitleFirst"/>
-                        <VBox fx:id="keyBinding"/>
-                    </children>
-                </VBox>
-                <Button fx:id="key_16" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gamesettings.continue.key!" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            </children>
-        </GridPane>
-    </content>
+                <Label fx:id="key_11" text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="3"/>
+                <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <tooltip>
+                        <Tooltip text="!gamesettings.audio.volume.sfx.tip.key!"/>
+                    </tooltip>
+                </Slider>
+                <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+            </GridPane>
+        </VBox>
+        <VBox>
+            <Label fx:id="key_4" text="!gamesettings.general.keybinding.key!" styleClass="settingsMenuTitle, settingsMenuTitleFirst"/>
+            <VBox fx:id="keyBinding"/>
+        </VBox>
+        <Button fx:id="key_16" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gamesettings.continue.key!"
+                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    </GridPane>
 </TitledPane>

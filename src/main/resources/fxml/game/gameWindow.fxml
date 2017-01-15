@@ -2,13 +2,9 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
-<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="sep.fimball.view.window.game.GameView">
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.game.GameView" stylesheets="@../../styles/style.css">
     <StackPane fx:id="pinballCanvasContainer" StackPane.alignment="CENTER"/>
-    <stylesheets>
-        <String fx:value="styles/style.css"/>
-    </stylesheets>
     <VBox styleClass="gameInfo" maxWidth="300" maxHeight="155" StackPane.alignment="TOP_CENTER">
         <HBox styleClass="gameInfoPlayerContainer">
             <Pane HBox.hgrow="ALWAYS"/>

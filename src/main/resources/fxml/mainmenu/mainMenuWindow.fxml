@@ -34,7 +34,7 @@
     <AnchorPane minWidth="300.0">
         <VBox styleClass="machinePreview" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Label fx:id="detailedPreviewName" alignment="CENTER" maxWidth="Infinity" prefHeight="17.0" styleClass="machineName"
-                       text="Automat"/>
+                   text="Automat"/>
             <GridPane prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
@@ -74,8 +74,8 @@
                 <HBox GridPane.columnIndex="1">
                     <Pane HBox.hgrow="ALWAYS"/>
                     <Pane fx:id="edit" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0"
-                          onMouseClicked="#editClicked"  prefHeight="60.0" prefWidth="60.0"  styleClass="button, buttonEdit"
-                    accessibleHelp="§mainmenu.edit.tip.key§"/>
+                          onMouseClicked="#editClicked" prefHeight="60.0" prefWidth="60.0" styleClass="button, buttonEdit"
+                          accessibleHelp="§mainmenu.edit.tip.key§"/>
                     <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>
             </GridPane>
