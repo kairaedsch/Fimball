@@ -43,7 +43,9 @@ public enum BaseElementType
     /**
      * Kennzeichnet ein Loch.
      */
-    HOLE(-1);
+    HOLE(-1),
+
+    SPINNER(0);
 
     /**
      * Gibt die Reihenfolge beim Zeichnen an. Dabei bedeutet ein kleinerer Wert, dass zuerst gezeichnet wird. z.B. wird 0 vor 1 gezeichnet.

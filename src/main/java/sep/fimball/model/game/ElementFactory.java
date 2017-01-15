@@ -6,10 +6,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.Handler;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.PhysicsHandler;
-import sep.fimball.model.physics.element.FlipperPhysicsElement;
-import sep.fimball.model.physics.element.HolePhysicsElement;
-import sep.fimball.model.physics.element.PhysicsElement;
-import sep.fimball.model.physics.element.PlungerPhysicsElement;
+import sep.fimball.model.physics.element.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +79,14 @@ public class ElementFactory
                             gameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
                     gameElements.add(gameElement);
                     physicsElements.add(physicsElement);
+                    break;
+                case SPINNER:
+                    SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false);
+                    SpinnerPhysicsElement spinnerPhysicsElement = new SpinnerPhysicsElement(spinnerGameElement, spinnerGameElement.positionProperty().get(),
+                            spinnerGameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
+                    spinnerGameElement.setPhysicsElement(spinnerPhysicsElement);
+                    gameElements.add(spinnerGameElement);
+                    physicsElements.add(spinnerPhysicsElement);
                     break;
                 default:
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
