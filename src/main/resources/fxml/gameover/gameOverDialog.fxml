@@ -6,21 +6,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" stylesheets="@../../styles/style.css" text="!gameover.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
-   <content>
-       <AnchorPane styleClass="dialogBackground">
+<TitledPane fx:id="key_0" animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../styles/style.css" text="!gameover.key!" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gameover.GameOverView">
+  <content>
+    <AnchorPane styleClass="dialogBackground">
+      <children>
+        <HBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-              <VBox styleClass="dialogScores" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <children>
-                     <Label fx:id="key_2" text="!gameover.playerscores.key!"  styleClass="highscoreTitle"/>
-                     <VBox fx:id="playerScores" prefWidth="100.0" />
-                     <Label fx:id="key_1" text="!gameover.highscores.key!"  styleClass="highscoreTitle"/>
-                     <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0" />
-                 </children>
-              </VBox>
-              <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-              <Button fx:id="key_4" mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+            <VBox HBox.hgrow="ALWAYS">
+              <children>
+                <AnchorPane>
+                  <children>
+                    <Label fx:id="key_2" text="!gameover.playerscores.key!" styleClass="topOffset" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER">
+                      <font>
+                        <Font name="System Bold" size="18.0" />
+                      </font>
+                    </Label>
+                  </children>
+                </AnchorPane>
+                <VBox fx:id="playerScores" />
+              </children>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+              <children>
+                <AnchorPane>
+                  <children>
+                    <Label fx:id="key_1" text="!gameover.highscores.key!" styleClass="topOffset" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="TOP_CENTER">
+                      <font>
+                        <Font name="System Bold" size="18.0" />
+                      </font>
+                    </Label>
+                  </children>
+                </AnchorPane>
+                <VBox fx:id="highscores" />
+              </children>
+            </VBox>
           </children>
-       </AnchorPane>
-   </content>
+        </HBox>
+        <Button fx:id="key_3" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!gameover.continue.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+        <Button fx:id="key_4" mnemonicParsing="false" onAction="#restartClicked" styleClass="dialogButton" text="!gameover.restart.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      </children>
+    </AnchorPane>
+  </content>
 </TitledPane>

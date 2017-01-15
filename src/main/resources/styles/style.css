@@ -418,3 +418,7 @@ AnchorPane {
 .keybindingName {
     -fx-padding: 6px 10px 0 0;
 }
+
+.topOffset {
+    -fx-padding: 10px 0 0 0;
+}
