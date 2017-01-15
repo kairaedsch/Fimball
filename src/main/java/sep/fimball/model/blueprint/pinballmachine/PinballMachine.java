@@ -420,14 +420,10 @@ public class PinballMachine
         copy.name = new SimpleStringProperty(name.get());
         copy.previewImagePath = new SimpleObjectProperty<>(previewImagePath.get());
         copy.id = new SimpleStringProperty(id.get());
-        copy.highscoreList = new SimpleListProperty<>();
-        //copy.highscoreList.s.setAll(highscoreList);
-        copy.highscoreListSorted = new SimpleListProperty<>();
-        copy.highscoreListSorted.bindBidirectional(highscoreListSorted);
+        copy.highscoreList = new SimpleListProperty<>(highscoreList);
+        copy.highscoreListSorted = new SimpleListProperty<>(highscoreListSorted.get());
         copy.elements = new SimpleListProperty<>();
-        copy.elements.bind(elements);
         copy.sortedElements =  new SimpleListProperty<>();
-        copy.sortedElements.bind(sortedElements);
         copy.elementsLoaded = elementsLoaded;
         return copy;
     }

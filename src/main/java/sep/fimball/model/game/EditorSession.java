@@ -9,6 +9,7 @@ import javafx.util.Duration;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 /**
  * Die Session des Editors.
@@ -49,7 +50,13 @@ public class EditorSession extends Session
 
         autoSaveLoop = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(AUTOSAVE_RATE), (event ->
-                PinballMachineManager.getInstance().saveAutoSaveMachine(autoSaveMachine)));
+        {
+            autoSaveMachine.unloadElements();
+            for(PlacedElement placedElement : pinballMachine.elementsProperty()) {
+                autoSaveMachine.addElement(placedElement);
+            }
+            PinballMachineManager.getInstance().saveAutoSaveMachine(autoSaveMachine);
+        }));
         autoSaveLoop.getKeyFrames().add(frame);
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
         autoSaveLoop.play();
