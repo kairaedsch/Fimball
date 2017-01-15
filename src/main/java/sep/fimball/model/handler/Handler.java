@@ -31,9 +31,12 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
      */
     public Handler(SomeHandler someHandler)
     {
-        if(someHandler instanceof ElementHandler) setElementHandler((ElementHandler) someHandler);
-        if(someHandler instanceof GameHandler) setGameHandler((GameHandler) someHandler);
-        if(someHandler instanceof UserHandler) setUserHandler((UserHandler) someHandler);
+        if (someHandler instanceof ElementHandler)
+            setElementHandler((ElementHandler) someHandler);
+        if (someHandler instanceof GameHandler)
+            setGameHandler((GameHandler) someHandler);
+        if (someHandler instanceof UserHandler)
+            setUserHandler((UserHandler) someHandler);
     }
 
     /**

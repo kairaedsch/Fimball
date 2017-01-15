@@ -46,7 +46,7 @@ class SettingsFactory
      * Lädt die in {@code settingsJson} gespeicherten Einstellungen in die aktuellen Einstellungen.
      *
      * @param settingsJson Das Objekt, das die zu setzenden Einstellungen enthält.
-     * @param settings Das Settings-Objekt, in die die serialisierten Einstellungen geladen werden sollen.
+     * @param settings     Das Settings-Objekt, in die die serialisierten Einstellungen geladen werden sollen.
      */
     static void fillSettingsFromSettingsJson(SettingsJson settingsJson, Settings settings)
     {

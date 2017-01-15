@@ -77,7 +77,7 @@ public class SpriteSubViewTest
     /**
      * Testet das Zeichnen der unteren Bildebene.
      */
-    @Test(timeout = 10000)
+    @Test (timeout = 10000)
     public void drawBottomLayerTest()
     {
         MockitoAnnotations.initMocks(this);
@@ -112,7 +112,7 @@ public class SpriteSubViewTest
     /**
      * Testet das Zeichnen der oberen Bildebene.
      */
-    @Test(timeout = 10000)
+    @Test (timeout = 10000)
     public void drawTopLayerTest()
     {
         MockitoAnnotations.initMocks(this);

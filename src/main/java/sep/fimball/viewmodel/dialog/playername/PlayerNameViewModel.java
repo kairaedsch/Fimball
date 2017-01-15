@@ -29,6 +29,7 @@ public class PlayerNameViewModel extends DialogViewModel
      * Gibt am, ob das Spiel gestartet werden darf.
      */
     private BooleanProperty gameCanBeStarted;
+
     /**
      * Erstellt ein neues PlayerNameViewModel.
      *
@@ -45,7 +46,7 @@ public class PlayerNameViewModel extends DialogViewModel
 
         playerNameEntries.get().addListener((ListChangeListener<PlayerNameEntrySubViewModel>) change ->
         {
-            while(change.next())
+            while (change.next())
             {
                 if (change.wasAdded())
                 {
@@ -67,7 +68,8 @@ public class PlayerNameViewModel extends DialogViewModel
     private void checkNames()
     {
         gameCanBeStarted.set(true);
-        for(PlayerNameEntrySubViewModel playerNameEntrySubViewModel : playerNameEntries) {
+        for (PlayerNameEntrySubViewModel playerNameEntrySubViewModel : playerNameEntries)
+        {
             gameCanBeStarted.set(gameCanBeStarted.get() && !playerNameEntrySubViewModel.playerNameProperty().get().isEmpty());
         }
     }
@@ -124,9 +126,11 @@ public class PlayerNameViewModel extends DialogViewModel
 
     /**
      * Gibt zurück, ob das Spiel gestartet werden darf.
+     *
      * @return {@code true} falls das Spiel gestartet werden darf, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty getGameCanBeStarted() {
+    public ReadOnlyBooleanProperty getGameCanBeStarted()
+    {
         return gameCanBeStarted;
     }
 }

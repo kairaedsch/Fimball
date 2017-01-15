@@ -42,20 +42,23 @@ public class HandlerManagerTest
      * Testet, ob die UserHandler des Managers aktiviert werden.
      */
     @Test
-    public void activateUserHandlerTest() {
+    public void activateUserHandlerTest()
+    {
         HandlerManager testHandlerManager = new HandlerManager();
         Handler testHandler = mock(Handler.class);
-        doAnswer(invocationOnMock -> {
+        doAnswer(invocationOnMock ->
+        {
             userHandlerActivated = true;
-            return null;}).when(testHandler).activateUserHandler(any());
+            return null;
+        }).when(testHandler).activateUserHandler(any());
         testHandlerManager.addHandler(testHandler);
 
-        testHandlerManager.activateUserHandler(new KeyEventArgs(null,null,false));
+        testHandlerManager.activateUserHandler(new KeyEventArgs(null, null, false));
         assertThat(userHandlerActivated, is(true));
 
         userHandlerActivated = false;
         testHandlerManager.setKeyEventsActivated(false);
-        testHandlerManager.activateUserHandler(new KeyEventArgs(null,null,false));
+        testHandlerManager.activateUserHandler(new KeyEventArgs(null, null, false));
         assertThat(userHandlerActivated, is(false));
     }
 
@@ -63,12 +66,15 @@ public class HandlerManagerTest
      * Testet, ob die ElementHandler des Managers aktiviert werden.
      */
     @Test
-    public void activateElementHandlerTest() {
+    public void activateElementHandlerTest()
+    {
         HandlerManager testHandlerManager = new HandlerManager();
         Handler testHandler = mock(Handler.class);
-        doAnswer(invocationOnMock -> {
+        doAnswer(invocationOnMock ->
+        {
             elementHandlerActivated = true;
-            return null;}).when(testHandler).activateElementHandler(any(), anyInt());
+            return null;
+        }).when(testHandler).activateElementHandler(any(), anyInt());
         testHandlerManager.addHandler(testHandler);
 
         testHandlerManager.activateElementHandler(null, 0);
@@ -79,17 +85,22 @@ public class HandlerManagerTest
      * Testet, ob die GameHandler des Managers aktiviert werden.
      */
     @Test
-    public void activateGameHandlerTest() {
+    public void activateGameHandlerTest()
+    {
         HandlerManager testHandlerManager = new HandlerManager();
         Handler testHandler1 = mock(Handler.class);
-        doAnswer(invocationOnMock -> {
+        doAnswer(invocationOnMock ->
+        {
             gameHandler1Activated = true;
-            return null;}).when(testHandler1).activateGameHandler(any());
+            return null;
+        }).when(testHandler1).activateGameHandler(any());
 
         Handler testHandler2 = mock(Handler.class);
-        doAnswer(invocationOnMock -> {
+        doAnswer(invocationOnMock ->
+        {
             gameHandler2Activated = true;
-            return null;}).when(testHandler2).activateGameHandler(any());
+            return null;
+        }).when(testHandler2).activateGameHandler(any());
 
         List<Handler> handlerList = new ArrayList<>();
         handlerList.add(testHandler1);
@@ -99,7 +110,7 @@ public class HandlerManagerTest
 
         testHandlerManager.activateGameHandler(null);
         assertThat(gameHandler1Activated, is(true));
-        assertThat(gameHandler2Activated,is(true));
+        assertThat(gameHandler2Activated, is(true));
     }
 
 

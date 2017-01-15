@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 /**
  * Tests für die Klasse ElementFactory.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith (MockitoJUnitRunner.class)
 public class ElementFactoryTest
 {
     private final double TEST_ROTATION = 0.0;

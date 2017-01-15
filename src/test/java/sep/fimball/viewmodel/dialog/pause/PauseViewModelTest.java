@@ -47,7 +47,7 @@ public class PauseViewModelTest
      * Simuliert das Drücken einer Taste.
      *
      * @param viewModel das ViewModel auf dem der Tastendruck simuliert werden soll.
-     * @param code der Tastendruck der simuliert werden soll.
+     * @param code      der Tastendruck der simuliert werden soll.
      */
     private void simulateKeyPressed(PauseViewModel viewModel, KeyCode code)
     {

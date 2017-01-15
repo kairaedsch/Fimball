@@ -51,7 +51,8 @@ public class PlayerTest
      * Testet, ob zwei Spieler richtig verglichen werden.
      */
     @Test
-    public void equalTest() {
+    public void equalTest()
+    {
         Player player1 = new Player("TestPlayer");
         Player player2 = new Player("OtherTestPlayer");
         Player player3 = new Player("TestPlayer");

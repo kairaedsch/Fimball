@@ -15,9 +15,10 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
 
     /**
      * Erstellt ein neues Loch.
-     * @param gameElement GameElement, das zu diesem Loch gehört.
-     * @param position Position des Lochs.
-     * @param rotation Rotation des Lochs.
+     *
+     * @param gameElement        GameElement, das zu diesem Loch gehört.
+     * @param position           Position des Lochs.
+     * @param rotation           Rotation des Lochs.
      * @param basePhysicsElement PhysicsElement, auf dem das Loch basiert.
      */
     public HolePhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
@@ -27,6 +28,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
 
     /**
      * Versucht einen Ball festzuhalten, falls das Loch nicht bereits einen Ball hat oder vor kurzem einen Ball abgeschossen hat.
+     *
      * @param ball Der Ball, welcher festgehalten werden soll.
      */
     public void tryFreezeBall(BallPhysicsElement ball)
@@ -41,6 +43,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
 
     /**
      * Kann das Loch im Moment einen Ball annehmen?
+     *
      * @return false, falls das Loch einen Ball hat oder vor kurzem einen Ball abgeschossen hat. Sonst true.
      */
     public boolean canAffectBall()

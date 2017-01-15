@@ -12,7 +12,7 @@ public class ShapeLightChangerTest
     /**
      * Überprüft ob die Methode {@link LightChanger#determineLightStatusWithAnimation} grundsätzlich funktionieren könnte.
      */
-    @Test(timeout = 1000)
+    @Test (timeout = 1000)
     public void determineLightStatus()
     {
         LightChangeTester.test(new ShapeLightChanger(false, new SimpleObjectProperty<>(new Vector2()), false), false);

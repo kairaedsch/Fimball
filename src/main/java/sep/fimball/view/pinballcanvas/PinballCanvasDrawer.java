@@ -36,9 +36,10 @@ class PinballCanvasDrawer
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
-     *  @param canvas   Die Canvas auf der gezeichnet wird.
-     * @param drawMode Der Modus mit dem gezeichnet werden soll.
-     * @param sprites Die zu zeichnenden Sprites.
+     *
+     * @param canvas      Die Canvas auf der gezeichnet wird.
+     * @param drawMode    Der Modus mit dem gezeichnet werden soll.
+     * @param sprites     Die zu zeichnenden Sprites.
      * @param boundingBox Der Rand des Automaten
      */
     PinballCanvasDrawer(Canvas canvas, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites, ReadOnlyObjectProperty<RectangleDouble> boundingBox)
@@ -53,8 +54,8 @@ class PinballCanvasDrawer
     /**
      * Leert das Canvas und zeichnet dann alle Sprites darauf, indem der GraphicsContext den Sprites zum Zeichnen übergeben wird.
      *
-     * @param cameraPosition Die Position der Kamera.
-     * @param cameraZoom Der Zoom der Kamera.
+     * @param cameraPosition    Die Position der Kamera.
+     * @param cameraZoom        Der Zoom der Kamera.
      * @param dragSelectionRect Das eventuell vorhandene Auswahlfenster welches es durch "ziehen" erlaubt Elemente auszuwählen.
      */
     void draw(Vector2 cameraPosition, double cameraZoom, Optional<RectangleDoubleByPoints> dragSelectionRect)
@@ -89,8 +90,8 @@ class PinballCanvasDrawer
     /**
      * Zeichnet den Rahmen des Automaten.
      *
-     * @param cameraPosition Die Position der Kamera.
-     * @param cameraZoom Der Zoom der Kamera.
+     * @param cameraPosition  Die Position der Kamera.
+     * @param cameraZoom      Der Zoom der Kamera.
      * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
      */
     private void drawBoundingBox(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
@@ -121,7 +122,7 @@ class PinballCanvasDrawer
      * Zeichnet die Markierung, die ein im Editor ausgewähltes Objekt umgibt.
      *
      * @param dragSelectionRect Bestimmt die Position und Größe der Markierung.
-     * @param graphicsContext Der GraphicsContext, auf dem gezeichnet werden soll.
+     * @param graphicsContext   Der GraphicsContext, auf dem gezeichnet werden soll.
      */
     private void drawSelectionRect(RectangleDoubleByPoints dragSelectionRect, GraphicsContext graphicsContext)
     {
@@ -160,7 +161,7 @@ class PinballCanvasDrawer
      * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
      *
      * @param cameraPosition Die Position der Kamera.
-     * @param cameraZoom Der Zoom der Kamera.
+     * @param cameraZoom     Der Zoom der Kamera.
      */
     private void drawEditorGrid(Vector2 cameraPosition, double cameraZoom)
     {
@@ -199,9 +200,9 @@ class PinballCanvasDrawer
      * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
      *
      * @param cameraPosition Die Position der Kamera.
-     * @param cameraZoom Der Zoom der Kamera.
-     * @param x Der x-Wert der Position auf dem Canvas.
-     * @param y Der y-Wert der Position auf dem Canvas.
+     * @param cameraZoom     Der Zoom der Kamera.
+     * @param x              Der x-Wert der Position auf dem Canvas.
+     * @param y              Der y-Wert der Position auf dem Canvas.
      * @return Die Position auf dem Grid.
      */
     Vector2 canvasPosToGridPos(Vector2 cameraPosition, double cameraZoom, double x, double y)

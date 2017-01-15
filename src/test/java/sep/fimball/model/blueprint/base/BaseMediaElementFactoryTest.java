@@ -5,9 +5,7 @@ import sep.fimball.general.data.Language;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.media.BaseMediaElement;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -39,9 +37,9 @@ public class BaseMediaElementFactoryTest
         localCoords.rotation = TEST_INT;
 
         BaseElementJson.MediaElementJson.MediaElementDescriptionJson description = new BaseElementJson.MediaElementJson.MediaElementDescriptionJson();
-        description.language= Language.GERMAN;
-        description.editorName=TEST_STRING;
-        description.editorDescription=TEST_STRING;
+        description.language = Language.GERMAN;
+        description.editorName = TEST_STRING;
+        description.editorDescription = TEST_STRING;
 
         BaseElementJson.MediaElementJson testJson = new BaseElementJson.MediaElementJson();
         testJson.events = new BaseElementJson.MediaElementJson.MediaElementEventJson[]{event};

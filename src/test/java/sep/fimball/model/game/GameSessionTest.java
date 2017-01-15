@@ -8,11 +8,11 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.*;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -20,9 +20,7 @@ import java.util.Observer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests für die Klasse GameSession.
@@ -32,7 +30,7 @@ public class GameSessionTest
     /**
      * Testet, ob der Konstruktor richtig auf eine falsche Eingabe reagiert.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void constructorTest()
     {
         // Erstellen eines leeren Automaten.

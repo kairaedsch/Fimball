@@ -25,7 +25,7 @@ public class PlacedElementTest
     public void duplicate()
     {
         // Erstelle ein PlacedElement und dupliziere es
-        PlacedElement originalPlacedElement =  new PlacedElement(null, new Vector2(5, 5), 1000, 2, 45);
+        PlacedElement originalPlacedElement = new PlacedElement(null, new Vector2(5, 5), 1000, 2, 45);
         PlacedElement duplicatedPlacedElement = originalPlacedElement.duplicate();
 
         assertThat("Die Kopie ist ein anderes Object", originalPlacedElement, is(not(duplicatedPlacedElement)));

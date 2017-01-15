@@ -40,7 +40,8 @@ public class TiltHandlerTest
     {
         HandlerGameSession gameSession = getTestHandlerGameSession();
         InputModifier inputModifier = mock(InputModifier.class);
-        doAnswer(invocationOnMock -> {
+        doAnswer(invocationOnMock ->
+        {
             tiltActivated = true;
             return null;
         }).when(inputModifier).setKeyEventsActivated(anyBoolean());

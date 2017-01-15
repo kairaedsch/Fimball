@@ -80,7 +80,7 @@ public class PlungerGameElement extends GameElement implements UserHandler
     @Override
     public void activateUserHandler(KeyEventArgs keyEventArgs)
     {
-        if(keyEventArgs.getBinding() == KeyBinding.PLUNGER)
+        if (keyEventArgs.getBinding() == KeyBinding.PLUNGER)
         {
             if (keyEventArgs.getState() == KeyEventArgs.KeyChangedToState.DOWN && keyEventArgs.isStateSwitched())
             {

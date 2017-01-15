@@ -69,6 +69,7 @@ public class PlungerGameElementTest
 
     /**
      * Gibt ein BaseElement, dass für den Test benötigt wird, zurück.
+     *
      * @return Ein BaseElement.
      */
     private BaseElement getTestBaseElement()

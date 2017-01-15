@@ -17,7 +17,7 @@ public class BaseMediaElement
     /**
      * Der Name des Elements im Editor in verschiedenen Sprachen.
      */
-    private Map<Language,String > names;
+    private Map<Language, String> names;
 
     /**
      * Die Beschreibung des Elements im Editor in verschiedenen Sprachen.

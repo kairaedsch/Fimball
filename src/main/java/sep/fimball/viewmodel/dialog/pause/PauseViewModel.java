@@ -45,7 +45,7 @@ public class PauseViewModel extends DialogViewModel
      * Erstellt ein neues PauseViewModel.
      *
      * @param gameViewModel Das zugehörige GameViewModel.
-     * @param settings Eine Instanz des Singleton Settings
+     * @param settings      Eine Instanz des Singleton Settings
      */
     PauseViewModel(GameViewModel gameViewModel, Settings settings)
     {

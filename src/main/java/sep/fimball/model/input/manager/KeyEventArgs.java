@@ -41,8 +41,8 @@ public class KeyEventArgs
     /**
      * Erstellt eine neue Instanz der Klasse.
      *
-     * @param binding Die Funktion, die ausgeführt werden soll.
-     * @param state   Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
+     * @param binding       Die Funktion, die ausgeführt werden soll.
+     * @param state         Status, zu dem die im InputManager festgelegte Taste gewechselt hat.
      * @param stateSwitched Gibt an ob die Taste losgelassen wurde wenn sie vorher gedrückt war oder gedrückt wurde wenn sie vorher nicht gedrückt war.
      */
     public KeyEventArgs(KeyBinding binding, KeyChangedToState state, boolean stateSwitched)

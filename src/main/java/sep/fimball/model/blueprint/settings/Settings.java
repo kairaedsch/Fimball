@@ -161,7 +161,7 @@ public class Settings
      * durch {@code keyCode} beschriebene Taste nicht schon durch ein anderes KeyBinding belegt ist und löscht
      * gegebenenfalls die vorhandene Belegung des übergebenen KeyBindings.
      *
-     * @param keyCode Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
+     * @param keyCode    Der KeyCode der Taste, an die das Spielereignis gebunden werden soll.
      * @param keyBinding Das Spielereignis, an das eine Teste gebunden werden soll.
      */
     public void setKeyBinding(KeyCode keyCode, KeyBinding keyBinding)

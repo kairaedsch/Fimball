@@ -51,7 +51,7 @@ public class ReserveBallsAndPlayerChangeTest
      *
      * @throws InterruptedException Falls ein Interrupt auftritt.
      */
-    @Test(timeout = MAX_TEST_DURATION)
+    @Test (timeout = MAX_TEST_DURATION)
     public void testReserveBalls() throws InterruptedException
     {
         // Start des Spiels
@@ -96,7 +96,7 @@ public class ReserveBallsAndPlayerChangeTest
         PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
         session = new TestGameSession(automat, players);
         List<Handler> handlers = HandlerFactory.generateAllHandlers(session, null);
-        Handler ballLostChecker = new Handler((GameHandler)(GameEvent gameEvent) ->
+        Handler ballLostChecker = new Handler((GameHandler) (GameEvent gameEvent) ->
         {
             if (gameEvent == GameEvent.BALL_LOST)
             {

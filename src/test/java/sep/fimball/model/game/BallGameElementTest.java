@@ -28,7 +28,7 @@ public class BallGameElementTest
     /**
      * Die Position, die das BallPhysicsElement nach dem Reset haben soll.
      */
-    private Vector2 position = new Vector2(0,0);
+    private Vector2 position = new Vector2(0, 0);
 
     /**
      * Testet, ob das Stoßen an der Kugel an das BallPhysicElement weitergeben wird.
@@ -41,7 +41,7 @@ public class BallGameElementTest
         testBallGameElement.nudge(true);
         assertThat(nudgeLeft, is(true));
         testBallGameElement.nudge(false);
-        assertThat(nudgeLeft,is(false));
+        assertThat(nudgeLeft, is(false));
 
     }
 
@@ -49,7 +49,8 @@ public class BallGameElementTest
      * Testet, ob das Zurücksetzen der Kugel an das BallPhysicElement weitergeben wird.
      */
     @Test
-    public void resetTest() {
+    public void resetTest()
+    {
         BallGameElement testBallGameElement = getTestBallGameElement();
 
         testBallGameElement.reset();
@@ -60,12 +61,13 @@ public class BallGameElementTest
 
     /**
      * Erstellt ein Test-BallGameElement und gibt dieses zurück.
+     *
      * @return Ein Test-BallGameElement.
      */
     private BallGameElement getTestBallGameElement()
     {
         PlacedElement element = mock(PlacedElement.class);
-        when(element.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(2,2)));
+        when(element.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2(2, 2)));
         when(element.rotationProperty()).thenReturn(new SimpleDoubleProperty());
         when(element.pointsProperty()).thenReturn(new SimpleIntegerProperty());
         BallPhysicsElement ballPhysicsElement = mock(BallPhysicsElement.class);
@@ -75,7 +77,9 @@ public class BallGameElementTest
             if (modify instanceof BallNudgeModify)
             {
                 nudgeLeft = ((BallNudgeModify) modify).isLeft();
-            } else if (modify instanceof BallResetModify) {
+            }
+            else if (modify instanceof BallResetModify)
+            {
                 position = ((BallResetModify) modify).getNewPosition();
             }
             return null;

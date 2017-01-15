@@ -3,7 +3,7 @@ package sep.fimball.model.physics.element;
 /**
  * Ein ModifyContainer speichert ein Modify mit seinem PhysicsElement, an welchen das Modify angewandt werden kann.
  *
- * @param <ModifyT> Der Typ des Modifys, welches an das PhysicsElement angewandt werden kann.
+ * @param <ModifyT>            Der Typ des Modifys, welches an das PhysicsElement angewandt werden kann.
  * @param <PhysicsModifyableT> Der Typ des PhysicsElements, an welches das Modify angewandt werden kann.
  */
 public class ModifyContainer<ModifyT extends Modify, PhysicsModifyableT extends PhysicsElementModifyAble<?, ModifyT>>

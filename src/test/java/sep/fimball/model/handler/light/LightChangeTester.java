@@ -20,7 +20,8 @@ public class LightChangeTester
     public static void test(LightChanger lightChanger, boolean isRandom)
     {
         testChangeWithDifferentParameters(lightChanger);
-        if (!isRandom) testNoChangeWithSameParameter(lightChanger);
+        if (!isRandom)
+            testNoChangeWithSameParameter(lightChanger);
     }
 
     /**
@@ -51,6 +52,7 @@ public class LightChangeTester
     private static void testChangeWithDifferentParameters(LightChanger lightChanger)
     {
         boolean defaultLight = lightChanger.determineLightStatus(new Vector2(0, 0), 0);
-        while (defaultLight == lightChanger.determineLightStatus(new Vector2(Math.random(), Math.random()), (long) (Math.random() * lightChanger.getDuration()))) ;
+        while (defaultLight == lightChanger.determineLightStatus(new Vector2(Math.random(), Math.random()), (long) (Math.random() * lightChanger.getDuration())))
+            ;
     }
 }

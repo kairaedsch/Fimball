@@ -6,7 +6,7 @@ import org.junit.Test;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.view.tools.ImageCache;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.number.OrderingComparison.lessThan;

@@ -222,9 +222,9 @@ public class PinballMachineTest
      * Erstellt ein PlacedElementMock mit dem gegebenen Parametern.
      *
      * @param baseElementType Der BaseElementType des zu erstellenden PlacedElementMocks.
-     * @param position Die Position  des zu erstellenden PlacedElementMocks.
-     * @param extremPosMin Die minimale ExtremPosition des zu erstellenden PlacedElementMocks.
-     * @param extremPosMax Die maximale ExtremPosition des zu erstellenden PlacedElementMocks.
+     * @param position        Die Position  des zu erstellenden PlacedElementMocks.
+     * @param extremPosMin    Die minimale ExtremPosition des zu erstellenden PlacedElementMocks.
+     * @param extremPosMax    Die maximale ExtremPosition des zu erstellenden PlacedElementMocks.
      * @return Das erstellte PlacedElementMock mit den gegebenen Parametern.
      */
     private PlacedElement getPlacedElementMock(BaseElementType baseElementType, Vector2 position, Vector2 extremPosMin, Vector2 extremPosMax)

@@ -24,7 +24,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     /**
      * Erstellt ein neues PinballCanvasEditorViewModel.
      *
-     * @param editorSession                   Die Spielsitzung.
+     * @param editorSession                 Die Spielsitzung.
      * @param pinballMachineEditorViewModel Das korrespondierende PinballMachineEditorViewModel.
      */
     public PinballCanvasEditorViewModel(EditorSession editorSession, PinballMachineEditorViewModel pinballMachineEditorViewModel)

@@ -42,7 +42,7 @@ public class GameTest
      *
      * @throws InterruptedException Bricht den Test ab, falls im Test unvorhergesehenerweise ein Interrupt aufgetreten ist.
      */
-    @Test(timeout = MAX_TEST_DURATION)
+    @Test (timeout = MAX_TEST_DURATION)
     public void gameCollisionTest() throws InterruptedException
     {
         // Aufbau des Automaten.

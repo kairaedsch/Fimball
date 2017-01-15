@@ -216,7 +216,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     /**
      * Erstellt ein Bild des aktuellen Automaten und gibt dieses zurück.
      *
-     * @param cameraScale Die für den Screenshot verwendete Skalierung der Kamera.
+     * @param cameraScale     Die für den Screenshot verwendete Skalierung der Kamera.
      * @param rectangleDouble Die für den Screenshot verwendete Größe des Automatenausschnitts.
      * @return Ein Bild des aktuellen Automaten.
      */

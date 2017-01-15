@@ -115,9 +115,7 @@ public class SceneManagerViewModel
      */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
-        dialogViewModel.bind(Bindings.createObjectBinding(
-                () -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0),
-                dialogViewModels));
+        dialogViewModel.bind(Bindings.createObjectBinding(() -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0), dialogViewModels));
         return dialogViewModel;
     }
 

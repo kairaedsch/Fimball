@@ -28,6 +28,7 @@ public class ScoreHandler implements ElementHandler
     {
         Map<Integer, BaseRuleElementEvent> eventMap = element.getRuleElement().getEventMap();
 
-        if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints()) session.getCurrentPlayer().addPoints(element.getPointReward());
+        if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints())
+            session.getCurrentPlayer().addPoints(element.getPointReward());
     }
 }

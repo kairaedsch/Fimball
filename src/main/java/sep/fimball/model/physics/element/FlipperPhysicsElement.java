@@ -131,10 +131,14 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     private double getAngularVelocity(AngularDirection angularDirection)
     {
-        if (isLeft && angularDirection == DOWN) return FLIPPER_ANGULAR_VELOCITY;
-        if (isLeft && angularDirection == UP) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == DOWN) return -FLIPPER_ANGULAR_VELOCITY;
-        if (!isLeft && angularDirection == UP) return FLIPPER_ANGULAR_VELOCITY;
+        if (isLeft && angularDirection == DOWN)
+            return FLIPPER_ANGULAR_VELOCITY;
+        if (isLeft && angularDirection == UP)
+            return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == DOWN)
+            return -FLIPPER_ANGULAR_VELOCITY;
+        if (!isLeft && angularDirection == UP)
+            return FLIPPER_ANGULAR_VELOCITY;
         return 0;
     }
 
@@ -147,7 +151,9 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
     {
         // Setzt die neue Rotationsrichtung, falls sich der Flipper noch in diese Richtung drehen kann.
         double newAngularVelocity = getAngularVelocity(newAngularDirection);
-        if (newAngularVelocity > 0 && getRotation() < maxRotation) angularDirection = newAngularDirection;
-        if (newAngularVelocity < 0 && getRotation() > minRotation) angularDirection = newAngularDirection;
+        if (newAngularVelocity > 0 && getRotation() < maxRotation)
+            angularDirection = newAngularDirection;
+        if (newAngularVelocity < 0 && getRotation() > minRotation)
+            angularDirection = newAngularDirection;
     }
 }

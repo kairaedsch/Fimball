@@ -75,7 +75,8 @@ public class PinballMachineSettingsViewModel extends WindowViewModel
         {
             boolean success = pinballMachine.deleteFromDisk();
             sceneManager.pushDialog(new MessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
-            if(success) sceneManager.setWindow(new MainMenuViewModel());
+            if (success)
+                sceneManager.setWindow(new MainMenuViewModel());
         }));
     }
 

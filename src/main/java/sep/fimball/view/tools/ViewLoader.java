@@ -121,7 +121,8 @@ public class ViewLoader<ViewT>
                     Tooltip labeled = (Tooltip) o;
                     bindToLanguage(labeled.textProperty(), labeled.getText());
                 }
-                if(o instanceof Pane){
+                if (o instanceof Pane)
+                {
                     Pane pane = (Pane) o;
                     installToolTip(pane);
                 }
@@ -132,11 +133,13 @@ public class ViewLoader<ViewT>
 
     /**
      * Installiert einen Tooltip bei der Pane. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
+     *
      * @param pane Die Pane, bei der der Tooltip installiert werden soll.
      */
     private void installToolTip(Pane pane)
     {
-        if(pane.accessibleHelpProperty().get() != null) {
+        if (pane.accessibleHelpProperty().get() != null)
+        {
             Tooltip tooltip = new Tooltip();
             if (pane.getAccessibleHelp().matches("§.*§"))
             {
@@ -145,7 +148,7 @@ public class ViewLoader<ViewT>
 
                 pane.setOnMouseEntered(t ->
                 {
-                    Node node =(Node)t.getSource();
+                    Node node = (Node) t.getSource();
                     Tooltip.install(node, tooltip);
                 });
             }
@@ -157,7 +160,7 @@ public class ViewLoader<ViewT>
      * Bindet den Text eines Nodes welcher Text haben kann an die ausgewählte Sprache.
      *
      * @param textProperty die Property die bestimmt welcher Text beim Node angezeigt wird.
-     * @param labeledText der Text der ersetzt werden soll.
+     * @param labeledText  der Text der ersetzt werden soll.
      */
     private void bindToLanguage(StringProperty textProperty, String labeledText)
     {
@@ -172,7 +175,7 @@ public class ViewLoader<ViewT>
      * Installiert einen Tooltip beim Node. Die Sprache des Tooltips wird automatisch auf die aktuell ausgewählte Sprache gesetzt.
      *
      * @param labeledText der Text der ersetzt werden soll.
-     * @param node der Node bei dem der Tooltip installiert werden soll.
+     * @param node        der Node bei dem der Tooltip installiert werden soll.
      */
     private void installTooltip(StringProperty labeledText, Node node)
     {

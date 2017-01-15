@@ -12,7 +12,7 @@ public class SpinnerCollision implements CollisionType
     @Override
     public void applyCollision(CollisionInfo info)
     {
-        SpinnerPhysicsElement spinnerPhysicsElement = (SpinnerPhysicsElement)info.getOtherPhysicsElement();
+        SpinnerPhysicsElement spinnerPhysicsElement = (SpinnerPhysicsElement) info.getOtherPhysicsElement();
         Vector2 spinnerDirection = new Vector2(0, -1).rotate(Math.toRadians(spinnerPhysicsElement.getRotation())).scale(PhysicsConfig.TICK_RATE_SEC);
         double spinnerAcceleration = Math.abs(spinnerDirection.normalized().dot(info.getBall().getVelocity().normalized()));
         spinnerPhysicsElement.setSpinnerAcceleration(spinnerAcceleration);

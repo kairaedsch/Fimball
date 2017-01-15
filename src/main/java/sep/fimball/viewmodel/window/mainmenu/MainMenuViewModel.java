@@ -50,6 +50,7 @@ public class MainMenuViewModel extends WindowViewModel
 
     /**
      * Erstellt ein neues MainMenuViewModel und wählt die übergebene PinballMachine aus.
+     *
      * @param selectedMachine Das Element, welches diese PinballMachine darstellt, wird ausgewählt.
      */
     public MainMenuViewModel(PinballMachine selectedMachine)

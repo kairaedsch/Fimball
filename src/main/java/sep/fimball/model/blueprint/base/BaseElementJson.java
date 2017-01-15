@@ -241,7 +241,8 @@ public class BaseElementJson
         /**
          * Diese Klasse enthält Information zum Namen und der Beschreibung des Elements im Editor in einer bestimmten Sprache.
          */
-        public static class MediaElementDescriptionJson {
+        public static class MediaElementDescriptionJson
+        {
 
             /**
              * Die Sprache der Beschreibung und des Namens.

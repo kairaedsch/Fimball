@@ -84,6 +84,7 @@ public class KeybindSubViewModel
 
     /**
      * Vergleicht zwei KeyBindSubViewModels nach den Namen der Aktionen, die sie auslösen sollen.
+     *
      * @param subViewModelOne Ein KeyBindSubViewModel, mit dem das {@code subViewModelTwo} verglichen werden soll.
      * @param subViewModelTwo Ein KeyBindSubViewModel, mit dem das {@code subViewModelOne} verglichen werden soll.
      * @return {@code 0}, falls die Namen gleich sind; ein Wert kleiner 0, falls {@code subViewModelOne} lexikographisch kleiner ist als {@code subViewModelTwo}; und ein Wert größer 0, falls {@code subViewModelOne} lexikographisch größer ist als {@code subViewModelTwo}

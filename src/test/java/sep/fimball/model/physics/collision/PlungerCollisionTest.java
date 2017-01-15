@@ -6,8 +6,8 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests für die Klasse PlungerCollision

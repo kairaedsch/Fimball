@@ -130,6 +130,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
             setPosition(((BallResetModify) modify).getNewPosition());
             setVelocity(new Vector2());
         }
-        else System.err.println("BallPhysicsElement got incompatible Modify Type");
+        else
+            System.err.println("BallPhysicsElement got incompatible Modify Type");
     }
 }

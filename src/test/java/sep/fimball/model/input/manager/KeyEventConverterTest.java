@@ -25,8 +25,9 @@ public class KeyEventConverterTest
     /**
      * Testet, ob die Erstellung von KeyEventArgs aus KeyEvents funktioniert.
      */
-    @Test(timeout = 5000)
-    public void testCreateKeyEventArgs() {
+    @Test (timeout = 5000)
+    public void testCreateKeyEventArgs()
+    {
         MockitoAnnotations.initMocks(this);
         Settings.getSingletonInstance().setKeyBinding(KeyCode.S, KeyBinding.LEFT_FLIPPER);
         Settings.getSingletonInstance().setKeyBinding(KeyCode.B, null);

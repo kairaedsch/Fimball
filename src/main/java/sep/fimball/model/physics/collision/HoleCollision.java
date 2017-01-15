@@ -15,7 +15,7 @@ public class HoleCollision extends NormalCollision
     {
         Vector2 ballCenterOffset = new Vector2(info.getBall().getCollider().getRadius(), info.getBall().getCollider().getRadius());
         Vector2 ballCenterPosition = info.getBall().getPosition().plus(ballCenterOffset);
-        double holeRadius = ((CircleColliderShape)info.getOtherColliderShapes().get(0)).getRadius();
+        double holeRadius = ((CircleColliderShape) info.getOtherColliderShapes().get(0)).getRadius();
         Vector2 holeCenterOffset = new Vector2(holeRadius, holeRadius);
         Vector2 holeCenterPosition = info.getOtherPhysicsElement().getPosition().plus(holeCenterOffset);
         double distanceToCenter = ballCenterPosition.minus(holeCenterPosition).magnitude();

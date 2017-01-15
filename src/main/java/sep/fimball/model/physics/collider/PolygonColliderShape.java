@@ -2,7 +2,10 @@ package sep.fimball.model.physics.collider;
 
 import sep.fimball.general.data.Vector2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -81,10 +84,9 @@ public class PolygonColliderShape implements ColliderShape
     /**
      * Berechnet den kürzesten Weg von den Vertices zum CircleCollider.
      *
-     * @param rotatedVertices Die rotierten Vertices dieses Polygons.
-     * @param colliderPosition Die globale Position dieses Colliders.
+     * @param rotatedVertices        Die rotierten Vertices dieses Polygons.
+     * @param colliderPosition       Die globale Position dieses Colliders.
      * @param circleColliderPosition Die globale Position des anderen Colliders.
-     *
      * @return Der kürzeste Weg von den Vertices zum CircleCollider.
      */
     private Vector2 shortestPathVertexToCircleCollider(List<Vector2> rotatedVertices, Vector2 colliderPosition, Vector2 circleColliderPosition)
@@ -103,10 +105,9 @@ public class PolygonColliderShape implements ColliderShape
     /**
      * Projiziert Vertices auf eine Achse.
      *
-     * @param vertices Die zu projizierenden Vertices.
+     * @param vertices         Die zu projizierenden Vertices.
      * @param colliderPosition Die globale Position dieses Colliders.
-     * @param axis Die Achse auf die projiziert werden soll.
-     *
+     * @param axis             Die Achse auf die projiziert werden soll.
      * @return Die Position der Punkte auf der projizierten Achse.
      */
     private List<Double> projectVerticesOnAxis(List<Vector2> vertices, Vector2 colliderPosition, Vector2 axis)
@@ -125,11 +126,10 @@ public class PolygonColliderShape implements ColliderShape
     /**
      * Überprüft ob sich das auf die Achse projizierte Polygon und Kreis überschneiden.
      *
-     * @param projectedVertices Die projizierten Vertices.
-     * @param axis Die Achse auf die projiziert wurde.
+     * @param projectedVertices      Die projizierten Vertices.
+     * @param axis                   Die Achse auf die projiziert wurde.
      * @param circleColliderPosition Die globale Position des anderen Colliders.
-     * @param circleColliderRadius Der Radius des anderen Colliders.
-     *
+     * @param circleColliderRadius   Der Radius des anderen Colliders.
      * @return Wenn sich die Projektionen überschneiden die Achse und die größe des Schnitts.
      */
     private Optional<OverlapAxis> checkIfProjectionsIntersect(List<Double> projectedVertices, Vector2 axis, Vector2 circleColliderPosition, double circleColliderRadius)
@@ -157,7 +157,7 @@ public class PolygonColliderShape implements ColliderShape
      * Berechnet die linksseitige Normale einer Gerade zwischen jeweils zwei Vertices.
      *
      * @param rotatedVertices Die rotierten Vertices.
-     * @param vertexIndex Der Index des Vertex.
+     * @param vertexIndex     Der Index des Vertex.
      * @return Die linksseitige Normale.
      */
     private Vector2 getVertexNormal(List<Vector2> rotatedVertices, int vertexIndex)

@@ -186,17 +186,21 @@ public class SelectedElementSubViewModel
 
     /**
      * Gibt zurück, ob die Punkte, die dieses Element vergibt, verändert werden dürfen.
+     *
      * @return {@code true}, falls die Punkte verändert werden dürfen, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty pointsCanBeChanged() {
+    public ReadOnlyBooleanProperty pointsCanBeChanged()
+    {
         return pointsCanBeChanged;
     }
 
     /**
      * Gibt zurück, ob ein einzelnes Element ausgewählt ist.
+     *
      * @return {@code true}, falls ein einzelnes Element ausgewählt ist, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty isSomethingSelected() {
+    public ReadOnlyBooleanProperty isSomethingSelected()
+    {
         return isSomethingSelected;
     }
 }

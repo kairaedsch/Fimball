@@ -5,7 +5,6 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.BaseElementJson;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;

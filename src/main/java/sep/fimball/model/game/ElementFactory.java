@@ -38,8 +38,7 @@ public class ElementFactory
                 case RAMP:
                 case NORMAL:
                     GameElement normalGameElement = new GameElement(element, false);
-                    PhysicsElement<GameElement> normalPhysicsElement = new PhysicsElement<>(normalGameElement, normalGameElement.positionProperty().get(),
-                            normalGameElement.rotationProperty().get(), element.multiplierProperty().get(), normalGameElement.getPlacedElement().getBaseElement().getPhysics());
+                    PhysicsElement<GameElement> normalPhysicsElement = new PhysicsElement<>(normalGameElement, normalGameElement.positionProperty().get(), normalGameElement.rotationProperty().get(), element.multiplierProperty().get(), normalGameElement.getPlacedElement().getBaseElement().getPhysics());
                     gameElements.add(normalGameElement);
                     physicsElements.add(normalPhysicsElement);
                     break;
@@ -50,9 +49,7 @@ public class ElementFactory
                     break;
                 case PLUNGER:
                     PlungerGameElement plungerGameElement = new PlungerGameElement(element, false);
-                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement,
-                            plungerGameElement.positionProperty().get(), plungerGameElement.rotationProperty().get(), element.multiplierProperty().get(),
-                            plungerGameElement.getPlacedElement().getBaseElement().getPhysics());
+                    PlungerPhysicsElement<GameElement> plungerPhysicsElement = new PlungerPhysicsElement<>(physicsHandler, plungerGameElement, plungerGameElement.positionProperty().get(), plungerGameElement.rotationProperty().get(), element.multiplierProperty().get(), plungerGameElement.getPlacedElement().getBaseElement().getPhysics());
                     plungerGameElement.setPhysicsElement(plungerPhysicsElement);
                     gameElements.add(plungerGameElement);
                     physicsElements.add(plungerPhysicsElement);
@@ -62,9 +59,7 @@ public class ElementFactory
                 case RIGHT_FLIPPER:
                     boolean left = element.getBaseElement().getType() == BaseElementType.LEFT_FLIPPER;
                     FlipperGameElement flipperGameElement = new FlipperGameElement(element, false, left);
-                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement,
-                            flipperGameElement.positionProperty().get(), element.multiplierProperty().get(),
-                            flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
+                    FlipperPhysicsElement<GameElement> leftFlipperPhysicsElement = new FlipperPhysicsElement<>(physicsHandler, flipperGameElement, flipperGameElement.positionProperty().get(), element.multiplierProperty().get(), flipperGameElement.getPlacedElement().getBaseElement().getPhysics(), left);
                     flipperGameElement.setPhysicsElement(leftFlipperPhysicsElement);
                     gameElements.add(flipperGameElement);
                     physicsElements.add(leftFlipperPhysicsElement);
@@ -75,15 +70,13 @@ public class ElementFactory
                     break;
                 case HOLE:
                     GameElement gameElement = new GameElement(element, false);
-                    HolePhysicsElement<GameElement> physicsElement = new HolePhysicsElement<>(gameElement, gameElement.positionProperty().get(),
-                            gameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
+                    HolePhysicsElement<GameElement> physicsElement = new HolePhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
                     gameElements.add(gameElement);
                     physicsElements.add(physicsElement);
                     break;
                 case SPINNER:
                     SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false);
-                    SpinnerPhysicsElement spinnerPhysicsElement = new SpinnerPhysicsElement(spinnerGameElement, spinnerGameElement.positionProperty().get(),
-                            spinnerGameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
+                    SpinnerPhysicsElement spinnerPhysicsElement = new SpinnerPhysicsElement(spinnerGameElement, spinnerGameElement.positionProperty().get(), spinnerGameElement.rotationProperty().get(), element.getBaseElement().getPhysics());
                     spinnerGameElement.setPhysicsElement(spinnerPhysicsElement);
                     gameElements.add(spinnerGameElement);
                     physicsElements.add(spinnerPhysicsElement);

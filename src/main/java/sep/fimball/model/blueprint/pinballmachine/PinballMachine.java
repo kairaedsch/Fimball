@@ -88,7 +88,8 @@ public class PinballMachine
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
         elementsLoaded = loaded;
-        if (loaded) addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
+        if (loaded)
+            addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
 
         // Fügt die Highscores zu Highscore-liste hinzu und lässt sie automatisch sortieren, wenn sie sich ändert
         highscoreList = FXCollections.observableArrayList();
@@ -184,7 +185,8 @@ public class PinballMachine
     {
         checkElementsLoaded();
         boolean success = pinballMachineManager.savePinballMachine(this);
-        if (success) unloadElements();
+        if (success)
+            unloadElements();
         return success;
     }
 
@@ -202,6 +204,7 @@ public class PinballMachine
 
     /**
      * Löscht die gespeicherte und geladene Version dieses Automaten.
+     *
      * @return Gibt zurück ob diese erfolgreich gelöscht wurde.
      */
     public boolean deleteFromDisk()

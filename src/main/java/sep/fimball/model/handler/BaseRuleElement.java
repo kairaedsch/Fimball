@@ -16,7 +16,7 @@ public class BaseRuleElement
     /**
      * Erstellt ein neues BaseRuleElement.
      *
-     * @param eventMap    Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
+     * @param eventMap Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     public BaseRuleElement(Map<Integer, BaseRuleElementEvent> eventMap)
     {

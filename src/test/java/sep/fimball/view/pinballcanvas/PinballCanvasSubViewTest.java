@@ -67,7 +67,7 @@ public class PinballCanvasSubViewTest
      * @throws IllegalAccessException    Falls die Methode redraw() nicht aufgerufen werden darf.
      * @throws InvocationTargetException Falls die Methode redraw() eine Exception wirft.
      */
-    @Test(timeout = 10000)
+    @Test (timeout = 10000)
     public void testRedraw() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
         MockitoAnnotations.initMocks(this);

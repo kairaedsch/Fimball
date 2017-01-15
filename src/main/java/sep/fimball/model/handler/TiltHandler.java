@@ -40,7 +40,7 @@ public class TiltHandler implements UserHandler
      * Erzeugt einen neuen TiltHandler.
      *
      * @param handlerGameSession Die zugehörige HandlerGameSession.
-     * @param inputModifier Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
+     * @param inputModifier      Dient dazu, den UserInput zu aktiviert oder zu deaktiviert.
      */
     TiltHandler(HandlerGameSession handlerGameSession, InputModifier inputModifier)
     {

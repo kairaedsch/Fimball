@@ -1,6 +1,9 @@
 package sep.fimball.viewmodel.window.pinballmachine.settings;
 
-import javafx.beans.property.*;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;

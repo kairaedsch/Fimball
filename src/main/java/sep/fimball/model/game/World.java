@@ -28,9 +28,9 @@ public class World implements HandlerWorld
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
      *
-     * @param elements Liste der Elemente in der Spielwelt.
+     * @param elements          Liste der Elemente in der Spielwelt.
      * @param startedFromEditor Gibt an ob die Welt im Editor oder dem Hauptspiel genutzt wird.
-     * @param maximumYPosition Die unterste Position das Automaten.
+     * @param maximumYPosition  Die unterste Position das Automaten.
      */
     public World(ObservableList<GameElement> elements, boolean startedFromEditor, double maximumYPosition)
     {
@@ -54,9 +54,7 @@ public class World implements HandlerWorld
      */
     public void synchronizeWithPhysics(List<List<ElementEventArgs<GameElement>>> elementEventArgsLists)
     {
-        elementEventArgsLists.forEach(elementEventArgsList ->
-                elementEventArgsList.forEach(elementEventArgs ->
-                        elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs)));
+        elementEventArgsLists.forEach(elementEventArgsList -> elementEventArgsList.forEach(elementEventArgs -> elementEventArgs.getGameElement().synchronizeWithPhysics(elementEventArgs)));
     }
 
     /**
