@@ -10,22 +10,11 @@
    <content>
        <AnchorPane styleClass="dialogBackground">
           <children>
-              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <VBox styleClass="dialogScores" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                  <children>
-                     <Label fx:id="key_2" text="!gameover.playerscores.key!">
-                         <font>
-                             <Font name="System Bold" size="18.0" />
-                         </font>
-                         <VBox.margin>
-                             <Insets top="5.0" />
-                         </VBox.margin>
-                     </Label>
+                     <Label fx:id="key_2" text="!gameover.playerscores.key!"  styleClass="highscoreTitle"/>
                      <VBox fx:id="playerScores" prefWidth="100.0" />
-                     <Label fx:id="key_1" text="!gameover.highscores.key!">
-                         <font>
-                             <Font name="System Bold" size="18.0" />
-                         </font>
-                     </Label>
+                     <Label fx:id="key_1" text="!gameover.highscores.key!"  styleClass="highscoreTitle"/>
                      <VBox fx:id="highscores" prefHeight="200.0" prefWidth="100.0" />
                  </children>
               </VBox>
