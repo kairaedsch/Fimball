@@ -8,8 +8,7 @@ import sep.fimball.model.game.GameElement;
  */
 public class SpinnerPhysicsElement extends PhysicsElement<GameElement>
 {
-    private double spinnerAcceleration;
-    private final Object spinnerMonitor = new Object();
+    private volatile double spinnerAcceleration;
 
     /**
      * Erstellt eine Instanz von PhysicsElement mit dem zugehörigen GameElement.
@@ -31,10 +30,6 @@ public class SpinnerPhysicsElement extends PhysicsElement<GameElement>
 
     public void setSpinnerAcceleration(double acceleration)
     {
-        //TODO: Find better sync
-        synchronized (spinnerMonitor)
-        {
-            this.spinnerAcceleration = acceleration;
-        }
+        this.spinnerAcceleration = acceleration;
     }
 }
