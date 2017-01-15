@@ -45,7 +45,11 @@ public class Config
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
      */
-    public static final double BALL_LOST_TOLERANCE = 10;
+    public final static double BALL_LOST_TOLERANCE = 10;
+
+    public final static int SPINS_PER_DIRECT_HIT = 80;
+
+    public final static int SPINNER_SLOWDOWN_SPEED = 3;
 
     /**
      * Gibt eine eindeutige ID zurück.

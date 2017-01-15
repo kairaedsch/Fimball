@@ -1,6 +1,7 @@
 package sep.fimball.model.game;
 
 import javafx.animation.AnimationTimer;
+import sep.fimball.general.data.Config;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.physics.element.SpinnerPhysicsElement;
 
@@ -13,8 +14,6 @@ public class SpinnerGameElement extends GameElement
     private double leftSpins;
     private double currentSpin;
     private int currentFrame = 1;
-    private final double spinsPerDirectHit = 80;
-    private final int slowDownSpeed = 3;
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
@@ -36,10 +35,10 @@ public class SpinnerGameElement extends GameElement
 
                 if (spinnerAcceleration > 0)
                 {
-                    leftSpins = spinnerAcceleration * spinsPerDirectHit;
+                    leftSpins = spinnerAcceleration * Config.SPINS_PER_DIRECT_HIT;
                     spinnerPhysicsElement.setSpinnerAcceleration(0);
                 }
-                double spinSpeed = Math.max(0.1, leftSpins / spinsPerDirectHit);
+                double spinSpeed = Math.max(0.1, leftSpins / Config.SPINS_PER_DIRECT_HIT);
                 currentSpin += spinSpeed;
 
                 if (currentSpin >= 1.0)
@@ -47,7 +46,7 @@ public class SpinnerGameElement extends GameElement
                     if (leftSpins > 0)
                     {
                         currentSpin = 0;
-                        leftSpins = leftSpins - slowDownSpeed;
+                        leftSpins = leftSpins - Config.SPINNER_SLOWDOWN_SPEED;
                         currentFrame = ((currentFrame + 1) % 7) + 1;
                     }
                     else

@@ -8,32 +8,32 @@ public class PhysicsConfig
     /**
      * In m/s^2. Gibt an wie stark der Ball auf der y-Achse nach Unten beschleunigt wird.
      */
-    public static final double GRAVITY = 60;
+    public final static double GRAVITY = 60;
 
     /**
      * Die Kraft mit der der Ball von den Rampen zurück auf die Spielfläche beschleunigt wird.
      */
-    public static final double RAMP_TO_FLOOR_GRAVITY = 5;
+    public final static double RAMP_TO_FLOOR_GRAVITY = 5;
 
     /**
      * Die maximale Höhe des Balls.
      */
-    public static final double MAX_BALL_HEIGHT = 2;
+    public final static double MAX_BALL_HEIGHT = 2;
 
     /**
      * Die Drehgeschwindigkeit der Flipper.
      */
-    public static final double FLIPPER_ANGULAR_VELOCITY = 1000.0;
+    public final static double FLIPPER_ANGULAR_VELOCITY = 1000.0;
 
     /**
      * Die minimale Rotation der Flipper.
      */
-    public static final double FLIPPER_MAX_ROTATION = -25.0;
+    public final static double FLIPPER_MAX_ROTATION = -25.0;
 
     /**
      * Die maximale Rotation der Flipper.
      */
-    public static final double FLIPPER_MIN_ROTATION = 20.0;
+    public final static double FLIPPER_MIN_ROTATION = 20.0;
 
     /**
      * Die Verzögerung des Startens des Physic Timers in Millisekunden.
@@ -53,55 +53,55 @@ public class PhysicsConfig
     /**
      * Die Geschwindigkeit, die der Ball erfährt, wenn am Automaten gestoßen wird.
      */
-    public static final double NUDGE_VELOCITY = 15;
+    public final static double NUDGE_VELOCITY = 15;
 
     /**
      * Gibt die Standardkraft des Plungers zurück welche bei 1 Sekunde aufladen gilt.
      */
-    public static double DEFAULT_PLUNGER_FORCE = 150;
+    public final static double DEFAULT_PLUNGER_FORCE = 150;
 
     /**
      * Gibt den maximalen Multiplier der Kraft des Plungers zurück, auch bei längeren Laden des Plungers kann dieser nicht überschritten werden.
      */
-    public static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
+    public final static double MAX_PLUNGER_FORCE_MULTIPLY = 3;
 
     /**
      * Gibt die Dauer an, in welcher der Plunger den Ball mit der aufgeladenen Stärke abstößt.
      */
-    public static double PLUNGER_FORCE_DURATION = 0.25;
+    public final static double PLUNGER_FORCE_DURATION = 0.25;
 
     /**
      * Gibt an wie stark sich die Kollision auf die Geschwindigkeit des Balls auswirkt. Ein Wert < 2 bedeutet das der Ball nach der Kollision langsamer wird.
      */
-    public static double BOUNCE_NORMAL_COLLISION = 1.4;
+    public final static double BOUNCE_NORMAL_COLLISION = 1.4;
 
     /**
      * Wenn der Ball so nah an den Mittelpunkt eines Lochs kommt, wird das Loch aktiviert
      */
-    public static double CENTER_AREA_RADIUS = 0.6;
+    public final static double CENTER_AREA_RADIUS = 0.6;
 
     /**
      * Die Mindestgeschwindigkeit, mit der ein Ball zum Mittelpunkt eines Lochs gezogen wird.
      */
-    public static double MIN_HOLE_SPEED = 3.0;
+    public final static double MIN_HOLE_SPEED = 3.0;
 
     /**
      * Die Rate der Richtungsänderung, mit der der Ball am Rand des Loches entlang rollt.
      */
-    public static double HOLE_DIRECTION_CHANGE_RATE = 0.25;
+    public final static double HOLE_DIRECTION_CHANGE_RATE = 0.25;
 
     /**
      * Wie lange der Ball vom Loch festgehalten wird.
      */
-    public static double HOLE_FREEZE_TIME_MS = 2000.0;
+    public final static double HOLE_FREEZE_TIME_MS = 2000.0;
 
     /**
      * Wie lange das Loch inaktiv ist, nachdem es einen Ball geschossen hat.
      */
-    public static double HOLE_WAIT_AFTER_FREEZE_TIME_MS = 1000.0;
+    public final static double HOLE_WAIT_AFTER_FREEZE_TIME_MS = 1000.0;
 
     /**
      * Die Geschwindigkeit, mit der ein Loch den Ball wegschießt.
      */
-    public static double HOLE_BALL_KICK_SPEED = 30.0;
+    public final static double HOLE_BALL_KICK_SPEED = 30.0;
 }
