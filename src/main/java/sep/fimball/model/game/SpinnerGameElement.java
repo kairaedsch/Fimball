@@ -12,11 +12,11 @@ import sep.fimball.model.handler.HandlerGameElement;
  */
 public class SpinnerGameElement extends GameElement implements ElementHandler
 {
-    private double leftSpins;
-    private double currentSpin;
+    private double remainingSpins;
+    private double currentSpinPercentage;
     private int currentFrame;
-    private double spinnerAcceleration;
-    private Vector2 ballDelta;
+    private double spinnerHitAngle;
+    private Vector2 ballSpeedDelta;
     private boolean accelerationUpdated;
 
     /**
@@ -28,12 +28,12 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
     public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall)
     {
         super(element, bind);
-        ballDelta = new Vector2();
+        ballSpeedDelta = new Vector2();
 
         gameBall.positionProperty().addListener(((observable, oldValue, newValue) -> {
             double deltaX = newValue.getX() - oldValue.getX();
             double deltaY = newValue.getY() - oldValue.getY();
-            ballDelta = new Vector2(deltaX, deltaY);
+            ballSpeedDelta = new Vector2(deltaX, deltaY);
         }));
 
         AnimationTimer spinnerUpdate = new AnimationTimer()
@@ -43,23 +43,23 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
             {
                 if (accelerationUpdated)
                 {
-                    leftSpins = Math.abs(spinnerAcceleration) * Config.SPINS_PER_DIRECT_HIT;
+                    remainingSpins = Math.abs(spinnerHitAngle) * Config.SPINS_PER_DIRECT_HIT;
                     accelerationUpdated = false;
                 }
-                double spinSpeed = Math.max(0.1, leftSpins / Config.SPINS_PER_DIRECT_HIT);
-                currentSpin += spinSpeed;
+                double spinSpeed = Math.max(0.1, remainingSpins / Config.SPINS_PER_DIRECT_HIT);
+                currentSpinPercentage += spinSpeed;
 
-                if (currentSpin >= 1.0)
+                if (currentSpinPercentage >= 1.0)
                 {
-                    if (leftSpins > 0)
+                    if (remainingSpins > 0)
                     {
-                        currentSpin = 0;
-                        leftSpins = leftSpins - Config.SPINNER_SLOWDOWN_SPEED;
+                        currentSpinPercentage = 0;
+                        remainingSpins = remainingSpins - Config.SPINNER_SLOWDOWN_SPEED;
                         switchToNextFrame();
                     }
                     else
                     {
-                        currentSpin = 0;
+                        currentSpinPercentage = 0;
                     }
                 }
                 setCurrentAnimation(getMediaElement().getEventMap().get(-1 * (currentFrame + 1)).getAnimation());
@@ -68,24 +68,25 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
         spinnerUpdate.start();
     }
 
-    private void switchToNextFrame()
-    {
-        currentFrame = (currentFrame + (int)Math.signum(spinnerAcceleration)) % 7;
-
-        if (currentFrame < 0)
-        {
-            currentFrame += 7;
-        }
-    }
-
     @Override
     public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
         if (element == this)
         {
-            Vector2 direction = new Vector2(0, -1).rotate(Math.toRadians(rotationProperty().get()));
-            spinnerAcceleration = direction.normalized().dot(ballDelta.normalized());
+            Vector2 spinnerDirection = new Vector2(0, -1).rotate(Math.toRadians(rotationProperty().get()));
+            spinnerHitAngle = spinnerDirection.normalized().dot(ballSpeedDelta.normalized());
             accelerationUpdated = true;
+        }
+    }
+
+    private void switchToNextFrame()
+    {
+        int spinnerAnimationFrames = 7;
+        currentFrame = (currentFrame + (int)Math.signum(spinnerHitAngle)) % spinnerAnimationFrames;
+
+        if (currentFrame < 0)
+        {
+            currentFrame += spinnerAnimationFrames;
         }
     }
 }
