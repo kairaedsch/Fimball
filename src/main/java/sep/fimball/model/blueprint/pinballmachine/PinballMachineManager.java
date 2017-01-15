@@ -296,7 +296,7 @@ public class PinballMachineManager
 
         if(autoSaveMachine.isPresent()) {
             for(PinballMachine pinballMachine : pinballMachines) {
-                if(pinballMachine.getID().equals(autoSaveMachine.get().nameProperty().get())) {
+                if(pinballMachine.getID().equals(autoSaveMachine.get().getID())) {
                     pinballMachine.unloadElements();
                     loadAutoSaveElements(pinballMachine);
                     return Optional.of(pinballMachine);
