@@ -6,6 +6,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Repräsentiert ein GameElement in der Berechnung der Physik. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden.
@@ -106,15 +107,11 @@ public class PhysicsElement<GameElementT>
      * @param eventArgsList      Die Liste, welche alle auftretenden Kollisionen speichert.
      * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kollidieren kann.
      */
-    public void checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
+    public void checkCollision(ConcurrentLinkedQueue<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
-        for (Collider collider : colliders)
-        {
-            if (collider.checkCollision(ballPhysicsElement, this))
-            {
-                eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId()));
-            }
-        }
+        colliders.parallelStream()
+                .filter(collider -> collider.checkCollision(ballPhysicsElement, this))
+                .forEach(collider -> eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId())));
     }
 
     /**

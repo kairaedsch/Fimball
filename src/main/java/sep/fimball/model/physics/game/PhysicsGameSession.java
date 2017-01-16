@@ -1,6 +1,7 @@
 package sep.fimball.model.physics.game;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Die PhysicsGameSession stellt die GameSession aus der Sichtweise der Physic da.
@@ -20,5 +21,5 @@ public interface PhysicsGameSession<GameElementT>
      * @param collisionEventArgs Liste aller CollisionsEvents.
      * @param elementEventArgs   Liste aller ElementEvents.
      */
-    void addEventArgs(List<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
+    void addEventArgs(ConcurrentLinkedQueue<CollisionEventArgs<GameElementT>> collisionEventArgs, List<ElementEventArgs<GameElementT>> elementEventArgs);
 }

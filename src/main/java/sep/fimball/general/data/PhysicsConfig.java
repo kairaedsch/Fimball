@@ -43,7 +43,7 @@ public class PhysicsConfig
     /**
      * Gibt an, nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    public final static int TICK_RATE_MILISEC = 1000 / 60;
+    public final static int TICK_RATE_MILISEC = 1000 / 240;
 
     /**
      * Gibt an, nach wie vielen Sekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.

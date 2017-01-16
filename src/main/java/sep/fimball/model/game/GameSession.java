@@ -18,7 +18,11 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
@@ -74,7 +78,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     /**
      * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
      */
-    private List<List<CollisionEventArgs<GameElement>>> collisionEventArgsList;
+    private List<ConcurrentLinkedQueue<CollisionEventArgs<GameElement>>> collisionEventArgsList;
 
     /**
      * Die Liste der von der Physik-Loop übertragenen ElementEvent-Argumente.
@@ -168,7 +172,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
             lastTime = currentTime;
         }
 
-        List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
+        List<ConcurrentLinkedQueue<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
         {
@@ -289,7 +293,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      * @param collisionEventArgs Liste aller CollisionsEvents.
      * @param elementEventArgs   Liste aller ElementEvents.
      */
-    public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
+    public void addEventArgs(ConcurrentLinkedQueue<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
         synchronized (physicMonitor)
         {

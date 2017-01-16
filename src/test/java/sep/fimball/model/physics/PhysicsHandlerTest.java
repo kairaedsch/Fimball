@@ -108,7 +108,7 @@ public class PhysicsHandlerTest
         {
             collisionCheckWithBall = true;
             return null;
-        }).when(mockedElement).checkCollision(anyList(), eq(mockedBall));
+        }).when(mockedElement).checkCollision(any(), eq(mockedBall));
         return mockedElement;
     }
 
@@ -129,7 +129,7 @@ public class PhysicsHandlerTest
                 eventMonitor.notify();
             }
             return null;
-        }).when(mockedGameSession).addEventArgs(anyList(), anyList());
+        }).when(mockedGameSession).addEventArgs(any(), anyList());
 
         return mockedGameSession;
     }

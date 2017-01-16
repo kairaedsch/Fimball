@@ -16,6 +16,7 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -68,7 +69,7 @@ public class GameSessionTest
         // künstliches Erstellen einer Kollision.
         final int colliderId = 0;
         CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId);
-        List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
+        ConcurrentLinkedQueue<CollisionEventArgs<GameElement>> collisionEventArgsList = new ConcurrentLinkedQueue<>();
         collisionEventArgsList.add(collisionEventArgs);
 
         // künstliches Erstellen einer Bewegung des Balls.
