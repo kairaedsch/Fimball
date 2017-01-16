@@ -1,15 +1,15 @@
 package sep.fimball.view.pinballcanvas;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.ImageLayer;
-import sep.fimball.general.data.RectangleDoubleByPoints;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
@@ -22,19 +22,21 @@ import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 public class SpriteSubView
 {
     /**
-     * Die Position des Sprites.
-     */
-    private ObjectProperty<Vector2> positionProperty;
-
-    /**
      * Das zur SpriteSubView gehörende SpriteSubViewModel.
      */
     private SpriteSubViewModel viewModel;
 
-    /**
-     * Der ImageCache des Programms.
-     */
-    private ImageCache imageCache;
+    private ObjectProperty<Image> imageTop;
+
+    private ObjectProperty<Image> imageBottom;
+
+    private DoubleProperty rotationRest;
+
+    private ObjectProperty<Vector2> position;
+
+    private ObjectProperty<Vector2> size;
+
+    private ObjectProperty<RectangleDoubleByPoints> drawArea;
 
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
@@ -46,10 +48,44 @@ public class SpriteSubView
     SpriteSubView(SpriteSubViewModel viewModel, ImageCache imageCache)
     {
         this.viewModel = viewModel;
-        this.imageCache = imageCache;
 
-        positionProperty = new SimpleObjectProperty<>();
-        positionProperty.bind(viewModel.positionProperty());
+        imageTop = new SimpleObjectProperty<>();
+        imageTop.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get())), imageTop));
+
+        imageBottom = new SimpleObjectProperty<>();
+        imageBottom.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get())), imageTop));
+
+        rotationRest = new SimpleDoubleProperty();
+        rotationRest.bind(Bindings.createDoubleBinding(() -> {
+            ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
+            return elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
+        }, viewModel.rotationProperty(), viewModel.animationFramePathProperty()));
+
+        size = new SimpleObjectProperty<>();
+        size.bind(Bindings.createObjectBinding(() -> new Vector2(imageTop.get().getWidth(), imageTop.get().getHeight()).scale(viewModel.scaleProperty().get()), imageTop, viewModel.scaleProperty()));
+
+        position = new SimpleObjectProperty<>();
+        position.bind(Bindings.createObjectBinding(() -> viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.get().scale(1 / viewModel.scaleProperty().get()).minus(size.get()).scale(0.5)), viewModel.positionProperty(), viewModel.scaleProperty(), size));
+
+        drawArea = new SimpleObjectProperty<>();
+        drawArea.bind(Bindings.createObjectBinding(() ->
+        {
+            // TODO ugly - repeated code
+            int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest.get()) % 360;
+
+            // TODO ugly - repeated code
+            Vector2 localCoordinates;
+            if (viewModel.getLocalCoordinates().containsKey(picRotate))
+            {
+                localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
+            } else {
+                localCoordinates = new Vector2();
+            }
+
+            // TODO ugly
+            return new RectangleDoubleByPoints(position.get().scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.get().plus(position.get()).plus(localCoordinates).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
+        }, size, position));
+
     }
 
     /**
@@ -63,54 +99,27 @@ public class SpriteSubView
      */
     void draw(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
-        ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
-        double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
-        Image image = imageCache.getImage(elementImage.getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
-
-        Vector2 position = positionProperty.get().scale(DesignConfig.PIXELS_PER_GRID_UNIT);
-        Vector2 size = new Vector2(image.getWidth(), image.getHeight());
-        if (viewModel.scaleProperty().get() != 1)
-        {
-            double scale = viewModel.scaleProperty().get();
-            Vector2 oldSize = size;
-            size = size.scale(scale);
-            position = position.plus(oldSize.minus(size).scale(0.5).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
-        }
-
-        // TODO ugly - repeated code
-        int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
-
-        // TODO ugly - repeated code
-        Vector2 localCoordinates;
-        if (viewModel.getLocalCoordinates().containsKey(picRotate))
-        {
-            localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
-        } else {
-            localCoordinates = new Vector2();
-        }
-
-        // TODO ugly
-        RectangleDoubleByPoints e = new RectangleDoubleByPoints(position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.plus(position).plus(localCoordinates).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
-        RectangleDoubleByPoints c = new RectangleDoubleByPoints(canvas.getOrigin(), canvas.getEnd());
         // System.out.println("c: " + c);
         // System.out.println("e: " + e);
         // System.out.println(c.intersectsWith(e));
-        if(c.intersectsWith(e))
+        if(canvas.intersectsWith(drawArea.get()))
         {
             graphicsContext.save();
-            setupDrawLocation(graphicsContext, rotationRest);
+            setupDrawLocation(graphicsContext, rotationRest.get());
+
+            Image image = (imageLayer == ImageLayer.TOP ? imageTop.get() : imageBottom.get());
 
             if (imageLayer == ImageLayer.TOP)
             {
-                drawImage(graphicsContext, image, drawMode, position, size);
+                drawImage(graphicsContext, image, drawMode, position.get(), size.get());
             }
             if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
             {
-                drawImageBorder(graphicsContext, imageLayer, position, size);
+                drawImageBorder(graphicsContext, imageLayer, position.get(), size.get());
             }
             if (imageLayer == ImageLayer.BOTTOM)
             {
-                drawImage(graphicsContext, image, drawMode, position, size);
+                drawImage(graphicsContext, image, drawMode, position.get(), size.get());
             }
             graphicsContext.restore();
         }
@@ -124,8 +133,6 @@ public class SpriteSubView
      */
     private void setupDrawLocation(GraphicsContext graphicsContext, double rotation)
     {
-        double x = positionProperty.get().getX();
-        double y = positionProperty.get().getY();
         Vector2 pivot = viewModel.pivotPointProperty().get().clone();
         int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
 
@@ -138,7 +145,7 @@ public class SpriteSubView
 
         if (rotation != 0)
         {
-            rotate(graphicsContext, rotation, pivot.plus(new Vector2(x, y)).scale(DesignConfig.PIXELS_PER_GRID_UNIT));
+            rotate(graphicsContext, rotation, pivot.plus(position.get()));
         }
     }
 

@@ -1,4 +1,4 @@
-package sep.fimball.viewmodel.dialog.question;
+package sep.fimball.general.data;
 
 /**
  * Wird für die Aktion die beim Klicken des OK Buttons des QuestionViewModel ausgeführt werden soll verwendet.

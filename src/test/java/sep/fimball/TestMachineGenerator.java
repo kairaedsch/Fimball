@@ -45,7 +45,7 @@ public class TestMachineGenerator
     @Test
     public void generateScalabilityLightMachine()
     {
-        final int size = 500;
+        final int size = 100;
         final int distance = 5;
 
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
