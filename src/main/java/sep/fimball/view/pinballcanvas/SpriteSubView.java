@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
@@ -60,17 +61,14 @@ public class SpriteSubView
      *                        zeichnen soll.
      * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
-    void draw(GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
+    void draw(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         double rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
         Image image = imageCache.getImage(elementImage.getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
-        Vector2 position = positionProperty.get();
+
+        Vector2 position = positionProperty.get().scale(DesignConfig.PIXELS_PER_GRID_UNIT);
         Vector2 size = new Vector2(image.getWidth(), image.getHeight());
-
-        graphicsContext.save();
-        setupDrawLocation(graphicsContext, rotationRest);
-
         if (viewModel.scaleProperty().get() != 1)
         {
             double scale = viewModel.scaleProperty().get();
@@ -79,19 +77,43 @@ public class SpriteSubView
             position = position.plus(oldSize.minus(size).scale(0.5).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
         }
 
-        if (imageLayer == ImageLayer.TOP)
+        // TODO ugly - repeated code
+        int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
+
+        // TODO ugly - repeated code
+        Vector2 localCoordinates;
+        if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
-            drawImage(graphicsContext, image, drawMode, position, size);
+            localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
+        } else {
+            localCoordinates = new Vector2();
         }
-        if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
+
+        // TODO ugly
+        RectangleDoubleByPoints e = new RectangleDoubleByPoints(position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.plus(position).plus(localCoordinates).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
+        RectangleDoubleByPoints c = new RectangleDoubleByPoints(canvas.getOrigin(), canvas.getEnd());
+        // System.out.println("c: " + c);
+        // System.out.println("e: " + e);
+        // System.out.println(c.intersectsWith(e));
+        if(c.intersectsWith(e))
         {
-            drawImageBorder(graphicsContext, imageLayer, position, size);
+            graphicsContext.save();
+            setupDrawLocation(graphicsContext, rotationRest);
+
+            if (imageLayer == ImageLayer.TOP)
+            {
+                drawImage(graphicsContext, image, drawMode, position, size);
+            }
+            if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
+            {
+                drawImageBorder(graphicsContext, imageLayer, position, size);
+            }
+            if (imageLayer == ImageLayer.BOTTOM)
+            {
+                drawImage(graphicsContext, image, drawMode, position, size);
+            }
+            graphicsContext.restore();
         }
-        if (imageLayer == ImageLayer.BOTTOM)
-        {
-            drawImage(graphicsContext, image, drawMode, position, size);
-        }
-        graphicsContext.restore();
     }
 
     /**
@@ -147,8 +169,8 @@ public class SpriteSubView
         graphicsContext.save();
         graphicsContext.setGlobalAlpha(drawMode == DrawMode.SCREENSHOT ? 1 : viewModel.visibilityProperty().get());
 
-        double x = (position.getX() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT;
-        double y = (position.getY() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE) * DesignConfig.PIXELS_PER_GRID_UNIT;
+        double x = position.getX() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * DesignConfig.PIXELS_PER_GRID_UNIT;
+        double y = position.getY() - DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * DesignConfig.PIXELS_PER_GRID_UNIT;
         double w = size.getX() + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT;
         double h = size.getY() + DesignConfig.ANTI_GRAPHIC_STRIPES_EXTRA_SIZE * 2 * DesignConfig.PIXELS_PER_GRID_UNIT;
 
@@ -177,13 +199,13 @@ public class SpriteSubView
         {
             Color color = DesignConfig.COMPLEMENT_COLOR.interpolate(DesignConfig.SECONDARY_COLOR, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(position.getX() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, position.getY() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
+            graphicsContext.strokeRect(position.getX()- borderOffset, position.getY() - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
         else
         {
             Color color = DesignConfig.COMPLEMENT_COLOR_DARK.interpolate(DesignConfig.SECONDARY_COLOR_DARK, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(position.getX() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, (position.getY() + viewModel.getElementHeight()) * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
+            graphicsContext.strokeRect(position.getX() - borderOffset, position.getY() + viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
     }
 }

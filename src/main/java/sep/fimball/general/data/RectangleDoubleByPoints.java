@@ -96,4 +96,19 @@ public class RectangleDoubleByPoints
     {
         return getSize().getY();
     }
+
+    public boolean intersectsWith(RectangleDoubleByPoints other)
+    {
+        return getOrigin().getX() < other.getEnd().getX() && getOrigin().getY() < other.getEnd().getY()
+                && other.getOrigin().getX() < getEnd().getX() && other.getOrigin().getY() < getEnd().getY();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "RectangleDoubleByPoints{" +
+                "pointA=" + pointA +
+                ", pointB=" + pointB +
+                '}';
+    }
 }

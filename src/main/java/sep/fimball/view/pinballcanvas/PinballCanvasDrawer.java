@@ -77,7 +77,7 @@ class PinballCanvasDrawer
             drawEditorGrid(cameraPosition, cameraZoom);
         }
 
-        drawElements(graphicsContext);
+        drawElements(cameraPosition, cameraZoom, graphicsContext);
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 
@@ -98,8 +98,8 @@ class PinballCanvasDrawer
      */
     private void drawBoundingBox(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
     {
-        Vector2 canvasTopLeft = canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0).scale(PIXELS_PER_GRID_UNIT);
-        Vector2 canvasBottomRight = canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight()).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 canvasTopLeft = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
 
         Vector2 ori = boundingBox.getOrigin().scale(PIXELS_PER_GRID_UNIT);
         Vector2 end = boundingBox.getSize().plus(boundingBox.getOrigin()).scale(PIXELS_PER_GRID_UNIT);
@@ -147,15 +147,19 @@ class PinballCanvasDrawer
      *
      * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
      */
-    private void drawElements(GraphicsContext graphicsContext)
+    private void drawElements(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
     {
+        Vector2 canvasTopLeft = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom);
+        Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom);
+        RectangleDoubleByPoints canvas = new RectangleDoubleByPoints(canvasTopLeft, canvasBottomRight);
+
         for (SpriteSubView spriteTop : sprites)
         {
-            spriteTop.draw(graphicsContext, ImageLayer.BOTTOM, drawMode);
+            spriteTop.draw(canvas, graphicsContext, ImageLayer.BOTTOM, drawMode);
         }
         for (SpriteSubView sprite : sprites)
         {
-            sprite.draw(graphicsContext, ImageLayer.TOP, drawMode);
+            sprite.draw(canvas, graphicsContext, ImageLayer.TOP, drawMode);
         }
     }
 
@@ -170,8 +174,8 @@ class PinballCanvasDrawer
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         graphicsContext.save();
-        Vector2 gridStart = canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0).scale(PIXELS_PER_GRID_UNIT);
-        Vector2 gridEnd = canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight()).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 gridStart = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 gridEnd = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
 
         for (int gridX = (int) gridStart.getX() - (int) gridStart.getX() % PIXELS_PER_GRID_UNIT; gridX <= gridEnd.getX(); gridX += PIXELS_PER_GRID_UNIT)
         {
@@ -211,5 +215,15 @@ class PinballCanvasDrawer
     {
         Vector2 posToMiddle = new Vector2(x, y).minus(new Vector2(canvas.getWidth(), canvas.getHeight()).scale(0.5));
         return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * cameraZoom)).plus(cameraPosition);
+    }
+
+    private Vector2 getTopLeftCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
+    {
+        return canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0);
+    }
+
+    private Vector2 getBottomRightCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
+    {
+        return canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight());
     }
 }

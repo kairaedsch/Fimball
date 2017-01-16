@@ -15,6 +15,7 @@ import org.mockito.invocation.InvocationOnMock;
 import sep.fimball.JavaFXThreadingRule;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
@@ -86,7 +87,7 @@ public class SpriteSubViewTest
         setupMockedMethods();
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.BOTTOM, DrawMode.EDITOR);
+        spriteSubView.draw(new RectangleDoubleByPoints(new Vector2(-100, -100), new Vector2(100, 100)), graphicsContextMock, ImageLayer.BOTTOM, DrawMode.EDITOR);
 
         assertEquals(firstTranslationVectorCoordinate, DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
         assertEquals(secondTranslationVectorCoordinate, DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
@@ -121,7 +122,7 @@ public class SpriteSubViewTest
         setupMockedMethods();
 
         SpriteSubView spriteSubView = new SpriteSubView(spriteSubViewModelMock, imageCacheMock);
-        spriteSubView.draw(graphicsContextMock, ImageLayer.TOP, DrawMode.EDITOR);
+        spriteSubView.draw(new RectangleDoubleByPoints(new Vector2(-100, -100), new Vector2(100, 100)), graphicsContextMock, ImageLayer.TOP, DrawMode.EDITOR);
 
         assertEquals(firstTranslationVectorCoordinate, DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
         assertEquals(secondTranslationVectorCoordinate, DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
