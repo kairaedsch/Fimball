@@ -132,7 +132,7 @@ public class SpriteSubView
      */
     private void setupDrawLocation(GraphicsContext graphicsContext, double rotation)
     {
-        Vector2 pivot = viewModel.pivotPointProperty().get().clone();
+        Vector2 pivot = viewModel.pivotPointProperty().get();
         int picRotate = (int) (viewModel.rotationProperty().get() - rotation) % 360;
 
         if (viewModel.getLocalCoordinates().containsKey(picRotate))
@@ -144,7 +144,7 @@ public class SpriteSubView
 
         if (rotation != 0)
         {
-            rotate(graphicsContext, rotation, pivot.plus(position.get()));
+            rotate(graphicsContext, rotation, pivot.scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(position.get()));
         }
     }
 

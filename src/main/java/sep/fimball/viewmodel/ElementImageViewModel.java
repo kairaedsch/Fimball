@@ -11,7 +11,6 @@ import sep.fimball.model.media.ElementImage;
  */
 public class ElementImageViewModel
 {
-
     /**
      * Das zugehörige ElementImage, das das Bild zum Element darstellt.
      */

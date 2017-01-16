@@ -262,16 +262,6 @@ public class Vector2
     }
 
     /**
-     * Klont diesen Vektor und gibt den geklonten Vektor zurück.
-     *
-     * @return Der geklonte Vektor.
-     */
-    public Vector2 clone()
-    {
-        return new Vector2(x, y);
-    }
-
-    /**
      * Gibt einen Vektor zurück der aus der maximalen x-Komponente von {@code a} und {@code b} und der maximalen y-Komponente von {@code a} und {@code b} besteht.
      *
      * @param a Der erste Vektor.

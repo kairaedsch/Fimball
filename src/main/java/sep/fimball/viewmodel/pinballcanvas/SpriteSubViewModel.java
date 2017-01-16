@@ -9,6 +9,7 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.ElementImage;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Map;
@@ -88,8 +89,6 @@ public class SpriteSubViewModel
 
         visibility = new SimpleDoubleProperty(1);
 
-        currentImage = new SimpleObjectProperty<>(new ElementImageViewModel());
-
         pivotPoint = new SimpleObjectProperty<>(gameElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint());
 
         localCoordinates = gameElement.getMediaElement().getLocalCoordinates();
@@ -98,8 +97,18 @@ public class SpriteSubViewModel
 
         elementHeight = gameElement.getMediaElement().getElementHeight();
 
-        gameElement.currentAnimationProperty().addListener((observable, oldValue, newValue) -> updateImage());
-        updateImage();
+        currentImage = new SimpleObjectProperty<>();
+        currentImage.bind(Bindings.createObjectBinding(() -> {
+            Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
+            if (currentAnimation.isPresent())
+            {
+                return new ElementImageViewModel(new ElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get()));
+            }
+            else
+            {
+                return new ElementImageViewModel(gameElement.getMediaElement().elementImageProperty().get());
+            }
+        }, gameElement.currentAnimationProperty()));
     }
 
     /**
@@ -208,21 +217,5 @@ public class SpriteSubViewModel
     public DoubleProperty visibilityProperty()
     {
         return visibility;
-    }
-
-    /**
-     * Aktualisiert abhängig vom GameElement das zu zeichnende Bild.
-     */
-    private void updateImage()
-    {
-        Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
-        if (currentAnimation.isPresent())
-        {
-            currentImage.get().setElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get());
-        }
-        else
-        {
-            currentImage.get().setElementImage(gameElement.getMediaElement().elementImageProperty().get());
-        }
     }
 }

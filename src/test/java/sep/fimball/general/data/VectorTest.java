@@ -211,17 +211,6 @@ public class VectorTest
     }
 
     /**
-     * Hier wird das Klonen eines Vektors getestet.
-     */
-    @Test
-    public void vectorCloneTest()
-    {
-        Vector2 vecOne = new Vector2(1.2, 5.1);
-        Vector2 vecClone = vecOne.clone();
-        assertThat("Der Klon von (1.2, 5.1) ist (1.2, 5.1)", vecOne, is(vecClone));
-    }
-
-    /**
      * Hier wird überprüft ob die equals Methode des Vektors korrekt funktioniert.
      */
     @Test
