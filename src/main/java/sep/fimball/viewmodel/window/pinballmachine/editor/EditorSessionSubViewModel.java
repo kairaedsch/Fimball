@@ -3,7 +3,6 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.EditorSession;
 import sep.fimball.model.game.GameSession;
-import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
@@ -26,24 +25,20 @@ public class EditorSessionSubViewModel
     private PinballMachine pinballMachine;
 
     /**
-     * Zeigt Fenster und Dialoge an.
-     */
-    private SceneManagerViewModel sceneManagerViewModel;
-
-    /**
      * Das PinballCanvasViewModel des angezeigten Spielfelds.
      */
     private PinballCanvasEditorViewModel pinballCanvasViewModel;
 
+    private PinballMachineEditorViewModel editorViewModel;
+
     /**
      * Erzeugt eine neue Instanz von EditorSessionSubViewModel.
      * @param viewModel Informationen über die geladene PinballMachine.
-     * @param sceneManagerViewModel Zum Anzeigen von Dialogen und Fenstern.
      * @param machine Was im Editor bearbeitet wrird.
      */
-    public EditorSessionSubViewModel(PinballMachineEditorViewModel viewModel, SceneManagerViewModel sceneManagerViewModel, PinballMachine machine)
+    public EditorSessionSubViewModel(PinballMachineEditorViewModel viewModel, PinballMachine machine)
     {
-        this.sceneManagerViewModel = sceneManagerViewModel;
+        editorViewModel = viewModel;
         pinballMachine = machine;
         editorSession = new EditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasEditorViewModel(editorSession, viewModel);
@@ -56,7 +51,7 @@ public class EditorSessionSubViewModel
     public void startPinballMachine()
     {
         editorSession.stopUpdateLoop();
-        sceneManagerViewModel.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
+        editorViewModel.getSceneManagerViewModel().setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
     }
 
     /**
@@ -68,8 +63,8 @@ public class EditorSessionSubViewModel
         editorSession.stopAutoSaveLoop();
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         boolean success = pinballMachine.saveToDisk();
-        sceneManagerViewModel.pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
-        sceneManagerViewModel.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+        editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
+        editorViewModel.getSceneManagerViewModel().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
     }
 
     /**
@@ -77,12 +72,12 @@ public class EditorSessionSubViewModel
      */
     public void showSettingsDialog()
     {
-        sceneManagerViewModel.pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
+        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
         {
             editorSession.stopUpdateLoop();
             editorSession.stopAutoSaveLoop();
             pinballMachine.unloadElements();
-            sceneManagerViewModel.setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+            editorViewModel.getSceneManagerViewModel().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
         }));
     }
 

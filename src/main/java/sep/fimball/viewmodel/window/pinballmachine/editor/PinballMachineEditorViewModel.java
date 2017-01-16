@@ -19,6 +19,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
@@ -165,7 +166,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         cursorProperty = new SimpleObjectProperty<>();
 
-        editorSessionSubViewModel = new EditorSessionSubViewModel(this, sceneManager, pinballMachine);
+        editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);
     }
 
     /**
@@ -575,5 +576,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public EditorSessionSubViewModel getEditorSessionSubViewModel()
     {
         return editorSessionSubViewModel;
+    }
+
+    public SceneManagerViewModel getSceneManagerViewModel()
+    {
+        return sceneManager;
     }
 }
