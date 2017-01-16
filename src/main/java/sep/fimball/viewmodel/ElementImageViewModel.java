@@ -2,8 +2,6 @@ package sep.fimball.viewmodel;
 
 
 import sep.fimball.general.data.ImageLayer;
-import sep.fimball.model.media.Animation;
-import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
 
 /**
@@ -33,14 +31,6 @@ public class ElementImageViewModel
     }
 
     /**
-     * Erstellt ein leeres ElementImageViewModel.
-     */
-    public ElementImageViewModel()
-    {
-
-    }
-
-    /**
      * Gibt den Pfad zu dem zu diesem ElementImageViewModel gehörenden Bild in
      * Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
      *
@@ -63,29 +53,5 @@ public class ElementImageViewModel
     public double getRestRotation(int rotation)
     {
         return elementImage.getRestRotation(rotation);
-    }
-
-    /**
-     * Setzt das ElementImage.
-     *
-     * @param elementImage Das neue ElementImage.
-     */
-    public void setElementImage(ElementImage elementImage)
-    {
-        this.elementImage = elementImage;
-        creationTime = System.currentTimeMillis();
-    }
-
-    /**
-     * Setzt ein aus den übergebenen Werten erstelltes ElementImage.
-     *
-     * @param id           Die ID des zugehörigen BaseElements.
-     * @param mediaElement Das zugehörige BaseMediaElement.
-     * @param animation    Die zugehörige Animation.
-     */
-    public void setElementImage(String id, BaseMediaElement mediaElement, Animation animation)
-    {
-        this.elementImage = new ElementImage(id, mediaElement, animation);
-        creationTime = System.currentTimeMillis();
     }
 }

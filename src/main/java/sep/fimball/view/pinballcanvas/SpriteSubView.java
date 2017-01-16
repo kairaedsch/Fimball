@@ -26,6 +26,8 @@ public class SpriteSubView
      */
     private SpriteSubViewModel viewModel;
 
+    private ImageCache imageCache;
+
     private ObjectProperty<Image> imageTop;
 
     private ObjectProperty<Image> imageBottom;
@@ -48,6 +50,7 @@ public class SpriteSubView
     SpriteSubView(SpriteSubViewModel viewModel, ImageCache imageCache)
     {
         this.viewModel = viewModel;
+        this.imageCache = imageCache;
 
         imageTop = new SimpleObjectProperty<>();
         imageTop.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get())), viewModel.animationFramePathProperty(), viewModel.rotationProperty()));
@@ -106,7 +109,7 @@ public class SpriteSubView
             graphicsContext.save();
             setupDrawLocation(graphicsContext, rotationRest.get());
 
-            Image image = (imageLayer == ImageLayer.TOP ? imageTop.get() : imageBottom.get());
+            Image image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
 
             if (imageLayer == ImageLayer.TOP)
             {
