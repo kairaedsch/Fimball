@@ -50,10 +50,10 @@ public class SpriteSubView
         this.viewModel = viewModel;
 
         imageTop = new SimpleObjectProperty<>();
-        imageTop.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get())), imageTop));
+        imageTop.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get())), viewModel.animationFramePathProperty(), viewModel.rotationProperty()));
 
         imageBottom = new SimpleObjectProperty<>();
-        imageBottom.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get())), imageTop));
+        imageBottom.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get())), viewModel.animationFramePathProperty(), viewModel.rotationProperty()));
 
         rotationRest = new SimpleDoubleProperty();
         rotationRest.bind(Bindings.createDoubleBinding(() -> {
@@ -65,7 +65,7 @@ public class SpriteSubView
         size.bind(Bindings.createObjectBinding(() -> new Vector2(imageTop.get().getWidth(), imageTop.get().getHeight()).scale(viewModel.scaleProperty().get()), imageTop, viewModel.scaleProperty()));
 
         position = new SimpleObjectProperty<>();
-        position.bind(Bindings.createObjectBinding(() -> viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.get().scale(1 / viewModel.scaleProperty().get()).minus(size.get()).scale(0.5)), viewModel.positionProperty(), viewModel.scaleProperty(), size));
+        position.bind(Bindings.createObjectBinding(() -> viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.get().scale(1 / viewModel.scaleProperty().get()).minus(size.get()).scale(0.5)), viewModel.positionProperty(), size));
 
         drawArea = new SimpleObjectProperty<>();
         drawArea.bind(Bindings.createObjectBinding(() ->
@@ -83,9 +83,8 @@ public class SpriteSubView
             }
 
             // TODO ugly
-            return new RectangleDoubleByPoints(position.get().scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.get().plus(position.get()).plus(localCoordinates).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT));
-        }, size, position));
-
+            return new RectangleDoubleByPoints(position.get().scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.get().plus(position.get()).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates));
+        }, size, position, rotationRest));
     }
 
     /**
