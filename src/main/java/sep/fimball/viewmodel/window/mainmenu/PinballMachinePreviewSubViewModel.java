@@ -64,6 +64,10 @@ public class PinballMachinePreviewSubViewModel
         mainMenu.switchPinballMachineInfo(pinballMachine);
     }
 
+    /**
+     * Gibt die ID des zugehörigen Automaten zurück.
+     * @return Die ID des zugehörigen Automaten.
+     */
     public String getMachineID()
     {
         return pinballMachine.getID();

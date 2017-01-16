@@ -68,6 +68,9 @@ public class MainMenuViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Initialisiert die Liste der PinballMachinePreviews.
+     */
     private void initialize()
     {
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())

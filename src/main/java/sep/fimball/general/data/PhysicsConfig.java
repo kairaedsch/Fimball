@@ -76,7 +76,7 @@ public class PhysicsConfig
     public final static double BOUNCE_NORMAL_COLLISION = 1.4;
 
     /**
-     * Wenn der Ball so nah an den Mittelpunkt eines Lochs kommt, wird das Loch aktiviert
+     * Wenn der Ball so nah an den Mittelpunkt eines Lochs kommt, wird das Loch aktiviert.
      */
     public final static double CENTER_AREA_RADIUS = 0.6;
 

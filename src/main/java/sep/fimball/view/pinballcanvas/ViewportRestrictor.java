@@ -4,9 +4,6 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 
-/**
- * Created by alexcekay on 15.01.17.
- */
 public class ViewportRestrictor
 {
     private Vector2 minDimensions;
