@@ -109,6 +109,7 @@ public class PhysicsElement<GameElementT>
      */
     public void checkCollision(ConcurrentLinkedQueue<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
+        // Optimierung da die Kollisionsberechnung sehr aufwändig ist und sich leicht parallelisieren lässt
         colliders.parallelStream()
                 .filter(collider -> collider.checkCollision(ballPhysicsElement, this))
                 .forEach(collider -> eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId())));
