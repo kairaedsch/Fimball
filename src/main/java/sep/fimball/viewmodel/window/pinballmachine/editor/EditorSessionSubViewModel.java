@@ -44,8 +44,8 @@ public class EditorSessionSubViewModel
     public EditorSessionSubViewModel(PinballMachineEditorViewModel viewModel, SceneManagerViewModel sceneManagerViewModel, PinballMachine machine)
     {
         this.sceneManagerViewModel = sceneManagerViewModel;
-        editorSession = new EditorSession(pinballMachine);
         pinballMachine = machine;
+        editorSession = new EditorSession(pinballMachine);
         pinballCanvasViewModel = new PinballCanvasEditorViewModel(editorSession, viewModel);
     }
 
