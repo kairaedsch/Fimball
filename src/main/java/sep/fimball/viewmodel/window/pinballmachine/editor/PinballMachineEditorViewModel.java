@@ -133,7 +133,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         super(WindowType.MACHINE_EDITOR);
 
         pinballMachineEditor = new PinballMachineEditor(pinballMachine);
-        editorSessionSubViewModel = new EditorSessionSubViewModel(this, sceneManager, pinballMachine);
 
         selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
 
@@ -165,6 +164,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
 
         cursorProperty = new SimpleObjectProperty<>();
+
+        editorSessionSubViewModel = new EditorSessionSubViewModel(this, sceneManager, pinballMachine);
     }
 
     /**
