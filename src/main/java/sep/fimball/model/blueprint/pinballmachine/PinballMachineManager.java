@@ -292,11 +292,10 @@ public class PinballMachineManager
         Path jsonPath = Paths.get(DataPath.pathToAutoSaveGeneralJson());
 
         Optional<PinballMachineJson> pinballMachineJson = JsonFileManager.loadFromJson(jsonPath, PinballMachineJson.class);
-        Optional<PinballMachine> autoSaveMachine = PinballMachineFactory.createPinballMachine(pinballMachineJson, "autosave", this);
 
-        if(autoSaveMachine.isPresent()) {
+        if(pinballMachineJson.isPresent()) {
             for(PinballMachine pinballMachine : pinballMachines) {
-                if(pinballMachine.getID().equals(autoSaveMachine.get().getID())) {
+                if(pinballMachine.getID().equals(pinballMachineJson.get().id)) {
                     pinballMachine.unloadElements();
                     loadAutoSaveElements(pinballMachine);
                     return Optional.of(pinballMachine);
@@ -307,6 +306,10 @@ public class PinballMachineManager
     }
 
 
+    /**
+     * Lädt die Elemente des AutoSave-Automaten in den gegebenen Automaten.
+     * @param pinballMachine Der Automat, der die Elemente des AutoSave-Automaten erhalten soll.
+     */
     private void loadAutoSaveElements(PinballMachine pinballMachine) {
         Path jsonPath = Paths.get(DataPath.pathToAutoSavePlacedElementsJson());
 
