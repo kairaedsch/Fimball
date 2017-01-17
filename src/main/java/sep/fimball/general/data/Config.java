@@ -55,6 +55,10 @@ public class Config
     public final static int SPINS_PER_DIRECT_HIT = 80;
 
     public final static int SPINNER_SLOWDOWN_SPEED = 3;
+    /**
+     * Die Rate, mit der der AutoSave gespeichert wird.
+     */
+    public final static int AUTOSAVE_RATE = 120;
 
     /**
      * Gibt eine eindeutige ID zurück.

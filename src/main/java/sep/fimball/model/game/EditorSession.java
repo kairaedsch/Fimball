@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
@@ -15,11 +16,6 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
  */
 public class EditorSession extends Session
 {
-
-    /**
-     * Die Rate, mit der der AutoSave gespeichert wird.
-     */
-    private final int AUTOSAVE_RATE = 2;
 
     /**
      * Die Loop. die den AutoSave ausführt.
@@ -41,7 +37,7 @@ public class EditorSession extends Session
         world = new World(list, true, pinballMachine.getMaximumYPosition());
 
         autoSaveLoop = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(AUTOSAVE_RATE), (event ->
+        KeyFrame frame = new KeyFrame(Duration.seconds(Config.AUTOSAVE_RATE), (event ->
                 PinballMachineManager.getInstance().saveAutoSaveMachine(pinballMachine)));
         autoSaveLoop.getKeyFrames().add(frame);
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
