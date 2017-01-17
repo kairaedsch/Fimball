@@ -214,7 +214,15 @@ public class PhysicsHandler<GameElementT>
                     physicsElements
                             .stream()
                             .filter(element -> element instanceof PhysicsUpdatable)
-                            .forEach(element -> ((PhysicsUpdatable) element).update(delta));
+                            .forEach(element ->
+                            {
+                                ((PhysicsUpdatable) element).update(delta);
+                                if (element.hasChanged())
+                                {
+                                    elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                                    element.resetChanged();
+                                }
+                            });
                 }
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
