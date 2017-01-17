@@ -58,7 +58,7 @@ public class PinballMachine
     /**
      * Die sortierte Liste der platzierten Elemente. Diese werden sortiert um in der korrekten Reihenfolge gezeichnet zu werden.
      */
-    private ListProperty<PlacedElement> sortedElements;
+    private Optional<ListProperty<PlacedElement>> sortedElements;
 
     /**
      * Gibt an, ob die Flipperautomaten-Elemente {@code elements} geladen wurde.
@@ -85,7 +85,7 @@ public class PinballMachine
 
         // Set up element list
         elements = new SimpleListProperty<>(FXCollections.observableArrayList());
-        sortedElements = new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare));
+        sortedElements = Optional.empty();
         elementsLoaded = loaded;
         if (loaded)
             addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
@@ -291,7 +291,8 @@ public class PinballMachine
         if (elementsLoaded)
         {
             elementsLoaded = false;
-            elements.clear();
+            sortedElements = Optional.empty();
+            elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         }
     }
 
@@ -323,7 +324,11 @@ public class PinballMachine
     public ReadOnlyListProperty<PlacedElement> elementsProperty()
     {
         checkElementsLoaded();
-        return sortedElements;
+        if(!sortedElements.isPresent())
+        {
+            sortedElements = Optional.of(new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare)));
+        }
+        return sortedElements.get();
     }
 
     /**

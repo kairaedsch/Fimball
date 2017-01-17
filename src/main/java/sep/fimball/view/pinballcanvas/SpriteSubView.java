@@ -15,6 +15,8 @@ import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
+import static com.sun.webkit.graphics.WCImage.getImage;
+
 /**
  * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements
  * zuständig.
@@ -28,17 +30,13 @@ public class SpriteSubView
 
     private ImageCache imageCache;
 
-    private ObjectProperty<Image> imageTop;
+    private double rotationRest;
 
-    private ObjectProperty<Image> imageBottom;
+    private Vector2 position;
 
-    private DoubleProperty rotationRest;
+    private Vector2 size;
 
-    private ObjectProperty<Vector2> position;
-
-    private ObjectProperty<Vector2> size;
-
-    private ObjectProperty<RectangleDoubleByPoints> drawArea;
+    private RectangleDoubleByPoints drawArea;
 
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
@@ -52,42 +50,38 @@ public class SpriteSubView
         this.viewModel = viewModel;
         this.imageCache = imageCache;
 
-        imageTop = new SimpleObjectProperty<>();
-        imageTop.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get())), viewModel.animationFramePathProperty(), viewModel.rotationProperty()));
+        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        viewModel.positionProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        viewModel.scaleProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        calculateValues();
+    }
 
-        imageBottom = new SimpleObjectProperty<>();
-        imageBottom.bind(Bindings.createObjectBinding(() -> imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get())), viewModel.animationFramePathProperty(), viewModel.rotationProperty()));
+    private void calculateValues()
+    {
+        Image imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
 
-        rotationRest = new SimpleDoubleProperty();
-        rotationRest.bind(Bindings.createDoubleBinding(() -> {
-            ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
-            return elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
-        }, viewModel.rotationProperty(), viewModel.animationFramePathProperty()));
+        ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
+        rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
 
-        size = new SimpleObjectProperty<>();
-        size.bind(Bindings.createObjectBinding(() -> new Vector2(imageTop.get().getWidth(), imageTop.get().getHeight()).scale(viewModel.scaleProperty().get()), imageTop, viewModel.scaleProperty()));
+        size = new Vector2(imageTop.getWidth(), imageTop.getHeight()).scale(viewModel.scaleProperty().get());
 
-        position = new SimpleObjectProperty<>();
-        position.bind(Bindings.createObjectBinding(() -> viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.get().scale(1 / viewModel.scaleProperty().get()).minus(size.get()).scale(0.5)), viewModel.positionProperty(), size));
+        position = viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.scale(1 / viewModel.scaleProperty().get()).minus(size).scale(0.5));
 
-        drawArea = new SimpleObjectProperty<>();
-        drawArea.bind(Bindings.createObjectBinding(() ->
+        // TODO ugly - repeated code
+        int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
+
+        // TODO ugly - repeated code
+        Vector2 localCoordinates;
+        if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
-            // TODO ugly - repeated code
-            int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest.get()) % 360;
+            localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
+        } else {
+            localCoordinates = new Vector2();
+        }
 
-            // TODO ugly - repeated code
-            Vector2 localCoordinates;
-            if (viewModel.getLocalCoordinates().containsKey(picRotate))
-            {
-                localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
-            } else {
-                localCoordinates = new Vector2();
-            }
-
-            // TODO ugly
-            return new RectangleDoubleByPoints(position.get().scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.get().plus(position.get()).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates));
-        }, size, position, rotationRest));
+        // TODO ugly
+        drawArea = new RectangleDoubleByPoints(position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.plus(position).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates));
     }
 
     /**
@@ -104,24 +98,24 @@ public class SpriteSubView
         // System.out.println("c: " + c);
         // System.out.println("e: " + e);
         // System.out.println(c.intersectsWith(e));
-        if(canvas.intersectsWith(drawArea.get()))
+        if(canvas.intersectsWith(drawArea))
         {
             graphicsContext.save();
-            setupDrawLocation(graphicsContext, rotationRest.get());
+            setupDrawLocation(graphicsContext, rotationRest);
 
             Image image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
 
             if (imageLayer == ImageLayer.TOP)
             {
-                drawImage(graphicsContext, image, drawMode, position.get(), size.get());
+                drawImage(graphicsContext, image, drawMode, position, size);
             }
             if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
             {
-                drawImageBorder(graphicsContext, imageLayer, position.get(), size.get());
+                drawImageBorder(graphicsContext, imageLayer, position, size);
             }
             if (imageLayer == ImageLayer.BOTTOM)
             {
-                drawImage(graphicsContext, image, drawMode, position.get(), size.get());
+                drawImage(graphicsContext, image, drawMode, position, size);
             }
             graphicsContext.restore();
         }
@@ -147,7 +141,7 @@ public class SpriteSubView
 
         if (rotation != 0)
         {
-            rotate(graphicsContext, rotation, pivot.scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(position.get()));
+            rotate(graphicsContext, rotation, pivot.scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(position));
         }
     }
 

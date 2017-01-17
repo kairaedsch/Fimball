@@ -31,6 +31,16 @@ public abstract class Session
     private sep.fimball.general.util.Observable updateLoopObservable;
 
     /**
+     * Wie viele Updates in der letzten Sekunde durchgeführt wurden.
+     */
+    private int framecount;
+
+    /**
+     * Der Zeitpunkt, seit dem die Updates gezählt wurden.
+     */
+    private long lastTime = System.currentTimeMillis();
+
+    /**
      * Erstellt eine neue Session mit einer PinballMachine.
      *
      * @param pinballMachine Die PinballMachine der Session.
@@ -45,6 +55,15 @@ public abstract class Session
             @Override
             public void handle(long now)
             {
+                framecount++;
+                long currentTime = System.currentTimeMillis();
+                if (((double) currentTime - (double) lastTime) > 1000)
+                {
+                    System.out.println("FPS: " + framecount);
+                    framecount = 0;
+                    lastTime = currentTime;
+                }
+
                 loopUpdate();
             }
         };

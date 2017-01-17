@@ -101,16 +101,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     private HandlerManager handlerManager;
 
     /**
-     * Wie viele Updates in der letzten Sekunde durchgeführt wurden.
-     */
-    private int framecount;
-
-    /**
-     * Der Zeitpunkt, seit dem die Updates gezählt wurden.
-     */
-    private long lastTime;
-
-    /**
      * Erstellt eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten,
      * erstellt die World samt GameElement und initialisiert die nötigen Handler.
      *
@@ -163,15 +153,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     @Override
     protected void loopUpdate()
     {
-        framecount++;
-        long currentTime = System.currentTimeMillis();
-        if (((double) currentTime - (double) lastTime) > 1000)
-        {
-            System.out.println("FPS: " + framecount);
-            framecount = 0;
-            lastTime = currentTime;
-        }
-
         List<ConcurrentLinkedQueue<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
