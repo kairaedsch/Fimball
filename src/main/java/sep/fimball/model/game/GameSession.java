@@ -213,6 +213,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         startUpdateLoop();
         startPhysics();
+        handlerManager.activateGameHandler(GameEvent.START);
     }
 
     /**
@@ -222,6 +223,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         physicsHandler.stopTicking();
         stopUpdateLoop();
+        handlerManager.activateGameHandler(GameEvent.PAUSE);
     }
 
     /**

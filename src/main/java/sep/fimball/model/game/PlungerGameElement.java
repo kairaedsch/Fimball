@@ -5,6 +5,8 @@ import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.UserHandler;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
@@ -17,7 +19,7 @@ import static sep.fimball.general.data.PhysicsConfig.MAX_PLUNGER_FORCE_MULTIPLY;
 /**
  * Das Spielelement des Plungers.
  */
-public class PlungerGameElement extends GameElement implements UserHandler
+public class PlungerGameElement extends GameElement implements UserHandler, GameHandler
 {
     /**
      * Der Zeitpunkt zu dem das Aufladen des Plungers begonnen wurde.
@@ -40,6 +42,11 @@ public class PlungerGameElement extends GameElement implements UserHandler
     private PauseTransition resetTransition;
 
     /**
+     * TODO
+     */
+    private AnimationTimer plungerUpdate;
+
+    /**
      * Erstellt ein neues PlungerGameElement aus dem gegebenen PlacedElement.
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
@@ -49,7 +56,7 @@ public class PlungerGameElement extends GameElement implements UserHandler
     {
         super(element, bind);
 
-        AnimationTimer plungerUpdate = new AnimationTimer()
+        plungerUpdate = new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -61,7 +68,6 @@ public class PlungerGameElement extends GameElement implements UserHandler
                 }
             }
         };
-        plungerUpdate.start();
 
         resetTransition = new PauseTransition(Duration.seconds(PhysicsConfig.PLUNGER_FORCE_DURATION));
         resetTransition.setOnFinished(e -> plungerPhysicsElement.addModify(() -> 0));
@@ -119,5 +125,19 @@ public class PlungerGameElement extends GameElement implements UserHandler
     private double getSecondsPressed()
     {
         return (System.currentTimeMillis() - pressStart) / 1000d;
+    }
+
+    @Override
+    public void activateGameHandler(GameEvent gameEvent)
+    {
+        switch (gameEvent)
+        {
+            case START:
+                plungerUpdate.start();
+                break;
+            case PAUSE:
+                plungerUpdate.stop();
+                break;
+        }
     }
 }

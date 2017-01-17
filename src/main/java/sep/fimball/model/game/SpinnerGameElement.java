@@ -5,12 +5,11 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.ElementHandler;
+import sep.fimball.model.handler.GameEvent;
+import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.HandlerGameElement;
 
-/**
- * Created by alexcekay on 15.01.17.
- */
-public class SpinnerGameElement extends GameElement implements ElementHandler
+public class SpinnerGameElement extends GameElement implements ElementHandler, GameHandler
 {
     private double remainingSpins;
     private double currentSpinPercentage;
@@ -18,6 +17,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
     private double spinnerHitAngle;
     private Vector2 ballSpeedDelta;
     private boolean accelerationUpdated;
+    private AnimationTimer spinnerUpdate;
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
@@ -36,7 +36,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
             ballSpeedDelta = new Vector2(deltaX, deltaY);
         }));
 
-        AnimationTimer spinnerUpdate = new AnimationTimer()
+        spinnerUpdate = new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -87,6 +87,20 @@ public class SpinnerGameElement extends GameElement implements ElementHandler
         if (currentFrame < 0)
         {
             currentFrame += spinnerAnimationFrames;
+        }
+    }
+
+    @Override
+    public void activateGameHandler(GameEvent gameEvent)
+    {
+        switch (gameEvent)
+        {
+            case START:
+                spinnerUpdate.start();
+                break;
+            case PAUSE:
+                spinnerUpdate.stop();
+                break;
         }
     }
 }

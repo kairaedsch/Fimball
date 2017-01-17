@@ -21,7 +21,6 @@ public class TestMachineGenerator
 
         for (int i = 0; i < sizes.length; i++)
         {
-
             PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
 
             int size = sizes[i];

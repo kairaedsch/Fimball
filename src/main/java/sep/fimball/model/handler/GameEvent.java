@@ -18,5 +18,15 @@ public enum GameEvent
     /**
      * Spielereignis, das ausgelöst wird, wenn das Spiel vorbei ist.
      */
-    GAME_OVER
+    GAME_OVER,
+
+    /**
+     * Spielereignis, wenn das Spiel gestartet wird.
+     */
+    START,
+
+    /**
+     * Spielereignis, wenn das Spiel beendet wird.
+     */
+    PAUSE
 }

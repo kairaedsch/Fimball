@@ -69,13 +69,14 @@ public class LightHandler implements GameHandler
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        if (gameEvent == GameEvent.BALL_LOST)
+        switch (gameEvent)
         {
-            lightChangeLoop.stop();
-        }
-        if (gameEvent == GameEvent.BALL_SPAWNED)
-        {
-            lightChangeLoop.start();
+            case START:
+                lightChangeLoop.start();
+                break;
+            case PAUSE:
+                lightChangeLoop.stop();
+                break;
         }
     }
 

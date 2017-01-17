@@ -53,7 +53,7 @@ public class ImageCache
         if (!cachedImages.containsKey(imagePath))
         {
             File imageFile = new File(imagePath);
-            Image loadedImage = new Image(imageFile.toURI().toString(), true);
+            Image loadedImage = new Image(imageFile.toURI().toString());
             cachedImages.put(imagePath, loadedImage);
         }
         return cachedImages.get(imagePath);
