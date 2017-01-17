@@ -258,6 +258,11 @@ public class PhysicsHandler<GameElementT>
         elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
     }
 
+    /**
+     * Berechnet die Hashes für die Position eines Elements, die für den Zugriff auf die physicsElementMap benötigt werden.
+     * @param element Element für das die Hashes berechnet werden.
+     * @return Eine Liste von Positions-Hashes.
+     */
     private List<Long> getElementPositionHashes(PhysicsElement<GameElementT> element)
     {
         List<Long> result = new ArrayList<>();
@@ -265,12 +270,12 @@ public class PhysicsHandler<GameElementT>
         Vector2 minPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), false));
         Vector2 maxPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), true));
 
-        IntegerVector2 minGroup = getPositionGroup(minPos);
-        IntegerVector2 maxGroup = getPositionGroup(maxPos);
+        IntegerVector2 minRegion = getPositionRegion(minPos);
+        IntegerVector2 maxRegion = getPositionRegion(maxPos);
 
-        for (int x = minGroup.getX(); x <= maxGroup.getX(); x++)
+        for (int x = minRegion.getX(); x <= maxRegion.getX(); x++)
         {
-            for (int y = minGroup.getY(); y <= maxGroup.getY(); y++)
+            for (int y = minRegion.getY(); y <= maxRegion.getY(); y++)
             {
                 long hash = getPositionHash(new IntegerVector2(x, y));
                 result.add(hash);
@@ -280,7 +285,12 @@ public class PhysicsHandler<GameElementT>
         return result;
     }
 
-    private IntegerVector2 getPositionGroup(Vector2 position)
+    /**
+     * Gibt die Region eines Vektors auf dem Spielfeld an.
+     * @param position Vektor für den die Region berechnet wird.
+     * @return Region, in der sich der Vektor befindet.
+     */
+    private IntegerVector2 getPositionRegion(Vector2 position)
     {
         final long REGION_SIZE = 10;
         int x = (int)Math.ceil(position.getX() / REGION_SIZE);
@@ -288,10 +298,15 @@ public class PhysicsHandler<GameElementT>
         return new IntegerVector2(x, y);
     }
 
-    private long getPositionHash(IntegerVector2 positionGroup)
+    /**
+     * Berechnet den Hash einer Spielfeld-Region.
+     * @param region Region, für die der Hash berechnet werden soll.
+     * @return Hash für eine Region.
+     */
+    private long getPositionHash(IntegerVector2 region)
     {
-        long hash = positionGroup.getX();
-        long shiftedY = positionGroup.getY();
+        long hash = region.getX();
+        long shiftedY = region.getY();
         shiftedY <<= 32;
         hash |= shiftedY;
         return hash;
