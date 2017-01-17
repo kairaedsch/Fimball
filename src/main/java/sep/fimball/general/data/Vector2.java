@@ -186,7 +186,7 @@ public class Vector2
 
     public Vector2 smoothLerp(Vector2 vecTwo, double t)
     {
-        double smoothT = smoothStep(0.0, 1.0, t);
+        double smoothT = smoothStep(t);
         return lerp(vecTwo, smoothT);
     }
 
@@ -301,12 +301,12 @@ public class Vector2
         return new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalized();
     }
 
-    private double smoothStep(double edgeOne, double edgeTwo, double t)
+    private double smoothStep(double t)
     {
         double min = 0.0;
         double max = 1.0;
-        double x = (t - edgeOne)/(edgeTwo - edgeOne);
+        double x = (t - min)/(max - min);
         x = Math.max(min, Math.min(max, x));
-        return x * x * (3 - 2 * x);
+        return x * x;
     }
 }
