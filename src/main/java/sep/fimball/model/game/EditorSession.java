@@ -38,7 +38,10 @@ public class EditorSession extends Session
 
         autoSaveLoop = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(Config.AUTOSAVE_RATE), (event ->
-                PinballMachineManager.getInstance().saveAutoSaveMachine(pinballMachine)));
+        {
+            System.out.println("Auto save");
+            PinballMachineManager.getInstance().saveAutoSaveMachine(pinballMachine);
+        }));
         autoSaveLoop.getKeyFrames().add(frame);
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
         autoSaveLoop.play();
@@ -46,10 +49,12 @@ public class EditorSession extends Session
 
     /**
      * Stoppt die AutoSave-Loop und löscht den AutoSave-Automaten.
+     * @param deleteAutoSaveData Gibt an, ob die AutoSave-Daten gelöscht werden sollen.
      */
-    public void stopAutoSaveLoop(){
+    public void stopAutoSaveLoop(boolean deleteAutoSaveData){
         autoSaveLoop.stop();
-        PinballMachineManager.getInstance().deleteAutoSaveMachine();
+        if (deleteAutoSaveData)
+            PinballMachineManager.getInstance().deleteAutoSaveMachine();
     }
 
 

@@ -51,6 +51,7 @@ public class EditorSessionSubViewModel
     public void startPinballMachine()
     {
         editorSession.stopUpdateLoop();
+        editorSession.stopAutoSaveLoop(false);
         editorViewModel.getSceneManagerViewModel().setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
     }
 
@@ -60,7 +61,7 @@ public class EditorSessionSubViewModel
     public void saveAndShowSettingsDialog()
     {
         editorSession.stopUpdateLoop();
-        editorSession.stopAutoSaveLoop();
+        editorSession.stopAutoSaveLoop(true);
         pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
         boolean success = pinballMachine.saveToDisk();
         editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
@@ -75,7 +76,7 @@ public class EditorSessionSubViewModel
         editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
         {
             editorSession.stopUpdateLoop();
-            editorSession.stopAutoSaveLoop();
+            editorSession.stopAutoSaveLoop(true);
             pinballMachine.unloadElements();
             editorViewModel.getSceneManagerViewModel().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
         }));
