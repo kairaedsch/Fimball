@@ -56,6 +56,4 @@ public class EditorSession extends Session
         if (deleteAutoSaveData)
             PinballMachineManager.getInstance().deleteAutoSaveMachine();
     }
-
-
 }

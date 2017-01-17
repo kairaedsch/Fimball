@@ -38,6 +38,8 @@ public class SpriteSubView
 
     private RectangleDoubleByPoints drawArea;
 
+    private Image imageTop;
+
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
@@ -59,7 +61,7 @@ public class SpriteSubView
 
     private void calculateValues()
     {
-        Image imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
 
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
@@ -101,14 +103,16 @@ public class SpriteSubView
         if(canvas.intersectsWith(drawArea))
         {
             graphicsContext.save();
-            setupDrawLocation(graphicsContext, rotationRest);
 
+            setupDrawLocation(graphicsContext, rotationRest);
             Image image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
+            //Image image = imageTop;
 
             if (imageLayer == ImageLayer.TOP)
             {
                 drawImage(graphicsContext, image, drawMode, position, size);
             }
+
             if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
             {
                 drawImageBorder(graphicsContext, imageLayer, position, size);

@@ -15,6 +15,10 @@ public class RectangleDoubleByPoints
      */
     private final Vector2 pointB;
 
+    private final Vector2 origin;
+
+    private final Vector2 end;
+
     /**
      * Erzeugt ein Rechteck welches durch zwei Punkte dargestellt wird.
      *
@@ -25,6 +29,8 @@ public class RectangleDoubleByPoints
     {
         this.pointA = pointA;
         this.pointB = pointB;
+        this.origin = Vector2.minComponents(pointA, pointB);
+        this.end = Vector2.maxComponents(pointA, pointB);
     }
 
     /**
@@ -54,7 +60,7 @@ public class RectangleDoubleByPoints
      */
     public Vector2 getOrigin()
     {
-        return Vector2.minComponents(pointA, pointB);
+        return origin;
     }
 
     /**
@@ -64,7 +70,7 @@ public class RectangleDoubleByPoints
      */
     public Vector2 getEnd()
     {
-        return Vector2.maxComponents(pointA, pointB);
+        return end;
     }
 
     /**
