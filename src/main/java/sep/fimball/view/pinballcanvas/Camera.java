@@ -83,7 +83,7 @@ public class Camera
         double camZoomStep = delta / cameraZoomSpeed;
         camZoomStep = Math.max(Math.min(camZoomStep, 1), 0);
 
-        softCameraPosition = softCameraPosition.lerp(cameraPosition.get(), camFollowStep);
+        softCameraPosition = softCameraPosition.smoothLerp(cameraPosition.get(), camFollowStep);
         softCameraZoom = softCameraZoom * (1 - camZoomStep) + cameraZoom.get() * camZoomStep;
 
         lastDraw = currentDraw;

@@ -184,6 +184,12 @@ public class Vector2
         return new Vector2(xLerped, yLerped);
     }
 
+    public Vector2 smoothLerp(Vector2 vecTwo, double t)
+    {
+        double smoothT = smoothStep(0.0, 1.0, t);
+        return lerp(vecTwo, smoothT);
+    }
+
     /**
      * Gibt die erste Komponente des Vektors zurück.
      *
@@ -293,5 +299,14 @@ public class Vector2
     public static Vector2 randomUnitVector()
     {
         return new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalized();
+    }
+
+    private double smoothStep(double edgeOne, double edgeTwo, double t)
+    {
+        double min = 0.0;
+        double max = 1.0;
+        double x = (t - edgeOne)/(edgeTwo - edgeOne);
+        x = Math.max(min, Math.min(max, x));
+        return x * x * (3 - 2 * x);
     }
 }
