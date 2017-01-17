@@ -43,8 +43,9 @@ public class ElementImageViewModel
      */
     public String getImagePath(ImageLayer imageLayer, int rotation, long time)
     {
-        isAnimating = elementImage.isAnimating(time);
-        return elementImage.getImagePath(imageLayer, rotation, time - creationTime);
+        long deltaTime = time - creationTime;
+        isAnimating = elementImage.isAnimating(deltaTime);
+        return elementImage.getImagePath(imageLayer, rotation, deltaTime);
     }
 
     /**

@@ -89,16 +89,16 @@ public class ElementImage
      *
      * @param imageLayer Das ImageLayer des Bildes.
      * @param rotation   Die Drehung des Bildes.
-     * @param time       Die Zeit, die seit der Erstellung des Bildes vergangen ist.
+     * @param deltaTime  Die Zeit, die seit der Erstellung des Bildes vergangen ist.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
-    public String getImagePath(ImageLayer imageLayer, int rotation, long time)
+    public String getImagePath(ImageLayer imageLayer, int rotation, long deltaTime)
     {
         //Berechnet die Zahl der Bilder, die in der vergangenen Zeit angezeigt werden hätten sollen
-        int framePos = isAnimation ? (int) (time / animation.getDuration()) : 0;
+        int framePos = isAnimation ? (int) (deltaTime / animation.getDuration()) : 0;
         if (isAnimation && framePos < animation.getFrameCount())
             //Gibt den Pfad des zugehörigen Bildes zurück, falls die Zahl der angezeigten Bilder kleiner als die Zahl der Bilder Animation ist. Die Rotation wird dabei als das nächst
-            return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), isAnimation, animation.getName(), framePos);
+            return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), true, animation.getName(), framePos);
         else
             //Gibt den Pfad des zugehörigen Bildes zurück, das kein Teil einer Animation ist.
             return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), false, "", 0);
@@ -115,11 +115,11 @@ public class ElementImage
         return rotation % rotationAccuracy;
     }
 
-    public boolean isAnimating(long time)
+    public boolean isAnimating(long deltaTime)
     {
         if (isAnimation)
         {
-            int framePos = (int) (time / animation.getDuration());
+            int framePos = (int) (deltaTime / animation.getDuration());
             return framePos < animation.getFrameCount();
         }
         else

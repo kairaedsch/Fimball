@@ -16,7 +16,7 @@ public class TestMachineGenerator
     @Test
     public void generateScalabilityTestMachine()
     {
-        int[] sizes = {16, 32, 64, 128, 256};
+        int[] sizes = {16, 32, 64, 128, 256, 512, 1024};
         final int distance = 20;
 
         for (int i = 0; i < sizes.length; i++)

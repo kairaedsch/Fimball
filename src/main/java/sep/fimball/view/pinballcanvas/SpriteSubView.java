@@ -1,10 +1,5 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -14,8 +9,6 @@ import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
-
-import static com.sun.webkit.graphics.WCImage.getImage;
 
 /**
  * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements
@@ -38,9 +31,9 @@ public class SpriteSubView
 
     private RectangleDoubleByPoints drawArea;
 
-    private Image imageTop;
+    private Image defaultImageTop;
 
-    private Image imageBottom;
+    private Image defaultImageBottom;
 
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
@@ -54,7 +47,9 @@ public class SpriteSubView
         this.viewModel = viewModel;
         this.imageCache = imageCache;
 
-        viewModel.animationFramePathProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        defaultImageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        defaultImageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
+
         viewModel.positionProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.scaleProperty().addListener((observable, oldValue, newValue) -> calculateValues());
@@ -63,13 +58,10 @@ public class SpriteSubView
 
     private void calculateValues()
     {
-        imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
-        imageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
-
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
 
-        size = new Vector2(imageTop.getWidth(), imageTop.getHeight()).scale(viewModel.scaleProperty().get());
+        size = new Vector2(defaultImageTop.getWidth(), defaultImageTop.getHeight()).scale(viewModel.scaleProperty().get());
 
         position = viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.scale(1 / viewModel.scaleProperty().get()).minus(size).scale(0.5));
 
@@ -112,13 +104,14 @@ public class SpriteSubView
             setupDrawLocation(graphicsContext, rotationRest);
 
             Image image;
-            if (viewModel.animationFramePathProperty().get().isAnimating())
+            ElementImageViewModel elementImageViewModel = viewModel.animationFramePathProperty().get();
+            if (elementImageViewModel.isAnimating())
             {
-                image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
+                image = imageCache.getImage(elementImageViewModel.getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
             }
             else
             {
-                image = imageLayer == ImageLayer.TOP ? imageTop : imageBottom;
+                image = imageLayer == ImageLayer.TOP ? defaultImageTop : defaultImageBottom;
             }
 
             if (imageLayer == ImageLayer.TOP)
