@@ -1,15 +1,13 @@
 package sep.fimball.model.physics;
 
 import sep.fimball.general.data.PhysicsConfig;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
@@ -18,6 +16,28 @@ import java.util.TimerTask;
  */
 public class PhysicsHandler<GameElementT>
 {
+    private static class IntegerVector2
+    {
+        private int x;
+        private int y;
+
+        public IntegerVector2(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX()
+        {
+            return x;
+        }
+
+        public int getY()
+        {
+            return y;
+        }
+    }
+
     /**
      * Der aktuelle Spielball.
      */
@@ -42,6 +62,12 @@ public class PhysicsHandler<GameElementT>
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
      */
     private List<PhysicsElement<GameElementT>> physicsElements;
+
+    /**
+     * Eine Liste aller PhysicsElements OHNE BALL, für schnellen und nach Position sortiertem Zugriff.
+     * Der Long-Key der HashMap ist ein aus der Position des PhysicsElements generierter hash, der naheliegende Elemente in die selbe Gruppe einfügt.
+     */
+    private HashMap<Long, List<PhysicsElement<GameElementT>>> physicsElementsMap;
 
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
@@ -81,6 +107,26 @@ public class PhysicsHandler<GameElementT>
     public void init(List<PhysicsElement<GameElementT>> elements, PhysicsGameSession<GameElementT> gameSession, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
         this.physicsElements = elements;
+        physicsElementsMap = new HashMap<>();
+
+        for (PhysicsElement<GameElementT> element : elements)
+        {
+            if (element instanceof BallPhysicsElement)
+                continue;
+
+            for (Long hash : getElementPositionHashes(element))
+            {
+                if (physicsElementsMap.containsKey(hash))
+                    physicsElementsMap.get(hash).add(element);
+                else
+                {
+                    List<PhysicsElement<GameElementT>> list = new ArrayList<>();
+                    list.add(element);
+                    physicsElementsMap.put(hash, list);
+                }
+            }
+        }
+
         this.gameSession = gameSession;
         this.ballPhysicsElement = ballPhysicsElement;
         this.physicTimer = new Timer(false);
@@ -165,7 +211,10 @@ public class PhysicsHandler<GameElementT>
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
-                    physicsElements.stream().filter(element -> element instanceof PhysicsUpdatable).forEach(element -> ((PhysicsUpdatable) element).update(delta));
+                    physicsElements
+                            .stream()
+                            .filter(element -> element instanceof PhysicsUpdatable)
+                            .forEach(element -> ((PhysicsUpdatable) element).update(delta));
                 }
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
@@ -181,15 +230,62 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
-        physicsElements.stream().filter(element -> element != ballPhysicsElement).forEach(element ->
+        for (Long hash : getElementPositionHashes(ballPhysicsElement))
         {
-            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
-            if (element.hasChanged())
+            if (physicsElementsMap.containsKey(hash))
             {
-                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
-                element.resetChanged();
+                physicsElementsMap.get(hash)
+                        .forEach(element ->
+                        {
+                            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
+                            if (element.hasChanged())
+                            {
+                                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                                element.resetChanged();
+                            }
+                        });
             }
-        });
+        }
+
         elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
+    }
+
+    private List<Long> getElementPositionHashes(PhysicsElement<GameElementT> element)
+    {
+        List<Long> result = new ArrayList<>();
+
+        Vector2 minPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), false));
+        Vector2 maxPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), true));
+
+        IntegerVector2 minGroup = getPositionGroup(minPos);
+        IntegerVector2 maxGroup = getPositionGroup(maxPos);
+
+        for (int x = minGroup.getX(); x <= maxGroup.getX(); x++)
+        {
+            for (int y = minGroup.getY(); y <= maxGroup.getY(); y++)
+            {
+                long hash = getPositionHash(new IntegerVector2(x, y));
+                result.add(hash);
+            }
+        }
+
+        return result;
+    }
+
+    private IntegerVector2 getPositionGroup(Vector2 position)
+    {
+        final long REGION_SIZE = 10;
+        int x = (int)Math.ceil(position.getX() / REGION_SIZE);
+        int y = (int)Math.ceil(position.getY() / REGION_SIZE);
+        return new IntegerVector2(x, y);
+    }
+
+    private long getPositionHash(IntegerVector2 positionGroup)
+    {
+        long hash = positionGroup.getX();
+        long shiftedY = positionGroup.getY();
+        shiftedY <<= 32;
+        hash |= shiftedY;
+        return hash;
     }
 }
