@@ -102,7 +102,7 @@ public class SelectedElementSubViewModel
                 setPlacedElement(Optional.empty());
             }
 
-            rotateAvailable.set((selection.size() == 1 && selection.get(0).getBaseElement().getMedia().canRotate()) || selection.size() > 1);
+            rotateAvailable.set(selection.size() > 0 && selection.stream().allMatch(placedElement1 -> placedElement1.getBaseElement().getMedia().canRotate()));
             duplicateAvailable.set(selection.stream().anyMatch(placedElement1 -> !placedElement1.getBaseElement().getId().equals("ball")));
             removeAvailable.set(!selection.stream().allMatch(placedElement1 -> placedElement1.getBaseElement().getId().equals("ball")));
         });

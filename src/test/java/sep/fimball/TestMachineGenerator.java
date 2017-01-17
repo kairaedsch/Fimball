@@ -16,30 +16,36 @@ public class TestMachineGenerator
     @Test
     public void generateScalabilityTestMachine()
     {
-        PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-
+        int[] sizes = {16, 32, 64, 128, 256};
         final int distance = 20;
-        final int size = 128;
 
-        pinballMachine.nameProperty().setValue("Test - Scalability " + size + "*" + size);
-
-        for (int x = 0; x < size; x++)
+        for (int i = 0; i < sizes.length; i++)
         {
-            for (int y = 0; y < size; y++)
-            {
-                String[] keys = new String[BaseElementManager.getInstance().elementsProperty().getSize()];
-                BaseElementManager.getInstance().elementsProperty().get().keySet().toArray(keys);
-                int index = (int) Math.floor(keys.length * Math.random());
-                String key = keys[index];
 
-                if (!key.equals("ball"))
+            PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+
+            int size = sizes[i];
+
+            pinballMachine.nameProperty().setValue("Test - Scalability " + size + "*" + size);
+
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
                 {
-                    pinballMachine.addElement(BaseElementManager.getInstance().getElement(key), new Vector2(x * distance - (size * distance / 2), y * distance));
+                    String[] keys = new String[BaseElementManager.getInstance().elementsProperty().getSize()];
+                    BaseElementManager.getInstance().elementsProperty().get().keySet().toArray(keys);
+                    int index = (int) Math.floor(keys.length * Math.random());
+                    String key = keys[index];
+
+                    if (!key.equals("ball"))
+                    {
+                        pinballMachine.addElement(BaseElementManager.getInstance().getElement(key), new Vector2(x * distance - (size * distance / 2), y * distance));
+                    }
                 }
             }
-        }
 
-        pinballMachine.saveToDisk();
+            pinballMachine.saveToDisk();
+        }
     }
 
     @Test
@@ -70,7 +76,7 @@ public class TestMachineGenerator
     {
         PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
 
-        final int size = 1024;
+        final int size = 512;
 
         pinballMachine.nameProperty().setValue("Test - Scalability Collision " + size);
 
