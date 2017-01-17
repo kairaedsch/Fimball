@@ -111,7 +111,7 @@ public class PhysicsHandler<GameElementT>
     {
         lastTime = System.currentTimeMillis();
         physicTimer = new Timer(false);
-        physicTimer.scheduleAtFixedRate(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
+        physicTimer.schedule(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
     }
 
     /**

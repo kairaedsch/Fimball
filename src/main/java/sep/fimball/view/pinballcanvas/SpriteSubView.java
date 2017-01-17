@@ -66,7 +66,7 @@ public class SpriteSubView
         imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
         imageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
 
-        imageTop.widthProperty().addListener((observable, oldValue, newValue) -> calculateValues());
+        if(imageTop.isBackgroundLoading()) imageTop.widthProperty().addListener((observable, oldValue, newValue) -> calculateValues());
 
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
