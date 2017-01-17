@@ -64,8 +64,7 @@ public class EditorSessionSubViewModel
         {
             editorSession.stopUpdateLoop();
             editorSession.stopAutoSaveLoop(true);
-            //TODO zu save verschieben
-           // pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+            pinballMachine.unloadElements();
             editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel(pinballMachine));
         }));
     }
@@ -75,8 +74,8 @@ public class EditorSessionSubViewModel
      */
     public void savePinballMachine()
     {
-        boolean success = pinballMachine.saveToDisk();
-        if(success) pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+        boolean success = pinballMachine.saveToDisk(false);
+        if(success) {pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());}
         editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
     }
 

@@ -178,13 +178,14 @@ public class PinballMachine
      * Serialisiert und speichert diesen Automaten.
      * Falls erfolgreich, werden die Elemente der PinballMachine wieder aus dem Ram entladen.
      *
+     * @param unloadElements Gibt an, ob die geladenen Elemente des Automaten verworfen werden sollen.
      * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    public boolean saveToDisk()
+    public boolean saveToDisk(boolean unloadElements)
     {
         checkElementsLoaded();
         boolean success = pinballMachineManager.savePinballMachine(this);
-        if (success)
+        if (success && unloadElements)
             unloadElements();
         return success;
     }
@@ -382,14 +383,14 @@ public class PinballMachine
                 highscoreList.remove(worstHighscore);
                 highscoreList.add(highscore);
                 if (save)
-                    saveToDisk();
+                    saveToDisk(true);
             }
         }
         else
         {
             highscoreList.add(highscore);
             if (save)
-                saveToDisk();
+                saveToDisk(true);
         }
     }
 

@@ -297,7 +297,6 @@ public class PinballMachineManager
         if(pinballMachineJson.isPresent()) {
             for(PinballMachine pinballMachine : pinballMachines) {
                 if(pinballMachine.getID().equals(pinballMachineJson.get().id)) {
-                    pinballMachine.unloadElements();
                     loadAutoSaveElements(pinballMachine);
                     return Optional.of(pinballMachine);
                 }
