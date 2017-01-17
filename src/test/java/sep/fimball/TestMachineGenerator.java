@@ -42,8 +42,11 @@ public class TestMachineGenerator
                     }
                 }
             }
+            System.out.println("created machine with: " + size);
 
             pinballMachine.saveToDisk(true);
+
+            System.out.println("saved machine with: " + size);
         }
     }
 
