@@ -19,6 +19,8 @@ public class ElementImageViewModel
      */
     private long creationTime;
 
+    private boolean isAnimating;
+
     /**
      * Erstellt ein neues ElementImageViewModel.
      *
@@ -28,6 +30,21 @@ public class ElementImageViewModel
     {
         this.elementImage = elementImage;
         creationTime = System.currentTimeMillis();
+        isAnimating = true;
+    }
+
+    /**
+     * Gibt den Pfad zu dem zu diesem ElementImageViewModel gehörenden Bild in
+     * Abhängigkeit von {@code imageLayer} und {@code rotation} zurück.
+     *
+     * @param imageLayer Das ImageLayer des Bildes.
+     * @param rotation   Die Drehung des Bildes.
+     * @return Ein zu diesem ElementImage gehörendes Bild.
+     */
+    public String getImagePath(ImageLayer imageLayer, int rotation, long time)
+    {
+        isAnimating = elementImage.isAnimating(time);
+        return elementImage.getImagePath(imageLayer, rotation, time - creationTime);
     }
 
     /**
@@ -40,9 +57,8 @@ public class ElementImageViewModel
      */
     public String getImagePath(ImageLayer imageLayer, int rotation)
     {
-        return elementImage.getImagePath(imageLayer, rotation, System.currentTimeMillis() - creationTime);
+        return getImagePath(imageLayer, rotation, Long.MAX_VALUE);
     }
-
 
     /**
      * Gibt die gegebene Rotation minus die Rotation des Bildes zurück.
@@ -53,5 +69,10 @@ public class ElementImageViewModel
     public double getRestRotation(int rotation)
     {
         return elementImage.getRestRotation(rotation);
+    }
+
+    public boolean isAnimating()
+    {
+        return isAnimating;
     }
 }

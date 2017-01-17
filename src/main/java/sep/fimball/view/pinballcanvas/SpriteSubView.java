@@ -40,6 +40,8 @@ public class SpriteSubView
 
     private Image imageTop;
 
+    private Image imageBottom;
+
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
@@ -62,6 +64,9 @@ public class SpriteSubView
     private void calculateValues()
     {
         imageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        imageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
+
+        imageTop.widthProperty().addListener((observable, oldValue, newValue) -> calculateValues());
 
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
@@ -78,7 +83,9 @@ public class SpriteSubView
         if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
             localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
-        } else {
+        }
+        else
+        {
             localCoordinates = new Vector2();
         }
 
@@ -100,19 +107,26 @@ public class SpriteSubView
         // System.out.println("c: " + c);
         // System.out.println("e: " + e);
         // System.out.println(c.intersectsWith(e));
-        if(canvas.intersectsWith(drawArea))
+        if (canvas.intersectsWith(drawArea))
         {
             graphicsContext.save();
 
             setupDrawLocation(graphicsContext, rotationRest);
-            Image image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get()));
-            //Image image = imageTop;
+
+            Image image;
+            if (viewModel.animationFramePathProperty().get().isAnimating())
+            {
+                image = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
+            }
+            else
+            {
+                image = imageLayer == ImageLayer.TOP ? imageTop : imageBottom;
+            }
 
             if (imageLayer == ImageLayer.TOP)
             {
                 drawImage(graphicsContext, image, drawMode, position, size);
             }
-
             if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
             {
                 drawImageBorder(graphicsContext, imageLayer, position, size);
@@ -206,7 +220,7 @@ public class SpriteSubView
         {
             Color color = DesignConfig.COMPLEMENT_COLOR.interpolate(DesignConfig.SECONDARY_COLOR, effectValue);
             graphicsContext.setStroke(color);
-            graphicsContext.strokeRect(position.getX()- borderOffset, position.getY() - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
+            graphicsContext.strokeRect(position.getX() - borderOffset, position.getY() - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
         else
         {

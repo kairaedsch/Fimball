@@ -95,8 +95,8 @@ public class ElementImage
     public String getImagePath(ImageLayer imageLayer, int rotation, long time)
     {
         //Berechnet die Zahl der Bilder, die in der vergangenen Zeit angezeigt werden hätten sollen
-        int framePos = animation == null ? 0 : (int) (time / animation.getDuration());
-        if (isAnimation && animation != null && framePos < animation.getFrameCount())
+        int framePos = isAnimation ? (int) (time / animation.getDuration()) : 0;
+        if (isAnimation && framePos < animation.getFrameCount())
             //Gibt den Pfad des zugehörigen Bildes zurück, falls die Zahl der angezeigten Bilder kleiner als die Zahl der Bilder Animation ist. Die Rotation wird dabei als das nächst
             return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), isAnimation, animation.getName(), framePos);
         else
@@ -113,5 +113,18 @@ public class ElementImage
     public int getRestRotation(int rotation)
     {
         return rotation % rotationAccuracy;
+    }
+
+    public boolean isAnimating(long time)
+    {
+        if (isAnimation)
+        {
+            int framePos = (int) (time / animation.getDuration());
+            return framePos < animation.getFrameCount();
+        }
+        else
+        {
+            return false;
+        }
     }
 }
