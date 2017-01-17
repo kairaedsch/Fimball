@@ -18,17 +18,16 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.*;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
 public class GameSession extends Session implements PhysicsGameSession<GameElement>, HandlerGameSession
 {
+    private int framecount;
+    private long lastTime;
+
     /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
@@ -78,7 +77,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     /**
      * Die Liste der von der Physik-Loop übertragenen Listen von  CollisionEventArgs.
      */
-    private List<ConcurrentLinkedQueue<CollisionEventArgs<GameElement>>> collisionEventArgsList;
+    private List<List<CollisionEventArgs<GameElement>>> collisionEventArgsList;
 
     /**
      * Die Liste der von der Physik-Loop übertragenen ElementEvent-Argumente.
@@ -153,7 +152,16 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     @Override
     protected void loopUpdate()
     {
-        List<ConcurrentLinkedQueue<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
+        framecount++;
+        long currentTime = System.currentTimeMillis();
+        if (((double) currentTime - (double) lastTime) > 1000)
+        {
+            System.out.println("FPS: " + framecount);
+            framecount = 0;
+            lastTime = currentTime;
+        }
+
+        List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
         {
@@ -276,7 +284,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
      * @param collisionEventArgs Liste aller CollisionsEvents.
      * @param elementEventArgs   Liste aller ElementEvents.
      */
-    public void addEventArgs(ConcurrentLinkedQueue<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
+    public void addEventArgs(List<CollisionEventArgs<GameElement>> collisionEventArgs, List<ElementEventArgs<GameElement>> elementEventArgs)
     {
         synchronized (physicMonitor)
         {

@@ -9,7 +9,6 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -41,7 +40,7 @@ public class PhysicsElementTest
         PhysicsElement<Object> physicsElement = new PhysicsElement<>(null, null, 0, 1, basePhysicsElement);
 
         // Initialisiere Liste von CollisionEventArgs und ein BallPhysicsElement Mock
-        ConcurrentLinkedQueue<CollisionEventArgs<Object>> eventArgsList = new ConcurrentLinkedQueue<>();
+        List<CollisionEventArgs<Object>> eventArgsList = new ArrayList<>();
         BallPhysicsElement<Object> ballPhysicsElement = Mockito.mock(BallPhysicsElement.class);
 
         // Teste mit keiner Kollision
@@ -55,7 +54,7 @@ public class PhysicsElementTest
         when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(true);
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es eine Kollision gab, muss die Liste genau ein Element haben", eventArgsList.size(), is(1));
-        assertThat("und es muss colliderB sein", eventArgsList.peek().getColliderId(), is(22222));
+        assertThat("und es muss colliderB sein", eventArgsList.get(0).getColliderId(), is(22222));
 
         // Leere Kollisions Liste
         eventArgsList.clear();

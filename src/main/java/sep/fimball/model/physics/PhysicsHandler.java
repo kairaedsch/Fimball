@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
@@ -159,7 +158,7 @@ public class PhysicsHandler<GameElementT>
                 localModifyContainers.forEach(ModifyContainer::apply);
 
                 // PhysicsElements auf Kollisionen mit dem Ball prüfen
-                ConcurrentLinkedQueue<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ConcurrentLinkedQueue<>();
+                List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
 
                 synchronized (physicsMonitor)
@@ -180,7 +179,7 @@ public class PhysicsHandler<GameElementT>
      * @param collisionEventArgsList Die Liste der CollisionEvents.
      * @param elementEventArgsList   Die Liste der ElementEvents.
      */
-    private void checkElementsForCollision(ConcurrentLinkedQueue<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
+    private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
         physicsElements.stream().filter(element -> element != ballPhysicsElement).forEach(element ->
         {
