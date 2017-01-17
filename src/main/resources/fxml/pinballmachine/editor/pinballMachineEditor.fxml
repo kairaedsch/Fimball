@@ -75,7 +75,7 @@
                     <HBox HBox.hgrow="ALWAYS">
                         <Pane HBox.hgrow="ALWAYS" />
                         <HBox styleClass="buttonBackToMainMenuContainer">
-                            <Polyline onMouseClicked="#settingsClicked" styleClass="buttonBackToMainMenuArrow">
+                            <Polyline onMouseClicked="#menuClicked" styleClass="buttonBackToMainMenuArrow">
                                 <points>
                                     <Double fx:value="0.0" />
                                     <Double fx:value="20.0" />
@@ -87,7 +87,7 @@
                                     <Double fx:value="40.0" />
                                 </points>
                             </Polyline>
-                            <Pane fx:id="menu" accessibleHelp="§editor.settings.menuButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#settingsClicked" styleClass="button, button_small, buttonBackToMainMenu" />
+                            <Pane fx:id="menu" accessibleHelp="§editor.settings.menuButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#menuClicked" styleClass="button, button_small, buttonBackToMainMenu" />
                         </HBox>
                         <Pane HBox.hgrow="ALWAYS" />
                     </HBox>
@@ -99,12 +99,12 @@
                     </HBox>
                     <HBox HBox.hgrow="ALWAYS">
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="save" accessibleHelp="§editor.settings.saveButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonSave" />
+                        <Pane fx:id="save" accessibleHelp="§editor.settings.saveButton.key§" onMouseClicked="#saveClicked" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonSave" />
                         <Pane HBox.hgrow="ALWAYS" />
                     </HBox>
                     <HBox HBox.hgrow="ALWAYS">
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="delete" accessibleHelp="§editor.settings.deleteButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonDelete" />
+                        <Pane fx:id="delete" accessibleHelp="§editor.settings.deleteButton.key§" onMouseClicked="#deleteClicked" maxHeight="40.0"  maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonDelete" />
                         <Pane HBox.hgrow="ALWAYS" />
                     </HBox>
                 </HBox>

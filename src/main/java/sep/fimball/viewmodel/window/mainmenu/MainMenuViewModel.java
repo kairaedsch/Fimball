@@ -20,7 +20,6 @@ import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -142,7 +141,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     public void addNewPinballMachine()
     {
-        sceneManager.setWindow(new PinballMachineSettingsViewModel(PinballMachineManager.getInstance().createNewMachine()));
+        sceneManager.setWindow(new PinballMachineEditorViewModel(PinballMachineManager.getInstance().createNewMachine()));
     }
 
     @Override

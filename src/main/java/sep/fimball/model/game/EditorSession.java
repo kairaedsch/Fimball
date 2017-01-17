@@ -38,10 +38,7 @@ public class EditorSession extends Session
 
         autoSaveLoop = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(Config.AUTOSAVE_RATE), (event ->
-        {
-            System.out.println("Auto save");
-            PinballMachineManager.getInstance().saveAutoSaveMachine(pinballMachine);
-        }));
+                PinballMachineManager.getInstance().saveAutoSaveMachine(pinballMachine)));
         autoSaveLoop.getKeyFrames().add(frame);
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
         autoSaveLoop.play();

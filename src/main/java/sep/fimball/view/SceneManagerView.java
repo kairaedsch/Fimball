@@ -131,9 +131,6 @@ public class SceneManagerView
             case MACHINE_EDITOR:
                 windowType = WindowType.EDITOR_WINDOW;
                 break;
-            case MACHINE_SETTINGS:
-                windowType = WindowType.EDITOR_SETTINGS_WINDOW;
-                break;
             default:
                 throw new RuntimeException("Unkown WindowType");
         }

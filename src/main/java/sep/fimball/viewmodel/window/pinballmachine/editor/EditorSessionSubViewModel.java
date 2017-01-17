@@ -7,7 +7,7 @@ import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
+import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 /**
  * Verwaltet die EditorSession aus dem Model.
@@ -58,27 +58,39 @@ public class EditorSessionSubViewModel
     /**
      * Führt den Benutzer zu dem Automateneinstellungsfenster und speichert den Automaten.
      */
-    public void saveAndShowSettingsDialog()
+    public void exitToMainMenu()
     {
-        editorSession.stopUpdateLoop();
-        editorSession.stopAutoSaveLoop(true);
-        pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
-        boolean success = pinballMachine.saveToDisk();
-        editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
-        editorViewModel.getSceneManagerViewModel().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
-    }
-
-    /**
-     * Führt den Benutzer zu dem Automateneinstellungsfenster, falls er das QuestionViewModel annimmt.
-     */
-    public void showSettingsDialog()
-    {
-        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.editor.discardQuestion", () ->
+        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.settings.exitToMainMenuQuestion", () ->
         {
             editorSession.stopUpdateLoop();
             editorSession.stopAutoSaveLoop(true);
-            pinballMachine.unloadElements();
-            editorViewModel.getSceneManagerViewModel().setWindow(new PinballMachineSettingsViewModel(pinballMachine));
+            //TODO zu save verschieben
+           // pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+            editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel(pinballMachine));
+        }));
+    }
+
+    /**
+     * Erteilt dem Model den Befehl, die Änderungen am Flipperautomaten zu speichern.
+     */
+    public void savePinballMachine()
+    {
+        boolean success = pinballMachine.saveToDisk();
+        if(success) pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+        editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
+    }
+
+    /**
+     * Erteilt dem Model den Befehl, den Flipperautomat zu löschen, falls der Nutzer den Dialog annimmt.
+     */
+    public void deletePinballMachine()
+    {
+        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.settings.deleteQuestion", () ->
+        {
+            boolean success = pinballMachine.deleteFromDisk();
+            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
+            if (success)
+                editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel());
         }));
     }
 

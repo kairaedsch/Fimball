@@ -9,7 +9,7 @@ import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -39,7 +39,7 @@ public class MainMenuViewModelTest
     /**
      * Gibt an, ob der Editor angezeigt wird.
      */
-    private boolean editorSettingsShown = false;
+    private boolean editorShown = false;
 
     /**
      * Der Name des im Editor angezeigten Namens.
@@ -90,10 +90,10 @@ public class MainMenuViewModelTest
         doAnswer(invocationOnMock ->
         {
             WindowViewModel windowViewModel = invocationOnMock.getArgument(0);
-            if (windowViewModel.getWindowType() == WindowType.MACHINE_SETTINGS)
+            if (windowViewModel.getWindowType() == WindowType.MACHINE_EDITOR)
             {
-                editorSettingsShown = true;
-                pinballMachineName = ((PinballMachineSettingsViewModel) windowViewModel).machineNameProperty().get();
+                editorShown = true;
+                pinballMachineName = ((PinballMachineEditorViewModel) windowViewModel).machineNameProperty().get();
             }
             return null;
         }).when(mockedSceneManager).setWindow(any());
@@ -115,7 +115,7 @@ public class MainMenuViewModelTest
         test.setSceneManager(mockedSceneManager);
         settingsShown = false;
         namesShown = false;
-        editorSettingsShown = false;
+        editorShown = false;
     }
 
     /**
@@ -149,7 +149,7 @@ public class MainMenuViewModelTest
     {
         init();
         test.addNewPinballMachine();
-        assertThat(editorSettingsShown, is(true));
+        assertThat(editorShown, is(true));
         assertThat(newMachineAdded, is(true));
     }
 
@@ -162,7 +162,7 @@ public class MainMenuViewModelTest
         init();
         PinballMachine pinballMachine = getMockedPinballMachine();
         test.startEditor(pinballMachine);
-        assertThat(editorSettingsShown, is(true));
+        assertThat(editorShown, is(true));
         assertThat(pinballMachineName, is(pinballMachine.nameProperty().get()));
     }
 
@@ -175,7 +175,7 @@ public class MainMenuViewModelTest
         @Override
         public void addNewPinballMachine()
         {
-            sceneManager.setWindow(new PinballMachineSettingsViewModel(getMockedPinballMachine()));
+            sceneManager.setWindow(new PinballMachineEditorViewModel(getMockedPinballMachine()));
             newMachineAdded = true;
         }
     }

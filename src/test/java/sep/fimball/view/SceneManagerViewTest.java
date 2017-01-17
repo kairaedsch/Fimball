@@ -1,9 +1,6 @@
 package sep.fimball.view;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.junit.ClassRule;
@@ -17,7 +14,7 @@ import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
-import sep.fimball.viewmodel.window.pinballmachine.settings.PinballMachineSettingsViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
@@ -54,6 +51,7 @@ public class SceneManagerViewTest
         PinballMachine pinballMachineMock = Mockito.mock(PinballMachine.class);
         Mockito.when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty("any Name"));
         Mockito.when(pinballMachineMock.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
+        Mockito.when(pinballMachineMock.elementsProperty()).thenReturn(new SimpleListProperty<>());
 
 
         // Teste - Setzte die aktuellen ViewModels
@@ -66,10 +64,10 @@ public class SceneManagerViewTest
         Node emptyDialogRootNode = sceneManagerView.getDialog();
 
         // Teste - Wechselt das WindowViewModel und holt das aktuelle WindowRootNodes
-        windowViewModel.setValue(new PinballMachineSettingsViewModel(pinballMachineMock));
-        Node machineSettingsWindowRootNode = sceneManagerView.getWindow();
+        windowViewModel.setValue(new PinballMachineEditorViewModel(pinballMachineMock));
+        Node editorWindowRootNode = sceneManagerView.getWindow();
 
-        assertThat("Es wurde ein anderes Window geladen", mainMenuWindowRootNode, not(equalTo(machineSettingsWindowRootNode)));
+        assertThat("Es wurde ein anderes Window geladen", mainMenuWindowRootNode, not(equalTo(editorWindowRootNode)));
 
         // Teste - Wechselt das DialogViewModel und holt das aktuelle DialogRootNodes
         dialogViewModel.setValue(new GameSettingsViewModel());

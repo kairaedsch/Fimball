@@ -285,37 +285,16 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
      */
     @FXML
-    private void settingsClicked()
+    private void menuClicked()
     {
-        editorSessionSubViewModel.saveAndShowSettingsDialog();
+        editorSessionSubViewModel.exitToMainMenu();
     }
 
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
-     */
     @FXML
-    private void abortClicked()
-    {
-        editorSessionSubViewModel.showSettingsDialog();
-    }
+    private void saveClicked() {editorSessionSubViewModel.savePinballMachine();}
 
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer den geöffneten Automaten hineinzoomen möchte.
-     */
     @FXML
-    private void zoomInClicked()
-    {
-        pinballMachineEditorViewModel.zoomIn();
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer aus dem geöffneten Automaten herauszoomen möchte.
-     */
-    @FXML
-    private void zoomOutClicked()
-    {
-        pinballMachineEditorViewModel.zoomOut();
-    }
+    private void deleteClicked() {editorSessionSubViewModel.deletePinballMachine();}
 
     /**
      * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.

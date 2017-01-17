@@ -23,10 +23,5 @@ public enum WindowType
     /**
      * Das Fenster, das den Editor darstellt.
      */
-    MACHINE_EDITOR,
-
-    /**
-     * Das Fenster, in dem allgemeine Änderungen am Automaten vorgenommen werden.
-     */
-    MACHINE_SETTINGS
+    MACHINE_EDITOR
 }

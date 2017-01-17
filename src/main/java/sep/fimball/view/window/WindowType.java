@@ -33,11 +33,6 @@ public enum WindowType implements ViewType
     EDITOR_WINDOW("pinballmachine/editor/pinballMachineEditor.fxml"),
 
     /**
-     * Das Editoreinstellungen-Fenster.
-     */
-    EDITOR_SETTINGS_WINDOW("pinballmachine/settings/pinballMachineSettings.fxml"),
-
-    /**
      * Das Spiel-Fenster.
      */
     GAME_WINDOW("game/gameWindow.fxml"),
