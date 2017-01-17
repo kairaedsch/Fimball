@@ -78,6 +78,7 @@ public class PinballMachineManager
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Optional.empty(), Collections.emptyList(), this, true);
         savePinballMachine(pinballMachine);
         pinballMachines.add(pinballMachine);
+        pinballMachine.unloadElements();
         return pinballMachine;
     }
 

@@ -3,12 +3,17 @@ package sep.fimball;
 import org.junit.Ignore;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.ArrayList;
+import java.util.PrimitiveIterator;
+import java.util.Random;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 @Ignore
 public class TestMachineGenerator
@@ -27,21 +32,31 @@ public class TestMachineGenerator
 
             pinballMachine.nameProperty().setValue("Test - Scalability " + size + "*" + size);
 
+            String[] keys = new String[BaseElementManager.getInstance().elementsProperty().getSize()];
+            BaseElementManager.getInstance().elementsProperty().get().keySet().toArray(keys);
+
+            BaseElement[] baseElements = new BaseElement[keys.length];
+            for (int k = 0; k < keys.length; k++)
+            {
+                baseElements[k] = BaseElementManager.getInstance().getElement(keys[k]);
+            }
+
+            ArrayList<PlacedElement> list = new ArrayList<>();
+
+            PrimitiveIterator.OfInt iterator = new Random().doubles(size * size).mapToInt(d -> (int) (keys.length * d)).iterator();
+            int halfSize = size / 2;
             for (int x = 0; x < size; x++)
             {
+                int xPos = (x - halfSize) * distance;
                 for (int y = 0; y < size; y++)
                 {
-                    String[] keys = new String[BaseElementManager.getInstance().elementsProperty().getSize()];
-                    BaseElementManager.getInstance().elementsProperty().get().keySet().toArray(keys);
-                    int index = (int) Math.floor(keys.length * Math.random());
-                    String key = keys[index];
-
-                    if (!key.equals("ball"))
-                    {
-                        pinballMachine.addElement(BaseElementManager.getInstance().getElement(key), new Vector2(x * distance - (size * distance / 2), y * distance));
-                    }
+                    list.add(new PlacedElement(baseElements[iterator.next()], new Vector2(xPos, y * distance), 0, 1, 0));
                 }
             }
+            System.out.println("created list with: " + size);
+
+            pinballMachine.addElement(list.toArray(new PlacedElement[0]));
+
             System.out.println("created machine with: " + size);
 
             pinballMachine.saveToDisk(true);
