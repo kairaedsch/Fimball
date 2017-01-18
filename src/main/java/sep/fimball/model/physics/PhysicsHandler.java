@@ -217,10 +217,13 @@ public class PhysicsHandler<GameElementT>
                             .forEach(element ->
                             {
                                 ((PhysicsUpdatable) element).update(delta);
-                                if (element.hasChanged())
+                                if (!(element instanceof BallPhysicsElement))
                                 {
-                                    elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
-                                    element.resetChanged();
+                                    if (element.hasChanged())
+                                    {
+                                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                                        element.resetChanged();
+                                    }
                                 }
                             });
 
