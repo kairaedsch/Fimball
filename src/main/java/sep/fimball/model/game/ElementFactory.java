@@ -123,6 +123,7 @@ public class ElementFactory
          *
          * @param gameElement     Die Liste der GameElemente.
          * @param physicsElement  Die Liste der PhysicsElemente.
+         * @param ballGameElement Die Kugel.
          */
         public GeneratedElements(List<GameElement> gameElement, List<PhysicsElement<GameElement>> physicsElement, BallGameElement ballGameElement)
         {

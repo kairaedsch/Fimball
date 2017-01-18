@@ -282,7 +282,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer in die Editoreinstellungen wechseln möchte.
+     * Benachrichtigt das {@code editorSessionSubViewModel}, dass der Nutzer in das Hauptmenü wechseln möchte.
      */
     @FXML
     private void menuClicked()
@@ -290,9 +290,15 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         editorSessionSubViewModel.exitToMainMenu();
     }
 
+    /**
+     * Benachrichtigt das {@code editorSessionSubViewModel}, dass der Nutzer speichern möchte.
+     */
     @FXML
     private void saveClicked() {editorSessionSubViewModel.savePinballMachine();}
 
+    /**
+     * Benachrichtigt das {@code editorSessionSubViewModel}, dass der Nutzer den Automaten löschen möchte.
+     */
     @FXML
     private void deleteClicked() {editorSessionSubViewModel.deletePinballMachine();}
 

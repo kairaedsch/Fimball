@@ -29,12 +29,15 @@ public class EditorSessionSubViewModel
      */
     private PinballCanvasEditorViewModel pinballCanvasViewModel;
 
+    /**
+     * Das zugehörige PinballMachineEditorViewModel.
+     */
     private PinballMachineEditorViewModel editorViewModel;
 
     /**
      * Erzeugt eine neue Instanz von EditorSessionSubViewModel.
-     * @param viewModel Informationen über die geladene PinballMachine.
-     * @param machine Was im Editor bearbeitet wrird.
+     * @param viewModel Das Haupt-Viewmodel des Editors.
+     * @param machine Die im Editor bearbeitete PinballMachine.
      */
     public EditorSessionSubViewModel(PinballMachineEditorViewModel viewModel, PinballMachine machine)
     {

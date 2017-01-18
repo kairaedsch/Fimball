@@ -45,6 +45,9 @@ public enum BaseElementType
      */
     HOLE(-1),
 
+    /**
+     * Kennzeichnet einen Spinner.
+     */
     SPINNER(0);
 
     /**
