@@ -8,7 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.blueprint.base.*;
+import sep.fimball.model.blueprint.base.BaseElement;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
@@ -38,20 +39,25 @@ public class BumperStrengthTest
     public void testBumperStrengthLoading() {
         for(String bumperID : BUMPER_IDS)
         {
-            setupPinballMachine(STRENGTH_OF_FIRST_BUMPER, bumperID);
-            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
-            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
-            double bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
-            assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0);
-            testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
+            {
+                setupPinballMachine(STRENGTH_OF_FIRST_BUMPER, bumperID);
+                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
+                testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
+                double bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
+                assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0);
+                testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
 
-            setupPinballMachine(STRENGTH_OF_SECOND_BUMPER, bumperID);
-            assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0);
-            testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
-            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
-            bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
-            assertEquals(bumperMultiplier, STRENGTH_OF_SECOND_BUMPER, 0.0);
-            testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
+                setupPinballMachine(STRENGTH_OF_SECOND_BUMPER, bumperID);
+                assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0); // Sicherstellen, dass bei Änderung des Automaten von außen die Werte im Editor unberührt bleiben.
+            }
+
+            {
+                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
+                testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
+                double bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
+                assertEquals(bumperMultiplier, STRENGTH_OF_SECOND_BUMPER, 0.0);
+                testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
+            }
         }
     }
 
