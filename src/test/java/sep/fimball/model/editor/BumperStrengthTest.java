@@ -25,7 +25,7 @@ public class BumperStrengthTest
     private final double STRENGTH_OF_FIRST_BUMPER = 0.1;
     private final double STRENGTH_OF_SECOND_BUMPER = 3.0;
     private final double TOO_LOW_STRENGTH = -1.0;
-    private final String[] BUMPER_IDS = {"bumper_blue", "bumper_yellow", "bumper_red", "bumper_green"};
+    private final String[] BUMPER_IDS = {"bumper_blue", "bumper_yellow", "bumper_red", "bumper_green"}; // Auflistung der IDs der BaseElements aller Bumper-Elemente.
     private PinballMachine testPinballMachine;
 
     @Mock
@@ -39,16 +39,19 @@ public class BumperStrengthTest
         for(String bumperID : BUMPER_IDS)
         {
             setupPinballMachine(STRENGTH_OF_FIRST_BUMPER, bumperID);
-            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
-            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
+            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
+            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
             double bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
             assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0);
+            testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
+
             setupPinballMachine(STRENGTH_OF_SECOND_BUMPER, bumperID);
             assertEquals(bumperMultiplier, STRENGTH_OF_FIRST_BUMPER, 0.0);
-            testEditor = new PinballMachineEditorViewModel(testPinballMachine);
-            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
+            testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
+            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
             bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
             assertEquals(bumperMultiplier, STRENGTH_OF_SECOND_BUMPER, 0.0);
+            testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
         }
     }
 
@@ -60,11 +63,11 @@ public class BumperStrengthTest
         for(String bumperID : BUMPER_IDS)
         {
             setupPinballMachine(TOO_LOW_STRENGTH, bumperID);
-            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
-            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
+            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine); // Startet den Editor.
+            testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4)); // Emuliert den Mausklick, der den Bumper auswählt.
             double bumperMultiplier = testEditor.getSelectedElementSubViewModel().multiplierProperty().get();
-            System.out.println(bumperMultiplier);
             assertThat(bumperMultiplier >= 0, is(true));
+            testPinballMachine.deleteFromDisk(); // Den auf der Festplatte gespeicherten Testautomaten wieder löschen.
         }
     }
 
@@ -78,9 +81,13 @@ public class BumperStrengthTest
         MockitoAnnotations.initMocks(this);
         Mockito.when(selectingPress.getButton()).thenReturn(MouseButton.PRIMARY);
         Mockito.when(selectingPress.isControlDown()).thenReturn(true);
+
+        // Einen Bumper laden und in einen leeren Automaten einfügen.
         BaseElement baseElement = BaseElementManager.getInstance().getElement(BUMPER_ID);
         testPinballMachine = PinballMachineManager.getInstance().createNewMachine();
         testPinballMachine.addElement(baseElement, new Vector2(1, 1));
+
+        // Die Stärke des platzierten Bumper auf den übergebenen Wert setzen.
         PinballMachineEditorViewModel editor = new PinballMachineEditorViewModel(testPinballMachine);
         editor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
         DoubleProperty multiplierProperty = editor.getSelectedElementSubViewModel().multiplierProperty();
