@@ -243,4 +243,9 @@ public class GameViewModel extends WindowViewModel
     {
         SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
     }
+
+    public void setCameraZoom(double cameraZoom)
+    {
+        this.cameraZoom.set(cameraZoom);
+    }
 }

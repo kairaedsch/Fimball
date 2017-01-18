@@ -1,6 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.input.manager.KeyEventArgs;
 
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class HandlerManager implements InputModifier
      * @param element    Das Element, das mit dem Ball kollidiert ist.
      * @param colliderId Die ID des Colliders des Elements, das mit dem Ball kollidiert ist.
      */
-    public void activateElementHandler(GameElement element, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, int colliderId)
     {
         for (Handler handler : handlers)
         {

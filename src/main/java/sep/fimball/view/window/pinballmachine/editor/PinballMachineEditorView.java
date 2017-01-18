@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -127,20 +126,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewTop));
         pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewBot));
-    }
-
-    /**
-     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im
-     * ScrollEvent hinein- oder herauszoomen möchte.
-     *
-     * @param scrollEvent Das ScrollEvent, das verarbeitet werden soll.
-     */
-    public void zoom(ScrollEvent scrollEvent)
-    {
-        if (scrollEvent.getDeltaY() < 0)
-            pinballMachineEditorViewModel.zoomOut();
-        else if (scrollEvent.getDeltaY() > 0)
-            pinballMachineEditorViewModel.zoomIn();
     }
 
     /**

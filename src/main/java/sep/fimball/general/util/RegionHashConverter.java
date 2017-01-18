@@ -5,13 +5,14 @@ import sep.fimball.general.data.Vector2I;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Erzeugt Hashes eines Bereichs auf dem Spielfeld, für schnellen und nach Position sortiertem Zugriff.
  */
 public class RegionHashConverter
 {
-    private static final long REGION_SIZE = 10;
 
     /**
      * Berechnet die Hashes eines Bereichs auf dem Spielfeld, die für schnellen und lokal beschränkten Zugriff benötigt werden.
@@ -20,18 +21,18 @@ public class RegionHashConverter
      * @param maxPos Rechte obere Ecke des Bereichs.
      * @return Eine Liste von Positions-Hashes.
      */
-    public static List<Long> gameAreaToRegionHashes(Vector2 minPos, Vector2 maxPos)
+    public static List<Long> gameAreaToRegionHashes(Vector2 minPos, Vector2 maxPos, int regionSize)
     {
         List<Long> result = new ArrayList<>();
 
-        Vector2I regionMin = positionToRegion(minPos);
-        Vector2I regionMax = positionToRegion(maxPos);
+        Vector2I regionMin = positionToRegion(minPos, regionSize);
+        Vector2I regionMax = positionToRegion(maxPos, regionSize);
 
         for (int x = regionMin.getX(); x <= regionMax.getX(); x++)
         {
             for (int y = regionMin.getY(); y <= regionMax.getY(); y++)
             {
-                long hash = calculateRegionHash(new Vector2I(x, y));
+                long hash = calculateRegionHash(new Vector2I(x , y));
                 result.add(hash);
             }
         }
@@ -45,10 +46,10 @@ public class RegionHashConverter
      * @param position Vektor für den die Region berechnet wird.
      * @return Region, in der sich der Vektor befindet.
      */
-    private static Vector2I positionToRegion(Vector2 position)
+    private static Vector2I positionToRegion(Vector2 position, int regionSize)
     {
-        int x = (int) Math.ceil(position.getX() / REGION_SIZE);
-        int y = (int) Math.ceil(position.getY() / REGION_SIZE);
+        int x = (int) Math.ceil(position.getX() / regionSize);
+        int y = (int) Math.ceil(position.getY() / regionSize);
         return new Vector2I(x, y);
     }
 
@@ -60,10 +61,8 @@ public class RegionHashConverter
      */
     private static long calculateRegionHash(Vector2I region)
     {
-        long hash = region.getX();
-        long shiftedY = region.getY();
-        shiftedY <<= 32;
-        hash |= shiftedY;
-        return hash;
+        long right = region.getX();
+        long left = region.getY();
+        return (left << 32) | (right & 0xFFFFFFFL);
     }
 }

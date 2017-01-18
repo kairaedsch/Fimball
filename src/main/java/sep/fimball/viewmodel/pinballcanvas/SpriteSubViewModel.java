@@ -71,6 +71,11 @@ public class SpriteSubViewModel
     private DoubleProperty visibility;
 
     /**
+     * Die Reihenfolge beim Zeichnen.
+     */
+    private IntegerProperty drawOrder;
+
+    /**
      * Erstellt ein neues SpriteSubViewModel.
      *
      * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
@@ -86,6 +91,9 @@ public class SpriteSubViewModel
 
         scale = new SimpleDoubleProperty();
         scale.bind(gameElement.heightProperty().divide(PhysicsConfig.MAX_BALL_HEIGHT).multiply(DesignConfig.BALL_SIZE_SCALE_WHEN_LIFTED).add(1));
+
+        drawOrder = new SimpleIntegerProperty();
+        drawOrder.bind(gameElement.drawOrderProperty());
 
         visibility = new SimpleDoubleProperty(1);
 
@@ -217,5 +225,15 @@ public class SpriteSubViewModel
     public DoubleProperty visibilityProperty()
     {
         return visibility;
+    }
+
+    /**
+     * Gibt die Reihenfolge beim Zeichnen dieses GameElements zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
+    public IntegerProperty drawOrderProperty()
+    {
+        return drawOrder;
     }
 }

@@ -1,13 +1,14 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.*;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.*;
+import sep.fimball.general.util.RegionHashConverter;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
-import java.util.Optional;
+import java.util.*;
 
 import static sep.fimball.general.data.DesignConfig.AUTOMATE_BORDER_WIDTH;
 import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
@@ -28,14 +29,11 @@ class PinballCanvasDrawer
     private DrawMode drawMode;
 
     /**
-     * Die zu zeichnenden Sprites.
-     */
-    private ReadOnlyListProperty<SpriteSubView> sprites;
-
-    /**
      * Der Rand des Automaten.
      */
     private RectangleDouble boundingBox;
+
+    private Map<Long, Map<Integer, List<SpriteSubView>>> spritesRegions;
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
@@ -50,7 +48,34 @@ class PinballCanvasDrawer
         this.canvas = canvas;
         this.drawMode = drawMode;
         this.boundingBox = boundingBox;
-        this.sprites = new SimpleListProperty<>(sprites);
+
+        spritesRegions = new HashMap<>();
+        for (SpriteSubView sprite : sprites)
+        {
+            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesMap(sprite, oldHashes, newHashes));
+            updateSpritesMap(sprite, Collections.emptyList(), sprite.regionHashesProperty().get());
+        }
+    }
+
+    private void updateSpritesMap(SpriteSubView sprite, List<Long> oldRegions, List<Long> newRegions)
+    {
+        int x = 0;
+        for (Long pots : oldRegions)
+        {
+            spritesRegions.get(pots).get(sprite.getDrawOrder()).remove(sprite);
+        }
+        for (Long pots : newRegions)
+        {
+            if (!spritesRegions.containsKey(pots))
+            {
+                spritesRegions.put(pots, new HashMap<>());
+            }
+            if (!spritesRegions.get(pots).containsKey(sprite.getDrawOrder()))
+            {
+                spritesRegions.get(pots).put(sprite.getDrawOrder(), new ArrayList<>());
+            }
+            spritesRegions.get(pots).get(sprite.getDrawOrder()).add(sprite);
+        }
     }
 
     /**
@@ -151,15 +176,36 @@ class PinballCanvasDrawer
     {
         Vector2 canvasTopLeft = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom);
         Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom);
-        RectangleDoubleByPoints canvas = new RectangleDoubleByPoints(canvasTopLeft, canvasBottomRight);
 
-        for (SpriteSubView spriteTop : sprites)
+        List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
+        RectangleDoubleByPoints canvas = new RectangleDoubleByPoints(canvasTopLeft,canvasBottomRight);
+
+        int start = -10;
+        int end = 10;
+
+        drawElements(canvas, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.BOTTOM);
+        drawElements(canvas, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.TOP);
+    }
+
+    private void drawElements(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, int start, int end, ImageLayer imageLayer)
+    {
+        for (Long newSpritesRegionsCanva : spritesRegionsCanvas)
         {
-            spriteTop.draw(canvas, graphicsContext, ImageLayer.BOTTOM, drawMode);
-        }
-        for (SpriteSubView sprite : sprites)
-        {
-            sprite.draw(canvas, graphicsContext, ImageLayer.TOP, drawMode);
+            for (int s = start; s <= end; s++)
+            {
+                Map<Integer, List<SpriteSubView>> spritePots = spritesRegions.get(newSpritesRegionsCanva);
+                if (spritePots != null)
+                {
+                    List<SpriteSubView> spritePot = spritePots.get(s);
+                    if (spritePot != null)
+                    {
+                        spritePot.forEach(sprite ->
+                        {
+                            sprite.draw(canvas, graphicsContext, imageLayer, drawMode);
+                        });
+                    }
+                }
+            }
         }
     }
 

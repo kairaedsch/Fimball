@@ -4,7 +4,6 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import sep.fimball.model.handler.HandlerWorld;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
@@ -35,16 +34,7 @@ public class World implements HandlerWorld
     public World(ObservableList<GameElement> elements, boolean startedFromEditor, double maximumYPosition)
     {
         this.maximumYPosition = maximumYPosition;
-        ListProperty<GameElement> gameElements = new SimpleListProperty<>(elements);
-
-        if (startedFromEditor)
-        {
-            this.gameElements = gameElements;
-        }
-        else
-        {
-            this.gameElements = new SimpleListProperty<>(new SortedList<>(gameElements, GameElement::compare));
-        }
+        gameElements = new SimpleListProperty<>(elements);
     }
 
     /**

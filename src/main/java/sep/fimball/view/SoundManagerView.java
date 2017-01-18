@@ -35,6 +35,11 @@ public class SoundManagerView
     private HashMap<String, AudioClip> loadedAudioClips;
 
     /**
+     * Cashed geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
+     */
+    private HashMap<String, Long> lastPlayedAudioClips;
+
+    /**
      * Die Lautstärke, mit der die Hintergrundmusik abgespielt wird.
      */
     private DoubleProperty musicVolume;
@@ -54,6 +59,7 @@ public class SoundManagerView
         mediaPlayer = Optional.empty();
         mediaPlayerSound = Optional.empty();
         loadedAudioClips = new HashMap<>();
+        lastPlayedAudioClips = new HashMap<>();
 
         // Holen der Lautstärke aus dem ViewModel
         musicVolume = new SimpleDoubleProperty();
@@ -112,13 +118,20 @@ public class SoundManagerView
                 {
                     audioClip.get().volumeProperty().bind(sfxVolume);
                     loadedAudioClips.put(soundPath, audioClip.get());
+                    lastPlayedAudioClips.put(soundPath, 0L);
                     audioClip.get().play();
                 }
             }
             else
             {
-                // Spiele den AudioClip ab
-                loadedAudioClips.get(soundPath).play();
+                long now = System.currentTimeMillis();
+
+                // TODO nötig?
+                if(lastPlayedAudioClips.containsKey(soundPath) && now - lastPlayedAudioClips.get(soundPath) > 100)
+                {
+                    // Spiele den AudioClip ab
+                    loadedAudioClips.get(soundPath).play();
+                }
             }
         }
     }

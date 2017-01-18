@@ -17,6 +17,8 @@ import java.util.Optional;
  */
 public class PinballCanvasGameViewModel extends PinballCanvasViewModel
 {
+    private GameViewModel gameViewModel;
+
     /**
      * Erstellt ein neues PinballCanvasGameViewModel.
      *
@@ -26,6 +28,7 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
     public PinballCanvasGameViewModel(GameSession gameSession, GameViewModel gameViewModel)
     {
         super(gameSession, DrawMode.GAME);
+        this.gameViewModel = gameViewModel;
         ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
@@ -37,6 +40,12 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
     {
         // Im Spiel kann der Nutzer nichts auswählen.
         return Optional.empty();
+    }
+
+    @Override
+    protected void setCameraZoom(double zoom)
+    {
+        gameViewModel.setCameraZoom(zoom);
     }
 
     @Override

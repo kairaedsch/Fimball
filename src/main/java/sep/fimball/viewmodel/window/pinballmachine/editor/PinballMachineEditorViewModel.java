@@ -210,36 +210,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Vergrößert die Ansicht des Flipper-Automaten für den Nutzer.
-     */
-    public void zoomOut()
-    {
-        if (cameraZoom.get() >= 1)
-        {
-            cameraZoom.set(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.125));
-        }
-        else
-        {
-            cameraZoom.set(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.1));
-        }
-    }
-
-    /**
-     * Verkleinert die Ansicht des Flipper-Automaten für den Nutzer.
-     */
-    public void zoomIn()
-    {
-        if (cameraZoom.get() >= 1)
-        {
-            cameraZoom.set(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.125));
-        }
-        else
-        {
-            cameraZoom.set(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.1));
-        }
-    }
-
-    /**
      * Verarbeitet eine Drag-Bewegung.
      *
      * @param startX  Die x-Position, an der die Drag-Bewegung angefangen hat.
@@ -581,5 +551,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public SceneManagerViewModel getSceneManagerViewModel()
     {
         return sceneManager;
+    }
+
+    public void setCameraZoom(double cameraZoom)
+    {
+        this.cameraZoom.set(cameraZoom);
     }
 }

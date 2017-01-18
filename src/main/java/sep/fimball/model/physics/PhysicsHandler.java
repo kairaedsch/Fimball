@@ -226,8 +226,6 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
-
-
         for (Long hash : getElementRegionHashes(ballPhysicsElement))
         {
             if (physicsElementsMap.containsKey(hash))
@@ -256,6 +254,6 @@ public class PhysicsHandler<GameElementT>
     {
         Vector2 minPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), false));
         Vector2 maxPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), true));
-        return RegionHashConverter.gameAreaToRegionHashes(minPos, maxPos);
+        return RegionHashConverter.gameAreaToRegionHashes(minPos, maxPos, PhysicsConfig.PHYSICS_REGION_SIZE);
     }
 }

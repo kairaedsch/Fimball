@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.Cursor;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
@@ -181,4 +182,36 @@ public abstract class PinballCanvasViewModel
         redrawObservable.setChanged();
         redrawObservable.notifyObservers();
     }
+
+    /**
+     * Vergrößert die Ansicht des Flipper-Automaten für den Nutzer.
+     */
+    public void zoomOut()
+    {
+        if (cameraZoom.get() >= 1)
+        {
+            setCameraZoom(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.125));
+        }
+        else
+        {
+            setCameraZoom(Math.max(Config.MIN_ZOOM, cameraZoom.get() - 0.1));
+        }
+    }
+
+    /**
+     * Verkleinert die Ansicht des Flipper-Automaten für den Nutzer.
+     */
+    public void zoomIn()
+    {
+        if (cameraZoom.get() >= 1)
+        {
+            setCameraZoom(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.125));
+        }
+        else
+        {
+            setCameraZoom(Math.min(Config.MAX_ZOOM, cameraZoom.get() + 0.1));
+        }
+    }
+
+    protected abstract void setCameraZoom(double zoom);
 }

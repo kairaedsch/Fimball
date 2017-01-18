@@ -104,4 +104,6 @@ public class PhysicsConfig
      * Die Geschwindigkeit, mit der ein Loch den Ball wegschießt.
      */
     public final static double HOLE_BALL_KICK_SPEED = 30.0;
+
+    public static final int PHYSICS_REGION_SIZE = 10;
 }

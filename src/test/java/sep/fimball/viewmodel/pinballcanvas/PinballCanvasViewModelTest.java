@@ -61,6 +61,12 @@ public class PinballCanvasViewModelTest
             {
                 return Optional.empty();
             }
+
+            @Override
+            protected void setCameraZoom(double zoom)
+            {
+
+            }
         };
 
         // Fange draw Update ab

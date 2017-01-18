@@ -1,14 +1,19 @@
 package sep.fimball.view.pinballcanvas;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import sep.fimball.general.data.*;
+import sep.fimball.general.util.RegionHashConverter;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.ElementImageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
+
+import java.util.List;
 
 /**
  * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements
@@ -29,11 +34,13 @@ public class SpriteSubView
 
     private Vector2 size;
 
-    private RectangleDoubleByPoints drawArea;
-
     private Image defaultImageTop;
 
     private Image defaultImageBottom;
+
+    private ObjectProperty<List<Long>> regionHashes;
+
+    private RectangleDoubleByPoints drawArea;
 
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
@@ -46,6 +53,7 @@ public class SpriteSubView
     {
         this.viewModel = viewModel;
         this.imageCache = imageCache;
+        this.regionHashes = new SimpleObjectProperty<>();
 
         viewModel.positionProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> calculateValues());
@@ -79,6 +87,11 @@ public class SpriteSubView
             localCoordinates = new Vector2();
         }
 
+        Vector2 min = position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates);
+        Vector2 max = size.plus(position).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates);
+
+        regionHashes.set(RegionHashConverter.gameAreaToRegionHashes(min, max, Config.DRAW_REGION_SIZE));
+
         // TODO ugly
         drawArea = new RectangleDoubleByPoints(position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.plus(position).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates));
     }
@@ -92,42 +105,39 @@ public class SpriteSubView
      *                        zeichnen soll.
      * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
-    void draw(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
+    boolean draw(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
-        // System.out.println("c: " + c);
-        // System.out.println("e: " + e);
-        // System.out.println(c.intersectsWith(e));
-        if (canvas.intersectsWith(drawArea))
+        if(!canvas.intersectsWith(drawArea)) return false;
+        graphicsContext.save();
+
+        setupDrawLocation(graphicsContext, rotationRest);
+
+        Image image;
+        ElementImageViewModel elementImageViewModel = viewModel.animationFramePathProperty().get();
+        if (elementImageViewModel.isAnimating())
         {
-            graphicsContext.save();
-
-            setupDrawLocation(graphicsContext, rotationRest);
-
-            Image image;
-            ElementImageViewModel elementImageViewModel = viewModel.animationFramePathProperty().get();
-            if (elementImageViewModel.isAnimating())
-            {
-                image = imageCache.getImage(elementImageViewModel.getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
-            }
-            else
-            {
-                image = imageLayer == ImageLayer.TOP ? defaultImageTop : defaultImageBottom;
-            }
-
-            if (imageLayer == ImageLayer.TOP)
-            {
-                drawImage(graphicsContext, image, drawMode, position, size);
-            }
-            if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
-            {
-                drawImageBorder(graphicsContext, imageLayer, position, size);
-            }
-            if (imageLayer == ImageLayer.BOTTOM)
-            {
-                drawImage(graphicsContext, image, drawMode, position, size);
-            }
-            graphicsContext.restore();
+            image = imageCache.getImage(elementImageViewModel.getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
         }
+        else
+        {
+            image = imageLayer == ImageLayer.TOP ? defaultImageTop : defaultImageBottom;
+        }
+
+        if (imageLayer == ImageLayer.TOP)
+        {
+            drawImage(graphicsContext, image, drawMode, position, size);
+        }
+        if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
+        {
+            drawImageBorder(graphicsContext, imageLayer, position, size);
+        }
+        if (imageLayer == ImageLayer.BOTTOM)
+        {
+            drawImage(graphicsContext, image, drawMode, position, size);
+        }
+        graphicsContext.restore();
+
+        return true;
     }
 
     /**
@@ -219,5 +229,25 @@ public class SpriteSubView
             graphicsContext.setStroke(color);
             graphicsContext.strokeRect(position.getX() - borderOffset, position.getY() + viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT - borderOffset, size.getX() + borderOffset * 2, size.getY() + borderOffset * 2 - (viewModel.getElementHeight() * DesignConfig.PIXELS_PER_GRID_UNIT));
         }
+    }
+
+    public ObjectProperty<List<Long>> regionHashesProperty()
+    {
+        return regionHashes;
+    }
+
+    /**
+     * Gibt die Reihenfolge beim Zeichnen dieses SpriteSubView zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
+    public int getDrawOrder()
+    {
+        return viewModel.drawOrderProperty().get();
+    }
+
+    public Vector2 getPosition()
+    {
+        return position;
     }
 }

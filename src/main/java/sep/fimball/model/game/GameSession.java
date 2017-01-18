@@ -130,9 +130,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         }
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
-        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
-        // TODO take when sortedlist is removed
-        //ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
 
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);

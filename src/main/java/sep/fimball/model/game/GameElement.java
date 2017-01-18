@@ -1,5 +1,6 @@
 package sep.fimball.model.game;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static sep.fimball.general.data.PhysicsConfig.MAX_BALL_HEIGHT;
 import static sep.fimball.model.blueprint.base.BaseElementType.BALL;
+import static sep.fimball.model.blueprint.base.BaseElementType.NORMAL;
 import static sep.fimball.model.blueprint.base.BaseElementType.RAMP;
 
 /**
@@ -35,6 +37,11 @@ public class GameElement implements HandlerGameElement
      * Die Höhe des Spielelements über dem Flipper.
      */
     private DoubleProperty height;
+
+    /**
+     * Die Reihenfolge beim Zeichnen.
+     */
+    private IntegerProperty drawOrder;
 
     /**
      * Diese Zahl zählt wie oft das GameElement in der aktuellen Runde des Spiels getroffen wurde, und wird benutzt um das Spielelement nach einer bestimmten Anzahl von Treffern zu "verbessern", wie z.B. mehr Punkte beim erneuten Treffen zu geben.
@@ -71,6 +78,9 @@ public class GameElement implements HandlerGameElement
         this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
         this.height = new SimpleDoubleProperty(0);
+
+        this.drawOrder = new SimpleIntegerProperty();
+        this.drawOrder.bind(Bindings.createIntegerBinding(this::getDrawOrder, this.height));
 
         if (bind)
         {
@@ -213,39 +223,29 @@ public class GameElement implements HandlerGameElement
     }
 
     /**
-     * Vergleicht zwei Spielelemente so, dass sie von der Höhe her richtig gezeichnet werden.
+     * Gibt die Reihenfolge beim Zeichnen dieses GameElements zurück.
      *
-     * @param g1 Das erste Spielelement.
-     * @param g2 Das zweite Spielelement.
-     * @return Welches der Spielelemente kleiner/größer/gleich ist.
+     * @return Die Reihenfolge beim Zeichnen.
      */
-    public static int compare(GameElement g1, GameElement g2)
+    public int getDrawOrder()
     {
-        BaseElementType g1t = g1.getElementType();
-        BaseElementType g2t = g2.getElementType();
-
-        if (g1t == BALL || g2t == BALL)
+        if(getElementType() == BALL)
         {
-            if (g1t == g2t)
-            {
-                return 0;
-            }
-            else if (g1t == BALL)
-            {
-                if (g2t == RAMP)
-                {
-                    return g1.heightProperty().get() > (MAX_BALL_HEIGHT / 2.0) ? 1 : -1;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
-            else
-            {
-                return -1 * compare(g2, g1);
-            }
+            return heightProperty().get() > (MAX_BALL_HEIGHT / 2.0) ? NORMAL.getDrawOrder() : (RAMP.getDrawOrder() + 1);
         }
-        return g1t.getDrawOrder() - g2t.getDrawOrder();
+        else
+        {
+            return getElementType().getDrawOrder();
+        }
+    }
+
+    /**
+     * Gibt die Reihenfolge beim Zeichnen dieses GameElements zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
+    public IntegerProperty drawOrderProperty()
+    {
+        return drawOrder;
     }
 }

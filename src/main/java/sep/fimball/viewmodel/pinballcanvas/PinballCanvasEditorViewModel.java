@@ -56,6 +56,12 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     }
 
     @Override
+    protected void setCameraZoom(double zoom)
+    {
+        editorViewModel.setCameraZoom(zoom);
+    }
+
+    @Override
     public ReadOnlyObjectProperty<Cursor> cursorProperty()
     {
         return editorViewModel.cursorProperty();

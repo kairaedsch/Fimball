@@ -8,6 +8,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.DesignConfig;
@@ -145,5 +146,19 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
         return pinballCanvasDrawer.canvasPosToGridPos(camera.getSoftCameraPosition(), camera.getSoftCameraZoom(), mouseEvent.getX(), mouseEvent.getY());
+    }
+
+    /**
+     * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass der Nutzer abhängig von der Richtung des Scrollens im
+     * ScrollEvent hinein- oder herauszoomen möchte.
+     *
+     * @param scrollEvent Das ScrollEvent, das verarbeitet werden soll.
+     */
+    public void zoom(ScrollEvent scrollEvent)
+    {
+        if (scrollEvent.getDeltaY() < 0)
+            pinballCanvasViewModel.zoomOut();
+        else if (scrollEvent.getDeltaY() > 0)
+            pinballCanvasViewModel.zoomIn();
     }
 }
