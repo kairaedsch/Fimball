@@ -28,7 +28,6 @@ public class ElementImageTest
     @Before
     public void init()
     {
-        //TODO
         Map<Language, String> names = new HashMap<>();
         names.put(Language.GERMAN, "testMedia");
 
@@ -54,7 +53,6 @@ public class ElementImageTest
     @Test
     public void imagePathTest()
     {
-
         assertThat("Das Bild wird mit der richtigen Rotation, Animation und Drehung ausgewählt", testElementImage.getImagePath(ImageLayer.BOTTOM, 35, 9), equalTo(DataPath.pathToElements() + "/testElement/bottom-0.png"));
         assertThat("Das Bild wird mit der richtigen Rotation, Animation und Drehung ausgewählt", testElementImage.getImagePath(ImageLayer.TOP, 60, 1), equalTo(DataPath.pathToElements() + "/testElement/top-40+testAnimation_0.png"));
         assertThat("Das Bild wird mit der richtigen Rotation, Animation und Drehung ausgewählt", testElementImage.getImagePath(ImageLayer.TOP, 60, 2), equalTo(DataPath.pathToElements() + "/testElement/top-40+testAnimation_1.png"));

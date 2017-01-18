@@ -26,8 +26,7 @@ public class QuestionView extends DialogView<QuestionViewModel>
     }
 
     /**
-     * TODO
-     * Benachrichtigt das {@code ????}, dass ????? möchte.
+     * Benachrichtigt das {@code questionViewModel}, dass der Nutzer die Frage bestätigt.
      */
     @FXML
     private void okClicked()
@@ -36,8 +35,7 @@ public class QuestionView extends DialogView<QuestionViewModel>
     }
 
     /**
-     * TODO
-     * Benachrichtigt das {@code ????}, dass ????? möchte.
+     * Benachrichtigt das {@code questionViewModel}, dass der Nutzer die Frage verneint.
      */
     @FXML
     public void abortClicked()

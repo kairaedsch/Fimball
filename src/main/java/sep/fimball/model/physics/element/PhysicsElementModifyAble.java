@@ -4,9 +4,9 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.PhysicsHandler;
 
 /**
- * Ein PhysicsModifyable ist ein PhysicsElement, an welches ein Modify angewandt werden kann.
+ * Ein PhysicsModifyAble ist ein PhysicsElement, an welches ein Modify angewandt werden kann.
  *
- * @param <ModifyT>      Der Typ des Modifys, welches an das PhysicsElement angewandt werden kann.
+ * @param <ModifyT>      Der Typ des Modify's, welches an das PhysicsElement angewandt werden kann.
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements..
  */
 public abstract class PhysicsElementModifyAble<GameElementT, ModifyT extends Modify> extends PhysicsElement<GameElementT>

@@ -70,10 +70,10 @@ public class Camera
         if (canvasWidth > 0 && canvasHeight > 0)
         {
             Vector2 cameraOffset = cameraPosition.get().minus(softCameraPosition);
-            double maxmimumBallOffsetX = canvasWidth / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
-            double maxmimumBallOffsetY = canvasHeight / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
-            double xOffsetPercentage = Math.min(Math.abs(cameraOffset.getX()) / maxmimumBallOffsetX, 1);
-            double yOffsetPercentage = Math.min(Math.abs(cameraOffset.getY()) / maxmimumBallOffsetY, 1);
+            double maximumBallOffsetX = canvasWidth / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
+            double maximumBallOffsetY = canvasHeight / 2 / DesignConfig.PIXELS_PER_GRID_UNIT;
+            double xOffsetPercentage = Math.min(Math.abs(cameraOffset.getX()) / maximumBallOffsetX, 1);
+            double yOffsetPercentage = Math.min(Math.abs(cameraOffset.getY()) / maximumBallOffsetY, 1);
             cameraFollowSpeed = defaultCamFollowSpeed - ((defaultCamFollowSpeed - maximumCamFollowSpeed) * Math.max(xOffsetPercentage, yOffsetPercentage));
         }
 

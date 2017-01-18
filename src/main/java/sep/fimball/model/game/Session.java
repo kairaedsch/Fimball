@@ -33,7 +33,7 @@ public abstract class Session
     /**
      * Wie viele Updates in der letzten Sekunde durchgeführt wurden.
      */
-    private int framecount;
+    private int frameCount;
 
     /**
      * Der Zeitpunkt, seit dem die Updates gezählt wurden.
@@ -55,12 +55,12 @@ public abstract class Session
             @Override
             public void handle(long now)
             {
-                framecount++;
+                frameCount++;
                 long currentTime = System.currentTimeMillis();
                 if (((double) currentTime - (double) lastTime) > 1000)
                 {
-                    System.out.println("FPS: " + framecount);
-                    framecount = 0;
+                    System.out.println("FPS: " + frameCount);
+                    frameCount = 0;
                     lastTime = currentTime;
                 }
 
@@ -87,7 +87,7 @@ public abstract class Session
     }
 
     /**
-     * Der Updateloop der Session. Benachrichtigt am Ende den updateLoopObservable.
+     * Der Update-Loop der Session. Benachrichtigt am Ende den updateLoopObservable.
      */
     protected void loopUpdate()
     {

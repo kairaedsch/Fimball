@@ -62,7 +62,7 @@ public class PhysicsHandler<GameElementT>
     /**
      * Wie viele Physik-Updates in der letzten Sekunde durchgeführt wurden.
      */
-    private int framecount;
+    private int frameCount;
 
     /**
      * Der Zeitpunkt, seit dem die Physik-Updates gezählt wurden.
@@ -174,12 +174,12 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                framecount++;
+                frameCount++;
                 long currentTime = System.currentTimeMillis();
                 if (((double) currentTime - (double) lastTime) > 1000)
                 {
-                    System.out.println("Physics FPS: " + framecount);
-                    framecount = 0;
+                    System.out.println("Physics FPS: " + frameCount);
+                    frameCount = 0;
                     lastTime = currentTime;
                 }
 

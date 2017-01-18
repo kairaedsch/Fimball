@@ -346,7 +346,7 @@ public class PinballMachine
      * Gibt den Speicherpfad zum Hintergrundbildes des Automaten zurück.
      * Falls kein Bild vorliegt wird der Pfad zum default-Hintergrundbild zurückgegeben.
      *
-     * @return Der Speicherpfad zu einem Hintergrundbilde.
+     * @return Der Speicherpfad zu einem Hintergrundbild.
      */
     public ReadOnlyStringProperty absolutePreviewImagePathProperty()
     {

@@ -33,8 +33,7 @@ import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     /**
-     * Zeigt den Namen des editierten Automaten an.
-     * // TODO asdasd
+     * Zeigt den Namen des editierten Automaten an. Über dieses Feld kann der Name auch geändert werden.
      */
     @FXML
     private TextField tableName;
