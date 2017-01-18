@@ -54,7 +54,19 @@ public class PlacedElement
         this.baseElement = baseElement;
         this.position = new SimpleObjectProperty<>(position);
         this.points = new SimpleIntegerProperty(points);
+        this.points.addListener(((observable, oldValue, newValue) -> {
+            if(newValue.doubleValue() < 0)
+            {
+                this.points.setValue(oldValue);
+            }
+        }));
         this.multiplier = new SimpleDoubleProperty(multiplier);
+        this.multiplier.addListener(((observable, oldValue, newValue) -> {
+            if(newValue.doubleValue() < 0)
+            {
+                this.multiplier.setValue(oldValue);
+            }
+        }));
         this.rotation = new SimpleDoubleProperty(rotation);
     }
 

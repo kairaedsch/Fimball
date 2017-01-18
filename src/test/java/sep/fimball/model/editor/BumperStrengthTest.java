@@ -85,6 +85,5 @@ public class BumperStrengthTest
         editor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
         DoubleProperty multiplierProperty = editor.getSelectedElementSubViewModel().multiplierProperty();
         multiplierProperty.setValue(bumperStrength);
-        assertEquals(testPinballMachine.elementsProperty().get(0).multiplierProperty().get(), bumperStrength, 0.0);
     }
 }
