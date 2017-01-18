@@ -223,6 +223,8 @@ public class PhysicsHandler<GameElementT>
                                     element.resetChanged();
                                 }
                             });
+
+                    elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
                 }
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
@@ -254,8 +256,6 @@ public class PhysicsHandler<GameElementT>
                         });
             }
         }
-
-        elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
     }
 
     /**
