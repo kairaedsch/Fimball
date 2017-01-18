@@ -2,6 +2,7 @@ package sep.fimball.model.physics;
 
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.util.RegionHashConverter;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -17,28 +18,6 @@ import java.util.stream.Collectors;
  */
 public class PhysicsHandler<GameElementT>
 {
-    private static class IntegerVector2
-    {
-        private int x;
-        private int y;
-
-        public IntegerVector2(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX()
-        {
-            return x;
-        }
-
-        public int getY()
-        {
-            return y;
-        }
-    }
-
     /**
      * Der aktuelle Spielball.
      */
@@ -120,7 +99,7 @@ public class PhysicsHandler<GameElementT>
             if (element instanceof BallPhysicsElement)
                 continue;
 
-            for (Long hash : getElementPositionHashes(element))
+            for (Long hash : getElementRegionHashes(element))
             {
                 if (physicsElementsMap.containsKey(hash))
                     physicsElementsMap.get(hash).add(element);
@@ -247,7 +226,9 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
     {
-        for (Long hash : getElementPositionHashes(ballPhysicsElement))
+
+
+        for (Long hash : getElementRegionHashes(ballPhysicsElement))
         {
             if (physicsElementsMap.containsKey(hash))
             {
@@ -271,54 +252,10 @@ public class PhysicsHandler<GameElementT>
      * @param element Element für das die Hashes berechnet werden.
      * @return Eine Liste von Positions-Hashes.
      */
-    private List<Long> getElementPositionHashes(PhysicsElement<GameElementT> element)
+    private List<Long> getElementRegionHashes(PhysicsElement<GameElementT> element)
     {
-        List<Long> result = new ArrayList<>();
-
         Vector2 minPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), false));
         Vector2 maxPos = element.getPosition().plus(element.getBasePhysicsElement().getExtremePos(element.getRotation(), true));
-
-        IntegerVector2 minRegion = getPositionRegion(minPos);
-        IntegerVector2 maxRegion = getPositionRegion(maxPos);
-
-        for (int x = minRegion.getX(); x <= maxRegion.getX(); x++)
-        {
-            for (int y = minRegion.getY(); y <= maxRegion.getY(); y++)
-            {
-                long hash = getPositionHash(new IntegerVector2(x, y));
-                result.add(hash);
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Gibt die Region eines Vektors auf dem Spielfeld an.
-     *
-     * @param position Vektor für den die Region berechnet wird.
-     * @return Region, in der sich der Vektor befindet.
-     */
-    private IntegerVector2 getPositionRegion(Vector2 position)
-    {
-        final long REGION_SIZE = 10;
-        int x = (int) Math.ceil(position.getX() / REGION_SIZE);
-        int y = (int) Math.ceil(position.getY() / REGION_SIZE);
-        return new IntegerVector2(x, y);
-    }
-
-    /**
-     * Berechnet den Hash einer Spielfeld-Region.
-     *
-     * @param region Region, für die der Hash berechnet werden soll.
-     * @return Hash für eine Region.
-     */
-    private long getPositionHash(IntegerVector2 region)
-    {
-        long hash = region.getX();
-        long shiftedY = region.getY();
-        shiftedY <<= 32;
-        hash |= shiftedY;
-        return hash;
+        return RegionHashConverter.gameAreaToRegionHashes(minPos, maxPos);
     }
 }
