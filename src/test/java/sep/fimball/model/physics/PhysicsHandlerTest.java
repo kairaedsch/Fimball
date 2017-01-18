@@ -2,8 +2,10 @@ package sep.fimball.model.physics;
 
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.physics.element.BallPhysicsElement;
+import sep.fimball.model.physics.element.BasePhysicsElement;
 import sep.fimball.model.physics.element.PhysicsElement;
 
 import java.util.ArrayList;
@@ -102,13 +104,18 @@ public class PhysicsHandlerTest
      */
     private PhysicsElement getElement(BallPhysicsElement mockedBall)
     {
-        PhysicsElement mockedElement = mock(PhysicsElement.class);
+        PhysicsElement<GameElement> mockedElement = mock(PhysicsElement.class);
 
         doAnswer(invocationOnMock ->
         {
             collisionCheckWithBall = true;
             return null;
         }).when(mockedElement).checkCollision(anyList(), eq(mockedBall));
+
+        when(mockedElement.getPosition()).thenReturn(new Vector2(0,0));
+        BasePhysicsElement basePhysicsElement = mock(BasePhysicsElement.class);
+        when(basePhysicsElement.getExtremePos(anyDouble(),anyBoolean())).thenReturn(new Vector2(0,0));
+        when(mockedElement.getBasePhysicsElement()).thenReturn(basePhysicsElement);
         return mockedElement;
     }
 
@@ -158,6 +165,11 @@ public class PhysicsHandlerTest
         doAnswer(invocationOnMock -> ballChanged).when(mockedBall).hasChanged();
 
         doAnswer(invocationOnMock -> ballPosition).when(mockedBall).getPosition();
+
+        BasePhysicsElement basePhysicsElement = mock(BasePhysicsElement.class);
+        when(basePhysicsElement.getExtremePos(anyDouble(),anyBoolean())).thenReturn(new Vector2(0,0));
+        when(mockedBall.getBasePhysicsElement()).thenReturn(basePhysicsElement);
+        when(mockedBall.getPosition()).thenReturn(new Vector2(0,0));
         return mockedBall;
     }
 
