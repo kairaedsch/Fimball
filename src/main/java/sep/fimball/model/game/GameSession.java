@@ -290,6 +290,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         synchronized (physicMonitor)
         {
+            // TODO make better
             while (this.collisionEventArgsList.size() > 100 || this.collisionEventArgsList.size() > 100)
             {
                 try

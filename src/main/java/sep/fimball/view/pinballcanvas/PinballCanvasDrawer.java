@@ -180,6 +180,7 @@ class PinballCanvasDrawer
         List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
         RectangleDoubleByPoints canvas = new RectangleDoubleByPoints(canvasTopLeft,canvasBottomRight);
 
+        // TODO make better
         int start = -10;
         int end = 10;
 
