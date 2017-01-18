@@ -106,13 +106,16 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     public void startPinballMachine()
     {
-        String[] names = new String[playerNameEntries.size()];
-        for (int i = 0; i < playerNameEntries.size(); i++)
+        if(gameCanBeStarted.get())
         {
-            names[i] = playerNameEntries.get(i).playerNameProperty().get();
+            String[] names = new String[playerNameEntries.size()];
+            for (int i = 0; i < playerNameEntries.size(); i++)
+            {
+                names[i] = playerNameEntries.get(i).playerNameProperty().get();
+            }
+            sceneManager.popDialog();
+            sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names, false)));
         }
-        sceneManager.popDialog();
-        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, names, false)));
     }
 
     /**
