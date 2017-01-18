@@ -5,6 +5,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.PhysicsHandler;
 import sep.fimball.model.physics.collider.CircleColliderShape;
 import sep.fimball.model.physics.collider.WorldLayer;
+import sep.fimball.model.physics.game.ElementEventArgs;
 
 import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
 
@@ -13,7 +14,7 @@ import static sep.fimball.general.data.PhysicsConfig.NUDGE_VELOCITY;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, Modify> implements PhysicsUpdatable
+public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, Modify> implements PhysicsUpdatable<GameElementT>
 {
     /**
      * Die Geschwindigkeit des Balls.
@@ -132,5 +133,10 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
         }
         else
             System.err.println("BallPhysicsElement got incompatible Modify Type");
+    }
+
+    public ElementEventArgs<GameElementT> getChange()
+    {
+        return new ElementEventArgs<>(gameElement, getPosition(), getRotation(), height);
     }
 }

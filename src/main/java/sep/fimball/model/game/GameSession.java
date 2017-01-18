@@ -20,6 +20,8 @@ import sep.fimball.model.physics.game.PhysicsGameSession;
 
 import java.util.*;
 
+import static javafx.scene.input.KeyCode.T;
+
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
@@ -129,6 +131,8 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
 
         // Erstelle GameElement und ggf. PhysicsElement aus der gegebenen Liste von PlacedElement
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList(gameElement -> new Observable[]{gameElement.positionProperty(), gameElement.rotationProperty(), gameElement.heightProperty()}));
+        // TODO take when sortedlist is removed
+        //ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
 
         ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);
@@ -288,6 +292,19 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         synchronized (physicMonitor)
         {
+            while (this.collisionEventArgsList.size() > 100 || this.collisionEventArgsList.size() > 100)
+            {
+                try
+                {
+                    System.out.println("physic is sleeping");
+                    physicMonitor.wait(250);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
             this.collisionEventArgsList.add(collisionEventArgs);
             this.elementEventArgsList.add(elementEventArgs);
         }

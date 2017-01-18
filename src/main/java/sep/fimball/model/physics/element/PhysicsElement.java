@@ -3,6 +3,7 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +43,7 @@ public class PhysicsElement<GameElementT>
     /**
      * Das korrespondierende GameElement.
      */
-    private GameElementT gameElement;
+    final protected GameElementT gameElement;
 
     /**
      * Das korrespondierende BasePhysicsElement.
@@ -183,5 +184,14 @@ public class PhysicsElement<GameElementT>
     public double getStrengthMultiplier()
     {
         return strengthMultiplier;
+    }
+
+    /**
+     * Gibt den aktuellen Zustand des PhysicsElements zurück.
+     * @return
+     */
+    public ElementEventArgs<GameElementT> getChange()
+    {
+        return new ElementEventArgs<>(gameElement, position, rotation, 0);
     }
 }

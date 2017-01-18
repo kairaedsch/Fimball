@@ -8,6 +8,7 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Der PhysicsHandler kümmert sich um die Physikalische Simulation des Automaten. Er ist dafür verantwortlich, dass sich der Ball korrekt auf der zweidimensionalen Fläche bewegt. Auch überprüft er ob die Kugel, welche das einzige BaseElement ist welches dauerhaft in Bewegung ist, mit anderen Elementen kollidiert. Falls sie dies tut wird die Kollision aufgelöst indem die beiden Elemente voneinander abprallen. Alle diese Berechnungen führt der PhysicsHandler in einer Schleife aus.
@@ -57,6 +58,11 @@ public class PhysicsHandler<GameElementT>
      * Der Timer wird zur Erzeugung der Physik Schleife genutzt.
      */
     private Timer physicTimer;
+
+    /**
+     * Eine Liste aller PhysicsElements, welche eine update methode haben.
+     */
+    private List<PhysicsUpdatable<GameElementT>> updatablePhysicsElements;
 
     /**
      * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
@@ -132,6 +138,12 @@ public class PhysicsHandler<GameElementT>
         this.physicTimer = new Timer(false);
 
         modifyContainers = new ArrayList<>();
+
+        updatablePhysicsElements = physicsElements
+                .stream()
+                .filter(element -> element instanceof PhysicsUpdatable)
+                .map(element -> (PhysicsUpdatable<GameElementT>) element)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -211,23 +223,15 @@ public class PhysicsHandler<GameElementT>
                 {
                     checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
 
-                    physicsElements
-                            .stream()
-                            .filter(element -> element instanceof PhysicsUpdatable)
-                            .forEach(element ->
-                            {
-                                ((PhysicsUpdatable) element).update(delta);
-                                if (!(element instanceof BallPhysicsElement))
-                                {
-                                    if (element.hasChanged())
-                                    {
-                                        elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
-                                        element.resetChanged();
-                                    }
-                                }
-                            });
-
-                    elementEventArgsList.add(new ElementEventArgs<>(ballPhysicsElement.getGameElement(), ballPhysicsElement.getPosition(), ballPhysicsElement.getRotation(), ballPhysicsElement.getHeight()));
+                    updatablePhysicsElements.forEach(element ->
+                    {
+                        element.update(delta);
+                        if (element.hasChanged())
+                        {
+                            elementEventArgsList.add(element.getChange());
+                            element.resetChanged();
+                        }
+                    });
                 }
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
@@ -253,7 +257,7 @@ public class PhysicsHandler<GameElementT>
                             element.checkCollision(collisionEventArgsList, ballPhysicsElement);
                             if (element.hasChanged())
                             {
-                                elementEventArgsList.add(new ElementEventArgs<>(element.getGameElement(), element.getPosition(), element.getRotation(), 0));
+                                elementEventArgsList.add(element.getChange());
                                 element.resetChanged();
                             }
                         });
@@ -263,6 +267,7 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Berechnet die Hashes für die Position eines Elements, die für den Zugriff auf die physicsElementMap benötigt werden.
+     *
      * @param element Element für das die Hashes berechnet werden.
      * @return Eine Liste von Positions-Hashes.
      */
@@ -290,19 +295,21 @@ public class PhysicsHandler<GameElementT>
 
     /**
      * Gibt die Region eines Vektors auf dem Spielfeld an.
+     *
      * @param position Vektor für den die Region berechnet wird.
      * @return Region, in der sich der Vektor befindet.
      */
     private IntegerVector2 getPositionRegion(Vector2 position)
     {
         final long REGION_SIZE = 10;
-        int x = (int)Math.ceil(position.getX() / REGION_SIZE);
-        int y = (int)Math.ceil(position.getY() / REGION_SIZE);
+        int x = (int) Math.ceil(position.getX() / REGION_SIZE);
+        int y = (int) Math.ceil(position.getY() / REGION_SIZE);
         return new IntegerVector2(x, y);
     }
 
     /**
      * Berechnet den Hash einer Spielfeld-Region.
+     *
      * @param region Region, für die der Hash berechnet werden soll.
      * @return Hash für eine Region.
      */

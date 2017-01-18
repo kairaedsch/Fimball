@@ -11,7 +11,7 @@ import static sep.fimball.model.physics.element.AngularDirection.*;
  *
  * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
-public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdatable
+public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdatable<GameElementT>
 {
     /**
      * Die aktuelle Winkelgeschwindigkeit des Flipperarms.

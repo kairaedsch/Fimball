@@ -7,7 +7,7 @@ import static sep.fimball.general.data.PhysicsConfig.*;
 /**
  * Repräsentiert ein Loch in der Berechnung der Physik.
  */
-public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdatable
+public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdatable<GameElementT>
 {
     private boolean ballFrozen = false;
     private double freezeStart;
