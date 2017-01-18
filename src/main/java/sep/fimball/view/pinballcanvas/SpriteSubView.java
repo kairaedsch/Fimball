@@ -47,9 +47,6 @@ public class SpriteSubView
         this.viewModel = viewModel;
         this.imageCache = imageCache;
 
-        defaultImageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
-        defaultImageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
-
         viewModel.positionProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.scaleProperty().addListener((observable, oldValue, newValue) -> calculateValues());
@@ -58,6 +55,9 @@ public class SpriteSubView
 
     private void calculateValues()
     {
+        defaultImageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
+        defaultImageBottom = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.BOTTOM, (int) viewModel.rotationProperty().get()));
+
         ElementImageViewModel elementImage = viewModel.animationFramePathProperty().get();
         rotationRest = elementImage.getRestRotation((int) viewModel.rotationProperty().get()) + (viewModel.rotationProperty().get() - (int) viewModel.rotationProperty().get());
 
