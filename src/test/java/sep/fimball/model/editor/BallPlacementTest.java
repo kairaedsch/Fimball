@@ -40,7 +40,8 @@ public class BallPlacementTest
      * Stellt sicher, dass bei Erstellung eines neuen Pinball-Automaten genau ein Kugel-Spawnpunkt vorhanden ist.
      */
     @Test(timeout = 3000)
-    public void testBallInNewPinballMachine() {
+    public void testBallInNewPinballMachine()
+    {
         testPinballMachine = PinballMachineManager.getInstance().createNewMachine();
         assertThat(testPinballMachine.elementsProperty().size(), is(1));
         assertThat(testPinballMachine.elementsProperty().get(0).getBaseElement().getId(), equalTo(BALL_ID));
@@ -89,12 +90,14 @@ public class BallPlacementTest
     /**
      * Diese Klasse stellt einen ViewScreenshotCreator für Testzwecke zur Verfügung.
      */
-    private static class TestScreenshotCreator implements ViewScreenshotCreator {
+    private static class TestScreenshotCreator implements ViewScreenshotCreator
+    {
         /**
          * {@inheritDoc}
          */
         @Override
-        public WritableImage getScreenshot() {
+        public WritableImage getScreenshot()
+        {
             return new WritableImage(1, 1);
         }
     }

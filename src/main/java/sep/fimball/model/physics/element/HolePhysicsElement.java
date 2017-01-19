@@ -2,6 +2,8 @@ package sep.fimball.model.physics.element;
 
 import sep.fimball.general.data.Vector2;
 
+import java.util.Optional;
+
 import static sep.fimball.general.data.PhysicsConfig.*;
 
 /**
@@ -10,23 +12,14 @@ import static sep.fimball.general.data.PhysicsConfig.*;
 public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdatable<GameElementT>
 {
     /**
-     * Gibt an, ob der Ball aktuell im Loch ist.
-     * TODO approve TILL
-     */
-    private boolean ballFrozen = false;
-
-    /**
      * Gibt an, wann der Ball zuletzt in das Loch gefallen ist.
-     * TODO approve TILL
      */
     private double freezeStart;
 
     /**
      * Der im Loch gefangene Ball.
-     * TODO approve TILL
-     * Kai sagt: Sollte das kein Optional sein?
      */
-    private BallPhysicsElement frozenBall;
+    private Optional<BallPhysicsElement> frozenBall;
 
     /**
      * Erstellt ein neues Loch.
@@ -39,6 +32,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
     public HolePhysicsElement(GameElementT gameElement, Vector2 position, double rotation, BasePhysicsElement basePhysicsElement)
     {
         super(gameElement, position, rotation, 1.0, basePhysicsElement);
+        frozenBall = Optional.empty();
     }
 
     /**
@@ -50,9 +44,8 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
     {
         if (canAffectBall())
         {
-            frozenBall = ball;
+            frozenBall = Optional.of(ball);
             freezeStart = System.currentTimeMillis();
-            ballFrozen = true;
         }
     }
 
@@ -63,21 +56,20 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     public boolean canAffectBall()
     {
-        return !ballFrozen && System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS + HOLE_WAIT_AFTER_FREEZE_TIME_MS;
+        return !frozenBall.isPresent() && System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS + HOLE_WAIT_AFTER_FREEZE_TIME_MS;
     }
 
     @Override
     public void update(double deltaTime)
     {
-        if (ballFrozen)
+        if (frozenBall.isPresent())
         {
             // TODO reset Ball position???? Was wenn Tilt????
-            frozenBall.setVelocity(new Vector2(0.0, 0.0));
+            frozenBall.get().setVelocity(new Vector2(0.0, 0.0));
 
             if (System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS)
             {
-                ballFrozen = false;
-                frozenBall.setVelocity(Vector2.randomUnitVector().scale(HOLE_BALL_KICK_SPEED));
+                frozenBall.get().setVelocity(Vector2.randomUnitVector().scale(HOLE_BALL_KICK_SPEED));
             }
         }
     }
