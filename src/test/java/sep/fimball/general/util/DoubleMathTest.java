@@ -5,10 +5,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by TheAsuro on 19.01.2017.
+ * Tests für die Klasse DoubleMath
  */
 public class DoubleMathTest
 {
+    /**
+     * Testet ob clamp die Werte richtig begrenzt.
+     */
     @Test
     public void clamp()
     {
@@ -21,6 +24,9 @@ public class DoubleMathTest
         assertThat(DoubleMath.clamp(-0.05, -0.04, testValBelow), is(-0.05));
     }
 
+    /**
+     * Testet ob lerp die Werte richtig interpoliert.
+     */
     @Test
     public void lerp()
     {
