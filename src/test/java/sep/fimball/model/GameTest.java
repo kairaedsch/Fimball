@@ -24,11 +24,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class GameTest
 {
-    private static final long MAX_TEST_DURATION = 20000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
-    private static final long HOLD_KEY_DURATION = 300;     // Die Zeit, die der Plunger gespannt wird.
+    private static final long MAX_TEST_DURATION = 5000;    // Die Zeit in Millisekunden, nach der der Test abgebrochen wird.
+    private static final long HOLD_KEY_DURATION = 700;     // Die Zeit, die der Plunger gespannt wird.
     private boolean ballIsLost = false;
 
-    private static final String WALL_ID = "hinderniss_linie_schraeg_2";
+    private static final String WALL_ID = "hinderniss_linie_schraeg_4";
     private static final String BUMPER_ID = "bumper_blue";
     private static final String PLUNGER_ID = "plunger";
     private static final String BALL_SPAWN_ID = "ball";
@@ -51,9 +51,9 @@ public class GameTest
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 18), 0, 1, 0));
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 12), 0, 1, 0));
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(0, -20), 0, 1, 0));
-        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(7, -12), 0, 1, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 14), 0, 1, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(-1, 7), 0, 1, 0));
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(2, 0), 0, 1, 0));
 
         session = new TestGameSession(pinballMachine, new String[]{"TestSpieler"});        // Start des Spiels
 
