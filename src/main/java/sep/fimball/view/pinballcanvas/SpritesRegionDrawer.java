@@ -54,7 +54,7 @@ class SpritesRegionDrawer
         {
             // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
             addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes, sprite.drawOrderProperty().get()));
+            sprite.regionHashesProperty().addListener((x, oldRegion, newRegion) -> updateSpritesRegions(sprite, oldRegion, newRegion, sprite.drawOrderProperty().get()));
             sprite.drawOrderProperty().addListener((x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get(), oldDrawOrder.intValue()));
         }, sprite ->
         {

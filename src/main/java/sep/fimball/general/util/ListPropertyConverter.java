@@ -40,7 +40,7 @@ public class ListPropertyConverter
      * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter,
-                                                                  Consumer<OriginalT> addListener, Consumer<OriginalT> removeListener)
+                                                                  Consumer<ConvertedT> addListener, Consumer<ConvertedT> removeListener)
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
@@ -49,8 +49,9 @@ public class ListPropertyConverter
                 listPropertyConverted.clear();
                 for (OriginalT original : listPropertyOriginal)
                 {
-                    addListener.accept(original);
-                    listPropertyConverted.add(converter.convert(original));
+                    ConvertedT converted = converter.convert(original);
+                    addListener.accept(converted);
+                    listPropertyConverted.add(converted);
                 }
             }
             else
@@ -61,14 +62,14 @@ public class ListPropertyConverter
                     {
                         if (change.getFrom() == change.getTo())
                         {
-                            removeListener.accept(listPropertyOriginal.get(change.getFrom()));
+                            removeListener.accept(listPropertyConverted.get(change.getFrom()));
                             listPropertyConverted.remove(change.getFrom());
                         }
                         else
                         {
                             for (int p = change.getFrom(); p < change.getTo(); p++)
                             {
-                                removeListener.accept(listPropertyOriginal.get(change.getFrom()));
+                                removeListener.accept(listPropertyConverted.get(change.getFrom()));
                                 listPropertyConverted.remove(change.getFrom());
                             }
                         }
@@ -77,9 +78,9 @@ public class ListPropertyConverter
                     {
                         for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
-                            OriginalT original = listPropertyOriginal.get(p);
-                            addListener.accept(original);
-                            listPropertyConverted.add(p, converter.convert(original));
+                            ConvertedT converted = converter.convert(listPropertyOriginal.get(p));
+                            addListener.accept(converted);
+                            listPropertyConverted.add(p, converted);
                         }
                     }
                     if (change.wasPermutated())

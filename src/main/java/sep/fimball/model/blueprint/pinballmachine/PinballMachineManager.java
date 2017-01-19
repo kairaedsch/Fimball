@@ -214,7 +214,6 @@ public class PinballMachineManager
             pathToGerneralJson = DataPath.pathToAutoSaveGeneralJson();
             pathToElementsJson = DataPath.pathToAutoSavePlacedElementsJson();
             pathToPinballMachine = DataPath.pathToAutoSave();
-
         } else {
             pathToGerneralJson = DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID());
             pathToElementsJson = DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID());
@@ -226,7 +225,7 @@ public class PinballMachineManager
             // Lösche Dateien
             Files.deleteIfExists(Paths.get(pathToGerneralJson));
             Files.deleteIfExists(Paths.get(pathToElementsJson));
-            deletePreviewImage(pinballMachine);
+            if(!autoSave) deletePreviewImage(pinballMachine);
 
             // Lösche Ordner
             Files.deleteIfExists(Paths.get(pathToPinballMachine));
