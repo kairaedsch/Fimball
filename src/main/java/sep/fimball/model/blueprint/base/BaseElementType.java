@@ -8,37 +8,37 @@ public enum BaseElementType
     /**
      * Kennzeichnet alle Arten von Elementen, die keine gesonderte Logik benötigen.
      */
-    NORMAL(0),
+    NORMAL(1),
 
     /**
      * Kennzeichnet einen Ball.
      */
-    BALL(3),
+    BALL(4),
 
     /**
      * Kennzeichnet einen Plunger.
      */
-    PLUNGER(0),
+    PLUNGER(1),
 
     /**
      * Kennzeichnet einen linken Flipperarm.
      */
-    LEFT_FLIPPER(1),
+    LEFT_FLIPPER(2),
 
     /**
      * Kennzeichnet einen rechten Flipperarm.
      */
-    RIGHT_FLIPPER(1),
+    RIGHT_FLIPPER(2),
 
     /**
      * Kennzeichnet ein Lichtelement.
      */
-    LIGHT(0),
+    LIGHT(1),
 
     /**
      * Kennzeichnet eine Rampe.
      */
-    RAMP(2),
+    RAMP(3),
 
     /**
      * Kennzeichnet ein Loch.
@@ -48,7 +48,7 @@ public enum BaseElementType
     /**
      * Kennzeichnet einen Spinner.
      */
-    SPINNER(0);
+    SPINNER(1);
 
     /**
      * Gibt die Reihenfolge beim Zeichnen an. Dabei bedeutet ein kleinerer Wert, dass zuerst gezeichnet wird. z.B. wird 0 vor 1 gezeichnet.

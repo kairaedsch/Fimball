@@ -35,7 +35,7 @@ class PinballCanvasDrawer
     /**
      * Der für das Zeichnen der Sprites zuständige SpritesRegionsDrawer.
      */
-    private SpritesRegionsDrawer spritesRegionsDrawer;
+    private SpritesRegionDrawer spritesRegionDrawer;
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
@@ -51,7 +51,7 @@ class PinballCanvasDrawer
         this.drawMode = drawMode;
         this.boundingBox = boundingBox;
 
-        spritesRegionsDrawer = new SpritesRegionsDrawer(this, drawMode, sprites);
+        spritesRegionDrawer = new SpritesRegionDrawer(this, drawMode, sprites);
     }
 
     /**
@@ -78,7 +78,7 @@ class PinballCanvasDrawer
             drawEditorGrid(cameraPosition, cameraZoom);
         }
 
-        spritesRegionsDrawer.drawElements(cameraPosition, cameraZoom, graphicsContext);
+        spritesRegionDrawer.drawElements(cameraPosition, cameraZoom, graphicsContext);
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 

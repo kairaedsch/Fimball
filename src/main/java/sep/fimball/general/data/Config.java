@@ -73,9 +73,9 @@ public class Config
     public static final int DRAW_REGION_SIZE = 75;
 
     /**
-     *
+     * Anzahl der Zeichenreihenfolgen.
      */
-    public final static int DRAW_ORDER_AMOUNT = 4;
+    public final static int DRAW_ORDER_AMOUNT = 5;
 
     /**
      * Gibt eine eindeutige ID zurück.

@@ -117,7 +117,10 @@ public class GameElement implements HandlerGameElement
             throw new IllegalArgumentException("Tried to synchronize a GameElement with a wrong GameElement");
         }
 
-        position.setValue(elementEventArgs.getPosition());
+        if(!elementEventArgs.getPosition().equals(position.get()))
+        {
+            position.setValue(elementEventArgs.getPosition());
+        }
         rotation.setValue(elementEventArgs.getRotation());
         height.setValue(elementEventArgs.getHeight());
     }

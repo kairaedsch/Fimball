@@ -17,7 +17,7 @@ import static sep.fimball.general.data.Config.DRAW_ORDER_AMOUNT;
 /**
  * Der SpritesRegionsDrawer zeichnet Sprites und verwendet dafür den RegionHashConverter um das zeichnen zu optimieren.
  */
-class SpritesRegionsDrawer
+class SpritesRegionDrawer
 {
     /**
      * Der zun diesem SpritesRegionsDrawer zugehörige PinballCanvasDrawer.
@@ -42,7 +42,7 @@ class SpritesRegionsDrawer
      * @param drawMode            Der Modus mit dem gezeichnet werden soll.
      * @param sprites             Die zu zeichnenden Sprites.
      */
-    SpritesRegionsDrawer(PinballCanvasDrawer pinballCanvasDrawer, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
+    SpritesRegionDrawer(PinballCanvasDrawer pinballCanvasDrawer, DrawMode drawMode, ReadOnlyListProperty<SpriteSubView> sprites)
     {
         this.pinballCanvasDrawer = pinballCanvasDrawer;
         this.drawMode = drawMode;
@@ -54,32 +54,33 @@ class SpritesRegionsDrawer
         {
             // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
             addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-            sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
+            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes, sprite.drawOrderProperty().get()));
+            sprite.drawOrderProperty().addListener((x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get(), oldDrawOrder.intValue()));
         }, sprite ->
         {
             // Wird ausgeführt, wenn ein Element entfernt werden soll
-            removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
+            removeSpriteRegions(sprite, sprite.regionHashesProperty().get(), sprite.drawOrderProperty().get());
         });
     }
 
     /**
-     * Aktualisiert die globalRegion mit dem übergebenen sprite und seinen Regions.
+     * Aktualisiert die globalRegion mit dem übergebenen sSprite und seinen Regions.
      *
-     * @param sprite    Das zu aktualisierende sprite.
-     * @param oldRegion Die alte region des sprites.
-     * @param newRegion Die neue region der Sprite.
+     * @param sprite       Das zu aktualisierende Sprite.
+     * @param oldRegion    Die alte region des Sprites.
+     * @param newRegion    Die neue region der Sprite.
+     * @param oldDrawOrder Die alte Zeichenreihenfolge es Sprites.
      */
-    private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegion, List<Long> newRegion)
+    private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegion, List<Long> newRegion, int oldDrawOrder)
     {
-        removeSpriteRegions(sprite, oldRegion);
+        removeSpriteRegions(sprite, oldRegion, oldDrawOrder);
         addSpriteRegions(sprite, newRegion);
     }
 
     /**
      * Fügt das sprite zu der übergebenen region der globalRegion hinzu.
      *
-     * @param sprite Das hinzuzufügende sprite.
+     * @param sprite Das hinzuzufügende Sprite.
      * @param region Die region, in welcher das sprite hinzugefügt werden soll.
      */
     private void addSpriteRegions(SpriteSubView sprite, List<Long> region)
@@ -96,24 +97,22 @@ class SpritesRegionsDrawer
                 }
                 globalRegion.put(potsHash, pots);
             }
-            pots[sprite.getDrawOrder()].add(sprite);
+            pots[sprite.drawOrderProperty().get()].add(sprite);
         }
     }
 
     /**
      * Entfernt das sprite aus der übergebenen region der globalRegion.
      *
-     * @param sprite Das zu entfernende sprite.
-     * @param region Die region, in welcher das sprite entfernt werden soll.
+     * @param sprite    Das zu entfernende sprite.
+     * @param region    Die region, in welcher das Sprite entfernt werden soll.
+     * @param drawOrder Die vielleicht alte Zeichenreihenfolge des Sprites.
      */
-    private void removeSpriteRegions(SpriteSubView sprite, List<Long> region)
+    private void removeSpriteRegions(SpriteSubView sprite, List<Long> region, int drawOrder)
     {
-        for (Long pots : region)
+        for (Long potsHash : region)
         {
-            for (int d = 0; d < DRAW_ORDER_AMOUNT; d++)
-            {
-                globalRegion.get(pots)[d].remove(sprite);
-            }
+            System.out.println(globalRegion.get(potsHash)[drawOrder].remove(sprite));
         }
     }
 

@@ -276,11 +276,6 @@ public class SpriteSubView
      *
      * @return Die Reihenfolge beim Zeichnen.
      */
-    public int getDrawOrder()
-    {
-        return viewModel.drawOrderProperty().get();
-    }
-
     public ReadOnlyIntegerProperty drawOrderProperty()
     {
         return drawOrder;
