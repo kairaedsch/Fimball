@@ -184,7 +184,7 @@ public class PinballMachine
     public boolean saveToDisk(boolean unloadElements)
     {
         checkElementsLoaded();
-        boolean success = pinballMachineManager.savePinballMachine(this);
+        boolean success = pinballMachineManager.savePinballMachine(this, false);
         if (success && unloadElements)
             unloadElements();
         return success;
@@ -209,7 +209,7 @@ public class PinballMachine
      */
     public boolean deleteFromDisk()
     {
-        return pinballMachineManager.deleteMachine(this);
+        return pinballMachineManager.deleteMachine(this, false);
     }
 
     /**

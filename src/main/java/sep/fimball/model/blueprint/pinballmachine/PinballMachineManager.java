@@ -76,7 +76,7 @@ public class PinballMachineManager
     public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Optional.empty(), Collections.emptyList(), this, true);
-        savePinballMachine(pinballMachine);
+        savePinballMachine(pinballMachine, false);
         pinballMachines.add(pinballMachine);
         pinballMachine.unloadElements();
         return pinballMachine;
@@ -132,17 +132,28 @@ public class PinballMachineManager
      * Speichert die gegebene PinballMachine und ihre Elemente.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
+     * @param autoSave Gibt an, ob der AutoSave-Automat gespeichert werden soll.
      * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    boolean savePinballMachine(PinballMachine pinballMachine)
+    boolean savePinballMachine(PinballMachine pinballMachine, boolean autoSave)
     {
-        Path pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
+        Path pathToMachine;
+        if(autoSave) {
+            pathToMachine = Paths.get(DataPath.pathToAutoSave());
+        } else
+        {
+            pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
+        }
         if (!pathToMachine.toFile().exists())
         {
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
             if (!couldCreateFolder)
             {
-                System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
+                if(autoSave) {
+                    System.err.println("Could not create folder: \"" + pathToMachine + "\". Auto save machine was not saved.");
+                } else {
+                    System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
+                }
                 return false;
             }
         }
@@ -152,34 +163,6 @@ public class PinballMachineManager
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
         boolean successElements = saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
-
-        return successMachine && successElements;
-    }
-
-    /**
-     * Speichert die gegebene PinballMachine und ihre Elemente als AutoSave-Automaten.
-     *
-     * @param pinballMachine Die zu speichernde PinballMachine.
-     * @return Ob die PinballMachine gespeichert werden konnte.
-     */
-    public boolean saveAutoSaveMachine(PinballMachine pinballMachine)
-    {
-        Path pathToMachine = Paths.get(DataPath.pathToAutoSave());
-        if (!pathToMachine.toFile().exists())
-        {
-            boolean couldCreateFolder = pathToMachine.toFile().mkdir();
-            if (!couldCreateFolder)
-            {
-                System.err.println("Could not create folder: \"" + pathToMachine + "\". Machine \"" + pinballMachine.getID() + "\" was not saved.");
-                return false;
-            }
-        }
-
-        PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
-        boolean successMachine = JsonFileManager.saveToJson(DataPath.pathToAutoSaveGeneralJson(), pinballMachineJson);
-
-        PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
-        boolean successElements = saveToJson(DataPath.pathToAutoSavePlacedElementsJson(), placedElementListJson);
 
         return successMachine && successElements;
     }
@@ -220,26 +203,45 @@ public class PinballMachineManager
      * Löscht die gegebene PinballMachine.
      *
      * @param pinballMachine Die PinballMachine, die gelöscht werden soll.
+     * @param autoSave Gibt an, ob der AutoSave-Automat gelöscht werden soll.
      * @return Gibt zurück ob diese erfolgreich gelöscht wurde.
      */
-    boolean deleteMachine(PinballMachine pinballMachine)
+    boolean deleteMachine(PinballMachine pinballMachine, boolean autoSave)
     {
+        String pathToGerneralJson;
+        String pathToElementsJson;
+        String pathToPinballMachine;
+        if(autoSave) {
+            pathToGerneralJson = DataPath.pathToAutoSaveGeneralJson();
+            pathToElementsJson = DataPath.pathToAutoSavePlacedElementsJson();
+            pathToPinballMachine = DataPath.pathToAutoSave();
+
+        } else {
+            pathToGerneralJson = DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID());
+            pathToElementsJson = DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID());
+            pathToPinballMachine = DataPath.pathToPinballMachine(pinballMachine.getID());
+        }
+
         try
         {
             // Lösche Dateien
-            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID())));
-            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(pathToGerneralJson));
+            Files.deleteIfExists(Paths.get(pathToElementsJson));
             deletePreviewImage(pinballMachine);
 
             // Lösche Ordner
-            Files.deleteIfExists(Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID())));
+            Files.deleteIfExists(Paths.get(pathToPinballMachine));
 
             // Entferne aus der List
             return pinballMachines.remove(pinballMachine);
         }
         catch (IOException e)
         {
-            System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not deleted");
+            if(autoSave) {
+                System.err.println("Auto saved machine not deleted");
+            } else {
+                System.err.println("Machine elem \"" + pinballMachine.getID() + "\" not deleted");
+            }
             e.printStackTrace();
             return false;
         }
@@ -260,29 +262,22 @@ public class PinballMachineManager
     }
 
     /**
+     * Speichert die gegebene PinballMachine und ihre Elemente als AutoSave-Automaten.
+     *
+     * @param pinballMachine Die zu speichernde PinballMachine.
+     * @return Ob die PinballMachine gespeichert werden konnte.
+     */
+    public boolean saveAutoSaveMachine(PinballMachine pinballMachine) {
+        return savePinballMachine(pinballMachine,true);
+    }
+
+    /**
      * Löscht den AutoSave-Automaten.
+     *
      * @return Gibt zurück, ob das Löschen erfolgreich war.
      */
-    public boolean deleteAutoSaveMachine()
-    {
-            try
-            {
-                // Lösche Dateien
-                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSaveGeneralJson()));
-                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSavePlacedElementsJson()));
-
-                // Lösche Ordner
-                Files.deleteIfExists(Paths.get(DataPath.pathToAutoSave()));
-
-                return true;
-            }
-            catch (IOException e)
-            {
-                System.err.println("AutoSave not deleted");
-                e.printStackTrace();
-                return false;
-            }
-
+    public boolean deleteAutoSaveMachine() {
+        return deleteMachine(null, true);
     }
 
     /**
