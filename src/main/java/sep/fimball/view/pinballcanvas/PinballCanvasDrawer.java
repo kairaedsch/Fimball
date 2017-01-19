@@ -1,6 +1,7 @@
 package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.ReadOnlyListProperty;
+import javafx.collections.ListChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -53,27 +54,98 @@ class PinballCanvasDrawer
         this.boundingBox = boundingBox;
 
         spritesRegions = new HashMap<>();
-        for (SpriteSubView sprite : sprites)
+
+        List<SpriteSubView> listPropertyConverted = new ArrayList<>();
+        ListChangeListener<SpriteSubView> listChangeListener = (change) ->
         {
-            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-            updateSpritesRegions(sprite, Collections.emptyList(), sprite.regionHashesProperty().get());
-        }
+            if (change == null || sprites.isEmpty())
+            {
+                if (change == null || sprites.isEmpty())
+                {
+                    listPropertyConverted.clear();
+                    for (SpriteSubView original : sprites)
+                    {
+                        listPropertyConverted.add(original);
+                    }
+                    spritesRegions.clear();
+                    for (SpriteSubView sprite : sprites)
+                    {
+                        sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                        addSpriteRegions(sprite, sprite.regionHashesProperty().get());
+                    }
+                }
+                else
+                {
+                    while (change.next())
+                    {
+                        if (change.wasRemoved())
+                        {
+                            if (change.getFrom() == change.getTo())
+                            {
+                                SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
+                                removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
+
+                                listPropertyConverted.remove(change.getFrom());
+                            }
+                            else
+                            {
+                                for (int p = change.getFrom(); p < change.getTo(); p++)
+                                {
+                                    SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
+                                    removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
+
+                                    listPropertyConverted.remove(change.getFrom());
+                                }
+                            }
+                        }
+                        if (change.wasAdded())
+                        {
+                            for (int p = change.getFrom(); p < change.getTo(); p++)
+                            {
+                                SpriteSubView sprite = sprites.get(p);
+                                sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                                addSpriteRegions(sprite, sprite.regionHashesProperty().get());
+
+                                listPropertyConverted.add(p, sprite);
+                            }
+                        }
+                        if (change.wasPermutated())
+                        {
+                            HashMap<Integer, SpriteSubView> map = new HashMap<>();
+                            for (int p = change.getFrom(); p < change.getTo(); p++)
+                            {
+                                int newPos = change.getPermutation(p);
+                                if (p != newPos)
+                                {
+                                    map.put(newPos, listPropertyConverted.get(newPos));
+                                    if (map.containsKey(p))
+                                        listPropertyConverted.set(newPos, map.get(p));
+                                    else
+                                        listPropertyConverted.set(newPos, listPropertyConverted.get(p));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        sprites.addListener(listChangeListener);
+        listChangeListener.onChanged(null);
     }
 
     /**
-     *
-     *
      * @param sprite
      * @param oldRegions
      * @param newRegions
      */
     private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegions, List<Long> newRegions)
     {
-        int x = 0;
-        for (Long pots : oldRegions)
-        {
-            spritesRegions.get(pots).get(sprite.getDrawOrder()).remove(sprite);
-        }
+        removeSpriteRegions(sprite, oldRegions);
+        addSpriteRegions(sprite, newRegions);
+    }
+
+    private void addSpriteRegions(SpriteSubView sprite, List<Long> newRegions)
+    {
         for (Long pots : newRegions)
         {
             if (!spritesRegions.containsKey(pots))
@@ -85,6 +157,14 @@ class PinballCanvasDrawer
                 spritesRegions.get(pots).put(sprite.getDrawOrder(), new ArrayList<>());
             }
             spritesRegions.get(pots).get(sprite.getDrawOrder()).add(sprite);
+        }
+    }
+
+    private void removeSpriteRegions(SpriteSubView sprite, List<Long> oldRegions)
+    {
+        for (Long pots : oldRegions)
+        {
+            spritesRegions.get(pots).get(sprite.getDrawOrder()).remove(sprite);
         }
     }
 
@@ -188,7 +268,7 @@ class PinballCanvasDrawer
         Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom);
 
         List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
-        RectangleDoubleByPoints canvasRectangle = new RectangleDoubleByPoints(canvasTopLeft,canvasBottomRight);
+        RectangleDoubleByPoints canvasRectangle = new RectangleDoubleByPoints(canvasTopLeft, canvasBottomRight);
 
         // TODO make better
         int start = -10;
