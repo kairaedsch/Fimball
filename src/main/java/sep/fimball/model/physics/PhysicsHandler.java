@@ -147,7 +147,7 @@ public class PhysicsHandler<GameElementT>
     {
         lastTime = System.currentTimeMillis();
         physicTimer = new Timer(false);
-        physicTimer.schedule(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC);
+        physicTimer.schedule(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC * PhysicsConfig.LOOPS_PER_TICK);
     }
 
     /**
@@ -184,34 +184,35 @@ public class PhysicsHandler<GameElementT>
                 }
 
                 double delta = PhysicsConfig.TICK_RATE_SEC;
-
-                List<ModifyContainer> localModifyContainers;
-                synchronized (modifiesMonitor)
-                {
-                    localModifyContainers = modifyContainers;
-                    modifyContainers = new ArrayList<>();
-                }
-
-                localModifyContainers.forEach(ModifyContainer::apply);
-
                 // PhysicsElements auf Kollisionen mit dem Ball prüfen
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();
                 List<ElementEventArgs<GameElementT>> elementEventArgsList = new ArrayList<>();
 
-                synchronized (physicsMonitor)
+                for (int i = 0; i < PhysicsConfig.LOOPS_PER_TICK; i++)
                 {
-                    checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
-
-                    updatablePhysicsElements.forEach(element ->
+                    List<ModifyContainer> localModifyContainers;
+                    synchronized (modifiesMonitor)
                     {
-                        element.update(delta);
-                        if (element.hasChanged())
-                        {
-                            elementEventArgsList.add(element.getStatus());
-                            element.resetChanged();
-                        }
-                    });
+                        localModifyContainers = modifyContainers;
+                        modifyContainers = new ArrayList<>();
+                    }
+
+                    localModifyContainers.forEach(ModifyContainer::apply);
+
+                    synchronized (physicsMonitor)
+                    {
+                        checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
+                        updatablePhysicsElements.forEach(element -> element.update(delta));
+                    }
                 }
+                updatablePhysicsElements.forEach(element ->
+                {
+                    if (element.hasChanged())
+                    {
+                        elementEventArgsList.add(element.getStatus());
+                        element.resetChanged();
+                    }
+                });
                 gameSession.addEventArgs(collisionEventArgsList, elementEventArgsList);
             }
         };
@@ -231,15 +232,7 @@ public class PhysicsHandler<GameElementT>
             if (physicsElementsMap.containsKey(hash))
             {
                 physicsElementsMap.get(hash)
-                        .forEach(element ->
-                        {
-                            element.checkCollision(collisionEventArgsList, ballPhysicsElement);
-                            if (element.hasChanged())
-                            {
-                                elementEventArgsList.add(element.getStatus());
-                                element.resetChanged();
-                            }
-                        });
+                        .forEach(element -> element.checkCollision(collisionEventArgsList, ballPhysicsElement));
             }
         }
     }

@@ -40,10 +40,11 @@ public class PhysicsConfig
      */
     public final static int TIMER_DELAY = 0;
 
+    public final static int LOOPS_PER_TICK = 4;
     /**
      * Gibt an, nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
      */
-    public final static int TICK_RATE_MILISEC = 1000 / 250;
+    public final static int TICK_RATE_MILISEC = 1000 / 240;
 
     /**
      * Gibt an, nach wie vielen Sekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.
