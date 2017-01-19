@@ -54,13 +54,11 @@ public class Config
 
     /**
      * Die Drehgeschwindigkeit des Spinners bei einer idealen Kollision mit der Kugel.
-     * TODO ALEX APROVE
      */
     public final static int SPINS_PER_DIRECT_HIT = 80;
 
     /**
-     * Der Verlust an Drehgeschwindigkeit des Spinners pro ????
-     * TODO ALEX APROVE
+     * Gibt an wie schnell der Spinner nach einer Kollision wieder zum Stillstand kommt.
      */
     public final static int SPINNER_SLOWDOWN_SPEED = 3;
 
