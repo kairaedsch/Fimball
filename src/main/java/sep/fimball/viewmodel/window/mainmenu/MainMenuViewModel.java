@@ -73,7 +73,13 @@ public class MainMenuViewModel extends WindowViewModel
     private void initialize()
     {
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
+        {
             pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
+        }
+        else
+        {
+            // TODO Ansonsten Nullpointer bei keiner Maschine
+        }
         pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, new SortedList<>(PinballMachineManager.getInstance().pinballMachinesProperty(), Comparator.comparing(o -> o.nameProperty().get().toLowerCase())), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
     }
