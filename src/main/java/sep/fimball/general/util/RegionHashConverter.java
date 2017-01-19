@@ -59,11 +59,8 @@ public class RegionHashConverter
      * @param region Region, für die der Hash berechnet werden soll.
      * @return Hash für eine Region.
      */
-    private static long calculateRegionHash(Vector2I region)
+    static long calculateRegionHash(Vector2I region)
     {
-        long right = region.getX();
-        long left = region.getY();
-        // TODO: Warum wird die rechte Seite mit 7*4=28 1er verundet wenn die Hälfte des Longs 32 bit sind?
-        return (left << 32) | (right & 0xFFFFFFFL);
+        return (((long)region.getX()) << 32) | (region.getY() & 0xFFFFFFFFL);
     }
 }

@@ -22,7 +22,7 @@ public class DoubleMath
      * @param from Erster Wert.
      * @param to Zweiter Wert.
      * @param t Interpolationsparameter.
-     * @return Wenn t=0 from, wenn t=1 to, sonst einen Wert der linear
+     * @return Wenn t=0 from, wenn t=1 to, sonst einen Wert der linear zwischen den Werten interpoliert wird.
      */
     public static double lerp(double from, double to, double t)
     {
