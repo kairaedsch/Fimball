@@ -72,6 +72,7 @@ public class SpriteSubViewModelTest
         when(gameElement.heightProperty()).thenReturn(heightOfGameElement);
         ObjectProperty<Optional<Animation>> currentAnimationProperty = new SimpleObjectProperty<>(Optional.empty());
         when(gameElement.currentAnimationProperty()).thenReturn(currentAnimationProperty);
+        when(gameElement.drawOrderProperty()).thenReturn(new SimpleIntegerProperty(0));
 
         // Gebe das PlacedElement Mock in das GameElement Mock
         when(gameElement.getPlacedElement()).thenReturn(placedElementOfGameElement);
