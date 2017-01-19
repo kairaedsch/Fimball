@@ -60,69 +60,66 @@ class PinballCanvasDrawer
         {
             if (change == null || sprites.isEmpty())
             {
-                if (change == null || sprites.isEmpty())
+                listPropertyConverted.clear();
+                for (SpriteSubView original : sprites)
                 {
-                    listPropertyConverted.clear();
-                    for (SpriteSubView original : sprites)
-                    {
-                        listPropertyConverted.add(original);
-                    }
-                    spritesRegions.clear();
-                    for (SpriteSubView sprite : sprites)
-                    {
-                        sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-                        addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-                    }
+                    listPropertyConverted.add(original);
                 }
-                else
+                spritesRegions.clear();
+                for (SpriteSubView sprite : sprites)
                 {
-                    while (change.next())
+                    sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                    addSpriteRegions(sprite, sprite.regionHashesProperty().get());
+                }
+            }
+            else
+            {
+                while (change.next())
+                {
+                    if (change.wasRemoved())
                     {
-                        if (change.wasRemoved())
+                        if (change.getFrom() == change.getTo())
                         {
-                            if (change.getFrom() == change.getTo())
+                            SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
+                            removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
+
+                            listPropertyConverted.remove(change.getFrom());
+                        }
+                        else
+                        {
+                            for (int p = change.getFrom(); p < change.getTo(); p++)
                             {
                                 SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
                                 removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
 
                                 listPropertyConverted.remove(change.getFrom());
                             }
-                            else
-                            {
-                                for (int p = change.getFrom(); p < change.getTo(); p++)
-                                {
-                                    SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
-                                    removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
-
-                                    listPropertyConverted.remove(change.getFrom());
-                                }
-                            }
                         }
-                        if (change.wasAdded())
+                    }
+                    if (change.wasAdded())
+                    {
+                        for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
-                            for (int p = change.getFrom(); p < change.getTo(); p++)
-                            {
-                                SpriteSubView sprite = sprites.get(p);
-                                sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-                                addSpriteRegions(sprite, sprite.regionHashesProperty().get());
+                            SpriteSubView sprite = sprites.get(p);
+                            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                            addSpriteRegions(sprite, sprite.regionHashesProperty().get());
 
-                                listPropertyConverted.add(p, sprite);
-                            }
+                            listPropertyConverted.add(p, sprite);
                         }
-                        if (change.wasPermutated())
+                    }
+                    if (change.wasPermutated())
+                    {
+                        HashMap<Integer, SpriteSubView> map = new HashMap<>();
+                        for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
-                            HashMap<Integer, SpriteSubView> map = new HashMap<>();
-                            for (int p = change.getFrom(); p < change.getTo(); p++)
+                            int newPos = change.getPermutation(p);
+                            if (p != newPos)
                             {
-                                int newPos = change.getPermutation(p);
-                                if (p != newPos)
-                                {
-                                    map.put(newPos, listPropertyConverted.get(newPos));
-                                    if (map.containsKey(p))
-                                        listPropertyConverted.set(newPos, map.get(p));
-                                    else
-                                        listPropertyConverted.set(newPos, listPropertyConverted.get(p));
-                                }
+                                map.put(newPos, listPropertyConverted.get(newPos));
+                                if (map.containsKey(p))
+                                    listPropertyConverted.set(newPos, map.get(p));
+                                else
+                                    listPropertyConverted.set(newPos, listPropertyConverted.get(p));
                             }
                         }
                     }
