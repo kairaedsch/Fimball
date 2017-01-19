@@ -39,6 +39,7 @@ public class ElementImageViewModel
      *
      * @param imageLayer Das ImageLayer des Bildes.
      * @param rotation   Die Drehung des Bildes.
+     * @param time       Der aktuelle Zeitpunkt, wird benötigt um zu erkennen ob aktuell eine Animation abgespielt wird.
      * @return Ein zu diesem ElementImage gehörendes Bild.
      */
     public String getImagePath(ImageLayer imageLayer, int rotation, long time)
@@ -72,6 +73,11 @@ public class ElementImageViewModel
         return elementImage.getRestRotation(rotation);
     }
 
+    /**
+     * Gibt zurück ob das Element aktuell eine Animation abspielt.
+     *
+     * @return Ob das Element aktuell eine Animation abspielt.
+     */
     public boolean isAnimating()
     {
         return isAnimating;

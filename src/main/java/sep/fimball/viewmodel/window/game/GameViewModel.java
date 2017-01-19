@@ -244,6 +244,11 @@ public class GameViewModel extends WindowViewModel
         SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
     }
 
+    /**
+     * Setzt den Zoom der Kamera auf den gegebenen Wert.
+     *
+     * @param cameraZoom Der neue Zoom der Kamera.
+     */
     public void setCameraZoom(double cameraZoom)
     {
         this.cameraZoom.set(cameraZoom);

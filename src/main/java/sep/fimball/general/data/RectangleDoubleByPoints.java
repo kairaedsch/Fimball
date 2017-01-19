@@ -103,6 +103,12 @@ public class RectangleDoubleByPoints
         return getSize().getY();
     }
 
+    /**
+     * Gibt zurück ob sich dieses Rechteck mit einem gegebenen überschneidet.
+     *
+     * @param other Das andere Rechteck mit dem auf Überschneidung geprüft werden soll.
+     * @return Ob sich die zwei Rechtecke überschneiden.
+     */
     public boolean intersectsWith(RectangleDoubleByPoints other)
     {
         return getOrigin().getX() < other.getEnd().getX() && getOrigin().getY() < other.getEnd().getY()

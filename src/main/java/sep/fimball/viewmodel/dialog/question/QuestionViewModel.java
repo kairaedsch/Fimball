@@ -17,6 +17,7 @@ public class QuestionViewModel extends DialogViewModel
     /**
      * Erzeugt ein neues QuestionViewModel.
      *
+     * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
      * @param action Die Aktion die beim Klicken des OK Button des Dialogs ausgeführt werden soll.
      */
     public QuestionViewModel(String dialogKey, Action action)

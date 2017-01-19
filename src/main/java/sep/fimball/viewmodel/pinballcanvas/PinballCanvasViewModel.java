@@ -145,6 +145,11 @@ public abstract class PinballCanvasViewModel
      */
     public abstract void mousePressedOnGame(Vector2 vector2, MouseEvent mouseEvent);
 
+    /**
+     * Der aktuelle Cursor welcher auf dem Canvas sichtbar ist.
+     *
+     * @return Der Cursor welcher auf dem Canvas sichtbar ist.
+     */
     public abstract ReadOnlyObjectProperty<Cursor> cursorProperty();
 
     /**

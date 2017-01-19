@@ -517,6 +517,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return selectionRect;
     }
 
+    /**
+     * Der aktuelle Cursor welcher im Editor Canvas sichtbar ist.
+     *
+     * @return Der Cursor welcher im Editor Canvas sichtbar ist.
+     */
     public ReadOnlyObjectProperty<Cursor> cursorProperty()
     {
         return cursorProperty;
@@ -553,6 +558,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         return sceneManager;
     }
 
+    /**
+     * Setzt den Zoom der Kamera auf den gegebenen Wert.
+     *
+     * @param cameraZoom Der neue Zoom der Kamera.
+     */
     public void setCameraZoom(double cameraZoom)
     {
         this.cameraZoom.set(cameraZoom);

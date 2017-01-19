@@ -115,6 +115,12 @@ public class ElementImage
         return rotation % rotationAccuracy;
     }
 
+    /**
+     * Gibt zurück ob das Element aktuell noch eine Animation abspielt.
+     *
+     * @param deltaTime Die Zeit seit Erzeugung der Animation.
+     * @return Ob das Element aktuell noch eine Animation abspielt.
+     */
     public boolean isAnimating(long deltaTime)
     {
         if (isAnimation)

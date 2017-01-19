@@ -43,6 +43,13 @@ public class Camera
      */
     private double softCameraZoom;
 
+    /**
+     * Erzeugt eine neue Kamera die dem Ball langsam folgt.
+     *
+     * @param drawMode Der Zeichenmodus welcher angibt ob das Spiel oder Editorfenster gezeichnet wird bzw. ein Screenshot erzeugt wird.
+     * @param cameraPositionViewModel Die eigentliche Position der "harten" Kamera welche dem Ball immer folgt.
+     * @param cameraZoomViewModel Der eigentliche Zoom der "harten" Kamera
+     */
     public Camera(DrawMode drawMode, ReadOnlyObjectProperty<Vector2> cameraPositionViewModel, ReadOnlyDoubleProperty cameraZoomViewModel)
     {
         this.drawMode = drawMode;
@@ -57,6 +64,12 @@ public class Camera
         softCameraZoom = cameraZoom.get();
     }
 
+    /**
+     * Aktualisiert die Position dieser Kamera abhängig von der Position und dem Zoom der "harten" Kamera.
+     *
+     * @param canvasWidth Die Breite des Canvas.
+     * @param canvasHeight Die Höhe des Canvas.
+     */
     public void updatePosition(double canvasWidth, double canvasHeight)
     {
         double defaultCamFollowSpeed = drawMode == DrawMode.GAME ? 500 : 50;
@@ -89,11 +102,21 @@ public class Camera
         lastDraw = currentDraw;
     }
 
+    /**
+     * Gibt die Position der Kamera welche dem Ball langsam folgt zurück
+     *
+     * @return Die Position der Kamera.
+     */
     public Vector2 getSoftCameraPosition()
     {
         return softCameraPosition;
     }
 
+    /**
+     * Gibt den Zoom der Kamera welche dem Ball langsam folgt zurück.
+     *
+     * @return Der Zoom der Kamera
+     */
     public double getSoftCameraZoom()
     {
         return softCameraZoom;

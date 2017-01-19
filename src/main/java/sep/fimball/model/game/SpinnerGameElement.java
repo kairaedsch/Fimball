@@ -24,6 +24,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
      *
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
+     * @param gameBall Das Spielelement des Balls.
      */
     public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall)
     {
@@ -79,6 +80,9 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
         }
     }
 
+    /**
+     * Wechselt je nach Drehrichtung des Spinners zum korrekten nächsten Bild der Spinneranimation.
+     */
     private void switchToNextFrame()
     {
         int spinnerAnimationFrames = 7;
