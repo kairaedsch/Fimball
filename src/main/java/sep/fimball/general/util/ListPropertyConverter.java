@@ -7,6 +7,7 @@ import javafx.collections.ObservableMap;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * Stellt Funktionen zum Konvertieren einer Liste sowie einer Map in eine andere Liste mit Elementen eines unterschiedlichen Typ bereit.
@@ -24,6 +25,23 @@ public class ListPropertyConverter
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
     {
+        bindAndConvertList(listPropertyConverted, listPropertyOriginal, converter, originalT -> {}, originalT -> {});
+    }
+
+    /**
+     * Synchronisiert die Werte der {@code listPropertyConverted} mit den korrespondierenden Werten in der {@code listPropertyOriginal}, wenn sich die Werte in der {@code listPropertyOriginal} ändern.
+     *
+     * @param listPropertyConverted Die Liste, in welcher die konvertierten Objekte gespeichert werden
+     * @param listPropertyOriginal  Die Liste, welche bei Änderung in die Liste listPropertyConverted konvertiert wird
+     * @param converter             Ein Converter welcher angibt wie zwischen den Typen OriginalT und ConvertedT konvertiert wird
+     * @param addListener           Wird aufgerufen, wenn ein Element hinzugefügt wird.
+     * @param removeListener        Wird aufgerufen, wenn ein Element entfernt wird.
+     * @param <ConvertedT>          Der Typ der Elemente in der listPropertyConverted-Liste
+     * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
+     */
+    public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter,
+                                                                  Consumer<OriginalT> addListener, Consumer<OriginalT> removeListener)
+    {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
             if (change == null || listPropertyOriginal.isEmpty())
@@ -31,6 +49,7 @@ public class ListPropertyConverter
                 listPropertyConverted.clear();
                 for (OriginalT original : listPropertyOriginal)
                 {
+                    addListener.accept(original);
                     listPropertyConverted.add(converter.convert(original));
                 }
             }
@@ -42,12 +61,14 @@ public class ListPropertyConverter
                     {
                         if (change.getFrom() == change.getTo())
                         {
+                            removeListener.accept(listPropertyOriginal.get(change.getFrom()));
                             listPropertyConverted.remove(change.getFrom());
                         }
                         else
                         {
                             for (int p = change.getFrom(); p < change.getTo(); p++)
                             {
+                                removeListener.accept(listPropertyOriginal.get(change.getFrom()));
                                 listPropertyConverted.remove(change.getFrom());
                             }
                         }
@@ -56,7 +77,9 @@ public class ListPropertyConverter
                     {
                         for (int p = change.getFrom(); p < change.getTo(); p++)
                         {
-                            listPropertyConverted.add(p, converter.convert(listPropertyOriginal.get(p)));
+                            OriginalT original = listPropertyOriginal.get(p);
+                            addListener.accept(original);
+                            listPropertyConverted.add(p, converter.convert(original));
                         }
                     }
                     if (change.wasPermutated())

@@ -73,6 +73,11 @@ public class Config
     public static final int DRAW_REGION_SIZE = 75;
 
     /**
+     *
+     */
+    public final static int DRAW_ORDER_AMOUNT = 4;
+
+    /**
      * Gibt eine eindeutige ID zurück.
      *
      * @return Eine eindeutige ID.

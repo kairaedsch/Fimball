@@ -65,6 +65,9 @@ public class SpriteSubView
      */
     private RectangleDoubleByPoints drawArea;
 
+    /**
+     * Die Zeichenreihenfolge des Sprites.
+     */
     private IntegerProperty drawOrder;
 
     /**
@@ -129,11 +132,9 @@ public class SpriteSubView
     /**
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
-     * @param canvasRectangle          Bereich des Canvas.
-     * @param graphicsContext Der GraphicsContext, auf dem die View sich
-     *                        zeichnen soll.
-     * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
-     *                        zeichnen soll.
+     * @param canvasRectangle Bereich des Canvas.
+     * @param graphicsContext Der GraphicsContext, auf dem die View sich zeichnen soll.
+     * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image zeichnen soll.
      * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
     void draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)

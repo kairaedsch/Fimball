@@ -1,12 +1,10 @@
 package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.ReadOnlyListProperty;
-import javafx.collections.ListChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sep.fimball.general.data.*;
-import sep.fimball.general.util.RegionHashConverter;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import java.util.*;
@@ -35,9 +33,9 @@ class PinballCanvasDrawer
     private RectangleDouble boundingBox;
 
     /**
-     * TODO Kai
+     * Der für das Zeichnen der Sprites zuständige SpritesRegionsDrawer.
      */
-    private Map<Long, List<SpriteSubView>[]> spritesRegions;
+    private SpritesRegionsDrawer spritesRegionsDrawer;
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
@@ -53,124 +51,7 @@ class PinballCanvasDrawer
         this.drawMode = drawMode;
         this.boundingBox = boundingBox;
 
-        spritesRegions = new HashMap<>();
-
-        List<SpriteSubView> listPropertyConverted = new ArrayList<>();
-        ListChangeListener<SpriteSubView> listChangeListener = (change) ->
-        {
-            if (change == null || sprites.isEmpty())
-            {
-                listPropertyConverted.clear();
-                for (SpriteSubView original : sprites)
-                {
-                    listPropertyConverted.add(original);
-                }
-                spritesRegions.clear();
-                for (SpriteSubView sprite : sprites)
-                {
-                    sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-                    sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
-                    addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-                }
-            }
-            else
-            {
-                while (change.next())
-                {
-                    if (change.wasRemoved())
-                    {
-                        if (change.getFrom() == change.getTo())
-                        {
-                            SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
-                            removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
-
-                            listPropertyConverted.remove(change.getFrom());
-                        }
-                        else
-                        {
-                            for (int p = change.getFrom(); p < change.getTo(); p++)
-                            {
-                                SpriteSubView sprite = listPropertyConverted.get(change.getFrom());
-                                removeSpriteRegions(sprite, sprite.regionHashesProperty().get());
-
-                                listPropertyConverted.remove(change.getFrom());
-                            }
-                        }
-                    }
-                    if (change.wasAdded())
-                    {
-                        for (int p = change.getFrom(); p < change.getTo(); p++)
-                        {
-                            SpriteSubView sprite = sprites.get(p);
-                            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
-                            sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
-                            addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-
-                            listPropertyConverted.add(p, sprite);
-                        }
-                    }
-                    if (change.wasPermutated())
-                    {
-                        HashMap<Integer, SpriteSubView> map = new HashMap<>();
-                        for (int p = change.getFrom(); p < change.getTo(); p++)
-                        {
-                            int newPos = change.getPermutation(p);
-                            if (p != newPos)
-                            {
-                                map.put(newPos, listPropertyConverted.get(newPos));
-                                if (map.containsKey(p))
-                                    listPropertyConverted.set(newPos, map.get(p));
-                                else
-                                    listPropertyConverted.set(newPos, listPropertyConverted.get(p));
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        sprites.addListener(listChangeListener);
-        listChangeListener.onChanged(null);
-    }
-
-    /**
-     * @param sprite
-     * @param oldRegions
-     * @param newRegions
-     */
-    private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegions, List<Long> newRegions)
-    {
-        removeSpriteRegions(sprite, oldRegions);
-        addSpriteRegions(sprite, newRegions);
-    }
-
-    private void addSpriteRegions(SpriteSubView sprite, List<Long> newRegions)
-    {
-        for (Long potsHash : newRegions)
-        {
-            List<SpriteSubView>[] pots = spritesRegions.get(potsHash);
-            if (pots == null)
-            {
-                pots = new List[4];
-                pots[0] = new ArrayList<>();
-                pots[1] = new ArrayList<>();
-                pots[2] = new ArrayList<>();
-                pots[3] = new ArrayList<>();
-                spritesRegions.put(potsHash, pots);
-            }
-            pots[sprite.getDrawOrder()].add(sprite);
-        }
-    }
-
-    private void removeSpriteRegions(SpriteSubView sprite, List<Long> oldRegions)
-    {
-        // TODO kann nicht funktionieren
-        for (Long pots : oldRegions)
-        {
-            for(int i = 0; i < 4; i++)
-            {
-                spritesRegions.get(pots)[i].remove(sprite);
-            }
-        }
+        spritesRegionsDrawer = new SpritesRegionsDrawer(this, drawMode, sprites);
     }
 
     /**
@@ -197,7 +78,7 @@ class PinballCanvasDrawer
             drawEditorGrid(cameraPosition, cameraZoom);
         }
 
-        drawElements(cameraPosition, cameraZoom, graphicsContext);
+        spritesRegionsDrawer.drawElements(cameraPosition, cameraZoom, graphicsContext);
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 
@@ -263,38 +144,6 @@ class PinballCanvasDrawer
     }
 
     /**
-     * Zeichnet jedes Spielelement auf den übergebenen GraphicsContext.
-     *
-     * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
-     */
-    private void drawElements(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
-    {
-        Vector2 canvasTopLeft = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom);
-        Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom);
-
-        List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
-        RectangleDoubleByPoints canvasRectangle = new RectangleDoubleByPoints(canvasTopLeft, canvasBottomRight);
-
-        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, ImageLayer.BOTTOM);
-        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, ImageLayer.TOP);
-    }
-
-    private void drawElements(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, ImageLayer imageLayer)
-    {
-        for (int s = 0; s < 4; s++)
-        {
-            for (Long newSpritesRegionsCanva : spritesRegionsCanvas)
-            {
-                List<SpriteSubView>[] spritePots = spritesRegions.get(newSpritesRegionsCanva);
-                if (spritePots != null)
-                {
-                    spritePots[s].forEach(sprite -> sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode));
-                }
-            }
-        }
-    }
-
-    /**
      * Zeichnet das Gitter des Editors auf den übergebenen GraphicsContext.
      *
      * @param cameraPosition Die Position der Kamera.
@@ -348,12 +197,26 @@ class PinballCanvasDrawer
         return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * cameraZoom)).plus(cameraPosition);
     }
 
-    private Vector2 getTopLeftCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
+    /**
+     * Berechnet die Position der linken oberen Ecke des Canvas in Grideinheiten aus.
+     *
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom     Der Zoom der Kamera.
+     * @return Die Position der linken oberen Ecke des Canvas in Grideinheiten.
+     */
+    Vector2 getTopLeftCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
         return canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0);
     }
 
-    private Vector2 getBottomRightCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
+    /**
+     * Berechnet die Position der rechte untere Ecke des Canvas in Grideinheiten aus.
+     *
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom     Der Zoom der Kamera.
+     * @return Die Position der linken oberen Ecke des Canvas in Grideinheiten.
+     */
+    Vector2 getBottomRightCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
         return canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight());
     }
