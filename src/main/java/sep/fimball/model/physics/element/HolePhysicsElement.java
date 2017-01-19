@@ -70,6 +70,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
             if (System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS)
             {
                 frozenBall.get().setVelocity(Vector2.randomUnitVector().scale(HOLE_BALL_KICK_SPEED));
+                frozenBall = Optional.empty();
             }
         }
     }
