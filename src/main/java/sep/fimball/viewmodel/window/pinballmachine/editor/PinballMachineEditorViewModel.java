@@ -296,7 +296,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Behandelt das Loslassend der Maustaste.
+     * Behandelt das Loslassen der Maustaste.
      *
      * @param mouseEvent Das Event, in dem die Maustaste losgelassen wurde.
      */
