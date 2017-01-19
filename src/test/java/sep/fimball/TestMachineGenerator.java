@@ -61,10 +61,9 @@ public class TestMachineGenerator
         {
             for (int y = 0; y < size; y++)
             {
-                list.add(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
+                pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
             }
         }
-        pinballMachine.addElement(list.toArray(new PlacedElement[0]));
         pinballMachine.saveToDisk(true);
     }
 

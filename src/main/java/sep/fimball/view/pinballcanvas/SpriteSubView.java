@@ -186,7 +186,7 @@ public class SpriteSubView
         {
             Vector2 localCoordinates = viewModel.getLocalCoordinates().get(picRotate);
             graphicsContext.translate(localCoordinates.getX() * DesignConfig.PIXELS_PER_GRID_UNIT, localCoordinates.getY() * DesignConfig.PIXELS_PER_GRID_UNIT);
-            pivot = pivot.plus(localCoordinates.scale(-1));
+            pivot = pivot.minus(localCoordinates);
         }
 
         if (rotation != 0)

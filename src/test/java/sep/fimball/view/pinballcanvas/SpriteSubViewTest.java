@@ -2,6 +2,7 @@ package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -164,6 +165,7 @@ public class SpriteSubViewTest
         Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
         Mockito.when(spriteSubViewModelMock.visibilityProperty()).thenReturn(new SimpleDoubleProperty(1.0));
+        Mockito.when(spriteSubViewModelMock.drawOrderProperty()).thenReturn(new SimpleIntegerProperty(0));
 
         Mockito.doAnswer((InvocationOnMock invocation) ->
         {

@@ -223,35 +223,22 @@ public class PinballMachine
     }
 
     /**
-     * Fügt die gegebenen PlacedElements zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
+     * Fügt das gegebene PlacedElement zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
      *
-     * @param placedElements Die einzufügenden Elemente.
+     * @param placedElement Das einzufügende Element.
      */
-    public void addElement(PlacedElement... placedElements)
+    public void addElement(PlacedElement placedElement)
     {
         checkElementsLoaded();
 
-        List<PlacedElement> placedElementList = new ArrayList<>();
-        placedElementList.addAll(Arrays.asList(placedElements));
-
-        for (Iterator<PlacedElement> iterator = placedElementList.iterator(); iterator.hasNext(); )
+        if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
         {
-            PlacedElement placedElement = iterator.next();
-
-            if (placedElement.getBaseElement().getType() == BaseElementType.BALL)
-            {
-                elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
-                elements.add(placedElement);
-                iterator.remove();
-            }
-            else if (elements.contains(placedElement))
-            {
-                iterator.remove();
-            }
+            elements.removeIf((element -> element.getBaseElement().getType() == BaseElementType.BALL));
         }
 
-        elements.addAll(placedElementList);
+        if (!elements.contains(placedElement)) elements.add(placedElement);
     }
+
 
     /**
      * Erstellt ein PlacedElement aus den gegebenen Werten und fügt es zur Liste der Bahnelemente {@code elements} hinzu. Falls ein zweiter Ball hinzugefügt werden soll wird der alte gelöscht.
