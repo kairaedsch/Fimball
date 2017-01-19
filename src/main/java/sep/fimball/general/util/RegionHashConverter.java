@@ -63,6 +63,7 @@ public class RegionHashConverter
     {
         long right = region.getX();
         long left = region.getY();
+        // TODO: Warum wird die rechte Seite mit 7*4=28 1er verundet wenn die Hälfte des Longs 32 bit sind?
         return (left << 32) | (right & 0xFFFFFFFL);
     }
 }
