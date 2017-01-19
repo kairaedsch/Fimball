@@ -76,8 +76,10 @@ public class PhysicsElement<GameElementT>
      */
     public void setPosition(Vector2 position)
     {
+        if (this.position != position)
+            changed = true;
+
         this.position = position;
-        changed = true;
     }
 
     /**
@@ -87,8 +89,10 @@ public class PhysicsElement<GameElementT>
      */
     public void setRotation(double rotation)
     {
+        if (this.rotation != rotation)
+            changed = true;
+
         this.rotation = rotation;
-        changed = true;
     }
 
     /**

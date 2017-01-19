@@ -44,15 +44,10 @@ public class PhysicsHandler<GameElementT>
     private List<PhysicsUpdatable<GameElementT>> updatablePhysicsElements;
 
     /**
-     * Eine Liste aller PhysicsElements auf welche die Berechnungen angewendet werden sollen.
-     */
-    private List<PhysicsElement<GameElementT>> physicsElements;
-
-    /**
      * Eine Liste aller PhysicsElements OHNE BALL, für schnellen und nach Position sortiertem Zugriff.
      * Der Long-Key der HashMap ist ein aus der Position des PhysicsElements generierter hash, der naheliegende Elemente in die selbe Gruppe einfügt.
      */
-    private HashMap<Long, List<PhysicsElement<GameElementT>>> physicsElementsMap;
+    private HashMap<Long, Set<PhysicsElement<GameElementT>>> physicsElementsMap;
 
     /**
      * Die aktive GameSession, die mögliche Events von der Physik bekommen soll.
@@ -93,26 +88,9 @@ public class PhysicsHandler<GameElementT>
      */
     public void init(List<PhysicsElement<GameElementT>> elements, PhysicsGameSession<GameElementT> gameSession, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
-        this.physicsElements = elements;
         physicsElementsMap = new HashMap<>();
 
-        for (PhysicsElement<GameElementT> element : elements)
-        {
-            if (element instanceof BallPhysicsElement)
-                continue;
-
-            for (Long hash : getElementRegionHashes(element))
-            {
-                if (physicsElementsMap.containsKey(hash))
-                    physicsElementsMap.get(hash).add(element);
-                else
-                {
-                    List<PhysicsElement<GameElementT>> list = new ArrayList<>();
-                    list.add(element);
-                    physicsElementsMap.put(hash, list);
-                }
-            }
-        }
+        elements.forEach(this::insertElementIntoHashMap);
 
         this.gameSession = gameSession;
         this.ballPhysicsElement = ballPhysicsElement;
@@ -121,7 +99,7 @@ public class PhysicsHandler<GameElementT>
 
         modifyContainers = new ArrayList<>();
 
-        updatablePhysicsElements = physicsElements
+        updatablePhysicsElements = elements
                 .stream()
                 .filter(element -> element instanceof PhysicsUpdatable)
                 .map(element -> (PhysicsUpdatable<GameElementT>) element)
@@ -210,7 +188,7 @@ public class PhysicsHandler<GameElementT>
 
                     synchronized (physicsMonitor)
                     {
-                        checkElementsForCollision(collisionEventArgsList, elementEventArgsList);
+                        checkElementsForCollision(collisionEventArgsList);
                         updatablePhysicsElements.forEach(element -> element.update(delta));
                     }
                 }
@@ -218,6 +196,11 @@ public class PhysicsHandler<GameElementT>
                 {
                     if (element.hasChanged())
                     {
+                        if (element instanceof FlipperPhysicsElement)
+                        {
+                            // Das Element hat sich verändert, die Position ist möglicherweise nicht mehr aktuell => Neue Hashes generieren
+                            insertElementIntoHashMap((PhysicsElement<GameElementT>) element);
+                        }
                         elementEventArgsList.add(element.getStatus());
                         element.resetChanged();
                     }
@@ -227,14 +210,31 @@ public class PhysicsHandler<GameElementT>
         };
     }
 
+    private void insertElementIntoHashMap(PhysicsElement<GameElementT> element)
+    {
+        if (element instanceof BallPhysicsElement)
+            return;
+
+        for (Long hash : getElementRegionHashes(element))
+        {
+            if (physicsElementsMap.containsKey(hash))
+                physicsElementsMap.get(hash).add(element);
+            else
+            {
+                Set<PhysicsElement<GameElementT>> list = new HashSet<>();
+                list.add(element);
+                physicsElementsMap.put(hash, list);
+            }
+        }
+    }
+
     /**
      * Prüft alle PhysicsElements auf Kollisionen mit dem Ball und fügt gegebenenfalls Argumente zu den gegebenen
      * Event-Argument-Listen hinzu.
      *
      * @param collisionEventArgsList Die Liste der CollisionEvents.
-     * @param elementEventArgsList   Die Liste der ElementEvents.
      */
-    private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList, List<ElementEventArgs<GameElementT>> elementEventArgsList)
+    private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList)
     {
         for (Long hash : getElementRegionHashes(ballPhysicsElement))
         {
