@@ -9,9 +9,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreator;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
@@ -28,7 +30,7 @@ import static org.junit.Assert.assertThat;
 public class BallPlacementTest
 {
     private final String BALL_ID = "ball";
-    private final String BALL_IMAGE_NAME = "Ball";
+    private final String BALL_IMAGE_NAME = BaseElementManager.getInstance().getElement(BALL_ID).getMedia().getName(Settings.getSingletonInstance().languageProperty().get());
     private PinballMachine testPinballMachine;
 
     @Mock
@@ -63,7 +65,7 @@ public class BallPlacementTest
         PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
 
         // Den Spawnpunkt der Kugel als zu platzierendes Element auswählen.
-        AvailableElementSubViewModel ballSelector = testEditor.availableBasicElementsProperty().parallelStream().filter(availableElementSubViewModel -> availableElementSubViewModel.nameProperty().get().equals(BALL_IMAGE_NAME)).findFirst().get();
+        AvailableElementSubViewModel ballSelector = testEditor.availableBasicElementsProperty().stream().filter(availableElementSubViewModel -> availableElementSubViewModel.nameProperty().get().equals(BALL_IMAGE_NAME)).findFirst().get();
         ballSelector.selected();
 
         // Den Spawnpunkt der Kugel via Drag and Drop platzieren.
