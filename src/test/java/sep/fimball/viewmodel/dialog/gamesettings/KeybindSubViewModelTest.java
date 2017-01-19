@@ -27,13 +27,13 @@ public class KeybindSubViewModelTest
         Mockito.when(binding.getName()).thenReturn(bindingName);
 
         // Teste ob der Code direkt mit null umgehen kann.
-        KeybindSubViewModel dialog1 = new KeybindSubViewModel(settings, binding, null);
+        KeybindSubViewModel dialog1 = new KeybindSubViewModel(settings, binding, null, null);
         dialog1.keyNameProperty();
         assertThat(dialog1.keyNameProperty().get(), is("No Key set"));
 
         // Überprüfe das Standardverhalten.
         KeyCode testCode = KeyCode.A;
-        KeybindSubViewModel dialog2 = new KeybindSubViewModel(settings, binding, testCode);
+        KeybindSubViewModel dialog2 = new KeybindSubViewModel(settings, binding, testCode, null);
         dialog2.keyNameProperty();
         assertThat(dialog2.keyNameProperty().get(), is(testCode.getName()));
         assertThat(dialog2.bindingNameProperty().get(), is(bindingName));

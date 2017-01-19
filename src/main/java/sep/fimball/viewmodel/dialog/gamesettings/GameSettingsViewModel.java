@@ -8,6 +8,7 @@ import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -62,7 +63,7 @@ public class GameSettingsViewModel extends DialogViewModel
         language.bindBidirectional(settings.languageProperty());
 
         ListProperty<KeybindSubViewModel> keybinds = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyCode, keyBinding) -> new KeybindSubViewModel(settings, keyBinding, keyCode));
+        ListPropertyConverter.bindAndConvertMap(keybinds, settings.keyBindingsMapProperty(), (keyCode, keyBinding) -> new KeybindSubViewModel(settings, keyBinding, keyCode, this));
         sortedKeybinds = new SimpleListProperty<>(new SortedList<>(keybinds, KeybindSubViewModel::compare));
 
         fullscreen = new SimpleBooleanProperty();
@@ -158,6 +159,16 @@ public class GameSettingsViewModel extends DialogViewModel
         ObservableList<Language> languages = FXCollections.observableArrayList();
         Collections.addAll(languages, Language.values());
         return languages;
+    }
+
+    /**
+     * Gibt das SceneManagerViewModel des ViewModels zurück.
+     *
+     * @return Das SceneManagerViewModel des ViewModels.
+     */
+    public SceneManagerViewModel getSceneManagerViewModel()
+    {
+        return sceneManager;
     }
 
     /**

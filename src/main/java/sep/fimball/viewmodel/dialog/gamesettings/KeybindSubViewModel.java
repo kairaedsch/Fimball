@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
+import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.game.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
@@ -34,16 +35,23 @@ public class KeybindSubViewModel
     private Settings settings;
 
     /**
+     * Das zugehörige GameSettingsViewModel.
+     */
+    private GameSettingsViewModel gameSettingsViewModel;
+
+    /**
      * Erzeugt ein neues KeyBindSubViewModel.
      *
      * @param settings   Die aktuellen Einstellungen.
      * @param keyBinding Die Funktion des Automaten, an die die Taste gebunden wird.
      * @param keyCode    Die Taste, an die die Funktion gebunden wird.
+     * @param gameSettingsViewModel Das zugehörige GameSettingsViewModel.
      */
-    public KeybindSubViewModel(Settings settings, KeyBinding keyBinding, KeyCode keyCode)
+    public KeybindSubViewModel(Settings settings, KeyBinding keyBinding, KeyCode keyCode, GameSettingsViewModel gameSettingsViewModel)
     {
         this.keyBinding = keyBinding;
         this.settings = settings;
+        this.gameSettingsViewModel = gameSettingsViewModel;
 
         keyName = new SimpleStringProperty();
         keyName.setValue(keyCode != null ? keyCode.getName() : "No Key set");
@@ -59,7 +67,13 @@ public class KeybindSubViewModel
      */
     public void changeKeyBinding(KeyCode keyCode)
     {
-        settings.setKeyBinding(keyCode, keyBinding);
+        if (keyCode == KeyCode.UNDEFINED)
+        {
+            gameSettingsViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("gamesettings.undefinedKey"));
+        } else
+        {
+            settings.setKeyBinding(keyCode, keyBinding);
+        }
     }
 
     /**
