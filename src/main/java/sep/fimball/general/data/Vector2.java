@@ -1,5 +1,7 @@
 package sep.fimball.general.data;
 
+import sep.fimball.general.util.DoubleMath;
+
 /**
  * Vector2 stellt einen Vektor mit zwei Komponenten dar.
  */
@@ -179,9 +181,7 @@ public class Vector2
      */
     public Vector2 lerp(Vector2 vecTwo, double t)
     {
-        double xLerped = (1 - t) * x + (t * vecTwo.getX());
-        double yLerped = (1 - t) * y + (t * vecTwo.getY());
-        return new Vector2(xLerped, yLerped);
+        return new Vector2(DoubleMath.lerp(x, vecTwo.x, t), DoubleMath.lerp(y, vecTwo.y, t));
     }
 
     /**

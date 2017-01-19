@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.general.util.DoubleMath;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 /**
@@ -83,22 +84,11 @@ public class Camera
             Vector2 targetPosition = cameraPosition.get();
             double maxDistance = 1.0 * (Math.min(canvasWidth, canvasHeight) / DesignConfig.PIXELS_PER_GRID_UNIT);
             double distanceToTargetPercent = softCameraPosition.minus(targetPosition).magnitude() / maxDistance;
-            softCameraPosition = softCameraPosition.lerp(targetPosition, clamp(0, 1, distanceToTargetPercent * delta * camFollowSpeed));
-            System.out.println(distanceToTargetPercent * delta * camFollowSpeed);
-            softCameraZoom = lerp(softCameraZoom, cameraZoom.get(), cameraZoomSpeed);
+            softCameraPosition = softCameraPosition.lerp(targetPosition, DoubleMath.clamp(0, 1, distanceToTargetPercent * delta * camFollowSpeed));
+            softCameraZoom = DoubleMath.lerp(softCameraZoom, cameraZoom.get(), cameraZoomSpeed);
         }
 
         lastDraw = currentDraw;
-    }
-
-    private double clamp(double min, double max, double val)
-    {
-        return Math.max(min, Math.min(max, val));
-    }
-
-    private double lerp(double x1, double x2, double t)
-    {
-        return (1 - t) * x1 + (t * x2);
     }
 
     /**
