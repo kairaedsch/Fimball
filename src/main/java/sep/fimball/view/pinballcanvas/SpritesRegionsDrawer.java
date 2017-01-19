@@ -53,6 +53,7 @@ class SpritesRegionsDrawer
         ListPropertyConverter.bindAndConvertList(listPropertyConverted, sprites, sprite -> sprite, sprite ->
         {
             // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
+            addSpriteRegions(sprite, sprite.regionHashesProperty().get());
             sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
             sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
         }, sprite ->

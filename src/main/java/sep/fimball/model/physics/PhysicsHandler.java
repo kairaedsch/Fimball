@@ -69,6 +69,9 @@ public class PhysicsHandler<GameElementT>
      */
     private final Object physicsMonitor = new Object();
 
+    /**
+     * ibt an, ob der Physik-Schleife läuft
+     */
     private boolean ticking;
 
     /**
@@ -141,6 +144,11 @@ public class PhysicsHandler<GameElementT>
         ticking = false;
     }
 
+    /**
+     * Gibt an, ob der Physik-Schleife läuft.
+     *
+     * @return ob die Physik-Schleife läuft
+     */
     public boolean isTicking()
     {
         return ticking;

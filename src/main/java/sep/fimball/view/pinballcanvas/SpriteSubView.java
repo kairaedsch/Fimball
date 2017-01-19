@@ -108,10 +108,7 @@ public class SpriteSubView
 
         position = viewModel.positionProperty().get().scale(DesignConfig.PIXELS_PER_GRID_UNIT).plus(size.scale(1 / viewModel.scaleProperty().get()).minus(size).scale(0.5));
 
-        // TODO ugly - repeated code
         int picRotate = (int) (viewModel.rotationProperty().get() - rotationRest) % 360;
-
-        // TODO ugly - repeated code
         Vector2 localCoordinates;
         if (viewModel.getLocalCoordinates().containsKey(picRotate))
         {
@@ -139,6 +136,7 @@ public class SpriteSubView
      */
     void draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
+        // Zeichnet nur, ob das Sprite sichtbar ist
         if (canvasRectangle.intersectsWith(drawArea))
         {
             graphicsContext.save();
