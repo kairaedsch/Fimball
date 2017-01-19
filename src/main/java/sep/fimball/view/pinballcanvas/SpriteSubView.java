@@ -105,9 +105,9 @@ public class SpriteSubView
      *                        zeichnen soll.
      * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
-    boolean draw(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
+    boolean draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
-        if(!canvas.intersectsWith(drawArea)) return false;
+        if(!canvasRectangle.intersectsWith(drawArea)) return false;
         graphicsContext.save();
 
         setupDrawLocation(graphicsContext, rotationRest);

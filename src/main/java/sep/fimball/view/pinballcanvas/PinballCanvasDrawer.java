@@ -178,17 +178,17 @@ class PinballCanvasDrawer
         Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom);
 
         List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
-        RectangleDoubleByPoints canvas = new RectangleDoubleByPoints(canvasTopLeft,canvasBottomRight);
+        RectangleDoubleByPoints canvasRectangle = new RectangleDoubleByPoints(canvasTopLeft,canvasBottomRight);
 
         // TODO make better
         int start = -10;
         int end = 10;
 
-        drawElements(canvas, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.BOTTOM);
-        drawElements(canvas, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.TOP);
+        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.BOTTOM);
+        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.TOP);
     }
 
-    private void drawElements(RectangleDoubleByPoints canvas, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, int start, int end, ImageLayer imageLayer)
+    private void drawElements(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, int start, int end, ImageLayer imageLayer)
     {
         for (Long newSpritesRegionsCanva : spritesRegionsCanvas)
         {
@@ -202,7 +202,7 @@ class PinballCanvasDrawer
                     {
                         spritePot.forEach(sprite ->
                         {
-                            sprite.draw(canvas, graphicsContext, imageLayer, drawMode);
+                            sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode);
                         });
                     }
                 }
