@@ -14,6 +14,8 @@ public class MessageViewModel extends DialogViewModel
 
     /**
      * Erzeugt ein MessageViewModel.
+     *
+     * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
      */
     public MessageViewModel(String dialogKey)
     {

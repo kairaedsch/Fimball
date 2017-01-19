@@ -218,5 +218,10 @@ public abstract class PinballCanvasViewModel
         }
     }
 
+    /**
+     * Setzt den Zoom der Kamera auf den gegebenen Wert.
+     *
+     * @param zoom Der neue Zoom der Kamera.
+     */
     protected abstract void setCameraZoom(double zoom);
 }

@@ -4,12 +4,20 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 
+/**
+ * Diese Klasse wird verwendet um die Größe einer Zeichenfläche zwischen einem Minimum und Maximum zu halten.
+ */
 public class ViewportRestrictor
 {
     private Vector2 minDimensions;
     private Vector2 maxDimensions;
     private double defaultZoom;
 
+    /**
+     * Erzeugt einen neuen ViewportRestrictor um die Größe einer Zeichenfläche zu beschränken.
+     *
+     * @param defaultZoom Der Standard Zoom der Zeichenfläche.
+     */
     public ViewportRestrictor(double defaultZoom)
     {
         this.minDimensions = new Vector2(DesignConfig.MINIMUM_PREVIEW_WIDTH, DesignConfig.MINIMUM_PREVIEW_HEIGHT);
@@ -17,6 +25,12 @@ public class ViewportRestrictor
         this.defaultZoom = defaultZoom;
     }
 
+    /**
+     * Beschränkt eine Zeichenfläche so dass sie zwischen Minimum und Maximum liegt.
+     *
+     * @param rectangle Die Zeichenfläche welche eventuell beschränkt werden muss.
+     * @return Eine Zeichenfläche welche zwischen Minimum und Maximum liegt.
+     */
     public RestrictedViewport restrictRectangle(RectangleDouble rectangle)
     {
         if (rectangle.getWidth() < minDimensions.getX() || rectangle.getHeight() < minDimensions.getY())
@@ -30,6 +44,12 @@ public class ViewportRestrictor
         return new RestrictedViewport(rectangle, defaultZoom);
     }
 
+    /**
+     * Beschränkt eine zu kleine Zeichenfläche auf das Minimum.
+     *
+     * @param rectangle Die Größe der zu kleinen Zeichenfläche.
+     * @return Eine auf das Minimum beschränkte Zeichenfläche.
+     */
     private RestrictedViewport restrictTooSmallRectangle(RectangleDouble rectangle)
     {
         double newOriginX = rectangle.getOrigin().getX();
@@ -54,6 +74,12 @@ public class ViewportRestrictor
         return new RestrictedViewport(newRectangle, defaultZoom);
     }
 
+    /**
+     * Beschränkt eine Zeichenfläche welche zu groß ist auf das Maximum.
+     *
+     * @param rectangle Die Größe der zu großen Zeichenfläche.
+     * @return Eine auf das Maximum beschränkte Zeichenfläche.
+     */
     private RestrictedViewport restrictTooLargeRectangle(RectangleDouble rectangle)
     {
         double scaleX = (maxDimensions.getX() / rectangle.getWidth());
@@ -66,22 +92,41 @@ public class ViewportRestrictor
         return new RestrictedViewport(newRectangle, cameraScale);
     }
 
+    /**
+     * Diese Klasse stellt eine beschränkte Zeichenfläche welche durch Größe und Zoom gegeben ist dar.
+     */
     public static class RestrictedViewport
     {
         private RectangleDouble restrictedRectangle;
         private double restrictedCameraScale;
 
+        /**
+         * Erzeugt eine neue beschränkte Zeichenfläche.
+         *
+         * @param restrictedRectangle Die neue Größe der Zeichenfläche.
+         * @param restrictedCameraScale Der neue Zoom der Zeichenfläche.
+         */
         public RestrictedViewport(RectangleDouble restrictedRectangle, double restrictedCameraScale)
         {
             this.restrictedRectangle = restrictedRectangle;
             this.restrictedCameraScale = restrictedCameraScale;
         }
 
+        /**
+         * Gibt die Größe der beschränkten Zeichenfläche zurück.
+         *
+         * @return Die Größe der beschränkten Zeichenfläche.
+         */
         public RectangleDouble getRestrictedRectangle()
         {
             return restrictedRectangle;
         }
 
+        /**
+         * Gibt den Zoom der beschränkten Zeichenfläche zurück.
+         *
+         * @return Der Zoom der beschränkten Zeichenfläche.
+         */
         public double getRestrictedCameraScale()
         {
             return restrictedCameraScale;
