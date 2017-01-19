@@ -77,9 +77,17 @@ public class EditorSessionSubViewModel
      */
     public void savePinballMachine()
     {
-        boolean success = pinballMachine.saveToDisk(false);
-        if(success) {pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());}
-        editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
+        if(pinballMachine.nameProperty().get().isEmpty()) {
+            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage.emptyName"));
+        } else
+        {
+            boolean success = pinballMachine.saveToDisk(false);
+            if (success)
+            {
+                pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+            }
+            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
+        }
     }
 
     /**
