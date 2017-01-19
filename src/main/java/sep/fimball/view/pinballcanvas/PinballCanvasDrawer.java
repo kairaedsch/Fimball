@@ -287,10 +287,7 @@ class PinballCanvasDrawer
                     List<SpriteSubView> spritePot = spritePots.get(s);
                     if (spritePot != null)
                     {
-                        spritePot.forEach(sprite ->
-                        {
-                            sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode);
-                        });
+                        spritePot.forEach(sprite -> sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode));
                     }
                 }
             }

@@ -20,7 +20,7 @@ public class FlipperPhysicsElementTest
      * @param isLeft Ob es ein linker Flipperarm werden soll.
      * @return Ein FlipperPhysicsElement mit Mock.
      */
-    private FlipperPhysicsElement getFlipperPhysicsElementwithMock(boolean isLeft)
+    private FlipperPhysicsElement getFlipperPhysicsElementWithMock(boolean isLeft)
     {
         BasePhysicsElement basePhysicsElement = Mockito.mock(BasePhysicsElement.class);
         when(basePhysicsElement.getColliders()).thenReturn(Collections.emptyList());
@@ -35,7 +35,7 @@ public class FlipperPhysicsElementTest
     {
         // Teste den linke Flipperarm
         {
-            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
+            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementWithMock(true);
 
             // Versuche den Flipperarm nach oben zu drehen
             flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
@@ -51,7 +51,7 @@ public class FlipperPhysicsElementTest
 
         // Teste den rechten Flipperarm
         {
-            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
+            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementWithMock(false);
 
             // Versuche den Flipperarm nach oben zu drehen
             flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
@@ -81,7 +81,7 @@ public class FlipperPhysicsElementTest
     {
         // Teste den linke Flipperarm
         {
-            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementwithMock(true);
+            FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementWithMock(true);
 
             assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementLeft.getRotation(), is(20.0));
 
@@ -98,7 +98,7 @@ public class FlipperPhysicsElementTest
 
         // Teste den rechten Flipperarm
         {
-            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementwithMock(false);
+            FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementWithMock(false);
 
             assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementRight.getRotation(), is(-20.0));
 

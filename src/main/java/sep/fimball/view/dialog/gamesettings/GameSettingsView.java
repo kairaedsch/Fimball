@@ -34,7 +34,7 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
     private VBox keyBinding;
 
     /**
-     * Einstellung des Fullscreens.
+     * Einstellung des Fullscreen.
      */
     @FXML
     private CheckBox fullscreen;

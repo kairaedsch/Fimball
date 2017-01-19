@@ -19,19 +19,19 @@ public class LightChangerTest
     {
         // lightChanger mit keiner umgekehrten Animation
         {
-            final long[] recievedDelta = new long[1];
+            final long[] receivedDelta = new long[1];
             LightChanger lightChanger = new LightChanger(false)
             {
                 @Override
                 protected boolean determineLightStatus(Vector2 position, long delta)
                 {
-                    recievedDelta[0] = delta;
+                    receivedDelta[0] = delta;
                     return false;
                 }
             };
 
             lightChanger.determineLightStatusWithAnimation(new Vector2(), 2500);
-            assertThat("Das Delta stimmt mit dem Übergebenen überein", recievedDelta[0], is(2500L));
+            assertThat("Das Delta stimmt mit dem Übergebenen überein", receivedDelta[0], is(2500L));
         }
 
         // lightChanger mit umgekehrten Animation

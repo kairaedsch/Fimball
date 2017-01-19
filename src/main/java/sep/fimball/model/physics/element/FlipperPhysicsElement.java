@@ -14,7 +14,7 @@ import static sep.fimball.model.physics.element.AngularDirection.*;
 public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAble<GameElementT, FlipperModify> implements PhysicsUpdatable<GameElementT>
 {
     /**
-     * Die aktuelle Winkelgeschwindigkeit des Flipperarms.
+     * Die aktuelle Winkelgeschwindigkeit des Flipperarmes.
      */
     private AngularDirection angularDirection = NONE;
 

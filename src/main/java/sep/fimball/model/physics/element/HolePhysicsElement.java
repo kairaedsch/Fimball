@@ -11,19 +11,19 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
 {
     /**
      * Gibt an, ob der Ball aktuell im Loch ist.
-     * TODO aprove TILL
+     * TODO approve TILL
      */
     private boolean ballFrozen = false;
 
     /**
      * Gibt an, wann der Ball zuletzt in das Loch gefallen ist.
-     * TODO aprove TILL
+     * TODO approve TILL
      */
     private double freezeStart;
 
     /**
      * Der im Loch gefangene Ball.
-     * TODO aprove TILL
+     * TODO approve TILL
      * Kai sagt: Sollte das kein Optional sein?
      */
     private BallPhysicsElement frozenBall;

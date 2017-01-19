@@ -94,7 +94,7 @@ public class BumperStrengthTest
     }
 
     /**
-     * Erstellt und initialisiert den Pinballautomaten mit einem Bumper an der Stelle (1,1).
+     * Erstellt und initialisiert den Flipperautomaten mit einem Bumper an der Stelle (1,1).
      *
      * @param bumperStrength Die Rückstoßstärke des Bumpers.
      * @param BUMPER_ID Die ID des BaseElement des Bumpers.

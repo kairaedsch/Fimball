@@ -321,7 +321,7 @@ public class PinballMachineManager
         {
             List<PlacedElement> placedElements = new ArrayList<>();
             placedElements.addAll(pinballMachine.elementsProperty());
-            placedElements.forEach(placedElement -> pinballMachine.removeElement(placedElement));
+            placedElements.forEach(pinballMachine::removeElement);
             PlacedElement[] tempElements = new PlacedElement[0];
             pinballMachine.addElement(PlacedElementList.get().toArray(tempElements));
         }

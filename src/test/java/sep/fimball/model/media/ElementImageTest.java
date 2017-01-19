@@ -44,7 +44,7 @@ public class ElementImageTest
     {
         assertThat("Die Rest-Rotation wird richtig berechnet, wenn die Rotation kleiner ist, als die Rotations-Genauigkeit", testElementImage.getRestRotation(25), equalTo(25));
         assertThat("Die Rest-Rotation wird richtig berechnet, wenn die Rotation gleich der Rotations-Genauigkeit ist", testElementImage.getRestRotation(40), equalTo(0));
-        assertThat("Die Rest-Rotation wird richtig berehchnet, wenn die Rotation größer als die Rotations-Genauigkeit ist", testElementImage.getRestRotation(75), equalTo(35));
+        assertThat("Die Rest-Rotation wird richtig berechnet, wenn die Rotation größer als die Rotations-Genauigkeit ist", testElementImage.getRestRotation(75), equalTo(35));
     }
 
     /**

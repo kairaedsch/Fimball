@@ -107,7 +107,7 @@ public class BasePhysicsElementTest
         Mockito.when(colliderShapeB1.getExtremePos(anyDouble(), any(), anyBoolean())).thenReturn(new Vector2(-3, -30));
         Mockito.when(colliderShapeB2.getExtremePos(anyDouble(), any(), anyBoolean())).thenReturn(new Vector2(1, 10));
 
-        // Hole die maximalste Position
+        // Hole die maximale Position
         Vector2 extremeMaxPos = basePhysicsElement.getExtremePos(0, true);
         assertThat("Die maximalste X-Position", extremeMaxPos.getX(), is(2.0));
         assertThat("Die minimalste Y-Position", extremeMaxPos.getY(), is(20.0));

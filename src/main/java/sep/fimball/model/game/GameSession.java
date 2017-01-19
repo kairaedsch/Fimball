@@ -1,6 +1,5 @@
 package sep.fimball.model.game;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +18,6 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 import sep.fimball.model.physics.game.PhysicsGameSession;
 
 import java.util.*;
-
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.

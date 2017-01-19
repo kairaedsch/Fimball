@@ -1,7 +1,7 @@
 package sep.fimball.model.physics.element;
 
 /**
- * Die Drehrichtung eines Flipperarmes.
+ * Die Drehrichtung eines Flipper.
  */
 public enum AngularDirection
 {
