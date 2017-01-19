@@ -5,8 +5,6 @@ import sep.fimball.general.data.Vector2I;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Erzeugt Hashes eines Bereichs auf dem Spielfeld, für schnellen und nach Position sortiertem Zugriff.
@@ -17,8 +15,9 @@ public class RegionHashConverter
     /**
      * Berechnet die Hashes eines Bereichs auf dem Spielfeld, die für schnellen und lokal beschränkten Zugriff benötigt werden.
      *
-     * @param minPos Linke obere Ecke des Bereichs.
-     * @param maxPos Rechte obere Ecke des Bereichs.
+     * @param minPos     Linke obere Ecke des Bereichs.
+     * @param maxPos     Rechte obere Ecke des Bereichs.
+     * @param regionSize Die Größe der einzelnen Regionen.
      * @return Eine Liste von Positions-Hashes.
      */
     public static List<Long> gameAreaToRegionHashes(Vector2 minPos, Vector2 maxPos, int regionSize)
@@ -32,7 +31,7 @@ public class RegionHashConverter
         {
             for (int y = regionMin.getY(); y <= regionMax.getY(); y++)
             {
-                long hash = calculateRegionHash(new Vector2I(x , y));
+                long hash = calculateRegionHash(new Vector2I(x, y));
                 result.add(hash);
             }
         }
@@ -43,7 +42,8 @@ public class RegionHashConverter
     /**
      * Gibt die Region eines Vektors auf dem Spielfeld an.
      *
-     * @param position Vektor für den die Region berechnet wird.
+     * @param position   Vektor für den die Region berechnet wird.
+     * @param regionSize Die Größe der einzelnen Regionen.
      * @return Region, in der sich der Vektor befindet.
      */
     private static Vector2I positionToRegion(Vector2 position, int regionSize)

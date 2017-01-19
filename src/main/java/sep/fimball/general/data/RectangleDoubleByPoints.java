@@ -15,8 +15,14 @@ public class RectangleDoubleByPoints
      */
     private final Vector2 pointB;
 
+    /**
+     * Die linke obere Ecke dieses Rechtecks.
+     */
     private final Vector2 origin;
 
+    /**
+     * Die rechts untere Ecke dieses Rechtecks.
+     */
     private final Vector2 end;
 
     /**

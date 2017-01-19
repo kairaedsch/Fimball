@@ -105,5 +105,8 @@ public class PhysicsConfig
      */
     public final static double HOLE_BALL_KICK_SPEED = 30.0;
 
+    /**
+     * Die Größe der einzelnen Regionen, in welchen die PhysicObjekte eingeteilt werden um nicht immer alle PhysicObjekte auf Kollision prüfen zu müssen.
+     */
     public static final int PHYSICS_REGION_SIZE = 10;
 }

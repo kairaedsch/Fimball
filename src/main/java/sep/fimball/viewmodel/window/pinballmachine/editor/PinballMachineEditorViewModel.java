@@ -38,6 +38,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private PinballMachineEditor pinballMachineEditor;
 
+    /**
+     * Das korrespondierende EditorSessionSubViewModel.
+     */
     private EditorSessionSubViewModel editorSessionSubViewModel;
 
     /**
@@ -122,6 +125,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private BooleanProperty availableElementSelected;
 
+    /**
+     * Der aktuell gewünschte Cursor das Canvas.
+     */
     private ObjectProperty<Cursor> cursorProperty;
 
     /**
@@ -156,7 +162,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableObstacleElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.OBSTACLE))));
         availableRampElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.RAMP))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
-
 
 
         topBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
@@ -548,11 +553,21 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         }
     }
 
+    /**
+     * Gibt das korrespondierende EditorSessionSubViewModel zurück.
+     *
+     * @return Das korrespondierende EditorSessionSubViewModel.
+     */
     public EditorSessionSubViewModel getEditorSessionSubViewModel()
     {
         return editorSessionSubViewModel;
     }
 
+    /**
+     * Gibt das SceneManagerViewModel des ViewModels zurück.
+     *
+     * @return Das SceneManagerViewModel des ViewModels.
+     */
     public SceneManagerViewModel getSceneManagerViewModel()
     {
         return sceneManager;

@@ -28,7 +28,8 @@ public interface PhysicsUpdatable<GameElementT>
 
     /**
      * Gibt den aktuellen Zustand des PhysicsElements zurück.
-     * @return
+     *
+     * @return Den aktuellen Zustand.
      */
-    ElementEventArgs<GameElementT> getChange();
+    ElementEventArgs<GameElementT> getStatus();
 }

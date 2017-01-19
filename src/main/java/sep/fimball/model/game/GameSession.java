@@ -27,7 +27,14 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class GameSession extends Session implements PhysicsGameSession<GameElement>, HandlerGameSession
 {
+    /**
+     * TODO DEBUG??
+     */
     private int framecount;
+
+    /**
+     * TODO DEBUG??
+     */
     private long lastTime;
 
     /**

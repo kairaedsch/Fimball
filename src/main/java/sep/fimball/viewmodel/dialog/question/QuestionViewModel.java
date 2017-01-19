@@ -8,10 +8,24 @@ import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
+/**
+ * Das PauseViewModel stellt der View Daten über eine Frage zur Verfügung und ermöglicht die Ausführung der Aktion, falls sich der Nutzer dafür entscheidet.
+ */
 public class QuestionViewModel extends DialogViewModel
 {
+    /**
+     * Der Titel der Frage.
+     */
     private StringProperty title;
+
+    /**
+     * Der Text der Frage.
+     */
     private StringProperty message;
+
+    /**
+     * Die Aktion, die bei Zustimmung ausgeführt werden soll.
+     */
     private Action action;
 
     /**

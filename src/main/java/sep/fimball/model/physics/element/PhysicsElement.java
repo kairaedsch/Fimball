@@ -188,9 +188,10 @@ public class PhysicsElement<GameElementT>
 
     /**
      * Gibt den aktuellen Zustand des PhysicsElements zurück.
-     * @return
+     *
+     * @return Der aktuelle Zustand.
      */
-    public ElementEventArgs<GameElementT> getChange()
+    public ElementEventArgs<GameElementT> getStatus()
     {
         return new ElementEventArgs<>(gameElement, position, rotation, 0);
     }

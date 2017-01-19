@@ -52,8 +52,16 @@ public class Config
      */
     public final static double BALL_LOST_TOLERANCE = 10;
 
+    /**
+     * Die Drehgeschwindigkeit des Spinners bei einer idealen Kollision mit der Kugel.
+     * TODO ALEX APROVE
+     */
     public final static int SPINS_PER_DIRECT_HIT = 80;
 
+    /**
+     * Der Verlust an Drehgeschwindigkeit des Spinners pro ????
+     * TODO ALEX APROVE
+     */
     public final static int SPINNER_SLOWDOWN_SPEED = 3;
 
     /**
@@ -61,9 +69,10 @@ public class Config
      */
     public final static int AUTOSAVE_RATE = 120;
 
+    /**
+     * Die Größe der einzelnen Regionen, in welchen die Sprites eingeteilt werden um nicht immer alle Sprites auf Zeichenbarkeit prüfen müssen.
+     */
     public static final int DRAW_REGION_SIZE = 75;
-
-    public static final int MAX_SOUNDS_PLAYING = 25;
 
     /**
      * Gibt eine eindeutige ID zurück.

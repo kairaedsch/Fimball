@@ -42,7 +42,7 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
     private PauseTransition resetTransition;
 
     /**
-     * TODO
+     * Timer, um den aktuellen Aufladstatus zu berechnen und aktuell zu halten.
      */
     private AnimationTimer plungerUpdate;
 

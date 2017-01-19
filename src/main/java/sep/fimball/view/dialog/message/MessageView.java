@@ -6,15 +6,26 @@ import javafx.scene.control.TitledPane;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 
-
+/**
+ * Die MessageView ist für die Darstellung einer Nachricht zuständig.
+ */
 public class MessageView extends DialogView<MessageViewModel>
 {
+    /**
+     * Der Titel der Nachricht.
+     */
     @FXML
     private TitledPane title;
 
+    /**
+     * Der Text der Nachricht.
+     */
     @FXML
     private Label message;
 
+    /**
+     * Das zur View dazugehörige ViewModel.
+     */
     private MessageViewModel messageViewModel;
 
     @Override
@@ -26,7 +37,7 @@ public class MessageView extends DialogView<MessageViewModel>
     }
 
     /**
-     * Benachrichtigt das {@code ????}, dass ????? möchte.
+     * Benachrichtigt das {@code messageViewModel}, dass die Nachricht geschlossen werden kann.
      */
     @FXML
     private void okClicked()

@@ -207,7 +207,7 @@ public class PhysicsHandler<GameElementT>
                         element.update(delta);
                         if (element.hasChanged())
                         {
-                            elementEventArgsList.add(element.getChange());
+                            elementEventArgsList.add(element.getStatus());
                             element.resetChanged();
                         }
                     });
@@ -236,7 +236,7 @@ public class PhysicsHandler<GameElementT>
                             element.checkCollision(collisionEventArgsList, ballPhysicsElement);
                             if (element.hasChanged())
                             {
-                                elementEventArgsList.add(element.getChange());
+                                elementEventArgsList.add(element.getStatus());
                                 element.resetChanged();
                             }
                         });

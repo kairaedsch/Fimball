@@ -26,20 +26,44 @@ public class SpriteSubView
      */
     private SpriteSubViewModel viewModel;
 
+    /**
+     * Der ImageCache.
+     */
     private ImageCache imageCache;
 
+    /**
+     * Die Restrotation des Sprites, nachdem die Rotation das aktuelle vorgedrehten ElementImageViewModels abgezogen wurde.
+     */
     private double rotationRest;
 
+    /**
+     * Die aktuelle Position des Sprites.
+     */
     private Vector2 position;
 
+    /**
+     * Die aktuelle Größe des Sprites.
+     */
     private Vector2 size;
 
+    /**
+     * Das aktuelle default Bild des Sprites (oben).
+     */
     private Image defaultImageTop;
 
+    /**
+     * Das aktuelle default Bild des Sprites (unten).
+     */
     private Image defaultImageBottom;
 
+    /**
+     * Die Hashes der Regionen, in welchen sich das Sprite befindet.
+     */
     private ObjectProperty<List<Long>> regionHashes;
 
+    /**
+     * Der Bereich, in welchen sich das Sprite befindet.
+     */
     private RectangleDoubleByPoints drawArea;
 
     /**
@@ -61,6 +85,10 @@ public class SpriteSubView
         calculateValues();
     }
 
+    /**
+     * Berechnet die Rotation, Position, Größe, default Bilder, drawArea und regionHashes aus.
+     * // TODO schöner
+     */
     private void calculateValues()
     {
         defaultImageTop = imageCache.getImage(viewModel.animationFramePathProperty().get().getImagePath(ImageLayer.TOP, (int) viewModel.rotationProperty().get()));
@@ -90,54 +118,53 @@ public class SpriteSubView
         Vector2 min = position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates);
         Vector2 max = size.plus(position).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates);
 
+        drawArea = new RectangleDoubleByPoints(min, max);
         regionHashes.set(RegionHashConverter.gameAreaToRegionHashes(min, max, Config.DRAW_REGION_SIZE));
-
-        // TODO ugly
-        drawArea = new RectangleDoubleByPoints(position.scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates), size.plus(position).scale(1.0 / DesignConfig.PIXELS_PER_GRID_UNIT).plus(localCoordinates));
     }
 
     /**
      * Zeichnet sich auf das übergebene GraphicsContext-Objekt.
      *
+     * @param canvasRectangle          Bereich des Canvas.
      * @param graphicsContext Der GraphicsContext, auf dem die View sich
      *                        zeichnen soll.
      * @param imageLayer      Gibt an, ob das Sprite sein Top- oder Bottom-Image
      *                        zeichnen soll.
      * @param drawMode        Der Modus in dem gezeichnet werden soll.
      */
-    boolean draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
+    void draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
-        if(!canvasRectangle.intersectsWith(drawArea)) return false;
-        graphicsContext.save();
+        if (canvasRectangle.intersectsWith(drawArea))
+        {
+            graphicsContext.save();
 
-        setupDrawLocation(graphicsContext, rotationRest);
+            setupDrawLocation(graphicsContext, rotationRest);
 
-        Image image;
-        ElementImageViewModel elementImageViewModel = viewModel.animationFramePathProperty().get();
-        if (elementImageViewModel.isAnimating())
-        {
-            image = imageCache.getImage(elementImageViewModel.getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
-        }
-        else
-        {
-            image = imageLayer == ImageLayer.TOP ? defaultImageTop : defaultImageBottom;
-        }
+            Image image;
+            ElementImageViewModel elementImageViewModel = viewModel.animationFramePathProperty().get();
+            if (elementImageViewModel.isAnimating())
+            {
+                image = imageCache.getImage(elementImageViewModel.getImagePath(imageLayer, (int) viewModel.rotationProperty().get(), System.currentTimeMillis()));
+            }
+            else
+            {
+                image = imageLayer == ImageLayer.TOP ? defaultImageTop : defaultImageBottom;
+            }
 
-        if (imageLayer == ImageLayer.TOP)
-        {
-            drawImage(graphicsContext, image, drawMode, position, size);
+            if (imageLayer == ImageLayer.TOP)
+            {
+                drawImage(graphicsContext, image, drawMode, position, size);
+            }
+            if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
+            {
+                drawImageBorder(graphicsContext, imageLayer, position, size);
+            }
+            if (imageLayer == ImageLayer.BOTTOM)
+            {
+                drawImage(graphicsContext, image, drawMode, position, size);
+            }
+            graphicsContext.restore();
         }
-        if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
-        {
-            drawImageBorder(graphicsContext, imageLayer, position, size);
-        }
-        if (imageLayer == ImageLayer.BOTTOM)
-        {
-            drawImage(graphicsContext, image, drawMode, position, size);
-        }
-        graphicsContext.restore();
-
-        return true;
     }
 
     /**
@@ -231,6 +258,11 @@ public class SpriteSubView
         }
     }
 
+    /**
+     * Gitb die Hashes der Regionen, in welchen sich das Sprite befindet, zurück.
+     *
+     * @return Die Hashes der Regionen, in welchen sich das Sprite befindet.
+     */
     public ObjectProperty<List<Long>> regionHashesProperty()
     {
         return regionHashes;
@@ -244,10 +276,5 @@ public class SpriteSubView
     public int getDrawOrder()
     {
         return viewModel.drawOrderProperty().get();
-    }
-
-    public Vector2 getPosition()
-    {
-        return position;
     }
 }

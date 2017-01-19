@@ -103,7 +103,7 @@ public class Camera
     }
 
     /**
-     * Gibt die Position der Kamera welche dem Ball langsam folgt zurück
+     * Gibt die Position der Kamera welche dem Ball langsam folgt zurück.
      *
      * @return Die Position der Kamera.
      */

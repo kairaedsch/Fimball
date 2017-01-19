@@ -6,15 +6,26 @@ import javafx.scene.control.TitledPane;
 import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 
-
+/**
+ * Die MessageView ist für die Darstellung einer Frage zuständig und ermöglicht es dem Nutzer, sich dafür oder dagegen zu entscheiden.
+ */
 public class QuestionView extends DialogView<QuestionViewModel>
 {
+    /**
+     * Der Titel der Frage.
+     */
     @FXML
     private TitledPane title;
 
+    /**
+     * Der Text der Frage.
+     */
     @FXML
     private Label message;
 
+    /**
+     * Das zur View dazugehörige ViewModel.
+     */
     private QuestionViewModel questionViewModel;
 
     @Override

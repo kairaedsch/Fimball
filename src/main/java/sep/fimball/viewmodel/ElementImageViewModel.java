@@ -19,6 +19,9 @@ public class ElementImageViewModel
      */
     private long creationTime;
 
+    /**
+     * Gibt an, ob zurzeit eine Animation läuft oder ein festes Bild angezeigt wird.
+     */
     private boolean isAnimating;
 
     /**

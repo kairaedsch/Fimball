@@ -135,7 +135,7 @@ public class BallPhysicsElement<GameElementT> extends PhysicsElementModifyAble<G
             System.err.println("BallPhysicsElement got incompatible Modify Type");
     }
 
-    public ElementEventArgs<GameElementT> getChange()
+    public ElementEventArgs<GameElementT> getStatus()
     {
         return new ElementEventArgs<>(gameElement, getPosition(), getRotation(), height);
     }

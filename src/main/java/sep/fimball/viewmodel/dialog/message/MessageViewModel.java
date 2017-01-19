@@ -7,9 +7,19 @@ import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
+/**
+ * Das PauseViewModel stellt der View Daten über eine Nachricht zur Verfügung.
+ */
 public class MessageViewModel extends DialogViewModel
 {
+    /**
+     * Der Titel der Nachricht.
+     */
     private StringProperty title;
+
+    /**
+     * Der Text der Nachricht.
+     */
     private StringProperty message;
 
     /**

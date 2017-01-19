@@ -100,12 +100,24 @@ public class DesignConfig
      */
     public final static double ANTI_GRAPHIC_STRIPES_EXTRA_SIZE = 0.02;
 
+    /**
+     * Minimale Vorschaubildbreite eines Automaten.
+     */
     public final static double MINIMUM_PREVIEW_WIDTH = (1280 / PIXELS_PER_GRID_UNIT);
 
+    /**
+     * Minimale Vorschaubildhöhe eines Automaten.
+     */
     public final static double MINIMUM_PREVIEW_HEIGHT = (720 / PIXELS_PER_GRID_UNIT);
 
+    /**
+     * Maximale Vorschaubildbreite eines Automaten.
+     */
     public final static double MAXIMUM_PREVIEW_WIDTH = (3840 / PIXELS_PER_GRID_UNIT);
 
+    /**
+     * Maximale Vorschaubildhöhe eines Automaten.
+     */
     public final static double MAXIMUM_PREVIEW_HEIGHT = (2160 / PIXELS_PER_GRID_UNIT);
 
     /**

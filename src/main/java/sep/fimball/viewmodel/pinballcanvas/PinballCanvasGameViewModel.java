@@ -17,6 +17,9 @@ import java.util.Optional;
  */
 public class PinballCanvasGameViewModel extends PinballCanvasViewModel
 {
+    /**
+     * Das korrespondierende GameViewModel.
+     */
     private GameViewModel gameViewModel;
 
     /**

@@ -40,6 +40,9 @@ public class SceneManagerViewModel
      */
     private BooleanProperty fullscreen;
 
+    /**
+     * Das aktuelle DialogViewModel, das angezeigt werden soll.
+     */
     private ObjectProperty<DialogViewModel> dialogViewModel;
 
     /**
@@ -48,10 +51,13 @@ public class SceneManagerViewModel
      */
     public SceneManagerViewModel()
     {
-        dialogViewModel = new SimpleObjectProperty<>();
         windowViewModel = new SimpleObjectProperty<>();
         dialogViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
         fullscreen = new SimpleBooleanProperty();
+
+        dialogViewModel = new SimpleObjectProperty<>();
+        dialogViewModel.bind(Bindings.createObjectBinding(() -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0), dialogViewModels));
+
         if (Paths.get(DataPath.pathToAutoSave()).toFile().exists()) {
             Optional<PinballMachine> autoSavedMachine = PinballMachineManager.getInstance().loadAutoSavedMachine();
             if(autoSavedMachine.isPresent())
@@ -99,6 +105,8 @@ public class SceneManagerViewModel
     }
 
     /**
+     * Legt das übergebene DialogViewModel auf den obersten Platz des DialogViewModelStacks.
+     *
      * @param dialogViewModel Das neue DialogViewModel.
      */
     public void pushDialog(DialogViewModel dialogViewModel)
@@ -109,7 +117,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     *
+     * Entfernt das auf den obersten Platz des DialogViewModelStacks liegende DialogViewModel.
      */
     public void popDialog()
     {
@@ -117,7 +125,7 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Stellt das aktuelle WindowViewModel als ObjectProperty zur Verfügung.
+     * Stellt das aktuelle WindowViewModel zur Verfügung.
      *
      * @return Das aktuelle WindowViewModel.
      */
@@ -127,13 +135,12 @@ public class SceneManagerViewModel
     }
 
     /**
-     * Stellt das aktuelle DialogViewModel als ObjectProperty zur Verfügung.
+     * Stellt das aktuelle DialogViewModel zur Verfügung.
      *
      * @return Das aktuelle DialogViewModel.
      */
     public ObjectProperty<DialogViewModel> dialogViewModelProperty()
     {
-        dialogViewModel.bind(Bindings.createObjectBinding(() -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0), dialogViewModels));
         return dialogViewModel;
     }
 

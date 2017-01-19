@@ -33,6 +33,9 @@ class PinballCanvasDrawer
      */
     private RectangleDouble boundingBox;
 
+    /**
+     * TODO Kai
+     */
     private Map<Long, Map<Integer, List<SpriteSubView>>> spritesRegions;
 
     /**
@@ -52,12 +55,19 @@ class PinballCanvasDrawer
         spritesRegions = new HashMap<>();
         for (SpriteSubView sprite : sprites)
         {
-            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesMap(sprite, oldHashes, newHashes));
-            updateSpritesMap(sprite, Collections.emptyList(), sprite.regionHashesProperty().get());
+            sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+            updateSpritesRegions(sprite, Collections.emptyList(), sprite.regionHashesProperty().get());
         }
     }
 
-    private void updateSpritesMap(SpriteSubView sprite, List<Long> oldRegions, List<Long> newRegions)
+    /**
+     *
+     *
+     * @param sprite
+     * @param oldRegions
+     * @param newRegions
+     */
+    private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegions, List<Long> newRegions)
     {
         int x = 0;
         for (Long pots : oldRegions)

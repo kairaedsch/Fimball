@@ -9,8 +9,23 @@ import static sep.fimball.general.data.PhysicsConfig.*;
  */
 public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdatable<GameElementT>
 {
+    /**
+     * Gibt an, ob der Ball aktuell im Loch ist.
+     * TODO aprove TILL
+     */
     private boolean ballFrozen = false;
+
+    /**
+     * Gibt an, wann der Ball zuletzt in das Loch gefallen ist.
+     * TODO aprove TILL
+     */
     private double freezeStart;
+
+    /**
+     * Der im Loch gefangene Ball.
+     * TODO aprove TILL
+     * Kai sagt: Sollte das kein Optional sein?
+     */
     private BallPhysicsElement frozenBall;
 
     /**
@@ -42,7 +57,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
     }
 
     /**
-     * Kann das Loch im Moment einen Ball annehmen?
+     * Prüft, ob das Loch im Moment einen Ball annehmen kann.
      *
      * @return false, falls das Loch einen Ball hat oder vor kurzem einen Ball abgeschossen hat. Sonst true.
      */
@@ -56,6 +71,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
     {
         if (ballFrozen)
         {
+            // TODO reset Ball position???? Was wenn Tilt????
             frozenBall.setVelocity(new Vector2(0.0, 0.0));
 
             if (System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS)
