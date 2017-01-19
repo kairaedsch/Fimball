@@ -3,6 +3,8 @@ package sep.fimball.model.media;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.ImageLayer;
 
+import static javafx.scene.input.KeyCode.M;
+
 /**
  * ElementImage stellt ein Bild oder Animation eines BaseElements dar.
  */
@@ -33,6 +35,14 @@ public class ElementImage
      */
     private Animation animation;
 
+    private String[] defaultImagesTop;
+
+    private String[] defaultImagesBottom;
+
+    private String[][] animationImagesTop;
+
+    private String[][] animationImagesBottom;
+
     /**
      * Erzeugt ein neues ElementImage.
      *
@@ -57,24 +67,6 @@ public class ElementImage
     /**
      * Erzeugt ein neues ElementImage mit den übergebenen Werten.
      *
-     * @param baseElementId    Die ID des BaseElements, zu dem das ElementImage gehören soll.
-     * @param canRotate        Gibt an, ob das zugehörige BaseElement gedreht werden kann.
-     * @param rotationAccuracy Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
-     * @param isAnimation      Gibt am, ob das ElementImage eine Animation ist.
-     * @param animation        Die zugehörige Animation.
-     */
-    private ElementImage(String baseElementId, boolean canRotate, int rotationAccuracy, boolean isAnimation, Animation animation)
-    {
-        this.baseElementId = baseElementId;
-        this.canRotate = canRotate && rotationAccuracy != 0;
-        this.rotationAccuracy = rotationAccuracy <= 0 ? 360 : rotationAccuracy;
-        this.isAnimation = isAnimation;
-        this.animation = animation;
-    }
-
-    /**
-     * Erzeugt ein neues ElementImage mit den übergebenen Werten.
-     *
      * @param baseElementId    Die ID des zugehörigen BaseElements.
      * @param baseMediaElement Das zugehörige BaseMediaElement.
      * @param animation        Die zugehörige Animation.
@@ -82,6 +74,73 @@ public class ElementImage
     public ElementImage(String baseElementId, BaseMediaElement baseMediaElement, Animation animation)
     {
         this(baseElementId, baseMediaElement.canRotate(), baseMediaElement.getRotationAccuracy(), true, animation);
+    }
+
+    /**
+     * Erzeugt ein neues ElementImage mit den übergebenen Werten.
+     *
+     * @param baseElementId         Die ID des BaseElements, zu dem das ElementImage gehören soll.
+     * @param canRotateParam        Gibt an, ob das zugehörige BaseElement gedreht werden kann.
+     * @param rotationAccuracyParam Gibt an, um wie viel Grad das zugehörige BaseElement gedreht werden kann.
+     * @param isAnimation           Gibt am, ob das ElementImage eine Animation ist.
+     * @param animation             Die zugehörige Animation.
+     */
+    private ElementImage(String baseElementId, boolean canRotateParam, int rotationAccuracyParam, boolean isAnimation, Animation animation)
+    {
+        this.baseElementId = baseElementId;
+        this.canRotate = canRotateParam && rotationAccuracyParam != 0;
+        this.rotationAccuracy = rotationAccuracyParam <= 0 ? 360 : rotationAccuracyParam;
+        this.isAnimation = isAnimation;
+        this.animation = animation;
+
+        defaultImagesTop = new String[360 / rotationAccuracy];
+        calculateDefaultImages(defaultImagesTop, baseElementId, ImageLayer.TOP);
+
+        defaultImagesBottom = new String[360 / rotationAccuracy];
+        calculateDefaultImages(defaultImagesBottom, baseElementId, ImageLayer.BOTTOM);
+
+        if (isAnimation)
+        {
+            animationImagesTop = new String[360 / rotationAccuracy][];
+            calculateAnimationImages(animationImagesTop, baseElementId, ImageLayer.TOP);
+
+            animationImagesBottom = new String[360 / rotationAccuracy][];
+            calculateAnimationImages(animationImagesBottom, baseElementId, ImageLayer.BOTTOM);
+        }
+    }
+
+    /**
+     * Berechnet die Defaultbilder.
+     *
+     * @param images        Das zu füllende ImagePathArray.
+     * @param baseElementId Die ID des zugehörigen BaseElements.
+     * @param imageLayer    Das ImageLayer der Bilder.
+     */
+    private void calculateDefaultImages(String[] images, String baseElementId, ImageLayer imageLayer)
+    {
+        for (int i = 0; i < images.length; i++)
+        {
+            images[i] = DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, i * rotationAccuracy, false, "", 0);
+        }
+    }
+
+    /**
+     * Berechnet die Animationsbilder.
+     *
+     * @param images        Das zu füllende ImagePathArray.
+     * @param baseElementId Die ID des zugehörigen BaseElements.
+     * @param imageLayer    Das ImageLayer der Bilder.
+     */
+    private void calculateAnimationImages(String[][] images, String baseElementId, ImageLayer imageLayer)
+    {
+        for (int i = 0; i < images.length; i++)
+        {
+            images[i] = new String[animation.getFrameCount()];
+            for (int framePos = 0; framePos < animation.getFrameCount(); framePos++)
+            {
+                images[i][framePos] = DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, i * rotationAccuracy, true, animation.getName(), framePos);
+            }
+        }
     }
 
     /**
@@ -96,12 +155,19 @@ public class ElementImage
     {
         //Berechnet die Zahl der Bilder, die in der vergangenen Zeit angezeigt werden hätten sollen
         int framePos = isAnimation ? (int) (deltaTime / animation.getDuration()) : 0;
+        int rotationLeft = (rotation % 360) - getRestRotation(rotation);
         if (isAnimation && framePos < animation.getFrameCount())
+        {
             //Gibt den Pfad des zugehörigen Bildes zurück, falls die Zahl der angezeigten Bilder kleiner als die Zahl der Bilder Animation ist. Die Rotation wird dabei als das nächst
-            return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), true, animation.getName(), framePos);
+            if (imageLayer == ImageLayer.TOP) return animationImagesTop[rotationLeft / rotationAccuracy][framePos];
+            else return animationImagesBottom[rotationLeft / rotationAccuracy][framePos];
+        }
         else
+        {
             //Gibt den Pfad des zugehörigen Bildes zurück, das kein Teil einer Animation ist.
-            return DataPath.pathToElementImage(baseElementId, imageLayer, canRotate, (rotation % 360) - getRestRotation(rotation), false, "", 0);
+            if (imageLayer == ImageLayer.TOP) return defaultImagesTop[rotationLeft / rotationAccuracy];
+            else return defaultImagesBottom[rotationLeft / rotationAccuracy];
+        }
     }
 
     /**

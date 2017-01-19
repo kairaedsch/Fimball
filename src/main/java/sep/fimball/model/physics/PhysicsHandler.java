@@ -74,6 +74,8 @@ public class PhysicsHandler<GameElementT>
      */
     private final Object physicsMonitor = new Object();
 
+    private boolean ticking;
+
     /**
      * Erzeugt einen neuen leeren PhysicsHandler.
      */
@@ -115,6 +117,7 @@ public class PhysicsHandler<GameElementT>
         this.gameSession = gameSession;
         this.ballPhysicsElement = ballPhysicsElement;
         this.physicTimer = new Timer(false);
+        ticking = false;
 
         modifyContainers = new ArrayList<>();
 
@@ -146,6 +149,7 @@ public class PhysicsHandler<GameElementT>
     public void startTicking()
     {
         lastTime = System.currentTimeMillis();
+        ticking = true;
         physicTimer = new Timer(false);
         physicTimer.schedule(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC * PhysicsConfig.LOOPS_PER_TICK);
     }
@@ -156,7 +160,12 @@ public class PhysicsHandler<GameElementT>
     public void stopTicking()
     {
         physicTimer.cancel();
-        physicTimer.purge();
+        ticking = false;
+    }
+
+    public boolean isTicking()
+    {
+        return ticking;
     }
 
     /**

@@ -37,7 +37,7 @@ class PinballCanvasDrawer
     /**
      * TODO Kai
      */
-    private Map<Long, Map<Integer, List<SpriteSubView>>> spritesRegions;
+    private Map<Long, List<SpriteSubView>[]> spritesRegions;
 
     /**
      * Erstellt einen neuen PinballCanvasDrawer.
@@ -69,6 +69,7 @@ class PinballCanvasDrawer
                 for (SpriteSubView sprite : sprites)
                 {
                     sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                    sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
                     addSpriteRegions(sprite, sprite.regionHashesProperty().get());
                 }
             }
@@ -102,6 +103,7 @@ class PinballCanvasDrawer
                         {
                             SpriteSubView sprite = sprites.get(p);
                             sprite.regionHashesProperty().addListener((x, oldHashes, newHashes) -> updateSpritesRegions(sprite, oldHashes, newHashes));
+                            sprite.drawOrderProperty().addListener((x, xxx, xxxx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get()));
                             addSpriteRegions(sprite, sprite.regionHashesProperty().get());
 
                             listPropertyConverted.add(p, sprite);
@@ -143,25 +145,31 @@ class PinballCanvasDrawer
 
     private void addSpriteRegions(SpriteSubView sprite, List<Long> newRegions)
     {
-        for (Long pots : newRegions)
+        for (Long potsHash : newRegions)
         {
-            if (!spritesRegions.containsKey(pots))
+            List<SpriteSubView>[] pots = spritesRegions.get(potsHash);
+            if (pots == null)
             {
-                spritesRegions.put(pots, new HashMap<>());
+                pots = new List[4];
+                pots[0] = new ArrayList<>();
+                pots[1] = new ArrayList<>();
+                pots[2] = new ArrayList<>();
+                pots[3] = new ArrayList<>();
+                spritesRegions.put(potsHash, pots);
             }
-            if (!spritesRegions.get(pots).containsKey(sprite.getDrawOrder()))
-            {
-                spritesRegions.get(pots).put(sprite.getDrawOrder(), new ArrayList<>());
-            }
-            spritesRegions.get(pots).get(sprite.getDrawOrder()).add(sprite);
+            pots[sprite.getDrawOrder()].add(sprite);
         }
     }
 
     private void removeSpriteRegions(SpriteSubView sprite, List<Long> oldRegions)
     {
+        // TODO kann nicht funktionieren
         for (Long pots : oldRegions)
         {
-            spritesRegions.get(pots).get(sprite.getDrawOrder()).remove(sprite);
+            for(int i = 0; i < 4; i++)
+            {
+                spritesRegions.get(pots)[i].remove(sprite);
+            }
         }
     }
 
@@ -267,28 +275,20 @@ class PinballCanvasDrawer
         List<Long> spritesRegionsCanvas = RegionHashConverter.gameAreaToRegionHashes(canvasTopLeft, canvasBottomRight, Config.DRAW_REGION_SIZE);
         RectangleDoubleByPoints canvasRectangle = new RectangleDoubleByPoints(canvasTopLeft, canvasBottomRight);
 
-        // TODO make better
-        int start = -10;
-        int end = 10;
-
-        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.BOTTOM);
-        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, start, end, ImageLayer.TOP);
+        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, ImageLayer.BOTTOM);
+        drawElements(canvasRectangle, graphicsContext, spritesRegionsCanvas, ImageLayer.TOP);
     }
 
-    private void drawElements(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, int start, int end, ImageLayer imageLayer)
+    private void drawElements(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, List<Long> spritesRegionsCanvas, ImageLayer imageLayer)
     {
-        for (Long newSpritesRegionsCanva : spritesRegionsCanvas)
+        for (int s = 0; s < 4; s++)
         {
-            for (int s = start; s <= end; s++)
+            for (Long newSpritesRegionsCanva : spritesRegionsCanvas)
             {
-                Map<Integer, List<SpriteSubView>> spritePots = spritesRegions.get(newSpritesRegionsCanva);
+                List<SpriteSubView>[] spritePots = spritesRegions.get(newSpritesRegionsCanva);
                 if (spritePots != null)
                 {
-                    List<SpriteSubView> spritePot = spritePots.get(s);
-                    if (spritePot != null)
-                    {
-                        spritePot.forEach(sprite -> sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode));
-                    }
+                    spritePots[s].forEach(sprite -> sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode));
                 }
             }
         }

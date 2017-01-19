@@ -1,7 +1,6 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -66,6 +65,8 @@ public class SpriteSubView
      */
     private RectangleDoubleByPoints drawArea;
 
+    private IntegerProperty drawOrder;
+
     /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
@@ -78,6 +79,9 @@ public class SpriteSubView
         this.viewModel = viewModel;
         this.imageCache = imageCache;
         this.regionHashes = new SimpleObjectProperty<>();
+
+        drawOrder = new SimpleIntegerProperty();
+        drawOrder.bind(viewModel.drawOrderProperty());
 
         viewModel.positionProperty().addListener((observable, oldValue, newValue) -> calculateValues());
         viewModel.rotationProperty().addListener((observable, oldValue, newValue) -> calculateValues());
@@ -263,7 +267,7 @@ public class SpriteSubView
      *
      * @return Die Hashes der Regionen, in welchen sich das Sprite befindet.
      */
-    public ObjectProperty<List<Long>> regionHashesProperty()
+    public ReadOnlyObjectProperty<List<Long>> regionHashesProperty()
     {
         return regionHashes;
     }
@@ -276,5 +280,10 @@ public class SpriteSubView
     public int getDrawOrder()
     {
         return viewModel.drawOrderProperty().get();
+    }
+
+    public ReadOnlyIntegerProperty drawOrderProperty()
+    {
+        return drawOrder;
     }
 }

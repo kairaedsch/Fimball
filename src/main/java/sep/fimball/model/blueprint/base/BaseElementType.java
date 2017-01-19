@@ -43,7 +43,7 @@ public enum BaseElementType
     /**
      * Kennzeichnet ein Loch.
      */
-    HOLE(-1),
+    HOLE(0),
 
     /**
      * Kennzeichnet einen Spinner.

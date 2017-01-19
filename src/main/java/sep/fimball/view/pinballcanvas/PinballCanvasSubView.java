@@ -67,6 +67,8 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), (viewModel) -> new SpriteSubView(viewModel, ImageCache.getInstance()));
 
+        pinballCanvasDrawer = new PinballCanvasDrawer(canvas, pinballCanvasViewModel.getDrawMode(), sprites, pinballCanvasViewModel.getBoundingBox());
+
         camera = new Camera(pinballCanvasViewModel.getDrawMode(), pinballCanvasViewModel.cameraPositionProperty(), pinballCanvasViewModel.cameraZoomProperty());
 
         Observer redrawObserver = (o, arg) -> redraw();
@@ -80,7 +82,6 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         pinballCanvasViewModel.setViewScreenshotCreator(this);
 
-        pinballCanvasDrawer = new PinballCanvasDrawer(canvas, pinballCanvasViewModel.getDrawMode(), sprites, pinballCanvasViewModel.getBoundingBox());
     }
 
     /**

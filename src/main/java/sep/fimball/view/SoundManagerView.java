@@ -34,10 +34,9 @@ public class SoundManagerView
      */
     private HashMap<String, AudioClip> loadedAudioClips;
 
-    /**
-     * Cashed geladenen AudioClips, damit diese nicht mehrmals geladen werden müssen.
-     */
-    private HashMap<String, Long> lastPlayedAudioClips;
+    private long lastPlayedAudioClips;
+
+    private int count;
 
     /**
      * Die Lautstärke, mit der die Hintergrundmusik abgespielt wird.
@@ -59,7 +58,8 @@ public class SoundManagerView
         mediaPlayer = Optional.empty();
         mediaPlayerSound = Optional.empty();
         loadedAudioClips = new HashMap<>();
-        lastPlayedAudioClips = new HashMap<>();
+        lastPlayedAudioClips = 0;
+        count = 0;
 
         // Holen der Lautstärke aus dem ViewModel
         musicVolume = new SimpleDoubleProperty();
@@ -83,14 +83,12 @@ public class SoundManagerView
      */
     private void play(Sound sound)
     {
-        String soundPath = sound.getSoundPath();
-
         // Erstelle einen MediaPlayer, falls sich der Sound wiederholen soll.
         if (sound.isRepeating())
         {
             if (!mediaPlayerSound.isPresent() || !mediaPlayerSound.get().getSoundPath().equals(sound.getSoundPath()))
             {
-                Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), soundPath);
+                Optional<MediaPlayer> newMediaPlayer = tryToLoad((path) -> new MediaPlayer(new Media(path)), sound.getSoundPath());
 
                 if (newMediaPlayer.isPresent())
                 {
@@ -109,25 +107,33 @@ public class SoundManagerView
         // Spiele einen AudioClip ab, falls sich der Sound nicht wiederholen soll
         else
         {
-            // Cache den AudioClip, falls er noch nicht existiert
-            if (!loadedAudioClips.containsKey(soundPath))
-            {
-                Optional<AudioClip> audioClip = tryToLoad(AudioClip::new, soundPath);
+            long now = System.currentTimeMillis();
 
-                if (audioClip.isPresent())
-                {
-                    audioClip.get().volumeProperty().bind(sfxVolume);
-                    loadedAudioClips.put(soundPath, audioClip.get());
-                    lastPlayedAudioClips.put(soundPath, 0L);
-                    audioClip.get().play();
-                }
+            if(now - lastPlayedAudioClips > 250)
+            {
+                lastPlayedAudioClips = now;
+                count = 0;
             }
-            else
-            {
-                long now = System.currentTimeMillis();
 
-                // TODO nötig?
-                if(lastPlayedAudioClips.containsKey(soundPath) && now - lastPlayedAudioClips.get(soundPath) > 100)
+            if (count < 25)
+            {
+                count++;
+
+                String soundPath = sound.getSoundPath();
+
+                // Cache den AudioClip, falls er noch nicht existiert
+                if (!loadedAudioClips.containsKey(soundPath))
+                {
+                    Optional<AudioClip> audioClip = tryToLoad(AudioClip::new, soundPath);
+
+                    if (audioClip.isPresent())
+                    {
+                        audioClip.get().volumeProperty().bind(sfxVolume);
+                        loadedAudioClips.put(soundPath, audioClip.get());
+                        audioClip.get().play();
+                    }
+                }
+                else
                 {
                     // Spiele den AudioClip ab
                     loadedAudioClips.get(soundPath).play();
