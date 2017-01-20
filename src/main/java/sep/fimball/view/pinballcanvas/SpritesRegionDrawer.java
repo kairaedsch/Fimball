@@ -50,17 +50,20 @@ class SpritesRegionDrawer
 
         // Bindet die globalRegion an die Sprites
         ObservableList<SpriteSubView> listPropertyConverted = new SimpleListProperty<>(FXCollections.observableArrayList());
+        // Wird ausgeführt, wenn alle Elemente entfernt werden sollen
         ListPropertyConverter.bindAndConvertList(listPropertyConverted, sprites, sprite -> sprite, sprite ->
-        {
-            // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
-            addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-            sprite.regionHashesProperty().addListener((x, oldRegion, newRegion) -> updateSpritesRegions(sprite, oldRegion, newRegion, sprite.drawOrderProperty().get()));
-            sprite.drawOrderProperty().addListener((x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get(), oldDrawOrder.intValue()));
-        }, sprite ->
-        {
-            // Wird ausgeführt, wenn ein Element entfernt werden soll
-            removeSpriteRegions(sprite, sprite.regionHashesProperty().get(), sprite.drawOrderProperty().get());
-        });
+                {
+                    // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
+                    addSpriteRegions(sprite, sprite.regionHashesProperty().get());
+                    sprite.regionHashesProperty().addListener((x, oldRegion, newRegion) -> updateSpritesRegions(sprite, oldRegion, newRegion, sprite.drawOrderProperty().get()));
+                    sprite.drawOrderProperty().addListener((x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get(), oldDrawOrder.intValue()));
+                }, sprite ->
+                {
+                    // Wird ausgeführt, wenn ein Element entfernt werden soll
+                    removeSpriteRegions(sprite, sprite.regionHashesProperty().get(), sprite.drawOrderProperty().get());
+                },
+                // Wird ausgeführt, wenn alle Elemente entfernt werden sollen
+                this::clearSpriteRegions);
     }
 
     /**
@@ -112,8 +115,16 @@ class SpritesRegionDrawer
     {
         for (Long potsHash : region)
         {
-            System.out.println(globalRegion.get(potsHash)[drawOrder].remove(sprite));
+            globalRegion.get(potsHash)[drawOrder].remove(sprite);
         }
+    }
+
+    /**
+     * Setzt die globalRegion zurück.
+     */
+    private void clearSpriteRegions()
+    {
+        globalRegion.clear();
     }
 
     /**

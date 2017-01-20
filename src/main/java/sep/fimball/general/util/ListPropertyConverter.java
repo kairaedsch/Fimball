@@ -4,6 +4,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import sep.fimball.general.data.Action;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class ListPropertyConverter
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
     {
-        bindAndConvertList(listPropertyConverted, listPropertyOriginal, converter, originalT -> {}, originalT -> {});
+        bindAndConvertList(listPropertyConverted, listPropertyOriginal, converter, originalT -> {}, originalT -> {}, () -> {});
     }
 
     /**
@@ -36,17 +37,19 @@ public class ListPropertyConverter
      * @param converter             Ein Converter welcher angibt wie zwischen den Typen OriginalT und ConvertedT konvertiert wird
      * @param addListener           Wird aufgerufen, wenn ein Element hinzugefügt wird.
      * @param removeListener        Wird aufgerufen, wenn ein Element entfernt wird.
+     * @param clearListener        Wird aufgerufen, wenn alle Elemente entfernt werden.
      * @param <ConvertedT>          Der Typ der Elemente in der listPropertyConverted-Liste
      * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter,
-                                                                  Consumer<ConvertedT> addListener, Consumer<ConvertedT> removeListener)
+                                                                  Consumer<ConvertedT> addListener, Consumer<ConvertedT> removeListener, Action clearListener)
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
             if (change == null || listPropertyOriginal.isEmpty())
             {
                 listPropertyConverted.clear();
+                clearListener.perform();
                 for (OriginalT original : listPropertyOriginal)
                 {
                     ConvertedT converted = converter.convert(original);
