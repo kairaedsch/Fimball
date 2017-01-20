@@ -47,6 +47,11 @@ public class ReserveBallsAndPlayerChangeTest
     private TestGameSession session;
 
     /**
+     * Der Testautomat.
+     */
+    private PinballMachine pinballMachine;
+
+    /**
      * Testet, ob bei Ballverlust in einem Mehrspielerspiel der Spieler gewechselt und die Anzahl der verbleibenden Kugeln ordnungsgemäß gesenkt wird.
      *
      * @throws InterruptedException Falls ein Interrupt auftritt.
@@ -79,11 +84,12 @@ public class ReserveBallsAndPlayerChangeTest
     }
 
     /**
-     * Hält den Physik- und Regelauswertung-Thread an.
+     * löscht den Automaten von der Festplatte und hält den Physik- und Regelauswertung-Thread an.
      */
     @After
-    public void stopThreads()
+    public void stopThreadsAndCleanDisk()
     {
+        pinballMachine.deleteFromDisk();
         session.stopPhysics();
         session.stopUpdateLoop();
     }
@@ -93,8 +99,8 @@ public class ReserveBallsAndPlayerChangeTest
      */
     private void initGameSession()
     {
-        PinballMachine automat = PinballMachineManager.getInstance().pinballMachinesProperty().stream().filter((PinballMachine machine) -> machine.getID().equals("0")).findFirst().get();
-        session = new TestGameSession(automat, players);
+        pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        session = new TestGameSession(pinballMachine, players);
         List<Handler> handlers = HandlerFactory.generateAllHandlers(session, null);
         Handler ballLostChecker = new Handler((GameHandler) (GameEvent gameEvent) ->
         {

@@ -34,6 +34,8 @@ public class GameTest
     private static final String BALL_SPAWN_ID = "ball";
     private static final Object monitor = new Object();
 
+    private PinballMachine pinballMachine;
+
     private Deque<GameElement> collidedGameElements = new ArrayDeque<>();    // Speichert Kollisionen, die während des Tests auftreten
     private TestGameSession session;
 
@@ -46,7 +48,7 @@ public class GameTest
     public void gameCollisionTest() throws InterruptedException
     {
         // Aufbau des Automaten.
-        PinballMachine pinballMachine = PinballMachineManager.getInstance().createNewMachine();
+        pinballMachine = PinballMachineManager.getInstance().createNewMachine();
         pinballMachine.nameProperty().setValue("GameTest Machine");
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
@@ -89,11 +91,12 @@ public class GameTest
     }
 
     /**
-     * Stoppt die Ausführung des Physik- und des Regelwerk-Threads.
+     * Löscht den verwendeten Automaten von der Festplatte und stoppt die Ausführung des Physik- und des Regelwerk-Threads.
      */
     @After
     public void cleanup()
     {
+        pinballMachine.deleteFromDisk();
         session.stopPhysics();
         session.stopUpdateLoop();
     }
