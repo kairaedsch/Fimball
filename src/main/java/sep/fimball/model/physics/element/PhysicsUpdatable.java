@@ -4,6 +4,7 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 
 /**
  * Interface, welches es PhysicsElements erlaubt, bei jedem Durchlauf der Physics-Loop aufgerufen zu werden.
+ * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public interface PhysicsUpdatable<GameElementT>
 {

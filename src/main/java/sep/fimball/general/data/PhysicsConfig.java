@@ -40,6 +40,9 @@ public class PhysicsConfig
      */
     public final static int TIMER_DELAY = 0;
 
+    /**
+     * Gibt an, wie oft die Physik-Loop durchlaufen wird, bevor sie die Updates an die GameSession weitergibt.
+     */
     public final static int LOOPS_PER_TICK = 4;
     /**
      * Gibt an, nach wie vielen Millisekunden Wartezeit der nächste Schritt der Physikschleife ausgeführt wird.

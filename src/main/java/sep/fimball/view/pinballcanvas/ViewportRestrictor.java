@@ -9,8 +9,19 @@ import sep.fimball.general.data.Vector2;
  */
 public class ViewportRestrictor
 {
+    /**
+     * Die minimale Größe der Ansicht.
+     */
     private Vector2 minDimensions;
+
+    /**
+     * Die maximale Größe der Ansicht.
+     */
     private Vector2 maxDimensions;
+
+    /**
+     * Der Standard-Zoom.
+     */
     private double defaultZoom;
 
     /**
@@ -97,7 +108,14 @@ public class ViewportRestrictor
      */
     public static class RestrictedViewport
     {
+        /**
+         * Die beschränkte Zeichenfläche.
+         */
         private RectangleDouble restrictedRectangle;
+
+        /**
+         * Der Zoom der beschränkten Zeichenfläche.
+         */
         private double restrictedCameraScale;
 
         /**

@@ -3,8 +3,6 @@ package sep.fimball.model.media;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.ImageLayer;
 
-import static javafx.scene.input.KeyCode.M;
-
 /**
  * ElementImage stellt ein Bild oder Animation eines BaseElements dar.
  */
@@ -35,12 +33,24 @@ public class ElementImage
      */
     private Animation animation;
 
+    /**
+     * Der obere Teil des Standardbilds.
+     */
     private String[] defaultImagesTop;
 
+    /**
+     * Der untere Teil des Standardbilds.
+     */
     private String[] defaultImagesBottom;
 
+    /**
+     * Die oberen Teile der Bilder der Animation.
+     */
     private String[][] animationImagesTop;
 
+    /**
+     * Die unteren Teile der Bilder der Animation.
+     */
     private String[][] animationImagesBottom;
 
     /**

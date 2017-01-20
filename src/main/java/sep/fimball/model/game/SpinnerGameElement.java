@@ -9,6 +9,9 @@ import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.HandlerGameElement;
 
+/**
+ * Das Spielelement des Spinners.
+ */
 public class SpinnerGameElement extends GameElement implements ElementHandler, GameHandler
 {
     private double remainingSpins;

@@ -8,6 +8,7 @@ import static sep.fimball.general.data.PhysicsConfig.*;
 
 /**
  * Repräsentiert ein Loch in der Berechnung der Physik.
+ * @param <GameElementT> Die Klasse des korrespondierenden GameElements.
  */
 public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElementT> implements PhysicsUpdatable<GameElementT>
 {

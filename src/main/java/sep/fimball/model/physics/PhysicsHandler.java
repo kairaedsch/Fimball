@@ -70,7 +70,7 @@ public class PhysicsHandler<GameElementT>
     private final Object physicsMonitor = new Object();
 
     /**
-     * ibt an, ob der Physik-Schleife läuft
+     * Gibt an, ob der Physik-Schleife läuft.
      */
     private boolean ticking;
 
@@ -218,6 +218,10 @@ public class PhysicsHandler<GameElementT>
         };
     }
 
+    /**
+     * Fügt ein Element in die HashMap der sortierten Elemente ein.
+     * @param element Das Element, das eingefügt werden soll.
+     */
     private void insertElementIntoHashMap(PhysicsElement<GameElementT> element)
     {
         if (element instanceof BallPhysicsElement)

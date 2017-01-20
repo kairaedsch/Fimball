@@ -34,8 +34,14 @@ public class SoundManagerView
      */
     private HashMap<String, AudioClip> loadedAudioClips;
 
+    /**
+     * Der Zeitpunkt, zu dem das letzte Mal AudioClips abgespielt wurden.
+     */
     private long lastPlayedAudioClips;
 
+    /**
+     * Die Anzahl der seit {@code lastPlayedAudioClips} abgespielten AudioClips.
+     */
     private int count;
 
     /**
