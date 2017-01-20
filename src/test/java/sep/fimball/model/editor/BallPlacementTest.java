@@ -1,6 +1,5 @@
 package sep.fimball.model.editor;
 
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.SceneManagerViewModel;
-import sep.fimball.viewmodel.pinballcanvas.ViewScreenshotCreator;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
@@ -85,20 +83,5 @@ public class BallPlacementTest
         assertThat(ball.getBaseElement().getId(), equalTo(BALL_ID));
 
         testPinballMachine.deleteFromDisk();
-    }
-
-    /**
-     * Diese Klasse stellt einen ViewScreenshotCreator für Testzwecke zur Verfügung.
-     */
-    private static class TestScreenshotCreator implements ViewScreenshotCreator
-    {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public WritableImage getScreenshot()
-        {
-            return new WritableImage(1, 1);
-        }
     }
 }
