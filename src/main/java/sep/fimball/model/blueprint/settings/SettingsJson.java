@@ -10,6 +10,7 @@ public class SettingsJson
     /**
      * Speichert die Sprache.
      */
+    // TODO use ENUM not String
     public String language;
 
     /**
@@ -45,6 +46,7 @@ public class SettingsJson
         /**
          * Speichert den KeyCode der Taste, die an eine Funktion gebunden ist.
          */
+        // TODO use ENUM not String
         public String keyCode;
 
         /**
