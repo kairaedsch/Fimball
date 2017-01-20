@@ -10,6 +10,7 @@ public class SettingsJson
     /**
      * Speichert die Sprache.
      */
+    // TODO use ENUM not String
     public String language;
 
     /**
