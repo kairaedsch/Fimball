@@ -207,7 +207,7 @@ public class PhysicsHandler<GameElementT>
                         if (element instanceof FlipperPhysicsElement)
                         {
                             // Das Element hat sich verändert, die Position ist möglicherweise nicht mehr aktuell => Neue Hashes generieren
-                            insertElementIntoHashMap((PhysicsElement<GameElementT>) element);
+                            insertElementIntoHashMap((FlipperPhysicsElement<GameElementT>) element);
                         }
                         elementEventArgsList.add(element.getStatus());
                         element.resetChanged();
