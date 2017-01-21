@@ -30,6 +30,7 @@ class PinballMachineFactory
 
             // Lade alle Highscores
             nullCheck(pinballMachineJson.highscores);
+            nullCheck(pinballMachineJson.id);
             ArrayList<Highscore> highscores = new ArrayList<>();
             for (PinballMachineJson.HighscoreJson highscoreJson : pinballMachineJson.highscores)
             {
@@ -37,17 +38,7 @@ class PinballMachineFactory
                 highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
             }
 
-            //TODO remove
-            PinballMachine pinballMachine;
-            if (pinballMachineJson.id != null)
-            {
-                pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineJson.id, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
-            }
-            else
-            {
-                pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
-            }
-
+            PinballMachine pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineJson.id, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");
             return Optional.of(pinballMachine);
         }
