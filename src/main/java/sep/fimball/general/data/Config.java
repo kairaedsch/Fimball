@@ -62,7 +62,10 @@ public class Config
      */
     public final static int MACHINE_BOX_MARGIN = 6;
 
-    public final static int MAX_EDITOR_SELECTION_AMOUNT = 5000;
+    /**
+     * Maximale Anzahl an Elementen, die man auswählen kann.
+     */
+    public final static int MAX_EDITOR_SELECTION_AMOUNT = 1000;
 
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.

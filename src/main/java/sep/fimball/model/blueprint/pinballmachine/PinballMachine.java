@@ -390,6 +390,10 @@ public class PinballMachine
         {
             elementsLoaded = true;
             pinballMachineManager.loadMachineElements(this);
+            if (!elements.stream().anyMatch((element -> element.getBaseElement().getType() == BaseElementType.BALL)))
+            {
+                addElement(BaseElementManager.getInstance().getElement("ball"), new Vector2());
+            }
         }
     }
 
