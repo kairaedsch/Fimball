@@ -4,10 +4,7 @@ import javafx.animation.AnimationTimer;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.ElementHandler;
-import sep.fimball.model.handler.GameEvent;
-import sep.fimball.model.handler.GameHandler;
-import sep.fimball.model.handler.HandlerGameElement;
+import sep.fimball.model.handler.*;
 
 /**
  * Das Spielelement des Spinners.
@@ -21,6 +18,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     private Vector2 ballSpeedDelta;
     private boolean accelerationUpdated;
     private AnimationTimer spinnerUpdate;
+    private HandlerGameSession handlerGameSession;
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
@@ -29,9 +27,10 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
      * @param gameBall Das Spielelement des Balls.
      */
-    public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall)
+    public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall, HandlerGameSession handlerGameSession)
     {
         super(element, bind);
+        this.handlerGameSession = handlerGameSession;
         ballSpeedDelta = new Vector2();
 
         gameBall.positionProperty().addListener(((observable, oldValue, newValue) -> {
@@ -59,6 +58,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
                     {
                         currentSpinPercentage = 0;
                         remainingSpins = remainingSpins - Config.SPINNER_SLOWDOWN_SPEED;
+                        addPointToPlayer();
                         switchToNextFrame();
                     }
                     else
@@ -95,6 +95,11 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
         {
             currentFrame += spinnerAnimationFrames;
         }
+    }
+
+    private void addPointToPlayer()
+    {
+        handlerGameSession.getCurrentPlayer().addPoints(1);
     }
 
     @Override

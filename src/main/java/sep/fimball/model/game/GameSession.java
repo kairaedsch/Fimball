@@ -137,7 +137,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         ObservableList<GameElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
         List<PhysicsElement<GameElement>> physicsElements = new ArrayList<>();
 
-        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(pinballMachine.elementsProperty(), physicsHandler, handlerManager);
+        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(this, pinballMachine.elementsProperty(), physicsHandler, handlerManager);
         elements.addAll(generatedElements.getGameElements());
         physicsElements.addAll(generatedElements.getPhysicsElements());
         gameBall.set(generatedElements.getBallGameElement());

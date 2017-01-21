@@ -25,7 +25,7 @@ public class ElementFactory
      * @param handlerManager Der handlerManager der GameSession von den neu erstellten GameElementen.
      * @return Ein GeneratedElements, welches alle neu erstellten Game- und PhysicsElemente enthält.
      */
-    public static GeneratedElements generateElements(ReadOnlyListProperty<PlacedElement> placedElements, PhysicsHandler<GameElement> physicsHandler, HandlerManager handlerManager)
+    public static GeneratedElements generateElements(GameSession session, ReadOnlyListProperty<PlacedElement> placedElements, PhysicsHandler<GameElement> physicsHandler, HandlerManager handlerManager)
     {
         BallGameElement ballGameElement;
         List<GameElement> gameElements = new ArrayList<>();
@@ -85,7 +85,7 @@ public class ElementFactory
                     physicsElements.add(physicsElement);
                     break;
                 case SPINNER:
-                    SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false, ballGameElement);
+                    SpinnerGameElement spinnerGameElement = new SpinnerGameElement(element, false, ballGameElement, session);
                     PhysicsElement<GameElement> spinnerPhysicsElement = new PhysicsElement<>(spinnerGameElement, spinnerGameElement.positionProperty().get(), spinnerGameElement.rotationProperty().get(), element.multiplierProperty().get(), spinnerGameElement.getPlacedElement().getBaseElement().getPhysics());
                     gameElements.add(spinnerGameElement);
                     physicsElements.add(spinnerPhysicsElement);

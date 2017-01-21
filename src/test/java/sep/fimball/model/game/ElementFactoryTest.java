@@ -39,6 +39,8 @@ public class ElementFactoryTest
     private PhysicsHandler<GameElement> physicsHandler;
     @Mock
     private HandlerManager handlerManager;
+    @Mock
+    private GameSession session;
 
     /**
      * Überprüft ob die ElementFactory korrekte GameElemente und PhysicsElemente erstellt.
@@ -46,7 +48,7 @@ public class ElementFactoryTest
     @Test
     public void testGenerateElements()
     {
-        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(generateAllPlacedElementTypes(), physicsHandler, handlerManager);
+        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(session, generateAllPlacedElementTypes(), physicsHandler, handlerManager);
 
         assertThat("Es wurden 9 GameElemente generiert", generatedElements.getGameElements().size(), is(9));
         assertThat("Es wurden 7 PhysicsElemente generiert", generatedElements.getPhysicsElements().size(), is(7));
