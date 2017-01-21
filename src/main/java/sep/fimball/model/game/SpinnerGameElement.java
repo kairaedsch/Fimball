@@ -99,7 +99,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
 
     private void addPointToPlayer()
     {
-        handlerGameSession.getCurrentPlayer().addPoints(1);
+        handlerGameSession.getCurrentPlayer().addPoints(getPointReward());
     }
 
     @Override

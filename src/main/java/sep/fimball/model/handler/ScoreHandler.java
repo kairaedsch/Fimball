@@ -1,5 +1,7 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.blueprint.base.BaseElementType;
+
 import java.util.Map;
 
 /**
@@ -28,7 +30,7 @@ public class ScoreHandler implements ElementHandler
     {
         Map<Integer, BaseRuleElementEvent> eventMap = element.getRuleElement().getEventMap();
 
-        if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints())
+        if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints() && element.getElementType() != BaseElementType.SPINNER)
             session.getCurrentPlayer().addPoints(element.getPointReward());
     }
 }
