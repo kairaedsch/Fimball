@@ -8,7 +8,6 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.DoubleMath;
-import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 /**
  * Berechnet einen Bereich des Spielfelds der angezeigt werden soll.
@@ -19,11 +18,6 @@ public class Camera
      * Die Zeit, zu der sich dieses Objekt zuletzt neu gezeichnet hat.
      */
     private long lastDraw;
-
-    /**
-     * Der Modus in dem gezeichnet werden soll.
-     */
-    private DrawMode drawMode;
 
     /**
      * Die Position der Kamera, die den Ausschnitt des Flipperautomaten angibt, der gezeichnet werden soll.
@@ -48,13 +42,11 @@ public class Camera
     /**
      * Erzeugt eine neue Kamera die dem Ball langsam folgt.
      *
-     * @param drawMode Der Zeichenmodus welcher angibt ob das Spiel oder Editorfenster gezeichnet wird bzw. ein Screenshot erzeugt wird.
      * @param cameraPositionViewModel Die eigentliche Position der "harten" Kamera welche dem Ball immer folgt.
      * @param cameraZoomViewModel Der eigentliche Zoom der "harten" Kamera
      */
-    public Camera(DrawMode drawMode, ReadOnlyObjectProperty<Vector2> cameraPositionViewModel, ReadOnlyDoubleProperty cameraZoomViewModel)
+    public Camera(ReadOnlyObjectProperty<Vector2> cameraPositionViewModel, ReadOnlyDoubleProperty cameraZoomViewModel)
     {
-        this.drawMode = drawMode;
         lastDraw = System.currentTimeMillis();
 
         cameraPosition = new SimpleObjectProperty<>();

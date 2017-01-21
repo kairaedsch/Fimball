@@ -69,7 +69,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         pinballCanvasDrawer = new PinballCanvasDrawer(canvas, pinballCanvasViewModel.getDrawMode(), sprites, pinballCanvasViewModel.getBoundingBox());
 
-        camera = new Camera(pinballCanvasViewModel.getDrawMode(), pinballCanvasViewModel.cameraPositionProperty(), pinballCanvasViewModel.cameraZoomProperty());
+        camera = new Camera(pinballCanvasViewModel.cameraPositionProperty(), pinballCanvasViewModel.cameraZoomProperty());
 
         Observer redrawObserver = (o, arg) -> redraw();
         pinballCanvasViewModel.addRedrawObserver(redrawObserver);
