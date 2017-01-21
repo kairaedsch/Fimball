@@ -33,6 +33,7 @@ public class Config
     public final static double MAX_ZOOM = 2;
 
     public final static double CAMERA_FOLLOW_SPEED = 0.05;
+
     public final static double CAMERA_ZOOM_SPEED = 0.01;
 
     /**
@@ -49,6 +50,8 @@ public class Config
      * Der minimale Abstand zwischen Teilen eines Automaten und dem Rand des Automaten.
      */
     public final static int MACHINE_BOX_MARGIN = 6;
+
+    public final static int MAX_EDITOR_SELECTION_AMOUNT = 5000;
 
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.

@@ -14,6 +14,8 @@ import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -38,7 +40,7 @@ public class SpriteSubViewModel
     /**
      * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
      */
-    private BooleanProperty selected;
+    private Supplier<Boolean> selected;
 
     /**
      * Das zugehörige GameElement.
@@ -101,7 +103,7 @@ public class SpriteSubViewModel
 
         localCoordinates = gameElement.getMediaElement().getLocalCoordinates();
 
-        selected = new SimpleBooleanProperty(false);
+        selected = () -> false;
 
         elementHeight = gameElement.getMediaElement().getElementHeight();
 
@@ -125,15 +127,15 @@ public class SpriteSubViewModel
      * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
      * @param selection   Die aktuell ausgewählten Elemente.
      */
-    public SpriteSubViewModel(GameElement gameElement, ReadOnlyListProperty<PlacedElement> selection)
+    public SpriteSubViewModel(GameElement gameElement, Set<PlacedElement> selection, IntegerProperty selectionSize)
     {
         this(gameElement);
 
-        selected.bind(Bindings.createBooleanBinding(() -> selection.stream().anyMatch(p -> p == gameElement.getPlacedElement()), selection));
+        selected = () -> selection.contains(gameElement.getPlacedElement());
 
         if (gameElement.getElementType() == BaseElementType.RAMP)
         {
-            visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selection));
+            visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selectionSize));
         }
     }
 
@@ -172,9 +174,9 @@ public class SpriteSubViewModel
      *
      * @return {@code true}, wenn das Sprite ausgewählt ist, {@code false} sonst.
      */
-    public ReadOnlyBooleanProperty selectedProperty()
+    public boolean selectedProperty()
     {
-        return selected;
+        return selected.get();
     }
 
     /**

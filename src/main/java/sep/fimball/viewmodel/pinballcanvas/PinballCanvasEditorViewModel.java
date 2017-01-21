@@ -31,7 +31,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     {
         super(editorSession, DrawMode.EDITOR);
 
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, editorSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()));
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, editorSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection(), pinballMachineEditorViewModel.selectionSizeProperty()));
 
         this.editorViewModel = pinballMachineEditorViewModel;
 

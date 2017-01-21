@@ -16,6 +16,7 @@ import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -90,22 +91,22 @@ public class SpriteSubViewModelTest
         // SpriteSubViewModel von einer Spielsitzung
         {
             SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
-            assertThat("Ein SpriteSubViewModel von einer Spielsitzung ist niemals ausgewählt", spriteSubViewModelGame.selectedProperty().get(), is(false));
+            assertThat("Ein SpriteSubViewModel von einer Spielsitzung ist niemals ausgewählt", spriteSubViewModelGame.selectedProperty(), is(false));
         }
 
         // SpriteSubViewModel von einer Editorsitzung
         {
-            ListProperty<PlacedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
-            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
+            SetProperty<PlacedElement> listOfSelecedElements = new SimpleSetProperty<>(FXCollections.observableSet(new HashSet<PlacedElement>()));
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements, new SimpleIntegerProperty());
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
 
             // Füge irgendein Element zur Liste hinzu
             listOfSelecedElements.add(Mockito.mock(PlacedElement.class));
-            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
 
             // Füge das PlacedElement des SpriteSubViewModels zur Liste hinzu
             listOfSelecedElements.add(placedElementOfGameElement);
-            assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(true));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(true));
         }
     }
 
@@ -145,8 +146,8 @@ public class SpriteSubViewModelTest
         {
             // Erstelle ein SpriteSubViewModel von einem Rampenelement
             when(gameElement.getElementType()).thenReturn(BaseElementType.RAMP);
-            ListProperty<PlacedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
-            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
+            SetProperty<PlacedElement> listOfSelecedElements = new SimpleSetProperty<>(FXCollections.observableSet(new HashSet<>()));
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements, new SimpleIntegerProperty());
 
             assertThat("Die Standardsichtbarkeit", spriteSubViewModelEditor.visibilityProperty().get(), is(1.0));
 

@@ -13,10 +13,6 @@ import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
 
-import static sep.fimball.general.data.PhysicsConfig.MAX_BALL_HEIGHT;
-import static sep.fimball.model.blueprint.base.BaseElementType.BALL;
-import static sep.fimball.model.blueprint.base.BaseElementType.NORMAL;
-
 /**
  * Stellt ein Spielelement auf einem Flipperautomaten dar. Im Gegensatz zu ElementTypeJson/PlacedElement wird das GameElement im Spiel zum zeichnen und für Spiel-Logik genutzt und wird nicht direkt serialisiert
  */
@@ -231,14 +227,7 @@ public class GameElement implements HandlerGameElement
      */
     public int getDrawOrder()
     {
-        if (getElementType() == BALL)
-        {
-            return heightProperty().get() > (MAX_BALL_HEIGHT / 2.0) ? BALL.getDrawOrder() : NORMAL.getDrawOrder();
-        }
-        else
-        {
-            return getElementType().getDrawOrder();
-        }
+        return getElementType().getDrawOrder();
     }
 
     /**

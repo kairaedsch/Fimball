@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SetProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -68,7 +69,7 @@ public class PinballMachineEditorViewModelTest
         pinballMachineEditorViewModel.mousePressedOnCanvas(mouseEventMock, pos);
 
         assertThat(pinballMachineEditorViewModel.getSelection().size(), is(1));
-        assertThat(pinballMachineEditorViewModel.getSelection().get(0), equalTo(ball));
+        assertThat(pinballMachineEditorViewModel.getSelection().iterator().next(), equalTo(ball));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class PinballMachineEditorViewModelTest
         when(mouseEventMock.getButton()).thenReturn(MouseButton.PRIMARY);
 
         // Ein Element wird manuell zur Auswahl hinzugefügt.
-        ListProperty<PlacedElement> selection = (ListProperty<PlacedElement>) pinballMachineEditorViewModel.getSelection();
+        SetProperty<PlacedElement> selection = (SetProperty<PlacedElement>) pinballMachineEditorViewModel.getSelection();
         selection.add(ball);
 
         pinballMachineEditorViewModel.mouseEnteredCanvas(pos);
@@ -114,7 +115,7 @@ public class PinballMachineEditorViewModelTest
         when(keyEventMock.getEventType()).thenReturn(KeyEvent.KEY_PRESSED);
 
         // Ein Element wird manuell zur Auswahl hinzugefügt.
-        ListProperty<PlacedElement> selection = (ListProperty<PlacedElement>) pinballMachineEditorViewModel.getSelection();
+        SetProperty<PlacedElement> selection = (SetProperty<PlacedElement>) pinballMachineEditorViewModel.getSelection();
         selection.add(ball);
 
         pinballMachineEditorViewModel.handleKeyEvent(keyEventMock);

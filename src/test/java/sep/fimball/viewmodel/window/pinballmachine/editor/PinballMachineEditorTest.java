@@ -14,6 +14,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class PinballMachineEditorTest
 
         test.addToSelection(baseElement);
         assertThat(test.getSelection().size(), is(1));
-        assertThat(test.getSelection().get(0).getBaseElement(), equalTo(baseElement));
+        assertThat(test.getSelection().iterator().next().getBaseElement(), equalTo(baseElement));
 
         test.addToSelection(baseElement);
         assertThat(test.getSelection().size(), is(1));
@@ -115,12 +116,14 @@ public class PinballMachineEditorTest
         Vector2 moveVector = new Vector2(1, 1);
         test.moveSelectionBy(moveVector);
         test.moveSelectionBy(moveVector);
-        assertThat(test.getSelection().get(0).positionProperty().get(), equalTo(new Vector2(2, 2)));
-        assertThat(test.getSelection().get(1).positionProperty().get(), equalTo(new Vector2(2, 2)));
+        Iterator<PlacedElement> iterator = test.getSelection().iterator();
+        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(2, 2)));
+        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(2, 2)));
 
         test.moveSelectionTo(moveVector);
-        assertThat(test.getSelection().get(0).positionProperty().get(), equalTo(new Vector2(1, 1)));
-        assertThat(test.getSelection().get(1).positionProperty().get(), equalTo(new Vector2(1, 1)));
+        iterator = test.getSelection().iterator();
+        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(1, 1)));
+        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(1, 1)));
     }
 
     /**

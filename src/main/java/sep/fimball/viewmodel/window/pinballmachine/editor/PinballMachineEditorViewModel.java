@@ -30,6 +30,7 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es,
@@ -334,7 +335,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                         RectangleDoubleByPoints rectangle = selectionRect.get();
                         if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                         {
-                            pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
+                            pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
                             selectionRect = Optional.empty();
                         }
                     }
@@ -359,7 +360,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                     RectangleDoubleByPoints rectangle = selectionRect.get();
                     if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
                     {
-                        pinballMachineEditor.addToSelection((ListProperty<PlacedElement>) pinballMachineEditor.getElementsAt(rectangle));
+                        pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
                         selectionRect = Optional.empty();
                     }
                 }
@@ -394,7 +395,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.removeSelection();
-            setSelectedAvailableElement(pinballMachineEditor.getSelection().get(0).getBaseElement());
+            PlacedElement aPlacedElement = pinballMachineEditor.getSelection().iterator().next();
+            setSelectedAvailableElement(aPlacedElement.getBaseElement());
         }
     }
 
@@ -488,7 +490,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @return Das aktuell auf dem Spielfeld ausgewählte Element.
      */
-    public ReadOnlyListProperty<PlacedElement> getSelection()
+    public Set<PlacedElement> getSelection()
     {
         return pinballMachineEditor.getSelection();
     }
@@ -592,5 +594,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void setCameraZoom(double cameraZoom)
     {
         this.cameraZoom.set(cameraZoom);
+    }
+
+    public IntegerProperty selectionSizeProperty()
+    {
+        return pinballMachineEditor.selectionSizeProperty();
     }
 }

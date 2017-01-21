@@ -1,6 +1,7 @@
 package sep.fimball.view.pinballcanvas;
 
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -13,6 +14,7 @@ import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.SpriteSubViewModel;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Die SpriteSubView ist für das Zeichnen eines Flipperautomaten-Elements
@@ -71,6 +73,16 @@ public class SpriteSubView
     private IntegerProperty drawOrder;
 
     /**
+     * Der Listener für die regionHashes.
+     */
+    private Optional<ChangeListener<List<Long>>> regionHashListener;
+
+    /**
+     * Der Listener für die drawOrder.
+     */
+    private Optional<ChangeListener<Number>> drawOrderlistener;
+
+    /**
      * Erzeugt eine neue SpriteSubView mit zugehörigem SpriteSubViewModel und
      * bindet sich an dieses.
      *
@@ -82,6 +94,8 @@ public class SpriteSubView
         this.viewModel = viewModel;
         this.imageCache = imageCache;
         this.regionHashes = new SimpleObjectProperty<>();
+        this.regionHashListener = Optional.empty();
+        this.drawOrderlistener = Optional.empty();
 
         drawOrder = new SimpleIntegerProperty();
         drawOrder.bind(viewModel.drawOrderProperty());
@@ -158,7 +172,7 @@ public class SpriteSubView
             {
                 drawImage(graphicsContext, image, drawMode, position, size);
             }
-            if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
+            if (viewModel.selectedProperty() && drawMode == DrawMode.EDITOR)
             {
                 drawImageBorder(graphicsContext, imageLayer, position, size);
             }
@@ -279,5 +293,22 @@ public class SpriteSubView
     public ReadOnlyIntegerProperty drawOrderProperty()
     {
         return drawOrder;
+    }
+
+    public void setDrawListener(ChangeListener<List<Long>> regionHashListener, ChangeListener<Number> drawOrderlistener)
+    {
+        clearDrawListener();
+        this.regionHashListener = Optional.of(regionHashListener);
+        this.drawOrderlistener = Optional.of(drawOrderlistener);
+        regionHashes.addListener(regionHashListener);
+        drawOrder.addListener(drawOrderlistener);
+    }
+
+    public void clearDrawListener()
+    {
+        regionHashListener.ifPresent(regionHashes::removeListener);
+        drawOrderlistener.ifPresent(drawOrder::removeListener);
+        this.regionHashListener = Optional.empty();
+        this.drawOrderlistener = Optional.empty();
     }
 }

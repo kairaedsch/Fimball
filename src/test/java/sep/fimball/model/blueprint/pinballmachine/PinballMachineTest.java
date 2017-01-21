@@ -1,6 +1,5 @@
 package sep.fimball.model.blueprint.pinballmachine;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,6 +14,7 @@ import sep.fimball.model.physics.element.BasePhysicsElement;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.not;
@@ -100,21 +100,21 @@ public class PinballMachineTest
 
         // Wähle links oben aus
         {
-            ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-10, -10), new Vector2(-4, -4)));
+            List<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-10, -10), new Vector2(-4, -4)));
             assertThat("ElementTop wurde ausgewählt", elementsAt.contains(placedElementTop), is(true));
             assertThat("ElementBottom wurde nicht ausgewählt", elementsAt.contains(placedElementBottom), is(false));
         }
 
         // Wähle rechts unten aus
         {
-            ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(4, 4), new Vector2(10, 10)));
+            List<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(4, 4), new Vector2(10, 10)));
             assertThat("ElementTop wurde nicht ausgewählt", elementsAt.contains(placedElementTop), is(false));
             assertThat("ElementBottom wurde ausgewählt", elementsAt.contains(placedElementBottom), is(true));
         }
 
         // Wähle in der Mitte aus
         {
-            ListProperty<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-3, -3), new Vector2(3, 3)));
+            List<PlacedElement> elementsAt = pinballMachine.getElementsAt(new RectangleDoubleByPoints(new Vector2(-3, -3), new Vector2(3, 3)));
             assertThat("ElementTop wurde nicht ausgewählt", elementsAt.contains(placedElementTop), is(false));
             assertThat("ElementBottom wurde nicht ausgewählt", elementsAt.contains(placedElementBottom), is(false));
         }

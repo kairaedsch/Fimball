@@ -127,9 +127,9 @@ public class PinballMachine
      * @param rect Das Viereck.
      * @return Die Elemente.
      */
-    public ListProperty<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
+    public List<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
     {
-        ListProperty<PlacedElement> matchingElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        List<PlacedElement> matchingElements = new ArrayList<>();
         for (PlacedElement element : elements)
         {
             Vector2 elemPos = element.positionProperty().get();

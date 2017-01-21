@@ -7,6 +7,10 @@ import sep.fimball.model.physics.element.BallNudgeModify;
 import sep.fimball.model.physics.element.BallPhysicsElement;
 import sep.fimball.model.physics.element.BallResetModify;
 
+import static sep.fimball.general.data.PhysicsConfig.MAX_BALL_HEIGHT;
+import static sep.fimball.model.blueprint.base.BaseElementType.BALL;
+import static sep.fimball.model.blueprint.base.BaseElementType.NORMAL;
+
 /**
  * Das Spielelement des Balls.
  */
@@ -50,5 +54,15 @@ public class BallGameElement extends GameElement implements HandlerBallGameEleme
     {
         Vector2 newPos = getPlacedElement().positionProperty().get();
         physicsElement.addModify((BallResetModify) () -> newPos);
+    }
+
+    /**
+     * Gibt die Reihenfolge beim Zeichnen dieses GameElements zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
+    public int getDrawOrder()
+    {
+        return heightProperty().get() > (MAX_BALL_HEIGHT / 2.0) ? BALL.getDrawOrder() : (NORMAL.getDrawOrder() + 1);
     }
 }

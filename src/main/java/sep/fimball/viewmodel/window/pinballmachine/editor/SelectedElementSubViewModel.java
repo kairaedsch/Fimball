@@ -5,6 +5,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Das SelectedElementSubViewModel stellt der View Daten über das aktuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
@@ -87,13 +88,14 @@ public class SelectedElementSubViewModel
 
         setPlacedElement(Optional.empty());
 
-        ListProperty<PlacedElement> selection = new SimpleListProperty<>(pinballMachineEditor.getSelection());
+        Set<PlacedElement> selection = pinballMachineEditor.getSelection();
 
-        selection.addListener((observableValue, placedElements, t1) ->
+        pinballMachineEditor.selectionSizeProperty().addListener((observableValue, placedElements, t1) ->
         {
             if (selection.size() == 1)
             {
-                setPlacedElement(Optional.of(selection.get(0)));
+                PlacedElement aPlacedElement = selection.iterator().next();
+                setPlacedElement(Optional.of(aPlacedElement));
             }
             else
             {

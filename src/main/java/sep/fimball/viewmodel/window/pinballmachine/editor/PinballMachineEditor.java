@@ -1,8 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
@@ -12,6 +10,9 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.*;
 
+import static javafx.collections.FXCollections.observableArrayList;
+import static sep.fimball.general.data.Config.MAX_EDITOR_SELECTION_AMOUNT;
+
 /**
  * Das Model des Editors.
  */
@@ -20,7 +21,17 @@ public class PinballMachineEditor
     /**
      * Die aktuelle Auswahl.
      */
-    private ListProperty<PlacedElement> selection;
+    private Set<PlacedElement> selection;
+
+    /**
+     * Die aktuelle Auswahl nicht editierbar
+     */
+    private Set<PlacedElement> unmodifiableSelection;
+
+    /**
+     * Die aktuelle Auswahl.
+     */
+    private IntegerProperty selectionSize;
 
     /**
      * Die genauen Positionen von Elementen.
@@ -40,7 +51,9 @@ public class PinballMachineEditor
     PinballMachineEditor(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
-        selection = new SimpleListProperty<>(FXCollections.observableArrayList());
+        selection = new HashSet<>();
+        unmodifiableSelection = Collections.unmodifiableSet(selection);
+        selectionSize = new SimpleIntegerProperty(0);
         detailedPositions = new HashMap<>();
     }
 
@@ -94,15 +107,16 @@ public class PinballMachineEditor
     {
         if (!selection.isEmpty())
         {
+            PlacedElement aPlacedElement = selection.iterator().next();
 
             Map<PlacedElement, Vector2> relativePos = new HashMap<>();
-            relativePos.put(selection.get(0), new Vector2(0, 0));
+            relativePos.put(aPlacedElement, new Vector2(0, 0));
 
             if (selection.size() > 1)
             {
-                for (int i = 1; i < selection.size(); i++)
+                for (PlacedElement placedElement : selection)
                 {
-                    relativePos.put(selection.get(i), getPosition(selection.get(i)).minus(getPosition(selection.get(0))));
+                    relativePos.put(placedElement, getPosition(placedElement).minus(getPosition(aPlacedElement)));
                 }
             }
 
@@ -123,7 +137,8 @@ public class PinballMachineEditor
             double rotation = selection.stream().map(p -> p.getBaseElement().getMedia().getRotationAccuracy()).reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
             if (rotation == 0)
                 rotation = 90;
-            Vector2 mainPivotPoint = selection.get(0).positionProperty().get().plus(selection.get(0).getBaseElement().getPhysics().getPivotPoint());
+            PlacedElement aPlacedElement = selection.iterator().next();
+            Vector2 mainPivotPoint = aPlacedElement.positionProperty().get().plus(aPlacedElement.getBaseElement().getPhysics().getPivotPoint());
             for (PlacedElement placedElement : selection)
             {
                 Vector2 pivotPoint = placedElement.getBaseElement().getPhysics().getPivotPoint();
@@ -152,10 +167,11 @@ public class PinballMachineEditor
      */
     void addToSelection(PlacedElement placedElement)
     {
-        if (!selection.contains(placedElement))
+        if (!selection.contains(placedElement) && selection.size() < MAX_EDITOR_SELECTION_AMOUNT)
         {
             setPosition(placedElement, getPosition(placedElement).round());
             selection.add(placedElement);
+            selectionSize.set(selection.size());
         }
     }
 
@@ -164,11 +180,17 @@ public class PinballMachineEditor
      *
      * @param placedElementList Die Elemente, die hinzugefügt werden sollen.
      */
-    void addToSelection(ListProperty<PlacedElement> placedElementList)
+    void addToSelection(List<PlacedElement> placedElementList)
     {
         if (placedElementList != null)
         {
-            placedElementList.forEach(this::addToSelection);
+            for (int i = 0; i < placedElementList.size() && selection.size() < MAX_EDITOR_SELECTION_AMOUNT; i++)
+            {
+                PlacedElement placedElement = placedElementList.get(i);
+                setPosition(placedElement, getPosition(placedElement).round());
+                selection.add(placedElement);
+            }
+            selectionSize.set(selection.size());
         }
     }
 
@@ -180,6 +202,7 @@ public class PinballMachineEditor
     void addToSelection(BaseElement baseElement)
     {
         selection.clear();
+        selectionSize.set(selection.size());
         addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 1, 1, 0));
     }
 
@@ -191,6 +214,7 @@ public class PinballMachineEditor
     void removeFromSelection(PlacedElement placedElement)
     {
         selection.remove(placedElement);
+        selectionSize.set(selection.size());
     }
 
     /**
@@ -199,6 +223,7 @@ public class PinballMachineEditor
     void clearSelection()
     {
         selection.clear();
+        selectionSize.set(selection.size());
     }
 
     /**
@@ -209,7 +234,7 @@ public class PinballMachineEditor
      */
     ReadOnlyListProperty<PlacedElement> getElementsAt(Vector2 pos)
     {
-        ListProperty<PlacedElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListProperty<PlacedElement> elements = new SimpleListProperty<>(observableArrayList());
         Optional<PlacedElement> element = pinballMachine.getElementAt(pos);
         element.ifPresent(elements::add);
         return elements;
@@ -221,7 +246,7 @@ public class PinballMachineEditor
      * @param rect Das Rechteck.
      * @return Die Elemente, die in dem Rechteck liegen.
      */
-    ReadOnlyListProperty<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
+    List<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
     {
         return pinballMachine.getElementsAt(rect);
     }
@@ -231,9 +256,9 @@ public class PinballMachineEditor
      *
      * @return Die aktuelle Auswahl.
      */
-    ReadOnlyListProperty<PlacedElement> getSelection()
+    Set<PlacedElement> getSelection()
     {
-        return selection;
+        return unmodifiableSelection;
     }
 
     /**
@@ -259,5 +284,10 @@ public class PinballMachineEditor
     {
         detailedPositions.put(placedElement, newPos);
         placedElement.setPosition(newPos.round());
+    }
+
+    public IntegerProperty selectionSizeProperty()
+    {
+        return selectionSize;
     }
 }
