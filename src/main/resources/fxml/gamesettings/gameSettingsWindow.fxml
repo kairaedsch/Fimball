@@ -65,7 +65,7 @@
                 <Label fx:id="key_11" text="!gamesettings.audio.volume.sfx.key!" GridPane.rowIndex="3"/>
                 <Slider fx:id="sfxVolumeSlider" blockIncrement="1.0" value="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <tooltip>
-                        <Tooltip text="!gamesettings.audio.volume.sfx.tip.key!"/>
+                        <Tooltip fx:id="key_17" text="!gamesettings.audio.volume.sfx.tip.key!"/>
                     </tooltip>
                 </Slider>
                 <Label fx:id="sfxVolumePercent" text="50%" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
