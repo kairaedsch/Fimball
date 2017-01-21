@@ -144,16 +144,6 @@ public class PinballMachineManager
         else
         {
             pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
-            try
-            {
-                deletePreviewImage(pinballMachine);
-            }
-            catch (IOException e)
-            {
-                System.err.println("Preview image of Machine \"" + pinballMachine.getID() + "\" not deleted");
-                e.printStackTrace();
-                return false;
-            }
         }
         if (!pathToMachine.toFile().exists())
         {

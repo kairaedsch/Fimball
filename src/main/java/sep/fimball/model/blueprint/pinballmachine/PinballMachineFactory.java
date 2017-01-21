@@ -37,12 +37,15 @@ class PinballMachineFactory
                 highscores.add(new Highscore(highscoreJson.score, highscoreJson.playerName));
             }
 
+            //TODO remove
             PinballMachine pinballMachine;
-            if(pinballMachineJson.id !=null)
+            if (pinballMachineJson.id != null)
             {
                 pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineJson.id, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
-            } else {
-                pinballMachine  = new PinballMachine(pinballMachineJson.name, pinballMachineId, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
+            }
+            else
+            {
+                pinballMachine = new PinballMachine(pinballMachineJson.name, pinballMachineId, Optional.ofNullable(pinballMachineJson.previewImagePath), highscores, pinballMachineManager, false);
             }
 
             System.out.println("Machine      \"" + pinballMachineId + "\" loaded");

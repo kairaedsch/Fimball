@@ -40,7 +40,7 @@ public class SpriteSubViewModel
     /**
      * Gibt an, ob das Sprite aktuell ausgewählt ist und somit besonders gezeichnet werden muss.
      */
-    private Supplier<Boolean> selected;
+    private BooleanProperty selected;
 
     /**
      * Das zugehörige GameElement.
@@ -103,7 +103,7 @@ public class SpriteSubViewModel
 
         localCoordinates = gameElement.getMediaElement().getLocalCoordinates();
 
-        selected = () -> false;
+        selected = new SimpleBooleanProperty(false);
 
         elementHeight = gameElement.getMediaElement().getElementHeight();
 
@@ -131,7 +131,7 @@ public class SpriteSubViewModel
     {
         this(gameElement);
 
-        selected = () -> selection.contains(gameElement.getPlacedElement());
+        selected.bind(Bindings.createBooleanBinding(() -> selection.contains(gameElement.getPlacedElement()), selectionSize));
 
         if (gameElement.getElementType() == BaseElementType.RAMP)
         {
@@ -174,9 +174,9 @@ public class SpriteSubViewModel
      *
      * @return {@code true}, wenn das Sprite ausgewählt ist, {@code false} sonst.
      */
-    public boolean selectedProperty()
+    public ReadOnlyBooleanProperty selectedProperty()
     {
-        return selected.get();
+        return selected;
     }
 
     /**

@@ -86,11 +86,8 @@ public class EditorSessionSubViewModel
         {
             final boolean[] success = new boolean[1];
             editorViewModel.getSceneManagerViewModel().pushDialog(new BusyMessageViewModel("editor.editor.saving", () -> {
+                pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
                 success[0] = pinballMachine.saveToDisk(false);
-                if (success[0])
-                {
-                    pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
-                }
             }, () -> {
                 editorViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("editor.settings.saveMessage." + (success[0] ? "success" : "fail")));
             }));

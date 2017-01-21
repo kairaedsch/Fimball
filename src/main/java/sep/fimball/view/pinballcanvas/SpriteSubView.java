@@ -172,7 +172,7 @@ public class SpriteSubView
             {
                 drawImage(graphicsContext, image, drawMode, position, size);
             }
-            if (viewModel.selectedProperty() && drawMode == DrawMode.EDITOR)
+            if (viewModel.selectedProperty().get() && drawMode == DrawMode.EDITOR)
             {
                 drawImageBorder(graphicsContext, imageLayer, position, size);
             }

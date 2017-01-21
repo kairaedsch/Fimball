@@ -400,5 +400,4 @@ public class PinballMachine
     private PinballMachine(PinballMachineManager pinballMachineManager) {
         this.pinballMachineManager = pinballMachineManager;
     }
-
 }

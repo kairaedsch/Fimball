@@ -164,7 +164,7 @@ public class SpriteSubViewTest
         Mockito.when(spriteSubViewModelMock.scaleProperty()).thenReturn(new SimpleDoubleProperty(SCALE));
         Mockito.when(imageMock.getWidth()).thenReturn(IMAGE_WIDTH);
         Mockito.when(imageMock.getHeight()).thenReturn(IMAGE_HEIGHT);
-        Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(true);
+        Mockito.when(spriteSubViewModelMock.selectedProperty()).thenReturn(new SimpleBooleanProperty(true));
         Mockito.when(spriteSubViewModelMock.getElementHeight()).thenReturn(ELEMENT_HEIGHT);
         Mockito.when(spriteSubViewModelMock.visibilityProperty()).thenReturn(new SimpleDoubleProperty(1.0));
         Mockito.when(spriteSubViewModelMock.drawOrderProperty()).thenReturn(new SimpleIntegerProperty(0));
