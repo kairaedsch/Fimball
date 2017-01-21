@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.SelectedElementSubViewModel;
 
 /**
@@ -98,8 +99,11 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         strengthSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.multiplierProperty());
         pointsSlider.valueProperty().bindBidirectional(selectedElementSubViewModel.pointsProperty());
 
-        strengthLabel.textProperty().bind(Bindings.concat("Strength: ", strengthSlider.valueProperty().asString("%.1f")));
-        pointsLabel.textProperty().bind(Bindings.concat("Points: ", pointsSlider.valueProperty().asString("%.0f")));
+        LanguageManagerViewModel languageManager = LanguageManagerViewModel.getInstance();
+        strengthLabel.textProperty().bind(Bindings.concat(languageManager.textProperty("editor.selected.strength.key"), " ",
+                strengthSlider.valueProperty().asString("%.1f")));
+        pointsLabel.textProperty().bind(Bindings.concat(languageManager.textProperty("editor.selected.points.key"), " ",
+                pointsSlider.valueProperty().asString("%.0f")));
 
         nameLabel.textProperty().bind(selectedElementSubViewModel.nameProperty());
         descriptionLabel.textProperty().bind(selectedElementSubViewModel.descriptionProperty());

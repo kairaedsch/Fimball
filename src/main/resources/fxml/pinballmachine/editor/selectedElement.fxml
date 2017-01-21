@@ -21,9 +21,9 @@
         <VBox.margin>
             <Insets right="5"/>
         </VBox.margin>
-        <Label text="Name: " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="key_1" text="!editor.selected.name.key!" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label fx:id="nameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Label text="Description: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="key_2" text="!editor.selected.description.key!" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label fx:id="strengthLabel" text="Strength: 3" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <Slider fx:id="strengthSlider" blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
@@ -33,17 +33,17 @@
     <HBox>
         <HBox HBox.hgrow="ALWAYS" styleClass="selectedElementButtonContainer">
             <Pane HBox.hgrow="ALWAYS" />
-            <Button fx:id="duplicateButton" mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="Duplicate"/>
+            <Button fx:id="duplicateButton" mnemonicParsing="false" onMouseClicked="#duplicateClicked" styleClass="dialogButton" text="!editor.selected.duplicate.key!"/>
             <Pane HBox.hgrow="ALWAYS" />
         </HBox>
         <HBox HBox.hgrow="ALWAYS" styleClass="selectedElementButtonContainer">
             <Pane HBox.hgrow="ALWAYS" />
-            <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="Remove"/>
+            <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#removeClicked" styleClass="dialogButton" text="!editor.selected.remove.key!"/>
             <Pane HBox.hgrow="ALWAYS" />
         </HBox>
         <HBox HBox.hgrow="ALWAYS" styleClass="selectedElementButtonContainer">
             <Pane HBox.hgrow="ALWAYS" />
-            <Button fx:id="rotateButton" mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="Rotate"/>
+            <Button fx:id="rotateButton" mnemonicParsing="false" onMouseClicked="#rotateClicked" styleClass="dialogButton" text="!editor.selected.rotate.key!"/>
             <Pane HBox.hgrow="ALWAYS" />
         </HBox>
     </HBox>

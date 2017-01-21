@@ -116,7 +116,7 @@
             <VBox>
                 <HBox styleClass="editorMenuBar" prefHeight="65">
                     <Pane HBox.hgrow="ALWAYS" />
-                    <Label text="Properties" styleClass="editorMenuBarTitle"/>
+                    <Label fx:id="key_6" text="!editor.menubar.key!" styleClass="editorMenuBarTitle"/>
                     <Pane HBox.hgrow="ALWAYS" />
                 </HBox>
                 <VBox VBox.vgrow="ALWAYS" fx:id="selectedElement"/>
