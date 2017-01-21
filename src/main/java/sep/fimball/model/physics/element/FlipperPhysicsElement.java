@@ -52,12 +52,22 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
         {
             minRotation = FLIPPER_MAX_ROTATION;
             maxRotation = FLIPPER_MIN_ROTATION;
+
+            // Move flipper to default position
+            // TODO - hack
+            setRotation(minRotation);
+            setRotation(maxRotation);
         }
         else
         {
             // Bei dem Rechten Flipperarm werden die Werte vertauscht, damit beide Arme gleich weit nach oben bzw. unten gedreht werden können.
             minRotation = -FLIPPER_MIN_ROTATION;
             maxRotation = -FLIPPER_MAX_ROTATION;
+
+            // Move flipper to default position
+            // TODO - hack
+            setRotation(maxRotation);
+            setRotation(minRotation);
         }
     }
 
