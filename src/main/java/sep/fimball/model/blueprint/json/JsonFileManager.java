@@ -3,8 +3,9 @@ package sep.fimball.model.blueprint.json;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class JsonFileManager
         String json;
         try
         {
-            json = new String(Files.readAllBytes(path));
+            json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         }
         catch (IOException e)
         {
@@ -65,7 +66,7 @@ public class JsonFileManager
      */
     public static boolean saveToJson(String path, Object classInstance)
     {
-        try (FileWriter writer = new FileWriter(path))
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), Charset.forName("UTF-8").newEncoder())))
         {
             Gson gson = new Gson();
             gson.toJson(classInstance, writer);
