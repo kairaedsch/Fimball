@@ -15,8 +15,8 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gamesettings.GameSettingsViewModel;
+import sep.fimball.viewmodel.dialog.message.question.QuestionMessageViewModel;
 import sep.fimball.viewmodel.dialog.playername.PlayerNameViewModel;
-import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
@@ -74,11 +74,11 @@ public class MainMenuViewModel extends WindowViewModel
     {
         if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
         {
-            pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
+            pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, Optional.of(PinballMachineManager.getInstance().pinballMachinesProperty().get(0)));
         }
         else
         {
-            // TODO Ansonsten Nullpointer bei keiner Maschine
+            pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, Optional.empty());
         }
         pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, new SortedList<>(PinballMachineManager.getInstance().pinballMachinesProperty(), Comparator.comparing(o -> o.nameProperty().get().toLowerCase())), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
@@ -91,7 +91,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     void switchPinballMachineInfo(PinballMachine pinballMachine)
     {
-        pinballMachineInfoSubViewModel.update(pinballMachine);
+        pinballMachineInfoSubViewModel.update(Optional.ofNullable(pinballMachine));
     }
 
     /**
@@ -119,7 +119,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     void startEditor(PinballMachine pinballMachine)
     {
-        sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine);
     }
 
     /**
@@ -147,7 +147,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     public void addNewPinballMachine()
     {
-        sceneManager.setWindow(new PinballMachineEditorViewModel(PinballMachineManager.getInstance().createNewMachine()));
+        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, PinballMachineManager.getInstance().createNewMachine());
     }
 
     @Override
@@ -206,7 +206,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     private void exitGame()
     {
-        sceneManager.pushDialog(new QuestionViewModel("mainmenu.exitQuestion", () ->
+        sceneManager.pushDialog(new QuestionMessageViewModel("mainmenu.exitQuestion", () ->
         {
             Platform.exit();
             System.exit(0);

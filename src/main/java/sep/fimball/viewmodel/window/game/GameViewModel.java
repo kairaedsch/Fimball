@@ -7,13 +7,16 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.general.data.Sounds;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.game.GameSession;
 import sep.fimball.model.game.Player;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventConverter;
+import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.SoundManagerViewModel;
 import sep.fimball.viewmodel.dialog.gameover.GameOverViewModel;
+import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;
 import sep.fimball.viewmodel.dialog.pause.PauseViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasGameViewModel;
 import sep.fimball.viewmodel.window.WindowType;
@@ -71,6 +74,13 @@ public class GameViewModel extends WindowViewModel
      */
     private KeyEventConverter keyEventConverter;
 
+    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
+    {
+        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
+            sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor)));
+        }));
+    }
+
     /**
      * Erzeugt ein neues GameViewModel.
      *
@@ -116,7 +126,7 @@ public class GameViewModel extends WindowViewModel
                 }
                 if (this.gameSession.isStartedFromEditor())
                 {
-                    sceneManager.setWindow(new PinballMachineEditorViewModel(this.gameSession.getPinballMachine()));
+                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, this.gameSession.getPinballMachine());
                 }
                 else
                 {
@@ -199,7 +209,7 @@ public class GameViewModel extends WindowViewModel
                 gameSession.pauseAll();
                 if (gameSession.isStartedFromEditor())
                 {
-                    sceneManager.setWindow(new PinballMachineEditorViewModel(gameSession.getPinballMachine()));
+                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, gameSession.getPinballMachine());
                 }
                 else
                 {

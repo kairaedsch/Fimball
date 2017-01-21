@@ -2,9 +2,9 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.EditorSession;
-import sep.fimball.model.game.GameSession;
-import sep.fimball.viewmodel.dialog.message.MessageViewModel;
-import sep.fimball.viewmodel.dialog.question.QuestionViewModel;
+import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;
+import sep.fimball.viewmodel.dialog.message.normal.NormalMessageViewModel;
+import sep.fimball.viewmodel.dialog.message.question.QuestionMessageViewModel;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
@@ -36,8 +36,9 @@ public class EditorSessionSubViewModel
 
     /**
      * Erzeugt eine neue Instanz von EditorSessionSubViewModel.
+     *
      * @param viewModel Das Haupt-Viewmodel des Editors.
-     * @param machine Die im Editor bearbeitete PinballMachine.
+     * @param machine   Die im Editor bearbeitete PinballMachine.
      */
     public EditorSessionSubViewModel(PinballMachineEditorViewModel viewModel, PinballMachine machine)
     {
@@ -55,7 +56,7 @@ public class EditorSessionSubViewModel
     {
         editorSession.stopUpdateLoop();
         editorSession.stopAutoSaveLoop(false);
-        editorViewModel.getSceneManagerViewModel().setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, new String[]{"Editor Player"}, true)));
+        GameViewModel.setAsWindowWithBusyDialog(editorViewModel.getSceneManagerViewModel(), pinballMachine, new String[]{"Editor Player"}, true);
     }
 
     /**
@@ -63,7 +64,7 @@ public class EditorSessionSubViewModel
      */
     public void exitToMainMenu()
     {
-        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.settings.exitToMainMenuQuestion", () ->
+        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionMessageViewModel("editor.settings.exitToMainMenuQuestion", () ->
         {
             editorSession.stopUpdateLoop();
             editorSession.stopAutoSaveLoop(true);
@@ -77,16 +78,23 @@ public class EditorSessionSubViewModel
      */
     public void savePinballMachine()
     {
-        if(pinballMachine.nameProperty().get().isEmpty()) {
-            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage.emptyName"));
-        } else
+        if (pinballMachine.nameProperty().get().isEmpty())
         {
-            boolean success = pinballMachine.saveToDisk(false);
-            if (success)
-            {
-                pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
-            }
-            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.saveMessage." + (success ? "success" : "fail")));
+            editorViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("editor.settings.saveMessage.emptyName"));
+        }
+        else
+        {
+            final boolean[] success = new boolean[1];
+            editorViewModel.getSceneManagerViewModel().pushDialog(new BusyMessageViewModel("editor.editor.saving", () -> {
+                success[0] = pinballMachine.saveToDisk(false);
+                if (success[0])
+                {
+                    pinballMachine.savePreviewImage(pinballCanvasViewModel.createScreenshot());
+                }
+            }, () -> {
+                editorViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("editor.settings.saveMessage." + (success[0] ? "success" : "fail")));
+            }));
+
         }
     }
 
@@ -95,10 +103,10 @@ public class EditorSessionSubViewModel
      */
     public void deletePinballMachine()
     {
-        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionViewModel("editor.settings.deleteQuestion", () ->
+        editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionMessageViewModel("editor.settings.deleteQuestion", () ->
         {
             boolean success = pinballMachine.deleteFromDisk();
-            editorViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
+            editorViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
             if (success)
                 editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel());
         }));

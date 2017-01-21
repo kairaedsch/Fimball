@@ -62,7 +62,7 @@ public class SceneManagerViewModel
             Optional<PinballMachine> autoSavedMachine = PinballMachineManager.getInstance().loadAutoSavedMachine();
             if(autoSavedMachine.isPresent())
             {
-                setWindow(new PinballMachineEditorViewModel(autoSavedMachine.get()));
+                PinballMachineEditorViewModel.setAsWindowWithBusyDialog(this, PinballMachineManager.getInstance().createNewMachine());
             } else {
                 setWindow(new SplashScreenViewModel());
             }

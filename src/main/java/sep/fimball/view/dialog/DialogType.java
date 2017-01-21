@@ -40,12 +40,7 @@ public enum DialogType implements ViewType
     /**
      * Der Message-Dialog.
      */
-    MESSAGE("message/messageDialog.fxml"),
-
-    /**
-     * Der Message-Dialog.
-     */
-    QUESTION("question/questionDialog.fxml");
+    MESSAGE("message/messageDialog.fxml");
 
     /**
      * Der Pfad zu der zum Fenster-Typ gehörende FXML-Datei.

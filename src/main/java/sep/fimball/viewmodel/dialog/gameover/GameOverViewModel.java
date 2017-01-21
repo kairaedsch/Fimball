@@ -5,7 +5,6 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
-import sep.fimball.model.game.GameSession;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
@@ -62,7 +61,7 @@ public class GameOverViewModel extends DialogViewModel
     public void restartGame()
     {
         sceneManager.popDialog();
-        sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, false)));
+        GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, playerNames, false);
     }
 
     /**

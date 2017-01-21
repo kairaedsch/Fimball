@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
-import sep.fimball.viewmodel.dialog.message.MessageViewModel;
+import sep.fimball.viewmodel.dialog.message.normal.NormalMessageViewModel;
 
 /**
  * Das KeybindSubViewModel stellt der View Daten über eine Tastenbelegung und das dazu gehörende {@link sep.fimball.model.game.GameElement} zur Verfügung und ermöglicht die Änderung der zugeteilten Taste.
@@ -69,7 +69,7 @@ public class KeybindSubViewModel
     {
         if (keyCode == KeyCode.UNDEFINED)
         {
-            gameSettingsViewModel.getSceneManagerViewModel().pushDialog(new MessageViewModel("gamesettings.undefinedKey"));
+            gameSettingsViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("gamesettings.undefinedKey"));
         } else
         {
             settings.setKeyBinding(keyCode, keyBinding);

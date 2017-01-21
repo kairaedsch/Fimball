@@ -1,9 +1,12 @@
 package sep.fimball.viewmodel.window.mainmenu;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.Highscore;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+
+import java.util.Optional;
 
 /**
  * Das PinballMachineInfoSubViewModel stellt der View detaillierte Daten über einen Flipperautomaten bereit und ermöglicht das Starten und Editieren dieses Automaten.
@@ -18,7 +21,7 @@ public class PinballMachineInfoSubViewModel
     /**
      * Der Flipperautomat, dessen Informationen zur Verfügung gestellt werden.
      */
-    private ObjectProperty<PinballMachine> pinballMachine;
+    private ObjectProperty<Optional<PinballMachine>> pinballMachine;
 
     /**
      * Der Name des Flipperautomaten.
@@ -41,7 +44,7 @@ public class PinballMachineInfoSubViewModel
      * @param mainMenu       Das korrespondierende MainMenuViewModel.
      * @param pinballMachine Der Flipperautomat, dessen Informationen dargestellt werden sollen.
      */
-    PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, PinballMachine pinballMachine)
+    PinballMachineInfoSubViewModel(MainMenuViewModel mainMenu, Optional<PinballMachine> pinballMachine)
     {
         this.mainMenu = mainMenu;
         this.pinballMachine = new SimpleObjectProperty<>();
@@ -57,15 +60,25 @@ public class PinballMachineInfoSubViewModel
      *
      * @param pinballMachine Der neue Flipperautomat.
      */
-    void update(PinballMachine pinballMachine)
+    void update(Optional<PinballMachine> pinballMachine)
     {
         this.pinballMachine.set(pinballMachine);
 
-        name.bind(pinballMachine.nameProperty());
-        imagePath.bind(pinballMachine.absolutePreviewImagePathProperty());
-        highscoreList.unbind();
-        highscoreList.set(FXCollections.observableArrayList());
-        highscoreList.bind(pinballMachine.highscoreListProperty());
+        if(pinballMachine.isPresent())
+        {
+            name.bind(pinballMachine.get().nameProperty());
+            imagePath.bind(pinballMachine.get().absolutePreviewImagePathProperty());
+            highscoreList.unbind();
+            highscoreList.set(FXCollections.observableArrayList());
+            highscoreList.bind(pinballMachine.get().highscoreListProperty());
+        }
+        else
+        {
+            name.bind(Bindings.concat(""));
+            imagePath.bind(Bindings.concat(""));
+            highscoreList.unbind();
+            highscoreList.set(FXCollections.observableArrayList());
+        }
     }
 
     /**
@@ -73,7 +86,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void showPlayerNameDialog()
     {
-        mainMenu.showPlayerNameDialog(pinballMachine.get());
+        pinballMachine.get().ifPresent(mainMenu::showPlayerNameDialog);
     }
 
     /**
@@ -81,7 +94,7 @@ public class PinballMachineInfoSubViewModel
      */
     public void startEditor()
     {
-        mainMenu.startEditor(pinballMachine.get());
+        pinballMachine.get().ifPresent(mainMenu::startEditor);
     }
 
     /**
@@ -119,7 +132,7 @@ public class PinballMachineInfoSubViewModel
      *
      * @return Der Flipperautomat.
      */
-    ReadOnlyObjectProperty<PinballMachine> pinballMachineReadOnlyProperty()
+    ReadOnlyObjectProperty<Optional<PinballMachine>> pinballMachineReadOnlyProperty()
     {
         return pinballMachine;
     }
