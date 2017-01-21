@@ -32,6 +32,7 @@ class PinballMachineFactory
             nullCheck(pinballMachineJson.highscores);
             nullCheck(pinballMachineJson.id);
             ArrayList<Highscore> highscores = new ArrayList<>();
+
             for (PinballMachineJson.HighscoreJson highscoreJson : pinballMachineJson.highscores)
             {
                 nullCheck(highscoreJson);
