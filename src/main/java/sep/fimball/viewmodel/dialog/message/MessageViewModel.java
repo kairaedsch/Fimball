@@ -45,7 +45,6 @@ public abstract class MessageViewModel extends DialogViewModel
 
         if (bindLeftButton)
         {
-
             this.leftButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.left.key"));
         }
 
