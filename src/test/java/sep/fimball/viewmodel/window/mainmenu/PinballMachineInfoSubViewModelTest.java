@@ -34,8 +34,8 @@ public class PinballMachineInfoSubViewModelTest
         when(pinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
         when(newPinballMachine.absolutePreviewImagePathProperty()).thenReturn(new SimpleStringProperty(""));
 
-        PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, pinballMachine);
-        test.update(newPinballMachine);
+        PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, java.util.Optional.of(pinballMachine));
+        test.update(java.util.Optional.of(newPinballMachine));
         assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(newPinballMachine));
         assertThat(test.nameProperty().get(), equalTo(newPinballMachine.nameProperty().get()));
         newPinballMachine.addHighscore(new Highscore(100, "Test"));

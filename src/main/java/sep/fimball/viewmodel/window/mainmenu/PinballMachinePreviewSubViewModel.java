@@ -4,6 +4,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 
+import java.util.Optional;
+
 /**
  * Das PinballMachinePreviewSubViewModel stellt der View Daten über einen Flipperautomat bereit und ermöglicht dessen Auswahl, sodass eine detailreichere Darstellung durch das PinballMachineInfoSubViewModel erfolgen kann.
  */
@@ -53,7 +55,18 @@ public class PinballMachinePreviewSubViewModel
         name.bind(pinballMachine.nameProperty());
         imagePath.bind(pinballMachine.absolutePreviewImagePathProperty());
 
-        selected.bind(Bindings.equal(pinballMachine, pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
+        selected.bind(Bindings.createBooleanBinding(() ->
+        {
+            Optional<PinballMachine> selectedPinballMachine = pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty().get();
+            if (selectedPinballMachine.isPresent())
+            {
+                return pinballMachine == selectedPinballMachine.get();
+            }
+            else
+            {
+                return false;
+            }
+        },  pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
     }
 
     /**
@@ -66,6 +79,7 @@ public class PinballMachinePreviewSubViewModel
 
     /**
      * Gibt die ID des zugehörigen Automaten zurück.
+     *
      * @return Die ID des zugehörigen Automaten.
      */
     public String getMachineID()
