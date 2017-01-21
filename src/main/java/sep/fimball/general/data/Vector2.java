@@ -185,6 +185,19 @@ public class Vector2
     }
 
     /**
+     * Mittelt zwei gewichtete Vektoren mithilfe einer Wurzelfunktion um einen "weichen" Übergang zu erzeugen.
+     *
+     * @param vecTwo Der zweite Vektor.
+     * @param t Die Gewichtung des zweiten Vektors.
+     * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
+     */
+    public Vector2 sqrtLerp(Vector2 vecTwo, double t)
+    {
+        double smoothT = Math.sqrt(t);
+        return lerp(vecTwo, smoothT);
+    }
+
+    /**
      * Mittelt zwei gewichtete Vektoren mithilfe einer quadratischen Funktion um einen "weichen" Übergang zu erzeugen.
      *
      * @param vecTwo Der zweite Vektor.

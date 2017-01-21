@@ -32,8 +32,19 @@ public class Config
      */
     public final static double MAX_ZOOM = 2;
 
-    public final static double CAMERA_FOLLOW_SPEED = 0.05;
+    /**
+     * Geschwindigkeit, mit der die Kamera dem Ball im Spiel folgt.
+     */
+    public final static double CAMERA_FOLLOW_SPEED_GAME = 0.05;
 
+    /**
+     * Geschwindigkeit, mit der die Kamera dem Ball im Editor folgt.
+     */
+    public final static double CAMERA_FOLLOW_SPEED_OTHER = 0.2;
+
+    /**
+     * Geschwindigkeit, mit der die Kamera rein/raus-zoomt.
+     */
     public final static double CAMERA_ZOOM_SPEED = 0.01;
 
     /**

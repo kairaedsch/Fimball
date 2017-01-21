@@ -74,6 +74,8 @@ public class Camera
      */
     public void updatePosition(double canvasWidth, double canvasHeight)
     {
+        double cameraFollowSpeed = drawMode == DrawMode.GAME ? Config.CAMERA_FOLLOW_SPEED_GAME : Config.CAMERA_FOLLOW_SPEED_OTHER;
+
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
@@ -82,8 +84,8 @@ public class Camera
             Vector2 targetPosition = cameraPosition.get();
             double maxDistance = Math.min(canvasWidth, canvasHeight) / DesignConfig.PIXELS_PER_GRID_UNIT;
             double distanceToTargetPercent = (softCameraPosition.minus(targetPosition).magnitude() / maxDistance) * cameraZoom.get();
-            softCameraPosition = softCameraPosition.lerp(targetPosition, DoubleMath.clamp(0, 1, distanceToTargetPercent * delta * Config.CAMERA_FOLLOW_SPEED));
-            softCameraZoom = DoubleMath.lerp(softCameraZoom, cameraZoom.get(), delta * Config.CAMERA_ZOOM_SPEED);
+            softCameraPosition = softCameraPosition.sqrtLerp(targetPosition, DoubleMath.clamp(0, 1, distanceToTargetPercent * delta * cameraFollowSpeed));
+            softCameraZoom = DoubleMath.lerp(softCameraZoom, cameraZoom.get(), DoubleMath.clamp(0, 1, delta * Config.CAMERA_ZOOM_SPEED));
         }
 
         lastDraw = currentDraw;
