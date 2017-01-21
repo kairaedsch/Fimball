@@ -21,12 +21,12 @@
                 <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <HBox HBox.hgrow="ALWAYS" styleClass="editorMenuBar" prefHeight="65">
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Label text="Dinge" styleClass="editorMenuBarTitle"/>
+                        <Label fx:id="key_1" text="!editor.elements.header.key!" styleClass="editorMenuBarTitle"/>
                         <Pane HBox.hgrow="ALWAYS" />
                     </HBox>
                     <Accordion styleClass="availableElements" VBox.vgrow="ALWAYS">
                         <panes>
-                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Basic Elements">
+                            <TitledPane fx:id="key_2" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.basic.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
@@ -36,7 +36,7 @@
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Obstacles">
+                            <TitledPane fx:id="key_3" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.obstacles.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
@@ -46,7 +46,7 @@
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Ramps">
+                            <TitledPane fx:id="key_4" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.ramps.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
@@ -56,7 +56,7 @@
                                     </ScrollPane>
                                 </AnchorPane>
                             </TitledPane>
-                            <TitledPane animated="false" styleClass="availableElementsTitle" text="Advanced Elements">
+                            <TitledPane fx:id="key_5" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.advanced.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
