@@ -21,7 +21,7 @@ public class QuestionMessageViewModel extends MessageViewModel
      */
     public QuestionMessageViewModel(String dialogKey, Action action)
     {
-        super(dialogKey);
+        super(dialogKey, true, true);
 
         this.action = action;
     }

@@ -30,7 +30,7 @@ public abstract class MessageViewModel extends DialogViewModel
      *
      * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
      */
-    public MessageViewModel(String dialogKey)
+    public MessageViewModel(String dialogKey, boolean bindLeftButton, boolean bindRightButton)
     {
         super(DialogType.MESSAGE);
 
@@ -41,10 +41,18 @@ public abstract class MessageViewModel extends DialogViewModel
         this.message.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".message.key"));
 
         this.leftButton = new SimpleStringProperty();
-        this.leftButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.left.key"));
-
         this.rightButton = new SimpleStringProperty();
-        this.rightButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.right.key"));
+
+        if (bindLeftButton)
+        {
+
+            this.leftButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.left.key"));
+        }
+
+        if (bindRightButton)
+        {
+            this.rightButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.right.key"));
+        }
 
         showleftButton = new SimpleBooleanProperty(true);
         showRightButton = new SimpleBooleanProperty(true);

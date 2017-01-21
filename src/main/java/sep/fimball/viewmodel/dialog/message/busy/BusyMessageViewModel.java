@@ -22,7 +22,7 @@ public class BusyMessageViewModel extends MessageViewModel
      */
     public BusyMessageViewModel(String dialogKey, Action longAction, Action afterAction)
     {
-        super(dialogKey);
+        super(dialogKey, false, false);
         showleftButton.setValue(false);
         showRightButton.setValue(false);
 

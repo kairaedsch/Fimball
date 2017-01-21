@@ -14,7 +14,7 @@ public class NormalMessageViewModel extends MessageViewModel
      */
     public NormalMessageViewModel(String dialogKey)
     {
-        super(dialogKey);
+        super(dialogKey, true, true);
         showleftButton.setValue(false);
     }
 
