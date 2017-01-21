@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import sep.fimball.general.data.Config;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.DoubleMath;
@@ -73,9 +74,6 @@ public class Camera
      */
     public void updatePosition(double canvasWidth, double canvasHeight)
     {
-        double camFollowSpeed = 0.05;
-        double cameraZoomSpeed = 0.01;
-
         long currentDraw = System.currentTimeMillis();
         int delta = (int) (currentDraw - lastDraw);
 
@@ -84,8 +82,8 @@ public class Camera
             Vector2 targetPosition = cameraPosition.get();
             double maxDistance = Math.min(canvasWidth, canvasHeight) / DesignConfig.PIXELS_PER_GRID_UNIT;
             double distanceToTargetPercent = (softCameraPosition.minus(targetPosition).magnitude() / maxDistance) * cameraZoom.get();
-            softCameraPosition = softCameraPosition.lerp(targetPosition, DoubleMath.clamp(0, 1, distanceToTargetPercent * delta * camFollowSpeed));
-            softCameraZoom = DoubleMath.lerp(softCameraZoom, cameraZoom.get(), delta * cameraZoomSpeed);
+            softCameraPosition = softCameraPosition.lerp(targetPosition, DoubleMath.clamp(0, 1, distanceToTargetPercent * delta * Config.CAMERA_FOLLOW_SPEED));
+            softCameraZoom = DoubleMath.lerp(softCameraZoom, cameraZoom.get(), delta * Config.CAMERA_ZOOM_SPEED);
         }
 
         lastDraw = currentDraw;

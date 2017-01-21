@@ -32,6 +32,9 @@ public class Config
      */
     public final static double MAX_ZOOM = 2;
 
+    public final static double CAMERA_FOLLOW_SPEED = 0.05;
+    public final static double CAMERA_ZOOM_SPEED = 0.01;
+
     /**
      * Der Standard-Zoom der Kamera.
      */
