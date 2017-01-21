@@ -10,7 +10,10 @@ import javafx.scene.Cursor;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import sep.fimball.general.data.*;
+import sep.fimball.general.data.DesignConfig;
+import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.RectangleDoubleByPoints;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
@@ -20,6 +23,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
+import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;
 import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 
@@ -129,6 +133,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Der aktuell gewünschte Cursor das Canvas.
      */
     private ObjectProperty<Cursor> cursorProperty;
+
+    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine)
+    {
+        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
+            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+        }));
+    }
 
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.

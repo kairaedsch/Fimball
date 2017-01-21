@@ -163,9 +163,6 @@ public class SceneManagerView
             case MESSAGE:
                 dialogType = DialogType.MESSAGE;
                 break;
-            case QUESTION:
-                dialogType = DialogType.QUESTION;
-                break;
             case NONE:
                 // Entfernt Dialog und returned falls DialogType.NONE
                 removeDialog();

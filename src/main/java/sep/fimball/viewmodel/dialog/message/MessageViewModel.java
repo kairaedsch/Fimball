@@ -1,16 +1,11 @@
 package sep.fimball.viewmodel.dialog.message;
 
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
-/**
- * Das PauseViewModel stellt der View Daten über eine Nachricht zur Verfügung.
- */
-public class MessageViewModel extends DialogViewModel
+public abstract class MessageViewModel extends DialogViewModel
 {
     /**
      * Der Titel der Nachricht.
@@ -21,6 +16,14 @@ public class MessageViewModel extends DialogViewModel
      * Der Text der Nachricht.
      */
     private StringProperty message;
+
+    private StringProperty leftButton;
+
+    private StringProperty rightButton;
+
+    protected BooleanProperty showleftButton;
+
+    protected BooleanProperty showRightButton;
 
     /**
      * Erzeugt ein MessageViewModel.
@@ -36,15 +39,20 @@ public class MessageViewModel extends DialogViewModel
 
         this.message = new SimpleStringProperty();
         this.message.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".message.key"));
+
+        this.leftButton = new SimpleStringProperty();
+        this.leftButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.left.key"));
+
+        this.rightButton = new SimpleStringProperty();
+        this.rightButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.right.key"));
+
+        showleftButton = new SimpleBooleanProperty(true);
+        showRightButton = new SimpleBooleanProperty(true);
     }
 
-    /**
-     * Schließt diesen Dialog.
-     */
-    public void close()
-    {
-        sceneManager.popDialog();
-    }
+    public abstract void leftButtonClicked();
+
+    public abstract void rightButtonClicked();
 
     /**
      * Gibt den Titel der MessageBox in der aktuellen Sprache zurück.
@@ -64,5 +72,25 @@ public class MessageViewModel extends DialogViewModel
     public ReadOnlyStringProperty messageProperty()
     {
         return message;
+    }
+
+    public StringProperty leftButtonProperty()
+    {
+        return leftButton;
+    }
+
+    public StringProperty rightButtonProperty()
+    {
+        return rightButton;
+    }
+
+    public BooleanProperty showleftButtonProperty()
+    {
+        return showleftButton;
+    }
+
+    public BooleanProperty showRightButtonProperty()
+    {
+        return showRightButton;
     }
 }

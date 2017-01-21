@@ -1,6 +1,7 @@
 package sep.fimball.view.dialog.message;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import sep.fimball.view.dialog.DialogView;
@@ -23,6 +24,12 @@ public class MessageView extends DialogView<MessageViewModel>
     @FXML
     private Label message;
 
+    @FXML
+    public Button leftButton;
+
+    @FXML
+    public Button rightButton;
+
     /**
      * Das zur View dazugehörige ViewModel.
      */
@@ -34,14 +41,28 @@ public class MessageView extends DialogView<MessageViewModel>
         this.messageViewModel = messageViewModel;
         title.textProperty().bind(messageViewModel.titleProperty());
         message.textProperty().bind(messageViewModel.messageProperty());
+
+        leftButton.textProperty().bind(messageViewModel.leftButtonProperty());
+        leftButton.visibleProperty().bind(messageViewModel.showleftButtonProperty());
+        rightButton.textProperty().bind(messageViewModel.rightButtonProperty());
+        rightButton.visibleProperty().bind(messageViewModel.showRightButtonProperty());
     }
 
     /**
      * Benachrichtigt das {@code messageViewModel}, dass die Nachricht geschlossen werden kann.
      */
     @FXML
-    private void okClicked()
+    private void leftButtonClicked()
     {
-        messageViewModel.close();
+        messageViewModel.leftButtonClicked();
+    }
+
+    /**
+     * Benachrichtigt das {@code messageViewModel}, dass die Nachricht geschlossen werden kann.
+     */
+    @FXML
+    private void rightButtonClicked()
+    {
+        messageViewModel.rightButtonClicked();
     }
 }
