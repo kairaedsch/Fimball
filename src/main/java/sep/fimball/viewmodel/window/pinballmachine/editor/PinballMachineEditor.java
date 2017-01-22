@@ -50,6 +50,22 @@ public class PinballMachineEditor
         detailedPositions = new HashMap<>();
     }
 
+    public void selectElement(Optional<PlacedElement> element, boolean additive)
+    {
+        if (additive && element.isPresent())
+        {
+            if (selection.contains(element.get()))
+                removeFromSelection(element.get());
+            else
+                addToSelection(element.get());
+        }
+        else
+        {
+            clearSelection();
+            element.ifPresent(this::addToSelection);
+        }
+    }
+
     /**
      * Dupliziert die aktuelle Auswahl.
      */
@@ -204,7 +220,7 @@ public class PinballMachineEditor
      *
      * @param placedElement Das Element, das entfernt werden soll.
      */
-    void removeFromSelection(PlacedElement placedElement)
+    private void removeFromSelection(PlacedElement placedElement)
     {
         selection.remove(placedElement);
         selectionSize.set(selection.size());

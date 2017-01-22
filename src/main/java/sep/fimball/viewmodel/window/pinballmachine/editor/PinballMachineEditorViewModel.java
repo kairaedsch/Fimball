@@ -265,45 +265,21 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
-        if (mouseEvent.getButton() == MouseButton.PRIMARY)
+        if (mouseEvent.getButton() != MouseButton.PRIMARY)
+            return;
+
+        List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
+        Optional<PlacedElement> selectedElement = elements.isEmpty() ? Optional.empty() : Optional.of(elements.get(0));
+        pinballMachineEditor.selectElement(selectedElement, mouseEvent.isControlDown());
+
+        if (elements.isEmpty())
         {
-            List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
-            if (!elements.isEmpty())
-            {
-                if (mouseEvent.isControlDown())
-                {
-                    if (pinballMachineEditor.getSelection().contains(elements.get(0)))
-                    {
-                        pinballMachineEditor.removeFromSelection(elements.get(0));
-                    }
-                    else
-                    {
-                        pinballMachineEditor.addToSelection(elements.get(0));
-                    }
-                }
-                else
-                {
-                    if (pinballMachineEditor.getSelection().contains(elements.get(0)))
-                    {
-                        mouseMode.setValue(MouseMode.PLACING);
-                    }
-                    else
-                    {
-                        mouseMode.setValue(MouseMode.PLACING);
-                        pinballMachineEditor.clearSelection();
-                        pinballMachineEditor.addToSelection(elements.get(0));
-                    }
-                }
-            }
-            else
-            {
-                if (!mouseEvent.isControlDown())
-                {
-                    pinballMachineEditor.clearSelection();
-                }
-                mouseMode.setValue(MouseMode.SELECTING);
-                selectionRect = Optional.of(new RectangleDoubleByPoints(gridPos, gridPos));
-            }
+            mouseMode.setValue(MouseMode.SELECTING);
+            selectionRect = Optional.of(new RectangleDoubleByPoints(gridPos, gridPos));
+        }
+        else if (!mouseEvent.isControlDown())
+        {
+            mouseMode.setValue(MouseMode.PLACING);
         }
     }
 
@@ -314,48 +290,24 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        if (mouseEvent.getButton() == MouseButton.PRIMARY)
-        {
-            if (mouseOnCanvas)
-            {
-                if (mouseMode.get() == MouseMode.PLACING)
-                {
-                    pinballMachineEditor.placeSelection();
-                    mouseMode.setValue(MouseMode.SELECTING);
-                }
-                else if (mouseMode.get() == MouseMode.SELECTING)
-                {
-                    if (!mouseEvent.isControlDown())
-                    {
-                        pinballMachineEditor.clearSelection();
-                    }
+        if (mouseEvent.getButton() != MouseButton.PRIMARY)
+            return;
 
-                    if (selectionRect.isPresent())
-                    {
-                        RectangleDoubleByPoints rectangle = selectionRect.get();
-                        if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
-                        {
-                            pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
-                            selectionRect = Optional.empty();
-                        }
-                    }
-                }
-                else
-                {
-                    pinballMachineEditor.clearSelection();
-                    mouseMode.setValue(MouseMode.SELECTING);
-                    setSelectedAvailableElement(null);
-                }
-            }
-            else
+        if (mouseOnCanvas)
+        {
+            if (mouseMode.get() == MouseMode.PLACING)
             {
-                if (mouseMode.get() == MouseMode.PLACING)
+                pinballMachineEditor.placeSelection();
+                mouseMode.setValue(MouseMode.SELECTING);
+            }
+            else if (mouseMode.get() == MouseMode.SELECTING)
+            {
+                if (!mouseEvent.isControlDown())
                 {
                     pinballMachineEditor.clearSelection();
-                    mouseMode.setValue(MouseMode.SELECTING);
-                    setSelectedAvailableElement(null);
                 }
-                if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
+
+                if (selectionRect.isPresent())
                 {
                     RectangleDoubleByPoints rectangle = selectionRect.get();
                     if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
@@ -365,7 +317,32 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                     }
                 }
             }
+            else
+            {
+                pinballMachineEditor.clearSelection();
+                mouseMode.setValue(MouseMode.SELECTING);
+                setSelectedAvailableElement(null);
+            }
         }
+        else
+        {
+            if (mouseMode.get() == MouseMode.PLACING)
+            {
+                pinballMachineEditor.clearSelection();
+                mouseMode.setValue(MouseMode.SELECTING);
+                setSelectedAvailableElement(null);
+            }
+            if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
+            {
+                RectangleDoubleByPoints rectangle = selectionRect.get();
+                if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
+                {
+                    pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
+                    selectionRect = Optional.empty();
+                }
+            }
+        }
+
         cursorProperty.set(Cursor.DEFAULT);
     }
 
