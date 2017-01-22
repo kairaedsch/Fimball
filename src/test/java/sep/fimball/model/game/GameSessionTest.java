@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.CollisonEvent;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class GameSessionTest
 
         // künstliches Erstellen einer Kollision.
         final int colliderId = 0;
-        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventArgs.CollisonEvent.ENTERED);
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisonEvent.ENTERED);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 

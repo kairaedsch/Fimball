@@ -3,6 +3,7 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
+import sep.fimball.model.physics.game.CollisonEvent;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Collections;
@@ -129,8 +130,12 @@ public class PhysicsElement<GameElementT>
             {
                 if (!colliding.get(collider.getId()))
                 {
-                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisionEventArgs.CollisonEvent.ENTERED));
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEvent.ENTERED));
                     colliding.put(collider.getId(), true);
+                }
+                else
+                {
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEvent.OVER));
                 }
                 collided = true;
             }
@@ -144,7 +149,7 @@ public class PhysicsElement<GameElementT>
         {
             if (integerBooleanEntry.getValue())
             {
-                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisionEventArgs.CollisonEvent.LEAVED));
+                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisonEvent.LEAVED));
             }
         }
         for (Collider collider : colliders)

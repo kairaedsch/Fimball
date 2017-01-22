@@ -58,8 +58,4 @@ public class CollisionEventArgs<GameElementT>
         return collisionEvent;
     }
 
-    public enum CollisonEvent
-    {
-        ENTERED, LEAVED
-    }
 }
