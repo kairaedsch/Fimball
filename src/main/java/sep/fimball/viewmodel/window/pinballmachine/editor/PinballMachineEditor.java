@@ -50,7 +50,7 @@ public class PinballMachineEditor
         detailedPositions = new HashMap<>();
     }
 
-    public void selectElement(Optional<PlacedElement> element, boolean additive)
+    void selectElement(Optional<PlacedElement> element, boolean additive)
     {
         if (additive && element.isPresent())
         {

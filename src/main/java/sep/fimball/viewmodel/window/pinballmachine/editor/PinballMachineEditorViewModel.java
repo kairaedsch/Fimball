@@ -290,57 +290,33 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
+        // Nur Linksklick ist interessant
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
             return;
 
-        if (mouseOnCanvas)
-        {
-            if (mouseMode.get() == MouseMode.PLACING)
-            {
-                pinballMachineEditor.placeSelection();
-                mouseMode.setValue(MouseMode.SELECTING);
-            }
-            else if (mouseMode.get() == MouseMode.SELECTING)
-            {
-                if (!mouseEvent.isControlDown())
-                {
-                    pinballMachineEditor.clearSelection();
-                }
+        // Leere auswahl wenn ctrl nicht gedrückt
+        if (!mouseEvent.isControlDown() && mouseMode.get() != MouseMode.PLACING)
+            pinballMachineEditor.clearSelection();
 
-                if (selectionRect.isPresent())
-                {
-                    RectangleDoubleByPoints rectangle = selectionRect.get();
-                    if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
-                    {
-                        pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
-                        selectionRect = Optional.empty();
-                    }
-                }
-            }
-            else
+        // Auswahlrechteck
+        if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
+        {
+            RectangleDoubleByPoints rectangle = selectionRect.get();
+            if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
             {
-                pinballMachineEditor.clearSelection();
-                mouseMode.setValue(MouseMode.SELECTING);
-                setSelectedAvailableElement(null);
+                pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
+                selectionRect = Optional.empty();
             }
         }
-        else
+
+        if (mouseMode.get() == MouseMode.PLACING)
         {
-            if (mouseMode.get() == MouseMode.PLACING)
-            {
-                pinballMachineEditor.clearSelection();
-                mouseMode.setValue(MouseMode.SELECTING);
+            mouseMode.setValue(MouseMode.SELECTING);
+
+            if (mouseOnCanvas)
+                pinballMachineEditor.placeSelection();
+            else
                 setSelectedAvailableElement(null);
-            }
-            if (mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
-            {
-                RectangleDoubleByPoints rectangle = selectionRect.get();
-                if (rectangle.getHeight() > 0 || rectangle.getWidth() > 0)
-                {
-                    pinballMachineEditor.addToSelection(pinballMachineEditor.getElementsAt(rectangle));
-                    selectionRect = Optional.empty();
-                }
-            }
         }
 
         cursorProperty.set(Cursor.DEFAULT);
