@@ -23,17 +23,24 @@ public class CollisionEventArgs<GameElementT>
     private CollisionEventType collisionEventType;
 
     /**
+     * Gibt an, wie tief der Ball eingedrungen ist.
+     */
+    private double depth;
+
+    /**
      * Erstellt eine neue Instanz von CollisionEventArgs.
      *
      * @param otherElement       Mit welchem GameElement das Ziel-GameElement zusammengestoßen ist.
      * @param colliderId         Die ID des Colliders von otherElement, an dem die Kollision passiert ist.
      * @param collisionEventType Gibt an, wie collided wurde.
+     * @param depth              Gibt an, wie tief der Ball eingedrungen ist.
      */
-    public CollisionEventArgs(GameElementT otherElement, int colliderId, CollisionEventType collisionEventType)
+    public CollisionEventArgs(GameElementT otherElement, int colliderId, CollisionEventType collisionEventType, double depth)
     {
         this.otherElement = otherElement;
         this.colliderId = colliderId;
         this.collisionEventType = collisionEventType;
+        this.depth = depth;
         System.out.println(collisionEventType);
     }
 
@@ -67,4 +74,14 @@ public class CollisionEventArgs<GameElementT>
         return collisionEventType;
     }
 
+
+    /**
+     * Gibt zurück, wie tief der Ball eingedrungen ist.
+     *
+     * @return Wie tief der Ball eingedrungen ist.
+     */
+    public double getDepth()
+    {
+        return depth;
+    }
 }

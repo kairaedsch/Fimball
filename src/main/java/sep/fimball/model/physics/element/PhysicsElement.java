@@ -6,10 +6,7 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.CollisionEventType;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Repräsentiert ein GameElement in der Berechnung der Physik. Der PhysicsHandler arbeitet nicht direkt auf GameElement um gleichzeitigen Zugriff von der Zeichenschleife und der Physikschleife zu vermeiden.
@@ -128,16 +125,17 @@ public class PhysicsElement<GameElementT>
         boolean collided = false;
         for (Collider collider : colliders)
         {
-            if (collider.checkCollision(ballPhysicsElement, this))
+            Optional<Double> depth = collider.checkCollision(ballPhysicsElement, this);
+            if (depth.isPresent())
             {
                 if (!colliding.get(collider.getId()))
                 {
-                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisionEventType.ENTERED));
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisionEventType.ENTERED, depth.get()));
                     colliding.put(collider.getId(), true);
                 }
                 else
                 {
-                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisionEventType.OVER));
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisionEventType.OVER, depth.get()));
                 }
                 collided = true;
             }
@@ -156,7 +154,7 @@ public class PhysicsElement<GameElementT>
         {
             if (integerBooleanEntry.getValue())
             {
-                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisionEventType.LEAVED));
+                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisionEventType.LEAVED, 0));
             }
         }
         for (Collider collider : colliders)

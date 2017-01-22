@@ -68,7 +68,7 @@ public class GameSessionTest
 
         // künstliches Erstellen einer Kollision.
         final int colliderId = 0;
-        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventType.ENTERED);
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventType.ENTERED, 0);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 

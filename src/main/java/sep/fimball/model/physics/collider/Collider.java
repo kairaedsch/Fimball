@@ -9,6 +9,7 @@ import sep.fimball.model.physics.element.PhysicsElement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repräsentiert eine Barriere für den Ball, an der dieser abprallt und/oder mögliche weitere physikalische Kräfte auf ihn einwirken.
@@ -58,10 +59,10 @@ public class Collider
      * @param element Das Element, bei dem die Kollision mit dem Ball überprüft wird
      * @return {@code true}, wenn eine Kollision stattfindet, {@code false} sonst.
      */
-    public boolean checkCollision(BallPhysicsElement ball, PhysicsElement element)
+    public Optional<Double> checkCollision(BallPhysicsElement ball, PhysicsElement element)
     {
         if (ball.getLayer() != layer && layer != WorldLayer.BOTH)
-            return false;
+            return Optional.empty();
 
         List<HitInfo> hits = new ArrayList<>();
         List<ColliderShape> collidedShapes = new ArrayList<>();
@@ -84,13 +85,13 @@ public class Collider
             {
                 shortestCombinedIntersect = shortestCombinedIntersect.plus(hit.getShortestIntersect());
             }
-            shortestCombinedIntersect.scale(1 / hits.size());
+            shortestCombinedIntersect = shortestCombinedIntersect.scale(1 / hits.size());
             type.applyCollision(new CollisionInfo(ball, shortestCombinedIntersect, element, collidedShapes));
 
-            return true;
+            return Optional.of(shortestCombinedIntersect.magnitude());
         }
 
-        return false;
+        return Optional.empty();
     }
 
     /**

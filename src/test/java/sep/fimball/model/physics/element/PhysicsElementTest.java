@@ -9,9 +9,11 @@ import sep.fimball.model.physics.game.CollisionEventArgs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -44,14 +46,14 @@ public class PhysicsElementTest
         BallPhysicsElement<Object> ballPhysicsElement = Mockito.mock(BallPhysicsElement.class);
 
         // Teste mit keiner Kollision
-        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(false);
-        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(false);
+        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.empty());
+        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.empty());
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es keine Kollision gab, muss die Liste leer sein", eventArgsList.size(), is(0));
 
         // Teste mit einer Kollision
-        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(false);
-        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(true);
+        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.empty());
+        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es eine Kollision gab, muss die Liste genau ein Element haben", eventArgsList.size(), is(1));
         assertThat("und es muss colliderB sein", eventArgsList.get(0).getColliderId(), is(22222));
@@ -60,8 +62,8 @@ public class PhysicsElementTest
         eventArgsList.clear();
 
         // Teste mit zwei Kollisionen
-        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(true);
-        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(true);
+        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
+        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es zwei Kollisionen gab, muss die Liste genau zwei Elemente haben", eventArgsList.size(), is(2));
     }
