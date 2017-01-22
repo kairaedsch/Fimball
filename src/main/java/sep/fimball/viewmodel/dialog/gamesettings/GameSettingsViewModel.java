@@ -4,16 +4,19 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.Language;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 import java.util.Collections;
+import java.util.Optional;
 
 /**
  * Das GameSettingsViewModel stellt der View Daten über die Einstellungen von Fimball zur Verfügung und ermöglicht deren Änderung.
@@ -77,6 +80,21 @@ public class GameSettingsViewModel extends DialogViewModel
 
         volumeSFX = new SimpleIntegerProperty();
         volumeSFX.bindBidirectional(settings.sfxVolumeProperty());
+    }
+
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        Optional<KeyBinding> bindingOptional = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
+        if (bindingOptional.isPresent())
+        {
+            KeyBinding binding = bindingOptional.get();
+
+            if (binding == KeyBinding.PAUSE)
+            {
+                exitDialogToMainMenu();
+            }
+        }
     }
 
     /**

@@ -3,11 +3,16 @@ package sep.fimball.viewmodel.dialog.playername;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.scene.input.KeyEvent;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
+
+import java.util.Optional;
 
 import static sep.fimball.general.data.Config.MAX_MULTIPLAYER_PLAYERCOUNT;
 
@@ -114,6 +119,21 @@ public class PlayerNameViewModel extends DialogViewModel
             }
             sceneManager.popDialog();
             GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, names, false);
+        }
+    }
+
+    @Override
+    public void handleKeyEvent(KeyEvent keyEvent)
+    {
+        Optional<KeyBinding> bindingOptional = Settings.getSingletonInstance().getKeyBinding(keyEvent.getCode());
+        if (bindingOptional.isPresent())
+        {
+            KeyBinding binding = bindingOptional.get();
+
+            if (binding == KeyBinding.PAUSE)
+            {
+                exitDialogToMainMenu();
+            }
         }
     }
 

@@ -144,7 +144,7 @@ public class MainMenuViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (keyEvent.getCode() == KeyCode.ESCAPE)
+        if (keyEvent.getCode() == KeyCode.ESCAPE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
         {
             exitGame();
         }
