@@ -243,7 +243,7 @@ public class GameElement implements HandlerGameElement
         return drawOrder;
     }
 
-    public  LongProperty lastTimeHitProperty()
+    public LongProperty lastTimeHitProperty()
     {
         return lastTimeHit;
     }
