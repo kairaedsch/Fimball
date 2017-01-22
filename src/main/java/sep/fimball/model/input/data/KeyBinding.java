@@ -48,7 +48,12 @@ public enum KeyBinding
     /**
      * Ist diese Taste gedrückt, wird durch klicken und ziehen der Maus im Editor die Kamera bewegt.
      */
-    EDITOR_MOVE("gamesettings.general.keybinding.editor_move.key");
+    EDITOR_MOVE("gamesettings.general.keybinding.editor_move.key"),
+
+    /**
+     * Ist diese Taste gedrückt, wird durch klicken und ziehen der Maus im Editor die Kamera bewegt.
+     */
+    EDITOR_DUPLICATE("gamesettings.general.keybinding.editor_duplicate.key");
 
     /**
      * Der Name der Funktion.

@@ -389,6 +389,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                         pinballMachineEditor.clearSelection();
                     }
                     break;
+                case EDITOR_DUPLICATE:
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+                    {
+                        pinballMachineEditor.duplicateSelection();
+                    }
+                    break;
                 case EDITOR_MOVE:
                     moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
                     break;
