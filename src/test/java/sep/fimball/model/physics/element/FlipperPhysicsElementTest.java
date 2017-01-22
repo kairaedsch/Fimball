@@ -36,6 +36,7 @@ public class FlipperPhysicsElementTest
         // Teste den linke Flipperarm
         {
             FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementWithMock(true);
+            flipperPhysicsElementLeft.update(1000);
 
             // Versuche den Flipperarm nach oben zu drehen
             flipperPhysicsElementLeft.applyModify(() -> AngularDirection.UP);
@@ -52,6 +53,7 @@ public class FlipperPhysicsElementTest
         // Teste den rechten Flipperarm
         {
             FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementWithMock(false);
+            flipperPhysicsElementRight.update(1000);
 
             // Versuche den Flipperarm nach oben zu drehen
             flipperPhysicsElementRight.applyModify(() -> AngularDirection.UP);
@@ -82,6 +84,7 @@ public class FlipperPhysicsElementTest
         // Teste den linke Flipperarm
         {
             FlipperPhysicsElement flipperPhysicsElementLeft = getFlipperPhysicsElementWithMock(true);
+            flipperPhysicsElementLeft.update(1000);
 
             assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementLeft.getRotation(), is(20.0));
 
@@ -99,6 +102,7 @@ public class FlipperPhysicsElementTest
         // Teste den rechten Flipperarm
         {
             FlipperPhysicsElement flipperPhysicsElementRight = getFlipperPhysicsElementWithMock(false);
+            flipperPhysicsElementRight.update(1000);
 
             assertThat("Der Flipperarm ist in der Ausgangsrotation", flipperPhysicsElementRight.getRotation(), is(-20.0));
 
