@@ -61,7 +61,8 @@ public class PinballMachineEditor
         }
         else
         {
-            clearSelection();
+            if (!element.isPresent() || !selection.contains(element.get()))
+                clearSelection();
             element.ifPresent(this::addToSelection);
         }
     }

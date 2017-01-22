@@ -269,6 +269,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             return;
 
         List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
+
         Optional<PlacedElement> selectedElement = elements.isEmpty() ? Optional.empty() : Optional.of(elements.get(0));
         pinballMachineEditor.selectElement(selectedElement, mouseEvent.isControlDown());
 
