@@ -63,8 +63,8 @@ public class SettingsTest
         assertThat(Settings.getSingletonInstance().musicVolumeProperty().get(), is(MUSIC_VOLUME));
         assertThat(Settings.getSingletonInstance().sfxVolumeProperty().get(), is(SFX_VOLUME));
         assertThat(Settings.getSingletonInstance().keyBindingsMapProperty(), not(equalTo(null)));
-        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> Settings.getSingletonInstance().getKeyBinding(KeyCode.valueOf(keyLayout.keyCode)).get().equals(keyLayout.keyBinding)), is(true));
-        Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !KeyCode.valueOf(keyLayout.keyCode).equals(keyCode)))).findFirst();
+        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> Settings.getSingletonInstance().getKeyBinding(keyLayout.keyCode).get().equals(keyLayout.keyBinding)), is(true));
+        Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !keyLayout.keyCode.equals(keyCode)))).findFirst();
         unusedKeyCode.ifPresent(keyCode -> assertThat(Settings.getSingletonInstance().getKeyBinding(keyCode), equalTo(Optional.empty())));
     }
 
@@ -89,7 +89,7 @@ public class SettingsTest
         Map<KeyCode, KeyBinding> keyBindings = new HashMap<>();
         for (SettingsJson.KeyLayout keyLayout : keyLayouts)
         {
-            keyBindings.put(KeyCode.valueOf(keyLayout.keyCode), keyLayout.keyBinding);
+            keyBindings.put(keyLayout.keyCode, keyLayout.keyBinding);
         }
         Mockito.when(mockedSettings.keyBindingsMapProperty()).thenReturn(new SimpleMapProperty<>(FXCollections.observableMap(keyBindings)));
         Mockito.when(mockedSettings.getKeyBinding(any())).then(invocation -> Optional.of(keyBindings.get(invocation.getArgument(0))));
@@ -137,7 +137,7 @@ public class SettingsTest
     private void initTestJson()
     {
         testSettingsJson.keyLayouts = keyLayouts;
-        testSettingsJson.language = LANGUAGE.name();
+        testSettingsJson.language = LANGUAGE;
         testSettingsJson.fullscreen = IS_IN_FULLSCREEN;
         testSettingsJson.masterVolume = MASTER_VOLUME;
         testSettingsJson.musicVolume = MUSIC_VOLUME;
@@ -154,23 +154,23 @@ public class SettingsTest
         {
             keyLayouts[i] = new SettingsJson.KeyLayout();
         }
-        keyLayouts[0].keyCode = KeyCode.A.name();
+        keyLayouts[0].keyCode = KeyCode.A;
         keyLayouts[0].keyBinding = KeyBinding.LEFT_FLIPPER;
-        keyLayouts[1].keyCode = KeyCode.R.name();
+        keyLayouts[1].keyCode = KeyCode.R;
         keyLayouts[1].keyBinding = KeyBinding.EDITOR_ROTATE;
-        keyLayouts[2].keyCode = KeyCode.E.name();
+        keyLayouts[2].keyCode = KeyCode.E;
         keyLayouts[2].keyBinding = KeyBinding.NUDGE_RIGHT;
-        keyLayouts[3].keyCode = KeyCode.Q.name();
+        keyLayouts[3].keyCode = KeyCode.Q;
         keyLayouts[3].keyBinding = KeyBinding.NUDGE_LEFT;
-        keyLayouts[4].keyCode = KeyCode.ESCAPE.name();
+        keyLayouts[4].keyCode = KeyCode.ESCAPE;
         keyLayouts[4].keyBinding = KeyBinding.PAUSE;
-        keyLayouts[5].keyCode = KeyCode.DELETE.name();
+        keyLayouts[5].keyCode = KeyCode.DELETE;
         keyLayouts[5].keyBinding = KeyBinding.EDITOR_DELETE;
-        keyLayouts[6].keyCode = KeyCode.D.name();
+        keyLayouts[6].keyCode = KeyCode.D;
         keyLayouts[6].keyBinding = KeyBinding.RIGHT_FLIPPER;
-        keyLayouts[7].keyCode = KeyCode.ALT.name();
+        keyLayouts[7].keyCode = KeyCode.ALT;
         keyLayouts[7].keyBinding = KeyBinding.EDITOR_MOVE;
-        keyLayouts[8].keyCode = KeyCode.SPACE.name();
+        keyLayouts[8].keyCode = KeyCode.SPACE;
         keyLayouts[8].keyBinding = KeyBinding.PLUNGER;
     }
 }

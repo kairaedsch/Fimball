@@ -94,7 +94,6 @@ public class GameSettingsView extends DialogView<GameSettingsViewModel>
         language.setItems(gameSettingsViewModel.getLanguages());
         language.valueProperty().bindBidirectional(gameSettingsViewModel.languageProperty());
 
-
         fullscreen.selectedProperty().bindBidirectional(gameSettingsViewModel.fullscreenProperty());
 
         masterVolumeSlider.valueProperty().bindBidirectional(gameSettingsViewModel.volumeMasterProperty());

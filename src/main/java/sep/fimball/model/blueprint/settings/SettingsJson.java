@@ -1,5 +1,7 @@
 package sep.fimball.model.blueprint.settings;
 
+import javafx.scene.input.KeyCode;
+import sep.fimball.general.data.Language;
 import sep.fimball.model.input.data.KeyBinding;
 
 /**
@@ -10,8 +12,7 @@ public class SettingsJson
     /**
      * Speichert die Sprache.
      */
-    // TODO use ENUM not String
-    public String language;
+    public Language language;
 
     /**
      * Speichert, ob FIMBall im Vollbildmodus angezeigt wird.
@@ -46,8 +47,7 @@ public class SettingsJson
         /**
          * Speichert den KeyCode der Taste, die an eine Funktion gebunden ist.
          */
-        // TODO use ENUM not String
-        public String keyCode;
+        public KeyCode keyCode;
 
         /**
          * Speichert den Namen der Funktion, die das Drücken der entsprechenden Taste auslösen soll.

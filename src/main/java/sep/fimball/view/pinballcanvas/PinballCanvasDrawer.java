@@ -155,6 +155,12 @@ class PinballCanvasDrawer
         // graphicsContext.setFill(SECONDARY_COLOR_DARK);
         // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), headMiddleHeight);
 
+        // Schatten
+        graphicsContext.setFill(PRIMARY_COLOR);
+        graphicsContext.setGlobalAlpha(0.5);
+        graphicsContext.fillRect(ori.getX(), end.getY() + borderWidth, end.getX() - ori.getX(), footHeight + borderWidth);
+        graphicsContext.setGlobalAlpha(1);
+
         // Beine
         graphicsContext.setLineWidth(borderWidth * 2);
         graphicsContext.setStroke(SECONDARY_COLOR_DARK);

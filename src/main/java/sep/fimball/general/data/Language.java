@@ -42,7 +42,7 @@ public enum Language
      *
      * @return Die gekennzeichnete Sprache.
      */
-    public String getName()
+    public String toString()
     {
         return name;
     }
