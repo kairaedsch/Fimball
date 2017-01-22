@@ -5,6 +5,8 @@ import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.*;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 
 /**
  * Das Spielelement des Spinners.
@@ -58,6 +60,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
                     {
                         currentSpinPercentage = 0;
                         remainingSpins = remainingSpins - Config.SPINNER_SLOWDOWN_SPEED;
+                        SoundManager.getInstance().addSoundToPlay(new Sound("spinner.wav", false));
                         addPointToPlayer();
                         switchToNextFrame();
                     }
