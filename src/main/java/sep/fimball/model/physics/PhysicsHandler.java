@@ -252,7 +252,7 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList)
     {
-        Set<PhysicsElement<GameElementT>> OldcollidedPhysicsElements = collidedPhysicsElements;
+        Set<PhysicsElement<GameElementT>> oldCollidedPhysicsElements = collidedPhysicsElements;
         collidedPhysicsElements = new HashSet<>();
 
         for (Long hash : getElementRegionHashes(ballPhysicsElement))
@@ -270,7 +270,7 @@ public class PhysicsHandler<GameElementT>
             }
         }
 
-        OldcollidedPhysicsElements.forEach(element -> {
+        oldCollidedPhysicsElements.forEach(element -> {
             if (!collidedPhysicsElements.contains(element))
             {
                 collidedPhysicsElements.remove(element);
