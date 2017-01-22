@@ -183,6 +183,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableElementSelected = new SimpleBooleanProperty();
         availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
 
+        previewsProperty = FXCollections.observableArrayList();
         cursorProperty = new SimpleObjectProperty<>();
 
         editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);

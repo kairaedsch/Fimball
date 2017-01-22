@@ -77,18 +77,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     private VBox availableElementsRamp;
 
     /**
-     * Die obere Pane der Drag-Vorschau.
-     */
-    @FXML
-    private Pane previewTop;
-
-    /**
-     * Die untere Pane der Drag-Vorschau.
-     */
-    @FXML
-    private Pane previewBot;
-
-    /**
      * Das zur PinballMachineEditorView gehörende PinballMachineEditorViewModel.
      */
 
@@ -126,11 +114,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
-
-        previewTop.disableProperty().bind(pinballMachineEditorViewModel.isAvailableElementSelected());
-
-        pinballMachineEditorViewModel.getTopBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewTop));
-        pinballMachineEditorViewModel.getBotBackgroundPath().addListener((observable, oldValue, newValue) -> bindPaneToImage(newValue, previewBot));
     }
 
     /**
@@ -257,8 +240,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     private void updatePreviewPosition(MouseEvent event)
     {
-        previewBot.setTranslateX(event.getX());
-        previewBot.setTranslateY(event.getY());
+        // TODO
     }
 
     /**
