@@ -17,16 +17,20 @@ public class CollisionEventArgs<GameElementT>
      */
     private int colliderId;
 
+    CollisonEvent collisionEvent;
+
     /**
      * Erstellt eine neue Instanz von CollisionEventArgs.
      *
      * @param otherElement Mit welchem GameElement das Ziel-GameElement zusammengestoßen ist.
      * @param colliderId   Die ID des Colliders von otherElement, an dem die Kollision passiert ist.
      */
-    public CollisionEventArgs(GameElementT otherElement, int colliderId)
+    public CollisionEventArgs(GameElementT otherElement, int colliderId, CollisonEvent collisionEvent)
     {
         this.otherElement = otherElement;
         this.colliderId = colliderId;
+        this.collisionEvent = collisionEvent;
+        System.out.println(collisionEvent);
     }
 
     /**
@@ -47,5 +51,15 @@ public class CollisionEventArgs<GameElementT>
     public int getColliderId()
     {
         return colliderId;
+    }
+
+    public CollisonEvent getCollisionEvent()
+    {
+        return collisionEvent;
+    }
+
+    public enum CollisonEvent
+    {
+        ENTERED, LEAVED
     }
 }

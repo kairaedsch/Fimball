@@ -3,6 +3,7 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.RegionHashConverter;
+import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -74,6 +75,8 @@ public class PhysicsHandler<GameElementT>
      */
     private boolean ticking;
 
+    private Set<PhysicsElement<GameElementT>> collidedPhysicsElements;
+
     /**
      * Erzeugt einen neuen leeren PhysicsHandler.
      */
@@ -101,6 +104,7 @@ public class PhysicsHandler<GameElementT>
         ticking = false;
 
         modifyContainers = new ArrayList<>();
+        collidedPhysicsElements = new HashSet<>();
 
         updatablePhysicsElements = elements
                 .stream()
@@ -248,14 +252,31 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList)
     {
+        Set<PhysicsElement<GameElementT>> OldcollidedPhysicsElements = collidedPhysicsElements;
+        collidedPhysicsElements = new HashSet<>();
+
         for (Long hash : getElementRegionHashes(ballPhysicsElement))
         {
             if (physicsElementsMap.containsKey(hash))
             {
                 physicsElementsMap.get(hash)
-                        .forEach(element -> element.checkCollision(collisionEventArgsList, ballPhysicsElement));
+                        .forEach(element -> {
+                            boolean collided = element.checkCollision(collisionEventArgsList, ballPhysicsElement);
+                            if (collided)
+                            {
+                                collidedPhysicsElements.add(element);
+                            }
+                        });
             }
         }
+
+        OldcollidedPhysicsElements.forEach(element -> {
+            if (!collidedPhysicsElements.contains(element))
+            {
+                collidedPhysicsElements.remove(element);
+                element.ballLeaved(collisionEventArgsList);
+            }
+        });
     }
 
     /**
