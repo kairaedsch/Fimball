@@ -3,7 +3,6 @@ package sep.fimball.model.physics;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.RegionHashConverter;
-import sep.fimball.model.game.GameElement;
 import sep.fimball.model.physics.element.*;
 import sep.fimball.model.physics.game.CollisionEventArgs;
 import sep.fimball.model.physics.game.ElementEventArgs;
@@ -75,7 +74,15 @@ public class PhysicsHandler<GameElementT>
      */
     private boolean ticking;
 
+    /**
+     * Alle PhysikElemente, die aktuell mit dem Ball colliden.
+     */
     private Set<PhysicsElement<GameElementT>> collidedPhysicsElements;
+
+    /**
+     * Alle PhysikElemente, die im letzten Tick mit dem Ball colliden.
+     */
+    private Set<PhysicsElement<GameElementT>> oldCollidedPhysicsElements;
 
     /**
      * Erzeugt einen neuen leeren PhysicsHandler.
@@ -105,6 +112,7 @@ public class PhysicsHandler<GameElementT>
 
         modifyContainers = new ArrayList<>();
         collidedPhysicsElements = new HashSet<>();
+        oldCollidedPhysicsElements = new HashSet<>();
 
         updatablePhysicsElements = elements
                 .stream()
@@ -252,9 +260,11 @@ public class PhysicsHandler<GameElementT>
      */
     private void checkElementsForCollision(List<CollisionEventArgs<GameElementT>> collisionEventArgsList)
     {
-        Set<PhysicsElement<GameElementT>> oldCollidedPhysicsElements = collidedPhysicsElements;
-        collidedPhysicsElements = new HashSet<>();
+        Set<PhysicsElement<GameElementT>> tempCollidedPhysicsElements = collidedPhysicsElements;
+        collidedPhysicsElements = oldCollidedPhysicsElements;
+        oldCollidedPhysicsElements = tempCollidedPhysicsElements;
 
+        collidedPhysicsElements.clear();
         for (Long hash : getElementRegionHashes(ballPhysicsElement))
         {
             if (physicsElementsMap.containsKey(hash))
