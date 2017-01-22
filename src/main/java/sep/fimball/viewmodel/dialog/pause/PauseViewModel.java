@@ -42,7 +42,8 @@ public class PauseViewModel extends DialogViewModel
     /**
      * Erstellt ein neues PauseViewModel.
      *
-     * @param gameViewModel Das zugehörige GameViewModel.
+     * @param gameViewModel  Das zugehörige GameViewModel.
+     * @param pinballMachine Die zugehörige PinballMachine.
      */
     public PauseViewModel(GameViewModel gameViewModel, PinballMachine pinballMachine)
     {
@@ -52,8 +53,9 @@ public class PauseViewModel extends DialogViewModel
     /**
      * Erstellt ein neues PauseViewModel.
      *
-     * @param gameViewModel Das zugehörige GameViewModel.
-     * @param settings      Eine Instanz des Singleton Settings
+     * @param gameViewModel  Das zugehörige GameViewModel.
+     * @param pinballMachine Die zugehörige PinballMachine.
+     * @param settings       Eine Instanz des Singleton Settings
      */
     PauseViewModel(GameViewModel gameViewModel, PinballMachine pinballMachine, Settings settings)
     {

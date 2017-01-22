@@ -40,6 +40,12 @@ public class ScoreHandler implements ElementHandler
         }
     }
 
+    /**
+     * Gibt zurück, ob das GameElement Punkte geben soll.
+     *
+     * @param handlerGameElement Das zu überprüfende GameElement.
+     * @return Ob das GameElement Punkte geben soll.
+     */
     private boolean shouldElementGivePoints(HandlerGameElement handlerGameElement)
     {
         int pointResetTime = handlerGameElement.getRuleElement().getPointResetTime();
