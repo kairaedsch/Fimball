@@ -17,6 +17,7 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -115,7 +116,7 @@ public class PinballMachineEditorViewModelTest
         when(keyEventMock.getEventType()).thenReturn(KeyEvent.KEY_PRESSED);
 
         // Ein Element wird manuell zur Auswahl hinzugefügt.
-        SetProperty<PlacedElement> selection = (SetProperty<PlacedElement>) pinballMachineEditorViewModel.getSelection();
+        Set<PlacedElement> selection = pinballMachineEditorViewModel.getSelection();
         selection.add(ball);
 
         pinballMachineEditorViewModel.handleKeyEvent(keyEventMock);

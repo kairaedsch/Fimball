@@ -1,7 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -22,11 +21,6 @@ public class PinballMachineEditor
      * Die aktuelle Auswahl.
      */
     private Set<PlacedElement> selection;
-
-    /**
-     * Die aktuelle Auswahl nicht editierbar
-     */
-    private Set<PlacedElement> unmodifiableSelection;
 
     /**
      * Die aktuelle Auswahl.
@@ -52,7 +46,6 @@ public class PinballMachineEditor
     {
         this.pinballMachine = pinballMachine;
         selection = new HashSet<>();
-        unmodifiableSelection = Collections.unmodifiableSet(selection);
         selectionSize = new SimpleIntegerProperty(0);
         detailedPositions = new HashMap<>();
     }
@@ -258,7 +251,7 @@ public class PinballMachineEditor
      */
     Set<PlacedElement> getSelection()
     {
-        return unmodifiableSelection;
+        return selection;
     }
 
     /**
