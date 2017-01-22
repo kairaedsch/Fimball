@@ -99,33 +99,29 @@ public class ElementFactory
             }
         }
 
+        // Generiere Rahmen um den Automaten,
         RectangleDouble boundingBox = session.getPinballMachine().getBoundingBox();
         for (double p = boundingBox.getOrigin().getX(); p <= boundingBox.getWidth() + boundingBox.getOrigin().getX(); p += 4)
         {
-            Vector2 pos = new Vector2(p, boundingBox.getOrigin().getY() + 2);
-            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 0);
-            GameElement gameElement = new GameElement(placedElement, false);
-            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-            physicsElements.add(physicsElement);
+            physicsElements.add(generatePhysicsBarrier(new Vector2(p, boundingBox.getOrigin().getY() + 2), 0));
         }
         for (double p = boundingBox.getOrigin().getY(); p <= boundingBox.getHeight() + boundingBox.getOrigin().getY(); p += 4)
         {
-            Vector2 pos = new Vector2(boundingBox.getOrigin().getX() - 1, p);
-            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 90);
-            GameElement gameElement = new GameElement(placedElement, false);
-            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-            physicsElements.add(physicsElement);
+            physicsElements.add(generatePhysicsBarrier(new Vector2(boundingBox.getOrigin().getX() - 1, p), 90));
         }
         for (double p = boundingBox.getOrigin().getY(); p <= boundingBox.getHeight() + boundingBox.getOrigin().getY(); p += 4)
         {
-            Vector2 pos = new Vector2(boundingBox.getOrigin().getX() + boundingBox.getWidth(), p);
-            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 90);
-            GameElement gameElement = new GameElement(placedElement, false);
-            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
-            physicsElements.add(physicsElement);
+            physicsElements.add(generatePhysicsBarrier(new Vector2(boundingBox.getOrigin().getX() + boundingBox.getWidth(), p), 90));
         }
 
         return new GeneratedElements(gameElements, physicsElements, ballGameElement);
+    }
+
+    private static PhysicsElement<GameElement> generatePhysicsBarrier(Vector2 position, double rotation)
+    {
+        PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), position, 0, 0, rotation);
+        GameElement gameElement = new GameElement(placedElement, false);
+        return new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
     }
 
     /**
