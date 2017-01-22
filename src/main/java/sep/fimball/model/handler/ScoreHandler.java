@@ -2,6 +2,7 @@ package sep.fimball.model.handler;
 
 import javafx.beans.property.LongProperty;
 import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class ScoreHandler implements ElementHandler
 
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, int colliderID)
+    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderID)
     {
         Map<Integer, BaseRuleElementEvent> eventMap = element.getRuleElement().getEventMap();
 

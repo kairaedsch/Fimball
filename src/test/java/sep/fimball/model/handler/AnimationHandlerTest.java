@@ -35,7 +35,7 @@ public class AnimationHandlerTest
     {
         AnimationHandler test = new AnimationHandler();
         HandlerGameElement testHandlerGameElement = getTestElement();
-        test.activateElementHandler(testHandlerGameElement, 0);
+        test.activateElementHandler(testHandlerGameElement, null, 0);
         assertThat("Es wurde die richtige Animation aktiviert", testAnimation.isAnimating(0), is(true));
     }
 

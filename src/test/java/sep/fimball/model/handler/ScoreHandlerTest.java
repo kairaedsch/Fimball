@@ -31,9 +31,9 @@ public class ScoreHandlerTest
         HandlerGameSession gameSession = getGameSession();
         ScoreHandler test = new ScoreHandler(gameSession);
 
-        test.activateElementHandler(getElement(), 1);
+        test.activateElementHandler(getElement(), null, 1);
         assertThat("Der Spieler hat einmal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
-        test.activateElementHandler(getElement(), 1);
+        test.activateElementHandler(getElement(), null, 1);
         assertThat("Der Spieler hat zweimal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
     }
 

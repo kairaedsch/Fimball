@@ -1,6 +1,9 @@
 package sep.fimball.model.physics.game;
 
-public enum CollisonEventType
+/**
+ * TODO
+ */
+public enum CollisionEventType
 {
     ENTERED, LEAVED, OVER
 }

@@ -11,7 +11,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.game.CollisionEventArgs;
-import sep.fimball.model.physics.game.CollisonEventType;
+import sep.fimball.model.physics.game.CollisionEventType;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class GameSessionTest
 
         // künstliches Erstellen einer Kollision.
         final int colliderId = 0;
-        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisonEventType.ENTERED);
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventType.ENTERED);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
@@ -88,7 +88,7 @@ public class GameSessionTest
         gameSession.loopUpdate();
 
         // Auswertung
-        verify(handlerManagerMock).activateElementHandler(gameElement, colliderId);
+        verify(handlerManagerMock).activateElementHandler(gameElement, null, colliderId);
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
         verify(handlerManagerMock).activateGameHandler(GameEvent.BALL_LOST);

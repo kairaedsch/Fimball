@@ -74,10 +74,10 @@ public class HandlerManagerTest
         {
             elementHandlerActivated = true;
             return null;
-        }).when(testHandler).activateElementHandler(any(), anyInt());
+        }).when(testHandler).activateElementHandler(any(), any(), anyInt());
         testHandlerManager.addHandler(testHandler);
 
-        testHandlerManager.activateElementHandler(null, 0);
+        testHandlerManager.activateElementHandler(null, null, 0);
         assertThat(elementHandlerActivated, is(true));
     }
 

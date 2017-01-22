@@ -20,7 +20,7 @@ public class CollisionEventArgs<GameElementT>
     /**
      * Gibt an, wie collided wurde.
      */
-    CollisonEventType collisionEventType;
+    private CollisionEventType collisionEventType;
 
     /**
      * Erstellt eine neue Instanz von CollisionEventArgs.
@@ -29,7 +29,7 @@ public class CollisionEventArgs<GameElementT>
      * @param colliderId         Die ID des Colliders von otherElement, an dem die Kollision passiert ist.
      * @param collisionEventType Gibt an, wie collided wurde.
      */
-    public CollisionEventArgs(GameElementT otherElement, int colliderId, CollisonEventType collisionEventType)
+    public CollisionEventArgs(GameElementT otherElement, int colliderId, CollisionEventType collisionEventType)
     {
         this.otherElement = otherElement;
         this.colliderId = colliderId;
@@ -62,7 +62,7 @@ public class CollisionEventArgs<GameElementT>
      *
      * @return Wie collided wurde
      */
-    public CollisonEventType getCollisionEventType()
+    public CollisionEventType getCollisionEventType()
     {
         return collisionEventType;
     }

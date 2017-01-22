@@ -5,7 +5,6 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
 
@@ -27,7 +26,7 @@ public class HitHandlerTest
     {
         HitHandler test = new HitHandler();
         HandlerGameElement gameElement = getTestElement();
-        test.activateElementHandler(gameElement, 0);
+        test.activateElementHandler(gameElement, null, 0);
         assertThat("Das Element hat einen Treffer registriert", gameElement.getHitCount(), is(1));
     }
 

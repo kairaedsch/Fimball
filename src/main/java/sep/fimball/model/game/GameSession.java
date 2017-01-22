@@ -180,7 +180,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
 
         world.synchronizeWithPhysics(localElementEventArgsList);
 
-        localCollisionEventArgsList.forEach(collisionEventArgsList -> collisionEventArgsList.forEach(collisionEventArgs -> handlerManager.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getColliderId())));
+        localCollisionEventArgsList.forEach(collisionEventArgsList -> collisionEventArgsList.forEach(collisionEventArgs -> handlerManager.activateElementHandler(collisionEventArgs.getOtherElement(), collisionEventArgs.getCollisionEventType(), collisionEventArgs.getColliderId())));
         super.loopUpdate();
     }
 

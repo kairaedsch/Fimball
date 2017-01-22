@@ -7,6 +7,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
+import sep.fimball.model.physics.game.CollisionEventType;
 
 /**
  * Das Spielelement des Spinners.
@@ -76,7 +77,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     }
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderId)
     {
         if (element == this)
         {
