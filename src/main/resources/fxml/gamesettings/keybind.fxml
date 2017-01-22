@@ -5,6 +5,6 @@
 
 <HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.dialog.gamesettings.KeybindSubView"
       styleClass="keybinding">
-    <Label fx:id="keybindName" maxWidth="150.0" minWidth="150.0" text="Left Flipper" HBox.hgrow="ALWAYS" styleClass="keybindingName"/>
+    <Label fx:id="keybindName" maxWidth="150.0" minWidth="175.0" text="Left Flipper" HBox.hgrow="ALWAYS" styleClass="keybindingName"/>
     <TextField fx:id="keybindKey" maxWidth="140.0" minWidth="140.0" onKeyPressed="#changeKey" prefHeight="25.0" text="Left Shift" HBox.hgrow="ALWAYS"/>
 </HBox>

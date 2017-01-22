@@ -55,7 +55,6 @@ class SettingsFactory
         settings.masterVolumeProperty().setValue(settingsJson.masterVolume);
         settings.musicVolumeProperty().setValue(settingsJson.musicVolume);
         settings.sfxVolumeProperty().setValue(settingsJson.sfxVolume);
-        settings.keyBindingsMapProperty().clear();
         // null checks are missing
         for (SettingsJson.KeyLayout layout : settingsJson.keyLayouts)
         {

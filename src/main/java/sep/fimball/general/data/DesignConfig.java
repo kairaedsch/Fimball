@@ -26,6 +26,16 @@ public class DesignConfig
     public final static int DEFAULT_STAGE_HEIGHT = 720;
 
     /**
+     * Die minimale Breite des Anwendungsfensters.
+     */
+    public final static int MIN_STAGE_WIDTH = 1024;
+
+    /**
+     * Die minimale Höhe des Anwendungsfensters.
+     */
+    public final static int MIN_STAGE_HEIGHT = 668;
+
+    /**
      * Die Transparenz der Zwischenebene.
      */
     public final static double STAGE_DIVIDER_LAYER_OPACITY = 0.6;

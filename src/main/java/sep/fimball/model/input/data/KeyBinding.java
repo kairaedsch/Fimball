@@ -41,7 +41,7 @@ public enum KeyBinding
     EDITOR_ROTATE("gamesettings.general.keybinding.editor_rotate.key"),
 
     /**
-     * Löscht das im Editor ausgewählte BaseElement.
+     * Löscht die im Editor ausgewählten Elemente.
      */
     EDITOR_DELETE("gamesettings.general.keybinding.editor_delete.key"),
 
@@ -51,7 +51,7 @@ public enum KeyBinding
     EDITOR_MOVE("gamesettings.general.keybinding.editor_move.key"),
 
     /**
-     * Ist diese Taste gedrückt, wird durch klicken und ziehen der Maus im Editor die Kamera bewegt.
+     * Löscht die im Editor ausgewählten Elemente.
      */
     EDITOR_DUPLICATE("gamesettings.general.keybinding.editor_duplicate.key");
 

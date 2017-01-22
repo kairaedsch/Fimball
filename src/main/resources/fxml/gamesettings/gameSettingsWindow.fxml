@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="key_0" animated="false" collapsible="false" prefHeight="550.0" maxWidth="800.0" stylesheets="@../../styles/style.css" text="!gamesettings.key!"
+<TitledPane fx:id="key_0" animated="false" collapsible="false" prefHeight="575.0" maxWidth="800.0" stylesheets="@../../styles/style.css" text="!gamesettings.key!"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sep.fimball.view.dialog.gamesettings.GameSettingsView">
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="dialogBackground">

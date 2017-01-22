@@ -22,6 +22,9 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 
 import java.io.File;
 
+import static sep.fimball.general.data.DesignConfig.MIN_STAGE_HEIGHT;
+import static sep.fimball.general.data.DesignConfig.MIN_STAGE_WIDTH;
+
 /**
  * Die SceneManagerView verwaltet die aktuelle WindowView und DialogView und reagiert bei Änderungen im ViewModel damit,
  * dass sie die richtige WindowView und DialogView erstellt und in die Stage einbindet.
@@ -64,6 +67,8 @@ public class SceneManagerView
         // Setzt die Anfangsgröße des gesamten Spiels
         stage.setWidth(DesignConfig.DEFAULT_STAGE_WIDTH);
         stage.setHeight(DesignConfig.DEFAULT_STAGE_HEIGHT);
+        stage.setMinWidth(MIN_STAGE_WIDTH);
+        stage.setMinHeight(MIN_STAGE_HEIGHT);
 
         root = new StackPane();
 
