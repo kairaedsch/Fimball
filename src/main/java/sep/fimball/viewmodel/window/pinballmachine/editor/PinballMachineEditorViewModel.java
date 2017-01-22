@@ -319,7 +319,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             if (mouseOnCanvas)
                 pinballMachineEditor.placeSelection();
             else
+            {
+                pinballMachineEditor.clearSelection();
                 setSelectedAvailableElement(null);
+            }
         }
     }
 
