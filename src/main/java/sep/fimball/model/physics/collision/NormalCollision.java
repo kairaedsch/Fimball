@@ -2,8 +2,6 @@ package sep.fimball.model.physics.collision;
 
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.media.Sound;
-import sep.fimball.model.media.SoundManager;
 
 
 /**
@@ -25,9 +23,6 @@ public class NormalCollision implements CollisionType
             //Setze die Berechnete neue Geschwindigkeit als Geschwindigkeit des Balls.
             info.getBall().setVelocity(newVel);
         }
-
-        if (info.getBall().getVelocity().project(info.getShortestIntersect().normalized()).magnitude() > 4.0)
-            SoundManager.getInstance().addSoundToPlay(new Sound("wall.wav", false));
     }
 
     /**
