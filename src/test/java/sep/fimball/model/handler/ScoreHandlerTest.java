@@ -7,8 +7,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -145,7 +145,7 @@ public class ScoreHandlerTest
             }
 
             @Override
-            public void setCurrentAnimation(Optional<Animation> animation)
+            public void setCurrentAnimation(Optional<ElementImage> animation)
             {
 
             }

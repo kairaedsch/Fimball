@@ -7,6 +7,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.Optional;
 
@@ -51,7 +52,7 @@ public class HitHandlerTest
             }
 
             @Override
-            public void setCurrentAnimation(Optional<Animation> animation)
+            public void setCurrentAnimation(Optional<ElementImage> animation)
             {
 
             }

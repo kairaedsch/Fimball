@@ -83,6 +83,10 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
 
         pinballCanvasViewModel.setViewScreenshotCreator(this);
 
+        for (String imagePath : pinballCanvasViewModel.getAllImagePaths())
+        {
+            ImageCache.getInstance().getImage(imagePath);
+        }
     }
 
     /**

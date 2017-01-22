@@ -60,7 +60,7 @@ public class SoundHandlerTest
             }
 
             @Override
-            public void setCurrentAnimation(Optional<Animation> animation)
+            public void setCurrentAnimation(Optional<ElementImage> animation)
             {
 
             }
@@ -87,7 +87,7 @@ public class SoundHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "")), java.util.Optional.of("Test-Sound.mp3"));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.empty(), java.util.Optional.of("Test-Sound.mp3"));
                 eventMap.put(0, baseMediaElementEvent);
                 return new BaseMediaElement(null, null, 0, false, 0, null, eventMap, null);
             }

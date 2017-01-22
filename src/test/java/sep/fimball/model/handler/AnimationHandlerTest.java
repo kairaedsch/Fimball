@@ -8,6 +8,7 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class AnimationHandlerTest
     /**
      * Eine Test-Animation.
      */
-    private Animation testAnimation;
+    private ElementImage testAnimation;
 
     /**
      * Testet, ob das Aktivieren des AnimationHandlers funktioniert.
@@ -35,7 +36,7 @@ public class AnimationHandlerTest
         AnimationHandler test = new AnimationHandler();
         HandlerGameElement testHandlerGameElement = getTestElement();
         test.activateElementHandler(testHandlerGameElement, 0);
-        assertThat("Es wurde die richtige Animation aktiviert", testAnimation.getName(), is("Test-Animation"));
+        assertThat("Es wurde die richtige Animation aktiviert", testAnimation.isAnimating(0), is(true));
     }
 
     /**
@@ -54,7 +55,7 @@ public class AnimationHandlerTest
             }
 
             @Override
-            public void setCurrentAnimation(Optional<Animation> animation)
+            public void setCurrentAnimation(Optional<ElementImage> animation)
             {
                 animation.ifPresent(animation1 -> testAnimation = animation1);
             }
@@ -81,7 +82,7 @@ public class AnimationHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new Animation(0, 0, "Test-Animation")), java.util.Optional.of(""));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new ElementImage("", false, 0, true, new Animation(0, 0, "Test-Animation"))), java.util.Optional.of(""));
                 eventMap.put(0, baseMediaElementEvent);
                 return new BaseMediaElement(null, null, 0, false, 0, null, eventMap, null);
             }

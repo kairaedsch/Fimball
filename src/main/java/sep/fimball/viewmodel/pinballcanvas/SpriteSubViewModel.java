@@ -8,7 +8,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
@@ -109,10 +108,10 @@ public class SpriteSubViewModel
         currentImage = new SimpleObjectProperty<>();
         currentImage.bind(Bindings.createObjectBinding(() ->
         {
-            Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
+            Optional<ElementImage> currentAnimation = gameElement.currentAnimationProperty().get();
             if (currentAnimation.isPresent())
             {
-                return new ElementImageViewModel(new ElementImage(gameElement.getPlacedElement().getBaseElement().getId(), gameElement.getMediaElement(), currentAnimation.get()));
+                return new ElementImageViewModel(currentAnimation.get());
             }
             else
             {

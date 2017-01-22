@@ -10,9 +10,11 @@ import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.Observable;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.game.Session;
 
+import java.util.List;
 import java.util.Observer;
 import java.util.Optional;
 
@@ -224,4 +226,9 @@ public abstract class PinballCanvasViewModel
      * @param zoom Der neue Zoom der Kamera.
      */
     protected abstract void setCameraZoom(double zoom);
+
+    public List<String> getAllImagePaths()
+    {
+        return BaseElementManager.getInstance().getAllImagePaths();
+    }
 }

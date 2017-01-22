@@ -3,6 +3,10 @@ package sep.fimball.model.media;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.general.data.ImageLayer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * ElementImage stellt ein Bild oder Animation eines BaseElements dar.
  */
@@ -12,11 +16,6 @@ public class ElementImage
      * Gibt an, in welchen Grad-Schritten Bilder vorliegen. So bedeutet z.B. der Wert 90, das Bilder mit 0, 90, 180, und 270 Grad vorliegen.
      */
     private final int rotationAccuracy;
-
-    /**
-     * Die ID des BaseElements, zu dem das ElementImage gehört.
-     */
-    private String baseElementId;
 
     /**
      * Gibt an, ob Bilder in Grad-Schritten vorliegen also ob es vorgesehen ist das zugehörige Element zu drehen.
@@ -95,9 +94,8 @@ public class ElementImage
      * @param isAnimation           Gibt am, ob das ElementImage eine Animation ist.
      * @param animation             Die zugehörige Animation.
      */
-    private ElementImage(String baseElementId, boolean canRotateParam, int rotationAccuracyParam, boolean isAnimation, Animation animation)
+    public ElementImage(String baseElementId, boolean canRotateParam, int rotationAccuracyParam, boolean isAnimation, Animation animation)
     {
-        this.baseElementId = baseElementId;
         this.canRotate = canRotateParam && rotationAccuracyParam != 0;
         this.rotationAccuracy = rotationAccuracyParam <= 0 ? 360 : rotationAccuracyParam;
         this.isAnimation = isAnimation;
@@ -208,5 +206,25 @@ public class ElementImage
         {
             return false;
         }
+    }
+
+    public List<String> getAllImagePaths()
+    {
+        List<String> allImages = new ArrayList<>();
+        Collections.addAll(allImages, defaultImagesTop);
+        Collections.addAll(allImages, defaultImagesBottom);
+
+        if (isAnimation)
+        {
+            for (String[] imagePaths : animationImagesBottom)
+            {
+                Collections.addAll(allImages, imagePaths);
+            }
+            for (String[] imagePaths : animationImagesTop)
+            {
+                Collections.addAll(allImages, imagePaths);
+            }
+        }
+        return allImages;
     }
 }

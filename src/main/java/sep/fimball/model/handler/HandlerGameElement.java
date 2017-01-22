@@ -4,8 +4,8 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public interface HandlerGameElement
      *
      * @param animation Die neue aktuelle Animation des Elements.
      */
-    void setCurrentAnimation(Optional<Animation> animation);
+    void setCurrentAnimation(Optional<ElementImage> animation);
 
     /**
      * Setzt die Anzahl der Treffer, die dieses Element durch die Kugel bekommen hat.

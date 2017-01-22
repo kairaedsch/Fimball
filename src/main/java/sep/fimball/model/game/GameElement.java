@@ -7,8 +7,8 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.BaseRuleElement;
 import sep.fimball.model.handler.HandlerGameElement;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Optional;
@@ -51,7 +51,7 @@ public class GameElement implements HandlerGameElement
     /**
      * Die aktuelle Animation des Elements.
      */
-    private ObjectProperty<Optional<Animation>> currentAnimation;
+    private ObjectProperty<Optional<ElementImage>> currentAnimation;
 
     /**
      * Das zu diesem GameElement korrespondierende PlacedElement.
@@ -200,7 +200,7 @@ public class GameElement implements HandlerGameElement
      *
      * @param currentAnimation Die Animation.
      */
-    public void setCurrentAnimation(Optional<Animation> currentAnimation)
+    public void setCurrentAnimation(Optional<ElementImage> currentAnimation)
     {
         this.currentAnimation.set(Optional.empty());
         this.currentAnimation.set(currentAnimation);
@@ -211,7 +211,7 @@ public class GameElement implements HandlerGameElement
      *
      * @return Die aktuelle Animation des Elements.
      */
-    public ReadOnlyObjectProperty<Optional<Animation>> currentAnimationProperty()
+    public ReadOnlyObjectProperty<Optional<ElementImage>> currentAnimationProperty()
     {
         return currentAnimation;
     }

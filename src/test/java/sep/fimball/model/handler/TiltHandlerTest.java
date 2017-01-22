@@ -8,6 +8,7 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.Optional;
 
@@ -135,7 +136,7 @@ public class TiltHandlerTest
             }
 
             @Override
-            public void setCurrentAnimation(Optional<Animation> animation)
+            public void setCurrentAnimation(Optional<ElementImage> animation)
             {
 
             }

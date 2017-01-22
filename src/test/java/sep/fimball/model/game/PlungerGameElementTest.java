@@ -11,6 +11,7 @@ import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
+import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.physics.element.Modify;
 import sep.fimball.model.physics.element.PlungerModify;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
@@ -78,7 +79,7 @@ public class PlungerGameElementTest
         BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
         when(baseElement.getMedia()).thenReturn(baseMediaElement);
         Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-        eventMap.put(-5, new BaseMediaElementEvent(Optional.of(new Animation(0, 0, "")), Optional.of("")));
+        eventMap.put(-5, new BaseMediaElementEvent(Optional.of(new ElementImage("", baseMediaElement, new Animation(0, 0, ""))), Optional.of("")));
         when(baseMediaElement.getEventMap()).thenReturn(eventMap);
         return baseElement;
     }

@@ -1,7 +1,7 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElementEvent;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.Map;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public class AnimationHandler implements ElementHandler
         // Falls eine Animation für diesen Collider vorliegt, wird diese aktiviert
         if (eventMap.containsKey(colliderId))
         {
-            Optional<Animation> animation = eventMap.get(colliderId).getAnimation();
+            Optional<ElementImage> animation = eventMap.get(colliderId).getAnimation();
 
             if (animation.isPresent())
                 element.setCurrentAnimation(animation);

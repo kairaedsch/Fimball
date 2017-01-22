@@ -11,7 +11,6 @@ import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.game.GameElement;
-import sep.fimball.model.media.Animation;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.physics.element.BasePhysicsElement;
@@ -71,7 +70,7 @@ public class SpriteSubViewModelTest
         when(gameElement.rotationProperty()).thenReturn(new SimpleDoubleProperty(0));
         heightOfGameElement = new SimpleDoubleProperty(0);
         when(gameElement.heightProperty()).thenReturn(heightOfGameElement);
-        ObjectProperty<Optional<Animation>> currentAnimationProperty = new SimpleObjectProperty<>(Optional.empty());
+        ObjectProperty<Optional<ElementImage>> currentAnimationProperty = new SimpleObjectProperty<>(Optional.empty());
         when(gameElement.currentAnimationProperty()).thenReturn(currentAnimationProperty);
         when(gameElement.drawOrderProperty()).thenReturn(new SimpleIntegerProperty(0));
 

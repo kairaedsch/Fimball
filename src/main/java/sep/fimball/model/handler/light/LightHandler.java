@@ -7,7 +7,7 @@ import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.HandlerGameElement;
 import sep.fimball.model.handler.HandlerGameSession;
-import sep.fimball.model.media.Animation;
+import sep.fimball.model.media.ElementImage;
 
 import java.util.List;
 import java.util.Optional;
@@ -97,7 +97,7 @@ public class LightHandler implements GameHandler
 
         for (HandlerGameElement light : lights)
         {
-            Optional<Animation> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
+            Optional<ElementImage> animation = light.getMediaElement().getEventMap().entrySet().iterator().next().getValue().getAnimation();
             if (animation.isPresent() && currentLightChanger.determineLightStatusWithAnimation(light.positionProperty().get(), delta))
             {
                 light.setCurrentAnimation(animation);

@@ -55,7 +55,7 @@ public class BaseMediaElementFactoryTest
         generatedElement.getEventMap().forEach((id, ev) ->
         {
             assertThat(id, is(TEST_INT));
-            assertThat(ev.getAnimation().get().getName(), is(TEST_STRING));
+            assertThat(ev.getAnimation().get().isAnimating(0), is(true));
             assertThat(ev.getSound(), notNullValue());
         });
         assertThat(generatedElement.getLocalCoordinates().size(), is(1));

@@ -49,11 +49,12 @@ public class BaseMediaElementFactory
         {
             for (BaseElementJson.MediaElementJson.MediaElementEventJson event : mediaElement.events)
             {
-                Animation animation = null;
+                ElementImage animation = null;
                 if (event.animation != null)
                 {
                     nullCheck(event.animation.animationName);
-                    animation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
+                    Animation aAnimation = new Animation(event.animation.duration, event.animation.frameCount, event.animation.animationName);
+                    animation = new ElementImage(baseElementId, canRotate, rotationAccuracy, true, aAnimation);
                 }
 
                 eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), Optional.ofNullable(event.soundName)));

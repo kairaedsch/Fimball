@@ -6,11 +6,16 @@ import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import sep.fimball.general.data.DataPath;
 import sep.fimball.model.blueprint.json.JsonFileManager;
+import sep.fimball.model.media.BaseMediaElement;
+import sep.fimball.model.media.BaseMediaElementEvent;
+import sep.fimball.model.media.ElementImage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -111,5 +116,22 @@ public class BaseElementManager
         {
             System.err.println("Element Type \"" + elementTypeId + "\" not loaded");
         }
+    }
+
+    public List<String> getAllImagePaths()
+    {
+        List<String> allImages = new ArrayList<>();
+
+        for (BaseElement baseElement : elements.values())
+        {
+            BaseMediaElement media = baseElement.getMedia();
+            allImages.addAll(media.elementImageProperty().get().getAllImagePaths());
+            for (BaseMediaElementEvent baseMediaElementEvent : media.getEventMap().values())
+            {
+                baseMediaElementEvent.getAnimation().ifPresent(animation -> allImages.addAll(animation.getAllImagePaths()));
+            }
+        }
+
+        return allImages;
     }
 }
