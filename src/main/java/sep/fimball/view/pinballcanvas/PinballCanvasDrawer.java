@@ -110,7 +110,7 @@ class PinballCanvasDrawer
 
         double borderWidth = PIXELS_PER_GRID_UNIT * 2;
         double borderHeight = PIXELS_PER_GRID_UNIT * 25;
-        double borderDepth = PIXELS_PER_GRID_UNIT * Config.MACHINE_BOX_MARGIN;
+        double borderDepth = PIXELS_PER_GRID_UNIT * (Config.MACHINE_BOX_MARGIN.getY() - 1);
         double footHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
         double headHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
         double headWidth = PIXELS_PER_GRID_UNIT * 20;

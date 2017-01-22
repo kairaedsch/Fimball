@@ -60,7 +60,7 @@ public class Config
     /**
      * Der minimale Abstand zwischen Teilen eines Automaten und dem Rand des Automaten.
      */
-    public final static int MACHINE_BOX_MARGIN = 6;
+    public final static Vector2 MACHINE_BOX_MARGIN = new Vector2(4, 7);
 
     /**
      * Die minimale Breite des Rand des Automaten.

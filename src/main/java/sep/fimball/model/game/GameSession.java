@@ -256,6 +256,9 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
 
         if (rounds >= players.size())
         {
+            isOver.setValue(true);
+            handlerManager.activateGameHandler(GameEvent.GAME_OVER);
+            pauseAll();
             if (!startedFromEditor)
             {
                 for (Player player : players)
@@ -263,9 +266,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
                     pinballMachine.addHighscore(new Highscore(player.pointsProperty().get(), player.nameProperty().get()));
                 }
             }
-            isOver.setValue(true);
-            handlerManager.activateGameHandler(GameEvent.GAME_OVER);
-            pauseAll();
         }
         else
         {

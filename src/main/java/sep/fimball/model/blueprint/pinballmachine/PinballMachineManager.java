@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static sep.fimball.model.blueprint.json.JsonFileManager.saveToJson;
+import static sep.fimball.model.blueprint.pinballmachine.PinballMachineManager.SaveMode.*;
 
 /**
  * Verwaltet die mitgelieferten und neu erstellten Flipperautomaten.
@@ -76,7 +77,7 @@ public class PinballMachineManager
     public PinballMachine createNewMachine()
     {
         PinballMachine pinballMachine = new PinballMachine("New Pinball Machine", Config.uniqueId(), Optional.empty(), Collections.emptyList(), this, true);
-        savePinballMachine(pinballMachine, false);
+        savePinballMachine(pinballMachine, ALL);
         pinballMachines.add(pinballMachine);
         pinballMachine.unloadElements();
         return pinballMachine;
@@ -131,15 +132,15 @@ public class PinballMachineManager
      * Speichert die gegebene PinballMachine und ihre Elemente.
      *
      * @param pinballMachine Die zu speichernde PinballMachine.
-     * @param autoSave       Gibt an, ob der AutoSave-Automat gespeichert werden soll.
+     * @param saveMode       Gibt an, wie gespeichert werden soll.
      * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    boolean savePinballMachine(PinballMachine pinballMachine, boolean autoSave)
+    boolean savePinballMachine(PinballMachine pinballMachine, SaveMode saveMode)
     {
         Path pathToMachine;
         String pathToPinballMachineGeneralJson;
         String pathToPinballMachinePlacedElementsJson;
-        if (autoSave)
+        if (saveMode == AUTOSAVE)
         {
             pathToMachine = Paths.get(DataPath.pathToAutoSave());
             pathToPinballMachineGeneralJson = DataPath.pathToAutoSaveGeneralJson();
@@ -157,7 +158,7 @@ public class PinballMachineManager
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
             if (!couldCreateFolder)
             {
-                if (autoSave)
+                if (saveMode == AUTOSAVE)
                 {
                     System.err.println("Could not create folder: \"" + pathToMachine + "\". Auto save machine was not saved.");
                 }
@@ -172,10 +173,16 @@ public class PinballMachineManager
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
         boolean successMachine = JsonFileManager.saveToJson(pathToPinballMachineGeneralJson, pinballMachineJson);
 
-        PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
-        boolean successElements = saveToJson(pathToPinballMachinePlacedElementsJson, placedElementListJson);
-
-        return successMachine && successElements;
+        if (saveMode != WITHOUT_ELEMENTS)
+        {
+            PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
+            boolean successElements = saveToJson(pathToPinballMachinePlacedElementsJson, placedElementListJson);
+            return successMachine && successElements;
+        }
+        else
+        {
+            return successMachine;
+        }
     }
 
     /**
@@ -285,7 +292,7 @@ public class PinballMachineManager
      */
     public boolean saveAutoSaveMachine(PinballMachine pinballMachine)
     {
-        return savePinballMachine(pinballMachine, true);
+        return savePinballMachine(pinballMachine, AUTOSAVE);
     }
 
     /**
@@ -342,5 +349,10 @@ public class PinballMachineManager
             placedElements.forEach(pinballMachine::removeElement);
             PlacedElementList.get().forEach(pinballMachine::addElement);
         }
+    }
+
+    enum SaveMode
+    {
+        ALL, WITHOUT_ELEMENTS, AUTOSAVE
     }
 }

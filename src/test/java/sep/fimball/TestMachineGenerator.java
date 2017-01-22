@@ -41,7 +41,7 @@ public class TestMachineGenerator
                 }
             }
 
-            pinballMachine.saveToDisk(true);
+            pinballMachine.saveToDisk(true, true);
         }
     }
 
@@ -64,7 +64,7 @@ public class TestMachineGenerator
                 pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement("light_green"), new Vector2(x * distance - (size * distance / 2), y * distance), 0, 0, 0));
             }
         }
-        pinballMachine.saveToDisk(true);
+        pinballMachine.saveToDisk(true, true);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class TestMachineGenerator
                 pinballMachine.addElement(element);
             }
 
-            pinballMachine.saveToDisk(true);
+            pinballMachine.saveToDisk(true, true);
         }
     }
 }

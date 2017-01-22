@@ -132,9 +132,9 @@ public class PinballMachine
     public RectangleDouble getBoundingBox()
     {
         RectangleDouble boundingBox = PinballMachineUtil.getBoundingBox(elements);
-        Vector2 newOrigin = boundingBox.getOrigin().minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN));
-        Vector2 newSize = boundingBox.getSize().plus(new Vector2(MACHINE_BOX_MARGIN * 2, MACHINE_BOX_MARGIN * 2));
-        if(newSize.getX() < MACHINE_BOX_MIN_WIDTH)
+        Vector2 newOrigin = boundingBox.getOrigin().minus(MACHINE_BOX_MARGIN);
+        Vector2 newSize = boundingBox.getSize().plus(MACHINE_BOX_MARGIN.scale(2));
+        if (newSize.getX() < MACHINE_BOX_MIN_WIDTH)
         {
             double missingWidth = MACHINE_BOX_MIN_WIDTH - newSize.getX();
             newOrigin = new Vector2(newOrigin.getX() - missingWidth / 2D, newOrigin.getY());
@@ -159,12 +159,13 @@ public class PinballMachine
      * Falls erfolgreich, werden die Elemente der PinballMachine wieder aus dem Ram entladen.
      *
      * @param unloadElements Gibt an, ob die geladenen Elemente des Automaten verworfen werden sollen.
+     * @param saveElements   Gibt an, ob die Elemente des Automaten gespeichert werden sollen.
      * @return Ob die PinballMachine gespeichert werden konnte.
      */
-    public boolean saveToDisk(boolean unloadElements)
+    public boolean saveToDisk(boolean unloadElements, boolean saveElements)
     {
         checkElementsLoaded();
-        boolean success = pinballMachineManager.savePinballMachine(this, false);
+        boolean success = pinballMachineManager.savePinballMachine(this, saveElements ? PinballMachineManager.SaveMode.ALL : PinballMachineManager.SaveMode.WITHOUT_ELEMENTS);
         if (success && unloadElements)
             unloadElements();
         return success;
@@ -292,7 +293,7 @@ public class PinballMachine
     public ReadOnlyListProperty<PlacedElement> elementsProperty()
     {
         checkElementsLoaded();
-        if(!sortedElements.isPresent())
+        if (!sortedElements.isPresent())
         {
             sortedElements = Optional.of(new SimpleListProperty<>(new SortedList<>(elements, PlacedElement::compare)));
         }
@@ -350,14 +351,14 @@ public class PinballMachine
                 highscoreList.remove(worstHighscore);
                 highscoreList.add(highscore);
                 if (save)
-                    saveToDisk(true);
+                    saveToDisk(false, false);
             }
         }
         else
         {
             highscoreList.add(highscore);
             if (save)
-                saveToDisk(true);
+                saveToDisk(false, false);
         }
     }
 
@@ -379,9 +380,11 @@ public class PinballMachine
 
     /**
      * Erstellt einen neue, leere PinballMachine.
+     *
      * @param pinballMachineManager Der PinballMachineManager, welcher diese PinballMachine verwaltet.
      */
-    private PinballMachine(PinballMachineManager pinballMachineManager) {
+    private PinballMachine(PinballMachineManager pinballMachineManager)
+    {
         this.pinballMachineManager = pinballMachineManager;
     }
 }
