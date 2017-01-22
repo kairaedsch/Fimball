@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
+import sep.fimball.view.general.ViewUtil;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.view.tools.ViewLoader;
@@ -21,8 +22,6 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.EditorSessionSubViewMo
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 import java.util.Optional;
-
-import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 
 
 /**
@@ -294,8 +293,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     private Vector2 mousePosToCanvasPos(Vector2 mousePos)
     {
-        Vector2 posToMiddle = new Vector2(mousePos.getX(), mousePos.getY()).minus(new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).scale(0.5));
-        return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * pinballMachineEditorViewModel.cameraZoomProperty().get())).plus(pinballMachineEditorViewModel.cameraPositionProperty().get());
-
+        return ViewUtil.canvasPosToGridPos(
+                pinballMachineEditorViewModel.cameraPositionProperty().get(),
+                pinballMachineEditorViewModel.cameraZoomProperty().get(),
+                new Vector2(mousePos.getX(), mousePos.getY()),
+                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight())
+        );
     }
 }

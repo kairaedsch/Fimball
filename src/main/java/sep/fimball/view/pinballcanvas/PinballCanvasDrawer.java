@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.Optional;
 
 import static sep.fimball.general.data.DesignConfig.*;
+import static sep.fimball.view.general.ViewUtil.canvasPosToGridPos;
 import static sep.fimball.viewmodel.pinballcanvas.DrawMode.EDITOR;
 import static sep.fimball.viewmodel.pinballcanvas.DrawMode.GAME;
 
@@ -246,21 +247,6 @@ class PinballCanvasDrawer
     }
 
     /**
-     * Rechnet die durch die {@code x} und {@code y} gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
-     *
-     * @param cameraPosition Die Position der Kamera.
-     * @param cameraZoom     Der Zoom der Kamera.
-     * @param x              Der x-Wert der Position auf dem Canvas.
-     * @param y              Der y-Wert der Position auf dem Canvas.
-     * @return Die Position auf dem Grid.
-     */
-    Vector2 canvasPosToGridPos(Vector2 cameraPosition, double cameraZoom, double x, double y)
-    {
-        Vector2 posToMiddle = new Vector2(x, y).minus(new Vector2(canvas.getWidth(), canvas.getHeight()).scale(0.5));
-        return posToMiddle.scale(1 / (PIXELS_PER_GRID_UNIT * cameraZoom)).plus(cameraPosition);
-    }
-
-    /**
      * Berechnet die Position der linken oberen Ecke des Canvas in Grideinheiten aus.
      *
      * @param cameraPosition Die Position der Kamera.
@@ -269,7 +255,7 @@ class PinballCanvasDrawer
      */
     Vector2 getTopLeftCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
-        return canvasPosToGridPos(cameraPosition, cameraZoom, 0, 0);
+        return canvasPosToGridPos(cameraPosition, cameraZoom, new Vector2(0, 0), new Vector2(canvas.getWidth(), canvas.getHeight()));
     }
 
     /**
@@ -281,6 +267,7 @@ class PinballCanvasDrawer
      */
     Vector2 getBottomRightCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
-        return canvasPosToGridPos(cameraPosition, cameraZoom, canvas.getWidth(), canvas.getHeight());
+        Vector2 canvasSize = new Vector2(canvas.getWidth(), canvas.getHeight());
+        return canvasPosToGridPos(cameraPosition, cameraZoom, canvasSize, canvasSize);
     }
 }

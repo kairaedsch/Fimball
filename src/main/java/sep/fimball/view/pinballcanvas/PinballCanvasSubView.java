@@ -16,6 +16,7 @@ import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.view.general.ViewUtil;
 import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 import sep.fimball.viewmodel.pinballcanvas.PinballCanvasViewModel;
@@ -146,7 +147,11 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return pinballCanvasDrawer.canvasPosToGridPos(camera.getSoftCameraPosition(), camera.getSoftCameraZoom(), mouseEvent.getX(), mouseEvent.getY());
+        return ViewUtil.canvasPosToGridPos(
+                camera.getSoftCameraPosition(),
+                camera.getSoftCameraZoom(),
+                new Vector2(mouseEvent.getX(), mouseEvent.getY()),
+                new Vector2(canvas.getWidth(), canvas.getHeight()));
     }
 
     /**
