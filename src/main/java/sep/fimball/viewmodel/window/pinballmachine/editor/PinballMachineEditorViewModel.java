@@ -290,6 +290,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
+        cursorProperty.set(Cursor.DEFAULT);
+
         // Nur Linksklick ist interessant
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
             return;
@@ -318,8 +320,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             else
                 setSelectedAvailableElement(null);
         }
-
-        cursorProperty.set(Cursor.DEFAULT);
     }
 
     /**
