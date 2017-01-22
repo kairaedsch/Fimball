@@ -56,7 +56,22 @@ public class FlipperGameElement extends GameElement implements UserHandler
             flipperPhysicsElement.addModify(() -> rotateUp ? AngularDirection.DOWN : AngularDirection.UP);
 
             if (keyEventArgs.isStateSwitched())
-                SoundManager.getInstance().addSoundToPlay(new Sound("flipper.wav", false));
+            {
+                if (!rotateUp)
+                {
+                    playFlipperSound("flipper.wav");
+                }
+                else
+                {
+                    playFlipperSound("flipperDown.wav");
+                }
+            }
+
         }
+    }
+
+    private void playFlipperSound(String soundPath)
+    {
+        SoundManager.getInstance().addSoundToPlay(new Sound(soundPath, false));
     }
 }
