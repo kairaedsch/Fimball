@@ -95,7 +95,7 @@ public class PauseViewModel extends DialogViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (settings.getKeyBinding(keyEvent.getCode()).isPresent() && settings.getKeyBinding(keyEvent.getCode()).get() == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+        if (settings.getKeyBinding(keyEvent.getCode()).isPresent() && settings.getKeyBinding(keyEvent.getCode()).get() == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
         {
             resumeGame();
         }

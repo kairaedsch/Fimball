@@ -14,7 +14,7 @@
         </VBox>
         <Button fx:id="key_2" defaultButton="true" mnemonicParsing="false" onAction="#okClicked" styleClass="dialogButton" text="!pause.continue.key!"
                 AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
-        <Button fx:id="key_3" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#abortClicked" styleClass="dialogButton"
+        <Button fx:id="key_3"  layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#abortClicked" styleClass="dialogButton"
                 text="!pause.abort.key!" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
     </AnchorPane>
 </TitledPane>
