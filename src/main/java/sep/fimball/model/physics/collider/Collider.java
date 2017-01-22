@@ -85,7 +85,7 @@ public class Collider
             {
                 shortestCombinedIntersect = shortestCombinedIntersect.plus(hit.getShortestIntersect());
             }
-            shortestCombinedIntersect = shortestCombinedIntersect.scale(1 / hits.size());
+            //shortestCombinedIntersect = shortestCombinedIntersect.scale(1 / hits.size());
             type.applyCollision(new CollisionInfo(ball, shortestCombinedIntersect, element, collidedShapes));
 
             return Optional.of(shortestCombinedIntersect.magnitude());
