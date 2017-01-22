@@ -144,25 +144,6 @@ public class MainMenuViewModel extends WindowViewModel
     @Override
     public void handleKeyEvent(KeyEvent keyEvent)
     {
-        if (!(keyEvent.getEventType() == KeyEvent.KEY_RELEASED))
-        {
-            Optional<Integer> index = findSelectedIndex();
-            switch (keyEvent.getCode())
-            {
-                case UP:
-                    if (index.isPresent() && index.get() >= 1)
-                    {
-                        pinballMachinePreviewSubViewModelList.get(index.get() - 1).selectPinballMachine();
-                    }
-                    break;
-                case DOWN:
-                    if (index.isPresent() && index.get() < pinballMachinePreviewSubViewModelList.size() - 1)
-                    {
-                        pinballMachinePreviewSubViewModelList.get(index.get() + 1).selectPinballMachine();
-                    }
-                    break;
-            }
-        }
         if (keyEvent.getCode() == KeyCode.ESCAPE)
         {
             exitGame();
@@ -173,23 +154,6 @@ public class MainMenuViewModel extends WindowViewModel
     public void changeBackgroundMusic()
     {
         SoundManagerViewModel.getInstance().playMusic(Sounds.MAIN_MENU);
-    }
-
-    /**
-     * Findet den Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
-     *
-     * @return Der Index des aktuell ausgewählten Automaten in der Vorschau-Liste.
-     */
-    private Optional<Integer> findSelectedIndex()
-    {
-        for (int i = 0; i < pinballMachinePreviewSubViewModelList.size(); ++i)
-        {
-            if (pinballMachinePreviewSubViewModelList.get(i).selectedProperty().get())
-            {
-                return Optional.of(i);
-            }
-        }
-        return Optional.empty();
     }
 
     /**
