@@ -86,9 +86,9 @@ public class DesignConfig
     public final static double BORDER_BLINK_RATE = 1000.0;
 
     /**
-     * Breite des Rahmens eines Automaten während eines Spiels.
+     * Höhe des Rahmens eines Automaten während eines Spiels.
      */
-    public final static double AUTOMATE_BORDER_WIDTH = 2;
+    public final static double AUTOMATE_BORDER_HEIGHT = 15;
 
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.

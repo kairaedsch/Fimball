@@ -3,6 +3,7 @@ package sep.fimball.viewmodel.dialog.pause;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.junit.Test;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
@@ -26,12 +27,13 @@ public class PauseViewModelTest
     {
         KeyCode pauseKeyCode = KeyCode.ESCAPE;
         KeyCode otherKeyCode = KeyCode.ENTER;
+        PinballMachine pinballMachine = mock(PinballMachine.class);
         GameViewModel gameViewModel = mock(GameViewModel.class);
         SceneManagerViewModel sceneManagerViewModel = mock(SceneManagerViewModel.class);
         Settings settings = mock(Settings.class);
         when(settings.getKeyBinding(pauseKeyCode)).thenReturn(Optional.of(KeyBinding.PAUSE));
 
-        PauseViewModel pauseViewModel = new PauseViewModel(gameViewModel, settings);
+        PauseViewModel pauseViewModel = new PauseViewModel(gameViewModel, pinballMachine, settings);
         pauseViewModel.setSceneManager(sceneManagerViewModel);
         //Das PauseViewModel dazu auffordern das Spiel wieder aufzunehmen.
         pauseViewModel.resumeGame();

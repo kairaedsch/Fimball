@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.scene.input.KeyEvent;
 import sep.fimball.general.data.Highscore;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.dialog.DialogType;
@@ -18,6 +19,11 @@ import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
  */
 public class PauseViewModel extends DialogViewModel
 {
+    /**
+     * Der gespielte PinnballAutomat.
+     */
+    private PinballMachine pinballMachine;
+
     /**
      * Eine Referenz auf die Singleton Instanz von settings.
      */
@@ -38,9 +44,9 @@ public class PauseViewModel extends DialogViewModel
      *
      * @param gameViewModel Das zugehörige GameViewModel.
      */
-    public PauseViewModel(GameViewModel gameViewModel)
+    public PauseViewModel(GameViewModel gameViewModel, PinballMachine pinballMachine)
     {
-        this(gameViewModel, Settings.getSingletonInstance());
+        this(gameViewModel, pinballMachine, Settings.getSingletonInstance());
     }
 
     /**
@@ -49,10 +55,11 @@ public class PauseViewModel extends DialogViewModel
      * @param gameViewModel Das zugehörige GameViewModel.
      * @param settings      Eine Instanz des Singleton Settings
      */
-    PauseViewModel(GameViewModel gameViewModel, Settings settings)
+    PauseViewModel(GameViewModel gameViewModel, PinballMachine pinballMachine, Settings settings)
     {
         super(DialogType.PAUSE);
         this.gameViewModel = gameViewModel;
+        this.pinballMachine = pinballMachine;
         playerHighscores = new SimpleListProperty<>(gameViewModel.getScores());
         this.settings = settings;
     }
@@ -63,7 +70,7 @@ public class PauseViewModel extends DialogViewModel
     public void exitDialog()
     {
         sceneManager.popDialog();
-        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.setWindow(new MainMenuViewModel(pinballMachine));
     }
 
     /**

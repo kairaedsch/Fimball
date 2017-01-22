@@ -109,16 +109,7 @@ public class PinballMachine
     public Optional<PlacedElement> getElementAt(Vector2 point)
     {
         checkElementsLoaded();
-        for (int i = elements.size() - 1; i >= 0; i--)
-        {
-            PlacedElement placedElement = elements.get(i);
-
-            if (placedElement.getBaseElement().getPhysics().checkIfPointIsInElement(placedElement.rotationProperty().get(), point.minus(placedElement.positionProperty().get())))
-            {
-                return Optional.of(elements.get(i));
-            }
-        }
-        return Optional.empty();
+        return PinballMachineUtil.getElementAt(point, elementsProperty());
     }
 
     /**
@@ -129,23 +120,7 @@ public class PinballMachine
      */
     public List<PlacedElement> getElementsAt(RectangleDoubleByPoints rect)
     {
-        List<PlacedElement> matchingElements = new ArrayList<>();
-        for (PlacedElement element : elements)
-        {
-            Vector2 elemPos = element.positionProperty().get();
-
-            Vector2 relToOrigin = elemPos.minus(rect.getOrigin());
-            Vector2 relToEnd = elemPos.minus(rect.getEnd());
-
-            Vector2 maxExtremePos = element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true);
-            Vector2 minExtremePos = element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false);
-
-            if (relToOrigin.plus(maxExtremePos).getX() > 0 && relToOrigin.plus(maxExtremePos).getY() > 0 && relToEnd.plus(minExtremePos).getX() < 0 && relToEnd.plus(minExtremePos).getY() < 0)
-            {
-                matchingElements.add(element);
-            }
-        }
-        return matchingElements;
+        return PinballMachineUtil.getElementsAt(rect, elements);
     }
 
     /**
@@ -155,12 +130,8 @@ public class PinballMachine
      */
     public RectangleDouble getBoundingBox()
     {
-        Vector2 max = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true))).reduce(Vector2.NEGATIVE_INFINITY, Vector2::maxComponents);
-        Vector2 origin = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false))).reduce(Vector2.POSITIVE_INFINITY, Vector2::minComponents);
-
-        double width = Math.abs(max.getX() - origin.getX());
-        double height = Math.abs(max.getY() - origin.getY());
-        return new RectangleDouble(origin.minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN)), width + MACHINE_BOX_MARGIN * 2, height + MACHINE_BOX_MARGIN * 2);
+        RectangleDouble boundingBox = PinballMachineUtil.getBoundingBox(elements);
+        return new RectangleDouble(boundingBox.getOrigin().minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN)), boundingBox.getSize().plus(new Vector2(MACHINE_BOX_MARGIN * 2, MACHINE_BOX_MARGIN * 2)));
     }
 
     /**

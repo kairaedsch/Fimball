@@ -70,7 +70,7 @@ public class GameOverViewModel extends DialogViewModel
     public void exitDialog()
     {
         sceneManager.popDialog();
-        sceneManager.setWindow(new MainMenuViewModel());
+        sceneManager.setWindow(new MainMenuViewModel(pinballMachine));
     }
 
     /**

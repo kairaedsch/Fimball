@@ -213,7 +213,7 @@ public class GameViewModel extends WindowViewModel
                 }
                 else
                 {
-                    sceneManager.pushDialog(new PauseViewModel(this));
+                    sceneManager.pushDialog(new PauseViewModel(this, gameSession.getPinballMachine()));
                 }
             }
             else

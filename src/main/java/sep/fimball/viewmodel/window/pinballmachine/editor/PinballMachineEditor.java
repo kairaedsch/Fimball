@@ -1,10 +1,12 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachineUtil;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.*;
@@ -144,11 +146,15 @@ public class PinballMachineEditor
     {
         if (!selection.isEmpty() && selection.stream().allMatch(p -> p.getBaseElement().getMedia().canRotate()))
         {
-            double rotation = selection.stream().map(p -> p.getBaseElement().getMedia().getRotationAccuracy()).reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
+            double rotation = selection.stream()
+                    .map(p -> p.getBaseElement().getMedia().getRotationAccuracy())
+                    .reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
             if (rotation == 0)
+            {
                 rotation = 90;
-            PlacedElement aPlacedElement = selection.iterator().next();
-            Vector2 mainPivotPoint = aPlacedElement.positionProperty().get().plus(aPlacedElement.getBaseElement().getPhysics().getPivotPoint());
+            }
+
+            Vector2 mainPivotPoint = PinballMachineUtil.getBoundingBox(selection).getMiddle().round();
             for (PlacedElement placedElement : selection)
             {
                 Vector2 pivotPoint = placedElement.getBaseElement().getPhysics().getPivotPoint();

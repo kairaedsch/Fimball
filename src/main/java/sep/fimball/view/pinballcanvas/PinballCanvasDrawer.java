@@ -4,13 +4,19 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import sep.fimball.general.data.*;
+import javafx.scene.text.Font;
+import sep.fimball.general.data.Config;
+import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.RectangleDoubleByPoints;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
-import java.util.*;
+import java.awt.*;
+import java.util.Optional;
 
-import static sep.fimball.general.data.DesignConfig.AUTOMATE_BORDER_WIDTH;
-import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
+import static sep.fimball.general.data.DesignConfig.*;
+import static sep.fimball.viewmodel.pinballcanvas.DrawMode.EDITOR;
+import static sep.fimball.viewmodel.pinballcanvas.DrawMode.GAME;
 
 /**
  * Der PinballCanvasDrawer ist eine Hilfsklasse, die die zum Zeichnen notwendigen Operationen auf dem GraphicsContext des Canvas ausführt.
@@ -65,7 +71,7 @@ class PinballCanvasDrawer
     {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
-        graphicsContext.setFill(DesignConfig.PRIMARY_COLOR);
+        graphicsContext.setFill(drawMode == GAME ? PRIMARY_COLOR_LIGHT : PRIMARY_COLOR);
         graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         graphicsContext.save();
@@ -73,19 +79,18 @@ class PinballCanvasDrawer
         graphicsContext.translate(translate.getX(), translate.getY());
         graphicsContext.scale(cameraZoom, cameraZoom);
 
-        if (drawMode == DrawMode.EDITOR)
+        if (drawMode == EDITOR)
         {
             drawEditorGrid(cameraPosition, cameraZoom);
+        }
+        if (drawMode == GAME)
+        {
+            drawBoundingBox(cameraPosition, cameraZoom, graphicsContext);
         }
 
         spritesRegionDrawer.drawElements(cameraPosition, cameraZoom, graphicsContext);
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
-
-        if (drawMode == DrawMode.GAME)
-        {
-            drawBoundingBox(cameraPosition, cameraZoom, graphicsContext);
-        }
 
         graphicsContext.restore();
     }
@@ -99,25 +104,64 @@ class PinballCanvasDrawer
      */
     private void drawBoundingBox(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
     {
-        Vector2 canvasTopLeft = getTopLeftCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
-        Vector2 canvasBottomRight = getBottomRightCornerOfCanvas(cameraPosition, cameraZoom).scale(PIXELS_PER_GRID_UNIT);
-
         Vector2 ori = boundingBox.getOrigin().scale(PIXELS_PER_GRID_UNIT);
         Vector2 end = boundingBox.getSize().plus(boundingBox.getOrigin()).scale(PIXELS_PER_GRID_UNIT);
 
-        graphicsContext.setFill(DesignConfig.PRIMARY_COLOR_LIGHT);
-        graphicsContext.fillRect(canvasTopLeft.getX(), canvasTopLeft.getY(), canvasBottomRight.getX() - canvasTopLeft.getX(), ori.getY() - canvasTopLeft.getY());
-        graphicsContext.fillRect(canvasTopLeft.getX(), canvasTopLeft.getY(), ori.getX() - canvasTopLeft.getX(), canvasBottomRight.getY() - canvasTopLeft.getY());
-        graphicsContext.fillRect(canvasTopLeft.getX(), end.getY(), canvasBottomRight.getX() - canvasTopLeft.getX(), canvasBottomRight.getY() - end.getY());
-        graphicsContext.fillRect(end.getX(), canvasTopLeft.getY(), canvasBottomRight.getX() - end.getX(), canvasBottomRight.getY() - canvasTopLeft.getY());
+        double borderWidth = PIXELS_PER_GRID_UNIT * 2;
+        double borderHeight = PIXELS_PER_GRID_UNIT * 25;
+        double borderDepth = PIXELS_PER_GRID_UNIT * Config.MACHINE_BOX_MARGIN;
+        double footHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
+        double headHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
+        double headWidth = PIXELS_PER_GRID_UNIT * 20;
+        double headInset = PIXELS_PER_GRID_UNIT * 5;
+        double textInset = PIXELS_PER_GRID_UNIT * 4;
+        double textHeight = PIXELS_PER_GRID_UNIT * 17;
+        double textWidth = PIXELS_PER_GRID_UNIT * 90;
 
-        double borderWidth = PIXELS_PER_GRID_UNIT * AUTOMATE_BORDER_WIDTH;
+        if(end.getX() - ori.getX() < textWidth)
+        {
+            double div = textWidth - (end.getX() - ori.getX());
+            ori = ori.minus(new Vector2(div / 2, 0));
+            end = end.plus(new Vector2(div / 2, 0));
+        }
+
+        // Spiel Hintergrund
+        graphicsContext.setFill(PRIMARY_COLOR);
+        graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX() - ori.getX(), end.getY() - ori.getY());
+
+        // Kopf
         graphicsContext.setLineWidth(borderWidth);
+        // Kopf oben
+        graphicsContext.setFill(SECONDARY_COLOR);
+        graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight - headWidth, end.getX() - ori.getX() + borderWidth * 2, headWidth);
+        // Kopf unten
+        graphicsContext.setFill(SECONDARY_COLOR_DARK);
+        graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight, end.getX() - ori.getX() + borderWidth * 2, headHeight);
+        // Kopf innen
+        graphicsContext.setFill(PRIMARY_COLOR);
+        graphicsContext.fillRect(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset, end.getX() - ori.getX() + borderWidth * 2 - headInset * 2, headHeight - headInset * 2 - borderWidth);
+        // Text
+        graphicsContext.setFill(PRIMARY_COLOR_LIGHT);
+        graphicsContext.setFont(Font.font("Arial", textHeight * Toolkit.getDefaultToolkit().getScreenResolution() / 72.0));
+        Vector2 posLeft = new Vector2(ori.getX() - borderWidth + headInset + textInset, ori.getY() - headHeight + headInset + textInset + textHeight);
+        Vector2 posMiddle = posLeft.plus(new Vector2(end.minus(ori).scale(0.5D).getX(), 0)).minus(new Vector2(textWidth / 2D, 0));
+        graphicsContext.fillText("FimBall", posMiddle.getX(), posMiddle.getY());
 
-        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR);
-        graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D + PIXELS_PER_GRID_UNIT, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
+        // Beine
+        graphicsContext.setLineWidth(borderWidth * 2);
+        graphicsContext.setStroke(SECONDARY_COLOR_DARK);
+        graphicsContext.strokeRect(ori.getX(), end.getY() + borderWidth, 0, footHeight);
+        graphicsContext.strokeRect(end.getX(), end.getY() + borderWidth, 0, footHeight);
 
-        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR_DARK);
+        // Rahmen
+        graphicsContext.setLineWidth(borderWidth);
+        graphicsContext.setStroke(SECONDARY_COLOR_DARK);
+        graphicsContext.setFill(SECONDARY_COLOR_DARK);
+        graphicsContext.fillRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, borderDepth);
+        graphicsContext.fillRect(ori.getX() - borderWidth, end.getY(), end.getX() - ori.getX() + borderWidth * 2D, borderHeight);
+
+        // Rahmen
+        graphicsContext.setStroke(SECONDARY_COLOR);
         graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
     }
 
@@ -129,8 +173,8 @@ class PinballCanvasDrawer
      */
     private void drawSelectionRect(RectangleDoubleByPoints dragSelectionRect, GraphicsContext graphicsContext)
     {
-        graphicsContext.setFill(DesignConfig.SECONDARY_COLOR);
-        graphicsContext.setStroke(DesignConfig.SECONDARY_COLOR_DARK);
+        graphicsContext.setFill(SECONDARY_COLOR);
+        graphicsContext.setStroke(SECONDARY_COLOR_DARK);
         graphicsContext.setLineWidth(0.25 * PIXELS_PER_GRID_UNIT);
 
         Vector2 ori = dragSelectionRect.getOrigin().scale(PIXELS_PER_GRID_UNIT);
@@ -160,7 +204,7 @@ class PinballCanvasDrawer
         for (int gridX = (int) gridStart.getX() - (int) gridStart.getX() % PIXELS_PER_GRID_UNIT; gridX <= gridEnd.getX(); gridX += PIXELS_PER_GRID_UNIT)
         {
             // Wähle die Linienfarbe und -stärke so, dass jede zweite Linie eine dünnere Linie ist.
-            Color lineColor = Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0 ? DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT : DesignConfig.PRIMARY_COLOR_LIGHT;
+            Color lineColor = Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0 ? PRIMARY_COLOR_LIGHT_LIGHT : PRIMARY_COLOR_LIGHT;
             int lineWidth = Math.abs(gridX) % (PIXELS_PER_GRID_UNIT * 2) == 0 ? 2 : 1;
 
             graphicsContext.setStroke(lineColor);
@@ -171,7 +215,7 @@ class PinballCanvasDrawer
         for (int gridY = (int) gridStart.getY() - (int) gridStart.getY() % PIXELS_PER_GRID_UNIT; gridY <= gridEnd.getY(); gridY += PIXELS_PER_GRID_UNIT)
         {
             // Wähle die Linienfarbe und -stärke so, dass jede zweite Linie eine dickere Linie ist.
-            Color lineColor = Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT ? DesignConfig.PRIMARY_COLOR_LIGHT_LIGHT : DesignConfig.PRIMARY_COLOR_LIGHT;
+            Color lineColor = Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT ? PRIMARY_COLOR_LIGHT_LIGHT : PRIMARY_COLOR_LIGHT;
             int lineWidth = Math.abs(gridY) % (PIXELS_PER_GRID_UNIT * 2) == PIXELS_PER_GRID_UNIT ? 2 : 1;
 
             graphicsContext.setStroke(lineColor);

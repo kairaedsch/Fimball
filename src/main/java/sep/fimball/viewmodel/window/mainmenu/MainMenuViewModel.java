@@ -45,7 +45,7 @@ public class MainMenuViewModel extends WindowViewModel
     public MainMenuViewModel()
     {
         super(WindowType.MAIN_MENU);
-        initialize();
+        initialize(Optional.empty());
     }
 
     /**
@@ -56,30 +56,21 @@ public class MainMenuViewModel extends WindowViewModel
     public MainMenuViewModel(PinballMachine selectedMachine)
     {
         super(WindowType.MAIN_MENU);
-        initialize();
-
-        for (PinballMachinePreviewSubViewModel preview : pinballMachinePreviewSubViewModelListProperty().get())
-        {
-            if (preview.getMachineID().equals(selectedMachine.getID()))
-            {
-                preview.selectPinballMachine();
-            }
-        }
+        initialize(Optional.of(selectedMachine));
     }
 
     /**
      * Initialisiert die Liste der PinballMachinePreviews.
+     *
+     * @param selectedMachine Die am Anfang ausgewählte Machine
      */
-    private void initialize()
+    private void initialize(Optional<PinballMachine> selectedMachine)
     {
-        if (!PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
+        if (!selectedMachine.isPresent() && !PinballMachineManager.getInstance().pinballMachinesProperty().isEmpty())
         {
-            pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, Optional.of(PinballMachineManager.getInstance().pinballMachinesProperty().get(0)));
+            selectedMachine = Optional.of(PinballMachineManager.getInstance().pinballMachinesProperty().get(0));
         }
-        else
-        {
-            pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, Optional.empty());
-        }
+        pinballMachineInfoSubViewModel = new PinballMachineInfoSubViewModel(this, selectedMachine);
         pinballMachinePreviewSubViewModelList = new SimpleListProperty<>(FXCollections.observableArrayList());
         ListPropertyConverter.bindAndConvertList(pinballMachinePreviewSubViewModelList, new SortedList<>(PinballMachineManager.getInstance().pinballMachinesProperty(), Comparator.comparing(o -> o.nameProperty().get().toLowerCase())), (pinballMachine) -> new PinballMachinePreviewSubViewModel(this, pinballMachine, pinballMachineInfoSubViewModel));
     }
