@@ -26,9 +26,17 @@
         <Label fx:id="key_2" text="!editor.selected.description.key!" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label fx:id="strengthLabel" text="Strength: 3" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <Slider fx:id="strengthSlider" blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Slider fx:id="strengthSlider" blockIncrement="0.5" max="5.0" min="1.0" value="3.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <tooltip>
+                <Tooltip fx:id="key_3" text="!editor.selected.strengthSlider.tooltip.key!"/>
+            </tooltip>
+        </Slider>
         <Label fx:id="pointsLabel" text="Points: 500" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <Slider fx:id="pointsSlider" blockIncrement="1" max="50" min="1" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Slider fx:id="pointsSlider" blockIncrement="1" max="50" min="1" value="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <tooltip>
+                <Tooltip fx:id="key_4" text="!editor.selected.pointSlider.tooltip.key!"/>
+            </tooltip>
+        </Slider>
     </GridPane>
     <HBox>
         <HBox HBox.hgrow="ALWAYS" styleClass="selectedElementButtonContainer">
