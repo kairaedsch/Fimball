@@ -45,30 +45,22 @@ public class FlipperPhysicsElement<GameElementT> extends PhysicsElementModifyAbl
      */
     public FlipperPhysicsElement(PhysicsHandler<GameElementT> physicsHandler, GameElementT gameElement, Vector2 position, double strengthMultiplier, BasePhysicsElement basePhysicsElement, boolean isLeft)
     {
-        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MIN_ROTATION : -FLIPPER_MIN_ROTATION, strengthMultiplier, basePhysicsElement);
+        super(physicsHandler, gameElement, position, isLeft ? FLIPPER_MAX_ROTATION : -FLIPPER_MAX_ROTATION, strengthMultiplier, basePhysicsElement);
         this.isLeft = isLeft;
 
         if (isLeft)
         {
             minRotation = FLIPPER_MAX_ROTATION;
             maxRotation = FLIPPER_MIN_ROTATION;
-
-            // Move flipper to default position
-            // TODO - hack
-            setRotation(minRotation);
-            setRotation(maxRotation);
         }
         else
         {
             // Bei dem Rechten Flipperarm werden die Werte vertauscht, damit beide Arme gleich weit nach oben bzw. unten gedreht werden können.
             minRotation = -FLIPPER_MIN_ROTATION;
             maxRotation = -FLIPPER_MAX_ROTATION;
-
-            // Move flipper to default position
-            // TODO - hack
-            setRotation(maxRotation);
-            setRotation(minRotation);
         }
+
+        rotate(DOWN);
     }
 
     /**
