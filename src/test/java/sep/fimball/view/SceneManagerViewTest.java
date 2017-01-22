@@ -16,6 +16,8 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
@@ -64,7 +66,7 @@ public class SceneManagerViewTest
         Node emptyDialogRootNode = sceneManagerView.getDialog();
 
         // Teste - Wechselt das WindowViewModel und holt das aktuelle WindowRootNodes
-        windowViewModel.setValue(new PinballMachineEditorViewModel(pinballMachineMock));
+        windowViewModel.setValue(new PinballMachineEditorViewModel(pinballMachineMock, Optional.empty()));
         Node editorWindowRootNode = sceneManagerView.getWindow();
 
         assertThat("Es wurde ein anderes Window geladen", mainMenuWindowRootNode, not(equalTo(editorWindowRootNode)));

@@ -75,19 +75,37 @@ public class GameViewModel extends WindowViewModel
     private KeyEventConverter keyEventConverter;
 
     /**
+     * Die alte EditorCameraPosition.
+     */
+    private Optional<Vector2> editorCameraPosition;
+
+    /**
      * Erstellt ein GameViewModel und zeigt dabei ein BusyDialog an.
      *
-     * @param sceneManager      Das zuständige SceneManagerViewModel
-     * @param pinballMachine    Die PinballMachine für das zu erstellende GameViewModel
-     * @param playerNames       Die Namen der Spieler für die GameSession.
-     * @param startedFromEditor Gibt an, ob das Spiel vom Editor gestartet wurde.
+     * @param sceneManager         Das zuständige SceneManagerViewModel
+     * @param pinballMachine       Die PinballMachine für das zu erstellende GameViewModel
+     * @param playerNames          Die Namen der Spieler für die GameSession.
+     * @param startedFromEditor    Gibt an, ob das Spiel vom Editor gestartet wurde.
+     * @param editorCameraPosition Die alte EditorKameraPosition.
      */
-    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
+    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
         {
-            sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor)));
+            sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor), editorCameraPosition));
         }));
+    }
+
+    /**
+     * Erzeugt ein neues GameViewModel.
+     *
+     * @param gameSession          Die GameSession, die vom GameViewModel benutzt wird.
+     * @param editorCameraPosition Die alte EditorKameraPosition.
+     */
+    public GameViewModel(GameSession gameSession, Optional<Vector2> editorCameraPosition)
+    {
+        this(gameSession);
+        this.editorCameraPosition = editorCameraPosition;
     }
 
     /**
@@ -135,7 +153,7 @@ public class GameViewModel extends WindowViewModel
                 }
                 if (this.gameSession.isStartedFromEditor())
                 {
-                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, this.gameSession.getPinballMachine());
+                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, this.gameSession.getPinballMachine(), editorCameraPosition);
                 }
                 else
                 {
@@ -218,7 +236,7 @@ public class GameViewModel extends WindowViewModel
                 gameSession.pauseAll();
                 if (gameSession.isStartedFromEditor())
                 {
-                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, gameSession.getPinballMachine());
+                    PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, gameSession.getPinballMachine(), editorCameraPosition);
                 }
                 else
                 {

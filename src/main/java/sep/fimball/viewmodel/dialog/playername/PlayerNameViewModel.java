@@ -118,7 +118,7 @@ public class PlayerNameViewModel extends DialogViewModel
                 names[i] = playerNameEntries.get(i).playerNameProperty().get();
             }
             sceneManager.popDialog();
-            GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, names, false);
+            GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, names, false, Optional.empty());
         }
     }
 

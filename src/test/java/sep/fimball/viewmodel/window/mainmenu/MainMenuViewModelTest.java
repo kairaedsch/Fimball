@@ -11,6 +11,8 @@ import sep.fimball.viewmodel.window.WindowType;
 import sep.fimball.viewmodel.window.WindowViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -175,7 +177,7 @@ public class MainMenuViewModelTest
         @Override
         public void addNewPinballMachine()
         {
-            sceneManager.setWindow(new PinballMachineEditorViewModel(getMockedPinballMachine()));
+            sceneManager.setWindow(new PinballMachineEditorViewModel(getMockedPinballMachine(), Optional.empty()));
             newMachineAdded = true;
         }
     }

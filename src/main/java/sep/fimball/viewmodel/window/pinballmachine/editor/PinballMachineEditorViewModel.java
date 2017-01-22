@@ -137,10 +137,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private ObservableList<EditorPreviewSubViewModel> previewsProperty;
 
-    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine)
+    public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
-            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine));
+            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine, editorCameraPosition));
         }));
     }
 
@@ -149,7 +149,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @param pinballMachine Der Flipperautomat, der editiert werden soll.
      */
-    public PinballMachineEditorViewModel(PinballMachine pinballMachine)
+    public PinballMachineEditorViewModel(PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
         super(WindowType.MACHINE_EDITOR);
 
@@ -163,6 +163,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         machineName.bindBidirectional(pinballMachine.nameProperty());
 
         cameraPosition = new SimpleObjectProperty<>(new Vector2());
+        editorCameraPosition.ifPresent(cameraPosition::setValue);
+
         cameraZoom = new SimpleDoubleProperty(0.75);
         selectedElementSubViewModel = new SelectedElementSubViewModel(pinballMachineEditor);
 

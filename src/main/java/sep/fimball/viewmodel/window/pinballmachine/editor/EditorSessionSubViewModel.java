@@ -9,6 +9,8 @@ import sep.fimball.viewmodel.pinballcanvas.PinballCanvasEditorViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
+import java.util.Optional;
+
 /**
  * Verwaltet die EditorSession aus dem Model.
  */
@@ -56,7 +58,7 @@ public class EditorSessionSubViewModel
     {
         editorSession.stopUpdateLoop();
         editorSession.stopAutoSaveLoop(false);
-        GameViewModel.setAsWindowWithBusyDialog(editorViewModel.getSceneManagerViewModel(), pinballMachine, new String[]{"Editor Player"}, true);
+        GameViewModel.setAsWindowWithBusyDialog(editorViewModel.getSceneManagerViewModel(), pinballMachine, new String[]{"Editor Player"}, true, Optional.of(this.editorViewModel.cameraPositionProperty().get()));
     }
 
     /**

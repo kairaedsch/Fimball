@@ -16,7 +16,6 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
  */
 public class EditorSession extends Session
 {
-
     /**
      * Die Loop. die den AutoSave ausführt.
      */

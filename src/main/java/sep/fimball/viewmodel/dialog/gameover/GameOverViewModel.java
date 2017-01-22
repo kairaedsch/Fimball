@@ -10,6 +10,8 @@ import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.window.game.GameViewModel;
 import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
+import java.util.Optional;
+
 /**
  * Das GameOverViewModel stellt der View Daten über die zuletzt gespielte Partie zur Verfügung und bietet dem Nutzer weitere Navigationsmöglichkeiten nach Spielende an.
  */
@@ -61,7 +63,7 @@ public class GameOverViewModel extends DialogViewModel
     public void restartGame()
     {
         sceneManager.popDialog();
-        GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, playerNames, false);
+        GameViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, playerNames, false, Optional.empty());
     }
 
     /**

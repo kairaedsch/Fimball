@@ -65,7 +65,7 @@ public class SceneManagerViewModel
             if (autoSavedMachine.isPresent())
             {
                 setWindow(new MainMenuViewModel());
-                PinballMachineEditorViewModel.setAsWindowWithBusyDialog(this, autoSavedMachine.get());
+                PinballMachineEditorViewModel.setAsWindowWithBusyDialog(this, autoSavedMachine.get(), Optional.empty());
             }
             else
             {

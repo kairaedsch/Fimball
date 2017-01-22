@@ -16,6 +16,8 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -55,7 +57,7 @@ public class MultiRotationTest
         setupPinballMachineAndPlacedElements();
 
         // Den Editor vorbereiten.
-        PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
+        PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
         testEditor.setSceneManager(new SceneManagerViewModel());
         testEditor.getEditorSessionSubViewModel().getPinballCanvasViewModel().setViewScreenshotCreator(new TestScreenshotCreator());
 

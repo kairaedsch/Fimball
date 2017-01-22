@@ -14,6 +14,8 @@ import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -44,7 +46,7 @@ public class BumperStrengthTest
                 setupPinballMachine(STRENGTH_OF_FIRST_BUMPER, bumperID);
 
                 // Startet den Editor.
-                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
+                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
 
                 // Emuliert den Mausklick, der den Bumper auswählt.
                 testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
@@ -59,7 +61,7 @@ public class BumperStrengthTest
 
             {
                 // Startet den Editor.
-                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
+                PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
 
                 // Emuliert den Mausklick, der den Bumper auswählt.
                 testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
@@ -82,7 +84,7 @@ public class BumperStrengthTest
             setupPinballMachine(TOO_LOW_STRENGTH, bumperID);
 
             // Startet den Editor.
-            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
+            PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
 
             // Emuliert den Mausklick, der den Bumper auswählt.
             testEditor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
@@ -110,7 +112,7 @@ public class BumperStrengthTest
         testPinballMachine.addElement(baseElement, new Vector2(1, 1));
 
         // Die Stärke des platzierten Bumper auf den übergebenen Wert setzen.
-        PinballMachineEditorViewModel editor = new PinballMachineEditorViewModel(testPinballMachine);
+        PinballMachineEditorViewModel editor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
         editor.mousePressedOnCanvas(selectingPress, new Vector2(4, 4));
         DoubleProperty multiplierProperty = editor.getSelectedElementSubViewModel().multiplierProperty();
         multiplierProperty.setValue(bumperStrength);

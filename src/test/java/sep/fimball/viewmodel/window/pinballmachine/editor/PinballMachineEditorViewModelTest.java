@@ -44,7 +44,7 @@ public class PinballMachineEditorViewModelTest
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
         when(pinballMachineMock.nameProperty()).thenReturn(new SimpleStringProperty(""));
 
-        pinballMachineEditorViewModel = new PinballMachineEditorViewModel(pinballMachineMock);
+        pinballMachineEditorViewModel = new PinballMachineEditorViewModel(pinballMachineMock, Optional.empty());
     }
 
     @Test

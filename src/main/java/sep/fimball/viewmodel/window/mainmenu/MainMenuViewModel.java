@@ -110,7 +110,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     void startEditor(PinballMachine pinballMachine)
     {
-        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine);
+        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, pinballMachine, Optional.empty());
     }
 
     /**
@@ -138,7 +138,7 @@ public class MainMenuViewModel extends WindowViewModel
      */
     public void addNewPinballMachine()
     {
-        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, PinballMachineManager.getInstance().createNewMachine());
+        PinballMachineEditorViewModel.setAsWindowWithBusyDialog(sceneManager, PinballMachineManager.getInstance().createNewMachine(), Optional.empty());
     }
 
     @Override

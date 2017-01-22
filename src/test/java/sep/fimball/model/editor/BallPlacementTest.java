@@ -17,6 +17,8 @@ import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -61,7 +63,7 @@ public class BallPlacementTest
         assertThat(testPinballMachine.elementsProperty().get(0).getBaseElement().getId(), equalTo(BALL_ID));
         assertThat(testPinballMachine.elementsProperty().get(0).positionProperty().get(), not(equalTo(new Vector2(14, 14))));
 
-        PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine);
+        PinballMachineEditorViewModel testEditor = new PinballMachineEditorViewModel(testPinballMachine, Optional.empty());
 
         // Den Spawnpunkt der Kugel als zu platzierendes Element auswählen.
         AvailableElementSubViewModel ballSelector = testEditor.availableBasicElementsProperty().stream().filter(availableElementSubViewModel -> availableElementSubViewModel.nameProperty().get().equals(BALL_IMAGE_NAME)).findFirst().get();
