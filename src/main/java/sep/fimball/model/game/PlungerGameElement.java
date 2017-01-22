@@ -11,6 +11,8 @@ import sep.fimball.model.handler.UserHandler;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
 import sep.fimball.model.input.manager.KeyEventArgs.KeyChangedToState;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 import sep.fimball.model.physics.element.PlungerPhysicsElement;
 
 import static sep.fimball.general.data.PhysicsConfig.DEFAULT_PLUNGER_FORCE;
@@ -100,6 +102,7 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
                 double force = calcForce();
                 plungerPhysicsElement.addModify(() -> force);
                 setCurrentAnimation(getMediaElement().getEventMap().get(-5).getAnimation());
+                SoundManager.getInstance().addSoundToPlay(new Sound("plunger.wav", false));
 
                 resetTransition.stop();
                 resetTransition.play();
