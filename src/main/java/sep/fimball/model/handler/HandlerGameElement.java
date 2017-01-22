@@ -70,5 +70,10 @@ public interface HandlerGameElement
      */
     BaseElementType getElementType();
 
+    /**
+     * Gibt zurück, wann das Element zuletzt getroffen wurde.
+     *
+     * @return Wann das Element zuletzt getroffen wurde.
+     */
     LongProperty lastTimeHitProperty();
 }

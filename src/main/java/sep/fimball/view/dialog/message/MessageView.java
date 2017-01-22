@@ -8,7 +8,8 @@ import sep.fimball.view.dialog.DialogView;
 import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 
 /**
- * Die MessageView ist für die Darstellung einer Nachricht zuständig.
+ * Die MessageView ist für die Darstellung einer Nachricht zuständig und ermöglicht es dem Nutzer, gegebenenfalls durch zwei Buttons zu reagieren.
+ * Dabei kann das ViewModel jedoch diese Buttons ausblenden.
  */
 public class MessageView extends DialogView<MessageViewModel>
 {
@@ -24,9 +25,15 @@ public class MessageView extends DialogView<MessageViewModel>
     @FXML
     private Label message;
 
+    /**
+     * Der linke Button.
+     */
     @FXML
     public Button leftButton;
 
+    /**
+     * Der rechte Button.
+     */
     @FXML
     public Button rightButton;
 

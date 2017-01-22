@@ -74,9 +74,18 @@ public class GameViewModel extends WindowViewModel
      */
     private KeyEventConverter keyEventConverter;
 
+    /**
+     * Erstellt ein GameViewModel und zeigt dabei ein BusyDialog an.
+     *
+     * @param sceneManager      Das zuständige SceneManagerViewModel
+     * @param pinballMachine    Die PinballMachine für das zu erstellende GameViewModel
+     * @param playerNames       Die Namen der Spieler für die GameSession.
+     * @param startedFromEditor Gibt an, ob das Spiel vom Editor gestartet wurde.
+     */
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor)
     {
-        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
+        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
+        {
             sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor)));
         }));
     }

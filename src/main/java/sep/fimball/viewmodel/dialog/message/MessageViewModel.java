@@ -5,6 +5,9 @@ import sep.fimball.viewmodel.LanguageManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 
+/**
+ * Das NormalMessageViewModel stellt der View Daten über eine Nachricht zur Verfügung sowie zwei Buttons.
+ */
 public abstract class MessageViewModel extends DialogViewModel
 {
     /**
@@ -17,18 +20,32 @@ public abstract class MessageViewModel extends DialogViewModel
      */
     private StringProperty message;
 
+    /**
+     * Der Text des linken Buttons.
+     */
     private StringProperty leftButton;
 
+    /**
+     * Der Text des rechten Buttons.
+     */
     private StringProperty rightButton;
 
-    protected BooleanProperty showleftButton;
+    /**
+     * Gibt an, ob der linke Button sichtbar ist.
+     */
+    private BooleanProperty showleftButton;
 
-    protected BooleanProperty showRightButton;
+    /**
+     * Gibt an, ob der rechte Button sichtbar ist.
+     */
+    private BooleanProperty showRightButton;
 
     /**
      * Erzeugt ein MessageViewModel.
      *
-     * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
+     * @param dialogKey       Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
+     * @param bindLeftButton  Gibt an, ob der linke Button gezeigt und mit Text befüllt werden soll.
+     * @param bindRightButton Gibt an, ob der rechte Button gezeigt und mit Text befüllt werden soll.
      */
     public MessageViewModel(String dialogKey, boolean bindLeftButton, boolean bindRightButton)
     {
@@ -43,22 +60,30 @@ public abstract class MessageViewModel extends DialogViewModel
         this.leftButton = new SimpleStringProperty();
         this.rightButton = new SimpleStringProperty();
 
+        showleftButton = new SimpleBooleanProperty(false);
+        showRightButton = new SimpleBooleanProperty(false);
+
         if (bindLeftButton)
         {
             this.leftButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.left.key"));
+            showleftButton.set(true);
         }
 
         if (bindRightButton)
         {
             this.rightButton.bind(LanguageManagerViewModel.getInstance().textProperty(dialogKey + ".button.right.key"));
+            showRightButton.set(true);
         }
-
-        showleftButton = new SimpleBooleanProperty(true);
-        showRightButton = new SimpleBooleanProperty(true);
     }
 
+    /**
+     * Wird ausgeführt, wenn der Nutzer den rechten Button klickt.
+     */
     public abstract void leftButtonClicked();
 
+    /**
+     * Wird ausgeführt, wenn der Nutzer den linken Button klickt.
+     */
     public abstract void rightButtonClicked();
 
     /**
@@ -81,21 +106,41 @@ public abstract class MessageViewModel extends DialogViewModel
         return message;
     }
 
+    /**
+     * Gibt den Text des linken Buttons zurück.
+     *
+     * @return Der Text des linken Buttons.
+     */
     public StringProperty leftButtonProperty()
     {
         return leftButton;
     }
 
+    /**
+     * Gibt den Text des rechten Buttons zurück.
+     *
+     * @return Der Text des rechten Buttons.
+     */
     public StringProperty rightButtonProperty()
     {
         return rightButton;
     }
 
+    /**
+     * Gibt zurück, ob der linke Button sichtbar ist.
+     *
+     * @return Ob der linke Button sichtbar ist.
+     */
     public BooleanProperty showleftButtonProperty()
     {
         return showleftButton;
     }
 
+    /**
+     * Gibt zurück, ob der rechte Button sichtbar ist.
+     *
+     * @return Ob der rechte Button sichtbar ist.
+     */
     public BooleanProperty showRightButtonProperty()
     {
         return showRightButton;

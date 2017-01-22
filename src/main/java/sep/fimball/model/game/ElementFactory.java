@@ -23,6 +23,7 @@ public class ElementFactory
     /**
      * Erstellt GameElements und deren PhysicElements aus einer Liste von PlacedElements.
      *
+     * @param session        Die GameSession, welche die Elemente haben will.
      * @param placedElements Die Elemente aus deren GameElemente und PhysicsElemente erstellt werden.
      * @param physicsHandler Der PhysicsHandler für die neu erstellten PhysicsElementen.
      * @param handlerManager Der handlerManager der GameSession von den neu erstellten GameElementen.
@@ -117,6 +118,13 @@ public class ElementFactory
         return new GeneratedElements(gameElements, physicsElements, ballGameElement);
     }
 
+    /**
+     * Erzeugt ein PhysicsElement mit den gegebenen Eigenschaften als ein hinderniss_linie_4.
+     *
+     * @param position Die Position des PhysicsElements.
+     * @param rotation Die Rotation des PhysicsElements.
+     * @return Das PhysicsElement.
+     */
     private static PhysicsElement<GameElement> generatePhysicsBarrier(Vector2 position, double rotation)
     {
         PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), position, 0, 0, rotation);

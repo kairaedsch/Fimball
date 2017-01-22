@@ -58,6 +58,9 @@ public class GameElement implements HandlerGameElement
      */
     private PlacedElement placedElement;
 
+    /**
+     * Gibt an, wann das Element zuletzt getroffen wurde.
+     */
     private LongProperty lastTimeHit;
 
     /**
@@ -116,7 +119,7 @@ public class GameElement implements HandlerGameElement
             throw new IllegalArgumentException("Tried to synchronize a GameElement with a wrong GameElement");
         }
 
-        if(!elementEventArgs.getPosition().equals(position.get()))
+        if (!elementEventArgs.getPosition().equals(position.get()))
         {
             position.setValue(elementEventArgs.getPosition());
         }
@@ -243,6 +246,11 @@ public class GameElement implements HandlerGameElement
         return drawOrder;
     }
 
+    /**
+     * Gibt zurück, wann das Element zuletzt getroffen wurde.
+     *
+     * @return Wann das Element zuletzt getroffen wurde.
+     */
     public LongProperty lastTimeHitProperty()
     {
         return lastTimeHit;

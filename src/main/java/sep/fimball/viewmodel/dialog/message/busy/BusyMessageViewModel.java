@@ -6,25 +6,31 @@ import sep.fimball.general.data.Action;
 import sep.fimball.viewmodel.dialog.message.MessageViewModel;
 
 /**
- * Das PauseViewModel stellt der View Daten über eine Frage zur Verfügung und ermöglicht die Ausführung der Aktion, falls sich der Nutzer dafür entscheidet.
+ * Das BusyMessageViewModel stellt der View Daten über eine aktuelle Aktion zur Verfügung und verschwindet, wenn die Aktion abgeschlossen ist.
  */
 public class BusyMessageViewModel extends MessageViewModel
 {
+    /**
+     * Erstellt ein neues BusyMessageViewModel.
+     *
+     * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
+     * @param action    Die automatisch auszuführende Aktion.
+     */
     public BusyMessageViewModel(String dialogKey, Action action)
     {
         this(dialogKey, action, () -> {});
     }
 
     /**
-     * Erzeugt ein neues QuestionViewModel.
+     * Erstellt ein neues BusyMessageViewModel.
      *
      * @param dialogKey Ein Ressourcen Key welcher zum setzen des Titels sowie der Nachricht in unterschiedlichen Sprachen genutzt wird.
+     * @param longAction Die automatisch auszuführende Aktion.
+     * @param afterAction Die automatisch auszuführende Aktion, nachdem der BusyDialog wieder weg ist.
      */
     public BusyMessageViewModel(String dialogKey, Action longAction, Action afterAction)
     {
         super(dialogKey, false, false);
-        showleftButton.setValue(false);
-        showRightButton.setValue(false);
 
         PauseTransition resetTransition = new PauseTransition(Duration.millis(50));
         resetTransition.setOnFinished(e ->
@@ -37,7 +43,7 @@ public class BusyMessageViewModel extends MessageViewModel
     }
 
     /**
-     * Führt die Aktion die ausgeführt werden soll aus und schließt den Dialog.
+     * Macht nichts.
      */
     public void rightButtonClicked()
     {
@@ -45,7 +51,7 @@ public class BusyMessageViewModel extends MessageViewModel
     }
 
     /**
-     * Beendet den Dialog.
+     * Macht nichts.
      */
     public void leftButtonClicked()
     {

@@ -101,7 +101,8 @@ class PinballCanvasDrawer
     /**
      * Zeichnet den Rahmen des Automaten.
      *
-     * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
+     * @param graphicsContext Der GraphicsContext, auf dem die Grafik gezeichnet werden sollen.
+     * @param imageLayer Gibt an, ob der Obere oder untere Teil gezeichnet werden soll.
      */
     private void drawBoundingBox(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
