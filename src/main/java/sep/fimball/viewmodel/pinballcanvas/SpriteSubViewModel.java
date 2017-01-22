@@ -15,7 +15,6 @@ import sep.fimball.viewmodel.ElementImageViewModel;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Supplier;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -108,7 +107,8 @@ public class SpriteSubViewModel
         elementHeight = gameElement.getMediaElement().getElementHeight();
 
         currentImage = new SimpleObjectProperty<>();
-        currentImage.bind(Bindings.createObjectBinding(() -> {
+        currentImage.bind(Bindings.createObjectBinding(() ->
+        {
             Optional<Animation> currentAnimation = gameElement.currentAnimationProperty().get();
             if (currentAnimation.isPresent())
             {
@@ -124,8 +124,9 @@ public class SpriteSubViewModel
     /**
      * Erstellt ein neues SpriteSubViewModel.
      *
-     * @param gameElement Das GameElement, das zu diesem SpriteSubViewModel gehört.
-     * @param selection   Die aktuell ausgewählten Elemente.
+     * @param gameElement   Das GameElement, das zu diesem SpriteSubViewModel gehört.
+     * @param selection     Die aktuell ausgewählten Elemente.
+     * @param selectionSize Die Größe der selection.
      */
     public SpriteSubViewModel(GameElement gameElement, Set<PlacedElement> selection, IntegerProperty selectionSize)
     {

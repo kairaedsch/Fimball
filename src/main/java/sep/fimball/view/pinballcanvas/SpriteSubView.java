@@ -295,6 +295,12 @@ public class SpriteSubView
         return drawOrder;
     }
 
+    /**
+     * Setzt die Listener für den regionHash und die drawOrder.
+     *
+     * @param regionHashListener Den regionHash Listener.
+     * @param drawOrderlistener  Den drawOrder Listener.
+     */
     public void setDrawListener(ChangeListener<List<Long>> regionHashListener, ChangeListener<Number> drawOrderlistener)
     {
         clearDrawListener();
@@ -304,6 +310,9 @@ public class SpriteSubView
         drawOrder.addListener(drawOrderlistener);
     }
 
+    /**
+     * Setzt die drawListener zurück.
+     */
     public void clearDrawListener()
     {
         regionHashListener.ifPresent(regionHashes::removeListener);
