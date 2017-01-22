@@ -1,7 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
-import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
@@ -63,7 +62,7 @@ public class PinballMachineEditor
         }
         else
         {
-            if (!element.isPresent() || !selection.contains(element.get()))
+            if (!additive && (!element.isPresent() || !selection.contains(element.get())))
                 clearSelection();
             element.ifPresent(this::addToSelection);
         }
