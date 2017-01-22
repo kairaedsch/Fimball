@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
@@ -93,6 +94,12 @@ public class AnimationHandlerTest
 
             @Override
             public BaseElementType getElementType()
+            {
+                return null;
+            }
+
+            @Override
+            public LongProperty lastTimeHitProperty()
             {
                 return null;
             }

@@ -281,7 +281,7 @@ public class BaseElementJson
          */
         public static class RuleElementGeneralJson
         {
-
+            public int pointResetTime;
         }
 
         /**

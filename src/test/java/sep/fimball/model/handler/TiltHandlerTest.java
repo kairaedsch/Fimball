@@ -1,9 +1,6 @@
 package sep.fimball.model.handler;
 
-import javafx.beans.property.ReadOnlyIntegerProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
@@ -175,6 +172,12 @@ public class TiltHandlerTest
 
             @Override
             public BaseElementType getElementType()
+            {
+                return null;
+            }
+
+            @Override
+            public LongProperty lastTimeHitProperty()
             {
                 return null;
             }

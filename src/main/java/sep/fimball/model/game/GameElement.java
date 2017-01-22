@@ -58,6 +58,8 @@ public class GameElement implements HandlerGameElement
      */
     private PlacedElement placedElement;
 
+    private LongProperty lastTimeHit;
+
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
      *
@@ -73,6 +75,7 @@ public class GameElement implements HandlerGameElement
         this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
         this.height = new SimpleDoubleProperty(0);
+        this.lastTimeHit = new SimpleLongProperty(0);
 
         this.drawOrder = new SimpleIntegerProperty();
         this.drawOrder.bind(Bindings.createIntegerBinding(this::getDrawOrder, this.height));
@@ -235,8 +238,13 @@ public class GameElement implements HandlerGameElement
      *
      * @return Die Reihenfolge beim Zeichnen.
      */
-    public IntegerProperty drawOrderProperty()
+    public ReadOnlyIntegerProperty drawOrderProperty()
     {
         return drawOrder;
+    }
+
+    public  LongProperty lastTimeHitProperty()
+    {
+        return lastTimeHit;
     }
 }

@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.LongProperty;
 import sep.fimball.model.blueprint.base.BaseElementType;
 
 import java.util.Map;
@@ -31,6 +32,35 @@ public class ScoreHandler implements ElementHandler
         Map<Integer, BaseRuleElementEvent> eventMap = element.getRuleElement().getEventMap();
 
         if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints() && element.getElementType() != BaseElementType.SPINNER)
-            session.getCurrentPlayer().addPoints(element.getPointReward());
+        {
+            if (shouldElementGivePoints(element))
+            {
+                session.getCurrentPlayer().addPoints(element.getPointReward());
+            }
+        }
+    }
+
+    private boolean shouldElementGivePoints(HandlerGameElement handlerGameElement)
+    {
+        int pointResetTime = handlerGameElement.getRuleElement().getPointResetTime();
+        LongProperty lastTimeHit = handlerGameElement.lastTimeHitProperty();
+        long currentMillis = System.currentTimeMillis();
+
+        if (pointResetTime > 0)
+        {
+            if (currentMillis - lastTimeHit.get() >= pointResetTime)
+            {
+                lastTimeHit.set(currentMillis);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
     }
 }

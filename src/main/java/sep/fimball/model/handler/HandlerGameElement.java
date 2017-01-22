@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
@@ -68,4 +69,6 @@ public interface HandlerGameElement
      * @return Der Typ des BaseElements.
      */
     BaseElementType getElementType();
+
+    LongProperty lastTimeHitProperty();
 }

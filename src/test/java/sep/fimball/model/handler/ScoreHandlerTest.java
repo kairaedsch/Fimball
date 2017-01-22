@@ -1,5 +1,6 @@
 package sep.fimball.model.handler;
 
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -178,11 +179,17 @@ public class ScoreHandlerTest
             {
                 Map<Integer, BaseRuleElementEvent> eventMap = new HashMap<>();
                 eventMap.put(1, new BaseRuleElementEvent(true));
-                return new BaseRuleElement(eventMap);
+                return new BaseRuleElement(eventMap, 0);
             }
 
             @Override
             public BaseElementType getElementType()
+            {
+                return null;
+            }
+
+            @Override
+            public LongProperty lastTimeHitProperty()
             {
                 return null;
             }

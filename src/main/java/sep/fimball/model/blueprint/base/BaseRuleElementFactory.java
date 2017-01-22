@@ -32,6 +32,6 @@ public class BaseRuleElementFactory
                 eventMap.put(event.colliderId, new BaseRuleElementEvent(event.givesPoints));
             }
         }
-        return new BaseRuleElement(eventMap);
+        return new BaseRuleElement(eventMap, ruleElement.general.pointResetTime);
     }
 }

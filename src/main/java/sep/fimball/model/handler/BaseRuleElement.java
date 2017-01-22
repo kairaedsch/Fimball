@@ -8,6 +8,8 @@ import java.util.Map;
  */
 public class BaseRuleElement
 {
+    private int pointResetTime;
+
     /**
      * Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
@@ -18,9 +20,10 @@ public class BaseRuleElement
      *
      * @param eventMap Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
-    public BaseRuleElement(Map<Integer, BaseRuleElementEvent> eventMap)
+    public BaseRuleElement(Map<Integer, BaseRuleElementEvent> eventMap, int pointResetTime)
     {
         this.eventMap = eventMap;
+        this.pointResetTime = pointResetTime;
     }
 
     /**
@@ -31,5 +34,10 @@ public class BaseRuleElement
     public Map<Integer, BaseRuleElementEvent> getEventMap()
     {
         return Collections.unmodifiableMap(eventMap);
+    }
+
+    public int getPointResetTime()
+    {
+        return pointResetTime;
     }
 }
