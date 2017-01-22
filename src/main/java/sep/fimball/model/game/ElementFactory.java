@@ -1,6 +1,9 @@
 package sep.fimball.model.game;
 
 import javafx.beans.property.ReadOnlyListProperty;
+import sep.fimball.general.data.RectangleDouble;
+import sep.fimball.general.data.Vector2;
+import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.Handler;
@@ -95,6 +98,33 @@ public class ElementFactory
                     throw new IllegalArgumentException("At least one given PlacedElement does not have a correct BaseElementType");
             }
         }
+
+        RectangleDouble boundingBox = session.getPinballMachine().getBoundingBox();
+        for (double p = boundingBox.getOrigin().getX(); p <= boundingBox.getWidth() + boundingBox.getOrigin().getX(); p += 4)
+        {
+            Vector2 pos = new Vector2(p, boundingBox.getOrigin().getY() + 2);
+            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 0);
+            GameElement gameElement = new GameElement(placedElement, false);
+            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+            physicsElements.add(physicsElement);
+        }
+        for (double p = boundingBox.getOrigin().getY(); p <= boundingBox.getHeight() + boundingBox.getOrigin().getY(); p += 4)
+        {
+            Vector2 pos = new Vector2(boundingBox.getOrigin().getX() - 1, p);
+            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 90);
+            GameElement gameElement = new GameElement(placedElement, false);
+            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+            physicsElements.add(physicsElement);
+        }
+        for (double p = boundingBox.getOrigin().getY(); p <= boundingBox.getHeight() + boundingBox.getOrigin().getY(); p += 4)
+        {
+            Vector2 pos = new Vector2(boundingBox.getOrigin().getX() + boundingBox.getWidth(), p);
+            PlacedElement placedElement = new PlacedElement(BaseElementManager.getInstance().getElement("hinderniss_linie_4"), pos, 0, 0, 90);
+            GameElement gameElement = new GameElement(placedElement, false);
+            PhysicsElement<GameElement> physicsElement = new PhysicsElement<>(gameElement, gameElement.positionProperty().get(), gameElement.rotationProperty().get(), placedElement.multiplierProperty().get(), gameElement.getPlacedElement().getBaseElement().getPhysics());
+            physicsElements.add(physicsElement);
+        }
+
         return new GeneratedElements(gameElements, physicsElements, ballGameElement);
     }
 

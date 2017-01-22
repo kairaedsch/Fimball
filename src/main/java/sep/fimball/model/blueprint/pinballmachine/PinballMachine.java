@@ -14,6 +14,7 @@ import sep.fimball.model.blueprint.base.BaseElementType;
 import java.util.*;
 
 import static sep.fimball.general.data.Config.MACHINE_BOX_MARGIN;
+import static sep.fimball.general.data.Config.MACHINE_BOX_MIN_WIDTH;
 
 /**
  * Eine PinballMachine stellt einen Flipperautomaten dar und enthält allgemeine Informationen über den Automaten sowie über die im Automaten platzierten Elemente.
@@ -131,7 +132,15 @@ public class PinballMachine
     public RectangleDouble getBoundingBox()
     {
         RectangleDouble boundingBox = PinballMachineUtil.getBoundingBox(elements);
-        return new RectangleDouble(boundingBox.getOrigin().minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN)), boundingBox.getSize().plus(new Vector2(MACHINE_BOX_MARGIN * 2, MACHINE_BOX_MARGIN * 2)));
+        Vector2 newOrigin = boundingBox.getOrigin().minus(new Vector2(MACHINE_BOX_MARGIN, MACHINE_BOX_MARGIN));
+        Vector2 newSize = boundingBox.getSize().plus(new Vector2(MACHINE_BOX_MARGIN * 2, MACHINE_BOX_MARGIN * 2));
+        if(newSize.getX() < MACHINE_BOX_MIN_WIDTH)
+        {
+            double missingWidth = MACHINE_BOX_MIN_WIDTH - newSize.getX();
+            newOrigin = new Vector2(newOrigin.getX() - missingWidth / 2D, newOrigin.getY());
+            newSize = new Vector2(newSize.getX() + missingWidth, newSize.getY());
+        }
+        return new RectangleDouble(newOrigin, newSize);
     }
 
     /**

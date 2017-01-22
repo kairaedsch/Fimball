@@ -5,10 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import sep.fimball.general.data.Config;
-import sep.fimball.general.data.RectangleDouble;
-import sep.fimball.general.data.RectangleDoubleByPoints;
-import sep.fimball.general.data.Vector2;
+import sep.fimball.general.data.*;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
 import java.awt.*;
@@ -83,12 +80,18 @@ class PinballCanvasDrawer
         {
             drawEditorGrid(cameraPosition, cameraZoom);
         }
+
         if (drawMode == GAME)
         {
-            drawBoundingBox(cameraPosition, cameraZoom, graphicsContext);
+            drawBoundingBox(graphicsContext, ImageLayer.BOTTOM);
         }
 
         spritesRegionDrawer.drawElements(cameraPosition, cameraZoom, graphicsContext);
+
+        if (drawMode == GAME)
+        {
+            drawBoundingBox(graphicsContext, ImageLayer.TOP);
+        }
 
         dragSelectionRect.ifPresent(rectangleDoubleByPoints -> drawSelectionRect(rectangleDoubleByPoints, graphicsContext));
 
@@ -98,14 +101,12 @@ class PinballCanvasDrawer
     /**
      * Zeichnet den Rahmen des Automaten.
      *
-     * @param cameraPosition  Die Position der Kamera.
-     * @param cameraZoom      Der Zoom der Kamera.
      * @param graphicsContext Der GraphicsContext, auf dem die Spielelemente gezeichnet werden sollen.
      */
-    private void drawBoundingBox(Vector2 cameraPosition, double cameraZoom, GraphicsContext graphicsContext)
+    private void drawBoundingBox(GraphicsContext graphicsContext, ImageLayer imageLayer)
     {
         Vector2 ori = boundingBox.getOrigin().scale(PIXELS_PER_GRID_UNIT);
-        Vector2 end = boundingBox.getSize().plus(boundingBox.getOrigin()).scale(PIXELS_PER_GRID_UNIT);
+        Vector2 end = boundingBox.getOrigin().plus(boundingBox.getSize()).scale(PIXELS_PER_GRID_UNIT);
 
         double borderWidth = PIXELS_PER_GRID_UNIT * 2;
         double borderHeight = PIXELS_PER_GRID_UNIT * 25;
@@ -119,64 +120,67 @@ class PinballCanvasDrawer
         double textHeight = PIXELS_PER_GRID_UNIT * 17;
         double textWidth = PIXELS_PER_GRID_UNIT * 92;
 
-        if(end.getX() - ori.getX() < textWidth)
+        if (imageLayer == ImageLayer.BOTTOM)
         {
-            double div = textWidth - (end.getX() - ori.getX());
-            ori = ori.minus(new Vector2(div / 2, 0));
-            end = end.plus(new Vector2(div / 2, 0));
+            // Spiel Hintergrund
+            graphicsContext.setFill(PRIMARY_COLOR);
+            graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX() - ori.getX(), end.getY() - ori.getY());
+
+            // Rahmen 3D Effekt oben, muss unter dem Ball gezeichnet werden.
+            graphicsContext.setLineWidth(borderWidth);
+            graphicsContext.setStroke(SECONDARY_COLOR_DARK);
+            graphicsContext.setFill(SECONDARY_COLOR_DARK);
+            graphicsContext.fillRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, borderDepth);
         }
 
-        // Spiel Hintergrund
-        graphicsContext.setFill(PRIMARY_COLOR);
-        graphicsContext.fillRect(ori.getX(), ori.getY(), end.getX() - ori.getX(), end.getY() - ori.getY());
+        if (imageLayer == ImageLayer.TOP)
+        {
+            // Kopf
+            graphicsContext.setLineWidth(borderWidth);
+            // Kopf oben
+            graphicsContext.setFill(SECONDARY_COLOR);
+            graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight - headWidth, end.getX() - ori.getX() + borderWidth * 2, headWidth);
+            // Kopf unten
+            graphicsContext.setFill(SECONDARY_COLOR_DARK);
+            graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight, end.getX() - ori.getX() + borderWidth * 2, headHeight);
+            // Kopf innen
+            graphicsContext.setFill(PRIMARY_COLOR);
+            graphicsContext.fillRect(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset, end.getX() - (ori.getX() - borderWidth * 2) - headInset * 2, headHeight - headInset * 2 - borderWidth);
+            // Text
+            graphicsContext.setFill(PRIMARY_COLOR_LIGHT_LIGHT);
+            graphicsContext.setFont(Font.font("Arial", textHeight * Toolkit.getDefaultToolkit().getScreenResolution() / 72.0));
+            Vector2 textPosLeft = new Vector2(ori.getX() - borderWidth + headInset + textInset, ori.getY() - headHeight + headInset + textInset + textHeight);
+            Vector2 textPosMiddle = textPosLeft.plus(new Vector2(end.minus(ori).scale(0.5D).getX(), 0)).minus(new Vector2(textWidth / 2D, 0));
+            graphicsContext.fillText("FimBall", textPosMiddle.getX(), textPosMiddle.getY());
+            // Kopf innen unten
+            // graphicsContext.setFill(PRIMARY_COLOR_DARK);
+            // Vector2 afterText = new Vector2(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset + textInset + textHeight + textInset);
+            // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), (ori.getY() - borderWidth) - afterText.getY() - headInset);
+            // Kopf innen mitte
+            // graphicsContext.setFill(SECONDARY_COLOR_DARK);
+            // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), headMiddleHeight);
 
-        // Kopf
-        graphicsContext.setLineWidth(borderWidth);
-        // Kopf oben
-        graphicsContext.setFill(SECONDARY_COLOR);
-        graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight - headWidth, end.getX() - ori.getX() + borderWidth * 2, headWidth);
-        // Kopf unten
-        graphicsContext.setFill(SECONDARY_COLOR_DARK);
-        graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight, end.getX() - ori.getX() + borderWidth * 2, headHeight);
-        // Kopf innen
-        graphicsContext.setFill(PRIMARY_COLOR);
-        graphicsContext.fillRect(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset, end.getX() - (ori.getX() - borderWidth * 2) - headInset * 2, headHeight - headInset * 2 - borderWidth);
-        // Text
-        graphicsContext.setFill(PRIMARY_COLOR_LIGHT_LIGHT);
-        graphicsContext.setFont(Font.font("Arial", textHeight * Toolkit.getDefaultToolkit().getScreenResolution() / 72.0));
-        Vector2 textPosLeft = new Vector2(ori.getX() - borderWidth + headInset + textInset, ori.getY() - headHeight + headInset + textInset + textHeight);
-        Vector2 textPosMiddle = textPosLeft.plus(new Vector2(end.minus(ori).scale(0.5D).getX(), 0)).minus(new Vector2(textWidth / 2D, 0));
-        graphicsContext.fillText("FimBall", textPosMiddle.getX(), textPosMiddle.getY());
-        // Kopf innen unten
-        // graphicsContext.setFill(PRIMARY_COLOR_DARK);
-        // Vector2 afterText = new Vector2(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset + textInset + textHeight + textInset);
-        // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), (ori.getY() - borderWidth) - afterText.getY() - headInset);
-        // Kopf innen mitte
-        // graphicsContext.setFill(SECONDARY_COLOR_DARK);
-        // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), headMiddleHeight);
+            // Schatten
+            graphicsContext.setFill(PRIMARY_COLOR);
+            graphicsContext.setGlobalAlpha(0.5);
+            graphicsContext.fillRect(ori.getX(), end.getY() + borderWidth, end.getX() - ori.getX(), footHeight + borderWidth);
+            graphicsContext.setGlobalAlpha(1);
 
-        // Schatten
-        graphicsContext.setFill(PRIMARY_COLOR);
-        graphicsContext.setGlobalAlpha(0.5);
-        graphicsContext.fillRect(ori.getX(), end.getY() + borderWidth, end.getX() - ori.getX(), footHeight + borderWidth);
-        graphicsContext.setGlobalAlpha(1);
+            // Beine
+            graphicsContext.setLineWidth(borderWidth * 2);
+            graphicsContext.setStroke(SECONDARY_COLOR_DARK);
+            graphicsContext.strokeRect(ori.getX(), end.getY() + borderWidth, 0, footHeight);
+            graphicsContext.strokeRect(end.getX(), end.getY() + borderWidth, 0, footHeight);
 
-        // Beine
-        graphicsContext.setLineWidth(borderWidth * 2);
-        graphicsContext.setStroke(SECONDARY_COLOR_DARK);
-        graphicsContext.strokeRect(ori.getX(), end.getY() + borderWidth, 0, footHeight);
-        graphicsContext.strokeRect(end.getX(), end.getY() + borderWidth, 0, footHeight);
+            // Rahmen 3D Effekt unten
+            graphicsContext.setLineWidth(borderWidth);
+            graphicsContext.setFill(SECONDARY_COLOR_DARK);
+            graphicsContext.fillRect(ori.getX() - borderWidth, end.getY(), end.getX() - ori.getX() + borderWidth * 2D, borderHeight);
 
-        // Rahmen
-        graphicsContext.setLineWidth(borderWidth);
-        graphicsContext.setStroke(SECONDARY_COLOR_DARK);
-        graphicsContext.setFill(SECONDARY_COLOR_DARK);
-        graphicsContext.fillRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, borderDepth);
-        graphicsContext.fillRect(ori.getX() - borderWidth, end.getY(), end.getX() - ori.getX() + borderWidth * 2D, borderHeight);
-
-        // Rahmen
-        graphicsContext.setStroke(SECONDARY_COLOR);
-        graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
+            // Rahmen um den gesamten Automaten
+            graphicsContext.setStroke(SECONDARY_COLOR);
+            graphicsContext.strokeRect(ori.getX() - borderWidth / 2D, ori.getY() - borderWidth / 2D, end.getX() - ori.getX() + borderWidth, end.getY() - ori.getY() + borderWidth);
+        }
     }
 
     /**

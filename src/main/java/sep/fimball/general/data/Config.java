@@ -63,6 +63,11 @@ public class Config
     public final static int MACHINE_BOX_MARGIN = 6;
 
     /**
+     * Die minimale Breite des Rand des Automaten.
+     */
+    public final static int MACHINE_BOX_MIN_WIDTH = 92;
+
+    /**
      * Maximale Anzahl an Elementen, die man auswählen kann.
      */
     public final static int MAX_EDITOR_SELECTION_AMOUNT = 1000;
@@ -70,7 +75,7 @@ public class Config
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
      */
-    public final static double BALL_LOST_TOLERANCE = 2;
+    public final static double BALL_LOST_TOLERANCE = 8;
 
     /**
      * Die Drehgeschwindigkeit des Spinners bei einer idealen Kollision mit der Kugel.
