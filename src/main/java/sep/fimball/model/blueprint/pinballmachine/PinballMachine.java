@@ -140,7 +140,7 @@ public class PinballMachine
             newOrigin = new Vector2(newOrigin.getX() - missingWidth / 2D, newOrigin.getY());
             newSize = new Vector2(newSize.getX() + missingWidth, newSize.getY());
         }
-        return new RectangleDouble(newOrigin, newSize);
+        return new RectangleDouble(newOrigin.round(), newSize.round());
     }
 
     /**

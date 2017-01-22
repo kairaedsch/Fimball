@@ -131,14 +131,14 @@ public class PinballMachineTest
 
         // Füge PlacedElementMocks hinzu
         pinballMachine.addElement(getPlacedElementMock(BaseElementType.NORMAL, new Vector2(-5, -5), new Vector2(-1, -1), new Vector2(1, 1)));
-        pinballMachine.addElement(getPlacedElementMock(BaseElementType.NORMAL, new Vector2(5, 5), new Vector2(-1, -1), new Vector2(1, 1)));
+        pinballMachine.addElement(getPlacedElementMock(BaseElementType.NORMAL, new Vector2(100, 100), new Vector2(-1, -1), new Vector2(1, 1)));
 
         // Erstelle die BoundingBox
         RectangleDouble boundingBox = pinballMachine.getBoundingBox();
 
-        // Prüfe ob die BoundingBox richtig ist
-        assertThat(boundingBox.getOrigin(), matchesVector(-12, -12));
-        assertThat(boundingBox.getSize(), matchesVector(24, 24));
+        // Prüfe ob die BoundingBox richtig ist new Vector2(4, 7);
+        assertThat(boundingBox.getOrigin(), matchesVector(-10, -13));
+        assertThat(boundingBox.getSize(), matchesVector(115, 121));
     }
 
     /**
