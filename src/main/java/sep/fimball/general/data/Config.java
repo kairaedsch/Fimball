@@ -70,7 +70,7 @@ public class Config
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.
      */
-    public final static double BALL_LOST_TOLERANCE = 10;
+    public final static double BALL_LOST_TOLERANCE = 2;
 
     /**
      * Die Drehgeschwindigkeit des Spinners bei einer idealen Kollision mit der Kugel.

@@ -114,9 +114,10 @@ class PinballCanvasDrawer
         double headHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
         double headWidth = PIXELS_PER_GRID_UNIT * 20;
         double headInset = PIXELS_PER_GRID_UNIT * 5;
-        double textInset = PIXELS_PER_GRID_UNIT * 4;
+        double headMiddleHeight = PIXELS_PER_GRID_UNIT * 15;
+        double textInset = PIXELS_PER_GRID_UNIT * 5;
         double textHeight = PIXELS_PER_GRID_UNIT * 17;
-        double textWidth = PIXELS_PER_GRID_UNIT * 90;
+        double textWidth = PIXELS_PER_GRID_UNIT * 92;
 
         if(end.getX() - ori.getX() < textWidth)
         {
@@ -139,13 +140,20 @@ class PinballCanvasDrawer
         graphicsContext.fillRect(ori.getX() - borderWidth, ori.getY() - headHeight, end.getX() - ori.getX() + borderWidth * 2, headHeight);
         // Kopf innen
         graphicsContext.setFill(PRIMARY_COLOR);
-        graphicsContext.fillRect(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset, end.getX() - ori.getX() + borderWidth * 2 - headInset * 2, headHeight - headInset * 2 - borderWidth);
+        graphicsContext.fillRect(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset, end.getX() - (ori.getX() - borderWidth * 2) - headInset * 2, headHeight - headInset * 2 - borderWidth);
         // Text
-        graphicsContext.setFill(PRIMARY_COLOR_LIGHT);
+        graphicsContext.setFill(PRIMARY_COLOR_LIGHT_LIGHT);
         graphicsContext.setFont(Font.font("Arial", textHeight * Toolkit.getDefaultToolkit().getScreenResolution() / 72.0));
-        Vector2 posLeft = new Vector2(ori.getX() - borderWidth + headInset + textInset, ori.getY() - headHeight + headInset + textInset + textHeight);
-        Vector2 posMiddle = posLeft.plus(new Vector2(end.minus(ori).scale(0.5D).getX(), 0)).minus(new Vector2(textWidth / 2D, 0));
-        graphicsContext.fillText("FimBall", posMiddle.getX(), posMiddle.getY());
+        Vector2 textPosLeft = new Vector2(ori.getX() - borderWidth + headInset + textInset, ori.getY() - headHeight + headInset + textInset + textHeight);
+        Vector2 textPosMiddle = textPosLeft.plus(new Vector2(end.minus(ori).scale(0.5D).getX(), 0)).minus(new Vector2(textWidth / 2D, 0));
+        graphicsContext.fillText("FimBall", textPosMiddle.getX(), textPosMiddle.getY());
+        // Kopf innen unten
+        // graphicsContext.setFill(PRIMARY_COLOR_DARK);
+        // Vector2 afterText = new Vector2(ori.getX() - borderWidth + headInset, ori.getY() - headHeight + headInset + textInset + textHeight + textInset);
+        // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), (ori.getY() - borderWidth) - afterText.getY() - headInset);
+        // Kopf innen mitte
+        // graphicsContext.setFill(SECONDARY_COLOR_DARK);
+        // graphicsContext.fillRect(afterText.getX(), afterText.getY(), (end.getX() + borderWidth - headInset) - afterText.getX(), headMiddleHeight);
 
         // Beine
         graphicsContext.setLineWidth(borderWidth * 2);

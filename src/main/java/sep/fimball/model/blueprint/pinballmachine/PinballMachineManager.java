@@ -137,14 +137,21 @@ public class PinballMachineManager
     boolean savePinballMachine(PinballMachine pinballMachine, boolean autoSave)
     {
         Path pathToMachine;
+        String pathToPinballMachineGeneralJson;
+        String pathToPinballMachinePlacedElementsJson;
         if (autoSave)
         {
             pathToMachine = Paths.get(DataPath.pathToAutoSave());
+            pathToPinballMachineGeneralJson = DataPath.pathToAutoSaveGeneralJson();
+            pathToPinballMachinePlacedElementsJson = DataPath.pathToAutoSavePlacedElementsJson();
         }
         else
         {
             pathToMachine = Paths.get(DataPath.pathToPinballMachine(pinballMachine.getID()));
+            pathToPinballMachineGeneralJson = DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID());
+            pathToPinballMachinePlacedElementsJson = DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID());
         }
+
         if (!pathToMachine.toFile().exists())
         {
             boolean couldCreateFolder = pathToMachine.toFile().mkdir();
@@ -163,10 +170,10 @@ public class PinballMachineManager
         }
 
         PinballMachineJson pinballMachineJson = PinballMachineFactory.createPinballMachineJson(pinballMachine);
-        boolean successMachine = JsonFileManager.saveToJson(DataPath.pathToPinballMachineGeneralJson(pinballMachine.getID()), pinballMachineJson);
+        boolean successMachine = JsonFileManager.saveToJson(pathToPinballMachineGeneralJson, pinballMachineJson);
 
         PlacedElementListJson placedElementListJson = PlacedElementListFactory.createPlacedElementListJson(pinballMachine.elementsProperty());
-        boolean successElements = saveToJson(DataPath.pathToPinballMachinePlacedElementsJson(pinballMachine.getID()), placedElementListJson);
+        boolean successElements = saveToJson(pathToPinballMachinePlacedElementsJson, placedElementListJson);
 
         return successMachine && successElements;
     }

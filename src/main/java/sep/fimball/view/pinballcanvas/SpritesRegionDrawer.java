@@ -65,7 +65,11 @@ class SpritesRegionDrawer
                     sprite.clearDrawListener();
                 },
                 // Wird ausgeführt, wenn alle Elemente entfernt werden sollen
-                this::clearSpriteRegions);
+                () ->
+                {
+                    listPropertyConverted.forEach(SpriteSubView::clearDrawListener);
+                    clearSpriteRegions();
+                });
     }
 
     /**

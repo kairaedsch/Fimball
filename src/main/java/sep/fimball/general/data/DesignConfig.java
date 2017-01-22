@@ -51,7 +51,7 @@ public class DesignConfig
     public final static Color PRIMARY_COLOR = new Color(219 / 255.0, 93 / 255.0, 93 / 255.0, 1);
 
     /**
-     * Die hellere Hintergrundfarbe des Flipperautomaten.
+     * Die helle Hintergrundfarbe des Flipperautomaten.
      */
     public final static Color PRIMARY_COLOR_LIGHT = new Color(255 / 255.0, 147 / 255.0, 147 / 255.0, 1);
 
@@ -59,6 +59,11 @@ public class DesignConfig
      * Die hellere Hintergrundfarbe des Flipperautomaten.
      */
     public final static Color PRIMARY_COLOR_LIGHT_LIGHT = new Color(255 / 255.0, 187 / 255.0, 187 / 255.0, 1);
+
+    /**
+     * Die dunklere Hintergrundfarbe des Flipperautomaten.
+     */
+    public final static Color PRIMARY_COLOR_DARK = new Color(165 / 255.0, 47 / 255.0, 47 / 255.0, 1);
 
     /**
      * Die Komplementfarbe des Flipperautomaten.

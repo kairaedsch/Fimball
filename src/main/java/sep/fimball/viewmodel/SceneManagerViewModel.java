@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.settings.Settings;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
 import sep.fimball.viewmodel.dialog.none.EmptyViewModel;
 import sep.fimball.viewmodel.window.WindowViewModel;
+import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 import sep.fimball.viewmodel.window.splashscreen.SplashScreenViewModel;
 
@@ -58,15 +59,20 @@ public class SceneManagerViewModel
         dialogViewModel = new SimpleObjectProperty<>();
         dialogViewModel.bind(Bindings.createObjectBinding(() -> dialogViewModels.isEmpty() ? new EmptyViewModel() : dialogViewModels.get(0), dialogViewModels));
 
-        if (Paths.get(DataPath.pathToAutoSave()).toFile().exists()) {
+        if (Paths.get(DataPath.pathToAutoSave()).toFile().exists())
+        {
             Optional<PinballMachine> autoSavedMachine = PinballMachineManager.getInstance().loadAutoSavedMachine();
-            if(autoSavedMachine.isPresent())
+            if (autoSavedMachine.isPresent())
             {
-                PinballMachineEditorViewModel.setAsWindowWithBusyDialog(this, PinballMachineManager.getInstance().createNewMachine());
-            } else {
+                setWindow(new MainMenuViewModel());
+                PinballMachineEditorViewModel.setAsWindowWithBusyDialog(this, autoSavedMachine.get());
+            }
+            else
+            {
                 setWindow(new SplashScreenViewModel());
             }
-        } else
+        }
+        else
         {
             setWindow(new SplashScreenViewModel());
         }
