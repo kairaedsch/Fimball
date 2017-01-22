@@ -355,8 +355,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.removeSelection();
-            PlacedElement aPlacedElement = pinballMachineEditor.getSelection().iterator().next();
-            setSelectedAvailableElement(aPlacedElement.getBaseElement());
+            previewsProperty.clear();
+            for (PlacedElement placedElement : pinballMachineEditor.getSelection())
+            {
+                previewsProperty.add(new EditorPreviewSubViewModel(placedElement));
+            }
         }
     }
 
