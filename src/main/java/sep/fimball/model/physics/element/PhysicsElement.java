@@ -3,7 +3,7 @@ package sep.fimball.model.physics.element;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.physics.collider.Collider;
 import sep.fimball.model.physics.game.CollisionEventArgs;
-import sep.fimball.model.physics.game.CollisonEvent;
+import sep.fimball.model.physics.game.CollisonEventType;
 import sep.fimball.model.physics.game.ElementEventArgs;
 
 import java.util.Collections;
@@ -120,6 +120,8 @@ public class PhysicsElement<GameElementT>
      *
      * @param eventArgsList      Die Liste, welche alle auftretenden Kollisionen speichert.
      * @param ballPhysicsElement Der Ball, welcher mit den Kollidern kollidieren kann.
+     *
+     * @return Ob eine Kollision stattgefunden hat.
      */
     public boolean checkCollision(List<CollisionEventArgs<GameElementT>> eventArgsList, BallPhysicsElement<GameElementT> ballPhysicsElement)
     {
@@ -130,12 +132,12 @@ public class PhysicsElement<GameElementT>
             {
                 if (!colliding.get(collider.getId()))
                 {
-                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEvent.ENTERED));
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEventType.ENTERED));
                     colliding.put(collider.getId(), true);
                 }
                 else
                 {
-                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEvent.OVER));
+                    eventArgsList.add(new CollisionEventArgs<>(gameElement, collider.getId(), CollisonEventType.OVER));
                 }
                 collided = true;
             }
@@ -143,13 +145,18 @@ public class PhysicsElement<GameElementT>
         return collided;
     }
 
+    /**
+     * Setzt alle gespeicherten Kollisionen zurück und Fügt diese zur eventArgsList hinzu.
+     *
+     * @param eventArgsList Die Liste, welche alle auftretenden Kollisionen speichert.
+     */
     public void ballLeaved(List<CollisionEventArgs<GameElementT>> eventArgsList)
     {
         for (Map.Entry<Integer, Boolean> integerBooleanEntry : colliding.entrySet())
         {
             if (integerBooleanEntry.getValue())
             {
-                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisonEvent.LEAVED));
+                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisonEventType.LEAVED));
             }
         }
         for (Collider collider : colliders)
