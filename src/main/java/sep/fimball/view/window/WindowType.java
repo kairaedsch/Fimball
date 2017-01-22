@@ -55,7 +55,7 @@ public enum WindowType implements ViewType
     /**
      * Das im Editor ausgewählte Element.
      */
-    EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml");
+    EDITOR_SELECTED_ELEMENT("pinballmachine/editor/selectedElement.fxml"), EDITOR_PREVIEW("pinballmachine/editor/editorPreview.fxml");
 
     /**
      * Der Pfad der zum Fenster-Typ gehörenden FXML-Datei.

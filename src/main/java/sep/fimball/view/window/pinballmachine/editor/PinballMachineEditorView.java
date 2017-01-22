@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,9 @@ import java.util.Optional;
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
+    @FXML
+    public AnchorPane baseAnchorPane;
+
     /**
      * Zeigt den Namen des editierten Automaten an. Über dieses Feld kann der Name auch geändert werden.
      */
@@ -112,6 +116,8 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsRamp, pinballMachineEditorViewModel.availableRampElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+
+        ViewModelListToPaneBinder.bindViewModelsToViews(baseAnchorPane, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW);
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());

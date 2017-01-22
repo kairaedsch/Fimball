@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Polyline?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView" fx:id="baseAnchorPane">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <SplitPane dividerPositions="0.2, 0.8" styleClass="splitPane" VBox.vgrow="ALWAYS">
             <AnchorPane minWidth="290.0">
@@ -123,7 +123,4 @@
             </VBox>
         </SplitPane>
     </VBox>
-    <Pane fx:id="previewBot" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0">
-        <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0" />
-    </Pane>
 </AnchorPane>

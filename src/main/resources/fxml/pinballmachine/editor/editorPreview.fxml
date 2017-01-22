@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="previewBot" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0" xmlns:fx="http://javafx.com/fxml/1">
+    <Pane fx:id="previewTop" mouseTransparent="true" prefHeight="50.0" prefWidth="50.0" />
+</Pane>

@@ -135,6 +135,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Cursor> cursorProperty;
 
+    private ObservableList<EditorPreviewSubViewModel> previewsProperty;
+
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
@@ -568,5 +570,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public IntegerProperty selectionSizeProperty()
     {
         return pinballMachineEditor.selectionSizeProperty();
+    }
+
+    public ObservableList<EditorPreviewSubViewModel> previewsProperty()
+    {
+        return previewsProperty;
     }
 }
