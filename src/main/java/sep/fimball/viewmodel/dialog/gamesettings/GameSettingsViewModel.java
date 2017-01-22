@@ -90,7 +90,7 @@ public class GameSettingsViewModel extends DialogViewModel
         {
             KeyBinding binding = bindingOptional.get();
 
-            if (binding == KeyBinding.PAUSE)
+            if (binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
             {
                 exitDialogToMainMenu();
             }

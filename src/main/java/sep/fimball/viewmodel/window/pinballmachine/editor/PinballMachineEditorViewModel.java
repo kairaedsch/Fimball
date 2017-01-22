@@ -399,7 +399,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
                     moveModifier = keyEvent.getEventType() == KeyEvent.KEY_PRESSED;
                     break;
                 case PAUSE:
-                    if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
+                    if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
                     {
                         editorSessionSubViewModel.exitToMainMenu();
                     }

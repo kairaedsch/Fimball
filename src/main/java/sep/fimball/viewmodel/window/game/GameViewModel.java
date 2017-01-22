@@ -204,7 +204,7 @@ public class GameViewModel extends WindowViewModel
         if (bindingOptional.isPresent())
         {
             KeyBinding binding = bindingOptional.get();
-            if (binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_PRESSED)
+            if (binding == KeyBinding.PAUSE && keyEvent.getEventType() == KeyEvent.KEY_RELEASED)
             {
                 gameSession.pauseAll();
                 if (gameSession.isStartedFromEditor())
