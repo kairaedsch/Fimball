@@ -95,7 +95,7 @@ public class SettingsTest
 
         SettingsJson createdJson = SettingsFactory.createSettingsJson(mockedSettings);
 
-        assertThat(createdJson.language, equalTo(LANGUAGE.toString()));
+        assertThat(createdJson.language, equalTo(LANGUAGE));
         assertThat(createdJson.fullscreen, is(IS_IN_FULLSCREEN));
         assertThat(createdJson.masterVolume, is(MASTER_VOLUME));
         assertThat(createdJson.musicVolume, is(MUSIC_VOLUME));
