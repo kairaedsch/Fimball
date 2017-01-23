@@ -36,7 +36,7 @@ public class AnimationHandlerTest
         AnimationHandler test = new AnimationHandler();
         HandlerGameElement testHandlerGameElement = getTestElement();
         test.activateElementHandler(testHandlerGameElement, new ElementHandlerArgs(null, 0, 0));
-        assertThat("Es wurde die richtige Animation aktiviert", testAnimation.isAnimating(0), is(true));
+        assertThat("Es wurde die richtige Animation aktiviert", testAnimation.isAnimating(5), is(true));
     }
 
     /**
@@ -82,7 +82,7 @@ public class AnimationHandlerTest
             public BaseMediaElement getMediaElement()
             {
                 Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new ElementImage("", false, 0, true, new Animation(0, 0, "Test-Animation"))), java.util.Optional.of(""));
+                BaseMediaElementEvent baseMediaElementEvent = new BaseMediaElementEvent(java.util.Optional.of(new ElementImage("", false, 0, true, new Animation(10, 2, "Test-Animation"))), java.util.Optional.of(""));
                 eventMap.put(0, baseMediaElementEvent);
                 return new BaseMediaElement(null, null, 0, false, 0, null, eventMap, null);
             }
