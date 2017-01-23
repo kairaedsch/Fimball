@@ -135,7 +135,15 @@ public class Vector2
     public Vector2 normalized()
     {
         double norm = this.magnitude();
-        return new Vector2(x / norm, y / norm);
+
+        if (norm == 0.0)
+        {
+            return new Vector2();
+        }
+        else
+        {
+            return new Vector2(x / norm, y / norm);
+        }
     }
 
     /**
