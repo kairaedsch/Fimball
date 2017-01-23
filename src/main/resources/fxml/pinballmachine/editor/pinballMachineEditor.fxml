@@ -14,23 +14,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Polyline?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8.0.76-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <SplitPane dividerPositions="0.2, 0.8" styleClass="splitPane" VBox.vgrow="ALWAYS">
             <AnchorPane minWidth="290.0">
                 <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <HBox HBox.hgrow="ALWAYS" styleClass="editorMenuBar" prefHeight="65">
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
                         <Label fx:id="key_1" text="!editor.elements.header.key!" styleClass="editorMenuBarTitle"/>
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
                     </HBox>
                     <Accordion styleClass="availableElements" VBox.vgrow="ALWAYS">
                         <panes>
                             <TitledPane fx:id="key_2" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.basic.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS"
+                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsBasic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsBasic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
@@ -38,9 +41,11 @@
                             </TitledPane>
                             <TitledPane fx:id="key_3" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.obstacles.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS"
+                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsObstacles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsObstacles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
@@ -48,9 +53,11 @@
                             </TitledPane>
                             <TitledPane fx:id="key_4" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.ramps.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS"
+                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsRamp" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsRamp" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
@@ -58,9 +65,11 @@
                             </TitledPane>
                             <TitledPane fx:id="key_5" animated="false" styleClass="availableElementsTitle" text="!editor.elements.category.advanced.key!">
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="edge-to-edge" vbarPolicy="ALWAYS"
+                                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                         <AnchorPane styleClass="availableElementsList">
-                                            <VBox fx:id="availableElementsAdvanced" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <VBox fx:id="availableElementsAdvanced" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
                                             </VBox>
                                         </AnchorPane>
                                     </ScrollPane>
@@ -73,57 +82,61 @@
             <VBox>
                 <HBox styleClass="editorMenuBar">
                     <HBox HBox.hgrow="ALWAYS">
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
                         <HBox styleClass="buttonBackToMainMenuContainer">
                             <Polyline onMouseClicked="#menuClicked" styleClass="buttonBackToMainMenuArrow">
                                 <points>
-                                    <Double fx:value="0.0" />
-                                    <Double fx:value="20.0" />
+                                    <Double fx:value="0.0"/>
+                                    <Double fx:value="20.0"/>
 
-                                    <Double fx:value="20.0" />
-                                    <Double fx:value="0.0" />
+                                    <Double fx:value="20.0"/>
+                                    <Double fx:value="0.0"/>
 
-                                    <Double fx:value="20.0" />
-                                    <Double fx:value="40.0" />
+                                    <Double fx:value="20.0"/>
+                                    <Double fx:value="40.0"/>
                                 </points>
                             </Polyline>
-                            <Pane fx:id="menu" accessibleHelp="§editor.settings.menuButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#menuClicked" styleClass="button, button_small, buttonBackToMainMenu" />
+                            <Pane fx:id="menu" accessibleHelp="§editor.settings.menuButton.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
+                                  onMouseClicked="#menuClicked" styleClass="button, button_small, buttonBackToMainMenu"/>
                         </HBox>
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
                     </HBox>
-                    <TextField fx:id="tableName" styleClass="pinballMachineSettingsTextField" text="Tills Automat" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="tableName" styleClass="pinballMachineSettingsTextField" text="Tills Automat" HBox.hgrow="ALWAYS"/>
                     <HBox HBox.hgrow="ALWAYS">
-                        <Pane HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="play" accessibleHelp="§mainmenu.play.tip.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" onMouseClicked="#playClicked" styleClass="button, button_small, buttonPlaySinglePlayer" />
-                        <Pane HBox.hgrow="ALWAYS" />
-                    </HBox>
-                    <HBox HBox.hgrow="ALWAYS">
-                        <Pane HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="save" accessibleHelp="§editor.settings.saveButton.key§" onMouseClicked="#saveClicked" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonSave" />
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Pane fx:id="play" accessibleHelp="§mainmenu.play.tip.key§" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
+                              onMouseClicked="#playClicked" styleClass="button, button_small, buttonPlaySinglePlayer"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
                     </HBox>
                     <HBox HBox.hgrow="ALWAYS">
-                        <Pane HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="delete" accessibleHelp="§editor.settings.deleteButton.key§" onMouseClicked="#deleteClicked" maxHeight="40.0"  maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonDelete" />
-                        <Pane HBox.hgrow="ALWAYS" />
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Pane fx:id="save" accessibleHelp="§editor.settings.saveButton.key§" onMouseClicked="#saveClicked" maxHeight="40.0" maxWidth="40.0" minHeight="40.0"
+                              minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonSave"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
+                    </HBox>
+                    <HBox HBox.hgrow="ALWAYS">
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Pane fx:id="delete" accessibleHelp="§editor.settings.deleteButton.key§" onMouseClicked="#deleteClicked" maxHeight="40.0" maxWidth="40.0"
+                              minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="button, button_small, buttonDelete"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
                     </HBox>
                 </HBox>
                 <AnchorPane VBox.vgrow="ALWAYS">
-                    <StackPane fx:id="pinballCanvasContainer" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas" onMouseDragOver="#draggedOver" onMouseDragged="#dragged" onMouseEntered="#mouseEnteredCanvas"
-                               onMouseExited="#mouseExitedCanvas" onMousePressed="#down" onMouseReleased="#mouseReleased" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    <StackPane fx:id="pinballCanvasContainer" onMouseDragEntered="#mouseDragEnteredCanvas" onMouseDragExited="#mouseDragExitedCanvas"
+                               onMouseDragOver="#draggedOver" onMouseDragged="#dragged" onMouseEntered="#mouseEnteredCanvas"
+                               onMouseExited="#mouseExitedCanvas" onMousePressed="#down" onMouseReleased="#mouseReleased" AnchorPane.bottomAnchor="0.0"
+                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                 </AnchorPane>
             </VBox>
             <VBox>
                 <HBox styleClass="editorMenuBar" prefHeight="65">
-                    <Pane HBox.hgrow="ALWAYS" />
+                    <Pane HBox.hgrow="ALWAYS"/>
                     <Label fx:id="key_6" text="!editor.menubar.key!" styleClass="editorMenuBarTitle"/>
-                    <Pane HBox.hgrow="ALWAYS" />
+                    <Pane HBox.hgrow="ALWAYS"/>
                 </HBox>
                 <VBox VBox.vgrow="ALWAYS" fx:id="selectedElement"/>
             </VBox>
         </SplitPane>
     </VBox>
-    <AnchorPane fx:id="previewBase">
-
-    </AnchorPane>
+    <Pane fx:id="previewBase"/>
 </AnchorPane>

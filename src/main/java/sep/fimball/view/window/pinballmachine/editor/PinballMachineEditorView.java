@@ -33,7 +33,7 @@ import java.util.Optional;
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     @FXML
-    public AnchorPane previewBase;
+    public Pane previewBase;
 
     /**
      * Zeigt den Namen des editierten Automaten an. Über dieses Feld kann der Name auch geändert werden.
@@ -116,6 +116,9 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
+
+        previewBase.setMaxHeight(0);
+        previewBase.setMaxWidth(0);
     }
 
     /**
