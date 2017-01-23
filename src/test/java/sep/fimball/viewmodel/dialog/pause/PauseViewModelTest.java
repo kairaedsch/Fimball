@@ -53,6 +53,6 @@ public class PauseViewModelTest
      */
     private void simulateKeyPressed(PauseViewModel viewModel, KeyCode code)
     {
-        viewModel.handleKeyEvent(new KeyEvent(KeyEvent.KEY_PRESSED, "", code.getName(), code, false, false, false, false));
+        viewModel.handleKeyEvent(new KeyEvent(KeyEvent.KEY_RELEASED, "", code.getName(), code, false, false, false, false));
     }
 }

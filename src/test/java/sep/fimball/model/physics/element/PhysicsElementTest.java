@@ -53,7 +53,7 @@ public class PhysicsElementTest
 
         // Teste mit einer Kollision
         when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.empty());
-        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
+        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.of(0D));
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es eine Kollision gab, muss die Liste genau ein Element haben", eventArgsList.size(), is(1));
         assertThat("und es muss colliderB sein", eventArgsList.get(0).getColliderId(), is(22222));

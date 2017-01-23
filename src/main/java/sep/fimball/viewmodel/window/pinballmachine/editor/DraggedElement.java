@@ -64,7 +64,7 @@ public class DraggedElement
     {
         if (object instanceof DraggedElement)
         {
-            return ((DraggedElement) object).getPlacedElement().equals(this.getPlacedElement());
+            return this.getPlacedElement().equals(((DraggedElement) object).getPlacedElement());
         }
         return object.equals(this);
     }

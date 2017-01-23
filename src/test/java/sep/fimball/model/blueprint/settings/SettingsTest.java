@@ -19,6 +19,7 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static sep.fimball.model.input.data.KeyBinding.*;
 
 /**
  * Diese Klasse enthält Tests, die sicherstellen, dass die Einstellungsobjekte ordnungsgemäß erzeugt werden und neue
@@ -31,10 +32,8 @@ public class SettingsTest
     private final int MUSIC_VOLUME = 75;
     private final int SFX_VOLUME = 80;
     private final Language LANGUAGE = Language.GERMAN;
-    private final KeyCode keyCodeA = KeyCode.A;
     private final KeyCode keyCodeB = KeyCode.B;
-    private final KeyBinding keyBinding1 = KeyBinding.EDITOR_DELETE;
-    private final KeyBinding keyBinding2 = KeyBinding.EDITOR_MOVE;
+    private final KeyBinding keyBinding2 = EDITOR_MOVE;
     private SettingsJson.KeyLayout[] keyLayouts = new SettingsJson.KeyLayout[0];
     private SettingsJson testSettingsJson = new SettingsJson();
 
@@ -96,7 +95,7 @@ public class SettingsTest
 
         SettingsJson createdJson = SettingsFactory.createSettingsJson(mockedSettings);
 
-        assertThat(createdJson.language, equalTo(LANGUAGE.name()));
+        assertThat(createdJson.language, equalTo(LANGUAGE.toString()));
         assertThat(createdJson.fullscreen, is(IS_IN_FULLSCREEN));
         assertThat(createdJson.masterVolume, is(MASTER_VOLUME));
         assertThat(createdJson.musicVolume, is(MUSIC_VOLUME));
@@ -107,28 +106,28 @@ public class SettingsTest
     /**
      * Stellt sicher, dass neue Tastenbelegungen wie beschrieben eingefügt werden.
      */
-    @Test (timeout = 1000)
+    @Test (timeout = 2000)
     public void testSetKeyBinding()
     {
         initTestJson();
         SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, Settings.getSingletonInstance());
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA), equalTo(Optional.empty()));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1), equalTo(Optional.empty()));
-        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding1);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding1));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeA));
-        Settings.getSingletonInstance().setKeyBinding(keyCodeB, keyBinding1);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA), equalTo(Optional.empty()));
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
-        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding2);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
-        Settings.getSingletonInstance().setKeyBinding(keyCodeA, keyBinding1);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeA).get(), equalTo(keyBinding2));
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(keyBinding1));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding1).get(), equalTo(keyCodeB));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(keyCodeA));
+        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), not(equalTo(EDITOR_DELETE)));
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.F1, LEFT_FLIPPER);
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, EDITOR_DELETE);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(EDITOR_DELETE));
+        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(KeyCode.A));
+        Settings.getSingletonInstance().setKeyBinding(keyCodeB, EDITOR_DELETE);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A), equalTo(Optional.empty()));
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
+        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, keyBinding2);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
+        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, EDITOR_DELETE);
+        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
+        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
+        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
+        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
     }
 
     /**
@@ -155,22 +154,22 @@ public class SettingsTest
             keyLayouts[i] = new SettingsJson.KeyLayout();
         }
         keyLayouts[0].keyCode = KeyCode.A;
-        keyLayouts[0].keyBinding = KeyBinding.LEFT_FLIPPER;
+        keyLayouts[0].keyBinding = LEFT_FLIPPER;
         keyLayouts[1].keyCode = KeyCode.R;
-        keyLayouts[1].keyBinding = KeyBinding.EDITOR_ROTATE;
+        keyLayouts[1].keyBinding = EDITOR_ROTATE;
         keyLayouts[2].keyCode = KeyCode.E;
-        keyLayouts[2].keyBinding = KeyBinding.NUDGE_RIGHT;
+        keyLayouts[2].keyBinding = NUDGE_RIGHT;
         keyLayouts[3].keyCode = KeyCode.Q;
-        keyLayouts[3].keyBinding = KeyBinding.NUDGE_LEFT;
+        keyLayouts[3].keyBinding = NUDGE_LEFT;
         keyLayouts[4].keyCode = KeyCode.ESCAPE;
-        keyLayouts[4].keyBinding = KeyBinding.PAUSE;
+        keyLayouts[4].keyBinding = PAUSE;
         keyLayouts[5].keyCode = KeyCode.DELETE;
-        keyLayouts[5].keyBinding = KeyBinding.EDITOR_DELETE;
+        keyLayouts[5].keyBinding = EDITOR_DELETE;
         keyLayouts[6].keyCode = KeyCode.D;
-        keyLayouts[6].keyBinding = KeyBinding.RIGHT_FLIPPER;
+        keyLayouts[6].keyBinding = RIGHT_FLIPPER;
         keyLayouts[7].keyCode = KeyCode.ALT;
-        keyLayouts[7].keyBinding = KeyBinding.EDITOR_MOVE;
+        keyLayouts[7].keyBinding = EDITOR_MOVE;
         keyLayouts[8].keyCode = KeyCode.SPACE;
-        keyLayouts[8].keyBinding = KeyBinding.PLUNGER;
+        keyLayouts[8].keyBinding = PLUNGER;
     }
 }

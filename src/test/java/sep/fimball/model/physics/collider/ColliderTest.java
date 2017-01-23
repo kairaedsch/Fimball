@@ -43,6 +43,6 @@ public class ColliderTest
         CollisionType type = mock(CollisionType.class);
 
         Collider collider = new Collider(WorldLayer.GROUND, shapes, type, 0);
-        assertThat(collider.checkCollision(ball, element), is(true));
+        assertThat(collider.checkCollision(ball, element).isPresent(), is(true));
     }
 }

@@ -57,6 +57,7 @@ public class SpriteSubViewModelTest
         when(baseElement.getPhysics()).thenReturn(basePhysicsElement);
         placedElementOfGameElement = Mockito.mock(PlacedElement.class);
         when(placedElementOfGameElement.getBaseElement()).thenReturn(baseElement);
+        when(placedElementOfGameElement.positionProperty()).thenReturn(new SimpleObjectProperty<>(new Vector2()));
 
         // Erstelle das BaseMediaElement Mock
         BaseMediaElement baseMediaElement = Mockito.mock(BaseMediaElement.class);
@@ -90,22 +91,22 @@ public class SpriteSubViewModelTest
         // SpriteSubViewModel von einer Spielsitzung
         {
             SpriteSubViewModel spriteSubViewModelGame = new SpriteSubViewModel(gameElement);
-            assertThat("Ein SpriteSubViewModel von einer Spielsitzung ist niemals ausgewählt", spriteSubViewModelGame.selectedProperty(), is(false));
+            assertThat("Ein SpriteSubViewModel von einer Spielsitzung ist niemals ausgewählt", spriteSubViewModelGame.selectedProperty().get(), is(false));
         }
 
         // SpriteSubViewModel von einer Editorsitzung
         {
             ListProperty<DraggedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
             SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
-            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
 
             // Füge irgendein Element zur Liste hinzu
             listOfSelecedElements.add(Mockito.mock(DraggedElement.class));
-            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(false));
 
             // Füge das PlacedElement des SpriteSubViewModels zur Liste hinzu
             listOfSelecedElements.add(new DraggedElement(placedElementOfGameElement));
-            assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(true));
+            assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty().get(), is(true));
         }
     }
 
