@@ -168,6 +168,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this));
     }
 
+    Optional<Vector2> oldGridPos = Optional.empty();
+
     /**
      * Verarbeitet eine Drag-Bewegung.
      *
@@ -178,9 +180,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param gridPos Die neue Position auf dem Canvas.
      * @param button  Die gedrückte Maustaste.
      */
-
-    Optional<Vector2> oldGridPos = Optional.empty();
-
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
         double divX, divY;
@@ -189,27 +188,25 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             Vector2 delta = gridPos.minus(oldGridPos.get());
             divX = delta.getX();
             divY = delta.getY();
-        }
-        else
-        {
-            divX = (((endX - startX) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
-            divY = (((endY - startY) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
-        }
-        oldGridPos = Optional.ofNullable(gridPos);
 
-        if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
-        {
-            cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
-            cursorProperty.set(Cursor.MOVE);
-        }
-        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
-        {
-            pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
-            cursorProperty.set(Cursor.CLOSED_HAND);
-        }
-        else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
-        {
-            selectionRect = Optional.of(new RectangleDoubleByPoints(selectionRect.get().getPointA(), gridPos));
+            oldGridPos = Optional.of(gridPos);
+
+            if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
+            {
+                divX = (((endX - startX) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+                divY = (((endY - startY) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+                cameraPosition.set(new Vector2(cameraPosition.get().getX() - divX, cameraPosition.get().getY() - divY));
+                cursorProperty.set(Cursor.MOVE);
+            }
+            else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.PLACING)
+            {
+                pinballMachineEditor.moveSelectionBy(new Vector2(divX, divY));
+                cursorProperty.set(Cursor.CLOSED_HAND);
+            }
+            else if (button == MouseButton.PRIMARY && mouseMode.get() == MouseMode.SELECTING && selectionRect.isPresent())
+            {
+                selectionRect = Optional.of(new RectangleDoubleByPoints(selectionRect.get().getPointA(), gridPos));
+            }
         }
     }
 
@@ -221,6 +218,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mousePressedOnCanvas(MouseEvent mouseEvent, Vector2 gridPos)
     {
+        oldGridPos = Optional.of(gridPos);
+
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
             return;
 
