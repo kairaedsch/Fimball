@@ -6,6 +6,7 @@ import org.junit.Test;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.*;
+import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class SoundHandlerTest
         SoundHandler test = new SoundHandler(soundManager);
         HandlerGameElement gameElement = getTestHandlerGameElement();
 
-        test.activateElementHandler(gameElement, new ElementHandlerArgs(null, 0, 0));
+        test.activateElementHandler(gameElement, new ElementHandlerArgs(CollisionEventType.ENTERED, 1, 0));
         assertThat("Es wurde der richtige Sound an den SoundManager weitergeleitet", playedSound.getSoundPath(), endsWith("Test-Sound.mp3"));
     }
 
