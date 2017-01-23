@@ -503,6 +503,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void setCameraZoom(double cameraZoom)
     {
+        if (mouseMode.get() == MouseMode.PLACING)
+        {
+            pinballMachineEditor.scaleSelectionPosition(this.cameraZoom.get(), cameraZoom, cameraPosition.get());
+        }
         this.cameraZoom.set(cameraZoom);
     }
 

@@ -141,6 +141,15 @@ public class PinballMachineEditor
         }
     }
 
+    void scaleSelectionPosition(double oldScale, double newScale, Vector2 cameraPosition)
+    {
+        for (PlacedElement placedElement : selection)
+        {
+            // TODO - YEAH idk i feel like it's close but something is missing
+            setPosition(placedElement, (placedElement.positionProperty().get().minus(cameraPosition).scale(1.0 / newScale).scale(oldScale).plus(cameraPosition)));
+        }
+    }
+
     /**
      * Dreht die Elemente in der Auswahl.
      */
