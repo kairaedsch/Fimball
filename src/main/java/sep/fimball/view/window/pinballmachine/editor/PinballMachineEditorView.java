@@ -128,7 +128,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void dragged(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())), mouseEvent.getButton());
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), mouseEvent.getX(), mouseEvent.getY(), canvasPixelToGridPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())), mouseEvent.getButton());
         mouseDown = mouseEvent;
     }
 
@@ -139,7 +139,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void draggedOver(MouseDragEvent event)
     {
-        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), event.getX(), event.getY(), mousePosToCanvasPos(new Vector2(event.getX(), event.getY())), event.getButton());
+        pinballMachineEditorViewModel.dragged(mouseDown.getX(), mouseDown.getY(), event.getX(), event.getY(), canvasPixelToGridPos(new Vector2(event.getX(), event.getY())), event.getButton());
         mouseDown = event;
     }
 
@@ -160,7 +160,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     public void mouseEnteredCanvas(MouseEvent mouseEvent)
     {
-        pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+        pinballMachineEditorViewModel.mouseEnteredCanvas(canvasPixelToGridPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
     }
 
     /**
@@ -181,7 +181,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void mouseDragEnteredCanvas(MouseDragEvent event)
     {
         mouseDown = event;
-        pinballMachineEditorViewModel.mouseEnteredCanvas(mousePosToCanvasPos(new Vector2(event.getX(), event.getY())));
+        pinballMachineEditorViewModel.mouseEnteredCanvas(canvasPixelToGridPos(new Vector2(event.getX(), event.getY())));
     }
 
     /**
@@ -269,7 +269,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * @param mousePos Die Position der Maus.
      * @return Die berechnete Position auf dem Canvas.
      */
-    Vector2 mousePosToCanvasPos(Vector2 mousePos)
+    Vector2 canvasPixelToGridPos(Vector2 mousePos)
     {
         return ViewUtil.canvasPixelToGridPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
@@ -279,14 +279,27 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         );
     }
 
+    /**
+     * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.
+     *
+     * @param sceneX Die Position der Maus in der JavaFX scene.
+     * @param sceneY
+     * @return Die berechnete Position auf dem Canvas.
+     */
+    Vector2 scenePixelToGridPos(double sceneX, double sceneY)
+    {
+        Point2D canvasPos = pinballCanvasContainer.sceneToLocal(sceneX, sceneY);
+        return canvasPixelToGridPos(new Vector2(canvasPos.getX(), canvasPos.getY()));
+    }
+
     Vector2 gridToCanvasPixelPos(Vector2 gridPos)
     {
-        Point2D point2D = pinballCanvasContainer.localToScene(0, 0);
+        Point2D canvasScenePos = pinballCanvasContainer.localToScene(0, 0);
         return ViewUtil.gridToCanvasPixelPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
                 pinballMachineEditorViewModel.cameraZoomProperty().get(),
                 new Vector2(gridPos.getX(), gridPos.getY()),
-                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).plus(new Vector2(point2D.getX(), point2D.getY()).scale(2))
+                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).plus(new Vector2(canvasScenePos.getX(), canvasScenePos.getY()).scale(2))
         );
     }
 }

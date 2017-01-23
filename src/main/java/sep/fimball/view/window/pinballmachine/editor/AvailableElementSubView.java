@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 
 /**
@@ -57,7 +56,7 @@ public class AvailableElementSubView
      */
     public void mousePressed(MouseEvent mouseEvent)
     {
-        availableElementSubViewModel.selected(editorView.mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
+        availableElementSubViewModel.selected(editorView.scenePixelToGridPos(mouseEvent.getSceneX(), mouseEvent.getSceneY()));
         lastMouseEvent = mouseEvent;
     }
 
@@ -95,9 +94,9 @@ public class AvailableElementSubView
     }
 
     @FXML
-    public void dragged(MouseEvent event)
+    public void dragged(MouseEvent mouseEvent)
     {
-        availableElementSubViewModel.dragged(lastMouseEvent.getX(), lastMouseEvent.getY(), event.getX(), event.getY(), editorView.mousePosToCanvasPos(new Vector2(event.getX(), event.getY())), event.getButton());
-        lastMouseEvent = event;
+        availableElementSubViewModel.dragged(lastMouseEvent.getX(), lastMouseEvent.getY(), mouseEvent.getX(), mouseEvent.getY(), editorView.scenePixelToGridPos(mouseEvent.getSceneX(), mouseEvent.getSceneY()), mouseEvent.getButton());
+        lastMouseEvent = mouseEvent;
     }
 }
