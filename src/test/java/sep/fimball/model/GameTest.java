@@ -87,8 +87,6 @@ public class GameTest
             }
         }
 
-        pinballMachine.saveToDisk(true, true);
-
         //Auswertung der Aufzeichnungen.
         assertThat(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), is(BUMPER_ID));
         assertThat(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), is(WALL_ID));
@@ -101,7 +99,7 @@ public class GameTest
     @After
     public void cleanup()
     {
-        //pinballMachine.deleteFromDisk();
+        pinballMachine.deleteFromDisk();
         session.stopPhysics();
         session.stopUpdateLoop();
     }
