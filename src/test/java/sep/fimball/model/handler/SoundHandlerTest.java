@@ -40,7 +40,7 @@ public class SoundHandlerTest
         SoundHandler test = new SoundHandler(soundManager);
         HandlerGameElement gameElement = getTestHandlerGameElement();
 
-        test.activateElementHandler(gameElement, null, 0);
+        test.activateElementHandler(gameElement, new ElementHandlerArgs(null, 0, 0));
         assertThat("Es wurde der richtige Sound an den SoundManager weitergeleitet", playedSound.getSoundPath(), endsWith("Test-Sound.mp3"));
     }
 

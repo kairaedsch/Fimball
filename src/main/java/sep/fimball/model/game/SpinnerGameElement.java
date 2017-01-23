@@ -77,7 +77,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     }
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
         if (element == this)
         {

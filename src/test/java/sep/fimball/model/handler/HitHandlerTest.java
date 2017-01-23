@@ -26,7 +26,7 @@ public class HitHandlerTest
     {
         HitHandler test = new HitHandler();
         HandlerGameElement gameElement = getTestElement();
-        test.activateElementHandler(gameElement, null, 0);
+        test.activateElementHandler(gameElement, new ElementHandlerArgs(null, 0,0));
         assertThat("Das Element hat einen Treffer registriert", gameElement.getHitCount(), is(1));
     }
 

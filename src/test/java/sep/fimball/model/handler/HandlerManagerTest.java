@@ -9,7 +9,6 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 
@@ -74,10 +73,10 @@ public class HandlerManagerTest
         {
             elementHandlerActivated = true;
             return null;
-        }).when(testHandler).activateElementHandler(any(), any(), anyInt());
+        }).when(testHandler).activateElementHandler(any(), any());
         testHandlerManager.addHandler(testHandler);
 
-        testHandlerManager.activateElementHandler(null, null, 0);
+        testHandlerManager.activateElementHandler(null, null);
         assertThat(elementHandlerActivated, is(true));
     }
 

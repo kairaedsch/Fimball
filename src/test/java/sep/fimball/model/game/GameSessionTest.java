@@ -8,6 +8,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.ElementHandlerArgs;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.game.CollisionEventArgs;
@@ -88,7 +89,7 @@ public class GameSessionTest
         gameSession.loopUpdate();
 
         // Auswertung
-        verify(handlerManagerMock).activateElementHandler(gameElement, null, colliderId);
+        verify(handlerManagerMock).activateElementHandler(gameElement, new ElementHandlerArgs(null, 0, colliderId));
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
         verify(handlerManagerMock).activateGameHandler(GameEvent.BALL_LOST);

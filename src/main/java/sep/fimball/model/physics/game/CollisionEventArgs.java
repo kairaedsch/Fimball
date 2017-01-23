@@ -41,7 +41,6 @@ public class CollisionEventArgs<GameElementT>
         this.colliderId = colliderId;
         this.collisionEventType = collisionEventType;
         this.depth = depth;
-        System.out.println(collisionEventType);
     }
 
     /**

@@ -2,7 +2,6 @@ package sep.fimball.model.handler;
 
 import javafx.beans.property.LongProperty;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.Map;
 
@@ -28,11 +27,12 @@ public class ScoreHandler implements ElementHandler
 
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderID)
+    public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
         Map<Integer, BaseRuleElementEvent> eventMap = element.getRuleElement().getEventMap();
 
-        if (eventMap.containsKey(colliderID) && eventMap.get(colliderID).givesPoints() && element.getElementType() != BaseElementType.SPINNER)
+        if (eventMap.containsKey(elementHandlerArgs.getColliderId()) && eventMap.get(elementHandlerArgs.getColliderId()).givesPoints()
+                && element.getElementType() != BaseElementType.SPINNER)
         {
             if (shouldElementGivePoints(element))
             {

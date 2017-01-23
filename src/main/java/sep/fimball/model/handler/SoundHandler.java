@@ -29,15 +29,17 @@ public class SoundHandler implements ElementHandler
     }
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderID)
+    public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
-        if (collisionEventType == CollisionEventType.ENTERED)
+        double minimumDepthForSound = 0.01;
+
+        if (elementHandlerArgs.getCollisionEventType() == CollisionEventType.ENTERED && elementHandlerArgs.getDepth() >= minimumDepthForSound)
         {
             Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
 
-            if (eventMap.containsKey(colliderID))
+            if (eventMap.containsKey(elementHandlerArgs.getColliderId()))
             {
-                Optional<Sound> soundToPlay = eventMap.get(colliderID).getSound();
+                Optional<Sound> soundToPlay = eventMap.get(elementHandlerArgs.getColliderId()).getSound();
 
                 soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
             }

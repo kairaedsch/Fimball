@@ -72,11 +72,11 @@ public class HandlerManager implements InputModifier
      * @param element    Das Element, das mit dem Ball kollidiert ist.
      * @param colliderId Die ID des Colliders des Elements, das mit dem Ball kollidiert ist.
      */
-    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
         for (Handler handler : handlers)
         {
-            handler.activateElementHandler(element, collisionEventType, colliderId);
+            handler.activateElementHandler(element, elementHandlerArgs);
         }
     }
 

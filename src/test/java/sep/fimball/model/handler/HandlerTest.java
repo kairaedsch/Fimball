@@ -42,8 +42,8 @@ public class HandlerTest
     @Test
     public void activateElementHandlerTest()
     {
-        Handler test = new Handler((ElementHandler) (element, collisionEventType, colliderId) -> elementHandlerActivated = true);
-        test.activateElementHandler(null, null, 0);
+        Handler test = new Handler((ElementHandler) (element, elementHandlerArgs) -> elementHandlerActivated = true);
+        test.activateElementHandler(null, null);
         assertThat("Der ElementHandler wurde aktiviert.", elementHandlerActivated, is(true));
     }
 

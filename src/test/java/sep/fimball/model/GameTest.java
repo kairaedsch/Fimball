@@ -12,7 +12,6 @@ import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
-import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -146,7 +145,7 @@ public class GameTest
          * Gibt das Spielelement, mit dem die Kugel kollidiert ist, in die Deque.
          */
         @Override
-        public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderID)
+        public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
         {
             addCollidedGameElement(element);
         }

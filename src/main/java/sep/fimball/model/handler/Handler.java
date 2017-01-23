@@ -1,7 +1,6 @@
 package sep.fimball.model.handler;
 
 import sep.fimball.model.input.manager.KeyEventArgs;
-import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.Optional;
 
@@ -71,9 +70,9 @@ public class Handler implements ElementHandler, GameHandler, UserHandler
     }
 
     @Override
-    public void activateElementHandler(HandlerGameElement element, CollisionEventType collisionEventType, int colliderId)
+    public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
-        elementHandler.ifPresent(elementHandler -> elementHandler.activateElementHandler(element, collisionEventType, colliderId));
+        elementHandler.ifPresent(elementHandler -> elementHandler.activateElementHandler(element, elementHandlerArgs));
     }
 
     @Override
