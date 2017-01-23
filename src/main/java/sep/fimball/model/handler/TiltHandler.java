@@ -6,6 +6,8 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,6 +77,7 @@ public class TiltHandler implements UserHandler
      */
     private void activateTilt()
     {
+        SoundManager.getInstance().addSoundToPlay(new Sound("tilt.wav", false));
         inputModifier.setKeyEventsActivated(false);
         Timeline timeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(TILT_DURATION_BEFORE_BALL_LOSS), (event -> handlerGameSession.ballLost()));
