@@ -73,7 +73,7 @@ public class GameSessionTest
 
         // künstliches Erstellen einer Kollision.
         final int colliderId = 0;
-        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventType.ENTERED, 0);
+        CollisionEventArgs<GameElement> collisionEventArgs = new CollisionEventArgs<>(gameElement, colliderId, CollisionEventType.ENTERED, 0.0);
         List<CollisionEventArgs<GameElement>> collisionEventArgsList = new ArrayList<>();
         collisionEventArgsList.add(collisionEventArgs);
 
@@ -93,7 +93,7 @@ public class GameSessionTest
         gameSession.loopUpdate();
 
         // Auswertung
-        verify(handlerManagerMock).activateElementHandler(gameElement, new ElementHandlerArgs(CollisionEventType.ENTERED, 0, colliderId));
+        verify(handlerManagerMock).activateElementHandler(eq(gameElement), any());
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
         verify(handlerManagerMock).activateGameHandler(GameEvent.BALL_LOST);
