@@ -13,7 +13,6 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -62,8 +61,8 @@ public class PhysicsElementTest
         eventArgsList.clear();
 
         // Teste mit zwei Kollisionen
-        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
-        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(not(Optional.empty()));
+        when(colliderA.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.of(0.0));
+        when(colliderB.checkCollision(eq(ballPhysicsElement), any())).thenReturn(Optional.of(0.0));
         physicsElement.checkCollision(eventArgsList, ballPhysicsElement);
         assertThat("Da es zwei Kollisionen gab, muss die Liste genau zwei Elemente haben", eventArgsList.size(), is(2));
     }
