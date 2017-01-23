@@ -120,7 +120,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
-        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
+        sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
+        {
             sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine, editorCameraPosition));
         }));
     }
@@ -177,10 +178,24 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * @param gridPos Die neue Position auf dem Canvas.
      * @param button  Die gedrückte Maustaste.
      */
+
+    Optional<Vector2> oldGridPos = Optional.empty();
+
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
-        double divX = (((endX - startX) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
-        double divY = (((endY - startY) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+        double divX, divY;
+        if (oldGridPos.isPresent())
+        {
+            Vector2 delta = gridPos.minus(oldGridPos.get());
+            divX = delta.getX();
+            divY = delta.getY();
+        }
+        else
+        {
+            divX = (((endX - startX) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+            divY = (((endY - startY) / DesignConfig.PIXELS_PER_GRID_UNIT) / cameraZoom.get());
+        }
+        oldGridPos = Optional.ofNullable(gridPos);
 
         if (button == MouseButton.SECONDARY || button == MouseButton.MIDDLE || moveModifier)
         {
@@ -234,6 +249,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseReleased(MouseEvent mouseEvent)
     {
+        oldGridPos = Optional.empty();
         cursorProperty.set(Cursor.DEFAULT);
 
         // Nur Linksklick ist interessant
