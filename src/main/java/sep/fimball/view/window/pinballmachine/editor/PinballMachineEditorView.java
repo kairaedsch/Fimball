@@ -18,6 +18,7 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorSessionSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
@@ -104,11 +105,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsRamp, pinballMachineEditorViewModel.availableRampElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
         ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(previewBase, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW);
-
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
         viewLoaderCanvas.getView().setViewModel(editorSessionSubViewModel.getPinballCanvasViewModel());
+
+        ViewModelListToPaneBinder.<EditorPreviewSubView, EditorPreviewSubViewModel>bindViewModelsToViews(previewBase, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW, (view, viewModel) -> view.init(viewModel, this));
 
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
@@ -257,9 +258,19 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * @param mousePos Die Position der Maus.
      * @return Die berechnete Position auf dem Canvas.
      */
-    private Vector2 mousePosToCanvasPos(Vector2 mousePos)
+    Vector2 mousePosToCanvasPos(Vector2 mousePos)
     {
         return ViewUtil.canvasPixelToGridPos(
+                pinballMachineEditorViewModel.cameraPositionProperty().get(),
+                pinballMachineEditorViewModel.cameraZoomProperty().get(),
+                new Vector2(mousePos.getX(), mousePos.getY()),
+                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight())
+        );
+    }
+
+    Vector2 gridToCanvasPixelPos(Vector2 mousePos)
+    {
+        return ViewUtil.gridToCanvasPixelPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
                 pinballMachineEditorViewModel.cameraZoomProperty().get(),
                 new Vector2(mousePos.getX(), mousePos.getY()),
