@@ -110,7 +110,6 @@ public class PinballMachineEditor
      */
     void moveSelectionTo(Vector2 to)
     {
-        /**
         if (!selection.isEmpty())
         {
             DraggedElement aPlacedElement = selection.iterator().next();
@@ -120,29 +119,18 @@ public class PinballMachineEditor
 
             if (selection.size() > 1)
             {
-                for (DraggedElement placedElement : selection)
+                for (DraggedElement draggedElement : selection)
                 {
-                    placedElement.setAccuratePosition(placedElement.getAccuratePosition().minus(getPosition(aPlacedElement)));
-                    relativePos.put(placedElement, getPosition(placedElement));
+                    draggedElement.setAccuratePosition(draggedElement.getAccuratePosition().minus(draggedElement.getAccuratePosition()));
+                    relativePos.put(draggedElement, draggedElement.getAccuratePosition());
                 }
             }
 
-            for (DraggedElement placedElement : selection)
+            for (DraggedElement draggedElement : selection)
             {
-                setPosition(placedElement, to.plus(relativePos.get(placedElement)));
+                draggedElement.setAccuratePosition(to.plus(relativePos.get(draggedElement)));
             }
-        }*/
-    }
-
-    void scaleSelectionPosition(double oldScale, double newScale, Vector2 cameraPosition)
-    {
-        /*
-        for (DraggedElement placedElement : selection)
-        {
-            // ARE YOU FUCKING RETARDID?????????????????????????????
-            // TODO - YEAH idk i feel like it's close but something is missing
-            setPosition(placedElement, (placedElement.positionProperty().get().minus(cameraPosition).scale(1.0 / newScale).scale(oldScale).plus(cameraPosition)));
-        }*/
+        }
     }
 
     /**

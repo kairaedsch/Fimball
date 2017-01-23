@@ -168,7 +168,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this));
     }
 
-    Optional<Vector2> oldGridPos = Optional.empty();
+    private Optional<Vector2> oldGridPos = Optional.empty();
 
     /**
      * Verarbeitet eine Drag-Bewegung.
@@ -301,6 +301,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             if (!dragStartedOnCanvas)
             {
                 pinballMachineEditor.moveSelectionTo(gridPos);
+                oldGridPos = Optional.of(gridPos);
             }
             pinballMachineEditor.placeSelection();
         }
@@ -511,10 +512,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void setCameraZoom(double cameraZoom)
     {
-        if (mouseMode.get() == MouseMode.PLACING)
-        {
-            pinballMachineEditor.scaleSelectionPosition(this.cameraZoom.get(), cameraZoom, cameraPosition.get());
-        }
         this.cameraZoom.set(cameraZoom);
     }
 
