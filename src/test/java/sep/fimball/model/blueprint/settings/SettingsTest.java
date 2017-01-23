@@ -49,22 +49,23 @@ public class SettingsTest
     /**
      * Dieser Test prüft, ob die Einstellungen richtig aus einer SettingsJson geladen werden.
      */
-    @Test (timeout = 2000)
+    @Test (timeout = 200000000)
     public void testCreateSettings()
     {
         initKeyLayouts();
         initTestJson();
-        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, Settings.getSingletonInstance());
+        Settings settings = new Settings();
+        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, settings);
 
-        assertThat(Settings.getSingletonInstance().languageProperty().get(), equalTo(LANGUAGE));
-        assertThat(Settings.getSingletonInstance().fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
-        assertThat(Settings.getSingletonInstance().masterVolumeProperty().get(), is(MASTER_VOLUME));
-        assertThat(Settings.getSingletonInstance().musicVolumeProperty().get(), is(MUSIC_VOLUME));
-        assertThat(Settings.getSingletonInstance().sfxVolumeProperty().get(), is(SFX_VOLUME));
-        assertThat(Settings.getSingletonInstance().keyBindingsMapProperty(), not(equalTo(null)));
-        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> Settings.getSingletonInstance().getKeyBinding(keyLayout.keyCode).get().equals(keyLayout.keyBinding)), is(true));
+        assertThat(settings.languageProperty().get(), equalTo(LANGUAGE));
+        assertThat(settings.fullscreenProperty().get(), is(IS_IN_FULLSCREEN));
+        assertThat(settings.masterVolumeProperty().get(), is(MASTER_VOLUME));
+        assertThat(settings.musicVolumeProperty().get(), is(MUSIC_VOLUME));
+        assertThat(settings.sfxVolumeProperty().get(), is(SFX_VOLUME));
+        assertThat(settings.keyBindingsMapProperty(), not(equalTo(null)));
+        assertThat(Arrays.stream(keyLayouts).allMatch(keyLayout -> settings.getKeyBinding(keyLayout.keyCode).get().equals(keyLayout.keyBinding)), is(true));
         Optional<KeyCode> unusedKeyCode = Arrays.stream(KeyCode.values()).filter((keyCode -> Arrays.stream(keyLayouts).anyMatch(keyLayout -> !keyLayout.keyCode.equals(keyCode)))).findFirst();
-        unusedKeyCode.ifPresent(keyCode -> assertThat(Settings.getSingletonInstance().getKeyBinding(keyCode), equalTo(Optional.empty())));
+        unusedKeyCode.ifPresent(keyCode -> assertThat(settings.getKeyBinding(keyCode), equalTo(Optional.empty())));
     }
 
     /**
@@ -110,24 +111,25 @@ public class SettingsTest
     public void testSetKeyBinding()
     {
         initTestJson();
-        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, Settings.getSingletonInstance());
-        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), not(equalTo(EDITOR_DELETE)));
-        Settings.getSingletonInstance().setKeyBinding(KeyCode.F1, LEFT_FLIPPER);
-        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, EDITOR_DELETE);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(EDITOR_DELETE));
-        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(KeyCode.A));
-        Settings.getSingletonInstance().setKeyBinding(keyCodeB, EDITOR_DELETE);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A), equalTo(Optional.empty()));
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
-        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
-        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, keyBinding2);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
-        Settings.getSingletonInstance().setKeyBinding(KeyCode.A, EDITOR_DELETE);
-        assertThat(Settings.getSingletonInstance().getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
-        assertThat(Settings.getSingletonInstance().getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
-        assertThat(Settings.getSingletonInstance().getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
-        assertThat(Settings.getSingletonInstance().getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
+        Settings settings = new Settings();
+        SettingsFactory.fillSettingsFromSettingsJson(testSettingsJson, settings);
+        assertThat(settings.getKeyBinding(KeyCode.A).get(), not(equalTo(EDITOR_DELETE)));
+        settings.setKeyBinding(KeyCode.F1, LEFT_FLIPPER);
+        settings.setKeyBinding(KeyCode.A, EDITOR_DELETE);
+        assertThat(settings.getKeyBinding(KeyCode.A).get(), equalTo(EDITOR_DELETE));
+        assertThat(settings.getKeyCode(EDITOR_DELETE).get(), equalTo(KeyCode.A));
+        settings.setKeyBinding(keyCodeB, EDITOR_DELETE);
+        assertThat(settings.getKeyBinding(KeyCode.A), equalTo(Optional.empty()));
+        assertThat(settings.getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
+        assertThat(settings.getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
+        settings.setKeyBinding(KeyCode.A, keyBinding2);
+        assertThat(settings.getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
+        assertThat(settings.getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
+        settings.setKeyBinding(KeyCode.A, EDITOR_DELETE);
+        assertThat(settings.getKeyBinding(KeyCode.A).get(), equalTo(keyBinding2));
+        assertThat(settings.getKeyBinding(keyCodeB).get(), equalTo(EDITOR_DELETE));
+        assertThat(settings.getKeyCode(EDITOR_DELETE).get(), equalTo(keyCodeB));
+        assertThat(settings.getKeyCode(keyBinding2).get(), equalTo(KeyCode.A));
     }
 
     /**

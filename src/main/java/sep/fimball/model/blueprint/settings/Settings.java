@@ -58,7 +58,7 @@ public class Settings
     /**
      * Erzeugt eine neue, leere Instanz von Settings.
      */
-    private Settings()
+    Settings()
     {
         keyBindingsMap = new SimpleMapProperty<>(FXCollections.observableMap(getDefaultBindings()));
         language = new SimpleObjectProperty<>(Language.ENGLISH);
