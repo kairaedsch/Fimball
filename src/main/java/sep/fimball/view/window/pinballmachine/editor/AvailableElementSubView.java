@@ -7,13 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 
 /**
  * Die AvailableElementSubView ist für die Darstellung eines zur Platzierung auf dem Spielfeld verfügbaren Elements im Editor zuständig und ermöglicht dem Nutzer, dieses zu platzieren.
  */
-public class AvailableElementSubView implements ViewBoundToViewModel<AvailableElementSubViewModel>
+public class AvailableElementSubView
 {
     /**
      * Das Pane, welches den oberen Teil des Vorschau-Bilds des Elements anzeigt.
@@ -38,10 +38,15 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
      */
     private AvailableElementSubViewModel availableElementSubViewModel;
 
-    @Override
-    public void setViewModel(AvailableElementSubViewModel availableElementSubViewModel)
+    private MouseEvent lastMouseEvent;
+
+    private PinballMachineEditorView editorView;
+
+    public void init(AvailableElementSubViewModel availableElementSubViewModel, PinballMachineEditorView pinballMachineEditorView)
     {
         this.availableElementSubViewModel = availableElementSubViewModel;
+        this.editorView = pinballMachineEditorView;
+
         previewName.textProperty().bind(availableElementSubViewModel.nameProperty());
         previewImageTop.styleProperty().bind(generatePreviewCss(true));
         previewImageBot.styleProperty().bind(generatePreviewCss(false));
@@ -50,9 +55,10 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     /**
      * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler auf dieses Element geklickt hat.
      */
-    public void mousePressed()
+    public void mousePressed(MouseEvent mouseEvent)
     {
         availableElementSubViewModel.selected();
+        lastMouseEvent = mouseEvent;
     }
 
     /**
@@ -86,5 +92,12 @@ public class AvailableElementSubView implements ViewBoundToViewModel<AvailableEl
     {
         ReadOnlyStringProperty imagePath = top ? availableElementSubViewModel.imagePathTopProperty() : availableElementSubViewModel.imagePathBotProperty();
         return DesignConfig.fillBackgroundImageCss(imagePath);
+    }
+
+    @FXML
+    public void dragged(MouseEvent event)
+    {
+        availableElementSubViewModel.dragged(lastMouseEvent.getX(), lastMouseEvent.getY(), event.getX(), event.getY(), editorView.mousePosToCanvasPos(new Vector2(event.getX(), event.getY())), event.getButton());
+        lastMouseEvent = event;
     }
 }

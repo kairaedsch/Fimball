@@ -6,7 +6,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -19,6 +18,7 @@ import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
 import sep.fimball.view.window.WindowView;
+import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorSessionSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
@@ -101,10 +101,10 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
         tableName.textProperty().bindBidirectional(pinballMachineEditorViewModel.machineNameProperty());
 
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsRamp, pinballMachineEditorViewModel.availableRampElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
-        ViewModelListToPaneBinder.bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT);
+        ViewModelListToPaneBinder.<AvailableElementSubView, AvailableElementSubViewModel>bindViewModelsToViews(availableElementsBasic, pinballMachineEditorViewModel.availableBasicElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT, (view, viewModel) -> view.init(viewModel, this));
+        ViewModelListToPaneBinder.<AvailableElementSubView, AvailableElementSubViewModel>bindViewModelsToViews(availableElementsObstacles, pinballMachineEditorViewModel.availableObstacleElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT, (view, viewModel) -> view.init(viewModel, this));
+        ViewModelListToPaneBinder.<AvailableElementSubView, AvailableElementSubViewModel>bindViewModelsToViews(availableElementsRamp, pinballMachineEditorViewModel.availableRampElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT, (view, viewModel) -> view.init(viewModel, this));
+        ViewModelListToPaneBinder.<AvailableElementSubView, AvailableElementSubViewModel>bindViewModelsToViews(availableElementsAdvanced, pinballMachineEditorViewModel.availableAdvancedElementsProperty(), WindowType.EDITOR_AVAILABLE_ELEMENT, (view, viewModel) -> view.init(viewModel, this));
 
         ViewLoader<PinballCanvasSubView> viewLoaderCanvas = new ViewLoader<>(WindowType.PINBALL_CANVAS);
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());

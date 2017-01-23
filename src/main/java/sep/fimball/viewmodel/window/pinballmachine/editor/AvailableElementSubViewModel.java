@@ -1,8 +1,10 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.ImageLayer;
+import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementCategory;
 import sep.fimball.model.blueprint.settings.Settings;
@@ -115,5 +117,10 @@ public class AvailableElementSubViewModel
     public void mouseReleased(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);
+    }
+
+    public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
+    {
+        pinballMachineEditorViewModel.dragged(startX, startY, endX, endY, gridPos, button);
     }
 }

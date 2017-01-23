@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <HBox onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" onDragDetected="#dragDetected" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView" styleClass="availableElement">
+      fx:controller="sep.fimball.view.window.pinballmachine.editor.AvailableElementSubView" styleClass="availableElement" onMouseDragged="#dragged">
     <Pane fx:id="previewImageBot" minHeight="40.0" minWidth="40.0">
         <Pane fx:id="previewImageTop" minHeight="40.0" minWidth="40.0"/>
     </Pane>
