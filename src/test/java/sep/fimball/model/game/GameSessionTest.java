@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import org.junit.Test;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
@@ -54,11 +55,14 @@ public class GameSessionTest
         // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
         PinballMachine pinballMachineMock = mock(PinballMachine.class);
+        RectangleDouble boundingBox = mock(RectangleDouble.class);
         PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0);
 
         ListProperty<PlacedElement> elementList = new SimpleListProperty<>(FXCollections.observableArrayList());
         elementList.add(ball);
+        when(boundingBox.getOrigin()).thenReturn(new Vector2());
         when(pinballMachineMock.elementsProperty()).thenReturn(elementList);
+        when(pinballMachineMock.getBoundingBox()).thenReturn(boundingBox);
 
         HandlerManager handlerManagerMock = mock(HandlerManager.class);
 
@@ -89,7 +93,7 @@ public class GameSessionTest
         gameSession.loopUpdate();
 
         // Auswertung
-        verify(handlerManagerMock).activateElementHandler(gameElement, new ElementHandlerArgs(null, 0, colliderId));
+        verify(handlerManagerMock).activateElementHandler(gameElement, new ElementHandlerArgs(CollisionEventType.ENTERED, 0, colliderId));
         assertThat(gameElement.positionProperty().get(), equalTo(newPos));
         assertThat(gameElement.rotationProperty().get(), equalTo(newRot));
         verify(handlerManagerMock).activateGameHandler(GameEvent.BALL_LOST);
@@ -127,11 +131,14 @@ public class GameSessionTest
         // Initialisierung
         String[] playerNames = {"TestPlayer1", "TestPlayer2", "TestPlayer3"};
         PinballMachine pinballMachine = mock(PinballMachine.class);
+        RectangleDouble boundingBox = mock(RectangleDouble.class);
         PlacedElement ball = new PlacedElement(BaseElementManager.getInstance().getElement("ball"), new Vector2(), 0, 1, 0);
 
         ListProperty<PlacedElement> list = new SimpleListProperty<>(FXCollections.observableArrayList());
         list.add(ball);
+        when(boundingBox.getOrigin()).thenReturn(new Vector2());
         when(pinballMachine.elementsProperty()).thenReturn(list);
+        when(pinballMachine.getBoundingBox()).thenReturn(boundingBox);
 
         GameSession gameSession = new GameSession(pinballMachine, playerNames, false, null);
 
