@@ -278,12 +278,12 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
 
     Vector2 gridToCanvasPixelPos(Vector2 gridPos)
     {
-        Point2D point2D = pinballCanvasContainer.localToScene(pinballCanvasContainer.getLayoutBounds().getMinX(), pinballCanvasContainer.getLayoutBounds().getMinY());
+        Point2D point2D = pinballCanvasContainer.localToScene(0, 0);
         return ViewUtil.gridToCanvasPixelPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
                 pinballMachineEditorViewModel.cameraZoomProperty().get(),
                 new Vector2(gridPos.getX(), gridPos.getY()),
-                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).plus(new Vector2(point2D.getX(), point2D.getY()))
+                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).plus(new Vector2(point2D.getX(), point2D.getY()).scale(2))
         );
     }
 }
