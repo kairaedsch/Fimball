@@ -50,7 +50,10 @@ public class PinballMachineEditorViewModelTest
     @Test
     public void cameraDraggedTest()
     {
-        pinballMachineEditorViewModel.dragged(0, 0, 1, 1, new Vector2(0, 0), MouseButton.MIDDLE);
+        MouseEvent event = mock(MouseEvent.class);
+
+        pinballMachineEditorViewModel.mousePressedOnCanvas(event, new Vector2());
+        pinballMachineEditorViewModel.dragged(0, 0, 1, 1, new Vector2(), MouseButton.MIDDLE);
 
         assertEquals(pinballMachineEditorViewModel.cameraPositionProperty().get().getX(), -0.09, 0.01);
         assertEquals(pinballMachineEditorViewModel.cameraPositionProperty().get().getY(), -0.09, 0.01);
