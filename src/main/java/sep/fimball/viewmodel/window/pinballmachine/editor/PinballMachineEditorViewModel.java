@@ -116,6 +116,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     private ObservableList<EditorPreviewSubViewModel> previewsProperty;
 
+    private boolean dragStartedOnCanvas = false;
+
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () -> {
@@ -204,6 +206,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
             return;
 
+        dragStartedOnCanvas = true;
+
         List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
 
         Optional<PlacedElement> selectedElement = elements.isEmpty() ? Optional.empty() : Optional.of(elements.get(0));
@@ -232,6 +236,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         // Nur Linksklick ist interessant
         if (mouseEvent.getButton() != MouseButton.PRIMARY)
             return;
+
+        dragStartedOnCanvas = false;
 
         // Leere auswahl wenn ctrl nicht gedrückt
         if (!mouseEvent.isControlDown() && mouseMode.get() != MouseMode.PLACING)
@@ -270,9 +276,12 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
         mouseOnCanvas = true;
+
+        if (!dragStartedOnCanvas)
+            pinballMachineEditor.moveSelectionTo(gridPos);
+
         if (mouseMode.get() == MouseMode.PLACING)
         {
-            pinballMachineEditor.moveSelectionTo(gridPos);
             pinballMachineEditor.placeSelection();
             previewsProperty.clear();
         }
