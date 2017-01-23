@@ -17,9 +17,12 @@ public class EditorPreviewSubViewModel
     private ObjectProperty<Vector2> topPixelPosition = new SimpleObjectProperty<>();
     private StringProperty botImagePath = new SimpleStringProperty();
     private ObjectProperty<Vector2> botPixelPosition = new SimpleObjectProperty<>();
+    private PinballMachineEditorViewModel editorViewModel;
 
-    public EditorPreviewSubViewModel(DraggedElement draggedElement)
+    public EditorPreviewSubViewModel(DraggedElement draggedElement, PinballMachineEditorViewModel editor)
     {
+        editorViewModel = editor;
+
         int rotation = (int)draggedElement.getPlacedElement().rotationProperty().get();
 
         topImagePath.set(draggedElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, rotation, 0));
@@ -47,5 +50,10 @@ public class EditorPreviewSubViewModel
     public ObjectProperty<Vector2> botPixelPositionProperty()
     {
         return botPixelPosition;
+    }
+
+    public PinballMachineEditorViewModel getEditorViewModel()
+    {
+        return editorViewModel;
     }
 }

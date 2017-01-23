@@ -5,7 +5,9 @@ import javafx.scene.layout.Pane;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.ViewBoundToViewModel;
+import sep.fimball.view.general.ViewUtil;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewModel;
+import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
 
 /**
  * Created by TheAsuro on 22.01.2017.
@@ -22,14 +24,15 @@ public class EditorPreviewSubView implements ViewBoundToViewModel<EditorPreviewS
     public void setViewModel(EditorPreviewSubViewModel editorPreviewSubViewModel)
     {
         previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(editorPreviewSubViewModel.botImagePathProperty()));
-        editorPreviewSubViewModel.botPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, previewBot)));
+        editorPreviewSubViewModel.botPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, editorPreviewSubViewModel.getEditorViewModel(), previewBot)));
         previewTop.styleProperty().bind(DesignConfig.backgroundImageCss(editorPreviewSubViewModel.topImagePathProperty()));
-        editorPreviewSubViewModel.topPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, previewTop)));
+        editorPreviewSubViewModel.topPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, editorPreviewSubViewModel.getEditorViewModel(), previewTop)));
     }
 
-    private void applyGridPosition(Vector2 gridPosition, Pane preview)
+    private void applyGridPosition(Vector2 gridPosition, PinballMachineEditorViewModel editor, Pane preview)
     {
-        Vector2 pixelPos = gridPosition;
+        // HOW THE FUCK AM I SUPPOSED TO GET CANVAS SIZE HERE?!?!
+        Vector2 pixelPos = ViewUtil.gridToCanvasPixelPos(editor.cameraPositionProperty().get(), editor.cameraZoomProperty().get(), gridPosition, canvasSize);
         preview.setLayoutX(pixelPos.getX());
         preview.setLayoutY(pixelPos.getY());
     }
