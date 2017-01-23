@@ -1,6 +1,5 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +10,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import sep.fimball.general.data.DesignConfig;
-import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.general.util.ListPropertyConverter;
@@ -21,6 +19,7 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.game.DraggedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;
@@ -96,11 +95,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ObjectProperty<MouseMode> mouseMode;
 
     /**
-     * Das aktuell ausgewählte Element aus der Liste der platzierbaren Elemente.
-     */
-    private ObjectProperty<Optional<BaseElement>> selectedAvailableElement;
-
-    /**
      * Gibt an, ob aktuell die Umschau-Taste gedrückt wird.
      */
     private boolean moveModifier = false;
@@ -114,21 +108,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      * Das Auswahl-Rechteck, falls vorhanden.
      */
     private Optional<RectangleDoubleByPoints> selectionRect;
-
-    /**
-     * Der obere Bildpfad des aktuell ausgewählten Elements.
-     */
-    private ObjectProperty<Optional<String>> topBackgroundPath;
-
-    /**
-     * Der untere Bildpfad des aktuell ausgewählten Elements.
-     */
-    private ObjectProperty<Optional<String>> botBackgroundPath;
-
-    /**
-     * Gibt an, ob ein zum Platzieren verfügbaren Element ausgewählt ist.
-     */
-    private BooleanProperty availableElementSelected;
 
     /**
      * Der aktuell gewünschte Cursor das Canvas.
@@ -155,8 +134,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         pinballMachineEditor = new PinballMachineEditor(pinballMachine);
 
-        selectedAvailableElement = new SimpleObjectProperty<>(Optional.empty());
-
         mouseMode = new SimpleObjectProperty<>(MouseMode.SELECTING);
 
         machineName = new SimpleStringProperty();
@@ -179,56 +156,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableRampElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.RAMP))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
-
-        topBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
-        botBackgroundPath = new SimpleObjectProperty<>(Optional.empty());
-        availableElementSelected = new SimpleBooleanProperty();
-        availableElementSelected.bind(Bindings.isNull(selectedAvailableElement));
-
         previewsProperty = FXCollections.observableArrayList();
         cursorProperty = new SimpleObjectProperty<>();
 
         editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);
-    }
-
-    /**
-     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente zurück.
-     *
-     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
-     */
-    public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
-    {
-        return availableBasicElements;
-    }
-
-    /**
-     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse zurück.
-     *
-     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse.
-     */
-    public ReadOnlyListProperty<AvailableElementSubViewModel> availableObstacleElementsProperty()
-    {
-        return availableObstacleElements;
-    }
-
-    /**
-     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Rampen zurück.
-     *
-     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Rampen.
-     */
-    public ReadOnlyListProperty<AvailableElementSubViewModel> availableRampElementsProperty()
-    {
-        return availableRampElements;
-    }
-
-    /**
-     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente zurück.
-     *
-     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
-     */
-    public ReadOnlyListProperty<AvailableElementSubViewModel> availableAdvancedElementsProperty()
-    {
-        return availableAdvancedElements;
     }
 
     /**
@@ -326,7 +257,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
             else
             {
                 pinballMachineEditor.clearSelection();
-                setSelectedAvailableElement(null);
+                previewsProperty.clear();
             }
         }
     }
@@ -336,7 +267,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @param gridPos Die Position, an der die Maus in den Canvas gefahren ist.
      */
-
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
         mouseOnCanvas = true;
@@ -344,7 +274,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             pinballMachineEditor.moveSelectionTo(gridPos);
             pinballMachineEditor.placeSelection();
-            setSelectedAvailableElement(null);
+            previewsProperty.clear();
         }
     }
 
@@ -357,11 +287,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.removeSelection();
-            previewsProperty.clear();
-            for (PlacedElement placedElement : pinballMachineEditor.getSelection())
-            {
-                previewsProperty.add(new EditorPreviewSubViewModel(placedElement));
-            }
+            showSelectionInPreview();
         }
     }
 
@@ -372,10 +298,19 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     void select(BaseElement baseElement)
     {
-        setSelectedAvailableElement(baseElement);
         mouseMode.setValue(MouseMode.PLACING);
         pinballMachineEditor.clearSelection();
         pinballMachineEditor.addToSelection(baseElement);
+        showSelectionInPreview();
+    }
+
+    private void showSelectionInPreview()
+    {
+        previewsProperty.clear();
+        for (DraggedElement draggedElement : pinballMachineEditor.getDetailedPositions())
+        {
+            previewsProperty.add(new EditorPreviewSubViewModel(draggedElement));
+        }
     }
 
     @Override
@@ -419,6 +354,46 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
             super.handleKeyEvent(keyEvent);
         }
+    }
+
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente zurück.
+     *
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
+     */
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableBasicElementsProperty()
+    {
+        return availableBasicElements;
+    }
+
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse zurück.
+     *
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Hindernisse.
+     */
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableObstacleElementsProperty()
+    {
+        return availableObstacleElements;
+    }
+
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Rampen zurück.
+     *
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Rampen.
+     */
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableRampElementsProperty()
+    {
+        return availableRampElements;
+    }
+
+    /**
+     * Gibt die zur Platzierung auf dem Spielfeld verfügbaren Spezial-Elemente zurück.
+     *
+     * @return Die zur Platzierung auf dem Spielfeld verfügbaren Basis-Elemente.
+     */
+    public ReadOnlyListProperty<AvailableElementSubViewModel> availableAdvancedElementsProperty()
+    {
+        return availableAdvancedElements;
     }
 
     /**
@@ -473,36 +448,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     }
 
     /**
-     * Gibt den oberen Bildpfad des aktuell ausgewählten Elements zurück.
-     *
-     * @return Der obere Bildpfad des aktuell ausgewählten Elements.
-     */
-    public ReadOnlyObjectProperty<Optional<String>> getTopBackgroundPath()
-    {
-        return topBackgroundPath;
-    }
-
-    /**
-     * Gibt den unteren Bildpfad des aktuell ausgewählten Elements zurück.
-     *
-     * @return Der untere Bildpfad des aktuell ausgewählten Elements.
-     */
-    public ReadOnlyObjectProperty<Optional<String>> getBotBackgroundPath()
-    {
-        return botBackgroundPath;
-    }
-
-    /**
-     * Gibt zurück, ob ein zur Platzierung verfügbares Element ausgewählt ist.
-     *
-     * @return {@code true}, falls ein Element ausgewählt ist, {@code false} sonst.
-     */
-    public ReadOnlyBooleanProperty isAvailableElementSelected()
-    {
-        return availableElementSelected;
-    }
-
-    /**
      * Gibt das Auswahl-Rechteck, falls vorhanden, zurück.
      *
      * @return Das Auswahl-Rechteck, falls vorhanden.
@@ -520,27 +465,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public ReadOnlyObjectProperty<Cursor> cursorProperty()
     {
         return cursorProperty;
-    }
-
-    /**
-     * Setzt das aktuell ausgewählte Element aus der Liste der möglichen Elemente auf das gegebene Element.
-     *
-     * @param selectedAvailableElement Das neue ausgewählte Element.
-     */
-    private void setSelectedAvailableElement(BaseElement selectedAvailableElement)
-    {
-        if (selectedAvailableElement != null)
-        {
-            this.selectedAvailableElement.set(Optional.of(selectedAvailableElement));
-            topBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, 0, 0)));
-            botBackgroundPath.set(Optional.of(selectedAvailableElement.getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, 0, 0)));
-        }
-        else
-        {
-            this.selectedAvailableElement.set(Optional.empty());
-            topBackgroundPath.set(Optional.empty());
-            botBackgroundPath.set(Optional.empty());
-        }
     }
 
     /**

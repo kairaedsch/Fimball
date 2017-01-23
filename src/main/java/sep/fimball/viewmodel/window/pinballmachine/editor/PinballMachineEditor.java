@@ -1,12 +1,15 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineUtil;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.DraggedElement;
 
 import java.util.*;
 
@@ -31,7 +34,7 @@ public class PinballMachineEditor
     /**
      * Die genauen Positionen von Elementen.
      */
-    private Map<PlacedElement, Vector2> detailedPositions;
+    private ObservableList<DraggedElement> detailedPositions;
 
     /**
      * Der zugehörige Flipper-Automat.
@@ -48,7 +51,7 @@ public class PinballMachineEditor
         this.pinballMachine = pinballMachine;
         selection = new HashSet<>();
         selectionSize = new SimpleIntegerProperty(0);
-        detailedPositions = new HashMap<>();
+        detailedPositions = FXCollections.observableArrayList();
     }
 
     void selectElement(Optional<PlacedElement> element, boolean additive)
@@ -284,9 +287,14 @@ public class PinballMachineEditor
      */
     private Vector2 getPosition(PlacedElement placedElement)
     {
-        if (!detailedPositions.containsKey(placedElement))
-            detailedPositions.put(placedElement, placedElement.positionProperty().get());
-        return detailedPositions.get(placedElement);
+        for (DraggedElement elem : detailedPositions)
+        {
+            if (elem.getPlacedElement().equals(placedElement))
+                return elem.getAccuratePosition();
+        }
+
+        detailedPositions.add(new DraggedElement(placedElement));
+        return placedElement.positionProperty().get();
     }
 
     /**
@@ -297,12 +305,25 @@ public class PinballMachineEditor
      */
     private void setPosition(PlacedElement placedElement, Vector2 newPos)
     {
-        detailedPositions.put(placedElement, newPos);
         placedElement.setPosition(newPos.round());
+        for (DraggedElement elem : detailedPositions)
+        {
+            if (elem.getPlacedElement().equals(placedElement))
+            {
+                elem.setAccuratePosition(newPos);
+                return;
+            }
+        }
+        detailedPositions.add(new DraggedElement(placedElement, newPos));
     }
 
     public IntegerProperty selectionSizeProperty()
     {
         return selectionSize;
+    }
+
+    public ObservableList<DraggedElement> getDetailedPositions()
+    {
+        return detailedPositions;
     }
 }

@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.Optional;
 
 import static sep.fimball.general.data.DesignConfig.*;
-import static sep.fimball.view.general.ViewUtil.canvasPosToGridPos;
+import static sep.fimball.view.general.ViewUtil.canvasPixelToGridPos;
 import static sep.fimball.viewmodel.pinballcanvas.DrawMode.EDITOR;
 import static sep.fimball.viewmodel.pinballcanvas.DrawMode.GAME;
 
@@ -255,7 +255,7 @@ class PinballCanvasDrawer
      */
     Vector2 getTopLeftCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
-        return canvasPosToGridPos(cameraPosition, cameraZoom, new Vector2(0, 0), new Vector2(canvas.getWidth(), canvas.getHeight()));
+        return canvasPixelToGridPos(cameraPosition, cameraZoom, new Vector2(0, 0), new Vector2(canvas.getWidth(), canvas.getHeight()));
     }
 
     /**
@@ -268,6 +268,6 @@ class PinballCanvasDrawer
     Vector2 getBottomRightCornerOfCanvas(Vector2 cameraPosition, double cameraZoom)
     {
         Vector2 canvasSize = new Vector2(canvas.getWidth(), canvas.getHeight());
-        return canvasPosToGridPos(cameraPosition, cameraZoom, canvasSize, canvasSize);
+        return canvasPixelToGridPos(cameraPosition, cameraZoom, canvasSize, canvasSize);
     }
 }

@@ -14,7 +14,6 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.view.dialog.DialogType;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.window.WindowType;
-import sep.fimball.view.window.pinballmachine.editor.PinballMachineEditorView;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.ViewModel;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
@@ -221,11 +220,6 @@ public class SceneManagerView
         try
         {
             ViewBoundToViewModel<ViewModel> view = viewLoader.getView();
-            // TODO - unschön
-            if (viewType == WindowType.EDITOR_WINDOW)
-            {
-                ((PinballMachineEditorView) ((Object) view)).addEventFilterToStage(stage);
-            }
             view.setViewModel(viewModel);
         }
         catch (ClassCastException e)

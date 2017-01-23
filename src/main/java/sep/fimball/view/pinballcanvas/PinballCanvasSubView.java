@@ -151,7 +151,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
      */
     private Vector2 mousePosToGridPos(MouseEvent mouseEvent)
     {
-        return ViewUtil.canvasPosToGridPos(
+        return ViewUtil.canvasPixelToGridPos(
                 camera.getSoftCameraPosition(),
                 camera.getSoftCameraZoom(),
                 new Vector2(mouseEvent.getX(), mouseEvent.getY()),

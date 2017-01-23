@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.general.ViewUtil;
@@ -199,17 +198,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Fügt EventFilter zur Erkennung von Maus-Bewegungen zur {@code stage} hinzu.
-     *
-     * @param stage Die Stage.
-     */
-    public void addEventFilterToStage(Stage stage)
-    {
-        stage.addEventFilter(MouseEvent.MOUSE_MOVED, this::updatePreviewPosition);
-        stage.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::updatePreviewPosition);
-    }
-
-    /**
      * Bindet die gegebene Pane an das gegeben Image.
      *
      * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
@@ -231,16 +219,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         {
             pane.styleProperty().set(DesignConfig.CSS_NO_IMAGE);
         }
-    }
-
-    /**
-     * Aktualisiert die Position der Drag-Vorschau.
-     *
-     * @param event Das Event, das die Position des Vorschaubildes bestimmt.
-     */
-    private void updatePreviewPosition(MouseEvent event)
-    {
-        // TODO
     }
 
     /**
@@ -281,7 +259,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      */
     private Vector2 mousePosToCanvasPos(Vector2 mousePos)
     {
-        return ViewUtil.canvasPosToGridPos(
+        return ViewUtil.canvasPixelToGridPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
                 pinballMachineEditorViewModel.cameraZoomProperty().get(),
                 new Vector2(mousePos.getX(), mousePos.getY()),
