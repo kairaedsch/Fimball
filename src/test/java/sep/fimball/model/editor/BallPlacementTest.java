@@ -67,7 +67,7 @@ public class BallPlacementTest
 
         // Den Spawnpunkt der Kugel als zu platzierendes Element auswählen.
         AvailableElementSubViewModel ballSelector = testEditor.availableBasicElementsProperty().stream().filter(availableElementSubViewModel -> availableElementSubViewModel.nameProperty().get().equals(BALL_IMAGE_NAME)).findFirst().get();
-        ballSelector.selected();
+        // TODO - ballSelector.selected();
 
         // Den Spawnpunkt der Kugel via Drag and Drop platzieren.
         testEditor.mouseEnteredCanvas(new Vector2(1, 1));

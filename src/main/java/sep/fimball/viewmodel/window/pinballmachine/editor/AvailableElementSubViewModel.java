@@ -104,9 +104,9 @@ public class AvailableElementSubViewModel
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass das Element ausgewählt wurde.
      */
-    public void selected()
+    public void selected(Vector2 gridPosition)
     {
-        pinballMachineEditorViewModel.select(baseElement);
+        pinballMachineEditorViewModel.select(baseElement, gridPosition);
     }
 
     /**

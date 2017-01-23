@@ -57,7 +57,7 @@ public class AvailableElementSubView
      */
     public void mousePressed(MouseEvent mouseEvent)
     {
-        availableElementSubViewModel.selected();
+        availableElementSubViewModel.selected(editorView.mousePosToCanvasPos(new Vector2(mouseEvent.getX(), mouseEvent.getY())));
         lastMouseEvent = mouseEvent;
     }
 

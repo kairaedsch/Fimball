@@ -324,11 +324,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @param baseElement Das Basis-Element, das ausgewählt werden soll.
      */
-    void select(BaseElement baseElement)
+    void select(BaseElement baseElement, Vector2 gridPosition)
     {
         mouseMode.setValue(MouseMode.PLACING);
         pinballMachineEditor.clearSelection();
         pinballMachineEditor.addToSelection(baseElement);
+        pinballMachineEditor.moveSelectionTo(gridPosition);
+        oldGridPos = Optional.of(gridPosition);
     }
 
     @Override
