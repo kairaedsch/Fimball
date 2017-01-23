@@ -7,9 +7,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import sep.fimball.VectorMatcher;
+import sep.fimball.general.data.RectangleDouble;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.PhysicsHandler;
@@ -41,6 +43,8 @@ public class ElementFactoryTest
     private HandlerManager handlerManager;
     @Mock
     private GameSession session;
+    @Mock
+    private PinballMachine pinballMachine;
 
     /**
      * Überprüft ob die ElementFactory korrekte GameElemente und PhysicsElemente erstellt.
@@ -48,10 +52,13 @@ public class ElementFactoryTest
     @Test
     public void testGenerateElements()
     {
-        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(session, generateAllPlacedElementTypes(), physicsHandler, handlerManager);
+        when(pinballMachine.getBoundingBox()).thenReturn(new RectangleDouble(new Vector2(), new Vector2()));
+        when(session.getPinballMachine()).thenReturn(pinballMachine);
+        ReadOnlyListProperty<PlacedElement> placedElements = generateAllPlacedElementTypes();
+        ElementFactory.GeneratedElements generatedElements = ElementFactory.generateElements(session, placedElements, physicsHandler, handlerManager);
 
         assertThat("Es wurden 9 GameElemente generiert", generatedElements.getGameElements().size(), is(9));
-        assertThat("Es wurden 7 PhysicsElemente generiert", generatedElements.getPhysicsElements().size(), is(7));
+        assertThat("Es wurden 7 PhysicsElemente + 3 Wände generiert", generatedElements.getPhysicsElements().size(), is(7 + 3));
         assertThat("Es wurde ein BallGameElement generiert", generatedElements.getBallGameElement(), is(notNullValue()));
 
         for (GameElement gameElement : generatedElements.getGameElements())
@@ -61,9 +68,13 @@ public class ElementFactoryTest
             assertThat("Die Rotation des Spielelements " + type + " ist gleich 0.0", gameElement.rotationProperty().get(), is(TEST_ROTATION));
         }
 
-        for (PhysicsElement physicsElement : generatedElements.getPhysicsElements())
+        int walls = 0;
+        for (PhysicsElement<GameElement> physicsElement : generatedElements.getPhysicsElements())
         {
-            assertThat("Die Position des Physikelements ist gleich (0, 0)", physicsElement.getPosition(), VectorMatcher.matchesVector(TEST_POSITION));
+            if (placedElements.contains(physicsElement.getGameElement().getPlacedElement()))
+            {
+                assertThat("Die Position des Physikelements ist gleich (0, 0)", physicsElement.getPosition(), VectorMatcher.matchesVector(TEST_POSITION));
+            }
         }
     }
 
