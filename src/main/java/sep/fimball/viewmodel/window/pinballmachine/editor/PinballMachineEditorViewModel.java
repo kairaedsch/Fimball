@@ -309,7 +309,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         previewsProperty.clear();
         for (DraggedElement draggedElement : pinballMachineEditor.getDetailedPositions())
         {
-            previewsProperty.add(new EditorPreviewSubViewModel(draggedElement));
+            previewsProperty.add(new EditorPreviewSubViewModel(draggedElement, this));
         }
     }
 
