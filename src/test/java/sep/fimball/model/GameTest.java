@@ -12,12 +12,14 @@ import sep.fimball.model.game.TestGameSession;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.model.input.manager.KeyEventArgs;
+import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Diese Klasse repräsentiert einen Test, der prüft, ob ein Ball den erwarteten Verlauf im angegebenen Automaten nimmt.
@@ -49,9 +51,10 @@ public class GameTest
     {
         // Aufbau des Automaten.
         pinballMachine = PinballMachineManager.getInstance().createNewMachine();
-        pinballMachine.nameProperty().setValue("GameTest Machine");
+        pinballMachine.nameProperty().setValue("GameTest Machine qwer qwer");
 
         // Einfügen von Plunger, Ball, Wand und Bumper.
+        pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BUMPER_ID), new Vector2(100, 0), 0, 1, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(PLUNGER_ID), new Vector2(0, 18), 0, 1, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(BALL_SPAWN_ID), new Vector2(0, 14), 0, 1, 0));
         pinballMachine.addElement(new PlacedElement(BaseElementManager.getInstance().getElement(WALL_ID), new Vector2(-1, 7), 0, 1, 0));
@@ -84,10 +87,12 @@ public class GameTest
             }
         }
 
+        pinballMachine.saveToDisk(true, true);
+
         //Auswertung der Aufzeichnungen.
-        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), BUMPER_ID);
-        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), WALL_ID);
-        assertEquals(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), PLUNGER_ID);
+        assertThat(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), is(BUMPER_ID));
+        assertThat(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), is(WALL_ID));
+        assertThat(collidedGameElements.pop().getPlacedElement().getBaseElement().getId(), is(PLUNGER_ID));
     }
 
     /**
@@ -96,7 +101,7 @@ public class GameTest
     @After
     public void cleanup()
     {
-        pinballMachine.deleteFromDisk();
+        //pinballMachine.deleteFromDisk();
         session.stopPhysics();
         session.stopUpdateLoop();
     }
@@ -147,7 +152,8 @@ public class GameTest
         @Override
         public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
         {
-            addCollidedGameElement(element);
+            if (elementHandlerArgs.getCollisionEventType().equals(CollisionEventType.ENTERED))
+                addCollidedGameElement(element);
         }
     }
 
