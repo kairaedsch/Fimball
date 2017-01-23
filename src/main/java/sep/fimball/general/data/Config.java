@@ -70,7 +70,7 @@ public class Config
     /**
      * Maximale Anzahl an Elementen, die man auswählen kann.
      */
-    public final static int MAX_EDITOR_SELECTION_AMOUNT = 1000;
+    public final static int MAX_EDITOR_SELECTION_AMOUNT = 500;
 
     /**
      * Gibt an, nach wie vielen Einheiten des Mittelpunkts des untersten Elements die Spielfeldgrenze gesetzt wird.

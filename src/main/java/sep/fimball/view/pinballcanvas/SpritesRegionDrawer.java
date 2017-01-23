@@ -121,7 +121,16 @@ class SpritesRegionDrawer
     {
         for (Long potsHash : region)
         {
-            globalRegion.get(potsHash)[drawOrder].remove(sprite);
+            boolean success = false;
+            List<SpriteSubView>[] lists = globalRegion.get(potsHash);
+            if(lists != null)
+            {
+                success = lists[drawOrder].remove(sprite);
+            }
+            if (!success)
+            {
+                System.err.println("Warning in RegionDrawer: could not remove");
+            }
         }
     }
 
