@@ -22,6 +22,8 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     private Optional<BallPhysicsElement> frozenBall;
 
+    private Optional<Vector2> ballFreezePosition;
+
     /**
      * Erstellt ein neues Loch.
      *
@@ -41,11 +43,12 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      *
      * @param ball Der Ball, welcher festgehalten werden soll.
      */
-    public void tryFreezeBall(BallPhysicsElement ball)
+    public void tryFreezeBall(BallPhysicsElement ball, Vector2 freezePosition)
     {
         if (canAffectBall())
         {
             frozenBall = Optional.of(ball);
+            ballFreezePosition = Optional.of(freezePosition);
             freezeStart = System.currentTimeMillis();
         }
     }
@@ -65,13 +68,22 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
     {
         if (frozenBall.isPresent())
         {
-            // TODO reset Ball position???? Was wenn Tilt????
-            frozenBall.get().setVelocity(new Vector2(0.0, 0.0));
-
-            if (System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS)
+            if (getPosition().minus(frozenBall.get().getPosition()).magnitude() < frozenBall.get().getCollider().getRadius())
             {
-                frozenBall.get().setVelocity(Vector2.randomUnitVector().scale(HOLE_BALL_KICK_SPEED));
+                frozenBall.get().setPosition(ballFreezePosition.get());
+                frozenBall.get().setVelocity(new Vector2(0.0, 0.0));
+
+                if (System.currentTimeMillis() > freezeStart + HOLE_FREEZE_TIME_MS)
+                {
+                    frozenBall.get().setVelocity(Vector2.randomUnitVector().scale(HOLE_BALL_KICK_SPEED));
+                    frozenBall = Optional.empty();
+                    ballFreezePosition = Optional.empty();
+                }
+            }
+            else
+            {
                 frozenBall = Optional.empty();
+                ballFreezePosition = Optional.empty();
             }
         }
     }

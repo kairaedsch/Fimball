@@ -26,8 +26,9 @@ public class HoleCollision extends NormalCollision
         {
             if (distanceToCenter <= PhysicsConfig.CENTER_AREA_RADIUS)
             {
-                physicsElement.tryFreezeBall(info.getBall());
-                info.getBall().setPosition(holeCenterPosition.minus(ballCenterOffset));
+                Vector2 ballFreezePosition = holeCenterPosition.minus(ballCenterOffset);
+                physicsElement.tryFreezeBall(info.getBall(), ballFreezePosition);
+                info.getBall().setPosition(ballFreezePosition);
             }
             else if (distanceToCenter < holeRadius)
             {
