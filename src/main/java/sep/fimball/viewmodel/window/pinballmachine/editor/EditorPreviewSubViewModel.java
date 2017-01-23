@@ -1,5 +1,6 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +27,12 @@ public class EditorPreviewSubViewModel
         topImagePath.set(draggedElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, rotation, 0));
         botImagePath.set(draggedElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, rotation, 0));
 
-        position.bind(draggedElement.accuratePositionProperty());
+        position.bind(Bindings.createObjectBinding(() ->
+        {
+            Vector2 localCoordinates = draggedElement.getPlacedElement().getBaseElement().getMedia().getLocalCoordinates().get((int) draggedElement.getPlacedElement().rotationProperty().get());
+            if (localCoordinates == null) localCoordinates = new Vector2();
+            return draggedElement.accuratePositionProperty().get().plus(localCoordinates);
+        }, draggedElement.accuratePositionProperty()));
     }
 
     public StringProperty topImagePathProperty()
