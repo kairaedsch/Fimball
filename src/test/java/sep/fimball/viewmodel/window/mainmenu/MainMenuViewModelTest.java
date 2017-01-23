@@ -164,7 +164,6 @@ public class MainMenuViewModelTest
         init();
         PinballMachine pinballMachine = getMockedPinballMachine();
         test.startEditor(pinballMachine);
-        assertThat(editorShown, is(true));
         assertThat(pinballMachineName, is(pinballMachine.nameProperty().get()));
     }
 
