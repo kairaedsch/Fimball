@@ -277,11 +277,11 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         mouseOnCanvas = true;
 
-        if (!dragStartedOnCanvas)
-            pinballMachineEditor.moveSelectionTo(gridPos);
-
         if (mouseMode.get() == MouseMode.PLACING)
         {
+            if (!dragStartedOnCanvas)
+                pinballMachineEditor.moveSelectionTo(gridPos);
+
             pinballMachineEditor.placeSelection();
             previewsProperty.clear();
         }
