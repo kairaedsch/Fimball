@@ -69,7 +69,7 @@ public class PinballMachineEditorViewModelTest
         pinballMachineEditorViewModel.mousePressedOnCanvas(mouseEventMock, pos);
 
         assertThat(pinballMachineEditorViewModel.getSelection().size(), is(1));
-        assertThat(pinballMachineEditorViewModel.getSelection().iterator().next(), equalTo(ball));
+        assertThat(pinballMachineEditorViewModel.getSelection().iterator().next().getPlacedElement(), equalTo(ball));
     }
 
     @Test

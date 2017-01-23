@@ -36,7 +36,7 @@ public class PinballMachineInfoSubViewModelTest
 
         PinballMachineInfoSubViewModel test = new PinballMachineInfoSubViewModel(mockedMainMenuViewModel, java.util.Optional.of(pinballMachine));
         test.update(java.util.Optional.of(newPinballMachine));
-        assertThat(test.pinballMachineReadOnlyProperty().get(), equalTo(newPinballMachine));
+        assertThat(test.pinballMachineReadOnlyProperty().get().get(), equalTo(newPinballMachine));
         assertThat(test.nameProperty().get(), equalTo(newPinballMachine.nameProperty().get()));
         newPinballMachine.addHighscore(new Highscore(100, "Test"));
         assertThat(test.highscoreListProperty().get(0).playerNameProperty().get(), is("Test"));

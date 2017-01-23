@@ -63,7 +63,7 @@ public class MainMenuViewModelTest
         PinballMachine pinballMachine = getMockedPinballMachine();
 
         test.switchPinballMachineInfo(pinballMachine);
-        assertThat(test.getPinballMachineInfoSubViewModel().pinballMachineReadOnlyProperty().get(), equalTo(pinballMachine));
+        assertThat(test.getPinballMachineInfoSubViewModel().pinballMachineReadOnlyProperty().get().get(), equalTo(pinballMachine));
     }
 
     /**
