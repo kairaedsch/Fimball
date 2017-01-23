@@ -10,7 +10,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.game.DraggedElement;
+import sep.fimball.viewmodel.window.pinballmachine.editor.DraggedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;

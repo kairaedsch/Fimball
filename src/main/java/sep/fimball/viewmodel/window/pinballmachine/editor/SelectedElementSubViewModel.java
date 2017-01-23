@@ -3,7 +3,6 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.model.game.DraggedElement;
 
 import java.util.Optional;
 

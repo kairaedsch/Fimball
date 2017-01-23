@@ -1,6 +1,5 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
@@ -22,7 +21,6 @@ import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
-import sep.fimball.model.game.DraggedElement;
 import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;

@@ -2,14 +2,12 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineUtil;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.game.DraggedElement;
 
 import java.util.*;
 

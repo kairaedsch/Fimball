@@ -12,7 +12,6 @@ import sep.fimball.model.blueprint.base.BaseElementJson;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.game.DraggedElement;
 
 import java.util.ArrayList;
 import java.util.Iterator;

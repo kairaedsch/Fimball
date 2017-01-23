@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
-import sep.fimball.model.game.DraggedElement;
 
 /**
  * Created by TheAsuro on 22.01.2017.

@@ -14,11 +14,9 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.game.DraggedElement;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

@@ -1,4 +1,4 @@
-package sep.fimball.model.game;
+package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
