@@ -49,7 +49,7 @@ public class SettingsTest
     /**
      * Dieser Test prüft, ob die Einstellungen richtig aus einer SettingsJson geladen werden.
      */
-    @Test (timeout = 200000000)
+    @Test (timeout = 2000)
     public void testCreateSettings()
     {
         initKeyLayouts();
