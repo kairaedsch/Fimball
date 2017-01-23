@@ -1,5 +1,8 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +32,6 @@ import sep.fimball.viewmodel.window.WindowViewModel;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Das PinballMachineEditorViewModel stellt der View Daten über einen Flipper-Automaten zur Verfügung und ermöglicht es,
@@ -102,7 +104,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Gibt an, ob sich die Maus auf dem Canvas befindet.
      */
-    private boolean mouseOnCanvas = false;
+    private BooleanProperty mouseOnCanvas;
 
     /**
      * Das Auswahl-Rechteck, falls vorhanden.
@@ -114,9 +116,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Cursor> cursorProperty;
 
-    private ObservableList<EditorPreviewSubViewModel> previewsProperty;
-
     private boolean dragStartedOnCanvas = false;
+
+    private ListProperty<EditorPreviewSubViewModel> editorPreviewSubViews;
 
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
@@ -158,10 +160,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         availableRampElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.RAMP))));
         availableAdvancedElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.ADVANCED))));
 
-        previewsProperty = FXCollections.observableArrayList();
+        mouseOnCanvas = new SimpleBooleanProperty(false);
         cursorProperty = new SimpleObjectProperty<>();
 
         editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);
+
+        editorPreviewSubViews = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this));
     }
 
     /**
@@ -210,7 +215,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         List<PlacedElement> elements = pinballMachineEditor.getElementsAt(gridPos);
 
-        Optional<PlacedElement> selectedElement = elements.isEmpty() ? Optional.empty() : Optional.of(elements.get(0));
+        Optional<DraggedElement> selectedElement = elements.isEmpty() ? Optional.empty() : Optional.of(new DraggedElement(elements.get(0)));
         pinballMachineEditor.selectElement(selectedElement, mouseEvent.isControlDown());
 
         if (elements.isEmpty())
@@ -258,12 +263,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         {
             mouseMode.setValue(MouseMode.SELECTING);
 
-            if (mouseOnCanvas)
+            if (mouseOnCanvas.get())
+            {
                 pinballMachineEditor.placeSelection();
+            }
             else
             {
                 pinballMachineEditor.clearSelection();
-                previewsProperty.clear();
             }
         }
     }
@@ -275,15 +281,15 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseEnteredCanvas(Vector2 gridPos)
     {
-        mouseOnCanvas = true;
+        mouseOnCanvas.set(true);
 
         if (mouseMode.get() == MouseMode.PLACING)
         {
             if (!dragStartedOnCanvas)
+            {
                 pinballMachineEditor.moveSelectionTo(gridPos);
-
+            }
             pinballMachineEditor.placeSelection();
-            previewsProperty.clear();
         }
     }
 
@@ -292,11 +298,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     public void mouseExitedCanvas()
     {
-        mouseOnCanvas = false;
+        mouseOnCanvas.set(false);
         if (!pinballMachineEditor.getSelection().isEmpty() && mouseMode.get() == MouseMode.PLACING)
         {
             pinballMachineEditor.removeSelection();
-            showSelectionInPreview();
         }
     }
 
@@ -310,16 +315,6 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         mouseMode.setValue(MouseMode.PLACING);
         pinballMachineEditor.clearSelection();
         pinballMachineEditor.addToSelection(baseElement);
-        showSelectionInPreview();
-    }
-
-    private void showSelectionInPreview()
-    {
-        previewsProperty.clear();
-        for (DraggedElement draggedElement : pinballMachineEditor.getDetailedPositions())
-        {
-            previewsProperty.add(new EditorPreviewSubViewModel(draggedElement, this));
-        }
     }
 
     @Override
@@ -451,7 +446,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      *
      * @return Das aktuell auf dem Spielfeld ausgewählte Element.
      */
-    public Set<PlacedElement> getSelection()
+    public ReadOnlyListProperty<DraggedElement> getSelection()
     {
         return pinballMachineEditor.getSelection();
     }
@@ -510,13 +505,13 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.cameraZoom.set(cameraZoom);
     }
 
-    public IntegerProperty selectionSizeProperty()
+    public ReadOnlyListProperty<EditorPreviewSubViewModel> previewsProperty()
     {
-        return pinballMachineEditor.selectionSizeProperty();
+        return editorPreviewSubViews;
     }
 
-    public ObservableList<EditorPreviewSubViewModel> previewsProperty()
+    public BooleanBinding showElementsAsNodesProperty()
     {
-        return previewsProperty;
+        return Bindings.createBooleanBinding(() -> !mouseOnCanvas.get() && mouseMode.get() == MouseMode.PLACING, mouseOnCanvas, mouseMode);
     }
 }

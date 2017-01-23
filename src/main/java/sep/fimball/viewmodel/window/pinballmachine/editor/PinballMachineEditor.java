@@ -24,17 +24,7 @@ public class PinballMachineEditor
     /**
      * Die aktuelle Auswahl.
      */
-    private Set<PlacedElement> selection;
-
-    /**
-     * Die aktuelle Auswahl.
-     */
-    private IntegerProperty selectionSize;
-
-    /**
-     * Die genauen Positionen von Elementen.
-     */
-    private ObservableList<DraggedElement> detailedPositions;
+    private ListProperty<DraggedElement> selection;
 
     /**
      * Der zugehörige Flipper-Automat.
@@ -49,24 +39,27 @@ public class PinballMachineEditor
     PinballMachineEditor(PinballMachine pinballMachine)
     {
         this.pinballMachine = pinballMachine;
-        selection = new HashSet<>();
-        selectionSize = new SimpleIntegerProperty(0);
-        detailedPositions = FXCollections.observableArrayList();
+        selection = new SimpleListProperty<>(FXCollections.observableArrayList());
     }
 
-    void selectElement(Optional<PlacedElement> element, boolean additive)
+    void selectElement(Optional<DraggedElement> element, boolean additive)
     {
-        if (additive && element.isPresent())
+        if (additive)
         {
-            if (selection.contains(element.get()))
-                removeFromSelection(element.get());
-            else
-                addToSelection(element.get());
+            if (element.isPresent())
+            {
+                if (selection.contains(element.get()))
+                    removeFromSelection(element.get());
+                else
+                    addToSelection(element.get());
+            }
         }
         else
         {
-            if (!additive && (!element.isPresent() || !selection.contains(element.get())))
+            if (!element.isPresent() || !selection.contains(element.get()))
+            {
                 clearSelection();
+            }
             element.ifPresent(this::addToSelection);
         }
     }
@@ -76,13 +69,13 @@ public class PinballMachineEditor
      */
     public void duplicateSelection()
     {
-        List<PlacedElement> newSelection = new ArrayList<>();
-        for (PlacedElement placedElement : selection)
+        List<DraggedElement> newSelection = new ArrayList<>();
+        for (DraggedElement placedElement : selection)
         {
-            PlacedElement placedElementCopy = placedElement.duplicate();
+            PlacedElement placedElementCopy = placedElement.getPlacedElement().duplicate();
             placedElementCopy.setPosition(placedElementCopy.positionProperty().get().plus(new Vector2(2, -2)));
             pinballMachine.addElement(placedElementCopy);
-            newSelection.add(placedElementCopy);
+            newSelection.add(new DraggedElement(placedElementCopy));
         }
         clearSelection();
         newSelection.forEach(this::addToSelection);
@@ -93,9 +86,9 @@ public class PinballMachineEditor
      */
     void placeSelection()
     {
-        for (PlacedElement placedElement : selection)
+        for (DraggedElement placedElement : selection)
         {
-            pinballMachine.addElement(placedElement);
+            pinballMachine.addElement(placedElement.getPlacedElement());
         }
     }
 
@@ -106,9 +99,9 @@ public class PinballMachineEditor
      */
     void moveSelectionBy(Vector2 by)
     {
-        for (PlacedElement placedElement : selection)
+        for (DraggedElement placedElement : selection)
         {
-            setPosition(placedElement, getPosition(placedElement).plus(by));
+            placedElement.setAccuratePosition(placedElement.getAccuratePosition().plus(by));
         }
     }
 
@@ -119,35 +112,39 @@ public class PinballMachineEditor
      */
     void moveSelectionTo(Vector2 to)
     {
+        /**
         if (!selection.isEmpty())
         {
-            PlacedElement aPlacedElement = selection.iterator().next();
+            DraggedElement aPlacedElement = selection.iterator().next();
 
-            Map<PlacedElement, Vector2> relativePos = new HashMap<>();
+            Map<DraggedElement, Vector2> relativePos = new HashMap<>();
             relativePos.put(aPlacedElement, new Vector2(0, 0));
 
             if (selection.size() > 1)
             {
-                for (PlacedElement placedElement : selection)
+                for (DraggedElement placedElement : selection)
                 {
-                    relativePos.put(placedElement, getPosition(placedElement).minus(getPosition(aPlacedElement)));
+                    placedElement.setAccuratePosition(placedElement.getAccuratePosition().minus(getPosition(aPlacedElement)));
+                    relativePos.put(placedElement, getPosition(placedElement));
                 }
             }
 
-            for (PlacedElement placedElement : selection)
+            for (DraggedElement placedElement : selection)
             {
                 setPosition(placedElement, to.plus(relativePos.get(placedElement)));
             }
-        }
+        }*/
     }
 
     void scaleSelectionPosition(double oldScale, double newScale, Vector2 cameraPosition)
     {
-        for (PlacedElement placedElement : selection)
+        /*
+        for (DraggedElement placedElement : selection)
         {
+            // ARE YOU FUCKING RETARDID?????????????????????????????
             // TODO - YEAH idk i feel like it's close but something is missing
             setPosition(placedElement, (placedElement.positionProperty().get().minus(cameraPosition).scale(1.0 / newScale).scale(oldScale).plus(cameraPosition)));
-        }
+        }*/
     }
 
     /**
@@ -155,23 +152,23 @@ public class PinballMachineEditor
      */
     void rotateSelection()
     {
-        if (!selection.isEmpty() && selection.stream().allMatch(p -> p.getBaseElement().getMedia().canRotate()))
+        if (!selection.isEmpty() && selection.stream().allMatch(p -> p.getPlacedElement().getBaseElement().getMedia().canRotate()))
         {
             double rotation = selection.stream()
-                    .map(p -> p.getBaseElement().getMedia().getRotationAccuracy())
+                    .map(p -> p.getPlacedElement().getBaseElement().getMedia().getRotationAccuracy())
                     .reduce(0, (rA1, rA2) -> rA1 > rA2 ? rA1 : rA2);
             if (rotation == 0)
             {
                 rotation = 90;
             }
 
-            Vector2 mainPivotPoint = PinballMachineUtil.getBoundingBox(selection).getMiddle().round();
-            for (PlacedElement placedElement : selection)
+            Vector2 mainPivotPoint = PinballMachineUtil.getBoundingBox(selection, t -> t.getPlacedElement()).getMiddle().round();
+            for (DraggedElement placedElement : selection)
             {
-                Vector2 pivotPoint = placedElement.getBaseElement().getPhysics().getPivotPoint();
-                Vector2 newPos = placedElement.positionProperty().get().plus(pivotPoint).rotate(Math.toRadians(rotation), mainPivotPoint).minus(pivotPoint);
-                setPosition(placedElement, newPos);
-                placedElement.rotateClockwise();
+                Vector2 pivotPoint = placedElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint();
+                Vector2 newPos = placedElement.getPlacedElement().positionProperty().get().plus(pivotPoint).rotate(Math.toRadians(rotation), mainPivotPoint).minus(pivotPoint);
+                placedElement.setAccuratePosition(newPos);
+                placedElement.getPlacedElement().rotateClockwise();
             }
         }
     }
@@ -181,9 +178,9 @@ public class PinballMachineEditor
      */
     void removeSelection()
     {
-        for (PlacedElement placedElement : selection)
+        for (DraggedElement placedElement : selection)
         {
-            pinballMachine.removeElement(placedElement);
+            pinballMachine.removeElement(placedElement.getPlacedElement());
         }
     }
 
@@ -194,11 +191,19 @@ public class PinballMachineEditor
      */
     void addToSelection(PlacedElement placedElement)
     {
+        addToSelection(new DraggedElement(placedElement));
+    }
+
+    /**
+     * Fügt ein Element zur Auswahl hinzu.
+     *
+     * @param placedElement Das Element, das hinzugefügt werden soll.
+     */
+    void addToSelection(DraggedElement placedElement)
+    {
         if (!selection.contains(placedElement) && selection.size() < MAX_EDITOR_SELECTION_AMOUNT)
         {
-            setPosition(placedElement, getPosition(placedElement).round());
             selection.add(placedElement);
-            selectionSize.set(selection.size());
         }
     }
 
@@ -214,10 +219,8 @@ public class PinballMachineEditor
             for (int i = 0; i < placedElementList.size() && selection.size() < MAX_EDITOR_SELECTION_AMOUNT; i++)
             {
                 PlacedElement placedElement = placedElementList.get(i);
-                setPosition(placedElement, getPosition(placedElement).round());
-                selection.add(placedElement);
+                selection.add(new DraggedElement(placedElement));
             }
-            selectionSize.set(selection.size());
         }
     }
 
@@ -229,8 +232,7 @@ public class PinballMachineEditor
     void addToSelection(BaseElement baseElement)
     {
         selection.clear();
-        selectionSize.set(selection.size());
-        addToSelection(new PlacedElement(baseElement, new Vector2(0, 0), 1, 1, 0));
+        addToSelection(new DraggedElement(new PlacedElement(baseElement, new Vector2(0, 0), 1, 1, 0)));
     }
 
     /**
@@ -238,10 +240,9 @@ public class PinballMachineEditor
      *
      * @param placedElement Das Element, das entfernt werden soll.
      */
-    private void removeFromSelection(PlacedElement placedElement)
+    private void removeFromSelection(DraggedElement placedElement)
     {
         selection.remove(placedElement);
-        selectionSize.set(selection.size());
     }
 
     /**
@@ -250,7 +251,6 @@ public class PinballMachineEditor
     void clearSelection()
     {
         selection.clear();
-        selectionSize.set(selection.size());
     }
 
     /**
@@ -283,56 +283,8 @@ public class PinballMachineEditor
      *
      * @return Die aktuelle Auswahl.
      */
-    Set<PlacedElement> getSelection()
+    ReadOnlyListProperty<DraggedElement> getSelection()
     {
         return selection;
-    }
-
-    /**
-     * Gibt die Position des gegebenen Elements zurück.
-     *
-     * @param placedElement Das Element, dessen Position zurückgegeben werden soll.
-     * @return Die Position des gegebenen Elements.
-     */
-    private Vector2 getPosition(PlacedElement placedElement)
-    {
-        for (DraggedElement elem : detailedPositions)
-        {
-            if (elem.getPlacedElement().equals(placedElement))
-                return elem.getAccuratePosition();
-        }
-
-        detailedPositions.add(new DraggedElement(placedElement));
-        return placedElement.positionProperty().get();
-    }
-
-    /**
-     * Setzt die Position des Elements.
-     *
-     * @param placedElement Das Element, dessen Position gesetzt werden soll.
-     * @param newPos        Die neue Position des Elements.
-     */
-    private void setPosition(PlacedElement placedElement, Vector2 newPos)
-    {
-        placedElement.setPosition(newPos.round());
-        for (DraggedElement elem : detailedPositions)
-        {
-            if (elem.getPlacedElement().equals(placedElement))
-            {
-                elem.setAccuratePosition(newPos);
-                return;
-            }
-        }
-        detailedPositions.add(new DraggedElement(placedElement, newPos));
-    }
-
-    public IntegerProperty selectionSizeProperty()
-    {
-        return selectionSize;
-    }
-
-    public ObservableList<DraggedElement> getDetailedPositions()
-    {
-        return detailedPositions;
     }
 }

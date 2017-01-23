@@ -480,3 +480,7 @@ AnchorPane {
 .playerNameEntryDelete:hover {
     -fx-background-color: #A52F2F;
 }
+
+.editorPreview {
+    -fx-background-size: contain;
+}

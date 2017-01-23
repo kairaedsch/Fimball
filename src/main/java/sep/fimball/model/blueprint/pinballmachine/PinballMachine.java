@@ -131,7 +131,7 @@ public class PinballMachine
      */
     public RectangleDouble getBoundingBox()
     {
-        RectangleDouble boundingBox = PinballMachineUtil.getBoundingBox(elements);
+        RectangleDouble boundingBox = PinballMachineUtil.getBoundingBox(elements, t-> t);
         Vector2 newOrigin = boundingBox.getOrigin().minus(MACHINE_BOX_MARGIN);
         Vector2 newSize = boundingBox.getSize().plus(MACHINE_BOX_MARGIN.scale(2));
         if (newSize.getX() < MACHINE_BOX_MIN_WIDTH)

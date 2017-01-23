@@ -14,7 +14,9 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.DraggedElement;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -82,8 +84,8 @@ public class PinballMachineEditorViewModelTest
         when(mouseEventMock.getButton()).thenReturn(MouseButton.PRIMARY);
 
         // Ein Element wird manuell zur Auswahl hinzugefügt.
-        Set<PlacedElement> selection = pinballMachineEditorViewModel.getSelection();
-        selection.add(ball);
+        List<DraggedElement> selection = pinballMachineEditorViewModel.getSelection();
+        selection.add(new DraggedElement(ball));
 
         pinballMachineEditorViewModel.mouseEnteredCanvas(pos);
         pinballMachineEditorViewModel.mouseReleased(mouseEventMock);
@@ -115,8 +117,8 @@ public class PinballMachineEditorViewModelTest
         when(keyEventMock.getEventType()).thenReturn(KeyEvent.KEY_PRESSED);
 
         // Ein Element wird manuell zur Auswahl hinzugefügt.
-        Set<PlacedElement> selection = pinballMachineEditorViewModel.getSelection();
-        selection.add(ball);
+        List<DraggedElement> selection = pinballMachineEditorViewModel.getSelection();
+        selection.add(new DraggedElement(ball));
 
         pinballMachineEditorViewModel.handleKeyEvent(keyEventMock);
 

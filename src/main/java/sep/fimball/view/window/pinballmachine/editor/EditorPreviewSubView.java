@@ -26,27 +26,28 @@ public class EditorPreviewSubView
         this.pinballMachineEditorView = pinballMachineEditorView;
 
         previewBot.styleProperty().bind(DesignConfig.backgroundImageCss(editorPreviewSubViewModel.botImagePathProperty()));
-        editorPreviewSubViewModel.botPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, previewBot)));
+        editorPreviewSubViewModel.positionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, previewBot)));
 
         previewTop.styleProperty().bind(DesignConfig.backgroundImageCss(editorPreviewSubViewModel.topImagePathProperty()));
-        editorPreviewSubViewModel.topPixelPositionProperty().addListener(((observable, oldValue, newValue) -> applyGridPosition(newValue, previewTop)));
 
         ImageCache cache = ImageCache.getInstance();
         String botImagePath = editorPreviewSubViewModel.botImagePathProperty().get();
         previewBot.prefWidthProperty().bind(Bindings.multiply(editorPreviewSubViewModel.getEditorViewModel().cameraZoomProperty(), cache.getImage(botImagePath).widthProperty()));
         previewBot.prefHeightProperty().bind(Bindings.multiply(editorPreviewSubViewModel.getEditorViewModel().cameraZoomProperty(), cache.getImage(botImagePath).heightProperty()));
+        previewBot.visibleProperty().bind(editorPreviewSubViewModel.getEditorViewModel().showElementsAsNodesProperty());
+        previewBot.setPickOnBounds(false);
 
         String topImagePath = editorPreviewSubViewModel.topImagePathProperty().get();
         previewTop.prefWidthProperty().bind(Bindings.multiply(editorPreviewSubViewModel.getEditorViewModel().cameraZoomProperty(), cache.getImage(topImagePath).widthProperty()));
         previewTop.prefHeightProperty().bind(Bindings.multiply(editorPreviewSubViewModel.getEditorViewModel().cameraZoomProperty(), cache.getImage(topImagePath).heightProperty()));
+        previewTop.visibleProperty().bind(editorPreviewSubViewModel.getEditorViewModel().showElementsAsNodesProperty());
+        previewTop.setPickOnBounds(false);
     }
 
     private void applyGridPosition(Vector2 gridPosition, Pane preview)
     {
-        // HOW THE FUCK AM I SUPPOSED TO GET CANVAS SIZE HERE?!?!
         Vector2 pixelPos = pinballMachineEditorView.gridToCanvasPixelPos(gridPosition);
         preview.setLayoutX(pixelPos.getX());
         preview.setLayoutY(pixelPos.getY());
-        //System.out.println(pixelPos);
     }
 }

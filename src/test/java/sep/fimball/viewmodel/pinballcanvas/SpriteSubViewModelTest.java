@@ -10,12 +10,12 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElement;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.DraggedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.model.physics.element.BasePhysicsElement;
 
-import java.util.HashSet;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -95,16 +95,16 @@ public class SpriteSubViewModelTest
 
         // SpriteSubViewModel von einer Editorsitzung
         {
-            SetProperty<PlacedElement> listOfSelecedElements = new SimpleSetProperty<>(FXCollections.observableSet(new HashSet<PlacedElement>()));
-            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements, new SimpleIntegerProperty());
+            ListProperty<DraggedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
             assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
 
             // Füge irgendein Element zur Liste hinzu
-            listOfSelecedElements.add(Mockito.mock(PlacedElement.class));
+            listOfSelecedElements.add(Mockito.mock(DraggedElement.class));
             assertThat("Das PlacedElement des SpriteSubViewModel ist nicht in der Liste und deshalb nicht ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(false));
 
             // Füge das PlacedElement des SpriteSubViewModels zur Liste hinzu
-            listOfSelecedElements.add(placedElementOfGameElement);
+            listOfSelecedElements.add(new DraggedElement(placedElementOfGameElement));
             assertThat("Das PlacedElement des SpriteSubViewModel ist in der Liste und deshalb auch ausgewählt", spriteSubViewModelEditor.selectedProperty(), is(true));
         }
     }
@@ -145,13 +145,13 @@ public class SpriteSubViewModelTest
         {
             // Erstelle ein SpriteSubViewModel von einem Rampenelement
             when(gameElement.getElementType()).thenReturn(BaseElementType.RAMP);
-            SetProperty<PlacedElement> listOfSelecedElements = new SimpleSetProperty<>(FXCollections.observableSet(new HashSet<>()));
-            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements, new SimpleIntegerProperty());
+            ListProperty<DraggedElement> listOfSelecedElements = new SimpleListProperty<>(FXCollections.observableArrayList());
+            SpriteSubViewModel spriteSubViewModelEditor = new SpriteSubViewModel(gameElement, listOfSelecedElements);
 
             assertThat("Die Standardsichtbarkeit", spriteSubViewModelEditor.visibilityProperty().get(), is(1.0));
 
             // Füge ein Element zur Liste hinzu
-            listOfSelecedElements.add(Mockito.mock(PlacedElement.class));
+            listOfSelecedElements.add(Mockito.mock(DraggedElement.class));
             assertThat("Die Sichtbarkeit von Rampenelementen ist bei einer nicht leeren Liste reduziert", spriteSubViewModelEditor.visibilityProperty().get(), is(0.5));
         }
     }

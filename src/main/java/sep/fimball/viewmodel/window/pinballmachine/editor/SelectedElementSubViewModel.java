@@ -3,9 +3,9 @@ package sep.fimball.viewmodel.window.pinballmachine.editor;
 import javafx.beans.property.*;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.blueprint.settings.Settings;
+import sep.fimball.model.game.DraggedElement;
 
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Das SelectedElementSubViewModel stellt der View Daten über das aktuell ausgewählte Flipperautomat-Element im Flipperautomat bereit und ermöglicht dem Nutzer, die Eigenschaften dieses Elements anzupassen.
@@ -88,13 +88,13 @@ public class SelectedElementSubViewModel
 
         setPlacedElement(Optional.empty());
 
-        Set<PlacedElement> selection = pinballMachineEditor.getSelection();
+        ReadOnlyListProperty<DraggedElement> selection = pinballMachineEditor.getSelection();
 
-        pinballMachineEditor.selectionSizeProperty().addListener((observableValue, placedElements, t1) ->
+        selection.addListener((observableValue, placedElements, t1) ->
         {
             if (selection.size() == 1)
             {
-                PlacedElement aPlacedElement = selection.iterator().next();
+                PlacedElement aPlacedElement = selection.iterator().next().getPlacedElement();
                 setPlacedElement(Optional.of(aPlacedElement));
             }
             else
@@ -102,9 +102,9 @@ public class SelectedElementSubViewModel
                 setPlacedElement(Optional.empty());
             }
 
-            rotateAvailable.set(selection.size() > 0 && selection.stream().allMatch(placedElement1 -> placedElement1.getBaseElement().getMedia().canRotate()));
-            duplicateAvailable.set(selection.stream().anyMatch(placedElement1 -> !placedElement1.getBaseElement().getId().equals("ball")));
-            removeAvailable.set(!selection.stream().allMatch(placedElement1 -> placedElement1.getBaseElement().getId().equals("ball")));
+            rotateAvailable.set(selection.size() > 0 && selection.stream().allMatch(placedElement1 -> placedElement1.getPlacedElement().getBaseElement().getMedia().canRotate()));
+            duplicateAvailable.set(selection.stream().anyMatch(placedElement1 -> !placedElement1.getPlacedElement().getBaseElement().getId().equals("ball")));
+            removeAvailable.set(!selection.stream().allMatch(placedElement1 -> placedElement1.getPlacedElement().getBaseElement().getId().equals("ball")));
         });
 
     }

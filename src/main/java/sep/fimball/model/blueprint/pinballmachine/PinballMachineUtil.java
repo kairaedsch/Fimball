@@ -5,6 +5,7 @@ import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.general.data.Vector2;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Die PinballMachineUtil ermöglicht das manipulieren von PlacedElements oder deren Auswertung.
@@ -17,10 +18,10 @@ public class PinballMachineUtil
      * @param elements Die übergebenen Elemente.
      * @return Eine Box, die die übergebenen Elemente umschließt.
      */
-    public static RectangleDouble getBoundingBox(Collection<PlacedElement> elements)
+    public static <T>RectangleDouble getBoundingBox(Collection<T> elements, Function<T, PlacedElement> converter)
     {
-        Vector2 max = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), true))).reduce(Vector2.NEGATIVE_INFINITY, Vector2::maxComponents);
-        Vector2 origin = elements.stream().map(element -> element.positionProperty().get().plus(element.getBaseElement().getPhysics().getExtremePos(element.rotationProperty().get(), false))).reduce(Vector2.POSITIVE_INFINITY, Vector2::minComponents);
+        Vector2 max = elements.stream().map(element -> converter.apply(element).positionProperty().get().plus(converter.apply(element).getBaseElement().getPhysics().getExtremePos(converter.apply(element).rotationProperty().get(), true))).reduce(Vector2.NEGATIVE_INFINITY, Vector2::maxComponents);
+        Vector2 origin = elements.stream().map(element -> converter.apply(element).positionProperty().get().plus(converter.apply(element).getBaseElement().getPhysics().getExtremePos(converter.apply(element).rotationProperty().get(), false))).reduce(Vector2.POSITIVE_INFINITY, Vector2::minComponents);
 
         double width = Math.abs(max.getX() - origin.getX());
         double height = Math.abs(max.getY() - origin.getY());

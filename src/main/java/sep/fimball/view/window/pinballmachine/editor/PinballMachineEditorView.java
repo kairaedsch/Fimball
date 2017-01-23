@@ -2,6 +2,7 @@ package sep.fimball.view.window.pinballmachine.editor;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -110,6 +111,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         viewLoaderCanvas.getView().setViewModel(editorSessionSubViewModel.getPinballCanvasViewModel());
 
         ViewModelListToPaneBinder.<EditorPreviewSubView, EditorPreviewSubViewModel>bindViewModelsToViews(previewBase, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW, (view, viewModel) -> view.init(viewModel, this));
+        previewBase.setPickOnBounds(false);
 
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
@@ -244,13 +246,19 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * Benachrichtigt das {@code editorSessionSubViewModel}, dass der Nutzer speichern möchte.
      */
     @FXML
-    private void saveClicked() {editorSessionSubViewModel.savePinballMachine();}
+    private void saveClicked()
+    {
+        editorSessionSubViewModel.savePinballMachine();
+    }
 
     /**
      * Benachrichtigt das {@code editorSessionSubViewModel}, dass der Nutzer den Automaten löschen möchte.
      */
     @FXML
-    private void deleteClicked() {editorSessionSubViewModel.deletePinballMachine();}
+    private void deleteClicked()
+    {
+        editorSessionSubViewModel.deletePinballMachine();
+    }
 
     /**
      * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.
@@ -268,13 +276,14 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         );
     }
 
-    Vector2 gridToCanvasPixelPos(Vector2 mousePos)
+    Vector2 gridToCanvasPixelPos(Vector2 gridPos)
     {
+        Point2D point2D = pinballCanvasContainer.localToScene(pinballCanvasContainer.getLayoutBounds().getMinX(), pinballCanvasContainer.getLayoutBounds().getMinY());
         return ViewUtil.gridToCanvasPixelPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),
                 pinballMachineEditorViewModel.cameraZoomProperty().get(),
-                new Vector2(mousePos.getX(), mousePos.getY()),
-                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight())
+                new Vector2(gridPos.getX(), gridPos.getY()),
+                new Vector2(pinballCanvasContainer.getWidth(), pinballCanvasContainer.getHeight()).plus(new Vector2(point2D.getX(), point2D.getY()))
         );
     }
 }

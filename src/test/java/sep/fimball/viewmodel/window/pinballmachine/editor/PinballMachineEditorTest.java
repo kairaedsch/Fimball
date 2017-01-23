@@ -12,6 +12,7 @@ import sep.fimball.model.blueprint.base.BaseElementJson;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.DraggedElement;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,13 +47,13 @@ public class PinballMachineEditorTest
 
         test.addToSelection(baseElement);
         assertThat(test.getSelection().size(), is(1));
-        assertThat(test.getSelection().iterator().next().getBaseElement(), equalTo(baseElement));
+        assertThat(test.getSelection().iterator().next().getPlacedElement().getBaseElement(), equalTo(baseElement));
 
         test.addToSelection(baseElement);
         assertThat(test.getSelection().size(), is(1));
 
         PlacedElement element = new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 1, 0);
-        test.addToSelection(element);
+        test.addToSelection(new DraggedElement(element));
         assertThat(test.getSelection().size(), is(2));
 
         ListProperty<PlacedElement> elements = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -111,19 +112,19 @@ public class PinballMachineEditorTest
         PinballMachine mockedMachine = mock(PinballMachine.class);
         PinballMachineEditor test = new PinballMachineEditor(mockedMachine);
 
-        test.addToSelection(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 1, 0));
-        test.addToSelection(new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 1, 0));
+        test.addToSelection(new DraggedElement(new PlacedElement(getBaseElement("Test 1"), new Vector2(0, 0), 0, 1, 0)));
+        test.addToSelection(new DraggedElement(new PlacedElement(getBaseElement("Test 2"), new Vector2(0, 0), 0, 1, 0)));
         Vector2 moveVector = new Vector2(1, 1);
         test.moveSelectionBy(moveVector);
         test.moveSelectionBy(moveVector);
-        Iterator<PlacedElement> iterator = test.getSelection().iterator();
-        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(2, 2)));
-        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(2, 2)));
+        Iterator<DraggedElement> iterator = test.getSelection().iterator();
+        assertThat(iterator.next().getPlacedElement().positionProperty().get(), equalTo(new Vector2(2, 2)));
+        assertThat(iterator.next().getPlacedElement().positionProperty().get(), equalTo(new Vector2(2, 2)));
 
         test.moveSelectionTo(moveVector);
         iterator = test.getSelection().iterator();
-        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(1, 1)));
-        assertThat(iterator.next().positionProperty().get(), equalTo(new Vector2(1, 1)));
+        assertThat(iterator.next().getPlacedElement().positionProperty().get(), equalTo(new Vector2(1, 1)));
+        assertThat(iterator.next().getPlacedElement().positionProperty().get(), equalTo(new Vector2(1, 1)));
     }
 
     /**
@@ -152,7 +153,7 @@ public class PinballMachineEditorTest
         PinballMachineEditor test = new PinballMachineEditor(mockedMachine);
 
         mockedMachine.addElement(mockElement);
-        test.addToSelection(mockElement);
+        test.addToSelection(new DraggedElement(mockElement));
         test.removeSelection();
 
         assertThat(elementsInMachine.size(), is(0));

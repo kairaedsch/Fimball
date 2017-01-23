@@ -11,6 +11,7 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 public class DraggedElement
 {
     private ObjectProperty<Vector2> accuratePosition;
+
     private PlacedElement placedElement;
 
     public DraggedElement(PlacedElement placedElement)
@@ -38,6 +39,8 @@ public class DraggedElement
     public void setAccuratePosition(Vector2 accuratePosition)
     {
         this.accuratePosition.set(accuratePosition);
+        placedElement.setPosition(accuratePosition.round());
+
     }
 
     public PlacedElement getPlacedElement()
@@ -48,5 +51,21 @@ public class DraggedElement
     public void setPlacedElement(PlacedElement placedElement)
     {
         this.placedElement = placedElement;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return placedElement.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if (object instanceof DraggedElement)
+        {
+            return ((DraggedElement) object).getPlacedElement().equals(this.getPlacedElement());
+        }
+        return object.equals(this);
     }
 }

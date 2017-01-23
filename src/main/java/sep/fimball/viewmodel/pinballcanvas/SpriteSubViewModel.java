@@ -6,14 +6,13 @@ import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.game.DraggedElement;
 import sep.fimball.model.game.GameElement;
 import sep.fimball.model.media.ElementImage;
 import sep.fimball.viewmodel.ElementImageViewModel;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Das SpriteSubViewModel stellt der View Daten über ein Sprite zur Verfügung, sodass es in der Lage ist, dieses mit Hilfe eines Bildpfades auf einem Canvas in der richtigen Position zu zeichnen.
@@ -125,17 +124,16 @@ public class SpriteSubViewModel
      *
      * @param gameElement   Das GameElement, das zu diesem SpriteSubViewModel gehört.
      * @param selection     Die aktuell ausgewählten Elemente.
-     * @param selectionSize Die Größe der selection.
      */
-    public SpriteSubViewModel(GameElement gameElement, Set<PlacedElement> selection, IntegerProperty selectionSize)
+    public SpriteSubViewModel(GameElement gameElement, ReadOnlyListProperty<DraggedElement> selection)
     {
         this(gameElement);
 
-        selected.bind(Bindings.createBooleanBinding(() -> selection.contains(gameElement.getPlacedElement()), selectionSize));
+        selected.bind(Bindings.createBooleanBinding(() -> selection.contains(new DraggedElement(gameElement.getPlacedElement())), selection));
 
         if (gameElement.getElementType() == BaseElementType.RAMP)
         {
-            visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selectionSize));
+            visibility.bind(Bindings.createDoubleBinding(() -> !selection.isEmpty() ? 0.5 : 1, selection));
         }
     }
 

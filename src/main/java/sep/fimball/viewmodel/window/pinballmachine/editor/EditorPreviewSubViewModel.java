@@ -14,9 +14,8 @@ import sep.fimball.model.game.DraggedElement;
 public class EditorPreviewSubViewModel
 {
     private StringProperty topImagePath = new SimpleStringProperty();
-    private ObjectProperty<Vector2> topPixelPosition = new SimpleObjectProperty<>();
+    private ObjectProperty<Vector2> position = new SimpleObjectProperty<>();
     private StringProperty botImagePath = new SimpleStringProperty();
-    private ObjectProperty<Vector2> botPixelPosition = new SimpleObjectProperty<>();
     private PinballMachineEditorViewModel editorViewModel;
 
     public EditorPreviewSubViewModel(DraggedElement draggedElement, PinballMachineEditorViewModel editor)
@@ -26,10 +25,9 @@ public class EditorPreviewSubViewModel
         int rotation = (int)draggedElement.getPlacedElement().rotationProperty().get();
 
         topImagePath.set(draggedElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get().getImagePath(ImageLayer.TOP, rotation, 0));
-        topPixelPosition.bind(draggedElement.accuratePositionProperty());
-
         botImagePath.set(draggedElement.getPlacedElement().getBaseElement().getMedia().elementImageProperty().get().getImagePath(ImageLayer.BOTTOM, rotation, 0));
-        botPixelPosition.bind(draggedElement.accuratePositionProperty());
+
+        position.bind(draggedElement.accuratePositionProperty());
     }
 
     public StringProperty topImagePathProperty()
@@ -42,14 +40,9 @@ public class EditorPreviewSubViewModel
         return botImagePath;
     }
 
-    public ObjectProperty<Vector2> topPixelPositionProperty()
+    public ObjectProperty<Vector2> positionProperty()
     {
-        return topPixelPosition;
-    }
-
-    public ObjectProperty<Vector2> botPixelPositionProperty()
-    {
-        return botPixelPosition;
+        return position;
     }
 
     public PinballMachineEditorViewModel getEditorViewModel()
