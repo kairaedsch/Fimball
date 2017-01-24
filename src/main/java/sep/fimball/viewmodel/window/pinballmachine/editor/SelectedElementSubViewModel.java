@@ -51,6 +51,9 @@ public class SelectedElementSubViewModel
      */
     private BooleanProperty pointsCanBeChanged;
 
+    /**
+     * Gibt an, ob die Stärke verändert werden kann.
+     */
     private BooleanProperty strengthCanBeChanged;
 
     /**
@@ -222,6 +225,11 @@ public class SelectedElementSubViewModel
         return pointsCanBeChanged;
     }
 
+    /**
+     * Gibt zurück, ob die Stärke verändert werden kann.
+     *
+     * @return ob die Stärke verändert werden kann.
+     */
     public ReadOnlyBooleanProperty strengthCanBeChangedProperty()
     {
         return strengthCanBeChanged;
