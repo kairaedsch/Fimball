@@ -10,6 +10,9 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 
 import java.util.ArrayList;
 
+/**
+ * Diese Klasse enthält Methoden zur Generierung von Automaten für Skalierungs- und Belastungstests.
+ */
 @Ignore
 public class TestMachineGenerator
 {

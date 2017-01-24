@@ -152,6 +152,9 @@ public class SpriteSubViewTest
         assertEquals(rectHeight, IMAGE_HEIGHT * SCALE + 0.25 * DesignConfig.PIXELS_PER_GRID_UNIT - ELEMENT_HEIGHT * DesignConfig.PIXELS_PER_GRID_UNIT, 0.0);
     }
 
+    /**
+     * Weist den gemockten Methoden Rückgabewerte zu.
+     */
     private void setupMockedMethods()
     {
         Mockito.when(spriteSubViewModelMock.positionProperty()).thenReturn(new SimpleObjectProperty<>(position));

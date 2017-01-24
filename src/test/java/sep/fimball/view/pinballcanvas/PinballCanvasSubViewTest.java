@@ -37,6 +37,9 @@ import static org.mockito.ArgumentMatchers.anyDouble;
  */
 public class PinballCanvasSubViewTest
 {
+    /**
+     * Lässt den Test im JavaFX-Thread ausführen.
+     */
     @Rule
     public JavaFXThreadingRule javaFXThreadingRule = new JavaFXThreadingRule();
 

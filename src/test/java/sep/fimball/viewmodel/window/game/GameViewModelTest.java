@@ -29,6 +29,9 @@ import static org.mockito.Mockito.*;
  */
 public class GameViewModelTest
 {
+    /**
+     * Überprüft, ob nach Ende des Spiels in den Game-Over-Dialog gewechselt wird.
+     */
     @Test
     public void gameViewModelTest()
     {
@@ -71,6 +74,9 @@ public class GameViewModelTest
         assertNotNull(argument.getValue());
     }
 
+    /**
+     * Überprüft, ob in den Pause-Dialog gewechselt wird, wenn die Pause-Taste im Spiel gedrückt wird.
+     */
     @Test
     public void keyEventTest()
     {

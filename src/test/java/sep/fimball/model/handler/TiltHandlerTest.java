@@ -27,6 +27,9 @@ public class TiltHandlerTest
      */
     private HandlerPlayer player1 = getPlayer();
 
+    /**
+     * Speichert, ob im Spielverlauf ein Tilt auftrat.
+     */
     private boolean tiltActivated;
 
     /**

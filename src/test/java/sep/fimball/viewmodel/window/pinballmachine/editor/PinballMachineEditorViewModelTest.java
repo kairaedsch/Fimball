@@ -33,6 +33,9 @@ public class PinballMachineEditorViewModelTest
     private PlacedElement ball;
     private PinballMachineEditorViewModel pinballMachineEditorViewModel;
 
+    /**
+     * Erzeugt ein PinballMachineEditorViewModel mit einem gemockten Automaten.
+     */
     @Before
     public void initialize()
     {
@@ -59,6 +62,9 @@ public class PinballMachineEditorViewModelTest
         assertEquals(pinballMachineEditorViewModel.cameraPositionProperty().get().getY(), -0.09, 0.01);
     }
 
+    /**
+     * Prüft, ob ein einzelnes Element durch Linksklick darauf ausgewählt werden kann.
+     */
     @Test
     public void selectSingleElementTest()
     {
@@ -75,6 +81,9 @@ public class PinballMachineEditorViewModelTest
         assertThat(pinballMachineEditorViewModel.getSelection().iterator().next().getPlacedElement(), equalTo(ball));
     }
 
+    /**
+     * Prüft, ob ein ausgewähltes Element nach Linksklick auf eine freie Fläche im Editor nicht mehr ausgewählt ist.
+     */
     @Test
     public void deselectElementTest()
     {
@@ -110,6 +119,9 @@ public class PinballMachineEditorViewModelTest
         verify(pinballMachineMock).addElement(ball);
     }
 
+    /**
+     * Prüft, ob ein ausgewähltes Element durch Drücken der Löschen-Taste entfernt wird.
+     */
     @Test
     public void removeElementTest()
     {

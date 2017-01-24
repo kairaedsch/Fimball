@@ -109,6 +109,11 @@ public class GameSessionTest
 
         private GameSessionTest test;
 
+        /**
+         * Erzeugt einen neuen GameLoopObserver, der bei einem Update den Test {@code test} benachrichtigt.
+         *
+         * @param test Der Test, der vom GameLoopObserver bei einem Update benachrichtigt wird.
+         */
         public GameLoopObserver(GameSessionTest test)
         {
             this.test = test;
