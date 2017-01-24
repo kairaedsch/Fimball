@@ -1,6 +1,5 @@
 package sep.fimball.model.handler;
 
-import javafx.beans.property.LongProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -187,13 +186,6 @@ public class ScoreHandlerTest
             {
                 return null;
             }
-
-            @Override
-            public LongProperty lastTimeHitProperty()
-            {
-                return null;
-            }
-
         };
     }
 }

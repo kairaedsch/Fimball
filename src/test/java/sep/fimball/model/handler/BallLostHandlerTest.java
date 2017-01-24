@@ -152,12 +152,6 @@ public class BallLostHandlerTest
                     {
                         return null;
                     }
-
-                    @Override
-                    public LongProperty lastTimeHitProperty()
-                    {
-                        return null;
-                    }
                 });
             }
 

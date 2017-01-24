@@ -176,12 +176,6 @@ public class TiltHandlerTest
             {
                 return null;
             }
-
-            @Override
-            public LongProperty lastTimeHitProperty()
-            {
-                return null;
-            }
         };
     }
 

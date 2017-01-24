@@ -58,10 +58,6 @@ public class GameElement implements HandlerGameElement
      */
     private PlacedElement placedElement;
 
-    /**
-     * Gibt an, wann das Element zuletzt getroffen wurde.
-     */
-    private LongProperty lastTimeHit;
 
     /**
      * Erstellt ein neues GameElement aus dem gegebenen PlacedElement.
@@ -78,7 +74,6 @@ public class GameElement implements HandlerGameElement
         this.currentAnimation = new SimpleObjectProperty<>(Optional.empty());
         this.pointReward = new SimpleIntegerProperty();
         this.height = new SimpleDoubleProperty(0);
-        this.lastTimeHit = new SimpleLongProperty(0);
 
         this.drawOrder = new SimpleIntegerProperty();
         this.drawOrder.bind(Bindings.createIntegerBinding(this::getDrawOrder, this.height));
@@ -244,15 +239,5 @@ public class GameElement implements HandlerGameElement
     public ReadOnlyIntegerProperty drawOrderProperty()
     {
         return drawOrder;
-    }
-
-    /**
-     * Gibt zurück, wann das Element zuletzt getroffen wurde.
-     *
-     * @return Wann das Element zuletzt getroffen wurde.
-     */
-    public LongProperty lastTimeHitProperty()
-    {
-        return lastTimeHit;
     }
 }
