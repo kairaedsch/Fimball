@@ -24,7 +24,7 @@ public class SplashScreenViewModel extends WindowViewModel
     /**
      * Der Abstand zwischen der Aktualisierungen des Lade-Fortschritts.
      */
-    private static final double LOOP_TICK = 0.1;
+    private static final double LOOP_TICK = 0.5;
 
     /**
      * Die Anzahl der Texte, die bem Fortschritt angezeigt werden sollen.
