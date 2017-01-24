@@ -94,7 +94,6 @@ public class SpriteSubView
 
     /**
      * Berechnet die Rotation, Position, Größe, default Bilder, drawArea und regionHashes aus.
-     * // TODO schöner
      */
     private void calculateValues()
     {

@@ -57,7 +57,7 @@ public class EditorSessionSubViewModel
     public void startPinballMachine()
     {
         editorSession.stopUpdateLoop();
-        editorSession.stopAutoSaveLoop(false);
+        editorSession.quit(false);
         GameViewModel.setAsWindowWithBusyDialog(editorViewModel.getSceneManagerViewModel(), pinballMachine, new String[]{"Editor Player"}, true, Optional.of(this.editorViewModel.cameraPositionProperty().get()));
     }
 
@@ -69,7 +69,7 @@ public class EditorSessionSubViewModel
         editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionMessageViewModel("editor.settings.exitToMainMenuQuestion", () ->
         {
             editorSession.stopUpdateLoop();
-            editorSession.stopAutoSaveLoop(true);
+            editorSession.quit(true);
             pinballMachine.unloadElements();
             editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel(pinballMachine));
         }));

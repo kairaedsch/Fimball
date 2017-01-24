@@ -19,6 +19,9 @@ import sep.fimball.model.physics.game.PhysicsGameSession;
 
 import java.util.*;
 
+import static sep.fimball.general.data.PhysicsConfig.EVENT_LIST_FULL_WAIT_TIME;
+import static sep.fimball.general.data.PhysicsConfig.MAX_EVENT_LIST_SIZE;
+
 /**
  * Enthält Informationen über eine Flipper-Partie und die aktiven Spieler.
  */
@@ -279,13 +282,12 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     {
         synchronized (physicMonitor)
         {
-            // TODO make better
-            while (physicsHandler.isTicking() && (this.collisionEventArgsList.size() > 100 || this.collisionEventArgsList.size() > 100))
+            while (physicsHandler.isTicking() && (this.collisionEventArgsList.size() > MAX_EVENT_LIST_SIZE || this.collisionEventArgsList.size() > MAX_EVENT_LIST_SIZE))
             {
                 try
                 {
-                    System.out.println("physic is sleeping");
-                    physicMonitor.wait(250);
+                    System.out.println("Physics is sleeping as the event list are full.");
+                    physicMonitor.wait(EVENT_LIST_FULL_WAIT_TIME);
                 }
                 catch (InterruptedException e)
                 {

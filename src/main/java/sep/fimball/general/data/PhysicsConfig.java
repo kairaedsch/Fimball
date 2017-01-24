@@ -113,4 +113,15 @@ public class PhysicsConfig
      * Die Größe der einzelnen Regionen, in welchen die PhysicObjekte eingeteilt werden um nicht immer alle PhysicObjekte auf Kollision prüfen zu müssen.
      */
     public static final int PHYSICS_REGION_SIZE = 10;
+
+    /**
+     * Die Maximale Größe der EventListens für die GameSession.
+     * Falls die Listen zu groß werden, wird die Physik so lange blockiert, bis die Listen wieder abgebaut sind
+     */
+    public static final int MAX_EVENT_LIST_SIZE = 60;
+
+    /**
+     * Wie lange die Physik wartet, wenn die Listen voll sind, umdann  erneut zu prüfen, ob die Listen voll sind um dann ggf. erneut zu warten.
+     */
+    public static final int EVENT_LIST_FULL_WAIT_TIME = 250;
 }

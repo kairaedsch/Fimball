@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Config;
 import sep.fimball.general.data.Sounds;
+import sep.fimball.general.util.CleanAble;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
@@ -27,6 +28,11 @@ public class EditorSession extends Session
     private Timeline autoSaveLoop;
 
     /**
+     * Dient dazu, das ListBinding wieder zu entfernen.
+     */
+    private CleanAble cleanAbleForListBinding;
+
+    /**
      * Erzeugt eine neue Editor Sitzung.
      *
      * @param pinballMachine Der zu bearbeitende Flipperautomat.
@@ -36,8 +42,8 @@ public class EditorSession extends Session
         super(pinballMachine);
 
         ObservableList<GameElement> list = FXCollections.observableArrayList();
-        // TODO Cleanup
-        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true), Optional.empty());
+        cleanAbleForListBinding = new CleanAble();
+        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true), Optional.of(cleanAbleForListBinding));
 
         world = new World(list, pinballMachine.getMaximumYPosition());
 
@@ -52,12 +58,15 @@ public class EditorSession extends Session
     }
 
     /**
-     * Stoppt die AutoSave-Loop und löscht den AutoSave-Automaten.
+     * Stoppt die AutoSave-Loop, löscht den AutoSave-Automaten und räumt die ListBindings auf.
      * @param deleteAutoSaveData Gibt an, ob die AutoSave-Daten gelöscht werden sollen.
      */
-    public void stopAutoSaveLoop(boolean deleteAutoSaveData){
+    public void quit(boolean deleteAutoSaveData){
         autoSaveLoop.stop();
         if (deleteAutoSaveData)
+        {
             PinballMachineManager.getInstance().deleteAutoSaveMachine();
+        }
+        cleanAbleForListBinding.cleanUp();
     }
 }
