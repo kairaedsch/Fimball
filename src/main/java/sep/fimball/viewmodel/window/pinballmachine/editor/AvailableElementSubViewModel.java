@@ -103,6 +103,8 @@ public class AvailableElementSubViewModel
 
     /**
      * Benachrichtigt das {@code pinballMachineEditorViewModel}, dass das Element ausgewählt wurde.
+     *
+     * @param gridPosition Die Position, an der das Element ausgewählt wurde.
      */
     public void selected(Vector2 gridPosition)
     {
@@ -119,6 +121,16 @@ public class AvailableElementSubViewModel
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);
     }
 
+    /**
+     * Verarbeitet eine Drag-Bewegung.
+     *
+     * @param startX  Die x-Position, an der die Drag-Bewegung angefangen hat.
+     * @param startY  Die y-Position, an der die Drag-Bewegung angefangen hat.
+     * @param endX    Die x-Position, an der sich die Drag-Bewegung befindet.
+     * @param endY    Die y-Position, an der sich die Drag-Bewegung befindet.
+     * @param gridPos Die neue Position auf dem Canvas.
+     * @param button  Die gedrückte Maustaste.
+     */
     public void dragged(double startX, double startY, double endX, double endY, Vector2 gridPos, MouseButton button)
     {
         pinballMachineEditorViewModel.dragged(startX, startY, endX, endY, gridPos, button);
