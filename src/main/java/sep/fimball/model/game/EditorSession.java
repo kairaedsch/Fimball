@@ -48,7 +48,7 @@ public class EditorSession extends Session
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
         autoSaveLoop.play();
 
-        SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
+        SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.MAIN_MUSIC.getSoundName(), true));
     }
 
     /**
