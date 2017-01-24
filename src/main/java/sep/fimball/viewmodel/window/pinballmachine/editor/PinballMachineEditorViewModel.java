@@ -528,9 +528,4 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     {
         return Bindings.createBooleanBinding(() -> !mouseOnCanvas.get() && mouseMode.get() == MouseMode.PLACING, mouseOnCanvas, mouseMode);
     }
-
-    protected void finalize()
-    {
-        System.out.println("Goodbye: " + this);
-    }
 }

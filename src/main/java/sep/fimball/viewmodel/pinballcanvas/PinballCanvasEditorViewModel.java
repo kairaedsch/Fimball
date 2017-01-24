@@ -66,9 +66,4 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     {
         return editorViewModel.cursorProperty();
     }
-
-    protected void finalize()
-    {
-        System.out.println("Goodbye: " + this);
-    }
 }

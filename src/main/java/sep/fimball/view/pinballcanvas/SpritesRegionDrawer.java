@@ -196,9 +196,4 @@ class SpritesRegionDrawer
             }
         }
     }
-
-    protected void finalize()
-    {
-        System.out.println("Goodbye: " + this);
-    }
 }
