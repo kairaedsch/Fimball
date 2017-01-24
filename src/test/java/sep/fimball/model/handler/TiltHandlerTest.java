@@ -57,8 +57,6 @@ public class TiltHandlerTest
         assertThat("Es wurde noch kein Tilt aktiviert", tiltActivated, is(false));
         test.activateUserHandler(new KeyEventArgs(KeyBinding.NUDGE_LEFT, KeyEventArgs.KeyChangedToState.DOWN, true));
         assertThat("Der Tilt wurde für Spieler 1 aktiviert", tiltActivated, is(true));
-        tiltActivated = false;
-        assertThat("Das Zählen des Anstoßens wurde zurückgesetzt", tiltActivated, is(false));
     }
 
     /**

@@ -211,7 +211,7 @@ public class VectorTest
     }
 
     /**
-     * Hier wird überprüft ob die equals Methode des Vektors korrekt funktioniert.
+     * Hier wird überprüft ob die equals Methode des Vektors korrekt funktioniert. ACHTUNG: Der nachfolgende Code erzeugt Warnungen, dies ist beabsichtigt und dient dem Test.
      */
     @Test
     public void equalTest()
