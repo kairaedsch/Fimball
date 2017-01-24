@@ -119,6 +119,7 @@ public class BaseElementManager
 
     /**
      * Lädt die Pfade für alle Bilder aller Elemente.
+     *
      * @return Die Pfade für alle Bilder aller Elemente.
      */
     public List<String> getAllImagePaths()
