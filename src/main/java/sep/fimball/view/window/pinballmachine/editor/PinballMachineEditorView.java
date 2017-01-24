@@ -27,6 +27,9 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
  */
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
+    /**
+     * Beinhaltet alle Elemente, die vom Nutzer aktuell gedragged werden.
+     */
     @FXML
     private Pane previewBase;
 

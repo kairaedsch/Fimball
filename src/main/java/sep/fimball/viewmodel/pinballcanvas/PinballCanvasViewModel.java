@@ -227,6 +227,11 @@ public abstract class PinballCanvasViewModel
      */
     protected abstract void setCameraZoom(double zoom);
 
+    /**
+     * Gibt die Pfade aller Bilder zurück, die es gibt.
+     *
+     * @return Die Pfade aller Bilder die es gibt.
+     */
     public List<String> getAllImagePaths()
     {
         return BaseElementManager.getInstance().getAllImagePaths();

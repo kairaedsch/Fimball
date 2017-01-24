@@ -50,6 +50,9 @@ public class PhysicsElement<GameElementT>
      */
     private BasePhysicsElement basePhysicsElement;
 
+    /**
+     * Gibt an, welche Collider aktuell mit dem Ball collidieren.
+     */
     private HashMap<Integer, Boolean> colliding;
 
     /**
