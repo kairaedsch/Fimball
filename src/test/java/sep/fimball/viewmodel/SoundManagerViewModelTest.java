@@ -91,23 +91,23 @@ public class SoundManagerViewModelTest
     }
 
     /**
-     * Stellt einen Observer da, der die Anzahl der Notifikationen zählt, die er erhält, sowie den Sound speichert, der
+     * Stellt einen Observer da, der die Anzahl der Benachrichtigungen zählt, die er erhält, sowie den Sound speichert, der
      * übergeben wird.
      */
     class NotificationObserver implements Observer
     {
         /**
-         * Die Anzahl der Notifikationen zählt, die der Observer erhalten hat.
+         * Die Anzahl der Benachrichtigungen zählt, die der Observer erhalten hat.
          */
         private int notifications;
 
         /**
-         * Der Sound, der bei der letzten Notifikation übergeben wurde.
+         * Der Sound, der bei der letzten Benachrichtigung übergeben wurde.
          */
         private Sound sound;
 
         /**
-         * Erstelt einen neuen NotificationObserver.
+         * Erstellt einen neuen NotificationObserver.
          */
         NotificationObserver()
         {
@@ -122,9 +122,9 @@ public class SoundManagerViewModelTest
         }
 
         /**
-         * Gibt die Anzahl der Notifikationen, die der Observer erhalten hat, zurück.
+         * Gibt die Anzahl der Benachrichtigungen, die der Observer erhalten hat, zurück.
          *
-         * @return Die Anzahl der Notifikationen, die der Observer erhalten hat,
+         * @return Die Anzahl der Benachrichtigungen, die der Observer erhalten hat,
          */
         int getNumberOfNotifications()
         {
@@ -132,9 +132,9 @@ public class SoundManagerViewModelTest
         }
 
         /**
-         * Gibt den Sound, der bei der letzten Notifikation übergeben wurde, zurück.
+         * Gibt den Sound, der bei der letzten Benachrichtigung übergeben wurde, zurück.
          *
-         * @return Der Sound, der bei der letzten Notifikation übergeben wurde.
+         * @return Der Sound, der bei der letzten Benachrichtigung übergeben wurde.
          */
         Sound getSound()
         {
