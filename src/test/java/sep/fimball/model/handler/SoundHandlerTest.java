@@ -102,7 +102,7 @@ public class SoundHandlerTest
             @Override
             public BaseElementType getElementType()
             {
-                return null;
+                return BaseElementType.SPINNER;
             }
 
             @Override
@@ -110,6 +110,7 @@ public class SoundHandlerTest
             {
                 return null;
             }
+
         };
     }
 }

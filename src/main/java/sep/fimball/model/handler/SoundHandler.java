@@ -1,5 +1,8 @@
 package sep.fimball.model.handler;
 
+import sep.fimball.model.blueprint.base.BaseElementCategory;
+import sep.fimball.model.blueprint.base.BaseElementType;
+import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
@@ -33,16 +36,28 @@ public class SoundHandler implements ElementHandler
     {
         double minimumDepthForSound = 0.01;
 
-        if (elementHandlerArgs.getCollisionEventType() == CollisionEventType.ENTERED && elementHandlerArgs.getDepth() >= minimumDepthForSound)
+        if (elementHandlerArgs.getCollisionEventType() == CollisionEventType.ENTERED)
         {
-            Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
-
-            if (eventMap.containsKey(elementHandlerArgs.getColliderId()))
+            if (element.getElementType() == BaseElementType.NORMAL && elementHandlerArgs.getDepth() >= minimumDepthForSound)
             {
-                Optional<Sound> soundToPlay = eventMap.get(elementHandlerArgs.getColliderId()).getSound();
-
-                soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
+                playSound(element, elementHandlerArgs.getColliderId());
             }
+            if (element.getElementType() != BaseElementType.NORMAL)
+            {
+                playSound(element, elementHandlerArgs.getColliderId());
+            }
+        }
+    }
+
+    private void playSound(HandlerGameElement element, int colliderId)
+    {
+        Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
+
+        if (eventMap.containsKey(colliderId))
+        {
+            Optional<Sound> soundToPlay = eventMap.get(colliderId).getSound();
+
+            soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
         }
     }
 }
