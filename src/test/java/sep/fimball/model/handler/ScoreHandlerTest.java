@@ -8,6 +8,7 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementType;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.ElementImage;
+import sep.fimball.model.physics.game.CollisionEventType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +31,9 @@ public class ScoreHandlerTest
         HandlerGameSession gameSession = getGameSession();
         ScoreHandler test = new ScoreHandler(gameSession);
 
-        test.activateElementHandler(getElement(), new ElementHandlerArgs(null, 0, 1));
+        test.activateElementHandler(getElement(), new ElementHandlerArgs(CollisionEventType.ENTERED, 0, 1));
         assertThat("Der Spieler hat einmal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(12));
-        test.activateElementHandler(getElement(), new ElementHandlerArgs(null, 0, 1));
+        test.activateElementHandler(getElement(), new ElementHandlerArgs(CollisionEventType.ENTERED, 0, 1));
         assertThat("Der Spieler hat zweimal Punkte bekommen", gameSession.getCurrentPlayer().pointsProperty().get(), is(24));
     }
 
