@@ -51,6 +51,8 @@ public class SelectedElementSubViewModel
      */
     private BooleanProperty pointsCanBeChanged;
 
+    private BooleanProperty strengthCanBeChanged;
+
     /**
      * Gibt an ob die Auswahl rotiert werden kann.
      */
@@ -81,6 +83,7 @@ public class SelectedElementSubViewModel
         placedElement = Optional.empty();
         this.pinballMachineEditor = pinballMachineEditor;
         pointsCanBeChanged = new SimpleBooleanProperty(false);
+        strengthCanBeChanged = new SimpleBooleanProperty(false);
         rotateAvailable = new SimpleBooleanProperty();
         duplicateAvailable = new SimpleBooleanProperty();
         removeAvailable = new SimpleBooleanProperty();
@@ -131,6 +134,7 @@ public class SelectedElementSubViewModel
             multiplier.bindBidirectional(newPlacedElement.get().multiplierProperty());
             isSomethingSelected.set(true);
             pointsCanBeChanged.set(newPlacedElement.get().getBaseElement().getRule().getEventMap().entrySet().stream().anyMatch((r) -> r.getValue().givesPoints()));
+            strengthCanBeChanged.set(newPlacedElement.get().getBaseElement().getPhysics().isStrengthModificationPossible());
         }
         else
         {
@@ -216,6 +220,11 @@ public class SelectedElementSubViewModel
     public ReadOnlyBooleanProperty pointsCanBeChanged()
     {
         return pointsCanBeChanged;
+    }
+
+    public ReadOnlyBooleanProperty strengthCanBeChangedProperty()
+    {
+        return strengthCanBeChanged;
     }
 
     /**

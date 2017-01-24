@@ -88,6 +88,8 @@ public class SelectedElementSubView implements ViewBoundToViewModel<SelectedElem
         descriptionLabel.visibleProperty().bind(selectedElementSubViewModel.isSomethingSelected());
         pointsSlider.visibleProperty().bind(Bindings.and(selectedElementSubViewModel.pointsCanBeChanged(), selectedElementSubViewModel.isSomethingSelected()));
         pointsLabel.visibleProperty().bind(Bindings.and(selectedElementSubViewModel.pointsCanBeChanged(), selectedElementSubViewModel.isSomethingSelected()));
+        strengthSlider.visibleProperty().bind(Bindings.and(selectedElementSubViewModel.strengthCanBeChangedProperty(), selectedElementSubViewModel.isSomethingSelected()));
+        strengthLabel.visibleProperty().bind(Bindings.and(selectedElementSubViewModel.strengthCanBeChangedProperty(), selectedElementSubViewModel.isSomethingSelected()));
 
         strengthSlider.setMajorTickUnit(0.1);
         strengthSlider.setMinorTickCount(0);

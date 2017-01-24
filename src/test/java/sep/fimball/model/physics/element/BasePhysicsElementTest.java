@@ -74,7 +74,7 @@ public class BasePhysicsElementTest
         colliders.add(colliderB);
 
         // Erstelle BasePhysicsElement mit Mocks
-        basePhysicsElement = new BasePhysicsElement(new Vector2(), colliders);
+        basePhysicsElement = new BasePhysicsElement(new Vector2(), colliders, true);
     }
 
     /**

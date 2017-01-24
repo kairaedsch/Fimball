@@ -28,6 +28,7 @@ public class BasePhysicsElementFactory
         nullCheck(physicsElement.pivotPoint);
         nullCheck(physicsElement.colliders);
 
+        boolean strengthModificationPossible = false;
         Vector2 pivotPoint = physicsElement.pivotPoint;
         List<Collider> colliders = new ArrayList<>();
         for (BaseElementJson.PhysicElementJson.PhysicColliderJson collider : physicsElement.colliders)
@@ -65,12 +66,15 @@ public class BasePhysicsElementFactory
                 case "acceleration":
                     nullCheck(collider.collisionType.acceleration);
                     collisionType = new AccelerationCollision(collider.collisionType.acceleration);
+                    strengthModificationPossible = true;
                     break;
                 case "bounce":
                     collisionType = new BounceCollision(collider.collisionType.strength);
+                    strengthModificationPossible = true;
                     break;
                 case "flipper":
                     collisionType = new FlipperCollision();
+                    strengthModificationPossible = true;
                     break;
                 case "empty":
                     collisionType = new EmptyCollision();
@@ -83,6 +87,7 @@ public class BasePhysicsElementFactory
                     break;
                 case "plunger":
                     collisionType = new PlungerCollision();
+                    strengthModificationPossible = true;
                     break;
                 case "hole":
                     collisionType = new HoleCollision();
@@ -99,6 +104,6 @@ public class BasePhysicsElementFactory
             newCollider = new Collider(layer, shapes, collisionType, collider.colliderId);
             colliders.add(newCollider);
         }
-        return new BasePhysicsElement(pivotPoint, colliders);
+        return new BasePhysicsElement(pivotPoint, colliders, strengthModificationPossible);
     }
 }

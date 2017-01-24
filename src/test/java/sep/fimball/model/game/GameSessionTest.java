@@ -9,7 +9,6 @@ import sep.fimball.general.data.Vector2;
 import sep.fimball.model.blueprint.base.BaseElementManager;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
-import sep.fimball.model.handler.ElementHandlerArgs;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.HandlerManager;
 import sep.fimball.model.physics.game.CollisionEventArgs;

@@ -25,16 +25,19 @@ public class BasePhysicsElement
      */
     private List<Collider> colliders;
 
+    private boolean strengthModificationPossible;
+
     /**
      * Erstellt ein neues BasePhysicsElement.
      *
      * @param pivotPoint Die Position des Pivot-Punktes des Elements.
      * @param colliders  Die Collider, die dieses Element hat.
      */
-    public BasePhysicsElement(Vector2 pivotPoint, List<Collider> colliders)
+    public BasePhysicsElement(Vector2 pivotPoint, List<Collider> colliders, boolean strengthModificationPossible)
     {
         this.pivotPoint = pivotPoint;
         this.colliders = colliders;
+        this.strengthModificationPossible = strengthModificationPossible;
     }
 
     /**
@@ -55,6 +58,11 @@ public class BasePhysicsElement
     public List<Collider> getColliders()
     {
         return Collections.unmodifiableList(colliders);
+    }
+
+    public boolean isStrengthModificationPossible()
+    {
+        return strengthModificationPossible;
     }
 
     /**
