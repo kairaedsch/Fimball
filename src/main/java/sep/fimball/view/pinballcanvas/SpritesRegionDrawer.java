@@ -34,7 +34,7 @@ class SpritesRegionDrawer
      * Teilt das Spielfeld in sogenannte "pots" auf. Dabei besteht eine "region" aus "pots", welche Sprites speichert.
      * Diese Sprites liegen dabei sortiert nach ihrer DrawOrder vor. Jeder "pot" in einem "pots" steht demnach für alle Sprites die die selbe drawOrder haben.
      */
-    private Map<Long, List<SpriteSubView>[]> globalRegion;
+    private Map<Long, List<SpriteRegionSubView>[]> globalRegion;
 
     /**
      * Erstellt einen neuen SpritesRegionsDrawer.
@@ -50,24 +50,24 @@ class SpritesRegionDrawer
         globalRegion = new HashMap<>();
 
         // Bindet die globalRegion an die Sprites
-        ObservableList<SpriteSubView> listPropertyConverted = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(listPropertyConverted, sprites, sprite -> sprite, sprite ->
+        ObservableList<SpriteRegionSubView> listPropertyConverted = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.<SpriteRegionSubView, SpriteSubView>bindAndConvertList(listPropertyConverted, sprites, SpriteRegionSubView::new, sprite ->
                 {
                     // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
-                    addSpriteRegions(sprite, sprite.regionHashesProperty().get());
-                    ChangeListener<List<Long>> regionHashListener = (x, oldRegion, newRegion) -> updateSpritesRegions(sprite, oldRegion, newRegion, sprite.drawOrderProperty().get());
-                    ChangeListener<Number> drawOrderlistener = (x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.regionHashesProperty().get(), sprite.regionHashesProperty().get(), oldDrawOrder.intValue());
+                    addSpriteRegions(sprite, sprite.getRegionHashes());
+                    ChangeListener<List<Long>> regionHashListener = (x, oldRegion, newRegion) -> updateSpritesRegions(sprite, oldRegion, newRegion, sprite.getDrawOrder());
+                    ChangeListener<Number> drawOrderlistener = (x, oldDrawOrder, xx) -> updateSpritesRegions(sprite, sprite.getRegionHashes(), sprite.getRegionHashes(), oldDrawOrder.intValue());
                     sprite.setDrawListener(regionHashListener, drawOrderlistener);
                 }, sprite ->
                 {
                     // Wird ausgeführt, wenn ein Element entfernt werden soll
-                    removeSpriteRegions(sprite, sprite.regionHashesProperty().get(), sprite.drawOrderProperty().get());
+                    removeSpriteRegions(sprite, sprite.getRegionHashes(), sprite.getDrawOrder());
                     sprite.clearDrawListener();
                 },
                 // Wird ausgeführt, wenn alle Elemente entfernt werden sollen
                 () ->
                 {
-                    listPropertyConverted.forEach(SpriteSubView::clearDrawListener);
+                    listPropertyConverted.forEach(SpriteRegionSubView::clearDrawListener);
                     clearSpriteRegions();
                 }, Optional.empty());
     }
@@ -80,7 +80,7 @@ class SpritesRegionDrawer
      * @param newRegion    Die neue region der Sprite.
      * @param oldDrawOrder Die alte Zeichenreihenfolge es Sprites.
      */
-    private void updateSpritesRegions(SpriteSubView sprite, List<Long> oldRegion, List<Long> newRegion, int oldDrawOrder)
+    private void updateSpritesRegions(SpriteRegionSubView sprite, List<Long> oldRegion, List<Long> newRegion, int oldDrawOrder)
     {
         removeSpriteRegions(sprite, oldRegion, oldDrawOrder);
         addSpriteRegions(sprite, newRegion);
@@ -92,11 +92,11 @@ class SpritesRegionDrawer
      * @param sprite Das hinzuzufügende Sprite.
      * @param region Die region, in welcher das sprite hinzugefügt werden soll.
      */
-    private void addSpriteRegions(SpriteSubView sprite, List<Long> region)
+    private void addSpriteRegions(SpriteRegionSubView sprite, List<Long> region)
     {
         for (Long potsHash : region)
         {
-            List<SpriteSubView>[] pots = globalRegion.get(potsHash);
+            List<SpriteRegionSubView>[] pots = globalRegion.get(potsHash);
             if (pots == null)
             {
                 pots = new List[DRAW_ORDER_AMOUNT];
@@ -106,8 +106,7 @@ class SpritesRegionDrawer
                 }
                 globalRegion.put(potsHash, pots);
             }
-            pots[sprite.drawOrderProperty().get()].add(sprite);
-            System.out.println("ADDED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + sprite.drawOrderProperty().get() + "T: " + Thread.currentThread().getId() + "P: " + this);
+            pots[sprite.getDrawOrder()].add(sprite);
         }
     }
 
@@ -118,16 +117,15 @@ class SpritesRegionDrawer
      * @param region    Die region, in welcher das Sprite entfernt werden soll.
      * @param drawOrder Die vielleicht alte Zeichenreihenfolge des Sprites.
      */
-    private void removeSpriteRegions(SpriteSubView sprite, List<Long> region, int drawOrder)
+    private void removeSpriteRegions(SpriteRegionSubView sprite, List<Long> region, int drawOrder)
     {
         for (Long potsHash : region)
         {
             boolean success = false;
-            List<SpriteSubView>[] lists = globalRegion.get(potsHash);
+            List<SpriteRegionSubView>[] lists = globalRegion.get(potsHash);
             if(lists != null)
             {
                 success = lists[drawOrder].remove(sprite);
-                if(success) System.out.println("REMOVED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + drawOrder + " T: " + Thread.currentThread().getId() + " P: " + this);
             }
             if (!success)
             {
@@ -188,7 +186,7 @@ class SpritesRegionDrawer
             for (Long potsHash : regionOfCanvas)
             {
                 // Zeichne die Sprites im pot der richtigen drawOrder
-                List<SpriteSubView>[] pots = globalRegion.get(potsHash);
+                List<SpriteRegionSubView>[] pots = globalRegion.get(potsHash);
                 if (pots != null)
                 {
                     pots[d].forEach(sprite -> sprite.draw(canvasRectangle, graphicsContext, imageLayer, drawMode));
