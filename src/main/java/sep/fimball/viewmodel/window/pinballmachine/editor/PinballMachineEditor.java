@@ -40,6 +40,11 @@ public class PinballMachineEditor
         selection = new SimpleListProperty<>(FXCollections.observableArrayList());
     }
 
+    /**
+     * Wählt ein Element (oder nichts) aus.
+     * @param element Das Element, falls vorhanden, das ausgewählt werden soll.
+     * @param additive Ob das Element zur Auswähl hinzugefügt werden soll (true), oder eine neue Auswahl mit dem Element erstellt werden soll.
+     */
     void selectElement(Optional<DraggedElement> element, boolean additive)
     {
         if (additive)

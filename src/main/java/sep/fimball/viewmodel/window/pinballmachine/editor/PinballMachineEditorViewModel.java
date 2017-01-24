@@ -519,11 +519,19 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         this.cameraZoom.set(cameraZoom);
     }
 
+    /**
+     * Die Liste der ViewModels die für die Vorschau der ausgewählten Elemente.
+     * @return Die Liste der ViewModels die für die Vorschau der ausgewählten Elemente.
+     */
     public ReadOnlyListProperty<EditorPreviewSubViewModel> previewsProperty()
     {
         return editorPreviewSubViews;
     }
 
+    /**
+     * Beschreibt ob die ausgewählten Elemente als Nodes oder im Canvas angezeigt werden.
+     * @return True wenn Nodes angezeigt werden sollen, sonst false.
+     */
     public BooleanBinding showElementsAsNodesProperty()
     {
         return Bindings.createBooleanBinding(() -> !mouseOnCanvas.get() && mouseMode.get() == MouseMode.PLACING, mouseOnCanvas, mouseMode);

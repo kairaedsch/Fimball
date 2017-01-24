@@ -280,11 +280,11 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     }
 
     /**
-     * Berechnet die Position der Maus auf dem Canvas und gibt diese zurück.
+     * Nimmt eine Position auf der JavaFX scene und rechnet die entsprechende Position auf dem Grid aus.
      *
-     * @param sceneX Die Position der Maus in der JavaFX scene.
-     * @param sceneY
-     * @return Die berechnete Position auf dem Canvas.
+     * @param sceneX Die Position in der JavaFX scene.
+     * @param sceneY Die Position in der JavaFX scene.
+     * @return Die berechnete Position auf dem Grid.
      */
     Vector2 scenePixelToGridPos(double sceneX, double sceneY)
     {
@@ -292,6 +292,12 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         return canvasPixelToGridPos(new Vector2(canvasPos.getX(), canvasPos.getY()));
     }
 
+    /**
+     * Nimmt eine Position in Grid-Einheiten und rechnet die entsprechende Position auf dem Canvas in Pixeln aus.
+     *
+     * @param gridPos Die Position auf dem Grid.
+     * @return Die berechnete Position auf dem Canvas.
+     */
     Vector2 gridToCanvasPixelPos(Vector2 gridPos)
     {
         Point2D canvasScenePos = pinballCanvasContainer.localToScene(0, 0);
