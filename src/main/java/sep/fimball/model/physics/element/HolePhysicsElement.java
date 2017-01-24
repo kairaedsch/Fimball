@@ -22,6 +22,9 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      */
     private Optional<BallPhysicsElement> frozenBall;
 
+    /**
+     * Gibt die Position an, an die der Ball eingefroren wurde.
+     */
     private Optional<Vector2> ballFreezePosition;
 
     /**
