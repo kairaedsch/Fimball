@@ -115,12 +115,27 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     private ObjectProperty<Cursor> cursorProperty;
 
     /**
-     *
+     * Gibt an, ob das Draggen auf dem Canvas angefangen hat.
      */
     private boolean dragStartedOnCanvas = false;
 
-    private ListProperty<EditorPreviewSubViewModel> editorPreviewSubViews;
+    /**
+     * Beinhaltet alle Elemente, die aktuell ausgewählt sind, als EditorPreviewSubViewModel, sodass diese zum Draggen angezeigt werden können.
+     */
+    private ListProperty<EditorPreviewSubViewModel> editorPreviewSubViewModels;
 
+    /**
+     * DIe zuletzt bekannte Gridposition der Maus.
+     */
+    private Optional<Vector2> oldGridPos = Optional.empty();
+
+    /**
+     * Erstellt ein neues PinballMachineEditorViewModel und zeigt bei der Erstellung einen Warte-Dialog an.
+     *
+     * @param sceneManager         Der dazugehörige SceneManager
+     * @param pinballMachine       Der Flipperautomat, der editiert werden soll.
+     * @param editorCameraPosition Die Anfangsposition der Kamera (Wenn vorhanden).
+     */
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
@@ -130,7 +145,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Erstellt ein neues PinballMachineEditorViewModel.
      *
-     * @param pinballMachine Der Flipperautomat, der editiert werden soll.
+     * @param pinballMachine       Der Flipperautomat, der editiert werden soll.
+     * @param editorCameraPosition Die Anfangsposition der Kamera (Wenn vorhanden).
      */
     public PinballMachineEditorViewModel(PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
@@ -166,11 +182,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
         editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);
 
-        editorPreviewSubViews = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this), Optional.of(this));
+        editorPreviewSubViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
+        ListPropertyConverter.bindAndConvertList(editorPreviewSubViewModels, getSelection(), t -> new EditorPreviewSubViewModel(t, this), Optional.of(this));
     }
-
-    private Optional<Vector2> oldGridPos = Optional.empty();
 
     /**
      * Verarbeitet eine Drag-Bewegung.
@@ -324,7 +338,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     /**
      * Wählt eines der verfügbaren Basis-Elemente aus.
      *
-     * @param baseElement Das Basis-Element, das ausgewählt werden soll.
+     * @param baseElement  Das Basis-Element, das ausgewählt werden soll.
+     * @param gridPosition Die Gridposition des zu erstellenden Elements.
      */
     void select(BaseElement baseElement, Vector2 gridPosition)
     {
@@ -521,15 +536,17 @@ public class PinballMachineEditorViewModel extends WindowViewModel
 
     /**
      * Die Liste der ViewModels die für die Vorschau der ausgewählten Elemente.
+     *
      * @return Die Liste der ViewModels die für die Vorschau der ausgewählten Elemente.
      */
     public ReadOnlyListProperty<EditorPreviewSubViewModel> previewsProperty()
     {
-        return editorPreviewSubViews;
+        return editorPreviewSubViewModels;
     }
 
     /**
      * Beschreibt ob die ausgewählten Elemente als Nodes oder im Canvas angezeigt werden.
+     *
      * @return True wenn Nodes angezeigt werden sollen, sonst false.
      */
     public BooleanBinding showElementsAsNodesProperty()
