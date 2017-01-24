@@ -70,6 +70,11 @@ public class FlipperGameElement extends GameElement implements UserHandler
         }
     }
 
+    /**
+     * Spielt den Flipper Sound ab.
+     *
+     * @param soundPath Der Pfad des Flipper Sound.
+     */
     private void playFlipperSound(String soundPath)
     {
         SoundManager.getInstance().addSoundToPlay(new Sound(soundPath, false));

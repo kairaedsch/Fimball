@@ -208,6 +208,12 @@ public class ElementImage
         }
     }
 
+    /**
+     * Gibt alle Pfade zurück aus denen dieses ElementImage besteht. Also wenn vorhanden
+     * alle Bilder der Animation, also sowohl die Pfade der Top Bild(er) als auch der Bottom Bild(er).
+     *
+     * @return Alle Pfade aus denen dieses ElementImage besteht.
+     */
     public List<String> getAllImagePaths()
     {
         List<String> allImages = new ArrayList<>();

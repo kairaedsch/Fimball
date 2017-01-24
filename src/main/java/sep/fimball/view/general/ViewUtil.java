@@ -10,7 +10,7 @@ import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 public class ViewUtil
 {
     /**
-     * Rechnet die durch die gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
+     * Rechnet die gegebene Position auf dem Canvas auf die zugehörige Grid-Position um.
      *
      * @param cameraPosition Die Position der Kamera.
      * @param cameraZoom     Der Zoom der Kamera.
@@ -23,6 +23,15 @@ public class ViewUtil
         return canvasPixel.minus(canvasSize.scale(0.5)).scale(1 / (PIXELS_PER_GRID_UNIT * cameraZoom)).plus(cameraPosition);
     }
 
+    /**
+     * Rechnet die gegebene Position auf dem Grid auf die zugehörige Position im Canvas um.
+     *
+     * @param cameraPosition Die Position der Kamera.
+     * @param cameraZoom Der Zoom der Kamera.
+     * @param gridPos Die Position auf dem Grid.
+     * @param canvasSize Die Größe des Canvas.
+     * @return Die Position auf dem Canvas.
+     */
     public static Vector2 gridToCanvasPixelPos(Vector2 cameraPosition, double cameraZoom, Vector2 gridPos, Vector2 canvasSize)
     {
         return gridPos.minus(cameraPosition).scale(PIXELS_PER_GRID_UNIT * cameraZoom).plus(canvasSize.scale(0.5));

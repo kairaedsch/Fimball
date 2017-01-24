@@ -8,22 +8,26 @@ import java.util.Optional;
 public class BaseMediaElementEvent
 {
     /**
-     * Die Animation des jeweiligen Bahnelements.
+     * Die Animation des jeweiligen Collider.
      */
     private Optional<ElementImage> animation;
 
     /**
-     * Der Soundeffekt des jeweiligen Bahnelements.
+     * Der Soundeffekt des jeweiligen Collider.
      */
     private Optional<Sound> sound;
 
+    /**
+     * Gibt an ob der Sound nur abgespielt werden soll wenn der Ball mit einer erhöhten Geschwindigkeit auf den Collider trifft.
+     */
     private boolean soundSpeedRestricted;
 
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.
      *
-     * @param animation Die Animation des jeweiligen Bahnelements.
-     * @param soundName Die Animation des jeweiligen Bahnelements.
+     * @param animation Die Animation des jeweiligen Collider.
+     * @param soundName Der Sound des jeweiligen Collider.
+     * @param soundSpeedRestricted Gibt an ob der Sound nur abgespielt werden soll wenn der Ball mit einer erhöhten Geschwindigkeit auf den Collider trifft.
      */
     public BaseMediaElementEvent(Optional<ElementImage> animation, Optional<String> soundName, boolean soundSpeedRestricted)
     {
@@ -56,6 +60,11 @@ public class BaseMediaElementEvent
         return sound;
     }
 
+    /**
+     * Gibt zurück ob der Sound nur abgespielt werden soll wenn der Ball mit erhöhter Geschwindigkeit auf den Collider trifft.
+     *
+     * @return Ob der Sound nur abgespielt werden soll wenn der Ball mit erhöhter Geschwindigkeit auf den Collider trifft.
+     */
     public boolean isSoundSpeedRestricted()
     {
         return soundSpeedRestricted;
