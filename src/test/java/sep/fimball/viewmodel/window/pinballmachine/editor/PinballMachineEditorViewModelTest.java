@@ -50,6 +50,9 @@ public class PinballMachineEditorViewModelTest
         pinballMachineEditorViewModel = new PinballMachineEditorViewModel(pinballMachineMock, Optional.empty());
     }
 
+    /**
+     * Prüft, ob die Kamera richtig bewegt wird.
+     */
     @Test
     public void cameraDraggedTest()
     {
@@ -103,6 +106,9 @@ public class PinballMachineEditorViewModelTest
         assertThat(pinballMachineEditorViewModel.getSelection().isEmpty(), is(true));
     }
 
+    /**
+     * Prüft, ob Elemente richtig, durch Loslassen der Maus-Taste, plaziert werden.
+     */
     @Test
     public void placeElementTest()
     {
