@@ -3,10 +3,7 @@ package sep.fimball.model.handler.light;
 import javafx.animation.AnimationTimer;
 import javafx.collections.transformation.FilteredList;
 import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.handler.GameEvent;
-import sep.fimball.model.handler.GameHandler;
-import sep.fimball.model.handler.HandlerGameElement;
-import sep.fimball.model.handler.HandlerGameSession;
+import sep.fimball.model.handler.*;
 import sep.fimball.model.media.ElementImage;
 
 import java.util.List;
@@ -26,7 +23,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Schleife, in der die Lichter gewechselt werden.
      */
-    private AnimationTimer lightChangeLoop;
+    private GameElementAnimation lightChangeLoop;
 
     /**
      * Die LightChangers, die benutzt werden, um die Lichter zu wechseln und verschiedene Effekte erzeugen.
@@ -53,14 +50,14 @@ public class LightHandler implements GameHandler
     {
         lights = new FilteredList<>(gameSession.getWorld().gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
-        lightChangeLoop = new AnimationTimer()
+        lightChangeLoop = new GameElementAnimation(new AnimationTimer()
         {
             @Override
             public void handle(long now)
             {
                 changeLights();
             }
-        };
+        });
 
         this.lightChangers = lightChangers;
         currentLightChanger = lightChangers.get(0);
@@ -69,15 +66,7 @@ public class LightHandler implements GameHandler
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        switch (gameEvent)
-        {
-            case START:
-                lightChangeLoop.start();
-                break;
-            case PAUSE:
-                lightChangeLoop.stop();
-                break;
-        }
+        lightChangeLoop.activate(gameEvent);
     }
 
     /**

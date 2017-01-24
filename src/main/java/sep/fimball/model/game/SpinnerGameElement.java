@@ -44,9 +44,9 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     private boolean accelerationUpdated;
 
     /**
-     * Der AnimationTimer welcher sich um die Updates des Spinner kümmert.
+     * Die Animation welche sich um die Updates des Spinner kümmert.
      */
-    private AnimationTimer spinnerUpdate;
+    private GameElementAnimation spinnerUpdate;
 
     /**
      * Die GameSession welche genutzt wird um den Spieler Punkte bei jeder Umdrehung des Spinners hinzuzufügen.
@@ -73,7 +73,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
             ballSpeedDelta = new Vector2(deltaX, deltaY);
         }));
 
-        spinnerUpdate = new AnimationTimer()
+        AnimationTimer spinnerAnim = new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -104,7 +104,8 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
                 setCurrentAnimation(getMediaElement().getEventMap().get(-1 * (currentFrame + 1)).getAnimation());
             }
         };
-        spinnerUpdate.start();
+        spinnerUpdate = new GameElementAnimation(spinnerAnim);
+        spinnerAnim.start();
     }
 
     @Override
@@ -143,14 +144,6 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        switch (gameEvent)
-        {
-            case START:
-                spinnerUpdate.start();
-                break;
-            case PAUSE:
-                spinnerUpdate.stop();
-                break;
-        }
+        spinnerUpdate.activate(gameEvent);
     }
 }

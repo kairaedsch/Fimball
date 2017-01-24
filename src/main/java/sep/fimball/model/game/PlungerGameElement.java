@@ -5,6 +5,7 @@ import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import sep.fimball.general.data.PhysicsConfig;
 import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
+import sep.fimball.model.handler.GameElementAnimation;
 import sep.fimball.model.handler.GameEvent;
 import sep.fimball.model.handler.GameHandler;
 import sep.fimball.model.handler.UserHandler;
@@ -46,7 +47,7 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
     /**
      * Timer, um den aktuellen Aufladstatus zu berechnen und aktuell zu halten.
      */
-    private AnimationTimer plungerUpdate;
+    private GameElementAnimation plungerUpdate;
 
     /**
      * Erstellt ein neues PlungerGameElement aus dem gegebenen PlacedElement.
@@ -58,7 +59,7 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
     {
         super(element, bind);
 
-        plungerUpdate = new AnimationTimer()
+        plungerUpdate = new GameElementAnimation(new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -69,7 +70,7 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
                     setCurrentAnimation(getMediaElement().getEventMap().get(-power).getAnimation());
                 }
             }
-        };
+        });
 
         resetTransition = new PauseTransition(Duration.seconds(PhysicsConfig.PLUNGER_FORCE_DURATION));
         resetTransition.setOnFinished(e -> plungerPhysicsElement.addModify(() -> 0));
@@ -133,14 +134,6 @@ public class PlungerGameElement extends GameElement implements UserHandler, Game
     @Override
     public void activateGameHandler(GameEvent gameEvent)
     {
-        switch (gameEvent)
-        {
-            case START:
-                plungerUpdate.start();
-                break;
-            case PAUSE:
-                plungerUpdate.stop();
-                break;
-        }
+        plungerUpdate.activate(gameEvent);
     }
 }
