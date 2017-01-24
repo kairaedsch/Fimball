@@ -195,6 +195,8 @@ public class BaseElementJson
              */
             public String soundName;
 
+            public boolean soundSpeedRestricted;
+
             /**
              * Speichert die Animation, die dieser Element-Typ bei Kollision mit dem Collider abspielt.
              */

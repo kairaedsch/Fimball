@@ -1,8 +1,5 @@
 package sep.fimball.model.handler;
 
-import sep.fimball.model.blueprint.base.BaseElementCategory;
-import sep.fimball.model.blueprint.base.BaseElementType;
-import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
@@ -35,29 +32,26 @@ public class SoundHandler implements ElementHandler
     public void activateElementHandler(HandlerGameElement element, ElementHandlerArgs elementHandlerArgs)
     {
         double minimumDepthForSound = 0.01;
+        int colliderId = elementHandlerArgs.getColliderId();
 
         if (elementHandlerArgs.getCollisionEventType() == CollisionEventType.ENTERED)
         {
-            if (element.getElementType() == BaseElementType.NORMAL && elementHandlerArgs.getDepth() >= minimumDepthForSound)
+            Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
+
+            if (eventMap.containsKey(colliderId))
             {
-                playSound(element, elementHandlerArgs.getColliderId());
+                Optional<Sound> soundToPlay = eventMap.get(colliderId).getSound();
+                boolean soundRestricted = eventMap.get(colliderId).isSoundSpeedRestricted();
+
+                if (!soundRestricted)
+                {
+                    soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
+                }
+                else if (elementHandlerArgs.getDepth() >= minimumDepthForSound)
+                {
+                    soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
+                }
             }
-            if (element.getElementType() != BaseElementType.NORMAL)
-            {
-                playSound(element, elementHandlerArgs.getColliderId());
-            }
-        }
-    }
-
-    private void playSound(HandlerGameElement element, int colliderId)
-    {
-        Map<Integer, BaseMediaElementEvent> eventMap = element.getMediaElement().getEventMap();
-
-        if (eventMap.containsKey(colliderId))
-        {
-            Optional<Sound> soundToPlay = eventMap.get(colliderId).getSound();
-
-            soundToPlay.ifPresent(sound -> soundManager.addSoundToPlay(sound));
         }
     }
 }

@@ -17,15 +17,19 @@ public class BaseMediaElementEvent
      */
     private Optional<Sound> sound;
 
+    private boolean soundSpeedRestricted;
+
     /**
      * Lädt die Animationen und Soundeffekte aus dem angegebenen Objekt.
      *
      * @param animation Die Animation des jeweiligen Bahnelements.
      * @param soundName Die Animation des jeweiligen Bahnelements.
      */
-    public BaseMediaElementEvent(Optional<ElementImage> animation, Optional<String> soundName)
+    public BaseMediaElementEvent(Optional<ElementImage> animation, Optional<String> soundName, boolean soundSpeedRestricted)
     {
         this.animation = animation;
+        this.soundSpeedRestricted = soundSpeedRestricted;
+
         if (soundName.isPresent())
             this.sound = Optional.of(new Sound(soundName.get(), false));
         else
@@ -50,5 +54,10 @@ public class BaseMediaElementEvent
     public Optional<Sound> getSound()
     {
         return sound;
+    }
+
+    public boolean isSoundSpeedRestricted()
+    {
+        return soundSpeedRestricted;
     }
 }

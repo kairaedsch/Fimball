@@ -79,7 +79,7 @@ public class PlungerGameElementTest
         BaseMediaElement baseMediaElement = mock(BaseMediaElement.class);
         when(baseElement.getMedia()).thenReturn(baseMediaElement);
         Map<Integer, BaseMediaElementEvent> eventMap = new HashMap<>();
-        eventMap.put(-5, new BaseMediaElementEvent(Optional.of(new ElementImage("", baseMediaElement, new Animation(0, 0, ""))), Optional.of("")));
+        eventMap.put(-5, new BaseMediaElementEvent(Optional.of(new ElementImage("", baseMediaElement, new Animation(0, 0, ""))), Optional.of(""), false));
         when(baseMediaElement.getEventMap()).thenReturn(eventMap);
         return baseElement;
     }

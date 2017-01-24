@@ -57,7 +57,7 @@ public class BaseMediaElementFactory
                     animation = new ElementImage(baseElementId, canRotate, rotationAccuracy, true, aAnimation);
                 }
 
-                eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), Optional.ofNullable(event.soundName)));
+                eventMap.put(event.colliderId, new BaseMediaElementEvent(java.util.Optional.ofNullable(animation), Optional.ofNullable(event.soundName), event.soundSpeedRestricted));
             }
         }
 
