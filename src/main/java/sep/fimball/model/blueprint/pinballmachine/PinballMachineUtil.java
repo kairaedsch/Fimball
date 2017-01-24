@@ -16,6 +16,7 @@ public class PinballMachineUtil
      * Gibt eine Box, die die übergebenen Elemente umschließt, zurück.
      *
      * @param elements Die übergebenen Elemente.
+     * @param converter Wandelt die Übergebenen Elemente in placedElements um, um dann auf Basis dieser die BoundingBox auszurechnen.
      * @return Eine Box, die die übergebenen Elemente umschließt.
      */
     public static <T>RectangleDouble getBoundingBox(Collection<T> elements, Function<T, PlacedElement> converter)

@@ -114,6 +114,9 @@ public class PinballMachineEditorViewModel extends WindowViewModel
      */
     private ObjectProperty<Cursor> cursorProperty;
 
+    /**
+     *
+     */
     private boolean dragStartedOnCanvas = false;
 
     private ListProperty<EditorPreviewSubViewModel> editorPreviewSubViews;

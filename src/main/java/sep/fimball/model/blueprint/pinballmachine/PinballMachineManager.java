@@ -348,8 +348,24 @@ public class PinballMachineManager
         }
     }
 
+    /**
+     * Die verschiedenen Speicher Modi.
+     */
     enum SaveMode
     {
-        ALL, WITHOUT_ELEMENTS, AUTOSAVE
+        /**
+         * Speichert Automat mit allen Elementen.
+         */
+        ALL,
+
+        /**
+         * Speichert Automat ohne seine Elementen.
+         */
+        WITHOUT_ELEMENTS,
+
+        /**
+         * Speichert den Automat als Autosafe-Datei.
+         */
+        AUTOSAVE
     }
 }
