@@ -9,11 +9,6 @@ import java.util.Map;
 public class BaseRuleElement
 {
     /**
-     * Gibt an, wie viel Millisekunden vergehen müssen, bis das Element wieder Punkte geben kann.
-     */
-    private int pointResetTime;
-
-    /**
      * Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
      */
     private Map<Integer, BaseRuleElementEvent> eventMap;
@@ -22,12 +17,10 @@ public class BaseRuleElement
      * Erstellt ein neues BaseRuleElement.
      *
      * @param eventMap       Enthält die RuleElementEvents zusammen mit der Id des zugehörigen Colliders, bei dem sie eintreten können.
-     * @param pointResetTime Wie viel Millisekunden vergehen müssen, bis das Element wieder Punkte gibt.
      */
-    public BaseRuleElement(Map<Integer, BaseRuleElementEvent> eventMap, int pointResetTime)
+    public BaseRuleElement(Map<Integer, BaseRuleElementEvent> eventMap)
     {
         this.eventMap = eventMap;
-        this.pointResetTime = pointResetTime;
     }
 
     /**
@@ -38,15 +31,5 @@ public class BaseRuleElement
     public Map<Integer, BaseRuleElementEvent> getEventMap()
     {
         return Collections.unmodifiableMap(eventMap);
-    }
-
-    /**
-     * Gibt an, wie viel Millisekunden vergehen müssen, bis das Element wieder Punkte geben kann.
-     *
-     * @return Wie viel Millisekunden vergehen müssen, bis das Element wieder Punkte gibt.
-     */
-    public int getPointResetTime()
-    {
-        return pointResetTime;
     }
 }

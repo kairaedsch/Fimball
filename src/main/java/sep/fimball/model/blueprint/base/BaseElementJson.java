@@ -286,10 +286,7 @@ public class BaseElementJson
          */
         public static class RuleElementGeneralJson
         {
-            /**
-             * Gibt an, wie viel Millisekunden vergehen müssen, bis das Element wieder Punkte geben kann.
-             */
-            public int pointResetTime;
+
         }
 
         /**
