@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Diese Klasse speichert ListChangeListener und MapChangeListener und kann diese bei Bedarf von den Maps und Listen, die sie beobachten, entfernen. So können mehrere ChangeListener gemeinsam entfernt werden.
+ * Diese Klasse speichert ListChangeListener und MapChangeListener und kann diese bei Bedarf von den Maps und Listen,
+ * die sie beobachten, entfernen. So können mehrere ChangeListener gemeinsam entfernt werden.
  */
 public class CleanAble
 {
@@ -63,7 +64,19 @@ public class CleanAble
     }
 
     /**
-     * Diese Klasse speichert einen MapChangeListener und die Map, die dieser beobachtet und ermöglicht es, den MapChangeListener zu entfernen.
+     * Dieses Interface stellt eine Methode zur Entfernung bestehender ChangeListener bereit.
+     */
+    interface RemoveAble
+    {
+        /**
+         * Entfernt einen bestehenden ChangeListener.
+         */
+        void remove();
+    }
+
+    /**
+     * Diese Klasse speichert einen MapChangeListener und die Map, die dieser beobachtet und ermöglicht es, den
+     * MapChangeListener zu entfernen.
      *
      * @param <K> Der Typ der Schlüsselwerte der Map.
      * @param <T> Der Typ der Werte der Map.
@@ -102,7 +115,8 @@ public class CleanAble
     }
 
     /**
-     * Diese Klasse speichert einen ListChangeListener zusammen mit der ObservableList, auf der er aktiv ist und ermöglicht es, den ListChangeListener zu einem beliebigen Zeitpunkt zu entfernen.
+     * Diese Klasse speichert einen ListChangeListener zusammen mit der ObservableList, auf der er aktiv ist und
+     * ermöglicht es, den ListChangeListener zu einem beliebigen Zeitpunkt zu entfernen.
      *
      * @param <T> Ein Obertyp der Elemente, die sich in der Liste befinden.
      */
@@ -137,16 +151,5 @@ public class CleanAble
         {
             listProperty.removeListener(changeListener);
         }
-    }
-
-    /**
-     * Dieses Interface stellt eine Methode zur Entfernung bestehender ChangeListener bereit.
-     */
-    interface RemoveAble
-    {
-        /**
-         * Entfernt einen bestehenden ChangeListener.
-         */
-        void remove();
     }
 }

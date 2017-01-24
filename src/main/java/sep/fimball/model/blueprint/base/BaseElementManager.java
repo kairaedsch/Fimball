@@ -23,14 +23,14 @@ import java.util.Optional;
 public class BaseElementManager
 {
     /**
+     * Stellt sicher, dass es nur einen ElementManager gibt, der alle Elemente verwalten soll, um Duplikate zu
+     * vermeiden.
+     */
+    private static BaseElementManager singletonInstance;
+    /**
      * Eine Map von IDs auf BaseElemente.
      */
     private MapProperty<String, BaseElement> elements;
-
-    /**
-     * Stellt sicher, dass es nur einen ElementManager gibt, der alle Elemente verwalten soll, um Duplikate zu vermeiden.
-     */
-    private static BaseElementManager singletonInstance;
 
     /**
      * Konstruiert einen BaseElementManager, dabei werden die Baupläne aller Spielelemente geladen.
@@ -73,7 +73,8 @@ public class BaseElementManager
     }
 
     /**
-     * Gibt den Bauplan für ein Element zurück, der durch baseElementId identifiziert wird oder null, falls kein solcher Bauplan existiert.
+     * Gibt den Bauplan für ein Element zurück, der durch baseElementId identifiziert wird oder null, falls kein solcher
+     * Bauplan existiert.
      *
      * @param baseElementId Die ID des gesuchten Bauplans.
      * @return Der Bauplan mit der gegebenen ID.
