@@ -50,7 +50,7 @@ public class Config
     /**
      * Der Standard-Zoom der Kamera.
      */
-    public final static double DEFAULT_ZOOM = 0.75;
+    public final static double DEFAULT_ZOOM = 0.5;
 
     /**
      * Die Wiederholungsrate, mit der sich die Spielschleife aktualisiert.
