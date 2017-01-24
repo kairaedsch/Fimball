@@ -157,7 +157,7 @@ public class PhysicsElement<GameElementT>
         {
             if (integerBooleanEntry.getValue())
             {
-                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisionEventType.LEAVED, 0));
+                eventArgsList.add(new CollisionEventArgs<>(gameElement, integerBooleanEntry.getKey(), CollisionEventType.LEFT, 0));
             }
         }
         for (Collider collider : colliders)
