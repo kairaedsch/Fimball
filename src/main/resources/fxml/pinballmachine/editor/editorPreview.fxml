@@ -2,6 +2,4 @@
 
 <?import javafx.scene.layout.Pane?>
 
-<Pane styleClass="editorPreview" fx:id="previewBot" mouseTransparent="true" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.EditorPreviewSubView">
-    <Pane styleClass="editorPreview" fx:id="previewTop" mouseTransparent="true" />
-</Pane>
+<Pane styleClass="editorPreview" fx:id="preview" mouseTransparent="true" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sep.fimball.view.window.pinballmachine.editor.EditorPreviewSubView"/>

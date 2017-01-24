@@ -138,5 +138,6 @@
             </VBox>
         </SplitPane>
     </VBox>
-    <Pane fx:id="previewBase"/>
+    <Pane fx:id="previewBaseBottom"/>
+    <Pane fx:id="previewBaseTop"/>
 </AnchorPane>

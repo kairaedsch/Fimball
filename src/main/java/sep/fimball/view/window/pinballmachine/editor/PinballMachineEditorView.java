@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.general.ViewUtil;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
@@ -28,10 +29,16 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorVi
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     /**
-     * Beinhaltet alle Elemente, die vom Nutzer aktuell gedragged werden.
+     * Beinhaltet alle Elemente (Obere Seite des Bildes), die vom Nutzer aktuell gedragged werden.
      */
     @FXML
-    private Pane previewBase;
+    public Pane previewBaseTop;
+
+    /**
+     * Beinhaltet alle Elemente (Untere Seite des Bildes), die vom Nutzer aktuell gedragged werden.
+     */
+    @FXML
+    public Pane previewBaseBottom;
 
     /**
      * Zeigt den Namen des editierten Automaten an. Über dieses Feld kann der Name auch geändert werden.
@@ -108,15 +115,20 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
         pinballCanvasContainer.getChildren().add(viewLoaderCanvas.getRootNode());
         viewLoaderCanvas.getView().setViewModel(editorSessionSubViewModel.getPinballCanvasViewModel());
 
-        ViewModelListToPaneBinder.<EditorPreviewSubView, EditorPreviewSubViewModel>bindViewModelsToViews(previewBase, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW, (view, viewModel) -> view.init(viewModel, this));
-        previewBase.setPickOnBounds(false);
+        ViewModelListToPaneBinder.<EditorPreviewSubView, EditorPreviewSubViewModel>bindViewModelsToViews(previewBaseTop, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW, (view, viewModel) -> view.init(viewModel, this, ImageLayer.TOP));
+        previewBaseTop.setPickOnBounds(false);
+        previewBaseTop.setMaxHeight(0);
+        previewBaseTop.setMaxWidth(0);
+
+        ViewModelListToPaneBinder.<EditorPreviewSubView, EditorPreviewSubViewModel>bindViewModelsToViews(previewBaseBottom, pinballMachineEditorViewModel.previewsProperty(), WindowType.EDITOR_PREVIEW, (view, viewModel) -> view.init(viewModel, this, ImageLayer.BOTTOM));
+        previewBaseBottom.setPickOnBounds(false);
+        previewBaseBottom.setMaxHeight(0);
+        previewBaseBottom.setMaxWidth(0);
 
         ViewLoader<SelectedElementSubView> viewLoader = new ViewLoader<>(WindowType.EDITOR_SELECTED_ELEMENT);
         selectedElement.getChildren().add(viewLoader.getRootNode());
         viewLoader.getView().setViewModel(pinballMachineEditorViewModel.getSelectedElementSubViewModel());
 
-        previewBase.setMaxHeight(0);
-        previewBase.setMaxWidth(0);
     }
 
     /**
