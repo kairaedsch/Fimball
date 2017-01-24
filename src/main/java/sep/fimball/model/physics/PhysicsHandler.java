@@ -55,16 +55,6 @@ public class PhysicsHandler<GameElementT>
     private PhysicsGameSession<GameElementT> gameSession;
 
     /**
-     * Wie viele Physik-Updates in der letzten Sekunde durchgeführt wurden.
-     */
-    private int frameCount;
-
-    /**
-     * Der Zeitpunkt, seit dem die Physik-Updates gezählt wurden.
-     */
-    private long lastTime;
-
-    /**
      * Ein Monitor, über den die Physik synchronisiert wird.
      */
     private final Object physicsMonitor = new Object();
@@ -141,7 +131,6 @@ public class PhysicsHandler<GameElementT>
      */
     public void startTicking()
     {
-        lastTime = System.currentTimeMillis();
         ticking = true;
         physicTimer = new Timer(false);
         physicTimer.schedule(createTask(), PhysicsConfig.TIMER_DELAY, PhysicsConfig.TICK_RATE_MILISEC * PhysicsConfig.LOOPS_PER_TICK);
@@ -181,15 +170,6 @@ public class PhysicsHandler<GameElementT>
             @Override
             public void run()
             {
-                frameCount++;
-                long currentTime = System.currentTimeMillis();
-                if (((double) currentTime - (double) lastTime) > 1000)
-                {
-                    System.out.println("Physics FPS: " + frameCount);
-                    frameCount = 0;
-                    lastTime = currentTime;
-                }
-
                 double delta = PhysicsConfig.TICK_RATE_SEC;
                 // PhysicsElements auf Kollisionen mit dem Ball prüfen
                 List<CollisionEventArgs<GameElementT>> collisionEventArgsList = new ArrayList<>();

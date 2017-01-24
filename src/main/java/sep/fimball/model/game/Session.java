@@ -55,15 +55,6 @@ public abstract class Session
             @Override
             public void handle(long now)
             {
-                frameCount++;
-                long currentTime = System.currentTimeMillis();
-                if (((double) currentTime - (double) lastTime) > 1000)
-                {
-                    System.out.println("FPS: " + frameCount);
-                    frameCount = 0;
-                    lastTime = currentTime;
-                }
-
                 loopUpdate();
             }
         };
