@@ -7,9 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import sep.fimball.general.data.Config;
+import sep.fimball.general.data.Sounds;
 import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
+import sep.fimball.model.media.Sound;
+import sep.fimball.model.media.SoundManager;
 
 import java.util.Optional;
 
@@ -44,6 +47,8 @@ public class EditorSession extends Session
         autoSaveLoop.getKeyFrames().add(frame);
         autoSaveLoop.setCycleCount(Animation.INDEFINITE);
         autoSaveLoop.play();
+
+        SoundManager.getInstance().addSoundToPlay(new Sound(Sounds.GAME_START.getSoundName(), false));
     }
 
     /**
