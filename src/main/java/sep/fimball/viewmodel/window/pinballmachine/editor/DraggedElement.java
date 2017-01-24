@@ -48,11 +48,6 @@ public class DraggedElement
         return placedElement;
     }
 
-    public void setPlacedElement(PlacedElement placedElement)
-    {
-        this.placedElement = placedElement;
-    }
-
     @Override
     public int hashCode()
     {

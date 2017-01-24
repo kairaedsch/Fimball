@@ -142,7 +142,7 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
         physicsElements.addAll(generatedElements.getPhysicsElements());
         gameBall.set(generatedElements.getBallGameElement());
 
-        world = new World(elements, false, pinballMachine.getMaximumYPosition());
+        world = new World(elements, pinballMachine.getMaximumYPosition());
         BallPhysicsElement<GameElement> ballPhysicsElement = new BallPhysicsElement<>(physicsHandler, gameBall.get(), gameBall.get().positionProperty().get(), gameBall.get().rotationProperty().get(), gameBall.get().getPlacedElement().multiplierProperty().get(), gameBall.get().getPlacedElement().getBaseElement().getPhysics());
         gameBall.get().setPhysicsElement(ballPhysicsElement);
 

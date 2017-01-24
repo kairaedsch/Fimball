@@ -39,7 +39,7 @@ public class EditorSession extends Session
         // TODO Cleanup
         ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true), Optional.empty());
 
-        world = new World(list, true, pinballMachine.getMaximumYPosition());
+        world = new World(list, pinballMachine.getMaximumYPosition());
 
         autoSaveLoop = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.seconds(Config.AUTOSAVE_RATE), (event ->

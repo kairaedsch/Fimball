@@ -206,19 +206,6 @@ public class Vector2
     }
 
     /**
-     * Mittelt zwei gewichtete Vektoren mithilfe einer quadratischen Funktion um einen "weichen" Übergang zu erzeugen.
-     *
-     * @param vecTwo Der zweite Vektor.
-     * @param t Die Gewichtung des zweiten Vektors.
-     * @return Ein neuer Vektor der zwischen den beiden Gegebenen liegt.
-     */
-    public Vector2 smoothLerp(Vector2 vecTwo, double t)
-    {
-        double smoothT = smoothStep(t);
-        return lerp(vecTwo, smoothT);
-    }
-
-    /**
      * Gibt die erste Komponente des Vektors zurück.
      *
      * @return Die erste Komponente des Vektors.
@@ -329,18 +316,4 @@ public class Vector2
         return new Vector2(Math.random() - 0.5, Math.random() - 0.5).normalized();
     }
 
-    /**
-     * Bildet den gegebenen Wert t auf einen Wert zwischen 0 und 1 ab und wendet die Funktion x^2 an.
-     *
-     * @param t Der Wert auf den die quadratische Funktion angewendet werden soll.
-     * @return Das Ergebnis der quadratischen Funktion.
-     */
-    private double smoothStep(double t)
-    {
-        double min = 0.0;
-        double max = 1.0;
-        double x = (t - min)/(max - min);
-        x = Math.max(min, Math.min(max, x));
-        return x * x;
-    }
 }

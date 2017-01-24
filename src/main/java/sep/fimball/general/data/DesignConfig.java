@@ -61,11 +61,6 @@ public class DesignConfig
     public final static Color PRIMARY_COLOR_LIGHT_LIGHT = new Color(255 / 255.0, 187 / 255.0, 187 / 255.0, 1);
 
     /**
-     * Die dunklere Hintergrundfarbe des Flipperautomaten.
-     */
-    public final static Color PRIMARY_COLOR_DARK = new Color(165 / 255.0, 47 / 255.0, 47 / 255.0, 1);
-
-    /**
      * Die Komplementfarbe des Flipperautomaten.
      */
     public final static Color COMPLEMENT_COLOR = new Color(219 / 255.0, 170 / 255.0, 93 / 255.0, 1);
@@ -91,19 +86,9 @@ public class DesignConfig
     public static final int LIGHT_CHANGE_DEFAULT_DURATION = 10000;
 
     /**
-     * Die Rate, mit der sich die Light-Change-Loop wiederholt.
-     */
-    public static final int LIGHT_CHANGE_TICK_RATE = 25;
-
-    /**
      * Die Blinkrate des Rechtecks der aktuellen Auswahl im Editor.
      */
     public final static double BORDER_BLINK_RATE = 1000.0;
-
-    /**
-     * Höhe des Rahmens eines Automaten während eines Spiels.
-     */
-    public final static double AUTOMATE_BORDER_HEIGHT = 15;
 
     /**
      * Gibt an, aus wie vielen Pixeln eine Grid-Einheit besteht.

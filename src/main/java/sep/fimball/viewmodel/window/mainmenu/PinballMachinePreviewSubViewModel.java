@@ -78,16 +78,6 @@ public class PinballMachinePreviewSubViewModel
     }
 
     /**
-     * Gibt die ID des zugehörigen Automaten zurück.
-     *
-     * @return Die ID des zugehörigen Automaten.
-     */
-    public String getMachineID()
-    {
-        return pinballMachine.getID();
-    }
-
-    /**
      * Stellt der View den Namen des Flipperautomaten zur Verfügung.
      *
      * @return Der Name des Flipperautomaten

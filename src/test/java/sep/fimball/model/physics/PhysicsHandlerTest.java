@@ -36,11 +36,6 @@ public class PhysicsHandlerTest
     private final Object eventMonitor = new Object();
 
     /**
-     * Der Monitor, über den Informationen über den Verlust der Kugel synchronisiert werden.
-     */
-    private final Object ballLostMonitor = new Object();
-
-    /**
      * Die Kugel-Position.
      */
     private Vector2 ballPosition = new Vector2(0, 19);

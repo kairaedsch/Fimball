@@ -9,10 +9,6 @@ import java.util.List;
  */
 public interface PhysicsGameSession<GameElementT>
 {
-    /**
-     * Lässt den Ball als verloren gelten.
-     */
-    void ballLost();
 
     /**
      * Überreicht die verschiedenen Events, die in der Physik passiert sind, an die GameSession weiter.

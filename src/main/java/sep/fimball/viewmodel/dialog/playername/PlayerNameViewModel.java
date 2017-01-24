@@ -80,7 +80,7 @@ public class PlayerNameViewModel extends DialogViewModel
      */
     private void checkNames()
     {
-        gameCanBeStarted.set(playerNameEntries.stream().allMatch(playerNameEntrySubViewModel -> !playerNameEntrySubViewModel.playerNameProperty().get().isEmpty()));
+        gameCanBeStarted.set(playerNameEntries.stream().noneMatch(playerNameEntrySubViewModel -> playerNameEntrySubViewModel.playerNameProperty().get().isEmpty()));
     }
 
     /**

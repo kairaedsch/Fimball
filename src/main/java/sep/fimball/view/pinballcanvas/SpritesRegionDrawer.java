@@ -51,7 +51,7 @@ class SpritesRegionDrawer
 
         // Bindet die globalRegion an die Sprites
         ObservableList<SpriteRegionSubView> listPropertyConverted = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.<SpriteRegionSubView, SpriteSubView>bindAndConvertList(listPropertyConverted, sprites, SpriteRegionSubView::new, sprite ->
+        ListPropertyConverter.bindAndConvertList(listPropertyConverted, sprites, SpriteRegionSubView::new, sprite ->
                 {
                     // Wird ausgeführt, wenn ein Element hinzugefügt werden soll
                     addSpriteRegions(sprite, sprite.getRegionHashes());

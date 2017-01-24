@@ -1,6 +1,5 @@
 package sep.fimball.view.window.pinballmachine.editor;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.TextField;
@@ -9,11 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import sep.fimball.general.data.DesignConfig;
 import sep.fimball.general.data.Vector2;
 import sep.fimball.view.general.ViewUtil;
 import sep.fimball.view.pinballcanvas.PinballCanvasSubView;
-import sep.fimball.view.tools.ImageCache;
 import sep.fimball.view.tools.ViewLoader;
 import sep.fimball.view.tools.ViewModelListToPaneBinder;
 import sep.fimball.view.window.WindowType;
@@ -22,8 +19,6 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.AvailableElementSubVie
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorSessionSubViewModel;
 import sep.fimball.viewmodel.window.pinballmachine.editor.PinballMachineEditorViewModel;
-
-import java.util.Optional;
 
 
 /**
@@ -201,30 +196,6 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
     public void mouseReleased(MouseEvent mouseEvent)
     {
         pinballMachineEditorViewModel.mouseReleased(mouseEvent);
-    }
-
-    /**
-     * Bindet die gegebene Pane an das gegeben Image.
-     *
-     * @param imagePath Der Pfad zu dem Image, an den sich die Pane binden soll.
-     * @param pane      Die Pane, die sich an das Image binden soll.
-     */
-    private void bindPaneToImage(Optional<String> imagePath, Pane pane)
-    {
-        if (imagePath.isPresent())
-        {
-            pane.styleProperty().set(DesignConfig.fillBackgroundImageCss(imagePath.get()));
-
-            ImageCache cache = ImageCache.getInstance();
-            pane.prefWidthProperty().unbind();
-            pane.prefWidthProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).widthProperty()));
-            pane.prefHeightProperty().unbind();
-            pane.prefHeightProperty().bind(Bindings.multiply(pinballMachineEditorViewModel.cameraZoomProperty(), cache.getImage(imagePath.get()).heightProperty()));
-        }
-        else
-        {
-            pane.styleProperty().set(DesignConfig.CSS_NO_IMAGE);
-        }
     }
 
     /**

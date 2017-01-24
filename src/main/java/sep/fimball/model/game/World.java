@@ -26,12 +26,10 @@ public class World implements HandlerWorld
 
     /**
      * Erzeugt eine World mit der übergebenen Liste von GameElements.
-     *
-     * @param elements          Liste der Elemente in der Spielwelt.
-     * @param startedFromEditor Gibt an ob die Welt im Editor oder dem Hauptspiel genutzt wird.
+     *  @param elements          Liste der Elemente in der Spielwelt.
      * @param maximumYPosition  Die unterste Position das Automaten.
      */
-    public World(ObservableList<GameElement> elements, boolean startedFromEditor, double maximumYPosition)
+    public World(ObservableList<GameElement> elements, double maximumYPosition)
     {
         this.maximumYPosition = maximumYPosition;
         gameElements = new SimpleListProperty<>(elements);
