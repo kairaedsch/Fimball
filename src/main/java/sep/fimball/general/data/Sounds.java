@@ -6,14 +6,9 @@ package sep.fimball.general.data;
 public enum Sounds
 {
     /**
-     * Der Sound, der im Spiel abgespielt wird.
-     */
-    GAME("game.mp3"),
-
-    /**
      * Der Sound, der im Hauptmenü abgespielt wird.
      */
-    MAIN_MENU("mainmenu.mp3"),
+    MAIN_MUSIC("mainTheme.mp3"),
 
     /**
      * Der Sound, der beim Starten eines Automaten abgespielt wird.

@@ -75,7 +75,7 @@ public class SoundManagerViewModelTest
         assertThat("Es soll noch kein Sound abgespielt werden", playObserver.getNumberOfNotifications(), is(0));
 
         //Die Observer werden über das Abspielen der Hintergrundmusik informiert.
-        SoundManagerViewModel.getInstance().playMusic(Sounds.GAME);
+        SoundManagerViewModel.getInstance().playMusic(Sounds.MAIN_MUSIC);
         assertThat("Der abzuspielende Sound soll wiederholt werden", playObserver.getSound().isRepeating(), is(true));
 
         //Die Observer werden über das Abspielen des richtigen SoundClips informiert.
