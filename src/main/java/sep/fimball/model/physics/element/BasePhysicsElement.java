@@ -25,6 +25,9 @@ public class BasePhysicsElement
      */
     private List<Collider> colliders;
 
+    /**
+     * Gibt an ob es möglich ist die Stärke eines der Collider dieses BasePhysicsElement zu ändern.
+     */
     private boolean strengthModificationPossible;
 
     /**
@@ -32,6 +35,7 @@ public class BasePhysicsElement
      *
      * @param pivotPoint Die Position des Pivot-Punktes des Elements.
      * @param colliders  Die Collider, die dieses Element hat.
+     * @param strengthModificationPossible Ob es möglich ist die Stärke eines der Collider dieses BasePhysicsElement zu ändern.
      */
     public BasePhysicsElement(Vector2 pivotPoint, List<Collider> colliders, boolean strengthModificationPossible)
     {
@@ -60,6 +64,11 @@ public class BasePhysicsElement
         return Collections.unmodifiableList(colliders);
     }
 
+    /**
+     * Gibt zurück ob es möglich ist die Stärke eines der Collider dieses BasePhysicsElement zu ändern.
+     *
+     * @return Ob es möglich ist die Stärke eines der Collider dieses BasePhysicsElement zu ändern.
+     */
     public boolean isStrengthModificationPossible()
     {
         return strengthModificationPossible;
