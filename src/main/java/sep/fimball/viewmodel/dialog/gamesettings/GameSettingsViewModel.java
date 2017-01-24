@@ -13,7 +13,6 @@ import sep.fimball.model.input.data.KeyBinding;
 import sep.fimball.viewmodel.SceneManagerViewModel;
 import sep.fimball.viewmodel.dialog.DialogType;
 import sep.fimball.viewmodel.dialog.DialogViewModel;
-import sep.fimball.viewmodel.window.mainmenu.MainMenuViewModel;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -104,7 +103,6 @@ public class GameSettingsViewModel extends DialogViewModel
     {
         saveSettings();
         sceneManager.popDialog();
-        sceneManager.setWindow(new MainMenuViewModel());
     }
 
     /**
