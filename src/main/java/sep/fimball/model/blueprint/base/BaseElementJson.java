@@ -195,6 +195,9 @@ public class BaseElementJson
              */
             public String soundName;
 
+            /**
+             * Speichert, ob der Soundeffekt nur dann abgespielt werden soll, wenn der Ball mit hoher Geschwindigkeit auf den Collider trifft.
+             */
             public boolean soundSpeedRestricted;
 
             /**

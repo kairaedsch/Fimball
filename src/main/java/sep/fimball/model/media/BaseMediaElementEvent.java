@@ -18,7 +18,7 @@ public class BaseMediaElementEvent
     private Optional<Sound> sound;
 
     /**
-     * Gibt an ob der Sound nur abgespielt werden soll wenn der Ball mit einer erhöhten Geschwindigkeit auf den Collider trifft.
+     * Gibt an, ob der Sound nur abgespielt werden soll, wenn der Ball mit einer erhöhten Geschwindigkeit auf den Collider trifft.
      */
     private boolean soundSpeedRestricted;
 
