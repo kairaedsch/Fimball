@@ -13,13 +13,44 @@ import sep.fimball.model.media.SoundManager;
  */
 public class SpinnerGameElement extends GameElement implements ElementHandler, GameHandler
 {
+    /**
+     * Die verbleibende Anzahl an Umdrehungen des Spinners.
+     */
     private double remainingSpins;
+
+    /**
+     * Der Fortschritt der aktuellen Umdrehung.
+     */
     private double currentSpinPercentage;
+
+    /**
+     * Das aktuelle Bild der Spinner Animation.
+     */
     private int currentFrame;
+
+    /**
+     * Der Winkel in dem der Spinner vom Ball getroffen wurde.
+     */
     private double spinnerHitAngle;
+
+    /**
+     * Die Geschwindigkeit des Balls.
+     */
     private Vector2 ballSpeedDelta;
+
+    /**
+     * Ist wahr sobald der Spinner getroffen wurde. Wird zur Synchronisierung mit dem AnimationTimer genutzt.
+     */
     private boolean accelerationUpdated;
+
+    /**
+     * Der AnimationTimer welcher sich um die Updates des Spinner kümmert.
+     */
     private AnimationTimer spinnerUpdate;
+
+    /**
+     * Die GameSession welche genutzt wird um den Spieler Punkte bei jeder Umdrehung des Spinners hinzuzufügen.
+     */
     private HandlerGameSession handlerGameSession;
 
     /**
