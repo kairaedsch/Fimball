@@ -41,6 +41,12 @@ public class AvailableElementSubView
 
     private PinballMachineEditorView editorView;
 
+    /**
+     * Bindet den Namen sowie das Vorschaubild des Elements an die Werte aus dem AvailableElementSubViewModel.
+     *
+     * @param availableElementSubViewModel Enthält die Informationen des dargestellten Elements.
+     * @param pinballMachineEditorView Die Klasse, die den Editor darstellt.
+     */
     public void init(AvailableElementSubViewModel availableElementSubViewModel, PinballMachineEditorView pinballMachineEditorView)
     {
         this.availableElementSubViewModel = availableElementSubViewModel;
@@ -53,6 +59,8 @@ public class AvailableElementSubView
 
     /**
      * Benachrichtigt das {@code availableElementSubViewModel}, dass der Spieler auf dieses Element geklickt hat.
+     *
+     * @param mouseEvent Das MouseEvent, das durch den Mausklick ausgelöst wurde.
      */
     public void mousePressed(MouseEvent mouseEvent)
     {
@@ -93,6 +101,11 @@ public class AvailableElementSubView
         return DesignConfig.fillBackgroundImageCss(imagePath);
     }
 
+    /**
+     * Delegiert eine Drag-Bewegung an {@code availableElementSubViewModel}, sodass diese verarbeitet werden kann.
+     *
+     * @param mouseEvent Das Mouse-Event, das durch die Drag-Bewegung ausgelöst wurde.
+     */
     @FXML
     public void dragged(MouseEvent mouseEvent)
     {
