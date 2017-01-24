@@ -32,7 +32,7 @@ public class PinballCanvasGameViewModel extends PinballCanvasViewModel
     {
         super(gameSession, DrawMode.GAME);
         this.gameViewModel = gameViewModel;
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), SpriteSubViewModel::new);
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, gameSession.getWorld().gameElementsProperty(), SpriteSubViewModel::new, Optional.of(gameViewModel));
 
         cameraPosition.bind(gameViewModel.cameraPositionProperty());
         cameraZoom.bind(gameViewModel.cameraZoomProperty());

@@ -53,6 +53,9 @@ public class SceneManagerViewModel
     public SceneManagerViewModel()
     {
         windowViewModel = new SimpleObjectProperty<>();
+        windowViewModel.addListener((observable, oldValue, newValue) -> {
+            if(oldValue != null) oldValue.cleanUp();
+        });
         dialogViewModels = new SimpleListProperty<>(FXCollections.observableArrayList());
         fullscreen = new SimpleBooleanProperty();
 
@@ -127,7 +130,7 @@ public class SceneManagerViewModel
      */
     public void popDialog()
     {
-        dialogViewModels.remove(0);
+        dialogViewModels.remove(0).cleanUp();
     }
 
     /**

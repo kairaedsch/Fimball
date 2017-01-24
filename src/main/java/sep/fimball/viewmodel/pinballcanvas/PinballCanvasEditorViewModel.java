@@ -31,7 +31,7 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     {
         super(editorSession, DrawMode.EDITOR);
 
-        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, editorSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()));
+        ListPropertyConverter.bindAndConvertList(spriteSubViewModels, editorSession.getWorld().gameElementsProperty(), (gameElement) -> new SpriteSubViewModel(gameElement, pinballMachineEditorViewModel.getSelection()), Optional.of(pinballMachineEditorViewModel));
 
         this.editorViewModel = pinballMachineEditorViewModel;
 
@@ -65,5 +65,10 @@ public class PinballCanvasEditorViewModel extends PinballCanvasViewModel
     public ReadOnlyObjectProperty<Cursor> cursorProperty()
     {
         return editorViewModel.cursorProperty();
+    }
+
+    protected void finalize()
+    {
+        System.out.println("Goodbye: " + this);
     }
 }

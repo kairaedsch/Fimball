@@ -8,6 +8,8 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.view.ViewBoundToViewModel;
 import sep.fimball.view.ViewType;
 
+import java.util.Optional;
+
 /**
  * ViewModelListToPaneBinder stellt Funktionen zum Binden einer Liste von ViewModels an ein Pane-Node bereit, sodass für jedes Element in der Liste ein Kinder-Node im Pane-Node eingefügt wird.
  */
@@ -68,7 +70,7 @@ public class ViewModelListToPaneBinder
             ViewLoader<ViewT> viewLoader = new ViewLoader<>(viewType);
             caller.call(viewLoader.getView(), viewModel);
             return viewLoader.getRootNode();
-        });
+        }, Optional.empty());
     }
 
     /**

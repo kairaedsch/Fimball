@@ -11,6 +11,8 @@ import sep.fimball.general.util.ListPropertyConverter;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
 import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 
+import java.util.Optional;
+
 /**
  * Die Session des Editors.
  */
@@ -31,7 +33,8 @@ public class EditorSession extends Session
         super(pinballMachine);
 
         ObservableList<GameElement> list = FXCollections.observableArrayList();
-        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true));
+        // TODO Cleanup
+        ListPropertyConverter.bindAndConvertList(list, pinballMachine.elementsProperty(), element -> new GameElement(element, true), Optional.empty());
 
         world = new World(list, true, pinballMachine.getMaximumYPosition());
 

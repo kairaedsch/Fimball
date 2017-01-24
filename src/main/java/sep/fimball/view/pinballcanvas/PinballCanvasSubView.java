@@ -66,7 +66,7 @@ public class PinballCanvasSubView implements ViewBoundToViewModel<PinballCanvasV
     {
         this.pinballCanvasViewModel = pinballCanvasViewModel;
         sprites = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), (viewModel) -> new SpriteSubView(viewModel, ImageCache.getInstance()));
+        ListPropertyConverter.bindAndConvertList(sprites, pinballCanvasViewModel.spriteSubViewModelsProperty(), (viewModel) -> new SpriteSubView(viewModel, ImageCache.getInstance()), Optional.empty());
 
         pinballCanvasDrawer = new PinballCanvasDrawer(canvas, pinballCanvasViewModel.getDrawMode(), sprites, pinballCanvasViewModel.getBoundingBox());
 

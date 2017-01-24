@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -151,7 +152,8 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         selectionRect = Optional.empty();
 
         ObservableList<AvailableElementSubViewModel> availableElements = FXCollections.observableArrayList();
-        ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element));
+        ListPropertyConverter.bindAndConvertMap(availableElements, BaseElementManager.getInstance().elementsProperty(), (elementId, element) -> new AvailableElementSubViewModel(this, element), Optional.of(this));
+
         SortedList<AvailableElementSubViewModel> availableElementsSorted = new SortedList<>(availableElements, Comparator.comparing(o -> o.nameProperty().get()));
 
         availableBasicElements = new SimpleListProperty<>(new FilteredList<>(availableElementsSorted, (original -> original.getElementCategory().get().equals(BaseElementCategory.BASIC))));
@@ -165,7 +167,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
         editorSessionSubViewModel = new EditorSessionSubViewModel(this, pinballMachine);
 
         editorPreviewSubViews = new SimpleListProperty<>(FXCollections.observableArrayList());
-        ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this));
+        ListPropertyConverter.bindAndConvertList(editorPreviewSubViews, getSelection(), t -> new EditorPreviewSubViewModel(t, this), Optional.of(this));
     }
 
     private Optional<Vector2> oldGridPos = Optional.empty();
@@ -525,5 +527,10 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public BooleanBinding showElementsAsNodesProperty()
     {
         return Bindings.createBooleanBinding(() -> !mouseOnCanvas.get() && mouseMode.get() == MouseMode.PLACING, mouseOnCanvas, mouseMode);
+    }
+
+    protected void finalize()
+    {
+        System.out.println("Goodbye: " + this);
     }
 }

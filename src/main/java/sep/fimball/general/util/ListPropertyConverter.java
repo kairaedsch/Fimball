@@ -8,6 +8,7 @@ import sep.fimball.general.data.Action;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -24,9 +25,9 @@ public class ListPropertyConverter
      * @param <ConvertedT>          Der Typ der Elemente in der listPropertyConverted-Liste
      * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
-    public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter)
+    public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter, Optional<CleanAble> cleanAble)
     {
-        bindAndConvertList(listPropertyConverted, listPropertyOriginal, converter, originalT -> {}, originalT -> {}, () -> {});
+        bindAndConvertList(listPropertyConverted, listPropertyOriginal, converter, originalT -> {}, originalT -> {}, () -> {}, cleanAble);
     }
 
     /**
@@ -42,7 +43,7 @@ public class ListPropertyConverter
      * @param <OriginalT>           Der Typ der Elemente in der listPropertyOriginal-Liste
      */
     public static <ConvertedT, OriginalT> void bindAndConvertList(ObservableList<ConvertedT> listPropertyConverted, ObservableList<? extends OriginalT> listPropertyOriginal, ListConverter<ConvertedT, OriginalT> converter,
-                                                                  Consumer<ConvertedT> addListener, Consumer<ConvertedT> removeListener, Action clearListener)
+                                                                  Consumer<ConvertedT> addListener, Consumer<ConvertedT> removeListener, Action clearListener, Optional<CleanAble> cleanAble)
     {
         ListChangeListener<OriginalT> listChangeListener = (change) ->
         {
@@ -108,6 +109,7 @@ public class ListPropertyConverter
 
         listPropertyOriginal.addListener(listChangeListener);
         listChangeListener.onChanged(null);
+        cleanAble.ifPresent(c -> c.addListBindingForCleanUp(listPropertyOriginal, listChangeListener));
     }
 
     /**
@@ -121,7 +123,7 @@ public class ListPropertyConverter
      * @param <OriginalValueT>      Der Typ der Values in der Original-Map.
      */
 
-    public static <ConvertedT, OriginalKeyT, OriginalValueT> void bindAndConvertMap(ObservableList<ConvertedT> listPropertyConverted, ObservableMap<OriginalKeyT, OriginalValueT> mapPropertyOriginal, MapConverter<ConvertedT, OriginalKeyT, OriginalValueT> converter)
+    public static <ConvertedT, OriginalKeyT, OriginalValueT> void bindAndConvertMap(ObservableList<ConvertedT> listPropertyConverted, ObservableMap<OriginalKeyT, OriginalValueT> mapPropertyOriginal, MapConverter<ConvertedT, OriginalKeyT, OriginalValueT> converter, Optional<CleanAble> cleanAble)
     {
         MapChangeListener<OriginalKeyT, OriginalValueT> listChangeListener = (change) ->
         {
@@ -142,6 +144,7 @@ public class ListPropertyConverter
 
         mapPropertyOriginal.addListener(listChangeListener);
         listChangeListener.onChanged(null);
+        cleanAble.ifPresent(c -> c.addMapBindingForCleanUp(mapPropertyOriginal, listChangeListener));
     }
 
     /**

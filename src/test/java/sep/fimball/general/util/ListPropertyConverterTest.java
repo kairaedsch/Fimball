@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -61,7 +63,7 @@ public class ListPropertyConverterTest
     @Test
     public void convertAndBindListTest()
     {
-        ListPropertyConverter.bindAndConvertList(convertedList, originalList, (DummyTwo::new));
+        ListPropertyConverter.bindAndConvertList(convertedList, originalList, (DummyTwo::new), Optional.empty());
         //Überprüfen ob beide Listen nach der Bindung gleich groß sind.
         assertThat("Die Größe der convertedList ist 100", convertedList.size(), is(originalSize));
 
@@ -95,7 +97,7 @@ public class ListPropertyConverterTest
     @Test
     public void convertAndBindMapTest()
     {
-        ListPropertyConverter.bindAndConvertMap(convertedList, originalMap, ((originalKey, dummyOne) -> new DummyTwo(dummyOne)));
+        ListPropertyConverter.bindAndConvertMap(convertedList, originalMap, ((originalKey, dummyOne) -> new DummyTwo(dummyOne)), Optional.empty());
         //Überprüfen ob die Größe der Map und Liste nach der Bindung gleich groß ist.
         assertThat("Die Größe der convertedList ist gleich der Größe der originalMap", convertedList.size(), is(originalMap.size()));
         originalMap.put(100, new DummyOne(100));
