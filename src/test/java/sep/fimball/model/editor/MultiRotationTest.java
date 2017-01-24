@@ -2,7 +2,6 @@ package sep.fimball.model.editor;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,7 +25,6 @@ import static org.junit.Assert.assertThat;
  * Diese Klasse enthält Tests, die überprüfen, ob bei Rotation mehrerer Elemente die Positionen sowie die Rotation der
  * Einzelelemente richtig gesetzt wird.
  */
-@Ignore
 public class MultiRotationTest
 {
     private final String[] BASE_ELEMENT_IDS = {"bumper_blue", "hinderniss_linie_4", "spinner", "speed"};
@@ -110,15 +108,15 @@ public class MultiRotationTest
      */
     private void check270DegreeRotation()
     {
-        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(2, -6)));
+        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(2, 4)));
         assertEquals(bumper.rotationProperty().get(), 0, 0.0);
-        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(10, 1)));
+        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(10, 11)));
         assertEquals(obstacle.rotationProperty().get(), 270, 0.0);
-        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(2, -6)));
+        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(4, -2)));
         assertEquals(spinner.rotationProperty().get(), 270, 0.0);
-        assertThat(speed.positionProperty().get(), equalTo(new Vector2(10, -10)));
+        assertThat(speed.positionProperty().get(), equalTo(new Vector2(10, 0)));
         assertEquals(speed.rotationProperty().get(), 270, 0.0);
-        assertThat(ball.positionProperty().get(), equalTo(new Vector2(0, 0)));
+        assertThat(ball.positionProperty().get(), equalTo(new Vector2(0, 10)));
         assertEquals(ball.rotationProperty().get(), 0, 0.0);
     }
 
@@ -128,15 +126,15 @@ public class MultiRotationTest
      */
     private void check180DegreeRotation()
     {
-        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(-6, -6)));
+        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(4, 4)));
         assertEquals(bumper.rotationProperty().get(), 0, 0.0);
-        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(1, -7)));
+        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(11, 3)));
         assertEquals(obstacle.rotationProperty().get(), 180, 0.0);
-        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(-6, 2)));
+        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(0, 4)));
         assertEquals(spinner.rotationProperty().get(), 180, 0.0);
-        assertThat(speed.positionProperty().get(), equalTo(new Vector2(-10, -10)));
+        assertThat(speed.positionProperty().get(), equalTo(new Vector2(0, 0)));
         assertEquals(speed.rotationProperty().get(), 180, 0.0);
-        assertThat(ball.positionProperty().get(), equalTo(new Vector2(0, 0)));
+        assertThat(ball.positionProperty().get(), equalTo(new Vector2(10, 10)));
         assertEquals(ball.rotationProperty().get(), 0, 0.0);
     }
 
@@ -146,15 +144,15 @@ public class MultiRotationTest
      */
     private void check90DegreeRotation()
     {
-        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(-6, 2)));
+        assertThat(bumper.positionProperty().get(), equalTo(new Vector2(4, 2)));
         assertEquals(bumper.rotationProperty().get(), 0, 0.0);
-        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(-7, 2)));
+        assertThat(obstacle.positionProperty().get(), equalTo(new Vector2(3, 2)));
         assertEquals(obstacle.rotationProperty().get(), 90, 0.0);
-        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(2, 10)));
+        assertThat(spinner.positionProperty().get(), equalTo(new Vector2(6, 8)));
         assertEquals(spinner.rotationProperty().get(), 90, 0.0);
-        assertThat(speed.positionProperty().get(), equalTo(new Vector2(-10, 10)));
+        assertThat(speed.positionProperty().get(), equalTo(new Vector2(0, 10)));
         assertEquals(speed.rotationProperty().get(), 90, 0.0);
-        assertThat(ball.positionProperty().get(), equalTo(new Vector2(0, 0)));
+        assertThat(ball.positionProperty().get(), equalTo(new Vector2(10, 0)));
         assertEquals(ball.rotationProperty().get(), 0, 0.0);
     }
 
