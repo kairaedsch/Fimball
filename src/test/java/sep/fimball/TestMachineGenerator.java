@@ -13,6 +13,9 @@ import java.util.ArrayList;
 @Ignore
 public class TestMachineGenerator
 {
+    /**
+     * Generiert eine Maschine mit einer variablen Anzahl von Bahnelementen um die Skalierbarkeit der Bahnelemente zu testen.
+     */
     @Test
     public void generateScalabilityTestMachine()
     {
@@ -45,6 +48,9 @@ public class TestMachineGenerator
         }
     }
 
+    /**
+     * Generiert eine Maschine mit einer großen Anzahl von Lichtern um die Skalierbarkeit der Lichter zu testen.
+     */
     @Test
     public void generateScalabilityLightMachine()
     {
@@ -67,6 +73,9 @@ public class TestMachineGenerator
         pinballMachine.saveToDisk(true, true);
     }
 
+    /**
+     * Generiert eine Maschine mit einer variablen Anzahl von gleichen Elementen um die Skalierbarkeit der Kollisionsüberprüfung zu testen.
+     */
     @Test
     public void generateScalabilityCollisionTestMachine()
     {

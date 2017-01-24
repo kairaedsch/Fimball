@@ -42,6 +42,7 @@ public class HolePhysicsElement<GameElementT> extends PhysicsElement<GameElement
      * Versucht einen Ball festzuhalten, falls das Loch nicht bereits einen Ball hat oder vor kurzem einen Ball abgeschossen hat.
      *
      * @param ball Der Ball, welcher festgehalten werden soll.
+     * @param freezePosition Die Position an der der Ball festgehalten werden soll.
      */
     public void tryFreezeBall(BallPhysicsElement ball, Vector2 freezePosition)
     {

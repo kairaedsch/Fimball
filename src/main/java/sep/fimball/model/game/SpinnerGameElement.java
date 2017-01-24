@@ -7,7 +7,6 @@ import sep.fimball.model.blueprint.pinballmachine.PlacedElement;
 import sep.fimball.model.handler.*;
 import sep.fimball.model.media.Sound;
 import sep.fimball.model.media.SoundManager;
-import sep.fimball.model.physics.game.CollisionEventType;
 
 /**
  * Das Spielelement des Spinners.
@@ -29,6 +28,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
      * @param element Das PlacedElement, das zu diesem GameElement gehört und dessen Eigenschaften übernommen werden sollen.
      * @param bind    Gibt an, ob sich das GameElement an Properties des PlacedElements binden soll.
      * @param gameBall Das Spielelement des Balls.
+     * @param handlerGameSession Die GameSession aus der Sicht der Handler.
      */
     public SpinnerGameElement(PlacedElement element, boolean bind, BallGameElement gameBall, HandlerGameSession handlerGameSession)
     {
@@ -101,6 +101,9 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
         }
     }
 
+    /**
+     * Fügt dem aktuellen Spieler die Anzahl an Punkten welche dieser Spinner gibt hinzu.
+     */
     private void addPointToPlayer()
     {
         handlerGameSession.getCurrentPlayer().addPoints(getPointReward());
