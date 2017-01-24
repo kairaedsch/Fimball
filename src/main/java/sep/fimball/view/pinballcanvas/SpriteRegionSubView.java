@@ -1,18 +1,22 @@
 package sep.fimball.view.pinballcanvas;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.GraphicsContext;
 import sep.fimball.general.data.ImageLayer;
 import sep.fimball.general.data.RectangleDoubleByPoints;
 import sep.fimball.viewmodel.pinballcanvas.DrawMode;
 
-import javax.naming.directory.Attribute;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Umschließt eine SpriteSubView und speichert dazu die Listener für den SpriteRegionDrawer.
+ */
 public class SpriteRegionSubView
 {
+    /**
+     * Die umschlossene SpriteSubView.
+     */
     private SpriteSubView spriteSubView;
 
     /**
@@ -25,6 +29,11 @@ public class SpriteRegionSubView
      */
     private Optional<ChangeListener<Number>> drawOrderlistener;
 
+    /**
+     * Erstellt eine neue SpriteRegionSubView.
+     *
+     * @param spriteSubView Die umschlossene SpriteSubView.
+     */
     public SpriteRegionSubView(SpriteSubView spriteSubView)
     {
         this.spriteSubView = spriteSubView;
@@ -52,6 +61,8 @@ public class SpriteRegionSubView
 
     /**
      * Setzt die drawListener zurück.
+     *
+     * @return Ob Listener entfernt wurden.
      */
     public boolean clearDrawListener()
     {
@@ -69,16 +80,35 @@ public class SpriteRegionSubView
         }
     }
 
+
+    /**
+     * Gibt die Reihenfolge beim Zeichnen des umschlossenen SpriteSubView zurück.
+     *
+     * @return Die Reihenfolge beim Zeichnen.
+     */
     public Integer getDrawOrder()
     {
         return spriteSubView.drawOrderProperty().get();
     }
 
+    /**
+     * Gitb die Hashes der Regionen, in welchen sich das umschlossenen SpriteSubView befindet, zurück.
+     *
+     * @return Die Hashes der Regionen, in welchen sich das umschlossenen SpriteSubView befindet.
+     */
     public List<Long> getRegionHashes()
     {
         return spriteSubView.regionHashesProperty().get();
     }
 
+    /**
+     * Zeichnet das umschlossenen SpriteSubView auf das übergebene GraphicsContext-Objekt.
+     *
+     * @param canvasRectangle Bereich des Canvas.
+     * @param graphicsContext Der GraphicsContext, auf dem das umschlossenen SpriteSubView sich zeichnen soll.
+     * @param imageLayer      Gibt an, ob das umschlossenen SpriteSubView sein Top- oder Bottom-Image zeichnen soll.
+     * @param drawMode        Der Modus in dem gezeichnet werden soll.
+     */
     public void draw(RectangleDoubleByPoints canvasRectangle, GraphicsContext graphicsContext, ImageLayer imageLayer, DrawMode drawMode)
     {
         spriteSubView.draw(canvasRectangle, graphicsContext, imageLayer, drawMode);

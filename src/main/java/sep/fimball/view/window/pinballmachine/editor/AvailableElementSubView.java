@@ -37,8 +37,14 @@ public class AvailableElementSubView
      */
     private AvailableElementSubViewModel availableElementSubViewModel;
 
+    /**
+     * Das zuletzt aufgetretene MouseEvent.
+     */
     private MouseEvent lastMouseEvent;
 
+    /**
+     * Die zugehörige PinballMachineEditorView.
+     */
     private PinballMachineEditorView editorView;
 
     /**
