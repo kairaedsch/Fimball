@@ -32,7 +32,12 @@ public class AccelerationCollision implements CollisionType
          * Danach das Ganze mit der Delta Time skalieren.
          */
         Vector2 speedUp = acceleration.rotate(Math.toRadians(info.getOtherPhysicsElement().getRotation())).scale(PhysicsConfig.TICK_RATE_SEC);
-        //Addiere die zusätzliche Geschwindigkeit auf die Geschwindigkeit des Balls
-        info.getBall().setVelocity(info.getBall().getVelocity().plus(speedUp.scale(info.getOtherPhysicsElement().getStrengthMultiplier())));
+        double angle = speedUp.normalized().dot(info.getBall().getVelocity().normalized());
+
+        if (angle >= 0)
+        {
+            Vector2 scaledSpeedUp = speedUp.scale(info.getOtherPhysicsElement().getStrengthMultiplier()).scale(angle);
+            info.getBall().setVelocity(info.getBall().getVelocity().plus(scaledSpeedUp));
+        }
     }
 }
