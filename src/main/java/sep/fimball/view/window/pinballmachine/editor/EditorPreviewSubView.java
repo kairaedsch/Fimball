@@ -9,18 +9,32 @@ import sep.fimball.view.tools.ImageCache;
 import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewModel;
 
 /**
- * Created by TheAsuro on 22.01.2017.
+ * Die SubView für eine Vorschau eines ausgewählten Elements.
  */
 public class EditorPreviewSubView
 {
+    /**
+     * Die Pane zum Anzeigen des oberen Bilds der Vorschau.
+     */
     @FXML
     private Pane previewBot;
 
+    /**
+     * Die Pane zum Anzeigen des unteren Bilds der Vorschau.
+     */
     @FXML
     private Pane previewTop;
 
+    /**
+     * Die View des Editors.
+     */
     private PinballMachineEditorView pinballMachineEditorView;
 
+    /**
+     * Initialisiert die View mit einem ViewModel und lädt
+     * @param editorPreviewSubViewModel ViewModel, das Informationen über die angezeigten Bilder enthält.
+     * @param pinballMachineEditorView Die View des Editors.
+     */
     public void init(EditorPreviewSubViewModel editorPreviewSubViewModel, PinballMachineEditorView pinballMachineEditorView)
     {
         this.pinballMachineEditorView = pinballMachineEditorView;
@@ -44,6 +58,11 @@ public class EditorPreviewSubView
         previewTop.setPickOnBounds(false);
     }
 
+    /**
+     * Bewegt die Preview an eine bestimmte Stelle in Grid-Einheiten.
+     * @param gridPosition Die Position, zu der die Preview bewegt werden soll.
+     * @param preview Das Element welches bewegt werden soll.
+     */
     private void applyGridPosition(Vector2 gridPosition, Pane preview)
     {
         Vector2 pixelPos = pinballMachineEditorView.gridToCanvasPixelPos(gridPosition);
