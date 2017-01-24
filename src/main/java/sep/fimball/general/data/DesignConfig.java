@@ -121,11 +121,6 @@ public class DesignConfig
     public final static double MAXIMUM_PREVIEW_HEIGHT = (2160 / PIXELS_PER_GRID_UNIT);
 
     /**
-     * Der konstante String der CSS anweist das Hintergrundbild auf nichts zu setzen.
-     */
-    public final static String CSS_NO_IMAGE = "-fx-background-image: none";
-
-    /**
      * Der Präfix für CSS um das Hintergrundbild auf eine Datei zu setzen.
      */
     private final static String CSS_URL_PREFIX = "-fx-background-image: url(\"";

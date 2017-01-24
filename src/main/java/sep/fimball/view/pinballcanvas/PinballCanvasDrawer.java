@@ -117,7 +117,6 @@ class PinballCanvasDrawer
         double headHeight = PIXELS_PER_GRID_UNIT * 50 + borderHeight;
         double headWidth = PIXELS_PER_GRID_UNIT * 20;
         double headInset = PIXELS_PER_GRID_UNIT * 5;
-        double headMiddleHeight = PIXELS_PER_GRID_UNIT * 15;
         double textInset = PIXELS_PER_GRID_UNIT * 5;
         double textHeight = PIXELS_PER_GRID_UNIT * 17;
         double textWidth = PIXELS_PER_GRID_UNIT * 92;
