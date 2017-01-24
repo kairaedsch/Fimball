@@ -32,8 +32,9 @@ public class EditorPreviewSubView
 
     /**
      * Initialisiert die View mit einem ViewModel und lädt
+     *
      * @param editorPreviewSubViewModel ViewModel, das Informationen über die angezeigten Bilder enthält.
-     * @param pinballMachineEditorView Die View des Editors.
+     * @param pinballMachineEditorView  Die View des Editors.
      */
     public void init(EditorPreviewSubViewModel editorPreviewSubViewModel, PinballMachineEditorView pinballMachineEditorView)
     {
@@ -60,8 +61,9 @@ public class EditorPreviewSubView
 
     /**
      * Bewegt die Preview an eine bestimmte Stelle in Grid-Einheiten.
+     *
      * @param gridPosition Die Position, zu der die Preview bewegt werden soll.
-     * @param preview Das Element welches bewegt werden soll.
+     * @param preview      Das Element welches bewegt werden soll.
      */
     private void applyGridPosition(Vector2 gridPosition, Pane preview)
     {
