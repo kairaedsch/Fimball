@@ -1,6 +1,7 @@
 package sep.fimball.viewmodel.window.pinballmachine.editor;
 
 import sep.fimball.model.blueprint.pinballmachine.PinballMachine;
+import sep.fimball.model.blueprint.pinballmachine.PinballMachineManager;
 import sep.fimball.model.game.EditorSession;
 import sep.fimball.viewmodel.dialog.message.busy.BusyMessageViewModel;
 import sep.fimball.viewmodel.dialog.message.normal.NormalMessageViewModel;
@@ -103,6 +104,7 @@ public class EditorSessionSubViewModel
         editorViewModel.getSceneManagerViewModel().pushDialog(new QuestionMessageViewModel("editor.settings.deleteQuestion", () ->
         {
             boolean success = pinballMachine.deleteFromDisk();
+            PinballMachineManager.getInstance().deleteAutoSaveMachine();
             editorViewModel.getSceneManagerViewModel().pushDialog(new NormalMessageViewModel("editor.settings.deleteMessage." + (success ? "success" : "fail")));
             if (success)
                 editorViewModel.getSceneManagerViewModel().setWindow(new MainMenuViewModel());
