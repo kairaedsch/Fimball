@@ -19,7 +19,7 @@ public class LightChangerFactory
     public static List<LightChanger> generateLightChangers(HandlerGameSession gameSession)
     {
         List<LightChanger> lightChangers = new ArrayList<>();
-        lightChangers.add(new RandomLightChanger());
+        //lightChangers.add(new RandomLightChanger());
         lightChangers.add(new ShapeLightChanger(true, gameSession.gameBallProperty().get().positionProperty(), false));
         lightChangers.add(new ShapeLightChanger(false, gameSession.gameBallProperty().get().positionProperty(), true));
         lightChangers.add(new LineLightChanger(true, true));
