@@ -20,12 +20,12 @@ public class CleanAble
         listBindings = new ArrayList<>();
     }
 
-    public <T>void addListBindingForCleanUp(ObservableList<? extends T> listProperty, ListChangeListener<T> changeListener)
+    public <T> void addListBindingForCleanUp(ObservableList<? extends T> listProperty, ListChangeListener<T> changeListener)
     {
         listBindings.add(new ListBinding<>(listProperty, changeListener));
     }
 
-    public <K, T>void addMapBindingForCleanUp(ObservableMap<K, T> mapProperty, MapChangeListener<K, T> changeListener)
+    public <K, T> void addMapBindingForCleanUp(ObservableMap<K, T> mapProperty, MapChangeListener<K, T> changeListener)
     {
         listBindings.add(new MapBinding<>(mapProperty, changeListener));
     }
