@@ -179,7 +179,7 @@ public class ScoreHandlerTest
             {
                 Map<Integer, BaseRuleElementEvent> eventMap = new HashMap<>();
                 eventMap.put(1, new BaseRuleElementEvent(true));
-                return new BaseRuleElement(eventMap, 0);
+                return new BaseRuleElement(eventMap);
             }
 
             @Override
