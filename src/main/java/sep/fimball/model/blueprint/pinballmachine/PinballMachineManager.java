@@ -122,10 +122,7 @@ public class PinballMachineManager
         Optional<PlacedElementListJson> placedElementListJson = JsonFileManager.loadFromJson(jsonPath, PlacedElementListJson.class);
         Optional<List<PlacedElement>> PlacedElementList = PlacedElementListFactory.createPlacedElementList(placedElementListJson);
 
-        if (PlacedElementList.isPresent())
-        {
-            PlacedElementList.get().forEach(pinballMachine::addElement);
-        }
+        PlacedElementList.ifPresent(placedElements -> placedElements.forEach(pinballMachine::addElement));
     }
 
     /**

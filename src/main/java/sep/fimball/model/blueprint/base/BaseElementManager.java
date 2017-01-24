@@ -8,7 +8,6 @@ import sep.fimball.general.data.DataPath;
 import sep.fimball.model.blueprint.json.JsonFileManager;
 import sep.fimball.model.media.BaseMediaElement;
 import sep.fimball.model.media.BaseMediaElementEvent;
-import sep.fimball.model.media.ElementImage;
 
 import java.io.IOException;
 import java.nio.file.Files;

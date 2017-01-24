@@ -56,17 +56,12 @@ public class PinballMachinePreviewSubViewModel
         imagePath.bind(pinballMachine.absolutePreviewImagePathProperty());
 
         selected.bind(Bindings.createBooleanBinding(() ->
-        {
-            Optional<PinballMachine> selectedPinballMachine = pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty().get();
-            if (selectedPinballMachine.isPresent())
-            {
-                return pinballMachine == selectedPinballMachine.get();
-            }
-            else
-            {
-                return false;
-            }
-        },  pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()));
+                {
+                    Optional<PinballMachine> selectedPinballMachine = pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty().get();
+                    return selectedPinballMachine.isPresent() && pinballMachine == selectedPinballMachine.get();
+                },
+                pinballMachineInfoSubViewModel.pinballMachineReadOnlyProperty()
+        ));
     }
 
     /**

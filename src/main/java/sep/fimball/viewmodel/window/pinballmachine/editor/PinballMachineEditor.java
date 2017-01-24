@@ -153,7 +153,7 @@ public class PinballMachineEditor
                 rotation = 90;
             }
 
-            Vector2 mainPivotPoint = PinballMachineUtil.getBoundingBox(selection, t -> t.getPlacedElement()).getMiddle().round();
+            Vector2 mainPivotPoint = PinballMachineUtil.getBoundingBox(selection, DraggedElement::getPlacedElement).getMiddle().round();
             for (DraggedElement placedElement : selection)
             {
                 Vector2 pivotPoint = placedElement.getPlacedElement().getBaseElement().getPhysics().getPivotPoint();

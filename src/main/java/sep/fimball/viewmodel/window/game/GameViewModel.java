@@ -89,9 +89,7 @@ public class GameViewModel extends WindowViewModel
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, String[] playerNames, boolean startedFromEditor, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
-        {
-            sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor), editorCameraPosition));
-        }));
+                sceneManager.setWindow(new GameViewModel(GameSession.generateGameSession(pinballMachine, playerNames, startedFromEditor), editorCameraPosition))));
     }
 
     /**

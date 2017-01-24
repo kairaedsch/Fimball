@@ -4,7 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -122,9 +121,7 @@ public class PinballMachineEditorViewModel extends WindowViewModel
     public static void setAsWindowWithBusyDialog(SceneManagerViewModel sceneManager, PinballMachine pinballMachine, Optional<Vector2> editorCameraPosition)
     {
         sceneManager.pushDialog(new BusyMessageViewModel("machine.loading", () ->
-        {
-            sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine, editorCameraPosition));
-        }));
+                sceneManager.setWindow(new PinballMachineEditorViewModel(pinballMachine, editorCameraPosition))));
     }
 
     /**
