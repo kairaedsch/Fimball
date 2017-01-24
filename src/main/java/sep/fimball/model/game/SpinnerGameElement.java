@@ -46,7 +46,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
     /**
      * Die Animation welche sich um die Updates des Spinner kümmert.
      */
-    private GameElementAnimation spinnerUpdate;
+    private GameElementAnimationTimer spinnerUpdate;
 
     /**
      * Die GameSession welche genutzt wird um den Spieler Punkte bei jeder Umdrehung des Spinners hinzuzufügen.
@@ -104,7 +104,7 @@ public class SpinnerGameElement extends GameElement implements ElementHandler, G
                 setCurrentAnimation(getMediaElement().getEventMap().get(-1 * (currentFrame + 1)).getAnimation());
             }
         };
-        spinnerUpdate = new GameElementAnimation(spinnerAnim);
+        spinnerUpdate = new GameElementAnimationTimer(spinnerAnim);
         spinnerAnim.start();
     }
 

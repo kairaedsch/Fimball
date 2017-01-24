@@ -23,7 +23,7 @@ public class LightHandler implements GameHandler
     /**
      * Die Schleife, in der die Lichter gewechselt werden.
      */
-    private GameElementAnimation lightChangeLoop;
+    private GameElementAnimationTimer lightChangeLoop;
 
     /**
      * Die LightChangers, die benutzt werden, um die Lichter zu wechseln und verschiedene Effekte erzeugen.
@@ -50,7 +50,7 @@ public class LightHandler implements GameHandler
     {
         lights = new FilteredList<>(gameSession.getWorld().gameElementsProperty(), e -> e.getElementType() == BaseElementType.LIGHT);
 
-        lightChangeLoop = new GameElementAnimation(new AnimationTimer()
+        lightChangeLoop = new GameElementAnimationTimer(new AnimationTimer()
         {
             @Override
             public void handle(long now)

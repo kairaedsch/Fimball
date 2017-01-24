@@ -5,7 +5,7 @@ import sep.fimball.general.data.Vector2;
 import static sep.fimball.general.data.DesignConfig.PIXELS_PER_GRID_UNIT;
 
 /**
- * Created by TheAsuro on 22.01.2017.
+ * Utility-Klasse für Umrechnungen in der View.
  */
 public class ViewUtil
 {
