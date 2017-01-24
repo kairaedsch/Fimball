@@ -303,7 +303,8 @@ public class SpriteSubView
      */
     public void setDrawListener(ChangeListener<List<Long>> regionHashListener, ChangeListener<Number> drawOrderlistener)
     {
-        clearDrawListener();
+        boolean cleared = clearDrawListener();
+        if (cleared) System.err.println("Warning: cleared changelistener on set: " + this);
         this.regionHashListener = Optional.of(regionHashListener);
         this.drawOrderlistener = Optional.of(drawOrderlistener);
         regionHashes.addListener(regionHashListener);
@@ -313,11 +314,19 @@ public class SpriteSubView
     /**
      * Setzt die drawListener zurück.
      */
-    public void clearDrawListener()
+    public boolean clearDrawListener()
     {
-        regionHashListener.ifPresent(regionHashes::removeListener);
-        drawOrderlistener.ifPresent(drawOrder::removeListener);
-        this.regionHashListener = Optional.empty();
-        this.drawOrderlistener = Optional.empty();
+        if (regionHashListener.isPresent() || drawOrderlistener.isPresent())
+        {
+            regionHashListener.ifPresent(regionHashes::removeListener);
+            drawOrderlistener.ifPresent(drawOrder::removeListener);
+            this.regionHashListener = Optional.empty();
+            this.drawOrderlistener = Optional.empty();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

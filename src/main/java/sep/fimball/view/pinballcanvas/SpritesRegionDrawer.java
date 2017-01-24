@@ -107,7 +107,7 @@ class SpritesRegionDrawer
                 globalRegion.put(potsHash, pots);
             }
             pots[sprite.drawOrderProperty().get()].add(sprite);
-            System.out.println("ADDED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + sprite.drawOrderProperty().get() + "T: " + Thread.currentThread().getId() + "P: " + globalRegion.hashCode());
+            System.out.println("ADDED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + sprite.drawOrderProperty().get() + "T: " + Thread.currentThread().getId() + "P: " + this);
         }
     }
 
@@ -127,11 +127,11 @@ class SpritesRegionDrawer
             if(lists != null)
             {
                 success = lists[drawOrder].remove(sprite);
-                if(success) System.out.println("REMOVED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + drawOrder + " T: " + Thread.currentThread().getId() + " P: " + globalRegion.hashCode());
+                if(success) System.out.println("REMOVED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + drawOrder + " T: " + Thread.currentThread().getId() + " P: " + this);
             }
             if (!success)
             {
-                System.out.println("NOT REMOVED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + drawOrder + " T: " + Thread.currentThread().getId() + " P: " + globalRegion.hashCode());
+                System.out.println("NOT REMOVED sprite: " + sprite + " potsHash: " + potsHash + " drawOrder: " + drawOrder + " T: " + Thread.currentThread().getId() + " P: " + this);
                 System.err.println("Warning in RegionDrawer: could not remove");
                 for (Long aLong : region)
                 {
