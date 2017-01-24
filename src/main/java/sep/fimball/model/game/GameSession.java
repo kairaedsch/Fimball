@@ -25,16 +25,6 @@ import java.util.*;
 public class GameSession extends Session implements PhysicsGameSession<GameElement>, HandlerGameSession
 {
     /**
-     * TODO DEBUG??
-     */
-    private int framecount;
-
-    /**
-     * TODO DEBUG??
-     */
-    private long lastTime;
-
-    /**
      * Generiert eine neue GameSession mit Spielern aus den gegebenen Spielernamen und dem gegebenen Flipperautomaten und initialisiert die Handler für diese Game Session.
      *
      * @param pinballMachine    Der Flipperautomat, der in der GameSession gespielt wird.
@@ -158,15 +148,6 @@ public class GameSession extends Session implements PhysicsGameSession<GameEleme
     @Override
     protected void loopUpdate()
     {
-        framecount++;
-        long currentTime = System.currentTimeMillis();
-        if (((double) currentTime - (double) lastTime) > 1000)
-        {
-            System.out.println("FPS: " + framecount);
-            framecount = 0;
-            lastTime = currentTime;
-        }
-
         List<List<CollisionEventArgs<GameElement>>> localCollisionEventArgsList;
         List<List<ElementEventArgs<GameElement>>> localElementEventArgsList;
         synchronized (physicMonitor)
