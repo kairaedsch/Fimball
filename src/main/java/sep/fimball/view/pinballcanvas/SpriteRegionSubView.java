@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class SpriteRegionSubView
 {
-    SpriteSubView spriteSubView;
+    private SpriteSubView spriteSubView;
 
     /**
      * Der Listener für die regionHashes.

@@ -29,13 +29,13 @@ public class MessageView extends DialogView<MessageViewModel>
      * Der linke Button.
      */
     @FXML
-    public Button leftButton;
+    private Button leftButton;
 
     /**
      * Der rechte Button.
      */
     @FXML
-    public Button rightButton;
+    private Button rightButton;
 
     /**
      * Das zur View dazugehörige ViewModel.

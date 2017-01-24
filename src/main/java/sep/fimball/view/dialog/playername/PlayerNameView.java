@@ -18,7 +18,7 @@ public class PlayerNameView extends DialogView<PlayerNameViewModel>
      * Der Button, mit dem ein Spieler hinzugefügt werde kann.
      */
     @FXML
-    public Button addPlayerButton;
+    private Button addPlayerButton;
 
     /**
      * Der Behälter zur Einstellung der Spielernamen.

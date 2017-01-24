@@ -33,7 +33,7 @@ import java.util.Optional;
 public class PinballMachineEditorView extends WindowView<PinballMachineEditorViewModel>
 {
     @FXML
-    public Pane previewBase;
+    private Pane previewBase;
 
     /**
      * Zeigt den Namen des editierten Automaten an. Über dieses Feld kann der Name auch geändert werden.
@@ -269,7 +269,7 @@ public class PinballMachineEditorView extends WindowView<PinballMachineEditorVie
      * @param mousePos Die Position der Maus.
      * @return Die berechnete Position auf dem Canvas.
      */
-    Vector2 canvasPixelToGridPos(Vector2 mousePos)
+    private Vector2 canvasPixelToGridPos(Vector2 mousePos)
     {
         return ViewUtil.canvasPixelToGridPos(
                 pinballMachineEditorViewModel.cameraPositionProperty().get(),

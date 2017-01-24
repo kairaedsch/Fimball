@@ -40,11 +40,6 @@ public class SpriteSubViewModel
     private BooleanProperty selected;
 
     /**
-     * Das zugehörige GameElement.
-     */
-    private GameElement gameElement;
-
-    /**
      * Der Drehpunkt des Sprites.
      */
     private ObjectProperty<Vector2> pivotPoint;
@@ -81,7 +76,6 @@ public class SpriteSubViewModel
      */
     SpriteSubViewModel(GameElement gameElement)
     {
-        this.gameElement = gameElement;
         position = new SimpleObjectProperty<>();
         position.bind(gameElement.positionProperty());
 

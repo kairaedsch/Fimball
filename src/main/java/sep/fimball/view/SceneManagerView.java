@@ -41,11 +41,6 @@ public class SceneManagerView
     private GaussianBlur blurEffect;
 
     /**
-     * Die von JavaFX erstellte Stage, auf der gearbeitet wird.
-     */
-    private Stage stage;
-
-    /**
      * Erzeugt eine neue SceneManagerView mit der gegebenen Stage, in welcher dann die Nodes der jeweils aktiven Views eingefügt werden.
      * Auch wird ein SceneManagerViewModel geholt, an das sich dieses SceneManagerView bindet, um bei Änderungen des ViewModels reagieren zu können,
      * um z.B. den Dialog zu wechseln.
@@ -55,8 +50,6 @@ public class SceneManagerView
      */
     public SceneManagerView(Stage stage, SceneManagerViewModel sceneManagerViewModel)
     {
-        this.stage = stage;
-
         // Blur-Effekt für das glass.
         blurEffect = new GaussianBlur(DesignConfig.STAGE_DIVIDER_LAYER_BLUR);
 

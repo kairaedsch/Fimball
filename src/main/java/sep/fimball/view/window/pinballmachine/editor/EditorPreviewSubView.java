@@ -14,10 +14,10 @@ import sep.fimball.viewmodel.window.pinballmachine.editor.EditorPreviewSubViewMo
 public class EditorPreviewSubView
 {
     @FXML
-    public Pane previewBot;
+    private Pane previewBot;
 
     @FXML
-    public Pane previewTop;
+    private Pane previewTop;
 
     private PinballMachineEditorView pinballMachineEditorView;
 
