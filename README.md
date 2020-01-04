@@ -6,7 +6,7 @@ A pinball game incl. editor written in JavaFX.
 The game was created for the bachelor Course "SEP - Software Engineering Project" at the University of Passau.
 
 ## How to play
-The game can be played by [downloading](https://next.dascloud.de/index.php/s/RxtPJTk6YegKwPb) a release, unzipping it and starting it via a run file.
+The game can be played by [downloading](https://next.dascloud.de/index.php/s/gRdyNL8dsAwoX6Z) a release, unzipping it and starting it via a run file.
 
 <p align="center"><img width="100%" src="images/intro.gif"/></p>
 
