@@ -8,6 +8,8 @@ The game was created for the bachelor Course "SEP - Software Engineering Project
 ## How to play
 The game can be played by [downloading](https://next.dascloud.de/index.php/s/RxtPJTk6YegKwPb) a release, unzipping it and starting it via a run file.
 
+<p align="center"><img width="100%" src="images/intro.gif"/></p>
+
 ## Features
 
 ### 🕹 Playing 
@@ -30,7 +32,7 @@ The game can be played by [downloading](https://next.dascloud.de/index.php/s/Rxt
   * Drag and drop
   * Rotate
 
-## Mod support
+### ⚗ Mod support
 One can add new machine elements by adding new element definitions to `data/elements`.
 
 ## Built With
