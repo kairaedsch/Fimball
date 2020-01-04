@@ -27,13 +27,13 @@ The game can be played by [downloading](https://next.dascloud.de/index.php/s/gRd
   * Copy
   * Paste
   * Delete
-* Extented editor functions:
+* Advanced editor functions
   * Multiselect
   * Drag and drop
   * Rotate
 
 ### ⚗ Mod support
-One can add new machine elements by adding new element definitions to `data/elements`.
+You can add new machine elements by adding new element definitions to `data/elements`.
 
 ## Built With
 * [Java](https://openjdk.java.net/) - Programming language
@@ -48,4 +48,4 @@ One can add new machine elements by adding new element definitions to `data/elem
 * Three others - *Initial work*
 
 ## License
-This project is licensed under the GNU General Public License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details
